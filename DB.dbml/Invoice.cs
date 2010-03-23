@@ -311,23 +311,23 @@ namespace CMBC.EasyFactor.DB.dbml
                 Commission = null;
             }
 
-            CaculateCommission();
+            CaculateCommission(false);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void CaculateCommission()
+        public void CaculateCommission(bool isOverwrite)
         {
             if (this.InvoiceAssignBatch != null)
             {
-                if (!TypeUtil.GreaterZero(this.Commission))
+                if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按融资金额")
                 {
-                    if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按融资金额")
-                    {
-                        Commission = FinanceAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
-                    }
-                    else if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按转让金额")
+                    Commission = this.InvoiceFinanceLogs.Sum(log => log.Commission);
+                }
+                else if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按转让金额")
+                {
+                    if (!TypeUtil.GreaterZero(this.Commission) || isOverwrite)
                     {
                         Commission = AssignAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
                     }

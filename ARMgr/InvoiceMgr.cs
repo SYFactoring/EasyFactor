@@ -646,5 +646,36 @@ namespace CMBC.EasyFactor.ARMgr
         }
         #endregion Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComputeCommission(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                if (this.dgvInvoices.CurrentCell == null)
+                {
+                    return;
+                }
+
+                List<Invoice> selectedInvoices = new List<Invoice>();
+                foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
+                {
+                    Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
+                    if (!selectedInvoices.Contains(invoice))
+                    {
+                        selectedInvoices.Add(invoice);
+                    }
+                }
+
+                foreach (Invoice invoice in selectedInvoices)
+                {
+                    invoice.CaculateCommission(true);
+                }
+            }
+        }
+
     }
 }

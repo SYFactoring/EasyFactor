@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceFinanceLog
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
         public InvoiceFinanceLog(Invoice invoice)
             : this()
@@ -29,12 +29,11 @@ namespace CMBC.EasyFactor.DB.dbml
             this.AssignDate2 = invoice.AssignDate;
             this.InvoiceFinanceAmount2 = invoice.FinanceAmount;
             this.InvoiceFinanceOutstanding2 = invoice.FinanceOutstanding;
-            this.Commission = invoice.Commission;
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (23) 
+        #region Properties (22)
 
         /// <summary>
         /// 
@@ -103,12 +102,6 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         public double AssignOutstanding2
-        {
-            get;
-            set;
-        }
-
-        public double? Commission
         {
             get;
             set;
@@ -379,7 +372,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
         /// <summary>
         /// 

@@ -134,10 +134,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -146,6 +142,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             assignDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -301,6 +301,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbTotalHandfee.Border.Class = "TextBoxBorder";
             this.tbTotalHandfee.Location = new System.Drawing.Point(910, 59);
             this.tbTotalHandfee.Name = "tbTotalHandfee";
+            this.tbTotalHandfee.ReadOnly = true;
             this.tbTotalHandfee.Size = new System.Drawing.Size(89, 20);
             this.tbTotalHandfee.TabIndex = 19;
             // 
@@ -312,6 +313,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbTotalCommission.Border.Class = "TextBoxBorder";
             this.tbTotalCommission.Location = new System.Drawing.Point(910, 40);
             this.tbTotalCommission.Name = "tbTotalCommission";
+            this.tbTotalCommission.ReadOnly = true;
             this.tbTotalCommission.Size = new System.Drawing.Size(89, 20);
             this.tbTotalCommission.TabIndex = 18;
             // 
@@ -323,6 +325,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbAssignNumber.Border.Class = "TextBoxBorder";
             this.tbAssignNumber.Location = new System.Drawing.Point(910, 21);
             this.tbAssignNumber.Name = "tbAssignNumber";
+            this.tbAssignNumber.ReadOnly = true;
             this.tbAssignNumber.Size = new System.Drawing.Size(89, 20);
             this.tbAssignNumber.TabIndex = 17;
             // 
@@ -334,6 +337,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbTotalAssign.Border.Class = "TextBoxBorder";
             this.tbTotalAssign.Location = new System.Drawing.Point(910, 2);
             this.tbTotalAssign.Name = "tbTotalAssign";
+            this.tbTotalAssign.ReadOnly = true;
             this.tbTotalAssign.Size = new System.Drawing.Size(89, 20);
             this.tbTotalAssign.TabIndex = 16;
             // 
@@ -681,26 +685,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellClick);
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             // 
-            // superValidator
-            // 
-            this.superValidator.ContainerControl = this;
-            this.superValidator.ErrorProvider = this.errorProvider;
-            this.superValidator.Highlighter = this.highlighter;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "必填";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // highlighter
-            // 
-            this.highlighter.ContainerControl = this;
-            // 
             // colInvoiceNo
             // 
             this.colInvoiceNo.DataPropertyName = "InvoiceNo";
@@ -758,6 +742,26 @@ namespace CMBC.EasyFactor.ARMgr
             this.colComment.DataPropertyName = "Comment";
             this.colComment.HeaderText = "备注";
             this.colComment.Name = "colComment";
+            // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "必填";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
             // 
             // InvoiceAssign
             // 

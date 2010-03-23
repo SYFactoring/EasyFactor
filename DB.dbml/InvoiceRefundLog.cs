@@ -29,6 +29,7 @@ namespace CMBC.EasyFactor.DB.dbml
             this.FinanceDate2 = financeLog.FinanceDate;
             this.FinanceDueDate2 = financeLog.FinanceDueDate;
             this.InvoiceRefundAmount2 = financeLog.RefundAmount;
+            this.InvoicePaymentAmount2 = financeLog.Invoice.PaymentAmount;
             this.RefundCurrency2 = financeLog.InvoiceFinanceBatch.BatchCurrency;
         }
 
@@ -169,6 +170,27 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        public double? InvoicePaymentAmount2
+        {
+            get;
+            set;
+        }
+
+        public double? InvoicePaymentAmount
+        {
+            get
+            {
+                if (this.InvoiceFinanceLog != null)
+                {
+                    return this.InvoiceFinanceLog.Invoice.PaymentAmount;
+                }
+                else
+                {
+                    return this.InvoicePaymentAmount2;
+                }
+            }
+        }
+
         public double? InvoiceRefundAmount2
         {
             get;
@@ -190,6 +212,17 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return InvoiceRefundAmount2;
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime RefundDate
+        {
+            get
+            {
+                return this.InvoiceRefundBatch.RefundDate;
             }
         }
 

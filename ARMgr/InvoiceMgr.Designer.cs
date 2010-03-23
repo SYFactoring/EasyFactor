@@ -111,6 +111,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSelectedInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSelectedInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCommission = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -646,6 +647,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvInvoices.Location = new System.Drawing.Point(0, 78);
             this.dgvInvoices.Name = "dgvInvoices";
+            this.dgvInvoices.ReadOnly = true;
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(891, 347);
             this.dgvInvoices.TabIndex = 0;
@@ -711,6 +713,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAssignOutstanding.HeaderText = "转让余额";
             this.colAssignOutstanding.Name = "colAssignOutstanding";
+            this.colAssignOutstanding.ReadOnly = true;
             // 
             // colInvoiceDate
             // 
@@ -750,6 +753,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle7;
             this.colFinanceAmount.HeaderText = "融资金额";
             this.colFinanceAmount.Name = "colFinanceAmount";
+            this.colFinanceAmount.ReadOnly = true;
             this.colFinanceAmount.Width = 80;
             // 
             // colFinanceOutstanding
@@ -759,12 +763,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle8;
             this.colFinanceOutstanding.HeaderText = "融资余额";
             this.colFinanceOutstanding.Name = "colFinanceOutstanding";
+            this.colFinanceOutstanding.ReadOnly = true;
             // 
             // colFinanceDate
             // 
             this.colFinanceDate.DataPropertyName = "FinanceDate";
             this.colFinanceDate.HeaderText = "融资日";
             this.colFinanceDate.Name = "colFinanceDate";
+            this.colFinanceDate.ReadOnly = true;
             this.colFinanceDate.Width = 68;
             // 
             // colFinanceDueDate
@@ -772,6 +778,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
             this.colFinanceDueDate.HeaderText = "融资到期日";
             this.colFinanceDueDate.Name = "colFinanceDueDate";
+            this.colFinanceDueDate.ReadOnly = true;
             this.colFinanceDueDate.Width = 92;
             // 
             // colPaymentAmount
@@ -781,6 +788,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle9;
             this.colPaymentAmount.HeaderText = "付款金额";
             this.colPaymentAmount.Name = "colPaymentAmount";
+            this.colPaymentAmount.ReadOnly = true;
             this.colPaymentAmount.Width = 80;
             // 
             // colPaymentDate
@@ -788,6 +796,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colPaymentDate.DataPropertyName = "PaymentDate";
             this.colPaymentDate.HeaderText = "付款日";
             this.colPaymentDate.Name = "colPaymentDate";
+            this.colPaymentDate.ReadOnly = true;
             this.colPaymentDate.Width = 68;
             // 
             // colRefundAmount
@@ -797,6 +806,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle10;
             this.colRefundAmount.HeaderText = "还款金额";
             this.colRefundAmount.Name = "colRefundAmount";
+            this.colRefundAmount.ReadOnly = true;
             this.colRefundAmount.Width = 80;
             // 
             // colRefundDate
@@ -804,6 +814,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRefundDate.DataPropertyName = "RefundDate";
             this.colRefundDate.HeaderText = "还款日";
             this.colRefundDate.Name = "colRefundDate";
+            this.colRefundDate.ReadOnly = true;
             this.colRefundDate.Width = 68;
             // 
             // colCommission
@@ -814,6 +825,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCommission.DefaultCellStyle = dataGridViewCellStyle11;
             this.colCommission.HeaderText = "手续费收入";
             this.colCommission.Name = "colCommission";
+            this.colCommission.ReadOnly = true;
             // 
             // colInterest
             // 
@@ -823,6 +835,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colInterest.DefaultCellStyle = dataGridViewCellStyle12;
             this.colInterest.HeaderText = "净利息";
             this.colInterest.Name = "colInterest";
+            this.colInterest.ReadOnly = true;
             // 
             // colGrossInterest
             // 
@@ -832,6 +845,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colGrossInterest.DefaultCellStyle = dataGridViewCellStyle13;
             this.colGrossInterest.HeaderText = "毛利息";
             this.colGrossInterest.Name = "colGrossInterest";
+            this.colGrossInterest.ReadOnly = true;
             // 
             // colIsFlaw
             // 
@@ -847,6 +861,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colIsDispute.DataPropertyName = "IsDispute";
             this.colIsDispute.HeaderText = "是否商纠";
             this.colIsDispute.Name = "colIsDispute";
+            this.colIsDispute.ReadOnly = true;
             this.colIsDispute.Width = 80;
             // 
             // colAssignOverDueDays
@@ -854,6 +869,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignOverDueDays.DataPropertyName = "AssignOverDueDays";
             this.colAssignOverDueDays.HeaderText = "应收账款逾期天数";
             this.colAssignOverDueDays.Name = "colAssignOverDueDays";
+            this.colAssignOverDueDays.ReadOnly = true;
             this.colAssignOverDueDays.Visible = false;
             this.colAssignOverDueDays.Width = 128;
             // 
@@ -862,6 +878,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceOverDueDays.DataPropertyName = "FinanceOverDueDays";
             this.colFinanceOverDueDays.HeaderText = "融资逾期天数";
             this.colFinanceOverDueDays.Name = "colFinanceOverDueDays";
+            this.colFinanceOverDueDays.ReadOnly = true;
             this.colFinanceOverDueDays.Visible = false;
             this.colFinanceOverDueDays.Width = 104;
             // 
@@ -874,56 +891,57 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemInvoiceFlaw,
             this.menuItemInvoiceDispute,
             this.menuItemInvoiceDelete,
+            this.menuItemCommission,
             this.toolStripSeparator1,
             this.menuItemExportAllInvoices,
             this.menuItemExportSelectedInvoices});
             this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(147, 170);
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(159, 214);
             // 
             // menuItemInvoiceDetail
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(158, 22);
             this.menuItemInvoiceDetail.Text = "详细信息";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(158, 22);
             this.menuItemCaseDetail.Text = "案子详细信息";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(155, 6);
             // 
             // menuItemInvoiceFlaw
             // 
             this.menuItemInvoiceFlaw.Name = "menuItemInvoiceFlaw";
-            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(146, 22);
+            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(158, 22);
             this.menuItemInvoiceFlaw.Text = "瑕疵处理";
             this.menuItemInvoiceFlaw.Click += new System.EventHandler(this.InvoiceFlaw);
             // 
             // menuItemInvoiceDispute
             // 
             this.menuItemInvoiceDispute.Name = "menuItemInvoiceDispute";
-            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(146, 22);
+            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(158, 22);
             this.menuItemInvoiceDispute.Text = "商纠处理";
             this.menuItemInvoiceDispute.Click += new System.EventHandler(this.InvoiceDispute);
             // 
             // menuItemInvoiceDelete
             // 
             this.menuItemInvoiceDelete.Name = "menuItemInvoiceDelete";
-            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(158, 22);
             this.menuItemInvoiceDelete.Text = "删除发票";
             this.menuItemInvoiceDelete.Click += new System.EventHandler(this.DeleteInvoice);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
             // 
             // menuItemExportAllInvoices
             // 
@@ -931,7 +949,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemAllInvoiceFull,
             this.menuItemAllInvoiceOverDue});
             this.menuItemExportAllInvoices.Name = "menuItemExportAllInvoices";
-            this.menuItemExportAllInvoices.Size = new System.Drawing.Size(146, 22);
+            this.menuItemExportAllInvoices.Size = new System.Drawing.Size(158, 22);
             this.menuItemExportAllInvoices.Text = "导出全部发票";
             // 
             // menuItemAllInvoiceFull
@@ -954,7 +972,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemSelectedInvoiceFull,
             this.menuItemSelectedInvoiceOverDue});
             this.menuItemExportSelectedInvoices.Name = "menuItemExportSelectedInvoices";
-            this.menuItemExportSelectedInvoices.Size = new System.Drawing.Size(146, 22);
+            this.menuItemExportSelectedInvoices.Size = new System.Drawing.Size(158, 22);
             this.menuItemExportSelectedInvoices.Text = "导出所选发票";
             // 
             // menuItemSelectedInvoiceFull
@@ -970,6 +988,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemSelectedInvoiceOverDue.Size = new System.Drawing.Size(146, 22);
             this.menuItemSelectedInvoiceOverDue.Text = "逾期台帐格式";
             this.menuItemSelectedInvoiceOverDue.Click += new System.EventHandler(this.ExportSelectedInvoicesOverDue);
+            // 
+            // menuItemCommission
+            // 
+            this.menuItemCommission.Name = "menuItemCommission";
+            this.menuItemCommission.Size = new System.Drawing.Size(158, 22);
+            this.menuItemCommission.Text = "重新计算手续费";
+            this.menuItemCommission.Click += new System.EventHandler(this.ComputeCommission);
             // 
             // InvoiceMgr
             // 
@@ -1059,5 +1084,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.LabelX lblFinanceOverDueDays;
         private DevComponents.DotNetBar.Controls.TextBoxX tbAssignOverDueDays;
         private DevComponents.DotNetBar.LabelX lblAssignOverDueDays;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCommission;
     }
 }

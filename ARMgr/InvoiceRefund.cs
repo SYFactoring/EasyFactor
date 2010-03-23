@@ -22,7 +22,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceRefund : UserControl
     {
-		#region Fields (4) 
+        #region Fields (4)
 
         /// <summary>
         /// 
@@ -41,9 +41,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpRefundType refundType;
 
-		#endregion Fields 
+        /// <summary>
+        /// 
+        /// </summary>
+        private double totalPayment = 0;
 
-		#region Enums (1) 
+        #endregion Fields
+
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -71,11 +76,11 @@ namespace CMBC.EasyFactor.ARMgr
             GUARANTEE_PAYMENT,
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         public InvoiceRefund(ARCaseBasic caseBasic, OpRefundType refundType)
@@ -106,9 +111,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.context = new DBDataContext();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (1) 
+        #region Properties (1)
 
         /// <summary>
         /// 
@@ -122,11 +127,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (21) 
+        #region Methods (21)
 
-		// Public Methods (2) 
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -154,7 +159,8 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            this.tbTotalPayment.Text = String.Format("{0:N2}", paymentBatch.InvoicePaymentLogs.Sum(log => log.PaymentAmount));
+            totalPayment = paymentBatch.InvoicePaymentLogs.Sum(log => log.PaymentAmount).GetValueOrDefault();
+            this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
             this.tbTotalRefund.Text = string.Empty;
             InvoiceRefundBatch batch = new InvoiceRefundBatch();
             batch.RefundType = paymentBatch.PaymentType;
@@ -168,8 +174,6 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvLogs.Rows[i].Cells[0];
                 cell.Value = 0;
-                InvoiceRefundLog log = (InvoiceRefundLog)logsBindingSource.List[i];
-                log.RefundAmount = log.FinanceOutstanding.GetValueOrDefault();
             }
 
             this.StatBatch();
@@ -188,7 +192,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = typeof(InvoiceRefundBatch);
             this.logsBindingSource.DataSource = typeof(InvoiceRefundLog);
         }
-		// Private Methods (19) 
+        // Private Methods (19) 
 
         /// <summary>
         /// 
@@ -196,7 +200,18 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="log"></param>
         private void ClickLog(InvoiceRefundLog log)
         {
-            log.RefundAmount = log.FinanceOutstanding.GetValueOrDefault();
+            IList logList = this.logsBindingSource.List;
+            double totalRefund = 0;
+            for (int i = 0; i < logList.Count; i++)
+            {
+                if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                {
+                    InvoiceRefundLog l = (InvoiceRefundLog)logList[i];
+                    totalRefund += l.RefundAmount.GetValueOrDefault();
+                }
+            }
+
+            log.RefundAmount = Math.Min(log.FinanceOutstanding.GetValueOrDefault(), totalPayment - totalRefund);
         }
 
         /// <summary>
@@ -712,45 +727,40 @@ namespace CMBC.EasyFactor.ARMgr
         {
             IList logList = this.logsBindingSource.List;
 
+            double totalRefund = 0;
             for (int i = 0; i < logList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     InvoiceRefundLog log = (InvoiceRefundLog)logList[i];
-                    if (TypeUtil.LessZero(log.FinanceOutstanding))
+                    if (TypeUtil.LessZero(log.FinanceOutstanding - log.RefundAmount))
                     {
-                        MessageBoxEx.Show("还款金额不能大于融资金额: " + log.InvoiceNo2, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("还款金额不能大于融资余额: " + log.InvoiceNo2, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
 
-                    //double paymentAmount = invoice.PaymentAmount.GetValueOrDefault();
-                    //if (invoice.InvoiceAssignBatch.BatchCurrency != invoice.InvoiceFinanceBatch.BatchCurrency)
-                    //{
-                    //    double exchangeRate = Exchange.GetExchangeRate(invoice.InvoiceAssignBatch.BatchCurrency, invoice.InvoiceFinanceBatch.BatchCurrency);
-                    //    paymentAmount *= exchangeRate;
-                    //}
+                    if (TypeUtil.LessZero(log.InvoicePaymentAmount - log.InvoiceRefundAmount - log.RefundAmount))
+                    {
+                        MessageBoxEx.Show("还款金额不能大于付款金额: " + log.InvoiceNo2, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
 
-                    //if (invoice.PaymentAmount.HasValue)
-                    //{
-                    //    if (TypeUtil.GreaterZero(invoice.RefundAmount - Math.Min(invoice.FinanceOutstanding.GetValueOrDefault(), paymentAmount)))
-                    //    {
-                    //        MessageBoxEx.Show("还款金额不能大于付款金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //        return false;
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    if (TypeUtil.GreaterZero(invoice.RefundAmount - invoice.FinanceOutstanding.GetValueOrDefault()))
-                    //    {
-                    //        MessageBoxEx.Show("还款金额不能大于融资余额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //        return false;
-                    //    }
-                    //}
+                    totalRefund += log.RefundAmount.GetValueOrDefault();
                 }
             }
+
+            if (TypeUtil.GreaterZero(this.totalPayment))
+            {
+                if (TypeUtil.GreaterZero(totalRefund - this.totalPayment))
+                {
+                    MessageBoxEx.Show("本次还款总额不能大于付款总额", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
+            }
+
             return true;
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

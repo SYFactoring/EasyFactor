@@ -167,6 +167,17 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime PaymentDate
+        {
+            get
+            {
+                return this.InvoicePaymentBatch.PaymentDate;
+            }
+        }
+
         #endregion Properties
     }
 }

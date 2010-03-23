@@ -11,7 +11,6 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Data.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.Controls;
@@ -19,7 +18,6 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
-    using System.Data.Common;
 
     /// <summary>
     /// 
@@ -156,6 +154,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             log.FinanceAmount = financeAmount;
+
+            if (this._case.ActiveCDA.CommissionType == "按融资金额")
+            {
+                log.Commission = log.FinanceAmount * this._case.ActiveCDA.Price;
+            }
         }
 
         /// <summary>
@@ -383,7 +386,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate )
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate)
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -432,7 +435,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate )
+            if (col == colInvoiceDate || col == colAssignDate || col == colDueDate)
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
