@@ -2829,10 +2829,11 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("发票号错误: " + invoiceNo);
                         }
 
+
+                        int financeLogID = Convert.ToInt32(String.Format("{0:G}", valueArray[row, column++]));
+                        InvoiceFinanceLog financeLog = context.InvoiceFinanceLogs.SingleOrDefault(i => i.FinanceLogID == financeLogID);
+                        InvoiceRefundLog log = new InvoiceRefundLog(financeLog);
                         column++;
-
-                        InvoiceRefundLog log = new InvoiceRefundLog();
-
                         log.RefundAmount = (double)valueArray[row, column++];
                         log.Comment = String.Format("{0:G}", valueArray[row, column++]);
 

@@ -18,34 +18,115 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="financeLog"></param>
+        public InvoiceRefundLog(InvoiceFinanceLog financeLog)
+            : this()
+        {
+            this.InvoiceNo2 = financeLog.InvoiceNo;
+            this.FinanceLogID2 = financeLog.FinanceLogID;
+            this.FinanceAmount2 = financeLog.FinanceAmount;
+            this.FinanceOutstanding2 = financeLog.FinanceOutstanding;
+            this.FinanceDate2 = financeLog.FinanceDate;
+            this.FinanceDueDate2 = financeLog.FinanceDueDate;
+            this.InvoiceRefundAmount2 = financeLog.RefundAmount;
+        }
+
+        public string InvoiceNo2
+        {
+            get;
+            set;
+        }
+
+        public string InvoiceNo
+        {
+            get
+            {
+                return this.InvoiceFinanceLog.InvoiceNo;
+            }
+        }
+
+        public int FinanceLogID2
+        {
+            get;
+            set;
+        }
+
+        public double? FinanceAmount2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public double? FinanceAmount
         {
             get
             {
-                return this.InvoiceFinanceLog.FinanceAmount;
+                if (this.InvoiceFinanceLog != null)
+                {
+                    return this.InvoiceFinanceLog.FinanceAmount;
+                }
+                else
+                {
+                    return FinanceAmount2;
+                }
             }
+        }
+
+        public DateTime? FinanceDate2
+        {
+            get;
+            set;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime FinanceDate
+        public DateTime? FinanceDate
         {
             get
             {
-                return this.InvoiceFinanceLog.InvoiceFinanceBatch.FinancePeriodBegin;
+                if (this.InvoiceFinanceLog != null)
+                {
+                    return this.InvoiceFinanceLog.FinanceDate;
+                }
+                else
+                {
+                    return FinanceDate2;
+                }
             }
+        }
+
+        public DateTime? FinanceDueDate2
+        {
+            get;
+            set;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime FinanceDueDate
+        public DateTime? FinanceDueDate
         {
             get
             {
-                return this.InvoiceFinanceLog.InvoiceFinanceBatch.FinancePeriodEnd;
+                if (this.InvoiceFinanceLog != null)
+                {
+                    return this.InvoiceFinanceLog.FinanceDueDate;
+                }
+                else
+                {
+                    return this.FinanceDueDate2;
+                }
             }
+        }
+
+        public double? FinanceOutstanding2
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -55,18 +136,38 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.InvoiceFinanceLog.FinanceOutstanding;
+                if (this.InvoiceFinanceLog != null)
+                {
+                    return this.InvoiceFinanceLog.FinanceOutstanding;
+                }
+                else
+                {
+                    return FinanceOutstanding2;
+                }
             }
+        }
+
+        public double? InvoiceRefundAmount2
+        {
+            get;
+            set;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public double? LogRefundAmount
+        public double? InvoiceRefundAmount
         {
             get
             {
-                return this.InvoiceFinanceLog.RefundAmount;
+                if (this.InvoiceFinanceLog != null)
+                {
+                    return this.InvoiceFinanceLog.RefundAmount;
+                }
+                else
+                {
+                    return InvoiceRefundAmount2;
+                }
             }
         }
 

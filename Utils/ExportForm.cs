@@ -1709,6 +1709,7 @@ namespace CMBC.EasyFactor.Utils
             {
                 int column = 1;
                 datasheet.Cells[1, column++] = "发票号";
+                datasheet.Cells[1, column++] = "融资编号";
                 datasheet.Cells[1, column++] = "融资余额";
                 datasheet.Cells[1, column++] = "还款金额";
                 datasheet.Cells[1, column++] = "备注";
@@ -1743,7 +1744,8 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     InvoiceRefundLog log = (InvoiceRefundLog)exportData[row];
-                    datasheet.Cells[row + 2, column++] = "'" + log.InvoiceFinanceLog.InvoiceNo;
+                    datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
+                    datasheet.Cells[row + 2, column++] = log.FinanceLogID2;
                     datasheet.Cells[row + 2, column++] = log.FinanceOutstanding;
                     datasheet.Cells[row + 2, column++] = log.RefundAmount;
                     datasheet.Cells[row + 2, column++] = log.Comment;
@@ -1754,7 +1756,7 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 2)
+                    if (range.Column == 3 || range.Column == 4)
                     {
                         range.NumberFormatLocal = "0.00";
                     }

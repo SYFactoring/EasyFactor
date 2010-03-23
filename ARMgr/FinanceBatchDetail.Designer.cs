@@ -105,6 +105,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tabItemInvoices = new DevComponents.DotNetBar.TabItem(this.components);
             this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
             this.checkStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -132,8 +134,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.cmuLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             financeBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             financeAmountLabel = new DevComponents.DotNetBar.LabelX();
@@ -155,12 +155,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl.SuspendLayout();
             this.panelInvoices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFinanceLogs)).BeginInit();
+            this.cmuLogMgr.SuspendLayout();
             this.panelBatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            this.cmuLogMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -431,6 +431,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvFinanceLogs.AllowUserToAddRows = false;
             this.dgvFinanceLogs.AllowUserToDeleteRows = false;
             this.dgvFinanceLogs.AllowUserToOrderColumns = true;
+            this.dgvFinanceLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -484,6 +485,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.colComment.HeaderText = "备注";
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
+            // 
+            // cmuLogMgr
+            // 
+            this.cmuLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemLogDelete});
+            this.cmuLogMgr.Name = "cmuContractMgr";
+            this.cmuLogMgr.Size = new System.Drawing.Size(107, 26);
+            // 
+            // menuItemLogDelete
+            // 
+            this.menuItemLogDelete.Name = "menuItemLogDelete";
+            this.menuItemLogDelete.Size = new System.Drawing.Size(106, 22);
+            this.menuItemLogDelete.Text = "&D删除";
+            this.menuItemLogDelete.Click += new System.EventHandler(this.DeleteLog);
             // 
             // tabItemInvoices
             // 
@@ -909,20 +924,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // cmuLogMgr
-            // 
-            this.cmuLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemLogDelete});
-            this.cmuLogMgr.Name = "cmuContractMgr";
-            this.cmuLogMgr.Size = new System.Drawing.Size(153, 48);
-            // 
-            // menuItemLogDelete
-            // 
-            this.menuItemLogDelete.Name = "menuItemLogDelete";
-            this.menuItemLogDelete.Size = new System.Drawing.Size(152, 22);
-            this.menuItemLogDelete.Text = "&D删除";
-            this.menuItemLogDelete.Click += new System.EventHandler(this.DeleteLog);
-            // 
             // FinanceBatchDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -938,13 +939,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl.ResumeLayout(false);
             this.panelInvoices.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFinanceLogs)).EndInit();
+            this.cmuLogMgr.ResumeLayout(false);
             this.panelBatch.ResumeLayout(false);
             this.panelBatch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            this.cmuLogMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

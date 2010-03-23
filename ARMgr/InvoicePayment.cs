@@ -620,6 +620,8 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (batch.InvoicePaymentLogs.Count == 0)
                 {
+                    batch.Case = null;
+                    batch.PaymentBatchNo = null;
                     return;
                 }
 
