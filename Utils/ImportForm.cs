@@ -283,7 +283,7 @@ namespace CMBC.EasyFactor.Utils
                     e.Result = this.ImportDepartments((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_RATES:
-                    e.Result = this.ImportRates((string)e.Argument, worker, e);
+                    e.Result = this.ImportExchangeRates((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_CASES:
                     e.Result = this.ImportCases((string)e.Argument, worker, e);
@@ -1045,11 +1045,6 @@ namespace CMBC.EasyFactor.Utils
             }
             catch (Exception e1)
             {
-                foreach (Client client in clientList)
-                {
-                    client = context.Clients.SingleOrDefault(c => c.ClientEDICode == client.clientEDICode);
-                }
-
                 if (result != clientList.Count)
                 {
                     e1.Data["row"] = result;
@@ -2730,7 +2725,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportRates(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportExchangeRates(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
