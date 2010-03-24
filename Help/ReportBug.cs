@@ -1,13 +1,25 @@
-﻿using System;
-using System.Reflection;
-using System.Windows.Forms;
-using CMBC.EasyFactor.Utils;
-using DevComponents.DotNetBar;
+﻿//-----------------------------------------------------------------------
+// <copyright file="ReportBug.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.Help
 {
+    using System;
+    using System.Reflection;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.Utils;
+    using DevComponents.DotNetBar;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ReportBug : DevComponents.DotNetBar.Office2007Form
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private SendMail mail;
 
         /// <summary>
@@ -53,21 +65,32 @@ namespace CMBC.EasyFactor.Help
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             mail.Send();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             if (e.Error != null)
             {
-                MessageBoxEx.Show("发送反馈失败: " + e.Error.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("问题反馈失败，原因： " + e.Error.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBoxEx.Show("意见已经提交", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("感谢您的反馈，我会立即处理您的意见，并将处理结果及时通知您。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
             this.btnSubmit.Enabled = true;
         }
     }

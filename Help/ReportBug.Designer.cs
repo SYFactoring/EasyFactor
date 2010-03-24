@@ -1,11 +1,36 @@
 ﻿namespace CMBC.EasyFactor.Help
 {
+    /// <summary>
+    /// 
+    /// </summary>
     partial class ReportBug
     {
+        #region Fields (15)
+
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private DevComponents.DotNetBar.ButtonX btnFileSelect;
+        private DevComponents.DotNetBar.ButtonX btnSubmit;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbBugType;
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.LabelX lblAttachment;
+        private DevComponents.DotNetBar.LabelX lblBug;
+        private DevComponents.DotNetBar.LabelX lblBugType;
+        private DevComponents.DotNetBar.LabelX lblSubmitPerson;
+        private DevComponents.DotNetBar.LabelX lblTitle;
+        private DevComponents.DotNetBar.Controls.GroupPanel panelBug;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbAttachment;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbBug;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbSubmitPerson;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTitle;
+
+        #endregion Fields
+
+        #region Methods (1)
+
+        // Protected Methods (1) 
 
         /// <summary>
         /// Clean up any resources being used.
@@ -19,6 +44,10 @@
             }
             base.Dispose(disposing);
         }
+
+        #endregion Methods
+
+
 
         #region Windows Form Designer generated code
 
@@ -274,20 +303,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.GroupPanel panelBug;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbBug;
-        private DevComponents.DotNetBar.LabelX lblBug;
-        private DevComponents.DotNetBar.LabelX lblAttachment;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbSubmitPerson;
-        private DevComponents.DotNetBar.LabelX lblSubmitPerson;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbAttachment;
-        private DevComponents.DotNetBar.ButtonX btnFileSelect;
-        private DevComponents.DotNetBar.ButtonX btnSubmit;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbBugType;
-        private DevComponents.DotNetBar.LabelX lblBugType;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTitle;
-        private DevComponents.DotNetBar.LabelX lblTitle;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

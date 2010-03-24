@@ -200,18 +200,25 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="log"></param>
         private void ClickLog(InvoiceRefundLog log)
         {
-            IList logList = this.logsBindingSource.List;
-            double totalRefund = 0;
-            for (int i = 0; i < logList.Count; i++)
+            if (TypeUtil.GreaterZero(this.totalPayment))
             {
-                if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                IList logList = this.logsBindingSource.List;
+                double totalRefund = 0;
+                for (int i = 0; i < logList.Count; i++)
                 {
-                    InvoiceRefundLog l = (InvoiceRefundLog)logList[i];
-                    totalRefund += l.RefundAmount.GetValueOrDefault();
+                    if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                    {
+                        InvoiceRefundLog l = (InvoiceRefundLog)logList[i];
+                        totalRefund += l.RefundAmount.GetValueOrDefault();
+                    }
                 }
-            }
 
-            log.RefundAmount = Math.Min(log.FinanceOutstanding.GetValueOrDefault(), totalPayment - totalRefund);
+                log.RefundAmount = Math.Min(log.FinanceOutstanding.GetValueOrDefault(), totalPayment - totalRefund);
+            }
+            else
+            {
+                log.RefundAmount = log.FinanceOutstanding.GetValueOrDefault();
+            }
         }
 
         /// <summary>
