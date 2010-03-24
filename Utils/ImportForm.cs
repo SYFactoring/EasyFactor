@@ -978,8 +978,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("客户不存在，不能导入： " + clientEDICode);
                         }
 
-                        client = clientList.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
-                        if (client != null)
+                        if (clientList.SingleOrDefault(c => c.ClientEDICode == clientEDICode) != null)
                         {
                             throw new Exception("客户编号重复，不能导入： " + clientEDICode);
                         }
