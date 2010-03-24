@@ -286,7 +286,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == this.colDueDate || col == this.colInvoiceDate )
+            if (col == this.colDueDate || col == this.colInvoiceDate)
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
@@ -348,6 +348,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+
             if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colInvoiceAmount)
             {
                 selectedInvoice.AssignAmount = selectedInvoice.InvoiceAmount;
@@ -355,6 +356,19 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colAssignAmount)
             {
+                CDA cda = this._case.ActiveCDA;
+                if (cda.CommissionType == "按转让金额")
+                {
+                    if (this._case.TransactionType == "进口保理")
+                    {
+                        selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.IFPrice;
+                    }
+                    else
+                    {
+                        selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.EFPrice;
+                    }
+                }
+
                 this.StatBatch();
             }
         }
@@ -689,6 +703,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         private bool ValidateBatch()
         {
+            CDA cda = this._case.ActiveCDA;
+
+
             foreach (Invoice invoice in this.invoiceBindingSource.List)
             {
                 if (invoice.InvoiceNo == null)
@@ -748,7 +765,14 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.IsFlaw = true;
                     invoice.FlawReason = "09";
                 }
+
+                if (invoice.Commission.HasValue == false && cda.CommissionType == "其他")
+                {
+                    MessageBoxEx.Show("请填写手续费: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
             }
+
             return true;
         }
 

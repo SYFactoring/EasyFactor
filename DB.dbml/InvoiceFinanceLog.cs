@@ -374,19 +374,29 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
+        #region Methods (1)
+
+        // Public Methods (1) 
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="action"></param>
-        partial void OnValidate(System.Data.Linq.ChangeAction action)
+        public void CaculateCommission()
         {
-            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            CDA cda = this.Invoice.InvoiceAssignBatch.Case.ActiveCDA;
+            if (cda.CommissionType == "按融资金额")
             {
-                if (this.Commission.HasValue)
+                if (cda.Case.TransactionType == "进口保理")
                 {
-                    this.Invoice.Commission = this.Commission;
+                    Commission = FinanceAmount * cda.IFPrice;
+                }
+                else
+                {
+                    Commission = FinanceAmount * cda.EFPrice;
                 }
             }
         }
+
+        #endregion Methods
     }
 }

@@ -338,15 +338,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            ClientCreditLine creditLine;
-            if (cda.Case.TransactionType == "国内买方保理" || cda.Case.TransactionType == "进口保理")
-            {
-                creditLine = cda.Case.BuyerClient.FinanceCreditLine;
-            }
-            else
-            {
-                creditLine = cda.Case.SellerClient.FinanceCreditLine;
-            }
+            ClientCreditLine creditLine = cda.FinanceCreditLine;
 
             if (creditLine != null)
             {
@@ -575,22 +567,24 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
-            Factor factor = null;
-            switch (cda.Case.TransactionType)
-            {
-                case "国内卖方保理":
-                case "出口保理":
-                case "国内信保保理":
-                case "国际信保保理":
-                case "租赁保理":
-                    factor = cda.Case.SellerFactor;
-                    break;
-                case "国内买方保理":
-                case "进口保理":
-                    factor = cda.Case.BuyerFactor;
-                    break;
-                default: break;
-            }
+
+            Factor factor = cda.Case.Factor;
+            //switch (cda.Case.TransactionType)
+            //{
+            //    case "国内卖方保理":
+            //    case "出口保理":
+            //    case "国内信保保理":
+            //    case "国际信保保理":
+            //    case "租赁保理":
+            //        factor = cda.Case.SellerFactor;
+            //        break;
+            //    case "国内买方保理":
+            //    case "进口保理":
+            //        factor = cda.Case.BuyerFactor;
+            //        break;
+            //    default: break;
+            //}
+
             if (factor != null)
             {
                 FactorDetail factorDetail = new FactorDetail(factor, FactorDetail.OpFactorType.DETAIL_FACTOR);
@@ -636,26 +630,31 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.contractCodeTextBox.Text = contract.ContractCode;
             }
 
-            switch (cda.Case.TransactionType)
-            {
-                case "国内卖方保理":
-                case "出口保理":
-                case "国内信保保理":
-                case "国际信保保理":
-                case "租赁保理":
-                    this.factorCodeTextBox.Text = cda.Case.SellerFactor.FactorCode;
-                    this.companyNameCNTextBox.Text = cda.Case.SellerFactor.CompanyNameCN;
-                    this.companyNameENTextBox.Text = cda.Case.SellerFactor.CompanyNameEN;
-                    break;
-                case "国内买方保理":
-                case "进口保理":
-                    this.factorCodeTextBox.Text = cda.Case.BuyerFactor.FactorCode;
-                    this.companyNameCNTextBox.Text = cda.Case.BuyerFactor.CompanyNameCN;
-                    this.companyNameENTextBox.Text = cda.Case.BuyerFactor.CompanyNameEN;
+            //switch (cda.Case.TransactionType)
+            //{
+            //    case "国内卖方保理":
+            //    case "出口保理":
+            //    case "国内信保保理":
+            //    case "国际信保保理":
+            //    case "租赁保理":
+            //        this.factorCodeTextBox.Text = cda.Case.SellerFactor.FactorCode;
+            //        this.companyNameCNTextBox.Text = cda.Case.SellerFactor.CompanyNameCN;
+            //        this.companyNameENTextBox.Text = cda.Case.SellerFactor.CompanyNameEN;
+            //        break;
+            //    case "国内买方保理":
+            //    case "进口保理":
+            //        this.factorCodeTextBox.Text = cda.Case.BuyerFactor.FactorCode;
+            //        this.companyNameCNTextBox.Text = cda.Case.BuyerFactor.CompanyNameCN;
+            //        this.companyNameENTextBox.Text = cda.Case.BuyerFactor.CompanyNameEN;
 
-                    break;
-                default: break;
-            }
+            //        break;
+            //    default: break;
+            //}
+
+            Factor factor = cda.Case.Factor;
+            this.factorCodeTextBox.Text = factor.FactorCode;
+            this.companyNameCNTextBox.Text = factor.CompanyNameCN;
+            this.companyNameENTextBox.Text = factor.CompanyNameEN;
 
             if (opCDAType == OpCDAType.NEW_CDA)
             {
@@ -803,6 +802,16 @@ namespace CMBC.EasyFactor.CaseMgr
             if (cda.HandFee.HasValue == false)
             {
                 cda.HandFeeCurr = null;
+            }
+
+            if (cda.IFPrice.HasValue == false)
+            {
+                cda.IFPrice = 0;
+            }
+
+            if (cda.Price.HasValue == false)
+            {
+                cda.Price = cda.IFPrice;
             }
 
             cda.EFPrice = cda.Price - cda.IFPrice;

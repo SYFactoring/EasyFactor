@@ -107,6 +107,11 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
+            IMPORT_CREDIT_COVER_NEG,
+
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_CONTRACT,
 
             /// <summary>
@@ -200,6 +205,9 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CASES:
                     this.Text = "案件信息导入";
                     break;
+                case ImportType.IMPORT_CREDIT_COVER_NEG:
+                    this.Text = "国际保理案关联额度导入";
+                    break;
                 case ImportType.IMPORT_CONTRACT:
                     this.Text = "保理合同导入";
                     break;
@@ -287,6 +295,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_CASES:
                     e.Result = this.ImportCases((string)e.Argument, worker, e);
+                    break;
+                case ImportType.IMPORT_CREDIT_COVER_NEG:
+                    e.Result = this.ImportCreditCoverNegs((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_CONTRACT:
                     e.Result = this.ImportContract((string)e.Argument, worker, e);
@@ -498,6 +509,96 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
+        private int ImportCreditCoverNegs(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            DBDataContext context = new DBDataContext();
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                List<CreditCoverNegotiation> creditCoverList = new List<CreditCoverNegotiation>();
+                try
+                {
+                    for (int row = 2; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
+                        string caseCode = String.Format("{0:G}", valueArray[row, 1]).Trim();
+
+                        if (String.Empty == caseCode)
+                        {
+                            continue;
+                        }
+
+                        Case curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                        if (curCase == null)
+                        {
+                            throw new Exception("案件不存在，不能导入关联额度： " + caseCode);
+                        }
+
+                        int column = 5;
+                        CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
+                        string requestType = String.Format("{0:G}", valueArray[row, column++]);
+                        if ("P".Equals(requestType))
+                        {
+                            creditCover.RequestType = "P-预额度";
+                        }
+                        else if ("C".Equals(requestType))
+                        {
+                            creditCover.RequestType = "C-正式额度";
+                        }
+
+                        creditCover.RequestAmount = (double)valueArray[row, column++];
+                        curCase.NetPaymentTerm = (System.Nullable<int>)valueArray[row, column++];
+                        creditCover.RequestDate = (DateTime)valueArray[row, column++];
+                        creditCover.ReplyAmount = (System.Nullable<double>)valueArray[row, column++];
+                        creditCover.ReplyDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        creditCover.IFPrice = (System.Nullable<double>)valueArray[row, column++];
+                        creditCover.PriceDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        creditCover.DueDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                        creditCover.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
+                        creditCover.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                        creditCover.Case = curCase;
+                        creditCoverList.Add(creditCover);
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
+                    context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    foreach (CreditCoverNegotiation neg in creditCoverList)
+                    {
+                        neg.Case = null;
+                    }
+
+                    e1.Data["row"] = result;
+                    throw e1;
+                }
+            }
+
+            worker.ReportProgress(100);
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private int ImportCases(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
@@ -508,7 +609,6 @@ namespace CMBC.EasyFactor.Utils
             {
                 int size = valueArray.GetUpperBound(0);
                 List<Case> caseList = new List<Case>();
-                List<CreditCoverNegotiation> creditCoverList = new List<CreditCoverNegotiation>();
                 try
                 {
                     for (int row = 2; row <= size; row++)
@@ -611,35 +711,6 @@ namespace CMBC.EasyFactor.Utils
                         curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
-                        if (valueArray.GetUpperBound(1) > 30)
-                        {
-                            CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
-                            string requestType = String.Format("{0:G}", valueArray[row, column++]);
-                            if ("P".Equals(requestType))
-                            {
-                                creditCover.RequestType = "P-预额度";
-                            }
-                            else if ("C".Equals(requestType))
-                            {
-                                creditCover.RequestType = "C-正式额度";
-                            }
-
-                            creditCover.RequestAmount = (double)valueArray[row, column++];
-                            curCase.NetPaymentTerm = (System.Nullable<int>)valueArray[row, column++];
-                            creditCover.RequestDate = (DateTime)valueArray[row, column++];
-                            creditCover.ReplyAmount = (System.Nullable<double>)valueArray[row, column++];
-                            creditCover.ReplyDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                            creditCover.IFPrice = (System.Nullable<double>)valueArray[row, column++];
-                            column++;
-                            creditCover.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
-                            creditCover.Comment = String.Format("{0:G}", valueArray[row, column++]);
-                            if (creditCover.RequestType != null)
-                            {
-                                creditCover.Case = curCase;
-                                creditCoverList.Add(creditCover);
-                            }
-                        }
-
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
@@ -656,11 +727,6 @@ namespace CMBC.EasyFactor.Utils
                         curCase.SellerFactor = null;
                         curCase.CoDepartment = null;
                         curCase.OwnerDepartment = null;
-                    }
-
-                    foreach (CreditCoverNegotiation neg in creditCoverList)
-                    {
-                        neg.Case = null;
                     }
 
                     e1.Data["row"] = result;

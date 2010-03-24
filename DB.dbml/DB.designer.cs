@@ -108,6 +108,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertInvoiceRefundLog(InvoiceRefundLog instance);
     partial void UpdateInvoiceRefundLog(InvoiceRefundLog instance);
     partial void DeleteInvoiceRefundLog(InvoiceRefundLog instance);
+    partial void InsertAgreement(Agreement instance);
+    partial void UpdateAgreement(Agreement instance);
+    partial void DeleteAgreement(Agreement instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -345,6 +348,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<InvoiceRefundLog>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Agreement> Agreements
+		{
+			get
+			{
+				return this.GetTable<Agreement>();
 			}
 		}
 	}
@@ -5036,6 +5047,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
+		private System.Nullable<System.DateTime> _PriceDate;
+		
+		private System.Nullable<System.DateTime> _DueDate;
+		
 		private EntityRef<Case> _Case;
 		
     #region Extensibility Method Definitions
@@ -5062,6 +5077,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
+    partial void OnPriceDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnPriceDateChanged();
+    partial void OnDueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDueDateChanged();
     #endregion
 		
 		public CreditCoverNegotiation()
@@ -5270,6 +5289,46 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PriceDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> PriceDate
+		{
+			get
+			{
+				return this._PriceDate;
+			}
+			set
+			{
+				if ((this._PriceDate != value))
+				{
+					this.OnPriceDateChanging(value);
+					this.SendPropertyChanging();
+					this._PriceDate = value;
+					this.SendPropertyChanged("PriceDate");
+					this.OnPriceDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DueDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DueDate
+		{
+			get
+			{
+				return this._DueDate;
+			}
+			set
+			{
+				if ((this._DueDate != value))
+				{
+					this.OnDueDateChanging(value);
+					this.SendPropertyChanging();
+					this._DueDate = value;
+					this.SendPropertyChanged("DueDate");
+					this.OnDueDateChanged();
 				}
 			}
 		}
@@ -6320,6 +6379,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
 		
+		private EntitySet<Agreement> _Agreements;
+		
 		private EntityRef<Factor> _FactorGroup;
 		
     #region Extensibility Method Definitions
@@ -6418,6 +6479,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._FactorAccounts = new EntitySet<FactorAccount>(new Action<FactorAccount>(this.attach_FactorAccounts), new Action<FactorAccount>(this.detach_FactorAccounts));
 			this._FactorCreditLines = new EntitySet<FactorCreditLine>(new Action<FactorCreditLine>(this.attach_FactorCreditLines), new Action<FactorCreditLine>(this.detach_FactorCreditLines));
 			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
+			this._Agreements = new EntitySet<Agreement>(new Action<Agreement>(this.attach_Agreements), new Action<Agreement>(this.detach_Agreements));
 			this._FactorGroup = default(EntityRef<Factor>);
 			OnCreated();
 		}
@@ -7324,6 +7386,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="Factor_Agreement", Storage="_Agreements", OtherKey="FactorCode")]
+		public EntitySet<Agreement> Agreements
+		{
+			get
+			{
+				return this._Agreements;
+			}
+			set
+			{
+				this._Agreements.Assign(value);
+			}
+		}
+		
 		[Association(Name="Factor_Factor", Storage="_FactorGroup", ThisKey="GroupFactorCode", IsForeignKey=true)]
 		public Factor FactorGroup
 		{
@@ -7445,6 +7520,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factor = null;
+		}
+		
+		private void attach_Agreements(Agreement entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factor = this;
+		}
+		
+		private void detach_Agreements(Agreement entity)
 		{
 			this.SendPropertyChanging();
 			entity.Factor = null;
@@ -12616,6 +12703,181 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._RefundBatchNo = default(string);
 					}
 					this.SendPropertyChanged("InvoiceRefundBatch");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.Agreement")]
+	public partial class Agreement : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AgreementID;
+		
+		private string _FactorCode;
+		
+		private System.DateTime _SignDate;
+		
+		private string _Comment;
+		
+		private EntityRef<Factor> _Factor;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAgreementIDChanging(int value);
+    partial void OnAgreementIDChanged();
+    partial void OnFactorCodeChanging(string value);
+    partial void OnFactorCodeChanged();
+    partial void OnSignDateChanging(System.DateTime value);
+    partial void OnSignDateChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    #endregion
+		
+		public Agreement()
+		{
+			this._Factor = default(EntityRef<Factor>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_AgreementID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AgreementID
+		{
+			get
+			{
+				return this._AgreementID;
+			}
+			set
+			{
+				if ((this._AgreementID != value))
+				{
+					this.OnAgreementIDChanging(value);
+					this.SendPropertyChanging();
+					this._AgreementID = value;
+					this.SendPropertyChanged("AgreementID");
+					this.OnAgreementIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FactorCode", DbType="Char(7) NOT NULL", CanBeNull=false)]
+		public string FactorCode
+		{
+			get
+			{
+				return this._FactorCode;
+			}
+			set
+			{
+				if ((this._FactorCode != value))
+				{
+					if (this._Factor.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFactorCodeChanging(value);
+					this.SendPropertyChanging();
+					this._FactorCode = value;
+					this.SendPropertyChanged("FactorCode");
+					this.OnFactorCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_SignDate", DbType="DateTime NOT NULL")]
+		public System.DateTime SignDate
+		{
+			get
+			{
+				return this._SignDate;
+			}
+			set
+			{
+				if ((this._SignDate != value))
+				{
+					this.OnSignDateChanging(value);
+					this.SendPropertyChanging();
+					this._SignDate = value;
+					this.SendPropertyChanged("SignDate");
+					this.OnSignDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Factor_Agreement", Storage="_Factor", ThisKey="FactorCode", IsForeignKey=true)]
+		public Factor Factor
+		{
+			get
+			{
+				return this._Factor.Entity;
+			}
+			set
+			{
+				Factor previousValue = this._Factor.Entity;
+				if (((previousValue != value) 
+							|| (this._Factor.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Factor.Entity = null;
+						previousValue.Agreements.Remove(this);
+					}
+					this._Factor.Entity = value;
+					if ((value != null))
+					{
+						value.Agreements.Add(this);
+						this._FactorCode = value.FactorCode;
+					}
+					else
+					{
+						this._FactorCode = default(string);
+					}
+					this.SendPropertyChanged("Factor");
 				}
 			}
 		}

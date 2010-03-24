@@ -19,12 +19,24 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (3)
+        #region Fields (6)
 
         /// <summary>
         /// 
         /// </summary>
+        private BindingSource bsAgreements;
+        /// <summary>
+        /// 
+        /// </summary>
         private BindingSource bsCreditLines;
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context;
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpAgreementType opAgreementType;
         /// <summary>
         /// 
         /// </summary>
@@ -34,14 +46,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private OpFactorType opFactorType;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-
         #endregion Fields
 
-        #region Enums (2)
+        #region Enums (3)
 
         /// <summary>
         /// Operation Type
@@ -83,6 +90,24 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             /// </summary>
             DETAIL_FACTOR_CREDIT_LINE
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpAgreementType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            NEW_AGREEMENT,
+            /// <summary>
+            /// 
+            /// </summary>
+            UPDATE_AGREEMENT,
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL_AGREEMENT
+        }
 
         #endregion Enums
 
@@ -94,13 +119,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="factor">selected factor</param>
         /// <param name="opFactorType"></param>
         /// <param name="opFactorCreditLineType"></param>
-        private FactorDetail(Factor factor, OpFactorType opFactorType, OpFactorCreditLineType opFactorCreditLineType)
+        private FactorDetail(Factor factor, OpFactorType opFactorType, OpFactorCreditLineType opFactorCreditLineType, OpAgreementType opAgreementType)
         {
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
+
             this.bsCreditLines = new BindingSource();
             this.dgvFactorCreditLines.DataSource = this.bsCreditLines;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
+
+            this.bsAgreements = new BindingSource();
+            this.dgvAgreements.DataSource = this.bsAgreements;
+            this.dgvAgreements.AutoGenerateColumns = false;
+
             this.context = new DBDataContext();
 
             this.countryNameComboBox.DataSource = Country.AllCountries();
@@ -115,6 +146,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             this.opFactorType = opFactorType;
             this.opFactorCreditLineType = opFactorCreditLineType;
+            this.opAgreementType = opAgreementType;
 
             if (opFactorType == OpFactorType.NEW_FACTOR)
             {
@@ -127,6 +159,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             this.factorBindingSource.DataSource = factor;
             this.bsCreditLines.DataSource = factor.FactorCreditLines;
+            this.bsAgreements.DataSource = factor.Agreements;
 
             if (opFactorCreditLineType == OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE)
             {
@@ -134,9 +167,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 this.factorCreditLineBindingSource.DataSource = new FactorCreditLine();
             }
 
-
             this.UpdateFactorControlStatus();
             this.UpdateFactorCreditLineControlStatus();
+            this.UpdateAgreementControlStatus();
         }
 
         /// <summary>
@@ -145,7 +178,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="factor"></param>
         /// <param name="opFactorType"></param>
         public FactorDetail(Factor factor, OpFactorType opFactorType)
-            : this(factor, opFactorType, OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE)
+            : this(factor, opFactorType, OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE, OpAgreementType.DETAIL_AGREEMENT)
         {
         }
 
@@ -155,16 +188,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="factor"></param>
         /// <param name="opFactorCreditLineType"></param>
         public FactorDetail(Factor factor, OpFactorCreditLineType opFactorCreditLineType)
-            : this(factor, OpFactorType.DETAIL_FACTOR, opFactorCreditLineType)
+            : this(factor, OpFactorType.DETAIL_FACTOR, opFactorCreditLineType, OpAgreementType.DETAIL_AGREEMENT)
         {
             this.tabControl.SelectedTab = this.tabItemFactorCreditLine;
         }
 
         #endregion Constructors
 
-        #region Methods (18)
+        #region Methods (24)
 
-        // Private Methods (18) 
+        // Private Methods (24) 
 
         /// <summary>
         /// 
@@ -211,6 +244,57 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             else
             {
                 e.IsValid = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteAgreement(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
+            {
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.factorAgreementBindingSource.DataSource is Agreement))
+            {
+                return;
+            }
+
+            Agreement agreement = (Agreement)this.factorAgreementBindingSource.DataSource;
+            if (agreement.AgreementID == 0)
+            {
+                return;
+            }
+
+            bool isDeleteOK = true;
+            try
+            {
+                context.Agreements.DeleteOnSubmit(agreement);
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                isDeleteOK = false;
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (isDeleteOK)
+            {
+                MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.bsAgreements.DataSource = typeof(Agreement);
+                this.bsAgreements.DataSource = factor.Agreements;
+                this.factorAgreementBindingSource.DataSource = typeof(Agreement);
             }
         }
 
@@ -309,6 +393,31 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void NewAgreement(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
+            {
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Agreement agreement = new Agreement();
+            this.factorAgreementBindingSource.DataSource = agreement;
+            this.opAgreementType = OpAgreementType.NEW_AGREEMENT;
+            this.UpdateAgreementControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewFactorCreditLine(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
@@ -335,6 +444,24 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void RefreshAgreements(object sender, EventArgs e)
+        {
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
+            {
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            this.bsAgreements.DataSource = typeof(Agreement);
+            this.bsAgreements.DataSource = factor.Agreements;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RefreshFactorCreditLine(object sender, EventArgs e)
         {
             Factor factor = (Factor)this.factorBindingSource.DataSource;
@@ -346,6 +473,88 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             this.bsCreditLines.DataSource = typeof(FactorCreditLine);
             this.bsCreditLines.DataSource = factor.FactorCreditLines;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveAgreement(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null)
+            {
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.factorAgreementBindingSource.DataSource is Agreement))
+            {
+                return;
+            }
+
+            Agreement agreement = (Agreement)this.factorAgreementBindingSource.DataSource;
+
+            if (agreement.AgreementID == 0)
+            {
+                bool isAddOK = true;
+                try
+                {
+                    agreement.Factor = factor;
+                    context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    isAddOK = false;
+                    agreement.Factor = null;
+                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isAddOK)
+                {
+                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.bsAgreements.DataSource = typeof(Agreement);
+                    this.bsAgreements.DataSource = factor.Agreements;
+                    this.NewAgreement(null, null);
+                }
+            }
+            else
+            {
+                bool isUpdateOK = true;
+                try
+                {
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
+
+                    context.SubmitChanges();
+                }
+                catch (Exception e2)
+                {
+                    isUpdateOK = false;
+                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isUpdateOK)
+                {
+                    MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         /// <summary>
@@ -565,6 +774,23 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void SelectAgreement(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvAgreements.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            Agreement selectedAgreement = (Agreement)this.bsAgreements.List[this.dgvAgreements.SelectedRows[0].Index];
+            this.SetAgreementEditable(false);
+            this.factorAgreementBindingSource.DataSource = selectedAgreement;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectFactorCreditLine(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvFactorCreditLines.SelectedRows.Count == 0)
@@ -577,7 +803,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.factorCreditLineBindingSource.DataSource = selectedFactorCreditLine;
             this.btnFactorCreditLineFreeze.Enabled = true;
             this.btnFactorCreditLineUnfreeze.Enabled = true;
-
         }
 
         /// <summary>
@@ -601,6 +826,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             if (factorMgr.Selected != null)
             {
                 factor.FactorGroup = factorMgr.Selected;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="editable"></param>
+        private void SetAgreementEditable(bool editable)
+        {
+            foreach (Control comp in this.groupPanelAgreementDetail.Controls)
+            {
+                ControlUtil.SetComponetEditable(comp, editable);
             }
         }
 
@@ -652,6 +889,62 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 this.unfreezeDateDateTimePicker.Enabled = true;
                 creditLine.Unfreezer = App.Current.CurUser.Name;
                 creditLine.UnfreezeDate = System.DateTime.Now.Date;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateAgreement(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            Factor factor = (Factor)this.factorBindingSource.DataSource;
+            if (factor == null || factor.FactorCode == null)
+            {
+                MessageBoxEx.Show("请首先选定一个机构", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.factorAgreementBindingSource.DataSource is Agreement))
+            {
+                return;
+            }
+
+            this.opAgreementType = OpAgreementType.UPDATE_AGREEMENT;
+            this.UpdateAgreementControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateAgreementControlStatus()
+        {
+            if (this.opAgreementType == OpAgreementType.DETAIL_AGREEMENT)
+            {
+                foreach (Control comp in this.groupPanelAgreementDetail.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (this.opAgreementType == OpAgreementType.NEW_AGREEMENT)
+            {
+                foreach (Control comp in this.groupPanelAgreementDetail.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            else if (this.opAgreementType == OpAgreementType.UPDATE_AGREEMENT)
+            {
+                foreach (Control comp in this.groupPanelAgreementDetail.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
             }
         }
 

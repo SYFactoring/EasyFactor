@@ -674,6 +674,8 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     invoice.CaculateCommission(true);
                 }
+
+                context.SubmitChanges();
             }
         }
 

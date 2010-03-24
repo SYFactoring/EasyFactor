@@ -77,7 +77,7 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (82)
+        #region Methods (83)
 
         // Public Methods (2) 
 
@@ -106,7 +106,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (80) 
+        // Private Methods (81) 
 
         /// <summary>
         /// 
@@ -497,6 +497,21 @@ namespace CMBC.EasyFactor
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT);
                 importForm.Show();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportCreditCoverNeg(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            {
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_CREDIT_COVER_NEG);
+                importForm.Show();
+            }
+
         }
 
         /// <summary>

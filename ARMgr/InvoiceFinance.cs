@@ -155,9 +155,17 @@ namespace CMBC.EasyFactor.ARMgr
 
             log.FinanceAmount = financeAmount;
 
-            if (this._case.ActiveCDA.CommissionType == "按融资金额")
+            CDA cda = this._case.ActiveCDA;
+            if (cda.CommissionType == "按融资金额")
             {
-                log.Commission = log.FinanceAmount * this._case.ActiveCDA.Price;
+                if (this._case.TransactionType == "进口保理")
+                {
+                    log.Commission = log.FinanceAmount * cda.IFPrice;
+                }
+                else
+                {
+                    log.Commission = log.FinanceAmount * cda.EFPrice;
+                }
             }
         }
 

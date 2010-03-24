@@ -275,9 +275,47 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
-        #region Methods (5)
+        #region Methods (6)
 
-        // Public Methods (5) 
+        // Public Methods (6) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculateCommission(bool isOverwrite)
+        {
+            if (this.InvoiceAssignBatch != null)
+            {
+                CDA cda = this.InvoiceAssignBatch.Case.ActiveCDA;
+
+                if (cda.CommissionType == "按融资金额")
+                {
+                    if (isOverwrite)
+                    {
+                        foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                        {
+                            log.CaculateCommission();
+                        }
+                    }
+
+                    Commission = this.InvoiceFinanceLogs.Sum(log => log.Commission);
+                }
+                else if (cda.CommissionType == "按转让金额")
+                {
+                    if (!TypeUtil.GreaterZero(this.Commission) || isOverwrite)
+                    {
+                        if (this.InvoiceAssignBatch.Case.TransactionType == "进口保理")
+                        {
+                            Commission = AssignAmount * cda.IFPrice.GetValueOrDefault();
+                        }
+                        else
+                        {
+                            Commission = AssignAmount * cda.EFPrice.GetValueOrDefault();
+                        }
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// 
@@ -312,27 +350,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             CaculateCommission(false);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void CaculateCommission(bool isOverwrite)
-        {
-            if (this.InvoiceAssignBatch != null)
-            {
-                if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按融资金额")
-                {
-                    Commission = this.InvoiceFinanceLogs.Sum(log => log.Commission);
-                }
-                else if (this.InvoiceAssignBatch.Case.ActiveCDA.CommissionType == "按转让金额")
-                {
-                    if (!TypeUtil.GreaterZero(this.Commission) || isOverwrite)
-                    {
-                        Commission = AssignAmount * this.InvoiceAssignBatch.Case.ActiveCDA.Price.GetValueOrDefault();
-                    }
-                }
-            }
         }
 
         /// <summary>

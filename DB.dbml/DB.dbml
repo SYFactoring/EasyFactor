@@ -215,6 +215,8 @@
       <Column Name="IFPrice" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(1400)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="PriceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Case_CreditCoverNegotiation" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>
@@ -310,6 +312,7 @@
       <Association Name="Factor_FactorAccount" Member="FactorAccounts" OtherKey="FactorCode" Type="FactorAccount" />
       <Association Name="Factor_FactorCreditLine" Member="FactorCreditLines" OtherKey="FactorCode" Type="FactorCreditLine" />
       <Association Name="Factor_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" OtherKey="FactorCode" Type="InvoiceFinanceBatch" />
+      <Association Name="Factor_Agreement" Member="Agreements" OtherKey="FactorCode" Type="Agreement" />
       <Association Name="Factor_Factor" Member="FactorGroup" ThisKey="GroupFactorCode" Type="Factor" IsForeignKey="true" />
     </Type>
   </Table>
@@ -546,6 +549,15 @@
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceFinanceLog" ThisKey="FinanceLogID" Type="InvoiceFinanceLog" IsForeignKey="true" />
       <Association Name="InvoiceRefundBatch_InvoiceRefundLog" Member="InvoiceRefundBatch" ThisKey="RefundBatchNo" Type="InvoiceRefundBatch" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Agreement" Member="Agreements">
+    <Type Name="Agreement">
+      <Column Name="AgreementID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FactorCode" Type="System.String" DbType="Char(7) NOT NULL" CanBeNull="false" />
+      <Column Name="SignDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="Factor_Agreement" Member="Factor" ThisKey="FactorCode" Type="Factor" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -599,6 +599,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Agreement.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Case.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.CDA.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Client.datasource" />
