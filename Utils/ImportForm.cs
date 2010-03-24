@@ -521,13 +521,13 @@ namespace CMBC.EasyFactor.Utils
 
                         string caseCode = String.Format("{0:G}", valueArray[row, 1]).Trim();
                         string transactionType = String.Format("{0:G}", valueArray[row, 4]);
-                        DateTime appDate = (DateTime)valueArray[row, 19];
 
                         if (String.Empty == caseCode && transactionType == String.Empty)
                         {
                             continue;
                         }
 
+                        DateTime appDate = (DateTime)valueArray[row, 19];
                         if (String.Empty == caseCode && transactionType != String.Empty)
                         {
                             caseCode = Case.GenerateCaseCode(transactionType, appDate, caseList);
@@ -602,7 +602,11 @@ namespace CMBC.EasyFactor.Utils
                         curCase.BuyerFactor = buyerFactor;
                         column++;
                         curCase.InvoiceCurrency = String.Format("{0:G}", valueArray[row, column++]);
-                        curCase.NetPaymentTerm = (System.Nullable<int>)valueArray[row, column++];
+                        double? netPaymentTerm = (double?)valueArray[row, column++];
+                        if (netPaymentTerm.HasValue)
+                        {
+                            curCase.NetPaymentTerm = Convert.ToInt32(netPaymentTerm.Value.ToString());
+                        }
                         curCase.CaseAppDate = (DateTime)valueArray[row, column++];
                         curCase.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.Comment = String.Format("{0:G}", valueArray[row, column++]);
