@@ -25,8 +25,17 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="Title">邮件的主题</param>  
         public SendMail(string To, string From, string Title, string Body, string Path)
         {
+            string[] toAddresses = To.Split(new char[] { ';' });
             mailMessage = new MailMessage();
-            mailMessage.To.Add(To);
+            mailMessage.To.Add(toAddresses[0]);
+            if (toAddresses.Length > 1)
+            {
+                for (int i = 1; i < toAddresses.Length; i++)
+                {
+                    mailMessage.CC.Add(toAddresses[i]);
+                }
+            }
+
             if (From == null)
             {
                 From = "yimingliu@fudan.edu.cn";

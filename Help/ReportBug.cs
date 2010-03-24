@@ -45,7 +45,7 @@ namespace CMBC.EasyFactor.Help
             string mailTitle = String.Format("{0}_{1}_{2}_{3:yyyy/MM/dd HH:mm:ss}", type, who, title, DateTime.Now);
             string bug = this.tbBug.Text + "\n----------------------------------------------\n" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            mail = new SendMail("liuyiming.vip@gmail.com", App.Current.CurUser.Email, mailTitle, bug, path);
+            mail = new SendMail("liuyiming.vip@gmail.com;xiaolan.pub@gmail.com", App.Current.CurUser.Email, mailTitle, bug, path);
             this.btnSubmit.Enabled = false;
             this.backgroundWorker.RunWorkerAsync();
         }

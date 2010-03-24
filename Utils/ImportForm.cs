@@ -975,8 +975,7 @@ namespace CMBC.EasyFactor.Utils
                         Client client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
-                            client = new Client();
-                            client.ClientEDICode = clientEDICode;
+                            throw new Exception("客户不存在，不能导入： " + clientEDICode);
                         }
 
                         clientList.Add(client);
@@ -1042,15 +1041,13 @@ namespace CMBC.EasyFactor.Utils
                     }
                 }
 
-                context.Clients.InsertAllOnSubmit(clientList);
                 context.SubmitChanges();
             }
             catch (Exception e1)
             {
                 foreach (Client client in clientList)
                 {
-                    client.ClientGroup = null;
-                    client.Department = null;
+                    client = context.Clients.SingleOrDefault(c => c.ClientEDICode == client.clientEDICode);
                 }
 
                 if (result != clientList.Count)
