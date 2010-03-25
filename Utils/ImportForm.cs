@@ -2555,7 +2555,7 @@ namespace CMBC.EasyFactor.Utils
                                 }
                             }
 
-                            invoice.CaculateCommission(true);
+                            invoice.CaculateCommission(false);
 
                             column = 25;
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
