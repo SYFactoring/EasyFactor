@@ -133,6 +133,41 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        private List<CreditCoverNegotiation> GetSelectedCreditCoverNegs()
+        {
+            List<CreditCoverNegotiation> selectedCreditCoverNegs = new List<CreditCoverNegotiation>();
+            foreach (DataGridViewCell cell in this.dgvCreditCoverNegs.SelectedCells)
+            {
+                CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)this.bs.List[cell.RowIndex];
+                if (!selectedCreditCoverNegs.Contains(creditCoverNeg))
+                {
+                    selectedCreditCoverNegs.Add(creditCoverNeg);
+                }
+            }
+
+            return selectedCreditCoverNegs;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportCreditCoverNeg(object sender, EventArgs e)
+        {
+            if (this.dgvCreditCoverNegs.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_CREDIT_COVER_NEG, GetSelectedCreditCoverNegs());
+            form.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Query(object sender, EventArgs e)

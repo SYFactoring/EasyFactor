@@ -9,15 +9,14 @@ namespace CMBC.EasyFactor.Utils
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
     using System.Runtime.InteropServices;
+    using System.Text;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using Microsoft.Office.Interop.Excel;
-    using System.Text;
-    using System.IO;
     using DevComponents.DotNetBar;
-    using System.Drawing;
-    using System.Linq;
+    using Microsoft.Office.Interop.Excel;
 
     /// <summary>
     /// 
@@ -103,6 +102,11 @@ namespace CMBC.EasyFactor.Utils
             /// 
             /// </summary>
             EXPORT_CLIENT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            EXPORT_CREDIT_COVER_NEG
         }
 
         #endregion Enums
@@ -128,7 +132,7 @@ namespace CMBC.EasyFactor.Utils
 
         #endregion Constructors
 
-        #region Methods (17)
+        #region Methods (19)
 
         // Public Methods (1) 
 
@@ -153,7 +157,7 @@ namespace CMBC.EasyFactor.Utils
 
             this.btnStart.Enabled = false;
         }
-        // Private Methods (16) 
+        // Private Methods (18) 
 
         /// <summary>
         /// 
@@ -200,6 +204,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ExportType.EXPORT_CLIENT:
                     e.Result = this.ExportClients(worker, e);
+                    break;
+                case ExportType.EXPORT_CREDIT_COVER_NEG:
+                    e.Result = this.ExportCreditCoverNegs(worker, e);
                     break;
                 default:
                     break;
@@ -345,6 +352,173 @@ namespace CMBC.EasyFactor.Utils
                         range.NumberFormatLocal = "0.00";
                     }
                     else if (range.Column == 4 || range.Column == 5)
+                    {
+                        range.NumberFormatLocal = "yyyy-MM-dd";
+                    }
+                }
+
+                app.Visible = true;
+            }
+            catch (Exception e1)
+            {
+                if (datasheet != null)
+                {
+                    Marshal.ReleaseComObject(datasheet);
+                    datasheet = null;
+                }
+
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+                throw e1;
+            }
+
+            return exportData.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private object ExportClientReviews(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+
+            if (app == null)
+            {
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return -1;
+            }
+            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            if (datasheet == null)
+            {
+                return -1;
+            }
+
+            try
+            {
+                datasheet.Cells[1, 1] = "协查意见台帐";
+                datasheet.get_Range("A1", "S1").MergeCells = true;
+                datasheet.get_Range("A1", "S1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                int column = 1;
+                datasheet.Cells[2, column++] = "回复时间";
+                datasheet.Cells[2, column++] = "协查意见编码";
+                datasheet.Cells[2, column++] = "区域负责人";
+                datasheet.Cells[2, column++] = "归属事业部/分行";
+                datasheet.Cells[2, column++] = "归属分部";
+                datasheet.Cells[2, column++] = "产品经理";
+                datasheet.Cells[2, column++] = "客户名称";
+                datasheet.Cells[2, column++] = "所属行业";
+                datasheet.Cells[2, column++] = "授信金额（万）";
+                datasheet.Cells[2, column++] = "国内";
+                datasheet.Cells[2, column++] = "国际";
+                datasheet.Cells[2, column++] = "卖方";
+                datasheet.Cells[2, column++] = "买方";
+                datasheet.Cells[2, column++] = "有追";
+                datasheet.Cells[2, column++] = "无追";
+                datasheet.Cells[2, column++] = "明保/暗保";
+                datasheet.Cells[2, column++] = "预付款";
+                datasheet.Cells[2, column++] = "代付";
+                datasheet.Cells[2, column++] = "信用证";
+                datasheet.Cells[2, column++] = "银承";
+                datasheet.Cells[2, column++] = "融资管理";
+                datasheet.Cells[2, column++] = "启用状态";
+                datasheet.Cells[2, column++] = "保理费";
+                datasheet.Cells[2, column++] = "融资期（月）";
+                datasheet.Cells[2, column++] = "备注";
+
+                int size = this.exportData.Count;
+                for (int row = 0; row < size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        if (datasheet != null)
+                        {
+                            Marshal.ReleaseComObject(datasheet);
+                            datasheet = null;
+                        }
+
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
+
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
+
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    column = 1;
+                    ClientReview review = (ClientReview)exportData[row];
+                    datasheet.Cells[row + 3, column++] = review.ReviewDate;
+                    datasheet.Cells[row + 3, column++] = review.ReviewNo;
+                    Department dept = review.Client.Department;
+                    if (dept != null)
+                    {
+                        datasheet.Cells[row + 3, column++] = dept.MarketManager;
+                        datasheet.Cells[row + 3, column++] = dept.Domain;
+                        datasheet.Cells[row + 3, column++] = dept.Location;
+                    }
+                    else
+                    {
+                        datasheet.Cells[row + 3, column++] = "---";
+                        datasheet.Cells[row + 3, column++] = "---";
+                        datasheet.Cells[row + 3, column++] = "---";
+                    }
+
+                    datasheet.Cells[row + 3, column++] = review.Client.PMName;
+                    datasheet.Cells[row + 3, column++] = review.Client.ToString();
+                    datasheet.Cells[row + 3, column++] = review.Client.Industry;
+                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = TypeUtil.GetExcelCurr(review.RequestCurrency);
+                    datasheet.Cells[row + 3, column++] = review.RequestAmount;
+                    datasheet.Cells[row + 3, column++] = review.IsLocal.GetValueOrDefault() ? "国内" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsInternational.GetValueOrDefault() ? "国际" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsSeller.GetValueOrDefault() ? "卖方" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsBuyer.GetValueOrDefault() ? "买方" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsRecoarse.GetValueOrDefault() ? "有追" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsNonRecoarse.GetValueOrDefault() ? "无追" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsNotice;
+                    string[] financeTypes = review.RequestFinanceType.Split(new char[] { ';' });
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("预付款") ? "预付款" : "---";
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("代付") ? "代付" : "---";
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("信用证") ? "信用证" : "---";
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("银承") ? "银承" : "---";
+                    datasheet.Cells[row + 3, column++] = review.RequestFinanceType2;
+                    datasheet.Cells[row + 3, column++] = review.Client.Contract != null ? "已启动" : "未启动";
+                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "0.00%";
+                    datasheet.Cells[row + 3, column++] = review.RequestCommissionRate;
+                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "##月";
+                    datasheet.Cells[row + 3, column++] = review.RequestFinancePeriod;
+                    datasheet.Cells[row + 3, column++] = review.Comment;
+
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+
+                foreach (Range range in datasheet.UsedRange.Columns)
+                {
+                    range.EntireColumn.AutoFit();
+                    if (range.Column == 1)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -549,7 +723,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private object ExportClientReviews(BackgroundWorker worker, DoWorkEventArgs e)
+        private object ExportCreditCoverNegs(BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
 
@@ -567,36 +741,23 @@ namespace CMBC.EasyFactor.Utils
 
             try
             {
-                datasheet.Cells[1, 1] = "协查意见台帐";
-                datasheet.get_Range("A1", "S1").MergeCells = true;
-                datasheet.get_Range("A1", "S1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-
                 int column = 1;
-                datasheet.Cells[2, column++] = "回复时间";
-                datasheet.Cells[2, column++] = "协查意见编码";
-                datasheet.Cells[2, column++] = "区域负责人";
-                datasheet.Cells[2, column++] = "归属事业部/分行";
-                datasheet.Cells[2, column++] = "归属分部";
-                datasheet.Cells[2, column++] = "产品经理";
-                datasheet.Cells[2, column++] = "客户名称";
-                datasheet.Cells[2, column++] = "所属行业";
-                datasheet.Cells[2, column++] = "授信金额（万）";
-                datasheet.Cells[2, column++] = "国内";
-                datasheet.Cells[2, column++] = "国际";
-                datasheet.Cells[2, column++] = "卖方";
-                datasheet.Cells[2, column++] = "买方";
-                datasheet.Cells[2, column++] = "有追";
-                datasheet.Cells[2, column++] = "无追";
-                datasheet.Cells[2, column++] = "明保/暗保";
-                datasheet.Cells[2, column++] = "预付款";
-                datasheet.Cells[2, column++] = "代付";
-                datasheet.Cells[2, column++] = "信用证";
-                datasheet.Cells[2, column++] = "银承";
-                datasheet.Cells[2, column++] = "融资管理";
-                datasheet.Cells[2, column++] = "启用状态";
-                datasheet.Cells[2, column++] = "保理费";
-                datasheet.Cells[2, column++] = "融资期（月）";
-                datasheet.Cells[2, column++] = "备注";
+                datasheet.Cells[1, column++] = "案件编号";
+                datasheet.Cells[1, column++] = "所属地区";
+                datasheet.Cells[1, column++] = "卖方名称";
+                datasheet.Cells[1, column++] = "买方名称";
+                datasheet.Cells[1, column++] = "合作保理商";
+                datasheet.Cells[1, column++] = "P/C标志";
+                datasheet.Cells[1, column++] = "申请额度";
+                datasheet.Cells[1, column++] = "付款条件";
+                datasheet.Cells[1, column++] = "申请日期";
+                datasheet.Cells[1, column++] = "回复额度";
+                datasheet.Cells[1, column++] = "回复日期";
+                datasheet.Cells[1, column++] = "IF报价";
+                datasheet.Cells[1, column++] = "报价日";
+                datasheet.Cells[1, column++] = "额度期限";
+                datasheet.Cells[1, column++] = "额度申请的经办人";
+                datasheet.Cells[1, column++] = "额度申请的备注";
 
                 int size = this.exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -627,47 +788,23 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    ClientReview review = (ClientReview)exportData[row];
-                    datasheet.Cells[row + 3, column++] = review.ReviewDate;
-                    datasheet.Cells[row + 3, column++] = review.ReviewNo;
-                    Department dept = review.Client.Department;
-                    if (dept != null)
-                    {
-                        datasheet.Cells[row + 3, column++] = dept.MarketManager;
-                        datasheet.Cells[row + 3, column++] = dept.Domain;
-                        datasheet.Cells[row + 3, column++] = dept.Location;
-                    }
-                    else
-                    {
-                        datasheet.Cells[row + 3, column++] = "---";
-                        datasheet.Cells[row + 3, column++] = "---";
-                        datasheet.Cells[row + 3, column++] = "---";
-                    }
-
-                    datasheet.Cells[row + 3, column++] = review.Client.PMName;
-                    datasheet.Cells[row + 3, column++] = review.Client.ToString();
-                    datasheet.Cells[row + 3, column++] = review.Client.Industry;
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = TypeUtil.GetExcelCurr(review.RequestCurrency);
-                    datasheet.Cells[row + 3, column++] = review.RequestAmount;
-                    datasheet.Cells[row + 3, column++] = review.IsLocal.GetValueOrDefault() ? "国内" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsInternational.GetValueOrDefault() ? "国际" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsSeller.GetValueOrDefault() ? "卖方" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsBuyer.GetValueOrDefault() ? "买方" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsRecoarse.GetValueOrDefault() ? "有追" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsNonRecoarse.GetValueOrDefault() ? "无追" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsNotice;
-                    string[] financeTypes = review.RequestFinanceType.Split(new char[] { ';' });
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("预付款") ? "预付款" : "---";
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("代付") ? "代付" : "---";
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("信用证") ? "信用证" : "---";
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("银承") ? "银承" : "---";
-                    datasheet.Cells[row + 3, column++] = review.RequestFinanceType2;
-                    datasheet.Cells[row + 3, column++] = review.Client.Contract != null ? "已启动" : "未启动";
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "0.00%";
-                    datasheet.Cells[row + 3, column++] = review.RequestCommissionRate;
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "##月";
-                    datasheet.Cells[row + 3, column++] = review.RequestFinancePeriod;
-                    datasheet.Cells[row + 3, column++] = review.Comment;
+                    CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)exportData[row];
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.CaseCode;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.OwnerDepartment.Location;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.SellerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.BuyerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.Factor.ToString();
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestType;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestAmount;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.NetPaymentTerm;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestDate;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.ReplyAmount;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.ReplyDate;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.IFPrice;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.PriceDate;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.DueDate;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.CreateUserName;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
@@ -675,9 +812,17 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 1)
+                    if (range.Column == 8 || range.Column == 10 || range.Column == 12 || range.Column == 13)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
+                    }
+                    else if (range.Column == 6 || range.Column == 9)
+                    {
+                        range.NumberFormatLocal = "0";
+                    }
+                    else if (range.Column == 11)
+                    {
+                        range.NumberFormatLocal = "0.00%";
                     }
                 }
 

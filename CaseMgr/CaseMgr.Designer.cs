@@ -115,15 +115,6 @@
             this.cbOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblOnwerDept = new DevComponents.DotNetBar.LabelX();
             this.dgvCases = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -148,6 +139,15 @@
             this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -661,7 +661,6 @@
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCases.Location = new System.Drawing.Point(0, 85);
-            this.dgvCases.MultiSelect = false;
             this.dgvCases.Name = "dgvCases";
             this.dgvCases.ReadOnly = true;
             this.dgvCases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -669,72 +668,6 @@
             this.dgvCases.TabIndex = 1;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCases_RowPostPaint);
-            // 
-            // cmuContractMgr
-            // 
-            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCaseSelect,
-            this.menuItemCaseDetail,
-            this.toolStripSeparator,
-            this.menuItemCaseNew,
-            this.menuItemCreditCoverNegNew,
-            this.menuItemCaseDelete,
-            this.toolStripSeparator1,
-            this.menuItemLegerReport});
-            this.cmuContractMgr.Name = "cmuContractMgr";
-            this.cmuContractMgr.Size = new System.Drawing.Size(147, 148);
-            // 
-            // menuItemCaseSelect
-            // 
-            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
-            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseSelect.Text = "选定案件";
-            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
-            // 
-            // menuItemCaseDetail
-            // 
-            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseDetail.Text = "详细信息";
-            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
-            // 
-            // menuItemCaseNew
-            // 
-            this.menuItemCaseNew.Name = "menuItemCaseNew";
-            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseNew.Text = "新建案件";
-            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
-            // 
-            // menuItemCreditCoverNegNew
-            // 
-            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
-            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
-            this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
-            // 
-            // menuItemCaseDelete
-            // 
-            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
-            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCaseDelete.Text = "删除案件";
-            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
-            // 
-            // menuItemLegerReport
-            // 
-            this.menuItemLegerReport.Name = "menuItemLegerReport";
-            this.menuItemLegerReport.Size = new System.Drawing.Size(146, 22);
-            this.menuItemLegerReport.Text = "导出台帐";
-            this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
             // 
             // colCaseCode
             // 
@@ -952,6 +885,72 @@
             this.colFinanceLineOutstanding.HeaderText = "剩余融资额度";
             this.colFinanceLineOutstanding.Name = "colFinanceLineOutstanding";
             this.colFinanceLineOutstanding.ReadOnly = true;
+            // 
+            // cmuContractMgr
+            // 
+            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCaseSelect,
+            this.menuItemCaseDetail,
+            this.toolStripSeparator,
+            this.menuItemCaseNew,
+            this.menuItemCreditCoverNegNew,
+            this.menuItemCaseDelete,
+            this.toolStripSeparator1,
+            this.menuItemLegerReport});
+            this.cmuContractMgr.Name = "cmuContractMgr";
+            this.cmuContractMgr.Size = new System.Drawing.Size(147, 148);
+            // 
+            // menuItemCaseSelect
+            // 
+            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
+            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseSelect.Text = "选定案件";
+            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
+            // 
+            // menuItemCaseDetail
+            // 
+            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDetail.Text = "详细信息";
+            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemCaseNew
+            // 
+            this.menuItemCaseNew.Name = "menuItemCaseNew";
+            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseNew.Text = "新建案件";
+            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
+            // 
+            // menuItemCreditCoverNegNew
+            // 
+            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
+            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
+            this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
+            // 
+            // menuItemCaseDelete
+            // 
+            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
+            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDelete.Text = "删除案件";
+            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemLegerReport
+            // 
+            this.menuItemLegerReport.Name = "menuItemLegerReport";
+            this.menuItemLegerReport.Size = new System.Drawing.Size(146, 22);
+            this.menuItemLegerReport.Text = "导出台帐";
+            this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
             // 
             // CaseMgr
             // 
