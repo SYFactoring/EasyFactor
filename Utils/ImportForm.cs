@@ -2541,12 +2541,21 @@ namespace CMBC.EasyFactor.Utils
 
                             //手续费
                             column = 22;
-                            invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
+                            double? Commission = (System.Nullable<double>)valueArray[row, column++];
 
-                            if (invoice.Commission == null)
+                            if (Commission != null)
                             {
-                                invoice.CaculateCommission();
+                                if (activeCDA.CommissionType == "按融资金额" && invoice.InvoiceFinanceLogs.Count > 0)
+                                {
+                                    invoice.InvoiceFinanceLogs[0].Commission = Commission;
+                                }
+                                else
+                                {
+                                    invoice.Commission = Commission;
+                                }
                             }
+
+                            invoice.CaculateCommission();
 
                             column = 25;
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
