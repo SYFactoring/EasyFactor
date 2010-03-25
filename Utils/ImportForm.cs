@@ -2543,21 +2543,9 @@ namespace CMBC.EasyFactor.Utils
                             column = 22;
                             invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
 
-                            if (activeCDA != null && invoice.Commission == null)
+                            if (invoice.Commission == null)
                             {
-                                switch (activeCDA.CommissionType)
-                                {
-                                    case "按融资金额":
-                                        invoice.Commission = invoice.FinanceAmount * activeCDA.Price;
-
-                                        break;
-                                    case "按转让金额":
-                                        invoice.Commission = invoice.AssignAmount * activeCDA.Price;
-
-                                        break;
-                                    default:
-                                        break;
-                                }
+                                invoice.CaculateCommission();
                             }
 
                             column = 25;
