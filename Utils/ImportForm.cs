@@ -544,18 +544,13 @@ namespace CMBC.EasyFactor.Utils
 
                         int column = 5;
                         CreditCoverNegotiation creditCover = new CreditCoverNegotiation();
-                        string requestType = String.Format("{0:G}", valueArray[row, column++]);
-                        if ("P".Equals(requestType))
-                        {
-                            creditCover.RequestType = "P-预额度";
-                        }
-                        else if ("C".Equals(requestType))
-                        {
-                            creditCover.RequestType = "C-正式额度";
-                        }
-
+                        creditCover.RequestType = String.Format("{0:G}", valueArray[row, column++]);
                         creditCover.RequestAmount = (double)valueArray[row, column++];
-                        creditCover.NetPaymentTerm = (System.Nullable<int>)valueArray[row, column++];
+                        double? netPaymentTerm = (double?)valueArray[row, column++];
+                        if (netPaymentTerm.HasValue)
+                        {
+                            creditCover.NetPaymentTerm = Convert.ToInt32(netPaymentTerm.Value.ToString());
+                        }
                         creditCover.RequestDate = (DateTime)valueArray[row, column++];
                         creditCover.ReplyAmount = (System.Nullable<double>)valueArray[row, column++];
                         creditCover.ReplyDate = (System.Nullable<DateTime>)valueArray[row, column++];
