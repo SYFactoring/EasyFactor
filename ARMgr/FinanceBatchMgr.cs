@@ -543,13 +543,13 @@ namespace CMBC.EasyFactor.ARMgr
 
                 sheet.Cells[row, 5] = "费用总计";
                 sheet.Cells[row, 6] = totalCommission;
-                sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
-                sheet.get_Range("D" + row, "E" + row).Borders.LineStyle = 1;
+                sheet.get_Range("F" + row, "F" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
+                sheet.get_Range("E" + row, "F" + row).Borders.LineStyle = 1;
 
                 row += 2;
 
                 sheet.Cells[row, 1] = String.Format("制表：{0}", batchGroup.First().CreateUserName);
-                sheet.Cells[row, 4] = String.Format("复核：{0}", batchGroup.First().CheckUserName);
+                sheet.Cells[row, 3] = String.Format("复核：{0}", batchGroup.First().CheckUserName);
                 sheet.Cells[row, 5] = "主管：";
                 sheet.Cells[row + 2, 4] = "中国民生银行 贸易金融部保理业务部  （业务章）";
                 sheet.Cells[row + 3, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
