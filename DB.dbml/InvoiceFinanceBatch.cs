@@ -16,7 +16,53 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceFinanceBatch
     {
-        #region Properties (3)
+        #region Properties (11)
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public double AssignAmount
+        {
+            get
+            {
+                double result = 0;
+                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                {
+                    result += log.Invoice.AssignAmount;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int AssignCount
+        {
+            get
+            {
+                return GetInvoices().Count;
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public DateTime AssignDate
+        {
+            get
+            {
+                if (this.InvoiceFinanceLogs.Count > 0)
+                {
+                    return this.InvoiceFinanceLogs[0].Invoice.AssignDate;
+                }
+                else
+                {
+                    return default(DateTime);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets
@@ -43,11 +89,67 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public string SellerName
+        public double? CommissionAmount
         {
             get
             {
-                return this.Case.SellerClient.ToString();
+                double? result = null;
+                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                {
+                    if (log.Commission.HasValue)
+                    {
+                        if (result.HasValue == false)
+                        {
+                            result = 0;
+                        }
+
+                        result += log.Commission;
+                    }
+                }
+
+                if (this.BatchCurrency != this.Case.InvoiceCurrency)
+                {
+                    double rate = Exchange.GetExchangeRate(this.BatchCurrency, this.Case.InvoiceCurrency);
+                    result *= rate;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 毛利息收入
+        /// </summary>
+        public double GrossInterestIncome
+        {
+            get
+            {
+                double result = 0;
+                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                {
+                    double value = log.GrossInterest;
+                    result += value;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public double? HandfeeAmount
+        {
+            get
+            {
+                double? result = AssignCount * this.Case.ActiveCDA.HandFee;
+                if (this.Case.ActiveCDA.HandFeeCurr != this.Case.InvoiceCurrency)
+                {
+                    double rate = Exchange.GetExchangeRate(this.Case.ActiveCDA.HandFeeCurr, this.Case.InvoiceCurrency);
+                    result *= rate;
+                }
+
+                return result;
             }
         }
 
@@ -81,23 +183,21 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 毛利息收入
+        /// Gets
         /// </summary>
-        public double GrossInterestIncome
+        public string SellerName
         {
             get
             {
-                double result = 0;
-                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
-                {
-                    double value = log.GrossInterest;
-                    result += value;
-                }
-
-                return result;
+                return this.Case.SellerClient.ToString();
             }
         }
+
         #endregion Properties
+
+        #region Methods (3)
+
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -152,5 +252,26 @@ namespace CMBC.EasyFactor.DB.dbml
             string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return financeNo;
         }
+        // Private Methods (1) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private List<Invoice> GetInvoices()
+        {
+            List<Invoice> invoices = new List<Invoice>();
+            foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+            {
+                if (!invoices.Contains(log.Invoice))
+                {
+                    invoices.Add(log.Invoice);
+                }
+            }
+
+            return invoices;
+        }
+
+        #endregion Methods
     }
 }

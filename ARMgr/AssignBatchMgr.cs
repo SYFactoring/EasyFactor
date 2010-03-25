@@ -660,6 +660,15 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            foreach (InvoiceAssignBatch batch in selectedBatches)
+            {
+                if (batch.Case.ActiveCDA.CommissionType != "按转让金额" && batch.Case.ActiveCDA.CommissionType != "其他")
+                {
+                    MessageBoxEx.Show("所选批次不是按照转让金额（或其他）收取保理费用，批次号：" + batch.AssignBatchNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
+
             MakeReport makeReport = new MakeReport(ReportCommissionImpl);
             GroupBatches(selectedBatches, makeReport);
         }
@@ -701,93 +710,44 @@ namespace CMBC.EasyFactor.ARMgr
                 foreach (InvoiceAssignBatch selectedBatch in batchGroup)
                 {
                     Client buyer = selectedBatch.Case.BuyerClient;
-                    Factor factor = null;
-                    switch (selectedBatch.Case.TransactionType)
-                    {
-                        case "国内卖方保理":
-                        case "国内信保保理":
-                        case "出口保理":
-                        case "国际信保保理":
-                        case "租赁保理":
-                            factor = selectedBatch.Case.BuyerFactor;
-                            break;
-                        case "国内买方保理":
-                        case "进口保理":
-                            factor = selectedBatch.Case.SellerFactor;
-                            break;
-                        default:
-                            break;
-                    }
+                    Factor factor = selectedBatch.Case.Factor;
 
                     CDA cda = selectedBatch.Case.ActiveCDA;
-                    string commissionType = cda.CommissionType;
-                    bool isCommissionByFinance = ("按融资金额" == commissionType);
 
-                    if (!isCommissionByFinance)
-                    {
-                        int beginRow = row;
-                        sheet.Cells[row, 1] = "买方";
-                        sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 5]).MergeCells = true;
-                        sheet.Cells[row++, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
-                        sheet.Cells[row, 1] = "保理商";
-                        sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 3]).MergeCells = true;
-                        sheet.Cells[row, 2] = factor.ToString();
-                        sheet.Cells[row, 4] = "币别";
-                        sheet.Cells[row++, 5] = selectedBatch.BatchCurrency;
-                        sheet.Cells[row, 1] = "本次转让金额";
-                        sheet.Cells[row, 2] = "本次转让笔数";
-                        sheet.Cells[row, 3] = "转让日";
-                        sheet.Cells[row, 4] = "保理费率";
-                        sheet.Cells[row++, 5] = "单据处理费";
-                        sheet.Cells[row, 1] = selectedBatch.AssignAmount;
-                        sheet.get_Range("A" + row, "A" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-                        sheet.Cells[row, 2] = selectedBatch.Invoices.Count;
-                        sheet.Cells[row, 3] = selectedBatch.AssignDate;
-                        sheet.Cells[row, 4] = String.Format("{0:0.00%}", selectedBatch.Case.ActiveCDA.Price);
-                        sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
-                        sheet.Cells[row++, 5] = selectedBatch.Case.ActiveCDA.HandFee;
-                        sheet.Cells[row, 1] = "小计";
-                        sheet.Cells[row, 4] = selectedBatch.CommissionAmount;
-                        sheet.Cells[row, 5] = selectedBatch.HandfeeAmount;
-                        sheet.get_Range("D" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-                        int endRow = row;
+                    int beginRow = row;
+                    sheet.Cells[row, 1] = "买方";
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 5]).MergeCells = true;
+                    sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
+                    row++;
+                    sheet.Cells[row, 1] = "保理商";
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 3]).MergeCells = true;
+                    sheet.Cells[row, 2] = factor.ToString();
+                    sheet.Cells[row, 4] = "币别";
+                    sheet.Cells[row, 5] = selectedBatch.BatchCurrency;
+                    row++;
+                    sheet.Cells[row, 1] = "本次转让金额";
+                    sheet.Cells[row, 2] = "本次转让笔数";
+                    sheet.Cells[row, 3] = "转让日";
+                    sheet.Cells[row, 4] = "保理费率";
+                    sheet.Cells[row, 5] = "单据处理费";
+                    row++;
+                    sheet.Cells[row, 1] = selectedBatch.AssignAmount;
+                    sheet.get_Range("A" + row, "A" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+                    sheet.Cells[row, 2] = selectedBatch.Invoices.Count;
+                    sheet.Cells[row, 3] = selectedBatch.AssignDate;
+                    sheet.Cells[row, 4] = String.Format("{0:0.00%}", selectedBatch.Case.ActiveCDA.Price);
+                    sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
+                    sheet.Cells[row++, 5] = selectedBatch.Case.ActiveCDA.HandFee;
+                    sheet.Cells[row, 1] = "小计";
+                    sheet.Cells[row, 4] = selectedBatch.CommissionAmount;
+                    sheet.Cells[row, 5] = selectedBatch.HandfeeAmount;
+                    sheet.get_Range("D" + row, "D" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+                    sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
 
-                        totalCommission += selectedBatch.CommissionAmount.GetValueOrDefault() + selectedBatch.HandfeeAmount.GetValueOrDefault();
-                        sheet.get_Range("A" + beginRow, "E" + endRow).Borders.LineStyle = 1;
-                    }
-                    else
-                    {
-                        int beginRow = row;
-                        sheet.Cells[row, 1] = "买方";
-                        sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 6]).MergeCells = true;
-                        sheet.Cells[row++, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
-                        sheet.Cells[row, 1] = "保理商";
-                        sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 4]).MergeCells = true;
-                        sheet.Cells[row, 2] = factor.ToString();
-                        sheet.Cells[row, 5] = "币别";
-                        sheet.Cells[row++, 6] = selectedBatch.BatchCurrency;
-                        sheet.Cells[row, 1] = "本次转让金额";
-                        sheet.Cells[row, 2] = "本次融资金额";
-                        sheet.Cells[row, 3] = "本次转让笔数";
-                        sheet.Cells[row, 4] = "转让日";
-                        sheet.Cells[row, 5] = "保理费率";
-                        sheet.Cells[row++, 6] = "单据处理费";
-                        sheet.Cells[row, 1] = selectedBatch.AssignAmount;
-                        sheet.get_Range("A" + row, "A" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-                        sheet.Cells[row, 2] = selectedBatch.Invoices.Count;
-                        sheet.Cells[row, 3] = selectedBatch.AssignDate;
-                        sheet.Cells[row, 4] = String.Format("{0:0.00%}", selectedBatch.Case.ActiveCDA.Price);
-                        sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
-                        sheet.Cells[row++, 5] = selectedBatch.Case.ActiveCDA.HandFee;
-                        sheet.Cells[row, 1] = "小计";
-                        sheet.Cells[row, 4] = selectedBatch.CommissionAmount;
-                        sheet.Cells[row, 5] = selectedBatch.HandfeeAmount;
-                        sheet.get_Range("D" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-                        int endRow = row;
+                    int endRow = row;
 
-                        totalCommission += selectedBatch.CommissionAmount.GetValueOrDefault() + selectedBatch.HandfeeAmount.GetValueOrDefault();
-                        sheet.get_Range("A" + beginRow, "E" + endRow).Borders.LineStyle = 1;
-                    }
+                    totalCommission += selectedBatch.CommissionAmount.GetValueOrDefault() + selectedBatch.HandfeeAmount.GetValueOrDefault();
+                    sheet.get_Range("A" + beginRow, "E" + endRow).Borders.LineStyle = 1;
 
                     row += 3;
                 }

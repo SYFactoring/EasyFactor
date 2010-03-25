@@ -768,8 +768,11 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (invoice.Commission.HasValue == false && cda.CommissionType == "其他")
                 {
-                    MessageBoxEx.Show("请填写手续费: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
+                    DialogResult dr = MessageBoxEx.Show("是否现在录入手续费: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (dr == DialogResult.Yes)
+                    {
+                        return false;
+                    }
                 }
             }
 
