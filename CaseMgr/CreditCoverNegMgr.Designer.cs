@@ -52,15 +52,22 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
@@ -107,6 +114,9 @@
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNegoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -117,11 +127,14 @@
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRequestType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNetPaymentTerm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRequestAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRequestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReplyAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReplyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIFPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPriceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOwnerDept = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
@@ -571,22 +584,25 @@
             this.colTransactionType,
             this.colCaseCurrency,
             this.colRequestType,
+            this.colNetPaymentTerm,
             this.colRequestAmount,
             this.colRequestDate,
             this.colReplyAmount,
             this.colReplyDate,
             this.colIFPrice,
+            this.colPriceDate,
+            this.colDueDate,
             this.colOwnerDept,
             this.colCreateUserName});
             this.dgvCreditCoverNegs.ContextMenuStrip = this.cmuCreditCoverMgr;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCreditCoverNegs.Location = new System.Drawing.Point(0, 75);
@@ -690,38 +706,40 @@
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "RequestAmount";
-            dataGridViewCellStyle7.Format = "N2";
-            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle10.Format = "N2";
+            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn11.HeaderText = "申请额度";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             // 
             // dataGridViewTextBoxColumn12
             // 
             this.dataGridViewTextBoxColumn12.DataPropertyName = "RequestDate";
-            dataGridViewCellStyle8.Format = "d";
-            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle11.Format = "d";
+            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn12.HeaderText = "申请日期";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             // 
             // dataGridViewTextBoxColumn13
             // 
             this.dataGridViewTextBoxColumn13.DataPropertyName = "ReplyAmount";
-            dataGridViewCellStyle9.Format = "N2";
-            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle12.Format = "N2";
+            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTextBoxColumn13.HeaderText = "回复额度";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             // 
             // dataGridViewTextBoxColumn14
             // 
             this.dataGridViewTextBoxColumn14.DataPropertyName = "ReplyDate";
-            dataGridViewCellStyle10.Format = "d";
-            this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle13.Format = "d";
+            this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewTextBoxColumn14.HeaderText = "回复日期";
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             // 
             // dataGridViewTextBoxColumn15
             // 
             this.dataGridViewTextBoxColumn15.DataPropertyName = "IFPrice";
+            dataGridViewCellStyle14.Format = "d";
+            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewTextBoxColumn15.HeaderText = "IF报价";
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             this.dataGridViewTextBoxColumn15.Width = 50;
@@ -729,15 +747,42 @@
             // dataGridViewTextBoxColumn16
             // 
             this.dataGridViewTextBoxColumn16.DataPropertyName = "OwnerDept";
+            dataGridViewCellStyle15.Format = "p3";
+            dataGridViewCellStyle15.NullValue = null;
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewTextBoxColumn16.HeaderText = "业务归属机构";
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.Width = 50;
             // 
             // dataGridViewTextBoxColumn17
             // 
             this.dataGridViewTextBoxColumn17.DataPropertyName = "CreateUserName";
+            dataGridViewCellStyle16.Format = "d";
+            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewTextBoxColumn17.HeaderText = "经办人";
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             this.dataGridViewTextBoxColumn17.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "DueDate";
+            dataGridViewCellStyle17.Format = "d";
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle17;
+            this.dataGridViewTextBoxColumn18.HeaderText = "额度期限";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "OwnerDept";
+            this.dataGridViewTextBoxColumn19.HeaderText = "业务归属机构";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "CreateUserName";
+            this.dataGridViewTextBoxColumn20.HeaderText = "经办人";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.Width = 50;
             // 
             // colNegoID
             // 
@@ -811,7 +856,14 @@
             this.colRequestType.HeaderText = "P/C标志";
             this.colRequestType.Name = "colRequestType";
             this.colRequestType.ReadOnly = true;
-            this.colRequestType.Width = 50;
+            // 
+            // colNetPaymentTerm
+            // 
+            this.colNetPaymentTerm.DataPropertyName = "NetPaymentTerm";
+            this.colNetPaymentTerm.HeaderText = "付款条件";
+            this.colNetPaymentTerm.Name = "colNetPaymentTerm";
+            this.colNetPaymentTerm.ReadOnly = true;
+            this.colNetPaymentTerm.Width = 50;
             // 
             // colRequestAmount
             // 
@@ -852,10 +904,31 @@
             // colIFPrice
             // 
             this.colIFPrice.DataPropertyName = "IFPrice";
+            dataGridViewCellStyle6.Format = "p3";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle6;
             this.colIFPrice.HeaderText = "IF报价";
             this.colIFPrice.Name = "colIFPrice";
             this.colIFPrice.ReadOnly = true;
             this.colIFPrice.Width = 50;
+            // 
+            // colPriceDate
+            // 
+            this.colPriceDate.DataPropertyName = "PriceDate";
+            dataGridViewCellStyle7.Format = "d";
+            this.colPriceDate.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colPriceDate.HeaderText = "报价日";
+            this.colPriceDate.Name = "colPriceDate";
+            this.colPriceDate.ReadOnly = true;
+            // 
+            // colDueDate
+            // 
+            this.colDueDate.DataPropertyName = "DueDate";
+            dataGridViewCellStyle8.Format = "d";
+            this.colDueDate.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colDueDate.HeaderText = "额度期限";
+            this.colDueDate.Name = "colDueDate";
+            this.colDueDate.ReadOnly = true;
             // 
             // colOwnerDept
             // 
@@ -939,13 +1012,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNetPaymentTerm;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReplyAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReplyDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPriceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
 
 
 
