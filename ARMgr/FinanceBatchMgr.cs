@@ -67,7 +67,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Enums
 
-        #region Constructors (2)
+        #region Constructors (3)
 
         /// <summary>
         /// Initializes a new instance of the FinanceBatchMgr class
@@ -157,11 +157,17 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
+        #region Delegates and Events (1)
+
+        // Delegates (1) 
+
         private delegate void MakeReport(IGrouping<Client, InvoiceFinanceBatch> batchGroup);
 
-        #region Methods (9)
+        #endregion Delegates and Events
 
-        // Private Methods (9) 
+        #region Methods (13)
+
+        // Private Methods (13) 
 
         /// <summary>
         /// 
@@ -175,12 +181,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
             if (batch.CheckStatus != "未复核" && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
             {
@@ -218,12 +224,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             if (MessageBoxEx.Show("是否打算删除此融资批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
@@ -255,7 +261,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.CurrentCell.RowIndex);
         }
 
         /// <summary>
@@ -301,123 +307,6 @@ namespace CMBC.EasyFactor.ARMgr
         {
             System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvBatches.RowHeadersWidth - 4, e.RowBounds.Height);
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvBatches.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvBatches.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryBatch(object sender, EventArgs e)
-        {
-            DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
-            DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
-            string status = this.cbCheckStatus.Text;
-            string createUserName = this.tbCreateUserName.Text;
-            string clientName = this.tbClientName.Text;
-
-            context = new DBDataContext();
-
-            var queryResult = context.InvoiceFinanceBatches.Where(i =>
-                i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
-                && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
-                && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
-                && (status != string.Empty ? i.CheckStatus == status : true)
-                && (i.CreateUserName.Contains(createUserName))
-                && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
-
-            this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Reject(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permission.INVOICE_CHECK))
-            {
-                return;
-            }
-
-            if (this.dgvBatches.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-
-            if (batch.CheckStatus != "未复核" && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
-            {
-                MessageBoxEx.Show("此批次已经过复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (MessageBoxEx.Show("是否确认复核退回该批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-            {
-                return;
-            }
-
-            if (App.Current.CurUser.Name == batch.CreateUserName)
-            {
-                MessageBoxEx.Show("经办人和复核人相同，不可进行复核退回", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            batch.CheckStatus = "复核未通过";
-            batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
-
-            context.SubmitChanges();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SelectBatch(object sender, EventArgs e)
-        {
-            if (this.dgvBatches.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            this.Selected = selectedBatch;
-            if (this.OwnerForm != null)
-            {
-                this.OwnerForm.DialogResult = DialogResult.Yes;
-                this.OwnerForm.Close();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void UpdateContextMenu()
-        {
-            if (PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_UPDATE))
-            {
-                this.menuItemBatchDelete.Enabled = true;
-            }
-            else
-            {
-                this.menuItemBatchDelete.Enabled = false;
-            }
-
-            if (PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_CHECK))
-            {
-                this.menuItemCheck.Enabled = true;
-                this.menuItemReject.Enabled = true;
-            }
-            else
-            {
-                this.menuItemCheck.Enabled = false;
-                this.menuItemReject.Enabled = false;
-            }
         }
 
         /// <summary>
@@ -469,6 +358,76 @@ namespace CMBC.EasyFactor.ARMgr
                     makeReport(group);
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryBatch(object sender, EventArgs e)
+        {
+            DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
+            DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
+            string status = this.cbCheckStatus.Text;
+            string createUserName = this.tbCreateUserName.Text;
+            string clientName = this.tbClientName.Text;
+
+            context = new DBDataContext();
+
+            var queryResult = context.InvoiceFinanceBatches.Where(i =>
+                i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
+                && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
+                && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
+                && (status != string.Empty ? i.CheckStatus == status : true)
+                && (i.CreateUserName.Contains(createUserName))
+                && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
+
+            this.bs.DataSource = queryResult;
+            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Reject(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permission.INVOICE_CHECK))
+            {
+                return;
+            }
+
+            if (this.dgvBatches.CurrentCell == null)
+            {
+                return;
+            }
+
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
+
+            if (batch.CheckStatus != "未复核" && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
+            {
+                MessageBoxEx.Show("此批次已经过复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (MessageBoxEx.Show("是否确认复核退回该批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
+            if (App.Current.CurUser.Name == batch.CreateUserName)
+            {
+                MessageBoxEx.Show("经办人和复核人相同，不可进行复核退回", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            batch.CheckStatus = "复核未通过";
+            batch.CheckUserName = App.Current.CurUser.Name;
+            batch.CheckDate = DateTime.Now.Date;
+
+            context.SubmitChanges();
         }
 
         /// <summary>
@@ -633,6 +592,53 @@ namespace CMBC.EasyFactor.ARMgr
                 }
 
                 MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectBatch(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.CurrentCell == null)
+            {
+                return;
+            }
+
+            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
+            this.Selected = selectedBatch;
+            if (this.OwnerForm != null)
+            {
+                this.OwnerForm.DialogResult = DialogResult.Yes;
+                this.OwnerForm.Close();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateContextMenu()
+        {
+            if (PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_UPDATE))
+            {
+                this.menuItemBatchDelete.Enabled = true;
+            }
+            else
+            {
+                this.menuItemBatchDelete.Enabled = false;
+            }
+
+            if (PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_CHECK))
+            {
+                this.menuItemCheck.Enabled = true;
+                this.menuItemReject.Enabled = true;
+            }
+            else
+            {
+                this.menuItemCheck.Enabled = false;
+                this.menuItemReject.Enabled = false;
             }
         }
 
