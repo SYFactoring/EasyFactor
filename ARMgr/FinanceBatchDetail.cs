@@ -21,7 +21,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class FinanceBatchDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (1)
+		#region Fields (3) 
 
         /// <summary>
         /// 
@@ -30,16 +30,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private OpBatchType opBatchType;
-
+        private DBDataContext context;
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context;
+        private OpBatchType opBatchType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -57,11 +56,11 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the FinanceBatchDetail class
         /// </summary>
         /// <param name="batch"></param>
@@ -91,11 +90,63 @@ namespace CMBC.EasyFactor.ARMgr
             this.UpdateBatchControlStatus();
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (6)
+		#region Methods (7) 
 
-        // Private Methods (6) 
+		// Private Methods (7) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteLog(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                return;
+            }
+
+            if (this.dgvFinanceLogs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoiceFinanceLog log = (InvoiceFinanceLog)this.bs.List[this.dgvFinanceLogs.SelectedRows[0].Index];
+            if (log.InvoiceRefundLogs.Count > 0)
+            {
+                DialogResult dr = MessageBoxEx.Show("此笔融资已还款，是否确认删除此笔融资以及关联还款记录", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            try
+            {
+                Invoice invoice = log.Invoice;
+                log.Invoice = null;
+                foreach (InvoiceRefundLog refundLog in log.InvoiceRefundLogs)
+                {
+                    refundLog.InvoiceFinanceLog = null;
+                }
+
+                context.InvoiceRefundLogs.DeleteAllOnSubmit(log.InvoiceRefundLogs);
+                invoice.CaculateRefund();
+                invoice.CaculateFinance();
+                context.InvoiceFinanceLogs.DeleteOnSubmit(log);
+                log.InvoiceFinanceBatch.CheckStatus = "未复核";
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.dgvFinanceLogs.Rows.RemoveAt(this.dgvFinanceLogs.SelectedRows[0].Index);
+        }
 
         /// <summary>
         /// 
@@ -106,6 +157,23 @@ namespace CMBC.EasyFactor.ARMgr
         {
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
             CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            detail.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvFinanceLogs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoiceFinanceLog log = (InvoiceFinanceLog)this.bs.List[this.dgvFinanceLogs.SelectedRows[0].Index];
+            InvoiceDetail detail = new InvoiceDetail(log.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             detail.Show();
         }
 
@@ -227,58 +295,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DeleteLog(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
-            {
-                return;
-            }
-
-            if (this.dgvFinanceLogs.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            InvoiceFinanceLog log = (InvoiceFinanceLog)this.bs.List[this.dgvFinanceLogs.SelectedRows[0].Index];
-            if (log.InvoiceRefundLogs.Count > 0)
-            {
-                DialogResult dr = MessageBoxEx.Show("此笔融资已还款，是否确认删除此笔融资以及关联还款记录", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.No)
-                {
-                    return;
-                }
-            }
-
-            try
-            {
-                Invoice invoice = log.Invoice;
-                log.Invoice = null;
-                foreach (InvoiceRefundLog refundLog in log.InvoiceRefundLogs)
-                {
-                    refundLog.InvoiceFinanceLog = null;
-                }
-
-                context.InvoiceRefundLogs.DeleteAllOnSubmit(log.InvoiceRefundLogs);
-                invoice.CaculateRefund();
-                invoice.CaculateFinance();
-                context.InvoiceFinanceLogs.DeleteOnSubmit(log);
-                log.InvoiceFinanceBatch.CheckStatus = "未复核";
-                context.SubmitChanges();
-            }
-            catch (Exception e1)
-            {
-                MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            this.dgvFinanceLogs.Rows.RemoveAt(this.dgvFinanceLogs.SelectedRows[0].Index);
-        }
+		#endregion Methods 
     }
 }

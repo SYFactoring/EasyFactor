@@ -271,12 +271,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             FinanceBatchDetail detail = new FinanceBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
@@ -479,7 +479,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.PageSetup.FitToPagesTall = false;
 
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
+                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 220, 3, 170, 30);
 
                 Client seller = batchGroup.Key;
                 sheet.Cells[3, 1] = String.Format("卖方：{0}", seller.ToString());
@@ -541,24 +541,25 @@ namespace CMBC.EasyFactor.ARMgr
                     row += 3;
                 }
 
-                sheet.Cells[row, 4] = "费用总计";
-                sheet.Cells[row, 5] = totalCommission;
+                sheet.Cells[row, 5] = "费用总计";
+                sheet.Cells[row, 6] = totalCommission;
                 sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
                 sheet.get_Range("D" + row, "E" + row).Borders.LineStyle = 1;
 
                 row += 2;
 
                 sheet.Cells[row, 1] = String.Format("制表：{0}", batchGroup.First().CreateUserName);
-                sheet.Cells[row, 3] = String.Format("复核：{0}", batchGroup.First().CheckUserName);
+                sheet.Cells[row, 4] = String.Format("复核：{0}", batchGroup.First().CheckUserName);
                 sheet.Cells[row, 5] = "主管：";
-                sheet.Cells[row + 2, 3] = "中国民生银行 贸易金融部保理业务部  （业务章）";
-                sheet.Cells[row + 3, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+                sheet.Cells[row + 2, 4] = "中国民生银行 贸易金融部保理业务部  （业务章）";
+                sheet.Cells[row + 3, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
-                sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
-                sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
-                sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("B1", Type.Missing).ColumnWidth = 23;
+                sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("F1", Type.Missing).ColumnWidth = 17;
 
                 sheet.UsedRange.Font.Name = "仿宋_GB2312";
                 sheet.UsedRange.Font.Size = 12;

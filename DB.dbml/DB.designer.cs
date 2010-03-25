@@ -5051,6 +5051,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _DueDate;
 		
+		private System.Nullable<int> _NetPaymentTerm;
+		
 		private EntityRef<Case> _Case;
 		
     #region Extensibility Method Definitions
@@ -5081,6 +5083,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPriceDateChanged();
     partial void OnDueDateChanging(System.Nullable<System.DateTime> value);
     partial void OnDueDateChanged();
+    partial void OnNetPaymentTermChanging(System.Nullable<int> value);
+    partial void OnNetPaymentTermChanged();
     #endregion
 		
 		public CreditCoverNegotiation()
@@ -5329,6 +5333,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._DueDate = value;
 					this.SendPropertyChanged("DueDate");
 					this.OnDueDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_NetPaymentTerm", DbType="Int")]
+		public System.Nullable<int> NetPaymentTerm
+		{
+			get
+			{
+				return this._NetPaymentTerm;
+			}
+			set
+			{
+				if ((this._NetPaymentTerm != value))
+				{
+					this.OnNetPaymentTermChanging(value);
+					this.SendPropertyChanging();
+					this._NetPaymentTerm = value;
+					this.SendPropertyChanged("NetPaymentTerm");
+					this.OnNetPaymentTermChanged();
 				}
 			}
 		}

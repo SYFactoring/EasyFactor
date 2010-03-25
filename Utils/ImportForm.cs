@@ -555,7 +555,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         creditCover.RequestAmount = (double)valueArray[row, column++];
-                        curCase.NetPaymentTerm = (System.Nullable<int>)valueArray[row, column++];
+                        creditCover.NetPaymentTerm = (System.Nullable<int>)valueArray[row, column++];
                         creditCover.RequestDate = (DateTime)valueArray[row, column++];
                         creditCover.ReplyAmount = (System.Nullable<double>)valueArray[row, column++];
                         creditCover.ReplyDate = (System.Nullable<DateTime>)valueArray[row, column++];

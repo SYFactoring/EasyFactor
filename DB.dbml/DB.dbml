@@ -217,6 +217,7 @@
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="PriceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="DueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NetPaymentTerm" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Case_CreditCoverNegotiation" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>
