@@ -458,7 +458,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 sheet.Cells[1, 1] = "中国民生银行保理额度通知书 ";
 
-                sheet.Cells[3, 1] = String.Format("贵公司（{0}公司）前洽本行办理保理业务并签立保理服务合同", selectedCDA.SellerName);
+                sheet.Cells[3, 1] = String.Format("贵（{0}）前洽本行办理保理业务并签立保理服务合同", selectedCDA.SellerName);
                 if (selectedCDA.Case.SellerClient.Contract != null)
                 {
                     sheet.Cells[4, 1] = String.Format("(合同编号:第[ {0} ]号 ), 经本行评估后,核定额度如下:", selectedCDA.Case.SellerClient.Contract.ContractCode);
@@ -570,9 +570,44 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 2]).WrapText = true;
 
                 sheet.Cells[21, 1] = "备注：";
-                sheet.Cells[22, 1] = selectedCDA.Comment;
-                sheet.Cells[24, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
-                sheet.Cells[26, 1] = "为利益考虑，请务必确认上开买方系贵公司预定交易之对象，本保理额度通知书取代先前同一买方之保理额度通知书及先前所有贵公司与本合同相关保理额度通知书中之最高保理预付款额度";
+
+                bool isSingle = selectedCDA.Case.SellerFactorCode == selectedCDA.Case.BuyerFactorCode;
+                bool isNonSingle = selectedCDA.Case.TransactionType == "国际信保保理" || selectedCDA.Case.TransactionType == "国内信保保理";
+
+                string recoarse = selectedCDA.IsRecoarse.GetValueOrDefault() ? "有追索权" : "无追索权";
+                string single = isNonSingle ? String.Empty : isSingle ? "单保理" : "双保理";
+                string line1 = string.Empty;
+                switch (selectedCDA.Case.TransactionType)
+                {
+                    case "国内卖方保理":
+                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "国内", single, selectedCDA.IsNotice);
+                        break;
+                    case "出口保理":
+                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "出口", single, selectedCDA.IsNotice);
+                        break;
+                    case "国内信保保理":
+                        line1 = String.Format("（1）本业务为{0}{1}（{2}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "国内信保", selectedCDA.IsNotice);
+                        break;
+                    case "国际信保保理":
+                        line1 = String.Format("（1）本业务为{0}{1}（{2}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "国际信保", selectedCDA.IsNotice);
+                        break;
+                    case "租赁保理":
+                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, single, selectedCDA.IsNotice);
+                        break;
+                    case "国内买方保理":
+                        line1 = String.Format("（1）本业务为{0}{1}（{2}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "国内", selectedCDA.IsNotice);
+                        break;
+                    case "进口保理":
+                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "进口", single, selectedCDA.IsNotice);
+                        break;
+                    default:
+                        break;
+                }
+
+                string line2 = "（2）如应收账款债务人(以下简称买方)于到应收账款期日后  日内（最长不超过  天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
+                string line3 = "（3）核准应收账款的销售合同有禁止转让的约定时，民生银行就该应收账款不须负任何责任。";
+                string line4 = "（4）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
+                string line5 = "（5）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
 
                 sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).WrapText = true;
                 sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 1]).WrapText = true;
@@ -581,6 +616,22 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 2]).MergeCells = true;
+
+                if (selectedCDA.IsNotice == "暗保理")
+                {
+                    sheet.Cells[22, 1] = line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5 + "\n\n" + selectedCDA.Comment;
+                    sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).RowHeight = 200;
+                }
+                else
+                {
+                    sheet.Cells[22, 1] = line1 + "\n\n" + selectedCDA.Comment;
+                    sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).RowHeight = 40;
+                }
+
+
+                sheet.Cells[24, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
+                sheet.Cells[26, 1] = "为利益考虑，请务必确认上开买方系贵公司预定交易之对象，本保理额度通知书取代先前同一买方之保理额度通知书及先前所有贵公司与本合同相关保理额度通知书中之最高保理预付款额度";
+
 
                 sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 2]).RowHeight = 40;
                 sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 2]).RowHeight = 40;

@@ -705,6 +705,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             CDA cda = this._case.ActiveCDA;
 
+            bool isCommissionAlert = true;
 
             foreach (Invoice invoice in this.invoiceBindingSource.List)
             {
@@ -768,10 +769,17 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (invoice.Commission.HasValue == false && cda.CommissionType == "其他")
                 {
-                    DialogResult dr = MessageBoxEx.Show("是否现在录入手续费: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    if (dr == DialogResult.Yes)
+                    if (isCommissionAlert)
                     {
-                        return false;
+                        DialogResult dr = MessageBoxEx.Show("是否现在录入手续费: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dr == DialogResult.Yes)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            isCommissionAlert = false;
+                        }
                     }
                 }
             }
