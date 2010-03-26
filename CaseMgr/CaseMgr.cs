@@ -370,30 +370,44 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            Workbook workbook = app.Workbooks.Add(true);
-
-            Client client = caseGroup.Key;
-            foreach (Case selectedCase in caseGroup)
+            try
             {
-                CDA cda = selectedCase.ActiveCDA;
+                Workbook workbook = app.Workbooks.Add(true);
 
-                if (cda == null)
+                Client client = caseGroup.Key;
+                foreach (Case selectedCase in caseGroup)
                 {
-                    MessageBoxEx.Show("案件没有有效的额度通知书，案件编号：" + selectedCase.CaseCode);
-                    return;
-                }
+                    CDA cda = selectedCase.ActiveCDA;
 
-                Worksheet sheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-                string name = selectedCase.TargetClient.ToString();
-                if (name.Length > 30)
-                {
-                    name = name.Substring(0, 30);
-                }
+                    if (cda == null)
+                    {
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
 
-                sheet.Name = name;
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
 
-                try
-                {
+                        MessageBoxEx.Show("案件没有有效的额度通知书，案件编号：" + selectedCase.CaseCode);
+
+                        return;
+                    }
+
+                    Worksheet sheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                    string name = selectedCase.TargetClient.ToString();
+                    if (name.Length > 30)
+                    {
+                        name = name.Substring(0, 30);
+                    }
+
+                    sheet.Name = name;
+
                     sheet.get_Range("A1", "Q1").MergeCells = true;
                     sheet.get_Range("A1", "A1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                     sheet.Cells[1, "A"] = "销售分户账台账";
@@ -599,29 +613,23 @@ namespace CMBC.EasyFactor.CaseMgr
 
                     sheet.UsedRange.Font.Name = "仿宋";
                 }
-                catch (Exception e1)
+            }
+            catch (Exception e1)
+            {
+                if (app != null)
                 {
-                    if (sheet != null)
+                    foreach (Workbook wb in app.Workbooks)
                     {
-                        Marshal.ReleaseComObject(sheet);
-                        sheet = null;
+                        wb.Close(false, Type.Missing, Type.Missing);
                     }
 
-                    if (app != null)
-                    {
-                        foreach (Workbook wb in app.Workbooks)
-                        {
-                            wb.Close(false, Type.Missing, Type.Missing);
-                        }
-
-                        app.Workbooks.Close();
-                        app.Quit();
-                        Marshal.ReleaseComObject(app);
-                        app = null;
-                    }
-
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
                 }
+
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (app != null)
