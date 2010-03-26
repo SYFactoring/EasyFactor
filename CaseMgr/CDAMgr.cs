@@ -103,18 +103,12 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else if (this.opCDAType == OpCDAType.REPORT)
             {
-                context = new DBDataContext();
-                var queryResult = from cda in context.CDAs
-                                  where
-                                      cda.CDAStatus == "已审核"
-                                      && (cda.Case.TransactionType == "国内卖方保理" || cda.Case.TransactionType == "国内信保保理" || cda.Case.TransactionType == "出口保理" || cda.Case.TransactionType == "国际信保保理")
-                                  select cda;
-
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                this.cbCheckStatus.Text = "已审核";
             }
             else if (this.opCDAType == OpCDAType.DUE)
             {
+                this.cbCheckStatus.Text = "已审核";
+
                 context = new DBDataContext();
                 var queryResult = from cda in context.CDAs
                                   where
@@ -444,6 +438,12 @@ namespace CMBC.EasyFactor.CaseMgr
 
             CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
 
+            if (selectedCDA.Case.TransactionType != "国内卖方保理" && selectedCDA.Case.TransactionType != "国内信保保理" && selectedCDA.Case.TransactionType != "出口保理" && selectedCDA.Case.TransactionType != "国际信保保理")
+            {
+                MessageBoxEx.Show("该额度通知书类型为：" + selectedCDA.Case.TransactionType + "，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -537,10 +537,12 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = "0";
                 }
 
+                int rowEnd = 19;
                 if (selectedCDA.Case.TransactionType == "出口保理" || selectedCDA.Case.TransactionType == "国际信保保理")
                 {
                     sheet.Cells[row, 1] = "进口保理商";
                     sheet.Cells[row++, 2] = selectedCDA.Case.BuyerFactor.ToString();
+                    rowEnd = 20;
                 }
 
                 sheet.Cells[row, 1] = "自负额";
@@ -563,11 +565,12 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = "0";
                 }
 
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignDistributed;
-                sheet.get_Range(sheet.Cells[6, 2], sheet.Cells[19, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
 
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 2]).Borders.LineStyle = 1;
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 2]).WrapText = true;
+                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[rowEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignDistributed;
+                sheet.get_Range(sheet.Cells[6, 2], sheet.Cells[rowEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+
+                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[rowEnd, 2]).Borders.LineStyle = 1;
+                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[rowEnd, 2]).WrapText = true;
 
                 sheet.Cells[21, 1] = "备注：";
 
@@ -619,12 +622,12 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (selectedCDA.IsNotice == "暗保理")
                 {
-                    sheet.Cells[22, 1] = line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5 + "\n\n" + selectedCDA.Comment;
+                    sheet.Cells[22, 1] = line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5 + "\n\n（6）" + selectedCDA.Comment;
                     sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).RowHeight = 200;
                 }
                 else
                 {
-                    sheet.Cells[22, 1] = line1 + "\n\n" + selectedCDA.Comment;
+                    sheet.Cells[22, 1] = line1 + "\n\n（2）" + selectedCDA.Comment;
                     sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).RowHeight = 40;
                 }
 
@@ -651,7 +654,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).Font.Size = 16;
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).Font.Bold = true;
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 1]).Font.Bold = true;
+                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[rowEnd, 1]).Font.Bold = true;
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 30;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 60;

@@ -367,11 +367,11 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
+            this.ribbonControl.Controls.Add(this.ribbonPanelReport);
+            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanel3);
             this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
-            this.ribbonControl.Controls.Add(this.ribbonPanelReport);
-            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanel2);
             this.ribbonControl.Controls.Add(this.ribbonPanel4);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
@@ -436,6 +436,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelMigration.StyleMouseOver.Class = "";
             this.ribbonPanelMigration.TabIndex = 8;
+            this.ribbonPanelMigration.Visible = false;
             // 
             // ribbonBarInvoiceImport
             // 
@@ -876,10 +877,10 @@ namespace CMBC.EasyFactor
             this.ribbonPanelReport.Controls.Add(this.ribbonBarAnalysisReport);
             this.ribbonPanelReport.Controls.Add(this.ribbonBarTransactionReport);
             this.ribbonPanelReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelReport.Location = new System.Drawing.Point(0, 0);
+            this.ribbonPanelReport.Location = new System.Drawing.Point(0, 56);
             this.ribbonPanelReport.Name = "ribbonPanelReport";
             this.ribbonPanelReport.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelReport.Size = new System.Drawing.Size(1000, 152);
+            this.ribbonPanelReport.Size = new System.Drawing.Size(1000, 96);
             // 
             // 
             // 
@@ -893,7 +894,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelReport.StyleMouseOver.Class = "";
             this.ribbonPanelReport.TabIndex = 3;
-            this.ribbonPanelReport.Visible = false;
             // 
             // ribbonBarAnalysisReport
             // 
@@ -914,7 +914,7 @@ namespace CMBC.EasyFactor
             this.btnLocationStat});
             this.ribbonBarAnalysisReport.Location = new System.Drawing.Point(527, 0);
             this.ribbonBarAnalysisReport.Name = "ribbonBarAnalysisReport";
-            this.ribbonBarAnalysisReport.Size = new System.Drawing.Size(191, 149);
+            this.ribbonBarAnalysisReport.Size = new System.Drawing.Size(191, 93);
             this.ribbonBarAnalysisReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarAnalysisReport.TabIndex = 1;
             this.ribbonBarAnalysisReport.Text = "统计分析";
@@ -970,7 +970,7 @@ namespace CMBC.EasyFactor
             this.btnLeger});
             this.ribbonBarTransactionReport.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarTransactionReport.Name = "ribbonBarTransactionReport";
-            this.ribbonBarTransactionReport.Size = new System.Drawing.Size(524, 149);
+            this.ribbonBarTransactionReport.Size = new System.Drawing.Size(524, 93);
             this.ribbonBarTransactionReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarTransactionReport.TabIndex = 0;
             this.ribbonBarTransactionReport.Text = "业务报表";
@@ -2084,13 +2084,13 @@ namespace CMBC.EasyFactor
             // 
             // itemReport
             // 
+            this.itemReport.Checked = true;
             this.itemReport.Name = "itemReport";
             this.itemReport.Panel = this.ribbonPanelReport;
             this.itemReport.Text = "报表";
             // 
             // tabItemMigration
             // 
-            this.tabItemMigration.Checked = true;
             this.tabItemMigration.Name = "tabItemMigration";
             this.tabItemMigration.Panel = this.ribbonPanelMigration;
             this.tabItemMigration.Text = "数据移植";

@@ -266,7 +266,7 @@ namespace CMBC.EasyFactor
         private void CheckUpdate(object sender, EventArgs e)
         {
             AutoUpdater autoUpdater = new AutoUpdater();
-            autoUpdater.ConfigURL = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml";
+            autoUpdater.ConfigURL = "http://cscw.fudan.edu.cn/EasyFactoring/UpdateVersion.xml";
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdate();
         }
@@ -277,7 +277,7 @@ namespace CMBC.EasyFactor
         private void CheckUpdateBackground()
         {
             AutoUpdater autoUpdater = new AutoUpdater();
-            autoUpdater.ConfigURL = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml";
+            autoUpdater.ConfigURL = "http://cscw.fudan.edu.cn/EasyFactoring/UpdateVersion.xml";
             autoUpdater.AutoDownload = true;
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdateBackground();
