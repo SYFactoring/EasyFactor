@@ -809,14 +809,14 @@ namespace CMBC.EasyFactor.Utils
 
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
-
+                    range.EntireColumn.AutoFit();
                     if (range.Column == 9 || range.Column == 11 || range.Column == 13 || range.Column == 14)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
                     else if (range.Column == 7 || range.Column == 8 || range.Column == 10)
                     {
-                        range.NumberFormatLocal = "0";
+                        range.NumberFormatLocal = "#,##0";
                     }
                     else if (range.Column == 12)
                     {
