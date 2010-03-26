@@ -622,12 +622,24 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (selectedCDA.IsNotice == "暗保理")
                 {
-                    sheet.Cells[22, 1] = line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5 + "\n\n（6）" + selectedCDA.Comment;
+                    string comment = line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5;
+                    if (!String.IsNullOrEmpty(selectedCDA.Comment))
+                    {
+                        comment+="\n\n（6）"+selectedCDA.Comment;
+                    }
+
+                    sheet.Cells[22, 1] = comment;
                     sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).RowHeight = 200;
                 }
                 else
                 {
-                    sheet.Cells[22, 1] = line1 + "\n\n（2）" + selectedCDA.Comment;
+                    string comment = line1;
+                    if (!String.IsNullOrEmpty(selectedCDA.Comment))
+                    {
+                        comment += "\n\n（2）" + selectedCDA.Comment;
+                    }
+
+                    sheet.Cells[22, 1] = comment;
                     sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).RowHeight = 40;
                 }
 

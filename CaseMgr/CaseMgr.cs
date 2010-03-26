@@ -112,6 +112,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.cbTransactionType.Items.Insert(0, "全部");
             this.cbTransactionType.Text = "全部";
+            this.cbCaseMark.Text = "启动案";
 
             List<Department> deptsList = Department.AllDepartments(new DBDataContext());
             deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
