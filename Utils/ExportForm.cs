@@ -756,8 +756,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "IF报价";
                 datasheet.Cells[1, column++] = "报价日";
                 datasheet.Cells[1, column++] = "额度期限";
-                datasheet.Cells[1, column++] = "额度申请的经办人";
-                datasheet.Cells[1, column++] = "额度申请的备注";
+                datasheet.Cells[1, column++] = "备注";
 
                 int size = this.exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -789,42 +788,46 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)exportData[row];
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.CaseCode;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.OwnerDepartment.Location;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.SellerClient.ToString();
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.BuyerClient.ToString();
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.Factor.ToString();
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestType;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestAmount;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.NetPaymentTerm;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestDate;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.ReplyAmount;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.ReplyDate;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.IFPrice;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.PriceDate;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.DueDate;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.CreateUserName;
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Comment;
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.CaseCode;//1
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.OwnerDepartment.Location;//2
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.SellerClient.ToString();//3
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.BuyerClient.ToString();//4
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.Factor.ToString();//5
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestType;//6
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestAmount;//7
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.NetPaymentTerm;//8
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestDate;//9
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.ReplyAmount;//10
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.ReplyDate;//11
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.IFPrice;//12
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.PriceDate;//13
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.DueDate;//14
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Comment;//15
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
-                    range.EntireColumn.AutoFit();
-                    if (range.Column == 8 || range.Column == 10 || range.Column == 12 || range.Column == 13)
+
+                    if (range.Column == 9 || range.Column == 11 || range.Column == 13 || range.Column == 14)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
-                    else if (range.Column == 6 || range.Column == 9)
+                    else if (range.Column == 7 || range.Column == 8 || range.Column == 10)
                     {
                         range.NumberFormatLocal = "0";
                     }
-                    else if (range.Column == 11)
+                    else if (range.Column == 12)
                     {
                         range.NumberFormatLocal = "0.00%";
                     }
                 }
+
+                datasheet.UsedRange.WrapText = false;
+                datasheet.UsedRange.Borders.LineStyle = 1;
+                datasheet.UsedRange.Font.Name = "仿宋_GB2312";
+                datasheet.UsedRange.Font.Size = 12;
 
                 app.Visible = true;
             }
