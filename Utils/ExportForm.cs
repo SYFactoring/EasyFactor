@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.Utils
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
@@ -106,7 +107,12 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            EXPORT_CREDIT_COVER_NEG
+            EXPORT_CREDIT_COVER_NEG,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            EXPORT_LEGER
         }
 
         #endregion Enums
@@ -124,7 +130,7 @@ namespace CMBC.EasyFactor.Utils
             this.exportType = exportType;
             this.exportData = exportData;
 
-            if (this.exportType == ExportType.EXPORT_MSG09 || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12)
+            if (this.exportType == ExportType.EXPORT_MSG09 || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
             {
                 this.btnFileSelect.Enabled = true;
             }
@@ -132,7 +138,7 @@ namespace CMBC.EasyFactor.Utils
 
         #endregion Constructors
 
-        #region Methods (19)
+        #region Methods (21)
 
         // Public Methods (1) 
 
@@ -146,18 +152,29 @@ namespace CMBC.EasyFactor.Utils
             string filePath = this.tbFilePath.Text;
             if (filePath.Trim().Equals(String.Empty))
             {
-                if (this.exportType == ExportType.EXPORT_MSG09 || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12)
+                if (this.exportType == ExportType.EXPORT_MSG09 || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
                 {
+                    this.tbStatus.Text = "请先选择保存文件名/路径";
                     return;
                 }
             }
+            else if (this.exportType == ExportType.EXPORT_LEGER)
+            {
+                DirectoryInfo info = new DirectoryInfo(filePath);
+                if (info.Parent == null)
+                {
+                    this.tbStatus.Text = "不要选择硬盘根目录";
+                    return;
+                }
+            }
+
 
             this.btnCancel.Text = "取消";
             this.backgroundWorker.RunWorkerAsync();
 
             this.btnStart.Enabled = false;
         }
-        // Private Methods (18) 
+        // Private Methods (20) 
 
         /// <summary>
         /// 
@@ -207,6 +224,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ExportType.EXPORT_CREDIT_COVER_NEG:
                     e.Result = this.ExportCreditCoverNegs(worker, e);
+                    break;
+                case ExportType.EXPORT_LEGER:
+                    e.Result = this.ExportLegers(worker, e);
                     break;
                 default:
                     break;
@@ -1144,7 +1164,6 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "融资币别";
                 datasheet.Cells[1, column++] = "融资利率";
                 datasheet.Cells[1, column++] = "成本利率";
-                datasheet.Cells[1, column++] = "收息方式";
                 datasheet.Cells[1, column++] = "本次融资起始日";
                 datasheet.Cells[1, column++] = "本次融资到期日";
                 datasheet.Cells[1, column++] = "本次融资备注";
@@ -1170,10 +1189,8 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "还款金额";
                 //手续费
                 datasheet.Cells[1, column++] = "手续费";
-                datasheet.Cells[1, column++] = "手续费收取日";
                 //利息
                 datasheet.Cells[1, column++] = "利息";
-                datasheet.Cells[1, column++] = "利息收取日";
                 datasheet.Cells[1, column++] = "备注";
 
                 int size = exportData.Count;
@@ -1223,64 +1240,73 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceDate;
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
+
                     //融资批次
-                    if (invoice.InvoiceFinanceLogs.Count > 0)
+                    int recordStep = 0;
+                    for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
                     {
                         column = 15;
-                        InvoiceFinanceLog log = invoice.InvoiceFinanceLogs[0];
-                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FinanceBatchNo;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FinanceType;
-                        if (log.InvoiceFinanceBatch.Factor != null)
+                        InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
+                        datasheet.Cells[row + recordStep + 2, column++] = financeLog.InvoiceFinanceBatch.FinanceBatchNo;
+                        datasheet.Cells[row + recordStep + 2, column++] = financeLog.InvoiceFinanceBatch.FinanceType;
+                        if (financeLog.InvoiceFinanceBatch.Factor != null)
                         {
-                            datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FactorCode;
-                            datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.Factor.ToString();
+                            datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.FactorCode;
+                            datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.Factor.ToString();
                         }
 
                         column = 19;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.BatchCurrency;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FinanceRate;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.CostRate;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FinancePeriodBegin;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.FinancePeriodEnd;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.Comment;
-                        datasheet.Cells[row + 2, column++] = log.InvoiceFinanceBatch.CreateUserName;
-                    }
-                    //融资
-                    column = 27;
-                    datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
-                    //付款批次
-                    if (invoice.InvoicePaymentLogs.Count > 0)
-                    {
-                        column = 28;
-                        InvoicePaymentLog log = invoice.InvoicePaymentLogs[0];
-                        datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.PaymentBatchNo;
-                        datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.PaymentType;
-                        datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.PaymentDate;
-                        datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(log.InvoicePaymentBatch.IsCreateMsg);
-                        datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.Comment;
-                        datasheet.Cells[row + 2, column++] = log.InvoicePaymentBatch.CreateUserName;
-                    }
-                    //付款
-                    column = 34;
-                    datasheet.Cells[row + 2, column++] = invoice.PaymentAmount;
-                    //还款批次
-                    if (invoice.InvoiceFinanceLogs.Count > 0)
-                    {
-                        InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[0];
-                        if (financeLog.InvoiceRefundLogs.Count > 0)
+                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.BatchCurrency;
+                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.FinanceRate;
+                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.CostRate;
+                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.FinancePeriodBegin;
+                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.FinancePeriodEnd;
+                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.Comment;
+                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.CreateUserName;
+
+                        //融资
+                        column = 26;
+                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.FinanceAmount;
+
+                        //还款批次
+                        for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
                         {
-                            column = 35;
-                            InvoiceRefundLog log = financeLog.InvoiceRefundLogs[0];
-                            datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundBatchNo;
-                            datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundType;
-                            datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.RefundDate;
-                            datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.Comment;
-                            datasheet.Cells[row + 2, column++] = log.InvoiceRefundBatch.CreateUserName;
+                            column = 34;
+                            InvoiceRefundLog log = financeLog.InvoiceRefundLogs[j];
+                            datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.RefundBatchNo;
+                            datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.RefundType;
+                            datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.RefundDate;
+                            datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.Comment;
+                            datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.CreateUserName;
+
+                            //还款
+                            column = 39;
+                            datasheet.Cells[row + 2 + j + recordStep, column++] = log.RefundAmount;
                         }
+
+                        recordStep += financeLog.InvoiceRefundLogs.Count;
                     }
-                    //还款
+
+
+                    //付款批次
+                    for (int i = 0; i < invoice.InvoicePaymentLogs.Count; i++)
+                    {
+                        column = 27;
+                        InvoicePaymentLog log = invoice.InvoicePaymentLogs[i];
+                        datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.PaymentBatchNo;
+                        datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.PaymentType;
+                        datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.PaymentDate;
+                        datasheet.Cells[row + 2 + i, column++] = TypeUtil.ConvertBoolToStr(log.InvoicePaymentBatch.IsCreateMsg);
+                        datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.Comment;
+                        datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.CreateUserName;
+
+                        //付款
+                        column = 33;
+                        datasheet.Cells[row + 2 + i, column++] = log.PaymentAmount;
+                    }
+
                     column = 40;
-                    datasheet.Cells[row + 2, column++] = invoice.RefundAmount;
+
                     //手续费
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
                     //利息
@@ -1292,15 +1318,20 @@ namespace CMBC.EasyFactor.Utils
 
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
-                    range.EntireColumn.AutoFit();
-                    if (range.Column == 10 || range.Column == 11 || range.Column == 27 || range.Column == 34 || range.Column == 40 || range.Column == 41 || range.Column == 43)
+                    if (range.Column == 10 || range.Column == 11 || range.Column == 26 || range.Column == 33 || range.Column == 39 || range.Column == 40 || range.Column == 41)
                     {
                         range.NumberFormatLocal = "0.00";
                     }
-                    else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 23 || range.Column == 24 || range.Column == 30 || range.Column == 37)
+                    else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 22 || range.Column == 23 || range.Column == 29 || range.Column == 36)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
+                    else if (range.Column == 20 || range.Column == 21)
+                    {
+                        range.NumberFormatLocal = "#0.000%";
+                    }
+
+                    range.EntireColumn.AutoFit();
                 }
 
                 app.Visible = true;
@@ -1468,6 +1499,58 @@ namespace CMBC.EasyFactor.Utils
             }
 
             return exportData.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ExportLegers(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            List<Case> selectedCases = (List<Case>)exportData;
+
+            IEnumerable<IGrouping<string, Case>> caseGroups = selectedCases.GroupBy(c => c.TransactionType);
+            int size = this.exportData.Count;
+            int result = 0;
+            IEnumerable<IGrouping<Client, Case>> groups = null;
+            foreach (IGrouping<string, Case> caseGroup in caseGroups)
+            {
+                string transactionType = caseGroup.Key;
+                switch (transactionType)
+                {
+                    case "国内卖方保理":
+                    case "出口保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                        groups = caseGroup.GroupBy(c => c.SellerClient);
+                        foreach (IGrouping<Client, Case> group in groups)
+                        {
+                            ExportReportLegarImpl(group);
+                            result += (int)group.LongCount();
+                            worker.ReportProgress((int)((float)result * 100 / (float)size));
+                        }
+
+                        break;
+                    case "国内买方保理":
+                    case "进口保理":
+                        groups = caseGroup.GroupBy(c => c.BuyerClient);
+                        foreach (IGrouping<Client, Case> group in groups)
+                        {
+                            ExportReportLegarImpl(group);
+                            result += (int)group.LongCount();
+                            worker.ReportProgress((int)((float)result * 100 / (float)size));
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -1933,16 +2016,333 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="caseGroup"></param>
+        private void ExportReportLegarImpl(IGrouping<Client, Case> caseGroup)
+        {
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            if (app == null)
+            {
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Workbook workbook = null;
+            try
+            {
+                workbook = app.Workbooks.Add(true);
+
+                Client client = caseGroup.Key;
+                foreach (Case selectedCase in caseGroup)
+                {
+                    CDA cda = selectedCase.ActiveCDA;
+
+                    if (cda == null)
+                    {
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
+
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
+
+                        MessageBoxEx.Show("案件没有有效的额度通知书，案件编号：" + selectedCase.CaseCode);
+
+                        return;
+                    }
+
+                    Worksheet sheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                    string name = selectedCase.TargetClient.ToString();
+                    if (name.Length > 30)
+                    {
+                        name = name.Substring(0, 30);
+                    }
+
+                    sheet.Name = name;
+
+                    sheet.get_Range("A1", "Q1").MergeCells = true;
+                    sheet.get_Range("A1", "A1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.Cells[1, "A"] = "销售分户账台账";
+                    sheet.Cells[2, "P"] = String.Format("单位：{0}", selectedCase.InvoiceCurrency);
+                    sheet.Cells[3, "A"] = "分行/分部";
+                    sheet.Cells[3, "B"] = selectedCase.OwnerDepartment.DepartmentName;
+
+                    sheet.Cells[4, "A"] = "Seller Name";
+                    sheet.get_Range("B4", "F4").MergeCells = true;
+                    sheet.Cells[4, "B"] = selectedCase.SellerClient.ToString();
+                    sheet.Cells[5, "A"] = "Buyer Name";
+                    sheet.get_Range("B5", "F5").MergeCells = true;
+                    sheet.Cells[5, "B"] = selectedCase.BuyerClient.ToString();
+
+                    sheet.get_Range("B6", "F6").MergeCells = true;
+                    if (selectedCase.TransactionType == "进口保理")
+                    {
+                        sheet.Cells[6, "A"] = "Export Factor";
+                        sheet.Cells[6, "B"] = selectedCase.SellerFactor.ToString();
+                    }
+                    else
+                    {
+                        sheet.Cells[6, "A"] = "Import Factor";
+                        sheet.Cells[6, "B"] = selectedCase.BuyerFactor.ToString();
+                    }
+
+                    sheet.get_Range("B7", "F7").MergeCells = true;
+                    sheet.Cells[7, "A"] = "协查意见书编号";
+                    List<ClientReview> reviewList = selectedCase.ClientReviews;
+                    if (reviewList != null)
+                    {
+                        String reviews = string.Empty;
+                        foreach (ClientReview review in reviewList)
+                        {
+                            reviews += review.ReviewNo + ";";
+                        }
+
+                        sheet.Cells[7, "B"] = reviews;
+                    }
+
+                    sheet.Cells[4, "G"] = "总手续费率";
+                    sheet.get_Range(sheet.Cells[4, "H"], sheet.Cells[4, "I"]).MergeCells = true;
+                    if (cda != null)
+                    {
+                        sheet.Cells[4, "H"] = String.Format("{0:P}", cda.Price);
+                    }
+
+                    sheet.get_Range(sheet.Cells[5, "H"], sheet.Cells[5, "I"]).MergeCells = true;
+                    if (selectedCase.TransactionType == "进口保理")
+                    {
+                        sheet.Cells[5, "G"] = "EF手续费率";
+                        if (cda != null)
+                        {
+                            sheet.Cells[5, "H"] = String.Format("{0:P}", cda.EFPrice);
+                        }
+                    }
+                    else
+                    {
+                        sheet.Cells[5, "G"] = "IF手续费率";
+                        if (cda != null)
+                        {
+                            sheet.Cells[5, "H"] = String.Format("{0:P}", cda.IFPrice);
+                        }
+                    }
+
+                    sheet.Cells[6, "G"] = "利率";
+                    sheet.get_Range(sheet.Cells[6, "H"], sheet.Cells[6, "I"]).MergeCells = true;
+
+                    sheet.Cells[7, "G"] = "单据处理费/笔";
+                    sheet.get_Range(sheet.Cells[7, "H"], sheet.Cells[7, "I"]).MergeCells = true;
+                    sheet.Cells[7, "H"] = String.Format("{0} {1:N2}", cda.HandFeeCurr, cda.HandFee);
+
+                    sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
+                    sheet.Cells[4, "L"] = "信用风险担保";
+                    sheet.Cells[5, "L"] = "核准额度";
+                    sheet.Cells[5, "M"] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCover);
+                    sheet.Cells[6, "L"] = "到期日";
+                    sheet.Cells[6, "M"] = String.Format("{0:yyyy-MM-dd}", cda.CreditCoverPeriodEnd);
+                    sheet.Cells[7, "L"] = "剩余额度";
+                    sheet.Cells[7, "M"] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCoverOutstanding);
+                    sheet.Cells[8, "L"] = "应收帐款余额";
+                    sheet.Cells[8, "M"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, selectedCase.AssignOutstanding);
+
+                    sheet.get_Range(sheet.Cells[4, "O"], sheet.Cells[4, "P"]).MergeCells = true;
+                    sheet.Cells[4, "O"] = "融资额度";
+                    sheet.Cells[5, "O"] = "核准额度";
+                    sheet.Cells[5, "P"] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, cda.FinanceLine);
+                    sheet.Cells[6, "O"] = "到期日";
+                    sheet.Cells[6, "P"] = String.Format("{0:yyyy-MM-dd}", cda.FinanceLinePeriodEnd);
+                    sheet.Cells[7, "O"] = "剩余额度";
+                    sheet.Cells[7, "P"] = String.Format("{0} {1:N2}", cda.FinanceLineCurr, cda.FinanceLineOutstanding);
+                    sheet.Cells[8, "O"] = "融资余额";
+                    sheet.Cells[8, "P"] = String.Format("{0} {1:N2}", selectedCase.InvoiceCurrency, selectedCase.FinanceOutstanding);
+
+                    sheet.Cells[9, "A"] = "发票号";
+                    sheet.Cells[9, "B"] = "转让金额";
+                    sheet.Cells[9, "C"] = "发票日";
+                    sheet.Cells[9, "D"] = "到期日";
+                    sheet.Cells[9, "E"] = "转让日";
+                    sheet.Cells[9, "F"] = "是否瑕疵";
+                    sheet.Cells[9, "G"] = "融资金额";
+                    sheet.Cells[9, "H"] = "融资日";
+                    sheet.Cells[9, "I"] = "融资到期日";
+                    sheet.Cells[9, "J"] = "付款金额";
+                    sheet.Cells[9, "K"] = "账款余额";
+                    sheet.Cells[9, "L"] = "付款日";
+                    sheet.Cells[9, "M"] = "还款金额";
+                    sheet.Cells[9, "N"] = "还款日";
+                    sheet.Cells[9, "O"] = "手续费";
+                    sheet.Cells[9, "P"] = "利息";
+                    sheet.Cells[9, "Q"] = "备注";
+
+                    sheet.get_Range("A4", "I7").Borders.LineStyle = 1;
+                    sheet.get_Range("L4", "M8").Borders.LineStyle = 1;
+                    sheet.get_Range("O4", "P8").Borders.LineStyle = 1;
+
+                    int row = 10;
+                    foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
+                    {
+                        foreach (Invoice invoice in batch.Invoices)
+                        {
+                            int step = 1;
+                            sheet.Cells[row, "A"] = "'" + invoice.InvoiceNo;
+                            sheet.Cells[row, "B"] = invoice.AssignAmount;
+                            sheet.Cells[row, "C"] = invoice.InvoiceDate;
+                            sheet.Cells[row, "D"] = invoice.DueDate;
+                            sheet.Cells[row, "E"] = batch.AssignDate;
+                            sheet.Cells[row, "F"] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
+
+                            int recordStep = 0;
+                            for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
+                            {
+                                InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
+                                sheet.Cells[row + recordStep, "G"] = financeLog.FinanceAmount;
+                                sheet.Cells[row + recordStep, "H"] = financeLog.FinanceDate;
+                                sheet.Cells[row + recordStep, "I"] = financeLog.FinanceDueDate;
+
+                                for (int j = 0; i < financeLog.InvoiceRefundLogs.Count; i++)
+                                {
+                                    InvoiceRefundLog refundLog = financeLog.InvoiceRefundLogs[j];
+                                    sheet.Cells[row + recordStep + j, "M"] = refundLog.RefundAmount;
+                                    sheet.Cells[row + recordStep + j, "N"] = refundLog.RefundDate;
+                                }
+
+                                recordStep += financeLog.InvoiceRefundLogs.Count;
+                            }
+
+                            step = step < recordStep ? recordStep : step;
+
+                            //sheet.Cells[row, "G"] = invoice.FinanceAmount;
+                            //sheet.Cells[row, "H"] = invoice.FinanceDate;
+                            //sheet.Cells[row, "I"] = invoice.FinanceDueDate;
+
+                            for (int i = 0; i < invoice.InvoicePaymentLogs.Count; i++)
+                            {
+                                InvoicePaymentLog paymentLog = invoice.InvoicePaymentLogs[i];
+                                sheet.Cells[row + i, "J"] = paymentLog.PaymentAmount;
+                                sheet.Cells[row + i, "L"] = paymentLog.PaymentDate;
+                            }
+
+                            step = step < invoice.InvoicePaymentLogs.Count ? invoice.InvoicePaymentLogs.Count : step;
+
+                            //sheet.Cells[row, "J"] = invoice.PaymentAmount;
+                            sheet.Cells[row, "K"] = invoice.AssignOutstanding;
+                            //sheet.Cells[row, "L"] = invoice.PaymentDate;
+
+                            //sheet.Cells[row, "M"] = invoice.RefundAmount;
+                            //sheet.Cells[row, "N"] = invoice.RefundDate;
+                            sheet.Cells[row, "O"] = invoice.Commission;
+                            sheet.Cells[row, "P"] = invoice.NetInterest;
+                            sheet.Cells[row, "Q"] = invoice.Comment;
+
+                            row += step;
+                        }
+                    }
+
+                    string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
+                    sheet.get_Range(sheet.Cells[9, "A"], sheet.Cells[row - 1, "Q"]).Borders.LineStyle = 1;
+                    sheet.get_Range(sheet.Cells[10, "B"], sheet.Cells[row - 1, "B"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "C"], sheet.Cells[row - 1, "C"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "D"], sheet.Cells[row - 1, "D"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "E"], sheet.Cells[row - 1, "E"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "G"], sheet.Cells[row - 1, "G"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "H"], sheet.Cells[row - 1, "H"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]).NumberFormatLocal = currencyFormat;
+
+                    foreach (Range range in sheet.UsedRange.Rows)
+                    {
+                        range.EntireRow.AutoFit();
+                    }
+
+                    foreach (Range range in sheet.UsedRange.Columns)
+                    {
+                        range.EntireColumn.AutoFit();
+                    }
+
+                    sheet.UsedRange.Font.Name = "仿宋";
+                }
+
+                if (app != null)
+                {
+                    app.DisplayAlerts = false;
+                    app.AlertBeforeOverwriting = false;
+                    if (workbook != null)
+                    {
+                        string ext = null;
+                        if (app.Version.IndexOf("12") != -1)
+                        {
+                            ext = ".xlsx";
+                        }
+                        else
+                        {
+                            ext = ".xls";
+                        }
+
+                        string filePath = this.tbFilePath.Text + "\\" + caseGroup.Key.ToString() + ext;
+                        workbook.SaveCopyAs(filePath);
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                if (app != null)
+                {
+                    app.Quit();
+                    app = null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SelectFile(object sender, EventArgs e)
         {
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.Filter = "CSV files (*.csv)|*.csv";
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
+            if (this.exportType == ExportType.EXPORT_LEGER)
             {
-                this.tbFilePath.Text = fileDialog.FileName;
+                FolderBrowserDialog dirDialog = new FolderBrowserDialog();
+                if (dirDialog.ShowDialog() == DialogResult.OK)
+                {
+                    this.tbFilePath.Text = dirDialog.SelectedPath;
+                }
+            }
+            else
+            {
+                SaveFileDialog fileDialog = new SaveFileDialog();
+                fileDialog.Filter = "CSV files (*.csv)|*.csv";
+
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    this.tbFilePath.Text = fileDialog.FileName;
+                }
             }
         }
 

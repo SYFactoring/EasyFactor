@@ -1,5 +1,5 @@
 <VersionConfig>
-	<AvailableVersion>1.3.26.1</AvailableVersion>
+	<AvailableVersion>1.3.29.1</AvailableVersion>
 	<AppFileURL>http://cscw.fudan.edu.cn/EasyFactoring/app.zip</AppFileURL>
 	<LatestChanges>Test Auto Updater</LatestChanges>
 	<ChangeLogURL>http://cscw.fudan.edu.cn/EasyFactoring/change_log.htm</ChangeLogURL>
