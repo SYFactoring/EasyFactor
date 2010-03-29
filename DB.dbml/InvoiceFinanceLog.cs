@@ -386,14 +386,14 @@ namespace CMBC.EasyFactor.DB.dbml
             CDA cda = this.Invoice.InvoiceAssignBatch.Case.ActiveCDA;
             if (cda.CommissionType == "按融资金额")
             {
-                if (cda.Case.TransactionType == "进口保理")
-                {
-                    Commission = FinanceAmount * cda.IFPrice;
-                }
-                else
-                {
-                    Commission = FinanceAmount * cda.EFPrice;
-                }
+                //if (cda.Case.TransactionType == "进口保理")
+                //{
+                //    Commission = FinanceAmount * cda.IFPrice;
+                //}
+                //else
+                //{
+                    Commission = FinanceAmount * cda.Price;
+                //}
             }
         }
 

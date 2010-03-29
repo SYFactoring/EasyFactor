@@ -359,14 +359,16 @@ namespace CMBC.EasyFactor.ARMgr
                 CDA cda = this._case.ActiveCDA;
                 if (cda.CommissionType == "按转让金额")
                 {
-                    if (this._case.TransactionType == "进口保理")
-                    {
-                        selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.IFPrice;
-                    }
-                    else
-                    {
-                        selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.EFPrice;
-                    }
+                    //if (this._case.TransactionType == "进口保理")
+                    //{
+                    //    selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.IFPrice;
+                    //}
+                    //else
+                    //{
+                        //selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.EFPrice;
+                    //}
+
+                    selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.Price;
                 }
 
                 this.StatBatch();

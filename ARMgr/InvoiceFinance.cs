@@ -158,14 +158,16 @@ namespace CMBC.EasyFactor.ARMgr
             CDA cda = this._case.ActiveCDA;
             if (cda.CommissionType == "按融资金额")
             {
-                if (this._case.TransactionType == "进口保理")
-                {
-                    log.Commission = log.FinanceAmount * cda.IFPrice;
-                }
-                else
-                {
-                    log.Commission = log.FinanceAmount * cda.EFPrice;
-                }
+                //if (this._case.TransactionType == "进口保理")
+                //{
+                //    log.Commission = log.FinanceAmount * cda.IFPrice;
+                //}
+                //else
+                //{
+                //    log.Commission = log.FinanceAmount * cda.EFPrice;
+                //}
+
+                log.Commission = log.FinanceAmount * cda.Price;
             }
         }
 
@@ -602,6 +604,12 @@ namespace CMBC.EasyFactor.ARMgr
             if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding))
             {
                 MessageBoxEx.Show("该案件的预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (activeCDA.FinanceCreditLine == null)
+            {
+                MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

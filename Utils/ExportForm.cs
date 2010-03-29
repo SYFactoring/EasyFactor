@@ -2277,7 +2277,7 @@ namespace CMBC.EasyFactor.Utils
                     app.AlertBeforeOverwriting = false;
                     if (workbook != null)
                     {
-                        string ext = null;
+                        string ext = ".xls";
                         if (app.Version.IndexOf("12") != -1)
                         {
                             ext = ".xlsx";
