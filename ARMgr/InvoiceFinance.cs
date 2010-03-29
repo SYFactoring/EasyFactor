@@ -138,13 +138,13 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
             double financeAmount = 0;
-            if (log.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value + currentFinanceAmount > batch.FinanceAmount)
+            if (log.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.GetValueOrDefault() + currentFinanceAmount > batch.FinanceAmount)
             {
                 financeAmount = batch.FinanceAmount - currentFinanceAmount;
             }
             else
             {
-                financeAmount = log.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.Value;
+                financeAmount = log.AssignOutstanding * this._case.ActiveCDA.FinanceProportion.GetValueOrDefault();
             }
 
             if (!TypeUtil.GreaterZero(financeAmount))

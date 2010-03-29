@@ -14,9 +14,11 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class InvoiceAssignBatch 
+    public partial class InvoiceAssignBatch
     {
         #region Properties (7)
+
+        private double? _assignAmount;
 
         /// <summary>
         /// Gets
@@ -25,7 +27,12 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Invoices.Sum(i => i.AssignAmount);
+                if (_assignAmount.HasValue == false)
+                {
+                    _assignAmount = this.Invoices.Sum(i => i.AssignAmount);
+                }
+
+                return _assignAmount.Value;
             }
         }
 
@@ -62,6 +69,8 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        private double? _commissionAmount;
+
         /// <summary>
         /// Gets
         /// </summary>
@@ -69,19 +78,25 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double? result = null;
-                foreach (Invoice invoice in this.Invoices)
+                if (_commissionAmount.HasValue == false)
                 {
-                    if (invoice.Commission.HasValue)
+                    double? result = null;
+                    foreach (Invoice invoice in this.Invoices)
                     {
-                        if (result.HasValue == false)
+                        if (invoice.Commission.HasValue)
                         {
-                            result = 0;
+                            if (result.HasValue == false)
+                            {
+                                result = 0;
+                            }
+                            result += invoice.Commission;
                         }
-                        result += invoice.Commission;
                     }
+
+                    _commissionAmount = result;
                 }
-                return result;
+
+                return _commissionAmount;
             }
         }
 

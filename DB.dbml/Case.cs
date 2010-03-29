@@ -19,6 +19,8 @@ namespace CMBC.EasyFactor.DB.dbml
     {
         #region Properties (16)
 
+        private CDA _activeCDA;
+
         /// <summary>
         /// Gets 
         /// </summary>
@@ -26,20 +28,25 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                IList<CDA> cdaList = this.CDAs.Where(c => c.CDAStatus == ConstStr.CDA.CHECKED).ToList();
-                if (cdaList.Count > 1)
+                if (_activeCDA == null)
                 {
-                    MessageBoxEx.Show("包含多个有效的CDA，案件编号: " + this.CaseCode, ConstStr.MESSAGE.TITLE_WARNING);
-                    return null;
+                    IList<CDA> cdaList = this.CDAs.Where(c => c.CDAStatus == ConstStr.CDA.CHECKED).ToList();
+                    if (cdaList.Count > 1)
+                    {
+                        MessageBoxEx.Show("包含多个有效的CDA，案件编号: " + this.CaseCode, ConstStr.MESSAGE.TITLE_WARNING);
+                        return null;
+                    }
+                    else if (cdaList.Count == 1)
+                    {
+                        _activeCDA = cdaList[0];
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else if (cdaList.Count == 1)
-                {
-                    return cdaList[0];
-                }
-                else
-                {
-                    return null;
-                }
+
+                return _activeCDA;
             }
         }
 
@@ -61,6 +68,8 @@ namespace CMBC.EasyFactor.DB.dbml
             set;
         }
 
+        private double? _assignAmountByDate;
+
         /// <summary>
         /// 
         /// </summary>
@@ -68,35 +77,42 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
-                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                IEnumerable<InvoiceAssignBatch> batches = this.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
-                foreach (InvoiceAssignBatch batch in batches)
+                if (_assignAmountByDate.HasValue == false)
                 {
-                    result += batch.AssignAmount;
+                    double result = 0;
+                    DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                    DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                    IEnumerable<InvoiceAssignBatch> batches = this.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
+                    foreach (InvoiceAssignBatch batch in batches)
+                    {
+                        result += batch.AssignAmount;
+                    }
+
+                    _assignAmountByDate = result;
                 }
 
-                return result;
+                return _assignAmountByDate.Value;
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double AssignAmount
-        {
-            get
-            {
-                double result = 0;
-                foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
-                {
-                    result += batch.AssignAmount;
-                }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public double AssignAmount
+        //{
+        //    get
+        //    {
+        //        double result = 0;
+        //        foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
+        //        {
+        //            result += batch.AssignAmount;
+        //        }
 
-                return result;
-            }
-        }
+        //        return result;
+        //    }
+        //}
+
+        private double? _assginOutstanding;
 
         /// <summary>
         /// Gets 转让余额
@@ -105,15 +121,21 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double total = 0;
-                foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
+                if (_assignAmountByDate.HasValue == false)
                 {
-                    foreach (Invoice invoice in assignBatch.Invoices)
+                    double total = 0;
+                    foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
                     {
-                        total += invoice.AssignOutstanding;
+                        foreach (Invoice invoice in assignBatch.Invoices)
+                        {
+                            total += invoice.AssignOutstanding;
+                        }
                     }
+
+                    _assginOutstanding = total;
                 }
-                return total;
+
+                return _assginOutstanding.Value;
             }
         }
 
@@ -142,6 +164,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Client TargetClient
         {
             get
@@ -163,6 +188,8 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        private double? _commissionIncomeByDate;
+
         /// <summary>
         /// 
         /// </summary>
@@ -170,60 +197,65 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                int count = 0;
-                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
-                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                IEnumerable<InvoiceAssignBatch> batches = this.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
-
-                foreach (InvoiceAssignBatch batch in batches)
+                if (_commissionIncomeByDate.HasValue == false)
                 {
-                    count += batch.BatchCount;
-                    foreach (Invoice invoice in batch.Invoices)
+                    double result = 0;
+                    int count = 0;
+                    DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                    DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                    IEnumerable<InvoiceAssignBatch> batches = this.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
+
+                    foreach (InvoiceAssignBatch batch in batches)
                     {
-                        result += invoice.Commission.GetValueOrDefault();
+                        count += batch.BatchCount;
+                        foreach (Invoice invoice in batch.Invoices)
+                        {
+                            result += invoice.Commission.GetValueOrDefault();
+                        }
                     }
+
+                    CDA cda = this.ActiveCDA;
+                    double handFreeIncome = 0;
+                    if (cda != null)
+                    {
+                        handFreeIncome = count * cda.HandFee.GetValueOrDefault();
+                    }
+
+                    _commissionIncomeByDate = result + handFreeIncome;
                 }
 
-                CDA cda = this.ActiveCDA;
-                double handFreeIncome = 0;
-                if (cda != null)
-                {
-                    handFreeIncome = count * cda.HandFee.GetValueOrDefault();
-                }
-
-                return result + handFreeIncome;
+                return _commissionIncomeByDate.Value;
             }
         }
 
         /// <summary>
         /// 手续费
         /// </summary>
-        public double CommissionIncome
-        {
-            get
-            {
-                double result = 0;
-                int count = 0;
-                foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
-                {
-                    count += batch.BatchCount;
-                    foreach (Invoice invoice in batch.Invoices)
-                    {
-                        result += invoice.Commission.GetValueOrDefault();
-                    }
-                }
+        //public double CommissionIncome
+        //{
+        //    get
+        //    {
+        //        double result = 0;
+        //        int count = 0;
+        //        foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
+        //        {
+        //            count += batch.BatchCount;
+        //            foreach (Invoice invoice in batch.Invoices)
+        //            {
+        //                result += invoice.Commission.GetValueOrDefault();
+        //            }
+        //        }
 
-                CDA cda = this.ActiveCDA;
-                double handFreeIncome = 0;
-                if (cda != null)
-                {
-                    handFreeIncome = count * cda.HandFee.GetValueOrDefault();
-                }
+        //        CDA cda = this.ActiveCDA;
+        //        double handFreeIncome = 0;
+        //        if (cda != null)
+        //        {
+        //            handFreeIncome = count * cda.HandFee.GetValueOrDefault();
+        //        }
 
-                return result + handFreeIncome;
-            }
-        }
+        //        return result + handFreeIncome;
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -262,6 +294,8 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        private double? _financeAmountByDate;
+
         /// <summary>
         /// 
         /// </summary>
@@ -269,47 +303,52 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
-                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
-                foreach (InvoiceFinanceBatch batch in batches)
+                if (_financeAmountByDate.HasValue == false)
                 {
-                    double finance = batch.FinanceAmount;
-                    if (batch.BatchCurrency != this.InvoiceCurrency)
+                    double result = 0;
+                    DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                    DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
+                    foreach (InvoiceFinanceBatch batch in batches)
                     {
-                        double rate = Exchange.GetExchangeRate(batch.BatchCurrency, this.InvoiceCurrency);
-                        finance *= rate;
+                        double finance = batch.FinanceAmount;
+                        if (batch.BatchCurrency != this.InvoiceCurrency)
+                        {
+                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, this.InvoiceCurrency);
+                            finance *= rate;
+                        }
+                        result += finance;
                     }
-                    result += finance;
+
+                    _financeAmountByDate = result;
                 }
 
-                return result;
+                return _financeAmountByDate.Value;
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double FinanceAmount
-        {
-            get
-            {
-                double result = 0;
-                foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
-                {
-                    double finance = batch.FinanceAmount;
-                    if (batch.BatchCurrency != this.InvoiceCurrency)
-                    {
-                        double rate = Exchange.GetExchangeRate(batch.BatchCurrency, this.InvoiceCurrency);
-                        finance *= rate;
-                    }
-                    result += finance;
-                }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public double FinanceAmount
+        //{
+        //    get
+        //    {
+        //        double result = 0;
+        //        foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
+        //        {
+        //            double finance = batch.FinanceAmount;
+        //            if (batch.BatchCurrency != this.InvoiceCurrency)
+        //            {
+        //                double rate = Exchange.GetExchangeRate(batch.BatchCurrency, this.InvoiceCurrency);
+        //                finance *= rate;
+        //            }
+        //            result += finance;
+        //        }
 
-                return result;
-            }
-        }
+        //        return result;
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -330,6 +369,8 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        private double? _financeOutstanding;
+
         /// <summary>
         /// Gets 融资余额
         /// </summary>
@@ -337,27 +378,34 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double? total = null;
-                foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
+                if (_financeOutstanding.HasValue == false)
                 {
-                    foreach (Invoice invoice in assignBatch.Invoices)
+                    double? total = null;
+                    foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
                     {
-                        if (invoice.FinanceOutstanding.HasValue)
+                        foreach (Invoice invoice in assignBatch.Invoices)
                         {
-                            if (total == null)
+                            if (invoice.FinanceOutstanding.HasValue)
                             {
-                                total = 0;
-                            }
+                                if (total == null)
+                                {
+                                    total = 0;
+                                }
 
-                            double financeOutstanding = invoice.FinanceOutstanding.Value;
-                            total += financeOutstanding;
+                                double financeOutstanding = invoice.FinanceOutstanding.Value;
+                                total += financeOutstanding;
+                            }
                         }
                     }
+
+                    _financeOutstanding = total;
                 }
 
-                return total;
+                return _financeOutstanding;
             }
         }
+
+        private double? _marginIncomeByDate;
 
         /// <summary>
         /// 
@@ -366,101 +414,115 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double? result = null;
-                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
-                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
-                foreach (InvoiceFinanceBatch batch in batches)
+                if (_marginIncomeByDate.HasValue == false)
                 {
-                    if (batch.FinanceType == "卖方代付" || batch.FinanceType == "买方代付")
+                    double? result = null;
+                    DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                    DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
+                    foreach (InvoiceFinanceBatch batch in batches)
                     {
-                        if (result == null)
+                        if (batch.FinanceType == "卖方代付" || batch.FinanceType == "买方代付")
                         {
-                            result = 0;
-                        }
+                            if (result == null)
+                            {
+                                result = 0;
+                            }
 
-                        result += batch.MarginIncome;
+                            result += batch.MarginIncome;
+                        }
                     }
+
+                    _marginIncomeByDate = result;
                 }
 
-                return result;
+                return _marginIncomeByDate;
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? MarginIncome
-        {
-            get
-            {
-                double? result = null;
-                foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
-                {
-                    if (batch.FinanceType == "卖方代付" || batch.FinanceType == "买方代付")
-                    {
-                        if (result == null)
-                        {
-                            result = 0;
-                        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public double? MarginIncome
+        //{
+        //    get
+        //    {
+        //        double? result = null;
+        //        foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
+        //        {
+        //            if (batch.FinanceType == "卖方代付" || batch.FinanceType == "买方代付")
+        //            {
+        //                if (result == null)
+        //                {
+        //                    result = 0;
+        //                }
 
-                        result += batch.MarginIncome;
-                    }
-                }
+        //                result += batch.MarginIncome;
+        //            }
+        //        }
 
-                return result;
-            }
-        }
+        //        return result;
+        //    }
+        //}
+
+        private double? _netInterestIncomeByDate;
 
         public double? NetInterestIncomeByDate
         {
             get
             {
-                double? result = null;
-                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
-                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
-                foreach (InvoiceFinanceBatch batch in batches)
+                if (_netInterestIncomeByDate.HasValue == false)
                 {
-                    if (batch.FinanceType != "卖方代付" && batch.FinanceType != "买方代付")
+                    double? result = null;
+                    DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                    DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
+                    foreach (InvoiceFinanceBatch batch in batches)
                     {
-                        if (result == null)
+                        if (batch.FinanceType != "卖方代付" && batch.FinanceType != "买方代付")
                         {
-                            result = 0;
-                        }
+                            if (result == null)
+                            {
+                                result = 0;
+                            }
 
-                        result += batch.NetInterestIncome;
+                            result += batch.NetInterestIncome;
+                        }
                     }
+
+                    _netInterestIncomeByDate = result;
                 }
 
-                return result;
+                return _netInterestIncomeByDate;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public double? NetInterestIncome
-        {
-            get
-            {
-                double? result = null;
-                foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
-                {
-                    if (batch.FinanceType != "卖方代付" && batch.FinanceType != "买方代付")
-                    {
-                        if (result == null)
-                        {
-                            result = 0;
-                        }
+        //public double? NetInterestIncome
+        //{
+        //    get
+        //    {
+        //        double? result = null;
+        //        foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
+        //        {
+        //            if (batch.FinanceType != "卖方代付" && batch.FinanceType != "买方代付")
+        //            {
+        //                if (result == null)
+        //                {
+        //                    result = 0;
+        //                }
 
-                        result += batch.NetInterestIncome;
-                    }
-                }
+        //                result += batch.NetInterestIncome;
+        //            }
+        //        }
 
-                return result;
-            }
-        }
+        //        return result;
+        //    }
+        //}
+
+        private double? _paymentAmountByDate;
 
         /// <summary>
         /// 
@@ -469,35 +531,42 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
-                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                IEnumerable<InvoicePaymentBatch> batches = this.InvoicePaymentBatches.Where(i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate);
-                foreach (InvoicePaymentBatch batch in batches)
+                if (_paymentAmountByDate.HasValue == false)
                 {
-                    result += batch.PaymentAmount;
+                    double result = 0;
+                    DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                    DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                    IEnumerable<InvoicePaymentBatch> batches = this.InvoicePaymentBatches.Where(i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate);
+                    foreach (InvoicePaymentBatch batch in batches)
+                    {
+                        result += batch.PaymentAmount;
+                    }
+
+                    _paymentAmountByDate = result;
                 }
 
-                return result;
+                return _paymentAmountByDate.Value;
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double PaymentAmount
-        {
-            get
-            {
-                double result = 0;
-                foreach (InvoicePaymentBatch batch in this.InvoicePaymentBatches)
-                {
-                    result += batch.PaymentAmount;
-                }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public double PaymentAmount
+        //{
+        //    get
+        //    {
+        //        double result = 0;
+        //        foreach (InvoicePaymentBatch batch in this.InvoicePaymentBatches)
+        //        {
+        //            result += batch.PaymentAmount;
+        //        }
 
-                return result;
-            }
-        }
+        //        return result;
+        //    }
+        //}
+
+        private double? _totalAssignOutstanding;
 
         /// <summary>
         /// 
@@ -506,14 +575,19 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                var caseList = this.SellerClient.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.TransactionType == this.TransactionType);
-                foreach (Case c in caseList)
+                if (_totalAssignOutstanding.HasValue == false)
                 {
-                    result += c.AssignOutstanding;
+                    double result = 0;
+                    var caseList = this.SellerClient.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.TransactionType == this.TransactionType);
+                    foreach (Case c in caseList)
+                    {
+                        result += c.AssignOutstanding;
+                    }
+
+                    _totalAssignOutstanding = result;
                 }
 
-                return result;
+                return _totalAssignOutstanding.Value;
             }
         }
 
@@ -555,13 +629,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 总收入
         /// </summary>
-        public double? TotalIncome
-        {
-            get
-            {
-                return this.CommissionIncome + this.NetInterestIncome.GetValueOrDefault() + this.MarginIncome.GetValueOrDefault();
-            }
-        }
+        //public double? TotalIncome
+        //{
+        //    get
+        //    {
+        //        return this.CommissionIncome + this.NetInterestIncome.GetValueOrDefault() + this.MarginIncome.GetValueOrDefault();
+        //    }
+        //}
 
         #endregion Properties
 

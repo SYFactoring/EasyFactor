@@ -18,6 +18,8 @@ namespace CMBC.EasyFactor.DB.dbml
     {
         #region Properties (11)
 
+        private double? _assignAmount;
+
         /// <summary>
         /// Gets
         /// </summary>
@@ -25,13 +27,18 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                if (_assignAmount.HasValue == false)
                 {
-                    result += log.Invoice.AssignAmount;
+                    double result = 0;
+                    foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                    {
+                        result += log.Invoice.AssignAmount;
+                    }
+
+                    _assignAmount = result;
                 }
 
-                return result;
+                return _assignAmount.Value;
             }
         }
 
@@ -86,6 +93,8 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        private double? _commissionAmount;
+
         /// <summary>
         /// Gets
         /// </summary>
@@ -93,29 +102,36 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double? result = null;
-                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                if (_commissionAmount.HasValue == false)
                 {
-                    if (log.Commission.HasValue)
+                    double? result = null;
+                    foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
                     {
-                        if (result.HasValue == false)
+                        if (log.Commission.HasValue)
                         {
-                            result = 0;
+                            if (result.HasValue == false)
+                            {
+                                result = 0;
+                            }
+
+                            result += log.Commission;
                         }
-
-                        result += log.Commission;
                     }
+
+                    if (this.BatchCurrency != this.Case.InvoiceCurrency)
+                    {
+                        double rate = Exchange.GetExchangeRate(this.BatchCurrency, this.Case.InvoiceCurrency);
+                        result *= rate;
+                    }
+
+                    _commissionAmount = result;
                 }
 
-                if (this.BatchCurrency != this.Case.InvoiceCurrency)
-                {
-                    double rate = Exchange.GetExchangeRate(this.BatchCurrency, this.Case.InvoiceCurrency);
-                    result *= rate;
-                }
-
-                return result;
+                return _commissionAmount;
             }
         }
+
+        private double? _grossInterestIncome;
 
         /// <summary>
         /// 毛利息收入
@@ -124,16 +140,23 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                if (_grossInterestIncome.HasValue == false)
                 {
-                    double value = log.GrossInterest;
-                    result += value;
+                    double result = 0;
+                    foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                    {
+                        double value = log.GrossInterest;
+                        result += value;
+                    }
+
+                    _grossInterestIncome = result;
                 }
 
-                return result;
+                return _grossInterestIncome.Value;
             }
         }
+
+        private double? _handfeeAmount;
 
         /// <summary>
         /// Gets
@@ -142,16 +165,23 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double? result = AssignCount * this.Case.ActiveCDA.HandFee;
-                if (this.Case.ActiveCDA.HandFeeCurr != this.Case.InvoiceCurrency)
+                if (_handfeeAmount.HasValue == false)
                 {
-                    double rate = Exchange.GetExchangeRate(this.Case.ActiveCDA.HandFeeCurr, this.Case.InvoiceCurrency);
-                    result *= rate;
+                    double? result = AssignCount * this.Case.ActiveCDA.HandFee;
+                    if (this.Case.ActiveCDA.HandFeeCurr != this.Case.InvoiceCurrency)
+                    {
+                        double rate = Exchange.GetExchangeRate(this.Case.ActiveCDA.HandFeeCurr, this.Case.InvoiceCurrency);
+                        result *= rate;
+                    }
+
+                    _handfeeAmount = result;
                 }
 
-                return result;
+                return _handfeeAmount;
             }
         }
+
+        private double? _marginIncome;
 
         /// <summary>
         /// 代付利差收入
@@ -160,9 +190,16 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.FinanceAmount * (this.FinanceRate - this.CostRate) / 360 * ((this.FinancePeriodEnd - this.FinancePeriodBegin).Days);
+                if (_marginIncome.HasValue == false)
+                {
+                    _marginIncome = this.FinanceAmount * (this.FinanceRate - this.CostRate) / 360 * ((this.FinancePeriodEnd - this.FinancePeriodBegin).Days);
+                }
+
+                return _marginIncome;
             }
         }
+
+        private double? _netInterestIncome;
 
         /// <summary>
         /// 净利息收入
@@ -171,14 +208,19 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                if (_netInterestIncome.HasValue == false)
                 {
-                    double value = log.NetInterest;
-                    result += value;
+                    double result = 0;
+                    foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                    {
+                        double value = log.NetInterest;
+                        result += value;
+                    }
+
+                    _netInterestIncome =  result;
                 }
 
-                return result;
+                return _netInterestIncome.Value;
             }
         }
 
