@@ -438,12 +438,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
             CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
 
-            if (selectedCDA.Case.TransactionType != "国内卖方保理" && selectedCDA.Case.TransactionType != "国内信保保理" && selectedCDA.Case.TransactionType != "出口保理" && selectedCDA.Case.TransactionType != "国际信保保理")
-            {
-                MessageBoxEx.Show("该额度通知书类型为：" + selectedCDA.Case.TransactionType + "，不能生成报表", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
@@ -454,6 +448,13 @@ namespace CMBC.EasyFactor.CaseMgr
 
             try
             {
+
+                bool isZero = false;
+                if (selectedCDA.Case.TransactionType == "国内买方保理" || selectedCDA.Case.TransactionType == "进口保理" || selectedCDA.Case.TransactionType == "租赁保理")
+                {
+                    isZero = true;
+                }
+
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 sheet.Cells[1, 1] = "中国民生银行保理额度通知书 ";
@@ -478,7 +479,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "信用风险额度";
                 if (selectedCDA.CreditCover.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.CreditCover, TypeUtil.ToPrintCurrencyChinese(selectedCDA.CreditCoverCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.CreditCover));
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.CreditCover, TypeUtil.ToPrintCurrencyChinese(selectedCDA.CreditCoverCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.CreditCover));
+                    }
                 }
                 else
                 {
@@ -486,11 +494,26 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 sheet.Cells[row, 1] = "信用风险承担比例";
-                sheet.Cells[row++, 2] = String.Format("{0:0%}", selectedCDA.PUGProportion.GetValueOrDefault());
+                if (isZero)
+                {
+                    sheet.Cells[row++, 2] = "0%";
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = String.Format("{0:0%}", selectedCDA.PUGProportion.GetValueOrDefault());
+                }
+
                 sheet.Cells[row, 1] = "信用风险额度有效期限";
                 if (selectedCDA.CreditCoverPeriodBegin.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日 至 {1:yyyy}年{1:MM}月{1:dd}日", selectedCDA.CreditCoverPeriodBegin, selectedCDA.CreditCoverPeriodEnd);
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "无";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日 至 {1:yyyy}年{1:MM}月{1:dd}日", selectedCDA.CreditCoverPeriodBegin, selectedCDA.CreditCoverPeriodEnd);
+                    }
                 }
                 else
                 {
@@ -499,7 +522,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "保理预付款额度";
                 if (selectedCDA.FinanceLine.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.FinanceLineCurr), selectedCDA.FinanceLine, TypeUtil.ToPrintCurrencyChinese(selectedCDA.FinanceLineCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.FinanceLine));
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.FinanceLineCurr), selectedCDA.FinanceLine, TypeUtil.ToPrintCurrencyChinese(selectedCDA.FinanceLineCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.FinanceLine));
+                    }
                 }
                 else
                 {
@@ -509,7 +539,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "预付款额度有效期限";
                 if (selectedCDA.FinanceLinePeriodBegin.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日 至 {1:yyyy}年{1:MM}月{1:dd}日", selectedCDA.FinanceLinePeriodBegin, selectedCDA.FinanceLinePeriodEnd);
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "无";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日 至 {1:yyyy}年{1:MM}月{1:dd}日", selectedCDA.FinanceLinePeriodBegin, selectedCDA.FinanceLinePeriodEnd);
+                    }
                 }
                 else
                 {
@@ -520,17 +557,51 @@ namespace CMBC.EasyFactor.CaseMgr
                 ClientCreditLine creditLine = selectedCDA.Case.SellerClient.FinanceCreditLine;
                 if (creditLine != null)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(creditLine.CreditLineCurrency), creditLine.CreditLine, TypeUtil.ToPrintCurrencyChinese(creditLine.CreditLineCurrency), TypeUtil.ConvertToChineseMoney(creditLine.CreditLine));
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(creditLine.CreditLineCurrency), creditLine.CreditLine, TypeUtil.ToPrintCurrencyChinese(creditLine.CreditLineCurrency), TypeUtil.ConvertToChineseMoney(creditLine.CreditLine));
+                    }
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = "0";
                 }
 
                 sheet.Cells[row, 1] = "预付比例";
-                sheet.Cells[row++, 2] = String.Format("单笔融资不超过发票金额的 {0:0%}", selectedCDA.FinanceProportion);
+                if (isZero)
+                {
+                    sheet.Cells[row++, 2] = String.Format("单笔融资不超过发票金额的 {0:0%}", selectedCDA.FinanceProportion);
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = "无";
+                }
+
                 sheet.Cells[row, 1] = "保理费率";
-                sheet.Cells[row++, 2] = String.Format("{0}的 {1:0.0%}", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
+                if (isZero)
+                {
+                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:0.0%}，由买方承担", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:0.0%}", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
+                }
+
                 sheet.Cells[row, 1] = "单据处理费";
                 if (selectedCDA.HandFee.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} 元 （每张发票）", TypeUtil.ToPrintCurrencyChinese(selectedCDA.HandFeeCurr), selectedCDA.HandFee);
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} 元 （每张发票）", TypeUtil.ToPrintCurrencyChinese(selectedCDA.HandFeeCurr), selectedCDA.HandFee);
+                    }
                 }
                 else
                 {
@@ -548,7 +619,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "自负额";
                 if (selectedCDA.Deductibles.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.Deductibles);
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.Deductibles);
+                    }
                 }
                 else
                 {
@@ -558,7 +636,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "最低损失门槛";
                 if (selectedCDA.LossThreshold.HasValue)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.LossThreshold);
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2}", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.LossThreshold);
+                    }
                 }
                 else
                 {
