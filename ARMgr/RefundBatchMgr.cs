@@ -193,7 +193,14 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
-            context.SubmitChanges();
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         /// <summary>
@@ -356,7 +363,14 @@ namespace CMBC.EasyFactor.ARMgr
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
-            context.SubmitChanges();
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         /// <summary>

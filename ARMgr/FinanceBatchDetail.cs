@@ -293,6 +293,8 @@ namespace CMBC.EasyFactor.ARMgr
                 this.factorCodeTextBox.ReadOnly = true;
                 this.factorTextBox.ReadOnly = true;
             }
+
+            ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
         }
 
         #endregion Methods

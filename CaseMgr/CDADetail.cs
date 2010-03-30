@@ -815,6 +815,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             cda.EFPrice = cda.Price - cda.IFPrice;
+            cda.CreateUserName = App.Current.CurUser.Name;
 
             if (cda.CDACode == null)
             {
@@ -827,7 +828,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 cda.CDACode = cdaCode;
-                cda.CreateUserName = App.Current.CurUser.Name;
+
                 try
                 {
                     context.CDAs.InsertOnSubmit(cda);
@@ -846,7 +847,6 @@ namespace CMBC.EasyFactor.CaseMgr
                     if (cda.Case.CaseMark == ConstStr.CASE.APPLICATION)
                     {
                         cda.Case.CaseMark = ConstStr.CASE.ENABLE;
-                        context.SubmitChanges();
                     }
 
                     if (cda.CDAStatus == ConstStr.CDA.CHECKED)
@@ -858,9 +858,17 @@ namespace CMBC.EasyFactor.CaseMgr
                                 c.CDAStatus = ConstStr.CDA.INVALID;
                             }
                         }
+                    }
 
+                    try
+                    {
                         context.SubmitChanges();
                     }
+                    catch (Exception e2)
+                    {
+                        MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
                     this.opCDAType = OpCDAType.UPDATE_CDA;
                 }
             }
@@ -907,7 +915,14 @@ namespace CMBC.EasyFactor.CaseMgr
                             }
                         }
 
-                        context.SubmitChanges();
+                        try
+                        {
+                            context.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                 }
             }
@@ -973,14 +988,17 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelCreditCover.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelOther.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+
                 this.btnCaseSelect.Visible = false;
             }
             else if (this.opCDAType == OpCDAType.NEW_CDA)
@@ -989,10 +1007,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelCreditCover.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelOther.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
@@ -1004,10 +1024,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
+
                 foreach (Control comp in this.groupPanelCreditCover.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
+
                 foreach (Control comp in this.groupPanelOther.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
@@ -1016,6 +1038,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.tbCDACode.ReadOnly = true;
             this.tbHighestFinance.ReadOnly = true;
+            ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
 
             //CDA cda = (CDA)this.CDABindingSource.DataSource;
             //if (cda.Case != null)

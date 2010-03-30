@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.ARMgr;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Help;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
     using CMBC.EasyFactor.InfoMgr.ExchangeMgr;
@@ -20,9 +21,6 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
-    using CMBC.EasyFactor.Help;
-    using System.IO;
-    using System.Threading;
 
     /// <summary>
     /// Main Window Form
@@ -42,7 +40,7 @@ namespace CMBC.EasyFactor
             this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-            this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
+            this.CommandStatus = ConstStr.MESSAGE.MAIN_DEFAULT;
 
             this.notifyIcon.Visible = false;
 
@@ -102,6 +100,15 @@ namespace CMBC.EasyFactor
         /// <param name="uc">user control</param>
         public void SetDetailPanel(UserControl uc)
         {
+            if (uc is CaseMgr.CaseMgr)
+            {
+                this.CommandStatus = "手续费收入的币别与发票币别相同；利息收入的币别为人民币";
+            }
+            else
+            {
+                this.CommandStatus = ConstStr.MESSAGE.MAIN_DEFAULT;
+            }
+
             uc.Dock = DockStyle.Fill;
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);

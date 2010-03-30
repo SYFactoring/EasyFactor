@@ -666,6 +666,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnFlawResolve.Enabled = true;
             this.isDisputeCheckBox.Enabled = true;
             this.isFlawCheckBox.Enabled = true;
+
+            ControlUtil.SetComponetEditable(this.flawResolveUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(this.disputeResolveUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(this.disputeUserNameTextBox, false);
         }
 
         #endregion Methods

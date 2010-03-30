@@ -558,6 +558,7 @@
       <Column Name="FactorCode" Type="System.String" DbType="Char(7) NOT NULL" CanBeNull="false" />
       <Column Name="SignDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Factor_Agreement" Member="Factor" ThisKey="FactorCode" Type="Factor" IsForeignKey="true" />
     </Type>
   </Table>

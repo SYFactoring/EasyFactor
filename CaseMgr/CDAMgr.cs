@@ -208,7 +208,14 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.CheckUserName = App.Current.CurUser.Name;
             cda.CheckDate = DateTime.Now.Date;
 
-            context.SubmitChanges();
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         /// <summary>
@@ -237,6 +244,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             bool isDeleteOK = true;
             context.CDAs.DeleteOnSubmit(cda);
+
             try
             {
                 context.SubmitChanges();
@@ -421,7 +429,14 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.CheckUserName = App.Current.CurUser.Name;
             cda.CheckDate = DateTime.Now.Date;
 
-            context.SubmitChanges();
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         /// <summary>

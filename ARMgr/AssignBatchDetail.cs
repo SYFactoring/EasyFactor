@@ -181,6 +181,8 @@ namespace CMBC.EasyFactor.ARMgr
                 this.caseCodeTextBox.ReadOnly = true;
                 this.assignBatchNoTextBox.ReadOnly = true;
             }
+
+            ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
         }
 
         #endregion Methods

@@ -500,6 +500,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             Agreement agreement = (Agreement)this.factorAgreementBindingSource.DataSource;
+            agreement.CreateUserName = App.Current.CurUser.Name;
 
             if (agreement.AgreementID == 0)
             {
@@ -573,14 +574,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             {
                 return;
             }
+
             Factor factor = (Factor)factorBindingSource.DataSource;
+            factor.CreateUserName = App.Current.CurUser.Name;
+            
             if (this.opFactorType == OpFactorType.NEW_FACTOR)
             {
                 bool isAddOK = true;
                 try
                 {
                     factor.LastModifiedDate = DateTime.Now.Date;
-                    factor.CreateUserName = App.Current.CurUser.Name;
                     context.Factors.InsertOnSubmit(factor);
                     context.SubmitChanges();
                 }
@@ -649,6 +652,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             {
                 return;
             }
+
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null)
             {
@@ -662,6 +666,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             FactorCreditLine creditLine = (FactorCreditLine)this.factorCreditLineBindingSource.DataSource;
+            creditLine.CreateUserName = App.Current.CurUser.Name;
 
             DateTime today = DateTime.Now.Date;
             if (creditLine.PeriodBegin < today)
@@ -717,7 +722,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                             }
                         }
 
-                        context.SubmitChanges();
+                        try
+                        {
+                            context.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
 
                     this.bsCreditLines.DataSource = typeof(FactorCreditLine);
@@ -763,7 +775,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                             }
                         }
 
-                        context.SubmitChanges();
+                        try
+                        {
+                            context.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                 }
             }
@@ -946,6 +965,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
+
+            ControlUtil.SetComponetEditable(this.tbAgreementCreateUserName, false);
         }
 
         /// <summary>
@@ -1047,6 +1068,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 }
                 this.btnGroupSelect.Visible = false;
             }
+
+            ControlUtil.SetComponetEditable(this.tbCreateUserName, false);
         }
 
         /// <summary>
@@ -1119,6 +1142,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 this.unfreezerTextBox.ReadOnly = true;
                 this.unfreezeDateDateTimePicker.Enabled = false;
             }
+
+            ControlUtil.SetComponetEditable(this.tbCreditLineCreateUserName, false);
         }
 
         #endregion Methods

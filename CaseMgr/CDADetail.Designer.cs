@@ -226,6 +226,8 @@
             this.customValidator7 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.customValidator10 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customValidator9 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.customValidator6 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator4 = new DevComponents.DotNetBar.Validator.CustomValidator();
@@ -237,8 +239,6 @@
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customValidator9 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.customValidator10 = new DevComponents.DotNetBar.Validator.CustomValidator();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             sellerClientLabel = new DevComponents.DotNetBar.LabelX();
             factorCodeLabel = new DevComponents.DotNetBar.LabelX();
@@ -1836,6 +1836,7 @@
             this.createUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreateUserName", true));
             this.createUserNameTextBox.Location = new System.Drawing.Point(599, 49);
             this.createUserNameTextBox.Name = "createUserNameTextBox";
+            this.createUserNameTextBox.ReadOnly = true;
             this.createUserNameTextBox.Size = new System.Drawing.Size(100, 20);
             this.createUserNameTextBox.TabIndex = 16;
             // 
@@ -1948,6 +1949,18 @@
             this.requiredFieldValidator1.ErrorMessage = "必填";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
+            // customValidator10
+            // 
+            this.customValidator10.ErrorMessage = "必填";
+            this.customValidator10.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator10.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator10_ValidateValue);
+            // 
+            // customValidator9
+            // 
+            this.customValidator9.ErrorMessage = "必填";
+            this.customValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator9.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator9_ValidateValue);
+            // 
             // compareValidator2
             // 
             this.compareValidator2.ControlToCompare = this.financeLinePeriodBeginDateTimePicker;
@@ -2013,18 +2026,6 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
-            // 
-            // customValidator9
-            // 
-            this.customValidator9.ErrorMessage = "必填";
-            this.customValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator9.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator9_ValidateValue);
-            // 
-            // customValidator10
-            // 
-            this.customValidator10.ErrorMessage = "必填";
-            this.customValidator10.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator10.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator10_ValidateValue);
             // 
             // CDADetail
             // 

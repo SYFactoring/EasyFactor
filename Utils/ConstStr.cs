@@ -21,6 +21,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         public class MESSAGE
         {
+            public static string MAIN_DEFAULT = "欢迎使用中国民生银行保理运营系统";
             /// <summary>
             /// 警告
             /// </summary>

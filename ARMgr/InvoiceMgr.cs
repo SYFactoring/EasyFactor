@@ -675,7 +675,14 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.CaculateCommission(true);
                 }
 
-                context.SubmitChanges();
+                try
+                {
+                    context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 

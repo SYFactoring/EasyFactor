@@ -428,6 +428,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.createUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CreateUserName", true));
             this.createUserNameTextBox.Location = new System.Drawing.Point(271, 149);
             this.createUserNameTextBox.Name = "createUserNameTextBox";
+            this.createUserNameTextBox.ReadOnly = true;
             this.createUserNameTextBox.Size = new System.Drawing.Size(100, 20);
             this.createUserNameTextBox.TabIndex = 9;
             // 

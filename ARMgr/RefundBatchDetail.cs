@@ -230,6 +230,8 @@ namespace CMBC.EasyFactor.ARMgr
                 this.CaseCodeTextBox.ReadOnly = true;
                 this.refundBatchNoTextBox.ReadOnly = true;
             }
+
+            ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
         }
 
         #endregion Methods

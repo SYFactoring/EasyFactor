@@ -652,6 +652,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             Case curCase = (Case)this.caseBindingSource.DataSource;
+            curCase.CreateUserName = App.Current.CurUser.Name;
 
             if (curCase.CaseCode == null)
             {
@@ -714,7 +715,14 @@ namespace CMBC.EasyFactor.CaseMgr
                             cda.CDAStatus = "已失效";
                         }
 
-                        context.SubmitChanges();
+                        try
+                        {
+                            context.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
 
                     MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -752,6 +760,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)this.creditCoverNegBindingSource.DataSource;
+            creditCoverNeg.CreateUserName = App.Current.CurUser.Name;
 
             if (creditCoverNeg.NegoID == 0)
             {
@@ -1093,11 +1102,11 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 foreach (Control comp in this.groupPanelCreditCoverNeg.Controls)
                 {
-                    ControlUtil.SetComponetEditable(comp, false);
+                    ControlUtil.SetComponetEditable(comp, true);
                 }
             }
 
-            this.tbCreateUserName.ReadOnly = true;
+            ControlUtil.SetComponetEditable(this.tbCreditCoverCreateUserName, false);
         }
 
         #endregion Methods

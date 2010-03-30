@@ -12766,6 +12766,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private string _CreateUserName;
+		
 		private EntityRef<Factor> _Factor;
 		
     #region Extensibility Method Definitions
@@ -12780,6 +12782,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnSignDateChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
     #endregion
 		
 		public Agreement()
@@ -12868,6 +12872,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50)")]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
 				}
 			}
 		}

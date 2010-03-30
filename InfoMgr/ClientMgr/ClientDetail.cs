@@ -904,6 +904,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            creditLine.CreateUserName = App.Current.CurUser.Name;
 
             DateTime today = DateTime.Now.Date;
             if (creditLine.PeriodEnd < today)
@@ -938,7 +939,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 try
                 {
                     creditLine.Client = client;
-                    creditLine.CreateUserName = App.Current.CurUser.Name;
 
                     context.SubmitChanges();
                 }
@@ -962,7 +962,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             }
                         }
 
-                        context.SubmitChanges();
+                        try
+                        {
+                            context.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
 
                     this.bsCreditLines.DataSource = typeof(ClientCreditLine);
@@ -1009,7 +1016,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             }
                         }
 
-                        context.SubmitChanges();
+                        try
+                        {
+                            context.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                 }
             }
@@ -1045,6 +1059,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             Contract contract = (Contract)this.contractBindingSource.DataSource;
+            contract.CreateUserName = App.Current.CurUser.Name;
 
             if (this.opContractType == OpContractType.NEW_CONTRACT)
             {
@@ -1060,7 +1075,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 try
                 {
                     contract.Client = client;
-                    contract.CreateUserName = App.Current.CurUser.Name;
+
                     DateTime today = DateTime.Now.Date;
                     if (contract.ContractDueDate < today)
                     {
@@ -1094,7 +1109,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             }
                         }
 
-                        context.SubmitChanges();
+                        try
+                        {
+                            context.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
 
                     this.bsContracts.DataSource = typeof(Contract);
@@ -1150,7 +1172,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             }
                         }
 
-                        context.SubmitChanges();
+                        try
+                        {
+                            context.SubmitChanges();
+                        }
+                        catch (Exception e1)
+                        {
+                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                 }
             }
@@ -1186,6 +1215,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             ClientReview review = (ClientReview)this.reviewBindingSource.DataSource;
+            review.CreateUserName = App.Current.CurUser.Name;
 
             string financeType = string.Empty;
             foreach (string item in this.requestFinanceTypeCheckedListBox.CheckedItems)
@@ -1201,7 +1231,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 try
                 {
                     client.ClientReviews.Add(review);
-                    review.CreateUserName = App.Current.CurUser.Name;
+
                     context.ClientReviews.InsertOnSubmit(review);
                     context.SubmitChanges();
                 }
@@ -1559,6 +1589,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.btnGroupSelect.Visible = true;
                 this.clientEDICodeTextBox.ReadOnly = true;
             }
+
+            ControlUtil.SetComponetEditable(this.tbCreateUserName, false);
         }
 
         /// <summary>
@@ -1631,8 +1663,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.unfreezerTextBox.ReadOnly = true;
                 this.unfreezeDateDateTimePicker.Enabled = false;
             }
+
             this.tbGroupCreditLine.ReadOnly = true;
             this.tbGroupCreditLineCurr.ReadOnly = true;
+            ControlUtil.SetComponetEditable(this.tbCreditLineCreateUserName, false);
         }
 
         /// <summary>
@@ -1680,8 +1714,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.tbContractCode.ReadOnly = true;
             }
 
-            this.tbContractStatus.ReadOnly = true;
-            this.tbContractCreateUserName.ReadOnly = true;
+            //ControlUtil.SetComponetEditable(this.tbContractStatus, false);
+            ControlUtil.SetComponetEditable(this.tbContractCreateUserName, false);
         }
 
         /// <summary>
@@ -1728,6 +1762,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 this.reviewNoTextBox.ReadOnly = true;
             }
+
+            ControlUtil.SetComponetEditable(this.tbReviewCreateUserName, false);
         }
 
         #endregion Methods
