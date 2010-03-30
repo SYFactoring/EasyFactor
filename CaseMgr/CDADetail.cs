@@ -1016,31 +1016,32 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.tbCDACode.ReadOnly = true;
             this.tbHighestFinance.ReadOnly = true;
-            CDA cda = (CDA)this.CDABindingSource.DataSource;
-            if (cda.Case != null)
-            {
-                ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
-                if (buyerCreditLine == null)
-                {
-                    this.creditCoverCurrComboBox.Enabled = false;
-                    this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
-                    this.creditCoverPeriodEndDateTimePicker.Enabled = false;
-                    this.creditCoverPeriodBeginDateTimePicker.Value = default(DateTime);
-                    this.creditCoverPeriodEndDateTimePicker.Value = default(DateTime);
-                    this.creditCoverTextBox.Enabled = false;
-                }
 
-                ClientCreditLine sellerFinanceLine = cda.Case.SellerClient.FinanceCreditLine;
-                if (sellerFinanceLine == null)
-                {
-                    this.financeLineCurrComboBox.Enabled = false;
-                    this.financeLinePeriodBeginDateTimePicker.Enabled = false;
-                    this.financeLinePeriodEndDateTimePicker.Enabled = false;
-                    this.financeLinePeriodBeginDateTimePicker.Value = default(DateTime);
-                    this.financeLinePeriodEndDateTimePicker.Value = default(DateTime);
-                    this.financeLineTextBox.Enabled = false;
-                }
-            }
+            //CDA cda = (CDA)this.CDABindingSource.DataSource;
+            //if (cda.Case != null)
+            //{
+            //    ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
+            //    if (buyerCreditLine == null)
+            //    {
+            //        this.creditCoverCurrComboBox.Enabled = false;
+            //        this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
+            //        this.creditCoverPeriodEndDateTimePicker.Enabled = false;
+            //        this.creditCoverPeriodBeginDateTimePicker.Value = default(DateTime);
+            //        this.creditCoverPeriodEndDateTimePicker.Value = default(DateTime);
+            //        this.creditCoverTextBox.Enabled = false;
+            //    }
+
+            //    ClientCreditLine sellerFinanceLine = cda.Case.SellerClient.FinanceCreditLine;
+            //    if (sellerFinanceLine == null)
+            //    {
+            //        this.financeLineCurrComboBox.Enabled = false;
+            //        this.financeLinePeriodBeginDateTimePicker.Enabled = false;
+            //        this.financeLinePeriodEndDateTimePicker.Enabled = false;
+            //        this.financeLinePeriodBeginDateTimePicker.Value = default(DateTime);
+            //        this.financeLinePeriodEndDateTimePicker.Value = default(DateTime);
+            //        this.financeLineTextBox.Enabled = false;
+            //    }
+            //}
         }
 
         #endregion Methods
