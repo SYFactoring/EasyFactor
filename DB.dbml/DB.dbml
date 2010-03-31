@@ -518,12 +518,12 @@
       <Column Name="RequestFinancePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="IsLocal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsInternational" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsSeller" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsBuyer" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsRecoarse" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsNonRecoarse" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsLocal" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
+      <Column Name="IsInternational" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
+      <Column Name="IsSeller" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
+      <Column Name="IsBuyer" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
+      <Column Name="IsRecoarse" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
+      <Column Name="IsNonRecoarse" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
       <Column Name="IsNotice" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Client_ClientReview" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>

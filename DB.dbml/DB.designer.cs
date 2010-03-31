@@ -11715,17 +11715,17 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
-		private System.Nullable<bool> _IsLocal;
+		private bool _IsLocal;
 		
-		private System.Nullable<bool> _IsInternational;
+		private bool _IsInternational;
 		
-		private System.Nullable<bool> _IsSeller;
+		private bool _IsSeller;
 		
-		private System.Nullable<bool> _IsBuyer;
+		private bool _IsBuyer;
 		
-		private System.Nullable<bool> _IsRecoarse;
+		private bool _IsRecoarse;
 		
-		private System.Nullable<bool> _IsNonRecoarse;
+		private bool _IsNonRecoarse;
 		
 		private string _IsNotice;
 		
@@ -11759,17 +11759,17 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
-    partial void OnIsLocalChanging(System.Nullable<bool> value);
+    partial void OnIsLocalChanging(bool value);
     partial void OnIsLocalChanged();
-    partial void OnIsInternationalChanging(System.Nullable<bool> value);
+    partial void OnIsInternationalChanging(bool value);
     partial void OnIsInternationalChanged();
-    partial void OnIsSellerChanging(System.Nullable<bool> value);
+    partial void OnIsSellerChanging(bool value);
     partial void OnIsSellerChanged();
-    partial void OnIsBuyerChanging(System.Nullable<bool> value);
+    partial void OnIsBuyerChanging(bool value);
     partial void OnIsBuyerChanged();
-    partial void OnIsRecoarseChanging(System.Nullable<bool> value);
+    partial void OnIsRecoarseChanging(bool value);
     partial void OnIsRecoarseChanged();
-    partial void OnIsNonRecoarseChanging(System.Nullable<bool> value);
+    partial void OnIsNonRecoarseChanging(bool value);
     partial void OnIsNonRecoarseChanged();
     partial void OnIsNoticeChanging(string value);
     partial void OnIsNoticeChanged();
@@ -12026,7 +12026,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_IsLocal", DbType="Bit")]
-		public System.Nullable<bool> IsLocal
+		public bool IsLocal
 		{
 			get
 			{
@@ -12046,7 +12046,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_IsInternational", DbType="Bit")]
-		public System.Nullable<bool> IsInternational
+		public bool IsInternational
 		{
 			get
 			{
@@ -12066,7 +12066,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_IsSeller", DbType="Bit")]
-		public System.Nullable<bool> IsSeller
+		public bool IsSeller
 		{
 			get
 			{
@@ -12086,7 +12086,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_IsBuyer", DbType="Bit")]
-		public System.Nullable<bool> IsBuyer
+		public bool IsBuyer
 		{
 			get
 			{
@@ -12106,7 +12106,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_IsRecoarse", DbType="Bit")]
-		public System.Nullable<bool> IsRecoarse
+		public bool IsRecoarse
 		{
 			get
 			{
@@ -12126,7 +12126,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_IsNonRecoarse", DbType="Bit")]
-		public System.Nullable<bool> IsNonRecoarse
+		public bool IsNonRecoarse
 		{
 			get
 			{

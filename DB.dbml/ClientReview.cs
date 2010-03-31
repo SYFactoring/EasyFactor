@@ -26,12 +26,12 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 List<string> result = new List<string>(2);
-                if (this.IsRecoarse.GetValueOrDefault())
+                if (this.IsRecoarse)
                 {
                     result.Add("有追");
                 }
 
-                if (this.IsNonRecoarse.GetValueOrDefault())
+                if (this.IsNonRecoarse)
                 {
                     result.Add("无追");
                 }
@@ -48,12 +48,12 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 List<string> result = new List<string>(2);
-                if (this.IsSeller.GetValueOrDefault())
+                if (this.IsSeller)
                 {
                     result.Add("卖方");
                 }
 
-                if (this.IsBuyer.GetValueOrDefault())
+                if (this.IsBuyer)
                 {
                     result.Add("买方");
                 }
@@ -70,12 +70,12 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 List<string> result = new List<string>(2);
-                if (this.IsLocal.GetValueOrDefault())
+                if (this.IsLocal)
                 {
                     result.Add("国内");
                 }
 
-                if (this.IsInternational.GetValueOrDefault())
+                if (this.IsInternational)
                 {
                     result.Add("国际");
                 }
