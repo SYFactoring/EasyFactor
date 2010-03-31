@@ -569,21 +569,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             Factor factor = cda.Case.Factor;
-            //switch (cda.Case.TransactionType)
-            //{
-            //    case "国内卖方保理":
-            //    case "出口保理":
-            //    case "国内信保保理":
-            //    case "国际信保保理":
-            //    case "租赁保理":
-            //        factor = cda.Case.SellerFactor;
-            //        break;
-            //    case "国内买方保理":
-            //    case "进口保理":
-            //        factor = cda.Case.BuyerFactor;
-            //        break;
-            //    default: break;
-            //}
 
             if (factor != null)
             {
@@ -629,27 +614,6 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 this.contractCodeTextBox.Text = contract.ContractCode;
             }
-
-            //switch (cda.Case.TransactionType)
-            //{
-            //    case "国内卖方保理":
-            //    case "出口保理":
-            //    case "国内信保保理":
-            //    case "国际信保保理":
-            //    case "租赁保理":
-            //        this.factorCodeTextBox.Text = cda.Case.SellerFactor.FactorCode;
-            //        this.companyNameCNTextBox.Text = cda.Case.SellerFactor.CompanyNameCN;
-            //        this.companyNameENTextBox.Text = cda.Case.SellerFactor.CompanyNameEN;
-            //        break;
-            //    case "国内买方保理":
-            //    case "进口保理":
-            //        this.factorCodeTextBox.Text = cda.Case.BuyerFactor.FactorCode;
-            //        this.companyNameCNTextBox.Text = cda.Case.BuyerFactor.CompanyNameCN;
-            //        this.companyNameENTextBox.Text = cda.Case.BuyerFactor.CompanyNameEN;
-
-            //        break;
-            //    default: break;
-            //}
 
             Factor factor = cda.Case.Factor;
             this.factorCodeTextBox.Text = factor.FactorCode;
@@ -1040,31 +1004,31 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbHighestFinance.ReadOnly = true;
             ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
 
-            //CDA cda = (CDA)this.CDABindingSource.DataSource;
-            //if (cda.Case != null)
-            //{
-            //    ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
-            //    if (buyerCreditLine == null)
-            //    {
-            //        this.creditCoverCurrComboBox.Enabled = false;
-            //        this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
-            //        this.creditCoverPeriodEndDateTimePicker.Enabled = false;
-            //        this.creditCoverPeriodBeginDateTimePicker.Value = default(DateTime);
-            //        this.creditCoverPeriodEndDateTimePicker.Value = default(DateTime);
-            //        this.creditCoverTextBox.Enabled = false;
-            //    }
+            CDA cda = (CDA)this.CDABindingSource.DataSource;
+            if (cda.Case != null)
+            {
+                ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
+                if (buyerCreditLine == null)
+                {
+                    this.creditCoverCurrComboBox.Enabled = false;
+                    this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
+                    this.creditCoverPeriodEndDateTimePicker.Enabled = false;
+                    this.creditCoverPeriodBeginDateTimePicker.Value = default(DateTime);
+                    this.creditCoverPeriodEndDateTimePicker.Value = default(DateTime);
+                    this.creditCoverTextBox.Enabled = false;
+                }
 
-            //    ClientCreditLine sellerFinanceLine = cda.Case.SellerClient.FinanceCreditLine;
-            //    if (sellerFinanceLine == null)
-            //    {
-            //        this.financeLineCurrComboBox.Enabled = false;
-            //        this.financeLinePeriodBeginDateTimePicker.Enabled = false;
-            //        this.financeLinePeriodEndDateTimePicker.Enabled = false;
-            //        this.financeLinePeriodBeginDateTimePicker.Value = default(DateTime);
-            //        this.financeLinePeriodEndDateTimePicker.Value = default(DateTime);
-            //        this.financeLineTextBox.Enabled = false;
-            //    }
-            //}
+                ClientCreditLine sellerFinanceLine = cda.Case.SellerClient.FinanceCreditLine;
+                if (sellerFinanceLine == null)
+                {
+                    this.financeLineCurrComboBox.Enabled = false;
+                    this.financeLinePeriodBeginDateTimePicker.Enabled = false;
+                    this.financeLinePeriodEndDateTimePicker.Enabled = false;
+                    this.financeLinePeriodBeginDateTimePicker.Value = default(DateTime);
+                    this.financeLinePeriodEndDateTimePicker.Value = default(DateTime);
+                    this.financeLineTextBox.Enabled = false;
+                }
+            }
         }
 
         #endregion Methods
