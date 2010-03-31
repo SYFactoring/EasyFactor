@@ -599,11 +599,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "保理费率";
                 if (isZero)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:0.0%}，由买方承担", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
+                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:0.000%}，由买方承担", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:0.0%}", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
+                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:0.000%}", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
                 }
 
                 sheet.Cells[row, 1] = "单据处理费";
@@ -725,7 +725,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     string comment = line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5;
                     if (!String.IsNullOrEmpty(selectedCDA.Comment))
                     {
-                        comment+="\n\n（6）"+selectedCDA.Comment;
+                        comment += "\n\n（6）" + selectedCDA.Comment;
                     }
 
                     sheet.Cells[22, 1] = comment;
@@ -754,7 +754,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[29, 1], sheet.Cells[29, 2]).MergeCells = true;
                 sheet.Cells[29, 1] = "客户经理                                                保理部门主管";
                 sheet.get_Range(sheet.Cells[30, 1], sheet.Cells[30, 2]).MergeCells = true;
-                sheet.Cells[30, 1] = "日期：     年   月   日                             日期：     年   月   日";
+                sheet.Cells[30, 1] = String.Format("日期：     年   月   日                             日期：{0:yyyy}年 {0:MM}月 {0:dd}日", selectedCDA.CDASignDate);
 
                 sheet.Cells[32, 1] = "同意并签回";
 
