@@ -529,7 +529,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.PageSetup.FitToPagesTall = false;
 
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
+                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
                 Client seller = batchGroup.Key;
                 sheet.Cells[2, 1] = String.Format("致： {0}", seller.ToString());
