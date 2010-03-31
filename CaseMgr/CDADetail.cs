@@ -1007,8 +1007,8 @@ namespace CMBC.EasyFactor.CaseMgr
             CDA cda = (CDA)this.CDABindingSource.DataSource;
             if (cda.Case != null)
             {
-                ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
-                if (buyerCreditLine == null)
+                ClientCreditLine creditLine = cda.Case.BuyerClient.AssignCreditLine;
+                if (creditLine == null)
                 {
                     this.creditCoverCurrComboBox.Enabled = false;
                     this.creditCoverPeriodBeginDateTimePicker.Enabled = false;
@@ -1018,8 +1018,17 @@ namespace CMBC.EasyFactor.CaseMgr
                     this.creditCoverTextBox.Enabled = false;
                 }
 
-                ClientCreditLine sellerFinanceLine = cda.Case.SellerClient.FinanceCreditLine;
-                if (sellerFinanceLine == null)
+                ClientCreditLine financeLine = null;
+                if (cda.Case.TransactionType == "国内买方保理" || cda.Case.TransactionType == "进口保理")
+                {
+                    financeLine = cda.Case.BuyerClient.FinanceCreditLine;
+                }
+                else
+                {
+                    financeLine = cda.Case.SellerClient.FinanceCreditLine;
+                }
+
+                if (financeLine == null)
                 {
                     this.financeLineCurrComboBox.Enabled = false;
                     this.financeLinePeriodBeginDateTimePicker.Enabled = false;
