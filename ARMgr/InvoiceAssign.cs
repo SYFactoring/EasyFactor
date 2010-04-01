@@ -365,7 +365,7 @@ namespace CMBC.EasyFactor.ARMgr
                     //}
                     //else
                     //{
-                        //selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.EFPrice;
+                    //selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.EFPrice;
                     //}
 
                     selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.Price;
@@ -706,7 +706,6 @@ namespace CMBC.EasyFactor.ARMgr
         private bool ValidateBatch()
         {
             CDA cda = this._case.ActiveCDA;
-
             bool isCommissionAlert = true;
 
             foreach (Invoice invoice in this.invoiceBindingSource.List)
@@ -722,18 +721,6 @@ namespace CMBC.EasyFactor.ARMgr
                     MessageBoxEx.Show("票面金额必填", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
-
-                //if (invoice.InvoiceDate == default(DateTime))
-                //{
-                //    MessageBoxEx.Show("发票日必填", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //    return false;
-                //}
-
-                //if (invoice.DueDate == default(DateTime))
-                //{
-                //    MessageBoxEx.Show("到期日必填", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //    return false;
-                //}
 
                 if (invoice.AssignAmount > invoice.InvoiceAmount)
                 {
@@ -759,6 +746,15 @@ namespace CMBC.EasyFactor.ARMgr
                     if (invoice.InvoiceDate != null && assignDate > invoice.InvoiceDate.Value.AddDays(this._case.NetPaymentTerm.Value))
                     {
                         MessageBoxEx.Show("转让日不能晚于发票日+付款期限: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
+                }
+
+                if (invoice.InvoiceDate != null && cda.CreditCoverPeriodEnd != null)
+                {
+                    if (invoice.InvoiceDate > cda.CreditCoverPeriodEnd)
+                    {
+                        MessageBoxEx.Show("发票日不能晚于额度通知书融资到期日: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }

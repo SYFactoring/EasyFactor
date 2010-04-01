@@ -582,20 +582,6 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ImportInvoiceNew(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
-            {
-                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES_NEW);
-                importForm.Show();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ImportInvoices(object sender, EventArgs e)
         {
             if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))

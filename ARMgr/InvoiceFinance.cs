@@ -613,6 +613,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            if (activeCDA.FinanceCreditLine.PeriodEnd < DateTime.Today)
+            {
+                MessageBoxEx.Show("融资额度已到期，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (!TypeUtil.GreaterZero(activeCDA.FinanceCreditLine.CreditLine - this._case.TotalFinanceOutstanding))
             {
                 MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);

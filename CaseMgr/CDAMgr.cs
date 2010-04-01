@@ -589,11 +589,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "预付比例";
                 if (isZero)
                 {
-                    sheet.Cells[row++, 2] = String.Format("单笔融资不超过发票金额的 {0:0%}", selectedCDA.FinanceProportion);
+                    sheet.Cells[row++, 2] = "无";
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = "无";
+                    sheet.Cells[row++, 2] = String.Format("单笔融资不超过发票金额的 {0:0%}", selectedCDA.FinanceProportion);                   
                 }
 
                 sheet.Cells[row, 1] = "保理费率";
