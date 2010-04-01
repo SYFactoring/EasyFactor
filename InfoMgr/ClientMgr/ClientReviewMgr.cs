@@ -65,6 +65,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientReviews.AutoGenerateColumns = false;
             ControlUtil.SetDoubleBuffered(this.dgvClientReviews);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
+
+            List<Department> deptsList = Department.AllDepartments(new DBDataContext());
+            deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
+            this.cbOwnerDepts.DataSource = deptsList;
+            this.cbOwnerDepts.DisplayMembers = "DepartmentName";
+            this.cbOwnerDepts.ValueMember = "DepartmentCode";
+            this.cbOwnerDepts.GroupingMembers = "Domain";
         }
 
         #endregion Constructors
@@ -236,7 +243,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             var queryResult = context.ClientReviews.Where(c =>
                 c.ReviewNo.Contains(clientReviewNo)
-             && (c.Client.BranchCode==null?string.Empty:c.Client.Department.Location).Contains(location)
+             && ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.Client.BranchCode == ((string)this.cbOwnerDepts.SelectedValue))
+             && (c.Client.BranchCode == null ? string.Empty : c.Client.Department.Location).Contains(location)
              && (beginDate != this.diBegin.MinDate ? c.ReviewDate >= beginDate : true)
              && (endDate != this.diEnd.MinDate ? c.ReviewDate <= endDate : true)
              && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName)));
