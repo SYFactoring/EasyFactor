@@ -66,12 +66,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ControlUtil.SetDoubleBuffered(this.dgvClientReviews);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
-            List<Department> deptsList = Department.AllDepartments(new DBDataContext());
-            deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
-            this.cbOwnerDepts.DataSource = deptsList;
-            this.cbOwnerDepts.DisplayMembers = "DepartmentName";
-            this.cbOwnerDepts.ValueMember = "DepartmentCode";
-            this.cbOwnerDepts.GroupingMembers = "Domain";
+            List<string> domainList = Department.AllDomains();
+            domainList.Insert(0, "全部");
+            this.cbDomains.DataSource = domainList;
         }
 
         #endregion Constructors
@@ -235,6 +232,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 location = string.Empty;
             }
+            string domain = this.cbDomains.Text;
+            if (domain == "全部")
+            {
+                domain = string.Empty;
+            }
 
             DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
             DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
@@ -243,8 +245,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             var queryResult = context.ClientReviews.Where(c =>
                 c.ReviewNo.Contains(clientReviewNo)
-             && ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.Client.BranchCode == ((string)this.cbOwnerDepts.SelectedValue))
              && (c.Client.BranchCode == null ? string.Empty : c.Client.Department.Location).Contains(location)
+             && (c.Client.BranchCode == null ? string.Empty : c.Client.Department.Domain).Contains(domain)
              && (beginDate != this.diBegin.MinDate ? c.ReviewDate >= beginDate : true)
              && (endDate != this.diEnd.MinDate ? c.ReviewDate <= endDate : true)
              && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName)));
