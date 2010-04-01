@@ -516,9 +516,9 @@ namespace CMBC.EasyFactor.ARMgr
             invoice.DisputeReason = disputeReason;
 
             bool isUpdateOK = true;
-            if (invoice.InvoiceAssignBatch.CheckStatus != "已复核")
+            if (invoice.InvoiceAssignBatch.CheckStatus != ConstStr.BATCH.CHECK)
             {
-                invoice.InvoiceAssignBatch.CheckStatus = "未复核";
+                invoice.InvoiceAssignBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
             }
 
             try
@@ -618,7 +618,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
 
-                if (invoice.InvoiceAssignBatch.CheckStatus == "已复核")
+                if (invoice.InvoiceAssignBatch.CheckStatus == ConstStr.BATCH.CHECK)
                 {
                     this.invoiceAmountTextBox.ReadOnly = true;
                     this.invoiceDateTextBox.Enabled = false;

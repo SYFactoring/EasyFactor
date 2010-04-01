@@ -527,7 +527,7 @@ namespace CMBC.EasyFactor.ARMgr
             List<InvoiceRefundLog> result = new List<InvoiceRefundLog>();
             foreach (InvoiceFinanceLog financeLog in queryResult)
             {
-                if (financeLog.InvoiceFinanceBatch.CheckStatus == "已复核")
+                if (financeLog.InvoiceFinanceBatch.CheckStatus == ConstStr.BATCH.CHECK)
                 {
                     InvoiceRefundLog refundLog = new InvoiceRefundLog(financeLog);
                     result.Add(refundLog);

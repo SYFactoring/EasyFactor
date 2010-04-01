@@ -28,15 +28,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpInvoiceType opInvoiceType;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context
-        {
-            get;
-            set;
-        }
-
         #endregion Fields
 
         #region Enums (1)
@@ -94,7 +85,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Enums
 
-        #region Constructors (2)
+        #region Constructors (3)
 
         public InvoiceMgr(OpInvoiceType opInvoiceType, int days)
             : this(opInvoiceType)
@@ -197,7 +188,16 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Constructors
 
-        #region Properties (2)
+        #region Properties (3)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets owner form
@@ -219,9 +219,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion Properties
 
-        #region Methods (17)
+        #region Methods (18)
 
-        // Private Methods (17) 
+        // Private Methods (18) 
 
         /// <summary>
         /// 
@@ -231,6 +231,46 @@ namespace CMBC.EasyFactor.ARMgr
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DetailInvoice(sender, e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComputeCommission(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                if (this.dgvInvoices.CurrentCell == null)
+                {
+                    return;
+                }
+
+                List<Invoice> selectedInvoices = new List<Invoice>();
+                foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
+                {
+                    Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
+                    if (!selectedInvoices.Contains(invoice))
+                    {
+                        selectedInvoices.Add(invoice);
+                    }
+                }
+
+                foreach (Invoice invoice in selectedInvoices)
+                {
+                    invoice.CaculateCommission(true);
+                }
+
+                try
+                {
+                    context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
 
         /// <summary>
@@ -264,10 +304,44 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (MessageBoxEx.Show("是否打算删除此" + selectedInvoices.Count + "条发票", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+
                 try
                 {
                     foreach (Invoice invoice in selectedInvoices)
                     {
+                        if (invoice.InvoiceAssignBatch.CheckStatus == ConstStr.BATCH.CHECK)
+                        {
+                            MessageBoxEx.Show("转让批次已复核，不能删除，发票号：" + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+
+                        foreach (InvoiceFinanceBatch batch in invoice.InvoiceFinanceBatches)
+                        {
+                            if (batch.CheckStatus == ConstStr.BATCH.CHECK)
+                            {
+                                MessageBoxEx.Show("融资批次已复核，不能删除，发票号：" + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
+                        }
+
+                        foreach (InvoicePaymentBatch batch in invoice.InvoicePaymentBatches)
+                        {
+                            if (batch.CheckStatus == ConstStr.BATCH.CHECK)
+                            {
+                                MessageBoxEx.Show("付款批次已复核，不能删除，发票号：" + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
+                        }
+
+                        foreach (InvoiceRefundBatch batch in invoice.InvoiceRefundBatches)
+                        {
+                            if (batch.CheckStatus == ConstStr.BATCH.CHECK)
+                            {
+                                MessageBoxEx.Show("还款批次已复核，不能删除，发票号：" + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
+                        }
+
                         foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
                         {
                             context.InvoiceRefundLogs.DeleteAllOnSubmit(financeLog.InvoiceRefundLogs);
@@ -644,47 +718,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.menuItemInvoiceFlaw.Enabled = false;
             }
         }
+
         #endregion Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ComputeCommission(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
-            {
-                if (this.dgvInvoices.CurrentCell == null)
-                {
-                    return;
-                }
-
-                List<Invoice> selectedInvoices = new List<Invoice>();
-                foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
-                {
-                    Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
-                    if (!selectedInvoices.Contains(invoice))
-                    {
-                        selectedInvoices.Add(invoice);
-                    }
-                }
-
-                foreach (Invoice invoice in selectedInvoices)
-                {
-                    invoice.CaculateCommission(true);
-                }
-
-                try
-                {
-                    context.SubmitChanges();
-                }
-                catch (Exception e1)
-                {
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-        }
-
     }
 }

@@ -718,11 +718,11 @@
             // 
             // 
             cDAStatusLabel.BackgroundStyle.Class = "";
-            cDAStatusLabel.Location = new System.Drawing.Point(25, 3);
+            cDAStatusLabel.Location = new System.Drawing.Point(27, 3);
             cDAStatusLabel.Name = "cDAStatusLabel";
-            cDAStatusLabel.Size = new System.Drawing.Size(56, 15);
+            cDAStatusLabel.Size = new System.Drawing.Size(58, 16);
             cDAStatusLabel.TabIndex = 2;
-            cDAStatusLabel.Text = "<font color=\'red\'>*</font>CDA状态:";
+            cDAStatusLabel.Text = "CDA状态:";
             // 
             // noticeMethodLabel
             // 

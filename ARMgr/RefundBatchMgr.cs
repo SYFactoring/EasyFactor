@@ -189,7 +189,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            batch.CheckStatus = "已复核";
+            batch.CheckStatus = ConstStr.BATCH.CHECK;
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
@@ -223,6 +223,12 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
             if (MessageBoxEx.Show("是否打算删除此" + selectedBatch.BatchCount + "条还款记录", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
+                return;
+            }
+
+            if (selectedBatch.CheckStatus == ConstStr.BATCH.CHECK)
+            {
+                MessageBoxEx.Show("不能删除已复核批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

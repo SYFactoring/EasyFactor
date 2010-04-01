@@ -721,7 +721,7 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.FinanceProportion = 0.8;
             cda.IsNotice = "明保理";
             cda.IsRecoarse = false;
-            cda.CDAStatus = "未审核";
+            cda.CDAStatus = ConstStr.CDA.UNCHECK;
             cda.IsCreditCoverRevolving = true;
             cda.AssignType = "全部";
             cda.Case = curCase;
@@ -795,6 +795,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 try
                 {
+                    cda.CDAStatus = ConstStr.CDA.UNCHECK;
                     context.CDAs.InsertOnSubmit(cda);
                     context.SubmitChanges();
                 }
@@ -1000,12 +1001,13 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
             }
 
-            this.tbCDACode.ReadOnly = true;
-            this.tbHighestFinance.ReadOnly = true;
+            ControlUtil.SetComponetEditable(this.tbCDACode, false);
+            ControlUtil.SetComponetEditable(this.tbHighestFinance, false);
             ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(this.cDAStatusComboBox, false);
 
             CDA cda = (CDA)this.CDABindingSource.DataSource;
-            if (cda.Case != null)
+            if (this.opCDAType != OpCDAType.DETAIL_CDA && cda.Case != null)
             {
                 ClientCreditLine creditLine = cda.Case.BuyerClient.AssignCreditLine;
                 if (creditLine == null)

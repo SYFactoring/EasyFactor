@@ -24,7 +24,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Fields
 
-        #region Properties (15)
+        #region Properties (18)
 
         /// <summary>
         /// Gets
@@ -180,6 +180,69 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public List<InvoiceFinanceBatch> InvoiceFinanceBatches
+        {
+            get
+            {
+                List<InvoiceFinanceBatch> result = new List<InvoiceFinanceBatch>();
+                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                {
+                    if (!result.Contains(log.InvoiceFinanceBatch))
+                    {
+                        result.Add(log.InvoiceFinanceBatch);
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<InvoicePaymentBatch> InvoicePaymentBatches
+        {
+            get
+            {
+                List<InvoicePaymentBatch> result = new List<InvoicePaymentBatch>();
+                foreach (InvoicePaymentLog log in this.InvoicePaymentLogs)
+                {
+                    if (!result.Contains(log.InvoicePaymentBatch))
+                    {
+                        result.Add(log.InvoicePaymentBatch);
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<InvoiceRefundBatch> InvoiceRefundBatches
+        {
+            get
+            {
+                List<InvoiceRefundBatch> result = new List<InvoiceRefundBatch>();
+                foreach (InvoiceFinanceLog flog in this.InvoiceFinanceLogs)
+                {
+                    foreach (InvoiceRefundLog rlog in flog.InvoiceRefundLogs)
+                    {
+                        if (!result.Contains(rlog.InvoiceRefundBatch))
+                        {
+                            result.Add(rlog.InvoiceRefundBatch);
+                        }
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public double NetInterest
         {
             get
@@ -310,7 +373,7 @@ namespace CMBC.EasyFactor.DB.dbml
                         //}
                         //else
                         //{
-                            Commission = AssignAmount * cda.Price.GetValueOrDefault();
+                        Commission = AssignAmount * cda.Price.GetValueOrDefault();
                         //}
                     }
                 }

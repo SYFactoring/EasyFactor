@@ -205,7 +205,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            batch.CheckStatus = "已复核";
+            batch.CheckStatus = ConstStr.BATCH.CHECK;
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
@@ -240,6 +240,12 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             if (MessageBoxEx.Show("是否打算删除此融资批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
+                return;
+            }
+
+            if (selectedBatch.CheckStatus == ConstStr.BATCH.CHECK)
+            {
+                MessageBoxEx.Show("不能删除已复核批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -337,7 +343,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     selectedBatches.Add(batch);
 
-                    if (batch.CheckStatus != "已复核")
+                    if (batch.CheckStatus != ConstStr.BATCH.CHECK)
                     {
                         MessageBoxEx.Show("该批次状态不属于已审核，不能生成报表，批次号： " + batch.FinanceBatchNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return null;

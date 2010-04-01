@@ -2403,7 +2403,7 @@ namespace CMBC.EasyFactor.Utils
                                 assignBatch = new InvoiceAssignBatch();
                                 assignBatch.AssignDate = assignDate;
                                 assignBatch.CreateUserName = createUserName;
-                                assignBatch.CheckStatus = "已复核";
+                                assignBatch.CheckStatus = ConstStr.BATCH.CHECK;
                                 assignBatch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(assignBatch.AssignDate, assignBatches);
                                 assignBatch.Case = curCase;
                                 assignBatches.Add(assignBatch);
@@ -2434,7 +2434,7 @@ namespace CMBC.EasyFactor.Utils
                                     financeBatch.FinancePeriodBegin = financeDate.Value;
                                     financeBatch.FinancePeriodEnd = financeDueDate.Value;
                                     financeBatch.CreateUserName = createUserName;
-                                    financeBatch.CheckStatus = "已复核";
+                                    financeBatch.CheckStatus = ConstStr.BATCH.CHECK;
                                     financeBatch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, financeBatches);
                                     financeBatch.Case = curCase;
                                     financeBatches.Add(financeBatch);
@@ -2474,7 +2474,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatch = new InvoicePaymentBatch();
                                     paymentBatch.PaymentType = paymentType;
                                     paymentBatch.PaymentDate = paymentDate.Value;
-                                    paymentBatch.CheckStatus = "已复核";
+                                    paymentBatch.CheckStatus = ConstStr.BATCH.CHECK;
                                     paymentBatch.CreateUserName = createUserName;
                                     paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentBatch.PaymentDate, paymentBatches);
                                     paymentBatch.Case = curCase;
@@ -2515,7 +2515,7 @@ namespace CMBC.EasyFactor.Utils
                                     refundBatch.RefundType = refundType;
                                     refundBatch.RefundDate = refundDate.Value;
                                     refundBatch.CreateUserName = createUserName;
-                                    refundBatch.CheckStatus = "已复核";
+                                    refundBatch.CheckStatus = ConstStr.BATCH.CHECK;
                                     refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(refundBatch.RefundDate, refundBatches);
                                     refundBatch.Case = curCase;
                                     refundBatches.Add(refundBatch);
@@ -2576,7 +2576,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatch.PaymentDate = paymentDate.Value;
                                     paymentBatch.CreateUserName = createUserName;
                                     paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentBatch.PaymentDate, paymentBatches);
-                                    paymentBatch.CheckStatus = "已复核";
+                                    paymentBatch.CheckStatus = ConstStr.BATCH.CHECK;
                                     paymentBatch.Case = curCase;
                                     paymentBatches.Add(paymentBatch);
                                 }
