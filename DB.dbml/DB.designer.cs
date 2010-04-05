@@ -398,6 +398,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private bool _IsPool;
+		
 		private EntitySet<CDA> _CDAs;
 		
 		private EntitySet<CreditCoverNegotiation> _CreditCoverNegotiations;
@@ -458,6 +460,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnNetPaymentTermChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnIsPoolChanging(bool value);
+    partial void OnIsPoolChanged();
     #endregion
 		
 		public Case()
@@ -817,6 +821,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsPool", DbType="Bit")]
+		public bool IsPool
+		{
+			get
+			{
+				return this._IsPool;
+			}
+			set
+			{
+				if ((this._IsPool != value))
+				{
+					this.OnIsPoolChanging(value);
+					this.SendPropertyChanging();
+					this._IsPool = value;
+					this.SendPropertyChanged("IsPool");
+					this.OnIsPoolChanged();
 				}
 			}
 		}

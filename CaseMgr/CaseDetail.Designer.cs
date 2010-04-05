@@ -194,19 +194,49 @@ namespace CMBC.EasyFactor.CaseMgr
             DevComponents.DotNetBar.LabelX lblPriceDate;
             DevComponents.DotNetBar.LabelX lblNetPaymentTerm;
             DevComponents.DotNetBar.LabelX lblDueDate;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaseDetail));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
+            this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
+            this.btnCaseUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.btnCaseSave = new DevComponents.DotNetBar.ButtonX();
+            this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbReviews = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.tbComment = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbPaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbOPName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cbCaseTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.tbCaseFactorNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cbCaseCoDepts = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbCaseOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
+            this.cbCaseOpType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.tbCaseBuyerNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbCaseSellerNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbCaseCreateUser = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.diCaseAppDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.cbCaseInvoiceCurrency = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.btnCaseBuyerSelect = new DevComponents.DotNetBar.ButtonX();
+            this.btnCaseSellerSelect = new DevComponents.DotNetBar.ButtonX();
+            this.btnCaseFactorSelect = new DevComponents.DotNetBar.ButtonX();
+            this.tbCaseBuyerNameCN = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbCaseBuyerNo = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbCaseFactorNameCN = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbCaseFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbCaseSellerNameCN = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbCaseSellerNo = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tabItemCase = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelCreditCoverNeg = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvCreditCoverNegs = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colNegoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -224,7 +254,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupPanelCreditCoverNeg = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.diDueDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.creditCoverNegBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.diPriceDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.tbNetPaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnCreditCoverNegDelete = new DevComponents.DotNetBar.ButtonX();
@@ -288,37 +317,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.btnCDANew = new DevComponents.DotNetBar.ButtonX();
             this.btnCDARefresh = new DevComponents.DotNetBar.ButtonX();
             this.tabItemCDA = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelCase = new DevComponents.DotNetBar.TabControlPanel();
-            this.btnCaseUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.btnCaseSave = new DevComponents.DotNetBar.ButtonX();
-            this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.cbReviews = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.caseBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.tbComment = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbPaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbOPName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cbCaseTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.tbCaseFactorNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cbCaseCoDepts = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.cbCaseOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
-            this.cbCaseOpType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.tbCaseBuyerNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCaseSellerNameEN = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCaseCreateUser = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.diCaseAppDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.cbCaseInvoiceCurrency = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.btnCaseBuyerSelect = new DevComponents.DotNetBar.ButtonX();
-            this.btnCaseSellerSelect = new DevComponents.DotNetBar.ButtonX();
-            this.btnCaseFactorSelect = new DevComponents.DotNetBar.ButtonX();
-            this.tbCaseBuyerNameCN = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCaseBuyerNo = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCaseFactorNameCN = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCaseFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCaseSellerNameCN = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCaseSellerNo = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tabItemCase = new DevComponents.DotNetBar.TabItem(this.components);
             this.caseValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
@@ -390,6 +388,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dataGridViewTextBoxColumn51 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn52 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn53 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbIsPool = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.caseBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.creditCoverNegBindingSource = new System.Windows.Forms.BindingSource(this.components);
             requestAmountLabel = new DevComponents.DotNetBar.LabelX();
             replyAmountLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
@@ -419,22 +420,22 @@ namespace CMBC.EasyFactor.CaseMgr
             lblDueDate = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
+            this.tabPanelCase.SuspendLayout();
+            this.groupPanelCase.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diCaseAppDate)).BeginInit();
             this.tabPanelCreditCoverNeg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).BeginInit();
             this.groupPanelCreditCoverNeg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diDueDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.creditCoverNegBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diPriceDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diRequestDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diReplyDate)).BeginInit();
             this.tabPanelCDA.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).BeginInit();
             this.groupPanelCDA.SuspendLayout();
-            this.tabPanelCase.SuspendLayout();
-            this.groupPanelCase.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.caseBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diCaseAppDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.caseBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.creditCoverNegBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // requestAmountLabel
@@ -863,6 +864,539 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tabControl.Tabs.Add(this.tabItemCDA);
             this.tabControl.Text = "tabControl1";
             // 
+            // tabPanelCase
+            // 
+            this.tabPanelCase.Controls.Add(this.btnCaseUpdate);
+            this.tabPanelCase.Controls.Add(this.btnCaseSave);
+            this.tabPanelCase.Controls.Add(this.groupPanelCase);
+            this.tabPanelCase.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelCase.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelCase.Name = "tabPanelCase";
+            this.tabPanelCase.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelCase.Size = new System.Drawing.Size(521, 398);
+            this.tabPanelCase.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelCase.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelCase.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelCase.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelCase.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelCase.Style.GradientAngle = 90;
+            this.tabPanelCase.TabIndex = 1;
+            this.tabPanelCase.TabItem = this.tabItemCase;
+            // 
+            // btnCaseUpdate
+            // 
+            this.btnCaseUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCaseUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCaseUpdate.Location = new System.Drawing.Point(181, 363);
+            this.btnCaseUpdate.Name = "btnCaseUpdate";
+            this.btnCaseUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnCaseUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCaseUpdate.TabIndex = 1;
+            this.btnCaseUpdate.Text = "编辑";
+            this.btnCaseUpdate.Click += new System.EventHandler(this.UpdateCase);
+            // 
+            // btnCaseSave
+            // 
+            this.btnCaseSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCaseSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCaseSave.Location = new System.Drawing.Point(262, 363);
+            this.btnCaseSave.Name = "btnCaseSave";
+            this.btnCaseSave.Size = new System.Drawing.Size(75, 23);
+            this.btnCaseSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCaseSave.TabIndex = 2;
+            this.btnCaseSave.Text = "保存";
+            this.btnCaseSave.Click += new System.EventHandler(this.SaveCase);
+            // 
+            // groupPanelCase
+            // 
+            this.groupPanelCase.AutoScroll = true;
+            this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelCase.Controls.Add(this.cbIsPool);
+            this.groupPanelCase.Controls.Add(lblReview);
+            this.groupPanelCase.Controls.Add(this.cbReviews);
+            this.groupPanelCase.Controls.Add(this.tbCaseCode);
+            this.groupPanelCase.Controls.Add(lblCaseCode);
+            this.groupPanelCase.Controls.Add(this.cbCaseMark);
+            this.groupPanelCase.Controls.Add(this.tbComment);
+            this.groupPanelCase.Controls.Add(lblComment);
+            this.groupPanelCase.Controls.Add(this.tbPaymentTerm);
+            this.groupPanelCase.Controls.Add(lblPaymentTerm);
+            this.groupPanelCase.Controls.Add(this.tbOPName);
+            this.groupPanelCase.Controls.Add(lblOPName);
+            this.groupPanelCase.Controls.Add(this.cbCaseTransactionType);
+            this.groupPanelCase.Controls.Add(this.tbCaseFactorNameEN);
+            this.groupPanelCase.Controls.Add(this.cbCaseCoDepts);
+            this.groupPanelCase.Controls.Add(lblCaseCoDept);
+            this.groupPanelCase.Controls.Add(this.cbCaseOwnerDepts);
+            this.groupPanelCase.Controls.Add(lblCaseOwnerDept);
+            this.groupPanelCase.Controls.Add(this.cbCaseOpType);
+            this.groupPanelCase.Controls.Add(lblCaseOpType);
+            this.groupPanelCase.Controls.Add(this.tbCaseBuyerNameEN);
+            this.groupPanelCase.Controls.Add(this.tbCaseSellerNameEN);
+            this.groupPanelCase.Controls.Add(this.tbCaseCreateUser);
+            this.groupPanelCase.Controls.Add(lblCaseCreateUser);
+            this.groupPanelCase.Controls.Add(lblCaseMark);
+            this.groupPanelCase.Controls.Add(this.diCaseAppDate);
+            this.groupPanelCase.Controls.Add(lblCaseAppDate);
+            this.groupPanelCase.Controls.Add(lblCaseTransactionType);
+            this.groupPanelCase.Controls.Add(this.cbCaseInvoiceCurrency);
+            this.groupPanelCase.Controls.Add(lblCaseInvoiceCurrency);
+            this.groupPanelCase.Controls.Add(this.btnCaseBuyerSelect);
+            this.groupPanelCase.Controls.Add(this.btnCaseSellerSelect);
+            this.groupPanelCase.Controls.Add(this.btnCaseFactorSelect);
+            this.groupPanelCase.Controls.Add(this.tbCaseBuyerNameCN);
+            this.groupPanelCase.Controls.Add(this.tbCaseBuyerNo);
+            this.groupPanelCase.Controls.Add(lblCaseBuyerNo);
+            this.groupPanelCase.Controls.Add(this.tbCaseFactorNameCN);
+            this.groupPanelCase.Controls.Add(this.tbCaseFactorCode);
+            this.groupPanelCase.Controls.Add(this.tbCaseSellerNameCN);
+            this.groupPanelCase.Controls.Add(this.tbCaseSellerNo);
+            this.groupPanelCase.Controls.Add(lblCaseSellerNo);
+            this.groupPanelCase.Controls.Add(lblCaseFactor);
+            this.groupPanelCase.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelCase.Location = new System.Drawing.Point(1, 1);
+            this.groupPanelCase.Name = "groupPanelCase";
+            this.groupPanelCase.Size = new System.Drawing.Size(519, 356);
+            // 
+            // 
+            // 
+            this.groupPanelCase.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelCase.Style.BackColorGradientAngle = 90;
+            this.groupPanelCase.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelCase.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelCase.Style.BorderBottomWidth = 1;
+            this.groupPanelCase.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelCase.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelCase.Style.BorderLeftWidth = 1;
+            this.groupPanelCase.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelCase.Style.BorderRightWidth = 1;
+            this.groupPanelCase.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelCase.Style.BorderTopWidth = 1;
+            this.groupPanelCase.Style.Class = "";
+            this.groupPanelCase.Style.CornerDiameter = 4;
+            this.groupPanelCase.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelCase.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelCase.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelCase.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelCase.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelCase.StyleMouseOver.Class = "";
+            this.groupPanelCase.TabIndex = 0;
+            // 
+            // cbReviews
+            // 
+            this.cbReviews.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbReviews.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbReviews.FormattingEnabled = true;
+            this.cbReviews.ItemHeight = 14;
+            this.cbReviews.Location = new System.Drawing.Point(336, 222);
+            this.cbReviews.Name = "cbReviews";
+            this.cbReviews.Size = new System.Drawing.Size(137, 20);
+            this.cbReviews.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbReviews.TabIndex = 42;
+            // 
+            // tbCaseCode
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseCode.Border.Class = "TextBoxBorder";
+            this.tbCaseCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CaseCode", true));
+            this.tbCaseCode.Location = new System.Drawing.Point(352, 3);
+            this.tbCaseCode.Name = "tbCaseCode";
+            this.tbCaseCode.ReadOnly = true;
+            this.tbCaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbCaseCode.Size = new System.Drawing.Size(121, 20);
+            this.tbCaseCode.TabIndex = 41;
+            // 
+            // cbCaseMark
+            // 
+            this.cbCaseMark.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CaseMark", true));
+            this.cbCaseMark.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCaseMark.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCaseMark.FormattingEnabled = true;
+            this.cbCaseMark.ItemHeight = 14;
+            this.cbCaseMark.Items.AddRange(new object[] {
+            "申请案",
+            "启动案",
+            "已结案"});
+            this.cbCaseMark.Location = new System.Drawing.Point(336, 244);
+            this.cbCaseMark.Name = "cbCaseMark";
+            this.cbCaseMark.Size = new System.Drawing.Size(137, 20);
+            this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCaseMark.TabIndex = 39;
+            this.caseValidator.SetValidator1(this.cbCaseMark, this.requiredFieldValidator3);
+            // 
+            // tbComment
+            // 
+            // 
+            // 
+            // 
+            this.tbComment.Border.Class = "TextBoxBorder";
+            this.tbComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "Comment", true));
+            this.tbComment.Location = new System.Drawing.Point(98, 288);
+            this.tbComment.Multiline = true;
+            this.tbComment.Name = "tbComment";
+            this.tbComment.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbComment.Size = new System.Drawing.Size(375, 59);
+            this.tbComment.TabIndex = 38;
+            // 
+            // tbPaymentTerm
+            // 
+            // 
+            // 
+            // 
+            this.tbPaymentTerm.Border.Class = "TextBoxBorder";
+            this.tbPaymentTerm.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "NetPaymentTerm", true));
+            this.tbPaymentTerm.Location = new System.Drawing.Point(98, 222);
+            this.tbPaymentTerm.Name = "tbPaymentTerm";
+            this.tbPaymentTerm.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbPaymentTerm.Size = new System.Drawing.Size(121, 20);
+            this.tbPaymentTerm.TabIndex = 28;
+            // 
+            // tbOPName
+            // 
+            // 
+            // 
+            // 
+            this.tbOPName.Border.Class = "TextBoxBorder";
+            this.tbOPName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "OPName", true));
+            this.tbOPName.Location = new System.Drawing.Point(98, 265);
+            this.tbOPName.Name = "tbOPName";
+            this.tbOPName.Size = new System.Drawing.Size(121, 20);
+            this.tbOPName.TabIndex = 34;
+            this.caseValidator.SetValidator1(this.tbOPName, this.regularExpressionValidator2);
+            // 
+            // cbCaseTransactionType
+            // 
+            this.cbCaseTransactionType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "TransactionType", true));
+            this.cbCaseTransactionType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCaseTransactionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCaseTransactionType.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.cbCaseTransactionType.FormattingEnabled = true;
+            this.cbCaseTransactionType.Items.AddRange(new object[] {
+            "国内卖方保理",
+            "国内买方保理",
+            "出口保理",
+            "进口保理",
+            "国内信保保理",
+            "国际信保保理",
+            "租赁保理"});
+            this.cbCaseTransactionType.Location = new System.Drawing.Point(100, 0);
+            this.cbCaseTransactionType.Name = "cbCaseTransactionType";
+            this.cbCaseTransactionType.Size = new System.Drawing.Size(124, 21);
+            this.cbCaseTransactionType.TabIndex = 1;
+            this.caseValidator.SetValidator1(this.cbCaseTransactionType, this.requiredFieldValidator1);
+            this.cbCaseTransactionType.SelectionChangeCommitted += new System.EventHandler(this.CaseTransactionTypeChanged);
+            // 
+            // tbCaseFactorNameEN
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseFactorNameEN.Border.Class = "TextBoxBorder";
+            this.tbCaseFactorNameEN.Location = new System.Drawing.Point(180, 131);
+            this.tbCaseFactorNameEN.Name = "tbCaseFactorNameEN";
+            this.tbCaseFactorNameEN.ReadOnly = true;
+            this.tbCaseFactorNameEN.Size = new System.Drawing.Size(293, 20);
+            this.tbCaseFactorNameEN.TabIndex = 15;
+            this.tbCaseFactorNameEN.WatermarkText = "英文名";
+            // 
+            // cbCaseCoDepts
+            // 
+            this.cbCaseCoDepts.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.caseBindingSource, "CoDepartment", true));
+            this.cbCaseCoDepts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCaseCoDepts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCaseCoDepts.FormattingEnabled = true;
+            this.cbCaseCoDepts.Location = new System.Drawing.Point(336, 172);
+            this.cbCaseCoDepts.Name = "cbCaseCoDepts";
+            this.cbCaseCoDepts.Size = new System.Drawing.Size(137, 21);
+            this.cbCaseCoDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCaseCoDepts.TabIndex = 24;
+            // 
+            // cbCaseOwnerDepts
+            // 
+            this.cbCaseOwnerDepts.BackColor = System.Drawing.SystemColors.Window;
+            // 
+            // 
+            // 
+            this.cbCaseOwnerDepts.BackgroundStyle.Class = "TextBoxBorder";
+            this.cbCaseOwnerDepts.ButtonDropDown.Visible = true;
+            this.cbCaseOwnerDepts.Location = new System.Drawing.Point(98, 197);
+            this.cbCaseOwnerDepts.Name = "cbCaseOwnerDepts";
+            this.cbCaseOwnerDepts.Size = new System.Drawing.Size(278, 23);
+            this.cbCaseOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCaseOwnerDepts.TabIndex = 26;
+            this.caseValidator.SetValidator1(this.cbCaseOwnerDepts, this.requiredFieldValidator4);
+            this.cbCaseOwnerDepts.SelectionChanged += new DevComponents.AdvTree.AdvTreeNodeEventHandler(this.CaseOwnerDeptsChanged);
+            // 
+            // cbCaseOpType
+            // 
+            this.cbCaseOpType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "OperationType", true));
+            this.cbCaseOpType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCaseOpType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCaseOpType.FormattingEnabled = true;
+            this.cbCaseOpType.ItemHeight = 14;
+            this.cbCaseOpType.Items.AddRange(new object[] {
+            "自营",
+            "协销",
+            "其他",
+            "未知"});
+            this.cbCaseOpType.Location = new System.Drawing.Point(98, 175);
+            this.cbCaseOpType.Name = "cbCaseOpType";
+            this.cbCaseOpType.Size = new System.Drawing.Size(100, 20);
+            this.cbCaseOpType.TabIndex = 22;
+            this.caseValidator.SetValidator1(this.cbCaseOpType, this.requiredFieldValidator3);
+            this.cbCaseOpType.SelectionChangeCommitted += new System.EventHandler(this.CaseOpTypeChanged);
+            // 
+            // tbCaseBuyerNameEN
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseBuyerNameEN.Border.Class = "TextBoxBorder";
+            this.tbCaseBuyerNameEN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "BuyerClient.ClientNameEN", true));
+            this.tbCaseBuyerNameEN.Location = new System.Drawing.Point(180, 88);
+            this.tbCaseBuyerNameEN.Name = "tbCaseBuyerNameEN";
+            this.tbCaseBuyerNameEN.ReadOnly = true;
+            this.tbCaseBuyerNameEN.Size = new System.Drawing.Size(293, 20);
+            this.tbCaseBuyerNameEN.TabIndex = 10;
+            this.tbCaseBuyerNameEN.WatermarkText = "英文名";
+            this.tbCaseBuyerNameEN.DoubleClick += new System.EventHandler(this.DetailBuyer);
+            // 
+            // tbCaseSellerNameEN
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseSellerNameEN.Border.Class = "TextBoxBorder";
+            this.tbCaseSellerNameEN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "SellerClient.ClientNameEN", true));
+            this.tbCaseSellerNameEN.Location = new System.Drawing.Point(180, 46);
+            this.tbCaseSellerNameEN.Name = "tbCaseSellerNameEN";
+            this.tbCaseSellerNameEN.ReadOnly = true;
+            this.tbCaseSellerNameEN.Size = new System.Drawing.Size(293, 20);
+            this.tbCaseSellerNameEN.TabIndex = 5;
+            this.tbCaseSellerNameEN.WatermarkText = "英文名";
+            this.tbCaseSellerNameEN.DoubleClick += new System.EventHandler(this.DetailSeller);
+            // 
+            // tbCaseCreateUser
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseCreateUser.Border.Class = "TextBoxBorder";
+            this.tbCaseCreateUser.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CreateUserName", true));
+            this.tbCaseCreateUser.Location = new System.Drawing.Point(336, 265);
+            this.tbCaseCreateUser.Name = "tbCaseCreateUser";
+            this.tbCaseCreateUser.ReadOnly = true;
+            this.tbCaseCreateUser.Size = new System.Drawing.Size(137, 20);
+            this.tbCaseCreateUser.TabIndex = 36;
+            this.caseValidator.SetValidator1(this.tbCaseCreateUser, this.requiredFieldValidator12);
+            // 
+            // diCaseAppDate
+            // 
+            // 
+            // 
+            // 
+            this.diCaseAppDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diCaseAppDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.diCaseAppDate.ButtonDropDown.Visible = true;
+            this.diCaseAppDate.ButtonFreeText.Checked = true;
+            this.diCaseAppDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CaseAppDate", true));
+            this.diCaseAppDate.FocusHighlightEnabled = true;
+            this.diCaseAppDate.FreeTextEntryMode = true;
+            this.diCaseAppDate.Location = new System.Drawing.Point(99, 244);
+            // 
+            // 
+            // 
+            this.diCaseAppDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diCaseAppDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diCaseAppDate.MonthCalendar.BackgroundStyle.Class = "";
+            this.diCaseAppDate.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diCaseAppDate.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.diCaseAppDate.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diCaseAppDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diCaseAppDate.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.diCaseAppDate.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.diCaseAppDate.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.diCaseAppDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diCaseAppDate.MonthCalendar.TodayButtonVisible = true;
+            this.diCaseAppDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diCaseAppDate.Name = "diCaseAppDate";
+            this.diCaseAppDate.Size = new System.Drawing.Size(120, 20);
+            this.diCaseAppDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.diCaseAppDate.TabIndex = 30;
+            this.caseValidator.SetValidator1(this.diCaseAppDate, this.requiredFieldValidator13);
+            // 
+            // cbCaseInvoiceCurrency
+            // 
+            this.cbCaseInvoiceCurrency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbCaseInvoiceCurrency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbCaseInvoiceCurrency.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.caseBindingSource, "InvoiceCurrency", true));
+            this.cbCaseInvoiceCurrency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCaseInvoiceCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCaseInvoiceCurrency.ItemHeight = 14;
+            this.cbCaseInvoiceCurrency.Location = new System.Drawing.Point(98, 153);
+            this.cbCaseInvoiceCurrency.Name = "cbCaseInvoiceCurrency";
+            this.cbCaseInvoiceCurrency.Size = new System.Drawing.Size(100, 20);
+            this.cbCaseInvoiceCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCaseInvoiceCurrency.TabIndex = 18;
+            // 
+            // btnCaseBuyerSelect
+            // 
+            this.btnCaseBuyerSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCaseBuyerSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCaseBuyerSelect.Location = new System.Drawing.Point(479, 68);
+            this.btnCaseBuyerSelect.Name = "btnCaseBuyerSelect";
+            this.btnCaseBuyerSelect.Size = new System.Drawing.Size(20, 19);
+            this.btnCaseBuyerSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCaseBuyerSelect.TabIndex = 11;
+            this.btnCaseBuyerSelect.Text = "...";
+            this.btnCaseBuyerSelect.Click += new System.EventHandler(this.SelectCaseBuyer);
+            // 
+            // btnCaseSellerSelect
+            // 
+            this.btnCaseSellerSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCaseSellerSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCaseSellerSelect.Location = new System.Drawing.Point(479, 25);
+            this.btnCaseSellerSelect.Name = "btnCaseSellerSelect";
+            this.btnCaseSellerSelect.Size = new System.Drawing.Size(20, 20);
+            this.btnCaseSellerSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCaseSellerSelect.TabIndex = 6;
+            this.btnCaseSellerSelect.Text = "...";
+            this.btnCaseSellerSelect.Click += new System.EventHandler(this.SelectCaseSeller);
+            // 
+            // btnCaseFactorSelect
+            // 
+            this.btnCaseFactorSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCaseFactorSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCaseFactorSelect.Location = new System.Drawing.Point(479, 109);
+            this.btnCaseFactorSelect.Name = "btnCaseFactorSelect";
+            this.btnCaseFactorSelect.Size = new System.Drawing.Size(20, 20);
+            this.btnCaseFactorSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCaseFactorSelect.TabIndex = 16;
+            this.btnCaseFactorSelect.Text = "...";
+            this.btnCaseFactorSelect.Click += new System.EventHandler(this.SelectFactor);
+            // 
+            // tbCaseBuyerNameCN
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseBuyerNameCN.Border.Class = "TextBoxBorder";
+            this.tbCaseBuyerNameCN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "BuyerClient.ClientNameCN", true));
+            this.tbCaseBuyerNameCN.Location = new System.Drawing.Point(180, 67);
+            this.tbCaseBuyerNameCN.Name = "tbCaseBuyerNameCN";
+            this.tbCaseBuyerNameCN.ReadOnly = true;
+            this.tbCaseBuyerNameCN.Size = new System.Drawing.Size(293, 20);
+            this.tbCaseBuyerNameCN.TabIndex = 9;
+            this.tbCaseBuyerNameCN.WatermarkText = "中文名";
+            this.tbCaseBuyerNameCN.DoubleClick += new System.EventHandler(this.DetailBuyer);
+            // 
+            // tbCaseBuyerNo
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseBuyerNo.Border.Class = "TextBoxBorder";
+            this.tbCaseBuyerNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "BuyerClient.ClientEDICode", true));
+            this.tbCaseBuyerNo.Location = new System.Drawing.Point(98, 67);
+            this.tbCaseBuyerNo.Name = "tbCaseBuyerNo";
+            this.tbCaseBuyerNo.ReadOnly = true;
+            this.tbCaseBuyerNo.Size = new System.Drawing.Size(76, 20);
+            this.tbCaseBuyerNo.TabIndex = 8;
+            this.caseValidator.SetValidator1(this.tbCaseBuyerNo, this.requiredFieldValidator9);
+            this.tbCaseBuyerNo.WatermarkText = "保理代码";
+            this.tbCaseBuyerNo.DoubleClick += new System.EventHandler(this.DetailBuyer);
+            // 
+            // tbCaseFactorNameCN
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseFactorNameCN.Border.Class = "TextBoxBorder";
+            this.tbCaseFactorNameCN.Location = new System.Drawing.Point(180, 109);
+            this.tbCaseFactorNameCN.Name = "tbCaseFactorNameCN";
+            this.tbCaseFactorNameCN.ReadOnly = true;
+            this.tbCaseFactorNameCN.Size = new System.Drawing.Size(293, 20);
+            this.tbCaseFactorNameCN.TabIndex = 14;
+            this.tbCaseFactorNameCN.WatermarkText = "中文名";
+            // 
+            // tbCaseFactorCode
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseFactorCode.Border.Class = "TextBoxBorder";
+            this.tbCaseFactorCode.Location = new System.Drawing.Point(99, 109);
+            this.tbCaseFactorCode.Name = "tbCaseFactorCode";
+            this.tbCaseFactorCode.ReadOnly = true;
+            this.tbCaseFactorCode.Size = new System.Drawing.Size(75, 20);
+            this.tbCaseFactorCode.TabIndex = 13;
+            this.caseValidator.SetValidator1(this.tbCaseFactorCode, this.customValidator1);
+            this.tbCaseFactorCode.WatermarkText = "保理代码";
+            this.tbCaseFactorCode.DoubleClick += new System.EventHandler(this.DetailFactor);
+            // 
+            // tbCaseSellerNameCN
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseSellerNameCN.Border.Class = "TextBoxBorder";
+            this.tbCaseSellerNameCN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "SellerClient.ClientNameCN", true));
+            this.tbCaseSellerNameCN.Location = new System.Drawing.Point(180, 25);
+            this.tbCaseSellerNameCN.Name = "tbCaseSellerNameCN";
+            this.tbCaseSellerNameCN.ReadOnly = true;
+            this.tbCaseSellerNameCN.Size = new System.Drawing.Size(293, 20);
+            this.tbCaseSellerNameCN.TabIndex = 4;
+            this.tbCaseSellerNameCN.WatermarkText = "中文名";
+            this.tbCaseSellerNameCN.DoubleClick += new System.EventHandler(this.DetailSeller);
+            // 
+            // tbCaseSellerNo
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseSellerNo.Border.Class = "TextBoxBorder";
+            this.tbCaseSellerNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "SellerClient.ClientEDICode", true));
+            this.tbCaseSellerNo.Location = new System.Drawing.Point(100, 25);
+            this.tbCaseSellerNo.Name = "tbCaseSellerNo";
+            this.tbCaseSellerNo.ReadOnly = true;
+            this.tbCaseSellerNo.Size = new System.Drawing.Size(74, 20);
+            this.tbCaseSellerNo.TabIndex = 3;
+            this.caseValidator.SetValidator1(this.tbCaseSellerNo, this.requiredFieldValidator7);
+            this.tbCaseSellerNo.WatermarkText = "保理代码";
+            this.tbCaseSellerNo.DoubleClick += new System.EventHandler(this.DetailSeller);
+            // 
+            // tabItemCase
+            // 
+            this.tabItemCase.AttachedControl = this.tabPanelCase;
+            this.tabItemCase.Name = "tabItemCase";
+            this.tabItemCase.Text = "案件信息";
+            // 
             // tabPanelCreditCoverNeg
             // 
             this.tabPanelCreditCoverNeg.Controls.Add(this.dgvCreditCoverNegs);
@@ -902,14 +1436,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colDueDate,
             this.colCreateUserName,
             this.colComment});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCreditCoverNegs.DefaultCellStyle = dataGridViewCellStyle16;
             this.dgvCreditCoverNegs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCreditCoverNegs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCreditCoverNegs.Location = new System.Drawing.Point(1, 199);
@@ -959,8 +1493,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // colRequestDate
             // 
             this.colRequestDate.DataPropertyName = "RequestDate";
-            dataGridViewCellStyle1.Format = "d";
-            this.colRequestDate.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle12.Format = "d";
+            this.colRequestDate.DefaultCellStyle = dataGridViewCellStyle12;
             this.colRequestDate.HeaderText = "申请日期";
             this.colRequestDate.Name = "colRequestDate";
             this.colRequestDate.ReadOnly = true;
@@ -975,9 +1509,9 @@ namespace CMBC.EasyFactor.CaseMgr
             // colReplyDate
             // 
             this.colReplyDate.DataPropertyName = "ReplyDate";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colReplyDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle13.Format = "d";
+            dataGridViewCellStyle13.NullValue = null;
+            this.colReplyDate.DefaultCellStyle = dataGridViewCellStyle13;
             this.colReplyDate.HeaderText = "回复日期";
             this.colReplyDate.Name = "colReplyDate";
             this.colReplyDate.ReadOnly = true;
@@ -992,8 +1526,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // colPriceDate
             // 
             this.colPriceDate.DataPropertyName = "PriceDate";
-            dataGridViewCellStyle3.Format = "d";
-            this.colPriceDate.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle14.Format = "d";
+            this.colPriceDate.DefaultCellStyle = dataGridViewCellStyle14;
             this.colPriceDate.HeaderText = "报价日";
             this.colPriceDate.Name = "colPriceDate";
             this.colPriceDate.ReadOnly = true;
@@ -1001,8 +1535,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // colDueDate
             // 
             this.colDueDate.DataPropertyName = "DueDate";
-            dataGridViewCellStyle4.Format = "d";
-            this.colDueDate.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle15.Format = "d";
+            this.colDueDate.DefaultCellStyle = dataGridViewCellStyle15;
             this.colDueDate.HeaderText = "额度期限";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.ReadOnly = true;
@@ -1123,10 +1657,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diDueDate.Name = "diDueDate";
             this.diDueDate.Size = new System.Drawing.Size(103, 20);
             this.diDueDate.TabIndex = 17;
-            // 
-            // creditCoverNegBindingSource
-            // 
-            this.creditCoverNegBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CreditCoverNegotiation);
             // 
             // diPriceDate
             // 
@@ -1418,14 +1948,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCDAs.AllowUserToAddRows = false;
             this.dgvCDAs.AllowUserToDeleteRows = false;
             this.dgvCDAs.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvCDAs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCDACode,
@@ -1468,14 +1998,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFax,
             this.colCDAComment,
             this.colCDACreateUserName});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvCDAs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCDAs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCDAs.Location = new System.Drawing.Point(1, 39);
@@ -1872,542 +2402,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tabItemCDA.Name = "tabItemCDA";
             this.tabItemCDA.Text = "额度通知书";
             // 
-            // tabPanelCase
-            // 
-            this.tabPanelCase.Controls.Add(this.btnCaseUpdate);
-            this.tabPanelCase.Controls.Add(this.btnCaseSave);
-            this.tabPanelCase.Controls.Add(this.groupPanelCase);
-            this.tabPanelCase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelCase.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelCase.Name = "tabPanelCase";
-            this.tabPanelCase.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCase.Size = new System.Drawing.Size(521, 398);
-            this.tabPanelCase.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelCase.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelCase.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelCase.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelCase.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelCase.Style.GradientAngle = 90;
-            this.tabPanelCase.TabIndex = 1;
-            this.tabPanelCase.TabItem = this.tabItemCase;
-            // 
-            // btnCaseUpdate
-            // 
-            this.btnCaseUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCaseUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseUpdate.Location = new System.Drawing.Point(181, 363);
-            this.btnCaseUpdate.Name = "btnCaseUpdate";
-            this.btnCaseUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnCaseUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCaseUpdate.TabIndex = 1;
-            this.btnCaseUpdate.Text = "编辑";
-            this.btnCaseUpdate.Click += new System.EventHandler(this.UpdateCase);
-            // 
-            // btnCaseSave
-            // 
-            this.btnCaseSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCaseSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseSave.Location = new System.Drawing.Point(262, 363);
-            this.btnCaseSave.Name = "btnCaseSave";
-            this.btnCaseSave.Size = new System.Drawing.Size(75, 23);
-            this.btnCaseSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCaseSave.TabIndex = 2;
-            this.btnCaseSave.Text = "保存";
-            this.btnCaseSave.Click += new System.EventHandler(this.SaveCase);
-            // 
-            // groupPanelCase
-            // 
-            this.groupPanelCase.AutoScroll = true;
-            this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.groupPanelCase.Controls.Add(lblReview);
-            this.groupPanelCase.Controls.Add(this.cbReviews);
-            this.groupPanelCase.Controls.Add(this.tbCaseCode);
-            this.groupPanelCase.Controls.Add(lblCaseCode);
-            this.groupPanelCase.Controls.Add(this.cbCaseMark);
-            this.groupPanelCase.Controls.Add(this.tbComment);
-            this.groupPanelCase.Controls.Add(lblComment);
-            this.groupPanelCase.Controls.Add(this.tbPaymentTerm);
-            this.groupPanelCase.Controls.Add(lblPaymentTerm);
-            this.groupPanelCase.Controls.Add(this.tbOPName);
-            this.groupPanelCase.Controls.Add(lblOPName);
-            this.groupPanelCase.Controls.Add(this.cbCaseTransactionType);
-            this.groupPanelCase.Controls.Add(this.tbCaseFactorNameEN);
-            this.groupPanelCase.Controls.Add(this.cbCaseCoDepts);
-            this.groupPanelCase.Controls.Add(lblCaseCoDept);
-            this.groupPanelCase.Controls.Add(this.cbCaseOwnerDepts);
-            this.groupPanelCase.Controls.Add(lblCaseOwnerDept);
-            this.groupPanelCase.Controls.Add(this.cbCaseOpType);
-            this.groupPanelCase.Controls.Add(lblCaseOpType);
-            this.groupPanelCase.Controls.Add(this.tbCaseBuyerNameEN);
-            this.groupPanelCase.Controls.Add(this.tbCaseSellerNameEN);
-            this.groupPanelCase.Controls.Add(this.tbCaseCreateUser);
-            this.groupPanelCase.Controls.Add(lblCaseCreateUser);
-            this.groupPanelCase.Controls.Add(lblCaseMark);
-            this.groupPanelCase.Controls.Add(this.diCaseAppDate);
-            this.groupPanelCase.Controls.Add(lblCaseAppDate);
-            this.groupPanelCase.Controls.Add(lblCaseTransactionType);
-            this.groupPanelCase.Controls.Add(this.cbCaseInvoiceCurrency);
-            this.groupPanelCase.Controls.Add(lblCaseInvoiceCurrency);
-            this.groupPanelCase.Controls.Add(this.btnCaseBuyerSelect);
-            this.groupPanelCase.Controls.Add(this.btnCaseSellerSelect);
-            this.groupPanelCase.Controls.Add(this.btnCaseFactorSelect);
-            this.groupPanelCase.Controls.Add(this.tbCaseBuyerNameCN);
-            this.groupPanelCase.Controls.Add(this.tbCaseBuyerNo);
-            this.groupPanelCase.Controls.Add(lblCaseBuyerNo);
-            this.groupPanelCase.Controls.Add(this.tbCaseFactorNameCN);
-            this.groupPanelCase.Controls.Add(this.tbCaseFactorCode);
-            this.groupPanelCase.Controls.Add(this.tbCaseSellerNameCN);
-            this.groupPanelCase.Controls.Add(this.tbCaseSellerNo);
-            this.groupPanelCase.Controls.Add(lblCaseSellerNo);
-            this.groupPanelCase.Controls.Add(lblCaseFactor);
-            this.groupPanelCase.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelCase.Location = new System.Drawing.Point(1, 1);
-            this.groupPanelCase.Name = "groupPanelCase";
-            this.groupPanelCase.Size = new System.Drawing.Size(519, 356);
-            // 
-            // 
-            // 
-            this.groupPanelCase.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelCase.Style.BackColorGradientAngle = 90;
-            this.groupPanelCase.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelCase.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCase.Style.BorderBottomWidth = 1;
-            this.groupPanelCase.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelCase.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCase.Style.BorderLeftWidth = 1;
-            this.groupPanelCase.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCase.Style.BorderRightWidth = 1;
-            this.groupPanelCase.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCase.Style.BorderTopWidth = 1;
-            this.groupPanelCase.Style.Class = "";
-            this.groupPanelCase.Style.CornerDiameter = 4;
-            this.groupPanelCase.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelCase.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelCase.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelCase.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelCase.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelCase.StyleMouseOver.Class = "";
-            this.groupPanelCase.TabIndex = 0;
-            // 
-            // cbReviews
-            // 
-            this.cbReviews.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbReviews.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbReviews.FormattingEnabled = true;
-            this.cbReviews.ItemHeight = 14;
-            this.cbReviews.Location = new System.Drawing.Point(336, 222);
-            this.cbReviews.Name = "cbReviews";
-            this.cbReviews.Size = new System.Drawing.Size(137, 20);
-            this.cbReviews.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbReviews.TabIndex = 42;
-            // 
-            // tbCaseCode
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseCode.Border.Class = "TextBoxBorder";
-            this.tbCaseCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CaseCode", true));
-            this.tbCaseCode.Location = new System.Drawing.Point(352, 3);
-            this.tbCaseCode.Name = "tbCaseCode";
-            this.tbCaseCode.ReadOnly = true;
-            this.tbCaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbCaseCode.Size = new System.Drawing.Size(121, 20);
-            this.tbCaseCode.TabIndex = 41;
-            // 
-            // caseBindingSource
-            // 
-            this.caseBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Case);
-            // 
-            // cbCaseMark
-            // 
-            this.cbCaseMark.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CaseMark", true));
-            this.cbCaseMark.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCaseMark.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCaseMark.FormattingEnabled = true;
-            this.cbCaseMark.ItemHeight = 14;
-            this.cbCaseMark.Items.AddRange(new object[] {
-            "申请案",
-            "启动案",
-            "已结案"});
-            this.cbCaseMark.Location = new System.Drawing.Point(336, 244);
-            this.cbCaseMark.Name = "cbCaseMark";
-            this.cbCaseMark.Size = new System.Drawing.Size(137, 20);
-            this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseMark.TabIndex = 39;
-            this.caseValidator.SetValidator1(this.cbCaseMark, this.requiredFieldValidator3);
-            // 
-            // tbComment
-            // 
-            // 
-            // 
-            // 
-            this.tbComment.Border.Class = "TextBoxBorder";
-            this.tbComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "Comment", true));
-            this.tbComment.Location = new System.Drawing.Point(98, 288);
-            this.tbComment.Multiline = true;
-            this.tbComment.Name = "tbComment";
-            this.tbComment.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbComment.Size = new System.Drawing.Size(375, 59);
-            this.tbComment.TabIndex = 38;
-            // 
-            // tbPaymentTerm
-            // 
-            // 
-            // 
-            // 
-            this.tbPaymentTerm.Border.Class = "TextBoxBorder";
-            this.tbPaymentTerm.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "NetPaymentTerm", true));
-            this.tbPaymentTerm.Location = new System.Drawing.Point(98, 222);
-            this.tbPaymentTerm.Name = "tbPaymentTerm";
-            this.tbPaymentTerm.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbPaymentTerm.Size = new System.Drawing.Size(121, 20);
-            this.tbPaymentTerm.TabIndex = 28;
-            // 
-            // tbOPName
-            // 
-            // 
-            // 
-            // 
-            this.tbOPName.Border.Class = "TextBoxBorder";
-            this.tbOPName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "OPName", true));
-            this.tbOPName.Location = new System.Drawing.Point(98, 265);
-            this.tbOPName.Name = "tbOPName";
-            this.tbOPName.Size = new System.Drawing.Size(121, 20);
-            this.tbOPName.TabIndex = 34;
-            this.caseValidator.SetValidator1(this.tbOPName, this.regularExpressionValidator2);
-            // 
-            // cbCaseTransactionType
-            // 
-            this.cbCaseTransactionType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "TransactionType", true));
-            this.cbCaseTransactionType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCaseTransactionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCaseTransactionType.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.cbCaseTransactionType.FormattingEnabled = true;
-            this.cbCaseTransactionType.Items.AddRange(new object[] {
-            "国内卖方保理",
-            "国内买方保理",
-            "出口保理",
-            "进口保理",
-            "国内信保保理",
-            "国际信保保理",
-            "租赁保理"});
-            this.cbCaseTransactionType.Location = new System.Drawing.Point(100, 0);
-            this.cbCaseTransactionType.Name = "cbCaseTransactionType";
-            this.cbCaseTransactionType.Size = new System.Drawing.Size(124, 21);
-            this.cbCaseTransactionType.TabIndex = 1;
-            this.caseValidator.SetValidator1(this.cbCaseTransactionType, this.requiredFieldValidator1);
-            this.cbCaseTransactionType.SelectionChangeCommitted += new System.EventHandler(this.CaseTransactionTypeChanged);
-            // 
-            // tbCaseFactorNameEN
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseFactorNameEN.Border.Class = "TextBoxBorder";
-            this.tbCaseFactorNameEN.Location = new System.Drawing.Point(180, 131);
-            this.tbCaseFactorNameEN.Name = "tbCaseFactorNameEN";
-            this.tbCaseFactorNameEN.ReadOnly = true;
-            this.tbCaseFactorNameEN.Size = new System.Drawing.Size(293, 20);
-            this.tbCaseFactorNameEN.TabIndex = 15;
-            this.tbCaseFactorNameEN.WatermarkText = "英文名";
-            // 
-            // cbCaseCoDepts
-            // 
-            this.cbCaseCoDepts.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.caseBindingSource, "CoDepartment", true));
-            this.cbCaseCoDepts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCaseCoDepts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCaseCoDepts.FormattingEnabled = true;
-            this.cbCaseCoDepts.Location = new System.Drawing.Point(336, 172);
-            this.cbCaseCoDepts.Name = "cbCaseCoDepts";
-            this.cbCaseCoDepts.Size = new System.Drawing.Size(137, 21);
-            this.cbCaseCoDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseCoDepts.TabIndex = 24;
-            // 
-            // cbCaseOwnerDepts
-            // 
-            this.cbCaseOwnerDepts.BackColor = System.Drawing.SystemColors.Window;
-            // 
-            // 
-            // 
-            this.cbCaseOwnerDepts.BackgroundStyle.Class = "TextBoxBorder";
-            this.cbCaseOwnerDepts.ButtonDropDown.Visible = true;
-            this.cbCaseOwnerDepts.Location = new System.Drawing.Point(98, 197);
-            this.cbCaseOwnerDepts.Name = "cbCaseOwnerDepts";
-            this.cbCaseOwnerDepts.Size = new System.Drawing.Size(278, 23);
-            this.cbCaseOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseOwnerDepts.TabIndex = 26;
-            this.caseValidator.SetValidator1(this.cbCaseOwnerDepts, this.requiredFieldValidator4);
-            this.cbCaseOwnerDepts.SelectionChanged += new DevComponents.AdvTree.AdvTreeNodeEventHandler(this.CaseOwnerDeptsChanged);
-            // 
-            // cbCaseOpType
-            // 
-            this.cbCaseOpType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "OperationType", true));
-            this.cbCaseOpType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCaseOpType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCaseOpType.FormattingEnabled = true;
-            this.cbCaseOpType.ItemHeight = 14;
-            this.cbCaseOpType.Items.AddRange(new object[] {
-            "自营",
-            "协销",
-            "其他",
-            "未知"});
-            this.cbCaseOpType.Location = new System.Drawing.Point(98, 175);
-            this.cbCaseOpType.Name = "cbCaseOpType";
-            this.cbCaseOpType.Size = new System.Drawing.Size(100, 20);
-            this.cbCaseOpType.TabIndex = 22;
-            this.caseValidator.SetValidator1(this.cbCaseOpType, this.requiredFieldValidator3);
-            this.cbCaseOpType.SelectionChangeCommitted += new System.EventHandler(this.CaseOpTypeChanged);
-            // 
-            // tbCaseBuyerNameEN
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseBuyerNameEN.Border.Class = "TextBoxBorder";
-            this.tbCaseBuyerNameEN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "BuyerClient.ClientNameEN", true));
-            this.tbCaseBuyerNameEN.Location = new System.Drawing.Point(180, 88);
-            this.tbCaseBuyerNameEN.Name = "tbCaseBuyerNameEN";
-            this.tbCaseBuyerNameEN.ReadOnly = true;
-            this.tbCaseBuyerNameEN.Size = new System.Drawing.Size(293, 20);
-            this.tbCaseBuyerNameEN.TabIndex = 10;
-            this.tbCaseBuyerNameEN.WatermarkText = "英文名";
-            this.tbCaseBuyerNameEN.DoubleClick += new System.EventHandler(this.DetailBuyer);
-            // 
-            // tbCaseSellerNameEN
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseSellerNameEN.Border.Class = "TextBoxBorder";
-            this.tbCaseSellerNameEN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "SellerClient.ClientNameEN", true));
-            this.tbCaseSellerNameEN.Location = new System.Drawing.Point(180, 46);
-            this.tbCaseSellerNameEN.Name = "tbCaseSellerNameEN";
-            this.tbCaseSellerNameEN.ReadOnly = true;
-            this.tbCaseSellerNameEN.Size = new System.Drawing.Size(293, 20);
-            this.tbCaseSellerNameEN.TabIndex = 5;
-            this.tbCaseSellerNameEN.WatermarkText = "英文名";
-            this.tbCaseSellerNameEN.DoubleClick += new System.EventHandler(this.DetailSeller);
-            // 
-            // tbCaseCreateUser
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseCreateUser.Border.Class = "TextBoxBorder";
-            this.tbCaseCreateUser.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CreateUserName", true));
-            this.tbCaseCreateUser.Location = new System.Drawing.Point(336, 265);
-            this.tbCaseCreateUser.Name = "tbCaseCreateUser";
-            this.tbCaseCreateUser.ReadOnly = true;
-            this.tbCaseCreateUser.Size = new System.Drawing.Size(137, 20);
-            this.tbCaseCreateUser.TabIndex = 36;
-            this.caseValidator.SetValidator1(this.tbCaseCreateUser, this.requiredFieldValidator12);
-            // 
-            // diCaseAppDate
-            // 
-            // 
-            // 
-            // 
-            this.diCaseAppDate.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diCaseAppDate.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.diCaseAppDate.ButtonDropDown.Visible = true;
-            this.diCaseAppDate.ButtonFreeText.Checked = true;
-            this.diCaseAppDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "CaseAppDate", true));
-            this.diCaseAppDate.FocusHighlightEnabled = true;
-            this.diCaseAppDate.FreeTextEntryMode = true;
-            this.diCaseAppDate.Location = new System.Drawing.Point(99, 244);
-            // 
-            // 
-            // 
-            this.diCaseAppDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diCaseAppDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diCaseAppDate.MonthCalendar.BackgroundStyle.Class = "";
-            this.diCaseAppDate.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.diCaseAppDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diCaseAppDate.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.diCaseAppDate.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diCaseAppDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diCaseAppDate.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.diCaseAppDate.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.diCaseAppDate.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.diCaseAppDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diCaseAppDate.MonthCalendar.TodayButtonVisible = true;
-            this.diCaseAppDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diCaseAppDate.Name = "diCaseAppDate";
-            this.diCaseAppDate.Size = new System.Drawing.Size(120, 20);
-            this.diCaseAppDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diCaseAppDate.TabIndex = 30;
-            this.caseValidator.SetValidator1(this.diCaseAppDate, this.requiredFieldValidator13);
-            // 
-            // cbCaseInvoiceCurrency
-            // 
-            this.cbCaseInvoiceCurrency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbCaseInvoiceCurrency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbCaseInvoiceCurrency.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.caseBindingSource, "InvoiceCurrency", true));
-            this.cbCaseInvoiceCurrency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCaseInvoiceCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCaseInvoiceCurrency.ItemHeight = 14;
-            this.cbCaseInvoiceCurrency.Location = new System.Drawing.Point(98, 153);
-            this.cbCaseInvoiceCurrency.Name = "cbCaseInvoiceCurrency";
-            this.cbCaseInvoiceCurrency.Size = new System.Drawing.Size(100, 20);
-            this.cbCaseInvoiceCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseInvoiceCurrency.TabIndex = 18;
-            // 
-            // btnCaseBuyerSelect
-            // 
-            this.btnCaseBuyerSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCaseBuyerSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseBuyerSelect.Location = new System.Drawing.Point(479, 68);
-            this.btnCaseBuyerSelect.Name = "btnCaseBuyerSelect";
-            this.btnCaseBuyerSelect.Size = new System.Drawing.Size(20, 19);
-            this.btnCaseBuyerSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCaseBuyerSelect.TabIndex = 11;
-            this.btnCaseBuyerSelect.Text = "...";
-            this.btnCaseBuyerSelect.Click += new System.EventHandler(this.SelectCaseBuyer);
-            // 
-            // btnCaseSellerSelect
-            // 
-            this.btnCaseSellerSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCaseSellerSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseSellerSelect.Location = new System.Drawing.Point(479, 25);
-            this.btnCaseSellerSelect.Name = "btnCaseSellerSelect";
-            this.btnCaseSellerSelect.Size = new System.Drawing.Size(20, 20);
-            this.btnCaseSellerSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCaseSellerSelect.TabIndex = 6;
-            this.btnCaseSellerSelect.Text = "...";
-            this.btnCaseSellerSelect.Click += new System.EventHandler(this.SelectCaseSeller);
-            // 
-            // btnCaseFactorSelect
-            // 
-            this.btnCaseFactorSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCaseFactorSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCaseFactorSelect.Location = new System.Drawing.Point(479, 109);
-            this.btnCaseFactorSelect.Name = "btnCaseFactorSelect";
-            this.btnCaseFactorSelect.Size = new System.Drawing.Size(20, 20);
-            this.btnCaseFactorSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCaseFactorSelect.TabIndex = 16;
-            this.btnCaseFactorSelect.Text = "...";
-            this.btnCaseFactorSelect.Click += new System.EventHandler(this.SelectFactor);
-            // 
-            // tbCaseBuyerNameCN
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseBuyerNameCN.Border.Class = "TextBoxBorder";
-            this.tbCaseBuyerNameCN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "BuyerClient.ClientNameCN", true));
-            this.tbCaseBuyerNameCN.Location = new System.Drawing.Point(180, 67);
-            this.tbCaseBuyerNameCN.Name = "tbCaseBuyerNameCN";
-            this.tbCaseBuyerNameCN.ReadOnly = true;
-            this.tbCaseBuyerNameCN.Size = new System.Drawing.Size(293, 20);
-            this.tbCaseBuyerNameCN.TabIndex = 9;
-            this.tbCaseBuyerNameCN.WatermarkText = "中文名";
-            this.tbCaseBuyerNameCN.DoubleClick += new System.EventHandler(this.DetailBuyer);
-            // 
-            // tbCaseBuyerNo
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseBuyerNo.Border.Class = "TextBoxBorder";
-            this.tbCaseBuyerNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "BuyerClient.ClientEDICode", true));
-            this.tbCaseBuyerNo.Location = new System.Drawing.Point(98, 67);
-            this.tbCaseBuyerNo.Name = "tbCaseBuyerNo";
-            this.tbCaseBuyerNo.ReadOnly = true;
-            this.tbCaseBuyerNo.Size = new System.Drawing.Size(76, 20);
-            this.tbCaseBuyerNo.TabIndex = 8;
-            this.caseValidator.SetValidator1(this.tbCaseBuyerNo, this.requiredFieldValidator9);
-            this.tbCaseBuyerNo.WatermarkText = "保理代码";
-            this.tbCaseBuyerNo.DoubleClick += new System.EventHandler(this.DetailBuyer);
-            // 
-            // tbCaseFactorNameCN
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseFactorNameCN.Border.Class = "TextBoxBorder";
-            this.tbCaseFactorNameCN.Location = new System.Drawing.Point(180, 109);
-            this.tbCaseFactorNameCN.Name = "tbCaseFactorNameCN";
-            this.tbCaseFactorNameCN.ReadOnly = true;
-            this.tbCaseFactorNameCN.Size = new System.Drawing.Size(293, 20);
-            this.tbCaseFactorNameCN.TabIndex = 14;
-            this.tbCaseFactorNameCN.WatermarkText = "中文名";
-            // 
-            // tbCaseFactorCode
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseFactorCode.Border.Class = "TextBoxBorder";
-            this.tbCaseFactorCode.Location = new System.Drawing.Point(99, 109);
-            this.tbCaseFactorCode.Name = "tbCaseFactorCode";
-            this.tbCaseFactorCode.ReadOnly = true;
-            this.tbCaseFactorCode.Size = new System.Drawing.Size(75, 20);
-            this.tbCaseFactorCode.TabIndex = 13;
-            this.caseValidator.SetValidator1(this.tbCaseFactorCode, this.customValidator1);
-            this.tbCaseFactorCode.WatermarkText = "保理代码";
-            this.tbCaseFactorCode.DoubleClick += new System.EventHandler(this.DetailFactor);
-            // 
-            // tbCaseSellerNameCN
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseSellerNameCN.Border.Class = "TextBoxBorder";
-            this.tbCaseSellerNameCN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "SellerClient.ClientNameCN", true));
-            this.tbCaseSellerNameCN.Location = new System.Drawing.Point(180, 25);
-            this.tbCaseSellerNameCN.Name = "tbCaseSellerNameCN";
-            this.tbCaseSellerNameCN.ReadOnly = true;
-            this.tbCaseSellerNameCN.Size = new System.Drawing.Size(293, 20);
-            this.tbCaseSellerNameCN.TabIndex = 4;
-            this.tbCaseSellerNameCN.WatermarkText = "中文名";
-            this.tbCaseSellerNameCN.DoubleClick += new System.EventHandler(this.DetailSeller);
-            // 
-            // tbCaseSellerNo
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseSellerNo.Border.Class = "TextBoxBorder";
-            this.tbCaseSellerNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.caseBindingSource, "SellerClient.ClientEDICode", true));
-            this.tbCaseSellerNo.Location = new System.Drawing.Point(100, 25);
-            this.tbCaseSellerNo.Name = "tbCaseSellerNo";
-            this.tbCaseSellerNo.ReadOnly = true;
-            this.tbCaseSellerNo.Size = new System.Drawing.Size(74, 20);
-            this.tbCaseSellerNo.TabIndex = 3;
-            this.caseValidator.SetValidator1(this.tbCaseSellerNo, this.requiredFieldValidator7);
-            this.tbCaseSellerNo.WatermarkText = "保理代码";
-            this.tbCaseSellerNo.DoubleClick += new System.EventHandler(this.DetailSeller);
-            // 
-            // tabItemCase
-            // 
-            this.tabItemCase.AttachedControl = this.tabPanelCase;
-            this.tabItemCase.Name = "tabItemCase";
-            this.tabItemCase.Text = "案件信息";
-            // 
             // caseValidator
             // 
             this.caseValidator.ContainerControl = this;
@@ -2539,8 +2533,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "RequestDate";
-            dataGridViewCellStyle8.Format = "d";
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle19.Format = "d";
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridViewTextBoxColumn6.HeaderText = "申请日期";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
@@ -2553,9 +2547,9 @@ namespace CMBC.EasyFactor.CaseMgr
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.DataPropertyName = "ReplyDate";
-            dataGridViewCellStyle9.Format = "d";
-            dataGridViewCellStyle9.NullValue = null;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle20.Format = "d";
+            dataGridViewCellStyle20.NullValue = null;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridViewTextBoxColumn8.HeaderText = "回复日期";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
@@ -2568,16 +2562,16 @@ namespace CMBC.EasyFactor.CaseMgr
             // dataGridViewTextBoxColumn10
             // 
             this.dataGridViewTextBoxColumn10.DataPropertyName = "PriceDate";
-            dataGridViewCellStyle10.Format = "d";
-            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle21.Format = "d";
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridViewTextBoxColumn10.HeaderText = "报价日";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             // 
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "DueDate";
-            dataGridViewCellStyle11.Format = "d";
-            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle22.Format = "d";
+            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridViewTextBoxColumn11.HeaderText = "额度期限";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             // 
@@ -2855,6 +2849,29 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dataGridViewTextBoxColumn53.HeaderText = "经办人";
             this.dataGridViewTextBoxColumn53.Name = "dataGridViewTextBoxColumn53";
             // 
+            // cbIsPool
+            // 
+            this.cbIsPool.AutoSize = true;
+            this.cbIsPool.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsPool.BackgroundStyle.Class = "";
+            this.cbIsPool.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.caseBindingSource, "IsPool", true));
+            this.cbIsPool.Location = new System.Drawing.Point(268, 153);
+            this.cbIsPool.Name = "cbIsPool";
+            this.cbIsPool.Size = new System.Drawing.Size(88, 16);
+            this.cbIsPool.TabIndex = 44;
+            this.cbIsPool.Text = "是否池融资";
+            // 
+            // caseBindingSource
+            // 
+            this.caseBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Case);
+            // 
+            // creditCoverNegBindingSource
+            // 
+            this.creditCoverNegBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CreditCoverNegotiation);
+            // 
             // CaseDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2868,24 +2885,24 @@ namespace CMBC.EasyFactor.CaseMgr
             this.Text = "案件";
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
+            this.tabPanelCase.ResumeLayout(false);
+            this.groupPanelCase.ResumeLayout(false);
+            this.groupPanelCase.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diCaseAppDate)).EndInit();
             this.tabPanelCreditCoverNeg.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditCoverNegs)).EndInit();
             this.groupPanelCreditCoverNeg.ResumeLayout(false);
             this.groupPanelCreditCoverNeg.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diDueDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.creditCoverNegBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diPriceDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diRequestDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diReplyDate)).EndInit();
             this.tabPanelCDA.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCDAs)).EndInit();
             this.groupPanelCDA.ResumeLayout(false);
-            this.tabPanelCase.ResumeLayout(false);
-            this.groupPanelCase.ResumeLayout(false);
-            this.groupPanelCase.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.caseBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diCaseAppDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.caseBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.creditCoverNegBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2961,6 +2978,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn51;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn52;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn53;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsPool;
 
     }
 }

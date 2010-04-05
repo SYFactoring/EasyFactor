@@ -23,6 +23,9 @@ namespace CMBC.EasyFactor.ARMgr
     {
         #region Fields (2)
 
+        /// <summary>
+        /// 
+        /// </summary>
         private Case _case;
 
         /// <summary>
@@ -166,7 +169,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cda"></param>
+        /// <param name="selectedCase"></param>
         public void CaculateOutstanding(Case selectedCase)
         {
             CDA cda = selectedCase.ActiveCDA;

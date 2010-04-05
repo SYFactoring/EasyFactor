@@ -75,7 +75,7 @@ namespace CMBC.EasyFactor
 
         #endregion Properties
 
-        #region Methods (83)
+        #region Methods (84)
 
         // Public Methods (2) 
 
@@ -113,7 +113,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (81) 
+        // Private Methods (82) 
 
         /// <summary>
         /// 
@@ -823,6 +823,28 @@ namespace CMBC.EasyFactor
                 FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
                 factorDetail.ShowDialog(this);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PoolFinance(object sender, EventArgs e)
+        {
+            ARPoolBasic poolFinance = new ARPoolBasic(ARPoolBasic.OpARType.FINANCE);
+            this.SetDetailPanel(poolFinance);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PoolRefund(object sender, EventArgs e)
+        {
+            ARPoolBasic poolRefund = new ARPoolBasic(ARPoolBasic.OpARType.REFUND);
+            this.SetDetailPanel(poolRefund);
         }
 
         /// <summary>

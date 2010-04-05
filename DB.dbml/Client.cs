@@ -21,6 +21,30 @@ namespace CMBC.EasyFactor.DB.dbml
     {
         #region Properties (7)
 
+        public double PoolAssignOutstanding
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public double PoolCashOutstanding
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public double PoolFinanceOutstanding
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
         /// <summary>
         /// Gets 买方信用风险担保额度
         /// </summary>

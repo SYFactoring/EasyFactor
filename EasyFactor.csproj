@@ -95,6 +95,12 @@
     <Compile Include="ARMgr\ARCaseBasic.Designer.cs">
       <DependentUpon>ARCaseBasic.cs</DependentUpon>
     </Compile>
+    <Compile Include="ARMgr\ARPoolBasic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\ARPoolBasic.Designer.cs">
+      <DependentUpon>ARPoolBasic.cs</DependentUpon>
+    </Compile>
     <Compile Include="ARMgr\AssignBatchDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,18 @@
     </Compile>
     <Compile Include="ARMgr\FinanceBatchDetail.Designer.cs">
       <DependentUpon>FinanceBatchDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ARMgr\PoolFinance.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\PoolFinance.Designer.cs">
+      <DependentUpon>PoolFinance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ARMgr\PoolRefund.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ARMgr\PoolRefund.Designer.cs">
+      <DependentUpon>PoolRefund.cs</DependentUpon>
     </Compile>
     <Compile Include="ARMgr\RefundBatchDetail.cs">
       <SubType>Form</SubType>
@@ -394,6 +412,10 @@
       <DependentUpon>ARCaseBasic.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\ARPoolBasic.resx">
+      <DependentUpon>ARPoolBasic.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\AssignBatchDetail.resx">
       <DependentUpon>AssignBatchDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -404,6 +426,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\FinanceBatchDetail.resx">
       <DependentUpon>FinanceBatchDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\PoolFinance.resx">
+      <DependentUpon>PoolFinance.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ARMgr\PoolRefund.resx">
+      <DependentUpon>PoolRefund.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ARMgr\RefundBatchDetail.resx">
