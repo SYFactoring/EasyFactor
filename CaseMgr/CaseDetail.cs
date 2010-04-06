@@ -61,6 +61,7 @@ namespace CMBC.EasyFactor.CaseMgr
             /// </summary>
             DETAIL_CREDIT_COVER_NEG
         }
+
         /// <summary>
         /// Operation types of Case
         /// </summary>
@@ -105,13 +106,13 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
             this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
 
-            List<Department> allMJDepatments = Department.AllDepartments(context, "贸易金融事业部");
+            List<Department> allMJDepatments = Department.AllDepartments(this.context, "贸易金融事业部");
             this.cbCaseCoDepts.DataSource = allMJDepatments;
             this.cbCaseCoDepts.ValueMember = "DepartmentCode";
             this.cbCaseCoDepts.DisplayMember = "DepartmentName";
             this.cbCaseCoDepts.SelectedIndex = -1;
 
-            List<Department> allDepartments = Department.AllDepartments(context);
+            List<Department> allDepartments = Department.AllDepartments(this.context);
             this.cbCaseOwnerDepts.DataSource = allDepartments;
             this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
             this.cbCaseOwnerDepts.GroupingMembers = "Domain";
@@ -138,7 +139,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else
             {
-                curCase = context.Cases.SingleOrDefault(c => c.CaseCode == curCase.CaseCode);
+                curCase = this.context.Cases.SingleOrDefault(c => c.CaseCode == curCase.CaseCode);
                 this.caseBindingSource.DataSource = curCase;
                 this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations;
                 this.dgvCDAs.DataSource = curCase.CDAs;
@@ -211,7 +212,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
             if (opCreditCoverNegType == OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG || opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
             {
-                neg = context.CreditCoverNegotiations.SingleOrDefault(n => n.NegoID == neg.NegoID);
+                neg = this.context.CreditCoverNegotiations.SingleOrDefault(n => n.NegoID == neg.NegoID);
                 this.creditCoverNegBindingSource.DataSource = neg;
             }
         }
@@ -275,7 +276,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             Case curCase = (Case)this.caseBindingSource.DataSource;
 
-            Factor cmbc = context.Factors.SingleOrDefault(f => f.FactorCode == Factor.CMBC_CODE);
+            Factor cmbc = this.context.Factors.SingleOrDefault(f => f.FactorCode == Factor.CMBC_CODE);
             switch (transactionType)
             {
                 case "国内卖方保理":
@@ -366,10 +367,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cdaCode = (string)this.dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
+            string cdaCode = (string)this.dgvCDAs["colCDACode", this.dgvCDAs.SelectedRows[0].Index].Value;
             if (cdaCode != null)
             {
-                CDA selectedCDA = context.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                CDA selectedCDA = this.context.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
                     if (MessageBoxEx.Show("是否打算删除额度通知书: " + cdaCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
@@ -381,8 +382,8 @@ namespace CMBC.EasyFactor.CaseMgr
 
                     try
                     {
-                        context.CDAs.DeleteOnSubmit(selectedCDA);
-                        context.SubmitChanges();
+                        this.context.CDAs.DeleteOnSubmit(selectedCDA);
+                        this.context.SubmitChanges();
                     }
                     catch (Exception e1)
                     {
@@ -432,8 +433,8 @@ namespace CMBC.EasyFactor.CaseMgr
             bool isDeleteOK = true;
             try
             {
-                context.CreditCoverNegotiations.DeleteOnSubmit(creditCoverNeg);
-                context.SubmitChanges();
+                this.context.CreditCoverNegotiations.DeleteOnSubmit(creditCoverNeg);
+                this.context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -478,10 +479,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string cdaCode = (string)this.dgvCDAs["colCDACode", dgvCDAs.SelectedRows[0].Index].Value;
+            string cdaCode = (string)this.dgvCDAs["colCDACode", this.dgvCDAs.SelectedRows[0].Index].Value;
             if (cdaCode != null)
             {
-                CDA selectedCDA = context.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
+                CDA selectedCDA = this.context.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
                     CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);
@@ -660,8 +661,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 try
                 {
                     curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType, curCase.CaseAppDate);
-                    context.Cases.InsertOnSubmit(curCase);
-                    context.SubmitChanges();
+                    this.context.Cases.InsertOnSubmit(curCase);
+                    this.context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -686,11 +687,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 try
                 {
-                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    this.context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in this.context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
@@ -698,7 +699,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         }
                     }
 
-                    context.SubmitChanges();
+                    this.context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -717,7 +718,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                         try
                         {
-                            context.SubmitChanges();
+                            this.context.SubmitChanges();
                         }
                         catch (Exception e1)
                         {
@@ -768,8 +769,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 try
                 {
                     creditCoverNeg.Case = curCase;
-                    context.CreditCoverNegotiations.InsertOnSubmit(creditCoverNeg);
-                    context.SubmitChanges();
+                    this.context.CreditCoverNegotiations.InsertOnSubmit(creditCoverNeg);
+                    this.context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -790,11 +791,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    this.context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in this.context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
@@ -802,7 +803,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         }
                     }
 
-                    context.SubmitChanges();
+                    this.context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -837,7 +838,7 @@ namespace CMBC.EasyFactor.CaseMgr
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
             {
-                curCase.BuyerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
+                curCase.BuyerClient = this.context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
                 switch (this.cbCaseTransactionType.Text)
                 {
                     case "国内卖方保理":
@@ -877,7 +878,7 @@ namespace CMBC.EasyFactor.CaseMgr
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
             {
-                curCase.SellerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
+                curCase.SellerClient = this.context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
                 switch (this.cbCaseTransactionType.Text)
                 {
                     case "国内卖方保理":
@@ -910,10 +911,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            int cid = (int)this.dgvCreditCoverNegs["colNegoID", dgvCreditCoverNegs.SelectedRows[0].Index].Value;
+            int cid = (int)this.dgvCreditCoverNegs["colNegoID", this.dgvCreditCoverNegs.SelectedRows[0].Index].Value;
             if (cid != 0)
             {
-                CreditCoverNegotiation selectedCreditCoverNeg = context.CreditCoverNegotiations.SingleOrDefault(c => c.NegoID == cid);
+                CreditCoverNegotiation selectedCreditCoverNeg = this.context.CreditCoverNegotiations.SingleOrDefault(c => c.NegoID == cid);
                 if (selectedCreditCoverNeg != null)
                 {
                     this.creditCoverNegBindingSource.DataSource = selectedCreditCoverNeg;
@@ -942,7 +943,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Factor factor = factorMgr.Selected;
             if (factor != null)
             {
-                factor = context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
+                factor = this.context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
                 this.tbCaseFactorCode.Text = factor.FactorCode;
                 this.tbCaseFactorNameCN.Text = factor.CompanyNameCN;
                 this.tbCaseFactorNameEN.Text = factor.CompanyNameEN;
