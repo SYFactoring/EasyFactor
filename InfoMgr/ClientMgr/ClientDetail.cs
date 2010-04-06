@@ -1337,7 +1337,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
             {
-                client.ClientGroup = clientMgr.Selected;
+                client.ClientGroup = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
             }
         }
 
