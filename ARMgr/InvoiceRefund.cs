@@ -734,7 +734,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             IList logList = this.logsBindingSource.List;
 
-            double totalRefund = 0;
+            //double totalRefund = 0;
             for (int i = 0; i < logList.Count; i++)
             {
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
@@ -746,26 +746,26 @@ namespace CMBC.EasyFactor.ARMgr
                         return false;
                     }
 
-                    if (log.InvoiceFinanceLog == null)
-                    {
-                        if (TypeUtil.LessZero(log.InvoicePaymentAmount - log.InvoiceRefundAmount - log.RefundAmount))
-                        {
-                            MessageBoxEx.Show("还款金额不能大于付款金额: " + log.InvoiceNo2, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return false;
-                        }
-                    }
-                    totalRefund += log.RefundAmount.GetValueOrDefault();
+                    //if (log.InvoiceFinanceLog == null)
+                    //{
+                    //    if (TypeUtil.LessZero(log.InvoicePaymentAmount - log.InvoiceRefundAmount - log.RefundAmount))
+                    //    {
+                    //        MessageBoxEx.Show("还款金额不能大于付款金额: " + log.InvoiceNo2, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //        return false;
+                    //    }
+                    //}
+                    //totalRefund += log.RefundAmount.GetValueOrDefault();
                 }
             }
 
-            if (TypeUtil.GreaterZero(this.totalPayment))
-            {
-                if (TypeUtil.GreaterZero(totalRefund - this.totalPayment))
-                {
-                    MessageBoxEx.Show("本次还款总额不能大于付款总额", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
-                }
-            }
+            //if (TypeUtil.GreaterZero(this.totalPayment))
+            //{
+            //    if (TypeUtil.GreaterZero(totalRefund - this.totalPayment))
+            //    {
+            //        MessageBoxEx.Show("本次还款总额不能大于付款总额", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        return false;
+            //    }
+            //}
 
             return true;
         }
