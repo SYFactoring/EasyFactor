@@ -456,14 +456,20 @@ namespace CMBC.EasyFactor.DB.dbml
                     }
 
                     RefundAmount += refund;
-                    DateTime maxDate2 = financeLog.InvoiceRefundLogs.Max(log => log.InvoiceRefundBatch.RefundDate);
-                    if (maxDate2 > maxDate)
+                    if (financeLog.InvoiceRefundLogs.Count > 0)
                     {
-                        maxDate = maxDate2;
+                        DateTime maxDate2 = financeLog.InvoiceRefundLogs.Max(log => log.InvoiceRefundBatch.RefundDate);
+                        if (maxDate2 > maxDate)
+                        {
+                            maxDate = maxDate2;
+                        }
                     }
                 }
 
-                RefundDate = maxDate;
+                if (maxDate != default(DateTime))
+                {
+                    RefundDate = maxDate;
+                }
             }
             else
             {
