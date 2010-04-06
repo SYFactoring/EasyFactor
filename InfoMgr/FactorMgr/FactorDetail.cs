@@ -577,7 +577,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             Factor factor = (Factor)factorBindingSource.DataSource;
             factor.CreateUserName = App.Current.CurUser.Name;
-            
+
             if (this.opFactorType == OpFactorType.NEW_FACTOR)
             {
                 bool isAddOK = true;
@@ -844,7 +844,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             if (factorMgr.Selected != null)
             {
-                factor.FactorGroup = factorMgr.Selected;
+                factor.FactorGroup = this.context.Factors.SingleOrDefault(f => f.FactorCode == factorMgr.Selected.FactorCode);
             }
         }
 

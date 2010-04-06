@@ -121,7 +121,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (_assignAmountByDate.HasValue == false)
+                if (_assginOutstanding.HasValue == false)
                 {
                     double total = 0;
                     foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)

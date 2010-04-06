@@ -968,6 +968,7 @@
             // colCaseCode
             // 
             this.colCaseCode.DataPropertyName = "CaseCode";
+            this.colCaseCode.Frozen = true;
             this.colCaseCode.HeaderText = "案件编号";
             this.colCaseCode.Name = "colCaseCode";
             this.colCaseCode.ReadOnly = true;
@@ -1205,30 +1206,6 @@
 
         private DevComponents.DotNetBar.LabelX lblLocation;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperationType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAppDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseMark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOPName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -1253,5 +1230,29 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperationType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAppDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseMark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOPName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
     }
 }
