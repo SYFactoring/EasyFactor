@@ -740,18 +740,20 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     InvoiceRefundLog log = (InvoiceRefundLog)logList[i];
-                    if (TypeUtil.LessZero(log.FinanceOutstanding - log.RefundAmount))
+                    if (TypeUtil.LessZero(log.FinanceAmount - log.RefundAmount))
                     {
                         MessageBoxEx.Show("还款金额不能大于融资余额: " + log.InvoiceNo2, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
 
-                    if (TypeUtil.LessZero(log.InvoicePaymentAmount - log.InvoiceRefundAmount - log.RefundAmount))
+                    if (log.InvoiceFinanceLog == null)
                     {
-                        MessageBoxEx.Show("还款金额不能大于付款金额: " + log.InvoiceNo2, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return false;
+                        if (TypeUtil.LessZero(log.InvoicePaymentAmount - log.InvoiceRefundAmount - log.RefundAmount))
+                        {
+                            MessageBoxEx.Show("还款金额不能大于付款金额: " + log.InvoiceNo2, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return false;
+                        }
                     }
-
                     totalRefund += log.RefundAmount.GetValueOrDefault();
                 }
             }
