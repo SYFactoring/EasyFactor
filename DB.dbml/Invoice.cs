@@ -439,7 +439,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (InvoiceFinanceLogs.Count > 0)
             {
-                RefundAmount = 0;
+                double refundAmount = 0;
                 DateTime maxDate = default(DateTime);
                 foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
                 {
@@ -455,7 +455,7 @@ namespace CMBC.EasyFactor.DB.dbml
                         refund *= rate;
                     }
 
-                    RefundAmount += refund;
+                    refundAmount += refund;
                     if (financeLog.InvoiceRefundLogs.Count > 0)
                     {
                         DateTime maxDate2 = financeLog.InvoiceRefundLogs.Max(log => log.InvoiceRefundBatch.RefundDate);
@@ -469,6 +469,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (maxDate != default(DateTime))
                 {
                     RefundDate = maxDate;
+                    this.RefundAmount = refundAmount;
                 }
             }
             else

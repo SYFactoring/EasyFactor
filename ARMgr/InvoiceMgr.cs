@@ -742,6 +742,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 foreach (Invoice invoice in selectedInvoices)
                 {
+                    invoice.CaculateRefund();
                     invoice.CaculateFinance();
                 }
 

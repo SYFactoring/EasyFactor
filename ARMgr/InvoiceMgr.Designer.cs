@@ -104,6 +104,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemInvoiceFlaw = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemInvoiceDispute = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaculateFinance = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCommission = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExportAllInvoices = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,8 +113,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSelectedInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSelectedInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaculateFinance = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaculateRefund = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -893,14 +892,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemInvoiceFlaw,
             this.menuItemInvoiceDispute,
             this.menuItemInvoiceDelete,
-            this.menuItemCaculateRefund,
             this.menuItemCaculateFinance,
             this.menuItemCommission,
             this.toolStripSeparator1,
             this.menuItemExportAllInvoices,
             this.menuItemExportSelectedInvoices});
             this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(159, 258);
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(159, 236);
             // 
             // menuItemInvoiceDetail
             // 
@@ -941,6 +939,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemInvoiceDelete.Size = new System.Drawing.Size(158, 22);
             this.menuItemInvoiceDelete.Text = "删除发票";
             this.menuItemInvoiceDelete.Click += new System.EventHandler(this.DeleteInvoice);
+            // 
+            // menuItemCaculateFinance
+            // 
+            this.menuItemCaculateFinance.Name = "menuItemCaculateFinance";
+            this.menuItemCaculateFinance.Size = new System.Drawing.Size(158, 22);
+            this.menuItemCaculateFinance.Text = "修正多币种Bug";
+            this.menuItemCaculateFinance.Click += new System.EventHandler(this.CaculateFinance);
             // 
             // menuItemCommission
             // 
@@ -999,20 +1004,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemSelectedInvoiceOverDue.Size = new System.Drawing.Size(146, 22);
             this.menuItemSelectedInvoiceOverDue.Text = "逾期台帐格式";
             this.menuItemSelectedInvoiceOverDue.Click += new System.EventHandler(this.ExportSelectedInvoicesOverDue);
-            // 
-            // menuItemCaculateFinance
-            // 
-            this.menuItemCaculateFinance.Name = "menuItemCaculateFinance";
-            this.menuItemCaculateFinance.Size = new System.Drawing.Size(158, 22);
-            this.menuItemCaculateFinance.Text = "重新计算融资";
-            this.menuItemCaculateFinance.Click += new System.EventHandler(this.CaculateFinance);
-            // 
-            // menuItemCaculateRefund
-            // 
-            this.menuItemCaculateRefund.Name = "menuItemCaculateRefund";
-            this.menuItemCaculateRefund.Size = new System.Drawing.Size(158, 22);
-            this.menuItemCaculateRefund.Text = "重新计算付款";
-            this.menuItemCaculateRefund.Click += new System.EventHandler(this.CaculateRefund);
             // 
             // InvoiceMgr
             // 
@@ -1104,6 +1095,5 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.LabelX lblAssignOverDueDays;
         private System.Windows.Forms.ToolStripMenuItem menuItemCommission;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaculateFinance;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaculateRefund;
     }
 }
