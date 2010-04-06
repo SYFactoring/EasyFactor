@@ -39,10 +39,20 @@
             DevComponents.DotNetBar.LabelX financePeriodBeginLabel;
             DevComponents.DotNetBar.LabelX financeAmountLabel;
             DevComponents.DotNetBar.LabelX financeBatchNoLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PoolFinance));
             this.dgvClients = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValuedAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceProportion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCanBeFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.poolBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -72,8 +82,11 @@
             this.financeAmountTextBoxX = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.batchCurrencyComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.financeBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.colCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.casesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             lblLoanNo = new DevComponents.DotNetBar.LabelX();
             lblFinanceLineBalance = new DevComponents.DotNetBar.LabelX();
             lblTotalInterest = new DevComponents.DotNetBar.LabelX();
@@ -90,6 +103,9 @@
             this.panelFinanceBatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.casesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lblLoanNo
@@ -227,26 +243,30 @@
             this.dgvClients.AllowUserToAddRows = false;
             this.dgvClients.AllowUserToDeleteRows = false;
             this.dgvClients.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCheckBox,
-            this.colCaseCode});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClients.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colCaseCode,
+            this.colBuyerName,
+            this.colAssignOutstanding,
+            this.colValuedAssignOutstanding,
+            this.colFinanceProportion,
+            this.colCanBeFinanceAmount});
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClients.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvClients.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClients.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvClients.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
@@ -255,6 +275,52 @@
             this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvClients.Size = new System.Drawing.Size(755, 269);
             this.dgvClients.TabIndex = 5;
+            // 
+            // colCaseCode
+            // 
+            this.colCaseCode.DataPropertyName = "CaseCode";
+            this.colCaseCode.Frozen = true;
+            this.colCaseCode.HeaderText = "案件编号";
+            this.colCaseCode.Name = "colCaseCode";
+            this.colCaseCode.ReadOnly = true;
+            // 
+            // colBuyerName
+            // 
+            this.colBuyerName.DataPropertyName = "BuyerName";
+            this.colBuyerName.HeaderText = "买方名称";
+            this.colBuyerName.Name = "colBuyerName";
+            // 
+            // colAssignOutstanding
+            // 
+            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle8.NullValue = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colAssignOutstanding.HeaderText = "账款余额";
+            this.colAssignOutstanding.Name = "colAssignOutstanding";
+            // 
+            // colValuedAssignOutstanding
+            // 
+            this.colValuedAssignOutstanding.DataPropertyName = "ValuedAssignOutstanding";
+            dataGridViewCellStyle9.Format = "N2";
+            this.colValuedAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle9;
+            this.colValuedAssignOutstanding.HeaderText = "有效账款余额";
+            this.colValuedAssignOutstanding.Name = "colValuedAssignOutstanding";
+            // 
+            // colFinanceProportion
+            // 
+            this.colFinanceProportion.DataPropertyName = "FinanceProportion";
+            dataGridViewCellStyle10.Format = "p3";
+            this.colFinanceProportion.DefaultCellStyle = dataGridViewCellStyle10;
+            this.colFinanceProportion.HeaderText = "预付比例";
+            this.colFinanceProportion.Name = "colFinanceProportion";
+            // 
+            // colCanBeFinanceAmount
+            // 
+            this.colCanBeFinanceAmount.DataPropertyName = "CanBeFinanceAmount";
+            dataGridViewCellStyle11.Format = "N2";
+            this.colCanBeFinanceAmount.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colCanBeFinanceAmount.HeaderText = "可融资金额";
+            this.colCanBeFinanceAmount.Name = "colCanBeFinanceAmount";
             // 
             // poolBindingNavigator
             // 
@@ -661,21 +727,24 @@
             this.financeBatchNoTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeBatchNoTextBox.TabIndex = 1;
             // 
-            // colCheckBox
+            // batchBindingSource
             // 
-            this.colCheckBox.Frozen = true;
-            this.colCheckBox.HeaderText = "";
-            this.colCheckBox.Name = "colCheckBox";
-            this.colCheckBox.ReadOnly = true;
-            this.colCheckBox.Width = 20;
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch);
             // 
-            // colCaseCode
+            // superValidator
             // 
-            this.colCaseCode.DataPropertyName = "CaseCode";
-            this.colCaseCode.Frozen = true;
-            this.colCaseCode.HeaderText = "案件编号";
-            this.colCaseCode.Name = "colCaseCode";
-            this.colCaseCode.ReadOnly = true;
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
             // 
             // PoolFinance
             // 
@@ -694,6 +763,9 @@
             this.panelFinanceBatch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.casesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -731,7 +803,16 @@
         private DevComponents.DotNetBar.Controls.TextBoxX financeAmountTextBoxX;
         private DevComponents.DotNetBar.Controls.ComboBoxEx batchCurrencyComboBoxEx;
         private DevComponents.DotNetBar.Controls.TextBoxX financeBatchNoTextBox;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colValuedAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCanBeFinanceAmount;
+        private System.Windows.Forms.BindingSource casesBindingSource;
+        private System.Windows.Forms.BindingSource batchBindingSource;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
     }
 }

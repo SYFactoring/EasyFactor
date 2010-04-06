@@ -31,8 +31,8 @@
             DevComponents.DotNetBar.LabelX lblClient;
             this.panelPoolBasic = new DevComponents.DotNetBar.ExpandablePanel();
             this.panelPoolOutstanding = new DevComponents.DotNetBar.ExpandablePanel();
-            this.lblAssignOutstanding = new DevComponents.DotNetBar.LabelX();
-            this.tbAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblValuedAssignOutstanding = new DevComponents.DotNetBar.LabelX();
+            this.tbValuedAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbFinanceOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCashOutstanding = new DevComponents.DotNetBar.LabelX();
             this.lblFinanceOustanding = new DevComponents.DotNetBar.LabelX();
@@ -42,6 +42,8 @@
             this.tbClientEDICode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelPool = new DevComponents.DotNetBar.PanelEx();
+            this.lblTotalAssignOutstanding = new DevComponents.DotNetBar.LabelX();
+            this.tbTotalAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             lblClient = new DevComponents.DotNetBar.LabelX();
             this.panelPoolBasic.SuspendLayout();
             this.panelPoolOutstanding.SuspendLayout();
@@ -70,7 +72,7 @@
             this.panelPoolBasic.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelPoolBasic.Location = new System.Drawing.Point(0, 0);
             this.panelPoolBasic.Name = "panelPoolBasic";
-            this.panelPoolBasic.Size = new System.Drawing.Size(730, 111);
+            this.panelPoolBasic.Size = new System.Drawing.Size(730, 86);
             this.panelPoolBasic.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelPoolBasic.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelPoolBasic.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -93,8 +95,10 @@
             this.panelPoolOutstanding.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelPoolOutstanding.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
             this.panelPoolOutstanding.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelPoolOutstanding.Controls.Add(this.lblAssignOutstanding);
-            this.panelPoolOutstanding.Controls.Add(this.tbAssignOutstanding);
+            this.panelPoolOutstanding.Controls.Add(this.tbTotalAssignOutstanding);
+            this.panelPoolOutstanding.Controls.Add(this.lblTotalAssignOutstanding);
+            this.panelPoolOutstanding.Controls.Add(this.lblValuedAssignOutstanding);
+            this.panelPoolOutstanding.Controls.Add(this.tbValuedAssignOutstanding);
             this.panelPoolOutstanding.Controls.Add(this.tbFinanceOutstanding);
             this.panelPoolOutstanding.Controls.Add(this.lblCashOutstanding);
             this.panelPoolOutstanding.Controls.Add(this.lblFinanceOustanding);
@@ -103,7 +107,7 @@
             this.panelPoolOutstanding.ExpandOnTitleClick = true;
             this.panelPoolOutstanding.Location = new System.Drawing.Point(225, 10);
             this.panelPoolOutstanding.Name = "panelPoolOutstanding";
-            this.panelPoolOutstanding.Size = new System.Drawing.Size(227, 101);
+            this.panelPoolOutstanding.Size = new System.Drawing.Size(431, 76);
             this.panelPoolOutstanding.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelPoolOutstanding.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelPoolOutstanding.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -122,30 +126,30 @@
             this.panelPoolOutstanding.TitleStyle.GradientAngle = 90;
             this.panelPoolOutstanding.TitleText = "余额信息";
             // 
-            // lblAssignOutstanding
+            // lblValuedAssignOutstanding
             // 
-            this.lblAssignOutstanding.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblAssignOutstanding.BackgroundStyle.Class = "";
-            this.lblAssignOutstanding.Location = new System.Drawing.Point(13, 28);
-            this.lblAssignOutstanding.Name = "lblAssignOutstanding";
-            this.lblAssignOutstanding.Size = new System.Drawing.Size(93, 16);
-            this.lblAssignOutstanding.TabIndex = 0;
-            this.lblAssignOutstanding.Text = "应收账款池余额";
-            // 
-            // tbAssignOutstanding
+            this.lblValuedAssignOutstanding.AutoSize = true;
             // 
             // 
             // 
+            this.lblValuedAssignOutstanding.BackgroundStyle.Class = "";
+            this.lblValuedAssignOutstanding.Location = new System.Drawing.Point(218, 26);
+            this.lblValuedAssignOutstanding.Name = "lblValuedAssignOutstanding";
+            this.lblValuedAssignOutstanding.Size = new System.Drawing.Size(93, 16);
+            this.lblValuedAssignOutstanding.TabIndex = 0;
+            this.lblValuedAssignOutstanding.Text = "应收账款池余额";
             // 
-            this.tbAssignOutstanding.Border.Class = "TextBoxBorder";
-            this.tbAssignOutstanding.Location = new System.Drawing.Point(112, 27);
-            this.tbAssignOutstanding.Name = "tbAssignOutstanding";
-            this.tbAssignOutstanding.ReadOnly = true;
-            this.tbAssignOutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbAssignOutstanding.TabIndex = 1;
+            // tbValuedAssignOutstanding
+            // 
+            // 
+            // 
+            // 
+            this.tbValuedAssignOutstanding.Border.Class = "TextBoxBorder";
+            this.tbValuedAssignOutstanding.Location = new System.Drawing.Point(317, 25);
+            this.tbValuedAssignOutstanding.Name = "tbValuedAssignOutstanding";
+            this.tbValuedAssignOutstanding.ReadOnly = true;
+            this.tbValuedAssignOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbValuedAssignOutstanding.TabIndex = 1;
             // 
             // tbFinanceOutstanding
             // 
@@ -153,7 +157,7 @@
             // 
             // 
             this.tbFinanceOutstanding.Border.Class = "TextBoxBorder";
-            this.tbFinanceOutstanding.Location = new System.Drawing.Point(112, 71);
+            this.tbFinanceOutstanding.Location = new System.Drawing.Point(317, 50);
             this.tbFinanceOutstanding.Name = "tbFinanceOutstanding";
             this.tbFinanceOutstanding.ReadOnly = true;
             this.tbFinanceOutstanding.Size = new System.Drawing.Size(100, 20);
@@ -179,7 +183,7 @@
             // 
             // 
             this.lblFinanceOustanding.BackgroundStyle.Class = "";
-            this.lblFinanceOustanding.Location = new System.Drawing.Point(13, 72);
+            this.lblFinanceOustanding.Location = new System.Drawing.Point(218, 50);
             this.lblFinanceOustanding.Name = "lblFinanceOustanding";
             this.lblFinanceOustanding.Size = new System.Drawing.Size(68, 16);
             this.lblFinanceOustanding.TabIndex = 4;
@@ -191,7 +195,7 @@
             // 
             // 
             this.tbCashOutstanding.Border.Class = "TextBoxBorder";
-            this.tbCashOutstanding.Location = new System.Drawing.Point(112, 49);
+            this.tbCashOutstanding.Location = new System.Drawing.Point(87, 49);
             this.tbCashOutstanding.Name = "tbCashOutstanding";
             this.tbCashOutstanding.ReadOnly = true;
             this.tbCashOutstanding.Size = new System.Drawing.Size(100, 20);
@@ -210,7 +214,7 @@
             this.panelClient.ExpandOnTitleClick = true;
             this.panelClient.Location = new System.Drawing.Point(0, 10);
             this.panelClient.Name = "panelClient";
-            this.panelClient.Size = new System.Drawing.Size(225, 101);
+            this.panelClient.Size = new System.Drawing.Size(225, 76);
             this.panelClient.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelClient.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelClient.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -272,9 +276,9 @@
             this.panelPool.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelPool.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelPool.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPool.Location = new System.Drawing.Point(0, 111);
+            this.panelPool.Location = new System.Drawing.Point(0, 86);
             this.panelPool.Name = "panelPool";
-            this.panelPool.Size = new System.Drawing.Size(730, 87);
+            this.panelPool.Size = new System.Drawing.Size(730, 112);
             this.panelPool.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelPool.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelPool.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -283,6 +287,31 @@
             this.panelPool.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelPool.Style.GradientAngle = 90;
             this.panelPool.TabIndex = 9;
+            // 
+            // lblTotalAssignOutstanding
+            // 
+            this.lblTotalAssignOutstanding.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblTotalAssignOutstanding.BackgroundStyle.Class = "";
+            this.lblTotalAssignOutstanding.Location = new System.Drawing.Point(13, 25);
+            this.lblTotalAssignOutstanding.Name = "lblTotalAssignOutstanding";
+            this.lblTotalAssignOutstanding.Size = new System.Drawing.Size(68, 16);
+            this.lblTotalAssignOutstanding.TabIndex = 6;
+            this.lblTotalAssignOutstanding.Text = "总账款余额";
+            // 
+            // tbTotalAssignOutstanding
+            // 
+            // 
+            // 
+            // 
+            this.tbTotalAssignOutstanding.Border.Class = "TextBoxBorder";
+            this.tbTotalAssignOutstanding.Location = new System.Drawing.Point(87, 25);
+            this.tbTotalAssignOutstanding.Name = "tbTotalAssignOutstanding";
+            this.tbTotalAssignOutstanding.ReadOnly = true;
+            this.tbTotalAssignOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbTotalAssignOutstanding.TabIndex = 7;
             // 
             // ARPoolBasic
             // 
@@ -307,8 +336,8 @@
         private DevComponents.DotNetBar.LabelX lblFinanceOustanding;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCashOutstanding;
         private DevComponents.DotNetBar.LabelX lblCashOutstanding;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbAssignOutstanding;
-        private DevComponents.DotNetBar.LabelX lblAssignOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbValuedAssignOutstanding;
+        private DevComponents.DotNetBar.LabelX lblValuedAssignOutstanding;
         private DevComponents.DotNetBar.ExpandablePanel panelClient;
         private DevComponents.DotNetBar.ExpandablePanel panelPoolOutstanding;
         private DevComponents.DotNetBar.ButtonX btnClientQuery;
@@ -316,5 +345,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.ExpandablePanel panelPoolBasic;
         private DevComponents.DotNetBar.PanelEx panelPool;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssignOutstanding;
+        private DevComponents.DotNetBar.LabelX lblTotalAssignOutstanding;
     }
 }

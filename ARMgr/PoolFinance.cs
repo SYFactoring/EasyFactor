@@ -53,6 +53,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
+
         }
     }
 }

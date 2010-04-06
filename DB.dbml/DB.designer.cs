@@ -111,6 +111,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertAgreement(Agreement instance);
     partial void UpdateAgreement(Agreement instance);
     partial void DeleteAgreement(Agreement instance);
+    partial void InsertGuaranteeDeposit(GuaranteeDeposit instance);
+    partial void UpdateGuaranteeDeposit(GuaranteeDeposit instance);
+    partial void DeleteGuaranteeDeposit(GuaranteeDeposit instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -356,6 +359,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<Agreement>();
+			}
+		}
+		
+		public System.Data.Linq.Table<GuaranteeDeposit> GuaranteeDeposits
+		{
+			get
+			{
+				return this.GetTable<GuaranteeDeposit>();
 			}
 		}
 	}
@@ -2741,6 +2752,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<ClientReview> _ClientReviews;
 		
+		private EntitySet<GuaranteeDeposit> _GuaranteeDeposits;
+		
 		private EntityRef<Department> _Department;
 		
 		private EntityRef<Client> _ClientGroup;
@@ -2824,6 +2837,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._ClientCreditLines = new EntitySet<ClientCreditLine>(new Action<ClientCreditLine>(this.attach_ClientCreditLines), new Action<ClientCreditLine>(this.detach_ClientCreditLines));
 			this._Contracts = new EntitySet<Contract>(new Action<Contract>(this.attach_Contracts), new Action<Contract>(this.detach_Contracts));
 			this._ClientReviews = new EntitySet<ClientReview>(new Action<ClientReview>(this.attach_ClientReviews), new Action<ClientReview>(this.detach_ClientReviews));
+			this._GuaranteeDeposits = new EntitySet<GuaranteeDeposit>(new Action<GuaranteeDeposit>(this.attach_GuaranteeDeposits), new Action<GuaranteeDeposit>(this.detach_GuaranteeDeposits));
 			this._Department = default(EntityRef<Department>);
 			this._ClientGroup = default(EntityRef<Client>);
 			OnCreated();
@@ -3568,6 +3582,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="Client_GuaranteeDeposit", Storage="_GuaranteeDeposits", OtherKey="ClientEDICode")]
+		public EntitySet<GuaranteeDeposit> GuaranteeDeposits
+		{
+			get
+			{
+				return this._GuaranteeDeposits;
+			}
+			set
+			{
+				this._GuaranteeDeposits.Assign(value);
+			}
+		}
+		
 		[Association(Name="Department_Client", Storage="_Department", ThisKey="BranchCode", IsForeignKey=true)]
 		public Department Department
 		{
@@ -3735,6 +3762,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_ClientReviews(ClientReview entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
+		}
+		
+		private void attach_GuaranteeDeposits(GuaranteeDeposit entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_GuaranteeDeposits(GuaranteeDeposit entity)
 		{
 			this.SendPropertyChanging();
 			entity.Client = null;
@@ -12950,6 +12989,205 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._FactorCode = default(string);
 					}
 					this.SendPropertyChanged("Factor");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.GuaranteeDeposit")]
+	public partial class GuaranteeDeposit : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _GuaranteeDepositID;
+		
+		private string _GuaranteeDepositCurrency;
+		
+		private double _GuaranteeDepositAmount;
+		
+		private string _ClientEDICode;
+		
+		private string _CreateUserName;
+		
+		private EntityRef<Client> _Client;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnGuaranteeDepositIDChanging(int value);
+    partial void OnGuaranteeDepositIDChanged();
+    partial void OnGuaranteeDepositCurrencyChanging(string value);
+    partial void OnGuaranteeDepositCurrencyChanged();
+    partial void OnGuaranteeDepositAmountChanging(double value);
+    partial void OnGuaranteeDepositAmountChanged();
+    partial void OnClientEDICodeChanging(string value);
+    partial void OnClientEDICodeChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
+    #endregion
+		
+		public GuaranteeDeposit()
+		{
+			this._Client = default(EntityRef<Client>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_GuaranteeDepositID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int GuaranteeDepositID
+		{
+			get
+			{
+				return this._GuaranteeDepositID;
+			}
+			set
+			{
+				if ((this._GuaranteeDepositID != value))
+				{
+					this.OnGuaranteeDepositIDChanging(value);
+					this.SendPropertyChanging();
+					this._GuaranteeDepositID = value;
+					this.SendPropertyChanged("GuaranteeDepositID");
+					this.OnGuaranteeDepositIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_GuaranteeDepositCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		public string GuaranteeDepositCurrency
+		{
+			get
+			{
+				return this._GuaranteeDepositCurrency;
+			}
+			set
+			{
+				if ((this._GuaranteeDepositCurrency != value))
+				{
+					this.OnGuaranteeDepositCurrencyChanging(value);
+					this.SendPropertyChanging();
+					this._GuaranteeDepositCurrency = value;
+					this.SendPropertyChanged("GuaranteeDepositCurrency");
+					this.OnGuaranteeDepositCurrencyChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_GuaranteeDepositAmount", DbType="Float NOT NULL")]
+		public double GuaranteeDepositAmount
+		{
+			get
+			{
+				return this._GuaranteeDepositAmount;
+			}
+			set
+			{
+				if ((this._GuaranteeDepositAmount != value))
+				{
+					this.OnGuaranteeDepositAmountChanging(value);
+					this.SendPropertyChanging();
+					this._GuaranteeDepositAmount = value;
+					this.SendPropertyChanged("GuaranteeDepositAmount");
+					this.OnGuaranteeDepositAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ClientEDICode", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		public string ClientEDICode
+		{
+			get
+			{
+				return this._ClientEDICode;
+			}
+			set
+			{
+				if ((this._ClientEDICode != value))
+				{
+					if (this._Client.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnClientEDICodeChanging(value);
+					this.SendPropertyChanging();
+					this._ClientEDICode = value;
+					this.SendPropertyChanged("ClientEDICode");
+					this.OnClientEDICodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreateUserName", DbType="NVarChar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Client_GuaranteeDeposit", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
+		public Client Client
+		{
+			get
+			{
+				return this._Client.Entity;
+			}
+			set
+			{
+				Client previousValue = this._Client.Entity;
+				if (((previousValue != value) 
+							|| (this._Client.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Client.Entity = null;
+						previousValue.GuaranteeDeposits.Remove(this);
+					}
+					this._Client.Entity = value;
+					if ((value != null))
+					{
+						value.GuaranteeDeposits.Add(this);
+						this._ClientEDICode = value.ClientEDICode;
+					}
+					else
+					{
+						this._ClientEDICode = default(string);
+					}
+					this.SendPropertyChanged("Client");
 				}
 			}
 		}

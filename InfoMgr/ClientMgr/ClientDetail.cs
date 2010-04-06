@@ -20,7 +20,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (7)
+        #region Fields (10)
 
         /// <summary>
         /// 
@@ -33,7 +33,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// 
         /// </summary>
+        private BindingSource bsGDs;
+        /// <summary>
+        /// 
+        /// </summary>
         private BindingSource bsReviews;
+        /// <summary>
+        /// 
+        /// </summary>
+        private DBDataContext context;
         /// <summary>
         /// 
         /// </summary>
@@ -49,16 +57,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// 
         /// </summary>
-        private OpReviewType opReviewType;
-
+        private OpGDType opGDType;
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context;
+        private OpReviewType opReviewType;
 
         #endregion Fields
 
-        #region Enums (4)
+        #region Enums (5)
 
         /// <summary>
         /// 
@@ -120,7 +127,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
-
         /// <summary>
         /// Review Type
         /// </summary>
@@ -140,6 +146,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// 
             /// </summary>
             DETAIL_REVIEW
+        }
+        /// <summary>
+        /// Guarantee Deposite Type
+        /// </summary>
+        public enum OpGDType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            NEW_GD,
+            /// <summary>
+            /// 
+            /// </summary>
+            UPDATE_GD,
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL_GD
         }
 
         #endregion Enums
@@ -161,12 +185,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.bsCreditLines = new BindingSource();
             this.bsContracts = new BindingSource();
             this.bsReviews = new BindingSource();
+            this.bsGDs = new BindingSource();
             this.dgvClientCreditLines.AutoGenerateColumns = false;
             this.dgvContracts.AutoGenerateColumns = false;
             this.dgvReviews.AutoGenerateColumns = false;
             this.dgvClientCreditLines.DataSource = this.bsCreditLines;
             this.dgvContracts.DataSource = this.bsContracts;
             this.dgvReviews.DataSource = this.bsReviews;
+            this.dgvGDs.DataSource = this.bsGDs;
             this.context = new DBDataContext();
 
             this.cbCountryCode.DataSource = Country.AllCountries();
@@ -190,10 +216,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.requestCurrencyComboBox.ValueMember = "CurrencyCode";
             this.requestCurrencyComboBox.SelectedIndex = -1;
 
+            this.cbGDCurr.DataSource = Currency.AllCurrencies();
+            this.cbGDCurr.DisplayMember = "CurrencyCode";
+            this.cbGDCurr.ValueMember = "CurrencyCode";
+            this.cbGDCurr.SelectedIndex = -1;
+
             this.opClientType = opClientType;
             this.opClientCreditLineType = opClientCreditLineType;
             this.opContractType = opContractType;
             this.opReviewType = opReviewType;
+            this.opGDType = OpGDType.DETAIL_GD;
 
             if (opClientType == OpClientType.NEW_CLIENT)
             {
@@ -209,6 +241,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.bsCreditLines.DataSource = client.ClientCreditLines;
             this.bsContracts.DataSource = client.Contracts;
             this.bsReviews.DataSource = client.ClientReviews;
+            this.bsGDs.DataSource = client.GuaranteeDeposits;
 
             List<Department> deptsList = (List<Department>)this.cbDepartments.DataSource;
             this.cbDepartments.SelectedIndex = deptsList.IndexOf(client.Department);
@@ -241,6 +274,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateClientCreditLineControlStatus();
             this.UpdateContractControlStatus();
             this.UpdateReviewControlStatus();
+            this.UpdateGDControlStatus();
 
             this.requestCommissionRateTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
             this.requestCommissionRateTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
@@ -341,9 +375,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion Constructors
 
-        #region Methods (39)
+        #region Methods (45)
 
-        // Private Methods (39) 
+        // Private Methods (45) 
 
         /// <summary>
         /// 
@@ -547,6 +581,63 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void DeleteGD(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.gdBindingSource.DataSource is GuaranteeDeposit))
+            {
+                return;
+            }
+
+            GuaranteeDeposit gd = (GuaranteeDeposit)this.gdBindingSource.DataSource;
+            if (gd.GuaranteeDepositID == 0)
+            {
+                return;
+            }
+
+            if (MessageBoxEx.Show("是否打算删除保证金: " + gd.GuaranteeDepositAmount, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            bool isDeleteOK = true;
+            try
+            {
+                context.GuaranteeDeposits.DeleteOnSubmit(gd);
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                isDeleteOK = false;
+                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (isDeleteOK)
+            {
+                MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.gdBindingSource.DataSource = typeof(GuaranteeDeposit);
+                this.SetGDEditable(false);
+                this.bsGDs.DataSource = typeof(GuaranteeDeposit);
+                this.bsGDs.DataSource = client.GuaranteeDeposits;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteReview(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
@@ -708,6 +799,31 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void NewGD(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            this.gdBindingSource.DataSource = typeof(GuaranteeDeposit);
+            this.gdBindingSource.DataSource = new GuaranteeDeposit();
+            this.opGDType = OpGDType.NEW_GD;
+            this.UpdateGDControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewReview(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
@@ -777,6 +893,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             this.bsContracts.DataSource = typeof(Contract);
             this.bsContracts.DataSource = client.Contracts;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefreshGDs(object sender, EventArgs e)
+        {
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            this.bsGDs.DataSource = typeof(GuaranteeDeposit);
+            this.bsGDs.DataSource = client.GuaranteeDeposits;
         }
 
         /// <summary>
@@ -1190,6 +1324,90 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void SaveGD(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            Client client = (Client)this.clientBindingSource.DataSource;
+            if (client == null)
+            {
+                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(this.gdBindingSource.DataSource is GuaranteeDeposit))
+            {
+                return;
+            }
+
+            GuaranteeDeposit gd = (GuaranteeDeposit)this.gdBindingSource.DataSource;
+            gd.CreateUserName = App.Current.CurUser.Name;
+
+            if (this.opGDType == OpGDType.NEW_GD)
+            {
+                bool isAddOK = true;
+                try
+                {
+                    client.GuaranteeDeposits.Add(gd);
+
+                    context.GuaranteeDeposits.InsertOnSubmit(gd);
+                    context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    gd.Client = null;
+                    isAddOK = false;
+                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isAddOK)
+                {
+                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.bsGDs.DataSource = typeof(GuaranteeDeposit);
+                    this.bsGDs.DataSource = client.GuaranteeDeposits;
+                    this.NewGD(null, null);
+                }
+            }
+            else
+            {
+                bool isUpdateOK = true;
+                try
+                {
+                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
+
+                    context.SubmitChanges();
+                }
+                catch (Exception e2)
+                {
+                    isUpdateOK = false;
+                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isUpdateOK)
+                {
+                    MessageBoxEx.Show(ConstStr.MESSAGE.DATA_UPDATE_SUCCESS, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveReview(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
@@ -1323,6 +1541,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void SelectGD(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvGDs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            GuaranteeDeposit selectedGD = (GuaranteeDeposit)this.bsGDs.List[this.dgvGDs.SelectedRows[0].Index];
+            this.SetGDEditable(false);
+            this.gdBindingSource.DataSource = selectedGD;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectGroup(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
@@ -1432,6 +1667,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void SetContractEditable(bool editable)
         {
             foreach (Control comp in this.groupPanelContract.Controls)
+            {
+                ControlUtil.SetComponetEditable(comp, editable);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="editable"></param>
+        private void SetGDEditable(bool editable)
+        {
+            foreach (Control comp in this.groupPanelGuaranteePanel.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, editable);
             }
@@ -1716,6 +1963,52 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             //ControlUtil.SetComponetEditable(this.tbContractStatus, false);
             ControlUtil.SetComponetEditable(this.tbContractCreateUserName, false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateGD(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            this.opGDType = OpGDType.UPDATE_GD;
+            this.UpdateGDControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateGDControlStatus()
+        {
+            if (this.opGDType == OpGDType.DETAIL_GD)
+            {
+                foreach (Control comp in this.groupPanelGuaranteePanel.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (this.opGDType == OpGDType.NEW_GD)
+            {
+                foreach (Control comp in this.groupPanelGuaranteePanel.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            else if (this.opGDType == OpGDType.UPDATE_GD)
+            {
+                foreach (Control comp in this.groupPanelGuaranteePanel.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+
+            ControlUtil.SetComponetEditable(this.tbGDCreateUserName, false);
         }
 
         /// <summary>

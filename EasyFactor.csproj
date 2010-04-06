@@ -646,6 +646,7 @@
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Factor.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.FactorAccount.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.FactorCreditLine.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.GuaranteeDeposit.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Invoice.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch.datasource" />
     <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch.datasource" />

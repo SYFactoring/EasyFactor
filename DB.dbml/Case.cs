@@ -17,9 +17,23 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Case
     {
-        #region Properties (16)
+        #region Fields (11)
 
         private CDA _activeCDA;
+        private double? _assginOutstanding;
+        private double? _assignAmountByDate;
+        private double? _commissionIncomeByDate;
+        private double? _financeAmountByDate;
+        private double? _financeOutstanding;
+        private double? _marginIncomeByDate;
+        private double? _netInterestIncomeByDate;
+        private double? _paymentAmountByDate;
+        private double? _totalAssignOutstanding;
+        private double? _valuedAssignOutstanding;
+
+        #endregion Fields
+
+        #region Properties (21)
 
         /// <summary>
         /// Gets 
@@ -53,26 +67,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public DateTime QueryDateFrom
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime QueryDateTo
-        {
-            get;
-            set;
-        }
-
-        private double? _assignAmountByDate;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public double AssignAmountByDate
         {
             get
@@ -94,25 +88,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _assignAmountByDate.Value;
             }
         }
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public double AssignAmount
-        //{
-        //    get
-        //    {
-        //        double result = 0;
-        //        foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
-        //        {
-        //            result += batch.AssignAmount;
-        //        }
-
-        //        return result;
-        //    }
-        //}
-
-        private double? _assginOutstanding;
 
         /// <summary>
         /// Gets 转让余额
@@ -142,6 +117,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public double CanBeFinanceAmount
+        {
+            get
+            {
+                return Math.Min(this.ActiveCDA.FinanceLineOutstanding.GetValueOrDefault(), this.ValuedAssignOutstanding * this.ActiveCDA.FinanceProportion ?? 0.8);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public List<ClientReview> ClientReviews
         {
             get
@@ -163,32 +149,6 @@ namespace CMBC.EasyFactor.DB.dbml
 
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Client TargetClient
-        {
-            get
-            {
-                switch (TransactionType)
-                {
-                    case "国内卖方保理":
-                    case "出口保理":
-                    case "国内信保保理":
-                    case "国际信保保理":
-                    case "租赁保理":
-                        return this.BuyerClient;
-                    case "国内买方保理":
-                    case "进口保理":
-                        return this.SellerClient;
-                    default:
-                        return null;
-                }
-            }
-        }
-
-        private double? _commissionIncomeByDate;
 
         /// <summary>
         /// 
@@ -256,7 +216,6 @@ namespace CMBC.EasyFactor.DB.dbml
         //        return result + handFreeIncome;
         //    }
         //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -293,8 +252,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
-
-        private double? _financeAmountByDate;
 
         /// <summary>
         /// 
@@ -349,7 +306,6 @@ namespace CMBC.EasyFactor.DB.dbml
         //        return result;
         //    }
         //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -368,8 +324,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
-
-        private double? _financeOutstanding;
 
         /// <summary>
         /// Gets 融资余额
@@ -405,8 +359,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private double? _marginIncomeByDate;
-
         /// <summary>
         /// 
         /// </summary>
@@ -439,33 +391,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _marginIncomeByDate;
             }
         }
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public double? MarginIncome
-        //{
-        //    get
-        //    {
-        //        double? result = null;
-        //        foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
-        //        {
-        //            if (batch.FinanceType == "卖方代付" || batch.FinanceType == "买方代付")
-        //            {
-        //                if (result == null)
-        //                {
-        //                    result = 0;
-        //                }
-
-        //                result += batch.MarginIncome;
-        //            }
-        //        }
-
-        //        return result;
-        //    }
-        //}
-
-        private double? _netInterestIncomeByDate;
 
         public double? NetInterestIncomeByDate
         {
@@ -500,33 +425,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        //public double? NetInterestIncome
-        //{
-        //    get
-        //    {
-        //        double? result = null;
-        //        foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
-        //        {
-        //            if (batch.FinanceType != "卖方代付" && batch.FinanceType != "买方代付")
-        //            {
-        //                if (result == null)
-        //                {
-        //                    result = 0;
-        //                }
-
-        //                result += batch.NetInterestIncome;
-        //            }
-        //        }
-
-        //        return result;
-        //    }
-        //}
-
-        private double? _paymentAmountByDate;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public double PaymentAmountByDate
         {
             get
@@ -549,24 +447,47 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public double PaymentAmount
-        //{
-        //    get
-        //    {
-        //        double result = 0;
-        //        foreach (InvoicePaymentBatch batch in this.InvoicePaymentBatches)
-        //        {
-        //            result += batch.PaymentAmount;
-        //        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime QueryDateFrom
+        {
+            get;
+            set;
+        }
 
-        //        return result;
-        //    }
-        //}
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime QueryDateTo
+        {
+            get;
+            set;
+        }
 
-        private double? _totalAssignOutstanding;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Client TargetClient
+        {
+            get
+            {
+                switch (TransactionType)
+                {
+                    case "国内卖方保理":
+                    case "出口保理":
+                    case "国内信保保理":
+                    case "国际信保保理":
+                    case "租赁保理":
+                        return this.BuyerClient;
+                    case "国内买方保理":
+                    case "进口保理":
+                        return this.SellerClient;
+                    default:
+                        return null;
+                }
+            }
+        }
 
         /// <summary>
         /// 
@@ -627,6 +548,42 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 用于池融资，有效的转让余额
+        /// </summary>
+        public double ValuedAssignOutstanding
+        {
+            get
+            {
+                if (_valuedAssignOutstanding.HasValue == false)
+                {
+                    double total = 0;
+                    foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
+                    {
+                        foreach (Invoice invoice in assignBatch.Invoices)
+                        {
+                            if (invoice.IsDispute.GetValueOrDefault() || invoice.IsFlaw || DateTime.Today > invoice.DueDate)
+                            {
+                                continue;
+                            }
+
+                            total += invoice.AssignOutstanding;
+                        }
+                    }
+
+                    _valuedAssignOutstanding = total;
+                }
+
+                return _valuedAssignOutstanding.Value;
+            }
+        }
+
+        #endregion Properties
+
+        #region Methods (2)
+
+        // Public Methods (2) 
+
+        /// <summary>
         /// 总收入
         /// </summary>
         //public double? TotalIncome
@@ -636,13 +593,6 @@ namespace CMBC.EasyFactor.DB.dbml
         //        return this.CommissionIncome + this.NetInterestIncome.GetValueOrDefault() + this.MarginIncome.GetValueOrDefault();
         //    }
         //}
-
-        #endregion Properties
-
-        #region Methods (2)
-
-        // Public Methods (2) 
-
         /// <summary>
         /// 
         /// </summary>

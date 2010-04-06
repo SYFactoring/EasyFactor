@@ -99,7 +99,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="selectedClient"></param>
         public void CaculateOutstanding(Client selectedClient)
         {
-            this.tbAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolAssignOutstanding);
+            this.tbTotalAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolTotalAssignOutstading);
+            this.tbValuedAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolValuedAssignOutstanding);
             this.tbCashOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolCashOutstanding);
             this.tbFinanceOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolFinanceOutstanding);
         }

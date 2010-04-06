@@ -21,27 +21,106 @@ namespace CMBC.EasyFactor.DB.dbml
     {
         #region Properties (7)
 
-        public double PoolAssignOutstanding
+        /// <summary>
+        /// 池融资的总账款余额
+        /// </summary>
+        public double PoolTotalAssignOutstading
         {
             get
             {
-                return 0;
+                double result = 0;
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                {
+                    double assignOutstanding = curCase.AssignOutstanding;
+                    if (curCase.InvoiceCurrency != "CNY")
+                    {
+                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
+                        assignOutstanding *= exchange;
+                    }
+
+                    result += assignOutstanding;
+                }
+
+                return result;
             }
         }
 
-        public double PoolCashOutstanding
+        /// <summary>
+        /// 池融资有效的账款余额，即应收账款池余额
+        /// </summary>
+        public double PoolValuedAssignOutstanding
         {
             get
             {
-                return 0;
+                double result = 0;
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                {
+                    double assignOutstanding = curCase.ValuedAssignOutstanding;
+                    if (curCase.InvoiceCurrency != "CNY")
+                    {
+                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
+                        assignOutstanding *= exchange;
+                    }
+
+                    result += assignOutstanding;
+                }
+
+                return result;
             }
         }
 
-        public double PoolFinanceOutstanding
+        /// <summary>
+        /// 现金池余额
+        /// </summary>
+        public double? PoolCashOutstanding
         {
             get
             {
-                return 0;
+                if (this.GuaranteeDeposits.Count > 0)
+                {
+                    double gd = this.GuaranteeDeposits[0].GuaranteeDepositAmount;
+                    if (this.GuaranteeDeposits[0].GuaranteeDepositCurrency != "CNY")
+                    {
+                        double exchange = Exchange.GetExchangeRate(this.GuaranteeDeposits[0].GuaranteeDepositCurrency, "CNY");
+                        gd *= exchange;
+                    }
+
+                    return gd;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 融资池余额
+        /// </summary>
+        public double? PoolFinanceOutstanding
+        {
+            get
+            {
+                double? total = null;
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                {
+                    double? financeOutstanding = curCase.FinanceOutstanding;
+                    if (financeOutstanding.HasValue)
+                    {
+                        if (total == null)
+                        {
+                            total = 0;
+                        }
+
+                        if (curCase.InvoiceCurrency != "CNY")
+                        {
+                            double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
+                            financeOutstanding *= exchange;
+                        }
+
+                        total += financeOutstanding.Value;
+                    }
+                }
+
+                return total;
             }
         }
 
@@ -82,7 +161,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     return null;
                 }
 
-                return creditLine.CreditLine - this.GetAssignOutstanding(creditLine.CreditLineCurrency);
+                return creditLine.CreditLine - this.GetAssignOutstandingAsBuyer(creditLine.CreditLineCurrency);
             }
         }
 
@@ -197,7 +276,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public double GetAssignOutstanding(string currency)
+        public double GetAssignOutstandingAsBuyer(string currency)
         {
             double result = 0;
             foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))

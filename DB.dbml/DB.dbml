@@ -139,6 +139,7 @@
       <Association Name="Client_ClientCreditLine" Member="ClientCreditLines" OtherKey="ClientEDICode" Type="ClientCreditLine" />
       <Association Name="Client_Contract" Member="Contracts" OtherKey="ClientEDICode" Type="Contract" />
       <Association Name="Client_ClientReview" Member="ClientReviews" OtherKey="ClientEDICode" Type="ClientReview" />
+      <Association Name="Client_GuaranteeDeposit" Member="GuaranteeDeposits" OtherKey="ClientEDICode" Type="GuaranteeDeposit" />
       <Association Name="Department_Client" Member="Department" ThisKey="BranchCode" Type="Department" IsForeignKey="true" />
       <Association Name="Client_Client" Member="ClientGroup" ThisKey="GroupEDICode" Type="Client" IsForeignKey="true" />
     </Type>
@@ -561,6 +562,16 @@
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Factor_Agreement" Member="Factor" ThisKey="FactorCode" Type="Factor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GuaranteeDeposit" Member="GuaranteeDeposits">
+    <Type Name="GuaranteeDeposit">
+      <Column Name="GuaranteeDepositID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GuaranteeDepositCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
+      <Column Name="GuaranteeDepositAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Association Name="Client_GuaranteeDeposit" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
