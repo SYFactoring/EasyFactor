@@ -1116,6 +1116,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             {
                 foreach (Control comp in this.groupPanelCreditLineDetail.Controls)
                 {
+                    ControlUtil.SetComponetDefault(comp);
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 

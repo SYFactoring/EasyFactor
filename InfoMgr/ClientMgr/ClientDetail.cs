@@ -1948,6 +1948,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 foreach (Control comp in this.groupPanelContract.Controls)
                 {
+                    ControlUtil.SetComponetDefault(comp);
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
@@ -1997,6 +1998,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 foreach (Control comp in this.groupPanelGuaranteePanel.Controls)
                 {
+                    ControlUtil.SetComponetDefault(comp);
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
@@ -2043,6 +2045,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 foreach (Control comp in this.groupPanelReview.Controls)
                 {
+                    ControlUtil.SetComponetDefault(comp);
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }

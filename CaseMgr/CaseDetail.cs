@@ -1096,6 +1096,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 foreach (Control comp in this.groupPanelCreditCoverNeg.Controls)
                 {
+                    ControlUtil.SetComponetDefault(comp);
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }

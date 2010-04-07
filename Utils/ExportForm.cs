@@ -2202,7 +2202,7 @@ namespace CMBC.EasyFactor.Utils
                                 sheet.Cells[row + recordStep, "H"] = financeLog.FinanceDate;
                                 sheet.Cells[row + recordStep, "I"] = financeLog.FinanceDueDate;
 
-                                for (int j = 0; i < financeLog.InvoiceRefundLogs.Count; i++)
+                                for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
                                 {
                                     InvoiceRefundLog refundLog = financeLog.InvoiceRefundLogs[j];
                                     sheet.Cells[row + recordStep + j, "M"] = refundLog.RefundAmount;
@@ -2214,10 +2214,6 @@ namespace CMBC.EasyFactor.Utils
 
                             step = step < recordStep ? recordStep : step;
 
-                            //sheet.Cells[row, "G"] = invoice.FinanceAmount;
-                            //sheet.Cells[row, "H"] = invoice.FinanceDate;
-                            //sheet.Cells[row, "I"] = invoice.FinanceDueDate;
-
                             for (int i = 0; i < invoice.InvoicePaymentLogs.Count; i++)
                             {
                                 InvoicePaymentLog paymentLog = invoice.InvoicePaymentLogs[i];
@@ -2227,12 +2223,8 @@ namespace CMBC.EasyFactor.Utils
 
                             step = step < invoice.InvoicePaymentLogs.Count ? invoice.InvoicePaymentLogs.Count : step;
 
-                            //sheet.Cells[row, "J"] = invoice.PaymentAmount;
                             sheet.Cells[row, "K"] = invoice.AssignOutstanding;
-                            //sheet.Cells[row, "L"] = invoice.PaymentDate;
 
-                            //sheet.Cells[row, "M"] = invoice.RefundAmount;
-                            //sheet.Cells[row, "N"] = invoice.RefundDate;
                             sheet.Cells[row, "O"] = invoice.Commission;
                             sheet.Cells[row, "P"] = invoice.NetInterest;
                             sheet.Cells[row, "Q"] = invoice.Comment;
