@@ -189,6 +189,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.AutoGenerateColumns = false;
             this.dgvContracts.AutoGenerateColumns = false;
             this.dgvReviews.AutoGenerateColumns = false;
+            this.dgvGDs.AutoGenerateColumns = false;
             this.dgvClientCreditLines.DataSource = this.bsCreditLines;
             this.dgvContracts.DataSource = this.bsContracts;
             this.dgvReviews.DataSource = this.bsReviews;
