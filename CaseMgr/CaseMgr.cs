@@ -27,7 +27,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// 
         /// </summary>
         private BindingSource bs;
-
         /// <summary>
         /// 
         /// </summary>
@@ -165,9 +164,47 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (11)
+        #region Methods (13)
 
-        // Private Methods (11) 
+        // Private Methods (13) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CaculateFinance(object sender, EventArgs e)
+        {
+            if (this.dgvCases.CurrentCell == null)
+            {
+                return;
+            }
+
+            List<Case> selectedCases = this.GetSelectedCases();
+            if (selectedCases.Count > 0)
+            {
+                foreach (Case c in selectedCases)
+                {
+                    foreach (InvoiceAssignBatch batch in c.InvoiceAssignBatches)
+                    {
+                        foreach (Invoice i in batch.Invoices)
+                        {
+                            i.CaculateRefund();
+                            i.CaculateFinance();
+                        }
+                    }
+                }
+
+                try
+                {
+                    this.context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -275,6 +312,25 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvCases.RowHeadersWidth - 4, e.RowBounds.Height);
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvCases.RowHeadersDefaultCellStyle.Font, rectangle, dgvCases.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private List<Case> GetSelectedCases()
+        {
+            List<Case> selectedCases = new List<Case>();
+            foreach (DataGridViewCell cell in this.dgvCases.SelectedCells)
+            {
+                Case selectedCase = (Case)this.bs.List[cell.RowIndex];
+                if (!selectedCases.Contains(selectedCase))
+                {
+                    selectedCases.Add(selectedCase);
+                }
+            }
+
+            return selectedCases;
         }
 
         /// <summary>
@@ -435,25 +491,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.menuItemCaseDelete.Enabled = false;
                 this.menuItemCreditCoverNegNew.Enabled = false;
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private List<Case> GetSelectedCases()
-        {
-            List<Case> selectedCases = new List<Case>();
-            foreach (DataGridViewCell cell in this.dgvCases.SelectedCells)
-            {
-                Case selectedCase = (Case)this.bs.List[cell.RowIndex];
-                if (!selectedCases.Contains(selectedCase))
-                {
-                    selectedCases.Add(selectedCase);
-                }
-            }
-
-            return selectedCases;
         }
 
         #endregion Methods

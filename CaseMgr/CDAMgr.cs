@@ -208,6 +208,31 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.CheckUserName = App.Current.CurUser.Name;
             cda.CheckDate = DateTime.Now.Date;
 
+            if (cda.Case.CaseMark == ConstStr.CASE.APPLICATION)
+            {
+                cda.Case.CaseMark = ConstStr.CASE.ENABLE;
+            }
+
+            if (cda.CDAStatus == ConstStr.CDA.CHECKED)
+            {
+                foreach (CDA c in cda.Case.CDAs)
+                {
+                    if (c != cda && c.CDAStatus == ConstStr.CDA.CHECKED)
+                    {
+                        c.CDAStatus = ConstStr.CDA.INVALID;
+                    }
+                }
+            }
+
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e2)
+            {
+                MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             try
             {
                 context.SubmitChanges();

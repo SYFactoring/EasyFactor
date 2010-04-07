@@ -189,34 +189,6 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 手续费
-        /// </summary>
-        //public double CommissionIncome
-        //{
-        //    get
-        //    {
-        //        double result = 0;
-        //        int count = 0;
-        //        foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
-        //        {
-        //            count += batch.BatchCount;
-        //            foreach (Invoice invoice in batch.Invoices)
-        //            {
-        //                result += invoice.Commission.GetValueOrDefault();
-        //            }
-        //        }
-
-        //        CDA cda = this.ActiveCDA;
-        //        double handFreeIncome = 0;
-        //        if (cda != null)
-        //        {
-        //            handFreeIncome = count * cda.HandFee.GetValueOrDefault();
-        //        }
-
-        //        return result + handFreeIncome;
-        //    }
-        //}
-        /// <summary>
         /// 
         /// </summary>
         public double? CreditCoverOutstanding
@@ -284,28 +256,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public double FinanceAmount
-        //{
-        //    get
-        //    {
-        //        double result = 0;
-        //        foreach (InvoiceFinanceBatch batch in this.InvoiceFinanceBatches)
-        //        {
-        //            double finance = batch.FinanceAmount;
-        //            if (batch.BatchCurrency != this.InvoiceCurrency)
-        //            {
-        //                double rate = Exchange.GetExchangeRate(batch.BatchCurrency, this.InvoiceCurrency);
-        //                finance *= rate;
-        //            }
-        //            result += finance;
-        //        }
-
-        //        return result;
-        //    }
-        //}
         /// <summary>
         /// 
         /// </summary>

@@ -809,31 +809,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 if (isAddOK)
                 {
                     MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (cda.Case.CaseMark == ConstStr.CASE.APPLICATION)
-                    {
-                        cda.Case.CaseMark = ConstStr.CASE.ENABLE;
-                    }
-
-                    if (cda.CDAStatus == ConstStr.CDA.CHECKED)
-                    {
-                        foreach (CDA c in cda.Case.CDAs)
-                        {
-                            if (c != cda && c.CDAStatus == ConstStr.CDA.CHECKED)
-                            {
-                                c.CDAStatus = ConstStr.CDA.INVALID;
-                            }
-                        }
-                    }
-
-                    try
-                    {
-                        context.SubmitChanges();
-                    }
-                    catch (Exception e2)
-                    {
-                        MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-
                     this.opCDAType = OpCDAType.UPDATE_CDA;
                 }
             }
