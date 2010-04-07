@@ -175,6 +175,11 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void CaculateFinance(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                return;
+            }
+
             if (this.dgvCases.CurrentCell == null)
             {
                 return;

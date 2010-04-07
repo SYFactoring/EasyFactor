@@ -76,7 +76,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     double result = 0;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceAssignBatch> batches = this.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
+                    IEnumerable<InvoiceAssignBatch> batches = this.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate && i.CheckStatus == ConstStr.BATCH.CHECK);
                     foreach (InvoiceAssignBatch batch in batches)
                     {
                         result += batch.AssignAmount;
@@ -101,9 +101,12 @@ namespace CMBC.EasyFactor.DB.dbml
                     double total = 0;
                     foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
                     {
-                        foreach (Invoice invoice in assignBatch.Invoices)
+                        if (assignBatch.CheckStatus == ConstStr.BATCH.CHECK)
                         {
-                            total += invoice.AssignOutstanding;
+                            foreach (Invoice invoice in assignBatch.Invoices)
+                            {
+                                total += invoice.AssignOutstanding;
+                            }
                         }
                     }
 
@@ -163,7 +166,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     int count = 0;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceAssignBatch> batches = this.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
+                    IEnumerable<InvoiceAssignBatch> batches = this.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate && i.CheckStatus == ConstStr.BATCH.CHECK);
 
                     foreach (InvoiceAssignBatch batch in batches)
                     {
@@ -237,7 +240,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     double result = 0;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
+                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate && i.CheckStatus == ConstStr.BATCH.CHECK);
                     foreach (InvoiceFinanceBatch batch in batches)
                     {
                         double finance = batch.FinanceAmount;
@@ -287,17 +290,20 @@ namespace CMBC.EasyFactor.DB.dbml
                     double? total = null;
                     foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
                     {
-                        foreach (Invoice invoice in assignBatch.Invoices)
+                        if (assignBatch.CheckStatus == ConstStr.BATCH.CHECK)
                         {
-                            if (invoice.FinanceOutstanding.HasValue)
+                            foreach (Invoice invoice in assignBatch.Invoices)
                             {
-                                if (total == null)
+                                if (invoice.FinanceOutstanding.HasValue)
                                 {
-                                    total = 0;
-                                }
+                                    if (total == null)
+                                    {
+                                        total = 0;
+                                    }
 
-                                double financeOutstanding = invoice.FinanceOutstanding.Value;
-                                total += financeOutstanding;
+                                    double financeOutstanding = invoice.FinanceOutstanding.Value;
+                                    total += financeOutstanding;
+                                }
                             }
                         }
                     }
@@ -321,7 +327,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     double? result = null;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
+                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate && i.CheckStatus == ConstStr.BATCH.CHECK);
                     foreach (InvoiceFinanceBatch batch in batches)
                     {
                         if (batch.FinanceType == "卖方代付" || batch.FinanceType == "买方代付")
@@ -351,7 +357,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     double? result = null;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
+                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate && i.CheckStatus == ConstStr.BATCH.CHECK);
                     foreach (InvoiceFinanceBatch batch in batches)
                     {
                         if (batch.FinanceType != "卖方代付" && batch.FinanceType != "买方代付")
@@ -384,7 +390,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     double result = 0;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoicePaymentBatch> batches = this.InvoicePaymentBatches.Where(i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate);
+                    IEnumerable<InvoicePaymentBatch> batches = this.InvoicePaymentBatches.Where(i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate && i.CheckStatus == ConstStr.BATCH.CHECK);
                     foreach (InvoicePaymentBatch batch in batches)
                     {
                         result += batch.PaymentAmount;
@@ -509,14 +515,17 @@ namespace CMBC.EasyFactor.DB.dbml
                     double total = 0;
                     foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
                     {
-                        foreach (Invoice invoice in assignBatch.Invoices)
+                        if (assignBatch.CheckStatus == ConstStr.BATCH.CHECK)
                         {
-                            if (invoice.IsDispute.GetValueOrDefault() || invoice.IsFlaw || DateTime.Today > invoice.DueDate)
+                            foreach (Invoice invoice in assignBatch.Invoices)
                             {
-                                continue;
-                            }
+                                if (invoice.IsDispute.GetValueOrDefault() || invoice.IsFlaw || DateTime.Today > invoice.DueDate)
+                                {
+                                    continue;
+                                }
 
-                            total += invoice.AssignOutstanding;
+                                total += invoice.AssignOutstanding;
+                            }
                         }
                     }
 
