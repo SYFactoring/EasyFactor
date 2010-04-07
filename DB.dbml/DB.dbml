@@ -571,6 +571,7 @@
       <Column Name="GuaranteeDepositAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="Client_GuaranteeDeposit" Member="Client" ThisKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>

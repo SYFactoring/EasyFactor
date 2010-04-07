@@ -13030,6 +13030,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
+		private string _Comment;
+		
 		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
@@ -13046,6 +13048,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnClientEDICodeChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
     #endregion
 		
 		public GuaranteeDeposit()
@@ -13154,6 +13158,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Comment", DbType="NVarChar(500)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
 				}
 			}
 		}
