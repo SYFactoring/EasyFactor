@@ -342,7 +342,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (selectedBatch.PaymentType != "买方付款")
             {
-                MessageBoxEx.Show("只有间接付款可以生成MSG12", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("只有买方付款可以生成MSG11", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

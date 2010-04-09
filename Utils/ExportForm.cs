@@ -154,7 +154,7 @@ namespace CMBC.EasyFactor.Utils
             {
                 if (this.exportType == ExportType.EXPORT_MSG09 || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
                 {
-                    this.tbStatus.Text = "请先选择保存文件名/路径";
+                    this.tbStatus.Text = "请先选择保存路径";
                     return;
                 }
             }
@@ -1561,8 +1561,13 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportMsg09(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            string filePath = this.tbFilePath.Text;
-            StreamWriter fileWriter = new StreamWriter(filePath, false, Encoding.ASCII);
+            if (exportData.Count == 0)
+            {
+                return 0;
+            }
+
+            string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((Invoice)exportData[0]).InvoiceAssignBatch.Case.SellerCode, DateTime.Today);
+            StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
             for (int row = 0; row < size; row++)
@@ -1640,8 +1645,13 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportMsg11(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            string filePath = this.tbFilePath.Text;
-            StreamWriter fileWriter = new StreamWriter(filePath, false, Encoding.ASCII);
+            if (exportData.Count == 0)
+            {
+                return 0;
+            }
+
+            string fileName = String.Format("{0}\\MSG11-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoicePaymentLog)exportData[0]).InvoicePaymentBatch.Case.SellerCode, DateTime.Today);
+            StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
             for (int row = 0; row < size; row++)
@@ -1725,8 +1735,13 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportMsg12(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            string filePath = this.tbFilePath.Text;
-            StreamWriter fileWriter = new StreamWriter(filePath, false, Encoding.ASCII);
+            if (exportData.Count == 0)
+            {
+                return 0;
+            }
+
+            string fileName = String.Format("{0}\\MSG12-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoicePaymentLog)exportData[0]).InvoicePaymentBatch.Case.SellerCode, DateTime.Today);
+            StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
             for (int row = 0; row < size; row++)
@@ -1751,21 +1766,21 @@ namespace CMBC.EasyFactor.Utils
                 sb.Append(',');
                 sb.Append(',');
                 sb.Append(',');
-                //sb.Append(curCase.SellerFactorCode).Append(',');
-                sb.Append(',');
+                sb.Append(curCase.SellerFactorCode).Append(',');
                 //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
                 sb.Append(',');
-                //sb.Append(curCase.BuyerFactorCode).Append(',');
-                sb.Append(',');
+                sb.Append(curCase.BuyerFactorCode).Append(',');
                 //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
                 sb.Append(',');
                 sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
                 sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
                 sb.Append(log.Invoice.InvoiceCurrency).Append(',');
                 sb.Append(curCase.SellerCode).Append(',');
-                sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
+                //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
+                sb.Append(',');
                 sb.Append(curCase.BuyerCode).Append(',');
-                sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
+                //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
+                sb.Append(',');
                 sb.Append(1).Append(',');
                 sb.Append(log.InvoiceNo).Append(',');
                 sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
@@ -2330,23 +2345,10 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         private void SelectFile(object sender, EventArgs e)
         {
-            if (this.exportType == ExportType.EXPORT_LEGER)
+            FolderBrowserDialog dirDialog = new FolderBrowserDialog();
+            if (dirDialog.ShowDialog() == DialogResult.OK)
             {
-                FolderBrowserDialog dirDialog = new FolderBrowserDialog();
-                if (dirDialog.ShowDialog() == DialogResult.OK)
-                {
-                    this.tbFilePath.Text = dirDialog.SelectedPath;
-                }
-            }
-            else
-            {
-                SaveFileDialog fileDialog = new SaveFileDialog();
-                fileDialog.Filter = "CSV files (*.csv)|*.csv";
-
-                if (fileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    this.tbFilePath.Text = fileDialog.FileName;
-                }
+                this.tbFilePath.Text = dirDialog.SelectedPath;
             }
         }
 
