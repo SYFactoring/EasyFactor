@@ -387,6 +387,7 @@ namespace CMBC.EasyFactor.CaseMgr
             DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
             string opName = this.tbOPName.Text;
             string location = this.cbLocation.Text;
+            string caseMark = this.cbCaseMark.Text;
 
             context = new DBDataContext();
 
@@ -396,7 +397,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency == (string)this.cbCurrency.SelectedValue)
                                 && (location == "全部" ? true : c.OwnerDepartment.Location == location)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
-                                && (c.CaseMark.Contains(this.cbCaseMark.Text))
+                                && (caseMark == "全部" ? true : c.CaseMark.Contains(caseMark))
                                 && (c.OPName == null ? true : c.OPName.Contains(opName))
                                 && (opCaseType != OpCaseType.STAT && beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                 && (opCaseType != OpCaseType.STAT && endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
