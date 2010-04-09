@@ -617,6 +617,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colCDACode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCDACode.DataPropertyName = "CDACode";
+            this.colCDACode.Frozen = true;
             this.colCDACode.HeaderText = "CDA编号";
             this.colCDACode.Name = "colCDACode";
             this.colCDACode.ReadOnly = true;
@@ -625,6 +626,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colCaseCode
             // 
             this.colCaseCode.DataPropertyName = "CaseCode";
+            this.colCaseCode.Frozen = true;
             this.colCaseCode.HeaderText = "案件编号";
             this.colCaseCode.Name = "colCaseCode";
             this.colCaseCode.ReadOnly = true;
@@ -632,6 +634,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colSellerName
             // 
             this.colSellerName.DataPropertyName = "SellerName";
+            this.colSellerName.Frozen = true;
             this.colSellerName.HeaderText = "卖方名称";
             this.colSellerName.Name = "colSellerName";
             this.colSellerName.ReadOnly = true;

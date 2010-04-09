@@ -58,15 +58,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbDomains = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblOnwerDept = new DevComponents.DotNetBar.LabelX();
             this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblLocation = new DevComponents.DotNetBar.LabelX();
@@ -80,7 +81,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbClientReviewNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientReviewNo = new DevComponents.DotNetBar.LabelX();
             this.dgvClientReviews = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colClientLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuClientReviewMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemClientReviewDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemClientReviewDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemClientReviewExport = new System.Windows.Forms.ToolStripMenuItem();
+             this.colClientLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReviewNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,30 +104,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colReviewStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReviewDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuClientReviewMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemClientReviewDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemClientReviewDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.导出选定协查意见ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cbDomains = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -157,6 +140,50 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // cbDomains
+            // 
+            this.cbDomains.DisplayMember = "Text";
+            this.cbDomains.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbDomains.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDomains.FormattingEnabled = true;
+            this.cbDomains.ItemHeight = 14;
+            this.cbDomains.Items.AddRange(new object[] {
+            "全部",
+            "北京",
+            "广州",
+            "上海",
+            "深圳",
+            "武汉",
+            "太原",
+            "石家庄",
+            "大连",
+            "杭州",
+            "南京",
+            "重庆",
+            "西安",
+            "福州",
+            "济南",
+            "宁波",
+            "成都",
+            "天津",
+            "苏州",
+            "青岛",
+            "厦门",
+            "郑州",
+            "昆明",
+            "温州",
+            "泉州",
+            "长沙",
+            "长春",
+            "汕头",
+            "南昌",
+            "香港"});
+            this.cbDomains.Location = new System.Drawing.Point(272, 29);
+            this.cbDomains.Name = "cbDomains";
+            this.cbDomains.Size = new System.Drawing.Size(133, 20);
+            this.cbDomains.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbDomains.TabIndex = 30;
             // 
             // lblOnwerDept
             // 
@@ -414,14 +441,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientReviews.AllowUserToDeleteRows = false;
             this.dgvClientReviews.AllowUserToOrderColumns = true;
             this.dgvClientReviews.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientReviews.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientReviews.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvClientReviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientReviews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colClientLocation,
@@ -442,14 +469,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colReviewDate,
             this.colCreateUserName});
             this.dgvClientReviews.ContextMenuStrip = this.cmuClientReviewMgr;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientReviews.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientReviews.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvClientReviews.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientReviews.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClientReviews.Location = new System.Drawing.Point(0, 55);
@@ -461,26 +488,77 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientReviews.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvClientReviews.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvClientCreditLines_RowPostPaint);
             // 
+            // cmuClientReviewMgr
+            // 
+            this.cmuClientReviewMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemClientReviewDetail,
+            this.toolStripSeparator,
+            this.menuItemClientReviewDelete,
+            this.toolStripSeparator1,
+            this.menuItemClientReviewExport});
+            this.cmuClientReviewMgr.Name = "contextMenuClientMgr";
+            this.cmuClientReviewMgr.Size = new System.Drawing.Size(171, 82);
+            // 
+            // menuItemClientReviewDetail
+            // 
+            this.menuItemClientReviewDetail.Name = "menuItemClientReviewDetail";
+            this.menuItemClientReviewDetail.Size = new System.Drawing.Size(170, 22);
+            this.menuItemClientReviewDetail.Text = "详细信息(&M)";
+            this.menuItemClientReviewDetail.Click += new System.EventHandler(this.DetailClientReview);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(167, 6);
+            // 
+            // menuItemClientReviewDelete
+            // 
+            this.menuItemClientReviewDelete.Name = "menuItemClientReviewDelete";
+            this.menuItemClientReviewDelete.Size = new System.Drawing.Size(170, 22);
+            this.menuItemClientReviewDelete.Text = "删除协查意见(&D)";
+            this.menuItemClientReviewDelete.Click += new System.EventHandler(this.DeleteClientReview);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
+            // 
+            // 导出选定协查意见ToolStripMenuItem
+            // 
+            this.menuItemClientReviewExport.Name = "导出选定协查意见ToolStripMenuItem";
+            this.menuItemClientReviewExport.Size = new System.Drawing.Size(170, 22);
+            this.menuItemClientReviewExport.Text = "导出选定协查意见";
+            this.menuItemClientReviewExport.Click += new System.EventHandler(this.ExportClientReviews);
+            // 
             // colClientLocation
             // 
+            this.colClientLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClientLocation.DataPropertyName = "ClientLocation";
+            this.colClientLocation.Frozen = true;
             this.colClientLocation.HeaderText = "所属业务地区";
             this.colClientLocation.Name = "colClientLocation";
             this.colClientLocation.ReadOnly = true;
+            this.colClientLocation.Width = 52;
             // 
             // colClientEDICode
             // 
+            this.colClientEDICode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClientEDICode.DataPropertyName = "ClientEDICode";
+            this.colClientEDICode.Frozen = true;
             this.colClientEDICode.HeaderText = "保理代码";
             this.colClientEDICode.Name = "colClientEDICode";
             this.colClientEDICode.ReadOnly = true;
+            this.colClientEDICode.Width = 53;
             // 
             // colClientName
             // 
+            this.colClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClientName.DataPropertyName = "Client";
+            this.colClientName.Frozen = true;
             this.colClientName.HeaderText = "客户名称";
             this.colClientName.Name = "colClientName";
             this.colClientName.ReadOnly = true;
+            this.colClientName.Width = 52;
             // 
             // colReviewNo
             // 
@@ -527,9 +605,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colRequestAmount
             // 
             this.colRequestAmount.DataPropertyName = "RequestAmount";
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.colRequestAmount.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colRequestAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colRequestAmount.HeaderText = "授信金额";
             this.colRequestAmount.Name = "colRequestAmount";
             this.colRequestAmount.ReadOnly = true;
@@ -558,8 +636,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colRequestCommissionRate
             // 
             this.colRequestCommissionRate.DataPropertyName = "RequestCommissionRate";
-            dataGridViewCellStyle11.Format = "p3";
-            this.colRequestCommissionRate.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Format = "p3";
+            this.colRequestCommissionRate.DefaultCellStyle = dataGridViewCellStyle3;
             this.colRequestCommissionRate.HeaderText = "手续费率";
             this.colRequestCommissionRate.Name = "colRequestCommissionRate";
             this.colRequestCommissionRate.ReadOnly = true;
@@ -574,9 +652,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colReviewDate
             // 
             this.colReviewDate.DataPropertyName = "ReviewDate";
-            dataGridViewCellStyle12.Format = "d";
-            dataGridViewCellStyle12.NullValue = null;
-            this.colReviewDate.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colReviewDate.DefaultCellStyle = dataGridViewCellStyle4;
             this.colReviewDate.HeaderText = "签发日期";
             this.colReviewDate.Name = "colReviewDate";
             this.colReviewDate.ReadOnly = true;
@@ -587,219 +665,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colCreateUserName.HeaderText = "经办人";
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
-            // 
-            // cmuClientReviewMgr
-            // 
-            this.cmuClientReviewMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemClientReviewDetail,
-            this.toolStripSeparator,
-            this.menuItemClientReviewDelete,
-            this.toolStripSeparator1,
-            this.导出选定协查意见ToolStripMenuItem});
-            this.cmuClientReviewMgr.Name = "contextMenuClientMgr";
-            this.cmuClientReviewMgr.Size = new System.Drawing.Size(171, 82);
-            // 
-            // menuItemClientReviewDetail
-            // 
-            this.menuItemClientReviewDetail.Name = "menuItemClientReviewDetail";
-            this.menuItemClientReviewDetail.Size = new System.Drawing.Size(170, 22);
-            this.menuItemClientReviewDetail.Text = "详细信息(&M)";
-            this.menuItemClientReviewDetail.Click += new System.EventHandler(this.DetailClientReview);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(167, 6);
-            // 
-            // menuItemClientReviewDelete
-            // 
-            this.menuItemClientReviewDelete.Name = "menuItemClientReviewDelete";
-            this.menuItemClientReviewDelete.Size = new System.Drawing.Size(170, 22);
-            this.menuItemClientReviewDelete.Text = "删除协查意见(&D)";
-            this.menuItemClientReviewDelete.Click += new System.EventHandler(this.DeleteClientReview);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
-            // 
-            // 导出选定协查意见ToolStripMenuItem
-            // 
-            this.导出选定协查意见ToolStripMenuItem.Name = "导出选定协查意见ToolStripMenuItem";
-            this.导出选定协查意见ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.导出选定协查意见ToolStripMenuItem.Text = "导出选定协查意见";
-            this.导出选定协查意见ToolStripMenuItem.Click += new System.EventHandler(this.ExportClientReviews);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ClientLocation";
-            this.dataGridViewTextBoxColumn1.HeaderText = "所属业务地区";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "ClientEDICode";
-            this.dataGridViewTextBoxColumn2.HeaderText = "保理代码";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Client";
-            this.dataGridViewTextBoxColumn3.HeaderText = "客户名称";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "ReviewNo";
-            this.dataGridViewTextBoxColumn4.HeaderText = "协查意见书编号";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "LocalInternational";
-            this.dataGridViewTextBoxColumn5.HeaderText = "国内/国际";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "SellerBuyer";
-            this.dataGridViewTextBoxColumn6.HeaderText = "卖方/买方";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "RecoarseNon";
-            this.dataGridViewTextBoxColumn7.HeaderText = "有追/无追";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "IsNotice";
-            this.dataGridViewTextBoxColumn8.HeaderText = "明/暗保理";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "RequestCurrency";
-            this.dataGridViewTextBoxColumn9.HeaderText = "授信币种";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "RequestAmount";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewTextBoxColumn10.HeaderText = "授信金额";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "RequestFinanceType";
-            this.dataGridViewTextBoxColumn11.HeaderText = "出账方式";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "RequestFinanceType2";
-            this.dataGridViewTextBoxColumn12.HeaderText = "融资管理";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "RequestFinancePeriod";
-            this.dataGridViewTextBoxColumn13.HeaderText = "融资期限(月)";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "RequestCommissionRate";
-            dataGridViewCellStyle5.Format = "p3";
-            this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewTextBoxColumn14.HeaderText = "手续费率";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "ReviewStatus";
-            this.dataGridViewTextBoxColumn15.HeaderText = "状态";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "ReviewDate";
-            dataGridViewCellStyle14.Format = "d";
-            dataGridViewCellStyle14.NullValue = null;
-            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle14;
-            this.dataGridViewTextBoxColumn16.HeaderText = "签发日期";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "CreateUserName";
-            this.dataGridViewTextBoxColumn17.HeaderText = "经办人";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.Width = 52;
-            // 
-            // cbDomains
-            // 
-            this.cbDomains.DisplayMember = "Text";
-            this.cbDomains.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbDomains.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDomains.FormattingEnabled = true;
-            this.cbDomains.ItemHeight = 14;
-            this.cbDomains.Items.AddRange(new object[] {
-            "全部",
-            "北京",
-            "广州",
-            "上海",
-            "深圳",
-            "武汉",
-            "太原",
-            "石家庄",
-            "大连",
-            "杭州",
-            "南京",
-            "重庆",
-            "西安",
-            "福州",
-            "济南",
-            "宁波",
-            "成都",
-            "天津",
-            "苏州",
-            "青岛",
-            "厦门",
-            "郑州",
-            "昆明",
-            "温州",
-            "泉州",
-            "长沙",
-            "长春",
-            "汕头",
-            "南昌",
-            "香港"});
-            this.cbDomains.Location = new System.Drawing.Point(272, 29);
-            this.cbDomains.Name = "cbDomains";
-            this.cbDomains.Size = new System.Drawing.Size(133, 20);
-            this.cbDomains.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbDomains.TabIndex = 30;
             // 
             // ClientReviewMgr
             // 
@@ -827,7 +692,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientReviewDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem 导出选定协查意见ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientReviewExport;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
+        private DevComponents.DotNetBar.LabelX lblLocation;
+        private DevComponents.DotNetBar.LabelX lblDate;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
+        private DevComponents.DotNetBar.LabelX lblOnwerDept;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbDomains;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientName;
@@ -845,29 +717,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colReviewStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReviewDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
-        private DevComponents.DotNetBar.LabelX lblLocation;
-        private DevComponents.DotNetBar.LabelX lblDate;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
-        private DevComponents.DotNetBar.LabelX lblOnwerDept;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbDomains;
     }
 }

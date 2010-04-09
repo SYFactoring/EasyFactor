@@ -92,7 +92,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cmuContractMgr.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelContractQuery
+            // panelQuery
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -108,7 +108,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.panelQuery.Controls.Add(this.lblContractCode);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
-            this.panelQuery.Name = "panelContractQuery";
+            this.panelQuery.Name = "panelQuery";
             this.panelQuery.Size = new System.Drawing.Size(768, 32);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
@@ -207,12 +207,12 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 9;
             // 
-            // btnContractQuery
+            // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnQuery.Location = new System.Drawing.Point(640, 5);
-            this.btnQuery.Name = "btnContractQuery";
+            this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 8;
@@ -334,22 +334,29 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // colContractCode
             // 
+            this.colContractCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colContractCode.DataPropertyName = "ContractCode";
+            this.colContractCode.Frozen = true;
             this.colContractCode.HeaderText = "合同编号";
             this.colContractCode.Name = "colContractCode";
             this.colContractCode.ReadOnly = true;
+            this.colContractCode.Width = 75;
             // 
             // colClientEDICode
             // 
+            this.colClientEDICode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClientEDICode.DataPropertyName = "ClientEDICode";
+            this.colClientEDICode.Frozen = true;
             this.colClientEDICode.HeaderText = "客户保理代码";
             this.colClientEDICode.Name = "colClientEDICode";
             this.colClientEDICode.ReadOnly = true;
+            this.colClientEDICode.Width = 75;
             // 
             // colClient
             // 
             this.colClient.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClient.DataPropertyName = "Client";
+            this.colClient.Frozen = true;
             this.colClient.HeaderText = "客户名称";
             this.colClient.Name = "colClient";
             this.colClient.ReadOnly = true;

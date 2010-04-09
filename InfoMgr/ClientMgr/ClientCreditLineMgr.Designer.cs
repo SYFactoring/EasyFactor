@@ -18,15 +18,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientGroupType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientCreditLines;
         private DevComponents.DotNetBar.LabelX lblClientEDICode;
@@ -251,10 +242,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // colClientEDICode
             // 
+            this.colClientEDICode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClientEDICode.DataPropertyName = "ClientEDICode";
+            this.colClientEDICode.Frozen = true;
             this.colClientEDICode.HeaderText = "保理代码";
             this.colClientEDICode.Name = "colClientEDICode";
             this.colClientEDICode.ReadOnly = true;
+            this.colClientEDICode.Width = 99;
             // 
             // colClientNameCN
             // 
@@ -330,5 +324,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
     }
 }
