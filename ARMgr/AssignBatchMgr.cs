@@ -902,7 +902,7 @@ namespace CMBC.EasyFactor.ARMgr
                         sheet.Cells[row, i % 4 + 1] = "'" + invoice.InvoiceNo;
                         if (invoice.DueDate != null && invoice.DueDate < dueDate)
                         {
-                            dueDate = invoice.DueDate.Value;
+                            dueDate = invoice.DueDate;
                         }
                     }
                     sheet.Cells[rowDueDate, 1] = String.Format("Earliest due date:   {0:yyyy-MM-dd}", dueDate);

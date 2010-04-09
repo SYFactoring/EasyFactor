@@ -1860,7 +1860,7 @@ namespace CMBC.EasyFactor.Utils
                             invoice.InvoiceAmount = (double)valueArray[row, column++];
                             invoice.AssignAmount = invoice.InvoiceAmount;
                             invoice.InvoiceDate = (System.Nullable<DateTime>)valueArray[row, column++];
-                            invoice.DueDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                            invoice.DueDate = (DateTime)valueArray[row, column++];
                             DateTime assignDate = (DateTime)valueArray[row, column++];
                             invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
 

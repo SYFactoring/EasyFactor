@@ -10535,7 +10535,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private double _AssignAmount;
 		
-		private System.Nullable<System.DateTime> _DueDate;
+		private System.DateTime _DueDate;
 		
 		private System.Nullable<System.DateTime> _ValueDate;
 		
@@ -10625,7 +10625,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnAssignBatchNoChanged();
     partial void OnAssignAmountChanging(double value);
     partial void OnAssignAmountChanged();
-    partial void OnDueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDueDateChanging(System.DateTime value);
     partial void OnDueDateChanged();
     partial void OnValueDateChanging(System.Nullable<System.DateTime> value);
     partial void OnValueDateChanged();
@@ -10810,7 +10810,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_DueDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<System.DateTime> DueDate
+		public System.DateTime DueDate
 		{
 			get
 			{

@@ -102,7 +102,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     financeLine *= rate;
                 }
 
-                return financeLine - this.Case.FinanceOutstanding;
+                return financeLine - this.Case.FinanceOutstanding.GetValueOrDefault();
             }
         }
 
