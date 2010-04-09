@@ -1734,7 +1734,7 @@ namespace CMBC.EasyFactor.Utils
                 StringBuilder sb = new StringBuilder();
                 Case curCase = log.Invoice.InvoiceAssignBatch.Case;
                 sb.Append(((int)row / 1000 + 1)).Append(',');
-                sb.Append("MSG11").Append(',');
+                sb.Append("MSG12").Append(',');
                 sb.Append(curCase.SellerFactorCode).Append(',');
                 sb.Append(curCase.BuyerFactorCode).Append(',');
                 sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
@@ -1743,10 +1743,14 @@ namespace CMBC.EasyFactor.Utils
                 sb.Append(',');
                 sb.Append(',');
                 sb.Append(',');
-                sb.Append(curCase.SellerFactorCode).Append(',');
-                sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
-                sb.Append(curCase.BuyerFactorCode).Append(',');
-                sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
+                //sb.Append(curCase.SellerFactorCode).Append(',');
+                sb.Append(',');
+                //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
+                sb.Append(',');
+                //sb.Append(curCase.BuyerFactorCode).Append(',');
+                sb.Append(',');
+                //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
+                sb.Append(',');
                 sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
                 sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
                 sb.Append(log.Invoice.InvoiceCurrency).Append(',');
