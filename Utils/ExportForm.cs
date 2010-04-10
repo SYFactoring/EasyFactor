@@ -112,7 +112,12 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            EXPORT_LEGER
+            EXPORT_LEGER,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            EXPORT_CASES
         }
 
         #endregion Enums
@@ -227,6 +232,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ExportType.EXPORT_LEGER:
                     e.Result = this.ExportLegers(worker, e);
+                    break;
+                case ExportType.EXPORT_CASES:
+                    e.Result = this.ExportCases(worker, e);
                     break;
                 default:
                     break;
@@ -372,6 +380,136 @@ namespace CMBC.EasyFactor.Utils
                         range.NumberFormatLocal = "0.00";
                     }
                     else if (range.Column == 4 || range.Column == 5)
+                    {
+                        range.NumberFormatLocal = "yyyy-MM-dd";
+                    }
+                }
+
+                app.Visible = true;
+            }
+            catch (Exception e1)
+            {
+                if (datasheet != null)
+                {
+                    Marshal.ReleaseComObject(datasheet);
+                    datasheet = null;
+                }
+
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+                throw e1;
+            }
+
+            return exportData.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private object ExportCases(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+
+            if (app == null)
+            {
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return -1;
+            }
+            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            if (datasheet == null)
+            {
+                return -1;
+            }
+
+            try
+            {
+                int column = 1;
+                datasheet.Cells[1, column++] = "案件编号";
+                datasheet.Cells[1, column++] = "卖方保理代码";
+                datasheet.Cells[1, column++] = "卖方名称";
+                datasheet.Cells[1, column++] = "卖方保理商代码";
+                datasheet.Cells[1, column++] = "卖方保理商";
+                datasheet.Cells[1, column++] = "买方保理代码";
+                datasheet.Cells[1, column++] = "买方名称";
+                datasheet.Cells[1, column++] = "买方保理商代码";
+                datasheet.Cells[1, column++] = "买方保理商";
+                datasheet.Cells[1, column++] = "发票币别";
+                datasheet.Cells[1, column++] = "业务类型";
+                datasheet.Cells[1, column++] = "操作类型";
+                datasheet.Cells[1, column++] = "业务归属机构";
+                datasheet.Cells[1, column++] = "申请日期";
+                datasheet.Cells[1, column++] = "案件状态";
+                datasheet.Cells[1, column++] = "OP人员";
+
+                int size = this.exportData.Count;
+                for (int row = 0; row < size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        if (datasheet != null)
+                        {
+                            Marshal.ReleaseComObject(datasheet);
+                            datasheet = null;
+                        }
+
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
+
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
+
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    column = 1;
+                    Case selectedCase = (Case)exportData[row];
+                    datasheet.Cells[row + 2, column++] = selectedCase.CaseCode;
+                    datasheet.Cells[row + 2, column++] = selectedCase.SellerCode;
+                    datasheet.Cells[row + 2, column++] = selectedCase.SellerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = selectedCase.SellerFactorCode;
+                    datasheet.Cells[row + 2, column++] = selectedCase.SellerFactor.ToString();
+                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerCode;
+                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerFactorCode;
+                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerFactor.ToString();
+                    datasheet.Cells[row + 2, column++] = selectedCase.InvoiceCurrency;
+                    datasheet.Cells[row + 2, column++] = selectedCase.TransactionType;
+                    datasheet.Cells[row + 2, column++] = selectedCase.OperationType;
+                    datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.DepartmentName;
+                    datasheet.Cells[row + 2, column++] = selectedCase.CaseAppDate;
+                    datasheet.Cells[row + 2, column++] = selectedCase.CaseMark;
+                    datasheet.Cells[row + 2, column++] = selectedCase.OPName;
+
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+
+                foreach (Range range in datasheet.UsedRange.Columns)
+                {
+                    range.EntireColumn.AutoFit();
+                    if (range.Column == 15)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }

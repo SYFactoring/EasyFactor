@@ -21,7 +21,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CaseMgr : UserControl
     {
-        #region Fields (2)
+		#region Fields (2) 
 
         /// <summary>
         /// 
@@ -32,9 +32,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCaseType opCaseType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -62,11 +62,11 @@ namespace CMBC.EasyFactor.CaseMgr
             STAT
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (2)
+		#region Constructors (2) 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the CaseMgr class
         /// </summary>
         /// <param name="isContract"></param>
@@ -131,9 +131,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.UpdateContextMenu();
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (3)
+		#region Properties (3) 
 
         /// <summary>
         /// 
@@ -162,11 +162,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (13)
+		#region Methods (14) 
 
-        // Private Methods (13) 
+		// Private Methods (14) 
 
         /// <summary>
         /// 
@@ -317,6 +317,26 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvCases.RowHeadersWidth - 4, e.RowBounds.Height);
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvCases.RowHeadersDefaultCellStyle.Font, rectangle, dgvCases.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportCases(object sender, EventArgs e)
+        {
+            if (this.dgvCases.CurrentCell == null)
+            {
+                return;
+            }
+
+            List<Case> selectedCases = this.GetSelectedCases();
+            if (selectedCases.Count > 0)
+            {
+                ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_CASES, selectedCases);
+                form.Show();
+            }
         }
 
         /// <summary>
@@ -499,6 +519,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }
