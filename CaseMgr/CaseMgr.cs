@@ -21,7 +21,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CaseMgr : UserControl
     {
-		#region Fields (2) 
+        #region Fields (2)
 
         /// <summary>
         /// 
@@ -32,9 +32,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCaseType opCaseType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -62,11 +62,11 @@ namespace CMBC.EasyFactor.CaseMgr
             STAT
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (2) 
+        #region Constructors (2)
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the CaseMgr class
         /// </summary>
         /// <param name="isContract"></param>
@@ -131,9 +131,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.UpdateContextMenu();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (3) 
+        #region Properties (3)
 
         /// <summary>
         /// 
@@ -162,11 +162,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (14) 
+        #region Methods (14)
 
-		// Private Methods (14) 
+        // Private Methods (14) 
 
         /// <summary>
         /// 
@@ -519,6 +519,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

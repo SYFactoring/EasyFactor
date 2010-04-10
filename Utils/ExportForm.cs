@@ -117,7 +117,12 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            EXPORT_CASES
+            EXPORT_CASES,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            EXPORT_CDAS
         }
 
         #endregion Enums
@@ -235,6 +240,9 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ExportType.EXPORT_CASES:
                     e.Result = this.ExportCases(worker, e);
+                    break;
+                case ExportType.EXPORT_CDAS:
+                    e.Result = this.ExportCDAs(worker, e);
                     break;
                 default:
                     break;
@@ -383,6 +391,194 @@ namespace CMBC.EasyFactor.Utils
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
+                }
+
+                app.Visible = true;
+            }
+            catch (Exception e1)
+            {
+                if (datasheet != null)
+                {
+                    Marshal.ReleaseComObject(datasheet);
+                    datasheet = null;
+                }
+
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+                throw e1;
+            }
+
+            return exportData.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private object ExportCDAs(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+
+            if (app == null)
+            {
+                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return -1;
+            }
+            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            if (datasheet == null)
+            {
+                return -1;
+            }
+
+            try
+            {
+                int column = 1;
+                datasheet.Cells[1, column++] = "案件编号";
+                datasheet.Cells[1, column++] = "CDA编号";
+                datasheet.Cells[1, column++] = "卖方名称";
+                datasheet.Cells[1, column++] = "买方名称";
+                datasheet.Cells[1, column++] = "保理商";
+                datasheet.Cells[1, column++] = "业务类型";
+                datasheet.Cells[1, column++] = "发票币别";
+                datasheet.Cells[1, column++] = "是否有追索权";
+                datasheet.Cells[1, column++] = "明/暗保理";
+                datasheet.Cells[1, column++] = "转让方式";
+                datasheet.Cells[1, column++] = "买方信用风险额度";
+                datasheet.Cells[1, column++] = "币别";
+                datasheet.Cells[1, column++] = "有效期限(始)";
+                datasheet.Cells[1, column++] = "有效期限(终)";
+                datasheet.Cells[1, column++] = "担保比例";
+                datasheet.Cells[1, column++] = "担保付款期限（天）";
+                datasheet.Cells[1, column++] = "回购宽限期（天）";
+                datasheet.Cells[1, column++] = "预付款额度";
+                datasheet.Cells[1, column++] = "币别";
+                datasheet.Cells[1, column++] = "有效期限（始）";
+                datasheet.Cells[1, column++] = "有效期限（终）";
+                datasheet.Cells[1, column++] = "最高保理预付款额度";
+                datasheet.Cells[1, column++] = "预付比例";
+                datasheet.Cells[1, column++] = "融资宽限期（天）";
+                datasheet.Cells[1, column++] = "付款条件";
+                datasheet.Cells[1, column++] = "是否循环额度";
+                datasheet.Cells[1, column++] = "订单号";
+                datasheet.Cells[1, column++] = "自负额";
+                datasheet.Cells[1, column++] = "最低损失门槛";
+                datasheet.Cells[1, column++] = "总手续费率";
+                datasheet.Cells[1, column++] = "IF手续费率";
+                datasheet.Cells[1, column++] = "EF手续费率";
+                datasheet.Cells[1, column++] = "单据处理费（每笔）";
+                datasheet.Cells[1, column++] = "币别";
+                datasheet.Cells[1, column++] = "计费方式";
+                datasheet.Cells[1, column++] = "说明";
+
+                datasheet.Cells[1, column++] = "CDA状态";
+                datasheet.Cells[1, column++] = "签发日期";
+                datasheet.Cells[1, column++] = "是否签回";
+                datasheet.Cells[1, column++] = "通知人";
+                datasheet.Cells[1, column++] = "通知方式";
+                datasheet.Cells[1, column++] = "Email";
+                datasheet.Cells[1, column++] = "传真";
+                datasheet.Cells[1, column++] = "经办人";
+                datasheet.Cells[1, column++] = "备注";
+                datasheet.Cells[1, column++] = "内部提示信息";
+
+                int size = this.exportData.Count;
+                for (int row = 0; row < size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        if (datasheet != null)
+                        {
+                            Marshal.ReleaseComObject(datasheet);
+                            datasheet = null;
+                        }
+
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
+
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
+
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    column = 1;
+                    CDA cda = (CDA)exportData[row];
+
+                    datasheet.Cells[row + 2, column++] = cda.CaseCode;
+                    datasheet.Cells[row + 2, column++] = cda.CDACode;
+                    datasheet.Cells[row + 2, column++] = cda.SellerName;
+                    datasheet.Cells[row + 2, column++] = cda.BuyerName;
+                    datasheet.Cells[row + 2, column++] = cda.FactorName;
+                    datasheet.Cells[row + 2, column++] = cda.TransactionType;
+                    datasheet.Cells[row + 2, column++] = cda.InvoiceCurrency;
+                    datasheet.Cells[row + 2, column++] = cda.IsRecoarse;
+                    datasheet.Cells[row + 2, column++] = cda.IsNotice;
+                    datasheet.Cells[row + 2, column++] = cda.AssignType;
+                    datasheet.Cells[row + 2, column++] = cda.CreditCover;
+                    datasheet.Cells[row + 2, column++] = cda.CreditCoverCurr;
+                    datasheet.Cells[row + 2, column++] = cda.CreditCoverPeriodBegin;
+                    datasheet.Cells[row + 2, column++] = cda.CreditCoverPeriodEnd;
+                    datasheet.Cells[row + 2, column++] = cda.PUGProportion;
+                    datasheet.Cells[row + 2, column++] = cda.PUGPeriod;
+                    datasheet.Cells[row + 2, column++] = cda.ReassignGracePeriod;
+                    datasheet.Cells[row + 2, column++] = cda.FinanceLine;
+                    datasheet.Cells[row + 2, column++] = cda.FinanceLineCurr;
+                    datasheet.Cells[row + 2, column++] = cda.FinanceLinePeriodBegin;
+                    datasheet.Cells[row + 2, column++] = cda.FinanceLinePeriodEnd;
+                    datasheet.Cells[row + 2, column++] = cda.HighestFinanceLine;
+                    datasheet.Cells[row + 2, column++] = cda.FinanceProportion;
+                    datasheet.Cells[row + 2, column++] = cda.FinanceGracePeriod;
+                    datasheet.Cells[row + 2, column++] = cda.PaymentTerms;
+                    datasheet.Cells[row + 2, column++] = cda.IsCreditCoverRevolving;
+                    datasheet.Cells[row + 2, column++] = cda.OrderNumber;
+                    datasheet.Cells[row + 2, column++] = cda.Deductibles;
+                    datasheet.Cells[row + 2, column++] = cda.LossThreshold;
+                    datasheet.Cells[row + 2, column++] = cda.Price;
+                    datasheet.Cells[row + 2, column++] = cda.IFPrice;
+                    datasheet.Cells[row + 2, column++] = cda.EFPrice;
+                    datasheet.Cells[row + 2, column++] = cda.HandFeeCurr;
+                    datasheet.Cells[row + 2, column++] = cda.HandFee;
+                    datasheet.Cells[row + 2, column++] = cda.CommissionType;
+                    datasheet.Cells[row + 2, column++] = cda.CommissionTypeComment;
+                    datasheet.Cells[row + 2, column++] = cda.CDAStatus;
+                    datasheet.Cells[row + 2, column++] = cda.CDASignDate;
+                    datasheet.Cells[row + 2, column++] = cda.IsSigned;
+                    datasheet.Cells[row + 2, column++] = cda.NoticePerson;
+                    datasheet.Cells[row + 2, column++] = cda.NoticeMethod;
+                    datasheet.Cells[row + 2, column++] = cda.Email;
+                    datasheet.Cells[row + 2, column++] = cda.Fax;
+                    datasheet.Cells[row + 2, column++] = cda.CreateUserName;
+                    datasheet.Cells[row + 2, column++] = cda.Comment;
+                    datasheet.Cells[row + 2, column++] = cda.Remark;
+
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+
+                foreach (Range range in datasheet.UsedRange.Columns)
+                {
+                    range.EntireColumn.AutoFit();
                 }
 
                 app.Visible = true;

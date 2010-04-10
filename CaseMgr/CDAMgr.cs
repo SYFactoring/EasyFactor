@@ -16,6 +16,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using Microsoft.Office.Interop.Excel;
     using System.Data.Linq;
     using DevComponents.DotNetBar;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 
@@ -65,7 +66,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Enums
 
-        #region Constructors (1)
+        #region Constructors (2)
 
         /// <summary>
         /// Initializes a new instance of the CDAMgr class.
@@ -154,9 +155,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
         #endregion Properties
 
-        #region Methods (13)
+        #region Methods (15)
 
-        // Private Methods (13) 
+        // Private Methods (15) 
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -187,12 +188,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            if (this.dgvCDAs.SelectedRows.Count == 0)
+            if (this.dgvCDAs.CurrentCell == null)
             {
                 return;
             }
 
-            CDA cda = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
             if (cda.CDAStatus != ConstStr.CDA.UNCHECK)
             {
                 MessageBoxEx.Show("此额度通知书已经过审核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -255,12 +256,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            if (this.dgvCDAs.SelectedRows.Count == 0)
+            if (this.dgvCDAs.CurrentCell == null)
             {
                 return;
             }
 
-            CDA cda = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
 
             if (MessageBoxEx.Show("是否打算删除额度通知书: " + cda.CDACode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
@@ -268,7 +269,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             bool isDeleteOK = true;
-            context.CDAs.DeleteOnSubmit(cda);
+            this.context.CDAs.DeleteOnSubmit(cda);
 
             try
             {
@@ -283,7 +284,7 @@ namespace CMBC.EasyFactor.CaseMgr
             if (isDeleteOK)
             {
                 MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                dgvCDAs.Rows.RemoveAt(dgvCDAs.SelectedRows[0].Index);
+                this.dgvCDAs.Rows.RemoveAt(this.dgvCDAs.CurrentCell.RowIndex);
             }
         }
 
@@ -294,12 +295,12 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void DetailCDA(object sender, System.EventArgs e)
         {
-            if (this.dgvCDAs.SelectedRows.Count == 0)
+            if (this.dgvCDAs.CurrentCell == null)
             {
                 return;
             }
 
-            CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
             CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);
             cdaDetail.ShowDialog(this);
         }
@@ -360,6 +361,45 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvCDAs.RowHeadersWidth - 4, e.RowBounds.Height);
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvCDAs.RowHeadersDefaultCellStyle.Font, rectangle, dgvCDAs.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportCDAs(object sender, EventArgs e)
+        {
+            if (this.dgvCDAs.CurrentCell == null)
+            {
+                return;
+            }
+
+            List<CDA> selectedCDAs = this.GetSelectedCDAs();
+            if (selectedCDAs.Count > 0)
+            {
+                ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_CDAS, selectedCDAs);
+                form.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private List<CDA> GetSelectedCDAs()
+        {
+            List<CDA> selectedCDAs = new List<CDA>();
+            foreach (DataGridViewCell cell in this.dgvCDAs.SelectedCells)
+            {
+                CDA selectedCDA = (CDA)this.bs.List[cell.RowIndex];
+                if (!selectedCDAs.Contains(selectedCDA))
+                {
+                    selectedCDAs.Add(selectedCDA);
+                }
+            }
+
+            return selectedCDAs;
         }
 
         /// <summary>
@@ -432,12 +472,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            if (this.dgvCDAs.SelectedRows.Count == 0)
+            if (this.dgvCDAs.CurrentCell == null)
             {
                 return;
             }
 
-            CDA cda = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
 
             if (cda.CDAStatus != ConstStr.CDA.UNCHECK)
             {
@@ -471,12 +511,12 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void ReportCDA(object sender, EventArgs e)
         {
-            if (this.dgvCDAs.SelectedRows.Count == 0)
+            if (this.dgvCDAs.CurrentCell == null)
             {
                 return;
             }
 
-            CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
+            CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -618,7 +658,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = String.Format("单笔融资不超过发票金额的 {0:0%}", selectedCDA.FinanceProportion);                   
+                    sheet.Cells[row++, 2] = String.Format("单笔融资不超过发票金额的 {0:0%}", selectedCDA.FinanceProportion);
                 }
 
                 sheet.Cells[row, 1] = "保理费率";
@@ -835,13 +875,12 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void SelectCDA(object sender, System.EventArgs e)
         {
-            if (this.dgvCDAs.SelectedRows.Count == 0)
+            if (this.dgvCDAs.CurrentCell == null)
             {
                 return;
             }
 
-            CDA selectedCDA = (CDA)this.bs.List[this.dgvCDAs.SelectedRows[0].Index];
-            this.Selected = selectedCDA;
+            this.Selected = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex]; ;
             if (this.OwnerForm != null)
             {
                 this.OwnerForm.DialogResult = DialogResult.Yes;

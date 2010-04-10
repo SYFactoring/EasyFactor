@@ -104,17 +104,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblContractCode = new DevComponents.DotNetBar.LabelX();
             this.dgvCDAs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuCDAMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCDASelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCDANew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCDADelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCDAReport = new System.Windows.Forms.ToolStripMenuItem();
             this.colCDACode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -146,6 +135,18 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuCDAMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCDASelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCDANew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCDADelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCDAReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCDAsExport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -522,96 +523,15 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCDAs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCDAs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCDAs.Location = new System.Drawing.Point(0, 54);
-            this.dgvCDAs.MultiSelect = false;
             this.dgvCDAs.Name = "dgvCDAs";
             this.dgvCDAs.ReadOnly = true;
-            this.dgvCDAs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCDAs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvCDAs.Size = new System.Drawing.Size(773, 348);
             this.dgvCDAs.TabIndex = 1;
             this.dgvCDAs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCDAs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCDAs_RowPostPaint);
             this.dgvCDAs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCDAs_CellFormatting);
             this.dgvCDAs.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCDAs_DataBindingComplete);
-            // 
-            // cmuCDAMgr
-            // 
-            this.cmuCDAMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCDASelect,
-            this.menuItemCDADetail,
-            this.toolStripSeparator,
-            this.menuItemCDANew,
-            this.menuItemCDADelete,
-            this.toolStripSeparator1,
-            this.menuItemCheck,
-            this.menuItemReject,
-            this.toolStripSeparator2,
-            this.menuItemCDAReport});
-            this.cmuCDAMgr.Name = "cmuContractMgr";
-            this.cmuCDAMgr.Size = new System.Drawing.Size(183, 176);
-            // 
-            // menuItemCDASelect
-            // 
-            this.menuItemCDASelect.Name = "menuItemCDASelect";
-            this.menuItemCDASelect.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDASelect.Text = "选定CDA";
-            this.menuItemCDASelect.Click += new System.EventHandler(this.SelectCDA);
-            // 
-            // menuItemCDADetail
-            // 
-            this.menuItemCDADetail.Name = "menuItemCDADetail";
-            this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDADetail.Text = "详细信息";
-            this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(179, 6);
-            // 
-            // menuItemCDANew
-            // 
-            this.menuItemCDANew.Name = "menuItemCDANew";
-            this.menuItemCDANew.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDANew.Text = "新建CDA";
-            this.menuItemCDANew.Click += new System.EventHandler(this.NewCDA);
-            // 
-            // menuItemCDADelete
-            // 
-            this.menuItemCDADelete.Name = "menuItemCDADelete";
-            this.menuItemCDADelete.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDADelete.Text = "删除CDA";
-            this.menuItemCDADelete.Click += new System.EventHandler(this.DeleteCDA);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
-            // 
-            // menuItemCheck
-            // 
-            this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCheck.Text = "审核通过";
-            this.menuItemCheck.Click += new System.EventHandler(this.Check);
-            // 
-            // menuItemReject
-            // 
-            this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(182, 22);
-            this.menuItemReject.Text = "审核拒绝";
-            this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
-            // 
-            // menuItemCDAReport
-            // 
-            this.menuItemCDAReport.Name = "menuItemCDAReport";
-            this.menuItemCDAReport.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDAReport.Text = "生成保理额度通知书";
-            this.menuItemCDAReport.Click += new System.EventHandler(this.ReportCDA);
             // 
             // colCDACode
             // 
@@ -892,6 +812,94 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCheckDate.Name = "colCheckDate";
             this.colCheckDate.ReadOnly = true;
             // 
+            // cmuCDAMgr
+            // 
+            this.cmuCDAMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCDASelect,
+            this.menuItemCDADetail,
+            this.toolStripSeparator,
+            this.menuItemCDANew,
+            this.menuItemCDADelete,
+            this.toolStripSeparator1,
+            this.menuItemCheck,
+            this.menuItemReject,
+            this.toolStripSeparator2,
+            this.menuItemCDAReport,
+            this.menuItemCDAsExport});
+            this.cmuCDAMgr.Name = "cmuContractMgr";
+            this.cmuCDAMgr.Size = new System.Drawing.Size(183, 198);
+            // 
+            // menuItemCDASelect
+            // 
+            this.menuItemCDASelect.Name = "menuItemCDASelect";
+            this.menuItemCDASelect.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDASelect.Text = "选定CDA";
+            this.menuItemCDASelect.Click += new System.EventHandler(this.SelectCDA);
+            // 
+            // menuItemCDADetail
+            // 
+            this.menuItemCDADetail.Name = "menuItemCDADetail";
+            this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDADetail.Text = "详细信息";
+            this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(179, 6);
+            // 
+            // menuItemCDANew
+            // 
+            this.menuItemCDANew.Name = "menuItemCDANew";
+            this.menuItemCDANew.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDANew.Text = "新建CDA";
+            this.menuItemCDANew.Click += new System.EventHandler(this.NewCDA);
+            // 
+            // menuItemCDADelete
+            // 
+            this.menuItemCDADelete.Name = "menuItemCDADelete";
+            this.menuItemCDADelete.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDADelete.Text = "删除CDA";
+            this.menuItemCDADelete.Click += new System.EventHandler(this.DeleteCDA);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
+            // 
+            // menuItemCheck
+            // 
+            this.menuItemCheck.Name = "menuItemCheck";
+            this.menuItemCheck.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCheck.Text = "审核通过";
+            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            // 
+            // menuItemReject
+            // 
+            this.menuItemReject.Name = "menuItemReject";
+            this.menuItemReject.Size = new System.Drawing.Size(182, 22);
+            this.menuItemReject.Text = "审核拒绝";
+            this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
+            // 
+            // menuItemCDAReport
+            // 
+            this.menuItemCDAReport.Name = "menuItemCDAReport";
+            this.menuItemCDAReport.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDAReport.Text = "生成保理额度通知书";
+            this.menuItemCDAReport.Click += new System.EventHandler(this.ReportCDA);
+            // 
+            // menuItemCDAsExport
+            // 
+            this.menuItemCDAsExport.Name = "menuItemCDAsExport";
+            this.menuItemCDAsExport.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDAsExport.Text = "导出额度通知书";
+            this.menuItemCDAsExport.Click += new System.EventHandler(this.ExportCDAs);
+            // 
             // CDAMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -948,6 +956,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDAsExport;
 
     }
 }
