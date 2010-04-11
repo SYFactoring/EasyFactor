@@ -359,15 +359,6 @@ namespace CMBC.EasyFactor.ARMgr
                 CDA cda = this._case.ActiveCDA;
                 if (cda.CommissionType == "按转让金额")
                 {
-                    //if (this._case.TransactionType == "进口保理")
-                    //{
-                    //    selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.IFPrice;
-                    //}
-                    //else
-                    //{
-                    //selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.EFPrice;
-                    //}
-
                     selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.Price;
                 }
 
@@ -743,8 +734,11 @@ namespace CMBC.EasyFactor.ARMgr
                 DateTime assignDate = this.assignDateDateTimePicker.Value.Date;
                 if (invoice.InvoiceDate != null && invoice.InvoiceDate > assignDate)
                 {
-                    MessageBoxEx.Show("转让日不能早于发票日: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
+                    DialogResult dr = MessageBoxEx.Show("发票日晚于转让日，是否确定录入: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (dr == DialogResult.No)
+                    {
+                        return false;
+                    }
                 }
 
                 if (this._case.NetPaymentTerm.HasValue)
