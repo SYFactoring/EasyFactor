@@ -385,7 +385,7 @@ namespace CMBC.EasyFactor.Utils
                     range.EntireColumn.AutoFit();
                     if (range.Column == 2 || range.Column == 3 || range.Column == 7)
                     {
-                        range.NumberFormatLocal = "0.00";
+                        range.NumberFormatLocal = "#,##0.00";
                     }
                     else if (range.Column == 4 || range.Column == 5)
                     {
@@ -938,7 +938,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 3, column++] = financeTypes.Contains("银承") ? "银承" : "---";
                     datasheet.Cells[row + 3, column++] = review.RequestFinanceType2;
                     datasheet.Cells[row + 3, column++] = review.Client.Contract != null ? "已启动" : "未启动";
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "0.00%";
+                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "0.000%";
                     datasheet.Cells[row + 3, column++] = review.RequestCommissionRate;
                     datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "##月";
                     datasheet.Cells[row + 3, column++] = review.RequestFinancePeriod;
@@ -1252,7 +1252,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     else if (range.Column == 12)
                     {
-                        range.NumberFormatLocal = "0.00%";
+                        range.NumberFormatLocal = "0.000%";
                     }
                 }
 
@@ -1383,7 +1383,7 @@ namespace CMBC.EasyFactor.Utils
                     range.EntireColumn.AutoFit();
                     if (range.Column == 10)
                     {
-                        range.NumberFormatLocal = "0.00";
+                        range.NumberFormatLocal = "#,##0.00";
                     }
                     else if (range.Column == 4 || range.Column == 11)
                     {
@@ -1494,7 +1494,7 @@ namespace CMBC.EasyFactor.Utils
                     range.EntireColumn.AutoFit();
                     if (range.Column == 2 || range.Column == 3 || range.Column == 4)
                     {
-                        range.NumberFormatLocal = "0.00";
+                        range.NumberFormatLocal = "#,##0.00";
                     }
                 }
 
@@ -1732,7 +1732,7 @@ namespace CMBC.EasyFactor.Utils
                 {
                     if (range.Column == 10 || range.Column == 11 || range.Column == 26 || range.Column == 33 || range.Column == 39 || range.Column == 40 || range.Column == 41)
                     {
-                        range.NumberFormatLocal = "0.00";
+                        range.NumberFormatLocal = "#,##0.00";
                     }
                     else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 22 || range.Column == 23 || range.Column == 29 || range.Column == 36)
                     {
@@ -1876,7 +1876,7 @@ namespace CMBC.EasyFactor.Utils
                     range.EntireColumn.AutoFit();
                     if (range.Column == 4 || range.Column == 5 || range.Column == 9 || range.Column == 10)
                     {
-                        range.NumberFormatLocal = "0.00";
+                        range.NumberFormatLocal = "#,##0.00";
                     }
                     else if (range.Column == 6 || range.Column == 7 || range.Column == 11 || range.Column == 12)
                     {
@@ -2308,7 +2308,7 @@ namespace CMBC.EasyFactor.Utils
                     range.EntireColumn.AutoFit();
                     if (range.Column == 2 || range.Column == 3)
                     {
-                        range.NumberFormatLocal = "0.00";
+                        range.NumberFormatLocal = "#,##0.00";
                     }
                     else if (range.Column == 6)
                     {
@@ -2419,7 +2419,7 @@ namespace CMBC.EasyFactor.Utils
                     range.EntireColumn.AutoFit();
                     if (range.Column == 3 || range.Column == 4)
                     {
-                        range.NumberFormatLocal = "0.00";
+                        range.NumberFormatLocal = "#,##0.00";
                     }
                 }
 
