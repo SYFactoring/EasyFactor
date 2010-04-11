@@ -19,108 +19,33 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Client
     {
-        #region Properties (7)
+        #region Fields (1)
+
+        private static Regex ClientEDICodeRegex = new Regex(@"^[a-zA-Z0-9]{2}[a-zA-Z0-9\\-]{1}[a-zA-Z0-9]{4}\d{2}$");
+
+        #endregion Fields
+
+        #region Properties (12)
 
         /// <summary>
-        /// 池融资的总账款余额
+        /// 
         /// </summary>
-        public double PoolTotalAssignOutstading
+        public string Address
         {
             get
             {
-                double result = 0;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                if (this.AddressCN != null)
                 {
-                    double assignOutstanding = curCase.AssignOutstanding;
-                    if (curCase.InvoiceCurrency != "CNY")
-                    {
-                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
-                        assignOutstanding *= exchange;
-                    }
-
-                    result += assignOutstanding;
+                    return this.AddressCN;
                 }
-
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// 池融资有效的账款余额，即应收账款池余额
-        /// </summary>
-        public double PoolValuedAssignOutstanding
-        {
-            get
-            {
-                double result = 0;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                else if (this.AddressEN != null)
                 {
-                    double assignOutstanding = curCase.ValuedAssignOutstanding;
-                    if (curCase.InvoiceCurrency != "CNY")
-                    {
-                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
-                        assignOutstanding *= exchange;
-                    }
-
-                    result += assignOutstanding;
+                    return this.AddressEN;
                 }
-
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// 现金池余额
-        /// </summary>
-        public double? PoolCashOutstanding
-        {
-            get
-            {
-                if (this.GuaranteeDeposits.Count > 0)
+                else
                 {
-                    double gd = this.GuaranteeDeposits[0].GuaranteeDepositAmount;
-                    if (this.GuaranteeDeposits[0].GuaranteeDepositCurrency != "CNY")
-                    {
-                        double exchange = Exchange.GetExchangeRate(this.GuaranteeDeposits[0].GuaranteeDepositCurrency, "CNY");
-                        gd *= exchange;
-                    }
-
-                    return gd;
+                    return string.Empty;
                 }
-
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 融资池余额
-        /// </summary>
-        public double? PoolFinanceOutstanding
-        {
-            get
-            {
-                double? total = null;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
-                {
-                    double? financeOutstanding = curCase.FinanceOutstanding;
-                    if (financeOutstanding.HasValue)
-                    {
-                        if (total == null)
-                        {
-                            total = 0;
-                        }
-
-                        if (curCase.InvoiceCurrency != "CNY")
-                        {
-                            double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
-                            financeOutstanding *= exchange;
-                        }
-
-                        total += financeOutstanding.Value;
-                    }
-                }
-
-                return total;
             }
         }
 
@@ -182,10 +107,8 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return contractList[0];
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
         }
 
@@ -265,6 +188,109 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 现金池余额
+        /// </summary>
+        public double? PoolCashOutstanding
+        {
+            get
+            {
+                if (this.GuaranteeDeposits.Count > 0)
+                {
+                    double gd = this.GuaranteeDeposits[0].GuaranteeDepositAmount;
+                    if (this.GuaranteeDeposits[0].GuaranteeDepositCurrency != "CNY")
+                    {
+                        double exchange = Exchange.GetExchangeRate(this.GuaranteeDeposits[0].GuaranteeDepositCurrency, "CNY");
+                        gd *= exchange;
+                    }
+
+                    return gd;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 融资池余额
+        /// </summary>
+        public double? PoolFinanceOutstanding
+        {
+            get
+            {
+                double? total = null;
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                {
+                    double? financeOutstanding = curCase.FinanceOutstanding;
+                    if (financeOutstanding.HasValue)
+                    {
+                        if (total == null)
+                        {
+                            total = 0;
+                        }
+
+                        if (curCase.InvoiceCurrency != "CNY")
+                        {
+                            double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
+                            financeOutstanding *= exchange;
+                        }
+
+                        total += financeOutstanding.Value;
+                    }
+                }
+
+                return total;
+            }
+        }
+
+        /// <summary>
+        /// 池融资的总账款余额
+        /// </summary>
+        public double PoolTotalAssignOutstading
+        {
+            get
+            {
+                double result = 0;
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                {
+                    double assignOutstanding = curCase.AssignOutstanding;
+                    if (curCase.InvoiceCurrency != "CNY")
+                    {
+                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
+                        assignOutstanding *= exchange;
+                    }
+
+                    result += assignOutstanding;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 池融资有效的账款余额，即应收账款池余额
+        /// </summary>
+        public double PoolValuedAssignOutstanding
+        {
+            get
+            {
+                double result = 0;
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                {
+                    double assignOutstanding = curCase.ValuedAssignOutstanding;
+                    if (curCase.InvoiceCurrency != "CNY")
+                    {
+                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
+                        assignOutstanding *= exchange;
+                    }
+
+                    result += assignOutstanding;
+                }
+
+                return result;
+            }
+        }
+
         #endregion Properties
 
         #region Methods (3)
@@ -341,7 +367,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private static Regex ClientEDICodeRegex = new Regex(@"^[a-zA-Z0-9]{2}[a-zA-Z0-9\\-]{1}[a-zA-Z0-9]{4}\d{2}$");
+        #endregion Methods
 
         /// <summary>
         /// 
@@ -357,6 +383,5 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
-        #endregion Methods
     }
 }
