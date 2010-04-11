@@ -217,7 +217,7 @@ namespace CMBC.EasyFactor.DB.dbml
                         result += value;
                     }
 
-                    _netInterestIncome =  result;
+                    _netInterestIncome = result;
                 }
 
                 return _netInterestIncome.Value;
@@ -231,7 +231,18 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Case.SellerClient.ToString();
+                if (this.Case != null && this.Case.SellerClient != null)
+                {
+                    return this.Case.SellerClient.ToString();
+                }
+                else if (this.Client != null)
+                {
+                    return this.Client.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 

@@ -2754,6 +2754,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<GuaranteeDeposit> _GuaranteeDeposits;
 		
+		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
+		
 		private EntityRef<Department> _Department;
 		
 		private EntityRef<Client> _ClientGroup;
@@ -2838,6 +2840,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._Contracts = new EntitySet<Contract>(new Action<Contract>(this.attach_Contracts), new Action<Contract>(this.detach_Contracts));
 			this._ClientReviews = new EntitySet<ClientReview>(new Action<ClientReview>(this.attach_ClientReviews), new Action<ClientReview>(this.detach_ClientReviews));
 			this._GuaranteeDeposits = new EntitySet<GuaranteeDeposit>(new Action<GuaranteeDeposit>(this.attach_GuaranteeDeposits), new Action<GuaranteeDeposit>(this.detach_GuaranteeDeposits));
+			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
 			this._Department = default(EntityRef<Department>);
 			this._ClientGroup = default(EntityRef<Client>);
 			OnCreated();
@@ -3595,6 +3598,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="Client_InvoiceFinanceBatch", Storage="_InvoiceFinanceBatches", OtherKey="ClientEDICode")]
+		public EntitySet<InvoiceFinanceBatch> InvoiceFinanceBatches
+		{
+			get
+			{
+				return this._InvoiceFinanceBatches;
+			}
+			set
+			{
+				this._InvoiceFinanceBatches.Assign(value);
+			}
+		}
+		
 		[Association(Name="Department_Client", Storage="_Department", ThisKey="BranchCode", IsForeignKey=true)]
 		public Department Department
 		{
@@ -3774,6 +3790,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_GuaranteeDeposits(GuaranteeDeposit entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
+		}
+		
+		private void attach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
 		{
 			this.SendPropertyChanging();
 			entity.Client = null;
@@ -8844,11 +8872,15 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _LoanNo;
 		
+		private string _ClientEDICode;
+		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
 		private EntityRef<Factor> _Factor;
 		
 		private EntityRef<Case> _Case;
+		
+		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -8890,6 +8922,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnOtherIncomeChanged();
     partial void OnLoanNoChanging(string value);
     partial void OnLoanNoChanged();
+    partial void OnClientEDICodeChanging(string value);
+    partial void OnClientEDICodeChanged();
     #endregion
 		
 		public InvoiceFinanceBatch()
@@ -8897,6 +8931,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._InvoiceFinanceLogs = new EntitySet<InvoiceFinanceLog>(new Action<InvoiceFinanceLog>(this.attach_InvoiceFinanceLogs), new Action<InvoiceFinanceLog>(this.detach_InvoiceFinanceLogs));
 			this._Factor = default(EntityRef<Factor>);
 			this._Case = default(EntityRef<Case>);
+			this._Client = default(EntityRef<Client>);
 			OnCreated();
 		}
 		
@@ -8920,7 +8955,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_CDACode", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_CDACode", DbType="VarChar(15) NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CaseCode
 		{
 			get
@@ -9268,6 +9303,30 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Column(Storage="_ClientEDICode", DbType="Varchar(35)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string ClientEDICode
+		{
+			get
+			{
+				return this._ClientEDICode;
+			}
+			set
+			{
+				if ((this._ClientEDICode != value))
+				{
+					if (this._Client.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnClientEDICodeChanging(value);
+					this.SendPropertyChanging();
+					this._ClientEDICode = value;
+					this.SendPropertyChanged("ClientEDICode");
+					this.OnClientEDICodeChanged();
+				}
+			}
+		}
+		
 		[Association(Name="InvoiceFinanceBatch_InvoiceFinanceLog", Storage="_InvoiceFinanceLogs", OtherKey="FinanceBatchNo")]
 		public EntitySet<InvoiceFinanceLog> InvoiceFinanceLogs
 		{
@@ -9345,6 +9404,40 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._CDACode = default(string);
 					}
 					this.SendPropertyChanged("Case");
+				}
+			}
+		}
+		
+		[Association(Name="Client_InvoiceFinanceBatch", Storage="_Client", ThisKey="ClientEDICode", IsForeignKey=true)]
+		public Client Client
+		{
+			get
+			{
+				return this._Client.Entity;
+			}
+			set
+			{
+				Client previousValue = this._Client.Entity;
+				if (((previousValue != value) 
+							|| (this._Client.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Client.Entity = null;
+						previousValue.InvoiceFinanceBatches.Remove(this);
+					}
+					this._Client.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceFinanceBatches.Add(this);
+						this._ClientEDICode = value.ClientEDICode;
+					}
+					else
+					{
+						this._ClientEDICode = default(string);
+					}
+					this.SendPropertyChanged("Client");
 				}
 			}
 		}

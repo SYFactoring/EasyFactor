@@ -294,6 +294,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.factorTextBox.ReadOnly = true;
             }
 
+            ControlUtil.SetComponetEditable(this.tbClientName, false);
             ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
         }
 

@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-        #region Constructors (1)
+		#region Constructors (1) 
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -47,9 +47,9 @@ namespace CMBC.EasyFactor
             this.backgroundWorker.RunWorkerAsync();
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Properties (2)
+		#region Properties (2) 
 
         /// <summary>
         /// Sets command status
@@ -73,11 +73,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregion Properties
+		#endregion Properties 
 
-        #region Methods (84)
+		#region Methods (86) 
 
-        // Public Methods (2) 
+		// Public Methods (2) 
 
         /// <summary>
         /// 
@@ -113,7 +113,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        // Private Methods (82) 
+		// Private Methods (84) 
 
         /// <summary>
         /// 
@@ -273,7 +273,7 @@ namespace CMBC.EasyFactor
         private void CheckUpdate(object sender, EventArgs e)
         {
             AutoUpdater autoUpdater = new AutoUpdater();
-            autoUpdater.ConfigURL = "http://cscw.fudan.edu.cn/EasyFactoring/UpdateVersion.xml";
+            autoUpdater.ConfigURL = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml";
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdate();
         }
@@ -284,7 +284,7 @@ namespace CMBC.EasyFactor
         private void CheckUpdateBackground()
         {
             AutoUpdater autoUpdater = new AutoUpdater();
-            autoUpdater.ConfigURL = "http://cscw.fudan.edu.cn/EasyFactoring/UpdateVersion.xml";
+            autoUpdater.ConfigURL = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml";
             autoUpdater.AutoDownload = true;
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdateBackground();
@@ -1083,6 +1083,28 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void QueryPoolFinanceBatch(object sender, EventArgs e)
+        {
+            FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.POOL_QUERY);
+            this.SetDetailPanel(batchMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryPoolRefundBatch(object sender, EventArgs e)
+        {
+            RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_QUERY);
+            this.SetDetailPanel(batchMgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryRefundBatch(object sender, EventArgs e)
         {
             RefundBatchMgr mgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.QUERY);
@@ -1222,6 +1244,6 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(mgr);
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

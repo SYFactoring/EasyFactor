@@ -30,10 +30,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private Case _case;
-        /// <summary>
-        /// 
-        /// </summary>
         private BindingSource bs;
         /// <summary>
         /// 
@@ -62,7 +58,12 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            QUERY
+            QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            POOL_QUERY
         }
 
         #endregion Enums
@@ -72,14 +73,29 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// Initializes a new instance of the FinanceBatchMgr class
         /// </summary>
+        /// <param name="selectedClient"></param>
+        /// <param name="context"></param>
+        public FinanceBatchMgr(Client selectedClient, DBDataContext context)
+            : this(OpBatchType.DETAIL)
+        {
+            this.panelQuery.Visible = false;
+            this.colBuyerName.Visible = false;
+            this.colBatchCount.Visible = false;
+
+            this.bs.DataSource = selectedClient.InvoiceFinanceBatches;
+            this.context = context;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the FinanceBatchMgr class
+        /// </summary>
         /// <param name="selectedCDA"></param>
         /// <param name="context"></param>
         public FinanceBatchMgr(Case selectedCase, DBDataContext context)
             : this(OpBatchType.DETAIL)
         {
-            this._case = selectedCase;
             this.panelQuery.Visible = false;
-            this.bs.DataSource = this._case.InvoiceFinanceBatches;
+            this.bs.DataSource = selectedCase.InvoiceFinanceBatches;
             this.context = context;
         }
 
@@ -121,6 +137,11 @@ namespace CMBC.EasyFactor.ARMgr
                 var queryResult = context.InvoiceFinanceBatches.Where(i => i.CheckStatus == "未复核");
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            }
+            else if (batchType == OpBatchType.POOL_QUERY)
+            {
+                this.colBuyerName.Visible = false;
+                this.colBatchCount.Visible = false;
             }
         }
 
@@ -389,13 +410,27 @@ namespace CMBC.EasyFactor.ARMgr
 
             context = new DBDataContext();
 
-            var queryResult = context.InvoiceFinanceBatches.Where(i =>
-                i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
-                && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
-                && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
-                && (status != string.Empty ? i.CheckStatus == status : true)
-                && (i.CreateUserName.Contains(createUserName))
-                && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
+            IEnumerable<InvoiceFinanceBatch> queryResult = null;
+            if (opBatchType != OpBatchType.POOL_QUERY)
+            {
+                queryResult = context.InvoiceFinanceBatches.Where(i =>
+                    i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
+                    && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
+                    && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
+                    && (status != string.Empty ? i.CheckStatus == status : true)
+                    && (i.CreateUserName.Contains(createUserName))
+                    && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
+            }
+            else
+            {
+                queryResult = context.InvoiceFinanceBatches.Where(i =>
+                    i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
+                    && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
+                    && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
+                    && (status != string.Empty ? i.CheckStatus == status : true)
+                    && (i.CreateUserName.Contains(createUserName))
+                    && (i.Client.ClientNameCN.Contains(clientName) || i.Client.ClientNameEN.Contains(clientName)));
+            }
 
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

@@ -55,7 +55,12 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            QUERY
+            QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            POOL_QUERY
         }
 
         #endregion Enums

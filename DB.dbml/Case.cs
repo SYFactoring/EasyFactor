@@ -33,7 +33,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Fields
 
-        #region Properties (21)
+        #region Properties (22)
 
         /// <summary>
         /// Gets 
@@ -315,6 +315,22 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        public double? FinanceProportion
+        {
+            get
+            {
+                CDA cda = this.ActiveCDA;
+                if (cda != null)
+                {
+                    return cda.FinanceProportion;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -542,16 +558,6 @@ namespace CMBC.EasyFactor.DB.dbml
 
         // Public Methods (2) 
 
-        /// <summary>
-        /// 总收入
-        /// </summary>
-        //public double? TotalIncome
-        //{
-        //    get
-        //    {
-        //        return this.CommissionIncome + this.NetInterestIncome.GetValueOrDefault() + this.MarginIncome.GetValueOrDefault();
-        //    }
-        //}
         /// <summary>
         /// 
         /// </summary>
