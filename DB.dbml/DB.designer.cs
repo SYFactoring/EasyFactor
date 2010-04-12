@@ -2750,11 +2750,11 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<Contract> _Contracts;
 		
+		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
+		
 		private EntitySet<ClientReview> _ClientReviews;
 		
 		private EntitySet<GuaranteeDeposit> _GuaranteeDeposits;
-		
-		private EntitySet<InvoiceFinanceBatch> _InvoiceFinanceBatches;
 		
 		private EntityRef<Department> _Department;
 		
@@ -2838,9 +2838,9 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._ClientAccounts = new EntitySet<ClientAccount>(new Action<ClientAccount>(this.attach_ClientAccounts), new Action<ClientAccount>(this.detach_ClientAccounts));
 			this._ClientCreditLines = new EntitySet<ClientCreditLine>(new Action<ClientCreditLine>(this.attach_ClientCreditLines), new Action<ClientCreditLine>(this.detach_ClientCreditLines));
 			this._Contracts = new EntitySet<Contract>(new Action<Contract>(this.attach_Contracts), new Action<Contract>(this.detach_Contracts));
+			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
 			this._ClientReviews = new EntitySet<ClientReview>(new Action<ClientReview>(this.attach_ClientReviews), new Action<ClientReview>(this.detach_ClientReviews));
 			this._GuaranteeDeposits = new EntitySet<GuaranteeDeposit>(new Action<GuaranteeDeposit>(this.attach_GuaranteeDeposits), new Action<GuaranteeDeposit>(this.detach_GuaranteeDeposits));
-			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
 			this._Department = default(EntityRef<Department>);
 			this._ClientGroup = default(EntityRef<Client>);
 			OnCreated();
@@ -3572,6 +3572,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="Client_InvoiceFinanceBatch", Storage="_InvoiceFinanceBatches", OtherKey="ClientEDICode")]
+		public EntitySet<InvoiceFinanceBatch> InvoiceFinanceBatches
+		{
+			get
+			{
+				return this._InvoiceFinanceBatches;
+			}
+			set
+			{
+				this._InvoiceFinanceBatches.Assign(value);
+			}
+		}
+		
 		[Association(Name="Client_ClientReview", Storage="_ClientReviews", OtherKey="ClientEDICode")]
 		public EntitySet<ClientReview> ClientReviews
 		{
@@ -3595,19 +3608,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			set
 			{
 				this._GuaranteeDeposits.Assign(value);
-			}
-		}
-		
-		[Association(Name="Client_InvoiceFinanceBatch", Storage="_InvoiceFinanceBatches", OtherKey="ClientEDICode")]
-		public EntitySet<InvoiceFinanceBatch> InvoiceFinanceBatches
-		{
-			get
-			{
-				return this._InvoiceFinanceBatches;
-			}
-			set
-			{
-				this._InvoiceFinanceBatches.Assign(value);
 			}
 		}
 		
@@ -3771,6 +3771,18 @@ namespace CMBC.EasyFactor.DB.dbml
 			entity.Client = null;
 		}
 		
+		private void attach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
+		}
+		
 		private void attach_ClientReviews(ClientReview entity)
 		{
 			this.SendPropertyChanging();
@@ -3790,18 +3802,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_GuaranteeDeposits(GuaranteeDeposit entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
-		}
-		
-		private void attach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_InvoiceFinanceBatches(InvoiceFinanceBatch entity)
 		{
 			this.SendPropertyChanging();
 			entity.Client = null;

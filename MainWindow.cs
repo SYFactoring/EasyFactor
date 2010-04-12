@@ -1096,8 +1096,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryPoolRefundBatch(object sender, EventArgs e)
         {
-            RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_QUERY);
-            this.SetDetailPanel(batchMgr);
+          //  RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_QUERY);
+          //  this.SetDetailPanel(batchMgr);
         }
 
         /// <summary>

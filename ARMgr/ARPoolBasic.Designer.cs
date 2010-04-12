@@ -31,6 +31,8 @@
             DevComponents.DotNetBar.LabelX lblClient;
             this.panelPoolBasic = new DevComponents.DotNetBar.ExpandablePanel();
             this.panelPoolOutstanding = new DevComponents.DotNetBar.ExpandablePanel();
+            this.tbTotalAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblTotalAssignOutstanding = new DevComponents.DotNetBar.LabelX();
             this.lblValuedAssignOutstanding = new DevComponents.DotNetBar.LabelX();
             this.tbValuedAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbFinanceOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -42,8 +44,6 @@
             this.tbClientEDICode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelPool = new DevComponents.DotNetBar.PanelEx();
-            this.lblTotalAssignOutstanding = new DevComponents.DotNetBar.LabelX();
-            this.tbTotalAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             lblClient = new DevComponents.DotNetBar.LabelX();
             this.panelPoolBasic.SuspendLayout();
             this.panelPoolOutstanding.SuspendLayout();
@@ -125,6 +125,31 @@
             this.panelPoolOutstanding.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelPoolOutstanding.TitleStyle.GradientAngle = 90;
             this.panelPoolOutstanding.TitleText = "余额信息";
+            // 
+            // tbTotalAssignOutstanding
+            // 
+            // 
+            // 
+            // 
+            this.tbTotalAssignOutstanding.Border.Class = "TextBoxBorder";
+            this.tbTotalAssignOutstanding.Location = new System.Drawing.Point(87, 25);
+            this.tbTotalAssignOutstanding.Name = "tbTotalAssignOutstanding";
+            this.tbTotalAssignOutstanding.ReadOnly = true;
+            this.tbTotalAssignOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbTotalAssignOutstanding.TabIndex = 7;
+            // 
+            // lblTotalAssignOutstanding
+            // 
+            this.lblTotalAssignOutstanding.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblTotalAssignOutstanding.BackgroundStyle.Class = "";
+            this.lblTotalAssignOutstanding.Location = new System.Drawing.Point(13, 25);
+            this.lblTotalAssignOutstanding.Name = "lblTotalAssignOutstanding";
+            this.lblTotalAssignOutstanding.Size = new System.Drawing.Size(68, 16);
+            this.lblTotalAssignOutstanding.TabIndex = 6;
+            this.lblTotalAssignOutstanding.Text = "总账款余额";
             // 
             // lblValuedAssignOutstanding
             // 
@@ -287,31 +312,6 @@
             this.panelPool.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelPool.Style.GradientAngle = 90;
             this.panelPool.TabIndex = 9;
-            // 
-            // lblTotalAssignOutstanding
-            // 
-            this.lblTotalAssignOutstanding.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblTotalAssignOutstanding.BackgroundStyle.Class = "";
-            this.lblTotalAssignOutstanding.Location = new System.Drawing.Point(13, 25);
-            this.lblTotalAssignOutstanding.Name = "lblTotalAssignOutstanding";
-            this.lblTotalAssignOutstanding.Size = new System.Drawing.Size(68, 16);
-            this.lblTotalAssignOutstanding.TabIndex = 6;
-            this.lblTotalAssignOutstanding.Text = "总账款余额";
-            // 
-            // tbTotalAssignOutstanding
-            // 
-            // 
-            // 
-            // 
-            this.tbTotalAssignOutstanding.Border.Class = "TextBoxBorder";
-            this.tbTotalAssignOutstanding.Location = new System.Drawing.Point(87, 25);
-            this.tbTotalAssignOutstanding.Name = "tbTotalAssignOutstanding";
-            this.tbTotalAssignOutstanding.ReadOnly = true;
-            this.tbTotalAssignOutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbTotalAssignOutstanding.TabIndex = 7;
             // 
             // ARPoolBasic
             // 

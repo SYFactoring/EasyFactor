@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=195.21.48.37;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -138,9 +138,9 @@
       <Association Name="Client_ClientAccount" Member="ClientAccounts" OtherKey="ClientEDICode" Type="ClientAccount" />
       <Association Name="Client_ClientCreditLine" Member="ClientCreditLines" OtherKey="ClientEDICode" Type="ClientCreditLine" />
       <Association Name="Client_Contract" Member="Contracts" OtherKey="ClientEDICode" Type="Contract" />
+      <Association Name="Client_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" OtherKey="ClientEDICode" Type="InvoiceFinanceBatch" />
       <Association Name="Client_ClientReview" Member="ClientReviews" OtherKey="ClientEDICode" Type="ClientReview" />
       <Association Name="Client_GuaranteeDeposit" Member="GuaranteeDeposits" OtherKey="ClientEDICode" Type="GuaranteeDeposit" />
-      <Association Name="Client_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" OtherKey="ClientEDICode" Type="InvoiceFinanceBatch" />
       <Association Name="Department_Client" Member="Department" ThisKey="BranchCode" Type="Department" IsForeignKey="true" />
       <Association Name="Client_Client" Member="ClientGroup" ThisKey="GroupEDICode" Type="Client" IsForeignKey="true" />
     </Type>
