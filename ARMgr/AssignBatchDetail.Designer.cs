@@ -80,6 +80,7 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX checkUserNameLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssignBatchDetail));
+            DevComponents.DotNetBar.LabelX lblInputDate;
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
             this.checkStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -101,6 +102,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             assignDateLabel = new DevComponents.DotNetBar.LabelX();
@@ -110,6 +112,7 @@ namespace CMBC.EasyFactor.ARMgr
             checkDateLabel = new DevComponents.DotNetBar.LabelX();
             checkUserNameLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
+            lblInputDate = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.panelBatch.SuspendLayout();
@@ -117,6 +120,7 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -265,6 +269,8 @@ namespace CMBC.EasyFactor.ARMgr
             // panelBatch
             // 
             this.panelBatch.AutoScroll = true;
+            this.panelBatch.Controls.Add(lblInputDate);
+            this.panelBatch.Controls.Add(this.diInputDate);
             this.panelBatch.Controls.Add(this.checkStatusComboBox);
             this.panelBatch.Controls.Add(this.btnSave);
             this.panelBatch.Controls.Add(this.btnUpdate);
@@ -308,9 +314,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.checkStatusComboBox.FormattingEnabled = true;
             this.checkStatusComboBox.Items.AddRange(new object[] {
-            ConstStr.BATCH.UNCHECK,
-            ConstStr.BATCH.CHECK,
-            ConstStr.BATCH.REJECT});
+            "未复核",
+            "已复核",
+            "复核未通过"});
             this.checkStatusComboBox.Location = new System.Drawing.Point(115, 181);
             this.checkStatusComboBox.Name = "checkStatusComboBox";
             this.checkStatusComboBox.Size = new System.Drawing.Size(162, 21);
@@ -403,7 +409,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.checkDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.checkDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.checkDateDateTimePicker.Name = "checkDateDateTimePicker";
-            this.checkDateDateTimePicker.Size = new System.Drawing.Size(162, 20);
+            this.checkDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
             this.checkDateDateTimePicker.TabIndex = 15;
             // 
             // rejectReasonTextBox
@@ -481,7 +487,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.assignDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
             this.assignDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.assignDateDateTimePicker.Name = "assignDateDateTimePicker";
-            this.assignDateDateTimePicker.Size = new System.Drawing.Size(162, 20);
+            this.assignDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
             this.assignDateDateTimePicker.TabIndex = 5;
             // 
             // assignBatchNoTextBox
@@ -553,6 +559,56 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // lblInputDate
+            // 
+            lblInputDate.AutoSize = true;
+            lblInputDate.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblInputDate.BackgroundStyle.Class = "";
+            lblInputDate.Location = new System.Drawing.Point(218, 58);
+            lblInputDate.Name = "lblInputDate";
+            lblInputDate.Size = new System.Drawing.Size(47, 16);
+            lblInputDate.TabIndex = 23;
+            lblInputDate.Text = "录入日:";
+            // 
+            // diInputDate
+            // 
+            // 
+            // 
+            // 
+            this.diInputDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diInputDate.ButtonDropDown.Visible = true;
+            this.diInputDate.ButtonFreeText.Checked = true;
+            this.diInputDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "InputDate", true));
+            this.diInputDate.FreeTextEntryMode = true;
+            this.diInputDate.Location = new System.Drawing.Point(271, 56);
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diInputDate.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.diInputDate.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diInputDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diInputDate.Name = "diInputDate";
+            this.diInputDate.Size = new System.Drawing.Size(100, 20);
+            this.diInputDate.TabIndex = 24;
+            // 
             // AssignBatchDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -571,9 +627,12 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             this.ResumeLayout(false);
 
         }
         #endregion
+
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diInputDate;
     }
 }

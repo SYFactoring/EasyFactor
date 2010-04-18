@@ -602,6 +602,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (batch.AssignBatchNo == null)
                 {
                     batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(batch.AssignDate);
+                    batch.InputDate = DateTime.Today;
                 }
 
                 foreach (Invoice invoice in invoiceList)

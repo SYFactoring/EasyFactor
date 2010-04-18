@@ -850,8 +850,16 @@ namespace CMBC.EasyFactor.CaseMgr
                     case "国内买方保理":
                     case "进口保理":
                         curCase.OwnerDepartment = curCase.BuyerClient.Department;
-                        List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
-                        this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
+                        if (curCase.OwnerDepartment != null)
+                        {
+                            if (!curCase.OwnerDepartment.DepartmentName.Contains("贸金"))
+                            {
+                                curCase.OperationType = "协销";
+                            }
+                            List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
+                            this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
+                        }
+
                         this.cbReviews.DataSource = curCase.ClientReviews;
                         break;
                     default: break;
@@ -887,8 +895,17 @@ namespace CMBC.EasyFactor.CaseMgr
                     case "租赁保理":
                     case "出口保理":
                         curCase.OwnerDepartment = curCase.SellerClient.Department;
-                        List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
-                        this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
+                        if (curCase.OwnerDepartment != null)
+                        {
+                            if (!curCase.OwnerDepartment.DepartmentName.Contains("贸金"))
+                            {
+                                curCase.OperationType = "协销";
+                            }
+
+                            List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
+                            this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
+                        }
+
                         this.cbReviews.DataSource = curCase.ClientReviews;
                         break;
                     case "国内买方保理":

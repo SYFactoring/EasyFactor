@@ -231,12 +231,12 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-
-                this.caseCodeTextBox.ReadOnly = true;
-                this.paymentBatchNoTextBox.ReadOnly = true;
             }
 
+            ControlUtil.SetComponetEditable(this.caseCodeTextBox, false);
             ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(this.paymentBatchNoTextBox, false);
+            ControlUtil.SetComponetEditable(this.diInputDate, false);
         }
 
         #endregion Methods

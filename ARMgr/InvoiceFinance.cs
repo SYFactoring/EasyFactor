@@ -655,7 +655,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void OnCheckBoxClicked(object sender, DataGridViewCheckboxHeaderEventArgs e)
         {
-            this.dgvLogs.EndEdit();
             IList logList = this.logsBindingSource.List;
             foreach (DataGridViewRow dgvRow in this.dgvLogs.Rows)
             {
@@ -673,6 +672,7 @@ namespace CMBC.EasyFactor.ARMgr
                     this.ResetRow(dgvRow.Index, false);
                 }
 
+                this.dgvLogs.Refresh();
                 this.StatBatch();
             }
         }
@@ -763,6 +763,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (batch.FinanceBatchNo == null)
             {
                 batch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(batch.FinancePeriodBegin);
+                batch.InputDate = DateTime.Today;
             }
 
             for (int i = 0; i < this.logsBindingSource.List.Count; i++)
@@ -831,12 +832,14 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceFinanceBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                //InvoiceFinanceBatch batch = context.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == selectedBatch.FinanceBatchNo);
                 this.batchBindingSource.DataSource = selectedBatch;
                 this.logsBindingSource.DataSource = selectedBatch.InvoiceFinanceLogs;
 
                 for (int i = 0; i < this.logsBindingSource.List.Count; i++)
                 {
+                    InvoiceFinanceLog log = (InvoiceFinanceLog)this.logsBindingSource.List[i];
+                    log.InvoiceNo2 = log.InvoiceNo;
+
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvLogs.Rows[i].Cells[0];
                     cell.Value = 1;
                     ResetRow(i, true);

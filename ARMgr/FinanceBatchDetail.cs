@@ -288,14 +288,15 @@ namespace CMBC.EasyFactor.ARMgr
                 }
 
                 this.btnFactorSelect.Visible = true;
-                this.caseCodeTextBox.ReadOnly = true;
-                this.financeBatchNoTextBox.ReadOnly = true;
                 this.factorCodeTextBox.ReadOnly = true;
                 this.factorTextBox.ReadOnly = true;
             }
 
-            ControlUtil.SetComponetEditable(this.tbClientName, false);
             ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(this.caseCodeTextBox, false);
+            ControlUtil.SetComponetEditable(this.financeBatchNoTextBox, false);
+            ControlUtil.SetComponetEditable(this.tbClientName, false);
+            ControlUtil.SetComponetEditable(this.diInputDate, false);
         }
 
         #endregion Methods

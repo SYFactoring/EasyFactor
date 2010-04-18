@@ -8509,6 +8509,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
+		private System.Nullable<System.DateTime> _InputDate;
+		
 		private EntitySet<Invoice> _Invoices;
 		
 		private EntityRef<Case> _Case;
@@ -8537,6 +8539,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
+    partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnInputDateChanged();
     #endregion
 		
 		public InvoiceAssignBatch()
@@ -8750,6 +8754,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Column(Storage="_InputDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> InputDate
+		{
+			get
+			{
+				return this._InputDate;
+			}
+			set
+			{
+				if ((this._InputDate != value))
+				{
+					this.OnInputDateChanging(value);
+					this.SendPropertyChanging();
+					this._InputDate = value;
+					this.SendPropertyChanged("InputDate");
+					this.OnInputDateChanged();
+				}
+			}
+		}
+		
 		[Association(Name="InvoiceAssignBatch_Invoice", Storage="_Invoices", OtherKey="AssignBatchNo")]
 		public EntitySet<Invoice> Invoices
 		{
@@ -8874,6 +8898,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _ClientEDICode;
 		
+		private System.Nullable<System.DateTime> _InputDate;
+		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
 		private EntityRef<Factor> _Factor;
@@ -8924,6 +8950,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnLoanNoChanged();
     partial void OnClientEDICodeChanging(string value);
     partial void OnClientEDICodeChanged();
+    partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnInputDateChanged();
     #endregion
 		
 		public InvoiceFinanceBatch()
@@ -9327,6 +9355,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Column(Storage="_InputDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> InputDate
+		{
+			get
+			{
+				return this._InputDate;
+			}
+			set
+			{
+				if ((this._InputDate != value))
+				{
+					this.OnInputDateChanging(value);
+					this.SendPropertyChanging();
+					this._InputDate = value;
+					this.SendPropertyChanged("InputDate");
+					this.OnInputDateChanged();
+				}
+			}
+		}
+		
 		[Association(Name="InvoiceFinanceBatch_InvoiceFinanceLog", Storage="_InvoiceFinanceLogs", OtherKey="FinanceBatchNo")]
 		public EntitySet<InvoiceFinanceLog> InvoiceFinanceLogs
 		{
@@ -9503,6 +9551,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _CheckDate;
 		
+		private System.Nullable<System.DateTime> _InputDate;
+		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
 		private EntityRef<Case> _Case;
@@ -9533,6 +9583,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckUserNameChanged();
     partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCheckDateChanged();
+    partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnInputDateChanged();
     #endregion
 		
 		public InvoicePaymentBatch()
@@ -9762,6 +9814,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CheckDate = value;
 					this.SendPropertyChanged("CheckDate");
 					this.OnCheckDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InputDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> InputDate
+		{
+			get
+			{
+				return this._InputDate;
+			}
+			set
+			{
+				if ((this._InputDate != value))
+				{
+					this.OnInputDateChanging(value);
+					this.SendPropertyChanging();
+					this._InputDate = value;
+					this.SendPropertyChanged("InputDate");
+					this.OnInputDateChanged();
 				}
 			}
 		}
@@ -10291,6 +10363,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _CheckDate;
 		
+		private System.Nullable<System.DateTime> _InputDate;
+		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
 		
 		private EntityRef<Case> _Case;
@@ -10319,6 +10393,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckUserNameChanged();
     partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCheckDateChanged();
+    partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnInputDateChanged();
     #endregion
 		
 		public InvoiceRefundBatch()
@@ -10528,6 +10604,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CheckDate = value;
 					this.SendPropertyChanged("CheckDate");
 					this.OnCheckDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_InputDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> InputDate
+		{
+			get
+			{
+				return this._InputDate;
+			}
+			set
+			{
+				if ((this._InputDate != value))
+				{
+					this.OnInputDateChanging(value);
+					this.SendPropertyChanging();
+					this._InputDate = value;
+					this.SendPropertyChanged("InputDate");
+					this.OnInputDateChanged();
 				}
 			}
 		}

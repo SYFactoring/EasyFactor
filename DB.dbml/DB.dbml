@@ -370,6 +370,7 @@
       <Column Name="IsCreateMsg" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="InputDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" OtherKey="AssignBatchNo" Type="Invoice" />
       <Association Name="Case_InvoiceAssignBatch" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
@@ -395,6 +396,7 @@
       <Column Name="OtherIncome" Type="System.Double" DbType="float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="LoanNo" Type="System.String" DbType="Nvarchar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="ClientEDICode" Type="System.String" DbType="Varchar(35)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="InputDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceFinanceBatch_InvoiceFinanceLog" Member="InvoiceFinanceLogs" OtherKey="FinanceBatchNo" Type="InvoiceFinanceLog" />
       <Association Name="Factor_InvoiceFinanceBatch" Member="Factor" ThisKey="FactorCode" Type="Factor" IsForeignKey="true" />
       <Association Name="Case_InvoiceFinanceBatch" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
@@ -414,6 +416,7 @@
       <Column Name="RejectReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="InputDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoicePaymentBatch_InvoicePaymentLog" Member="InvoicePaymentLogs" OtherKey="PaymentBatchNo" Type="InvoicePaymentLog" />
       <Association Name="Case_InvoicePaymentBatch" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
@@ -450,6 +453,7 @@
       <Column Name="RejectReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="InputDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceRefundBatch_InvoiceRefundLog" Member="InvoiceRefundLogs" OtherKey="RefundBatchNo" Type="InvoiceRefundLog" />
       <Association Name="Case_InvoiceRefundBatch" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
