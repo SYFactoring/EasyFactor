@@ -95,7 +95,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemDepartmentNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDepartmentDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDomain = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -354,7 +354,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.dgvDepts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDepts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDepts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colLocation,
+            this.colCity,
             this.colDepartmentCode,
             this.colDepartmentName,
             this.colDomain,
@@ -433,13 +433,13 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.menuItemDepartmentDelete.Text = "删除分部";
             this.menuItemDepartmentDelete.Click += new System.EventHandler(this.DeleteDepartment);
             // 
-            // colLocation
+            // colCity
             // 
-            this.colLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colLocation.DataPropertyName = "Location";
-            this.colLocation.HeaderText = "城市";
-            this.colLocation.Name = "colLocation";
-            this.colLocation.ReadOnly = true;
+            this.colCity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCity.DataPropertyName = "City";
+            this.colCity.HeaderText = "城市";
+            this.colCity.Name = "colCity";
+            this.colCity.ReadOnly = true;
             // 
             // colDepartmentCode
             // 
@@ -577,7 +577,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
         #endregion
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDomain;
@@ -591,5 +591,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
+
     }
 }

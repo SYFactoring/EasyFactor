@@ -8,6 +8,8 @@ namespace CMBC.EasyFactor
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Data.Linq;
     using System.Reflection;
     using System.Windows.Forms;
     using CMBC.EasyFactor.ARMgr;
@@ -27,7 +29,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -47,9 +49,9 @@ namespace CMBC.EasyFactor
             this.backgroundWorker.RunWorkerAsync();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Sets command status
@@ -73,11 +75,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (86) 
+        #region Methods (90)
 
-		// Public Methods (2) 
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -113,7 +115,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-		// Private Methods (84) 
+        // Private Methods (88) 
 
         /// <summary>
         /// 
@@ -413,6 +415,20 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ImportAssign(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
+                form.ShowDialog(this);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportCases(object sender, EventArgs e)
         {
             if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
@@ -526,6 +542,20 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ImportCreditNote(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CREDIT_NOTE);
+                form.ShowDialog(this);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportDepartments(object sender, EventArgs e)
         {
             if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
@@ -582,12 +612,40 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ImportFinance(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE);
+                form.ShowDialog(this);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportInvoices(object sender, EventArgs e)
         {
             if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES);
                 importForm.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportPayment(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            {
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_PAYMENT);
+                form.ShowDialog(this);
             }
         }
 
@@ -1096,8 +1154,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryPoolRefundBatch(object sender, EventArgs e)
         {
-          //  RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_QUERY);
-          //  this.SetDetailPanel(batchMgr);
+            //  RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_QUERY);
+            //  this.SetDetailPanel(batchMgr);
         }
 
         /// <summary>
@@ -1244,6 +1302,37 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(mgr);
         }
 
-		#endregion Methods 
+        #endregion Methods
+
+        private void GenerateNewCaseCode(object sender, EventArgs e)
+        {
+            DBDataContext context = new DBDataContext();
+            foreach (Case c in context.Cases)
+            {
+                string transactionType = null;
+                switch (c.TransactionType)
+                {
+                    case "出口保理": transactionType = "EX"; break;
+                    case "进口保理": transactionType = "IM"; break;
+                    case "国内卖方保理": transactionType = "SE"; break;
+                    case "国内买方保理": transactionType = "BY"; break;
+                    case "租赁保理": transactionType = "  "; break;
+                    case "国际信保保理": transactionType = "  "; break;
+                    case "国内信保保理": transactionType = "  "; break;
+                    default:
+                        transactionType = "  ";
+                        break;
+                }
+
+                string year = String.Format("{0:yy}", c.CaseAppDate);
+                string locationCode = c.OwnerDepartment.LocationCode;
+                List<Case> caseList = context.Cases.Where(ca => ca.OwnerDepartment.LocationCode == locationCode).OrderBy(order => order.CaseAppDate).ToList();
+                int index = caseList.IndexOf(c) + 1;
+                string newCaseCode = String.Format("69{0}{1}{2}{3:D4}", locationCode, transactionType, year, index);
+                c.NewCaseCode = newCaseCode;
+            }
+
+            context.SubmitChanges();
+        }
     }
 }

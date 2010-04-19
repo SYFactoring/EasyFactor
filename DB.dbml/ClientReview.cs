@@ -93,7 +93,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (this.Client.Department != null)
                 {
-                    return this.Client.Department.Location;
+                    return this.Client.Department.Location.LocationName;
                 }
                 else
                 {

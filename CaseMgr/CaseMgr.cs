@@ -126,6 +126,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
 
+            List<Location> allLocations = DB.dbml.Location.AllLocations();
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
+            this.cbLocation.DataSource = allLocations;
+            this.cbLocation.DisplayMember = "LocationName";
+            this.cbLocation.ValueMember = "LocationCode";
             this.cbLocation.SelectedIndex = 0;
 
             this.UpdateContextMenu();
@@ -406,7 +411,7 @@ namespace CMBC.EasyFactor.CaseMgr
             DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
             DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
             string opName = this.tbOPName.Text;
-            string location = this.cbLocation.Text;
+            string location = (string)this.cbLocation.SelectedValue;
             string caseMark = this.cbCaseMark.Text;
 
             context = new DBDataContext();
@@ -415,7 +420,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                    ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))
                                 && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType == this.cbTransactionType.Text)
                                 && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency == (string)this.cbCurrency.SelectedValue)
-                                && (location == "全部" ? true : c.OwnerDepartment.Location == location)
+                                && (location == "00" ? true : c.OwnerDepartment.LocationCode == location)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
                                 && (caseMark == "全部" ? true : c.CaseMark.Contains(caseMark))
                                 && (c.OPName == null ? true : c.OPName.Contains(opName))

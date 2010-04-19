@@ -218,37 +218,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 14;
-            this.cbLocation.Items.AddRange(new object[] {
-            "全部",
-            "北京",
-            "广州",
-            "上海",
-            "深圳",
-            "武汉",
-            "太原",
-            "石家庄",
-            "大连",
-            "杭州",
-            "南京",
-            "重庆",
-            "西安",
-            "福州",
-            "济南",
-            "宁波",
-            "成都",
-            "天津",
-            "苏州",
-            "青岛",
-            "厦门",
-            "郑州",
-            "昆明",
-            "温州",
-            "泉州",
-            "长沙",
-            "长春",
-            "汕头",
-            "南昌",
-            "香港"});
             this.cbLocation.Location = new System.Drawing.Point(235, 31);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(100, 20);
@@ -898,7 +867,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemExportAllInvoices,
             this.menuItemExportSelectedInvoices});
             this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(159, 236);
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(159, 214);
             // 
             // menuItemInvoiceDetail
             // 

@@ -297,7 +297,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
                 foreach (var loc in result)
                 {
-                    locations.Add(new City(loc.Location, loc.Departments.ToList(), beginDate, endDate));
+                    locations.Add(new City(loc.Location.LocationName, loc.Departments.ToList(), beginDate, endDate));
                 }
 
                 this.bs.DataSource = locations;

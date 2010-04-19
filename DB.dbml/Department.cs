@@ -311,6 +311,17 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string City
+        {
+            get
+            {
+                return this.Location.LocationName;
+            }
+        }
+
         #endregion Properties
 
         #region Methods (4)

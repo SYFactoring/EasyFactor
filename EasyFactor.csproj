@@ -252,6 +252,7 @@
     <Compile Include="DB.dbml\ClientCreditLine.cs" />
     <Compile Include="DB.dbml\ClientReview.cs" />
     <Compile Include="DB.dbml\Contract.cs" />
+    <Compile Include="DB.dbml\Location.cs" />
     <Compile Include="DB.dbml\InvoiceFinanceLog.cs" />
     <Compile Include="DB.dbml\DisputeReason.cs" />
     <Compile Include="DB.dbml\Exchange.cs" />

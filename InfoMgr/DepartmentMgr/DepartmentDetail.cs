@@ -71,6 +71,10 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.ImeMode = ImeMode.OnHalf;
             this.opDepartmentType = opDepartmentType;
 
+            this.cbLocation.DataSource = DB.dbml.Location.AllLocations();
+            this.cbLocation.DisplayMember = "LocationName";
+            this.cbLocation.ValueMember = "LocationCode";
+
             if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
             {
                 department = new Department();

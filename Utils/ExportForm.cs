@@ -761,7 +761,7 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     Case selectedCase = (Case)exportData[row];
-                    datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.Location;
+                    datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.Location.LocationName;
                     datasheet.Cells[row + 2, column++] = selectedCase.CaseCode;
                     datasheet.Cells[row + 2, column++] = selectedCase.SellerCode;
                     datasheet.Cells[row + 2, column++] = selectedCase.SellerClient.ToString();

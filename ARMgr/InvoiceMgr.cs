@@ -144,6 +144,12 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             this.cbCaseMark.SelectedIndex = 1;
+
+            List<Location> allLocations = DB.dbml.Location.AllLocations();
+            allLocations.Insert(0, new Location() {LocationCode="00",LocationName="全部" });
+            this.cbLocation.DataSource = allLocations;
+            this.cbLocation.DisplayMember = "LocationName";
+            this.cbLocation.ValueMember = "LocationCode";
             this.cbLocation.SelectedIndex = 0;
 
             this.UpdateContextMenu();
@@ -621,7 +627,7 @@ namespace CMBC.EasyFactor.ARMgr
             string caseMark = this.cbCaseMark.Text;
             DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
             DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
-            string location = this.cbLocation.Text;
+            string location = (string)this.cbLocation.SelectedValue;
 
             int assignOverDueDays = 0;
             DateTime assignOverDueDate = DateTime.Now.Date;
@@ -655,7 +661,7 @@ namespace CMBC.EasyFactor.ARMgr
             var queryResult = from invoice in context.Invoices
                               let curCase = invoice.InvoiceAssignBatch.Case
                               where curCase.CaseMark == caseMark
-                                    && (location == "全部" ? true : curCase.OwnerDepartment.Location == location)
+                                    && (location == "00" ? true : curCase.OwnerDepartment.LocationCode == location)
                               let seller = curCase.SellerClient
                               let buyer = curCase.BuyerClient
                               where seller.ClientNameCN.Contains(clientName) || seller.ClientNameEN.Contains(clientName) || buyer.ClientNameCN.Contains(clientName) || buyer.ClientNameEN.Contains(clientName)

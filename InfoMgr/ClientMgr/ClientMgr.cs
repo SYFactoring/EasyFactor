@@ -362,7 +362,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             context = new DBDataContext();
 
             var queryResult = context.Clients.Where(c =>
-                     ((c.BranchCode == null ? string.Empty : c.Department.Location).Contains(location))
+                     ((c.BranchCode == null ? string.Empty : c.Department.Location.LocationName).Contains(location))
                   && ((c.PMName == null ? string.Empty : c.PMName).Contains(tbPM.Text))
                   && ((c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text))
                   && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN == null ? string.Empty : c.ClientNameEN).Contains(tbClientName.Text)))

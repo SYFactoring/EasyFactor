@@ -245,7 +245,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             var queryResult = context.ClientReviews.Where(c =>
                 c.ReviewNo.Contains(clientReviewNo)
-             && (c.Client.BranchCode == null ? string.Empty : c.Client.Department.Location).Contains(location)
+             && (c.Client.BranchCode == null ? string.Empty : c.Client.Department.Location.LocationName).Contains(location)
              && (c.Client.BranchCode == null ? string.Empty : c.Client.Department.Domain).Contains(domain)
              && (beginDate != this.diBegin.MinDate ? c.ReviewDate >= beginDate : true)
              && (endDate != this.diEnd.MinDate ? c.ReviewDate <= endDate : true)

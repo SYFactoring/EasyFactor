@@ -114,6 +114,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertGuaranteeDeposit(GuaranteeDeposit instance);
     partial void UpdateGuaranteeDeposit(GuaranteeDeposit instance);
     partial void DeleteGuaranteeDeposit(GuaranteeDeposit instance);
+    partial void InsertLocation(Location instance);
+    partial void UpdateLocation(Location instance);
+    partial void DeleteLocation(Location instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -369,6 +372,14 @@ namespace CMBC.EasyFactor.DB.dbml
 				return this.GetTable<GuaranteeDeposit>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Location> Locations
+		{
+			get
+			{
+				return this.GetTable<Location>();
+			}
+		}
 	}
 	
 	[Table(Name="dbo.[Case]")]
@@ -410,6 +421,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		private string _Comment;
 		
 		private bool _IsPool;
+		
+		private string _NewCaseCode;
 		
 		private EntitySet<CDA> _CDAs;
 		
@@ -473,6 +486,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnIsPoolChanging(bool value);
     partial void OnIsPoolChanged();
+    partial void OnNewCaseCodeChanging(string value);
+    partial void OnNewCaseCodeChanged();
     #endregion
 		
 		public Case()
@@ -852,6 +867,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._IsPool = value;
 					this.SendPropertyChanged("IsPool");
 					this.OnIsPoolChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_NewCaseCode", DbType="char(12)")]
+		public string NewCaseCode
+		{
+			get
+			{
+				return this._NewCaseCode;
+			}
+			set
+			{
+				if ((this._NewCaseCode != value))
+				{
+					this.OnNewCaseCodeChanging(value);
+					this.SendPropertyChanging();
+					this._NewCaseCode = value;
+					this.SendPropertyChanged("NewCaseCode");
+					this.OnNewCaseCodeChanged();
 				}
 			}
 		}
@@ -5599,8 +5634,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _DepartmentName;
 		
-		private string _Location;
-		
 		private string _Domain;
 		
 		private string _AddressCN;
@@ -5631,6 +5664,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _MaintainManager;
 		
+		private string _LocationCode;
+		
 		private EntitySet<Case> _CoCases;
 		
 		private EntitySet<Case> _OwnerCases;
@@ -5638,6 +5673,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		private EntitySet<Client> _Clients;
 		
 		private EntitySet<DepartmentAccount> _DepartmentAccounts;
+		
+		private EntityRef<Location> _Location;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -5647,8 +5684,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnDepartmentCodeChanged();
     partial void OnDepartmentNameChanging(string value);
     partial void OnDepartmentNameChanged();
-    partial void OnLocationChanging(string value);
-    partial void OnLocationChanged();
     partial void OnDomainChanging(string value);
     partial void OnDomainChanged();
     partial void OnAddressCNChanging(string value);
@@ -5679,6 +5714,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnMarketManagerChanged();
     partial void OnMaintainManagerChanging(string value);
     partial void OnMaintainManagerChanged();
+    partial void OnLocationCodeChanging(string value);
+    partial void OnLocationCodeChanged();
     #endregion
 		
 		public Department()
@@ -5687,6 +5724,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._OwnerCases = new EntitySet<Case>(new Action<Case>(this.attach_OwnerCases), new Action<Case>(this.detach_OwnerCases));
 			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
 			this._DepartmentAccounts = new EntitySet<DepartmentAccount>(new Action<DepartmentAccount>(this.attach_DepartmentAccounts), new Action<DepartmentAccount>(this.detach_DepartmentAccounts));
+			this._Location = default(EntityRef<Location>);
 			OnCreated();
 		}
 		
@@ -5726,26 +5764,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._DepartmentName = value;
 					this.SendPropertyChanged("DepartmentName");
 					this.OnDepartmentNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Location", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Location
-		{
-			get
-			{
-				return this._Location;
-			}
-			set
-			{
-				if ((this._Location != value))
-				{
-					this.OnLocationChanging(value);
-					this.SendPropertyChanging();
-					this._Location = value;
-					this.SendPropertyChanged("Location");
-					this.OnLocationChanged();
 				}
 			}
 		}
@@ -6050,6 +6068,30 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Column(Storage="_LocationCode", DbType="char(2)", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string LocationCode
+		{
+			get
+			{
+				return this._LocationCode;
+			}
+			set
+			{
+				if ((this._LocationCode != value))
+				{
+					if (this._Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLocationCodeChanging(value);
+					this.SendPropertyChanging();
+					this._LocationCode = value;
+					this.SendPropertyChanged("LocationCode");
+					this.OnLocationCodeChanged();
+				}
+			}
+		}
+		
 		[Association(Name="Department_Case", Storage="_CoCases", OtherKey="CoDepartmentCode")]
 		public EntitySet<Case> CoCases
 		{
@@ -6099,6 +6141,40 @@ namespace CMBC.EasyFactor.DB.dbml
 			set
 			{
 				this._DepartmentAccounts.Assign(value);
+			}
+		}
+		
+		[Association(Name="Location_Department", Storage="_Location", ThisKey="LocationCode", IsForeignKey=true)]
+		public Location Location
+		{
+			get
+			{
+				return this._Location.Entity;
+			}
+			set
+			{
+				Location previousValue = this._Location.Entity;
+				if (((previousValue != value) 
+							|| (this._Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Location.Entity = null;
+						previousValue.Departments.Remove(this);
+					}
+					this._Location.Entity = value;
+					if ((value != null))
+					{
+						value.Departments.Add(this);
+						this._LocationCode = value.LocationCode;
+					}
+					else
+					{
+						this._LocationCode = default(string);
+					}
+					this.SendPropertyChanged("Location");
+				}
 			}
 		}
 		
@@ -13423,6 +13499,120 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[Table(Name="dbo.Location")]
+	public partial class Location : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CountryCode;
+		
+		private string _CountryNameCN;
+		
+		private EntitySet<Department> _Departments;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLocationCodeChanging(string value);
+    partial void OnLocationCodeChanged();
+    partial void OnLocationNameChanging(string value);
+    partial void OnLocationNameChanged();
+    #endregion
+		
+		public Location()
+		{
+			this._Departments = new EntitySet<Department>(new Action<Department>(this.attach_Departments), new Action<Department>(this.detach_Departments));
+			OnCreated();
+		}
+		
+		[Column(Storage="_CountryCode", DbType="Char(2) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		public string LocationCode
+		{
+			get
+			{
+				return this._CountryCode;
+			}
+			set
+			{
+				if ((this._CountryCode != value))
+				{
+					this.OnLocationCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CountryCode = value;
+					this.SendPropertyChanged("LocationCode");
+					this.OnLocationCodeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CountryNameCN", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string LocationName
+		{
+			get
+			{
+				return this._CountryNameCN;
+			}
+			set
+			{
+				if ((this._CountryNameCN != value))
+				{
+					this.OnLocationNameChanging(value);
+					this.SendPropertyChanging();
+					this._CountryNameCN = value;
+					this.SendPropertyChanged("LocationName");
+					this.OnLocationNameChanged();
+				}
+			}
+		}
+		
+		[Association(Name="Location_Department", Storage="_Departments", OtherKey="LocationCode")]
+		public EntitySet<Department> Departments
+		{
+			get
+			{
+				return this._Departments;
+			}
+			set
+			{
+				this._Departments.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Departments(Department entity)
+		{
+			this.SendPropertyChanging();
+			entity.Location = this;
+		}
+		
+		private void detach_Departments(Department entity)
+		{
+			this.SendPropertyChanging();
+			entity.Location = null;
 		}
 	}
 }
