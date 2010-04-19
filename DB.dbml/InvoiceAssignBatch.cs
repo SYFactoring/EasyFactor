@@ -139,7 +139,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 batchCount = 0;
             }
 
-            string assignNo = String.Format("{0}{1:D4}", curCase.CaseCode, batchCount + 1);
+            string assignNo = String.Format("{0}ASS{1:D3}", curCase.CaseCode, batchCount + 1);
             return assignNo;
         }
 

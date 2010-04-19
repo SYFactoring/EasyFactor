@@ -3,7 +3,7 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
-      <Column Name="CaseCode" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="CaseCode" Type="System.String" DbType="Char(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="SellerCode" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="SellerFactorCode" Type="System.String" DbType="Char(7) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="BuyerCode" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -362,7 +362,7 @@
   </Table>
   <Table Name="dbo.InvoiceAssignBatch" Member="InvoiceAssignBatches">
     <Type Name="InvoiceAssignBatch">
-      <Column Name="AssignBatchNo" Type="System.String" DbType="VarChar(35) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="AssignBatchNo" Type="System.String" DbType="char(18) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CaseCode" Storage="_CDACode" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="AssignDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CheckStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -373,7 +373,7 @@
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="InputDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="NewAssignBatchNo" Type="System.String" DbType="char(16)" CanBeNull="true" />
+      <Column Name="NewAssignBatchNo" Type="System.String" DbType="char(18)" CanBeNull="true" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" OtherKey="AssignBatchNo" Type="Invoice" />
       <Association Name="Case_InvoiceAssignBatch" Member="Case" ThisKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>

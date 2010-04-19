@@ -507,7 +507,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_CaseCode", DbType="VarChar(15) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_CaseCode", DbType="Char(12) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CaseCode
 		{
 			get
@@ -8630,7 +8630,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_AssignBatchNo", DbType="VarChar(35) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_AssignBatchNo", DbType="char(18) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AssignBatchNo
 		{
 			get
@@ -8854,7 +8854,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_NewAssignBatchNo", DbType="char(16)")]
+		[Column(Storage="_NewAssignBatchNo", DbType="char(18)")]
 		public string NewAssignBatchNo
 		{
 			get
