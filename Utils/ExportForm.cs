@@ -2477,16 +2477,19 @@ namespace CMBC.EasyFactor.Utils
             sheet.Cells[9, "P"] = "利息";
             sheet.Cells[9, "Q"] = "备注";
 
+            List<string> sellerList = new List<string>();
             List<string> buyerList = new List<string>();
             List<string> factorList = new List<string>();
             List<string> clientReviewList = new List<string>();
+
             string creditCoverCurr = null;
             string invoiceCurrency = null;
             string financeLineCurr = null;
             double totalCreditCoverOutstanding = 0;
             double totalAssignOutstanding = 0;
             double totalFinanceLine = 0;
-            DateTime dueDate = default(DateTime);
+            DateTime financeLineDueDate = default(DateTime);
+            DateTime creditCoverDueDate = default(DateTime);
             double totalFinanceLineOutstanding = 0;
             double totalFinanceOutstanding = 0;
 
@@ -2494,7 +2497,19 @@ namespace CMBC.EasyFactor.Utils
             foreach (Case selectedCase in caseGroup)
             {
                 CDA cda = selectedCase.ActiveCDA;
-                buyerList.Add(selectedCase.BuyerClient.ToString());
+
+                string seller = selectedCase.SellerClient.ToString();
+                if (!sellerList.Contains(seller))
+                {
+                    sellerList.Add(seller);
+                }
+
+                string buyer = selectedCase.BuyerClient.ToString();
+                if (!buyerList.Contains(buyer))
+                {
+                    buyerList.Add(buyer);
+                }
+
                 string factorName = selectedCase.Factor.ToString();
                 if (!factorList.Contains(factorName))
                 {
@@ -2521,6 +2536,15 @@ namespace CMBC.EasyFactor.Utils
                 }
                 totalCreditCoverOutstanding += creditCoverOutstanding;
 
+                if (creditCoverDueDate == default(DateTime))
+                {
+                    creditCoverDueDate = cda.CreditCoverPeriodEnd.GetValueOrDefault();
+                }
+                else if (creditCoverDueDate > cda.CreditCoverPeriodEnd)
+                {
+                    creditCoverDueDate = cda.CreditCoverPeriodEnd.GetValueOrDefault();
+                }
+
                 double assignOutstanding = selectedCase.AssignOutstanding;
                 if (invoiceCurrency == null)
                 {
@@ -2545,13 +2569,13 @@ namespace CMBC.EasyFactor.Utils
                 }
                 totalFinanceLine += financeLine;
 
-                if (dueDate == default(DateTime))
+                if (financeLineDueDate == default(DateTime))
                 {
-                    dueDate = cda.FinanceLinePeriodEnd.GetValueOrDefault();
+                    financeLineDueDate = cda.FinanceLinePeriodEnd.GetValueOrDefault();
                 }
-                else if (dueDate > cda.FinanceLinePeriodEnd)
+                else if (financeLineDueDate > cda.FinanceLinePeriodEnd)
                 {
-                    dueDate = cda.FinanceLinePeriodEnd.GetValueOrDefault();
+                    financeLineDueDate = cda.FinanceLinePeriodEnd.GetValueOrDefault();
                 }
 
                 double financeLineOutstanding = cda.FinanceLineOutstanding.GetValueOrDefault();
@@ -2652,25 +2676,26 @@ namespace CMBC.EasyFactor.Utils
 
             sheet.Cells[4, "A"] = "Seller Name";
             sheet.get_Range("B4", "I4").MergeCells = true;
-            sheet.Cells[4, "B"] = caseGroup.Key;
+            sheet.Cells[4, "B"] = sellerList.Count == 1 ? sellerList[0] : String.Join(";", sellerList.ToArray());
             sheet.Cells[5, "A"] = "Buyer Name";
             sheet.get_Range("B5", "I5").MergeCells = true;
-            sheet.Cells[5, "B"] = String.Join(";", buyerList.ToArray());
+            sheet.Cells[5, "B"] = buyerList.Count == 1 ? buyerList[0] : String.Join(";", buyerList.ToArray());
 
             sheet.get_Range("B6", "I6").MergeCells = true;
             sheet.Cells[6, "A"] = "Factor Name";
-            sheet.Cells[6, "B"] = String.Join(";", factorList.ToArray());
+            sheet.Cells[6, "B"] = factorList.Count == 1 ? factorList[0] : String.Join(";", factorList.ToArray());
 
             sheet.get_Range("B7", "I7").MergeCells = true;
             sheet.Cells[7, "A"] = "协查意见书编号";
-            sheet.Cells[7, "B"] = String.Join(";", clientReviewList.ToArray());
+            sheet.Cells[7, "B"] = clientReviewList.Count == 1 ? clientReviewList[0] : String.Join(";", clientReviewList.ToArray());
 
             sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
             sheet.Cells[4, "L"] = "信用风险担保";
             sheet.Cells[5, "L"] = "核准额度";
             // sheet.Cells[5, "M"] = String.Format("{0} {1:N2}", cda.CreditCoverCurr, cda.CreditCover);
             sheet.Cells[6, "L"] = "到期日";
-            //sheet.Cells[6, "M"] = String.Format("{0:yyyy-MM-dd}", cda.CreditCoverPeriodEnd);
+            sheet.Cells[6, "M"] = creditCoverDueDate;
+            sheet.get_Range(sheet.Cells[6, "M"], sheet.Cells[6, "M"]).NumberFormatLocal = "yyyy-MM-dd";
             sheet.Cells[7, "L"] = "总剩余额度";
             sheet.Cells[7, "M"] = totalCreditCoverOutstanding;
             sheet.get_Range(sheet.Cells[7, "M"], sheet.Cells[7, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(creditCoverCurr);
@@ -2684,7 +2709,7 @@ namespace CMBC.EasyFactor.Utils
             sheet.Cells[5, "P"] = totalFinanceLine;
             sheet.get_Range(sheet.Cells[5, "P"], sheet.Cells[5, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(financeLineCurr);
             sheet.Cells[6, "O"] = "到期日";
-            sheet.Cells[6, "P"] = dueDate;
+            sheet.Cells[6, "P"] = financeLineDueDate;
             sheet.get_Range(sheet.Cells[6, "P"], sheet.Cells[6, "P"]).NumberFormatLocal = "yyyy-MM-dd";
             sheet.Cells[7, "O"] = "总剩余额度";
             sheet.Cells[7, "P"] = totalFinanceLineOutstanding;
