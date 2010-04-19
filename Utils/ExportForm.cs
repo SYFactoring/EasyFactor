@@ -713,6 +713,7 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
+                datasheet.Cells[1, column++] = "业务地区";
                 datasheet.Cells[1, column++] = "案件编号";
                 datasheet.Cells[1, column++] = "卖方保理代码";
                 datasheet.Cells[1, column++] = "卖方名称";
@@ -760,6 +761,7 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     Case selectedCase = (Case)exportData[row];
+                    datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.Location;
                     datasheet.Cells[row + 2, column++] = selectedCase.CaseCode;
                     datasheet.Cells[row + 2, column++] = selectedCase.SellerCode;
                     datasheet.Cells[row + 2, column++] = selectedCase.SellerClient.ToString();
@@ -783,7 +785,7 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 15)
+                    if (range.Column == 16)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -3013,6 +3015,12 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         string filePath = this.tbFilePath.Text + "\\" + caseGroup.Key.ToString() + ext;
+                        int count = 1;
+                        while (System.IO.File.Exists(filePath))
+                        {
+                            filePath = this.tbFilePath.Text + "\\" + caseGroup.Key.ToString() + "_(" + count + ")" + ext;
+                            count++;
+                        }
                         workbook.SaveCopyAs(filePath);
                     }
                 }
