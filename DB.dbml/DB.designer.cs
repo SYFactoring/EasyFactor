@@ -8587,6 +8587,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
+		private string _NewAssignBatchNo;
+		
 		private EntitySet<Invoice> _Invoices;
 		
 		private EntityRef<Case> _Case;
@@ -8617,6 +8619,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
+    partial void OnNewAssignBatchNoChanging(string value);
+    partial void OnNewAssignBatchNoChanged();
     #endregion
 		
 		public InvoiceAssignBatch()
@@ -8846,6 +8850,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._InputDate = value;
 					this.SendPropertyChanged("InputDate");
 					this.OnInputDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_NewAssignBatchNo", DbType="char(16)")]
+		public string NewAssignBatchNo
+		{
+			get
+			{
+				return this._NewAssignBatchNo;
+			}
+			set
+			{
+				if ((this._NewAssignBatchNo != value))
+				{
+					this.OnNewAssignBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._NewAssignBatchNo = value;
+					this.SendPropertyChanged("NewAssignBatchNo");
+					this.OnNewAssignBatchNoChanged();
 				}
 			}
 		}

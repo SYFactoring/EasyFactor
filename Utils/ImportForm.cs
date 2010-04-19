@@ -470,6 +470,7 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
             List<Invoice> invoiceList = new List<Invoice>();
+            List<InvoiceAssignBatch> batchList = new List<InvoiceAssignBatch>();
 
             this.context = new DBDataContext();
 
@@ -479,6 +480,8 @@ namespace CMBC.EasyFactor.Utils
 
                 try
                 {
+                    Case curCase = null;
+                    InvoiceAssignBatch batch = null;
                     for (int row = 3; row <= size; row++)
                     {
                         if (worker.CancellationPending)
@@ -495,8 +498,17 @@ namespace CMBC.EasyFactor.Utils
                             break;
                         }
 
-                        Case curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
-
+                        if (curCase == null||curCase.CaseCode!=caseCode)
+                        {
+                            curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+                            batch = new InvoiceAssignBatch();
+                            batch.AssignDate = DateTime.Today;
+                            batch.Case = curCase;
+                            batch.CreateUserName = App.Current.CurUser.Name;
+                            batch.InputDate = DateTime.Today;
+                            batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase);
+                            batchList.Add(batch);
+                        }
                         if (curCase == null)
                         {
                             throw new Exception("案件编号错误: " + caseCode);
@@ -533,63 +545,40 @@ namespace CMBC.EasyFactor.Utils
                         {
                             throw new Exception("发票已经存在，不能导入： " + invoiceNo);
                         }
+                        
+                        string currency = string.Format("{0:G}", valueArray[row, column++]);
+                        if (currency != curCase.InvoiceCurrency)
+                        {
+                            throw new Exception("发票币别与案件币别不匹配，不能导入：" + invoiceNo);
+                        }
 
                         invoice.InvoiceAmount = (double)valueArray[row, column++];
                         invoice.AssignAmount = invoice.InvoiceAmount;
                         invoice.InvoiceDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         invoice.DueDate = (DateTime)valueArray[row, column++];
-                        DateTime assignDate = (DateTime)valueArray[row, column++];
-                        invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-
-                        //转让批次信息
-                        InvoiceAssignBatch assignBatch = null;
-                        assignBatch = assignBatches.SingleOrDefault(i => i.Case.CaseCode == caseCode && i.AssignDate == assignDate);
-                        if (assignBatch == null)
-                        {
-                            assignBatch = new InvoiceAssignBatch();
-                            assignBatch.AssignDate = assignDate;
-                            assignBatch.CreateUserName = createUserName;
-                            assignBatch.CheckStatus = ConstStr.BATCH.CHECK;
-                            assignBatch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(assignBatch.AssignDate, assignBatches);
-                            assignBatch.Case = curCase;
-                            assignBatches.Add(assignBatch);
-                        }
-
-                        invoice.InvoiceAssignBatch = assignBatch;
-
-                        string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
-                        if (invoiceNo.Equals(string.Empty))
-                        {
-                            continue;
-                        }
-
-                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                        if (invoice == null)
-                        {
-                            invoice = new Invoice();
-                            invoice.InvoiceNo = invoiceNo;
-                            Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                            if (old != null)
-                            {
-                                throw new Exception("发票号重复: " + old.InvoiceNo);
-                            }
-                        }
-
-                        invoice.InvoiceAmount = (double)valueArray[row, column++];
-                        invoice.AssignAmount = (double)valueArray[row, column++];
-                        invoice.InvoiceDate = (DateTime)valueArray[row, column++];
-                        invoice.DueDate = (DateTime)valueArray[row, column++];
-                        invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
                         invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        invoice.InvoiceAssignBatch = batch;
 
                         invoiceList.Add(invoice);
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
+
+                    context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
+                    foreach (Invoice i in invoiceList)
+                    {
+                        i.InvoiceAssignBatch = null;
+                    }
+
+                    foreach (InvoiceAssignBatch batch in batchList)
+                    {
+                        batch.Case = null;
+                    }
+
                     if (result != invoiceList.Count)
                     {
                         e1.Data["row"] = result;
@@ -599,7 +588,6 @@ namespace CMBC.EasyFactor.Utils
                 }
             }
 
-            this.ImportedList = invoiceList;
             worker.ReportProgress(100);
             this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
@@ -615,6 +603,11 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ImportFinance(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
         }
 
         /// <summary>
@@ -626,6 +619,11 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ImportPayment(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
         }
 
         /// <summary>
@@ -637,6 +635,11 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ImportCreditNote(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
         }
         /// <summary>
         /// 

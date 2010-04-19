@@ -1333,6 +1333,14 @@ namespace CMBC.EasyFactor
             }
 
             context.SubmitChanges();
+
+            foreach (InvoiceAssignBatch batch in context.InvoiceAssignBatches)
+            {
+                batch.NewAssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(batch.Case);
+                context.SubmitChanges();
+            }
+
+            
         }
     }
 }

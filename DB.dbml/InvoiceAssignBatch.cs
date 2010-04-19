@@ -127,6 +127,25 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="curCase"></param>
+        /// <returns></returns>
+        public static string GenerateAssignBatchNo(Case curCase)
+        {
+            DBDataContext context = new DBDataContext();
+            var queryResult = from batch in context.InvoiceAssignBatches where batch.NewAssignBatchNo.StartsWith(curCase.CaseCode) select batch.NewAssignBatchNo;
+            int batchCount;
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            {
+                batchCount = 0;
+            }
+
+            string assignNo = String.Format("{0}{1:D4}", curCase.CaseCode, batchCount + 1);
+            return assignNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
         public static string GenerateAssignBatchNo(DateTime date)
