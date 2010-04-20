@@ -1323,7 +1323,7 @@ namespace CMBC.EasyFactor
 
                 string year = String.Format("{0:yy}", c.CaseAppDate);
                 string locationCode = c.OwnerDepartment.LocationCode;
-                List<Case> caseList = context.Cases.Where(ca => ca.OwnerDepartment.LocationCode == locationCode).OrderBy(order => order.CaseAppDate).ToList();
+                List<Case> caseList = context.Cases.Where(ca => ca.OwnerDepartment.LocationCode == locationCode && ca.CaseAppDate.Year == c.CaseAppDate.Year).OrderBy(order => order.CaseAppDate).ToList();
                 int index = caseList.IndexOf(c) + 1;
                 string newCaseCode = String.Format("69{0}{1}{2}{3:D4}", locationCode, transactionType, year, index);
                 c.NewCaseCode = newCaseCode;
@@ -1337,7 +1337,7 @@ namespace CMBC.EasyFactor
                 context.SubmitChanges();
             }
 
-            
+
         }
     }
 }
