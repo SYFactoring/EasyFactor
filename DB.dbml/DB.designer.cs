@@ -420,8 +420,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private bool _IsPool;
 		
-		private string _NewCaseCode;
-		
 		private EntitySet<CDA> _CDAs;
 		
 		private EntitySet<CreditCoverNegotiation> _CreditCoverNegotiations;
@@ -480,8 +478,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnIsPoolChanging(bool value);
     partial void OnIsPoolChanged();
-    partial void OnNewCaseCodeChanging(string value);
-    partial void OnNewCaseCodeChanged();
     #endregion
 		
 		public Case()
@@ -840,26 +836,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Column(Storage="_NewCaseCode", DbType="char(12)")]
-		public string NewCaseCode
-		{
-			get
-			{
-				return this._NewCaseCode;
-			}
-			set
-			{
-				if ((this._NewCaseCode != value))
-				{
-					this.OnNewCaseCodeChanging(value);
-					this.SendPropertyChanging();
-					this._NewCaseCode = value;
-					this.SendPropertyChanged("NewCaseCode");
-					this.OnNewCaseCodeChanged();
-				}
-			}
-		}
-		
 		[Association(Name="Case_CDA", Storage="_CDAs", OtherKey="CaseCode")]
 		public EntitySet<CDA> CDAs
 		{
@@ -1006,7 +982,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Department_Case1", Storage="_OwnerDepartment", ThisKey="OwnerDepartmentCode", IsForeignKey=true)]
+		[Association(Name="Department_Case", Storage="_OwnerDepartment", ThisKey="OwnerDepartmentCode", IsForeignKey=true)]
 		public Department OwnerDepartment
 		{
 			get
@@ -6024,7 +6000,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Department_Case1", Storage="_OwnerCases", OtherKey="OwnerDepartmentCode")]
+		[Association(Name="Department_Case", Storage="_OwnerCases", OtherKey="OwnerDepartmentCode")]
 		public EntitySet<Case> OwnerCases
 		{
 			get
@@ -8494,8 +8470,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
-		private string _NewAssignBatchNo;
-		
 		private EntitySet<Invoice> _Invoices;
 		
 		private EntityRef<Case> _Case;
@@ -8526,8 +8500,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
-    partial void OnNewAssignBatchNoChanging(string value);
-    partial void OnNewAssignBatchNoChanged();
     #endregion
 		
 		public InvoiceAssignBatch()
@@ -8537,7 +8509,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[Column(Storage="_AssignBatchNo", DbType="char(18) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
+		[Column(Storage="_AssignBatchNo", DbType="char(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AssignBatchNo
 		{
 			get
@@ -8757,26 +8729,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._InputDate = value;
 					this.SendPropertyChanged("InputDate");
 					this.OnInputDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_NewAssignBatchNo", DbType="char(18)")]
-		public string NewAssignBatchNo
-		{
-			get
-			{
-				return this._NewAssignBatchNo;
-			}
-			set
-			{
-				if ((this._NewAssignBatchNo != value))
-				{
-					this.OnNewAssignBatchNoChanging(value);
-					this.SendPropertyChanging();
-					this._NewAssignBatchNo = value;
-					this.SendPropertyChanged("NewAssignBatchNo");
-					this.OnNewAssignBatchNoChanged();
 				}
 			}
 		}

@@ -110,7 +110,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -407,7 +406,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBatches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSellerName,
-            this.Column1,
             this.colBuyerName,
             this.colAssignBatchNo,
             this.colAssignDate,
@@ -565,13 +563,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colSellerName.Name = "colSellerName";
             this.colSellerName.ReadOnly = true;
             // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "NewAssignBatchNo";
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
             // colBuyerName
             // 
             this.colBuyerName.DataPropertyName = "BuyerName";
@@ -685,7 +676,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemMSG09;
         private System.Windows.Forms.ToolStripMenuItem menuItemFileCheckList;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;

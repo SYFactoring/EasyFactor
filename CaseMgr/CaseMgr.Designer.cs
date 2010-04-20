@@ -130,7 +130,6 @@
             this.menuItemCaseExport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaculateCurr = new System.Windows.Forms.ToolStripMenuItem();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNewCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -442,7 +441,7 @@
             "国内卖方保理",
             "国内买方保理",
             "出口保理",
-            "进口保理",});
+            "进口保理"});
             this.cbTransactionType.Location = new System.Drawing.Point(59, 57);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
@@ -599,7 +598,6 @@
             this.dgvCases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCaseCode,
-            this.colNewCaseCode,
             this.colSellerClient,
             this.colSellerFactor,
             this.colBuyerClient,
@@ -733,14 +731,6 @@
             this.colCaseCode.Name = "colCaseCode";
             this.colCaseCode.ReadOnly = true;
             this.colCaseCode.Width = 80;
-            // 
-            // colNewCaseCode
-            // 
-            this.colNewCaseCode.DataPropertyName = "NewCaseCode";
-            this.colNewCaseCode.Frozen = true;
-            this.colNewCaseCode.HeaderText = "Column1";
-            this.colNewCaseCode.Name = "colNewCaseCode";
-            this.colNewCaseCode.ReadOnly = true;
             // 
             // colSellerClient
             // 
@@ -975,7 +965,6 @@
 
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseExport;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNewCaseCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerClient;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactor;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
