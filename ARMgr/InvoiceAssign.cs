@@ -601,7 +601,7 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.Case = this._case;
                 if (batch.AssignBatchNo == null)
                 {
-                    batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(this._case.CaseCode);
+                    batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(this._case.CaseCode, batch.AssignDate.Year);
                     batch.InputDate = DateTime.Today;
                 }
 
