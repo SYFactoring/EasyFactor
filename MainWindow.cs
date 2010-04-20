@@ -1307,29 +1307,29 @@ namespace CMBC.EasyFactor
         private void GenerateNewCaseCode(object sender, EventArgs e)
         {
             DBDataContext context = new DBDataContext();
-            foreach (Case c in context.Cases)
-            {
-                string transactionType = null;
-                switch (c.TransactionType)
-                {
-                    case "出口保理": transactionType = "EX"; break;
-                    case "进口保理": transactionType = "IM"; break;
-                    case "国内卖方保理": transactionType = "SE"; break;
-                    case "国内买方保理": transactionType = "BY"; break;
-                    default:
-                        transactionType = "  ";
-                        break;
-                }
+            //foreach (Case c in context.Cases)
+            //{
+            //    string transactionType = null;
+            //    switch (c.TransactionType)
+            //    {
+            //        case "出口保理": transactionType = "EX"; break;
+            //        case "进口保理": transactionType = "IM"; break;
+            //        case "国内卖方保理": transactionType = "SE"; break;
+            //        case "国内买方保理": transactionType = "BY"; break;
+            //        default:
+            //            transactionType = "  ";
+            //            break;
+            //    }
 
-                string year = String.Format("{0:yy}", c.CaseAppDate);
-                string locationCode = c.OwnerDepartment.LocationCode;
-                List<Case> caseList = context.Cases.Where(ca => ca.OwnerDepartment.LocationCode == locationCode && ca.TransactionType == c.TransactionType && ca.CaseAppDate.Year == c.CaseAppDate.Year).OrderBy(order => order.CaseAppDate).ToList();
-                int index = caseList.IndexOf(c) + 1;
-                string newCaseCode = String.Format("69{0}{1}{2}{3:D4}", locationCode, transactionType, year, index);
-                c.NewCaseCode = newCaseCode;
-            }
+            //    string year = String.Format("{0:yy}", c.CaseAppDate);
+            //    string locationCode = c.OwnerDepartment.LocationCode;
+            //    List<Case> caseList = context.Cases.Where(ca => ca.OwnerDepartment.LocationCode == locationCode && ca.TransactionType == c.TransactionType && ca.CaseAppDate.Year == c.CaseAppDate.Year).OrderBy(order => order.CaseAppDate).ToList();
+            //    int index = caseList.IndexOf(c) + 1;
+            //    string newCaseCode = String.Format("69{0}{1}{2}{3:D4}", locationCode, transactionType, year, index);
+            //    c.NewCaseCode = newCaseCode;
+            //}
 
-            context.SubmitChanges();
+            //context.SubmitChanges();
 
             foreach (InvoiceAssignBatch batch in context.InvoiceAssignBatches)
             {

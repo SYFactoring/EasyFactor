@@ -132,9 +132,9 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GenerateAssignBatchNo(string caseCode, DateTime assignDate)
         {
             DBDataContext context = new DBDataContext();
-            var queryResult = from batch in context.InvoiceAssignBatches where batch.AssignBatchNo.StartsWith(caseCode) && batch.AssignDate.Year == assignDate.Year select batch.NewAssignBatchNo;
+            var queryResult = from batch in context.InvoiceAssignBatches where batch.CaseCode == caseCode && batch.AssignDate.Year == assignDate.Year select batch.NewAssignBatchNo;
             int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(15)), out batchCount))
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(17)), out batchCount))
             {
                 batchCount = 0;
             }
@@ -154,9 +154,9 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GenerateAssignBatchNo(string caseCode, DateTime assignDate, List<InvoiceAssignBatch> batchesInMemory)
         {
             DBDataContext context = new DBDataContext();
-            var queryResult = from batch in context.InvoiceAssignBatches where batch.AssignBatchNo.StartsWith(caseCode) && batch.AssignDate.Year == assignDate.Year select batch.NewAssignBatchNo;
+            var queryResult = from batch in context.InvoiceAssignBatches where batch.CaseCode == caseCode && batch.AssignDate.Year == assignDate.Year select batch.NewAssignBatchNo;
             int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(15)), out batchCount))
+            if (!Int32.TryParse(queryResult.Max(no => no.Substring(17)), out batchCount))
             {
                 batchCount = 0;
             }
