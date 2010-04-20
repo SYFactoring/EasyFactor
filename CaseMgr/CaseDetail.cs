@@ -106,12 +106,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
             this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
 
-            List<Department> allMJDepatments = Department.AllDepartments(this.context, "贸易金融事业部");
-            this.cbCaseCoDepts.DataSource = allMJDepatments;
-            this.cbCaseCoDepts.ValueMember = "DepartmentCode";
-            this.cbCaseCoDepts.DisplayMember = "DepartmentName";
-            this.cbCaseCoDepts.SelectedIndex = -1;
-
             List<Department> allDepartments = Department.AllDepartments(this.context);
             this.cbCaseOwnerDepts.DataSource = allDepartments;
             this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
@@ -220,32 +214,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
         // Private Methods (24) 
 
-        /// <summary>
-        /// Case operation type changed event handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseOpTypeChanged(object sender, EventArgs e)
-        {
-            string operationType = this.cbCaseOpType.Text;
-
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-
-            if (operationType != curCase.OperationType)
-            {
-                if ("自营".Equals(operationType))
-                {
-                    this.cbCaseCoDepts.Enabled = false;
-                    curCase.CoDepartment = null;
-                }
-                else
-                {
-                    this.cbCaseCoDepts.Enabled = true;
-                }
-            }
-        }
-
-        /// <summary>
+         /// <summary>
         /// Case owner deparment changed event handler
         /// </summary>
         /// <param name="sender"></param>
@@ -1006,15 +975,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.btnCaseBuyerSelect.Visible = true;
                 this.btnCaseFactorSelect.Visible = true;
                 this.btnCaseSellerSelect.Visible = true;
-
-                if ("自营".Equals(curCase.OperationType))
-                {
-                    this.cbCaseCoDepts.Enabled = false;
-                }
-                else
-                {
-                    this.cbCaseCoDepts.Enabled = true;
-                }
             }
             else if (this.opCaseType == OpCaseType.DETAIL_CASE)
             {

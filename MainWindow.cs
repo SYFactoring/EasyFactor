@@ -1333,7 +1333,7 @@ namespace CMBC.EasyFactor
 
             foreach (InvoiceAssignBatch batch in context.InvoiceAssignBatches)
             {
-                batch.NewAssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(batch.Case);
+                batch.NewAssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(batch.Case.CaseCode);
                 context.SubmitChanges();
             }
 

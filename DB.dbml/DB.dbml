@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=195.21.48.37;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="Char(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -12,7 +12,6 @@
       <Column Name="TransactionType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="OperationType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="OwnerDepartmentCode" Type="System.String" DbType="VarChar(14) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="CoDepartmentCode" Type="System.String" DbType="VarChar(14)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CaseAppDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CaseMark" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -29,7 +28,6 @@
       <Association Name="Case_InvoiceRefundBatch" Member="InvoiceRefundBatches" OtherKey="CaseCode" Type="InvoiceRefundBatch" />
       <Association Name="Client_Case" Member="BuyerClient" ThisKey="BuyerCode" Type="Client" IsForeignKey="true" />
       <Association Name="Client_Case1" Member="SellerClient" ThisKey="SellerCode" Type="Client" IsForeignKey="true" />
-      <Association Name="Department_Case" Member="CoDepartment" ThisKey="CoDepartmentCode" Type="Department" IsForeignKey="true" />
       <Association Name="Department_Case1" Member="OwnerDepartment" ThisKey="OwnerDepartmentCode" Type="Department" IsForeignKey="true" />
       <Association Name="Factor_Case" Member="BuyerFactor" ThisKey="BuyerFactorCode" Type="Factor" IsForeignKey="true" />
       <Association Name="Factor_Case1" Member="SellerFactor" ThisKey="SellerFactorCode" Type="Factor" IsForeignKey="true" />
@@ -251,7 +249,6 @@
       <Column Name="MarketManager" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="MaintainManager" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="LocationCode" Type="System.String" DbType="char(2)" CanBeNull="false" UpdateCheck="Never" />
-      <Association Name="Department_Case" Member="CoCases" OtherKey="CoDepartmentCode" Type="Case" />
       <Association Name="Department_Case1" Member="OwnerCases" OtherKey="OwnerDepartmentCode" Type="Case" />
       <Association Name="Department_Client" Member="Clients" OtherKey="BranchCode" Type="Client" />
       <Association Name="Department_DepartmentAccount" Member="DepartmentAccounts" OtherKey="DepartmentCode" Type="DepartmentAccount" />

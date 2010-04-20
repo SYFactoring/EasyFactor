@@ -506,7 +506,7 @@ namespace CMBC.EasyFactor.Utils
                             batch.Case = curCase;
                             batch.CreateUserName = App.Current.CurUser.Name;
                             batch.InputDate = DateTime.Today;
-                            batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase);
+                            batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase.CaseCode);
                             batchList.Add(batch);
                         }
                         if (curCase == null)
@@ -874,8 +874,6 @@ namespace CMBC.EasyFactor.Utils
                         column++;
                         curCase.TransactionType = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.OperationType = String.Format("{0:G}", valueArray[row, column++]);
-                        string coDeptName = String.Format("{0:G}", valueArray[row, column++]);
-                        curCase.CoDepartment = context.Departments.SingleOrDefault(d => d.DepartmentName == coDeptName);
                         curCase.CaseMark = String.Format("{0:G}", valueArray[row, column++]);
                         string sellerEDICode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         Client sellerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
@@ -938,7 +936,6 @@ namespace CMBC.EasyFactor.Utils
                         curCase.SellerClient = null;
                         curCase.BuyerFactor = null;
                         curCase.SellerFactor = null;
-                        curCase.CoDepartment = null;
                         curCase.OwnerDepartment = null;
                     }
 
@@ -2102,7 +2099,7 @@ namespace CMBC.EasyFactor.Utils
                                 assignBatch.AssignDate = assignDate;
                                 assignBatch.CreateUserName = createUserName;
                                 assignBatch.CheckStatus = ConstStr.BATCH.CHECK;
-                                assignBatch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(assignBatch.AssignDate, assignBatches);
+                                assignBatch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(caseCode, assignBatches);
                                 assignBatch.Case = curCase;
                                 assignBatches.Add(assignBatch);
                             }

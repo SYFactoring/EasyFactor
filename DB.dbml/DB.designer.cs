@@ -406,8 +406,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _OwnerDepartmentCode;
 		
-		private string _CoDepartmentCode;
-		
 		private System.DateTime _CaseAppDate;
 		
 		private string _CaseMark;
@@ -440,8 +438,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntityRef<Client> _SellerClient;
 		
-		private EntityRef<Department> _CoDepartment;
-		
 		private EntityRef<Department> _OwnerDepartment;
 		
 		private EntityRef<Factor> _BuyerFactor;
@@ -470,8 +466,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnOperationTypeChanged();
     partial void OnOwnerDepartmentCodeChanging(string value);
     partial void OnOwnerDepartmentCodeChanged();
-    partial void OnCoDepartmentCodeChanging(string value);
-    partial void OnCoDepartmentCodeChanged();
     partial void OnCaseAppDateChanging(System.DateTime value);
     partial void OnCaseAppDateChanged();
     partial void OnCaseMarkChanging(string value);
@@ -500,7 +494,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._InvoiceRefundBatches = new EntitySet<InvoiceRefundBatch>(new Action<InvoiceRefundBatch>(this.attach_InvoiceRefundBatches), new Action<InvoiceRefundBatch>(this.detach_InvoiceRefundBatches));
 			this._BuyerClient = default(EntityRef<Client>);
 			this._SellerClient = default(EntityRef<Client>);
-			this._CoDepartment = default(EntityRef<Department>);
 			this._OwnerDepartment = default(EntityRef<Department>);
 			this._BuyerFactor = default(EntityRef<Factor>);
 			this._SellerFactor = default(EntityRef<Factor>);
@@ -703,30 +696,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._OwnerDepartmentCode = value;
 					this.SendPropertyChanged("OwnerDepartmentCode");
 					this.OnOwnerDepartmentCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CoDepartmentCode", DbType="VarChar(14)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CoDepartmentCode
-		{
-			get
-			{
-				return this._CoDepartmentCode;
-			}
-			set
-			{
-				if ((this._CoDepartmentCode != value))
-				{
-					if (this._CoDepartment.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCoDepartmentCodeChanging(value);
-					this.SendPropertyChanging();
-					this._CoDepartmentCode = value;
-					this.SendPropertyChanged("CoDepartmentCode");
-					this.OnCoDepartmentCodeChanged();
 				}
 			}
 		}
@@ -1033,40 +1002,6 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._SellerCode = default(string);
 					}
 					this.SendPropertyChanged("SellerClient");
-				}
-			}
-		}
-		
-		[Association(Name="Department_Case", Storage="_CoDepartment", ThisKey="CoDepartmentCode", IsForeignKey=true)]
-		public Department CoDepartment
-		{
-			get
-			{
-				return this._CoDepartment.Entity;
-			}
-			set
-			{
-				Department previousValue = this._CoDepartment.Entity;
-				if (((previousValue != value) 
-							|| (this._CoDepartment.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CoDepartment.Entity = null;
-						previousValue.CoCases.Remove(this);
-					}
-					this._CoDepartment.Entity = value;
-					if ((value != null))
-					{
-						value.CoCases.Add(this);
-						this._CoDepartmentCode = value.DepartmentCode;
-					}
-					else
-					{
-						this._CoDepartmentCode = default(string);
-					}
-					this.SendPropertyChanged("CoDepartment");
 				}
 			}
 		}
@@ -5666,8 +5601,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _LocationCode;
 		
-		private EntitySet<Case> _CoCases;
-		
 		private EntitySet<Case> _OwnerCases;
 		
 		private EntitySet<Client> _Clients;
@@ -5720,7 +5653,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		public Department()
 		{
-			this._CoCases = new EntitySet<Case>(new Action<Case>(this.attach_CoCases), new Action<Case>(this.detach_CoCases));
 			this._OwnerCases = new EntitySet<Case>(new Action<Case>(this.attach_OwnerCases), new Action<Case>(this.detach_OwnerCases));
 			this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
 			this._DepartmentAccounts = new EntitySet<DepartmentAccount>(new Action<DepartmentAccount>(this.attach_DepartmentAccounts), new Action<DepartmentAccount>(this.detach_DepartmentAccounts));
@@ -6092,19 +6024,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="Department_Case", Storage="_CoCases", OtherKey="CoDepartmentCode")]
-		public EntitySet<Case> CoCases
-		{
-			get
-			{
-				return this._CoCases;
-			}
-			set
-			{
-				this._CoCases.Assign(value);
-			}
-		}
-		
 		[Association(Name="Department_Case1", Storage="_OwnerCases", OtherKey="OwnerDepartmentCode")]
 		public EntitySet<Case> OwnerCases
 		{
@@ -6196,18 +6115,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_CoCases(Case entity)
-		{
-			this.SendPropertyChanging();
-			entity.CoDepartment = this;
-		}
-		
-		private void detach_CoCases(Case entity)
-		{
-			this.SendPropertyChanging();
-			entity.CoDepartment = null;
 		}
 		
 		private void attach_OwnerCases(Case entity)
