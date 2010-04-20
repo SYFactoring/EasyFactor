@@ -148,9 +148,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     case "国内卖方保理":
                     case "出口保理":
-                    case "国内信保保理":
-                    case "国际信保保理":
-                    case "租赁保理":
                         this.tbCaseFactorCode.Text = curCase.BuyerFactor.FactorCode;
                         this.tbCaseFactorNameCN.Text = curCase.BuyerFactor.CompanyNameCN;
                         this.tbCaseFactorNameEN.Text = curCase.BuyerFactor.CompanyNameEN;
@@ -281,7 +278,6 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 case "国内卖方保理":
                 case "国内买方保理":
-                case "租赁保理":
                     this.btnCaseFactorSelect.Enabled = false;
                     curCase.SellerFactor = cmbc;
                     curCase.BuyerFactor = cmbc;
@@ -299,18 +295,6 @@ namespace CMBC.EasyFactor.CaseMgr
                     curCase.BuyerFactor = cmbc;
                     curCase.InvoiceCurrency = "USD";
                     this.cbCaseInvoiceCurrency.Enabled = true;
-                    break;
-                case "国际信保保理":
-                    this.btnCaseFactorSelect.Enabled = true;
-                    curCase.SellerFactor = cmbc;
-                    curCase.InvoiceCurrency = "USD";
-                    this.cbCaseInvoiceCurrency.Enabled = true;
-                    break;
-                case "国内信保保理":
-                    this.btnCaseFactorSelect.Enabled = true;
-                    curCase.SellerFactor = cmbc;
-                    curCase.InvoiceCurrency = "CNY";
-                    this.cbCaseInvoiceCurrency.Enabled = false;
                     break;
                 default: break;
             }
@@ -332,7 +316,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
-            string[] caseTypes = new string[] { "出口保理", "进口保理", "国际信保保理", "国内信保保理时" };
+            string[] caseTypes = new string[] { "出口保理", "进口保理" };
             if (caseTypes.Contains(curCase.TransactionType))
             {
                 if (this.tbCaseFactorCode.Text != string.Empty)
@@ -509,9 +493,6 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 case "国内卖方保理":
                 case "出口保理":
-                case "国内信保保理":
-                case "国际信保保理":
-                case "租赁保理":
                     factor = curCase.BuyerFactor;
                     break;
                 case "国内买方保理":
@@ -587,7 +568,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            if (curCase.TransactionType == "出口保理" || curCase.TransactionType == "进口保理" || curCase.TransactionType == "国际信保保理")
+            if (curCase.TransactionType == "出口保理" || curCase.TransactionType == "进口保理")
             {
                 CreditCoverNegotiation creditCoverNeg = new CreditCoverNegotiation();
                 creditCoverNeg.CreateUserName = App.Current.CurUser.Name;
@@ -660,7 +641,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isAddOK = true;
                 try
                 {
-                    curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType, curCase.CaseAppDate);
+                    curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType, curCase.OwnerDepartment.LocationCode, curCase.CaseAppDate);
                     this.context.Cases.InsertOnSubmit(curCase);
                     this.context.SubmitChanges();
                 }
@@ -842,9 +823,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 switch (this.cbCaseTransactionType.Text)
                 {
                     case "国内卖方保理":
-                    case "国内信保保理":
-                    case "国际信保保理":
-                    case "租赁保理":
                     case "出口保理":
                         break;
                     case "国内买方保理":
@@ -890,9 +868,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 switch (this.cbCaseTransactionType.Text)
                 {
                     case "国内卖方保理":
-                    case "国内信保保理":
-                    case "国际信保保理":
-                    case "租赁保理":
                     case "出口保理":
                         curCase.OwnerDepartment = curCase.SellerClient.Department;
                         if (curCase.OwnerDepartment != null)
@@ -969,9 +944,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     case "国内卖方保理":
                     case "出口保理":
-                    case "国内信保保理":
-                    case "国际信保保理":
-                    case "租赁保理":
                         curCase.BuyerFactor = factor;
                         break;
                     case "国内买方保理":

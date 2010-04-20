@@ -285,9 +285,6 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 case "国内卖方保理":
                 case "出口保理":
-                case "国内信保保理":
-                case "国际信保保理":
-                case "租赁保理":
                     this.factorCodeTextBox.Text = this.Case.BuyerFactor.FactorCode;
                     this.factorNameTextBox.Text = this.Case.BuyerFactor.ToString();
                     break;

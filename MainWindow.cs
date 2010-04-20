@@ -1316,9 +1316,6 @@ namespace CMBC.EasyFactor
                     case "进口保理": transactionType = "IM"; break;
                     case "国内卖方保理": transactionType = "SE"; break;
                     case "国内买方保理": transactionType = "BY"; break;
-                    case "租赁保理": transactionType = "  "; break;
-                    case "国际信保保理": transactionType = "  "; break;
-                    case "国内信保保理": transactionType = "  "; break;
                     default:
                         transactionType = "  ";
                         break;

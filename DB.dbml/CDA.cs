@@ -65,9 +65,6 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         case "国内卖方保理":
                         case "出口保理":
-                        case "国内信保保理":
-                        case "国际信保保理":
-                        case "租赁保理":
                             return this.Case.BuyerFactor.ToString();
                         case "国内买方保理":
                         case "进口保理":

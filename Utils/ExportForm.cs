@@ -550,7 +550,7 @@ namespace CMBC.EasyFactor.Utils
 
                     Worksheet sheet = null;
                     int rowID = 0;
-                    if (cda.TransactionType == "进口保理" || cda.TransactionType == "出口保理" || cda.TransactionType == "国际信保保理")
+                    if (cda.TransactionType == "进口保理" || cda.TransactionType == "出口保理")
                     {
                         rowID = ++inter;
                         sheet = sheetInternal;
@@ -1936,9 +1936,6 @@ namespace CMBC.EasyFactor.Utils
                 {
                     case "国内卖方保理":
                     case "出口保理":
-                    case "国内信保保理":
-                    case "国际信保保理":
-                    case "租赁保理":
                         groups = caseGroup.GroupBy(c => c.SellerClient);
                         foreach (IGrouping<Client, Case> group in groups)
                         {

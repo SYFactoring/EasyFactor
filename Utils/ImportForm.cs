@@ -498,7 +498,7 @@ namespace CMBC.EasyFactor.Utils
                             break;
                         }
 
-                        if (curCase == null||curCase.CaseCode!=caseCode)
+                        if (curCase == null || curCase.CaseCode != caseCode)
                         {
                             curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                             batch = new InvoiceAssignBatch();
@@ -545,7 +545,7 @@ namespace CMBC.EasyFactor.Utils
                         {
                             throw new Exception("发票已经存在，不能导入： " + invoiceNo);
                         }
-                        
+
                         string currency = string.Format("{0:G}", valueArray[row, column++]);
                         if (currency != curCase.InvoiceCurrency)
                         {
@@ -838,10 +838,18 @@ namespace CMBC.EasyFactor.Utils
                             continue;
                         }
 
+                        string ownerDeptName = String.Format("{0:G}", valueArray[row, 3]);
+                        Department ownerDept = context.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
+                        if (ownerDept == null)
+                        {
+                            throw new Exception("所属分部名称错误： " + ownerDeptName);
+                        }
+
+
                         DateTime appDate = (DateTime)valueArray[row, 19];
                         if (String.Empty == caseCode && transactionType != String.Empty)
                         {
-                            caseCode = Case.GenerateCaseCode(transactionType, appDate, caseList);
+                            caseCode = Case.GenerateCaseCode(transactionType, ownerDept.LocationCode, appDate, caseList);
                         }
 
                         Case curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
@@ -862,14 +870,8 @@ namespace CMBC.EasyFactor.Utils
 
                         int column = 2;
                         curCase.OPName = String.Format("{0:G}", valueArray[row, column++]);
-                        string ownerDeptName = String.Format("{0:G}", valueArray[row, column++]);
-                        Department ownerDept = context.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
-                        if (ownerDept == null)
-                        {
-                            throw new Exception("所属分部名称错误： " + ownerDeptName);
-                        }
-
                         curCase.OwnerDepartment = ownerDept;
+                        column++;
                         curCase.TransactionType = String.Format("{0:G}", valueArray[row, column++]);
                         curCase.OperationType = String.Format("{0:G}", valueArray[row, column++]);
                         string coDeptName = String.Format("{0:G}", valueArray[row, column++]);

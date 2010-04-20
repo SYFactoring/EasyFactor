@@ -555,13 +555,10 @@ namespace CMBC.EasyFactor.ARMgr
                     switch (selectedBatch.Case.TransactionType)
                     {
                         case "国内卖方保理":
-                        case "国内信保保理":
                         case "国内买方保理":
-                        case "租赁保理":
                         case "进口保理":
                             break;
                         case "出口保理":
-                        case "国际信保保理":
                             factor = selectedBatch.Case.SellerFactor;
                             break;
                         default:

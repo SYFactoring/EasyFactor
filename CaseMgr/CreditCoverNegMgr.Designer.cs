@@ -53,14 +53,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -94,11 +86,6 @@
             this.tbSellerFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblSellerFactorCode = new DevComponents.DotNetBar.LabelX();
             this.dgvCreditCoverNegs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCreditCoverNegExport = new System.Windows.Forms.ToolStripMenuItem();
             this.colNegoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -119,6 +106,11 @@
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOwnerDept = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCreditCoverNegExport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -308,11 +300,6 @@
             this.cbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCurrency.FormattingEnabled = true;
             this.cbCurrency.ItemHeight = 14;
-            this.cbCurrency.Items.AddRange(new object[] {
-            "国内保理",
-            "出口保理",
-            "进口",
-            "信保保理"});
             this.cbCurrency.Location = new System.Drawing.Point(260, 26);
             this.cbCurrency.Name = "cbCurrency";
             this.cbCurrency.Size = new System.Drawing.Size(100, 20);
@@ -341,11 +328,8 @@
             "国内卖方保理",
             "国内买方保理",
             "出口保理",
-            "进口保理",
-            "国内信保保理",
-            "国际信保保理",
-            "租赁保理"});
-            this.cbTransactionType.Location = new System.Drawing.Point(65, 54);
+            "进口保理"});
+            this.cbTransactionType.Location = new System.Drawing.Point(65, 52);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -357,7 +341,7 @@
             // 
             // 
             this.lblTransactionType.BackgroundStyle.Class = "";
-            this.lblTransactionType.Location = new System.Drawing.Point(9, 51);
+            this.lblTransactionType.Location = new System.Drawing.Point(9, 50);
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(59, 23);
             this.lblTransactionType.TabIndex = 12;
@@ -463,7 +447,7 @@
             // 
             this.cbOwnerDepts.BackgroundStyle.Class = "TextBoxBorder";
             this.cbOwnerDepts.ButtonDropDown.Visible = true;
-            this.cbOwnerDepts.Location = new System.Drawing.Point(65, 28);
+            this.cbOwnerDepts.Location = new System.Drawing.Point(65, 26);
             this.cbOwnerDepts.Name = "cbOwnerDepts";
             this.cbOwnerDepts.Size = new System.Drawing.Size(133, 23);
             this.cbOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -475,7 +459,7 @@
             // 
             // 
             this.lblOnwerDept.BackgroundStyle.Class = "";
-            this.lblOnwerDept.Location = new System.Drawing.Point(9, 28);
+            this.lblOnwerDept.Location = new System.Drawing.Point(9, 27);
             this.lblOnwerDept.Name = "lblOnwerDept";
             this.lblOnwerDept.Size = new System.Drawing.Size(59, 23);
             this.lblOnwerDept.TabIndex = 6;
@@ -595,40 +579,6 @@
             this.dgvCreditCoverNegs.TabIndex = 1;
             this.dgvCreditCoverNegs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCreditCoverNegs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCreditCoverNegs_RowPostPaint);
-            // 
-            // cmuCreditCoverMgr
-            // 
-            this.cmuCreditCoverMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCreditCoverSelect,
-            this.menuItemCreditCoverDetail,
-            this.toolStripSeparator1,
-            this.menuItemCreditCoverNegExport});
-            this.cmuCreditCoverMgr.Name = "cmuContractMgr";
-            this.cmuCreditCoverMgr.Size = new System.Drawing.Size(147, 76);
-            // 
-            // menuItemCreditCoverSelect
-            // 
-            this.menuItemCreditCoverSelect.Name = "menuItemCreditCoverSelect";
-            this.menuItemCreditCoverSelect.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverSelect.Text = "选定额度申请";
-            // 
-            // menuItemCreditCoverDetail
-            // 
-            this.menuItemCreditCoverDetail.Name = "menuItemCreditCoverDetail";
-            this.menuItemCreditCoverDetail.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverDetail.Text = "详细信息";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
-            // 
-            // menuItemCreditCoverNegExport
-            // 
-            this.menuItemCreditCoverNegExport.Name = "menuItemCreditCoverNegExport";
-            this.menuItemCreditCoverNegExport.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverNegExport.Text = "导出额度申请";
-            this.menuItemCreditCoverNegExport.Click += new System.EventHandler(this.ExportCreditCoverNeg);
             // 
             // colNegoID
             // 
@@ -793,6 +743,40 @@
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
             this.colCreateUserName.Width = 50;
+            // 
+            // cmuCreditCoverMgr
+            // 
+            this.cmuCreditCoverMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCreditCoverSelect,
+            this.menuItemCreditCoverDetail,
+            this.toolStripSeparator1,
+            this.menuItemCreditCoverNegExport});
+            this.cmuCreditCoverMgr.Name = "cmuContractMgr";
+            this.cmuCreditCoverMgr.Size = new System.Drawing.Size(147, 76);
+            // 
+            // menuItemCreditCoverSelect
+            // 
+            this.menuItemCreditCoverSelect.Name = "menuItemCreditCoverSelect";
+            this.menuItemCreditCoverSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverSelect.Text = "选定额度申请";
+            // 
+            // menuItemCreditCoverDetail
+            // 
+            this.menuItemCreditCoverDetail.Name = "menuItemCreditCoverDetail";
+            this.menuItemCreditCoverDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverDetail.Text = "详细信息";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemCreditCoverNegExport
+            // 
+            this.menuItemCreditCoverNegExport.Name = "menuItemCreditCoverNegExport";
+            this.menuItemCreditCoverNegExport.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNegExport.Text = "导出额度申请";
+            this.menuItemCreditCoverNegExport.Click += new System.EventHandler(this.ExportCreditCoverNeg);
             // 
             // CreditCoverNegMgr
             // 

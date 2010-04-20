@@ -530,7 +530,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
 
                 bool isZero = false;
-                if (selectedCDA.Case.TransactionType == "国内买方保理" || selectedCDA.Case.TransactionType == "进口保理" || selectedCDA.Case.TransactionType == "租赁保理")
+                if (selectedCDA.Case.TransactionType == "国内买方保理" || selectedCDA.Case.TransactionType == "进口保理")
                 {
                     isZero = true;
                 }
@@ -689,7 +689,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 int rowEnd = 19;
-                if (selectedCDA.Case.TransactionType == "出口保理" || selectedCDA.Case.TransactionType == "国际信保保理")
+                if (selectedCDA.Case.TransactionType == "出口保理" )
                 {
                     sheet.Cells[row, 1] = "进口保理商";
                     sheet.Cells[row++, 2] = selectedCDA.Case.BuyerFactor.ToString();
@@ -740,10 +740,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[21, 1] = "备注：";
 
                 bool isSingle = selectedCDA.Case.SellerFactorCode == selectedCDA.Case.BuyerFactorCode;
-                bool isNonSingle = selectedCDA.Case.TransactionType == "国际信保保理" || selectedCDA.Case.TransactionType == "国内信保保理";
 
                 string recoarse = selectedCDA.IsRecoarse.GetValueOrDefault() ? "有追索权" : "无追索权";
-                string single = isNonSingle ? String.Empty : isSingle ? "单保理" : "双保理";
+                string single = isSingle ? "单保理" : "双保理";
                 string line1 = string.Empty;
                 switch (selectedCDA.Case.TransactionType)
                 {
@@ -752,15 +751,6 @@ namespace CMBC.EasyFactor.CaseMgr
                         break;
                     case "出口保理":
                         line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "出口", single, selectedCDA.IsNotice);
-                        break;
-                    case "国内信保保理":
-                        line1 = String.Format("（1）本业务为{0}{1}（{2}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "国内信保", selectedCDA.IsNotice);
-                        break;
-                    case "国际信保保理":
-                        line1 = String.Format("（1）本业务为{0}{1}（{2}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "国际信保", selectedCDA.IsNotice);
-                        break;
-                    case "租赁保理":
-                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, single, selectedCDA.IsNotice);
                         break;
                     case "国内买方保理":
                         line1 = String.Format("（1）本业务为{0}{1}（{2}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "国内", selectedCDA.IsNotice);

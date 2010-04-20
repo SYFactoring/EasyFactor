@@ -442,10 +442,7 @@
             "国内卖方保理",
             "国内买方保理",
             "出口保理",
-            "进口保理",
-            "国际信保保理",
-            "国内信保保理",
-            "租赁保理"});
+            "进口保理",});
             this.cbTransactionType.Location = new System.Drawing.Point(59, 57);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
