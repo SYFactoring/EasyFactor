@@ -159,7 +159,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 batchCount = 0;
             }
 
-            batchCount += batchesInMemory.Count(batch => batch.AssignBatchNo.StartsWith(caseCode));
+            batchCount += batchesInMemory.Count(batch => batch.AssignBatchNo.StartsWith(String.Format("{0}ASS{1:yy}", caseCode, assignDate)));
             string assignNo = String.Format("{0}ASS{1:yy}{2:D3}", caseCode, assignDate, batchCount + 1);
             return assignNo;
         }

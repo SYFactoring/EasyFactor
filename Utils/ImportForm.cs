@@ -2099,7 +2099,7 @@ namespace CMBC.EasyFactor.Utils
                                 assignBatch.AssignDate = assignDate;
                                 assignBatch.CreateUserName = createUserName;
                                 assignBatch.CheckStatus = ConstStr.BATCH.CHECK;
-                                assignBatch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(caseCode, assignBatches);
+                                assignBatch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(caseCode, assignBatch.AssignDate, assignBatches);
                                 assignBatch.Case = curCase;
                                 assignBatches.Add(assignBatch);
                             }
