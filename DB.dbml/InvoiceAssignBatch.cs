@@ -129,10 +129,10 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         /// <param name="caseCode"></param>
         /// <returns></returns>
-        public static string GenerateAssignBatchNo(string caseCode)
+        public static string GenerateAssignBatchNo(string caseCode, int year)
         {
             DBDataContext context = new DBDataContext();
-            var queryResult = from batch in context.InvoiceAssignBatches where batch.NewAssignBatchNo.StartsWith(caseCode) select batch.NewAssignBatchNo;
+            var queryResult = from batch in context.InvoiceAssignBatches where batch.AssignBatchNo.StartsWith(caseCode) && batch.AssignDate.Year == year select batch.NewAssignBatchNo;
             int batchCount;
             if (!Int32.TryParse(queryResult.Max(no => no.Substring(15)), out batchCount))
             {
