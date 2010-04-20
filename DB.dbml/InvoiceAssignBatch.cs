@@ -139,7 +139,9 @@ namespace CMBC.EasyFactor.DB.dbml
                 batchCount = 0;
             }
 
-            string assignNo = String.Format("{0}ASS{1:yy}{2:D3}", caseCode, assignDate, batchCount + 1);
+            string newCaseCode = context.Cases.SingleOrDefault(c => c.CaseCode).NewCaseCode;
+
+            string assignNo = String.Format("{0}ASS{1:yy}{2:D3}", newCaseCode, assignDate, batchCount + 1);
             return assignNo;
         }
 
