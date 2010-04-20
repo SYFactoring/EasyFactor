@@ -591,12 +591,10 @@ namespace CMBC.EasyFactor.ARMgr
                     totalCommission += selectedBatch.CommissionAmount.GetValueOrDefault() + selectedBatch.HandfeeAmount.GetValueOrDefault();
                     sheet.get_Range("A" + beginRow, "F" + endRow).Borders.LineStyle = 1;
 
-                    row += 2;
-                    sheet.Cells[row, 1] = "注：保理手续费按融资金额收取。";
-
                     row += 3;
                 }
 
+                sheet.Cells[row-1, 1] = "注：保理手续费按融资金额收取。";
                 sheet.Cells[row, 5] = "费用总计";
                 sheet.Cells[row, 6] = totalCommission;
                 sheet.get_Range("F" + row, "F" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
@@ -604,10 +602,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 row += 2;
 
-                sheet.Cells[row, 1] = String.Format("制表：{0}", batchGroup.First().CreateUserName);
-                sheet.Cells[row, 3] = String.Format("复核：{0}", batchGroup.First().CheckUserName);
-                sheet.Cells[row, 5] = "主管：";
-                sheet.Cells[row + 2, 4] = "中国民生银行 贸易金融部保理业务部  （业务章）";
+                sheet.Cells[row + 1, 4] = "中国民生银行贸易金融事业部保理业务部 （业务章）";
                 sheet.Cells[row + 3, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;

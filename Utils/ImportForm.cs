@@ -515,8 +515,8 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("案件编号错误: " + caseCode);
                         }
 
-                        CDA activeCDA = curCase.ActiveCDA;
-                        if (activeCDA == null)
+                        CDA cda = curCase.ActiveCDA;
+                        if (cda == null)
                         {
                             throw new Exception("没有有效的额度通知书: " + caseCode);
                         }
@@ -558,12 +558,18 @@ namespace CMBC.EasyFactor.Utils
                         invoice.InvoiceDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         invoice.DueDate = (DateTime)valueArray[row, column++];
                         double? commission = (System.Nullable<double>)valueArray[row, column++];
-                        if(activeCDA.CommissionType=="其他")
+                        if (cda.CommissionType == "其他")
                         {
                             invoice.Commission = commission;
                         }
+                        else if (cda.CommissionType == "按转让金额")
+                        {
+                            invoice.Commission = invoice.AssignAmount * cda.Price;
+                        }
+
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         invoice.InvoiceAssignBatch = batch;
+
 
                         invoiceList.Add(invoice);
                         result++;
@@ -610,6 +616,137 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+
+            List<InvoiceFinanceBatch> batchList = new List<InvoiceFinanceBatch>();
+
+            this.context = new DBDataContext();
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+
+                try
+                {
+                    for (int row = 3; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+                        //int column = 12;
+                        int column = 1;
+                        string assignBatchCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
+
+                        if (string.Empty.Equals(assignBatchCode) || assignBatchCode.Length > 20)
+                        {
+                            break;
+                        }
+
+                        InvoiceAssignBatch assignBatch = context.InvoiceAssignBatches.SingleOrDefault(c => c.AssignBatchNo == assignBatchCode);
+                        if (assignBatch == null)
+                        {
+                            throw new Exception("业务编号错误：" + assignBatchCode);
+                        }
+                        if (assignBatch.CheckStatus != ConstStr.BATCH.CHECK)
+                        {
+                            throw new Exception("该业务未复核（或复核未通过）：" + assignBatchCode);
+                        }
+
+                        InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
+                        financeBatch.FinanceType = String.Format("{0:G}", valueArray[row, column++]);
+                        financeBatch.BatchCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        financeBatch.FinanceAmount = (double)valueArray[row, column++];
+                        financeBatch.FinancePeriodBegin = (DateTime)valueArray[row, column++];
+                        financeBatch.FinancePeriodEnd = (DateTime)valueArray[row, column++];
+                        financeBatch.FinanceRate = (double)valueArray[row, column++];
+                        financeBatch.CostRate = (double?)valueArray[row, column++];
+                        string factorCode = String.Format("{0:G}", valueArray[row, column++]);
+                        if (!String.IsNullOrEmpty(factorCode))
+                        {
+                            Factor factor = context.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                            if (factor == null)
+                            {
+                                throw new Exception("代付行编码错误：" + factorCode);
+                            }
+
+                            financeBatch.Factor = factor;
+                        }
+
+                        financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                        financeBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
+                        financeBatch.InputDate = DateTime.Today;
+                        financeBatch.CreateUserName = App.Current.CurUser.Name;
+                        financeBatch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin);
+                        financeBatch.Case = assignBatch.Case;
+
+                        batchList.Add(financeBatch);
+
+                        CDA cda = assignBatch.Case.ActiveCDA;
+                        if (cda == null)
+                        {
+                            throw new Exception("没有有效的额度通知书，业务编号：" + assignBatchCode);
+                        }
+
+                        double currentFinanceAmount = 0;
+                        foreach (Invoice invoice in assignBatch.Invoices.Where(i => (i.IsDispute.HasValue == false || i.IsDispute == false) && i.IsFlaw == false).OrderBy(i => i.DueDate))
+                        {
+                            double canBeFinanceAmount = invoice.AssignOutstanding * cda.FinanceProportion - invoice.FinanceAmount.GetValueOrDefault();
+                            if (TypeUtil.GreaterZero(canBeFinanceAmount))
+                            {
+                                if (invoice.InvoiceCurrency != financeBatch.BatchCurrency)
+                                {
+                                    double rate = Exchange.GetExchangeRate(invoice.InvoiceCurrency, financeBatch.BatchCurrency);
+                                    canBeFinanceAmount *= rate;
+                                }
+
+                                double financeAmount = 0;
+                                if (canBeFinanceAmount * cda.FinanceProportion.GetValueOrDefault() + currentFinanceAmount > financeBatch.FinanceAmount)
+                                {
+                                    financeAmount = financeBatch.FinanceAmount - currentFinanceAmount;
+                                }
+                                else
+                                {
+                                    financeAmount = canBeFinanceAmount * cda.FinanceProportion.GetValueOrDefault();
+                                }
+
+                                if (TypeUtil.GreaterZero(financeAmount))
+                                {
+                                    InvoiceFinanceLog log = new InvoiceFinanceLog();
+                                    log.Invoice = invoice;
+                                    log.InvoiceFinanceBatch = financeBatch;
+                                    log.FinanceAmount = financeAmount;
+                                    currentFinanceAmount += financeAmount;
+                                    if (cda.CommissionType == "按融资金额")
+                                    {
+                                        log.Commission = log.FinanceAmount * cda.Price;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (TypeUtil.GreaterZero(financeBatch.FinanceAmount - currentFinanceAmount))
+                        {
+                            throw new Exception("融资额未分配结束，不能保存，业务编号：" + assignBatchCode);
+                        }
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
+                    context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    foreach (InvoiceFinanceBatch batch in batchList)
+                    {
+                        batch.Case = null;
+                    }
+
+                    throw e1;
+                }
+            }
+
             this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
             return result;

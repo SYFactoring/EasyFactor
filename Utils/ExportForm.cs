@@ -2471,9 +2471,9 @@ namespace CMBC.EasyFactor.Utils
             sheet.Cells[9, "K"] = "账款余额";
             sheet.Cells[9, "L"] = "付款日";
             sheet.Cells[9, "M"] = "还款金额";
-            sheet.Cells[9, "N"] = "还款日";
-            sheet.Cells[9, "O"] = "手续费";
-            sheet.Cells[9, "P"] = "利息";
+            sheet.Cells[9, "N"] = "融资余额";
+            sheet.Cells[9, "O"] = "还款日";
+            sheet.Cells[9, "P"] = "手续费";
             sheet.Cells[9, "Q"] = "备注";
 
             Client client = caseGroup.Key;
@@ -2558,12 +2558,13 @@ namespace CMBC.EasyFactor.Utils
                             sheet.Cells[row + recordStep, "G"] = financeLog.FinanceAmount;
                             sheet.Cells[row + recordStep, "H"] = financeLog.FinanceDate;
                             sheet.Cells[row + recordStep, "I"] = financeLog.FinanceDueDate;
+                            sheet.Cells[row + recordStep, "N"] = financeLog.FinanceOutstanding;
 
                             for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
                             {
                                 InvoiceRefundLog refundLog = financeLog.InvoiceRefundLogs[j];
                                 sheet.Cells[row + recordStep + j, "M"] = refundLog.RefundAmount;
-                                sheet.Cells[row + recordStep + j, "N"] = refundLog.RefundDate;
+                                sheet.Cells[row + recordStep + j, "O"] = refundLog.RefundDate;
                             }
 
                             recordStep += financeLog.InvoiceRefundLogs.Count;
@@ -2582,8 +2583,7 @@ namespace CMBC.EasyFactor.Utils
 
                         sheet.Cells[row, "K"] = invoice.AssignOutstanding;
 
-                        sheet.Cells[row, "O"] = invoice.Commission;
-                        sheet.Cells[row, "P"] = invoice.NetInterest;
+                        sheet.Cells[row, "P"] = invoice.Commission;
                         sheet.Cells[row, "Q"] = invoice.Comment;
 
                         row += step;
@@ -2603,8 +2603,8 @@ namespace CMBC.EasyFactor.Utils
                 sheet.get_Range(sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]).NumberFormatLocal = currencyFormat;
                 sheet.get_Range(sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]).NumberFormatLocal = "yyyy-MM-dd";
                 sheet.get_Range(sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]).NumberFormatLocal = currencyFormat;
-                sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = currencyFormat;
+                sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = "yyyy-MM-dd";
                 sheet.get_Range(sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]).NumberFormatLocal = currencyFormat;
             }
 
@@ -2617,7 +2617,7 @@ namespace CMBC.EasyFactor.Utils
             sheet.Cells[1, "A"] = "销售分户账台账";
             sheet.Cells[2, "P"] = String.Format("单位：{0}", invoiceCurrency);
             sheet.Cells[3, "A"] = "分行/分部";
-            sheet.Cells[3, "B"] = "";
+            sheet.Cells[3, "B"] = caseGroup.First().OwnerDepartment.DepartmentName;
 
             sheet.Cells[4, "A"] = "Seller Name";
             sheet.get_Range("B4", "I4").MergeCells = true;
@@ -2654,7 +2654,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
 
-            sheet.Cells[8, "L"] = "总应收帐款余额";
+            sheet.Cells[8, "L"] = "总账款余额";
             sheet.Cells[8, "M"] = totalAssignOutstanding;
             sheet.get_Range(sheet.Cells[8, "M"], sheet.Cells[8, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoiceCurrency);
 
@@ -2663,20 +2663,21 @@ namespace CMBC.EasyFactor.Utils
             sheet.Cells[5, "O"] = "核准总额度";
             sheet.Cells[6, "O"] = "到期日";
             sheet.Cells[7, "O"] = "总剩余额度";
-            if (transactionType == "出口保理" || transactionType == "国内卖方保理")
+
             {
                 ClientCreditLine creditLine = client.FinanceCreditLine;
                 if (creditLine != null)
                 {
                     sheet.Cells[5, "P"] = creditLine.CreditLine;
                     sheet.Cells[6, "P"] = creditLine.PeriodEnd;
-                    sheet.Cells[7, "P"] = creditLine.CreditLine - totalFinanceOutstanding ;
+                    sheet.Cells[7, "P"] = creditLine.CreditLine - totalFinanceOutstanding;
                     sheet.get_Range(sheet.Cells[5, "P"], sheet.Cells[5, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
                     sheet.get_Range(sheet.Cells[6, "P"], sheet.Cells[6, "P"]).NumberFormatLocal = "yyyy-MM-dd";
                     sheet.get_Range(sheet.Cells[7, "P"], sheet.Cells[7, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
                 }
             }
 
+            sheet.Cells[8, "O"] = "总融资余额";
             sheet.Cells[8, "P"] = totalFinanceOutstanding;
             sheet.get_Range(sheet.Cells[8, "P"], sheet.Cells[8, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoiceCurrency);
 
@@ -2775,7 +2776,7 @@ namespace CMBC.EasyFactor.Utils
                         sheet.Cells[6, "B"] = selectedCase.BuyerFactor.ToString();
                     }
 
-                    sheet.get_Range("B7", "F7").MergeCells = true;
+                    sheet.get_Range("B7", "I7").MergeCells = true;
                     sheet.Cells[7, "A"] = "协查意见书编号";
                     List<ClientReview> reviewList = selectedCase.ClientReviews;
                     if (reviewList != null)
@@ -2814,12 +2815,9 @@ namespace CMBC.EasyFactor.Utils
                         }
                     }
 
-                    sheet.Cells[6, "G"] = "利率";
+                    sheet.Cells[6, "G"] = "单据处理费/笔";
                     sheet.get_Range(sheet.Cells[6, "H"], sheet.Cells[6, "I"]).MergeCells = true;
-
-                    sheet.Cells[7, "G"] = "单据处理费/笔";
-                    sheet.get_Range(sheet.Cells[7, "H"], sheet.Cells[7, "I"]).MergeCells = true;
-                    sheet.Cells[7, "H"] = String.Format("{0} {1:N2}", cda.HandFeeCurr, cda.HandFee);
+                    sheet.Cells[6, "H"] = String.Format("{0} {1:N2}", cda.HandFeeCurr, cda.HandFee);
 
                     sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
                     sheet.Cells[4, "L"] = "信用风险担保";
@@ -2864,9 +2862,9 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Cells[9, "K"] = "账款余额";
                     sheet.Cells[9, "L"] = "付款日";
                     sheet.Cells[9, "M"] = "还款金额";
-                    sheet.Cells[9, "N"] = "还款日";
-                    sheet.Cells[9, "O"] = "手续费";
-                    sheet.Cells[9, "P"] = "利息";
+                    sheet.Cells[9, "N"] = "融资余额";
+                    sheet.Cells[9, "O"] = "还款日";
+                    sheet.Cells[9, "P"] = "手续费";
                     sheet.Cells[9, "Q"] = "备注";
 
                     sheet.get_Range("A4", "I7").Borders.LineStyle = 1;
@@ -2893,12 +2891,13 @@ namespace CMBC.EasyFactor.Utils
                                 sheet.Cells[row + recordStep, "G"] = financeLog.FinanceAmount;
                                 sheet.Cells[row + recordStep, "H"] = financeLog.FinanceDate;
                                 sheet.Cells[row + recordStep, "I"] = financeLog.FinanceDueDate;
+                                sheet.Cells[row + recordStep, "N"] = financeLog.FinanceOutstanding;
 
                                 for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
                                 {
                                     InvoiceRefundLog refundLog = financeLog.InvoiceRefundLogs[j];
                                     sheet.Cells[row + recordStep + j, "M"] = refundLog.RefundAmount;
-                                    sheet.Cells[row + recordStep + j, "N"] = refundLog.RefundDate;
+                                    sheet.Cells[row + recordStep + j, "O"] = refundLog.RefundDate;
                                 }
 
                                 recordStep += financeLog.InvoiceRefundLogs.Count;
@@ -2917,8 +2916,7 @@ namespace CMBC.EasyFactor.Utils
 
                             sheet.Cells[row, "K"] = invoice.AssignOutstanding;
 
-                            sheet.Cells[row, "O"] = invoice.Commission;
-                            sheet.Cells[row, "P"] = invoice.NetInterest;
+                            sheet.Cells[row, "P"] = invoice.Commission;
                             sheet.Cells[row, "Q"] = invoice.Comment;
 
                             row += step;
@@ -2938,8 +2936,8 @@ namespace CMBC.EasyFactor.Utils
                     sheet.get_Range(sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]).NumberFormatLocal = currencyFormat;
                     sheet.get_Range(sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]).NumberFormatLocal = "yyyy-MM-dd";
                     sheet.get_Range(sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = "yyyy-MM-dd";
                     sheet.get_Range(sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]).NumberFormatLocal = currencyFormat;
 
                     foreach (Range range in sheet.UsedRange.Rows)
@@ -2974,11 +2972,16 @@ namespace CMBC.EasyFactor.Utils
                             ext = ".xls";
                         }
 
-                        string filePath = this.tbFilePath.Text + "\\" + caseGroup.Key.ToString() + ext;
+                        string location = caseGroup.First().OwnerDepartment.Location.LocationName;
+                        if (!System.IO.Directory.Exists(this.tbFilePath.Text + "\\" + location + "\\"))
+                        {
+                            System.IO.Directory.CreateDirectory(this.tbFilePath.Text + "\\" + location + "\\");
+                        }
+                        string filePath = this.tbFilePath.Text + "\\" + location + "\\" + caseGroup.Key.ToString() + ext;
                         int count = 1;
                         while (System.IO.File.Exists(filePath))
                         {
-                            filePath = this.tbFilePath.Text + "\\" + caseGroup.Key.ToString() + "_(" + count + ")" + ext;
+                            filePath = this.tbFilePath.Text + "\\" + location + "\\" + caseGroup.Key.ToString() + "_" + count + ext;
                             count++;
                         }
                         workbook.SaveCopyAs(filePath);

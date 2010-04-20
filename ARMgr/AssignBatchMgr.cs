@@ -559,7 +559,7 @@ namespace CMBC.EasyFactor.ARMgr
                         case "进口保理":
                             break;
                         case "出口保理":
-                            factor = selectedBatch.Case.SellerFactor;
+                            factor = selectedBatch.Case.BuyerFactor;
                             break;
                         default:
                             break;
@@ -584,6 +584,9 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
                     row++;
+
+                    sheet.get_Range("D10", "E10").MergeCells = true;
+                    sheet.Cells[row, 4] = String.Format("业务编号：{0}", selectedBatch.AssignBatchNo);
 
                     row++;
                     sheet.Cells[row, 1] = "发票号";
@@ -624,8 +627,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
 
                 sheet.Cells[row, 1] = "本行已完成上述发票/贷项发票转让，特此通知";
-                sheet.Cells[row + 2, 3] = "中国民生银行 贸易金融事业部保理业务部 （业务章）";
-                sheet.Cells[row + 4, 4] = "签字：";
+                sheet.Cells[row + 2, 3] = "中国民生银行贸易金融事业部保理业务部 （业务章）";
                 sheet.Cells[row + 5, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
                 sheet.UsedRange.Font.Name = "仿宋_GB2312";
@@ -776,11 +778,8 @@ namespace CMBC.EasyFactor.ARMgr
 
                 row += 2;
 
-                sheet.Cells[row, 1] = String.Format("制表：{0}", batchGroup.First().CreateUserName);
-                sheet.Cells[row, 3] = String.Format("复核：{0}", batchGroup.First().CheckUserName);
-                sheet.Cells[row, 5] = "主管：";
-                sheet.Cells[row + 2, 3] = "中国民生银行 贸易金融部保理业务部  （业务章）";
-                sheet.Cells[row + 3, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+                sheet.Cells[row + 1, 4] = "中国民生银行贸易金融事业部保理业务部 （业务章）";
+                sheet.Cells[row + 3, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
@@ -1024,7 +1023,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row, 2] = String.Format("{0}", seller.ToString());
 
                 row++;
-                sheet.Cells[row, 1] = "最高预付款额度：";
+                sheet.Cells[row, 1] = "最高保理融资额度：";
                 ClientCreditLine creditLine = batchGroup.First().Case.ActiveCDA.FinanceCreditLine;
                 if (creditLine != null)
                 {
@@ -1041,11 +1040,12 @@ namespace CMBC.EasyFactor.ARMgr
                 }
 
                 row++;
-                sheet.Cells[row, 1] = "总剩余额度：";
+                sheet.Cells[row, 1] = "最高可融资金额：";
                 if (creditLine != null)
                 {
-                    sheet.Cells[row, 2] = creditLine.CreditLine - seller.GetFinanceOutstanding(creditLine.CreditLineCurrency).GetValueOrDefault();
-                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(creditLine.CreditLineCurrency);
+                    Case curCase = batchGroup.First().Case;
+                    sheet.Cells[row, 2] = seller.CanBeFinanceAmount(curCase.TransactionType, curCase.InvoiceCurrency);
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(curCase.InvoiceCurrency);
                 }
 
                 row += 3;
@@ -1057,7 +1057,29 @@ namespace CMBC.EasyFactor.ARMgr
 
                     sheet.Cells[row, 1] = "买方：";
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
-                    sheet.Cells[row++, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
+                    sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
+                    row++;
+
+                    Factor factor = null;
+                    switch (selectedBatch.Case.TransactionType)
+                    {
+                        case "国内卖方保理":
+                        case "国内买方保理":
+                        case "进口保理":
+                            break;
+                        case "出口保理":
+                            factor = selectedBatch.Case.BuyerFactor;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (factor != null)
+                    {
+                        sheet.Cells[row, 1] = "进口保理商";
+                        sheet.Cells[row, 2] = factor.ToString();
+                    }
+
                     row++;
 
                     sheet.Cells[row, 1] = "信用风险额度：";
@@ -1070,7 +1092,7 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
                     row++;
-                    sheet.Cells[row, 1] = "预付款额度：";
+                    sheet.Cells[row, 1] = "保理融资额度：";
                     sheet.Cells[row, 2] = cda.FinanceLine.GetValueOrDefault();
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(cda.FinanceLineCurr);
 
@@ -1079,6 +1101,11 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.Cells[row, 2] = selectedBatch.Case.FinanceOutstanding.GetValueOrDefault();
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
+                    row++;
+                    sheet.Cells[row, 1] = "此买方最高可融资金额：";
+                    sheet.Cells[row, 2] = selectedBatch.Case.CanBeFinanceAmount;
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
+  
                     row++;
                     row++;
                     sheet.Cells[row, 1] = "发票号";
@@ -1122,8 +1149,7 @@ namespace CMBC.EasyFactor.ARMgr
                     row += 3;
                 }
 
-                sheet.Cells[row + 1, 3] = "中国民生银行 贸易金融部保理业务部 （业务章）";
-                sheet.Cells[row + 2, 4] = "签字：";
+                sheet.Cells[row + 1, 3] = "中国民生银行贸易金融事业部保理业务部 （业务章）";
                 sheet.Cells[row + 3, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
                 sheet.UsedRange.Font.Name = "仿宋_GB2312";

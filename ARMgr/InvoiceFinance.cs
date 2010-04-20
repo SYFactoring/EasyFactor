@@ -634,7 +634,7 @@ namespace CMBC.EasyFactor.ARMgr
             double financeProp = this._case.ActiveCDA.FinanceProportion.GetValueOrDefault();
 
             var invoiceResult = from invoice in context.Invoices
-                                where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.IsFlaw == false && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > 0.01) && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - invoice.AssignAmount * financeProp < -0.01)
+                                where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.IsFlaw == false && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp < -0.01)
                                 select invoice;
 
             List<InvoiceFinanceLog> logs = new List<InvoiceFinanceLog>();

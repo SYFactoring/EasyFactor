@@ -528,6 +528,10 @@ namespace CMBC.EasyFactor.CaseMgr
 
             try
             {
+                sheet.PageSetup.Zoom = false;
+                sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+                sheet.PageSetup.FitToPagesWide = 1;
+                sheet.PageSetup.FitToPagesTall = false;
 
                 bool isZero = false;
                 if (selectedCDA.Case.TransactionType == "国内买方保理" || selectedCDA.Case.TransactionType == "进口保理")
@@ -539,17 +543,20 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 sheet.Cells[1, 1] = "中国民生银行保理额度通知书 ";
 
-                sheet.Cells[3, 1] = String.Format("贵（{0}）前洽本行办理保理业务并签立保理服务合同", selectedCDA.SellerName);
+                sheet.Cells[3, 2] = String.Format("案件编号：{0}", selectedCDA.CaseCode);
+                sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+
+                sheet.Cells[5, 1] = String.Format("贵（{0}）前洽本行办理保理业务并签立保理服务合同", selectedCDA.SellerName);
                 if (selectedCDA.Case.SellerClient.Contract != null)
                 {
-                    sheet.Cells[4, 1] = String.Format("(合同编号:第[ {0} ]号 ), 经本行评估后,核定额度如下:", selectedCDA.Case.SellerClient.Contract.ContractCode);
+                    sheet.Cells[6, 1] = String.Format("(合同编号:第[ {0} ]号 ), 经本行评估后,核定额度如下:", selectedCDA.Case.SellerClient.Contract.ContractCode);
                 }
                 else
                 {
-                    sheet.Cells[4, 1] = String.Format("(合同编号:第[  ]号 ), 经本行评估后,核定额度如下:");
+                    sheet.Cells[6, 1] = String.Format("(合同编号:第[  ]号 ), 经本行评估后,核定额度如下:");
                 }
 
-                int row = 6;
+                int row = 8;
                 sheet.Cells[row, 1] = "买方名称";
                 sheet.Cells[row++, 2] = selectedCDA.BuyerName;
                 sheet.Cells[row, 1] = "买方地址";
@@ -688,12 +695,12 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = "0";
                 }
 
-                int rowEnd = 19;
-                if (selectedCDA.Case.TransactionType == "出口保理" )
+                int rowEnd = 21;
+                if (selectedCDA.Case.TransactionType == "出口保理")
                 {
                     sheet.Cells[row, 1] = "进口保理商";
                     sheet.Cells[row++, 2] = selectedCDA.Case.BuyerFactor.ToString();
-                    rowEnd = 20;
+                    rowEnd = 22;
                 }
 
                 sheet.Cells[row, 1] = "自负额";
@@ -731,13 +738,13 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
 
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[rowEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignDistributed;
-                sheet.get_Range(sheet.Cells[6, 2], sheet.Cells[rowEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[rowEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignDistributed;
+                sheet.get_Range(sheet.Cells[8, 2], sheet.Cells[rowEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
 
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[rowEnd, 2]).Borders.LineStyle = 1;
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[rowEnd, 2]).WrapText = true;
+                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[rowEnd, 2]).Borders.LineStyle = 1;
+                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[rowEnd, 2]).WrapText = true;
 
-                sheet.Cells[21, 1] = "备注：";
+                sheet.Cells[23, 1] = "备注：";
 
                 bool isSingle = selectedCDA.Case.SellerFactorCode == selectedCDA.Case.BuyerFactorCode;
 
@@ -747,16 +754,16 @@ namespace CMBC.EasyFactor.CaseMgr
                 switch (selectedCDA.Case.TransactionType)
                 {
                     case "国内卖方保理":
-                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "国内", single, selectedCDA.IsNotice);
+                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "国内", single, selectedCDA.IsNotice);
                         break;
                     case "出口保理":
-                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "出口", single, selectedCDA.IsNotice);
+                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "出口", single, selectedCDA.IsNotice);
                         break;
                     case "国内买方保理":
-                        line1 = String.Format("（1）本业务为{0}{1}（{2}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "国内", selectedCDA.IsNotice);
+                        line1 = String.Format("（1）本业务为{0}{1}（{2}）业务。", recoarse, "国内", selectedCDA.IsNotice);
                         break;
                     case "进口保理":
-                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，单笔融资期限不超过  天（含  天宽限期）", recoarse, "进口", single, selectedCDA.IsNotice);
+                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "进口", single, selectedCDA.IsNotice);
                         break;
                     default:
                         break;
@@ -767,13 +774,13 @@ namespace CMBC.EasyFactor.CaseMgr
                 string line4 = "（4）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
                 string line5 = "（5）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
 
-                sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).WrapText = true;
                 sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 1]).WrapText = true;
                 sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 1]).WrapText = true;
+                sheet.get_Range(sheet.Cells[28, 1], sheet.Cells[28, 1]).WrapText = true;
 
-                sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 2]).MergeCells = true;
+                sheet.get_Range(sheet.Cells[28, 1], sheet.Cells[28, 2]).MergeCells = true;
 
                 if (selectedCDA.IsNotice == "暗保理")
                 {
@@ -783,8 +790,8 @@ namespace CMBC.EasyFactor.CaseMgr
                         comment += "\n\n（6）" + selectedCDA.Comment;
                     }
 
-                    sheet.Cells[22, 1] = comment;
-                    sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).RowHeight = 200;
+                    sheet.Cells[24, 1] = comment;
+                    sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 1]).RowHeight = 200;
                 }
                 else
                 {
@@ -794,42 +801,44 @@ namespace CMBC.EasyFactor.CaseMgr
                         comment += "\n\n（2）" + selectedCDA.Comment;
                     }
 
-                    sheet.Cells[22, 1] = comment;
-                    sheet.get_Range(sheet.Cells[22, 1], sheet.Cells[22, 1]).RowHeight = 40;
+                    sheet.Cells[24, 1] = comment;
+                    sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 1]).RowHeight = 40;
                 }
 
 
-                sheet.Cells[24, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
-                sheet.Cells[26, 1] = "为利益考虑，请务必确认上开买方系贵公司预定交易之对象，本保理额度通知书取代先前同一买方之保理额度通知书及先前所有贵公司与本合同相关保理额度通知书中之最高保理预付款额度";
+                sheet.Cells[26, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
+                sheet.Cells[28, 1] = "为利益考虑，请务必确认上开买方系贵公司预定交易之对象，本保理额度通知书取代先前同一买方之保理额度通知书及先前所有贵公司与本合同相关保理额度通知书中之最高保理预付款额度。";
 
 
-                sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 2]).RowHeight = 40;
                 sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 2]).RowHeight = 40;
+                sheet.get_Range(sheet.Cells[28, 1], sheet.Cells[28, 2]).RowHeight = 40;
 
-                sheet.get_Range(sheet.Cells[29, 1], sheet.Cells[29, 2]).MergeCells = true;
-                sheet.Cells[29, 1] = "客户经理                                                保理部门主管";
-                sheet.get_Range(sheet.Cells[30, 1], sheet.Cells[30, 2]).MergeCells = true;
-                sheet.Cells[30, 1] = String.Format("日期：     年   月   日                             日期：{0:yyyy}年 {0:MM}月 {0:dd}日", selectedCDA.CDASignDate);
+                sheet.Cells[30, 2] = String.Format("中国民生银行股份有限公司{0}分行", selectedCDA.Case.OwnerDepartment.Location.LocationName);
+                sheet.Cells[31, 2] = String.Format("日期：{0:yyyy}年 {0:MM}月 {0:dd}日", selectedCDA.CDASignDate);
+                sheet.get_Range(sheet.Cells[30, 2], sheet.Cells[31, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
 
-                sheet.Cells[32, 1] = "同意并签回";
+                sheet.Cells[33, 1] = "我公司知晓并同意上述保理额度通知书内容。";
 
-                sheet.get_Range(sheet.Cells[35, 1], sheet.Cells[35, 2]).MergeCells = true;
-                sheet.Cells[35, 1] = String.Format("客户： {0,-20}   {1}", selectedCDA.SellerName, "日期：      年   月   日");
+                sheet.Cells[35, 2] = selectedCDA.SellerName;
+                sheet.Cells[36, 2] = "公司印鉴          ";
+                sheet.Cells[37, 2] = String.Format("日期:      年    月    日");
+                sheet.get_Range(sheet.Cells[35, 2], sheet.Cells[37, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+
 
                 sheet.UsedRange.Font.Name = "仿宋_GB2312";
                 sheet.UsedRange.Font.Size = 12;
 
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).Font.Size = 16;
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).Font.Bold = true;
-                sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[rowEnd, 1]).Font.Bold = true;
+                sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[rowEnd, 1]).Font.Bold = true;
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 30;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 60;
 
-                Range contentRange = sheet.get_Range(sheet.Cells[6, 1], sheet.Cells[19, 2]);
+                Range contentRange = sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[21, 2]);
                 foreach (Range range in contentRange)
                 {
-                    range.EntireRow.RowHeight = 40;
+                    range.EntireRow.RowHeight = 35;
                 }
 
                 app.Visible = true;

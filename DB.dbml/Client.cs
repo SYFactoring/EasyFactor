@@ -117,7 +117,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public ClientCreditLine FinanceCreditLine
         {
-
             get
             {
                 IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "保理预付款融资额度").ToList();
@@ -178,7 +177,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                ClientCreditLine creditLine = this.FinanceCreditLine;
+                ClientCreditLine creditLine = FinanceCreditLine;
                 if (creditLine != null)
                 {
                     return creditLine.GroupCreditLine;
@@ -293,9 +292,41 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
-        #region Methods (3)
+        #region Methods (5)
 
-        // Public Methods (3) 
+        // Public Methods (5) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transactionType"></param>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public double CanBeFinanceAmount(string transactionType, string currency)
+        {
+            double result = 0;
+            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.TransactionType == transactionType))
+            {
+                double canbeFinanceAmount = curCase.CanBeFinanceAmount;
+                if (curCase.InvoiceCurrency != currency)
+                {
+                    double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                    canbeFinanceAmount *= exchange;
+                }
+
+                result += canbeFinanceAmount;
+            }
+
+            ClientCreditLine creditLine = this.FinanceCreditLine;
+            double creditLineAmount = creditLine.CreditLine;
+            if (creditLine.CreditLineCurrency != currency)
+            {
+                double exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, currency);
+                creditLineAmount *= exchange;
+            }
+
+            return Math.Min(result, creditLineAmount - GetFinanceOutstanding(currency).GetValueOrDefault());
+        }
 
         /// <summary>
         /// 转让余额
@@ -306,6 +337,30 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             double result = 0;
             foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+            {
+                double assignOutstanding = curCase.AssignOutstanding;
+                if (curCase.InvoiceCurrency != currency)
+                {
+                    double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                    assignOutstanding *= exchange;
+                }
+
+                result += assignOutstanding;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transactionType"></param>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public double GetAssignOutstandingAsSeller(string transactionType, string currency)
+        {
+            double result = 0;
+            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.TransactionType == transactionType))
             {
                 double assignOutstanding = curCase.AssignOutstanding;
                 if (curCase.InvoiceCurrency != currency)

@@ -464,14 +464,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_totalAssignOutstanding.HasValue == false)
                 {
-                    double result = 0;
-                    var caseList = this.SellerClient.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.TransactionType == this.TransactionType);
-                    foreach (Case c in caseList)
-                    {
-                        result += c.AssignOutstanding;
-                    }
-
-                    _totalAssignOutstanding = result;
+                    _totalAssignOutstanding = this.SellerClient.GetAssignOutstandingAsSeller(this.TransactionType, this.InvoiceCurrency);
                 }
 
                 return _totalAssignOutstanding.Value;

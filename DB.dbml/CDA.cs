@@ -92,14 +92,15 @@ namespace CMBC.EasyFactor.DB.dbml
                     return null;
                 }
 
-                double? financeLine = this.FinanceLine;
-                if (this.FinanceLineCurr != this.Case.InvoiceCurrency)
+                double financeLine = this.FinanceLine.GetValueOrDefault();
+                double financeOutstanding = this.Case.FinanceOutstanding.GetValueOrDefault();
+                if (this.Case.InvoiceCurrency != this.FinanceLineCurr)
                 {
-                    double rate = Exchange.GetExchangeRate(this.FinanceLineCurr, this.Case.InvoiceCurrency);
-                    financeLine *= rate;
+                    double rate = Exchange.GetExchangeRate(this.Case.InvoiceCurrency, this.FinanceLineCurr);
+                    financeOutstanding *= rate;
                 }
 
-                return financeLine - this.Case.FinanceOutstanding.GetValueOrDefault();
+                return financeLine - financeOutstanding;
             }
         }
 
