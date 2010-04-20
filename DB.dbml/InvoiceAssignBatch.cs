@@ -129,17 +129,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         /// <param name="caseCode"></param>
         /// <returns></returns>
-        public static string GenerateAssignBatchNo(string caseCode, int year)
+        public static string GenerateAssignBatchNo(string caseCode, DateTime assignDate)
         {
             DBDataContext context = new DBDataContext();
-            var queryResult = from batch in context.InvoiceAssignBatches where batch.AssignBatchNo.StartsWith(caseCode) && batch.AssignDate.Year == year select batch.NewAssignBatchNo;
+            var queryResult = from batch in context.InvoiceAssignBatches where batch.AssignBatchNo.StartsWith(caseCode) && batch.AssignDate.Year == assignDate.Year select batch.NewAssignBatchNo;
             int batchCount;
             if (!Int32.TryParse(queryResult.Max(no => no.Substring(15)), out batchCount))
             {
                 batchCount = 0;
             }
 
-            string assignNo = String.Format("{0}ASS{1:D3}", caseCode, batchCount + 1);
+            string assignNo = String.Format("{0}ASS{1:yy}{2:D3}", caseCode, assignDate, batchCount + 1);
             return assignNo;
         }
 
@@ -149,10 +149,10 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <param name="caseCode"></param>
         /// <param name="batchesInMemory"></param>
         /// <returns></returns>
-        public static string GenerateAssignBatchNo(string caseCode, List<InvoiceAssignBatch> batchesInMemory)
+        public static string GenerateAssignBatchNo(string caseCode, DateTime assignDate, List<InvoiceAssignBatch> batchesInMemory)
         {
             DBDataContext context = new DBDataContext();
-            var queryResult = from batch in context.InvoiceAssignBatches where batch.NewAssignBatchNo.StartsWith(caseCode) select batch.NewAssignBatchNo;
+            var queryResult = from batch in context.InvoiceAssignBatches where batch.AssignBatchNo.StartsWith(caseCode) && batch.AssignDate.Year == assignDate.Year select batch.NewAssignBatchNo;
             int batchCount;
             if (!Int32.TryParse(queryResult.Max(no => no.Substring(15)), out batchCount))
             {
@@ -160,7 +160,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             batchCount += batchesInMemory.Count(batch => batch.AssignBatchNo.StartsWith(caseCode));
-            string assignNo = String.Format("{0}ASS{1:D3}", caseCode, batchCount + 1);
+            string assignNo = String.Format("{0}ASS{1:yy}{2:D3}", caseCode, assignDate, batchCount + 1);
             return assignNo;
         }
     }

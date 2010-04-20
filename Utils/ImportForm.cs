@@ -506,7 +506,7 @@ namespace CMBC.EasyFactor.Utils
                             batch.Case = curCase;
                             batch.CreateUserName = App.Current.CurUser.Name;
                             batch.InputDate = DateTime.Today;
-                            batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase.CaseCode, batch.AssignDate.Year);
+                            batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase.CaseCode, batch.AssignDate);
                             batchList.Add(batch);
                         }
                         if (curCase == null)
