@@ -507,6 +507,7 @@ namespace CMBC.EasyFactor.Utils
                             batch.CreateUserName = App.Current.CurUser.Name;
                             batch.InputDate = DateTime.Today;
                             batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase.CaseCode, batch.AssignDate);
+                            batch.CheckStatus = ConstStr.BATCH.UNCHECK;
                             batchList.Add(batch);
                         }
                         if (curCase == null)
@@ -553,10 +554,14 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         invoice.InvoiceAmount = (double)valueArray[row, column++];
-                        invoice.AssignAmount = invoice.InvoiceAmount;
+                        invoice.AssignAmount = (double)valueArray[row, column++];
                         invoice.InvoiceDate = (System.Nullable<DateTime>)valueArray[row, column++];
                         invoice.DueDate = (DateTime)valueArray[row, column++];
-                        invoice.Commission = (System.Nullable<double>)valueArray[row, column++];
+                        double? commission = (System.Nullable<double>)valueArray[row, column++];
+                        if(activeCDA.CommissionType=="其他")
+                        {
+                            invoice.Commission = commission;
+                        }
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         invoice.InvoiceAssignBatch = batch;
 
