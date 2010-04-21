@@ -691,7 +691,7 @@ namespace CMBC.EasyFactor.Utils
                         double currentFinanceAmount = 0;
                         foreach (Invoice invoice in assignBatch.Invoices.Where(i => (i.IsDispute.HasValue == false || i.IsDispute == false) && i.IsFlaw == false).OrderBy(i => i.DueDate))
                         {
-                            double canBeFinanceAmount = invoice.AssignOutstanding * cda.FinanceProportion - invoice.FinanceAmount.GetValueOrDefault();
+                            double canBeFinanceAmount = invoice.AssignOutstanding * cda.FinanceProportion.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault();
                             if (TypeUtil.GreaterZero(canBeFinanceAmount))
                             {
                                 if (invoice.InvoiceCurrency != financeBatch.BatchCurrency)
