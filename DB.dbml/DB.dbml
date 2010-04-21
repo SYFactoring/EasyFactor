@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=195.21.48.37;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="Char(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -245,8 +245,6 @@
       <Column Name="Email_2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Phone_2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Fax_2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="MarketManager" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="MaintainManager" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="LocationCode" Type="System.String" DbType="char(2)" CanBeNull="false" UpdateCheck="Never" />
       <Association Name="Department_Case" Member="OwnerCases" OtherKey="OwnerDepartmentCode" Type="Case" />
       <Association Name="Department_Client" Member="Clients" OtherKey="BranchCode" Type="Client" />
@@ -584,6 +582,8 @@
     <Type Name="Location">
       <Column Name="LocationCode" Storage="_CountryCode" Type="System.String" DbType="Char(2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="LocationName" Storage="_CountryNameCN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PManager" Type="System.String" DbType="nvarchar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Assistant" Type="System.String" DbType="Nvarchar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Location_Department" Member="Departments" OtherKey="LocationCode" Type="Department" />
     </Type>
   </Table>

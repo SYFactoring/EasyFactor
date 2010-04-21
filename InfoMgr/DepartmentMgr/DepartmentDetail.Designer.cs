@@ -84,8 +84,10 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             DevComponents.DotNetBar.LabelX lblMarketManager;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DepartmentDetail));
             this.groupPanelDepartment = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.tbMaintainManager = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbMarketManager = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.departmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbAssistant = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbPManager = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.managerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.postCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.fax_2TextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -104,13 +106,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必选");
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.departmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             departmentCodeLabel = new DevComponents.DotNetBar.LabelX();
             departmentNameLabel = new DevComponents.DotNetBar.LabelX();
             domainLabel = new DevComponents.DotNetBar.LabelX();
@@ -129,8 +129,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             lblMaintainManager = new DevComponents.DotNetBar.LabelX();
             lblMarketManager = new DevComponents.DotNetBar.LabelX();
             this.groupPanelDepartment.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.departmentBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // departmentCodeLabel
@@ -351,11 +351,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             lblMaintainManager.BackgroundStyle.Class = "";
-            lblMaintainManager.Location = new System.Drawing.Point(241, 227);
+            lblMaintainManager.Location = new System.Drawing.Point(252, 227);
             lblMaintainManager.Name = "lblMaintainManager";
-            lblMaintainManager.Size = new System.Drawing.Size(97, 16);
+            lblMaintainManager.Size = new System.Drawing.Size(84, 16);
             lblMaintainManager.TabIndex = 33;
-            lblMaintainManager.Text = "维护区域负责人:";
+            lblMaintainManager.Text = "产品经理助理:";
             // 
             // lblMarketManager
             // 
@@ -365,11 +365,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             lblMarketManager.BackgroundStyle.Class = "";
-            lblMarketManager.Location = new System.Drawing.Point(3, 227);
+            lblMarketManager.Location = new System.Drawing.Point(19, 227);
             lblMarketManager.Name = "lblMarketManager";
-            lblMarketManager.Size = new System.Drawing.Size(97, 16);
+            lblMarketManager.Size = new System.Drawing.Size(72, 16);
             lblMarketManager.TabIndex = 31;
-            lblMarketManager.Text = "营销区域负责人:";
+            lblMarketManager.Text = "区域负责人:";
             // 
             // groupPanelDepartment
             // 
@@ -377,9 +377,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.groupPanelDepartment.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.groupPanelDepartment.Controls.Add(this.cbLocation);
             this.groupPanelDepartment.Controls.Add(lblMaintainManager);
-            this.groupPanelDepartment.Controls.Add(this.tbMaintainManager);
+            this.groupPanelDepartment.Controls.Add(this.tbAssistant);
             this.groupPanelDepartment.Controls.Add(lblMarketManager);
-            this.groupPanelDepartment.Controls.Add(this.tbMarketManager);
+            this.groupPanelDepartment.Controls.Add(this.tbPManager);
             this.groupPanelDepartment.Controls.Add(managerLabel);
             this.groupPanelDepartment.Controls.Add(this.managerTextBox);
             this.groupPanelDepartment.Controls.Add(postCodeLabel);
@@ -445,29 +445,54 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.groupPanelDepartment.StyleMouseOver.Class = "";
             this.groupPanelDepartment.TabIndex = 0;
             // 
-            // tbMaintainManager
+            // cbLocation
+            // 
+            this.cbLocation.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.departmentBindingSource, "LocationCode", true));
+            this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLocation.FormattingEnabled = true;
+            this.cbLocation.Items.AddRange(new object[] {
+            "贸易金融事业部",
+            "分行营业部",
+            "地产金融事业部",
+            "交通金融事业部",
+            "金融市场事业部",
+            "能源金融事业部",
+            "冶金金融事业部",
+            "中小企业金融事业部"});
+            this.cbLocation.Location = new System.Drawing.Point(104, 48);
+            this.cbLocation.Name = "cbLocation";
+            this.cbLocation.Size = new System.Drawing.Size(121, 21);
+            this.cbLocation.TabIndex = 35;
+            this.superValidator.SetValidator1(this.cbLocation, this.requiredFieldValidator2);
+            // 
+            // departmentBindingSource
+            // 
+            this.departmentBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Department);
+            // 
+            // tbAssistant
             // 
             // 
             // 
             // 
-            this.tbMaintainManager.Border.Class = "TextBoxBorder";
-            this.tbMaintainManager.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "MaintainManager", true));
-            this.tbMaintainManager.Location = new System.Drawing.Point(343, 226);
-            this.tbMaintainManager.Name = "tbMaintainManager";
-            this.tbMaintainManager.Size = new System.Drawing.Size(121, 20);
-            this.tbMaintainManager.TabIndex = 34;
+            this.tbAssistant.Border.Class = "TextBoxBorder";
+            this.tbAssistant.Location = new System.Drawing.Point(343, 226);
+            this.tbAssistant.Name = "tbAssistant";
+            this.tbAssistant.ReadOnly = true;
+            this.tbAssistant.Size = new System.Drawing.Size(121, 20);
+            this.tbAssistant.TabIndex = 34;
             // 
-            // tbMarketManager
-            // 
-            // 
+            // tbPManager
             // 
             // 
-            this.tbMarketManager.Border.Class = "TextBoxBorder";
-            this.tbMarketManager.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.departmentBindingSource, "MarketManager", true));
-            this.tbMarketManager.Location = new System.Drawing.Point(105, 226);
-            this.tbMarketManager.Name = "tbMarketManager";
-            this.tbMarketManager.Size = new System.Drawing.Size(120, 20);
-            this.tbMarketManager.TabIndex = 32;
+            // 
+            // 
+            this.tbPManager.Border.Class = "TextBoxBorder";
+            this.tbPManager.Location = new System.Drawing.Point(105, 226);
+            this.tbPManager.Name = "tbPManager";
+            this.tbPManager.ReadOnly = true;
+            this.tbPManager.Size = new System.Drawing.Size(120, 20);
+            this.tbPManager.TabIndex = 32;
             // 
             // managerTextBox
             // 
@@ -691,11 +716,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.superValidator.ErrorProvider = this.errorProvider;
             this.superValidator.Highlighter = this.highlighter;
             // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "必填";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // requiredFieldValidator2
             // 
             this.requiredFieldValidator2.ErrorMessage = "必选";
@@ -715,30 +735,10 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // cbLocation
+            // requiredFieldValidator1
             // 
-            this.cbLocation.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.departmentBindingSource, "LocationCode", true));
-            this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLocation.FormattingEnabled = true;
-            this.cbLocation.Items.AddRange(new object[] {
-            "贸易金融事业部",
-            "分行营业部",
-            "地产金融事业部",
-            "交通金融事业部",
-            "金融市场事业部",
-            "能源金融事业部",
-            "冶金金融事业部",
-            "中小企业金融事业部"});
-            this.cbLocation.Location = new System.Drawing.Point(104, 48);
-            this.cbLocation.Name = "cbLocation";
-            this.cbLocation.Size = new System.Drawing.Size(121, 21);
-            this.cbLocation.TabIndex = 35;
-            this.superValidator.SetValidator1(this.cbLocation, this.requiredFieldValidator2);
-            // 
-            // departmentBindingSource
-            // 
-            this.departmentBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Department);
+            this.requiredFieldValidator1.ErrorMessage = "必填";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // DepartmentDetail
             // 
@@ -756,8 +756,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.Text = "部门信息";
             this.groupPanelDepartment.ResumeLayout(false);
             this.groupPanelDepartment.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.departmentBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -772,8 +772,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbMaintainManager;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbMarketManager;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbAssistant;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPManager;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
     }
 }

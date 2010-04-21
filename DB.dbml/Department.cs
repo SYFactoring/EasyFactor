@@ -322,6 +322,27 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PManager
+        {
+            get
+            {
+                return this.Location.PManager;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Assistant
+        {
+            get
+            {
+                return this.Location.Assistant;
+            }
+        }
         #endregion Properties
 
         #region Methods (4)

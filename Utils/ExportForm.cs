@@ -910,9 +910,9 @@ namespace CMBC.EasyFactor.Utils
                     Department dept = review.Client.Department;
                     if (dept != null)
                     {
-                        datasheet.Cells[row + 3, column++] = dept.MarketManager;
+                        datasheet.Cells[row + 3, column++] = dept.Location.PManager;
                         datasheet.Cells[row + 3, column++] = dept.Domain;
-                        datasheet.Cells[row + 3, column++] = dept.Location;
+                        datasheet.Cells[row + 3, column++] = dept.Location.LocationName;
                     }
                     else
                     {

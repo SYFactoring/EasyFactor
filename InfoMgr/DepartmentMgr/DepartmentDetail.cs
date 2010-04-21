@@ -82,6 +82,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             else
             {
                 department = context.Departments.SingleOrDefault(d => d.DepartmentCode == department.DepartmentCode);
+                this.tbPManager.Text = department.Location.PManager;
+                this.tbAssistant.Text = department.Location.Assistant;
             }
 
             this.departmentBindingSource.DataSource = department;
@@ -193,6 +195,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
                 this.departmentCodeTextBox.ReadOnly = true;
             }
+
+            ControlUtil.SetComponetEditable(this.tbPManager, false);
+            ControlUtil.SetComponetEditable(this.tbAssistant, false);
         }
 
         #endregion Methods

@@ -465,18 +465,22 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoiceRefundLog oldLog = (InvoiceRefundLog)this.logsBindingSource.List[i];
 
                     InvoiceRefundLog newLog = logList.SingleOrDefault(log => log.InvoiceNo2 == oldLog.InvoiceNo2);
-                    oldLog.RefundAmount = newLog.RefundAmount;
-                    oldLog.Comment = newLog.Comment;
-
-
-                    if (TypeUtil.GreaterZero(oldLog.RefundAmount))
+                    if (newLog != null)
                     {
-                        cell.Value = 1;
-                    }
+                        oldLog.RefundAmount = newLog.RefundAmount;
+                        oldLog.Comment = newLog.Comment;
 
-                    this.ResetRow(i, 1 == (int)cell.Value ? true : false);
+
+                        if (TypeUtil.GreaterZero(oldLog.RefundAmount))
+                        {
+                            cell.Value = 1;
+                        }
+
+                        this.ResetRow(i, 1 == (int)cell.Value ? true : false);
+                    }
                 }
 
+                this.dgvLogs.Refresh();
                 this.StatBatch();
             }
         }

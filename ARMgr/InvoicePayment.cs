@@ -428,17 +428,22 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoicePaymentLog oldLog = (InvoicePaymentLog)this.logsBindingSource.List[i];
 
                     InvoicePaymentLog newLog = logList.SingleOrDefault(log => log.InvoiceNo2 == oldLog.InvoiceNo2);
-                    oldLog.PaymentAmount = newLog.PaymentAmount;
-                    oldLog.Comment = newLog.Comment;
-
-                    if (TypeUtil.GreaterZero(oldLog.PaymentAmount))
+                    if (newLog != null)
                     {
-                        cell.Value = 1;
-                    }
+                        oldLog.PaymentAmount = newLog.PaymentAmount;
+                        oldLog.Comment = newLog.Comment;
 
-                    this.ResetRow(i, 1 == (int)cell.Value ? true : false);
+
+                        if (TypeUtil.GreaterZero(oldLog.PaymentAmount))
+                        {
+                            cell.Value = 1;
+                        }
+
+                        this.ResetRow(i, 1 == (int)cell.Value ? true : false);
+                    }
                 }
 
+                this.dgvLogs.Refresh();
                 this.StatBatch();
             }
         }

@@ -5571,10 +5571,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Fax_2;
 		
-		private string _MarketManager;
-		
-		private string _MaintainManager;
-		
 		private string _LocationCode;
 		
 		private EntitySet<Case> _OwnerCases;
@@ -5619,10 +5615,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPhone_2Changed();
     partial void OnFax_2Changing(string value);
     partial void OnFax_2Changed();
-    partial void OnMarketManagerChanging(string value);
-    partial void OnMarketManagerChanged();
-    partial void OnMaintainManagerChanging(string value);
-    partial void OnMaintainManagerChanged();
     partial void OnLocationCodeChanging(string value);
     partial void OnLocationCodeChanged();
     #endregion
@@ -5932,46 +5924,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Fax_2 = value;
 					this.SendPropertyChanged("Fax_2");
 					this.OnFax_2Changed();
-				}
-			}
-		}
-		
-		[Column(Storage="_MarketManager", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
-		public string MarketManager
-		{
-			get
-			{
-				return this._MarketManager;
-			}
-			set
-			{
-				if ((this._MarketManager != value))
-				{
-					this.OnMarketManagerChanging(value);
-					this.SendPropertyChanging();
-					this._MarketManager = value;
-					this.SendPropertyChanged("MarketManager");
-					this.OnMarketManagerChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_MaintainManager", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
-		public string MaintainManager
-		{
-			get
-			{
-				return this._MaintainManager;
-			}
-			set
-			{
-				if ((this._MaintainManager != value))
-				{
-					this.OnMaintainManagerChanging(value);
-					this.SendPropertyChanging();
-					this._MaintainManager = value;
-					this.SendPropertyChanged("MaintainManager");
-					this.OnMaintainManagerChanged();
 				}
 			}
 		}
@@ -13395,6 +13347,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CountryNameCN;
 		
+		private string _PManager;
+		
+		private string _Assistant;
+		
 		private EntitySet<Department> _Departments;
 		
     #region Extensibility Method Definitions
@@ -13405,6 +13361,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnLocationCodeChanged();
     partial void OnLocationNameChanging(string value);
     partial void OnLocationNameChanged();
+    partial void OnPManagerChanging(string value);
+    partial void OnPManagerChanged();
+    partial void OnAssistantChanging(string value);
+    partial void OnAssistantChanged();
     #endregion
 		
 		public Location()
@@ -13449,6 +13409,46 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CountryNameCN = value;
 					this.SendPropertyChanged("LocationName");
 					this.OnLocationNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PManager", DbType="nvarchar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string PManager
+		{
+			get
+			{
+				return this._PManager;
+			}
+			set
+			{
+				if ((this._PManager != value))
+				{
+					this.OnPManagerChanging(value);
+					this.SendPropertyChanging();
+					this._PManager = value;
+					this.SendPropertyChanged("PManager");
+					this.OnPManagerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Assistant", DbType="Nvarchar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string Assistant
+		{
+			get
+			{
+				return this._Assistant;
+			}
+			set
+			{
+				if ((this._Assistant != value))
+				{
+					this.OnAssistantChanging(value);
+					this.SendPropertyChanging();
+					this._Assistant = value;
+					this.SendPropertyChanged("Assistant");
+					this.OnAssistantChanged();
 				}
 			}
 		}
