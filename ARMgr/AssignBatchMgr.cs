@@ -410,10 +410,30 @@ namespace CMBC.EasyFactor.ARMgr
             foreach (IGrouping<string, InvoiceAssignBatch> caseGroup in caseGroups)
             {
                 string transactionType = caseGroup.Key;
-                IEnumerable<IGrouping<Client, InvoiceAssignBatch>> groups = caseGroup.GroupBy(c => c.Case.SellerClient);
-                foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
+                IEnumerable<IGrouping<Client, InvoiceAssignBatch>> groups = null;
+
+                switch (transactionType)
                 {
-                    makeReport(group);
+                    case "国内卖方保理":
+                    case "出口保理":
+                        groups = caseGroup.GroupBy(c => c.Case.SellerClient);
+                        foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
+                        {
+                            makeReport(group);
+                        }
+
+                        break;
+                    case "国内买方保理":
+                    case "进口保理":
+                        groups = caseGroup.GroupBy(c => c.Case.BuyerClient);
+                        foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
+                        {
+                            makeReport(group);
+                        }
+
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -1111,7 +1131,7 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.Cells[row, 1] = "此买方最高可融资金额：";
                     sheet.Cells[row, 2] = selectedBatch.Case.CanBeFinanceAmount;
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
-  
+
                     row++;
                     row++;
                     sheet.Cells[row, 1] = "发票号";
