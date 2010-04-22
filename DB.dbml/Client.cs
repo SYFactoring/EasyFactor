@@ -318,11 +318,15 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             ClientCreditLine creditLine = this.FinanceCreditLine;
-            double creditLineAmount = creditLine.CreditLine;
-            if (creditLine.CreditLineCurrency != currency)
+            double creditLineAmount = 0;
+            if (creditLine != null)
             {
-                double exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, currency);
-                creditLineAmount *= exchange;
+                creditLineAmount = creditLine.CreditLine;
+                if (creditLine.CreditLineCurrency != currency)
+                {
+                    double exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, currency);
+                    creditLineAmount *= exchange;
+                }
             }
 
             return Math.Min(result, creditLineAmount - GetFinanceOutstanding(currency).GetValueOrDefault());

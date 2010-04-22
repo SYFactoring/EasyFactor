@@ -240,7 +240,7 @@ namespace CMBC.EasyFactor.ARMgr
             foreach (InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
             {
                 InvoiceFinanceLog financeLog = log.InvoiceFinanceLog ;
-                financeLog.InvoiceRefundLogs.Remove(log);
+                log.InvoiceFinanceLog = null;
                 financeLog.Invoice.CaculateRefund();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
             }

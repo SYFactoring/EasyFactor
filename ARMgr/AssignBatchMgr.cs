@@ -1024,11 +1024,18 @@ namespace CMBC.EasyFactor.ARMgr
 
                 row++;
                 sheet.Cells[row, 1] = "最高保理融资额度：";
-                ClientCreditLine creditLine = batchGroup.First().Case.ActiveCDA.FinanceCreditLine;
-                if (creditLine != null)
+
+                Case firstCase = batchGroup.First().Case;
+                CDA activeCDA = firstCase.ActiveCDA;
+                ClientCreditLine creditLine = null;
+                if (activeCDA != null)
                 {
-                    sheet.Cells[row, 2] = creditLine.CreditLine;
-                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(creditLine.CreditLineCurrency);
+                    creditLine = activeCDA.FinanceCreditLine;
+                    if (creditLine != null)
+                    {
+                        sheet.Cells[row, 2] = creditLine.CreditLine;
+                        sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(creditLine.CreditLineCurrency);
+                    }
                 }
 
                 row++;
@@ -1043,9 +1050,8 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row, 1] = "最高可融资金额：";
                 if (creditLine != null)
                 {
-                    Case curCase = batchGroup.First().Case;
-                    sheet.Cells[row, 2] = seller.CanBeFinanceAmount(curCase.TransactionType, curCase.InvoiceCurrency);
-                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(curCase.InvoiceCurrency);
+                    sheet.Cells[row, 2] = seller.CanBeFinanceAmount(firstCase.TransactionType, firstCase.InvoiceCurrency);
+                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(firstCase.InvoiceCurrency);
                 }
 
                 row += 3;
