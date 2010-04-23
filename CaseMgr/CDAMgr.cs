@@ -802,7 +802,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
 
                     sheet.Cells[24, 1] = comment;
-                    sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 1]).RowHeight = 40;
+                    sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 1]).RowHeight = 45;
                 }
 
 
