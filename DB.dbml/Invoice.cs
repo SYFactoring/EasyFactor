@@ -20,7 +20,7 @@ namespace CMBC.EasyFactor.DB.dbml
     {
         #region Fields (1)
 
-        private static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>\\.\\(\\)/]+$");
+        public static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>\\.\\(\\)/]+$");
 
         #endregion Fields
 

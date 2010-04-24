@@ -400,8 +400,18 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            ClientCreditLine sellerCreditLine = cda.Case.SellerClient.FinanceCreditLine;
-            if (sellerCreditLine != null && cda.FinanceLinePeriodEnd > sellerCreditLine.PeriodEnd)
+            string transactionType = cda.Case.TransactionType;
+            ClientCreditLine creditLine = null;
+            if (transactionType == "国内卖方保理" || transactionType == "出口保理")
+            {
+                creditLine = cda.Case.SellerClient.FinanceCreditLine;
+            }
+            else
+            {
+                creditLine = cda.Case.BuyerClient.FinanceCreditLine;
+            }
+
+            if (creditLine != null && cda.FinanceLinePeriodEnd > creditLine.PeriodEnd)
             {
                 e.IsValid = false;
             }

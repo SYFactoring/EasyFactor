@@ -314,7 +314,7 @@ namespace CMBC.EasyFactor.ARMgr
             else if (col == this.colInvoiceNo)
             {
                 string str = (string)e.FormattedValue;
-                Regex regex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>]+$");
+                Regex regex = Invoice.InvoiceNoRegex;
                 bool ok = regex.IsMatch(str);
                 if (!ok)
                 {
@@ -486,7 +486,7 @@ namespace CMBC.EasyFactor.ARMgr
             batch.AssignDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
             batch.IsCreateMsg = false;
-            batch.CheckStatus = "未复核";
+            batch.CheckStatus = ConstStr.BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
             this.invoiceBindingSource.DataSource = batch.Invoices;
             this.dgvInvoices.ReadOnly = false;
