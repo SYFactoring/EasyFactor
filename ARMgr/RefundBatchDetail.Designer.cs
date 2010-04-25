@@ -38,19 +38,21 @@
             DevComponents.DotNetBar.LabelX refundDateLabel;
             DevComponents.DotNetBar.LabelX refundBatchNoLabel;
             DevComponents.DotNetBar.LabelX CaseLabel;
+            DevComponents.DotNetBar.LabelX lblInputDate;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RefundBatchDetail));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            DevComponents.DotNetBar.LabelX lblInputDate;
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.refundTypeLabel = new DevComponents.DotNetBar.LabelX();
             this.cmuLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
-            this.refundTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.refundTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.checkStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
@@ -65,9 +67,6 @@
             this.tabItemBatch = new DevComponents.DotNetBar.TabItem(this.components);
             this.panelInvoices = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvRefundLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabItemInvoices = new DevComponents.DotNetBar.TabItem(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
@@ -75,8 +74,10 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             commentLabel = new DevComponents.DotNetBar.LabelX();
             checkUserNameLabel = new DevComponents.DotNetBar.LabelX();
             checkDateLabel = new DevComponents.DotNetBar.LabelX();
@@ -91,13 +92,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.panelBatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.refundDateDateTimePicker)).BeginInit();
             this.panelInvoices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
             this.SuspendLayout();
             // 
             // commentLabel
@@ -226,6 +227,20 @@
             CaseLabel.TabIndex = 23;
             CaseLabel.Text = "案件编号:";
             // 
+            // lblInputDate
+            // 
+            lblInputDate.AutoSize = true;
+            lblInputDate.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblInputDate.BackgroundStyle.Class = "";
+            lblInputDate.Location = new System.Drawing.Point(230, 75);
+            lblInputDate.Name = "lblInputDate";
+            lblInputDate.Size = new System.Drawing.Size(47, 16);
+            lblInputDate.TabIndex = 46;
+            lblInputDate.Text = "录入日:";
+            // 
             // refundTypeLabel
             // 
             this.refundTypeLabel.AutoSize = true;
@@ -258,8 +273,8 @@
             // 
             this.tabControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl1.CanReorderTabs = true;
-            this.tabControl1.Controls.Add(this.panelBatch);
             this.tabControl1.Controls.Add(this.panelInvoices);
+            this.tabControl1.Controls.Add(this.panelBatch);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -313,6 +328,46 @@
             this.panelBatch.TabIndex = 1;
             this.panelBatch.TabItem = this.tabItemBatch;
             // 
+            // diInputDate
+            // 
+            // 
+            // 
+            // 
+            this.diInputDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diInputDate.ButtonDropDown.Visible = true;
+            this.diInputDate.ButtonFreeText.Checked = true;
+            this.diInputDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "InputDate", true));
+            this.diInputDate.FreeTextEntryMode = true;
+            this.diInputDate.Location = new System.Drawing.Point(283, 73);
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diInputDate.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.diInputDate.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diInputDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diInputDate.Name = "diInputDate";
+            this.diInputDate.Size = new System.Drawing.Size(100, 20);
+            this.diInputDate.TabIndex = 47;
+            // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceRefundBatch);
+            // 
             // refundTypeComboBox
             // 
             this.refundTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RefundType", true));
@@ -320,18 +375,12 @@
             this.refundTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.refundTypeComboBox.FormattingEnabled = true;
             this.refundTypeComboBox.Items.AddRange(new object[] {
-            "买方付款",
-            "间接付款",
-            "担保付款",
+            "买方直接付款",
             "卖方还款"});
             this.refundTypeComboBox.Location = new System.Drawing.Point(115, 49);
             this.refundTypeComboBox.Name = "refundTypeComboBox";
             this.refundTypeComboBox.Size = new System.Drawing.Size(162, 21);
             this.refundTypeComboBox.TabIndex = 28;
-            // 
-            // batchBindingSource
-            // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceRefundBatch);
             // 
             // checkStatusComboBox
             // 
@@ -509,7 +558,7 @@
             this.refundBatchNoTextBox.Size = new System.Drawing.Size(162, 20);
             this.refundBatchNoTextBox.TabIndex = 26;
             // 
-            // CaseCodeTextBox
+            // caseCodeTextBox
             // 
             // 
             // 
@@ -517,7 +566,7 @@
             this.caseCodeTextBox.Border.Class = "TextBoxBorder";
             this.caseCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CaseCode", true));
             this.caseCodeTextBox.Location = new System.Drawing.Point(115, 0);
-            this.caseCodeTextBox.Name = "CaseCodeTextBox";
+            this.caseCodeTextBox.Name = "caseCodeTextBox";
             this.caseCodeTextBox.Size = new System.Drawing.Size(162, 20);
             this.caseCodeTextBox.TabIndex = 24;
             this.caseCodeTextBox.DoubleClick += new System.EventHandler(this.DetailCase);
@@ -583,29 +632,7 @@
             this.dgvRefundLogs.Size = new System.Drawing.Size(396, 361);
             this.dgvRefundLogs.TabIndex = 1;
             this.dgvRefundLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvRefundLogs_RowPostPaint);
-            // 
-            // colInvoiceNo
-            // 
-            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
-            this.colInvoiceNo.HeaderText = "发票号";
-            this.colInvoiceNo.Name = "colInvoiceNo";
-            this.colInvoiceNo.ReadOnly = true;
-            // 
-            // colRefundAmount
-            // 
-            this.colRefundAmount.DataPropertyName = "RefundAmount";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colRefundAmount.HeaderText = "还款金额";
-            this.colRefundAmount.Name = "colRefundAmount";
-            this.colRefundAmount.ReadOnly = true;
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
+            this.dgvRefundLogs.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailInvoice);
             // 
             // tabItemInvoices
             // 
@@ -633,6 +660,8 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "RefundCurrency";
+            dataGridViewCellStyle4.Format = "N2";
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn2.HeaderText = "币别";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.Width = 85;
@@ -640,11 +669,34 @@
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "RefundAmount";
-            dataGridViewCellStyle4.Format = "N2";
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Format = "N2";
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn3.HeaderText = "还款金额";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.Width = 84;
+            // 
+            // colInvoiceNo
+            // 
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.HeaderText = "发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
+            this.colInvoiceNo.ReadOnly = true;
+            // 
+            // colRefundAmount
+            // 
+            this.colRefundAmount.DataPropertyName = "RefundAmount";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colRefundAmount.HeaderText = "还款金额";
+            this.colRefundAmount.Name = "colRefundAmount";
+            this.colRefundAmount.ReadOnly = true;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -652,56 +704,6 @@
             this.dataGridViewTextBoxColumn4.HeaderText = "备注";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Width = 85;
-            // 
-            // lblInputDate
-            // 
-            lblInputDate.AutoSize = true;
-            lblInputDate.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblInputDate.BackgroundStyle.Class = "";
-            lblInputDate.Location = new System.Drawing.Point(230, 75);
-            lblInputDate.Name = "lblInputDate";
-            lblInputDate.Size = new System.Drawing.Size(47, 16);
-            lblInputDate.TabIndex = 46;
-            lblInputDate.Text = "录入日:";
-            // 
-            // diInputDate
-            // 
-            // 
-            // 
-            // 
-            this.diInputDate.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diInputDate.ButtonDropDown.Visible = true;
-            this.diInputDate.ButtonFreeText.Checked = true;
-            this.diInputDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "InputDate", true));
-            this.diInputDate.FreeTextEntryMode = true;
-            this.diInputDate.Location = new System.Drawing.Point(283, 73);
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diInputDate.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diInputDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.diInputDate.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diInputDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diInputDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diInputDate.Name = "diInputDate";
-            this.diInputDate.Size = new System.Drawing.Size(100, 20);
-            this.diInputDate.TabIndex = 47;
             // 
             // RefundBatchDetail
             // 
@@ -718,13 +720,13 @@
             this.tabControl1.ResumeLayout(false);
             this.panelBatch.ResumeLayout(false);
             this.panelBatch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.refundDateDateTimePicker)).EndInit();
             this.panelInvoices.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             this.ResumeLayout(false);
 
         }

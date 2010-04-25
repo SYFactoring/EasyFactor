@@ -367,14 +367,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     if (!TypeUtil.GreaterZero(this.Commission) || isOverwrite)
                     {
-                        //if (this.InvoiceAssignBatch.Case.TransactionType == "进口保理")
-                        //{
-                        //    Commission = AssignAmount * cda.IFPrice.GetValueOrDefault();
-                        //}
-                        //else
-                        //{
                         Commission = AssignAmount * cda.Price.GetValueOrDefault();
-                        //}
                     }
                 }
             }

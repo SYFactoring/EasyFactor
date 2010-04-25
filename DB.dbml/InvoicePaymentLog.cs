@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoicePaymentLog
     {
-        #region Properties (6)
+        #region Constructors (1)
 
         public InvoicePaymentLog(Invoice invoice)
             : this()
@@ -26,17 +26,9 @@ namespace CMBC.EasyFactor.DB.dbml
             this.InvoicePaymentAmount2 = invoice.PaymentAmount;
         }
 
-        public string InvoiceNo2
-        {
-            get;
-            set;
-        }
+        #endregion Constructors
 
-        public double AssignAmount2
-        {
-            get;
-            set;
-        }
+        #region Properties (14)
 
         /// <summary>
         /// 
@@ -56,7 +48,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public DateTime AssignDate2
+        public double AssignAmount2
         {
             get;
             set;
@@ -80,7 +72,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double AssignOutstanding2
+        public DateTime AssignDate2
         {
             get;
             set;
@@ -104,6 +96,12 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        public double AssignOutstanding2
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Gets
         /// </summary>
@@ -117,12 +115,6 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 this.CreditNote.CreditNoteDate = value;
             }
-        }
-
-        public DateTime? DueDate2
-        {
-            get;
-            set;
         }
 
         /// <summary>
@@ -143,7 +135,13 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double? InvoicePaymentAmount2
+        public DateTime? DueDate2
+        {
+            get;
+            set;
+        }
+
+        public string InvoiceNo2
         {
             get;
             set;
@@ -164,6 +162,23 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return InvoicePaymentAmount2;
                 }
+            }
+        }
+
+        public double? InvoicePaymentAmount2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public String PaymentCurrency
+        {
+            get
+            {
+                return this.Invoice.InvoiceCurrency;
             }
         }
 

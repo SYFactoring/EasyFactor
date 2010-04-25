@@ -82,17 +82,18 @@
             DevComponents.DotNetBar.LabelX paymentBatchNoLabel;
             DevComponents.DotNetBar.LabelX CaseLabel;
             DevComponents.DotNetBar.LabelX paymentTypeLabel;
+            DevComponents.DotNetBar.LabelX lblInputDate;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentBatchDetail));
-            DevComponents.DotNetBar.LabelX lblInputDate;
             this.cmuLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
-            this.paymentTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.paymentTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.checkStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
@@ -117,7 +118,6 @@
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             commentLabel = new DevComponents.DotNetBar.LabelX();
             checkUserNameLabel = new DevComponents.DotNetBar.LabelX();
             checkDateLabel = new DevComponents.DotNetBar.LabelX();
@@ -133,13 +133,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.panelBatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentDateDateTimePicker)).BeginInit();
             this.panelInvoices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
             this.SuspendLayout();
             // 
             // commentLabel
@@ -282,6 +282,20 @@
             paymentTypeLabel.TabIndex = 4;
             paymentTypeLabel.Text = "付款类型:";
             // 
+            // lblInputDate
+            // 
+            lblInputDate.AutoSize = true;
+            lblInputDate.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblInputDate.BackgroundStyle.Class = "";
+            lblInputDate.Location = new System.Drawing.Point(231, 80);
+            lblInputDate.Name = "lblInputDate";
+            lblInputDate.Size = new System.Drawing.Size(47, 16);
+            lblInputDate.TabIndex = 23;
+            lblInputDate.Text = "录入日:";
+            // 
             // cmuLogMgr
             // 
             this.cmuLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -300,8 +314,8 @@
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.panelBatch);
             this.tabControl.Controls.Add(this.panelInvoices);
+            this.tabControl.Controls.Add(this.panelBatch);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -355,6 +369,46 @@
             this.panelBatch.TabIndex = 1;
             this.panelBatch.TabItem = this.tabItemBatch;
             // 
+            // diInputDate
+            // 
+            // 
+            // 
+            // 
+            this.diInputDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diInputDate.ButtonDropDown.Visible = true;
+            this.diInputDate.ButtonFreeText.Checked = true;
+            this.diInputDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "InputDate", true));
+            this.diInputDate.FreeTextEntryMode = true;
+            this.diInputDate.Location = new System.Drawing.Point(284, 78);
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diInputDate.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.diInputDate.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diInputDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diInputDate.Name = "diInputDate";
+            this.diInputDate.Size = new System.Drawing.Size(100, 20);
+            this.diInputDate.TabIndex = 24;
+            // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoicePaymentBatch);
+            // 
             // paymentTypeComboBox
             // 
             this.paymentTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "PaymentType", true));
@@ -362,19 +416,15 @@
             this.paymentTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.paymentTypeComboBox.FormattingEnabled = true;
             this.paymentTypeComboBox.Items.AddRange(new object[] {
-            "买方付款",
-            "间接付款",
+            "买方直接付款",
+            "买方间接付款",
             "担保付款",
-            "卖方回购",
+            "反转让",
             "贷项通知"});
             this.paymentTypeComboBox.Location = new System.Drawing.Point(116, 54);
             this.paymentTypeComboBox.Name = "paymentTypeComboBox";
             this.paymentTypeComboBox.Size = new System.Drawing.Size(162, 21);
             this.paymentTypeComboBox.TabIndex = 5;
-            // 
-            // batchBindingSource
-            // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoicePaymentBatch);
             // 
             // checkStatusComboBox
             // 
@@ -609,6 +659,7 @@
             this.dgvPaymentLogs.AllowUserToAddRows = false;
             this.dgvPaymentLogs.AllowUserToDeleteRows = false;
             this.dgvPaymentLogs.AllowUserToOrderColumns = true;
+            this.dgvPaymentLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -642,6 +693,7 @@
             this.dgvPaymentLogs.Size = new System.Drawing.Size(404, 371);
             this.dgvPaymentLogs.TabIndex = 0;
             this.dgvPaymentLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPaymentLogs_RowPostPaint);
+            this.dgvPaymentLogs.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailInvoice);
             // 
             // colInvoiceNo
             // 
@@ -696,56 +748,6 @@
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 
-            // lblInputDate
-            // 
-            lblInputDate.AutoSize = true;
-            lblInputDate.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblInputDate.BackgroundStyle.Class = "";
-            lblInputDate.Location = new System.Drawing.Point(231, 80);
-            lblInputDate.Name = "lblInputDate";
-            lblInputDate.Size = new System.Drawing.Size(47, 16);
-            lblInputDate.TabIndex = 23;
-            lblInputDate.Text = "录入日:";
-            // 
-            // diInputDate
-            // 
-            // 
-            // 
-            // 
-            this.diInputDate.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diInputDate.ButtonDropDown.Visible = true;
-            this.diInputDate.ButtonFreeText.Checked = true;
-            this.diInputDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "InputDate", true));
-            this.diInputDate.FreeTextEntryMode = true;
-            this.diInputDate.Location = new System.Drawing.Point(284, 78);
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diInputDate.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diInputDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.diInputDate.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diInputDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diInputDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diInputDate.Name = "diInputDate";
-            this.diInputDate.Size = new System.Drawing.Size(100, 20);
-            this.diInputDate.TabIndex = 24;
-            // 
             // PaymentBatchDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -761,13 +763,13 @@
             this.tabControl.ResumeLayout(false);
             this.panelBatch.ResumeLayout(false);
             this.panelBatch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentDateDateTimePicker)).EndInit();
             this.panelInvoices.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             this.ResumeLayout(false);
 
         }

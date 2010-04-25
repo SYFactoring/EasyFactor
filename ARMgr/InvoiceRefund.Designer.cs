@@ -327,9 +327,7 @@
             this.cbRefundType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRefundType.FormattingEnabled = true;
             this.cbRefundType.Items.AddRange(new object[] {
-            "买方付款",
-            "间接付款",
-            "担保付款",
+            "买方直接付款",
             "卖方还款"});
             this.cbRefundType.Location = new System.Drawing.Point(90, 29);
             this.cbRefundType.Name = "cbRefundType";

@@ -461,7 +461,7 @@
             this.financeTypeComboBoxEx.FormattingEnabled = true;
             this.financeTypeComboBoxEx.ItemHeight = 14;
             this.financeTypeComboBoxEx.Items.AddRange(new object[] {
-            "预付款",
+            "保理预付款(表内)",
             "卖方代付",
             "买方代付",
             "银行承兑汇票",

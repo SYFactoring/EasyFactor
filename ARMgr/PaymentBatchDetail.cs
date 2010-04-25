@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class PaymentBatchDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (2)
+		#region Fields (3) 
 
         /// <summary>
         /// 
@@ -25,16 +25,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private OpBatchType opBatchType;
-
+        private DBDataContext context;
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context;
+        private OpBatchType opBatchType;
 
-        #endregion Fields
+		#endregion Fields 
 
-        #region Enums (1)
+		#region Enums (1) 
 
         /// <summary>
         /// 
@@ -52,11 +51,11 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-        #endregion Enums
+		#endregion Enums 
 
-        #region Constructors (1)
+		#region Constructors (1) 
 
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         /// <param name="batch"></param>
@@ -83,11 +82,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.UpdateBatchControlStatus();
         }
 
-        #endregion Constructors
+		#endregion Constructors 
 
-        #region Methods (7)
+		#region Methods (7) 
 
-        // Private Methods (7) 
+		// Private Methods (7) 
 
         /// <summary>
         /// 
@@ -135,6 +134,23 @@ namespace CMBC.EasyFactor.ARMgr
         {
             InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
             CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            detail.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvPaymentLogs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoicePaymentLog log = (InvoicePaymentLog)this.bs.List[this.dgvPaymentLogs.SelectedRows[0].Index];
+            InvoiceDetail detail = new InvoiceDetail(log.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             detail.Show();
         }
 
@@ -239,6 +255,6 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(this.diInputDate, false);
         }
 
-        #endregion Methods
+		#endregion Methods 
     }
 }

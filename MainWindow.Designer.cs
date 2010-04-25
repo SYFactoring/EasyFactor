@@ -1863,14 +1863,14 @@ namespace CMBC.EasyFactor
             this.btnBuyerPayment.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
             this.btnBuyerPayment.Name = "btnBuyerPayment";
             this.btnBuyerPayment.SubItemsExpandWidth = 14;
-            this.btnBuyerPayment.Text = "买方付款";
+            this.btnBuyerPayment.Text = "买方直接付款";
             this.btnBuyerPayment.Click += new System.EventHandler(this.InvoiceBuyerPayment);
             // 
             // btnIndirectPayment
             // 
             this.btnIndirectPayment.Name = "btnIndirectPayment";
             this.btnIndirectPayment.SubItemsExpandWidth = 14;
-            this.btnIndirectPayment.Text = "间接付款";
+            this.btnIndirectPayment.Text = "买方间接付款";
             this.btnIndirectPayment.Click += new System.EventHandler(this.InvoiceIndirectPayment);
             // 
             // btnGuaranteePayment
@@ -1884,7 +1884,7 @@ namespace CMBC.EasyFactor
             // 
             this.btnReassignment.Name = "btnReassignment";
             this.btnReassignment.SubItemsExpandWidth = 14;
-            this.btnReassignment.Text = "卖方回购";
+            this.btnReassignment.Text = "反转让";
             this.btnReassignment.Click += new System.EventHandler(this.InvoiceSellerReassign);
             // 
             // btnCreditNotePayment

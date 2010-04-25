@@ -16,9 +16,16 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceAssignBatch
     {
-        #region Properties (7)
+        #region Fields (3)
 
         private double? _assignAmount;
+        private double? _assignOutstanding;
+        private double? _commissionAmount;
+        private double? _financeOutstanding;
+
+        #endregion Fields
+
+        #region Properties (8)
 
         /// <summary>
         /// Gets
@@ -33,6 +40,38 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return _assignAmount.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public double AssignOutstanding
+        {
+            get
+            {
+                if (_assignOutstanding.HasValue == false)
+                {
+                    _assignOutstanding = this.Invoices.Sum(i => i.AssignOutstanding);
+                }
+
+                return _assignOutstanding.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public double FinanceOutstanding
+        {
+            get
+            {
+                if (_financeOutstanding.HasValue == false)
+                {
+                    _financeOutstanding = this.Invoices.Sum(i => i.FinanceOutstanding.GetValueOrDefault());
+                }
+
+                return _financeOutstanding.Value;
             }
         }
 
@@ -68,8 +107,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 return this.Case.BuyerClient.ToString();
             }
         }
-
-        private double? _commissionAmount;
 
         /// <summary>
         /// Gets
@@ -124,6 +161,10 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
+        #region Methods (2)
+
+        // Public Methods (2) 
+
         /// <summary>
         /// 
         /// </summary>
@@ -163,5 +204,7 @@ namespace CMBC.EasyFactor.DB.dbml
             string assignNo = String.Format("{0}ASS{1:yy}{2:D3}", caseCode, assignDate, batchCount + 1);
             return assignNo;
         }
+
+        #endregion Methods
     }
 }

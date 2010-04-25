@@ -167,10 +167,10 @@
             this.cbPaymentType.ItemHeight = 14;
             this.cbPaymentType.Items.AddRange(new object[] {
             "",
-            "买方付款",
-            "间接付款",
+            "买方直接付款",
+            "买方间接付款",
             "担保付款",
-            "卖方回购",
+            "反转让",
             "贷项通知"});
             this.cbPaymentType.Location = new System.Drawing.Point(244, 7);
             this.cbPaymentType.Name = "cbPaymentType";

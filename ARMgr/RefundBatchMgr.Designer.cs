@@ -139,10 +139,8 @@
             this.cbRefundType.ItemHeight = 14;
             this.cbRefundType.Items.AddRange(new object[] {
             "",
-            "买方付款",
-            "卖方还款",
-            "担保付款",
-            "间接付款"});
+            "买方直接付款",
+            "卖方还款"});
             this.cbRefundType.Location = new System.Drawing.Point(244, 6);
             this.cbRefundType.Name = "cbRefundType";
             this.cbRefundType.Size = new System.Drawing.Size(101, 20);

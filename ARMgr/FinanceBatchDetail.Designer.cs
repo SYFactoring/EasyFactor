@@ -717,7 +717,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.financeTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.financeTypeComboBox.FormattingEnabled = true;
             this.financeTypeComboBox.Items.AddRange(new object[] {
-            "预付款",
+            "保理预付款(表内)",
             "卖方代付",
             "买方代付",
             "银行承兑汇票",

@@ -13,10 +13,10 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
+    using CMBC.EasyFactor.Controls;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
-    using CMBC.EasyFactor.Controls;
 
     /// <summary>
     /// 
@@ -466,16 +466,16 @@ namespace CMBC.EasyFactor.ARMgr
             switch (paymentType)
             {
                 case OpPaymentType.BUYER_PAYMENT:
-                    batch.PaymentType = "买方付款";
+                    batch.PaymentType = "买方直接付款";
                     break;
                 case OpPaymentType.INDIRECT_PAYMENT:
-                    batch.PaymentType = "间接付款";
+                    batch.PaymentType = "买方间接付款";
                     break;
                 case OpPaymentType.GUARANTEE_PAYMENT:
                     batch.PaymentType = "担保付款";
                     break;
                 case OpPaymentType.SELLER_REASSIGN:
-                    batch.PaymentType = "卖方回购";
+                    batch.PaymentType = "反转让";
                     break;
                 case OpPaymentType.CREDIT_NOTE_PAYMENT:
                     batch.PaymentType = "贷项通知";

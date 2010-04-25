@@ -364,9 +364,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (selectedBatch.PaymentType != "间接付款")
+            if (selectedBatch.PaymentType != "买方间接付款")
             {
-                MessageBoxEx.Show("只有间接付款可以生成MSG12", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("只有买方间接付款可以生成MSG12", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

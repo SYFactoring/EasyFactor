@@ -17,7 +17,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class RefundBatchDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (2)
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -26,12 +26,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private OpBatchType opBatchType;
-
+        private DBDataContext context;
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context;
+        private OpBatchType opBatchType;
 
         #endregion Fields
 
@@ -102,7 +101,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceRefundLog log = (InvoiceRefundLog)this.bs.List[this.dgvRefundLogs.SelectedRows[0].Index];
-            
+
             try
             {
                 InvoiceFinanceLog financeLog = log.InvoiceFinanceLog;
@@ -130,6 +129,23 @@ namespace CMBC.EasyFactor.ARMgr
         {
             InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
             CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            detail.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvRefundLogs.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            InvoiceRefundLog log = (InvoiceRefundLog)this.bs.List[this.dgvRefundLogs.SelectedRows[0].Index];
+            InvoiceDetail detail = new InvoiceDetail(log.InvoiceFinanceLog.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             detail.Show();
         }
 

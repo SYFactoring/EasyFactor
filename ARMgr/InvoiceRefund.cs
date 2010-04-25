@@ -63,17 +63,7 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            INDIRECT_PAYMENT,
-
-            /// <summary>
-            /// 
-            /// </summary>
             SELLER_REFUND,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            GUARANTEE_PAYMENT,
         }
 
         #endregion Enums
@@ -503,16 +493,10 @@ namespace CMBC.EasyFactor.ARMgr
             switch (refundType)
             {
                 case OpRefundType.BUYER_PAYMENT:
-                    batch.RefundType = "买方还款";
-                    break;
-                case OpRefundType.INDIRECT_PAYMENT:
-                    batch.RefundType = "间接还款";
+                    batch.RefundType = "买方直接还款";
                     break;
                 case OpRefundType.SELLER_REFUND:
                     batch.RefundType = "卖方还款";
-                    break;
-                case OpRefundType.GUARANTEE_PAYMENT:
-                    batch.RefundType = "担保付款";
                     break;
                 default:
                     break;

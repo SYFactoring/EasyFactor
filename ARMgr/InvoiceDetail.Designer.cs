@@ -168,47 +168,25 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX grossInterestLbl;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceDetail));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
-            this.tabPanelLog = new DevComponents.DotNetBar.TabControlPanel();
-            this.dgvPaymentLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditNoteNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditNoteDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paymentLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemPaymentLogDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgvFinanceLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvRefundLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRefundDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.refundLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemRefundLogDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabItemLog = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelInvoice = new DevComponents.DotNetBar.TabControlPanel();
             this.groupPanelInvoiceProcess = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.grossInterestTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -240,19 +218,15 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnInvoiceSave = new DevComponents.DotNetBar.ButtonX();
             this.btnInvoiceUpdate = new DevComponents.DotNetBar.ButtonX();
             this.tabItemInvoice = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelEDI = new DevComponents.DotNetBar.TabControlPanel();
-            this.btnEDISave = new DevComponents.DotNetBar.ButtonX();
-            this.groupPanelInvoiceAdv = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.invoiceReferenceNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.orderNumberReferenceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.paymentConditionsComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.valueDateTextBox = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.secondaryDiscountRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.secondaryDiscountDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.primaryDiscountRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.primaryDiscountDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.netPaymentTermsTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tabItemEDI = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelLog = new DevComponents.DotNetBar.TabControlPanel();
+            this.dgvPaymentLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.paymentLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemPaymentLogDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.dgvFinanceLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dgvRefundLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.refundLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemRefundLogDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabItemLog = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelFlaw = new DevComponents.DotNetBar.TabControlPanel();
             this.btnFlawSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelFlawResolve = new DevComponents.DotNetBar.Controls.GroupPanel();
@@ -266,6 +240,19 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbFlawReason = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.flawReasonCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.tabItemFlaw = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelEDI = new DevComponents.DotNetBar.TabControlPanel();
+            this.btnEDISave = new DevComponents.DotNetBar.ButtonX();
+            this.groupPanelInvoiceAdv = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.invoiceReferenceNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.orderNumberReferenceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.paymentConditionsComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.valueDateTextBox = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.secondaryDiscountRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.secondaryDiscountDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.primaryDiscountRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.primaryDiscountDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.netPaymentTermsTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tabItemEDI = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanelDispute = new DevComponents.DotNetBar.TabControlPanel();
             this.btnDisputeSave = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelDisputeResolve = new DevComponents.DotNetBar.Controls.GroupPanel();
@@ -296,6 +283,22 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditNoteNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditNoteDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             flawResolveReasonLabel = new DevComponents.DotNetBar.LabelX();
             flawResolveDateLabel = new DevComponents.DotNetBar.LabelX();
             flawResolveUserNameLabel = new DevComponents.DotNetBar.LabelX();
@@ -343,12 +346,6 @@ namespace CMBC.EasyFactor.ARMgr
             grossInterestLbl = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
-            this.tabPanelLog.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).BeginInit();
-            this.paymentLogMgr.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFinanceLogs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).BeginInit();
-            this.refundLogMgr.SuspendLayout();
             this.tabPanelInvoice.SuspendLayout();
             this.groupPanelInvoiceProcess.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
@@ -360,13 +357,19 @@ namespace CMBC.EasyFactor.ARMgr
             this.groupPanelInvoiceBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dueDateTextBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceDateTextBox)).BeginInit();
-            this.tabPanelEDI.SuspendLayout();
-            this.groupPanelInvoiceAdv.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).BeginInit();
+            this.tabPanelLog.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).BeginInit();
+            this.paymentLogMgr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFinanceLogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).BeginInit();
+            this.refundLogMgr.SuspendLayout();
             this.tabPanelFlaw.SuspendLayout();
             this.groupPanelFlawResolve.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).BeginInit();
             this.groupPanelFlaw.SuspendLayout();
+            this.tabPanelEDI.SuspendLayout();
+            this.groupPanelInvoiceAdv.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).BeginInit();
             this.tabControlPanelDispute.SuspendLayout();
             this.groupPanelDisputeResolve.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.disputeResolveDateDateTimePicker)).BeginInit();
@@ -1009,8 +1012,8 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelInvoice);
             this.tabControl.Controls.Add(this.tabPanelLog);
+            this.tabControl.Controls.Add(this.tabPanelInvoice);
             this.tabControl.Controls.Add(this.tabPanelFlaw);
             this.tabControl.Controls.Add(this.tabPanelEDI);
             this.tabControl.Controls.Add(this.tabControlPanelDispute);
@@ -1027,288 +1030,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl.Tabs.Add(this.tabItemFlaw);
             this.tabControl.Tabs.Add(this.tabItemDispute);
             this.tabControl.Tabs.Add(this.tabItemEDI);
-            // 
-            // tabPanelLog
-            // 
-            this.tabPanelLog.Controls.Add(this.dgvPaymentLogs);
-            this.tabPanelLog.Controls.Add(this.dgvFinanceLogs);
-            this.tabPanelLog.Controls.Add(this.dgvRefundLogs);
-            this.tabPanelLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelLog.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelLog.Name = "tabPanelLog";
-            this.tabPanelLog.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelLog.Size = new System.Drawing.Size(550, 329);
-            this.tabPanelLog.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelLog.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelLog.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelLog.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelLog.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelLog.Style.GradientAngle = 90;
-            this.tabPanelLog.TabIndex = 6;
-            this.tabPanelLog.TabItem = this.tabItemLog;
-            // 
-            // dgvPaymentLogs
-            // 
-            this.dgvPaymentLogs.AllowUserToAddRows = false;
-            this.dgvPaymentLogs.AllowUserToDeleteRows = false;
-            this.dgvPaymentLogs.AllowUserToOrderColumns = true;
-            this.dgvPaymentLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPaymentLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvPaymentLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPaymentLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colPaymentAmount,
-            this.colPaymentDate,
-            this.colCreditNoteNo,
-            this.colCreditNoteDate,
-            this.colComment});
-            this.dgvPaymentLogs.ContextMenuStrip = this.paymentLogMgr;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPaymentLogs.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvPaymentLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPaymentLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvPaymentLogs.Location = new System.Drawing.Point(1, 111);
-            this.dgvPaymentLogs.Name = "dgvPaymentLogs";
-            this.dgvPaymentLogs.ReadOnly = true;
-            this.dgvPaymentLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPaymentLogs.Size = new System.Drawing.Size(548, 103);
-            this.dgvPaymentLogs.TabIndex = 6;
-            // 
-            // colPaymentAmount
-            // 
-            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colPaymentAmount.HeaderText = "付款金额";
-            this.colPaymentAmount.Name = "colPaymentAmount";
-            this.colPaymentAmount.ReadOnly = true;
-            // 
-            // colPaymentDate
-            // 
-            this.colPaymentDate.DataPropertyName = "PaymentDate";
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colPaymentDate.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPaymentDate.HeaderText = "付款日";
-            this.colPaymentDate.Name = "colPaymentDate";
-            this.colPaymentDate.ReadOnly = true;
-            // 
-            // colCreditNoteNo
-            // 
-            this.colCreditNoteNo.DataPropertyName = "CreditNoteNo";
-            this.colCreditNoteNo.HeaderText = "贷项通知编号";
-            this.colCreditNoteNo.Name = "colCreditNoteNo";
-            this.colCreditNoteNo.ReadOnly = true;
-            this.colCreditNoteNo.Visible = false;
-            // 
-            // colCreditNoteDate
-            // 
-            this.colCreditNoteDate.DataPropertyName = "CreditNoteDate";
-            this.colCreditNoteDate.HeaderText = "贷项通知日";
-            this.colCreditNoteDate.Name = "colCreditNoteDate";
-            this.colCreditNoteDate.ReadOnly = true;
-            this.colCreditNoteDate.Visible = false;
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
-            // 
-            // paymentLogMgr
-            // 
-            this.paymentLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemPaymentLogDelete});
-            this.paymentLogMgr.Name = "cmuContractMgr";
-            this.paymentLogMgr.Size = new System.Drawing.Size(115, 26);
-            // 
-            // menuItemPaymentLogDelete
-            // 
-            this.menuItemPaymentLogDelete.Name = "menuItemPaymentLogDelete";
-            this.menuItemPaymentLogDelete.Size = new System.Drawing.Size(114, 22);
-            this.menuItemPaymentLogDelete.Text = "删除(&D)";
-            this.menuItemPaymentLogDelete.Click += new System.EventHandler(this.DeletePaymentLog);
-            // 
-            // dgvFinanceLogs
-            // 
-            this.dgvFinanceLogs.AllowUserToAddRows = false;
-            this.dgvFinanceLogs.AllowUserToDeleteRows = false;
-            this.dgvFinanceLogs.AllowUserToOrderColumns = true;
-            this.dgvFinanceLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFinanceLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvFinanceLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFinanceLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colFinanceAmount,
-            this.colFinanceDate,
-            this.colFinanceDueDate,
-            this.colCommission,
-            this.colFinanceComment});
-            this.dgvFinanceLogs.ContextMenuStrip = this.paymentLogMgr;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFinanceLogs.DefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvFinanceLogs.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dgvFinanceLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvFinanceLogs.Location = new System.Drawing.Point(1, 1);
-            this.dgvFinanceLogs.Name = "dgvFinanceLogs";
-            this.dgvFinanceLogs.ReadOnly = true;
-            this.dgvFinanceLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFinanceLogs.Size = new System.Drawing.Size(548, 110);
-            this.dgvFinanceLogs.TabIndex = 5;
-            // 
-            // colFinanceAmount
-            // 
-            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle6.Format = "N2";
-            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colFinanceAmount.HeaderText = "融资金额";
-            this.colFinanceAmount.Name = "colFinanceAmount";
-            this.colFinanceAmount.ReadOnly = true;
-            // 
-            // colFinanceDate
-            // 
-            this.colFinanceDate.DataPropertyName = "FinanceDate";
-            dataGridViewCellStyle7.Format = "d";
-            dataGridViewCellStyle7.NullValue = null;
-            this.colFinanceDate.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colFinanceDate.HeaderText = "融资日";
-            this.colFinanceDate.Name = "colFinanceDate";
-            this.colFinanceDate.ReadOnly = true;
-            // 
-            // colFinanceDueDate
-            // 
-            this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
-            this.colFinanceDueDate.HeaderText = "融资到期日";
-            this.colFinanceDueDate.Name = "colFinanceDueDate";
-            this.colFinanceDueDate.ReadOnly = true;
-            // 
-            // colCommission
-            // 
-            this.colCommission.DataPropertyName = "Commission";
-            dataGridViewCellStyle8.Format = "N2";
-            this.colCommission.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colCommission.HeaderText = "手续费";
-            this.colCommission.Name = "colCommission";
-            this.colCommission.ReadOnly = true;
-            // 
-            // colFinanceComment
-            // 
-            this.colFinanceComment.DataPropertyName = "Comment";
-            this.colFinanceComment.HeaderText = "备注";
-            this.colFinanceComment.Name = "colFinanceComment";
-            this.colFinanceComment.ReadOnly = true;
-            // 
-            // dgvRefundLogs
-            // 
-            this.dgvRefundLogs.AllowUserToAddRows = false;
-            this.dgvRefundLogs.AllowUserToDeleteRows = false;
-            this.dgvRefundLogs.AllowUserToOrderColumns = true;
-            this.dgvRefundLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRefundLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.dgvRefundLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRefundLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colRefundAmount,
-            this.colRefundDate,
-            this.dataGridViewTextBoxColumn2});
-            this.dgvRefundLogs.ContextMenuStrip = this.refundLogMgr;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRefundLogs.DefaultCellStyle = dataGridViewCellStyle14;
-            this.dgvRefundLogs.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvRefundLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvRefundLogs.Location = new System.Drawing.Point(1, 214);
-            this.dgvRefundLogs.Name = "dgvRefundLogs";
-            this.dgvRefundLogs.ReadOnly = true;
-            this.dgvRefundLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRefundLogs.Size = new System.Drawing.Size(548, 114);
-            this.dgvRefundLogs.TabIndex = 3;
-            // 
-            // colRefundAmount
-            // 
-            this.colRefundAmount.DataPropertyName = "RefundAmount";
-            dataGridViewCellStyle11.Format = "N2";
-            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colRefundAmount.HeaderText = "还款金额";
-            this.colRefundAmount.Name = "colRefundAmount";
-            this.colRefundAmount.ReadOnly = true;
-            // 
-            // colRefundDate
-            // 
-            this.colRefundDate.DataPropertyName = "RefundDate";
-            dataGridViewCellStyle12.Format = "d";
-            dataGridViewCellStyle12.NullValue = null;
-            this.colRefundDate.DefaultCellStyle = dataGridViewCellStyle12;
-            this.colRefundDate.HeaderText = "还款日";
-            this.colRefundDate.Name = "colRefundDate";
-            this.colRefundDate.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Comment";
-            dataGridViewCellStyle13.Format = "d";
-            dataGridViewCellStyle13.NullValue = null;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dataGridViewTextBoxColumn2.HeaderText = "备注";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // refundLogMgr
-            // 
-            this.refundLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemRefundLogDelete});
-            this.refundLogMgr.Name = "cmuContractMgr";
-            this.refundLogMgr.Size = new System.Drawing.Size(107, 26);
-            // 
-            // menuItemRefundLogDelete
-            // 
-            this.menuItemRefundLogDelete.Name = "menuItemRefundLogDelete";
-            this.menuItemRefundLogDelete.Size = new System.Drawing.Size(106, 22);
-            this.menuItemRefundLogDelete.Text = "&D删除";
-            this.menuItemRefundLogDelete.Click += new System.EventHandler(this.DeleteRefundLog);
-            // 
-            // tabItemLog
-            // 
-            this.tabItemLog.AttachedControl = this.tabPanelLog;
-            this.tabItemLog.Name = "tabItemLog";
-            this.tabItemLog.Text = "融资/付款/还款记录";
             // 
             // tabPanelInvoice
             // 
@@ -1955,240 +1676,177 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabItemInvoice.Name = "tabItemInvoice";
             this.tabItemInvoice.Text = "发票明细";
             // 
-            // tabPanelEDI
+            // tabPanelLog
             // 
-            this.tabPanelEDI.Controls.Add(this.btnEDISave);
-            this.tabPanelEDI.Controls.Add(this.groupPanelInvoiceAdv);
-            this.tabPanelEDI.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelEDI.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelEDI.Name = "tabPanelEDI";
-            this.tabPanelEDI.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelEDI.Size = new System.Drawing.Size(550, 329);
-            this.tabPanelEDI.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelEDI.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelEDI.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelEDI.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelEDI.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+            this.tabPanelLog.Controls.Add(this.dgvPaymentLogs);
+            this.tabPanelLog.Controls.Add(this.dgvFinanceLogs);
+            this.tabPanelLog.Controls.Add(this.dgvRefundLogs);
+            this.tabPanelLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelLog.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelLog.Name = "tabPanelLog";
+            this.tabPanelLog.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelLog.Size = new System.Drawing.Size(550, 329);
+            this.tabPanelLog.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelLog.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelLog.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelLog.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelLog.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
                         | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelEDI.Style.GradientAngle = 90;
-            this.tabPanelEDI.TabIndex = 2;
-            this.tabPanelEDI.TabItem = this.tabItemEDI;
-            // 
-            // btnEDISave
-            // 
-            this.btnEDISave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnEDISave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnEDISave.Location = new System.Drawing.Point(194, 192);
-            this.btnEDISave.Name = "btnEDISave";
-            this.btnEDISave.Size = new System.Drawing.Size(75, 23);
-            this.btnEDISave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnEDISave.TabIndex = 4;
-            this.btnEDISave.Text = "保存";
-            this.btnEDISave.Click += new System.EventHandler(this.SaveEDI);
-            // 
-            // groupPanelInvoiceAdv
-            // 
-            this.groupPanelInvoiceAdv.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelInvoiceAdv.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelInvoiceAdv.Controls.Add(invoiceReferenceNumberLabel);
-            this.groupPanelInvoiceAdv.Controls.Add(this.invoiceReferenceNumberTextBox);
-            this.groupPanelInvoiceAdv.Controls.Add(orderNumberReferenceLabel);
-            this.groupPanelInvoiceAdv.Controls.Add(this.orderNumberReferenceTextBox);
-            this.groupPanelInvoiceAdv.Controls.Add(paymentConditionsLabel);
-            this.groupPanelInvoiceAdv.Controls.Add(valueDateLabel);
-            this.groupPanelInvoiceAdv.Controls.Add(this.paymentConditionsComboBox);
-            this.groupPanelInvoiceAdv.Controls.Add(this.valueDateTextBox);
-            this.groupPanelInvoiceAdv.Controls.Add(secondaryDiscountRateLabel);
-            this.groupPanelInvoiceAdv.Controls.Add(this.secondaryDiscountRateTextBox);
-            this.groupPanelInvoiceAdv.Controls.Add(secondaryDiscountDaysLabel);
-            this.groupPanelInvoiceAdv.Controls.Add(this.secondaryDiscountDaysTextBox);
-            this.groupPanelInvoiceAdv.Controls.Add(primaryDiscountRateLabel);
-            this.groupPanelInvoiceAdv.Controls.Add(this.primaryDiscountRateTextBox);
-            this.groupPanelInvoiceAdv.Controls.Add(primaryDiscountDaysLabel);
-            this.groupPanelInvoiceAdv.Controls.Add(this.primaryDiscountDaysTextBox);
-            this.groupPanelInvoiceAdv.Controls.Add(netPaymentTermsLabel);
-            this.groupPanelInvoiceAdv.Controls.Add(this.netPaymentTermsTextBox);
-            this.groupPanelInvoiceAdv.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelInvoiceAdv.Location = new System.Drawing.Point(1, 1);
-            this.groupPanelInvoiceAdv.Name = "groupPanelInvoiceAdv";
-            this.groupPanelInvoiceAdv.Size = new System.Drawing.Size(548, 185);
-            // 
-            // 
-            // 
-            this.groupPanelInvoiceAdv.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelInvoiceAdv.Style.BackColorGradientAngle = 90;
-            this.groupPanelInvoiceAdv.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelInvoiceAdv.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceAdv.Style.BorderBottomWidth = 1;
-            this.groupPanelInvoiceAdv.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelInvoiceAdv.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceAdv.Style.BorderLeftWidth = 1;
-            this.groupPanelInvoiceAdv.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceAdv.Style.BorderRightWidth = 1;
-            this.groupPanelInvoiceAdv.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelInvoiceAdv.Style.BorderTopWidth = 1;
-            this.groupPanelInvoiceAdv.Style.Class = "";
-            this.groupPanelInvoiceAdv.Style.CornerDiameter = 4;
-            this.groupPanelInvoiceAdv.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelInvoiceAdv.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelInvoiceAdv.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelInvoiceAdv.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelInvoiceAdv.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelInvoiceAdv.StyleMouseOver.Class = "";
-            this.groupPanelInvoiceAdv.TabIndex = 2;
-            // 
-            // invoiceReferenceNumberTextBox
-            // 
-            // 
-            // 
-            // 
-            this.invoiceReferenceNumberTextBox.Border.Class = "TextBoxBorder";
-            this.invoiceReferenceNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceReferenceNumber", true));
-            this.invoiceReferenceNumberTextBox.Location = new System.Drawing.Point(145, 156);
-            this.invoiceReferenceNumberTextBox.Name = "invoiceReferenceNumberTextBox";
-            this.invoiceReferenceNumberTextBox.Size = new System.Drawing.Size(120, 20);
-            this.invoiceReferenceNumberTextBox.TabIndex = 17;
-            // 
-            // orderNumberReferenceTextBox
-            // 
-            // 
-            // 
-            // 
-            this.orderNumberReferenceTextBox.Border.Class = "TextBoxBorder";
-            this.orderNumberReferenceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "OrderNumberReference", true));
-            this.orderNumberReferenceTextBox.Location = new System.Drawing.Point(144, 134);
-            this.orderNumberReferenceTextBox.Name = "orderNumberReferenceTextBox";
-            this.orderNumberReferenceTextBox.Size = new System.Drawing.Size(121, 20);
-            this.orderNumberReferenceTextBox.TabIndex = 15;
-            // 
-            // paymentConditionsComboBox
-            // 
-            this.paymentConditionsComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "PaymentConditions", true));
-            this.paymentConditionsComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.paymentConditionsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.paymentConditionsComboBox.FormattingEnabled = true;
-            this.paymentConditionsComboBox.Items.AddRange(new object[] {
-            "1-Open account",
-            "2-Bill of exchange against acceptance",
-            "3-Bill of exchange against payment",
-            "4-Documents through banks",
-            "5-Instalment payment without draft",
-            "6-Instalment payment with draft",
-            "7-Other"});
-            this.paymentConditionsComboBox.Location = new System.Drawing.Point(143, 110);
-            this.paymentConditionsComboBox.Name = "paymentConditionsComboBox";
-            this.paymentConditionsComboBox.Size = new System.Drawing.Size(122, 21);
-            this.paymentConditionsComboBox.TabIndex = 11;
-            // 
-            // valueDateTextBox
-            // 
-            // 
-            // 
-            // 
-            this.valueDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.valueDateTextBox.ButtonDropDown.Visible = true;
-            this.valueDateTextBox.ButtonFreeText.Checked = true;
-            this.valueDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "ValueDate", true));
-            this.valueDateTextBox.FreeTextEntryMode = true;
-            this.valueDateTextBox.Location = new System.Drawing.Point(423, 109);
-            // 
-            // 
-            // 
-            this.valueDateTextBox.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.valueDateTextBox.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.valueDateTextBox.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.valueDateTextBox.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.valueDateTextBox.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.valueDateTextBox.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.valueDateTextBox.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.valueDateTextBox.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.valueDateTextBox.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.valueDateTextBox.Name = "valueDateTextBox";
-            this.valueDateTextBox.Size = new System.Drawing.Size(100, 20);
-            this.valueDateTextBox.TabIndex = 13;
-            // 
-            // secondaryDiscountRateTextBox
-            // 
-            // 
-            // 
-            // 
-            this.secondaryDiscountRateTextBox.Border.Class = "TextBoxBorder";
-            this.secondaryDiscountRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "SecondaryDiscountRate", true));
-            this.secondaryDiscountRateTextBox.Location = new System.Drawing.Point(423, 83);
-            this.secondaryDiscountRateTextBox.Name = "secondaryDiscountRateTextBox";
-            this.secondaryDiscountRateTextBox.Size = new System.Drawing.Size(100, 20);
-            this.secondaryDiscountRateTextBox.TabIndex = 9;
-            // 
-            // secondaryDiscountDaysTextBox
-            // 
-            // 
-            // 
-            // 
-            this.secondaryDiscountDaysTextBox.Border.Class = "TextBoxBorder";
-            this.secondaryDiscountDaysTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "SecondaryDiscountDays", true));
-            this.secondaryDiscountDaysTextBox.Location = new System.Drawing.Point(143, 83);
-            this.secondaryDiscountDaysTextBox.Name = "secondaryDiscountDaysTextBox";
-            this.secondaryDiscountDaysTextBox.Size = new System.Drawing.Size(122, 20);
-            this.secondaryDiscountDaysTextBox.TabIndex = 5;
-            // 
-            // primaryDiscountRateTextBox
-            // 
-            // 
-            // 
-            // 
-            this.primaryDiscountRateTextBox.Border.Class = "TextBoxBorder";
-            this.primaryDiscountRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "PrimaryDiscountRate", true));
-            this.primaryDiscountRateTextBox.Location = new System.Drawing.Point(423, 60);
-            this.primaryDiscountRateTextBox.Name = "primaryDiscountRateTextBox";
-            this.primaryDiscountRateTextBox.Size = new System.Drawing.Size(100, 20);
-            this.primaryDiscountRateTextBox.TabIndex = 7;
-            // 
-            // primaryDiscountDaysTextBox
-            // 
-            // 
-            // 
-            // 
-            this.primaryDiscountDaysTextBox.Border.Class = "TextBoxBorder";
-            this.primaryDiscountDaysTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "PrimaryDiscountDays", true));
-            this.primaryDiscountDaysTextBox.Location = new System.Drawing.Point(143, 60);
-            this.primaryDiscountDaysTextBox.Name = "primaryDiscountDaysTextBox";
-            this.primaryDiscountDaysTextBox.Size = new System.Drawing.Size(122, 20);
-            this.primaryDiscountDaysTextBox.TabIndex = 3;
-            // 
-            // netPaymentTermsTextBox
-            // 
-            // 
-            // 
-            // 
-            this.netPaymentTermsTextBox.Border.Class = "TextBoxBorder";
-            this.netPaymentTermsTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "NetPaymentTerms", true));
-            this.netPaymentTermsTextBox.Location = new System.Drawing.Point(143, 7);
-            this.netPaymentTermsTextBox.Multiline = true;
-            this.netPaymentTermsTextBox.Name = "netPaymentTermsTextBox";
-            this.netPaymentTermsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.netPaymentTermsTextBox.Size = new System.Drawing.Size(380, 47);
-            this.netPaymentTermsTextBox.TabIndex = 1;
-            // 
-            // tabItemEDI
-            // 
-            this.tabItemEDI.AttachedControl = this.tabPanelEDI;
-            this.tabItemEDI.Name = "tabItemEDI";
-            this.tabItemEDI.Text = "更多";
+            this.tabPanelLog.Style.GradientAngle = 90;
+            this.tabPanelLog.TabIndex = 6;
+            this.tabPanelLog.TabItem = this.tabItemLog;
+            // 
+            // dgvPaymentLogs
+            // 
+            this.dgvPaymentLogs.AllowUserToAddRows = false;
+            this.dgvPaymentLogs.AllowUserToDeleteRows = false;
+            this.dgvPaymentLogs.AllowUserToOrderColumns = true;
+            this.dgvPaymentLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPaymentLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvPaymentLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPaymentLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colPaymentCurrency,
+            this.colPaymentAmount,
+            this.colPaymentDate,
+            this.colCreditNoteNo,
+            this.colCreditNoteDate,
+            this.colComment});
+            this.dgvPaymentLogs.ContextMenuStrip = this.paymentLogMgr;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPaymentLogs.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvPaymentLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPaymentLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvPaymentLogs.Location = new System.Drawing.Point(1, 111);
+            this.dgvPaymentLogs.Name = "dgvPaymentLogs";
+            this.dgvPaymentLogs.ReadOnly = true;
+            this.dgvPaymentLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPaymentLogs.Size = new System.Drawing.Size(548, 103);
+            this.dgvPaymentLogs.TabIndex = 6;
+            // 
+            // paymentLogMgr
+            // 
+            this.paymentLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemPaymentLogDelete});
+            this.paymentLogMgr.Name = "cmuContractMgr";
+            this.paymentLogMgr.Size = new System.Drawing.Size(115, 26);
+            // 
+            // menuItemPaymentLogDelete
+            // 
+            this.menuItemPaymentLogDelete.Name = "menuItemPaymentLogDelete";
+            this.menuItemPaymentLogDelete.Size = new System.Drawing.Size(114, 22);
+            this.menuItemPaymentLogDelete.Text = "删除(&D)";
+            this.menuItemPaymentLogDelete.Click += new System.EventHandler(this.DeletePaymentLog);
+            // 
+            // dgvFinanceLogs
+            // 
+            this.dgvFinanceLogs.AllowUserToAddRows = false;
+            this.dgvFinanceLogs.AllowUserToDeleteRows = false;
+            this.dgvFinanceLogs.AllowUserToOrderColumns = true;
+            this.dgvFinanceLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFinanceLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvFinanceLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFinanceLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colFinanceCurrency,
+            this.colFinanceAmount,
+            this.colFinanceDate,
+            this.colFinanceDueDate,
+            this.colCommission,
+            this.colFinanceComment});
+            this.dgvFinanceLogs.ContextMenuStrip = this.paymentLogMgr;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFinanceLogs.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvFinanceLogs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvFinanceLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvFinanceLogs.Location = new System.Drawing.Point(1, 1);
+            this.dgvFinanceLogs.Name = "dgvFinanceLogs";
+            this.dgvFinanceLogs.ReadOnly = true;
+            this.dgvFinanceLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFinanceLogs.Size = new System.Drawing.Size(548, 110);
+            this.dgvFinanceLogs.TabIndex = 5;
+            // 
+            // dgvRefundLogs
+            // 
+            this.dgvRefundLogs.AllowUserToAddRows = false;
+            this.dgvRefundLogs.AllowUserToDeleteRows = false;
+            this.dgvRefundLogs.AllowUserToOrderColumns = true;
+            this.dgvRefundLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRefundLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvRefundLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRefundLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colRefundCurrency,
+            this.colRefundAmount,
+            this.colRefundDate,
+            this.dataGridViewTextBoxColumn2});
+            this.dgvRefundLogs.ContextMenuStrip = this.refundLogMgr;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRefundLogs.DefaultCellStyle = dataGridViewCellStyle14;
+            this.dgvRefundLogs.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvRefundLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvRefundLogs.Location = new System.Drawing.Point(1, 214);
+            this.dgvRefundLogs.Name = "dgvRefundLogs";
+            this.dgvRefundLogs.ReadOnly = true;
+            this.dgvRefundLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRefundLogs.Size = new System.Drawing.Size(548, 114);
+            this.dgvRefundLogs.TabIndex = 3;
+            // 
+            // refundLogMgr
+            // 
+            this.refundLogMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemRefundLogDelete});
+            this.refundLogMgr.Name = "cmuContractMgr";
+            this.refundLogMgr.Size = new System.Drawing.Size(107, 26);
+            // 
+            // menuItemRefundLogDelete
+            // 
+            this.menuItemRefundLogDelete.Name = "menuItemRefundLogDelete";
+            this.menuItemRefundLogDelete.Size = new System.Drawing.Size(106, 22);
+            this.menuItemRefundLogDelete.Text = "&D删除";
+            this.menuItemRefundLogDelete.Click += new System.EventHandler(this.DeleteRefundLog);
+            // 
+            // tabItemLog
+            // 
+            this.tabItemLog.AttachedControl = this.tabPanelLog;
+            this.tabItemLog.Name = "tabItemLog";
+            this.tabItemLog.Text = "融资/付款/还款记录";
             // 
             // tabPanelFlaw
             // 
@@ -2444,6 +2102,241 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabItemFlaw.AttachedControl = this.tabPanelFlaw;
             this.tabItemFlaw.Name = "tabItemFlaw";
             this.tabItemFlaw.Text = "瑕疵处理";
+            // 
+            // tabPanelEDI
+            // 
+            this.tabPanelEDI.Controls.Add(this.btnEDISave);
+            this.tabPanelEDI.Controls.Add(this.groupPanelInvoiceAdv);
+            this.tabPanelEDI.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelEDI.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelEDI.Name = "tabPanelEDI";
+            this.tabPanelEDI.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelEDI.Size = new System.Drawing.Size(550, 329);
+            this.tabPanelEDI.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelEDI.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelEDI.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelEDI.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelEDI.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelEDI.Style.GradientAngle = 90;
+            this.tabPanelEDI.TabIndex = 2;
+            this.tabPanelEDI.TabItem = this.tabItemEDI;
+            // 
+            // btnEDISave
+            // 
+            this.btnEDISave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnEDISave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnEDISave.Location = new System.Drawing.Point(194, 192);
+            this.btnEDISave.Name = "btnEDISave";
+            this.btnEDISave.Size = new System.Drawing.Size(75, 23);
+            this.btnEDISave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnEDISave.TabIndex = 4;
+            this.btnEDISave.Text = "保存";
+            this.btnEDISave.Click += new System.EventHandler(this.SaveEDI);
+            // 
+            // groupPanelInvoiceAdv
+            // 
+            this.groupPanelInvoiceAdv.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelInvoiceAdv.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelInvoiceAdv.Controls.Add(invoiceReferenceNumberLabel);
+            this.groupPanelInvoiceAdv.Controls.Add(this.invoiceReferenceNumberTextBox);
+            this.groupPanelInvoiceAdv.Controls.Add(orderNumberReferenceLabel);
+            this.groupPanelInvoiceAdv.Controls.Add(this.orderNumberReferenceTextBox);
+            this.groupPanelInvoiceAdv.Controls.Add(paymentConditionsLabel);
+            this.groupPanelInvoiceAdv.Controls.Add(valueDateLabel);
+            this.groupPanelInvoiceAdv.Controls.Add(this.paymentConditionsComboBox);
+            this.groupPanelInvoiceAdv.Controls.Add(this.valueDateTextBox);
+            this.groupPanelInvoiceAdv.Controls.Add(secondaryDiscountRateLabel);
+            this.groupPanelInvoiceAdv.Controls.Add(this.secondaryDiscountRateTextBox);
+            this.groupPanelInvoiceAdv.Controls.Add(secondaryDiscountDaysLabel);
+            this.groupPanelInvoiceAdv.Controls.Add(this.secondaryDiscountDaysTextBox);
+            this.groupPanelInvoiceAdv.Controls.Add(primaryDiscountRateLabel);
+            this.groupPanelInvoiceAdv.Controls.Add(this.primaryDiscountRateTextBox);
+            this.groupPanelInvoiceAdv.Controls.Add(primaryDiscountDaysLabel);
+            this.groupPanelInvoiceAdv.Controls.Add(this.primaryDiscountDaysTextBox);
+            this.groupPanelInvoiceAdv.Controls.Add(netPaymentTermsLabel);
+            this.groupPanelInvoiceAdv.Controls.Add(this.netPaymentTermsTextBox);
+            this.groupPanelInvoiceAdv.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelInvoiceAdv.Location = new System.Drawing.Point(1, 1);
+            this.groupPanelInvoiceAdv.Name = "groupPanelInvoiceAdv";
+            this.groupPanelInvoiceAdv.Size = new System.Drawing.Size(548, 185);
+            // 
+            // 
+            // 
+            this.groupPanelInvoiceAdv.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelInvoiceAdv.Style.BackColorGradientAngle = 90;
+            this.groupPanelInvoiceAdv.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelInvoiceAdv.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceAdv.Style.BorderBottomWidth = 1;
+            this.groupPanelInvoiceAdv.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelInvoiceAdv.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceAdv.Style.BorderLeftWidth = 1;
+            this.groupPanelInvoiceAdv.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceAdv.Style.BorderRightWidth = 1;
+            this.groupPanelInvoiceAdv.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelInvoiceAdv.Style.BorderTopWidth = 1;
+            this.groupPanelInvoiceAdv.Style.Class = "";
+            this.groupPanelInvoiceAdv.Style.CornerDiameter = 4;
+            this.groupPanelInvoiceAdv.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelInvoiceAdv.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelInvoiceAdv.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelInvoiceAdv.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelInvoiceAdv.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelInvoiceAdv.StyleMouseOver.Class = "";
+            this.groupPanelInvoiceAdv.TabIndex = 2;
+            // 
+            // invoiceReferenceNumberTextBox
+            // 
+            // 
+            // 
+            // 
+            this.invoiceReferenceNumberTextBox.Border.Class = "TextBoxBorder";
+            this.invoiceReferenceNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "InvoiceReferenceNumber", true));
+            this.invoiceReferenceNumberTextBox.Location = new System.Drawing.Point(145, 156);
+            this.invoiceReferenceNumberTextBox.Name = "invoiceReferenceNumberTextBox";
+            this.invoiceReferenceNumberTextBox.Size = new System.Drawing.Size(120, 20);
+            this.invoiceReferenceNumberTextBox.TabIndex = 17;
+            // 
+            // orderNumberReferenceTextBox
+            // 
+            // 
+            // 
+            // 
+            this.orderNumberReferenceTextBox.Border.Class = "TextBoxBorder";
+            this.orderNumberReferenceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "OrderNumberReference", true));
+            this.orderNumberReferenceTextBox.Location = new System.Drawing.Point(144, 134);
+            this.orderNumberReferenceTextBox.Name = "orderNumberReferenceTextBox";
+            this.orderNumberReferenceTextBox.Size = new System.Drawing.Size(121, 20);
+            this.orderNumberReferenceTextBox.TabIndex = 15;
+            // 
+            // paymentConditionsComboBox
+            // 
+            this.paymentConditionsComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "PaymentConditions", true));
+            this.paymentConditionsComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.paymentConditionsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.paymentConditionsComboBox.FormattingEnabled = true;
+            this.paymentConditionsComboBox.Items.AddRange(new object[] {
+            "1-Open account",
+            "2-Bill of exchange against acceptance",
+            "3-Bill of exchange against payment",
+            "4-Documents through banks",
+            "5-Instalment payment without draft",
+            "6-Instalment payment with draft",
+            "7-Other"});
+            this.paymentConditionsComboBox.Location = new System.Drawing.Point(143, 110);
+            this.paymentConditionsComboBox.Name = "paymentConditionsComboBox";
+            this.paymentConditionsComboBox.Size = new System.Drawing.Size(122, 21);
+            this.paymentConditionsComboBox.TabIndex = 11;
+            // 
+            // valueDateTextBox
+            // 
+            // 
+            // 
+            // 
+            this.valueDateTextBox.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.valueDateTextBox.ButtonDropDown.Visible = true;
+            this.valueDateTextBox.ButtonFreeText.Checked = true;
+            this.valueDateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "ValueDate", true));
+            this.valueDateTextBox.FreeTextEntryMode = true;
+            this.valueDateTextBox.Location = new System.Drawing.Point(423, 109);
+            // 
+            // 
+            // 
+            this.valueDateTextBox.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.valueDateTextBox.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.valueDateTextBox.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.valueDateTextBox.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.valueDateTextBox.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.valueDateTextBox.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.valueDateTextBox.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.valueDateTextBox.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.valueDateTextBox.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.valueDateTextBox.Name = "valueDateTextBox";
+            this.valueDateTextBox.Size = new System.Drawing.Size(100, 20);
+            this.valueDateTextBox.TabIndex = 13;
+            // 
+            // secondaryDiscountRateTextBox
+            // 
+            // 
+            // 
+            // 
+            this.secondaryDiscountRateTextBox.Border.Class = "TextBoxBorder";
+            this.secondaryDiscountRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "SecondaryDiscountRate", true));
+            this.secondaryDiscountRateTextBox.Location = new System.Drawing.Point(423, 83);
+            this.secondaryDiscountRateTextBox.Name = "secondaryDiscountRateTextBox";
+            this.secondaryDiscountRateTextBox.Size = new System.Drawing.Size(100, 20);
+            this.secondaryDiscountRateTextBox.TabIndex = 9;
+            // 
+            // secondaryDiscountDaysTextBox
+            // 
+            // 
+            // 
+            // 
+            this.secondaryDiscountDaysTextBox.Border.Class = "TextBoxBorder";
+            this.secondaryDiscountDaysTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "SecondaryDiscountDays", true));
+            this.secondaryDiscountDaysTextBox.Location = new System.Drawing.Point(143, 83);
+            this.secondaryDiscountDaysTextBox.Name = "secondaryDiscountDaysTextBox";
+            this.secondaryDiscountDaysTextBox.Size = new System.Drawing.Size(122, 20);
+            this.secondaryDiscountDaysTextBox.TabIndex = 5;
+            // 
+            // primaryDiscountRateTextBox
+            // 
+            // 
+            // 
+            // 
+            this.primaryDiscountRateTextBox.Border.Class = "TextBoxBorder";
+            this.primaryDiscountRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "PrimaryDiscountRate", true));
+            this.primaryDiscountRateTextBox.Location = new System.Drawing.Point(423, 60);
+            this.primaryDiscountRateTextBox.Name = "primaryDiscountRateTextBox";
+            this.primaryDiscountRateTextBox.Size = new System.Drawing.Size(100, 20);
+            this.primaryDiscountRateTextBox.TabIndex = 7;
+            // 
+            // primaryDiscountDaysTextBox
+            // 
+            // 
+            // 
+            // 
+            this.primaryDiscountDaysTextBox.Border.Class = "TextBoxBorder";
+            this.primaryDiscountDaysTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "PrimaryDiscountDays", true));
+            this.primaryDiscountDaysTextBox.Location = new System.Drawing.Point(143, 60);
+            this.primaryDiscountDaysTextBox.Name = "primaryDiscountDaysTextBox";
+            this.primaryDiscountDaysTextBox.Size = new System.Drawing.Size(122, 20);
+            this.primaryDiscountDaysTextBox.TabIndex = 3;
+            // 
+            // netPaymentTermsTextBox
+            // 
+            // 
+            // 
+            // 
+            this.netPaymentTermsTextBox.Border.Class = "TextBoxBorder";
+            this.netPaymentTermsTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.invoiceBindingSource, "NetPaymentTerms", true));
+            this.netPaymentTermsTextBox.Location = new System.Drawing.Point(143, 7);
+            this.netPaymentTermsTextBox.Multiline = true;
+            this.netPaymentTermsTextBox.Name = "netPaymentTermsTextBox";
+            this.netPaymentTermsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.netPaymentTermsTextBox.Size = new System.Drawing.Size(380, 47);
+            this.netPaymentTermsTextBox.TabIndex = 1;
+            // 
+            // tabItemEDI
+            // 
+            this.tabItemEDI.AttachedControl = this.tabPanelEDI;
+            this.tabItemEDI.Name = "tabItemEDI";
+            this.tabItemEDI.Text = "更多";
             // 
             // tabControlPanelDispute
             // 
@@ -2886,6 +2779,140 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.Width = 168;
             // 
+            // colFinanceCurrency
+            // 
+            this.colFinanceCurrency.DataPropertyName = "FinanceCurrency";
+            this.colFinanceCurrency.HeaderText = "币别";
+            this.colFinanceCurrency.Name = "colFinanceCurrency";
+            this.colFinanceCurrency.ReadOnly = true;
+            // 
+            // colFinanceAmount
+            // 
+            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            dataGridViewCellStyle6.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colFinanceAmount.HeaderText = "融资金额";
+            this.colFinanceAmount.Name = "colFinanceAmount";
+            this.colFinanceAmount.ReadOnly = true;
+            // 
+            // colFinanceDate
+            // 
+            this.colFinanceDate.DataPropertyName = "FinanceDate";
+            dataGridViewCellStyle7.Format = "d";
+            dataGridViewCellStyle7.NullValue = null;
+            this.colFinanceDate.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colFinanceDate.HeaderText = "融资日";
+            this.colFinanceDate.Name = "colFinanceDate";
+            this.colFinanceDate.ReadOnly = true;
+            // 
+            // colFinanceDueDate
+            // 
+            this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
+            this.colFinanceDueDate.HeaderText = "融资到期日";
+            this.colFinanceDueDate.Name = "colFinanceDueDate";
+            this.colFinanceDueDate.ReadOnly = true;
+            // 
+            // colCommission
+            // 
+            this.colCommission.DataPropertyName = "Commission";
+            dataGridViewCellStyle8.Format = "N2";
+            this.colCommission.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colCommission.HeaderText = "手续费";
+            this.colCommission.Name = "colCommission";
+            this.colCommission.ReadOnly = true;
+            // 
+            // colFinanceComment
+            // 
+            this.colFinanceComment.DataPropertyName = "Comment";
+            this.colFinanceComment.HeaderText = "备注";
+            this.colFinanceComment.Name = "colFinanceComment";
+            this.colFinanceComment.ReadOnly = true;
+            // 
+            // colPaymentCurrency
+            // 
+            this.colPaymentCurrency.DataPropertyName = "PaymentCurrency";
+            this.colPaymentCurrency.HeaderText = "币别";
+            this.colPaymentCurrency.Name = "colPaymentCurrency";
+            this.colPaymentCurrency.ReadOnly = true;
+            // 
+            // colPaymentAmount
+            // 
+            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colPaymentAmount.HeaderText = "付款金额";
+            this.colPaymentAmount.Name = "colPaymentAmount";
+            this.colPaymentAmount.ReadOnly = true;
+            // 
+            // colPaymentDate
+            // 
+            this.colPaymentDate.DataPropertyName = "PaymentDate";
+            dataGridViewCellStyle3.Format = "d";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colPaymentDate.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colPaymentDate.HeaderText = "付款日";
+            this.colPaymentDate.Name = "colPaymentDate";
+            this.colPaymentDate.ReadOnly = true;
+            // 
+            // colCreditNoteNo
+            // 
+            this.colCreditNoteNo.DataPropertyName = "CreditNoteNo";
+            this.colCreditNoteNo.HeaderText = "贷项通知编号";
+            this.colCreditNoteNo.Name = "colCreditNoteNo";
+            this.colCreditNoteNo.ReadOnly = true;
+            this.colCreditNoteNo.Visible = false;
+            // 
+            // colCreditNoteDate
+            // 
+            this.colCreditNoteDate.DataPropertyName = "CreditNoteDate";
+            this.colCreditNoteDate.HeaderText = "贷项通知日";
+            this.colCreditNoteDate.Name = "colCreditNoteDate";
+            this.colCreditNoteDate.ReadOnly = true;
+            this.colCreditNoteDate.Visible = false;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
+            // 
+            // colRefundCurrency
+            // 
+            this.colRefundCurrency.DataPropertyName = "RefundCurrency";
+            this.colRefundCurrency.HeaderText = "币别";
+            this.colRefundCurrency.Name = "colRefundCurrency";
+            this.colRefundCurrency.ReadOnly = true;
+            // 
+            // colRefundAmount
+            // 
+            this.colRefundAmount.DataPropertyName = "RefundAmount";
+            dataGridViewCellStyle11.Format = "N2";
+            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colRefundAmount.HeaderText = "还款金额";
+            this.colRefundAmount.Name = "colRefundAmount";
+            this.colRefundAmount.ReadOnly = true;
+            // 
+            // colRefundDate
+            // 
+            this.colRefundDate.DataPropertyName = "RefundDate";
+            dataGridViewCellStyle12.Format = "d";
+            dataGridViewCellStyle12.NullValue = null;
+            this.colRefundDate.DefaultCellStyle = dataGridViewCellStyle12;
+            this.colRefundDate.HeaderText = "还款日";
+            this.colRefundDate.Name = "colRefundDate";
+            this.colRefundDate.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Comment";
+            dataGridViewCellStyle13.Format = "d";
+            dataGridViewCellStyle13.NullValue = null;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle13;
+            this.dataGridViewTextBoxColumn2.HeaderText = "备注";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
             // InvoiceDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2899,12 +2926,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.Text = "发票详细信息";
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
-            this.tabPanelLog.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).EndInit();
-            this.paymentLogMgr.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFinanceLogs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).EndInit();
-            this.refundLogMgr.ResumeLayout(false);
             this.tabPanelInvoice.ResumeLayout(false);
             this.groupPanelInvoiceProcess.ResumeLayout(false);
             this.groupPanelInvoiceProcess.PerformLayout();
@@ -2918,16 +2939,22 @@ namespace CMBC.EasyFactor.ARMgr
             this.groupPanelInvoiceBasic.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dueDateTextBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceDateTextBox)).EndInit();
-            this.tabPanelEDI.ResumeLayout(false);
-            this.groupPanelInvoiceAdv.ResumeLayout(false);
-            this.groupPanelInvoiceAdv.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).EndInit();
+            this.tabPanelLog.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).EndInit();
+            this.paymentLogMgr.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFinanceLogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).EndInit();
+            this.refundLogMgr.ResumeLayout(false);
             this.tabPanelFlaw.ResumeLayout(false);
             this.groupPanelFlawResolve.ResumeLayout(false);
             this.groupPanelFlawResolve.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).EndInit();
             this.groupPanelFlaw.ResumeLayout(false);
             this.groupPanelFlaw.PerformLayout();
+            this.tabPanelEDI.ResumeLayout(false);
+            this.groupPanelInvoiceAdv.ResumeLayout(false);
+            this.groupPanelInvoiceAdv.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.valueDateTextBox)).EndInit();
             this.tabControlPanelDispute.ResumeLayout(false);
             this.groupPanelDisputeResolve.ResumeLayout(false);
             this.groupPanelDisputeResolve.PerformLayout();
@@ -2949,9 +2976,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.TabControlPanel tabPanelLog;
         private DevComponents.DotNetBar.TabItem tabItemLog;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvRefundLogs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DevComponents.DotNetBar.Controls.TextBoxX grossInterestTextBox;
         private System.Windows.Forms.ContextMenuStrip refundLogMgr;
         private System.Windows.Forms.ToolStripMenuItem menuItemRefundLogDelete;
@@ -2959,11 +2983,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemPaymentLogDelete;
         private DevComponents.DotNetBar.ButtonX btnEDISave;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvPaymentLogs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvFinanceLogs;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -2975,10 +2994,21 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     }
 }
