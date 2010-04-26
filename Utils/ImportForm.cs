@@ -1274,6 +1274,186 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+
+            List<InvoicePaymentBatch> paymentBatchList = new List<InvoicePaymentBatch>();
+
+            this.context = new DBDataContext();
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+
+                try
+                {
+                    InvoiceAssignBatch assignBatch = null;
+                    InvoicePaymentBatch paymentBatch = null;
+                    Invoice invoice = null;
+                    InvoicePaymentLog log = null;
+                    CreditNote creditNote = null;
+                    List<CreditNote> creditNoteList = new List<CreditNote>();
+
+                    for (int row = 3; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+                        //int column = 12;
+                        int column = 1;
+                        string assignBatchCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
+                        string creditNoteNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
+                        string invoiceNo = String.Format("{0:G}", valueArray[row, 5]).Trim();
+
+                        if (String.IsNullOrEmpty(assignBatchCode))
+                        {
+                            if (String.IsNullOrEmpty(creditNoteNo))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                throw new Exception("业务编号不能为空，不能导入");
+                            }
+                        }
+                        else
+                        {
+                            if (assignBatchCode.Length > 20)
+                            {
+                                break;
+                            }
+
+                            if (assignBatch == null || assignBatch.AssignBatchNo != assignBatchCode)
+                            {
+                                assignBatch = context.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == assignBatchCode);
+
+                                if (assignBatch == null)
+                                {
+                                    throw new Exception("业务编号错误，不能导入：" + assignBatchCode);
+                                }
+
+                                CDA cda = assignBatch.Case.ActiveCDA;
+                                if (cda == null)
+                                {
+                                    throw new Exception("没有有效的额度通知书: " + assignBatchCode);
+                                }
+                            }
+
+                            if (String.IsNullOrEmpty(creditNoteNo))
+                            {
+                                throw new Exception("贷项通知号不能为空，不能导入，业务编号： " + assignBatchCode);
+                            }
+
+                            if (String.IsNullOrEmpty(invoiceNo))
+                            {
+                                throw new Exception("对应发票号不能为空，不能导入，业务编号： " + assignBatchCode);
+                            }
+                        }
+
+                        invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        if (invoice == null)
+                        {
+                            throw new Exception("发票号错误，不能导入，发票号：" + invoiceNo);
+                        }
+
+                        creditNote = context.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == creditNoteNo);
+                        if (creditNote == null)
+                        {
+                            creditNote = creditNoteList.SingleOrDefault(c => c.CreditNoteNo == creditNoteNo);
+                            if (creditNote == null)
+                            {
+                                creditNote = new CreditNote();
+                                creditNote.CreditNoteNo = creditNoteNo;
+                                creditNoteList.Add(creditNote);
+                            }
+                        }
+
+                        log = new InvoicePaymentLog();
+                        log.CreditNote = creditNote;
+
+                        string creditNoteAmountStr = String.Format("{0:G}", valueArray[row, column++]);
+                        double creditNoteAmount = 0;
+                        if (String.IsNullOrEmpty(creditNoteAmountStr))
+                        {
+                            throw new Exception("贷项通知金额不能为空，不能导入：" + creditNoteNo);
+                        }
+                        if (Double.TryParse(creditNoteAmountStr, out creditNoteAmount))
+                        {
+                            log.PaymentAmount = creditNoteAmount;
+                        }
+                        else
+                        {
+                            throw new Exception("贷项通知金额类型异常，不能导入：" + creditNoteNo);
+                        }
+
+                        string creditNoteDateStr = String.Format("{0:G}", valueArray[row, column++]);
+                        if (String.IsNullOrEmpty(creditNoteDateStr))
+                        {
+                            throw new Exception("贷项通知日不能为空，不能导入：" + creditNoteNo);
+                        }
+
+                        DateTime creditNoteDate = default(DateTime);
+                        if (DateTime.TryParse(creditNoteDateStr, out creditNoteDate))
+                        {
+                            creditNote.CreditNoteDate = creditNoteDate;
+                        }
+                        else
+                        {
+                            throw new Exception("贷项通知日类型异常，不能导入：" + creditNoteNo);
+                        }
+
+                        string comment = String.Format("{0:G}", valueArray[row, 6]);
+                        log.Comment = comment;
+
+                        if (paymentBatch == null || paymentBatch.CaseCode != assignBatch.CaseCode)
+                        {
+                            paymentBatch = new InvoicePaymentBatch();
+                            paymentBatch.Case = assignBatch.Case;
+                            paymentBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
+                            paymentBatch.Comment = comment;
+                            paymentBatch.InputDate = DateTime.Now;
+                            paymentBatch.IsCreateMsg = false;
+                            paymentBatch.PaymentDate = DateTime.Now;
+                            paymentBatch.PaymentType = "贷项通知";
+                            paymentBatch.CreateUserName = App.Current.CurUser.Name;
+                            paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(DateTime.Now);
+                        }
+
+                        if (TypeUtil.GreaterZero(creditNoteAmount - invoice.AssignOutstanding))
+                        {
+                            throw new Exception("贷项通知金额不能大于转让余额，不能导入：" + creditNoteNo);
+                        }
+
+                        log.Invoice = invoice;
+                        log.InvoicePaymentBatch = paymentBatch;
+                        invoice.CaculatePayment();
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
+                    context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    foreach (InvoicePaymentBatch batch in paymentBatchList)
+                    {
+                        foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
+                        {
+                            Invoice invoice = log.Invoice;
+                            log.Invoice = null;
+                            log.CreditNote = null;
+                            invoice.CaculatePayment();
+                        }
+
+                        batch.Case = null;
+                    }
+
+                    throw e1;
+                }
+            }
+
+            worker.ReportProgress(100);
             this.workbook.Close(false, fileName, null);
             this.ReleaseResource();
             return result;
