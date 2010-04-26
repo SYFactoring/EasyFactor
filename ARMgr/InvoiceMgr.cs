@@ -682,7 +682,7 @@ namespace CMBC.EasyFactor.ARMgr
                                 && (endDate != this.dateTo.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
                                 && (needAssignOutstanding ? invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount + assignOustanding < -0.0001 : true)
                                 && (needFinanceOutstanding ? invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() + financeOutstanding < -0.0001 : true)
-                              orderby invoice.AssignDate
+                              orderby invoice.InvoiceAssignBatch.AssignDate
                               select invoice;
 
             this.bs.DataSource = queryResult;
