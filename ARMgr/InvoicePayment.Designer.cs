@@ -128,8 +128,8 @@
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoicePaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditNoteNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditNoteDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditNoteNo2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditNoteDate2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             paymentBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             paymentDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -559,8 +559,8 @@
             this.colDueDate,
             this.colInvoicePaymentAmount,
             this.colPaymentAmount,
-            this.colCreditNoteNo,
-            this.colCreditNoteDate});
+            this.colCreditNoteNo2,
+            this.colCreditNoteDate2});
             this.dgvLogs.ContextMenuStrip = this.cmuInvoicePayment;
             this.dgvLogs.DataSource = this.logsBindingSource;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -759,17 +759,17 @@
             this.colPaymentAmount.HeaderText = "本次付款金额";
             this.colPaymentAmount.Name = "colPaymentAmount";
             // 
-            // colCreditNoteNo
+            // colCreditNoteNo2
             // 
-            this.colCreditNoteNo.DataPropertyName = "CreditNoteNo";
-            this.colCreditNoteNo.HeaderText = "贷项通知号";
-            this.colCreditNoteNo.Name = "colCreditNoteNo";
+            this.colCreditNoteNo2.DataPropertyName = "CreditNoteNo2";
+            this.colCreditNoteNo2.HeaderText = "贷项通知号";
+            this.colCreditNoteNo2.Name = "colCreditNoteNo2";
             // 
-            // colCreditNoteDate
+            // colCreditNoteDate2
             // 
-            this.colCreditNoteDate.DataPropertyName = "CreditNoteDate";
-            this.colCreditNoteDate.HeaderText = "贷项通知日";
-            this.colCreditNoteDate.Name = "colCreditNoteDate";
+            this.colCreditNoteDate2.DataPropertyName = "CreditNoteDate2";
+            this.colCreditNoteDate2.HeaderText = "贷项通知日";
+            this.colCreditNoteDate2.Name = "colCreditNoteDate2";
             // 
             // InvoicePayment
             // 
@@ -833,7 +833,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoicePaymentAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate2;
     }
 }

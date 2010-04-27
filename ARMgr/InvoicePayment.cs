@@ -108,13 +108,13 @@ namespace CMBC.EasyFactor.ARMgr
             }
             if (paymentType == OpPaymentType.CREDIT_NOTE_PAYMENT)
             {
-                colCreditNoteDate.Visible = true;
-                colCreditNoteNo.Visible = true;
+                colCreditNoteDate2.Visible = true;
+                colCreditNoteNo2.Visible = true;
             }
             else
             {
-                colCreditNoteDate.Visible = false;
-                colCreditNoteNo.Visible = false;
+                colCreditNoteDate2.Visible = false;
+                colCreditNoteNo2.Visible = false;
             }
 
             colCheckBox.ReadOnly = false;
@@ -166,6 +166,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void ClickLog(InvoicePaymentLog log)
         {
             log.PaymentAmount = log.AssignOutstanding;
+            log.CreditNoteDate2 = DateTime.Now;
         }
 
         /// <summary>
@@ -268,7 +269,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colAssignDate || col == colDueDate || col == colCreditNoteDate)
+            if (col == colAssignDate || col == colDueDate || col == colCreditNoteDate2)
             {
                 DateTime date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -296,7 +297,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colCreditNoteDate)
+            if (col == colCreditNoteDate2)
             {
                 string str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
@@ -317,7 +318,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
-            if (col == colCreditNoteDate)
+            if (col == colCreditNoteDate2)
             {
                 string str = (string)e.FormattedValue;
                 DateTime result;
@@ -497,12 +498,6 @@ namespace CMBC.EasyFactor.ARMgr
             foreach (Invoice invoice in queryResult)
             {
                 InvoicePaymentLog log = new InvoicePaymentLog(invoice);
-                if (paymentType == OpPaymentType.CREDIT_NOTE_PAYMENT)
-                {
-                    CreditNote note = new CreditNote();
-                    log.CreditNote = note;
-                }
-
                 logs.Add(log);
             }
 
@@ -546,16 +541,16 @@ namespace CMBC.EasyFactor.ARMgr
         private void ResetRow(int rowIndex, bool editable)
         {
             this.dgvLogs.Rows[rowIndex].Cells["colPaymentAmount"].ReadOnly = !editable;
-            this.dgvLogs.Rows[rowIndex].Cells["colCreditNoteNo"].ReadOnly = !editable;
-            this.dgvLogs.Rows[rowIndex].Cells["colCreditNoteDate"].ReadOnly = !editable;
+            this.dgvLogs.Rows[rowIndex].Cells["colCreditNoteNo2"].ReadOnly = !editable;
+            this.dgvLogs.Rows[rowIndex].Cells["colCreditNoteDate2"].ReadOnly = !editable;
             if (!editable)
             {
                 InvoicePaymentLog log = (InvoicePaymentLog)this.logsBindingSource.List[rowIndex];
                 log.PaymentAmount = 0;
                 if (log.CreditNote != null)
                 {
-                    log.CreditNoteDate = default(DateTime);
-                    log.CreditNoteNo = null;
+                    log.CreditNoteDate2 = default(DateTime);
+                    log.CreditNoteNo2 = null;
                 }
             }
         }
@@ -621,6 +616,14 @@ namespace CMBC.EasyFactor.ARMgr
                         {
                             invoiceList.Add(log.Invoice);
                         }
+
+                        if (!String.IsNullOrEmpty(log.CreditNoteNo2))
+                        {
+                            CreditNote note = new CreditNote();
+                            note.CreditNoteNo = log.CreditNoteNo2;
+                            note.CreditNoteDate = log.CreditNoteDate2;
+                            log.CreditNote = note;
+                        }
                     }
                 }
 
@@ -640,6 +643,7 @@ namespace CMBC.EasyFactor.ARMgr
                     Invoice invoice = log.Invoice;
                     log.Invoice = null;
                     log.InvoicePaymentBatch = null;
+                    log.CreditNote = null;
                     invoice.CaculatePayment();
                 }
 

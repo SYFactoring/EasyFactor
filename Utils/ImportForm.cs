@@ -1367,6 +1367,10 @@ namespace CMBC.EasyFactor.Utils
                                 creditNoteList.Add(creditNote);
                             }
                         }
+                        else
+                        {
+                            throw new Exception("贷项通知号已存在，不能导入：" + creditNoteNo);
+                        }
 
                         log = new InvoicePaymentLog();
                         log.CreditNote = creditNote;

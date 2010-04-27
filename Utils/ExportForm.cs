@@ -2296,7 +2296,7 @@ namespace CMBC.EasyFactor.Utils
                     if (log.CreditNote != null)
                     {
                         datasheet.Cells[row + 2, column++] = "'" + log.CreditNoteNo;
-                        datasheet.Cells[row + 2, column++] = log.CreditNoteDate;
+                        datasheet.Cells[row + 2, column++] = log.CreditNote.CreditNoteDate;
                     }
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));

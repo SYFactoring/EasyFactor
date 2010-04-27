@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class PaymentBatchDetail : DevComponents.DotNetBar.Office2007Form
     {
-		#region Fields (3) 
+        #region Fields (3)
 
         /// <summary>
         /// 
@@ -31,9 +31,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Enums (1) 
+        #region Enums (1)
 
         /// <summary>
         /// 
@@ -51,11 +51,11 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-		#endregion Enums 
+        #endregion Enums
 
-		#region Constructors (1) 
+        #region Constructors (1)
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="batch"></param>
@@ -82,11 +82,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.UpdateBatchControlStatus();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Methods (7) 
+        #region Methods (7)
 
-		// Private Methods (7) 
+        // Private Methods (7) 
 
         /// <summary>
         /// 
@@ -255,6 +255,6 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(this.diInputDate, false);
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

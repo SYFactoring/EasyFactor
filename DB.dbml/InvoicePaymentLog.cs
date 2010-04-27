@@ -96,6 +96,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double AssignOutstanding2
         {
             get;
@@ -103,17 +106,38 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets
+        /// 
         /// </summary>
-        public DateTime CreditNoteDate
+        public string CreditNoteNo2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? CreditNoteDate2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? CreditNoteDate
         {
             get
             {
-                return this.CreditNote.CreditNoteDate;
-            }
-            set
-            {
-                this.CreditNote.CreditNoteDate = value;
+                if (this.CreditNote != null)
+                {
+                    return this.CreditNote.CreditNoteDate;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 

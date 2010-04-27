@@ -194,11 +194,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
-            if (cda.CDAStatus != ConstStr.CDA.UNCHECK)
-            {
-                MessageBoxEx.Show("此额度通知书已经过审核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
 
             if (MessageBoxEx.Show("是否确认复核通过该额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
@@ -262,6 +257,12 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
+
+            if (cda.CDAStatus == ConstStr.CDA.CHECKED)
+            {
+                MessageBoxEx.Show("此额度通知书已经过审核，不能删除。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             if (MessageBoxEx.Show("是否打算删除额度通知书: " + cda.CDACode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
@@ -478,12 +479,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
-
-            if (cda.CDAStatus != ConstStr.CDA.UNCHECK)
-            {
-                MessageBoxEx.Show("此额度通知书已经过审核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
 
             if (MessageBoxEx.Show("是否确认复核退回该额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
