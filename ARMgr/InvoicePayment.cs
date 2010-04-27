@@ -621,7 +621,7 @@ namespace CMBC.EasyFactor.ARMgr
                         {
                             CreditNote note = new CreditNote();
                             note.CreditNoteNo = log.CreditNoteNo2;
-                            note.CreditNoteDate = log.CreditNoteDate2;
+                            note.CreditNoteDate = log.CreditNoteDate2.GetValueOrDefault();
                             log.CreditNote = note;
                         }
                     }

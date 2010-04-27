@@ -659,6 +659,11 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
+
+                //                ((Worksheet)app.ActiveSheet).Protect(Type.Missing, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
+
                 app.Visible = true;
             }
             catch (Exception e1)
@@ -814,6 +819,8 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("A5", "A5").Font.Size = 22;
                 sheet.get_Range("A1", "A4").RowHeight = 20;
                 sheet.get_Range("A5", "A5").RowHeight = 30;
+
+                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
                 app.Visible = true;
             }
@@ -1188,6 +1195,9 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 23;
+
+                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
+
                 app.Visible = true;
             }
             catch (Exception e1)
