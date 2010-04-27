@@ -226,7 +226,10 @@ namespace CMBC.EasyFactor.ARMgr
             catch (Exception e1)
             {
                 MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            ReportThree(batch);
         }
 
         /// <summary>
@@ -1011,6 +1014,23 @@ namespace CMBC.EasyFactor.ARMgr
 
             MakeReport makeReport = new MakeReport(ReportFinanceImpl);
             GroupBatches(selectedBatches, makeReport);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batch"></param>
+        private void ReportThree(InvoiceAssignBatch batch)
+        {
+            List<InvoiceAssignBatch> selectedBatches = new List<InvoiceAssignBatch>();
+            selectedBatches.Add(batch);
+            MakeReport assignReport = new MakeReport(ReportAssignImpl);
+            GroupBatches(selectedBatches, assignReport);
+            MakeReport financeReport = new MakeReport(ReportFinanceImpl);
+            GroupBatches(selectedBatches, financeReport);
+            MakeReport commissionReport = new MakeReport(ReportCommissionImpl);
+            GroupBatches(selectedBatches, commissionReport);
         }
 
         /// <summary>
