@@ -852,7 +852,7 @@ namespace CMBC.EasyFactor.Utils
                         financeBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
                         financeBatch.InputDate = DateTime.Today;
                         financeBatch.CreateUserName = App.Current.CurUser.Name;
-                        financeBatch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin);
+                        financeBatch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, batchList);
                         financeBatch.Case = assignBatch.Case;
 
                         batchList.Add(financeBatch);
