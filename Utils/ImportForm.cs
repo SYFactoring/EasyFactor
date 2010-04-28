@@ -1100,7 +1100,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatch.PaymentDate = paymentDate;
                                     paymentBatch.PaymentType = paymentType;
                                     paymentBatch.CreateUserName = App.Current.CurUser.Name;
-                                    paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate);
+                                    paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate, paymentBatchList);
                                 }
 
                                 if (TypeUtil.GreaterZero(paymentAmount - invoice.AssignOutstanding))
@@ -1127,7 +1127,7 @@ namespace CMBC.EasyFactor.Utils
                                     refundBatch.RefundDate = paymentDate;
                                     refundBatch.RefundType = paymentType;
                                     refundBatch.CreateUserName = App.Current.CurUser.Name;
-                                    refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(paymentDate);
+                                    refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(paymentDate, refundBatchList);
                                 }
 
                                 if (TypeUtil.GreaterZero(refundAmount - invoice.FinanceOutstanding))
@@ -1420,7 +1420,7 @@ namespace CMBC.EasyFactor.Utils
                             paymentBatch.PaymentDate = DateTime.Now;
                             paymentBatch.PaymentType = "贷项通知";
                             paymentBatch.CreateUserName = App.Current.CurUser.Name;
-                            paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(DateTime.Now);
+                            paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(DateTime.Now, paymentBatchList);
                         }
 
                         if (TypeUtil.GreaterZero(creditNoteAmount - invoice.AssignOutstanding))
