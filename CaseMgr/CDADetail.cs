@@ -338,7 +338,15 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            ClientCreditLine creditLine = cda.FinanceCreditLine;
+            ClientCreditLine creditLine = null;
+            if (cda.Case.IsPool)
+            {
+                creditLine = cda.PoolFinanceCreditLine;
+            }
+            else
+            {
+                creditLine = cda.FinanceCreditLine;
+            }
 
             if (creditLine != null)
             {
@@ -400,15 +408,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            string transactionType = cda.Case.TransactionType;
             ClientCreditLine creditLine = null;
-            if (transactionType == "国内卖方保理" || transactionType == "出口保理")
+            if (cda.Case.IsPool)
             {
-                creditLine = cda.Case.SellerClient.FinanceCreditLine;
+                creditLine = cda.PoolFinanceCreditLine;
             }
             else
             {
-                creditLine = cda.Case.BuyerClient.FinanceCreditLine;
+                creditLine = cda.FinanceCreditLine;
             }
 
             if (creditLine != null && cda.FinanceLinePeriodEnd > creditLine.PeriodEnd)
@@ -648,7 +655,9 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 return;
             }
+
             ClientCreditLine buyerCreditLine = cda.Case.BuyerClient.AssignCreditLine;
+
             if (buyerCreditLine != null)
             {
                 cda.CreditCoverPeriodBegin = buyerCreditLine.PeriodBegin;
@@ -690,7 +699,16 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            ClientCreditLine creditLine = cda.FinanceCreditLine;
+            ClientCreditLine creditLine = null;
+            if (cda.Case.IsPool)
+            {
+                creditLine = cda.PoolFinanceCreditLine;
+            }
+            else
+            {
+                creditLine = cda.FinanceCreditLine;
+            }
+
             if (creditLine != null)
             {
                 cda.FinanceLinePeriodBegin = creditLine.PeriodBegin;

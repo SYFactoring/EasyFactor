@@ -179,6 +179,17 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public ClientCreditLine PoolFinanceCreditLine
+        {
+            get
+            {
+                return Case.SellerClient.PoolFinanceCreditLine;
+            }
+        }
+
         #endregion Properties
 
         #region Methods (3)

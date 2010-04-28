@@ -113,6 +113,30 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// Gets 池融资额度
+        /// </summary>
+        public ClientCreditLine PoolFinanceCreditLine
+        {
+            get
+            {
+                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "池融资额度").ToList();
+                if (creditLines.Count > 1)
+                {
+                    MessageBoxEx.Show("包含多个有效的池融资额度，客户编号: " + this.ClientEDICode, ConstStr.MESSAGE.TITLE_WARNING);
+                    return null;
+                }
+                else if (creditLines.Count == 1)
+                {
+                    return creditLines[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets 保理预付款融资额度
         /// </summary>
         public ClientCreditLine FinanceCreditLine
