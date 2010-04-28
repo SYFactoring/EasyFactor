@@ -134,7 +134,7 @@ namespace CMBC.EasyFactor.Utils
                 return false;
             }
 
-            return Math.Abs(double1.Value) < 0.0001;
+            return Math.Abs(double1.Value) < 0.01;
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace CMBC.EasyFactor.Utils
                 return false;
             }
 
-            return double1 > 0.0001;
+            return double1 > 0.01;
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace CMBC.EasyFactor.Utils
                 return false;
             }
 
-            return double1 < -0.0001;
+            return double1 < -0.01;
         }
 
         /// <summary>
