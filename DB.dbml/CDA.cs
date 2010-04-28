@@ -165,28 +165,21 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                Client client;
-                if (Case.TransactionType == "国内买方保理" || Case.TransactionType == "进口保理")
+                if (Case.IsPool)
                 {
-                    client = Case.BuyerClient;
+                    return Case.SellerClient.PoolFinanceCreditLine;
                 }
                 else
                 {
-                    client = Case.SellerClient;
+                    if (Case.TransactionType == "国内买方保理" || Case.TransactionType == "进口保理")
+                    {
+                        return Case.BuyerClient.FinanceCreditLine ;
+                    }
+                    else
+                    {
+                        return Case.SellerClient.FinanceCreditLine;
+                    }
                 }
-
-                return client.FinanceCreditLine;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ClientCreditLine PoolFinanceCreditLine
-        {
-            get
-            {
-                return Case.SellerClient.PoolFinanceCreditLine;
             }
         }
 

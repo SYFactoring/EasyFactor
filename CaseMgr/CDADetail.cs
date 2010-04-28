@@ -338,15 +338,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            ClientCreditLine creditLine = null;
-            if (cda.Case.IsPool)
-            {
-                creditLine = cda.PoolFinanceCreditLine;
-            }
-            else
-            {
-                creditLine = cda.FinanceCreditLine;
-            }
+            ClientCreditLine creditLine = cda.FinanceCreditLine;
 
             if (creditLine != null)
             {
@@ -408,15 +400,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            ClientCreditLine creditLine = null;
-            if (cda.Case.IsPool)
-            {
-                creditLine = cda.PoolFinanceCreditLine;
-            }
-            else
-            {
-                creditLine = cda.FinanceCreditLine;
-            }
+            ClientCreditLine creditLine = cda.FinanceCreditLine;
 
             if (creditLine != null && cda.FinanceLinePeriodEnd > creditLine.PeriodEnd)
             {
@@ -699,15 +683,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            ClientCreditLine creditLine = null;
-            if (cda.Case.IsPool)
-            {
-                creditLine = cda.PoolFinanceCreditLine;
-            }
-            else
-            {
-                creditLine = cda.FinanceCreditLine;
-            }
+            ClientCreditLine creditLine = cda.FinanceCreditLine;
 
             if (creditLine != null)
             {
@@ -1029,15 +1005,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     this.creditCoverTextBox.Enabled = false;
                 }
 
-                ClientCreditLine financeLine = null;
-                if (cda.Case.TransactionType == "国内买方保理" || cda.Case.TransactionType == "进口保理")
-                {
-                    financeLine = cda.Case.BuyerClient.FinanceCreditLine;
-                }
-                else
-                {
-                    financeLine = cda.Case.SellerClient.FinanceCreditLine;
-                }
+                ClientCreditLine financeLine = cda.FinanceCreditLine;
 
                 if (financeLine == null)
                 {
