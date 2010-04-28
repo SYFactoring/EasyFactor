@@ -1801,6 +1801,7 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
+                datasheet.Cells[1, column++] = "所属地区";
                 datasheet.Cells[1, column++] = "卖方名称";
                 datasheet.Cells[1, column++] = "买方名称";
                 datasheet.Cells[1, column++] = "发票号";
@@ -1847,6 +1848,7 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     Invoice invoice = (Invoice)exportData[row];
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.OwnerDepartment.Location.LocationName;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
@@ -1876,11 +1878,11 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 4 || range.Column == 5 || range.Column == 9 || range.Column == 10)
+                    if (range.Column == 5 || range.Column == 6 || range.Column == 10 || range.Column == 11)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
-                    else if (range.Column == 6 || range.Column == 7 || range.Column == 11 || range.Column == 12)
+                    else if (range.Column == 7 || range.Column == 8 || range.Column == 12 || range.Column == 13)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
