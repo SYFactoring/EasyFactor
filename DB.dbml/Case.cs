@@ -124,7 +124,15 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return Math.Min(this.ActiveCDA.FinanceLineOutstanding.GetValueOrDefault(), this.ValuedAssignOutstanding * this.ActiveCDA.FinanceProportion ?? 0.8);
+                CDA activeCDA = this.ActiveCDA;
+                if (activeCDA == null)
+                {
+                    return this.ValuedAssignOutstanding * 0.8;
+                }
+                else
+                {
+                    return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(), this.ValuedAssignOutstanding * activeCDA.FinanceProportion ?? 0.8);
+                }
             }
         }
 

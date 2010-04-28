@@ -643,15 +643,16 @@ namespace CMBC.EasyFactor.Utils
                                 {
                                     invoice.Commission = commissionAmount;
                                 }
-                                else if (cda.CommissionType == "按转让金额")
-                                {
-                                    invoice.Commission = commissionAmount * cda.Price;
-                                }
                             }
                             else
                             {
                                 throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
                             }
+                        }
+
+                        if (cda.CommissionType == "按转让金额")
+                        {
+                            invoice.Commission = invoice.AssignAmount * cda.Price;
                         }
 
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);

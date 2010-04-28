@@ -917,11 +917,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            if (cda.CDAStatus == ConstStr.CDA.CHECKED)
-            {
-                MessageBoxEx.Show("额度通知书已审核，不能修改", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            //if (cda.CDAStatus == ConstStr.CDA.CHECKED)
+            //{
+            //    MessageBoxEx.Show("额度通知书已审核，不能修改", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return;
+            //}
 
             this.opCDAType = OpCDAType.UPDATE_CDA;
             this.UpdateCDAControlStatus();
