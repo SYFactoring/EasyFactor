@@ -459,10 +459,22 @@ namespace CMBC.EasyFactor.DB.dbml
                     }
                 }
 
+                if (TypeUtil.GreaterZero(refundAmount))
+                {
+                    this.RefundAmount = refundAmount;
+                }
+                else
+                {
+                    this.RefundAmount = null;
+                }
+
                 if (maxDate != default(DateTime))
                 {
                     RefundDate = maxDate;
-                    this.RefundAmount = refundAmount;
+                }
+                else
+                {
+                    RefundDate = null;
                 }
             }
             else

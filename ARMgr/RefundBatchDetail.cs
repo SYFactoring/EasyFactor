@@ -106,9 +106,13 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 InvoiceFinanceLog financeLog = log.InvoiceFinanceLog;
                 log.InvoiceFinanceLog = null;
+                InvoiceRefundBatch batch = log.InvoiceRefundBatch;
+                log.InvoiceRefundBatch = null;
+
                 financeLog.Invoice.CaculateRefund();
+                batch.CaculateRefundAmount();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
-                log.InvoiceRefundBatch.CheckStatus = "未复核";
+                batch.CheckStatus = "未复核";
                 context.SubmitChanges();
             }
             catch (Exception e1)

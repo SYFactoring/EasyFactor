@@ -8813,6 +8813,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
+		private EntitySet<InvoiceRefundBatch> _InvoiceRefundBatches;
+		
 		private EntityRef<Factor> _Factor;
 		
 		private EntityRef<Case> _Case;
@@ -8868,6 +8870,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		public InvoiceFinanceBatch()
 		{
 			this._InvoiceFinanceLogs = new EntitySet<InvoiceFinanceLog>(new Action<InvoiceFinanceLog>(this.attach_InvoiceFinanceLogs), new Action<InvoiceFinanceLog>(this.detach_InvoiceFinanceLogs));
+			this._InvoiceRefundBatches = new EntitySet<InvoiceRefundBatch>(new Action<InvoiceRefundBatch>(this.attach_InvoiceRefundBatches), new Action<InvoiceRefundBatch>(this.detach_InvoiceRefundBatches));
 			this._Factor = default(EntityRef<Factor>);
 			this._Case = default(EntityRef<Case>);
 			this._Client = default(EntityRef<Client>);
@@ -9299,6 +9302,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Association(Name="InvoiceFinanceBatch_InvoiceRefundBatch", Storage="_InvoiceRefundBatches", OtherKey="FinanceBatchNo")]
+		public EntitySet<InvoiceRefundBatch> InvoiceRefundBatches
+		{
+			get
+			{
+				return this._InvoiceRefundBatches;
+			}
+			set
+			{
+				this._InvoiceRefundBatches.Assign(value);
+			}
+		}
+		
 		[Association(Name="Factor_InvoiceFinanceBatch", Storage="_Factor", ThisKey="FactorCode", IsForeignKey=true)]
 		public Factor Factor
 		{
@@ -9428,6 +9444,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_InvoiceFinanceLogs(InvoiceFinanceLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceFinanceBatch = null;
+		}
+		
+		private void attach_InvoiceRefundBatches(InvoiceRefundBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceFinanceBatch = this;
+		}
+		
+		private void detach_InvoiceRefundBatches(InvoiceRefundBatch entity)
 		{
 			this.SendPropertyChanging();
 			entity.InvoiceFinanceBatch = null;
@@ -10276,9 +10304,15 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
+		private System.Nullable<double> _RefundAmount;
+		
+		private string _FinanceBatchNo;
+		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
 		
 		private EntityRef<Case> _Case;
+		
+		private EntityRef<InvoiceFinanceBatch> _InvoiceFinanceBatch;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -10306,12 +10340,17 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckDateChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
+    partial void OnRefundAmountChanging(System.Nullable<double> value);
+    partial void OnRefundAmountChanged();
+    partial void OnFinanceBatchNoChanging(string value);
+    partial void OnFinanceBatchNoChanged();
     #endregion
 		
 		public InvoiceRefundBatch()
 		{
 			this._InvoiceRefundLogs = new EntitySet<InvoiceRefundLog>(new Action<InvoiceRefundLog>(this.attach_InvoiceRefundLogs), new Action<InvoiceRefundLog>(this.detach_InvoiceRefundLogs));
 			this._Case = default(EntityRef<Case>);
+			this._InvoiceFinanceBatch = default(EntityRef<InvoiceFinanceBatch>);
 			OnCreated();
 		}
 		
@@ -10539,6 +10578,50 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[Column(Storage="_RefundAmount", DbType="float", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<double> RefundAmount
+		{
+			get
+			{
+				return this._RefundAmount;
+			}
+			set
+			{
+				if ((this._RefundAmount != value))
+				{
+					this.OnRefundAmountChanging(value);
+					this.SendPropertyChanging();
+					this._RefundAmount = value;
+					this.SendPropertyChanged("RefundAmount");
+					this.OnRefundAmountChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FinanceBatchNo", DbType="NVarChar(50)")]
+		public string FinanceBatchNo
+		{
+			get
+			{
+				return this._FinanceBatchNo;
+			}
+			set
+			{
+				if ((this._FinanceBatchNo != value))
+				{
+					if (this._InvoiceFinanceBatch.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFinanceBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceBatchNo = value;
+					this.SendPropertyChanged("FinanceBatchNo");
+					this.OnFinanceBatchNoChanged();
+				}
+			}
+		}
+		
 		[Association(Name="InvoiceRefundBatch_InvoiceRefundLog", Storage="_InvoiceRefundLogs", OtherKey="RefundBatchNo")]
 		public EntitySet<InvoiceRefundLog> InvoiceRefundLogs
 		{
@@ -10582,6 +10665,40 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._CDACode = default(string);
 					}
 					this.SendPropertyChanged("Case");
+				}
+			}
+		}
+		
+		[Association(Name="InvoiceFinanceBatch_InvoiceRefundBatch", Storage="_InvoiceFinanceBatch", ThisKey="FinanceBatchNo", IsForeignKey=true)]
+		public InvoiceFinanceBatch InvoiceFinanceBatch
+		{
+			get
+			{
+				return this._InvoiceFinanceBatch.Entity;
+			}
+			set
+			{
+				InvoiceFinanceBatch previousValue = this._InvoiceFinanceBatch.Entity;
+				if (((previousValue != value) 
+							|| (this._InvoiceFinanceBatch.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InvoiceFinanceBatch.Entity = null;
+						previousValue.InvoiceRefundBatches.Remove(this);
+					}
+					this._InvoiceFinanceBatch.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceRefundBatches.Add(this);
+						this._FinanceBatchNo = value.FinanceBatchNo;
+					}
+					else
+					{
+						this._FinanceBatchNo = default(string);
+					}
+					this.SendPropertyChanged("InvoiceFinanceBatch");
 				}
 			}
 		}

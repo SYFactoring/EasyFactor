@@ -16,9 +16,18 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceFinanceBatch
     {
-        #region Properties (11)
+        #region Fields (6)
 
         private double? _assignAmount;
+        private double? _commissionAmount;
+        private double? _grossInterestIncome;
+        private double? _handfeeAmount;
+        private double? _marginIncome;
+        private double? _netInterestIncome;
+
+        #endregion Fields
+
+        #region Properties (11)
 
         /// <summary>
         /// Gets
@@ -39,6 +48,35 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return _assignAmount.Value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? PoolFinanceOutstanding
+        {
+            get
+            {
+                return this.FinanceAmount - PoolRefundAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? PoolRefundAmount
+        {
+            get
+            {
+                if (this.InvoiceRefundBatches != null)
+                {
+                    return this.InvoiceRefundBatches.Sum(batch => batch.RefundAmount);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -93,8 +131,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private double? _commissionAmount;
-
         /// <summary>
         /// Gets
         /// </summary>
@@ -131,8 +167,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private double? _grossInterestIncome;
-
         /// <summary>
         /// 毛利息收入
         /// </summary>
@@ -155,8 +189,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _grossInterestIncome.Value;
             }
         }
-
-        private double? _handfeeAmount;
 
         /// <summary>
         /// Gets
@@ -181,8 +213,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private double? _marginIncome;
-
         /// <summary>
         /// 代付利差收入
         /// </summary>
@@ -198,8 +228,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _marginIncome;
             }
         }
-
-        private double? _netInterestIncome;
 
         /// <summary>
         /// 净利息收入
@@ -248,7 +276,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Properties
 
-        #region Methods (3)
+        #region Methods (4)
 
         // Public Methods (2) 
 
@@ -305,7 +333,15 @@ namespace CMBC.EasyFactor.DB.dbml
             string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return financeNo;
         }
-        // Private Methods (1) 
+        // Private Methods (2) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculateFinanceAmount()
+        {
+            this.FinanceAmount = this.InvoiceFinanceLogs.Sum(log => log.FinanceAmount.GetValueOrDefault());
+        }
 
         /// <summary>
         /// 

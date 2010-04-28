@@ -14,9 +14,9 @@ namespace CMBC.EasyFactor.DB.dbml
     /// <summary>
     /// 
     /// </summary>
-    public partial class InvoiceRefundBatch 
+    public partial class InvoiceRefundBatch
     {
-        #region Properties (4)
+        #region Properties (3)
 
         /// <summary>
         /// Gets
@@ -43,23 +43,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double RefundAmount
-        {
-            get
-            {
-                double result = 0;
-                foreach (InvoiceRefundLog refundLog in this.InvoiceRefundLogs)
-                {
-                    result += refundLog.RefundAmount.GetValueOrDefault();
-                }
-
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// Gets
-        /// </summary>
         public string SellerName
         {
             get
@@ -69,6 +52,18 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         #endregion Properties
+
+        #region Methods (3)
+
+        // Public Methods (3) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculateRefundAmount()
+        {
+            this.RefundAmount = this.InvoiceRefundLogs.Sum(log => log.RefundAmount);
+        }
 
         /// <summary>
         /// 
@@ -124,5 +119,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return refundNo;
         }
 
+        #endregion Methods
     }
 }

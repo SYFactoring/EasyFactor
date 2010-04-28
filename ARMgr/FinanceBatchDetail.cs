@@ -127,6 +127,9 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 Invoice invoice = log.Invoice;
                 log.Invoice = null;
+                InvoiceFinanceBatch batch = log.InvoiceFinanceBatch;
+                log.InvoiceFinanceBatch = null;
+
                 foreach (InvoiceRefundLog refundLog in log.InvoiceRefundLogs)
                 {
                     refundLog.InvoiceFinanceLog = null;
@@ -135,6 +138,7 @@ namespace CMBC.EasyFactor.ARMgr
                 context.InvoiceRefundLogs.DeleteAllOnSubmit(log.InvoiceRefundLogs);
                 invoice.CaculateRefund();
                 invoice.CaculateFinance();
+                batch.CaculateFinanceAmount();
                 context.InvoiceFinanceLogs.DeleteOnSubmit(log);
                 log.InvoiceFinanceBatch.CheckStatus = "未复核";
                 context.SubmitChanges();
