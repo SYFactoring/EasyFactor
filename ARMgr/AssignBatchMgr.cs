@@ -228,8 +228,6 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            ReportThree(batch);
         }
 
         /// <summary>
