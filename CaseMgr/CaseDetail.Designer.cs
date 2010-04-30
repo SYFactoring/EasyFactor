@@ -2080,7 +2080,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colFinanceProportion
             // 
             this.colFinanceProportion.DataPropertyName = "FinanceProportion";
-            dataGridViewCellStyle16.Format = "p2";
+            dataGridViewCellStyle16.Format = "p0";
             this.colFinanceProportion.DefaultCellStyle = dataGridViewCellStyle16;
             this.colFinanceProportion.HeaderText = "预付比例";
             this.colFinanceProportion.Name = "colFinanceProportion";

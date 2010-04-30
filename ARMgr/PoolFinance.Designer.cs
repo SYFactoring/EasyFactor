@@ -724,7 +724,7 @@
             // colFinanceProportion
             // 
             this.colFinanceProportion.DataPropertyName = "FinanceProportion";
-            dataGridViewCellStyle4.Format = "p2";
+            dataGridViewCellStyle4.Format = "p0";
             this.colFinanceProportion.DefaultCellStyle = dataGridViewCellStyle4;
             this.colFinanceProportion.HeaderText = "预付比例";
             this.colFinanceProportion.Name = "colFinanceProportion";

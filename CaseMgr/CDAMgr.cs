@@ -660,17 +660,17 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = String.Format("单笔融资不超过发票金额的 {0:0%}", selectedCDA.FinanceProportion);
+                    sheet.Cells[row++, 2] = String.Format("单笔融资不超过发票金额的 {0:p0}", selectedCDA.FinanceProportion);
                 }
 
                 sheet.Cells[row, 1] = "保理费率";
                 if (isZero)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:0.000%}，由买方承担", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
+                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:p4}，由买方承担", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:0.000%}", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
+                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:p4}", selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额", selectedCDA.Price.GetValueOrDefault());
                 }
 
                 sheet.Cells[row, 1] = "单据处理费";
