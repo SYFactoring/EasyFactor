@@ -784,6 +784,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             cda.EFPrice = cda.Price - cda.IFPrice;
             cda.CreateUserName = App.Current.CurUser.Name;
+            cda.CDAStatus = ConstStr.CDA.UNCHECK;
 
             if (cda.CDACode == null)
             {
@@ -799,7 +800,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 try
                 {
-                    cda.CDAStatus = ConstStr.CDA.UNCHECK;
                     context.CDAs.InsertOnSubmit(cda);
                     context.SubmitChanges();
                 }
