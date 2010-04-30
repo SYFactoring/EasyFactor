@@ -1933,33 +1933,35 @@ namespace CMBC.EasyFactor.Utils
             IEnumerable<IGrouping<Client, Case>> groups = null;
             foreach (IGrouping<string, Case> caseGroup in caseGroups)
             {
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return -1;
+                }
+
                 string transactionType = caseGroup.Key;
                 switch (transactionType)
                 {
                     case "国内卖方保理":
                     case "出口保理":
                         groups = caseGroup.GroupBy(c => c.SellerClient);
-                        foreach (IGrouping<Client, Case> group in groups)
-                        {
-                            ExportReportLegarImpl(group);
-                            result += (int)group.LongCount();
-                            worker.ReportProgress((int)((float)result * 100 / (float)size));
-                        }
-
                         break;
                     case "国内买方保理":
                     case "进口保理":
                         groups = caseGroup.GroupBy(c => c.BuyerClient);
-                        foreach (IGrouping<Client, Case> group in groups)
-                        {
-                            ExportReportLegarImpl(group);
-                            result += (int)group.LongCount();
-                            worker.ReportProgress((int)((float)result * 100 / (float)size));
-                        }
-
                         break;
                     default:
                         break;
+                }
+
+                if (groups != null)
+                {
+                    foreach (IGrouping<Client, Case> group in groups)
+                    {
+                        ExportReportLegarImpl(group);
+                        result += (int)group.LongCount();
+                        worker.ReportProgress((int)((float)result * 100 / (float)size));
+                    }
                 }
             }
 
@@ -2747,12 +2749,12 @@ namespace CMBC.EasyFactor.Utils
                     Worksheet sheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
 
                     string name = selectedCase.TargetClient.ToString();
-                    if (name.Length > 30)
+                    if (name.Length > 15)
                     {
-                        name = name.Substring(0, 30);
+                        name = name.Substring(0, 15);
                     }
 
-                    sheet.Name = name;
+                    sheet.Name = String.Format("{0}-{1}", selectedCase.CaseCode, name);
 
                     sheet.get_Range("A1", "Q1").MergeCells = true;
                     sheet.get_Range("A1", "A1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -2780,7 +2782,7 @@ namespace CMBC.EasyFactor.Utils
                         sheet.Cells[6, "B"] = selectedCase.BuyerFactor.ToString();
                     }
 
-                    sheet.get_Range("B7", "I7").MergeCells = true;
+                    sheet.get_Range("B7", "F7").MergeCells = true;
                     sheet.Cells[7, "A"] = "协查意见书编号";
                     List<ClientReview> reviewList = selectedCase.ClientReviews;
                     if (reviewList != null)
@@ -2794,34 +2796,38 @@ namespace CMBC.EasyFactor.Utils
                         sheet.Cells[7, "B"] = reviews;
                     }
 
-                    sheet.Cells[4, "G"] = "总手续费率";
+                    sheet.Cells[4, "G"] = "案件编号";
                     sheet.get_Range(sheet.Cells[4, "H"], sheet.Cells[4, "I"]).MergeCells = true;
+                    sheet.Cells[4, "H"] = selectedCase.CaseCode;
+
+                    sheet.Cells[5, "G"] = "总手续费率";
+                    sheet.get_Range(sheet.Cells[5, "H"], sheet.Cells[5, "I"]).MergeCells = true;
                     if (cda != null)
                     {
-                        sheet.Cells[4, "H"] = String.Format("{0:P}", cda.Price);
+                        sheet.Cells[5, "H"] = String.Format("{0:P}", cda.Price);
                     }
 
-                    sheet.get_Range(sheet.Cells[5, "H"], sheet.Cells[5, "I"]).MergeCells = true;
+                    sheet.get_Range(sheet.Cells[6, "H"], sheet.Cells[6, "I"]).MergeCells = true;
                     if (selectedCase.TransactionType == "进口保理")
                     {
-                        sheet.Cells[5, "G"] = "EF手续费率";
+                        sheet.Cells[6, "G"] = "EF手续费率";
                         if (cda != null)
                         {
-                            sheet.Cells[5, "H"] = String.Format("{0:P}", cda.EFPrice);
+                            sheet.Cells[6, "H"] = String.Format("{0:P}", cda.EFPrice);
                         }
                     }
                     else
                     {
-                        sheet.Cells[5, "G"] = "IF手续费率";
+                        sheet.Cells[6, "G"] = "IF手续费率";
                         if (cda != null)
                         {
-                            sheet.Cells[5, "H"] = String.Format("{0:P}", cda.IFPrice);
+                            sheet.Cells[6, "H"] = String.Format("{0:P}", cda.IFPrice);
                         }
                     }
 
-                    sheet.Cells[6, "G"] = "单据处理费/笔";
-                    sheet.get_Range(sheet.Cells[6, "H"], sheet.Cells[6, "I"]).MergeCells = true;
-                    sheet.Cells[6, "H"] = String.Format("{0} {1:N2}", cda.HandFeeCurr, cda.HandFee);
+                    sheet.Cells[7, "G"] = "单据处理费/笔";
+                    sheet.get_Range(sheet.Cells[7, "H"], sheet.Cells[7, "I"]).MergeCells = true;
+                    sheet.Cells[7, "H"] = String.Format("{0} {1:N2}", cda.HandFeeCurr, cda.HandFee);
 
                     sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
                     sheet.Cells[4, "L"] = "信用风险担保";
@@ -2894,7 +2900,7 @@ namespace CMBC.EasyFactor.Utils
                             for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
                             {
                                 InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
-                                sheet.Cells[row + recordStep, "G"] = financeLog.FinanceAmount;
+                                sheet.Cells[row + recordStep, "H"] = financeLog.FinanceAmount;
                                 sheet.Cells[row + recordStep, "I"] = financeLog.FinanceDate;
                                 sheet.Cells[row + recordStep, "J"] = financeLog.FinanceDueDate;
                                 sheet.Cells[row + recordStep, "O"] = financeLog.FinanceOutstanding;
@@ -2969,14 +2975,14 @@ namespace CMBC.EasyFactor.Utils
                     if (workbook != null)
                     {
                         string ext = ".xls";
-                        if (app.Version.IndexOf("12") != -1)
-                        {
-                            ext = ".xlsx";
-                        }
-                        else
-                        {
-                            ext = ".xls";
-                        }
+                        //if (app.Version.IndexOf("12") != -1)
+                        //{
+                        //    ext = ".xlsx";
+                        //}
+                        //else
+                        //{
+                        //    ext = ".xls";
+                        //}
 
                         string location = caseGroup.First().OwnerDepartment.Location.LocationName;
                         if (!System.IO.Directory.Exists(this.tbFilePath.Text + "\\" + location + "\\"))
@@ -3009,7 +3015,7 @@ namespace CMBC.EasyFactor.Utils
                     app = null;
                 }
 
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                throw e1;
             }
             finally
             {

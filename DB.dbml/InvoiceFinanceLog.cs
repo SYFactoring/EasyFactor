@@ -181,11 +181,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? FinanceOutstanding
+        public double FinanceOutstanding
         {
             get
             {
-                return this.FinanceAmount - RefundAmount;
+                return this.FinanceAmount.GetValueOrDefault() - RefundAmount.GetValueOrDefault();
             }
         }
 

@@ -559,22 +559,29 @@ namespace CMBC.EasyFactor.Utils
                             {
                                 throw new Exception("案件编号错误: " + caseCode);
                             }
-
-                            batch = new InvoiceAssignBatch();
-                            batch.AssignDate = DateTime.Today;
-                            batch.Case = curCase;
-                            batch.CreateUserName = App.Current.CurUser.Name;
-                            batch.InputDate = DateTime.Today;
-                            batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase.CaseCode, batch.AssignDate);
-                            batch.CheckStatus = ConstStr.BATCH.UNCHECK;
-                            batch.IsCreateMsg = false;
-                            batchList.Add(batch);
                         }
 
                         CDA cda = curCase.ActiveCDA;
                         if (cda == null)
                         {
                             throw new Exception("没有有效的额度通知书: " + caseCode);
+                        }
+
+                        if (batch == null || batch.CaseCode != caseCode)
+                        {
+                            batch = batchList.SingleOrDefault(b => b.CaseCode == caseCode);
+                            if (batch == null)
+                            {
+                                batch = new InvoiceAssignBatch();
+                                batch.AssignDate = DateTime.Today;
+                                batch.Case = curCase;
+                                batch.CreateUserName = App.Current.CurUser.Name;
+                                batch.InputDate = DateTime.Today;
+                                batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase.CaseCode, batch.AssignDate, batchList);
+                                batch.CheckStatus = ConstStr.BATCH.UNCHECK;
+                                batch.IsCreateMsg = false;
+                                batchList.Add(batch);
+                            }
                         }
 
                         Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
@@ -2295,6 +2302,7 @@ namespace CMBC.EasyFactor.Utils
                         {
                             throw new Exception("业务编号错误：" + assignBatchCode);
                         }
+
                         if (assignBatch.CheckStatus != ConstStr.BATCH.CHECK)
                         {
                             throw new Exception("该业务未复核（或复核未通过）：" + assignBatchCode);
@@ -2982,7 +2990,6 @@ namespace CMBC.EasyFactor.Utils
             int result = 0;
 
             List<InvoicePaymentBatch> paymentBatchList = new List<InvoicePaymentBatch>();
-            List<InvoiceRefundBatch> refundBatchList = new List<InvoiceRefundBatch>();
 
             this.context = new DBDataContext();
 
@@ -2994,7 +3001,6 @@ namespace CMBC.EasyFactor.Utils
                 {
                     InvoiceAssignBatch assignBatch = null;
                     InvoicePaymentBatch paymentBatch = null;
-                    InvoiceRefundBatch refundBatch = null;
                     Invoice invoice = null;
                     bool isInInvoice = false;
 
@@ -3080,23 +3086,6 @@ namespace CMBC.EasyFactor.Utils
                             }
                         }
 
-                        string refundAmountStr = String.Format("{0:G}", valueArray[row, column++]);
-                        double refundAmount = 0;
-                        if (!String.IsNullOrEmpty(refundAmountStr))
-                        {
-                            if (!Double.TryParse(refundAmountStr, out refundAmount))
-                            {
-                                if (isInInvoice)
-                                {
-                                    throw new Exception("冲销融资金额类型异常，不能导入：" + invoiceNo);
-                                }
-                                else
-                                {
-                                    throw new Exception("冲销融资金额类型异常，不能导入：" + assignBatchCode);
-                                }
-                            }
-                        }
-
                         string paymentDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(paymentDateStr))
                         {
@@ -3125,11 +3114,13 @@ namespace CMBC.EasyFactor.Utils
 
                         string comment = String.Format("{0:G}", valueArray[row, column++]);
 
-                        if (isInInvoice)
+
+                        if (TypeUtil.GreaterZero(paymentAmount))
                         {
-                            if (TypeUtil.GreaterZero(paymentAmount))
+                            if (isInInvoice)
                             {
-                                if (paymentBatch == null || paymentBatch.PaymentDate != paymentDate || paymentBatch.CaseCode != assignBatch.CaseCode)
+                                paymentBatch = paymentBatchList.SingleOrDefault(batch => batch.CaseCode == assignBatch.CaseCode && batch.PaymentDate == paymentDate && batch.PaymentType == paymentType);
+                                if (paymentBatch == null)
                                 {
                                     paymentBatch = new InvoicePaymentBatch();
                                     paymentBatch.Case = assignBatch.Case;
@@ -3140,7 +3131,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatch.PaymentDate = paymentDate;
                                     paymentBatch.PaymentType = paymentType;
                                     paymentBatch.CreateUserName = App.Current.CurUser.Name;
-                                    paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate, paymentBatchList);
+                                    paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate);
                                 }
 
                                 if (TypeUtil.GreaterZero(paymentAmount - invoice.AssignOutstanding))
@@ -3154,44 +3145,7 @@ namespace CMBC.EasyFactor.Utils
                                 log.InvoicePaymentBatch = paymentBatch;
                                 invoice.CaculatePayment();
                             }
-
-                            if (TypeUtil.GreaterZero(refundAmount))
-                            {
-                                if (refundBatch == null || refundBatch.RefundDate != paymentDate || refundBatch.CaseCode != assignBatch.CaseCode)
-                                {
-                                    refundBatch = new InvoiceRefundBatch();
-                                    refundBatch.Case = assignBatch.Case;
-                                    refundBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
-                                    refundBatch.Comment = comment;
-                                    refundBatch.InputDate = DateTime.Now;
-                                    refundBatch.RefundDate = paymentDate;
-                                    refundBatch.RefundType = paymentType;
-                                    refundBatch.CreateUserName = App.Current.CurUser.Name;
-                                    refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(paymentDate, refundBatchList);
-                                }
-
-                                if (TypeUtil.GreaterZero(refundAmount - invoice.FinanceOutstanding))
-                                {
-                                    throw new Exception("冲销融资金额不能大于融资余额，不能导入：" + invoiceNo);
-                                }
-
-                                foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs.OrderBy(i => i.FinanceDueDate))
-                                {
-                                    if (TypeUtil.GreaterZero(refundAmount))
-                                    {
-                                        InvoiceRefundLog log = new InvoiceRefundLog();
-                                        log.RefundAmount = Math.Min(refundAmount, financeLog.FinanceOutstanding.GetValueOrDefault());
-                                        log.InvoiceFinanceLog = financeLog;
-                                        refundAmount -= log.RefundAmount.Value;
-                                        log.InvoiceRefundBatch = refundBatch;
-                                        financeLog.Invoice.CaculateRefund();
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (TypeUtil.GreaterZero(paymentAmount))
+                            else
                             {
                                 paymentBatch = new InvoicePaymentBatch();
                                 paymentBatch.Case = assignBatch.Case;
@@ -3201,7 +3155,7 @@ namespace CMBC.EasyFactor.Utils
                                 paymentBatch.IsCreateMsg = false;
                                 paymentBatch.PaymentDate = paymentDate;
                                 paymentBatch.PaymentType = paymentType;
-                                paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate);
+                                paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate, paymentBatchList);
 
                                 if (TypeUtil.GreaterZero(paymentAmount - assignBatch.AssignOutstanding))
                                 {
@@ -3221,44 +3175,6 @@ namespace CMBC.EasyFactor.Utils
                                     }
                                 }
                             }
-
-                            if (TypeUtil.GreaterZero(refundAmount))
-                            {
-                                refundBatch = new InvoiceRefundBatch();
-                                refundBatch.Case = assignBatch.Case;
-                                refundBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
-                                refundBatch.Comment = comment;
-                                refundBatch.InputDate = DateTime.Now;
-                                refundBatch.RefundDate = paymentDate;
-                                refundBatch.RefundType = paymentType;
-                                refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(paymentDate);
-
-                                if (TypeUtil.GreaterZero(refundAmount - assignBatch.FinanceOutstanding))
-                                {
-                                    throw new Exception("冲销融资金额不能大于融资余额，不能导入：" + assignBatchCode);
-                                }
-
-                                List<InvoiceFinanceLog> financeLogs = new List<InvoiceFinanceLog>();
-                                foreach (Invoice inv in assignBatch.Invoices)
-                                {
-                                    financeLogs.AddRange(inv.InvoiceFinanceLogs);
-                                }
-
-                                foreach (InvoiceFinanceLog financeLog in financeLogs.OrderBy(f => f.FinanceDueDate))
-                                {
-                                    if (TypeUtil.GreaterZero(refundAmount))
-                                    {
-                                        InvoiceRefundLog log = new InvoiceRefundLog();
-                                        log.RefundAmount = Math.Min(refundAmount, financeLog.FinanceOutstanding.GetValueOrDefault());
-                                        log.InvoiceFinanceLog = financeLog;
-                                        log.InvoiceRefundBatch = refundBatch;
-                                        financeLog.Invoice.CaculateRefund();
-                                        refundAmount -= log.RefundAmount.Value;
-                                    }
-                                }
-
-                            }
-
                         }
 
                         result++;
@@ -3276,18 +3192,6 @@ namespace CMBC.EasyFactor.Utils
                             Invoice invoice = log.Invoice;
                             log.Invoice = null;
                             invoice.CaculatePayment();
-                        }
-
-                        batch.Case = null;
-                    }
-
-                    foreach (InvoiceRefundBatch batch in refundBatchList)
-                    {
-                        foreach (InvoiceRefundLog log in batch.InvoiceRefundLogs)
-                        {
-                            InvoiceFinanceLog financeLog = log.InvoiceFinanceLog;
-                            log.InvoiceFinanceLog = null;
-                            financeLog.Invoice.CaculateRefund();
                         }
 
                         batch.Case = null;
@@ -3724,8 +3628,6 @@ namespace CMBC.EasyFactor.Utils
                 {
                     InvoiceAssignBatch assignBatch = null;
                     InvoiceRefundBatch refundBatch = null;
-                    Invoice invoice = null;
-                    bool isInInvoice = false;
 
                     for (int row = 3; row <= size; row++)
                     {
@@ -3737,18 +3639,10 @@ namespace CMBC.EasyFactor.Utils
                         //int column = 12;
                         int column = 1;
                         string assignBatchCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
-                        string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
 
                         if (String.IsNullOrEmpty(assignBatchCode))
                         {
-                            if (String.IsNullOrEmpty(invoiceNo))
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                throw new Exception("业务编号不能为空，不能导入");
-                            }
+                            throw new Exception("业务编号不能为空，不能导入");
                         }
                         else
                         {
@@ -3770,27 +3664,11 @@ namespace CMBC.EasyFactor.Utils
                                 throw new Exception("没有有效的额度通知书: " + assignBatchCode);
                             }
 
-                            if (assignBatch.Case.TransactionType == "出口保理" || assignBatch.Case.TransactionType == "进口保理")
-                            {
-                                isInInvoice = true;
-                            }
-
-                            if (isInInvoice && String.IsNullOrEmpty(invoiceNo))
-                            {
-                                throw new Exception("本案为国际保理案，发票编号不能为空，不能导入，业务编号： " + assignBatchCode);
-                            }
-                        }
-
-                        if (isInInvoice)
-                        {
-                            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                            if (invoice == null)
-                            {
-                                throw new Exception("发票号错误，不能导入，发票号：" + invoiceNo);
-                            }
                         }
 
                         string refundType = String.Format("{0:G}", valueArray[row, column++]);
+
+                        string refundCurrency = String.Format("{0:G}", valueArray[row, column++]);
 
                         string refundAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         double refundAmount = 0;
@@ -3798,116 +3676,74 @@ namespace CMBC.EasyFactor.Utils
                         {
                             if (!Double.TryParse(refundAmountStr, out refundAmount))
                             {
-                                if (isInInvoice)
-                                {
-                                    throw new Exception("冲销融资金额类型异常，不能导入：" + invoiceNo);
-                                }
-                                else
-                                {
-                                    throw new Exception("冲销融资金额类型异常，不能导入：" + assignBatchCode);
-                                }
+                                throw new Exception("冲销融资金额类型异常，不能导入：" + assignBatchCode);
                             }
                         }
 
                         string refundDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(refundDateStr))
                         {
-                            if (isInInvoice)
-                            {
-                                throw new Exception("销帐日不能为空，不能导入：" + invoiceNo);
-                            }
-                            else
-                            {
-                                throw new Exception("销帐日不能为空，不能导入：" + assignBatchCode);
-                            }
+                            throw new Exception("销帐日不能为空，不能导入：" + assignBatchCode);
                         }
 
                         DateTime refundDate = default(DateTime);
                         if (!DateTime.TryParse(refundDateStr, out refundDate))
                         {
-                            if (isInInvoice)
-                            {
-                                throw new Exception("销帐日类型异常，不能导入：" + invoiceNo);
-                            }
-                            else
-                            {
-                                throw new Exception("销帐日类型异常，不能导入：" + assignBatchCode);
-                            }
+                            throw new Exception("销帐日类型异常，不能导入：" + assignBatchCode);
                         }
 
                         string comment = String.Format("{0:G}", valueArray[row, column++]);
 
-                        if (isInInvoice)
+
+                        if (TypeUtil.GreaterZero(refundAmount))
                         {
-                            if (TypeUtil.GreaterZero(refundAmount))
+                            refundBatch = new InvoiceRefundBatch();
+                            refundBatch.Case = assignBatch.Case;
+                            refundBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
+                            refundBatch.Comment = comment;
+                            refundBatch.InputDate = DateTime.Now;
+                            refundBatch.RefundDate = refundDate;
+                            refundBatch.RefundType = refundType;
+                            refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(refundDate, refundBatchList);
+
+                            if (refundCurrency != assignBatch.BatchCurrency)
                             {
-                                if (refundBatch == null || refundBatch.RefundDate != refundDate || refundBatch.CaseCode != assignBatch.CaseCode)
+                                double rate = Exchange.GetExchangeRate(refundCurrency, assignBatch.BatchCurrency);
+                                if (TypeUtil.GreaterZero(refundAmount * rate - assignBatch.FinanceOutstanding))
                                 {
-                                    refundBatch = new InvoiceRefundBatch();
-                                    refundBatch.Case = assignBatch.Case;
-                                    refundBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
-                                    refundBatch.Comment = comment;
-                                    refundBatch.InputDate = DateTime.Now;
-                                    refundBatch.RefundDate = refundDate;
-                                    refundBatch.RefundType = refundType;
-                                    refundBatch.CreateUserName = App.Current.CurUser.Name;
-                                    refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(refundDate, refundBatchList);
-                                }
-
-                                if (TypeUtil.GreaterZero(refundAmount - invoice.FinanceOutstanding))
-                                {
-                                    throw new Exception("冲销融资金额不能大于融资余额，不能导入：" + invoiceNo);
-                                }
-
-                                foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs.OrderBy(i => i.FinanceDueDate))
-                                {
-                                    if (TypeUtil.GreaterZero(refundAmount))
-                                    {
-                                        InvoiceRefundLog log = new InvoiceRefundLog();
-                                        log.RefundAmount = Math.Min(refundAmount, financeLog.FinanceOutstanding.GetValueOrDefault());
-                                        log.InvoiceFinanceLog = financeLog;
-                                        refundAmount -= log.RefundAmount.Value;
-                                        log.InvoiceRefundBatch = refundBatch;
-                                        financeLog.Invoice.CaculateRefund();
-                                    }
+                                    throw new Exception("冲销融资金额不能大于融资余额，不能导入：" + assignBatchCode);
                                 }
                             }
-                        }
-                        else
-                        {
-                            if (TypeUtil.GreaterZero(refundAmount))
+                            else
                             {
-                                refundBatch = new InvoiceRefundBatch();
-                                refundBatch.Case = assignBatch.Case;
-                                refundBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
-                                refundBatch.Comment = comment;
-                                refundBatch.InputDate = DateTime.Now;
-                                refundBatch.RefundDate = refundDate;
-                                refundBatch.RefundType = refundType;
-                                refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(refundDate);
-
                                 if (TypeUtil.GreaterZero(refundAmount - assignBatch.FinanceOutstanding))
                                 {
                                     throw new Exception("冲销融资金额不能大于融资余额，不能导入：" + assignBatchCode);
                                 }
+                            }
 
-                                List<InvoiceFinanceLog> financeLogs = new List<InvoiceFinanceLog>();
-                                foreach (Invoice inv in assignBatch.Invoices)
+                            List<InvoiceFinanceLog> financeLogs = new List<InvoiceFinanceLog>();
+                            foreach (Invoice inv in assignBatch.Invoices)
+                            {
+                                foreach (InvoiceFinanceLog financeLog in inv.InvoiceFinanceLogs)
                                 {
-                                    financeLogs.AddRange(inv.InvoiceFinanceLogs);
-                                }
-
-                                foreach (InvoiceFinanceLog financeLog in financeLogs.OrderBy(f => f.FinanceDueDate))
-                                {
-                                    if (TypeUtil.GreaterZero(refundAmount))
+                                    if (financeLog.InvoiceFinanceBatch.BatchCurrency == refundCurrency && TypeUtil.GreaterZero(financeLog.FinanceOutstanding))
                                     {
-                                        InvoiceRefundLog log = new InvoiceRefundLog();
-                                        log.RefundAmount = Math.Min(refundAmount, financeLog.FinanceOutstanding.GetValueOrDefault());
-                                        log.InvoiceFinanceLog = financeLog;
-                                        log.InvoiceRefundBatch = refundBatch;
-                                        financeLog.Invoice.CaculateRefund();
-                                        refundAmount -= log.RefundAmount.Value;
+                                        financeLogs.Add(financeLog);
                                     }
+                                }
+                            }
+
+                            foreach (InvoiceFinanceLog financeLog in financeLogs.OrderBy(f => f.FinanceDueDate))
+                            {
+                                if (TypeUtil.GreaterZero(refundAmount))
+                                {
+                                    InvoiceRefundLog log = new InvoiceRefundLog();
+                                    log.RefundAmount = Math.Min(refundAmount, financeLog.FinanceOutstanding);
+                                    log.InvoiceFinanceLog = financeLog;
+                                    log.InvoiceRefundBatch = refundBatch;
+                                    financeLog.Invoice.CaculateRefund();
+                                    refundAmount -= log.RefundAmount.Value;
                                 }
                             }
                         }
