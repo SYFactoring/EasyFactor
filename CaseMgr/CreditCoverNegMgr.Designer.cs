@@ -703,7 +703,7 @@
             // colIFPrice
             // 
             this.colIFPrice.DataPropertyName = "IFPrice";
-            dataGridViewCellStyle6.Format = "p3";
+            dataGridViewCellStyle6.Format = "p4";
             dataGridViewCellStyle6.NullValue = null;
             this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle6;
             this.colIFPrice.HeaderText = "IF报价";

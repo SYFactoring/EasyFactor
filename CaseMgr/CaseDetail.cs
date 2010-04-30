@@ -61,7 +61,6 @@ namespace CMBC.EasyFactor.CaseMgr
             /// </summary>
             DETAIL_CREDIT_COVER_NEG
         }
-
         /// <summary>
         /// Operation types of Case
         /// </summary>
@@ -214,7 +213,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
         // Private Methods (24) 
 
-         /// <summary>
+        /// <summary>
         /// Case owner deparment changed event handler
         /// </summary>
         /// <param name="sender"></param>
@@ -493,6 +492,32 @@ namespace CMBC.EasyFactor.CaseMgr
 
             ClientDetail clientDetail = new ClientDetail(curCase.SellerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
             clientDetail.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvCDAs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = this.dgvCDAs.Columns[e.ColumnIndex];
+            if (column == colIsRecoarse)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    bool result = (bool)originalData;
+                    if (result)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+                }
+            }
         }
 
         /// <summary>

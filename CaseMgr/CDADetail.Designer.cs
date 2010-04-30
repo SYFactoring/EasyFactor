@@ -1378,7 +1378,7 @@
             // 
             // 
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
-            this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IFPrice", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p3"));
+            this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IFPrice", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p4"));
             this.iFPriceTextBox.Location = new System.Drawing.Point(350, 205);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.Size = new System.Drawing.Size(100, 20);
@@ -1404,7 +1404,7 @@
             // 
             // 
             this.priceTextBox.Border.Class = "TextBoxBorder";
-            this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Price", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p3"));
+            this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Price", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p4"));
             this.priceTextBox.Location = new System.Drawing.Point(101, 203);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(109, 20);

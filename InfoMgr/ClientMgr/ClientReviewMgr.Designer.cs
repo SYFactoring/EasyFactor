@@ -636,7 +636,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colRequestCommissionRate
             // 
             this.colRequestCommissionRate.DataPropertyName = "RequestCommissionRate";
-            dataGridViewCellStyle3.Format = "p3";
+            dataGridViewCellStyle3.Format = "p4";
             this.colRequestCommissionRate.DefaultCellStyle = dataGridViewCellStyle3;
             this.colRequestCommissionRate.HeaderText = "手续费率";
             this.colRequestCommissionRate.Name = "colRequestCommissionRate";

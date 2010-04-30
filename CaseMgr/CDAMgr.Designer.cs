@@ -729,7 +729,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colPrice.DataPropertyName = "Price";
-            dataGridViewCellStyle9.Format = "p3";
+            dataGridViewCellStyle9.Format = "p4";
             this.colPrice.DefaultCellStyle = dataGridViewCellStyle9;
             this.colPrice.HeaderText = "总手续费率";
             this.colPrice.Name = "colPrice";
@@ -740,7 +740,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colIFPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colIFPrice.DataPropertyName = "IFPrice";
-            dataGridViewCellStyle10.Format = "p3";
+            dataGridViewCellStyle10.Format = "p4";
             this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle10;
             this.colIFPrice.HeaderText = "IF手续费率";
             this.colIFPrice.Name = "colIFPrice";
