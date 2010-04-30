@@ -49,18 +49,6 @@
             this.tbPaymentBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblPaymentBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsMsgCreate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +60,21 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemMSG11 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemMSG12 = new System.Windows.Forms.ToolStripMenuItem();
+            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsMsgCreate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblTransactionType = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -83,6 +86,8 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbTransactionType);
+            this.panelQuery.Controls.Add(this.lblTransactionType);
             this.panelQuery.Controls.Add(this.tbClientName);
             this.panelQuery.Controls.Add(this.lblClientName);
             this.panelQuery.Controls.Add(this.tbCreateUserName);
@@ -117,10 +122,10 @@
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.Location = new System.Drawing.Point(76, 29);
+            this.tbClientName.Location = new System.Drawing.Point(56, 4);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(100, 20);
-            this.tbClientName.TabIndex = 8;
+            this.tbClientName.TabIndex = 1;
             // 
             // lblClientName
             // 
@@ -129,10 +134,10 @@
             // 
             // 
             this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.Location = new System.Drawing.Point(14, 31);
+            this.lblClientName.Location = new System.Drawing.Point(3, 6);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(56, 16);
-            this.lblClientName.TabIndex = 7;
+            this.lblClientName.TabIndex = 0;
             this.lblClientName.Text = "客户名称";
             // 
             // tbCreateUserName
@@ -141,10 +146,10 @@
             // 
             // 
             this.tbCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreateUserName.Location = new System.Drawing.Point(401, 29);
+            this.tbCreateUserName.Location = new System.Drawing.Point(550, 27);
             this.tbCreateUserName.Name = "tbCreateUserName";
             this.tbCreateUserName.Size = new System.Drawing.Size(100, 20);
-            this.tbCreateUserName.TabIndex = 12;
+            this.tbCreateUserName.TabIndex = 14;
             // 
             // lblCreateUserName
             // 
@@ -153,10 +158,10 @@
             // 
             // 
             this.lblCreateUserName.BackgroundStyle.Class = "";
-            this.lblCreateUserName.Location = new System.Drawing.Point(351, 31);
+            this.lblCreateUserName.Location = new System.Drawing.Point(500, 28);
             this.lblCreateUserName.Name = "lblCreateUserName";
             this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
-            this.lblCreateUserName.TabIndex = 11;
+            this.lblCreateUserName.TabIndex = 13;
             this.lblCreateUserName.Text = "经办人";
             // 
             // cbPaymentType
@@ -166,17 +171,17 @@
             this.cbPaymentType.FormattingEnabled = true;
             this.cbPaymentType.ItemHeight = 14;
             this.cbPaymentType.Items.AddRange(new object[] {
-            "",
+            "全部",
             "买方直接付款",
             "买方间接付款",
             "担保付款",
             "反转让",
             "贷项通知"});
-            this.cbPaymentType.Location = new System.Drawing.Point(244, 7);
+            this.cbPaymentType.Location = new System.Drawing.Point(224, 27);
             this.cbPaymentType.Name = "cbPaymentType";
             this.cbPaymentType.Size = new System.Drawing.Size(101, 20);
             this.cbPaymentType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbPaymentType.TabIndex = 3;
+            this.cbPaymentType.TabIndex = 10;
             // 
             // lblPaymentType
             // 
@@ -185,10 +190,10 @@
             // 
             // 
             this.lblPaymentType.BackgroundStyle.Class = "";
-            this.lblPaymentType.Location = new System.Drawing.Point(182, 7);
+            this.lblPaymentType.Location = new System.Drawing.Point(162, 28);
             this.lblPaymentType.Name = "lblPaymentType";
             this.lblPaymentType.Size = new System.Drawing.Size(56, 16);
-            this.lblPaymentType.TabIndex = 2;
+            this.lblPaymentType.TabIndex = 9;
             this.lblPaymentType.Text = "付款类型";
             // 
             // lblCount
@@ -198,10 +203,11 @@
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(613, 36);
+            this.lblCount.Location = new System.Drawing.Point(656, 31);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
-            this.lblCount.TabIndex = 14;
+            this.lblCount.Size = new System.Drawing.Size(71, 16);
+            this.lblCount.TabIndex = 16;
+            this.lblCount.Text = "获得 条记录";
             // 
             // cbCheckStatus
             // 
@@ -214,11 +220,11 @@
             "未复核",
             "已复核",
             "复核未通过"});
-            this.cbCheckStatus.Location = new System.Drawing.Point(244, 29);
+            this.cbCheckStatus.Location = new System.Drawing.Point(393, 27);
             this.cbCheckStatus.Name = "cbCheckStatus";
             this.cbCheckStatus.Size = new System.Drawing.Size(101, 20);
             this.cbCheckStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCheckStatus.TabIndex = 10;
+            this.cbCheckStatus.TabIndex = 12;
             // 
             // lblCheckStatus
             // 
@@ -227,10 +233,10 @@
             // 
             // 
             this.lblCheckStatus.BackgroundStyle.Class = "";
-            this.lblCheckStatus.Location = new System.Drawing.Point(182, 31);
+            this.lblCheckStatus.Location = new System.Drawing.Point(331, 28);
             this.lblCheckStatus.Name = "lblCheckStatus";
             this.lblCheckStatus.Size = new System.Drawing.Size(56, 16);
-            this.lblCheckStatus.TabIndex = 9;
+            this.lblCheckStatus.TabIndex = 11;
             this.lblCheckStatus.Text = "复核结果";
             // 
             // dateTo
@@ -241,7 +247,7 @@
             this.dateTo.BackgroundStyle.Class = "DateTimeInputBackground";
             this.dateTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateTo.ButtonDropDown.Visible = true;
-            this.dateTo.Location = new System.Drawing.Point(507, 7);
+            this.dateTo.Location = new System.Drawing.Point(500, 4);
             // 
             // 
             // 
@@ -286,7 +292,7 @@
             // 
             // 
             this.lblDatePicker.BackgroundStyle.Class = "";
-            this.lblDatePicker.Location = new System.Drawing.Point(351, 8);
+            this.lblDatePicker.Location = new System.Drawing.Point(343, 6);
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(44, 16);
             this.lblDatePicker.TabIndex = 4;
@@ -300,7 +306,7 @@
             this.dateFrom.BackgroundStyle.Class = "DateTimeInputBackground";
             this.dateFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateFrom.ButtonDropDown.Visible = true;
-            this.dateFrom.Location = new System.Drawing.Point(401, 7);
+            this.dateFrom.Location = new System.Drawing.Point(393, 4);
             // 
             // 
             // 
@@ -338,15 +344,15 @@
             this.dateFrom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dateFrom.TabIndex = 5;
             // 
-            // btnPaymentBatchQuery
+            // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(613, 7);
-            this.btnQuery.Name = "btnPaymentBatchQuery";
+            this.btnQuery.Location = new System.Drawing.Point(656, 4);
+            this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 13;
+            this.btnQuery.TabIndex = 15;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryBatch);
             // 
@@ -356,10 +362,10 @@
             // 
             // 
             this.tbPaymentBatchNo.Border.Class = "TextBoxBorder";
-            this.tbPaymentBatchNo.Location = new System.Drawing.Point(76, 7);
+            this.tbPaymentBatchNo.Location = new System.Drawing.Point(56, 27);
             this.tbPaymentBatchNo.Name = "tbPaymentBatchNo";
             this.tbPaymentBatchNo.Size = new System.Drawing.Size(100, 20);
-            this.tbPaymentBatchNo.TabIndex = 1;
+            this.tbPaymentBatchNo.TabIndex = 8;
             // 
             // lblPaymentBatchNo
             // 
@@ -368,10 +374,10 @@
             // 
             // 
             this.lblPaymentBatchNo.BackgroundStyle.Class = "";
-            this.lblPaymentBatchNo.Location = new System.Drawing.Point(14, 8);
+            this.lblPaymentBatchNo.Location = new System.Drawing.Point(3, 28);
             this.lblPaymentBatchNo.Name = "lblPaymentBatchNo";
             this.lblPaymentBatchNo.Size = new System.Drawing.Size(56, 16);
-            this.lblPaymentBatchNo.TabIndex = 0;
+            this.lblPaymentBatchNo.TabIndex = 7;
             this.lblPaymentBatchNo.Text = "付款批号";
             // 
             // dgvBatches
@@ -392,6 +398,7 @@
             this.dgvBatches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSellerName,
             this.colBuyerName,
+            this.colTransactionType,
             this.colPaymentBatchNo,
             this.colPaymentType,
             this.colPaymentDate,
@@ -424,6 +431,86 @@
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBatches_RowPostPaint);
             this.dgvBatches.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvBatches_CellFormatting);
             // 
+            // cmuBatchMgr
+            // 
+            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemBatchSelect,
+            this.menuItemBatchDetail,
+            this.toolStripSeparator1,
+            this.menuItemCheck,
+            this.menuItemReject,
+            this.toolStripSeparator2,
+            this.menuItemBatchDelete,
+            this.toolStripSeparator3,
+            this.menuItemMSG11,
+            this.menuItemMSG12});
+            this.cmuBatchMgr.Name = "cmuBatchMgr";
+            this.cmuBatchMgr.Size = new System.Drawing.Size(142, 176);
+            // 
+            // menuItemBatchSelect
+            // 
+            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(141, 22);
+            this.menuItemBatchSelect.Text = "选择批次(&S)";
+            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            // 
+            // menuItemBatchDetail
+            // 
+            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
+            this.menuItemBatchDetail.Size = new System.Drawing.Size(141, 22);
+            this.menuItemBatchDetail.Text = "批次详情(&M)";
+            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(138, 6);
+            // 
+            // menuItemCheck
+            // 
+            this.menuItemCheck.Name = "menuItemCheck";
+            this.menuItemCheck.Size = new System.Drawing.Size(141, 22);
+            this.menuItemCheck.Text = "复核通过(&P)";
+            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            // 
+            // menuItemReject
+            // 
+            this.menuItemReject.Name = "menuItemReject";
+            this.menuItemReject.Size = new System.Drawing.Size(141, 22);
+            this.menuItemReject.Text = "复核拒绝(&R)";
+            this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(138, 6);
+            // 
+            // menuItemBatchDelete
+            // 
+            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
+            this.menuItemBatchDelete.Size = new System.Drawing.Size(141, 22);
+            this.menuItemBatchDelete.Text = "删除批次(&D)";
+            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(138, 6);
+            // 
+            // menuItemMSG11
+            // 
+            this.menuItemMSG11.Name = "menuItemMSG11";
+            this.menuItemMSG11.Size = new System.Drawing.Size(141, 22);
+            this.menuItemMSG11.Text = "生成MSG11";
+            this.menuItemMSG11.Click += new System.EventHandler(this.ExportMSG11);
+            // 
+            // menuItemMSG12
+            // 
+            this.menuItemMSG12.Name = "menuItemMSG12";
+            this.menuItemMSG12.Size = new System.Drawing.Size(141, 22);
+            this.menuItemMSG12.Text = "生成MSG12";
+            this.menuItemMSG12.Click += new System.EventHandler(this.ExportMSG12);
+            // 
             // colSellerName
             // 
             this.colSellerName.DataPropertyName = "SellerName";
@@ -437,6 +524,13 @@
             this.colBuyerName.HeaderText = "买方名称";
             this.colBuyerName.Name = "colBuyerName";
             this.colBuyerName.ReadOnly = true;
+            // 
+            // colTransactionType
+            // 
+            this.colTransactionType.DataPropertyName = "TransactionType";
+            this.colTransactionType.HeaderText = "业务类别";
+            this.colTransactionType.Name = "colTransactionType";
+            this.colTransactionType.ReadOnly = true;
             // 
             // colPaymentBatchNo
             // 
@@ -510,85 +604,36 @@
             this.colBatchCount.Name = "colBatchCount";
             this.colBatchCount.ReadOnly = true;
             // 
-            // cmuBatchMgr
+            // cbTransactionType
             // 
-            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemBatchSelect,
-            this.menuItemBatchDetail,
-            this.toolStripSeparator1,
-            this.menuItemCheck,
-            this.menuItemReject,
-            this.toolStripSeparator2,
-            this.menuItemBatchDelete,
-            this.toolStripSeparator3,
-            this.menuItemMSG11,
-            this.menuItemMSG12});
-            this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(153, 198);
+            this.cbTransactionType.DisplayMember = "Text";
+            this.cbTransactionType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbTransactionType.FormattingEnabled = true;
+            this.cbTransactionType.ItemHeight = 14;
+            this.cbTransactionType.Items.AddRange(new object[] {
+            "全部",
+            "国内卖方保理",
+            "国内买方保理",
+            "出口保理",
+            "进口保理"});
+            this.cbTransactionType.Location = new System.Drawing.Point(224, 4);
+            this.cbTransactionType.Name = "cbTransactionType";
+            this.cbTransactionType.Size = new System.Drawing.Size(101, 20);
+            this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbTransactionType.TabIndex = 3;
             // 
-            // menuItemBatchSelect
+            // lblTransactionType
             // 
-            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
-            this.menuItemBatchSelect.Size = new System.Drawing.Size(152, 22);
-            this.menuItemBatchSelect.Text = "选择批次(&S)";
-            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            this.lblTransactionType.AutoSize = true;
             // 
-            // menuItemBatchDetail
             // 
-            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
-            this.menuItemBatchDetail.Size = new System.Drawing.Size(152, 22);
-            this.menuItemBatchDetail.Text = "批次详情(&M)";
-            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemCheck
-            // 
-            this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(152, 22);
-            this.menuItemCheck.Text = "复核通过(&P)";
-            this.menuItemCheck.Click += new System.EventHandler(this.Check);
-            // 
-            // menuItemReject
-            // 
-            this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(152, 22);
-            this.menuItemReject.Text = "复核拒绝(&R)";
-            this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemBatchDelete
-            // 
-            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
-            this.menuItemBatchDelete.Size = new System.Drawing.Size(152, 22);
-            this.menuItemBatchDelete.Text = "删除批次(&D)";
-            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemMSG11
-            // 
-            this.menuItemMSG11.Name = "menuItemMSG11";
-            this.menuItemMSG11.Size = new System.Drawing.Size(152, 22);
-            this.menuItemMSG11.Text = "生成MSG11";
-            this.menuItemMSG11.Click += new System.EventHandler(this.ExportMSG11);
-            // 
-            // menuItemMSG12
-            // 
-            this.menuItemMSG12.Name = "menuItemMSG12";
-            this.menuItemMSG12.Size = new System.Drawing.Size(152, 22);
-            this.menuItemMSG12.Text = "生成MSG12";
-            this.menuItemMSG12.Click += new System.EventHandler(this.ExportMSG12);
+            this.lblTransactionType.BackgroundStyle.Class = "";
+            this.lblTransactionType.Location = new System.Drawing.Point(162, 6);
+            this.lblTransactionType.Name = "lblTransactionType";
+            this.lblTransactionType.Size = new System.Drawing.Size(56, 16);
+            this.lblTransactionType.TabIndex = 2;
+            this.lblTransactionType.Text = "业务类别";
             // 
             // PaymentBatchMgr
             // 
@@ -627,18 +672,6 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
         private DevComponents.DotNetBar.LabelX lblDatePicker;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsMsgCreate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbPaymentType;
         private DevComponents.DotNetBar.LabelX lblPaymentType;
@@ -651,5 +684,20 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem menuItemMSG11;
         private System.Windows.Forms.ToolStripMenuItem menuItemMSG12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentBatchNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsMsgCreate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
+        private DevComponents.DotNetBar.LabelX lblTransactionType;
     }
 }

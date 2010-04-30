@@ -407,6 +407,16 @@ namespace CMBC.EasyFactor.ARMgr
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
+            string transactionType = this.cbTransactionType.Text;
+            if (String.IsNullOrEmpty(transactionType))
+            {
+                transactionType = "全部";
+            }
+            string financeType = this.cbFinanceType.Text;
+            if (String.IsNullOrEmpty(transactionType))
+            {
+                transactionType = "全部";
+            }
 
             context = new DBDataContext();
 
@@ -419,6 +429,8 @@ namespace CMBC.EasyFactor.ARMgr
                     && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true)
                     && (i.CreateUserName.Contains(createUserName))
+                    && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
+                    && (financeType == "全部" ? true : i.FinanceType == financeType)
                     && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
             }
             else
@@ -594,7 +606,7 @@ namespace CMBC.EasyFactor.ARMgr
                     row += 3;
                 }
 
-                sheet.Cells[row-1, 1] = "注：保理手续费按融资金额收取。";
+                sheet.Cells[row - 1, 1] = "注：保理手续费按融资金额收取。";
                 sheet.Cells[row, 5] = "费用总计";
                 sheet.Cells[row, 6] = totalCommission;
                 sheet.get_Range("F" + row, "F" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);

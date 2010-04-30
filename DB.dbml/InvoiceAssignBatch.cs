@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceAssignBatch
     {
-        #region Fields (3)
+        #region Fields (4)
 
         private double? _assignAmount;
         private double? _assignOutstanding;
@@ -25,7 +25,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Fields
 
-        #region Properties (8)
+        #region Properties (10)
 
         /// <summary>
         /// Gets
@@ -56,22 +56,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return _assignOutstanding.Value;
-            }
-        }
-
-        /// <summary>
-        /// Gets
-        /// </summary>
-        public double FinanceOutstanding
-        {
-            get
-            {
-                if (_financeOutstanding.HasValue == false)
-                {
-                    _financeOutstanding = this.Invoices.Sum(i => i.FinanceOutstanding.GetValueOrDefault());
-                }
-
-                return _financeOutstanding.Value;
             }
         }
 
@@ -140,6 +124,22 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
+        public double FinanceOutstanding
+        {
+            get
+            {
+                if (_financeOutstanding.HasValue == false)
+                {
+                    _financeOutstanding = this.Invoices.Sum(i => i.FinanceOutstanding.GetValueOrDefault());
+                }
+
+                return _financeOutstanding.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
         public double? HandfeeAmount
         {
             get
@@ -156,6 +156,17 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 return this.Case.SellerClient.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets Transaction Type
+        /// </summary>
+        public string TransactionType
+        {
+            get
+            {
+                return this.Case.TransactionType;
             }
         }
 

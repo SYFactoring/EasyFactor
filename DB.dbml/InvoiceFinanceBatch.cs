@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
         #endregion Fields
 
-        #region Properties (11)
+        #region Properties (14)
 
         /// <summary>
         /// Gets
@@ -48,35 +48,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return _assignAmount.Value;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? PoolFinanceOutstanding
-        {
-            get
-            {
-                return this.FinanceAmount - PoolRefundAmount;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? PoolRefundAmount
-        {
-            get
-            {
-                if (this.InvoiceRefundBatches != null)
-                {
-                    return this.InvoiceRefundBatches.Sum(batch => batch.RefundAmount);
-                }
-                else
-                {
-                    return null;
-                }
             }
         }
 
@@ -253,6 +224,35 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public double? PoolFinanceOutstanding
+        {
+            get
+            {
+                return this.FinanceAmount - PoolRefundAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? PoolRefundAmount
+        {
+            get
+            {
+                if (this.InvoiceRefundBatches != null)
+                {
+                    return this.InvoiceRefundBatches.Sum(batch => batch.RefundAmount);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets
         /// </summary>
         public string SellerName
@@ -274,11 +274,30 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TransactionType
+        {
+            get
+            {
+                return this.Case.TransactionType;
+            }
+        }
+
         #endregion Properties
 
         #region Methods (4)
 
-        // Public Methods (2) 
+        // Public Methods (3) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculateFinanceAmount()
+        {
+            this.FinanceAmount = this.InvoiceFinanceLogs.Sum(log => log.FinanceAmount.GetValueOrDefault());
+        }
 
         /// <summary>
         /// 
@@ -333,15 +352,7 @@ namespace CMBC.EasyFactor.DB.dbml
             string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return financeNo;
         }
-        // Private Methods (2) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void CaculateFinanceAmount()
-        {
-            this.FinanceAmount = this.InvoiceFinanceLogs.Sum(log => log.FinanceAmount.GetValueOrDefault());
-        }
+        // Private Methods (1) 
 
         /// <summary>
         /// 

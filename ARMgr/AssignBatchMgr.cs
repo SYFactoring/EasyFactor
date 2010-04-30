@@ -171,7 +171,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="batchGroup"></param>
-        private delegate void MakeReport(IGrouping<Client, InvoiceAssignBatch> batchGroup);
+        private delegate void MakeReport(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType);
 
         #endregion Delegates and Events
 
@@ -404,7 +404,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="selectedBatches"></param>
         /// <param name="makeReport"></param>
-        private void GroupBatches(List<InvoiceAssignBatch> selectedBatches, MakeReport makeReport)
+        private void GroupBatchesByTransactionType(List<InvoiceAssignBatch> selectedBatches, MakeReport makeReport)
         {
             IEnumerable<IGrouping<string, InvoiceAssignBatch>> caseGroups = selectedBatches.GroupBy(c => c.Case.TransactionType);
 
@@ -420,21 +420,39 @@ namespace CMBC.EasyFactor.ARMgr
                         groups = caseGroup.GroupBy(c => c.Case.SellerClient);
                         foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
                         {
-                            makeReport(group);
+                            makeReport(group, transactionType);
                         }
-
                         break;
                     case "国内买方保理":
                     case "进口保理":
                         groups = caseGroup.GroupBy(c => c.Case.BuyerClient);
                         foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
                         {
-                            makeReport(group);
+                            makeReport(group, transactionType);
                         }
+                        break;
+                    default: break;
+                }
+            }
+        }
 
-                        break;
-                    default:
-                        break;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedBatches"></param>
+        /// <param name="makeReport"></param>
+        private void GroupBatchesBySeller(List<InvoiceAssignBatch> selectedBatches, MakeReport makeReport)
+        {
+            IEnumerable<IGrouping<string, InvoiceAssignBatch>> caseGroups = selectedBatches.GroupBy(c => c.Case.TransactionType);
+
+            foreach (IGrouping<string, InvoiceAssignBatch> caseGroup in caseGroups)
+            {
+                string transactionType = caseGroup.Key;
+                IEnumerable<IGrouping<Client, InvoiceAssignBatch>> groups = null;
+                groups = caseGroup.GroupBy(c => c.Case.SellerClient);
+                foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
+                {
+                    makeReport(group, transactionType);
                 }
             }
         }
@@ -451,6 +469,11 @@ namespace CMBC.EasyFactor.ARMgr
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
+            string transactionType = this.cbTransactionType.Text;
+            if (String.IsNullOrEmpty(transactionType))
+            {
+                transactionType = "全部";
+            }
 
             context = new DBDataContext();
 
@@ -460,6 +483,7 @@ namespace CMBC.EasyFactor.ARMgr
                 && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
                 && (status != string.Empty ? i.CheckStatus == status : true)
                 && (i.CreateUserName.Contains(createUserName))
+                && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
                 && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
 
             this.bs.DataSource = queryResult;
@@ -530,14 +554,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             MakeReport makeReport = new MakeReport(ReportAssignImpl);
-            GroupBatches(selectedBatches, makeReport);
+            GroupBatchesBySeller(selectedBatches, makeReport);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="group"></param>
-        private void ReportAssignImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup)
+        private void ReportAssignImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -573,17 +597,9 @@ namespace CMBC.EasyFactor.ARMgr
                     Factor factor = null;
                     Client buyer = selectedBatch.Case.BuyerClient;
 
-                    switch (selectedBatch.Case.TransactionType)
+                    if (transactionType == "出口保理")
                     {
-                        case "国内卖方保理":
-                        case "国内买方保理":
-                        case "进口保理":
-                            break;
-                        case "出口保理":
-                            factor = selectedBatch.Case.BuyerFactor;
-                            break;
-                        default:
-                            break;
+                        factor = selectedBatch.Case.BuyerFactor;
                     }
 
                     sheet.Cells[row, 1] = "买方：";
@@ -715,14 +731,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             MakeReport makeReport = new MakeReport(ReportCommissionImpl);
-            GroupBatches(selectedBatches, makeReport);
+            GroupBatchesBySeller(selectedBatches, makeReport);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="batchGroup"></param>
-        private void ReportCommissionImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup)
+        private void ReportCommissionImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
 
             ApplicationClass app = new ApplicationClass() { Visible = false };
@@ -864,14 +880,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             MakeReport makeReport = new MakeReport(ReportFileCheckListImpl);
-            GroupBatches(selectedBatches, makeReport);
+            GroupBatchesBySeller(selectedBatches, makeReport);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="batchGroup"></param>
-        private void ReportFileCheckListImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup)
+        private void ReportFileCheckListImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -1011,7 +1027,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             MakeReport makeReport = new MakeReport(ReportFinanceImpl);
-            GroupBatches(selectedBatches, makeReport);
+            GroupBatchesByTransactionType(selectedBatches, makeReport);
         }
 
 
@@ -1024,11 +1040,11 @@ namespace CMBC.EasyFactor.ARMgr
             List<InvoiceAssignBatch> selectedBatches = new List<InvoiceAssignBatch>();
             selectedBatches.Add(batch);
             MakeReport assignReport = new MakeReport(ReportAssignImpl);
-            GroupBatches(selectedBatches, assignReport);
+            GroupBatchesBySeller(selectedBatches, assignReport);
             MakeReport financeReport = new MakeReport(ReportFinanceImpl);
-            GroupBatches(selectedBatches, financeReport);
+            GroupBatchesByTransactionType(selectedBatches, financeReport);
             MakeReport commissionReport = new MakeReport(ReportCommissionImpl);
-            GroupBatches(selectedBatches, commissionReport);
+            GroupBatchesBySeller(selectedBatches, commissionReport);
         }
 
         /// <summary>
@@ -1036,7 +1052,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="batchGroup"></param>
         /// <returns></returns>
-        private void ReportFinanceImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup)
+        private void ReportFinanceImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -1061,11 +1077,19 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 sheet.Cells[3, 1] = "可融资账款明细表";
 
-                Client seller = batchGroup.Key;
+                Client keyClient = batchGroup.Key;
                 int row = 5;
-                sheet.Cells[row, 1] = "卖方：";
+                if (transactionType == "国内卖方保理" || transactionType == "出口保理")
+                {
+                    sheet.Cells[row, 1] = "卖方：";
+                }
+                else
+                {
+                    sheet.Cells[row, 1] = "买方：";
+                }
+
                 sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
-                sheet.Cells[row, 2] = String.Format("{0}", seller.ToString());
+                sheet.Cells[row, 2] = String.Format("{0}", keyClient.ToString());
 
                 row++;
                 sheet.Cells[row, 1] = "最高保理融资额度：";
@@ -1087,7 +1111,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row, 1] = "总融资余额：";
                 if (creditLine != null)
                 {
-                    sheet.Cells[row, 2] = seller.GetFinanceOutstanding(creditLine.CreditLineCurrency).GetValueOrDefault();
+                    sheet.Cells[row, 2] = keyClient.GetFinanceOutstanding(creditLine.CreditLineCurrency).GetValueOrDefault();
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(creditLine.CreditLineCurrency);
                 }
 
@@ -1095,7 +1119,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row, 1] = "最高可融资金额：";
                 if (creditLine != null)
                 {
-                    sheet.Cells[row, 2] = seller.CanBeFinanceAmount(firstCase.TransactionType, firstCase.InvoiceCurrency);
+                    sheet.Cells[row, 2] = keyClient.CanBeFinanceAmount(firstCase.TransactionType, firstCase.InvoiceCurrency);
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(firstCase.InvoiceCurrency);
                 }
 
@@ -1103,26 +1127,29 @@ namespace CMBC.EasyFactor.ARMgr
 
                 foreach (InvoiceAssignBatch selectedBatch in batchGroup)
                 {
-                    Client buyer = selectedBatch.Case.BuyerClient;
+
+                    Client valueClient = null;
+                    if (transactionType == "国内卖方保理" || transactionType == "出口保理")
+                    {
+                        valueClient = selectedBatch.Case.BuyerClient;
+                        sheet.Cells[row, 1] = "买方：";
+                    }
+                    else
+                    {
+                        valueClient = selectedBatch.Case.SellerClient;
+                        sheet.Cells[row, 1] = "卖方：";
+                    }
+
                     CDA cda = selectedBatch.Case.ActiveCDA;
 
-                    sheet.Cells[row, 1] = "买方：";
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
-                    sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
+                    sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", valueClient.ToString());
                     row++;
 
                     Factor factor = null;
-                    switch (selectedBatch.Case.TransactionType)
+                    if (transactionType == "出口保理")
                     {
-                        case "国内卖方保理":
-                        case "国内买方保理":
-                        case "进口保理":
-                            break;
-                        case "出口保理":
-                            factor = selectedBatch.Case.BuyerFactor;
-                            break;
-                        default:
-                            break;
+                        factor = selectedBatch.Case.BuyerFactor;
                     }
 
                     if (factor != null)
@@ -1153,7 +1180,15 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
                     row++;
-                    sheet.Cells[row, 1] = "此买方最高可融资金额：";
+                    if (transactionType == "国内卖方保理" || transactionType == "出口保理")
+                    {
+                        sheet.Cells[row, 1] = "此买方最高可融资金额：";
+                    }
+                    else
+                    {
+                        sheet.Cells[row, 1] = "此卖方最高可融资金额：";
+                    }
+
                     sheet.Cells[row, 2] = selectedBatch.Case.CanBeFinanceAmount;
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
@@ -1257,14 +1292,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             MakeReport makeReport = new MakeReport(ReportFlawImpl);
-            GroupBatches(selectedBatches, makeReport);
+            GroupBatchesBySeller(selectedBatches, makeReport);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="batchGroup"></param>
-        private void ReportFlawImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup)
+        private void ReportFlawImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)

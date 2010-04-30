@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceRefundBatch
     {
-        #region Properties (3)
+        #region Properties (4)
 
         /// <summary>
         /// Gets
@@ -48,6 +48,17 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 return this.Case.SellerClient.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets Transaction Type
+        /// </summary>
+        public string TransactionType
+        {
+            get
+            {
+                return this.Case.TransactionType;
             }
         }
 

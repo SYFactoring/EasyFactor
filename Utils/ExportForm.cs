@@ -2961,15 +2961,7 @@ namespace CMBC.EasyFactor.Utils
                     if (workbook != null)
                     {
                         string ext = ".xls";
-                        //if (app.Version.IndexOf("12") != -1)
-                        //{
-                        //    ext = ".xlsx";
-                        //}
-                        //else
-                        //{
-                        //    ext = ".xls";
-                        //}
-
+ 
                         string location = caseGroup.First().OwnerDepartment.Location.LocationName;
                         if (!System.IO.Directory.Exists(this.tbFilePath.Text + "\\" + location + "\\"))
                         {
@@ -2984,7 +2976,7 @@ namespace CMBC.EasyFactor.Utils
                             count++;
                         }
 
-                        workbook.SaveAs(filePath, XlFileFormat.xlExcel12, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false, Type.Missing, Type.Missing, Type.Missing);
+                        workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false, Type.Missing, Type.Missing, Type.Missing);
                     }
                 }
             }
@@ -3010,6 +3002,7 @@ namespace CMBC.EasyFactor.Utils
                 if (app != null)
                 {
                     app.Quit();
+                    Marshal.ReleaseComObject(app);
                     app = null;
                 }
             }

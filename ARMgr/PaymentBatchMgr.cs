@@ -384,10 +384,19 @@ namespace CMBC.EasyFactor.ARMgr
             DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
             DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
             string status = this.cbCheckStatus.Text;
-            string paymentType = this.cbPaymentType.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
+            string transactionType = this.cbTransactionType.Text;
+            if (String.IsNullOrEmpty(transactionType))
+            {
+                transactionType = "全部";
+            }
 
+            string paymentType = this.cbPaymentType.Text;
+            if (String.IsNullOrEmpty(paymentType))
+            {
+                paymentType = "全部";
+            }
             context = new DBDataContext();
 
             var queryResult = context.InvoicePaymentBatches.Where(i =>
@@ -395,8 +404,9 @@ namespace CMBC.EasyFactor.ARMgr
                 && (beginDate != this.dateFrom.MinDate ? i.PaymentDate >= beginDate : true)
                 && (endDate != this.dateTo.MinDate ? i.PaymentDate <= endDate : true)
                 && (status != string.Empty ? i.CheckStatus == status : true)
-                && (paymentType != string.Empty ? i.PaymentType == paymentType : true)
+                && (paymentType == "全部" ? true : i.PaymentType == paymentType)
                 && (i.CreateUserName.Contains(createUserName))
+                && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
                 && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
                );
 

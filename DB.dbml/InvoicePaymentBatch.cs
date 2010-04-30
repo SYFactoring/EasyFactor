@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoicePaymentBatch
     {
-        #region Properties (4)
+		#region Properties (5) 
 
         /// <summary>
         /// Gets
@@ -68,9 +68,22 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+        /// <summary>
+        /// Gets Tranasction Type
+        /// </summary>
+        public string TransactionType
+        {
+            get
+            {
+                return this.Case.TransactionType;
+            }
+        }
 
+		#endregion Properties 
 
+		#region Methods (2) 
+
+		// Public Methods (2) 
 
         /// <summary>
         /// 
@@ -124,5 +137,7 @@ namespace CMBC.EasyFactor.DB.dbml
             string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return paymentNo;
         }
+
+		#endregion Methods 
     }
 }

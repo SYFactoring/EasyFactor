@@ -239,7 +239,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
             {
-                InvoiceFinanceLog financeLog = log.InvoiceFinanceLog ;
+                InvoiceFinanceLog financeLog = log.InvoiceFinanceLog;
                 log.InvoiceFinanceLog = null;
                 financeLog.Invoice.CaculateRefund();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
@@ -314,9 +314,19 @@ namespace CMBC.EasyFactor.ARMgr
             DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value : this.dateFrom.MinDate;
             DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value : this.dateTo.MinDate;
             string status = this.cbCheckStatus.Text;
-            string refundType = this.cbRefundType.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
+            string transactionType = this.cbTransactionType.Text;
+            if (String.IsNullOrEmpty(transactionType))
+            {
+                transactionType = "全部";
+            }
+
+            string refundType = this.cbRefundType.Text;
+            if (String.IsNullOrEmpty(refundType))
+            {
+                refundType = "全部";
+            }
 
             context = new DBDataContext();
 
@@ -325,8 +335,9 @@ namespace CMBC.EasyFactor.ARMgr
                 && (beginDate != this.dateFrom.MinDate ? i.RefundDate >= beginDate : true)
                 && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
                 && (status != string.Empty ? i.CheckStatus == status : true)
-                && (refundType != string.Empty ? i.RefundType == refundType : true)
+                && (refundType == "全部" ? true : i.RefundType == refundType)
                 && (i.CreateUserName.Contains(createUserName))
+                && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
                 && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
                 );
 
