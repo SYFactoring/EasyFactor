@@ -1252,6 +1252,11 @@ namespace CMBC.EasyFactor.ARMgr
                 ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
                 app.Visible = true;
+
+                if (activeCDA != null && activeCDA.CommissionType == "按融资金额")
+                {
+                    MessageBoxEx.Show("此业务按照融资金额收取费用，请及时导出《保理费用明细表》");
+                }
             }
             catch (Exception e1)
             {
@@ -1446,6 +1451,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 13;
                 sheet.get_Range("F1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("G1", Type.Missing).ColumnWidth = 12;
+
                 app.Visible = true;
             }
             catch (Exception e1)
