@@ -3131,7 +3131,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatch.PaymentDate = paymentDate;
                                     paymentBatch.PaymentType = paymentType;
                                     paymentBatch.CreateUserName = App.Current.CurUser.Name;
-                                    paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate);
+                                    paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate, paymentBatchList);
                                 }
 
                                 if (TypeUtil.GreaterZero(paymentAmount - invoice.AssignOutstanding))
@@ -3155,6 +3155,7 @@ namespace CMBC.EasyFactor.Utils
                                 paymentBatch.IsCreateMsg = false;
                                 paymentBatch.PaymentDate = paymentDate;
                                 paymentBatch.PaymentType = paymentType;
+                                paymentBatch.CreateUserName = App.Current.CurUser.Name;
                                 paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate, paymentBatchList);
 
                                 if (TypeUtil.GreaterZero(paymentAmount - assignBatch.AssignOutstanding))
@@ -3704,6 +3705,7 @@ namespace CMBC.EasyFactor.Utils
                             refundBatch.InputDate = DateTime.Now;
                             refundBatch.RefundDate = refundDate;
                             refundBatch.RefundType = refundType;
+                            refundBatch.CreateUserName = App.Current.CurUser.Name;
                             refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(refundDate, refundBatchList);
 
                             if (refundCurrency != assignBatch.BatchCurrency)
