@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyFactor", "EasyFactor.csproj", "{3876B9CE-93F3-42D1-B12B-6BD0F39D4CCA}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyFactor 2010", "..\EasyFactor 2010\EasyFactor 2010.vdproj", "{7F21A8EE-552F-4F77-8C19-D8840C84FB2F}"

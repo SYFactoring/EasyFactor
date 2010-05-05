@@ -634,7 +634,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                batch.RefundAmount = batch.InvoiceRefundLogs.Sum(l => l.RefundAmount.GetValueOrDefault());
+                batch.CaculateRefundAmount();
 
                 context.SubmitChanges();
             }

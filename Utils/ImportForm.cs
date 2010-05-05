@@ -2271,7 +2271,8 @@ namespace CMBC.EasyFactor.Utils
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
 
-            List<InvoiceFinanceBatch> batchList = new List<InvoiceFinanceBatch>();
+            List<InvoiceFinanceBatch> financeBatchList = new List<InvoiceFinanceBatch>();
+            List<InvoicePaymentBatch> paymentBatchList = new List<InvoicePaymentBatch>();
 
             this.context = new DBDataContext();
 
@@ -2426,10 +2427,10 @@ namespace CMBC.EasyFactor.Utils
                         financeBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
                         financeBatch.InputDate = DateTime.Today;
                         financeBatch.CreateUserName = App.Current.CurUser.Name;
-                        financeBatch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, batchList);
+                        financeBatch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, financeBatchList);
                         financeBatch.Case = assignBatch.Case;
 
-                        batchList.Add(financeBatch);
+                        financeBatchList.Add(financeBatch);
 
                         double currentFinanceAmount = 0;
                         foreach (Invoice invoice in assignBatch.Invoices.Where(i => (i.IsDispute.HasValue == false || i.IsDispute == false) && i.IsFlaw == false).OrderBy(i => i.DueDate))
@@ -2476,6 +2477,28 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("融资金额不能大于转让金额，业务编号：" + assignBatchCode);
                         }
 
+                        if (assignBatch.Case.TransactionType == "国内买方保理")
+                        {
+                            InvoicePaymentBatch paymentBatch = new InvoicePaymentBatch();
+                            paymentBatch.PaymentType = "买方直接付款";
+                            paymentBatch.PaymentDate = financeBatch.FinancePeriodBegin;
+                            paymentBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
+                            paymentBatch.CreateUserName = App.Current.CurUser.Name;
+                            paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentBatch.PaymentDate, paymentBatchList);
+                            paymentBatch.Case = financeBatch.Case;
+                            paymentBatch.InputDate = DateTime.Today;
+                            paymentBatchList.Add(paymentBatch);
+
+                            foreach (InvoiceFinanceLog financeLog in financeBatch.InvoiceFinanceLogs)
+                            {
+                                InvoicePaymentLog paymentLog = new InvoicePaymentLog();
+                                paymentLog.InvoicePaymentBatch = paymentBatch;
+                                paymentLog.PaymentAmount = financeLog.FinanceAmount;
+                                paymentLog.Invoice = financeLog.Invoice;
+                                paymentLog.Invoice.CaculatePayment();
+                            }
+                        }
+
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
@@ -2484,7 +2507,7 @@ namespace CMBC.EasyFactor.Utils
                 }
                 catch (Exception e1)
                 {
-                    foreach (InvoiceFinanceBatch batch in batchList)
+                    foreach (InvoiceFinanceBatch batch in financeBatchList)
                     {
                         foreach (InvoiceFinanceLog log in batch.InvoiceFinanceLogs)
                         {
@@ -3749,7 +3772,7 @@ namespace CMBC.EasyFactor.Utils
                                 }
                             }
 
-                            refundBatch.RefundAmount = refundBatch.InvoiceRefundLogs.Sum(l => l.RefundAmount.GetValueOrDefault());
+                            refundBatch.CaculateRefundAmount();
                         }
 
                         result++;
