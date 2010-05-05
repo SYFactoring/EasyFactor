@@ -413,9 +413,9 @@ namespace CMBC.EasyFactor.ARMgr
                 transactionType = "全部";
             }
             string financeType = this.cbFinanceType.Text;
-            if (String.IsNullOrEmpty(transactionType))
+            if (String.IsNullOrEmpty(financeType))
             {
-                transactionType = "全部";
+                financeType = "全部";
             }
 
             context = new DBDataContext();

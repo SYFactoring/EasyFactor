@@ -73,7 +73,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public void CaculateRefundAmount()
         {
-            this.RefundAmount = this.InvoiceRefundLogs.Sum(log => log.RefundAmount);
+            this.RefundAmount = this.InvoiceRefundLogs.Sum(log => log.RefundAmount.GetValueOrDefault());
         }
 
         /// <summary>

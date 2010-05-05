@@ -3561,7 +3561,7 @@ namespace CMBC.EasyFactor.Utils
                                 {
                                     InvoiceRefundBatch refundBatch = new InvoiceRefundBatch();
                                     refundBatch.InvoiceFinanceBatch = financeBatch;
-                                    refundAmount -= refundBatch.RefundAmount.Value;
+                                    refundAmount -= refundBatch.RefundAmount;
                                     refundBatch.RefundAmount = Math.Min(refundAmount, financeBatch.PoolFinanceOutstanding.GetValueOrDefault());
                                     refundBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
                                     refundBatch.Comment = comment;
@@ -3749,7 +3749,7 @@ namespace CMBC.EasyFactor.Utils
                                 }
                             }
 
-                            refundBatch.RefundAmount = refundBatch.InvoiceRefundLogs.Sum(l => l.RefundAmount);
+                            refundBatch.RefundAmount = refundBatch.InvoiceRefundLogs.Sum(l => l.RefundAmount.GetValueOrDefault());
                         }
 
                         result++;
