@@ -47,7 +47,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             ControlUtil.SetDoubleBuffered(this.dgvFactors);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
-            List<Country> countryList = Country.AllCountries().ToList();
+            List<Country> countryList = Country.AllCountries();
             countryList.Insert(0, new Country() { CountryCode = "AA", CountryNameCN = "全部", CountryNameEN = "All" });
             this.cbCountry.DataSource = countryList;
             this.cbCountry.DisplayMember = "CountryFormatEN";

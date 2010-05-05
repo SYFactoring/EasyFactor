@@ -74,7 +74,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static List<Country> AllCountries()
         {
-            return _countryList;
+            return _countryList.ToList();
         }
 
         #endregion Methods

@@ -49,7 +49,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static List<Location> AllLocations()
         {
-            return _locationList;
+            return _locationList.ToList();
         }
 
         #endregion Methods
