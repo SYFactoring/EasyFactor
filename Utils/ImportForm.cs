@@ -3748,6 +3748,8 @@ namespace CMBC.EasyFactor.Utils
                                     refundAmount -= log.RefundAmount.Value;
                                 }
                             }
+
+                            refundBatch.RefundAmount = refundBatch.InvoiceRefundLogs.Sum(l => l.RefundAmount);
                         }
 
                         result++;

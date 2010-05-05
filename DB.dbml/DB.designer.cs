@@ -8811,9 +8811,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
-		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
-		
 		private EntitySet<InvoiceRefundBatch> _InvoiceRefundBatches;
+		
+		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
 		private EntityRef<Factor> _Factor;
 		
@@ -8869,8 +8869,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		public InvoiceFinanceBatch()
 		{
-			this._InvoiceFinanceLogs = new EntitySet<InvoiceFinanceLog>(new Action<InvoiceFinanceLog>(this.attach_InvoiceFinanceLogs), new Action<InvoiceFinanceLog>(this.detach_InvoiceFinanceLogs));
 			this._InvoiceRefundBatches = new EntitySet<InvoiceRefundBatch>(new Action<InvoiceRefundBatch>(this.attach_InvoiceRefundBatches), new Action<InvoiceRefundBatch>(this.detach_InvoiceRefundBatches));
+			this._InvoiceFinanceLogs = new EntitySet<InvoiceFinanceLog>(new Action<InvoiceFinanceLog>(this.attach_InvoiceFinanceLogs), new Action<InvoiceFinanceLog>(this.detach_InvoiceFinanceLogs));
 			this._Factor = default(EntityRef<Factor>);
 			this._Case = default(EntityRef<Case>);
 			this._Client = default(EntityRef<Client>);
@@ -9289,19 +9289,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[Association(Name="InvoiceFinanceBatch_InvoiceFinanceLog", Storage="_InvoiceFinanceLogs", OtherKey="FinanceBatchNo")]
-		public EntitySet<InvoiceFinanceLog> InvoiceFinanceLogs
-		{
-			get
-			{
-				return this._InvoiceFinanceLogs;
-			}
-			set
-			{
-				this._InvoiceFinanceLogs.Assign(value);
-			}
-		}
-		
 		[Association(Name="InvoiceFinanceBatch_InvoiceRefundBatch", Storage="_InvoiceRefundBatches", OtherKey="FinanceBatchNo")]
 		public EntitySet<InvoiceRefundBatch> InvoiceRefundBatches
 		{
@@ -9312,6 +9299,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			set
 			{
 				this._InvoiceRefundBatches.Assign(value);
+			}
+		}
+		
+		[Association(Name="InvoiceFinanceBatch_InvoiceFinanceLog", Storage="_InvoiceFinanceLogs", OtherKey="FinanceBatchNo")]
+		public EntitySet<InvoiceFinanceLog> InvoiceFinanceLogs
+		{
+			get
+			{
+				return this._InvoiceFinanceLogs;
+			}
+			set
+			{
+				this._InvoiceFinanceLogs.Assign(value);
 			}
 		}
 		
@@ -9437,18 +9437,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		private void attach_InvoiceFinanceLogs(InvoiceFinanceLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.InvoiceFinanceBatch = this;
-		}
-		
-		private void detach_InvoiceFinanceLogs(InvoiceFinanceLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.InvoiceFinanceBatch = null;
-		}
-		
 		private void attach_InvoiceRefundBatches(InvoiceRefundBatch entity)
 		{
 			this.SendPropertyChanging();
@@ -9456,6 +9444,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_InvoiceRefundBatches(InvoiceRefundBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceFinanceBatch = null;
+		}
+		
+		private void attach_InvoiceFinanceLogs(InvoiceFinanceLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceFinanceBatch = this;
+		}
+		
+		private void detach_InvoiceFinanceLogs(InvoiceFinanceLog entity)
 		{
 			this.SendPropertyChanging();
 			entity.InvoiceFinanceBatch = null;
@@ -10304,7 +10304,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
-		private System.Nullable<double> _RefundAmount;
+		private double _RefundAmount;
 		
 		private string _FinanceBatchNo;
 		
@@ -10340,7 +10340,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckDateChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
-    partial void OnRefundAmountChanging(System.Nullable<double> value);
+    partial void OnRefundAmountChanging(double value);
     partial void OnRefundAmountChanged();
     partial void OnFinanceBatchNoChanging(string value);
     partial void OnFinanceBatchNoChanged();
@@ -10579,7 +10579,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[Column(Storage="_RefundAmount", DbType="float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> RefundAmount
+		public double RefundAmount
 		{
 			get
 			{
