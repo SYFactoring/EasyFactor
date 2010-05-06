@@ -71,7 +71,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.opUserType = opType;
             this.context = new DBDataContext();
 
-            this.cbPermission.DataSource = User.GetAllPermissions();
+            this.cbPermission.DataSource = User.AllPermissions;
             this.cbPermission.ValueMember = "Permission";
             this.cbPermission.DisplayMember = "Name";
 

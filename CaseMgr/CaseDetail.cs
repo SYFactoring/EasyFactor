@@ -100,7 +100,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCreditCoverNegs.AutoGenerateColumns = false;
             this.context = new DBDataContext();
 
-            List<Currency> allCurrencies = Currency.AllCurrencies();
+            List<Currency> allCurrencies = Currency.AllCurrencies;
             this.cbCaseInvoiceCurrency.DataSource = allCurrencies;
             this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
             this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";

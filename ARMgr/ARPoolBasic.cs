@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.DB.dbml;
-using CMBC.EasyFactor.InfoMgr.ClientMgr;
-using CMBC.EasyFactor.Utils;
-
-namespace CMBC.EasyFactor.ARMgr
+﻿namespace CMBC.EasyFactor.ARMgr
 {
+    using System;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.InfoMgr.ClientMgr;
+    using CMBC.EasyFactor.Utils;
+
+    public enum OpPoolARType
+    {
+
+        /// <summary>
+        /// 融资
+        /// </summary>
+        FINANCE,
+
+        /// <summary>
+        /// 卖方还款
+        /// </summary>
+        REFUND
+    }
+
     public partial class ARPoolBasic : UserControl
     {
         /// <summary>
@@ -22,40 +30,23 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private OpARType opARType;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public enum OpARType
-        {
-
-            /// <summary>
-            /// 融资
-            /// </summary>
-            FINANCE,
-
-            /// <summary>
-            /// 卖方还款
-            /// </summary>
-            REFUND
-        }
+        private OpPoolARType opARType;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="opARType"></param>
-        public ARPoolBasic(OpARType opARType)
+        public ARPoolBasic(OpPoolARType opARType)
         {
             this.InitializeComponent();
 
             this.opARType = opARType;
             switch (opARType)
             {
-                case OpARType.FINANCE:
+                case OpPoolARType.FINANCE:
                     this.PoolControl = new PoolFinance(this);
                     break;
-                case OpARType.REFUND:
+                case OpPoolARType.REFUND:
                     this.PoolControl = new PoolRefund(this, PoolRefund.OpRefundType.SELLER_REFUND);
                     break;
                 default:

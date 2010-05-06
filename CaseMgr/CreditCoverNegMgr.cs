@@ -50,7 +50,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbOwnerDepts.ValueMember = "DepartmentCode";
             this.cbOwnerDepts.GroupingMembers = "Domain";
 
-            List<Currency> currencyList = Currency.AllCurrencies().ToList();
+            List<Currency> currencyList = Currency.AllCurrencies;
             currencyList.Insert(0, new Currency() { CurrencyCode = "AAA", CurrencyName = "All" });
             this.cbCurrency.DataSource = currencyList;
             this.cbCurrency.DisplayMember = "CurrencyFormat";

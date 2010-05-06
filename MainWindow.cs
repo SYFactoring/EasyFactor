@@ -89,7 +89,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
-                ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
+                ARCaseBasic invoiceRefund = new ARCaseBasic(OpARType.SELLER_REFUND);
                 this.SetDetailPanel(invoiceRefund);
                 InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
                 uc.NewBatchFromPayment(invoiceList, batch);
@@ -314,7 +314,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
-                ARCaseBasic creditNotePayment = new ARCaseBasic(ARCaseBasic.OpARType.CREDIT_NOTE);
+                ARCaseBasic creditNotePayment = new ARCaseBasic(OpARType.CREDIT_NOTE);
                 this.SetDetailPanel(creditNotePayment);
             }
         }
@@ -362,7 +362,7 @@ namespace CMBC.EasyFactor
             else if (dr == DialogResult.Cancel)
             {
                 App.Current.CurUser = null;
-                LoginWindow loginWindow = new LoginWindow();
+                LogOnWindow loginWindow = new LogOnWindow();
                 loginWindow.ShowDialog(this);
 
                 if (App.Current.CurUser == null)
@@ -714,7 +714,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
-                ARCaseBasic invoiceAssign = new ARCaseBasic(ARCaseBasic.OpARType.ASSIGN);
+                ARCaseBasic invoiceAssign = new ARCaseBasic(OpARType.ASSIGN);
                 this.SetDetailPanel(invoiceAssign);
             }
         }
@@ -728,7 +728,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
-                ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.BUYER_PAYMENT);
+                ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.BUYER_PAYMENT);
                 this.SetDetailPanel(invoicePayment);
             }
         }
@@ -742,7 +742,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
-                ARCaseBasic invoiceFinance = new ARCaseBasic(ARCaseBasic.OpARType.FINANCE);
+                ARCaseBasic invoiceFinance = new ARCaseBasic(OpARType.FINANCE);
                 this.SetDetailPanel(invoiceFinance);
             }
         }
@@ -756,7 +756,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
-                ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.GUARANTEE_PAYMENT);
+                ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.GUARANTEE_PAYMENT);
                 this.SetDetailPanel(invoicePayment);
             }
         }
@@ -770,7 +770,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
-                ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.INDIRECT_PAYMENT);
+                ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.INDIRECT_PAYMENT);
                 this.SetDetailPanel(invoicePayment);
             }
         }
@@ -784,7 +784,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
-                ARCaseBasic invoicePayment = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REASSIGN);
+                ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.SELLER_REASSIGN);
                 this.SetDetailPanel(invoicePayment);
             }
         }
@@ -798,7 +798,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
             {
-                ARCaseBasic invoiceRefund = new ARCaseBasic(ARCaseBasic.OpARType.SELLER_REFUND);
+                ARCaseBasic invoiceRefund = new ARCaseBasic(OpARType.SELLER_REFUND);
                 this.SetDetailPanel(invoiceRefund);
             }
         }
@@ -845,7 +845,7 @@ namespace CMBC.EasyFactor
             else if (dr == DialogResult.Cancel)
             {
                 App.Current.CurUser = null;
-                LoginWindow loginWindow = new LoginWindow();
+                LogOnWindow loginWindow = new LogOnWindow();
                 loginWindow.ShowDialog(this);
 
                 if (App.Current.CurUser == null)
@@ -932,7 +932,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void PoolFinance(object sender, EventArgs e)
         {
-            ARPoolBasic poolFinance = new ARPoolBasic(ARPoolBasic.OpARType.FINANCE);
+            ARPoolBasic poolFinance = new ARPoolBasic(OpPoolARType.FINANCE);
             this.SetDetailPanel(poolFinance);
         }
 
@@ -943,7 +943,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void PoolRefund(object sender, EventArgs e)
         {
-            ARPoolBasic poolRefund = new ARPoolBasic(ARPoolBasic.OpARType.REFUND);
+            ARPoolBasic poolRefund = new ARPoolBasic(OpPoolARType.REFUND);
             this.SetDetailPanel(poolRefund);
         }
 

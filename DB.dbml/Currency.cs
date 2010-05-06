@@ -66,9 +66,12 @@ namespace CMBC.EasyFactor.DB.dbml
         /// 
         /// </summary>
         /// <returns></returns>
-        public static List<Currency> AllCurrencies()
+        public static List<Currency> AllCurrencies
         {
-            return _currencyList.ToList();
+            get
+            {
+                return _currencyList.ToList();
+            }
         }
 
         #endregion Methods

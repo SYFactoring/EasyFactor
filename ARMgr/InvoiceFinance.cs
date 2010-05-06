@@ -68,7 +68,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator.Enabled = false;
             ControlUtil.SetDoubleBuffered(this.dgvLogs);
 
-            this.batchCurrencyComboBoxEx.DataSource = Currency.AllCurrencies();
+            this.batchCurrencyComboBoxEx.DataSource = Currency.AllCurrencies;
             this.batchCurrencyComboBoxEx.DisplayMember = "CurrencyCode";
             this.batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
 

@@ -207,17 +207,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbDepartments.ValueMember = "DepartmentCode";
             this.cbDepartments.SelectedIndex = -1;
 
-            this.creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies();
+            this.creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies;
             this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
             this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
             this.creditLineCurrencyComboBox.SelectedIndex = -1;
 
-            this.requestCurrencyComboBox.DataSource = Currency.AllCurrencies();
+            this.requestCurrencyComboBox.DataSource = Currency.AllCurrencies;
             this.requestCurrencyComboBox.DisplayMember = "CurrencyCode";
             this.requestCurrencyComboBox.ValueMember = "CurrencyCode";
             this.requestCurrencyComboBox.SelectedIndex = -1;
 
-            this.cbGDCurr.DataSource = Currency.AllCurrencies();
+            this.cbGDCurr.DataSource = Currency.AllCurrencies;
             this.cbGDCurr.DisplayMember = "CurrencyCode";
             this.cbGDCurr.ValueMember = "CurrencyCode";
             this.cbGDCurr.SelectedIndex = -1;

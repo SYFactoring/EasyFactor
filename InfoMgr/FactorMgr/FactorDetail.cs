@@ -139,7 +139,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.countryNameComboBox.ValueMember = "CountryNameEN";
             this.countryNameComboBox.SelectedIndex = -1;
 
-            this.creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies();
+            this.creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies;
             this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
             this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
             this.creditLineCurrencyComboBox.SelectedIndex = -1;

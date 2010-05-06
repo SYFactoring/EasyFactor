@@ -23,8 +23,8 @@ namespace CMBC.EasyFactor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LoginWindow loginWindow = new LoginWindow();
-            if (!loginWindow.PreLogin())
+            LogOnWindow loginWindow = new LogOnWindow();
+            if (!loginWindow.PreLogOn())
             {
                 return;
             }

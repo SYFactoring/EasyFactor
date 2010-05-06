@@ -9,7 +9,7 @@ namespace CMBC.EasyFactor
     /// <summary>
     /// Login Window Designer
     /// </summary>
-    public partial class LoginWindow
+    public partial class LogOnWindow
     {
 		#region Fields (13) 
 
@@ -61,7 +61,7 @@ namespace CMBC.EasyFactor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogOnWindow));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.panelFooter = new System.Windows.Forms.Panel();
             this.btnCancel = new DevComponents.DotNetBar.ButtonX();
@@ -123,7 +123,7 @@ namespace CMBC.EasyFactor
             this.btnLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "登录";
-            this.btnLogin.Click += new System.EventHandler(this.Login);
+            this.btnLogin.Click += new System.EventHandler(this.LogOn);
             // 
             // panelCenter
             // 

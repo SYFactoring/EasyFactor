@@ -18,7 +18,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <StartupObject>CMBC.EasyFactor.Program</StartupObject>
     <ManifestCertificateThumbprint>39C659FC473C3F4A98E2A9A80A4966A1A8E399B5</ManifestCertificateThumbprint>
     <ManifestKeyFile>EasyFactor_TemporaryKey.pfx</ManifestKeyFile>
@@ -60,6 +61,13 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSharpZipLib, Version=0.5.0.0, Culture=neutral" />
     <Reference Include="DevComponents.DotNetBar2, Version=8.2.0.2, Culture=neutral, PublicKeyToken=5fd520d36328f741, processorArchitecture=MSIL">
@@ -75,7 +83,6 @@
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -394,11 +401,11 @@
     <Compile Include="InfoMgr\UserMgr\UserMgr.Designer.cs">
       <DependentUpon>UserMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginWindow.cs">
+    <Compile Include="LogOnWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginWindow.designer.cs">
-      <DependentUpon>LoginWindow.cs</DependentUpon>
+    <Compile Include="LogOnWindow.designer.cs">
+      <DependentUpon>LogOnWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -408,7 +415,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="DB.dbml\DB.dbml.layout">
       <DependentUpon>DB.dbml</DependentUpon>
     </None>
@@ -592,8 +598,8 @@
       <DependentUpon>UserMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginWindow.resx">
-      <DependentUpon>LoginWindow.cs</DependentUpon>
+    <EmbeddedResource Include="LogOnWindow.resx">
+      <DependentUpon>LogOnWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
@@ -674,6 +680,11 @@
     <Content Include="Help\UpdateVersion.xml" />
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -692,7 +703,7 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5</ProductName>
-      <Install>true</Install>
+      <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>

@@ -50,7 +50,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.costRateTextBoxX.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
             this.costRateTextBoxX.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
 
-            this.batchCurrencyComboBoxEx.DataSource = Currency.AllCurrencies();
+            this.batchCurrencyComboBoxEx.DataSource = Currency.AllCurrencies;
             this.batchCurrencyComboBoxEx.DisplayMember = "CurrencyCode";
             this.batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
         }

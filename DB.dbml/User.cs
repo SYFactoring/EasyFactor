@@ -19,20 +19,24 @@ namespace CMBC.EasyFactor.DB.dbml
         /// 
         /// </summary>
         /// <returns></returns>
-        public static List<PermissionItem> GetAllPermissions()
+        public static List<PermissionItem> AllPermissions
         {
-            List<PermissionItem> reasonList = new List<PermissionItem>();
-            reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_QUERY, "查询权限"));
-            reasonList.Add(new PermissionItem(Utils.Permission.BASICINFO_UPDATE, "客户/合作机构更新权限"));
-            reasonList.Add(new PermissionItem(Utils.Permission.CASE_UPDATE, "案件信息更新权限"));
-            reasonList.Add(new PermissionItem(Utils.Permission.CDA_UPDATE, "额度通知书更新权限"));
-            reasonList.Add(new PermissionItem(Utils.Permission.CDA_APPROVE, "额度通知书审核权限"));
-            reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_UPDATE, "发票更新权限"));
-            reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_CHECK, "发票复核权限"));
-            reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_APPROVE, "发票审核权限"));
-            reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_IMPORT, "系统数据导入权限"));
-            reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_UPDATE, "系统数据更新权限"));
-            return reasonList;
+            get
+            {
+                List<PermissionItem> reasonList = new List<PermissionItem>();
+                reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_QUERY, "查询权限"));
+                reasonList.Add(new PermissionItem(Utils.Permission.BASICINFO_UPDATE, "客户/合作机构更新权限"));
+                reasonList.Add(new PermissionItem(Utils.Permission.CASE_UPDATE, "案件信息更新权限"));
+                reasonList.Add(new PermissionItem(Utils.Permission.CDA_UPDATE, "额度通知书更新权限"));
+                reasonList.Add(new PermissionItem(Utils.Permission.CDA_APPROVE, "额度通知书审核权限"));
+                reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_UPDATE, "发票更新权限"));
+                reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_CHECK, "发票复核权限"));
+                reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_APPROVE, "发票审核权限"));
+                reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_IMPORT, "系统数据导入权限"));
+                reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_UPDATE, "系统数据更新权限"));
+
+                return reasonList;
+            }
         }
 
         /// <summary>

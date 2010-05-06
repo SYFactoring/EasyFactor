@@ -77,7 +77,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.opBatchType = OpBatchType.DETAIL_BATCH;
             this.ImeMode = ImeMode.OnHalf;
 
-            this.batchCurrencyComboBox.DataSource = Currency.AllCurrencies();
+            this.batchCurrencyComboBox.DataSource = Currency.AllCurrencies;
             this.batchCurrencyComboBox.DisplayMember = "CurrencyCode";
             this.batchCurrencyComboBox.ValueMember = "CurrencyCode";
 

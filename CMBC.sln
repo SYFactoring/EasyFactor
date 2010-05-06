@@ -7,6 +7,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyFactor 2010", "..\EasyF
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyFactor 2007", "..\EasyFactor 2007\EasyFactor 2007.vdproj", "{CA202655-E1F8-4E36-966E-0392E8ED86FA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3853BEB4-D1F1-496F-8A16-6DAB291D62E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

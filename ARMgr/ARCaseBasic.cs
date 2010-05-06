@@ -7,7 +7,6 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
-    using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
@@ -15,6 +14,49 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+
+    public enum OpARType
+    {
+        /// <summary>
+        /// 转让
+        /// </summary>
+        ASSIGN,
+
+        /// <summary>
+        /// 融资
+        /// </summary>
+        FINANCE,
+
+        /// <summary>
+        /// 买方付款
+        /// </summary>
+        BUYER_PAYMENT,
+
+        /// <summary>
+        /// 卖方还款
+        /// </summary>
+        SELLER_REFUND,
+
+        /// <summary>
+        /// 间接付款
+        /// </summary>
+        INDIRECT_PAYMENT,
+
+        /// <summary>
+        /// 担保付款
+        /// </summary>
+        GUARANTEE_PAYMENT,
+
+        /// <summary>
+        /// 卖方回购
+        /// </summary>
+        SELLER_REASSIGN,
+
+        /// <summary>
+        /// 贷项通知
+        /// </summary>
+        CREDIT_NOTE,
+    }
 
     /// <summary>
     /// 
@@ -34,56 +76,6 @@ namespace CMBC.EasyFactor.ARMgr
         private OpARType opARType;
 
         #endregion Fields
-
-        #region Enums (1)
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public enum OpARType
-        {
-            /// <summary>
-            /// 转让
-            /// </summary>
-            ASSIGN,
-
-            /// <summary>
-            /// 融资
-            /// </summary>
-            FINANCE,
-
-            /// <summary>
-            /// 买方付款
-            /// </summary>
-            BUYER_PAYMENT,
-
-            /// <summary>
-            /// 卖方还款
-            /// </summary>
-            SELLER_REFUND,
-
-            /// <summary>
-            /// 间接付款
-            /// </summary>
-            INDIRECT_PAYMENT,
-
-            /// <summary>
-            /// 担保付款
-            /// </summary>
-            GUARANTEE_PAYMENT,
-
-            /// <summary>
-            /// 卖方回购
-            /// </summary>
-            SELLER_REASSIGN,
-
-            /// <summary>
-            /// 贷项通知
-            /// </summary>
-            CREDIT_NOTE,
-        }
-
-        #endregion Enums
 
         #region Constructors (1)
 

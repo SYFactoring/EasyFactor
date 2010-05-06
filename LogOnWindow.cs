@@ -16,14 +16,14 @@ namespace CMBC.EasyFactor
     /// <summary>
     /// Login Window
     /// </summary>
-    public partial class LoginWindow : DevComponents.DotNetBar.Office2007Form
+    public partial class LogOnWindow : DevComponents.DotNetBar.Office2007Form
     {
         #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the LoginWindow class
         /// </summary>
-        public LoginWindow()
+        public LogOnWindow()
         {
             this.InitializeComponent();
         }
@@ -35,19 +35,10 @@ namespace CMBC.EasyFactor
         // Public Methods (2) 
 
         /// <summary>
-        /// Auto login system. Only used in develop period.
-        /// </summary>
-        public void AutoLogin()
-        {
-            User curUser = new User { Name = "系统管理员", UserID = "admin", Role = "管理员", LoginDate = DateTime.Now };
-            App.Current.CurUser = curUser;
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool PreLogin()
+        public bool PreLogOn()
         {
             DBDataContext context = new DBDataContext();
             try
@@ -85,7 +76,7 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void Login(object sender, EventArgs e)
+        private void LogOn(object sender, EventArgs e)
         {
             if (!this.superValidator.Validate())
             {

@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Linq;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using System.Collections.ObjectModel;
 
     /// <summary>
     /// 

@@ -83,15 +83,15 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvPaymentLogs.AutoGenerateColumns = false;
             this.dgvRefundLogs.AutoGenerateColumns = false;
 
-            this.invoiceCurrencyComboBox.DataSource = Currency.AllCurrencies();
+            this.invoiceCurrencyComboBox.DataSource = Currency.AllCurrencies;
             this.invoiceCurrencyComboBox.DisplayMember = "CurrencyCode";
             this.invoiceCurrencyComboBox.ValueMember = "CurrencyCode";
 
-            this.flawReasonCheckedListBox.DataSource = FlawReason.GetAllFlawReasons();
+            this.flawReasonCheckedListBox.DataSource = FlawReason.AllFlawReasons;
             this.flawReasonCheckedListBox.DisplayMember = "Reason";
             this.flawReasonCheckedListBox.ValueMember = "Index";
 
-            this.disputeReasonCheckedListBox.DataSource = DisputeReason.GetAllDisputeReasons();
+            this.disputeReasonCheckedListBox.DataSource = DisputeReason.AllDisputeReasons;
             this.disputeReasonCheckedListBox.DisplayMember = "Reason";
             this.disputeReasonCheckedListBox.ValueMember = "Index";
 

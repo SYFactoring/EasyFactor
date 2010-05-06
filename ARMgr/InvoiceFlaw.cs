@@ -43,7 +43,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.bs = new BindingSource();
             this.dgvInvoices.DataSource = bs;
 
-            this.flawReasonCheckedListBox.DataSource = FlawReason.GetAllFlawReasons();
+            this.flawReasonCheckedListBox.DataSource = FlawReason.AllFlawReasons;
             this.flawReasonCheckedListBox.DisplayMember = "Reason";
             this.flawReasonCheckedListBox.ValueMember = "Index";
 

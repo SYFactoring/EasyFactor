@@ -10,7 +10,7 @@ namespace CMBC.EasyFactor.Utils
     /// <summary>
     /// 
     /// </summary>
-    class SendMail
+    class SendMail : IDisposable
     {
         private MailMessage mailMessage;
 
@@ -83,5 +83,20 @@ namespace CMBC.EasyFactor.Utils
                 smtpClient.Send(mailMessage);
             }
         }
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            if (this.mailMessage != null)
+            {
+                this.mailMessage.Dispose();
+            }
+        }
+
+        #endregion
     }
 }

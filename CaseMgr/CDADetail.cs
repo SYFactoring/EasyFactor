@@ -97,17 +97,17 @@ namespace CMBC.EasyFactor.CaseMgr
             this.iFPriceTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
             this.iFPriceTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
 
-            this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies().ToList();
+            this.creditCoverCurrComboBox.DataSource = Currency.AllCurrencies;
             this.creditCoverCurrComboBox.DisplayMember = "CurrencyCode";
             this.creditCoverCurrComboBox.ValueMember = "CurrencyCode";
             this.creditCoverCurrComboBox.SelectedIndex = -1;
 
-            this.financeLineCurrComboBox.DataSource = Currency.AllCurrencies().ToList();
+            this.financeLineCurrComboBox.DataSource = Currency.AllCurrencies;
             this.financeLineCurrComboBox.DisplayMember = "CurrencyCode";
             this.financeLineCurrComboBox.ValueMember = "CurrencyCode";
             this.financeLineCurrComboBox.SelectedIndex = -1;
 
-            this.handFeeCurrComboBox.DataSource = Currency.AllCurrencies().ToList();
+            this.handFeeCurrComboBox.DataSource = Currency.AllCurrencies;
             this.handFeeCurrComboBox.DisplayMember = "CurrencyCode";
             this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
             this.handFeeCurrComboBox.SelectedIndex = -1;

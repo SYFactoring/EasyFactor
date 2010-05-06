@@ -1,6 +1,7 @@
 ﻿
 namespace CMBC.EasyFactor.Utils
 {
+    using System;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using DevComponents.DotNetBar;
@@ -8,8 +9,14 @@ namespace CMBC.EasyFactor.Utils
     /// <summary>
     /// 
     /// </summary>
+    [FlagsAttribute]
     public enum Permission
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        NONE =0x00000000,
+
         /// <summary>
         /// 
         /// </summary>
