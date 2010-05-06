@@ -126,7 +126,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.DisplayMember = "CurrencyFormat";
             this.cbCurrency.ValueMember = "CurrencyCode";
 
-            List<Location> allLocations = DB.dbml.Location.AllLocations();
+            List<Location> allLocations = DB.dbml.Location.AllLocations;
             allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";

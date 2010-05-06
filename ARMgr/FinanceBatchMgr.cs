@@ -7,18 +7,16 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
-    using System.Drawing;
+    using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
     using DevComponents.DotNetBar;
-    using System.Collections.Generic;
-    using Microsoft.Office.Interop.Excel;
-    using System.IO;
     using Microsoft.Office.Core;
-    using System.Runtime.InteropServices;
+    using Microsoft.Office.Interop.Excel;
 
     /// <summary>
     /// 
@@ -127,6 +125,12 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
+            List<Location> allLocations = DB.dbml.Location.AllLocations;
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
+            this.cbLocation.DataSource = allLocations;
+            this.cbLocation.DisplayMember = "LocationName";
+            this.cbLocation.ValueMember = "LocationCode";
+            this.cbLocation.SelectedIndex = 0;
 
             this.UpdateContextMenu();
 
@@ -407,11 +411,13 @@ namespace CMBC.EasyFactor.ARMgr
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
+            string location = (string)this.cbLocation.SelectedValue;
             string transactionType = this.cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
                 transactionType = "全部";
             }
+
             string financeType = this.cbFinanceType.Text;
             if (String.IsNullOrEmpty(financeType))
             {
@@ -431,6 +437,7 @@ namespace CMBC.EasyFactor.ARMgr
                     && (i.CreateUserName.Contains(createUserName))
                     && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
                     && (financeType == "全部" ? true : i.FinanceType == financeType)
+                    && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
                     && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
             }
             else
@@ -441,6 +448,7 @@ namespace CMBC.EasyFactor.ARMgr
                     && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true)
                     && (i.CreateUserName.Contains(createUserName))
+                    && (location == "00" ? true : i.Client.Department.LocationCode == location)
                     && (i.Client.ClientNameCN.Contains(clientName) || i.Client.ClientNameEN.Contains(clientName)));
             }
 

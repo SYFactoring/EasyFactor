@@ -46,10 +46,12 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public static List<Location> AllLocations()
+        public static List<Location> AllLocations
         {
-            return _locationList.ToList();
+            get
+            {
+                return _locationList.ToList();
+            }
         }
 
         #endregion Methods

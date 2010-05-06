@@ -147,7 +147,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbTransactionType.Text = "全部";
             this.cbCaseMark.Text = "启动案";
 
-            List<Location> allLocations = DB.dbml.Location.AllLocations();
+            List<Location> allLocations = DB.dbml.Location.AllLocations;
             allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";

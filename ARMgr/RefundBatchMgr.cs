@@ -7,6 +7,7 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
@@ -108,6 +109,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.opBatchType = batchType;
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
+
+            List<Location> allLocations = DB.dbml.Location.AllLocations;
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
+            this.cbLocation.DataSource = allLocations;
+            this.cbLocation.DisplayMember = "LocationName";
+            this.cbLocation.ValueMember = "LocationCode";
+            this.cbLocation.SelectedIndex = 0;
 
             this.UpdateContextMenu();
 
@@ -316,6 +324,7 @@ namespace CMBC.EasyFactor.ARMgr
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
+            string location = (string)this.cbLocation.SelectedValue;
             string transactionType = this.cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
@@ -338,6 +347,7 @@ namespace CMBC.EasyFactor.ARMgr
                 && (refundType == "全部" ? true : i.RefundType == refundType)
                 && (i.CreateUserName.Contains(createUserName))
                 && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
+                && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
                 && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
                 );
 

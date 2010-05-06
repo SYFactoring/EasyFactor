@@ -546,7 +546,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
 
-                        if (caseCode.Length > 12)
+                        if (caseCode.Length > 20)
                         {
                             break;
                         }

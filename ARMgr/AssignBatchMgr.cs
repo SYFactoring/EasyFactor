@@ -10,13 +10,13 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// 
@@ -113,6 +113,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.opBatchType = batchType;
             ControlUtil.SetDoubleBuffered(this.dgvBatches);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
+
+            List<Location> allLocations = DB.dbml.Location.AllLocations;
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
+            this.cbLocation.DataSource = allLocations;
+            this.cbLocation.DisplayMember = "LocationName";
+            this.cbLocation.ValueMember = "LocationCode";
+            this.cbLocation.SelectedIndex = 0;
 
             this.UpdateContextMenu();
 
@@ -470,6 +477,8 @@ namespace CMBC.EasyFactor.ARMgr
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
             string transactionType = this.cbTransactionType.Text;
+            string location = (string)this.cbLocation.SelectedValue;
+
             if (String.IsNullOrEmpty(transactionType))
             {
                 transactionType = "全部";
@@ -484,6 +493,7 @@ namespace CMBC.EasyFactor.ARMgr
                 && (status != string.Empty ? i.CheckStatus == status : true)
                 && (i.CreateUserName.Contains(createUserName))
                 && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
+                && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
                 && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
 
             this.bs.DataSource = queryResult;

@@ -1809,14 +1809,13 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "转让余额";
                 datasheet.Cells[1, column++] = "发票日";
                 datasheet.Cells[1, column++] = "到期日";
-                datasheet.Cells[1, column++] = "是否瑕疵";
+                datasheet.Cells[1, column++] = "转让日";
                 datasheet.Cells[1, column++] = "融资金额";
                 datasheet.Cells[1, column++] = "融资余额";
                 datasheet.Cells[1, column++] = "融资日";
                 datasheet.Cells[1, column++] = "融资到期日";
-                datasheet.Cells[1, column++] = "备注";
-                datasheet.Cells[1, column++] = "应收帐款逾期天数";
-                datasheet.Cells[1, column++] = "预付款逾期天数";
+                datasheet.Cells[1, column++] = "账款逾期天数";
+                datasheet.Cells[1, column++] = "融资逾期天数";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -1856,11 +1855,11 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceDate;
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
+                    datasheet.Cells[row + 2, column++] = invoice.AssignDate;
                     if (invoice.AssignOverDueDays >= 0)
                     {
-                        ((Range)datasheet.Cells[row + 2, column - 1]).Interior.ColorIndex = 6;
+                        ((Range)datasheet.Cells[row + 2, column - 2]).Interior.ColorIndex = 6;
                     }
-                    datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
                     datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceOutstanding;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceDate;
@@ -1869,7 +1868,6 @@ namespace CMBC.EasyFactor.Utils
                     {
                         ((Range)datasheet.Cells[row + 2, column - 1]).Interior.ColorIndex = 3;
                     }
-                    datasheet.Cells[row + 2, column++] = invoice.Comment;
                     datasheet.Cells[row + 2, column++] = invoice.AssignOverDueDays;
                     datasheet.Cells[row + 2, column++] = invoice.FinanceOverDueDays;
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
@@ -1882,7 +1880,7 @@ namespace CMBC.EasyFactor.Utils
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
-                    else if (range.Column == 7 || range.Column == 8 || range.Column == 12 || range.Column == 13)
+                    else if (range.Column == 7 || range.Column == 8 || range.Column == 9 || range.Column == 12 || range.Column == 13)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -2961,7 +2959,7 @@ namespace CMBC.EasyFactor.Utils
                     if (workbook != null)
                     {
                         string ext = ".xls";
- 
+
                         string location = caseGroup.First().OwnerDepartment.Location.LocationName;
                         if (!System.IO.Directory.Exists(this.tbFilePath.Text + "\\" + location + "\\"))
                         {
