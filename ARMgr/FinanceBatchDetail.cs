@@ -140,7 +140,7 @@ namespace CMBC.EasyFactor.ARMgr
                 invoice.CaculateFinance();
                 batch.CaculateFinanceAmount();
                 context.InvoiceFinanceLogs.DeleteOnSubmit(log);
-                log.InvoiceFinanceBatch.CheckStatus = "未复核";
+                batch.CheckStatus = ConstStr.BATCH.UNCHECK;
                 context.SubmitChanges();
             }
             catch (Exception e1)
