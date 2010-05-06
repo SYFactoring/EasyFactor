@@ -3666,7 +3666,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (String.IsNullOrEmpty(assignBatchCode))
                         {
-                            throw new Exception("业务编号不能为空，不能导入");
+                            break;
                         }
                         else
                         {
