@@ -3584,7 +3584,7 @@ namespace CMBC.EasyFactor.Utils
                                 {
                                     InvoiceRefundBatch refundBatch = new InvoiceRefundBatch();
                                     refundBatch.InvoiceFinanceBatch = financeBatch;
-                                    refundAmount -= refundBatch.RefundAmount;
+                                    refundAmount -= refundBatch.RefundAmount.GetValueOrDefault();
                                     refundBatch.RefundAmount = Math.Min(refundAmount, financeBatch.PoolFinanceOutstanding.GetValueOrDefault());
                                     refundBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
                                     refundBatch.Comment = comment;

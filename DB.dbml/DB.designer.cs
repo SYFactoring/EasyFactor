@@ -10304,7 +10304,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
-		private double _RefundAmount;
+		private System.Nullable<double> _RefundAmount;
 		
 		private string _FinanceBatchNo;
 		
@@ -10340,7 +10340,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckDateChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
-    partial void OnRefundAmountChanging(double value);
+    partial void OnRefundAmountChanging(System.Nullable<double> value);
     partial void OnRefundAmountChanged();
     partial void OnFinanceBatchNoChanging(string value);
     partial void OnFinanceBatchNoChanged();
@@ -10579,7 +10579,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefundAmount", DbType="float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public double RefundAmount
+		public System.Nullable<double> RefundAmount
 		{
 			get
 			{
