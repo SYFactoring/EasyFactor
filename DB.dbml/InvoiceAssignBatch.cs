@@ -183,12 +183,15 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateAssignBatchNo(string caseCode, DateTime assignDate)
         {
-            DBDataContext context = new DBDataContext();
-            var queryResult = from batch in context.InvoiceAssignBatches where batch.CaseCode == caseCode && batch.AssignDate.Year == assignDate.Year select batch.AssignBatchNo;
             int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(17)), out batchCount))
+            using (DBDataContext context = new DBDataContext())
             {
-                batchCount = 0;
+                var queryResult = from batch in context.InvoiceAssignBatches where batch.CaseCode == caseCode && batch.AssignDate.Year == assignDate.Year select batch.AssignBatchNo;
+
+                if (!Int32.TryParse(queryResult.Max(no => no.Substring(17)), out batchCount))
+                {
+                    batchCount = 0;
+                }
             }
 
             string assignNo = String.Format("{0}ASS{1:yy}{2:D3}", caseCode, assignDate, batchCount + 1);
@@ -203,12 +206,15 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateAssignBatchNo(string caseCode, DateTime assignDate, List<InvoiceAssignBatch> batchesInMemory)
         {
-            DBDataContext context = new DBDataContext();
-            var queryResult = from batch in context.InvoiceAssignBatches where batch.CaseCode == caseCode && batch.AssignDate.Year == assignDate.Year select batch.AssignBatchNo;
             int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(17)), out batchCount))
+            using (DBDataContext context = new DBDataContext())
             {
-                batchCount = 0;
+                var queryResult = from batch in context.InvoiceAssignBatches where batch.CaseCode == caseCode && batch.AssignDate.Year == assignDate.Year select batch.AssignBatchNo;
+
+                if (!Int32.TryParse(queryResult.Max(no => no.Substring(17)), out batchCount))
+                {
+                    batchCount = 0;
+                }
             }
 
             batchCount += batchesInMemory.Count(batch => batch.AssignBatchNo.StartsWith(String.Format("{0}ASS{1:yy}", caseCode, assignDate)));

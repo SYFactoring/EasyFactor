@@ -42,6 +42,12 @@
             {
                 components.Dispose();
             }
+
+            if (this.mail != null)
+            {
+                this.mail.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 

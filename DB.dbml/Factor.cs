@@ -68,7 +68,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (_GroupNo != null && !_GroupNo.Trim().Equals(string.Empty))
+                if (!String.IsNullOrEmpty(_GroupNo))
                 {
                     return FactorGroup.GroupNameCN;
                 }
@@ -86,7 +86,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (_GroupNo != null && !_GroupNo.Trim().Equals(string.Empty))
+                if (!String.IsNullOrEmpty(_GroupNo))
                 {
                     return FactorGroup.GroupNameEN;
                 }
@@ -164,7 +164,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public override string ToString()
         {
-            if (_CompanyNameCN != null && !_CompanyNameCN.Equals(string.Empty))
+            if (!String.IsNullOrEmpty(_CompanyNameCN))
             {
                 return _CompanyNameCN;
             }

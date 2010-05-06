@@ -621,14 +621,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryInvoices(object sender, EventArgs e)
         {
+            DateTime beginDate = String.IsNullOrEmpty(this.dateFrom.Text) ? this.dateFrom.MinDate : this.dateFrom.Value.Date;
+            DateTime endDate = String.IsNullOrEmpty(this.dateTo.Text) ? this.dateTo.MinDate : this.dateTo.Value.Date;
             string clientName = this.tbClientName.Text;
             string factorName = this.tbFactor.Text;
             string invoiceNo = this.tbInvoiceNo.Text;
             string isFlaw = this.cbIsFlaw.CheckValue as string;
             string isDispute = this.cbIsDispute.CheckValue as string;
             string caseMark = this.cbCaseMark.Text;
-            DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
-            DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
             string location = (string)this.cbLocation.SelectedValue;
             string transactionType = this.cbTransactionType.Text;
 

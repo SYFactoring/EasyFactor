@@ -160,7 +160,7 @@ namespace CMBC.EasyFactor.Utils
         public void StartExport(object sender, EventArgs e)
         {
             string filePath = this.tbFilePath.Text;
-            if (filePath.Trim().Equals(String.Empty))
+            if (String.IsNullOrEmpty(filePath.Trim()))
             {
                 if (this.exportType == ExportType.EXPORT_MSG09 || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
                 {
@@ -1265,7 +1265,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
@@ -1286,7 +1286,7 @@ namespace CMBC.EasyFactor.Utils
                     app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -1395,7 +1395,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
@@ -1416,7 +1416,7 @@ namespace CMBC.EasyFactor.Utils
                     app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -1502,7 +1502,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
@@ -1523,7 +1523,7 @@ namespace CMBC.EasyFactor.Utils
                     app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -1750,7 +1750,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
@@ -1771,7 +1771,7 @@ namespace CMBC.EasyFactor.Utils
                     app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -1888,7 +1888,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
@@ -1909,7 +1909,7 @@ namespace CMBC.EasyFactor.Utils
                     app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -2319,7 +2319,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
@@ -2340,7 +2340,7 @@ namespace CMBC.EasyFactor.Utils
                     app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -2426,7 +2426,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
@@ -2447,7 +2447,7 @@ namespace CMBC.EasyFactor.Utils
                     app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -2978,7 +2978,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                 }
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (app != null)
                 {
@@ -2993,7 +2993,7 @@ namespace CMBC.EasyFactor.Utils
                     app = null;
                 }
 
-                throw e1;
+                throw;
             }
             finally
             {

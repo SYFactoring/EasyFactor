@@ -82,7 +82,7 @@ namespace CMBC.EasyFactor.Help
 
                 Request = (HttpWebRequest)HttpWebRequest.Create(url);
                 //Request.Headers.Add("Translate: f"); //Commented out 11/16/2004 Matt Palmerlee, this Header is more for DAV and causes a known security issue
-                if (user != null && user != "")
+                if (!String.IsNullOrEmpty(user))
                     Request.Credentials = new NetworkCredential(user, pass);
                 else
                     Request.Credentials = CredentialCache.DefaultCredentials;

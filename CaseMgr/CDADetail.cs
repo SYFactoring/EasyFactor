@@ -219,7 +219,7 @@ namespace CMBC.EasyFactor.CaseMgr
             CDA cda = this.CDABindingSource.DataSource as CDA;
             if ("其他".Equals(cda.CommissionType))
             {
-                if (e.ControlToValidate.Text.Equals(string.Empty))
+                if (String.IsNullOrEmpty(e.ControlToValidate.Text))
                 {
                     e.IsValid = false;
                 }
@@ -249,7 +249,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (cda.Case.TransactionType == "进口保理")
             {
-                if (this.iFPriceTextBox.Text == string.Empty)
+                if (String.IsNullOrEmpty(this.iFPriceTextBox.Text))
                 {
                     e.IsValid = false;
                 }
@@ -487,7 +487,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (cda.Case.TransactionType != "进口保理")
             {
-                if (this.priceTextBox.Text == string.Empty)
+                if (String.IsNullOrEmpty(this.priceTextBox.Text))
                 {
                     e.IsValid = false;
                 }
@@ -790,7 +790,7 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 bool isAddOK = true;
                 string cdaCode = CDA.GenerateCDACode(cda.Case);
-                if (string.Empty.Equals(cdaCode))
+                if (String.IsNullOrEmpty(cdaCode))
                 {
                     MessageBoxEx.Show("CDA编号生成失败", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;

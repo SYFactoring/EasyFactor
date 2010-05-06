@@ -1,4 +1,5 @@
-﻿namespace CMBC.EasyFactor.ARMgr
+﻿using CMBC.EasyFactor.Utils;
+namespace CMBC.EasyFactor.ARMgr
 {
     partial class RefundBatchDetail
     {
@@ -17,6 +18,12 @@
             {
                 components.Dispose();
             }
+
+            if (this.context != null)
+            {
+                this.context.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 
@@ -281,7 +288,7 @@
             this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl1.Tabs.Add(this.tabItemBatch);
             this.tabControl1.Tabs.Add(this.tabItemInvoices);
-            this.tabControl1.Text = "tabControl";
+            this.tabControl1.Text = "";
             // 
             // panelInvoices
             // 
@@ -449,9 +456,9 @@
             this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.checkStatusComboBox.FormattingEnabled = true;
             this.checkStatusComboBox.Items.AddRange(new object[] {
-            "未复核",
-            "已复核",
-            "复核未通过"});
+            ConstStr.BATCH.UNCHECK,
+            ConstStr.BATCH.CHECK,
+            ConstStr.BATCH.REJECT});
             this.checkStatusComboBox.Location = new System.Drawing.Point(115, 198);
             this.checkStatusComboBox.Name = "checkStatusComboBox";
             this.checkStatusComboBox.Size = new System.Drawing.Size(162, 21);

@@ -56,6 +56,11 @@ namespace CMBC.EasyFactor.ARMgr
                 this.components.Dispose();
             }
 
+            if (this.context != null)
+            {
+                this.context.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 
@@ -314,9 +319,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.checkStatusComboBox.FormattingEnabled = true;
             this.checkStatusComboBox.Items.AddRange(new object[] {
-            "未复核",
-            "已复核",
-            "复核未通过"});
+            ConstStr.BATCH.UNCHECK,
+            ConstStr.BATCH.CHECK,
+            ConstStr.BATCH.REJECT});
             this.checkStatusComboBox.Location = new System.Drawing.Point(115, 181);
             this.checkStatusComboBox.Name = "checkStatusComboBox";
             this.checkStatusComboBox.Size = new System.Drawing.Size(162, 21);

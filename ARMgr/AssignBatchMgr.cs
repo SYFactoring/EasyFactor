@@ -125,14 +125,14 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this.opBatchType == OpBatchType.CHECK)
             {
-                this.cbCheckStatus.Text = "未复核";
+                this.cbCheckStatus.Text = ConstStr.BATCH.UNCHECK;
                 this.QueryBatch(null, null);
             }
             else if (this.opBatchType == OpBatchType.REPORT)
             {
                 this.dateFrom.Value = DateTime.Now.Date;
                 this.dateTo.Value = DateTime.Now.Date;
-                this.cbCheckStatus.Text = "已复核";
+                this.cbCheckStatus.Text = ConstStr.BATCH.CHECK;
                 this.QueryBatch(null, null);
             }
         }
@@ -471,8 +471,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
-            DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
+            DateTime beginDate = String.IsNullOrEmpty(this.dateFrom.Text) ? this.dateFrom.MinDate : this.dateFrom.Value.Date;
+            DateTime endDate = String.IsNullOrEmpty(this.dateTo.Text) ? this.dateTo.MinDate : this.dateTo.Value.Date;
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
@@ -536,7 +536,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            batch.CheckStatus = "复核未通过";
+            batch.CheckStatus = ConstStr.BATCH.REJECT;
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
@@ -1376,7 +1376,7 @@ namespace CMBC.EasyFactor.ARMgr
                             sheet.Cells[row, 5] = invoice.DueDate;
                             sheet.Cells[row, 6] = invoice.InvoiceAmount;
                             sheet.Cells[row, 7] = invoice.FlawReason;
-                            if (invoice.FlawOtherReason != string.Empty && flawOtherReason == string.Empty)
+                            if (!String.IsNullOrEmpty(invoice.FlawOtherReason) && String.IsNullOrEmpty(flawOtherReason))
                             {
                                 flawOtherReason = invoice.FlawOtherReason;
                             }

@@ -79,7 +79,7 @@ namespace CMBC.EasyFactor.Utils
             this.DoubleBuffered = true;
             this.Name = "QueryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FactorQueryUI";
+            this.Text = "查询";
             this.ResumeLayout(false);
 
         }

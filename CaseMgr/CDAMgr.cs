@@ -95,20 +95,30 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetDoubleBuffered(this.dgvCDAs);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
+            this.cbTransactionType.Items.Insert(0, "全部");
+            this.cbTransactionType.Text = "全部";
+
+            List<Location> allLocations = DB.dbml.Location.AllLocations;
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
+            this.cbLocation.DataSource = allLocations;
+            this.cbLocation.DisplayMember = "LocationName";
+            this.cbLocation.ValueMember = "LocationCode";
+            this.cbLocation.SelectedIndex = 0;
+
             this.UpdateContextMenu();
 
             if (this.opCDAType == OpCDAType.CHECK)
             {
-                this.cbCheckStatus.Text = "未审核";
+                this.cbCheckStatus.Text = ConstStr.CDA.UNCHECK;
                 this.QueryCDAs(null, null);
             }
             else if (this.opCDAType == OpCDAType.REPORT)
             {
-                this.cbCheckStatus.Text = "已审核";
+                this.cbCheckStatus.Text = ConstStr.CDA.CHECKED;
             }
             else if (this.opCDAType == OpCDAType.DUE)
             {
-                this.cbCheckStatus.Text = "已审核";
+                this.cbCheckStatus.Text = ConstStr.CDA.CHECKED;
 
                 context = new DBDataContext();
                 var queryResult = from cda in context.CDAs
@@ -430,15 +440,19 @@ namespace CMBC.EasyFactor.CaseMgr
             string factorName = tbFactorName.Text;
             string contractCode = tbContractCode.Text;
             string status = this.cbCheckStatus.Text;
+            string transactionType = this.cbTransactionType.Text;
+            string location = (string)this.cbLocation.SelectedValue;
             string createUserName = this.tbCreateUserName.Text;
             bool isCDAChecked = this.cbIsCDA.CheckState == System.Windows.Forms.CheckState.Checked;
-            DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
-            DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
+            DateTime beginDate = String.IsNullOrEmpty(this.diBegin.Text) ? this.diBegin.MinDate : this.diBegin.Value;
+            DateTime endDate = String.IsNullOrEmpty(this.diEnd.Text) ? this.diEnd.MinDate : this.diEnd.Value;
 
             context = new DBDataContext();
 
             var queryResult =
                 from cda in context.CDAs
+                let curCase = cda.Case
+                where (transactionType == "全部" ? true : curCase.TransactionType == transactionType) && (location == "00" ? true : curCase.OwnerDepartment.LocationCode == location)
                 let contracts = cda.Case.SellerClient.Contracts
                 where contractCode == string.Empty ? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
                 let seller = cda.Case.SellerClient
@@ -555,7 +569,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "买方名称";
                 sheet.Cells[row++, 2] = selectedCDA.BuyerName;
                 sheet.Cells[row, 1] = "买方地址";
-                sheet.Cells[row++, 2] = selectedCDA.Case.BuyerClient.AddressCN == string.Empty ? selectedCDA.Case.BuyerClient.AddressEN : selectedCDA.Case.BuyerClient.AddressCN;
+                sheet.Cells[row++, 2] = String.IsNullOrEmpty(selectedCDA.Case.BuyerClient.AddressCN) ? selectedCDA.Case.BuyerClient.AddressEN : selectedCDA.Case.BuyerClient.AddressCN;
                 sheet.Cells[row, 1] = "付款条件";
                 sheet.Cells[row++, 2] = selectedCDA.PaymentTerms;
                 sheet.Cells[row, 1] = "信用风险额度";

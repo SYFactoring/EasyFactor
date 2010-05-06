@@ -557,7 +557,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCaseBasic.Style.GradientAngle = 90;
             this.panelCaseBasic.TabIndex = 0;
             this.panelCaseBasic.TitleHeight = 15;
-            this.panelCaseBasic.TitleText = "Title Bar";
+            this.panelCaseBasic.TitleText = "";
             // 
             // panelFinanceCreditLine
             // 

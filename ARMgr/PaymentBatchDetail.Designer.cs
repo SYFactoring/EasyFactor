@@ -1,4 +1,5 @@
-﻿namespace CMBC.EasyFactor.ARMgr
+﻿using CMBC.EasyFactor.Utils;
+namespace CMBC.EasyFactor.ARMgr
 {
     partial class PaymentBatchDetail
     {
@@ -49,6 +50,11 @@
             if (disposing && (this.components != null))
             {
                 this.components.Dispose();
+            }
+
+            if (this.context != null)
+            {
+                this.context.Dispose();
             }
 
             base.Dispose(disposing);
@@ -496,9 +502,9 @@
             this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.checkStatusComboBox.FormattingEnabled = true;
             this.checkStatusComboBox.Items.AddRange(new object[] {
-            "未复核",
-            "已复核",
-            "复核未通过"});
+            ConstStr.BATCH.UNCHECK,
+            ConstStr.BATCH.CHECK,
+            ConstStr.BATCH.REJECT});
             this.checkStatusComboBox.Location = new System.Drawing.Point(116, 203);
             this.checkStatusComboBox.Name = "checkStatusComboBox";
             this.checkStatusComboBox.Size = new System.Drawing.Size(162, 21);

@@ -4,6 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using CMBC.EasyFactor.Utils;
 namespace CMBC.EasyFactor.ARMgr
 {
     /// <summary>
@@ -62,6 +63,11 @@ namespace CMBC.EasyFactor.ARMgr
             if (disposing && (this.components != null))
             {
                 this.components.Dispose();
+            }
+
+            if (this.context != null)
+            {
+                this.context.Dispose();
             }
 
             base.Dispose(disposing);
@@ -516,9 +522,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.checkStatusComboBox.FormattingEnabled = true;
             this.checkStatusComboBox.Items.AddRange(new object[] {
-            "未复核",
-            "已复核",
-            "复核未通过"});
+            ConstStr.BATCH.UNCHECK,
+            ConstStr.BATCH.CHECK,
+            ConstStr.BATCH.REJECT});
             this.checkStatusComboBox.Location = new System.Drawing.Point(114, 241);
             this.checkStatusComboBox.Name = "checkStatusComboBox";
             this.checkStatusComboBox.Size = new System.Drawing.Size(134, 21);

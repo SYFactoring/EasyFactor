@@ -136,9 +136,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batchType == OpBatchType.CHECK)
             {
-                this.cbCheckStatus.Text = "未复核";
+                this.cbCheckStatus.Text = ConstStr.BATCH.UNCHECK;
                 context = new DBDataContext();
-                var queryResult = context.InvoiceFinanceBatches.Where(i => i.CheckStatus == "未复核");
+                var queryResult = context.InvoiceFinanceBatches.Where(i => i.CheckStatus == ConstStr.BATCH.UNCHECK);
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
@@ -213,7 +213,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
-            if (batch.CheckStatus != "未复核" && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
+            if (batch.CheckStatus != ConstStr.BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
             {
                 MessageBoxEx.Show("此批次已经过复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -406,8 +406,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            DateTime beginDate = this.dateFrom.Text != string.Empty ? this.dateFrom.Value.Date : this.dateFrom.MinDate;
-            DateTime endDate = this.dateTo.Text != string.Empty ? this.dateTo.Value.Date : this.dateTo.MinDate;
+            DateTime beginDate = String.IsNullOrEmpty(this.dateFrom.Text) ? this.dateFrom.MinDate : this.dateFrom.Value.Date;
+            DateTime endDate = String.IsNullOrEmpty(this.dateTo.Text) ? this.dateTo.MinDate : this.dateTo.Value.Date;
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
@@ -475,7 +475,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
-            if (batch.CheckStatus != "未复核" && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
+            if (batch.CheckStatus != ConstStr.BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
             {
                 MessageBoxEx.Show("此批次已经过复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -492,7 +492,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            batch.CheckStatus = "复核未通过";
+            batch.CheckStatus = ConstStr.BATCH.REJECT;
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 

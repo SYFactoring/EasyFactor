@@ -43,12 +43,12 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbTransactionType.Items.Insert(0, "全部");
             this.cbTransactionType.Text = "全部";
 
-            List<Department> deptsList = Department.AllDepartments(new DBDataContext()).ToList();
-            deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "全部" });
-            this.cbOwnerDepts.DataSource = deptsList;
-            this.cbOwnerDepts.DisplayMembers = "DepartmentName";
-            this.cbOwnerDepts.ValueMember = "DepartmentCode";
-            this.cbOwnerDepts.GroupingMembers = "Domain";
+            List<Location> allLocations = DB.dbml.Location.AllLocations;
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
+            this.cbLocation.DataSource = allLocations;
+            this.cbLocation.DisplayMember = "LocationName";
+            this.cbLocation.ValueMember = "LocationCode";
+            this.cbLocation.SelectedIndex = 0;
 
             List<Currency> currencyList = Currency.AllCurrencies;
             currencyList.Insert(0, new Currency() { CurrencyCode = "AAA", CurrencyName = "All" });
@@ -172,20 +172,21 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
-            DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
-            DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
+            DateTime beginDate = String.IsNullOrEmpty(this.diBegin.Text) ? this.diBegin.MinDate : this.diBegin.Value;
+            DateTime endDate = String.IsNullOrEmpty(this.diEnd.Text) ? this.diEnd.MinDate : this.diEnd.Value;
             string sellerFactorCode = this.tbSellerFactorCode.Text;
             string buyerFactorCode = this.tbBuyerFactorCode.Text;
             string createUserName = this.tbCreateUserName.Text;
+            string location = this.cbLocation.Text;
 
             DBDataContext context = new DBDataContext();
 
             var queryResult = from neg in context.CreditCoverNegotiations
                               let c = neg.Case
                               where
-                               ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))
-                               && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType.Equals(this.cbTransactionType.Text))
-                               && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency.Equals((string)this.cbCurrency.SelectedValue))
+                               (location == "全部" ? true : c.OwnerDepartment.LocationCode == location)
+                               && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType == (this.cbTransactionType.Text))
+                               && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency == (string)this.cbCurrency.SelectedValue)
                                && (beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                && c.CaseCode.Contains(this.tbCaseCode.Text)

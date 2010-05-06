@@ -102,12 +102,9 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (action == ChangeAction.Insert)
             {
-                if (this.ApproveNo != null & this.ApproveNo != string.Empty)
+                if (!String.IsNullOrEmpty(this.ApproveNo) && !ApproveNoRegex.IsMatch(this.ApproveNo))
                 {
-                    if (!ApproveNoRegex.IsMatch(this.ApproveNo))
-                    {
-                        throw new ArgumentException("不符合授信编号规则: " + this.ApproveNo);
-                    }
+                    throw new ArgumentException("不符合授信编号规则: " + this.ApproveNo);
                 }
             }
         }

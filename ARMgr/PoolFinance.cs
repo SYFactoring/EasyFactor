@@ -123,7 +123,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.CreateUserName = App.Current.CurUser.Name;
-            financeBatch.CheckStatus = "未复核";
+            financeBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
             this.batchBindingSource.DataSource = financeBatch;
 
             var caseResult = from c in context.Cases

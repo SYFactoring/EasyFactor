@@ -297,19 +297,6 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ComputeCommission(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
-            {
-                InvoiceUtil.ComputeCommission();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CreditNotePayment(object sender, EventArgs e)
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))

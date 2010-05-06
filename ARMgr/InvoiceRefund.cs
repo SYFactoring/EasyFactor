@@ -156,7 +156,7 @@ namespace CMBC.EasyFactor.ARMgr
             batch.RefundType = paymentBatch.PaymentType;
             batch.RefundDate = paymentBatch.PaymentDate;
             batch.CreateUserName = App.Current.CurUser.Name;
-            batch.CheckStatus = "未复核";
+            batch.CheckStatus = ConstStr.BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
             this.logsBindingSource.DataSource = refundList;
 
@@ -504,7 +504,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             batch.RefundDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
-            batch.CheckStatus = "未复核";
+            batch.CheckStatus = ConstStr.BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from log in context.InvoiceFinanceLogs

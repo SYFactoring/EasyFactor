@@ -424,7 +424,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             if (this.freezeDateDateTimePicker.Enabled)
             {
-                if (e.ControlToValidate.Text == string.Empty)
+                if (String.IsNullOrEmpty(e.ControlToValidate.Text))
                 {
                     e.IsValid = false;
                 }
@@ -448,7 +448,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             if (this.unfreezeDateDateTimePicker.Enabled)
             {
-                if (e.ControlToValidate.Text == string.Empty)
+                if (String.IsNullOrEmpty(e.ControlToValidate.Text))
                 {
                     e.IsValid = false;
                 }

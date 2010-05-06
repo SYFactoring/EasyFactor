@@ -45,6 +45,11 @@ namespace CMBC.EasyFactor.Utils
                 this.components.Dispose();
             }
 
+            if (this.context != null)
+            {
+                this.context.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 

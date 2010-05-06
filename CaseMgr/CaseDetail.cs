@@ -287,7 +287,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string[] caseTypes = new string[] { "出口保理", "进口保理" };
             if (caseTypes.Contains(curCase.TransactionType))
             {
-                if (this.tbCaseFactorCode.Text != string.Empty)
+                if (!String.IsNullOrEmpty(this.tbCaseFactorCode.Text))
                 {
                     e.IsValid = true;
                 }

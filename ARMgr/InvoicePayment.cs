@@ -487,7 +487,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             batch.PaymentDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
-            batch.CheckStatus = "未复核";
+            batch.CheckStatus = ConstStr.BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in context.Invoices

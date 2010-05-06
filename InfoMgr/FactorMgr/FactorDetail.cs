@@ -208,7 +208,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             if (this.freezeDateDateTimePicker.Enabled)
             {
-                if (this.freezeReasonTextBox.Text == string.Empty)
+                if (String.IsNullOrEmpty(this.freezeReasonTextBox.Text))
                 {
                     e.IsValid = false;
                 }
@@ -232,7 +232,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             if (this.unfreezeDateDateTimePicker.Enabled)
             {
-                if (this.unfreezeReasonTextBox.Text == string.Empty)
+                if (String.IsNullOrEmpty(this.unfreezeReasonTextBox.Text))
                 {
                     e.IsValid = false;
                 }

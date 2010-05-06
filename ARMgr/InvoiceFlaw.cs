@@ -79,7 +79,7 @@ namespace CMBC.EasyFactor.ARMgr
                 flawReason += (item.Index + ";");
             }
 
-            if (this.isFlawCheckBox.Checked && flawReason == string.Empty)
+            if (this.isFlawCheckBox.Checked && String.IsNullOrEmpty(flawReason))
             {
                 MessageBoxEx.Show("请选择瑕疵原因", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;

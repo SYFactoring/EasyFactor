@@ -113,7 +113,7 @@ namespace CMBC.EasyFactor.ARMgr
                 log.Invoice = null;
                 invoice.CaculatePayment();
                 context.InvoicePaymentLogs.DeleteOnSubmit(log);
-                log.InvoicePaymentBatch.CheckStatus = "未复核";
+                log.InvoicePaymentBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
                 context.SubmitChanges();
             }
             catch (Exception e1)

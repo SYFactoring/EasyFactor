@@ -187,7 +187,7 @@ namespace CMBC.EasyFactor.ARMgr
                 log.Invoice = null;
                 invoice.CaculatePayment();
                 context.InvoicePaymentLogs.DeleteOnSubmit(log);
-                log.InvoicePaymentBatch.CheckStatus = "未复核";
+                log.InvoicePaymentBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
                 context.SubmitChanges();
             }
             catch (Exception e1)
@@ -224,7 +224,7 @@ namespace CMBC.EasyFactor.ARMgr
                 financeLog.InvoiceRefundLogs.Remove(log);
                 financeLog.Invoice.CaculateRefund();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
-                log.InvoiceRefundBatch.CheckStatus = "未复核";
+                log.InvoiceRefundBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
                 context.SubmitChanges();
             }
             catch (Exception e1)

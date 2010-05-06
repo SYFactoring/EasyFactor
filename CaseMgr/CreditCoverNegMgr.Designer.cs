@@ -78,8 +78,6 @@
             this.lblTransactionType = new DevComponents.DotNetBar.LabelX();
             this.diEnd = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.diBegin = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.cbOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
-            this.lblOnwerDept = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.tbBuyerFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblBuyerFactorCode = new DevComponents.DotNetBar.LabelX();
@@ -111,6 +109,8 @@
             this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCreditCoverNegExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblLocation = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -122,6 +122,8 @@
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbLocation);
+            this.panelQuery.Controls.Add(this.lblLocation);
             this.panelQuery.Controls.Add(this.tbCreateUserName);
             this.panelQuery.Controls.Add(this.lblCreateUserName);
             this.panelQuery.Controls.Add(this.cbIsContractSigned);
@@ -139,8 +141,6 @@
             this.panelQuery.Controls.Add(this.lblTransactionType);
             this.panelQuery.Controls.Add(this.diEnd);
             this.panelQuery.Controls.Add(this.diBegin);
-            this.panelQuery.Controls.Add(this.cbOwnerDepts);
-            this.panelQuery.Controls.Add(this.lblOnwerDept);
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.tbBuyerFactorCode);
             this.panelQuery.Controls.Add(this.lblBuyerFactorCode);
@@ -236,13 +236,14 @@
             // 
             // lblClientName
             // 
+            this.lblClientName.AutoSize = true;
             // 
             // 
             // 
             this.lblClientName.BackgroundStyle.Class = "";
             this.lblClientName.Location = new System.Drawing.Point(9, 3);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(59, 23);
+            this.lblClientName.Size = new System.Drawing.Size(56, 16);
             this.lblClientName.TabIndex = 0;
             this.lblClientName.Text = "客户名称";
             // 
@@ -259,25 +260,27 @@
             // 
             // lblCaseCode
             // 
+            this.lblCaseCode.AutoSize = true;
             // 
             // 
             // 
             this.lblCaseCode.BackgroundStyle.Class = "";
             this.lblCaseCode.Location = new System.Drawing.Point(204, 3);
             this.lblCaseCode.Name = "lblCaseCode";
-            this.lblCaseCode.Size = new System.Drawing.Size(59, 23);
+            this.lblCaseCode.Size = new System.Drawing.Size(56, 16);
             this.lblCaseCode.TabIndex = 2;
             this.lblCaseCode.Text = "案件编号";
             // 
             // lblDate
             // 
+            this.lblDate.AutoSize = true;
             // 
             // 
             // 
             this.lblDate.BackgroundStyle.Class = "";
             this.lblDate.Location = new System.Drawing.Point(204, 50);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(59, 23);
+            this.lblDate.Size = new System.Drawing.Size(56, 16);
             this.lblDate.TabIndex = 14;
             this.lblDate.Text = "申请期限";
             // 
@@ -308,13 +311,14 @@
             // 
             // lblCurrency
             // 
+            this.lblCurrency.AutoSize = true;
             // 
             // 
             // 
             this.lblCurrency.BackgroundStyle.Class = "";
             this.lblCurrency.Location = new System.Drawing.Point(204, 29);
             this.lblCurrency.Name = "lblCurrency";
-            this.lblCurrency.Size = new System.Drawing.Size(59, 23);
+            this.lblCurrency.Size = new System.Drawing.Size(56, 16);
             this.lblCurrency.TabIndex = 8;
             this.lblCurrency.Text = "发票币别";
             // 
@@ -329,7 +333,7 @@
             "国内买方保理",
             "出口保理",
             "进口保理"});
-            this.cbTransactionType.Location = new System.Drawing.Point(65, 52);
+            this.cbTransactionType.Location = new System.Drawing.Point(65, 49);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -337,13 +341,14 @@
             // 
             // lblTransactionType
             // 
+            this.lblTransactionType.AutoSize = true;
             // 
             // 
             // 
             this.lblTransactionType.BackgroundStyle.Class = "";
-            this.lblTransactionType.Location = new System.Drawing.Point(9, 50);
+            this.lblTransactionType.Location = new System.Drawing.Point(6, 50);
             this.lblTransactionType.Name = "lblTransactionType";
-            this.lblTransactionType.Size = new System.Drawing.Size(59, 23);
+            this.lblTransactionType.Size = new System.Drawing.Size(56, 16);
             this.lblTransactionType.TabIndex = 12;
             this.lblTransactionType.Text = "业务类别";
             // 
@@ -438,32 +443,6 @@
             this.diBegin.Size = new System.Drawing.Size(100, 20);
             this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.diBegin.TabIndex = 15;
-            // 
-            // cbOwnerDepts
-            // 
-            this.cbOwnerDepts.BackColor = System.Drawing.SystemColors.Window;
-            // 
-            // 
-            // 
-            this.cbOwnerDepts.BackgroundStyle.Class = "TextBoxBorder";
-            this.cbOwnerDepts.ButtonDropDown.Visible = true;
-            this.cbOwnerDepts.Location = new System.Drawing.Point(65, 26);
-            this.cbOwnerDepts.Name = "cbOwnerDepts";
-            this.cbOwnerDepts.Size = new System.Drawing.Size(133, 23);
-            this.cbOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbOwnerDepts.TabIndex = 7;
-            // 
-            // lblOnwerDept
-            // 
-            // 
-            // 
-            // 
-            this.lblOnwerDept.BackgroundStyle.Class = "";
-            this.lblOnwerDept.Location = new System.Drawing.Point(9, 27);
-            this.lblOnwerDept.Name = "lblOnwerDept";
-            this.lblOnwerDept.Size = new System.Drawing.Size(59, 23);
-            this.lblOnwerDept.TabIndex = 6;
-            this.lblOnwerDept.Text = "业务归属";
             // 
             // lblCount
             // 
@@ -778,6 +757,32 @@
             this.menuItemCreditCoverNegExport.Text = "导出额度申请";
             this.menuItemCreditCoverNegExport.Click += new System.EventHandler(this.ExportCreditCoverNeg);
             // 
+            // cbLocation
+            // 
+            this.cbLocation.DisplayMember = "Text";
+            this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLocation.FormattingEnabled = true;
+            this.cbLocation.ItemHeight = 14;
+            this.cbLocation.Location = new System.Drawing.Point(65, 26);
+            this.cbLocation.Name = "cbLocation";
+            this.cbLocation.Size = new System.Drawing.Size(133, 20);
+            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbLocation.TabIndex = 25;
+            // 
+            // lblLocation
+            // 
+            this.lblLocation.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblLocation.BackgroundStyle.Class = "";
+            this.lblLocation.Location = new System.Drawing.Point(6, 28);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(56, 16);
+            this.lblLocation.TabIndex = 24;
+            this.lblLocation.Text = "业务地区";
+            // 
             // CreditCoverNegMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -814,8 +819,6 @@
         private DevComponents.DotNetBar.LabelX lblTransactionType;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
-        private DevComponents.DotNetBar.Controls.ComboTree cbOwnerDepts;
-        private DevComponents.DotNetBar.LabelX lblOnwerDept;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.LabelX lblCreateUserName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -840,6 +843,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
+        private DevComponents.DotNetBar.LabelX lblLocation;
 
 
 

@@ -17,6 +17,12 @@
             {
                 components.Dispose();
             }
+
+            if (this.context != null)
+            {
+                this.context.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 

@@ -79,6 +79,19 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -129,6 +142,30 @@
             this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseExport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaculateCurr = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -191,7 +228,7 @@
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(819, 85);
+            this.panelQuery.Size = new System.Drawing.Size(819, 77);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -208,7 +245,7 @@
             this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 14;
-            this.cbLocation.Location = new System.Drawing.Point(59, 32);
+            this.cbLocation.Location = new System.Drawing.Point(59, 28);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(133, 20);
             this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -216,13 +253,14 @@
             // 
             // lblLocation
             // 
+            this.lblLocation.AutoSize = true;
             // 
             // 
             // 
             this.lblLocation.BackgroundStyle.Class = "";
-            this.lblLocation.Location = new System.Drawing.Point(3, 29);
+            this.lblLocation.Location = new System.Drawing.Point(3, 30);
             this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(59, 23);
+            this.lblLocation.Size = new System.Drawing.Size(56, 16);
             this.lblLocation.TabIndex = 22;
             this.lblLocation.Text = "业务地区";
             // 
@@ -262,7 +300,7 @@
             "申请案",
             "启动案",
             "已结案"});
-            this.cbCaseMark.Location = new System.Drawing.Point(460, 32);
+            this.cbCaseMark.Location = new System.Drawing.Point(460, 28);
             this.cbCaseMark.Name = "cbCaseMark";
             this.cbCaseMark.Size = new System.Drawing.Size(100, 20);
             this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -275,7 +313,7 @@
             // 
             // 
             this.lblCaseMark.BackgroundStyle.Class = "";
-            this.lblCaseMark.Location = new System.Drawing.Point(397, 34);
+            this.lblCaseMark.Location = new System.Drawing.Point(397, 30);
             this.lblCaseMark.Name = "lblCaseMark";
             this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
             this.lblCaseMark.TabIndex = 8;
@@ -334,13 +372,14 @@
             // 
             // lblClientName
             // 
+            this.lblClientName.AutoSize = true;
             // 
             // 
             // 
             this.lblClientName.BackgroundStyle.Class = "";
             this.lblClientName.Location = new System.Drawing.Point(3, 6);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(59, 23);
+            this.lblClientName.Size = new System.Drawing.Size(56, 16);
             this.lblClientName.TabIndex = 0;
             this.lblClientName.Text = "客户名称";
             // 
@@ -350,7 +389,7 @@
             // 
             // 
             this.tbCaseCode.Border.Class = "TextBoxBorder";
-            this.tbCaseCode.Location = new System.Drawing.Point(254, 6);
+            this.tbCaseCode.Location = new System.Drawing.Point(254, 5);
             this.tbCaseCode.Name = "tbCaseCode";
             this.tbCaseCode.Size = new System.Drawing.Size(133, 20);
             this.tbCaseCode.TabIndex = 3;
@@ -362,7 +401,7 @@
             // 
             // 
             this.lblCaseCode.BackgroundStyle.Class = "";
-            this.lblCaseCode.Location = new System.Drawing.Point(198, 9);
+            this.lblCaseCode.Location = new System.Drawing.Point(198, 8);
             this.lblCaseCode.Name = "lblCaseCode";
             this.lblCaseCode.Size = new System.Drawing.Size(56, 16);
             this.lblCaseCode.TabIndex = 2;
@@ -387,7 +426,7 @@
             // 
             // 
             this.lblDate.BackgroundStyle.Class = "";
-            this.lblDate.Location = new System.Drawing.Point(198, 60);
+            this.lblDate.Location = new System.Drawing.Point(198, 54);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
             this.lblDate.TabIndex = 14;
@@ -412,7 +451,7 @@
             this.cbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCurrency.FormattingEnabled = true;
             this.cbCurrency.ItemHeight = 14;
-            this.cbCurrency.Location = new System.Drawing.Point(514, 56);
+            this.cbCurrency.Location = new System.Drawing.Point(514, 51);
             this.cbCurrency.Name = "cbCurrency";
             this.cbCurrency.Size = new System.Drawing.Size(79, 20);
             this.cbCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -425,7 +464,7 @@
             // 
             // 
             this.lblCurrency.BackgroundStyle.Class = "";
-            this.lblCurrency.Location = new System.Drawing.Point(477, 58);
+            this.lblCurrency.Location = new System.Drawing.Point(477, 53);
             this.lblCurrency.Name = "lblCurrency";
             this.lblCurrency.Size = new System.Drawing.Size(31, 16);
             this.lblCurrency.TabIndex = 17;
@@ -442,7 +481,7 @@
             "国内买方保理",
             "出口保理",
             "进口保理"});
-            this.cbTransactionType.Location = new System.Drawing.Point(59, 57);
+            this.cbTransactionType.Location = new System.Drawing.Point(59, 50);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -450,13 +489,14 @@
             // 
             // lblTransactionType
             // 
+            this.lblTransactionType.AutoSize = true;
             // 
             // 
             // 
             this.lblTransactionType.BackgroundStyle.Class = "";
-            this.lblTransactionType.Location = new System.Drawing.Point(3, 54);
+            this.lblTransactionType.Location = new System.Drawing.Point(3, 53);
             this.lblTransactionType.Name = "lblTransactionType";
-            this.lblTransactionType.Size = new System.Drawing.Size(59, 23);
+            this.lblTransactionType.Size = new System.Drawing.Size(56, 16);
             this.lblTransactionType.TabIndex = 12;
             this.lblTransactionType.Text = "业务类别";
             // 
@@ -470,7 +510,7 @@
             this.diEnd.ButtonDropDown.Visible = true;
             this.diEnd.ButtonFreeText.Checked = true;
             this.diEnd.FreeTextEntryMode = true;
-            this.diEnd.Location = new System.Drawing.Point(360, 57);
+            this.diEnd.Location = new System.Drawing.Point(360, 52);
             // 
             // 
             // 
@@ -518,7 +558,7 @@
             this.diBegin.ButtonDropDown.Visible = true;
             this.diBegin.ButtonFreeText.Checked = true;
             this.diBegin.FreeTextEntryMode = true;
-            this.diBegin.Location = new System.Drawing.Point(254, 57);
+            this.diBegin.Location = new System.Drawing.Point(254, 52);
             // 
             // 
             // 
@@ -564,21 +604,22 @@
             // 
             this.cbOwnerDepts.BackgroundStyle.Class = "TextBoxBorder";
             this.cbOwnerDepts.ButtonDropDown.Visible = true;
-            this.cbOwnerDepts.Location = new System.Drawing.Point(254, 31);
+            this.cbOwnerDepts.Location = new System.Drawing.Point(254, 28);
             this.cbOwnerDepts.Name = "cbOwnerDepts";
-            this.cbOwnerDepts.Size = new System.Drawing.Size(133, 23);
+            this.cbOwnerDepts.Size = new System.Drawing.Size(133, 22);
             this.cbOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbOwnerDepts.TabIndex = 7;
             // 
             // lblOnwerDept
             // 
+            this.lblOnwerDept.AutoSize = true;
             // 
             // 
             // 
             this.lblOnwerDept.BackgroundStyle.Class = "";
             this.lblOnwerDept.Location = new System.Drawing.Point(198, 31);
             this.lblOnwerDept.Name = "lblOnwerDept";
-            this.lblOnwerDept.Size = new System.Drawing.Size(59, 23);
+            this.lblOnwerDept.Size = new System.Drawing.Size(56, 16);
             this.lblOnwerDept.TabIndex = 6;
             this.lblOnwerDept.Text = "业务归属";
             // 
@@ -632,11 +673,11 @@
             this.dgvCases.DefaultCellStyle = dataGridViewCellStyle15;
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCases.Location = new System.Drawing.Point(0, 85);
+            this.dgvCases.Location = new System.Drawing.Point(0, 77);
             this.dgvCases.Name = "dgvCases";
             this.dgvCases.ReadOnly = true;
             this.dgvCases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvCases.Size = new System.Drawing.Size(819, 300);
+            this.dgvCases.Size = new System.Drawing.Size(819, 308);
             this.dgvCases.TabIndex = 1;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCases_RowPostPaint);
@@ -722,6 +763,201 @@
             this.menuItemCaculateCurr.Size = new System.Drawing.Size(155, 22);
             this.menuItemCaculateCurr.Text = "修复多币种Bug";
             this.menuItemCaculateCurr.Click += new System.EventHandler(this.CaculateFinance);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CaseCode";
+            this.dataGridViewTextBoxColumn1.Frozen = true;
+            this.dataGridViewTextBoxColumn1.HeaderText = "案件编号";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "SellerClient";
+            this.dataGridViewTextBoxColumn2.Frozen = true;
+            this.dataGridViewTextBoxColumn2.HeaderText = "卖方名称";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "SellerFactor";
+            this.dataGridViewTextBoxColumn3.HeaderText = "卖方保理商";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 92;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "BuyerClient";
+            this.dataGridViewTextBoxColumn4.HeaderText = "买方名称";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "BuyerFactor";
+            this.dataGridViewTextBoxColumn5.HeaderText = "买方保理商";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 92;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "InvoiceCurrency";
+            this.dataGridViewTextBoxColumn6.HeaderText = "发票币别";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "TransactionType";
+            this.dataGridViewTextBoxColumn7.HeaderText = "业务类别";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "OperationType";
+            this.dataGridViewTextBoxColumn8.HeaderText = "操作类型";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "OwnerDepartment";
+            this.dataGridViewTextBoxColumn9.HeaderText = "业务归属机构";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.Width = 104;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "CaseAppDate";
+            dataGridViewCellStyle16.Format = "d";
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle16;
+            this.dataGridViewTextBoxColumn10.HeaderText = "申请日期";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "CaseMark";
+            this.dataGridViewTextBoxColumn11.HeaderText = "案件状态";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "OPName";
+            this.dataGridViewTextBoxColumn12.HeaderText = "OP人员";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.Width = 68;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "AssignAmountByDate";
+            dataGridViewCellStyle17.Format = "N2";
+            dataGridViewCellStyle17.NullValue = null;
+            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle17;
+            this.dataGridViewTextBoxColumn13.HeaderText = "转让量";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "FinanceAmountByDate";
+            dataGridViewCellStyle18.Format = "N2";
+            dataGridViewCellStyle18.NullValue = null;
+            this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle18;
+            this.dataGridViewTextBoxColumn14.HeaderText = "融资量";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "CommissionIncomeByDate";
+            dataGridViewCellStyle19.Format = "N2";
+            dataGridViewCellStyle19.NullValue = null;
+            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle19;
+            this.dataGridViewTextBoxColumn15.HeaderText = "保理费收入";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "NetInterestIncomeByDate";
+            dataGridViewCellStyle20.Format = "N2";
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle20;
+            this.dataGridViewTextBoxColumn16.HeaderText = "净利息收入";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "MarginIncomeByDate";
+            dataGridViewCellStyle21.Format = "N2";
+            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle21;
+            this.dataGridViewTextBoxColumn17.HeaderText = "代付利差收入";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "TotalIncomeByDate";
+            dataGridViewCellStyle22.Format = "N2";
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle22;
+            this.dataGridViewTextBoxColumn18.HeaderText = "总收入";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle23.Format = "N2";
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle23;
+            this.dataGridViewTextBoxColumn19.HeaderText = "应收帐款余额";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "TotalAssignOutstanding";
+            dataGridViewCellStyle24.Format = "N2";
+            dataGridViewCellStyle24.NullValue = null;
+            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle24;
+            this.dataGridViewTextBoxColumn20.HeaderText = "总帐款余额";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "CreditCoverOutstanding";
+            dataGridViewCellStyle25.Format = "N2";
+            this.dataGridViewTextBoxColumn21.DefaultCellStyle = dataGridViewCellStyle25;
+            this.dataGridViewTextBoxColumn21.HeaderText = "剩余信用风险额度";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.DataPropertyName = "FinanceOutstanding";
+            dataGridViewCellStyle26.Format = "N2";
+            dataGridViewCellStyle26.NullValue = null;
+            this.dataGridViewTextBoxColumn22.DefaultCellStyle = dataGridViewCellStyle26;
+            this.dataGridViewTextBoxColumn22.HeaderText = "融资余额";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            this.dataGridViewTextBoxColumn23.DataPropertyName = "TotalFinanceOutstanding";
+            dataGridViewCellStyle27.Format = "N2";
+            this.dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle27;
+            this.dataGridViewTextBoxColumn23.HeaderText = "总融资余额";
+            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            this.dataGridViewTextBoxColumn24.DataPropertyName = "FinanceLineOutstanding";
+            dataGridViewCellStyle28.Format = "N2";
+            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle28;
+            this.dataGridViewTextBoxColumn24.HeaderText = "剩余融资额度";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
             // 
             // colCaseCode
             // 
@@ -988,5 +1224,29 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
     }
 }

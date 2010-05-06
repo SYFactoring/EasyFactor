@@ -83,19 +83,19 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateRefundBatchNo(DateTime date)
         {
-            DBDataContext context = new DBDataContext();
-            //var queryResult = from batch in context.InvoiceRefundBatches
-            //                  where batch.RefundDate.Date == date.Date
-            //                  select batch.RefundBatchNo;
             string dateStr = String.Format("{0:yyyMMdd}", date);
-            var queryResult = from batch in context.InvoiceRefundBatches
-                              where batch.RefundBatchNo.Contains(dateStr)
-                              select batch.RefundBatchNo;
-
             int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            using (DBDataContext context = new DBDataContext())
             {
-                batchCount = 0;
+
+                var queryResult = from batch in context.InvoiceRefundBatches
+                                  where batch.RefundBatchNo.Contains(dateStr)
+                                  select batch.RefundBatchNo;
+
+                if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+                {
+                    batchCount = 0;
+                }
             }
 
             string refundNo = String.Format("RFD{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
@@ -110,19 +110,18 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateRefundBatchNo(DateTime date, List<InvoiceRefundBatch> batchesInMemory)
         {
-            DBDataContext context = new DBDataContext();
-            //var queryResult = from batch in context.InvoiceRefundBatches
-            //                  where batch.RefundDate.Date == date.Date
-            //                  select batch.RefundBatchNo;
             string dateStr = String.Format("{0:yyyMMdd}", date);
-            var queryResult = from batch in context.InvoiceRefundBatches
-                              where batch.RefundBatchNo.Contains(dateStr)
-                              select batch.RefundBatchNo;
-
             int batchCount;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+            using (DBDataContext context = new DBDataContext())
             {
-                batchCount = 0;
+                var queryResult = from batch in context.InvoiceRefundBatches
+                                  where batch.RefundBatchNo.Contains(dateStr)
+                                  select batch.RefundBatchNo;
+
+                if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+                {
+                    batchCount = 0;
+                }
             }
 
             batchCount += batchesInMemory.Count(batch => batch.RefundBatchNo.Contains(dateStr));

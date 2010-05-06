@@ -237,6 +237,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 this.components.Dispose();
             }
 
+            if (this.context != null)
+            {
+                this.context.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 

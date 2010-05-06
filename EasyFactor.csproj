@@ -50,7 +50,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -270,6 +271,7 @@
     <Compile Include="DB.dbml\InvoiceRefundBatch.cs" />
     <Compile Include="DB.dbml\InvoiceRefundLog.cs" />
     <Compile Include="DB.dbml\User.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Help\AutoUpdateConfig.cs" />
     <Compile Include="Help\AutoUpdater.cs">
       <SubType>Component</SubType>
@@ -380,7 +382,6 @@
     <Compile Include="Utils\ImportForm.Designer.cs">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\InvoiceUtil.cs" />
     <Compile Include="Utils\MailUtil.cs" />
     <Compile Include="Utils\PermUtil.cs" />
     <Compile Include="Utils\QueryForm.cs">

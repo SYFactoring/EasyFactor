@@ -74,18 +74,28 @@ namespace CMBC.EasyFactor.CaseMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblDate = new DevComponents.DotNetBar.LabelX();
             this.diEnd = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -104,6 +114,51 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbContractCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblContractCode = new DevComponents.DotNetBar.LabelX();
             this.dgvCDAs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuCDAMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCDASelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCDANew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCDADelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCDAReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCDAsExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblTransactionType = new DevComponents.DotNetBar.LabelX();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCDACode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -135,18 +190,10 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuCDAMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCDASelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCDADetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCDANew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCDADelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCDAReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCDAsExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblLocation = new DevComponents.DotNetBar.LabelX();
+            this.tbCDACode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lbcCDACode = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -158,6 +205,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.tbCDACode);
+            this.panelQuery.Controls.Add(this.lbcCDACode);
+            this.panelQuery.Controls.Add(this.cbLocation);
+            this.panelQuery.Controls.Add(this.lblLocation);
+            this.panelQuery.Controls.Add(this.cbTransactionType);
+            this.panelQuery.Controls.Add(this.lblTransactionType);
             this.panelQuery.Controls.Add(this.lblDate);
             this.panelQuery.Controls.Add(this.diEnd);
             this.panelQuery.Controls.Add(this.diBegin);
@@ -177,7 +230,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(773, 54);
+            this.panelQuery.Size = new System.Drawing.Size(978, 49);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -194,10 +247,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblDate.BackgroundStyle.Class = "";
-            this.lblDate.Location = new System.Drawing.Point(363, 28);
+            this.lblDate.Location = new System.Drawing.Point(537, 27);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
-            this.lblDate.TabIndex = 17;
+            this.lblDate.TabIndex = 14;
             this.lblDate.Text = "查询期限";
             // 
             // diEnd
@@ -210,7 +263,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diEnd.ButtonDropDown.Visible = true;
             this.diEnd.ButtonFreeText.Checked = true;
             this.diEnd.FreeTextEntryMode = true;
-            this.diEnd.Location = new System.Drawing.Point(532, 27);
+            this.diEnd.Location = new System.Drawing.Point(679, 27);
             // 
             // 
             // 
@@ -244,9 +297,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diEnd.MonthCalendar.TodayButtonVisible = true;
             this.diEnd.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diEnd.Name = "diEnd";
-            this.diEnd.Size = new System.Drawing.Size(100, 20);
+            this.diEnd.Size = new System.Drawing.Size(78, 20);
             this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diEnd.TabIndex = 19;
+            this.diEnd.TabIndex = 16;
             // 
             // diBegin
             // 
@@ -258,7 +311,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diBegin.ButtonDropDown.Visible = true;
             this.diBegin.ButtonFreeText.Checked = true;
             this.diBegin.FreeTextEntryMode = true;
-            this.diBegin.Location = new System.Drawing.Point(426, 27);
+            this.diBegin.Location = new System.Drawing.Point(592, 27);
             // 
             // 
             // 
@@ -292,9 +345,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diBegin.MonthCalendar.TodayButtonVisible = true;
             this.diBegin.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diBegin.Name = "diBegin";
-            this.diBegin.Size = new System.Drawing.Size(100, 20);
+            this.diBegin.Size = new System.Drawing.Size(81, 20);
             this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diBegin.TabIndex = 18;
+            this.diBegin.TabIndex = 15;
             // 
             // cbIsCDA
             // 
@@ -306,11 +359,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbIsCDA.Checked = true;
             this.cbIsCDA.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIsCDA.CheckValue = null;
-            this.cbIsCDA.Location = new System.Drawing.Point(532, 7);
+            this.cbIsCDA.Location = new System.Drawing.Point(763, 29);
             this.cbIsCDA.Name = "cbIsCDA";
             this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
             this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsCDA.TabIndex = 6;
+            this.cbIsCDA.TabIndex = 19;
             this.cbIsCDA.Text = "CDA是否签回";
             this.cbIsCDA.ThreeState = true;
             // 
@@ -320,10 +373,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreateUserName.Location = new System.Drawing.Point(245, 26);
+            this.tbCreateUserName.Location = new System.Drawing.Point(749, 4);
             this.tbCreateUserName.Name = "tbCreateUserName";
             this.tbCreateUserName.Size = new System.Drawing.Size(100, 20);
-            this.tbCreateUserName.TabIndex = 12;
+            this.tbCreateUserName.TabIndex = 18;
             // 
             // lblCreateUserName
             // 
@@ -332,10 +385,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblCreateUserName.BackgroundStyle.Class = "";
-            this.lblCreateUserName.Location = new System.Drawing.Point(195, 28);
+            this.lblCreateUserName.Location = new System.Drawing.Point(699, 4);
             this.lblCreateUserName.Name = "lblCreateUserName";
             this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
-            this.lblCreateUserName.TabIndex = 11;
+            this.lblCreateUserName.TabIndex = 17;
             this.lblCreateUserName.Text = "经办人";
             // 
             // cbCheckStatus
@@ -350,11 +403,11 @@ namespace CMBC.EasyFactor.CaseMgr
             "已审核",
             "审核未通过",
             "已失效"});
-            this.cbCheckStatus.Location = new System.Drawing.Point(425, 3);
+            this.cbCheckStatus.Location = new System.Drawing.Point(592, 3);
             this.cbCheckStatus.Name = "cbCheckStatus";
             this.cbCheckStatus.Size = new System.Drawing.Size(101, 20);
             this.cbCheckStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCheckStatus.TabIndex = 5;
+            this.cbCheckStatus.TabIndex = 13;
             // 
             // lblCheckStatus
             // 
@@ -363,10 +416,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblCheckStatus.BackgroundStyle.Class = "";
-            this.lblCheckStatus.Location = new System.Drawing.Point(363, 7);
+            this.lblCheckStatus.Location = new System.Drawing.Point(537, 4);
             this.lblCheckStatus.Name = "lblCheckStatus";
             this.lblCheckStatus.Size = new System.Drawing.Size(56, 16);
-            this.lblCheckStatus.TabIndex = 4;
+            this.lblCheckStatus.TabIndex = 12;
             this.lblCheckStatus.Text = "审核状态";
             // 
             // tbFactorName
@@ -375,10 +428,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbFactorName.Border.Class = "TextBoxBorder";
-            this.tbFactorName.Location = new System.Drawing.Point(245, 3);
+            this.tbFactorName.Location = new System.Drawing.Point(255, 25);
             this.tbFactorName.Name = "tbFactorName";
             this.tbFactorName.Size = new System.Drawing.Size(100, 20);
-            this.tbFactorName.TabIndex = 3;
+            this.tbFactorName.TabIndex = 7;
             // 
             // lblFactorName
             // 
@@ -387,10 +440,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblFactorName.BackgroundStyle.Class = "";
-            this.lblFactorName.Location = new System.Drawing.Point(195, 7);
+            this.lblFactorName.Location = new System.Drawing.Point(205, 27);
             this.lblFactorName.Name = "lblFactorName";
             this.lblFactorName.Size = new System.Drawing.Size(44, 16);
-            this.lblFactorName.TabIndex = 2;
+            this.lblFactorName.TabIndex = 6;
             this.lblFactorName.Text = "保理商";
             // 
             // tbClientName
@@ -399,10 +452,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.Location = new System.Drawing.Point(86, 27);
+            this.tbClientName.Location = new System.Drawing.Point(255, 3);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(100, 20);
-            this.tbClientName.TabIndex = 8;
+            this.tbClientName.TabIndex = 5;
             // 
             // lblClientName
             // 
@@ -411,10 +464,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.Location = new System.Drawing.Point(28, 29);
+            this.lblClientName.Location = new System.Drawing.Point(197, 5);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(56, 16);
-            this.lblClientName.TabIndex = 7;
+            this.lblClientName.TabIndex = 4;
             this.lblClientName.Text = "客户名称";
             // 
             // lblCount
@@ -424,20 +477,21 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(638, 29);
+            this.lblCount.Location = new System.Drawing.Point(869, 29);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
-            this.lblCount.TabIndex = 14;
+            this.lblCount.Size = new System.Drawing.Size(71, 16);
+            this.lblCount.TabIndex = 21;
+            this.lblCount.Text = "获得 条记录";
             // 
             // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(638, 3);
+            this.btnQuery.Location = new System.Drawing.Point(869, 3);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(47, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 13;
+            this.btnQuery.TabIndex = 20;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryCDAs);
             // 
@@ -470,14 +524,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCDAs.AllowUserToAddRows = false;
             this.dgvCDAs.AllowUserToDeleteRows = false;
             this.dgvCDAs.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
             this.dgvCDAs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCDAs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCDACode,
@@ -512,26 +566,423 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCheckUserName,
             this.colCheckDate});
             this.dgvCDAs.ContextMenuStrip = this.cmuCDAMgr;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCDAs.DefaultCellStyle = dataGridViewCellStyle34;
             this.dgvCDAs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCDAs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCDAs.Location = new System.Drawing.Point(0, 54);
+            this.dgvCDAs.Location = new System.Drawing.Point(0, 49);
             this.dgvCDAs.Name = "dgvCDAs";
             this.dgvCDAs.ReadOnly = true;
             this.dgvCDAs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvCDAs.Size = new System.Drawing.Size(773, 348);
+            this.dgvCDAs.Size = new System.Drawing.Size(978, 353);
             this.dgvCDAs.TabIndex = 1;
             this.dgvCDAs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            this.dgvCDAs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCDAs_RowPostPaint);
             this.dgvCDAs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCDAs_CellFormatting);
             this.dgvCDAs.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCDAs_DataBindingComplete);
+            this.dgvCDAs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCDAs_RowPostPaint);
+            // 
+            // cmuCDAMgr
+            // 
+            this.cmuCDAMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCDASelect,
+            this.menuItemCDADetail,
+            this.toolStripSeparator,
+            this.menuItemCDANew,
+            this.menuItemCDADelete,
+            this.toolStripSeparator1,
+            this.menuItemCheck,
+            this.menuItemReject,
+            this.toolStripSeparator2,
+            this.menuItemCDAReport,
+            this.menuItemCDAsExport});
+            this.cmuCDAMgr.Name = "cmuContractMgr";
+            this.cmuCDAMgr.Size = new System.Drawing.Size(183, 198);
+            // 
+            // menuItemCDASelect
+            // 
+            this.menuItemCDASelect.Name = "menuItemCDASelect";
+            this.menuItemCDASelect.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDASelect.Text = "选定CDA(&S)";
+            this.menuItemCDASelect.Click += new System.EventHandler(this.SelectCDA);
+            // 
+            // menuItemCDADetail
+            // 
+            this.menuItemCDADetail.Name = "menuItemCDADetail";
+            this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDADetail.Text = "详细信息(&M)";
+            this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(179, 6);
+            // 
+            // menuItemCDANew
+            // 
+            this.menuItemCDANew.Name = "menuItemCDANew";
+            this.menuItemCDANew.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDANew.Text = "新建CDA(&N)";
+            this.menuItemCDANew.Click += new System.EventHandler(this.NewCDA);
+            // 
+            // menuItemCDADelete
+            // 
+            this.menuItemCDADelete.Name = "menuItemCDADelete";
+            this.menuItemCDADelete.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDADelete.Text = "删除CDA(&D)";
+            this.menuItemCDADelete.Click += new System.EventHandler(this.DeleteCDA);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
+            // 
+            // menuItemCheck
+            // 
+            this.menuItemCheck.Name = "menuItemCheck";
+            this.menuItemCheck.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCheck.Text = "审核通过(&P)";
+            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            // 
+            // menuItemReject
+            // 
+            this.menuItemReject.Name = "menuItemReject";
+            this.menuItemReject.Size = new System.Drawing.Size(182, 22);
+            this.menuItemReject.Text = "审核拒绝(&R)";
+            this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
+            // 
+            // menuItemCDAReport
+            // 
+            this.menuItemCDAReport.Name = "menuItemCDAReport";
+            this.menuItemCDAReport.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDAReport.Text = "生成保理额度通知书";
+            this.menuItemCDAReport.Click += new System.EventHandler(this.ReportCDA);
+            // 
+            // menuItemCDAsExport
+            // 
+            this.menuItemCDAsExport.Name = "menuItemCDAsExport";
+            this.menuItemCDAsExport.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCDAsExport.Text = "导出额度通知书";
+            this.menuItemCDAsExport.Click += new System.EventHandler(this.ExportCDAs);
+            // 
+            // cbTransactionType
+            // 
+            this.cbTransactionType.DisplayMember = "Text";
+            this.cbTransactionType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbTransactionType.FormattingEnabled = true;
+            this.cbTransactionType.ItemHeight = 14;
+            this.cbTransactionType.Items.AddRange(new object[] {
+            "国内卖方保理",
+            "国内买方保理",
+            "出口保理",
+            "进口保理"});
+            this.cbTransactionType.Location = new System.Drawing.Point(418, 3);
+            this.cbTransactionType.Name = "cbTransactionType";
+            this.cbTransactionType.Size = new System.Drawing.Size(113, 20);
+            this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbTransactionType.TabIndex = 9;
+            // 
+            // lblTransactionType
+            // 
+            this.lblTransactionType.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblTransactionType.BackgroundStyle.Class = "";
+            this.lblTransactionType.Location = new System.Drawing.Point(362, 4);
+            this.lblTransactionType.Name = "lblTransactionType";
+            this.lblTransactionType.Size = new System.Drawing.Size(56, 16);
+            this.lblTransactionType.TabIndex = 8;
+            this.lblTransactionType.Text = "业务类别";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CDACode";
+            this.dataGridViewTextBoxColumn1.Frozen = true;
+            this.dataGridViewTextBoxColumn1.HeaderText = "CDA编号";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "CaseCode";
+            this.dataGridViewTextBoxColumn2.Frozen = true;
+            this.dataGridViewTextBoxColumn2.HeaderText = "案件编号";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "SellerName";
+            this.dataGridViewTextBoxColumn3.Frozen = true;
+            this.dataGridViewTextBoxColumn3.HeaderText = "卖方名称";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "BuyerName";
+            this.dataGridViewTextBoxColumn4.HeaderText = "买方名称";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "FactorName";
+            this.dataGridViewTextBoxColumn5.HeaderText = "保理商";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "TransactionType";
+            this.dataGridViewTextBoxColumn6.HeaderText = "业务类别";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "InvoiceCurrency";
+            this.dataGridViewTextBoxColumn7.HeaderText = "发票币别";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "IsRecoarse";
+            this.dataGridViewTextBoxColumn8.HeaderText = "是否有追";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn8.Width = 61;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "IsNotice";
+            this.dataGridViewTextBoxColumn9.HeaderText = "明/暗保理";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn9.Width = 66;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "AssignType";
+            this.dataGridViewTextBoxColumn10.HeaderText = "转让方式";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "CreditCoverCurr";
+            this.dataGridViewTextBoxColumn11.HeaderText = "额度币别";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.dataGridViewTextBoxColumn11.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "CreditCover";
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewTextBoxColumn12.HeaderText = "买方信用风险额度";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            this.dataGridViewTextBoxColumn12.Width = 128;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "CreditCoverPeriodBegin";
+            dataGridViewCellStyle12.Format = "d";
+            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle12;
+            this.dataGridViewTextBoxColumn13.HeaderText = "有效期(始)";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            this.dataGridViewTextBoxColumn13.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn13.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "CreditCoverPeriodEnd";
+            dataGridViewCellStyle35.Format = "d";
+            this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle35;
+            this.dataGridViewTextBoxColumn14.HeaderText = "有效期(终)";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            this.dataGridViewTextBoxColumn14.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn14.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "FinanceLineCurr";
+            this.dataGridViewTextBoxColumn15.HeaderText = "额度币别";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            this.dataGridViewTextBoxColumn15.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn15.Width = 61;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "FinanceLine";
+            dataGridViewCellStyle36.Format = "N2";
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle36;
+            this.dataGridViewTextBoxColumn16.HeaderText = "预付款额度";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            this.dataGridViewTextBoxColumn16.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn16.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn16.Width = 73;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "FinanceLinePeriodBegin";
+            dataGridViewCellStyle37.Format = "d";
+            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle37;
+            this.dataGridViewTextBoxColumn17.HeaderText = "有效期(始)";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            this.dataGridViewTextBoxColumn17.Width = 86;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "FinanceLinePeriodEnd";
+            dataGridViewCellStyle38.Format = "d";
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle38;
+            this.dataGridViewTextBoxColumn18.HeaderText = "有效期(终)";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.ReadOnly = true;
+            this.dataGridViewTextBoxColumn18.Width = 86;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "HighestFinanceLine";
+            dataGridViewCellStyle39.Format = "N2";
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle39;
+            this.dataGridViewTextBoxColumn19.HeaderText = "最高保理预付款额度";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "PaymentTerms";
+            this.dataGridViewTextBoxColumn20.HeaderText = "付款条件";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "Price";
+            dataGridViewCellStyle40.Format = "p4";
+            this.dataGridViewTextBoxColumn21.DefaultCellStyle = dataGridViewCellStyle40;
+            this.dataGridViewTextBoxColumn21.HeaderText = "总手续费率";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            this.dataGridViewTextBoxColumn21.ReadOnly = true;
+            this.dataGridViewTextBoxColumn21.Width = 92;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn22.DataPropertyName = "IFPrice";
+            dataGridViewCellStyle41.Format = "p4";
+            this.dataGridViewTextBoxColumn22.DefaultCellStyle = dataGridViewCellStyle41;
+            this.dataGridViewTextBoxColumn22.HeaderText = "IF手续费率";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            this.dataGridViewTextBoxColumn22.ReadOnly = true;
+            this.dataGridViewTextBoxColumn22.Width = 89;
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            this.dataGridViewTextBoxColumn23.DataPropertyName = "CommissionType";
+            this.dataGridViewTextBoxColumn23.HeaderText = "收费方式";
+            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            this.dataGridViewTextBoxColumn23.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            this.dataGridViewTextBoxColumn24.DataPropertyName = "HandFeeCurr";
+            this.dataGridViewTextBoxColumn24.HeaderText = "费用币别";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            this.dataGridViewTextBoxColumn24.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn25
+            // 
+            this.dataGridViewTextBoxColumn25.DataPropertyName = "HandFee";
+            dataGridViewCellStyle42.Format = "N2";
+            this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle42;
+            this.dataGridViewTextBoxColumn25.HeaderText = "单据处理费";
+            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            this.dataGridViewTextBoxColumn25.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn26
+            // 
+            this.dataGridViewTextBoxColumn26.DataPropertyName = "CDAStatus";
+            this.dataGridViewTextBoxColumn26.HeaderText = "合同状态";
+            this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
+            this.dataGridViewTextBoxColumn26.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn27
+            // 
+            this.dataGridViewTextBoxColumn27.DataPropertyName = "IsSigned";
+            this.dataGridViewTextBoxColumn27.HeaderText = "是否签回";
+            this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
+            this.dataGridViewTextBoxColumn27.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn28
+            // 
+            this.dataGridViewTextBoxColumn28.DataPropertyName = "CDASignDate";
+            this.dataGridViewTextBoxColumn28.HeaderText = "签发日";
+            this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
+            this.dataGridViewTextBoxColumn28.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn29
+            // 
+            this.dataGridViewTextBoxColumn29.DataPropertyName = "CreateUserName";
+            this.dataGridViewTextBoxColumn29.HeaderText = "经办人";
+            this.dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
+            this.dataGridViewTextBoxColumn29.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn30
+            // 
+            this.dataGridViewTextBoxColumn30.DataPropertyName = "CheckUserName";
+            this.dataGridViewTextBoxColumn30.HeaderText = "复核人";
+            this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
+            this.dataGridViewTextBoxColumn30.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn31
+            // 
+            this.dataGridViewTextBoxColumn31.DataPropertyName = "CheckDate";
+            this.dataGridViewTextBoxColumn31.HeaderText = "复核日";
+            this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
+            this.dataGridViewTextBoxColumn31.ReadOnly = true;
             // 
             // colCDACode
             // 
@@ -633,9 +1084,9 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colCreditCover.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCreditCover.DataPropertyName = "CreditCover";
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colCreditCover.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle24.Format = "N2";
+            dataGridViewCellStyle24.NullValue = null;
+            this.colCreditCover.DefaultCellStyle = dataGridViewCellStyle24;
             this.colCreditCover.HeaderText = "买方信用风险额度";
             this.colCreditCover.Name = "colCreditCover";
             this.colCreditCover.ReadOnly = true;
@@ -644,8 +1095,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // colCreditCoverPeriodBegin
             // 
             this.colCreditCoverPeriodBegin.DataPropertyName = "CreditCoverPeriodBegin";
-            dataGridViewCellStyle3.Format = "d";
-            this.colCreditCoverPeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle25.Format = "d";
+            this.colCreditCoverPeriodBegin.DefaultCellStyle = dataGridViewCellStyle25;
             this.colCreditCoverPeriodBegin.HeaderText = "有效期(始)";
             this.colCreditCoverPeriodBegin.Name = "colCreditCoverPeriodBegin";
             this.colCreditCoverPeriodBegin.ReadOnly = true;
@@ -655,8 +1106,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // colCreditCoverPeriodEnd
             // 
             this.colCreditCoverPeriodEnd.DataPropertyName = "CreditCoverPeriodEnd";
-            dataGridViewCellStyle4.Format = "d";
-            this.colCreditCoverPeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle26.Format = "d";
+            this.colCreditCoverPeriodEnd.DefaultCellStyle = dataGridViewCellStyle26;
             this.colCreditCoverPeriodEnd.HeaderText = "有效期(终)";
             this.colCreditCoverPeriodEnd.Name = "colCreditCoverPeriodEnd";
             this.colCreditCoverPeriodEnd.ReadOnly = true;
@@ -678,8 +1129,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colFinanceLine.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colFinanceLine.DataPropertyName = "FinanceLine";
-            dataGridViewCellStyle5.Format = "N2";
-            this.colFinanceLine.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle27.Format = "N2";
+            this.colFinanceLine.DefaultCellStyle = dataGridViewCellStyle27;
             this.colFinanceLine.HeaderText = "预付款额度";
             this.colFinanceLine.Name = "colFinanceLine";
             this.colFinanceLine.ReadOnly = true;
@@ -691,8 +1142,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colFinanceLinePeriodBegin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colFinanceLinePeriodBegin.DataPropertyName = "FinanceLinePeriodBegin";
-            dataGridViewCellStyle6.Format = "d";
-            this.colFinanceLinePeriodBegin.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle28.Format = "d";
+            this.colFinanceLinePeriodBegin.DefaultCellStyle = dataGridViewCellStyle28;
             this.colFinanceLinePeriodBegin.HeaderText = "有效期(始)";
             this.colFinanceLinePeriodBegin.Name = "colFinanceLinePeriodBegin";
             this.colFinanceLinePeriodBegin.ReadOnly = true;
@@ -702,8 +1153,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colFinanceLinePeriodEnd.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colFinanceLinePeriodEnd.DataPropertyName = "FinanceLinePeriodEnd";
-            dataGridViewCellStyle7.Format = "d";
-            this.colFinanceLinePeriodEnd.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle29.Format = "d";
+            this.colFinanceLinePeriodEnd.DefaultCellStyle = dataGridViewCellStyle29;
             this.colFinanceLinePeriodEnd.HeaderText = "有效期(终)";
             this.colFinanceLinePeriodEnd.Name = "colFinanceLinePeriodEnd";
             this.colFinanceLinePeriodEnd.ReadOnly = true;
@@ -712,8 +1163,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // colHighestFinanceLine
             // 
             this.colHighestFinanceLine.DataPropertyName = "HighestFinanceLine";
-            dataGridViewCellStyle8.Format = "N2";
-            this.colHighestFinanceLine.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle30.Format = "N2";
+            this.colHighestFinanceLine.DefaultCellStyle = dataGridViewCellStyle30;
             this.colHighestFinanceLine.HeaderText = "最高保理预付款额度";
             this.colHighestFinanceLine.Name = "colHighestFinanceLine";
             this.colHighestFinanceLine.ReadOnly = true;
@@ -729,8 +1180,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colPrice.DataPropertyName = "Price";
-            dataGridViewCellStyle9.Format = "p4";
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle31.Format = "p4";
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle31;
             this.colPrice.HeaderText = "总手续费率";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
@@ -740,8 +1191,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colIFPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colIFPrice.DataPropertyName = "IFPrice";
-            dataGridViewCellStyle10.Format = "p4";
-            this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle32.Format = "p4";
+            this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle32;
             this.colIFPrice.HeaderText = "IF手续费率";
             this.colIFPrice.Name = "colIFPrice";
             this.colIFPrice.ReadOnly = true;
@@ -764,8 +1215,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // colHandFee
             // 
             this.colHandFee.DataPropertyName = "HandFee";
-            dataGridViewCellStyle11.Format = "N2";
-            this.colHandFee.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle33.Format = "N2";
+            this.colHandFee.DefaultCellStyle = dataGridViewCellStyle33;
             this.colHandFee.HeaderText = "单据处理费";
             this.colHandFee.Name = "colHandFee";
             this.colHandFee.ReadOnly = true;
@@ -812,93 +1263,55 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCheckDate.Name = "colCheckDate";
             this.colCheckDate.ReadOnly = true;
             // 
-            // cmuCDAMgr
+            // cbLocation
             // 
-            this.cmuCDAMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCDASelect,
-            this.menuItemCDADetail,
-            this.toolStripSeparator,
-            this.menuItemCDANew,
-            this.menuItemCDADelete,
-            this.toolStripSeparator1,
-            this.menuItemCheck,
-            this.menuItemReject,
-            this.toolStripSeparator2,
-            this.menuItemCDAReport,
-            this.menuItemCDAsExport});
-            this.cmuCDAMgr.Name = "cmuContractMgr";
-            this.cmuCDAMgr.Size = new System.Drawing.Size(183, 198);
+            this.cbLocation.DisplayMember = "Text";
+            this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLocation.FormattingEnabled = true;
+            this.cbLocation.ItemHeight = 14;
+            this.cbLocation.Location = new System.Drawing.Point(418, 25);
+            this.cbLocation.Name = "cbLocation";
+            this.cbLocation.Size = new System.Drawing.Size(113, 20);
+            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbLocation.TabIndex = 11;
             // 
-            // menuItemCDASelect
+            // lblLocation
             // 
-            this.menuItemCDASelect.Name = "menuItemCDASelect";
-            this.menuItemCDASelect.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDASelect.Text = "选定CDA";
-            this.menuItemCDASelect.Click += new System.EventHandler(this.SelectCDA);
+            this.lblLocation.AutoSize = true;
             // 
-            // menuItemCDADetail
             // 
-            this.menuItemCDADetail.Name = "menuItemCDADetail";
-            this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDADetail.Text = "详细信息";
-            this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
             // 
-            // toolStripSeparator
+            this.lblLocation.BackgroundStyle.Class = "";
+            this.lblLocation.Location = new System.Drawing.Point(362, 26);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(56, 16);
+            this.lblLocation.TabIndex = 10;
+            this.lblLocation.Text = "业务地区";
             // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(179, 6);
+            // tbCDACode
             // 
-            // menuItemCDANew
             // 
-            this.menuItemCDANew.Name = "menuItemCDANew";
-            this.menuItemCDANew.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDANew.Text = "新建CDA";
-            this.menuItemCDANew.Click += new System.EventHandler(this.NewCDA);
             // 
-            // menuItemCDADelete
             // 
-            this.menuItemCDADelete.Name = "menuItemCDADelete";
-            this.menuItemCDADelete.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDADelete.Text = "删除CDA";
-            this.menuItemCDADelete.Click += new System.EventHandler(this.DeleteCDA);
+            this.tbCDACode.Border.Class = "TextBoxBorder";
+            this.tbCDACode.Location = new System.Drawing.Point(86, 25);
+            this.tbCDACode.Name = "tbCDACode";
+            this.tbCDACode.Size = new System.Drawing.Size(100, 20);
+            this.tbCDACode.TabIndex = 3;
             // 
-            // toolStripSeparator1
+            // lbcCDACode
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
+            this.lbcCDACode.AutoSize = true;
             // 
-            // menuItemCheck
             // 
-            this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCheck.Text = "审核通过";
-            this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
-            // menuItemReject
-            // 
-            this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(182, 22);
-            this.menuItemReject.Text = "审核拒绝";
-            this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
-            // 
-            // menuItemCDAReport
-            // 
-            this.menuItemCDAReport.Name = "menuItemCDAReport";
-            this.menuItemCDAReport.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDAReport.Text = "生成保理额度通知书";
-            this.menuItemCDAReport.Click += new System.EventHandler(this.ReportCDA);
-            // 
-            // menuItemCDAsExport
-            // 
-            this.menuItemCDAsExport.Name = "menuItemCDAsExport";
-            this.menuItemCDAsExport.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDAsExport.Text = "导出额度通知书";
-            this.menuItemCDAsExport.Click += new System.EventHandler(this.ExportCDAs);
+            this.lbcCDACode.BackgroundStyle.Class = "";
+            this.lbcCDACode.Location = new System.Drawing.Point(25, 27);
+            this.lbcCDACode.Name = "lbcCDACode";
+            this.lbcCDACode.Size = new System.Drawing.Size(55, 16);
+            this.lbcCDACode.TabIndex = 2;
+            this.lbcCDACode.Text = "CDA编号";
             // 
             // CDAMgr
             // 
@@ -908,7 +1321,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "CDAMgr";
-            this.Size = new System.Drawing.Size(773, 402);
+            this.Size = new System.Drawing.Size(978, 402);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();
@@ -957,6 +1370,43 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDAsExport;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
+        private DevComponents.DotNetBar.LabelX lblTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCDACode;
+        private DevComponents.DotNetBar.LabelX lbcCDACode;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
+        private DevComponents.DotNetBar.LabelX lblLocation;
 
     }
 }

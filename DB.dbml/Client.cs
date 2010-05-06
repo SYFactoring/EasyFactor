@@ -440,7 +440,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public override string ToString()
         {
-            if (_ClientNameCN != null && !_ClientNameCN.Equals(string.Empty))
+            if (!String.IsNullOrEmpty(_ClientNameCN))
             {
                 return _ClientNameCN;
             }

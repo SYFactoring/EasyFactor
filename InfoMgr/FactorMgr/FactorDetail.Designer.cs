@@ -154,6 +154,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             {
                 components.Dispose();
             }
+
+            if (this.context != null)
+            {
+                this.context.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 

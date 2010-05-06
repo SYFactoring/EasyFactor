@@ -408,8 +408,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void QueryCase(object sender, EventArgs e)
         {
-            DateTime beginDate = this.diBegin.Text != string.Empty ? this.diBegin.Value : this.diBegin.MinDate;
-            DateTime endDate = this.diEnd.Text != string.Empty ? this.diEnd.Value : this.diEnd.MinDate;
+            DateTime beginDate = String.IsNullOrEmpty(this.diBegin.Text) ? this.diBegin.MinDate : this.diBegin.Value;
+            DateTime endDate = String.IsNullOrEmpty(this.diEnd.Text) ? this.diEnd.MinDate : this.diEnd.Value;
             string opName = this.tbOPName.Text;
             string location = (string)this.cbLocation.SelectedValue;
             string caseMark = this.cbCaseMark.Text;

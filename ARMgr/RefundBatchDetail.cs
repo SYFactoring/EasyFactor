@@ -112,7 +112,7 @@ namespace CMBC.EasyFactor.ARMgr
                 financeLog.Invoice.CaculateRefund();
                 batch.CaculateRefundAmount();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
-                batch.CheckStatus = "未复核";
+                batch.CheckStatus = ConstStr.BATCH.UNCHECK;
                 context.SubmitChanges();
             }
             catch (Exception e1)

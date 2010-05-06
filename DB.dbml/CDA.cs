@@ -10,6 +10,7 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
@@ -173,7 +174,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     if (Case.TransactionType == "国内买方保理" || Case.TransactionType == "进口保理")
                     {
-                        return Case.BuyerClient.FinanceCreditLine ;
+                        return Case.BuyerClient.FinanceCreditLine;
                     }
                     else
                     {
@@ -188,6 +189,76 @@ namespace CMBC.EasyFactor.DB.dbml
         #region Methods (3)
 
         // Public Methods (3) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AdjustCDAStatus()
+        {
+            if (CDAStatus == ConstStr.CDA.CHECKED)
+            {
+                CDA checkCDA = Case.CDAs.OrderByDescending(c => c.CDASignDate).First();
+                checkCDA.CDAStatus = ConstStr.CDA.CHECKED;
+
+                foreach (CDA c in Case.CDAs)
+                {
+                    if (c != checkCDA && c.CDAStatus == ConstStr.CDA.CHECKED)
+                    {
+                        c.CDAStatus = ConstStr.CDA.INVALID;
+                    }
+                }
+            }
+        }
+
+        public static string GenerateCDACode(Case selectedCase, List<CDA> cdaList)
+        {
+            if (selectedCase == null)
+            {
+                return string.Empty;
+            }
+
+            DBDataContext context = new DBDataContext();
+            Contract contract = selectedCase.SellerClient.Contract;
+            if (contract != null)
+            {
+                if (contract.ContractType == "新合同")
+                {
+                    var queryResult = from cda in context.CDAs
+                                      where cda.CDACode.StartsWith(contract.ContractCode)
+                                      select cda.CDACode;
+                    int count = 0;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(no.LastIndexOf("-") + 1)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    count += cdaList.Count(cda => cda.CDACode.StartsWith(contract.ContractCode));
+                    return String.Format("{0}-{1:000}", contract.ContractCode, count + 1);
+                }
+                else
+                {
+                    return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, selectedCase.CDAs.Count + 1);
+                }
+            }
+            else if (selectedCase.TransactionType == "进口保理")
+            {
+                var queryResult = from cda in context.CDAs
+                                  where cda.CDACode.StartsWith(selectedCase.CaseCode)
+                                  select cda.CDACode;
+                int count = 0;
+                if (!Int32.TryParse(queryResult.Max(no => no.Substring(no.LastIndexOf("-") + 1)), out count))
+                {
+                    count = 0;
+                }
+
+                count+=cdaList.Count(cda=>cda.CDACode.StartsWith(selectedCase.CaseCode));
+                return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, count + 1);
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
 
         /// <summary>
         /// 
