@@ -17,6 +17,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using System.Data.Linq;
     using DevComponents.DotNetBar;
     using System.Collections.Generic;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -109,21 +110,21 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (this.opCDAType == OpCDAType.CHECK)
             {
-                this.cbCheckStatus.Text = ConstStr.CDA.UNCHECK;
+                this.cbCheckStatus.Text = CDAStr.UNCHECK;
                 this.QueryCDAs(null, null);
             }
             else if (this.opCDAType == OpCDAType.REPORT)
             {
-                this.cbCheckStatus.Text = ConstStr.CDA.CHECKED;
+                this.cbCheckStatus.Text = CDAStr.CHECKED;
             }
             else if (this.opCDAType == OpCDAType.DUE)
             {
-                this.cbCheckStatus.Text = ConstStr.CDA.CHECKED;
+                this.cbCheckStatus.Text = CDAStr.CHECKED;
 
                 context = new DBDataContext();
                 var queryResult = from cda in context.CDAs
                                   where
-                                      cda.CDAStatus == ConstStr.CDA.CHECKED
+                                      cda.CDAStatus == CDAStr.CHECKED
                                       && (cda.CreditCoverPeriodEnd < DateTime.Now.Date || cda.FinanceLinePeriodEnd < DateTime.Now.Date)
                                   select cda;
 
@@ -205,27 +206,27 @@ namespace CMBC.EasyFactor.CaseMgr
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
 
-            if (MessageBoxEx.Show("是否确认复核通过该额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("是否确认复核通过该额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
-            cda.CDAStatus = ConstStr.CDA.CHECKED;
+            cda.CDAStatus = CDAStr.CHECKED;
             cda.CheckUserName = App.Current.CurUser.Name;
             cda.CheckDate = DateTime.Now.Date;
 
-            if (cda.Case.CaseMark == ConstStr.CASE.APPLICATION)
+            if (cda.Case.CaseMark == CASEStr.APPLICATION)
             {
-                cda.Case.CaseMark = ConstStr.CASE.ENABLE;
+                cda.Case.CaseMark = CASEStr.ENABLE;
             }
 
-            if (cda.CDAStatus == ConstStr.CDA.CHECKED)
+            if (cda.CDAStatus == CDAStr.CHECKED)
             {
                 foreach (CDA c in cda.Case.CDAs)
                 {
-                    if (c != cda && c.CDAStatus == ConstStr.CDA.CHECKED)
+                    if (c != cda && c.CDAStatus == CDAStr.CHECKED)
                     {
-                        c.CDAStatus = ConstStr.CDA.INVALID;
+                        c.CDAStatus = CDAStr.INVALID;
                     }
                 }
             }
@@ -236,7 +237,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             catch (Exception e2)
             {
-                MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             try
@@ -245,7 +246,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -268,13 +269,13 @@ namespace CMBC.EasyFactor.CaseMgr
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
 
-            if (cda.CDAStatus == ConstStr.CDA.CHECKED)
+            if (cda.CDAStatus == CDAStr.CHECKED)
             {
-                MessageBoxEx.Show("此额度通知书已经过审核，不能删除。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("此额度通知书已经过审核，不能删除。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("是否打算删除额度通知书: " + cda.CDACode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("是否打算删除额度通知书: " + cda.CDACode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -289,12 +290,12 @@ namespace CMBC.EasyFactor.CaseMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBoxEx.Show("不能删除此额度通知书: " + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("不能删除此额度通知书: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvCDAs.Rows.RemoveAt(this.dgvCDAs.CurrentCell.RowIndex);
             }
         }
@@ -494,12 +495,12 @@ namespace CMBC.EasyFactor.CaseMgr
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
 
-            if (MessageBoxEx.Show("是否确认复核退回该额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("是否确认复核退回该额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
-            cda.CDAStatus = ConstStr.CDA.REJECT;
+            cda.CDAStatus = CDAStr.REJECT;
             cda.CheckUserName = App.Current.CurUser.Name;
             cda.CheckDate = DateTime.Now.Date;
 
@@ -509,7 +510,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -530,7 +531,7 @@ namespace CMBC.EasyFactor.CaseMgr
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel 程序无法启动!", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];

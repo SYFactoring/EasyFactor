@@ -16,6 +16,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Controls;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -110,6 +111,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         public Case Case
         {
+            get
+            {
+                return this._case;
+            }
             set
             {
                 this._case = this.context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
@@ -156,7 +161,7 @@ namespace CMBC.EasyFactor.ARMgr
             batch.RefundType = paymentBatch.PaymentType;
             batch.RefundDate = paymentBatch.PaymentDate;
             batch.CreateUserName = App.Current.CurUser.Name;
-            batch.CheckStatus = ConstStr.BATCH.UNCHECK;
+            batch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
             this.logsBindingSource.DataSource = refundList;
 
@@ -407,7 +412,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -434,7 +439,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -484,7 +489,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -504,7 +509,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             batch.RefundDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
-            batch.CheckStatus = ConstStr.BATCH.UNCHECK;
+            batch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from log in context.InvoiceFinanceLogs
@@ -515,7 +520,7 @@ namespace CMBC.EasyFactor.ARMgr
             List<InvoiceRefundLog> result = new List<InvoiceRefundLog>();
             foreach (InvoiceFinanceLog financeLog in queryResult)
             {
-                if (financeLog.InvoiceFinanceBatch.CheckStatus == ConstStr.BATCH.CHECK)
+                if (financeLog.InvoiceFinanceBatch.CheckStatus == BATCH.CHECK)
                 {
                     InvoiceRefundLog refundLog = new InvoiceRefundLog(financeLog);
                     result.Add(refundLog);
@@ -585,7 +590,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -648,12 +653,12 @@ namespace CMBC.EasyFactor.ARMgr
                 }
 
                 isSaveOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isSaveOK)
             {
-                MessageBoxEx.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据保存成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.caseBasic.CaculateOutstanding(this._case);
             }
         }
@@ -667,7 +672,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -736,7 +741,7 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoiceRefundLog log = (InvoiceRefundLog)logList[i];
                     if (TypeUtil.LessZero(log.FinanceAmount - log.RefundAmount))
                     {
-                        MessageBoxEx.Show("还款金额不能大于融资余额: " + log.InvoiceNo2, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("还款金额不能大于融资余额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
 
@@ -744,7 +749,7 @@ namespace CMBC.EasyFactor.ARMgr
                     //{
                     //    if (TypeUtil.LessZero(log.InvoicePaymentAmount - log.InvoiceRefundAmount - log.RefundAmount))
                     //    {
-                    //        MessageBoxEx.Show("还款金额不能大于付款金额: " + log.InvoiceNo2, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //        MessageBoxEx.Show("还款金额不能大于付款金额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //        return false;
                     //    }
                     //}
@@ -756,7 +761,7 @@ namespace CMBC.EasyFactor.ARMgr
             //{
             //    if (TypeUtil.GreaterZero(totalRefund - this.totalPayment))
             //    {
-            //        MessageBoxEx.Show("本次还款总额不能大于付款总额", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        MessageBoxEx.Show("本次还款总额不能大于付款总额", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             //        return false;
             //    }
             //}

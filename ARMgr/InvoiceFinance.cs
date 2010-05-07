@@ -18,6 +18,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -96,10 +97,14 @@ namespace CMBC.EasyFactor.ARMgr
         #region Properties (1)
 
         /// <summary>
-        /// Sets
+        /// Gets or Sets
         /// </summary>
         public Case Case
         {
+            get
+            {
+                return this._case;
+            }
             set
             {
                 this._case = this.context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
@@ -466,7 +471,7 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoiceFinanceLog selectedLog = (InvoiceFinanceLog)this.logsBindingSource.List[e.RowIndex];
                     if (result > selectedLog.AssignOutstanding * this._case.ActiveCDA.FinanceProportion)
                     {
-                        if (DialogResult.No == MessageBoxEx.Show("您输入的融资金额超出融资比例的范围，确认录入吗？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+                        if (DialogResult.No == MessageBoxEx.Show("您输入的融资金额超出融资比例的范围，确认录入吗？", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information))
                         {
                             e.Cancel = true;
                         }
@@ -512,7 +517,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -539,7 +544,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -589,7 +594,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -597,25 +602,25 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding))
             {
-                MessageBoxEx.Show("该案件的预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("该案件的预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             if (activeCDA.FinanceCreditLine == null)
             {
-                MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             if (activeCDA.FinanceCreditLine.PeriodEnd < DateTime.Today)
             {
-                MessageBoxEx.Show("融资额度已到期，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("融资额度已到期，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             if (!TypeUtil.GreaterZero(activeCDA.FinanceCreditLine.CreditLine - this._case.TotalFinanceOutstanding))
             {
-                MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -631,7 +636,7 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.BatchCurrency = this._case.InvoiceCurrency;
             financeBatch.CreateUserName = App.Current.CurUser.Name;
-            financeBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
+            financeBatch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = financeBatch;
 
             double financeProp = this._case.ActiveCDA.FinanceProportion.GetValueOrDefault();
@@ -722,7 +727,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -756,7 +761,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (!TypeUtil.EqualsZero(batch.FinanceAmount - totalFinance))
             {
-                MessageBoxEx.Show("融资额未分配结束，不能保存", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("融资额未分配结束，不能保存", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -805,12 +810,12 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.FinanceBatchNo = null;
                 batch.Case = null;
                 isSaveOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isSaveOK)
             {
-                MessageBoxEx.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据保存成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.caseBasic.CaculateOutstanding(this._case);
             }
         }
@@ -824,7 +829,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -861,7 +866,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -907,7 +912,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbTotalInterest.Text = String.Format("{0:N2}", totalInterest);
             if (totalFinance > financeBatch.FinanceAmount)
             {
-                MessageBoxEx.Show("当前融资额超过限定", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("当前融资额超过限定", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -925,13 +930,13 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoiceFinanceLog log = (InvoiceFinanceLog)logList[i];
                     if (!TypeUtil.GreaterZero(log.FinanceAmount))
                     {
-                        MessageBoxEx.Show("融资金额不能为空: " + log.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("融资金额不能为空: " + log.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
 
                     if (log.FinanceAmount > log.AssignOutstanding)
                     {
-                        MessageBoxEx.Show("融资金额不能大于转让余额: " + log.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("融资金额不能大于转让余额: " + log.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }

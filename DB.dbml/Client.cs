@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Text.RegularExpressions;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -56,10 +57,10 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "买方信用风险担保额度").ToList();
+                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "买方信用风险担保额度").ToList();
                 if (creditLines.Count > 1)
                 {
-                    MessageBoxEx.Show("包含多个有效的买方信用风险担保额度，客户编号: " + this.ClientEDICode, ConstStr.MESSAGE.TITLE_WARNING);
+                    MessageBoxEx.Show("包含多个有效的买方信用风险担保额度，客户编号: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
                     return null;
                 }
                 else if (creditLines.Count == 1)
@@ -97,10 +98,10 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                IList<Contract> contractList = this.Contracts.Where(c => c.ContractStatus == ConstStr.CONTRACT.AVAILABILITY).ToList();
+                IList<Contract> contractList = this.Contracts.Where(c => c.ContractStatus == CONTRACT.AVAILABILITY).ToList();
                 if (contractList.Count > 1)
                 {
-                    MessageBoxEx.Show("包含多个有效的主合同，客户编号: " + this.ClientEDICode, ConstStr.MESSAGE.TITLE_WARNING);
+                    MessageBoxEx.Show("包含多个有效的主合同，客户编号: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
                     return null;
                 }
                 else if (contractList.Count == 1)
@@ -119,10 +120,10 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "池融资额度").ToList();
+                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "池融资额度").ToList();
                 if (creditLines.Count > 1)
                 {
-                    MessageBoxEx.Show("包含多个有效的池融资额度，客户编号: " + this.ClientEDICode, ConstStr.MESSAGE.TITLE_WARNING);
+                    MessageBoxEx.Show("包含多个有效的池融资额度，客户编号: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
                     return null;
                 }
                 else if (creditLines.Count == 1)
@@ -143,10 +144,10 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "保理预付款融资额度").ToList();
+                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "保理预付款融资额度").ToList();
                 if (creditLines.Count > 1)
                 {
-                    MessageBoxEx.Show("包含多个有效的保理预付款融资额度，客户编号: " + this.ClientEDICode, ConstStr.MESSAGE.TITLE_WARNING);
+                    MessageBoxEx.Show("包含多个有效的保理预付款融资额度，客户编号: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
                     return null;
                 }
                 else if (creditLines.Count == 1)
@@ -242,7 +243,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double? total = null;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE && c.IsPool))
                 {
                     double? financeOutstanding = curCase.FinanceOutstanding;
                     if (financeOutstanding.HasValue)
@@ -274,7 +275,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE && c.IsPool))
                 {
                     double assignOutstanding = curCase.AssignOutstanding;
                     if (curCase.InvoiceCurrency != "CNY")
@@ -298,7 +299,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.IsPool))
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE && c.IsPool))
                 {
                     double assignOutstanding = curCase.ValuedAssignOutstanding;
                     if (curCase.InvoiceCurrency != "CNY")
@@ -329,7 +330,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public double CanBeFinanceAmount(string transactionType, string currency)
         {
             double result = 0;
-            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.TransactionType == transactionType))
+            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE && c.TransactionType == transactionType))
             {
                 double canbeFinanceAmount = curCase.CanBeFinanceAmount;
                 if (curCase.InvoiceCurrency != currency)
@@ -364,7 +365,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public double GetAssignOutstandingAsBuyer(string currency)
         {
             double result = 0;
-            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
             {
                 double assignOutstanding = curCase.AssignOutstanding;
                 if (curCase.InvoiceCurrency != currency)
@@ -388,7 +389,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public double GetAssignOutstandingAsSeller(string transactionType, string currency)
         {
             double result = 0;
-            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE && c.TransactionType == transactionType))
+            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE && c.TransactionType == transactionType))
             {
                 double assignOutstanding = curCase.AssignOutstanding;
                 if (curCase.InvoiceCurrency != currency)
@@ -411,7 +412,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public System.Nullable<double> GetFinanceOutstanding(string currency)
         {
             double? total = null;
-            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
             {
                 double? financeOutstanding = curCase.FinanceOutstanding;
                 if (financeOutstanding.HasValue)

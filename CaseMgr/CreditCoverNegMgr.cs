@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     public partial class CreditCoverNegMgr : UserControl
     {
@@ -190,8 +191,8 @@ namespace CMBC.EasyFactor.CaseMgr
                                && (beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                && c.CaseCode.Contains(this.tbCaseCode.Text)
-                               && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == ConstStr.CDA.CHECKED))
-                               && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CONTRACT.AVAILABILITY))
+                               && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == CDAStr.CHECKED))
+                               && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == CONTRACT.AVAILABILITY))
                                && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text)
                                 || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN.Contains(this.tbClientName.Text)
                                && neg.Case.SellerFactorCode.Contains(sellerFactorCode) && neg.Case.BuyerFactorCode.Contains(buyerFactorCode))
@@ -209,7 +210,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Reset(object sender, EventArgs e)
         {
-            this.cbOwnerDepts.SelectedIndex = 0;
             this.cbTransactionType.SelectedIndex = 0;
             this.cbCurrency.SelectedIndex = 0;
             this.tbCaseCode.Text = string.Empty;

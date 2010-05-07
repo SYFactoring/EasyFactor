@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -134,12 +135,12 @@ namespace CMBC.EasyFactor.ARMgr
             catch (Exception e2)
             {
                 isUpdateOK = false;
-                MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isUpdateOK)
             {
-                MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

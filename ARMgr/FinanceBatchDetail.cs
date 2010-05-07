@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Data.Linq;
     using System.Linq;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -116,7 +117,7 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceFinanceLog log = (InvoiceFinanceLog)this.bs.List[this.dgvFinanceLogs.SelectedRows[0].Index];
             if (log.InvoiceRefundLogs.Count > 0)
             {
-                DialogResult dr = MessageBoxEx.Show("此笔融资已还款，是否确认删除此笔融资以及关联还款记录", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBoxEx.Show("此笔融资已还款，是否确认删除此笔融资以及关联还款记录", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     return;
@@ -140,12 +141,12 @@ namespace CMBC.EasyFactor.ARMgr
                 invoice.CaculateFinance();
                 batch.CaculateFinanceAmount();
                 context.InvoiceFinanceLogs.DeleteOnSubmit(log);
-                batch.CheckStatus = ConstStr.BATCH.UNCHECK;
+                batch.CheckStatus = BATCH.UNCHECK;
                 context.SubmitChanges();
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -220,12 +221,12 @@ namespace CMBC.EasyFactor.ARMgr
             catch (Exception e2)
             {
                 isUpdateOK = false;
-                MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isUpdateOK)
             {
-                MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

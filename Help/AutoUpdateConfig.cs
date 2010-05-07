@@ -52,16 +52,16 @@ namespace CMBC.EasyFactor.Help
         public string AvailableVersion
         { get { return _AvailableVersion; } set { _AvailableVersion = value; } }
 
-        private string _AppFileURL;
-        public string AppFileURL
+        private Uri _AppFileURL;
+        public Uri AppFileURL
         { get { return _AppFileURL; } set { _AppFileURL = value; } }
 
         private string _LatestChanges;
         public string LatestChanges
         { get { return _LatestChanges; } set { _LatestChanges = value; } }
 
-        private string _ChangeLogURL;
-        public string ChangeLogURL
+        private Uri _ChangeLogURL;
+        public Uri ChangeLogURL
         { get { return _ChangeLogURL; } set { _ChangeLogURL = value; } }
 
         public delegate void LoadConfigError(string stMessage, Exception e);
@@ -70,7 +70,7 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// LoadConfig: Invoke this method when you are ready to populate this object
         /// </summary>
-        public bool LoadConfig(string url, string user, string pass, string proxyURL, bool proxyEnabled)
+        public bool LoadConfig(Uri url, string user, string pass, string proxyURL, bool proxyEnabled)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace CMBC.EasyFactor.Help
 
                 //Parse out the AppFileURL
                 XmlNode AppFileURLNode = XmlDoc.SelectSingleNode(@"//AppFileURL");
-                this.AppFileURL = AppFileURLNode.InnerText;
+                this.AppFileURL = new Uri(AppFileURLNode.InnerText);
 
                 //Parse out the LatestChanges
                 XmlNode LatestChangesNode = XmlDoc.SelectSingleNode(@"//LatestChanges");
@@ -117,9 +117,9 @@ namespace CMBC.EasyFactor.Help
                 //Parse out the ChangLogURL
                 XmlNode ChangeLogURLNode = XmlDoc.SelectSingleNode(@"//ChangeLogURL");
                 if (ChangeLogURLNode != null)
-                    this.ChangeLogURL = ChangeLogURLNode.InnerText;
+                    this.ChangeLogURL = new Uri(ChangeLogURLNode.InnerText);
                 else
-                    this.ChangeLogURL = "";
+                    this.ChangeLogURL = new Uri("");
 
             }
             catch (Exception e)

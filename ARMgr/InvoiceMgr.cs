@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -276,7 +277,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 catch (Exception e1)
                 {
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -310,42 +311,42 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            if (MessageBoxEx.Show("是否打算删除此" + selectedInvoices.Count + "条发票", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("是否打算删除此" + selectedInvoices.Count + "条发票", MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
 
                 try
                 {
                     foreach (Invoice invoice in selectedInvoices)
                     {
-                        if (invoice.InvoiceAssignBatch.CheckStatus == ConstStr.BATCH.CHECK)
+                        if (invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK)
                         {
-                            MessageBoxEx.Show("转让批次已复核，不能删除，发票号：" + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBoxEx.Show("转让批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
 
                         foreach (InvoiceFinanceBatch batch in invoice.InvoiceFinanceBatches)
                         {
-                            if (batch.CheckStatus == ConstStr.BATCH.CHECK)
+                            if (batch.CheckStatus == BATCH.CHECK)
                             {
-                                MessageBoxEx.Show("融资批次已复核，不能删除，发票号：" + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBoxEx.Show("融资批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
                             }
                         }
 
                         foreach (InvoicePaymentBatch batch in invoice.InvoicePaymentBatches)
                         {
-                            if (batch.CheckStatus == ConstStr.BATCH.CHECK)
+                            if (batch.CheckStatus == BATCH.CHECK)
                             {
-                                MessageBoxEx.Show("付款批次已复核，不能删除，发票号：" + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBoxEx.Show("付款批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
                             }
                         }
 
                         foreach (InvoiceRefundBatch batch in invoice.InvoiceRefundBatches)
                         {
-                            if (batch.CheckStatus == ConstStr.BATCH.CHECK)
+                            if (batch.CheckStatus == BATCH.CHECK)
                             {
-                                MessageBoxEx.Show("还款批次已复核，不能删除，发票号：" + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBoxEx.Show("还款批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
                             }
                         }
@@ -364,7 +365,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 catch (Exception e1)
                 {
-                    MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -768,7 +769,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 catch (Exception e1)
                 {
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }

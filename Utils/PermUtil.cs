@@ -5,6 +5,7 @@ namespace CMBC.EasyFactor.Utils
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -74,6 +75,10 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public class PermUtil
     {
+        private PermUtil()
+        {
+        }
+
         #region Methods (3)
 
         // Public Methods (2) 
@@ -91,7 +96,7 @@ namespace CMBC.EasyFactor.Utils
             }
             else
             {
-                MessageBoxEx.Show("对不起，您没有执行该操作的权限。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("对不起，您没有执行该操作的权限。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
         }

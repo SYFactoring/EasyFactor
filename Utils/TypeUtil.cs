@@ -15,6 +15,10 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public class TypeUtil
     {
+        private TypeUtil()
+        {
+        }
+
         #region Methods (12)
 
         // Public Methods (12) 

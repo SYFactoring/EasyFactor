@@ -13,6 +13,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using System.Data.Linq;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -61,7 +62,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 DateTime overDueDate = DateTime.Now.Date;
 
-                var queryResult = context.FactorCreditLines.Where(f => f.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY && f.PeriodEnd < overDueDate);
+                var queryResult = context.FactorCreditLines.Where(f => f.CreditLineStatus == FACTOR_CREDIT_LINE.AVAILABILITY && f.PeriodEnd < overDueDate);
 
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

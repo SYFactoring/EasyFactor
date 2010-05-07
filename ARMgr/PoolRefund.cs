@@ -71,6 +71,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         public Client Client
         {
+            get
+            {
+                return this._client;
+            }
             set
             {
                 this._client = this.context.Clients.SingleOrDefault(c => c.ClientEDICode == value.ClientEDICode);

@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     public enum OpARType
     {
@@ -164,6 +165,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="selectedCase"></param>
         public void CaculateOutstanding(Case selectedCase)
         {
+            if (selectedCase == null)
+            {
+                return;
+            }
+
             CDA cda = selectedCase.ActiveCDA;
             if (cda != null)
             {
@@ -324,7 +330,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (!cda.FinanceLine.HasValue && this.opARType == OpARType.FINANCE)
                 {
-                    MessageBoxEx.Show("本案无预付款额度，不能融资。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("本案无预付款额度，不能融资。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }
@@ -369,7 +375,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (curCase.ActiveCDA == null)
                 {
-                    MessageBoxEx.Show("没有有效的额度通知书，不能进行应收账款管理", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("没有有效的额度通知书，不能进行应收账款管理", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 this.Case = curCase;

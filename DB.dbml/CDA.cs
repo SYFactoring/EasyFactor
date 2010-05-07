@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Linq;
     using System.Text;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -195,16 +196,16 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public void AdjustCDAStatus()
         {
-            if (CDAStatus == ConstStr.CDA.CHECKED)
+            if (CDAStatus == CDAStr.CHECKED)
             {
                 CDA checkCDA = Case.CDAs.OrderByDescending(c => c.CDASignDate).First();
-                checkCDA.CDAStatus = ConstStr.CDA.CHECKED;
+                checkCDA.CDAStatus = CDAStr.CHECKED;
 
                 foreach (CDA c in Case.CDAs)
                 {
-                    if (c != checkCDA && c.CDAStatus == ConstStr.CDA.CHECKED)
+                    if (c != checkCDA && c.CDAStatus == CDAStr.CHECKED)
                     {
-                        c.CDAStatus = ConstStr.CDA.INVALID;
+                        c.CDAStatus = CDAStr.INVALID;
                     }
                 }
             }

@@ -23,13 +23,14 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// Main Window Form
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-		#region Constructors (1) 
+        #region Constructors (1)
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -42,22 +43,26 @@ namespace CMBC.EasyFactor
             this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
             this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-            this.CommandStatus = ConstStr.MESSAGE.MAIN_DEFAULT;
+            this.CommandStatus = MESSAGE.MAIN_DEFAULT;
 
             this.notifyIcon.Visible = false;
 
             this.backgroundWorker.RunWorkerAsync();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties (2) 
+        #region Properties (2)
 
         /// <summary>
         /// Sets command status
         /// </summary>
         public string CommandStatus
         {
+            get
+            {
+                return this.lblCommandStatus.Text;
+            }
             set
             {
                 this.lblCommandStatus.Text = value;
@@ -69,17 +74,21 @@ namespace CMBC.EasyFactor
         /// </summary>
         public string UserStatus
         {
+            get
+            {
+                return this.lblCurrentUser.Text;
+            }
             set
             {
                 this.lblCurrentUser.Text = value;
             }
         }
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Methods (93) 
+        #region Methods (93)
 
-		// Public Methods (2) 
+        // Public Methods (2) 
 
         /// <summary>
         /// 
@@ -108,14 +117,14 @@ namespace CMBC.EasyFactor
             }
             else
             {
-                this.CommandStatus = ConstStr.MESSAGE.MAIN_DEFAULT;
+                this.CommandStatus = MESSAGE.MAIN_DEFAULT;
             }
 
             uc.Dock = DockStyle.Fill;
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-		// Private Methods (91) 
+        // Private Methods (91) 
 
         /// <summary>
         /// 
@@ -275,7 +284,7 @@ namespace CMBC.EasyFactor
         private void CheckUpdate(object sender, EventArgs e)
         {
             AutoUpdater autoUpdater = new AutoUpdater();
-            autoUpdater.ConfigURL = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml";
+            autoUpdater.ConfigURL = new Uri("http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml");
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdate();
         }
@@ -286,7 +295,7 @@ namespace CMBC.EasyFactor
         private void CheckUpdateBackground()
         {
             AutoUpdater autoUpdater = new AutoUpdater();
-            autoUpdater.ConfigURL = "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml";
+            autoUpdater.ConfigURL = new Uri("http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml");
             autoUpdater.AutoDownload = true;
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdateBackground();
@@ -1331,6 +1340,6 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(mgr);
         }
 
-		#endregion Methods 
+        #endregion Methods
     }
 }

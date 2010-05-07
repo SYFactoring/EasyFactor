@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
     /// <summary>
     /// 
     /// </summary>
@@ -116,9 +117,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batchType == OpBatchType.CHECK)
             {
-                this.cbCheckStatus.Text = ConstStr.BATCH.UNCHECK;
+                this.cbCheckStatus.Text = BATCH.UNCHECK;
                 context = new DBDataContext();
-                var queryResult = context.InvoicePaymentBatches.Where(i => i.CheckStatus == ConstStr.BATCH.UNCHECK);
+                var queryResult = context.InvoicePaymentBatches.Where(i => i.CheckStatus == BATCH.UNCHECK);
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
@@ -180,24 +181,24 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (batch.CheckStatus != ConstStr.BATCH.UNCHECK && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
+            if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("此批次已经过复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("是否确认复核通过该批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("是否确认复核通过该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("经办人和复核人相同，不可进行复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("经办人和复核人相同，不可进行复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            batch.CheckStatus = ConstStr.BATCH.CHECK;
+            batch.CheckStatus = BATCH.CHECK;
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
@@ -207,7 +208,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -229,14 +230,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("是否打算删除此" + selectedBatch.BatchCount + "条付款记录", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("是否打算删除此" + selectedBatch.BatchCount + "条付款记录", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
-            if (selectedBatch.CheckStatus == ConstStr.BATCH.CHECK)
+            if (selectedBatch.CheckStatus == BATCH.CHECK)
             {
-                MessageBoxEx.Show("不能删除已复核批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("不能删除已复核批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -255,7 +256,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -350,7 +351,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (selectedBatch.PaymentType != "买方付款")
             {
-                MessageBoxEx.Show("只有买方付款可以生成MSG11", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("只有买方付款可以生成MSG11", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -374,7 +375,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (selectedBatch.PaymentType != "买方间接付款")
             {
-                MessageBoxEx.Show("只有买方间接付款可以生成MSG12", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("只有买方间接付款可以生成MSG12", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -443,24 +444,24 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (batch.CheckStatus != ConstStr.BATCH.UNCHECK && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
+            if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("此批次已经过复核", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("是否确认复核退回该批次", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("是否确认复核退回该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("经办人和复核人相同，不可进行复核退回", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("经办人和复核人相同，不可进行复核退回", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            batch.CheckStatus = ConstStr.BATCH.REJECT;
+            batch.CheckStatus = BATCH.REJECT;
             batch.CheckUserName = App.Current.CurUser.Name;
             batch.CheckDate = DateTime.Now.Date;
 
@@ -470,7 +471,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

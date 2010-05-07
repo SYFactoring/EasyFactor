@@ -16,6 +16,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// Case Detail
@@ -325,7 +326,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 CDA selectedCDA = this.context.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
-                    if (MessageBoxEx.Show("是否打算删除额度通知书: " + cdaCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+                    if (MessageBoxEx.Show("是否打算删除额度通知书: " + cdaCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                     {
                         return;
                     }
@@ -340,12 +341,12 @@ namespace CMBC.EasyFactor.CaseMgr
                     catch (Exception e1)
                     {
                         isDeleteOK = false;
-                        MessageBoxEx.Show("不能删除此额度通知书: " + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBoxEx.Show("不能删除此额度通知书: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
 
                     if (isDeleteOK)
                     {
-                        MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.dgvCDAs.Rows.RemoveAt(this.dgvCDAs.SelectedRows[0].Index);
                     }
                 }
@@ -367,7 +368,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -391,12 +392,12 @@ namespace CMBC.EasyFactor.CaseMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
                 this.creditCoverNegBindingSource.DataSource = new CreditCoverNegotiation();
             }
@@ -535,7 +536,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -558,7 +559,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -572,7 +573,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else
             {
-                MessageBoxEx.Show("国内保理案不需要向国外保理商申请额度", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("国内保理案不需要向国外保理商申请额度", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -586,7 +587,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -603,7 +604,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -643,12 +644,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     curCase.CaseCode = null;
                     isAddOK = false;
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.opCaseType = OpCaseType.UPDATE_CASE;
                 }
             }
@@ -679,7 +680,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
@@ -697,11 +698,11 @@ namespace CMBC.EasyFactor.CaseMgr
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
 
-                    MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -726,7 +727,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -751,12 +752,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     creditCoverNeg.Case = null;
                     isAddOK = false;
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
                     this.NewCreditCoverNeg(null, null);
                 }
@@ -783,12 +784,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.dgvCreditCoverNegs.Refresh();
                 }
             }
@@ -964,7 +965,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1041,7 +1042,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

@@ -17,6 +17,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -131,6 +132,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         public Case Case
         {
+            get
+            {
+                return this._case;
+            }
             set
             {
                 this._case = this.context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
@@ -381,7 +386,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -408,7 +413,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -458,7 +463,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -487,7 +492,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             batch.PaymentDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
-            batch.CheckStatus = ConstStr.BATCH.UNCHECK;
+            batch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in context.Invoices
@@ -569,7 +574,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -649,12 +654,12 @@ namespace CMBC.EasyFactor.ARMgr
 
                 batch.Case = null;
                 isSaveOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isSaveOK)
             {
-                MessageBoxEx.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据保存成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.caseBasic.CaculateOutstanding(this._case);
                 if (invoiceList.Count > 0)
                 {
@@ -677,7 +682,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有选定案件", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -738,7 +743,7 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoicePaymentLog log = (InvoicePaymentLog)logList[i];
                     if (TypeUtil.LessZero(log.AssignOutstanding))
                     {
-                        MessageBoxEx.Show("付款金额不能大于转让金额: " + log.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("付款金额不能大于转让金额: " + log.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
 
@@ -746,12 +751,12 @@ namespace CMBC.EasyFactor.ARMgr
                     //{
                     //    if (batch.PaymentType == "贷项通知")
                     //    {
-                    //        MessageBoxEx.Show("账款调整金额大于融资余额，需要求客户偿还融资款差额后，才可调整: " + log.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //        MessageBoxEx.Show("账款调整金额大于融资余额，需要求客户偿还融资款差额后，才可调整: " + log.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //        return false;
                     //    }
                     //    if (batch.PaymentType == "卖方回购")
                     //    {
-                    //        MessageBoxEx.Show("回购金额大于融资余额，需要求客户偿还融资款差额后，才可调整: " + log.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //        MessageBoxEx.Show("回购金额大于融资余额，需要求客户偿还融资款差额后，才可调整: " + log.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //        return false;
                     //    }
                     //}

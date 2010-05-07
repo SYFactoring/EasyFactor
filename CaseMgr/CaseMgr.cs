@@ -9,12 +9,11 @@ namespace CMBC.EasyFactor.CaseMgr
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.Utils.ConstStr;
     using DevComponents.DotNetBar;
-    using Microsoft.Office.Interop.Excel;
 
     /// <summary>
     /// 
@@ -211,7 +210,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 catch (Exception e1)
                 {
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -251,7 +250,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
-            if (MessageBoxEx.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bool isDeleteOK = true;
                 foreach (InvoiceAssignBatch assignBatch in selectedCase.InvoiceAssignBatches)
@@ -285,12 +284,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 catch (Exception e1)
                 {
                     isDeleteOK = false;
-                    MessageBoxEx.Show("不能删除此案件: " + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此案件: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 if (isDeleteOK)
                 {
-                    MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dgvCases.Rows.RemoveAt(dgvCases.CurrentCell.RowIndex);
                 }
             }
@@ -427,7 +426,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                 && (opCaseType != OpCaseType.STAT && beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                 && (opCaseType != OpCaseType.STAT && endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
                                 && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.IsSigned == true))
-                                && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY))
+                                && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == CLIENT_CREDIT_LINE.AVAILABILITY))
                                 && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text)
                                  || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN.Contains(this.tbClientName.Text))
                                     );

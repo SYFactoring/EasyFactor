@@ -11,6 +11,7 @@ using DevComponents.DotNetBar;
 using CMBC.EasyFactor.Utils;
 using CMBC.EasyFactor.InfoMgr.FactorMgr;
 using CMBC.EasyFactor.CaseMgr;
+using CMBC.EasyFactor.Utils.ConstStr;
 
 namespace CMBC.EasyFactor.ARMgr
 {
@@ -60,6 +61,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         public Client Client
         {
+            get
+            {
+                return this._client;
+            }
             set
             {
                 this._client = this.context.Clients.SingleOrDefault(c => c.ClientEDICode == value.ClientEDICode);
@@ -117,13 +122,13 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._client == null)
             {
-                MessageBoxEx.Show("没有选定客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.CreateUserName = App.Current.CurUser.Name;
-            financeBatch.CheckStatus = ConstStr.BATCH.UNCHECK;
+            financeBatch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = financeBatch;
 
             var caseResult = from c in context.Cases
@@ -147,7 +152,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this._client == null)
             {
-                MessageBoxEx.Show("没有选定客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -179,12 +184,12 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.FinanceBatchNo = null;
                 batch.Client = null;
                 isSaveOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isSaveOK)
             {
-                MessageBoxEx.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据保存成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.poolBasic.CaculateOutstanding(this._client);
             }
         }
@@ -198,7 +203,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._client == null)
             {
-                MessageBoxEx.Show("没有选定客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -228,7 +233,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._client == null)
             {
-                MessageBoxEx.Show("没有选定客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有选定客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

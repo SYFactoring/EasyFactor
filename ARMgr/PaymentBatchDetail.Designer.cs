@@ -1,4 +1,5 @@
 ﻿using CMBC.EasyFactor.Utils;
+using CMBC.EasyFactor.Utils.ConstStr;
 namespace CMBC.EasyFactor.ARMgr
 {
     partial class PaymentBatchDetail
@@ -502,9 +503,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.checkStatusComboBox.FormattingEnabled = true;
             this.checkStatusComboBox.Items.AddRange(new object[] {
-            ConstStr.BATCH.UNCHECK,
-            ConstStr.BATCH.CHECK,
-            ConstStr.BATCH.REJECT});
+            BATCH.UNCHECK,
+            BATCH.CHECK,
+            BATCH.REJECT});
             this.checkStatusComboBox.Location = new System.Drawing.Point(116, 203);
             this.checkStatusComboBox.Name = "checkStatusComboBox";
             this.checkStatusComboBox.Size = new System.Drawing.Size(162, 21);

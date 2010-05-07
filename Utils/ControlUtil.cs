@@ -17,6 +17,10 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public class ControlUtil
     {
+        private ControlUtil()
+        {
+        }
+
         #region Methods (4)
 
         // Public Methods (4) 

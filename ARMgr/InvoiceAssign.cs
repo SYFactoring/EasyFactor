@@ -17,6 +17,7 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -67,7 +68,7 @@ namespace CMBC.EasyFactor.ARMgr
         #region Properties (1)
 
         /// <summary>
-        /// Sets
+        /// Gets or Sets
         /// </summary>
         public Case Case
         {
@@ -76,6 +77,11 @@ namespace CMBC.EasyFactor.ARMgr
                 this._case = this.context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
                 this.NewBatch(null, null);
             }
+            get
+            {
+                return this._case;
+            }
+           
         }
 
         #endregion Properties
@@ -385,7 +391,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -424,7 +430,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -469,7 +475,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -486,7 +492,7 @@ namespace CMBC.EasyFactor.ARMgr
             batch.AssignDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
             batch.IsCreateMsg = false;
-            batch.CheckStatus = ConstStr.BATCH.UNCHECK;
+            batch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
             this.invoiceBindingSource.DataSource = batch.Invoices;
             this.dgvInvoices.ReadOnly = false;
@@ -506,7 +512,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -543,13 +549,13 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 else
                 {
-                    MessageBoxEx.Show("发票号重复: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("发票号重复: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
                 if (batch.AssignBatchNo == null && context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo) != null)
                 {
-                    MessageBoxEx.Show("发票号已存在: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("发票号已存在: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -558,7 +564,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this._case.ActiveCDA.CreditCoverOutstanding.HasValue && totalAssign > this._case.ActiveCDA.CreditCoverOutstanding.Value)
             {
-                DialogResult dr = MessageBoxEx.Show("买卖方关联额度中的买方信用风险担保额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBoxEx.Show("买卖方关联额度中的买方信用风险担保额度已占满，超额度转让部分不再进行担保，是否确认转让？", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     return;
@@ -567,7 +573,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this._case.BuyerClient.AssignCreditLineOutstanding.HasValue && totalAssign > this._case.BuyerClient.AssignCreditLineOutstanding.Value)
             {
-                DialogResult dr = MessageBoxEx.Show("客户额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBoxEx.Show("客户额度已占满，超额度转让部分不再进行担保，是否确认转让？", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     return;
@@ -585,7 +591,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (totalAssign > assignCreditLineOutstanding)
                 {
-                    DialogResult dr = MessageBoxEx.Show("集团额度已占满，超额度转让部分不再进行担保，是否确认转让？", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult dr = MessageBoxEx.Show("集团额度已占满，超额度转让部分不再进行担保，是否确认转让？", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.No)
                     {
                         return;
@@ -627,12 +633,12 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.Case = null;
                 batch.AssignBatchNo = null;
                 isSaveOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isSaveOK)
             {
-                MessageBoxEx.Show("数据保存成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据保存成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.caseBasic.CaculateOutstanding(this._case);
                 this.StatBatch();
 
@@ -653,7 +659,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("没有有效的额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -664,7 +670,6 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceAssignBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                //    InvoiceAssignBatch batch = this.context.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == selectedBatch.AssignBatchNo);
                 this.batchBindingSource.DataSource = selectedBatch;
                 this.invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
                 this.StatBatch();
@@ -704,38 +709,38 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (invoice.InvoiceNo == null)
                 {
-                    MessageBoxEx.Show("发票号必填", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("发票号必填", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
 
                 if (TypeUtil.EqualsZero(invoice.InvoiceAmount))
                 {
-                    MessageBoxEx.Show("票面金额必填", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("票面金额必填", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
 
                 if (invoice.AssignAmount > invoice.InvoiceAmount)
                 {
-                    MessageBoxEx.Show("转让金额不能大于票面金额: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("转让金额不能大于票面金额: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
 
                 if (invoice.DueDate == null)
                 {
-                    MessageBoxEx.Show("到期日必填: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("到期日必填: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
 
                 if (invoice.DueDate != null && invoice.InvoiceDate != null && invoice.DueDate < invoice.InvoiceDate)
                 {
-                    MessageBoxEx.Show("到期日不可早于发票日: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("到期日不可早于发票日: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
 
                 DateTime assignDate = this.assignDateDateTimePicker.Value.Date;
                 if (invoice.InvoiceDate != null && invoice.InvoiceDate > assignDate)
                 {
-                    DialogResult dr = MessageBoxEx.Show("发票日晚于转让日，是否确定录入: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    DialogResult dr = MessageBoxEx.Show("发票日晚于转让日，是否确定录入: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (dr == DialogResult.No)
                     {
                         return false;
@@ -746,7 +751,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (invoice.InvoiceDate != null && assignDate > invoice.InvoiceDate.Value.AddDays(this._case.NetPaymentTerm.Value))
                     {
-                        MessageBoxEx.Show("转让日不能晚于发票日+付款期限: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("转让日不能晚于发票日+付款期限: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }
@@ -755,7 +760,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (invoice.InvoiceDate > cda.CreditCoverPeriodEnd)
                     {
-                        MessageBoxEx.Show("发票日不能晚于额度通知书融资到期日: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("发票日不能晚于额度通知书融资到期日: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }
@@ -770,7 +775,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (isCommissionAlert)
                     {
-                        DialogResult dr = MessageBoxEx.Show("是否现在录入手续费: " + invoice.InvoiceNo, ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        DialogResult dr = MessageBoxEx.Show("是否现在录入手续费: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (dr == DialogResult.Yes)
                         {
                             return false;

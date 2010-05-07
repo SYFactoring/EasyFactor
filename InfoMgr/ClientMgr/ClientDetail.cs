@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// Client Detail
@@ -478,7 +479,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -493,7 +494,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (MessageBoxEx.Show("是否打算删除此额度信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("是否打算删除此额度信息", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -507,12 +508,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.clientCreditLineBindingSource.DataSource = typeof(ClientCreditLine);
                 this.SetClientCreditLineEditable(false);
                 this.bsCreditLines.DataSource = typeof(ClientCreditLine);
@@ -535,7 +536,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -550,7 +551,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (MessageBoxEx.Show("是否打算删除保理合同: " + contract.ContractCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("是否打算删除保理合同: " + contract.ContractCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -564,12 +565,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.contractBindingSource.DataSource = typeof(Contract);
                 this.SetContractEditable(false);
                 this.bsContracts.DataSource = typeof(Contract);
@@ -592,7 +593,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -607,7 +608,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (MessageBoxEx.Show("是否打算删除保证金: " + gd.GuaranteeDepositAmount, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("是否打算删除保证金: " + gd.GuaranteeDepositAmount, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -621,12 +622,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.gdBindingSource.DataSource = typeof(GuaranteeDeposit);
                 this.SetGDEditable(false);
                 this.bsGDs.DataSource = typeof(GuaranteeDeposit);
@@ -649,7 +650,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -664,7 +665,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (MessageBoxEx.Show("是否打算删除此协查意见信息", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("是否打算删除此协查意见信息", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -678,12 +679,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.reviewBindingSource.DataSource = typeof(ClientReview);
                 this.SetReviewEditable(false);
                 this.bsReviews.DataSource = typeof(ClientReview);
@@ -721,7 +722,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -736,7 +737,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (creditLine.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY)
+            if (creditLine.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY)
             {
                 this.freezeReasonTextBox.ReadOnly = false;
                 this.freezeDateDateTimePicker.Enabled = true;
@@ -760,7 +761,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -785,7 +786,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -810,7 +811,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -835,7 +836,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -870,7 +871,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -888,7 +889,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -906,7 +907,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -924,7 +925,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -963,12 +964,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e1)
                 {
                     isAddOK = false;
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.opClientType = OpClientType.UPDATE_CLIENT;
                 }
             }
@@ -999,12 +1000,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -1029,7 +1030,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1044,27 +1045,27 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DateTime today = DateTime.Now.Date;
             if (creditLine.PeriodEnd < today)
             {
-                creditLine.CreditLineStatus = ConstStr.CLIENT_CREDIT_LINE.EXPIRY;
+                creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.EXPIRY;
             }
             else
             {
-                creditLine.CreditLineStatus = ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY;
+                creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.AVAILABILITY;
             }
 
             if (this.freezeDateDateTimePicker.Enabled)
             {
-                creditLine.CreditLineStatus = ConstStr.CLIENT_CREDIT_LINE.FREEZE;
+                creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.FREEZE;
             }
 
             if (this.unfreezeDateDateTimePicker.Enabled)
             {
                 if (creditLine.PeriodEnd < today)
                 {
-                    creditLine.CreditLineStatus = ConstStr.CLIENT_CREDIT_LINE.EXPIRY;
+                    creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.EXPIRY;
                 }
                 else
                 {
-                    creditLine.CreditLineStatus = ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY;
+                    creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.AVAILABILITY;
                 }
             }
 
@@ -1081,19 +1082,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     creditLine.Client = null;
                     isAddOK = false;
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (creditLine.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY)
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (creditLine.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (ClientCreditLine ccl in client.ClientCreditLines)
                         {
-                            if (ccl != creditLine && ccl.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && ccl.CreditLineType == creditLine.CreditLineType)
+                            if (ccl != creditLine && ccl.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && ccl.CreditLineType == creditLine.CreditLineType)
                             {
-                                ccl.CreditLineStatus = ConstStr.CLIENT_CREDIT_LINE.EXPIRY;
+                                ccl.CreditLineStatus = CLIENT_CREDIT_LINE.EXPIRY;
                             }
                         }
 
@@ -1103,7 +1104,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
 
@@ -1135,19 +1136,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (creditLine.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY)
+                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (creditLine.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (ClientCreditLine ccl in client.ClientCreditLines)
                         {
-                            if (ccl != creditLine && ccl.CreditLineStatus == ConstStr.CLIENT_CREDIT_LINE.AVAILABILITY && ccl.CreditLineType == creditLine.CreditLineType && ccl.CreditLineCurrency == creditLine.CreditLineCurrency)
+                            if (ccl != creditLine && ccl.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && ccl.CreditLineType == creditLine.CreditLineType && ccl.CreditLineCurrency == creditLine.CreditLineCurrency)
                             {
-                                ccl.CreditLineStatus = ConstStr.CLIENT_CREDIT_LINE.EXPIRY;
+                                ccl.CreditLineStatus = CLIENT_CREDIT_LINE.EXPIRY;
                             }
                         }
 
@@ -1157,7 +1158,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
@@ -1184,7 +1185,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1203,7 +1204,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Contract oldContract = this.context.Contracts.SingleOrDefault(c => c.ContractCode == contract.ContractCode);
                 if (oldContract != null)
                 {
-                    MessageBoxEx.Show("该合同编号已存在，请重新编码", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("该合同编号已存在，请重新编码", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -1214,11 +1215,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     DateTime today = DateTime.Now.Date;
                     if (contract.ContractDueDate < today)
                     {
-                        contract.ContractStatus = ConstStr.CONTRACT.EXPIRY;
+                        contract.ContractStatus = CONTRACT.EXPIRY;
                     }
                     else
                     {
-                        contract.ContractStatus = ConstStr.CONTRACT.AVAILABILITY;
+                        contract.ContractStatus = CONTRACT.AVAILABILITY;
                     }
 
                     context.Contracts.InsertOnSubmit(contract);
@@ -1228,19 +1229,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     contract.Client = null;
                     isAddOK = false;
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (contract.ContractStatus == ConstStr.CONTRACT.AVAILABILITY)
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (contract.ContractStatus == CONTRACT.AVAILABILITY)
                     {
                         foreach (Contract c in client.Contracts)
                         {
-                            if (c != contract && c.ContractStatus == ConstStr.CONTRACT.AVAILABILITY)
+                            if (c != contract && c.ContractStatus == CONTRACT.AVAILABILITY)
                             {
-                                c.ContractStatus = ConstStr.CONTRACT.EXPIRY;
+                                c.ContractStatus = CONTRACT.EXPIRY;
                             }
                         }
 
@@ -1250,7 +1251,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
 
@@ -1265,11 +1266,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 DateTime today = DateTime.Now.Date;
                 if (contract.ContractDueDate < today)
                 {
-                    contract.ContractStatus = ConstStr.CONTRACT.EXPIRY;
+                    contract.ContractStatus = CONTRACT.EXPIRY;
                 }
                 else
                 {
-                    contract.ContractStatus = ConstStr.CONTRACT.AVAILABILITY;
+                    contract.ContractStatus = CONTRACT.AVAILABILITY;
                 }
 
                 try
@@ -1291,19 +1292,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show(ConstStr.MESSAGE.DATA_UPDATE_SUCCESS, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (contract.ContractStatus == ConstStr.CONTRACT.AVAILABILITY)
+                    MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (contract.ContractStatus == CONTRACT.AVAILABILITY)
                     {
                         foreach (Contract c in client.Contracts)
                         {
-                            if (c != contract && c.ContractStatus == ConstStr.CONTRACT.AVAILABILITY)
+                            if (c != contract && c.ContractStatus == CONTRACT.AVAILABILITY)
                             {
-                                c.ContractStatus = ConstStr.CONTRACT.EXPIRY;
+                                c.ContractStatus = CONTRACT.EXPIRY;
                             }
                         }
 
@@ -1313,7 +1314,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
@@ -1335,7 +1336,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1361,12 +1362,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     gd.Client = null;
                     isAddOK = false;
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.bsGDs.DataSource = typeof(GuaranteeDeposit);
                     this.bsGDs.DataSource = client.GuaranteeDeposits;
                     this.NewGD(null, null);
@@ -1394,12 +1395,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show(ConstStr.MESSAGE.DATA_UPDATE_SUCCESS, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -1424,7 +1425,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1458,12 +1459,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     review.Client = null;
                     isAddOK = false;
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.bsReviews.DataSource = typeof(ClientReview);
                     this.bsReviews.DataSource = client.ClientReviews;
                     this.NewReview(null, null);
@@ -1491,12 +1492,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show(ConstStr.MESSAGE.DATA_UPDATE_SUCCESS, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -1605,13 +1606,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 ClientCreditLine clientCreditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
                 if (clientCreditLine.CreditLineType != selected.CreditLineType)
                 {
-                    MessageBoxEx.Show("所选集团的额度类型与客户的额度类型不相同", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("所选集团的额度类型与客户的额度类型不相同", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
                 if (clientCreditLine.CreditLine > selected.CreditLine)
                 {
-                    MessageBoxEx.Show("所选集团的保理预付款融资额度必须大于客户的保理预付款融资额度", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("所选集团的保理预付款融资额度必须大于客户的保理预付款融资额度", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -1712,7 +1713,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1751,7 +1752,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1856,7 +1857,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("请首先选定一个客户", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

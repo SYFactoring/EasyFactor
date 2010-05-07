@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 
 using CMBC.EasyFactor.Utils;
+using CMBC.EasyFactor.Utils.ConstStr;
 namespace CMBC.EasyFactor.ARMgr
 {
     /// <summary>
@@ -303,9 +304,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbCheckStatus.ItemHeight = 14;
             this.cbCheckStatus.Items.AddRange(new object[] {
             "",
-            ConstStr.BATCH.UNCHECK,
-            ConstStr.BATCH.CHECK,
-            ConstStr.BATCH.REJECT});
+            BATCH.UNCHECK,
+            BATCH.CHECK,
+            BATCH.REJECT});
             this.cbCheckStatus.Location = new System.Drawing.Point(376, 26);
             this.cbCheckStatus.Name = "cbCheckStatus";
             this.cbCheckStatus.Size = new System.Drawing.Size(101, 20);

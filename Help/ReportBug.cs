@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.Help
     using System.Windows.Forms;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -84,11 +85,11 @@ namespace CMBC.EasyFactor.Help
         {
             if (e.Error != null)
             {
-                MessageBoxEx.Show("问题反馈失败，原因： " + e.Error.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("问题反馈失败，原因： " + e.Error.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBoxEx.Show("感谢您的反馈，我会立即处理您的意见，并将处理结果及时通知您。", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("感谢您的反馈，我会立即处理您的意见，并将处理结果及时通知您。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             this.btnSubmit.Enabled = true;

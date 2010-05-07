@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Linq;
     using System.Text;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -40,7 +41,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.FactorCreditLines.SingleOrDefault(f => f.CreditLineStatus == ConstStr.FACTOR_CREDIT_LINE.AVAILABILITY);
+                return this.FactorCreditLines.SingleOrDefault(f => f.CreditLineStatus == FACTOR_CREDIT_LINE.AVAILABILITY);
             }
         }
 
@@ -143,7 +144,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public double GetAssignOutstanding(string currency)
         {
             double result = 0;
-            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == ConstStr.CASE.ENABLE))
+            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
             {
                 double assignOutstanding = curCase.AssignOutstanding;
                 if (curCase.InvoiceCurrency != currency)

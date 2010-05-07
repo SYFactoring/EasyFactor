@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -114,7 +115,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.assignTypeComboBox.Items.AddRange(new string[] { "全部", "部分" });
             this.commissionTypeComboBox.Items.AddRange(new string[] { "按转让金额", "按融资金额", "其他" });
-            this.cDAStatusComboBox.Items.AddRange(new string[] { ConstStr.CDA.UNCHECK, ConstStr.CDA.CHECKED, ConstStr.CDA.REJECT, ConstStr.CDA.INVALID });
+            this.cDAStatusComboBox.Items.AddRange(new string[] { CDAStr.UNCHECK, CDAStr.CHECKED, CDAStr.REJECT, CDAStr.INVALID });
 
             if (opCDAType == OpCDAType.NEW_CDA)
             {
@@ -725,7 +726,7 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.FinanceProportion = 0.8;
             cda.IsNotice = "明保理";
             cda.IsRecoarse = false;
-            cda.CDAStatus = ConstStr.CDA.UNCHECK;
+            cda.CDAStatus = CDAStr.UNCHECK;
             cda.IsCreditCoverRevolving = true;
             cda.AssignType = "全部";
             cda.Case = curCase;
@@ -784,7 +785,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             cda.EFPrice = cda.Price - cda.IFPrice;
             cda.CreateUserName = App.Current.CurUser.Name;
-            cda.CDAStatus = ConstStr.CDA.UNCHECK;
+            cda.CDAStatus = CDAStr.UNCHECK;
 
             if (cda.CDACode == null)
             {
@@ -792,7 +793,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 string cdaCode = CDA.GenerateCDACode(cda.Case);
                 if (String.IsNullOrEmpty(cdaCode))
                 {
-                    MessageBoxEx.Show("CDA编号生成失败", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("CDA编号生成失败", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -807,12 +808,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     cda.CDACode = null;
                     isAddOK = false;
-                    MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.opCDAType = OpCDAType.UPDATE_CDA;
                 }
             }
@@ -843,19 +844,19 @@ namespace CMBC.EasyFactor.CaseMgr
                 catch (Exception e2)
                 {
                     isUpdateOK = false;
-                    MessageBoxEx.Show(e2.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("数据更新成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (cda.CDAStatus == ConstStr.CDA.CHECKED)
+                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (cda.CDAStatus == CDAStr.CHECKED)
                     {
                         foreach (CDA c in cda.Case.CDAs)
                         {
-                            if (c != cda && c.CDAStatus == ConstStr.CDA.CHECKED)
+                            if (c != cda && c.CDAStatus == CDAStr.CHECKED)
                             {
-                                c.CDAStatus = ConstStr.CDA.INVALID;
+                                c.CDAStatus = CDAStr.INVALID;
                             }
                         }
 
@@ -865,7 +866,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
@@ -913,13 +914,13 @@ namespace CMBC.EasyFactor.CaseMgr
             CDA cda = (CDA)this.CDABindingSource.DataSource;
             if (cda == null)
             {
-                MessageBoxEx.Show("请首先选择一个额度通知书", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            //if (cda.CDAStatus == ConstStr.CDA.CHECKED)
+            //if (cda.CDAStatus == CDAStr.CHECKED)
             //{
-            //    MessageBoxEx.Show("额度通知书已审核，不能修改", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    MessageBoxEx.Show("额度通知书已审核，不能修改", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             //    return;
             //}
 

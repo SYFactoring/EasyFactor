@@ -12,6 +12,7 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// Login Window
@@ -48,11 +49,11 @@ namespace CMBC.EasyFactor
                     return true;
                 }
 
-                MessageBoxEx.Show("数据库连接失败", ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("数据库连接失败", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception e)
             {
-                MessageBoxEx.Show("数据库连接失败: " + e.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("数据库连接失败: " + e.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 

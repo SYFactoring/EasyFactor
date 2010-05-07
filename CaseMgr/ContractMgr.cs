@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -67,7 +68,7 @@ namespace CMBC.EasyFactor.CaseMgr
             if (opType == OpContractType.DUE)
             {
                 context = new DBDataContext();
-                var queryResult = context.Contracts.Where(c => c.ContractStatus == ConstStr.CONTRACT.AVAILABILITY && c.ContractDueDate < DateTime.Now.Date);
+                var queryResult = context.Contracts.Where(c => c.ContractStatus == CONTRACT.AVAILABILITY && c.ContractDueDate < DateTime.Now.Date);
 
                 this.bs.DataSource = queryResult;
                 this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -162,7 +163,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             Contract selectedContract = (Contract)this.bs.List[this.dgvContracts.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("是否打算删除保理合同: " + selectedContract.ContractCode, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("是否打算删除保理合同: " + selectedContract.ContractCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -176,12 +177,12 @@ namespace CMBC.EasyFactor.CaseMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBoxEx.Show(e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("数据删除成功", ConstStr.MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dgvContracts.Rows.RemoveAt(dgvContracts.SelectedRows[0].Index);
             }
         }

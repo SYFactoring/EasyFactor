@@ -14,6 +14,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using CMBC.EasyFactor.Utils;
     using DevComponents.DotNetBar;
     using System.Collections.Generic;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -138,7 +139,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             ClientReview review = (ClientReview)this.bs.List[this.dgvClientReviews.CurrentCell.RowIndex];
-            if (MessageBoxEx.Show("是否打算删除协查意见: " + review.ReviewNo, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("是否打算删除协查意见: " + review.ReviewNo, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 context.ClientReviews.DeleteOnSubmit(review);
                 try
@@ -147,7 +148,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
                 catch (Exception e1)
                 {
-                    MessageBoxEx.Show("删除失败," + e1.Message, ConstStr.MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
