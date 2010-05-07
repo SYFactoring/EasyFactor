@@ -10,8 +10,8 @@ namespace CMBC.EasyFactor.Help
     using System.Reflection;
     using System.Windows.Forms;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
@@ -39,6 +39,8 @@ namespace CMBC.EasyFactor.Help
         /// <param name="e"></param>
         private void SubmitBug(object sender, EventArgs e)
         {
+            this.btnSubmit.Enabled = false;
+
             string title = this.tbTitle.Text;
             string who = this.tbSubmitPerson.Text;
             string type = this.cbBugType.Text;
@@ -47,7 +49,6 @@ namespace CMBC.EasyFactor.Help
             string bug = this.tbBug.Text + "\n----------------------------------------------\n" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             mail = new SendMail("liuyiming.vip@gmail.com;xiaolan.pub@gmail.com", App.Current.CurUser.Email, mailTitle, bug, path);
-            this.btnSubmit.Enabled = false;
             this.backgroundWorker.RunWorkerAsync();
         }
 

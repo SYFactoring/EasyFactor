@@ -84,6 +84,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemClientCreditLineNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemContractNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemClientDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemClientsExport = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblLocation = new DevComponents.DotNetBar.LabelX();
@@ -110,8 +112,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PMNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemClientsExport = new System.Windows.Forms.ToolStripMenuItem();
             lblClientType = new DevComponents.DotNetBar.LabelX();
             lblClientNo = new DevComponents.DotNetBar.LabelX();
             lblClientName = new DevComponents.DotNetBar.LabelX();
@@ -201,7 +201,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             lblCaseType.BackgroundStyle.Class = "";
-            lblCaseType.Location = new System.Drawing.Point(509, 10);
+            lblCaseType.Location = new System.Drawing.Point(509, 9);
             lblCaseType.Name = "lblCaseType";
             lblCaseType.Size = new System.Drawing.Size(56, 16);
             lblCaseType.TabIndex = 16;
@@ -270,6 +270,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemClientDelete.Text = "删除客户";
             this.menuItemClientDelete.Click += new System.EventHandler(this.DeleteClient);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // menuItemClientsExport
+            // 
+            this.menuItemClientsExport.Name = "menuItemClientsExport";
+            this.menuItemClientsExport.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientsExport.Text = "导出所有客户";
+            this.menuItemClientsExport.Click += new System.EventHandler(this.ExportClients);
+            // 
             // pnlQuery
             // 
             this.pnlQuery.CanvasColor = System.Drawing.SystemColors.Control;
@@ -307,42 +319,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // cbLocation
             // 
-            this.cbLocation.DisplayMember = "Text";
             this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 14;
-            this.cbLocation.Items.AddRange(new object[] {
-            "全部",
-            "北京",
-            "广州",
-            "上海",
-            "深圳",
-            "武汉",
-            "太原",
-            "石家庄",
-            "大连",
-            "杭州",
-            "南京",
-            "重庆",
-            "西安",
-            "福州",
-            "济南",
-            "宁波",
-            "成都",
-            "天津",
-            "苏州",
-            "青岛",
-            "厦门",
-            "郑州",
-            "昆明",
-            "温州",
-            "泉州",
-            "长沙",
-            "长春",
-            "汕头",
-            "南昌",
-            "香港"});
             this.cbLocation.Location = new System.Drawing.Point(59, 34);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(101, 20);
@@ -365,7 +345,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.cbCaseType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbCaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCaseType.FocusHighlightEnabled = true;
             this.cbCaseType.ItemHeight = 14;
             this.cbCaseType.Items.AddRange(new object[] {
             "全部",
@@ -433,7 +412,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.cbClientType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbClientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbClientType.FocusHighlightEnabled = true;
             this.cbClientType.ItemHeight = 14;
             this.cbClientType.Items.AddRange(new object[] {
             "全部",
@@ -452,7 +430,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbClientEDICode.Border.Class = "TextBoxBorder";
-            this.tbClientEDICode.FocusHighlightEnabled = true;
             this.tbClientEDICode.Location = new System.Drawing.Point(60, 7);
             this.tbClientEDICode.Name = "tbClientEDICode";
             this.tbClientEDICode.Size = new System.Drawing.Size(100, 20);
@@ -464,7 +441,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.FocusHighlightEnabled = true;
             this.tbClientName.Location = new System.Drawing.Point(227, 7);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(100, 20);
@@ -476,7 +452,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbRM.Border.Class = "TextBoxBorder";
-            this.tbRM.FocusHighlightEnabled = true;
             this.tbRM.Location = new System.Drawing.Point(397, 33);
             this.tbRM.Name = "tbRM";
             this.tbRM.Size = new System.Drawing.Size(100, 20);
@@ -488,7 +463,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbPM.Border.Class = "TextBoxBorder";
-            this.tbPM.FocusHighlightEnabled = true;
             this.tbPM.Location = new System.Drawing.Point(227, 33);
             this.tbPM.Name = "tbPM";
             this.tbPM.Size = new System.Drawing.Size(100, 20);
@@ -639,18 +613,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.PMNameColumn.HeaderText = "产品经理";
             this.PMNameColumn.Name = "PMNameColumn";
             this.PMNameColumn.ReadOnly = true;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemClientsExport
-            // 
-            this.menuItemClientsExport.Name = "menuItemClientsExport";
-            this.menuItemClientsExport.Size = new System.Drawing.Size(152, 22);
-            this.menuItemClientsExport.Text = "导出所有客户";
-            this.menuItemClientsExport.Click += new System.EventHandler(this.ExportClients);
             // 
             // ClientMgr
             // 

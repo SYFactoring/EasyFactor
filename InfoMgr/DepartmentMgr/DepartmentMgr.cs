@@ -269,12 +269,17 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
             DateTime beginDate = String.IsNullOrEmpty(this.diBegin.Text) ? this.diBegin.MinDate : this.diBegin.Value;
             DateTime endDate = String.IsNullOrEmpty(this.diEnd.Text) ? this.diEnd.MinDate : this.diEnd.Value;
+            string pmanager = this.tbPManager.Text;
+            string manager = this.tbManager.Text;
 
             if (opDepatmentType == OpDepartmentType.QUERY || opDepatmentType == OpDepartmentType.DEPARTMENT_STAT)
             {
                 var queryResult = context.Departments.Where(d =>
                                  (d.DepartmentCode == null ? string.Empty : d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
-                              && (d.DepartmentName == null ? string.Empty : d.DepartmentName).Contains(this.tbDepartmentName.Text));
+                              && (d.DepartmentName == null ? string.Empty : d.DepartmentName).Contains(this.tbDepartmentName.Text)
+                              && (d.Location.PManager.Contains(pmanager)||d.Location.Assistant.Contains(pmanager))
+                              && (d.Manager.Contains(manager) || d.Contact_1.Contains(manager) || d.Contact_2.Contains(manager))
+                              );
 
                 if (opDepatmentType == OpDepartmentType.DEPARTMENT_STAT)
                 {

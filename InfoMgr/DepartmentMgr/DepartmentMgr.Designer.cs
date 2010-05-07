@@ -89,12 +89,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.tbDepartmentCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentCode = new DevComponents.DotNetBar.LabelX();
             this.dgvDepts = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemDepartmentNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDepartmentDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.colCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -109,6 +103,16 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colNetInterestIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMarginIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemDepartmentNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDepartmentDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbPManager = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblPManager = new DevComponents.DotNetBar.LabelX();
+            this.tbManager = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblManager = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -120,6 +124,10 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.tbManager);
+            this.panelQuery.Controls.Add(this.lblManager);
+            this.panelQuery.Controls.Add(this.tbPManager);
+            this.panelQuery.Controls.Add(this.lblPManager);
             this.panelQuery.Controls.Add(this.lblDate);
             this.panelQuery.Controls.Add(this.diEnd);
             this.panelQuery.Controls.Add(this.diBegin);
@@ -133,7 +141,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(605, 54);
+            this.panelQuery.Size = new System.Drawing.Size(772, 54);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -256,7 +264,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.btnReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnReset.Location = new System.Drawing.Point(379, 3);
+            this.btnReset.Location = new System.Drawing.Point(554, 3);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(42, 23);
             this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -271,17 +279,18 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(427, 7);
+            this.lblCount.Location = new System.Drawing.Point(505, 32);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.Size = new System.Drawing.Size(71, 16);
             this.lblCount.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblCount.TabIndex = 6;
+            this.lblCount.Text = "获得 条记录";
             // 
             // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(330, 3);
+            this.btnQuery.Location = new System.Drawing.Point(505, 3);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(43, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -384,54 +393,10 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.dgvDepts.Name = "dgvDepts";
             this.dgvDepts.ReadOnly = true;
             this.dgvDepts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDepts.Size = new System.Drawing.Size(605, 406);
+            this.dgvDepts.Size = new System.Drawing.Size(772, 406);
             this.dgvDepts.TabIndex = 0;
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvDepts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvDepts_RowPostPaint);
-            // 
-            // cmuDeptMgr
-            // 
-            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDetail,
-            this.menuItemSelect,
-            this.toolStripSeparator1,
-            this.menuItemDepartmentNew,
-            this.menuItemDepartmentDelete});
-            this.cmuDeptMgr.Name = "cmuDeptMgr";
-            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 98);
-            // 
-            // menuItemDetail
-            // 
-            this.menuItemDetail.Name = "menuItemDetail";
-            this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDetail.Text = "详细信息";
-            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
-            // 
-            // menuItemSelect
-            // 
-            this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
-            this.menuItemSelect.Text = "选定分部";
-            this.menuItemSelect.Click += new System.EventHandler(this.Select);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
-            // 
-            // menuItemDepartmentNew
-            // 
-            this.menuItemDepartmentNew.Name = "menuItemDepartmentNew";
-            this.menuItemDepartmentNew.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDepartmentNew.Text = "新建分部";
-            this.menuItemDepartmentNew.Click += new System.EventHandler(this.NewDepartment);
-            // 
-            // menuItemDepartmentDelete
-            // 
-            this.menuItemDepartmentDelete.Name = "menuItemDepartmentDelete";
-            this.menuItemDepartmentDelete.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDepartmentDelete.Text = "删除分部";
-            this.menuItemDepartmentDelete.Click += new System.EventHandler(this.DeleteDepartment);
             // 
             // colCity
             // 
@@ -556,6 +521,100 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colTotalIncome.ReadOnly = true;
             this.colTotalIncome.Visible = false;
             // 
+            // cmuDeptMgr
+            // 
+            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemDetail,
+            this.menuItemSelect,
+            this.toolStripSeparator1,
+            this.menuItemDepartmentNew,
+            this.menuItemDepartmentDelete});
+            this.cmuDeptMgr.Name = "cmuDeptMgr";
+            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 98);
+            // 
+            // menuItemDetail
+            // 
+            this.menuItemDetail.Name = "menuItemDetail";
+            this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDetail.Text = "详细信息";
+            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
+            // 
+            // menuItemSelect
+            // 
+            this.menuItemSelect.Name = "menuItemSelect";
+            this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
+            this.menuItemSelect.Text = "选定分部";
+            this.menuItemSelect.Click += new System.EventHandler(this.Select);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
+            // 
+            // menuItemDepartmentNew
+            // 
+            this.menuItemDepartmentNew.Name = "menuItemDepartmentNew";
+            this.menuItemDepartmentNew.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDepartmentNew.Text = "新建分部";
+            this.menuItemDepartmentNew.Click += new System.EventHandler(this.NewDepartment);
+            // 
+            // menuItemDepartmentDelete
+            // 
+            this.menuItemDepartmentDelete.Name = "menuItemDepartmentDelete";
+            this.menuItemDepartmentDelete.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDepartmentDelete.Text = "删除分部";
+            this.menuItemDepartmentDelete.Click += new System.EventHandler(this.DeleteDepartment);
+            // 
+            // tbPManager
+            // 
+            // 
+            // 
+            // 
+            this.tbPManager.Border.Class = "TextBoxBorder";
+            this.tbPManager.Location = new System.Drawing.Point(399, 5);
+            this.tbPManager.Name = "tbPManager";
+            this.tbPManager.Size = new System.Drawing.Size(100, 20);
+            this.tbPManager.TabIndex = 21;
+            // 
+            // lblPManager
+            // 
+            this.lblPManager.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblPManager.BackgroundStyle.Class = "";
+            this.lblPManager.Location = new System.Drawing.Point(330, 7);
+            this.lblPManager.Name = "lblPManager";
+            this.lblPManager.Size = new System.Drawing.Size(68, 16);
+            this.lblPManager.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.lblPManager.TabIndex = 20;
+            this.lblPManager.Text = "总部负责人";
+            // 
+            // tbManager
+            // 
+            // 
+            // 
+            // 
+            this.tbManager.Border.Class = "TextBoxBorder";
+            this.tbManager.Location = new System.Drawing.Point(399, 27);
+            this.tbManager.Name = "tbManager";
+            this.tbManager.Size = new System.Drawing.Size(100, 20);
+            this.tbManager.TabIndex = 23;
+            // 
+            // lblManager
+            // 
+            this.lblManager.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblManager.BackgroundStyle.Class = "";
+            this.lblManager.Location = new System.Drawing.Point(330, 29);
+            this.lblManager.Name = "lblManager";
+            this.lblManager.Size = new System.Drawing.Size(68, 16);
+            this.lblManager.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.lblManager.TabIndex = 22;
+            this.lblManager.Text = "分部负责人";
+            // 
             // DepartmentMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -564,7 +623,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "DepartmentMgr";
-            this.Size = new System.Drawing.Size(605, 460);
+            this.Size = new System.Drawing.Size(772, 460);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();
@@ -591,6 +650,10 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbManager;
+        private DevComponents.DotNetBar.LabelX lblManager;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPManager;
+        private DevComponents.DotNetBar.LabelX lblPManager;
 
 
 

@@ -7,15 +7,14 @@
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data.SqlClient;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Client Management User Interface
@@ -111,6 +110,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.DataSource = this.bs;
             ControlUtil.SetDoubleBuffered(this.dgvClients);
             ControlUtil.AddEnterListenersForQuery(this.pnlQuery.Controls, btnQuery);
+
+            List<Location> allLocations = DB.dbml.Location.AllLocations;
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
+            this.cbLocation.DataSource = allLocations;
+            this.cbLocation.DisplayMember = "LocationName";
+            this.cbLocation.ValueMember = "LocationCode";
+            this.cbLocation.SelectedIndex = 0;
 
             this.UpdateContextMenu();
         }
@@ -352,18 +358,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 clientType = string.Empty;
             }
 
-            string location = this.cbLocation.Text;
-            if (location == "全部")
-            {
-                location = string.Empty;
-            }
+            string location = (string)this.cbLocation.SelectedValue;
 
             string caseType = this.cbCaseType.Text;
 
             context = new DBDataContext();
 
             var queryResult = context.Clients.Where(c =>
-                     ((c.BranchCode == null ? string.Empty : c.Department.Location.LocationName).Contains(location))
+                     (location == "00" ? true : c.Department.Location.LocationCode == location)
                   && ((c.PMName == null ? string.Empty : c.PMName).Contains(tbPM.Text))
                   && ((c.RMName == null ? string.Empty : c.RMName).Contains(tbRM.Text))
                   && (((c.ClientNameCN == null ? string.Empty : c.ClientNameCN).Contains(tbClientName.Text)) || ((c.ClientNameEN == null ? string.Empty : c.ClientNameEN).Contains(tbClientName.Text)))

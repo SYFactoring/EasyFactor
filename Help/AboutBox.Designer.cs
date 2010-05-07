@@ -126,7 +126,7 @@ namespace CMBC.EasyFactor.Help
             // 
             this.labelVersion.BackgroundStyle.Class = "";
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelVersion.Location = new System.Drawing.Point(143, 26);
+            this.labelVersion.Location = new System.Drawing.Point(143, 23);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelVersion.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelVersion.Name = "labelVersion";
@@ -141,7 +141,7 @@ namespace CMBC.EasyFactor.Help
             // 
             this.labelCopyright.BackgroundStyle.Class = "";
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(143, 52);
+            this.labelCopyright.Location = new System.Drawing.Point(143, 46);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelCopyright.Name = "labelCopyright";
@@ -156,7 +156,7 @@ namespace CMBC.EasyFactor.Help
             // 
             this.labelCompanyName.BackgroundStyle.Class = "";
             this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCompanyName.Location = new System.Drawing.Point(143, 78);
+            this.labelCompanyName.Location = new System.Drawing.Point(143, 69);
             this.labelCompanyName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelCompanyName.Name = "labelCompanyName";
@@ -167,13 +167,13 @@ namespace CMBC.EasyFactor.Help
             // textBoxDescription
             // 
             this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDescription.Location = new System.Drawing.Point(143, 104);
+            this.textBoxDescription.Location = new System.Drawing.Point(143, 95);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ReadOnly = true;
             this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDescription.Size = new System.Drawing.Size(271, 129);
+            this.textBoxDescription.Size = new System.Drawing.Size(271, 115);
             this.textBoxDescription.TabIndex = 23;
             this.textBoxDescription.TabStop = false;
             this.textBoxDescription.Text = "说明";
@@ -182,9 +182,9 @@ namespace CMBC.EasyFactor.Help
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(339, 239);
+            this.okButton.Location = new System.Drawing.Point(339, 240);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.Size = new System.Drawing.Size(75, 22);
             this.okButton.TabIndex = 24;
             this.okButton.Text = "确定(&O)";
             this.okButton.Click += new System.EventHandler(this.Close);
