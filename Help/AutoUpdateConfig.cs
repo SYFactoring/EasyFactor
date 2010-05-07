@@ -70,7 +70,7 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// LoadConfig: Invoke this method when you are ready to populate this object
         /// </summary>
-        public bool LoadConfig(Uri url, string user, string pass, string proxyURL, bool proxyEnabled)
+        public bool LoadConfig(Uri url, string user, string pass, Uri proxyURL, bool proxyEnabled)
         {
             try
             {

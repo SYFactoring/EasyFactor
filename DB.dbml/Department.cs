@@ -356,6 +356,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static List<Department> AllDepartments(DBDataContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             List<Department> _allDepartment = new List<Department>();
             _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "贸易金融事业部"));
             _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "分行营业部"));
@@ -379,18 +384,21 @@ namespace CMBC.EasyFactor.DB.dbml
         /// 
         /// </summary>
         /// <returns></returns>
-        public static List<String> AllDomains()
+        public static List<String> AllDomains
         {
-            List<String> allDomains = new List<string>();
-            allDomains.Add("贸易金融事业部");
-            allDomains.Add("分行营业部");
-            allDomains.Add("地产金融事业部");
-            allDomains.Add("交通金融事业部");
-            allDomains.Add("金融市场事业部");
-            allDomains.Add("能源金融事业部");
-            allDomains.Add("冶金金融事业部");
-            allDomains.Add("中小企业金融事业部");
-            return allDomains;
+            get
+            {
+                List<String> allDomains = new List<string>();
+                allDomains.Add("贸易金融事业部");
+                allDomains.Add("分行营业部");
+                allDomains.Add("地产金融事业部");
+                allDomains.Add("交通金融事业部");
+                allDomains.Add("金融市场事业部");
+                allDomains.Add("能源金融事业部");
+                allDomains.Add("冶金金融事业部");
+                allDomains.Add("中小企业金融事业部");
+                return allDomains;
+            }
         }
 
         /// <summary>

@@ -20,6 +20,11 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="title"></param>
         public QueryForm(UserControl userControl, string title)
         {
+            if (userControl == null)
+            {
+                return;
+            }
+
             this.InitializeComponent();
             this.ImeMode = ImeMode.OnHalf;
             this.Text = title;

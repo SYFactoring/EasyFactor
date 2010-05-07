@@ -67,7 +67,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ControlUtil.SetDoubleBuffered(this.dgvClientReviews);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
-            List<string> domainList = Department.AllDomains();
+            List<string> domainList = Department.AllDomains;
             domainList.Insert(0, "全部");
             this.cbDomains.DataSource = domainList;
         }

@@ -90,6 +90,11 @@
         /// <param name="selectedClient"></param>
         public void CaculateOutstanding(Client selectedClient)
         {
+            if (selectedClient == null)
+            {
+                throw new ArgumentNullException("Selected Client");
+            }
+
             this.tbTotalAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolTotalAssignOutstading);
             this.tbValuedAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolValuedAssignOutstanding);
             this.tbCashOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolCashOutstanding);

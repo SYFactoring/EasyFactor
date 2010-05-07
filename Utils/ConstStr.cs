@@ -6,15 +6,11 @@
 
 namespace CMBC.EasyFactor.Utils.ConstStr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// 
     /// </summary>
-    public class MESSAGE
+    public sealed class MESSAGE
     {
         private MESSAGE()
         {
@@ -40,7 +36,7 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// <summary>
     /// 
     /// </summary>
-    public class CLIENT_CREDIT_LINE
+    public sealed class CLIENT_CREDIT_LINE
     {
         private CLIENT_CREDIT_LINE()
         {
@@ -65,7 +61,7 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// <summary>
     /// 
     /// </summary>
-    public class CONTRACT
+    public sealed class CONTRACT
     {
         private CONTRACT()
         {
@@ -85,7 +81,7 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// <summary>
     /// 
     /// </summary>
-    public class FACTOR_CREDIT_LINE
+    public sealed class FACTOR_CREDIT_LINE
     {
         private FACTOR_CREDIT_LINE()
         {
@@ -110,7 +106,7 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// <summary>
     /// 
     /// </summary>
-    public class CASEStr
+    public sealed class CASEStr
     {
         private CASEStr()
         {
@@ -135,7 +131,7 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// <summary>
     /// 
     /// </summary>
-    public class CDAStr
+    public sealed class CDAStr
     {
         private CDAStr()
         {
@@ -165,7 +161,7 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// <summary>
     /// 
     /// </summary>
-    public class BATCH
+    public sealed class BATCH
     {
         private BATCH()
         {

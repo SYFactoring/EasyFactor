@@ -111,6 +111,11 @@ namespace CMBC.EasyFactor
         /// <param name="uc">user control</param>
         public void SetDetailPanel(UserControl uc)
         {
+            if (uc == null)
+            {
+                throw new ArgumentNullException("Set Detail Panel");
+            }
+
             if (uc is CaseMgr.CaseMgr)
             {
                 this.CommandStatus = "手续费收入的币别与发票币别相同；利息收入的币别为人民币";

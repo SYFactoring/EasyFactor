@@ -11,11 +11,12 @@ namespace CMBC.EasyFactor.Utils
     using System.Windows.Forms;
     using DevComponents.DotNetBar.Controls;
     using DevComponents.Editors.DateTimeAdv;
+    using System.Globalization;
 
     /// <summary>
     /// 
     /// </summary>
-    public class ControlUtil
+    public sealed class ControlUtil
     {
         private ControlUtil()
         {
@@ -142,7 +143,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="control"></param>
         public static void SetDoubleBuffered(Control control)
         {
-            typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, control, new object[] { true });
+            typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, control, new object[] { true }, CultureInfo.CurrentCulture);
         }
 
         #endregion Methods

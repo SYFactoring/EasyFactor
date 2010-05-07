@@ -1806,11 +1806,13 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "卖方名称";
                 datasheet.Cells[1, column++] = "买方名称";
                 datasheet.Cells[1, column++] = "发票号";
+                datasheet.Cells[1, column++] = "发票币别";
                 datasheet.Cells[1, column++] = "转让金额";
                 datasheet.Cells[1, column++] = "转让余额";
                 datasheet.Cells[1, column++] = "发票日";
                 datasheet.Cells[1, column++] = "到期日";
                 datasheet.Cells[1, column++] = "转让日";
+                datasheet.Cells[1, column++] = "融资币别";
                 datasheet.Cells[1, column++] = "融资金额";
                 datasheet.Cells[1, column++] = "融资余额";
                 datasheet.Cells[1, column++] = "融资日";
@@ -1819,7 +1821,8 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "融资逾期天数";
 
                 int size = exportData.Count;
-                for (int row = 0; row < size; row++)
+                int row = 0;
+                foreach (Invoice invoice in exportData)
                 {
                     if (worker.CancellationPending)
                     {
@@ -1847,11 +1850,11 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)exportData[row];
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.OwnerDepartment.Location.LocationName;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceCurrency;
                     datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
                     datasheet.Cells[row + 2, column++] = invoice.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceDate;
@@ -1861,27 +1864,38 @@ namespace CMBC.EasyFactor.Utils
                     {
                         ((Range)datasheet.Cells[row + 2, column - 2]).Interior.ColorIndex = 6;
                     }
-                    datasheet.Cells[row + 2, column++] = invoice.FinanceAmount;
-                    datasheet.Cells[row + 2, column++] = invoice.FinanceOutstanding;
-                    datasheet.Cells[row + 2, column++] = invoice.FinanceDate;
-                    datasheet.Cells[row + 2, column++] = invoice.FinanceDueDate;
-                    if (invoice.FinanceOverDueDays >= 0)
+                    for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
                     {
-                        ((Range)datasheet.Cells[row + 2, column - 1]).Interior.ColorIndex = 3;
+                        column = 11;
+                        InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
+                        datasheet.Cells[row + 2 + i, column++] = financeLog.InvoiceFinanceBatch.BatchCurrency;
+                        datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceAmount;
+                        datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceOutstanding;
+                        datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceDate;
+                        datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceDueDate;
+                        if (financeLog.FinanceOverDueDays >= 0)
+                        {
+                            ((Range)datasheet.Cells[row + 2 + i, column - 1]).Interior.ColorIndex = 3;
+                        }
+
+                        datasheet.Cells[row + 2, column++] = invoice.AssignOverDueDays;
+                        datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceOverDueDays;
                     }
-                    datasheet.Cells[row + 2, column++] = invoice.AssignOverDueDays;
-                    datasheet.Cells[row + 2, column++] = invoice.FinanceOverDueDays;
+
+                    int step = invoice.InvoiceFinanceLogs.Count > 1 ? invoice.InvoiceFinanceLogs.Count : 1;
+                    row += step;
+                    size += (step - 1);
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 5 || range.Column == 6 || range.Column == 10 || range.Column == 11)
+                    if (range.Column == 6 || range.Column == 7 || range.Column == 12 || range.Column == 13)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
-                    else if (range.Column == 7 || range.Column == 8 || range.Column == 9 || range.Column == 12 || range.Column == 13)
+                    else if (range.Column == 8 || range.Column == 9 || range.Column == 10 || range.Column == 14 || range.Column == 15)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }

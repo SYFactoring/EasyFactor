@@ -355,6 +355,25 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// Gets
+        /// </summary>
+        public System.Nullable<int> FinanceOverDueDays
+        {
+            get
+            {
+                if (TypeUtil.GreaterZero(this.FinanceOutstanding))
+                {
+                    TimeSpan duedays = DateTime.Now.Date - this.FinanceDueDate.Value;
+                    return duedays.Days;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public double? RefundAmount

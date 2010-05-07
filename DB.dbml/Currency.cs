@@ -21,7 +21,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        private static readonly List<Currency> _currencyList;
+        private static readonly List<Currency> _currencyList = InitializeCurrency();
 
         #endregion Fields
 
@@ -30,15 +30,16 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Initializes static members of the Currency class
         /// </summary>
-        static Currency()
+        static List<Currency> InitializeCurrency()
         {
             DBDataContext context = new DBDataContext();
             context.ObjectTrackingEnabled = false;
-            _currencyList = context.Currencies.ToList();
+            List<Currency> _currencyList = context.Currencies.ToList();
             Currency CNY = _currencyList.SingleOrDefault(c => c.CurrencyCode == "CNY");
             Currency USD = _currencyList.SingleOrDefault(c => c.CurrencyCode == "USD");
             _currencyList.Insert(0, CNY);
             _currencyList.Insert(1, USD);
+            return _currencyList;
         }
 
         #endregion Constructors

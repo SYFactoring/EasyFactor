@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.Utils
     /// <summary>
     /// 
     /// </summary>
-    public class TypeUtil
+    public sealed class TypeUtil
     {
         private TypeUtil()
         {
@@ -148,6 +148,11 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         public static void FormatFloatToPercent(object sender, ConvertEventArgs e)
         {
+            if (e == null)
+            {
+                throw new ArgumentNullException("Format Float To Percent");
+            }
+
             if (e.DesiredType == typeof(string) && e.Value != null && !String.IsNullOrEmpty(e.Value.ToString()))
             {
                 double result;
@@ -223,6 +228,11 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         public static void ParsePercentToFloat(object sender, ConvertEventArgs e)
         {
+            if (e == null)
+            {
+                throw new ArgumentNullException("Parse Percent To Float");
+            }
+
             if ((e.DesiredType == typeof(double) || e.DesiredType == typeof(System.Nullable<double>)) && e.Value != null && !String.IsNullOrEmpty(e.Value.ToString()))
             {
                 double result;

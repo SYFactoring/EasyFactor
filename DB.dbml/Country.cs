@@ -21,7 +21,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        private static readonly List<Country> _countryList;
+        private static readonly List<Country> _countryList = InitializeCountry();
 
         #endregion Fields
 
@@ -30,10 +30,10 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Initializes static members of the Country class
         /// </summary>
-        static Country()
+        static List<Country> InitializeCountry()
         {
             DBDataContext context = new DBDataContext();
-            _countryList = context.Countries.ToList();
+            return context.Countries.ToList();
         }
 
         #endregion Constructors

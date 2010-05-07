@@ -73,7 +73,7 @@ namespace CMBC.EasyFactor.Utils
     /// <summary>
     /// 
     /// </summary>
-    public class PermUtil
+    public sealed class PermUtil
     {
         private PermUtil()
         {

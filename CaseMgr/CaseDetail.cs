@@ -201,6 +201,11 @@ namespace CMBC.EasyFactor.CaseMgr
             : this(neg.Case, OpCaseType.DETAIL_CASE, opCreditCoverNegType)
         {
             this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
+            if (neg == null)
+            {
+                return;
+            }
+
             if (opCreditCoverNegType == OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG || opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
             {
                 neg = this.context.CreditCoverNegotiations.SingleOrDefault(n => n.NegoID == neg.NegoID);

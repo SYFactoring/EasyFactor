@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Text;
-using System.Windows.Forms;
 using System.Collections;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Windows.Forms;
 
 namespace CMBC.EasyFactor.Utils
 {
-    class SystemUtil
+    public sealed class SystemUtil
     {
         public static string GetAllDirFilesRecurse(FileSystemInfo mainDir, string[] extensions, int level)
         {
@@ -32,7 +33,7 @@ namespace CMBC.EasyFactor.Utils
                                 sb.AppendLine(result);
                             }
                         }
-                        else if (item is FileInfo && ((FileInfo)item).Length > 1024000 && extensions.Contains(item.Extension.ToLower()))
+                        else if (item is FileInfo && ((FileInfo)item).Length > 1024000 && extensions.Contains(item.Extension.ToLower(CultureInfo.CurrentCulture)))
                         {
                             sb.AppendLine("FILE: " + item.FullName);
                         }
@@ -44,7 +45,7 @@ namespace CMBC.EasyFactor.Utils
                     return sb.ToString();
                 }
             }
-            else if (mainDir is FileInfo && ((FileInfo)mainDir).Length > 102400 && extensions.Contains(mainDir.Extension.ToLower()))
+            else if (mainDir is FileInfo && ((FileInfo)mainDir).Length > 102400 && extensions.Contains(mainDir.Extension.ToLower(CultureInfo.CurrentCulture)))
             {
                 sb.AppendLine("FILE: " + mainDir.FullName);
             }

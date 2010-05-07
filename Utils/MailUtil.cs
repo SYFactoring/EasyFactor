@@ -54,13 +54,13 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>  
         /// 添加附件  
         /// </summary>  
-        private void AddAttachment(string path)
+        private void AddAttachment(string attachmentPath)
         {
-            Attachment data = new Attachment(path, MediaTypeNames.Application.Octet);//实例化附件  
+            Attachment data = new Attachment(attachmentPath, MediaTypeNames.Application.Octet);//实例化附件  
             ContentDisposition disposition = data.ContentDisposition;
-            disposition.CreationDate = File.GetCreationTime(path);//获取附件的创建日期  
-            disposition.ModificationDate = File.GetLastWriteTime(path);//获取附件的修改日期  
-            disposition.ReadDate = File.GetLastAccessTime(path);//获取附件的读取日期  
+            disposition.CreationDate = File.GetCreationTime(attachmentPath);//获取附件的创建日期  
+            disposition.ModificationDate = File.GetLastWriteTime(attachmentPath);//获取附件的修改日期  
+            disposition.ReadDate = File.GetLastAccessTime(attachmentPath);//获取附件的读取日期  
             mailMessage.Attachments.Add(data);//添加到附件中  
         }
 

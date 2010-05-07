@@ -21,7 +21,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        private static List<Exchange> _exchangeList;
+        private static List<Exchange> _exchangeList = InitializeExchange();
 
         #endregion Fields
 
@@ -30,10 +30,10 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Initializes static members of the Exchange class
         /// </summary>
-        static Exchange()
+        static List<Exchange> InitializeExchange()
         {
             DBDataContext context = new DBDataContext();
-            _exchangeList = context.Exchanges.ToList();
+            return context.Exchanges.ToList();
         }
 
         #endregion Constructors
