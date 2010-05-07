@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Exchange.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -16,31 +16,18 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Exchange
     {
-        #region Fields (1)
+		#region?Fields?(1)?
 
         /// <summary>
         /// 
         /// </summary>
         private static List<Exchange> _exchangeList = InitializeExchange();
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Constructors (1)
+		#region?Methods?(2)?
 
-        /// <summary>
-        /// Initializes static members of the Exchange class
-        /// </summary>
-        static List<Exchange> InitializeExchange()
-        {
-            DBDataContext context = new DBDataContext();
-            return context.Exchanges.ToList();
-        }
-
-        #endregion Constructors
-
-        #region Methods (1)
-
-        // Public Methods (1) 
+		//?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -60,7 +47,17 @@ namespace CMBC.EasyFactor.DB.dbml
                 return 1;
             }
         }
+		//?Private?Methods?(1)?
 
-        #endregion Methods
+        /// <summary>
+        /// Initializes static members of the Exchange class
+        /// </summary>
+        static List<Exchange> InitializeExchange()
+        {
+            DBDataContext context = new DBDataContext();
+            return context.Exchanges.ToList();
+        }
+
+		#endregion?Methods?
     }
 }

@@ -1,29 +1,33 @@
-Ôªø
+
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceFlaw : DevComponents.DotNetBar.Office2007Form
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bs;
+        #region?Fields?(2)?
 
         /// <summary>
         /// 
         /// </summary>
+        private BindingSource bs;
+        /// <summary>
+        /// 
+        /// </summary>
         private DBDataContext context;
+
+        #endregion?Fields?
+
+        #region?Constructors?(2)?
 
         public InvoiceFlaw(List<Invoice> invoiceList, bool isFlaw)
             : this(invoiceList)
@@ -57,6 +61,12 @@ namespace CMBC.EasyFactor.ARMgr
             bs.DataSource = list;
         }
 
+        #endregion?Constructors?
+
+        #region?Methods?(3)?
+
+        //?Private?Methods?(3)?
+
         /// <summary>
         /// 
         /// </summary>
@@ -65,6 +75,23 @@ namespace CMBC.EasyFactor.ARMgr
         private void CloseFlaw(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResolveFlaw(object sender, EventArgs e)
+        {
+            this.flawResolveDateDateTimePicker.Value = DateTime.Now.Date;
+            this.flawResolveUserNameTextBox.Text = App.Current.CurUser.Name;
+            this.tbFlawResolveReason.Enabled = true;
+            this.flawResolveDateDateTimePicker.Enabled = true;
+            this.flawResolveUserNameTextBox.Enabled = true;
+            this.isFlawCheckBox.Checked = false;
+
+            this.tbFlawResolveReason.Text = "»´≤ø“—Ω‚≥˝";
         }
 
         /// <summary>
@@ -82,7 +109,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this.isFlawCheckBox.Checked && String.IsNullOrEmpty(flawReason))
             {
-                MessageBoxEx.Show("ËØ∑ÈÄâÊã©ÁëïÁñµÂéüÂõ†", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("«Î—°‘ÒË¶¥√‘≠“Ú", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -112,26 +139,10 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (isUpdateOK)
             {
-                MessageBoxEx.Show("Êï∞ÊçÆÊõ¥Êñ∞ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show(" ˝æ›∏¸–¬≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ResolveFlaw(object sender, EventArgs e)
-        {
-            this.flawResolveDateDateTimePicker.Value = DateTime.Now.Date;
-            this.flawResolveUserNameTextBox.Text = App.Current.CurUser.Name;
-            this.tbFlawResolveReason.Enabled = true;
-            this.flawResolveDateDateTimePicker.Enabled = true;
-            this.flawResolveUserNameTextBox.Enabled = true;
-            this.isFlawCheckBox.Checked = false;
-
-            this.tbFlawResolveReason.Text = "ÂÖ®ÈÉ®Â∑≤Ëß£Èô§";
-        }
-
+        #endregion?Methods?
     }
 }

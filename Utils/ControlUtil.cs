@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ControlUtil.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -18,13 +18,17 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public sealed class ControlUtil
     {
+		#region?Constructors?(1)?
+
         private ControlUtil()
         {
         }
 
-        #region Methods (4)
+		#endregion?Constructors?
 
-        // Public Methods (4) 
+		#region?Methods?(4)?
+
+		//?Public?Methods?(4)?
 
         /// <summary>
         /// 
@@ -146,7 +150,6 @@ namespace CMBC.EasyFactor.Utils
             typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, control, new object[] { true }, CultureInfo.CurrentCulture);
         }
 
-        #endregion Methods
-
+		#endregion?Methods?
     }
 }

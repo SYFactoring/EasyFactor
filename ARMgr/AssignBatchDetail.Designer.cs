@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="AssignBatchDetail.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -13,7 +13,8 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class AssignBatchDetail
     {
-        #region¬†Fields¬†(22)
+		#region?Fields?(23)?
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -29,6 +30,7 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diInputDate;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.Controls.CheckBoxX isCreateMsgCheckBox;
@@ -40,11 +42,11 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.TabItem tabItemBatch;
         private DevComponents.DotNetBar.TabItem tabItemInvoices;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -65,7 +67,9 @@ namespace CMBC.EasyFactor.ARMgr
             base.Dispose(disposing);
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
+
+
 
         #region Windows Form Designer generated code
 
@@ -141,7 +145,7 @@ namespace CMBC.EasyFactor.ARMgr
             caseCodeLabel.Name = "caseCodeLabel";
             caseCodeLabel.Size = new System.Drawing.Size(59, 16);
             caseCodeLabel.TabIndex = 0;
-            caseCodeLabel.Text = "Ê°à‰ª∂ÁºñÂè∑:";
+            caseCodeLabel.Text = "∞∏º˛±‡∫≈:";
             // 
             // assignBatchNoLabel
             // 
@@ -155,7 +159,7 @@ namespace CMBC.EasyFactor.ARMgr
             assignBatchNoLabel.Name = "assignBatchNoLabel";
             assignBatchNoLabel.Size = new System.Drawing.Size(59, 16);
             assignBatchNoLabel.TabIndex = 2;
-            assignBatchNoLabel.Text = "ËΩ¨ËÆ©ÊâπÂè∑:";
+            assignBatchNoLabel.Text = "◊™»√≈˙∫≈:";
             // 
             // assignDateLabel
             // 
@@ -169,7 +173,7 @@ namespace CMBC.EasyFactor.ARMgr
             assignDateLabel.Name = "assignDateLabel";
             assignDateLabel.Size = new System.Drawing.Size(47, 16);
             assignDateLabel.TabIndex = 4;
-            assignDateLabel.Text = "ËΩ¨ËÆ©Êó•:";
+            assignDateLabel.Text = "◊™»√»’:";
             // 
             // createUserNameLabel
             // 
@@ -183,7 +187,7 @@ namespace CMBC.EasyFactor.ARMgr
             createUserNameLabel.Name = "createUserNameLabel";
             createUserNameLabel.Size = new System.Drawing.Size(47, 16);
             createUserNameLabel.TabIndex = 8;
-            createUserNameLabel.Text = "ÁªèÂäû‰∫∫:";
+            createUserNameLabel.Text = "æ≠∞Ï»À:";
             // 
             // checkStatusLabel
             // 
@@ -197,7 +201,7 @@ namespace CMBC.EasyFactor.ARMgr
             checkStatusLabel.Name = "checkStatusLabel";
             checkStatusLabel.Size = new System.Drawing.Size(59, 16);
             checkStatusLabel.TabIndex = 10;
-            checkStatusLabel.Text = "Â§çÊ†∏Áä∂ÊÄÅ:";
+            checkStatusLabel.Text = "∏¥∫À◊¥Ã¨:";
             // 
             // rejectReasonLabel
             // 
@@ -211,7 +215,7 @@ namespace CMBC.EasyFactor.ARMgr
             rejectReasonLabel.Name = "rejectReasonLabel";
             rejectReasonLabel.Size = new System.Drawing.Size(59, 16);
             rejectReasonLabel.TabIndex = 12;
-            rejectReasonLabel.Text = "ÈÄÄÂõûÂéüÂõ†:";
+            rejectReasonLabel.Text = "ÕÀªÿ‘≠“Ú:";
             // 
             // checkDateLabel
             // 
@@ -225,7 +229,7 @@ namespace CMBC.EasyFactor.ARMgr
             checkDateLabel.Name = "checkDateLabel";
             checkDateLabel.Size = new System.Drawing.Size(47, 16);
             checkDateLabel.TabIndex = 14;
-            checkDateLabel.Text = "Â§çÊ†∏Êó•:";
+            checkDateLabel.Text = "∏¥∫À»’:";
             // 
             // checkUserNameLabel
             // 
@@ -239,7 +243,7 @@ namespace CMBC.EasyFactor.ARMgr
             checkUserNameLabel.Name = "checkUserNameLabel";
             checkUserNameLabel.Size = new System.Drawing.Size(47, 16);
             checkUserNameLabel.TabIndex = 16;
-            checkUserNameLabel.Text = "Â§çÊ†∏‰∫∫:";
+            checkUserNameLabel.Text = "∏¥∫À»À:";
             // 
             // commentLabel
             // 
@@ -253,7 +257,7 @@ namespace CMBC.EasyFactor.ARMgr
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
             commentLabel.TabIndex = 18;
-            commentLabel.Text = "Â§áÊ≥®:";
+            commentLabel.Text = "±∏◊¢:";
             // 
             // tabControl
             // 
@@ -341,7 +345,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSave.TabIndex = 21;
-            this.btnSave.Text = "‰øùÂ≠ò";
+            this.btnSave.Text = "±£¥Ê";
             this.btnSave.Click += new System.EventHandler(this.SaveBatch);
             // 
             // btnUpdate
@@ -353,7 +357,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUpdate.TabIndex = 20;
-            this.btnUpdate.Text = "ÁºñËæë";
+            this.btnUpdate.Text = "±‡º≠";
             this.btnUpdate.Click += new System.EventHandler(this.UpdateBatch);
             // 
             // commentTextBox
@@ -458,7 +462,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.isCreateMsgCheckBox.Name = "isCreateMsgCheckBox";
             this.isCreateMsgCheckBox.Size = new System.Drawing.Size(101, 16);
             this.isCreateMsgCheckBox.TabIndex = 7;
-            this.isCreateMsgCheckBox.Text = "ÊòØÂê¶ÁîüÊàêÊä•Êñá";
+            this.isCreateMsgCheckBox.Text = " «∑Ò…˙≥…±®Œƒ";
             // 
             // assignDateDateTimePicker
             // 
@@ -525,7 +529,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tabItemBatch.AttachedControl = this.panelBatch;
             this.tabItemBatch.Name = "tabItemBatch";
-            this.tabItemBatch.Text = "ÊâπÊ¨°";
+            this.tabItemBatch.Text = "≈˙¥Œ";
             // 
             // panelInvoices
             // 
@@ -548,7 +552,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tabItemInvoices.AttachedControl = this.panelInvoices;
             this.tabItemInvoices.Name = "tabItemInvoices";
-            this.tabItemInvoices.Text = "ÂèëÁ•®";
+            this.tabItemInvoices.Text = "∑¢∆±";
             // 
             // superValidator
             // 
@@ -577,7 +581,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblInputDate.Name = "lblInputDate";
             lblInputDate.Size = new System.Drawing.Size(47, 16);
             lblInputDate.TabIndex = 23;
-            lblInputDate.Text = "ÂΩïÂÖ•Êó•:";
+            lblInputDate.Text = "¬º»Î»’:";
             // 
             // diInputDate
             // 
@@ -624,7 +628,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.DoubleBuffered = true;
             this.Name = "AssignBatchDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ËΩ¨ËÆ©ÊâπÊ¨°‰ø°ÊÅØ";
+            this.Text = "◊™»√≈˙¥Œ–≈œ¢";
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.panelBatch.ResumeLayout(false);
@@ -638,7 +642,5 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
         #endregion
-
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diInputDate;
     }
 }

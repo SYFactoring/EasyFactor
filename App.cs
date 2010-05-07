@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="App.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -15,16 +15,16 @@ namespace CMBC.EasyFactor
     /// </summary>
     public class App
     {
-        #region Fields (1)
+        #region?Fields?(1)?
 
         /// <summary>
         /// private static class variable
         /// </summary>
         private static App current;
 
-        #endregion Fields
+        #endregion?Fields?
 
-        #region Constructors (1)
+        #region?Constructors?(1)?
 
         /// <summary>
         /// Prevents a default instance of the App class from being created
@@ -33,9 +33,9 @@ namespace CMBC.EasyFactor
         {
         }
 
-        #endregion Constructors
+        #endregion?Constructors?
 
-        #region Properties (4)
+        #region?Properties?(3)?
 
         /// <summary>
         /// Gets current class variable
@@ -59,6 +59,6 @@ namespace CMBC.EasyFactor
             set;
         }
 
-        #endregion Properties
+        #endregion?Properties?
     }
 }

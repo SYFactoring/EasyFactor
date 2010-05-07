@@ -1,9 +1,10 @@
-Ôªønamespace CMBC.EasyFactor.ARMgr
+namespace CMBC.EasyFactor.ARMgr
 {
     partial class InvoicePayment
     {
-        #region¬†Fields¬†(73)
+		#region?Fields?(46)?
 
+        private System.Windows.Forms.BindingSource batchBindingSource;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
@@ -13,27 +14,51 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchExport;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchImport;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchNew;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchSave;
+        private DevComponents.DotNetBar.ButtonX btnPaymentBatchSelect;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbPaymentType;
+        private System.Windows.Forms.ContextMenuStrip cmuInvoicePayment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoicePaymentAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.BindingSource batchBindingSource;
-        private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
-        private System.Windows.Forms.BindingSource logsBindingSource;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvLogs;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private System.Windows.Forms.BindingNavigator invoiceBindingNavigator;
         private DevComponents.DotNetBar.Controls.CheckBoxX isCreateMsgCheckBox;
         private DevComponents.DotNetBar.LabelX lblTotalPayment;
+        private DevComponents.DotNetBar.LabelX lblTotalRefund;
+        private System.Windows.Forms.BindingSource logsBindingSource;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
         private DevComponents.DotNetBar.PanelEx panelPaymentBatch;
         private DevComponents.DotNetBar.Controls.TextBoxX paymentBatchNoTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput paymentDateDateTimePicker;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private DevComponents.DotNetBar.Controls.TextBoxX tbTotalPayment;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalRefund;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -54,7 +79,7 @@
             base.Dispose(disposing);
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
 
 
 
@@ -149,7 +174,7 @@
             paymentBatchNoLabel.Name = "paymentBatchNoLabel";
             paymentBatchNoLabel.Size = new System.Drawing.Size(56, 16);
             paymentBatchNoLabel.TabIndex = 0;
-            paymentBatchNoLabel.Text = "‰ªòÊ¨æÊâπÂè∑";
+            paymentBatchNoLabel.Text = "∏∂øÓ≈˙∫≈";
             // 
             // paymentDateLabel
             // 
@@ -162,7 +187,7 @@
             paymentDateLabel.Name = "paymentDateLabel";
             paymentDateLabel.Size = new System.Drawing.Size(47, 16);
             paymentDateLabel.TabIndex = 2;
-            paymentDateLabel.Text = "‰ªòÊ¨æÊó•:";
+            paymentDateLabel.Text = "∏∂øÓ»’:";
             // 
             // commentLabel
             // 
@@ -175,7 +200,7 @@
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(31, 16);
             commentLabel.TabIndex = 9;
-            commentLabel.Text = "Â§áÊ≥®";
+            commentLabel.Text = "±∏◊¢";
             // 
             // lblPaymentType
             // 
@@ -188,7 +213,7 @@
             lblPaymentType.Name = "lblPaymentType";
             lblPaymentType.Size = new System.Drawing.Size(56, 16);
             lblPaymentType.TabIndex = 4;
-            lblPaymentType.Text = "‰ªòÊ¨æÁ±ªÂûã";
+            lblPaymentType.Text = "∏∂øÓ¿‡–Õ";
             // 
             // panelPaymentBatch
             // 
@@ -234,7 +259,7 @@
             this.btnPaymentBatchImport.Size = new System.Drawing.Size(61, 23);
             this.btnPaymentBatchImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPaymentBatchImport.TabIndex = 17;
-            this.btnPaymentBatchImport.Text = "ÂØºÂÖ•ÊâπÊ¨°";
+            this.btnPaymentBatchImport.Text = "µº»Î≈˙¥Œ";
             this.btnPaymentBatchImport.Click += new System.EventHandler(this.ImportBatch);
             // 
             // btnPaymentBatchExport
@@ -246,7 +271,7 @@
             this.btnPaymentBatchExport.Size = new System.Drawing.Size(61, 23);
             this.btnPaymentBatchExport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPaymentBatchExport.TabIndex = 16;
-            this.btnPaymentBatchExport.Text = "ÂØºÂá∫ÊâπÊ¨°";
+            this.btnPaymentBatchExport.Text = "µº≥ˆ≈˙¥Œ";
             this.btnPaymentBatchExport.Click += new System.EventHandler(this.ExportBatch);
             // 
             // btnPaymentBatchSelect
@@ -258,7 +283,7 @@
             this.btnPaymentBatchSelect.Size = new System.Drawing.Size(61, 23);
             this.btnPaymentBatchSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPaymentBatchSelect.TabIndex = 15;
-            this.btnPaymentBatchSelect.Text = "ÈÄâÊã©ÊâπÊ¨°";
+            this.btnPaymentBatchSelect.Text = "—°‘Ò≈˙¥Œ";
             this.btnPaymentBatchSelect.Click += new System.EventHandler(this.SelectBatch);
             // 
             // lblTotalRefund
@@ -272,7 +297,7 @@
             this.lblTotalRefund.Name = "lblTotalRefund";
             this.lblTotalRefund.Size = new System.Drawing.Size(118, 16);
             this.lblTotalRefund.TabIndex = 13;
-            this.lblTotalRefund.Text = "Êú¨Ê¨°ÂÜ≤ÈîÄËûçËµÑÊ¨æÊÄªÈ¢ù";
+            this.lblTotalRefund.Text = "±æ¥Œ≥Âœ˙»⁄◊ øÓ◊‹∂Ó";
             // 
             // tbTotalRefund
             // 
@@ -295,7 +320,7 @@
             this.btnPaymentBatchNew.Size = new System.Drawing.Size(61, 23);
             this.btnPaymentBatchNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPaymentBatchNew.TabIndex = 12;
-            this.btnPaymentBatchNew.Text = "Êñ∞Âª∫ÊâπÊ¨°";
+            this.btnPaymentBatchNew.Text = "–¬Ω®≈˙¥Œ";
             this.btnPaymentBatchNew.Click += new System.EventHandler(this.NewBatch);
             // 
             // cbPaymentType
@@ -305,11 +330,11 @@
             this.cbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPaymentType.FormattingEnabled = true;
             this.cbPaymentType.Items.AddRange(new object[] {
-            "‰π∞ÊñπÁõ¥Êé•‰ªòÊ¨æ",
-            "‰π∞ÊñπÈó¥Êé•‰ªòÊ¨æ",
-            "ÊãÖ‰øù‰ªòÊ¨æ",
-            "ÂèçËΩ¨ËÆ©",
-            "Ë¥∑È°πÈÄöÁü•"});
+            "¬Ú∑Ω÷±Ω”∏∂øÓ",
+            "¬Ú∑Ωº‰Ω”∏∂øÓ",
+            "µ£±£∏∂øÓ",
+            "∑¥◊™»√",
+            "¥˚œÓÕ®÷™"});
             this.cbPaymentType.Location = new System.Drawing.Point(90, 29);
             this.cbPaymentType.Name = "cbPaymentType";
             this.cbPaymentType.Size = new System.Drawing.Size(100, 21);
@@ -328,7 +353,7 @@
             this.btnPaymentBatchSave.Size = new System.Drawing.Size(61, 23);
             this.btnPaymentBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPaymentBatchSave.TabIndex = 11;
-            this.btnPaymentBatchSave.Text = "‰øùÂ≠òÊâπÊ¨°";
+            this.btnPaymentBatchSave.Text = "±£¥Ê≈˙¥Œ";
             this.btnPaymentBatchSave.Click += new System.EventHandler(this.SaveBatch);
             // 
             // lblTotalPayment
@@ -342,7 +367,7 @@
             this.lblTotalPayment.Name = "lblTotalPayment";
             this.lblTotalPayment.Size = new System.Drawing.Size(131, 16);
             this.lblTotalPayment.TabIndex = 7;
-            this.lblTotalPayment.Text = "Êú¨Ê¨°ÂÜ≤ÈîÄÂ∫îÊî∂Ë¥¶Ê¨æÊÄªÈ¢ù";
+            this.lblTotalPayment.Text = "±æ¥Œ≥Âœ˙”¶ ’’ÀøÓ◊‹∂Ó";
             // 
             // tbTotalPayment
             // 
@@ -382,7 +407,7 @@
             this.isCreateMsgCheckBox.Name = "isCreateMsgCheckBox";
             this.isCreateMsgCheckBox.Size = new System.Drawing.Size(120, 16);
             this.isCreateMsgCheckBox.TabIndex = 6;
-            this.isCreateMsgCheckBox.Text = "ÊòØÂê¶ÁîüÊàêEDIÊä•Êñá";
+            this.isCreateMsgCheckBox.Text = " «∑Ò…˙≥…EDI±®Œƒ";
             // 
             // paymentDateDateTimePicker
             // 
@@ -592,21 +617,21 @@
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
             this.menuItemInvoiceDetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemInvoiceDetail.Text = "ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemInvoiceDetail.Text = "œÍœ∏–≈œ¢";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // menuItemCDADetail
             // 
             this.menuItemCDADetail.Name = "menuItemCDADetail";
             this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDADetail.Text = "È¢ùÂ∫¶ÈÄöÁü•‰π¶ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemCDADetail.Text = "∂Ó∂»Õ®÷™ ÈœÍœ∏–≈œ¢";
             this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
             this.menuItemCaseDetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCaseDetail.Text = "Ê°àÂ≠êËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemCaseDetail.Text = "∞∏◊”œÍœ∏–≈œ¢";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // superValidator
@@ -634,7 +659,7 @@
             // colInvoiceNo
             // 
             this.colInvoiceNo.DataPropertyName = "InvoiceNo2";
-            this.colInvoiceNo.HeaderText = "ÂèëÁ•®Âè∑";
+            this.colInvoiceNo.HeaderText = "∑¢∆±∫≈";
             this.colInvoiceNo.Name = "colInvoiceNo";
             // 
             // colAssignAmount
@@ -642,7 +667,7 @@
             this.colAssignAmount.DataPropertyName = "AssignAmount";
             dataGridViewCellStyle2.Format = "N2";
             this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignAmount.HeaderText = "ËΩ¨ËÆ©ÈáëÈ¢ù";
+            this.colAssignAmount.HeaderText = "◊™»√Ω∂Ó";
             this.colAssignAmount.Name = "colAssignAmount";
             // 
             // colAssignOutstanding
@@ -650,19 +675,19 @@
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
             dataGridViewCellStyle3.Format = "N2";
             this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colAssignOutstanding.HeaderText = "ËΩ¨ËÆ©‰ΩôÈ¢ù";
+            this.colAssignOutstanding.HeaderText = "◊™»√”‡∂Ó";
             this.colAssignOutstanding.Name = "colAssignOutstanding";
             // 
             // colAssignDate
             // 
             this.colAssignDate.DataPropertyName = "AssignDate";
-            this.colAssignDate.HeaderText = "ËΩ¨ËÆ©Êó•";
+            this.colAssignDate.HeaderText = "◊™»√»’";
             this.colAssignDate.Name = "colAssignDate";
             // 
             // colDueDate
             // 
             this.colDueDate.DataPropertyName = "DueDate";
-            this.colDueDate.HeaderText = "ÂèëÁ•®Âà∞ÊúüÊó•";
+            this.colDueDate.HeaderText = "∑¢∆±µΩ∆⁄»’";
             this.colDueDate.Name = "colDueDate";
             // 
             // colInvoicePaymentAmount
@@ -671,7 +696,7 @@
             dataGridViewCellStyle4.Format = "N2";
             dataGridViewCellStyle4.NullValue = null;
             this.colInvoicePaymentAmount.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colInvoicePaymentAmount.HeaderText = "Â∑≤‰ªòÊ¨æÈáëÈ¢ù";
+            this.colInvoicePaymentAmount.HeaderText = "“—∏∂øÓΩ∂Ó";
             this.colInvoicePaymentAmount.Name = "colInvoicePaymentAmount";
             // 
             // colPaymentAmount
@@ -680,19 +705,19 @@
             dataGridViewCellStyle5.Format = "N2";
             dataGridViewCellStyle5.NullValue = null;
             this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colPaymentAmount.HeaderText = "Êú¨Ê¨°‰ªòÊ¨æÈáëÈ¢ù";
+            this.colPaymentAmount.HeaderText = "±æ¥Œ∏∂øÓΩ∂Ó";
             this.colPaymentAmount.Name = "colPaymentAmount";
             // 
             // colCreditNoteNo2
             // 
             this.colCreditNoteNo2.DataPropertyName = "CreditNoteNo2";
-            this.colCreditNoteNo2.HeaderText = "Ë¥∑È°πÈÄöÁü•Âè∑";
+            this.colCreditNoteNo2.HeaderText = "¥˚œÓÕ®÷™∫≈";
             this.colCreditNoteNo2.Name = "colCreditNoteNo2";
             // 
             // colCreditNoteDate2
             // 
             this.colCreditNoteDate2.DataPropertyName = "CreditNoteDate2";
-            this.colCreditNoteDate2.HeaderText = "Ë¥∑È°πÈÄöÁü•Êó•";
+            this.colCreditNoteDate2.HeaderText = "¥˚œÓÕ®÷™»’";
             this.colCreditNoteDate2.Name = "colCreditNoteDate2";
             // 
             // InvoicePayment
@@ -723,31 +748,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchSave;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private System.Windows.Forms.ContextMenuStrip cmuInvoicePayment;
-        private System.Windows.Forms.ToolStripMenuItem menuItemInvoiceDetail;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbPaymentType;
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchNew;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDADetail;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
-        private DevComponents.DotNetBar.LabelX lblTotalRefund;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalRefund;
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchImport;
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchExport;
-        private DevComponents.DotNetBar.ButtonX btnPaymentBatchSelect;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoicePaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate2;
     }
 }

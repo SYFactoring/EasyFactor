@@ -1,88 +1,28 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ClientReview.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Data.Linq;
-using System.Text.RegularExpressions;
-using System;
-using System.Collections.Generic;
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Linq;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class ClientReview
     {
+		#region?Fields?(1)?
+
         private static Regex ReviewNoRegex = new Regex(@"^[A-Z]{2}\d{8}-\d{4}[A-Z]{2,3}(-[A-Z]{2})?$");
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string RecoarseNon
-        {
-            get
-            {
-                List<string> result = new List<string>(2);
-                if (this.IsRecoarse)
-                {
-                    result.Add("ÊúâËøΩ");
-                }
+		#endregion?Fields?
 
-                if (this.IsNonRecoarse)
-                {
-                    result.Add("Êó†ËøΩ");
-                }
-
-                return String.Join(";", result.ToArray());
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string SellerBuyer
-        {
-            get
-            {
-                List<string> result = new List<string>(2);
-                if (this.IsSeller)
-                {
-                    result.Add("ÂçñÊñπ");
-                }
-
-                if (this.IsBuyer)
-                {
-                    result.Add("‰π∞Êñπ");
-                }
-
-                return String.Join(";", result.ToArray());
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string LocalInternational
-        {
-            get
-            {
-                List<string> result = new List<string>(2);
-                if (this.IsLocal)
-                {
-                    result.Add("ÂõΩÂÜÖ");
-                }
-
-                if (this.IsInternational)
-                {
-                    result.Add("ÂõΩÈôÖ");
-                }
-
-                return String.Join(";", result.ToArray());
-            }
-        }
+		#region?Properties?(4)?
 
         /// <summary>
         /// 
@@ -105,6 +45,78 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public string LocalInternational
+        {
+            get
+            {
+                List<string> result = new List<string>(2);
+                if (this.IsLocal)
+                {
+                    result.Add("π˙ƒ⁄");
+                }
+
+                if (this.IsInternational)
+                {
+                    result.Add("π˙º ");
+                }
+
+                return String.Join(";", result.ToArray());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string RecoarseNon
+        {
+            get
+            {
+                List<string> result = new List<string>(2);
+                if (this.IsRecoarse)
+                {
+                    result.Add("”–◊∑");
+                }
+
+                if (this.IsNonRecoarse)
+                {
+                    result.Add("Œﬁ◊∑");
+                }
+
+                return String.Join(";", result.ToArray());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SellerBuyer
+        {
+            get
+            {
+                List<string> result = new List<string>(2);
+                if (this.IsSeller)
+                {
+                    result.Add("¬Ù∑Ω");
+                }
+
+                if (this.IsBuyer)
+                {
+                    result.Add("¬Ú∑Ω");
+                }
+
+                return String.Join(";", result.ToArray());
+            }
+        }
+
+		#endregion?Properties?
+
+		#region?Methods?(1)?
+
+		//?Private?Methods?(1)?
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="action"></param>
         partial void OnValidate(System.Data.Linq.ChangeAction action)
         {
@@ -112,10 +124,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!ReviewNoRegex.IsMatch(this.ReviewNo))
                 {
-                    throw new ArgumentException("‰∏çÁ¨¶ÂêàÂçèÊü•ÊÑèËßÅÁºñÁ†ÅËßÑÂàô: " + this.ReviewNo);
+                    throw new ArgumentException("≤ª∑˚∫œ–≠≤È“‚º˚±‡¬ÎπÊ‘Ú: " + this.ReviewNo);
                 }
             }
         }
 
+		#endregion?Methods?
     }
 }

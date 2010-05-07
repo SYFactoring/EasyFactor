@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ClientDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -13,15 +13,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// Client Detail
     /// </summary>
     public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #regionÂ FieldsÂ (10)
+		#region?Fields?(10)?
 
         /// <summary>
         /// 
@@ -64,9 +64,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpReviewType opReviewType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (5)
+		#region?Enums?(5)?
 
         /// <summary>
         /// 
@@ -88,7 +88,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpContractType
@@ -108,7 +108,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CONTRACT
         }
-        /// <summary>
+/// <summary>
         /// Operation Type 
         /// </summary>
         public enum OpClientType
@@ -128,7 +128,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
-        /// <summary>
+/// <summary>
         /// Review Type
         /// </summary>
         public enum OpReviewType
@@ -148,7 +148,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_REVIEW
         }
-        /// <summary>
+/// <summary>
         /// Guarantee Deposite Type
         /// </summary>
         public enum OpGDType
@@ -167,11 +167,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DETAIL_GD
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (7)
+		#region?Constructors?(7)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
@@ -375,11 +375,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ MethodsÂ (45)
+		#region?Methods?(45)?
 
-        //Â PrivateÂ MethodsÂ (45)Â 
+		//?Private?Methods?(45)?
 
         /// <summary>
         /// 
@@ -479,7 +479,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -494,7 +494,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤æ­¤é¢åº¦ä¿¡æ¯", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı´Ë¶î¶ÈĞÅÏ¢", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -513,7 +513,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.clientCreditLineBindingSource.DataSource = typeof(ClientCreditLine);
                 this.SetClientCreditLineEditable(false);
                 this.bsCreditLines.DataSource = typeof(ClientCreditLine);
@@ -536,7 +536,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -551,7 +551,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤ä¿ç†åˆåŒ: " + contract.ContractCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı±£ÀíºÏÍ¬: " + contract.ContractCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -570,7 +570,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.contractBindingSource.DataSource = typeof(Contract);
                 this.SetContractEditable(false);
                 this.bsContracts.DataSource = typeof(Contract);
@@ -593,7 +593,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -608,7 +608,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤ä¿è¯é‡‘: " + gd.GuaranteeDepositAmount, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı±£Ö¤½ğ: " + gd.GuaranteeDepositAmount, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -627,7 +627,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.gdBindingSource.DataSource = typeof(GuaranteeDeposit);
                 this.SetGDEditable(false);
                 this.bsGDs.DataSource = typeof(GuaranteeDeposit);
@@ -650,7 +650,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -665,7 +665,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤æ­¤åæŸ¥æ„è§ä¿¡æ¯", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı´ËĞ­²éÒâ¼ûĞÅÏ¢", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -684,7 +684,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.reviewBindingSource.DataSource = typeof(ClientReview);
                 this.SetReviewEditable(false);
                 this.bsReviews.DataSource = typeof(ClientReview);
@@ -722,7 +722,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -761,7 +761,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -786,7 +786,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -811,7 +811,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -836,7 +836,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -871,7 +871,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -889,7 +889,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -907,7 +907,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -925,7 +925,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -969,7 +969,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.opClientType = OpClientType.UPDATE_CLIENT;
                 }
             }
@@ -1005,7 +1005,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İ¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -1030,7 +1030,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1087,7 +1087,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (creditLine.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (ClientCreditLine ccl in client.ClientCreditLines)
@@ -1141,7 +1141,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İ¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (creditLine.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (ClientCreditLine ccl in client.ClientCreditLines)
@@ -1185,7 +1185,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1204,7 +1204,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 Contract oldContract = this.context.Contracts.SingleOrDefault(c => c.ContractCode == contract.ContractCode);
                 if (oldContract != null)
                 {
-                    MessageBoxEx.Show("è¯¥åˆåŒç¼–å·å·²å­˜åœ¨ï¼Œè¯·é‡æ–°ç¼–ç ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("¸ÃºÏÍ¬±àºÅÒÑ´æÔÚ£¬ÇëÖØĞÂ±àÂë", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -1234,7 +1234,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (contract.ContractStatus == CONTRACT.AVAILABILITY)
                     {
                         foreach (Contract c in client.Contracts)
@@ -1336,7 +1336,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1367,7 +1367,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.bsGDs.DataSource = typeof(GuaranteeDeposit);
                     this.bsGDs.DataSource = client.GuaranteeDeposits;
                     this.NewGD(null, null);
@@ -1425,7 +1425,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1464,7 +1464,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.bsReviews.DataSource = typeof(ClientReview);
                     this.bsReviews.DataSource = client.ClientReviews;
                     this.NewReview(null, null);
@@ -1569,7 +1569,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             Client client = (Client)this.clientBindingSource.DataSource;
             ClientMgr clientMgr = new ClientMgr();
-            QueryForm queryUI = new QueryForm(clientMgr, "é€‰æ‹©é›†å›¢");
+            QueryForm queryUI = new QueryForm(clientMgr, "Ñ¡Ôñ¼¯ÍÅ");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
@@ -1597,7 +1597,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             ClientCreditLineMgr mgr = new ClientCreditLineMgr(client.ClientGroup);
-            QueryForm queryFrom = new QueryForm(mgr, "é€‰æ‹©é›†å›¢é¢åº¦");
+            QueryForm queryFrom = new QueryForm(mgr, "Ñ¡Ôñ¼¯ÍÅ¶î¶È");
             mgr.OwnerForm = queryFrom;
             queryFrom.ShowDialog(this);
             ClientCreditLine selected = mgr.Selected;
@@ -1606,13 +1606,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 ClientCreditLine clientCreditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
                 if (clientCreditLine.CreditLineType != selected.CreditLineType)
                 {
-                    MessageBoxEx.Show("æ‰€é€‰é›†å›¢çš„é¢åº¦ç±»å‹ä¸å®¢æˆ·çš„é¢åº¦ç±»å‹ä¸ç›¸åŒ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("ËùÑ¡¼¯ÍÅµÄ¶î¶ÈÀàĞÍÓë¿Í»§µÄ¶î¶ÈÀàĞÍ²»ÏàÍ¬", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
                 if (clientCreditLine.CreditLine > selected.CreditLine)
                 {
-                    MessageBoxEx.Show("æ‰€é€‰é›†å›¢çš„ä¿ç†é¢„ä»˜æ¬¾èèµ„é¢åº¦å¿…é¡»å¤§äºå®¢æˆ·çš„ä¿ç†é¢„ä»˜æ¬¾èèµ„é¢åº¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("ËùÑ¡¼¯ÍÅµÄ±£ÀíÔ¤¸¶¿îÈÚ×Ê¶î¶È±ØĞë´óÓÚ¿Í»§µÄ±£ÀíÔ¤¸¶¿îÈÚ×Ê¶î¶È", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -1713,7 +1713,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1728,7 +1728,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (creditLine.CreditLineStatus == "å·²å†»ç»“")
+            if (creditLine.CreditLineStatus == "ÒÑ¶³½á")
             {
                 this.unfreezeReasonTextBox.ReadOnly = false;
                 this.unfreezeDateDateTimePicker.Enabled = true;
@@ -1752,7 +1752,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1857,7 +1857,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             Client client = (Client)this.clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -2064,6 +2064,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ControlUtil.SetComponetEditable(this.tbReviewCreateUserName, false);
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

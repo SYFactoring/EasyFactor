@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ClientCreditLineMgr.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -12,7 +12,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
     using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
@@ -20,21 +19,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientCreditLineMgr : UserControl
     {
-        #regionÂ FieldsÂ (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
-
         /// <summary>
         /// 
         /// </summary>
         private OpClientCreditMgrType opType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -57,11 +55,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DUE,
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (2)
+		#region?Constructors?(2)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the ClientCreditLineMgr class.
         /// </summary>
         /// <param name="groupClient"></param>
@@ -89,14 +87,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (opType == OpClientCreditMgrType.QUERY_GROUP)
             {
-                this.lblClientName.Text = "é›†å›¢åç§°";
-                this.colClientNameCN.HeaderText = "é›†å›¢å®¢æˆ·åç§°ï¼ˆä¸­ï¼‰";
-                this.colClientNameEN.HeaderText = "é›†å›¢å®¢æˆ·åç§°ï¼ˆè‹±ï¼‰";
-                this.cbClientGroupType.Text = "é›†å›¢";
+                this.lblClientName.Text = "¼¯ÍÅÃû³Æ";
+                this.colClientNameCN.HeaderText = "¼¯ÍÅ¿Í»§Ãû³Æ£¨ÖĞ£©";
+                this.colClientNameEN.HeaderText = "¼¯ÍÅ¿Í»§Ãû³Æ£¨Ó¢£©";
+                this.cbClientGroupType.Text = "¼¯ÍÅ";
             }
             else if (opType == OpClientCreditMgrType.QUERY_CLINET)
             {
-                this.cbClientGroupType.Text = "å®¢æˆ·";
+                this.cbClientGroupType.Text = "¿Í»§";
             }
             else if (opType == OpClientCreditMgrType.DUE)
             {
@@ -107,14 +105,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 var queryResult = context.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.PeriodEnd < overDueDate);
 
                 this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+                this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
             }
 
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ PropertiesÂ (2)
+		#region?Properties?(2)?
 
         /// <summary>
         /// Gets or sets owner form
@@ -134,11 +132,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             set;
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (6)
+		#region?Methods?(6)?
 
-        //Â PrivateÂ MethodsÂ (6)Â 
+		//?Private?Methods?(6)?
 
         /// <summary>
         /// 
@@ -213,7 +211,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             string clientName = this.tbClientName.Text;
             string clientGroupType = this.cbClientGroupType.Text;
             bool isGroup = false;
-            if (clientGroupType == "é›†å›¢")
+            if (clientGroupType == "¼¯ÍÅ")
             {
                 isGroup = true;
             }
@@ -226,7 +224,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
              && (isGroup == true ? c.Client.GroupClients.Count > 0 : true));
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
         }
 
         /// <summary>
@@ -250,6 +248,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

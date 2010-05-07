@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ClientDetail.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientDetail
     {
-        #regionÂ FieldsÂ (203)
+		#region?Fields?(204)?
 
         /// <summary>
         /// Required designer variable.
@@ -208,6 +208,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreditLineCreateUserName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbGDAmount;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbGDComment;
         private DevComponents.DotNetBar.Controls.TextBoxX tbGDCreateUserName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbGroupCreditLine;
         private DevComponents.DotNetBar.Controls.TextBoxX tbGroupCreditLineCurr;
@@ -220,11 +221,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX unfreezerTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX websiteTextBox;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ MethodsÂ (1)
+		#region?Methods?(1)?
 
-        //Â ProtectedÂ MethodsÂ (1)Â 
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -245,7 +246,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             base.Dispose(disposing);
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
 
 
 
@@ -506,43 +507,43 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemClientCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
             this.clientValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.regularExpressionValidator8 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.regularExpressionValidator7 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
-            this.requiredFieldValidator18 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("è‡³å°‘æœ‰ä¸€ä¸ªåœ°å€", "Address");
+            this.requiredFieldValidator18 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÖÁÉÙÓĞÒ»¸öµØÖ·", "Address");
             this.regularExpressionValidator6 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
-            this.requiredFieldValidator17 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("è‡³å°‘æœ‰ä¸€ä¸ªåœ°å€", "Address");
+            this.requiredFieldValidator17 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÖÁÉÙÓĞÒ»¸öµØÖ·", "Address");
             this.regularExpressionValidator5 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
-            this.requiredFieldValidator15 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("è‡³å°‘æœ‰ä¸€ä¸ªå®¢æˆ·å", "ClientName");
+            this.requiredFieldValidator15 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÖÁÉÙÓĞÒ»¸ö¿Í»§Ãû", "ClientName");
             this.regularExpressionValidator4 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
-            this.requiredFieldValidator14 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("è‡³å°‘æœ‰ä¸€ä¸ªå®¢æˆ·å", "ClientName");
+            this.requiredFieldValidator14 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÖÁÉÙÓĞÒ»¸ö¿Í»§Ãû", "ClientName");
             this.regularExpressionValidator3 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator16 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("è‡³å°‘æœ‰ä¸€ä¸ªå®¢æˆ·å", "ClientName");
-            this.requiredFieldValidator10 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator16 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÖÁÉÙÓĞÒ»¸ö¿Í»§Ãû", "ClientName");
+            this.requiredFieldValidator10 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.creditLineValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator5 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator4 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.regularExpressionValidator9 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
-            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
-            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
-            this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
+            this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.contractValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
-            this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
+            this.requiredFieldValidator11 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.regularExpressionValidator10 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
-            this.requiredFieldValidator13 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator13 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
-            this.requiredFieldValidator12 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator12 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.reviewValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator19 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
-            this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator19 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
+            this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.tbGDComment = new DevComponents.DotNetBar.Controls.TextBoxX();
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -657,7 +658,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             clientNameCNLabel.Name = "clientNameCNLabel";
             clientNameCNLabel.Size = new System.Drawing.Size(33, 15);
             clientNameCNLabel.TabIndex = 4;
-            clientNameCNLabel.Text = "<font color=\'red\'>*</font>å®¢æˆ·:";
+            clientNameCNLabel.Text = "<font color=\'red\'>*</font>¿Í»§:";
             clientNameCNLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // addressCNLabel
@@ -673,7 +674,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             addressCNLabel.Name = "addressCNLabel";
             addressCNLabel.Size = new System.Drawing.Size(33, 15);
             addressCNLabel.TabIndex = 8;
-            addressCNLabel.Text = "<font color=\'red\'>*</font>åœ°å€:";
+            addressCNLabel.Text = "<font color=\'red\'>*</font>µØÖ·:";
             addressCNLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // cityCNLabel
@@ -689,7 +690,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             cityCNLabel.Name = "cityCNLabel";
             cityCNLabel.Size = new System.Drawing.Size(34, 16);
             cityCNLabel.TabIndex = 11;
-            cityCNLabel.Text = "åŸå¸‚:";
+            cityCNLabel.Text = "³ÇÊĞ:";
             cityCNLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // provinceCNLabel
@@ -704,7 +705,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             provinceCNLabel.Name = "provinceCNLabel";
             provinceCNLabel.Size = new System.Drawing.Size(37, 16);
             provinceCNLabel.TabIndex = 14;
-            provinceCNLabel.Text = "çœ/å·:";
+            provinceCNLabel.Text = "Ê¡/Öİ:";
             provinceCNLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // productCNLabel
@@ -719,7 +720,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             productCNLabel.Name = "productCNLabel";
             productCNLabel.Size = new System.Drawing.Size(59, 16);
             productCNLabel.TabIndex = 21;
-            productCNLabel.Text = "ç»è¥èŒƒå›´:";
+            productCNLabel.Text = "¾­Óª·¶Î§:";
             productCNLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // postCodeLabel
@@ -734,7 +735,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             postCodeLabel.Name = "postCodeLabel";
             postCodeLabel.Size = new System.Drawing.Size(34, 16);
             postCodeLabel.TabIndex = 19;
-            postCodeLabel.Text = "é‚®ç¼–:";
+            postCodeLabel.Text = "ÓÊ±à:";
             postCodeLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // countryCodeLabel
@@ -750,7 +751,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             countryCodeLabel.Name = "countryCodeLabel";
             countryCodeLabel.Size = new System.Drawing.Size(33, 15);
             countryCodeLabel.TabIndex = 17;
-            countryCodeLabel.Text = "<font color=\'red\'>*</font>å›½å®¶:";
+            countryCodeLabel.Text = "<font color=\'red\'>*</font>¹ú¼Ò:";
             countryCodeLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // representativeLabel
@@ -765,7 +766,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             representativeLabel.Name = "representativeLabel";
             representativeLabel.Size = new System.Drawing.Size(59, 16);
             representativeLabel.TabIndex = 0;
-            representativeLabel.Text = "å…¬å¸æ³•äºº:";
+            representativeLabel.Text = "¹«Ë¾·¨ÈË:";
             representativeLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // contactLabel
@@ -780,7 +781,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             contactLabel.Name = "contactLabel";
             contactLabel.Size = new System.Drawing.Size(47, 16);
             contactLabel.TabIndex = 2;
-            contactLabel.Text = "è”ç³»äºº:";
+            contactLabel.Text = "ÁªÏµÈË:";
             contactLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // emailLabel
@@ -810,7 +811,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             faxNumberLabel.Name = "faxNumberLabel";
             faxNumberLabel.Size = new System.Drawing.Size(59, 16);
             faxNumberLabel.TabIndex = 12;
-            faxNumberLabel.Text = "ä¼ çœŸå·ç :";
+            faxNumberLabel.Text = "´«ÕæºÅÂë:";
             faxNumberLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // cellPhoneLabel
@@ -825,7 +826,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             cellPhoneLabel.Name = "cellPhoneLabel";
             cellPhoneLabel.Size = new System.Drawing.Size(59, 16);
             cellPhoneLabel.TabIndex = 6;
-            cellPhoneLabel.Text = "æ‰‹æœºå·ç :";
+            cellPhoneLabel.Text = "ÊÖ»úºÅÂë:";
             cellPhoneLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // groupNoLabel
@@ -840,7 +841,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             groupNoLabel.Name = "groupNoLabel";
             groupNoLabel.Size = new System.Drawing.Size(97, 16);
             groupNoLabel.TabIndex = 0;
-            groupNoLabel.Text = "æ‰€å±é›†å›¢å®¢æˆ·å·:";
+            groupNoLabel.Text = "ËùÊô¼¯ÍÅ¿Í»§ºÅ:";
             groupNoLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // registrationNumberLabel
@@ -855,7 +856,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             registrationNumberLabel.Name = "registrationNumberLabel";
             registrationNumberLabel.Size = new System.Drawing.Size(84, 16);
             registrationNumberLabel.TabIndex = 14;
-            registrationNumberLabel.Text = "è¥ä¸šæ‰§ç…§å·ç :";
+            registrationNumberLabel.Text = "ÓªÒµÖ´ÕÕºÅÂë:";
             registrationNumberLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // companyCodeLabel
@@ -870,7 +871,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             companyCodeLabel.Name = "companyCodeLabel";
             companyCodeLabel.Size = new System.Drawing.Size(84, 16);
             companyCodeLabel.TabIndex = 16;
-            companyCodeLabel.Text = "ç»„ç»‡æœºæ„ä»£ç :";
+            companyCodeLabel.Text = "×éÖ¯»ú¹¹´úÂë:";
             companyCodeLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // clientTypeLabel
@@ -886,7 +887,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             clientTypeLabel.Name = "clientTypeLabel";
             clientTypeLabel.Size = new System.Drawing.Size(59, 16);
             clientTypeLabel.TabIndex = 0;
-            clientTypeLabel.Text = "å®¢æˆ·ç±»å‹:";
+            clientTypeLabel.Text = "¿Í»§ÀàĞÍ:";
             clientTypeLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // clientLevelLabel
@@ -901,7 +902,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             clientLevelLabel.Name = "clientLevelLabel";
             clientLevelLabel.Size = new System.Drawing.Size(59, 16);
             clientLevelLabel.TabIndex = 2;
-            clientLevelLabel.Text = "å®¢æˆ·çº§åˆ«:";
+            clientLevelLabel.Text = "¿Í»§¼¶±ğ:";
             clientLevelLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // branchCodeLabel
@@ -916,7 +917,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             branchCodeLabel.Name = "branchCodeLabel";
             branchCodeLabel.Size = new System.Drawing.Size(59, 16);
             branchCodeLabel.TabIndex = 4;
-            branchCodeLabel.Text = "æ‰€å±æœºæ„:";
+            branchCodeLabel.Text = "ËùÊô»ú¹¹:";
             branchCodeLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // pMNameLabel
@@ -931,7 +932,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             pMNameLabel.Name = "pMNameLabel";
             pMNameLabel.Size = new System.Drawing.Size(59, 16);
             pMNameLabel.TabIndex = 6;
-            pMNameLabel.Text = "äº§å“ç»ç†:";
+            pMNameLabel.Text = "²úÆ·¾­Àí:";
             pMNameLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // rMNameLabel
@@ -946,7 +947,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             rMNameLabel.Name = "rMNameLabel";
             rMNameLabel.Size = new System.Drawing.Size(59, 16);
             rMNameLabel.TabIndex = 8;
-            rMNameLabel.Text = "å®¢æˆ·ç»ç†:";
+            rMNameLabel.Text = "¿Í»§¾­Àí:";
             rMNameLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // clientNoLabel
@@ -963,7 +964,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             clientNoLabel.Size = new System.Drawing.Size(57, 15);
             clientNoLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             clientNoLabel.TabIndex = 0;
-            clientNoLabel.Text = "<font color=\'red\'>*</font>ä¿ç†ä»£ç :";
+            clientNoLabel.Text = "<font color=\'red\'>*</font>±£Àí´úÂë:";
             // 
             // creditLineCurrencyLabel
             // 
@@ -978,7 +979,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             creditLineCurrencyLabel.Name = "creditLineCurrencyLabel";
             creditLineCurrencyLabel.Size = new System.Drawing.Size(57, 15);
             creditLineCurrencyLabel.TabIndex = 5;
-            creditLineCurrencyLabel.Text = "<font color=\'red\'>*</font>é¢åº¦å¸åˆ«:";
+            creditLineCurrencyLabel.Text = "<font color=\'red\'>*</font>¶î¶È±Ò±ğ:";
             // 
             // creditLineTypeLabel
             // 
@@ -993,7 +994,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             creditLineTypeLabel.Name = "creditLineTypeLabel";
             creditLineTypeLabel.Size = new System.Drawing.Size(57, 15);
             creditLineTypeLabel.TabIndex = 0;
-            creditLineTypeLabel.Text = "<font color=\'red\'>*</font>é¢åº¦ç§ç±»:";
+            creditLineTypeLabel.Text = "<font color=\'red\'>*</font>¶î¶ÈÖÖÀà:";
             // 
             // creditLineLabel
             // 
@@ -1008,7 +1009,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             creditLineLabel.Name = "creditLineLabel";
             creditLineLabel.Size = new System.Drawing.Size(57, 15);
             creditLineLabel.TabIndex = 9;
-            creditLineLabel.Text = "<font color=\'red\'>*</font>é¢åº¦ä¸Šé™:";
+            creditLineLabel.Text = "<font color=\'red\'>*</font>¶î¶ÈÉÏÏŞ:";
             // 
             // periodBeginLabel
             // 
@@ -1023,7 +1024,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             periodBeginLabel.Name = "periodBeginLabel";
             periodBeginLabel.Size = new System.Drawing.Size(57, 15);
             periodBeginLabel.TabIndex = 2;
-            periodBeginLabel.Text = "<font color=\'red\'>*</font>æœ‰æ•ˆæœŸé™:";
+            periodBeginLabel.Text = "<font color=\'red\'>*</font>ÓĞĞ§ÆÚÏŞ:";
             // 
             // approveNoLabel
             // 
@@ -1038,7 +1039,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             approveNoLabel.Name = "approveNoLabel";
             approveNoLabel.Size = new System.Drawing.Size(59, 16);
             approveNoLabel.TabIndex = 7;
-            approveNoLabel.Text = "æˆä¿¡ç¼–å·:";
+            approveNoLabel.Text = "ÊÚĞÅ±àºÅ:";
             // 
             // approveTypeLabel
             // 
@@ -1053,7 +1054,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             approveTypeLabel.Name = "approveTypeLabel";
             approveTypeLabel.Size = new System.Drawing.Size(59, 16);
             approveTypeLabel.TabIndex = 11;
-            approveTypeLabel.Text = "æˆä¿¡ç±»å‹:";
+            approveTypeLabel.Text = "ÊÚĞÅÀàĞÍ:";
             // 
             // creditLineStatusLabel
             // 
@@ -1067,7 +1068,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             creditLineStatusLabel.Name = "creditLineStatusLabel";
             creditLineStatusLabel.Size = new System.Drawing.Size(59, 16);
             creditLineStatusLabel.TabIndex = 13;
-            creditLineStatusLabel.Text = "é¢åº¦çŠ¶æ€:";
+            creditLineStatusLabel.Text = "¶î¶È×´Ì¬:";
             // 
             // freezeReasonLabel
             // 
@@ -1081,7 +1082,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             freezeReasonLabel.Name = "freezeReasonLabel";
             freezeReasonLabel.Size = new System.Drawing.Size(59, 16);
             freezeReasonLabel.TabIndex = 21;
-            freezeReasonLabel.Text = "å†»ç»“åŸå› :";
+            freezeReasonLabel.Text = "¶³½áÔ­Òò:";
             // 
             // freezerLabel
             // 
@@ -1095,7 +1096,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             freezerLabel.Name = "freezerLabel";
             freezerLabel.Size = new System.Drawing.Size(47, 16);
             freezerLabel.TabIndex = 23;
-            freezerLabel.Text = "ç»åŠäºº:";
+            freezerLabel.Text = "¾­°ìÈË:";
             // 
             // freezeDateLabel
             // 
@@ -1109,7 +1110,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             freezeDateLabel.Name = "freezeDateLabel";
             freezeDateLabel.Size = new System.Drawing.Size(59, 16);
             freezeDateLabel.TabIndex = 25;
-            freezeDateLabel.Text = "å†»ç»“æ—¥æœŸ:";
+            freezeDateLabel.Text = "¶³½áÈÕÆÚ:";
             // 
             // unfreezeReasonLabel
             // 
@@ -1123,7 +1124,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             unfreezeReasonLabel.Name = "unfreezeReasonLabel";
             unfreezeReasonLabel.Size = new System.Drawing.Size(59, 16);
             unfreezeReasonLabel.TabIndex = 27;
-            unfreezeReasonLabel.Text = "è§£å†»åŸå› :";
+            unfreezeReasonLabel.Text = "½â¶³Ô­Òò:";
             // 
             // unfreezerLabel
             // 
@@ -1137,7 +1138,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             unfreezerLabel.Name = "unfreezerLabel";
             unfreezerLabel.Size = new System.Drawing.Size(47, 16);
             unfreezerLabel.TabIndex = 29;
-            unfreezerLabel.Text = "ç»åŠäºº:";
+            unfreezerLabel.Text = "¾­°ìÈË:";
             // 
             // unfreezeDateLabel
             // 
@@ -1151,7 +1152,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             unfreezeDateLabel.Name = "unfreezeDateLabel";
             unfreezeDateLabel.Size = new System.Drawing.Size(59, 16);
             unfreezeDateLabel.TabIndex = 31;
-            unfreezeDateLabel.Text = "è§£å†»æ—¥æœŸ:";
+            unfreezeDateLabel.Text = "½â¶³ÈÕÆÚ:";
             // 
             // commentLabel
             // 
@@ -1165,7 +1166,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
             commentLabel.TabIndex = 24;
-            commentLabel.Text = "å¤‡æ³¨:";
+            commentLabel.Text = "±¸×¢:";
             commentLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // creditLineCommentLabel
@@ -1180,7 +1181,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             creditLineCommentLabel.Name = "creditLineCommentLabel";
             creditLineCommentLabel.Size = new System.Drawing.Size(34, 16);
             creditLineCommentLabel.TabIndex = 19;
-            creditLineCommentLabel.Text = "å¤‡æ³¨:";
+            creditLineCommentLabel.Text = "±¸×¢:";
             // 
             // clientCoreNoLabel
             // 
@@ -1193,7 +1194,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             clientCoreNoLabel.Name = "clientCoreNoLabel";
             clientCoreNoLabel.Size = new System.Drawing.Size(47, 16);
             clientCoreNoLabel.TabIndex = 2;
-            clientCoreNoLabel.Text = "å®¢æˆ·å·:";
+            clientCoreNoLabel.Text = "¿Í»§ºÅ:";
             clientCoreNoLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // industryLabel
@@ -1208,7 +1209,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             industryLabel.Name = "industryLabel";
             industryLabel.Size = new System.Drawing.Size(59, 16);
             industryLabel.TabIndex = 10;
-            industryLabel.Text = "æ‰€å±è¡Œä¸š:";
+            industryLabel.Text = "ËùÊôĞĞÒµ:";
             industryLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // lblContractCode
@@ -1224,7 +1225,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblContractCode.Name = "lblContractCode";
             lblContractCode.Size = new System.Drawing.Size(57, 15);
             lblContractCode.TabIndex = 4;
-            lblContractCode.Text = "<font color=\'red\'>*</font>åˆåŒç¼–å·:";
+            lblContractCode.Text = "<font color=\'red\'>*</font>ºÏÍ¬±àºÅ:";
             // 
             // lblContractCreateUserName
             // 
@@ -1238,7 +1239,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblContractCreateUserName.Name = "lblContractCreateUserName";
             lblContractCreateUserName.Size = new System.Drawing.Size(47, 16);
             lblContractCreateUserName.TabIndex = 10;
-            lblContractCreateUserName.Text = "ç»åŠäºº:";
+            lblContractCreateUserName.Text = "¾­°ìÈË:";
             // 
             // lblContractStatus
             // 
@@ -1252,7 +1253,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblContractStatus.Name = "lblContractStatus";
             lblContractStatus.Size = new System.Drawing.Size(59, 16);
             lblContractStatus.TabIndex = 8;
-            lblContractStatus.Text = "åˆåŒçŠ¶æ€:";
+            lblContractStatus.Text = "ºÏÍ¬×´Ì¬:";
             // 
             // lblContractValueDate
             // 
@@ -1267,7 +1268,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblContractValueDate.Name = "lblContractValueDate";
             lblContractValueDate.Size = new System.Drawing.Size(45, 15);
             lblContractValueDate.TabIndex = 2;
-            lblContractValueDate.Text = "<font color=\'red\'>*</font>ç”Ÿæ•ˆæ—¥:";
+            lblContractValueDate.Text = "<font color=\'red\'>*</font>ÉúĞ§ÈÕ:";
             // 
             // lblContractDueDate
             // 
@@ -1282,7 +1283,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblContractDueDate.Name = "lblContractDueDate";
             lblContractDueDate.Size = new System.Drawing.Size(45, 15);
             lblContractDueDate.TabIndex = 6;
-            lblContractDueDate.Text = "<font color=\'red\'>*</font>åˆ°æœŸæ—¥:";
+            lblContractDueDate.Text = "<font color=\'red\'>*</font>µ½ÆÚÈÕ:";
             // 
             // lblGroupNameCN
             // 
@@ -1296,7 +1297,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblGroupNameCN.Name = "lblGroupNameCN";
             lblGroupNameCN.Size = new System.Drawing.Size(72, 16);
             lblGroupNameCN.TabIndex = 3;
-            lblGroupNameCN.Text = "é›†å›¢å®¢æˆ·å:";
+            lblGroupNameCN.Text = "¼¯ÍÅ¿Í»§Ãû:";
             lblGroupNameCN.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // websiteLabel
@@ -1311,7 +1312,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             websiteLabel.Name = "websiteLabel";
             websiteLabel.Size = new System.Drawing.Size(59, 16);
             websiteLabel.TabIndex = 8;
-            websiteLabel.Text = "å…¬å¸ç½‘å€:";
+            websiteLabel.Text = "¹«Ë¾ÍøÖ·:";
             websiteLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // telephoneLabel
@@ -1326,7 +1327,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             telephoneLabel.Name = "telephoneLabel";
             telephoneLabel.Size = new System.Drawing.Size(59, 16);
             telephoneLabel.TabIndex = 10;
-            telephoneLabel.Text = "è”ç³»ç”µè¯:";
+            telephoneLabel.Text = "ÁªÏµµç»°:";
             telephoneLabel.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // lblContractType
@@ -1342,7 +1343,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblContractType.Name = "lblContractType";
             lblContractType.Size = new System.Drawing.Size(57, 15);
             lblContractType.TabIndex = 0;
-            lblContractType.Text = "<font color=\'red\'>*</font>åˆåŒç±»å‹:";
+            lblContractType.Text = "<font color=\'red\'>*</font>ºÏÍ¬ÀàĞÍ:";
             // 
             // lblCreateUserName
             // 
@@ -1356,7 +1357,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblCreateUserName.Name = "lblCreateUserName";
             lblCreateUserName.Size = new System.Drawing.Size(47, 16);
             lblCreateUserName.TabIndex = 12;
-            lblCreateUserName.Text = "ç»åŠäºº:";
+            lblCreateUserName.Text = "¾­°ìÈË:";
             lblCreateUserName.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // lblGroupCreditLine
@@ -1372,7 +1373,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblGroupCreditLine.Name = "lblGroupCreditLine";
             lblGroupCreditLine.Size = new System.Drawing.Size(84, 16);
             lblGroupCreditLine.TabIndex = 15;
-            lblGroupCreditLine.Text = "é›†å›¢é¢åº¦ä¸Šé™:";
+            lblGroupCreditLine.Text = "¼¯ÍÅ¶î¶ÈÉÏÏŞ:";
             // 
             // reviewNoLabel
             // 
@@ -1386,7 +1387,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             reviewNoLabel.Name = "reviewNoLabel";
             reviewNoLabel.Size = new System.Drawing.Size(81, 15);
             reviewNoLabel.TabIndex = 0;
-            reviewNoLabel.Text = "<font color=\'red\'>*</font>åæŸ¥æ„è§ç¼–å·:";
+            reviewNoLabel.Text = "<font color=\'red\'>*</font>Ğ­²éÒâ¼û±àºÅ:";
             // 
             // reviewStatusLabel
             // 
@@ -1400,7 +1401,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             reviewStatusLabel.Name = "reviewStatusLabel";
             reviewStatusLabel.Size = new System.Drawing.Size(33, 15);
             reviewStatusLabel.TabIndex = 5;
-            reviewStatusLabel.Text = "<font color=\'red\'>*</font>çŠ¶æ€:";
+            reviewStatusLabel.Text = "<font color=\'red\'>*</font>×´Ì¬:";
             // 
             // reviewDateLabel
             // 
@@ -1414,7 +1415,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             reviewDateLabel.Name = "reviewDateLabel";
             reviewDateLabel.Size = new System.Drawing.Size(45, 15);
             reviewDateLabel.TabIndex = 7;
-            reviewDateLabel.Text = "<font color=\'red\'>*</font>åæŸ¥æ—¥:";
+            reviewDateLabel.Text = "<font color=\'red\'>*</font>Ğ­²éÈÕ:";
             // 
             // createUserNameLabel
             // 
@@ -1428,7 +1429,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             createUserNameLabel.Name = "createUserNameLabel";
             createUserNameLabel.Size = new System.Drawing.Size(47, 16);
             createUserNameLabel.TabIndex = 15;
-            createUserNameLabel.Text = "ç»åŠäºº:";
+            createUserNameLabel.Text = "¾­°ìÈË:";
             // 
             // commentLabel1
             // 
@@ -1442,7 +1443,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             commentLabel1.Name = "commentLabel1";
             commentLabel1.Size = new System.Drawing.Size(34, 16);
             commentLabel1.TabIndex = 27;
-            commentLabel1.Text = "å¤‡æ³¨:";
+            commentLabel1.Text = "±¸×¢:";
             // 
             // requestAmountLabel
             // 
@@ -1456,7 +1457,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             requestAmountLabel.Name = "requestAmountLabel";
             requestAmountLabel.Size = new System.Drawing.Size(84, 16);
             requestAmountLabel.TabIndex = 2;
-            requestAmountLabel.Text = "ç”³è¯·æˆä¿¡é‡‘é¢:";
+            requestAmountLabel.Text = "ÉêÇëÊÚĞÅ½ğ¶î:";
             // 
             // requestCommissionRateLabel
             // 
@@ -1470,7 +1471,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             requestCommissionRateLabel.Name = "requestCommissionRateLabel";
             requestCommissionRateLabel.Size = new System.Drawing.Size(59, 16);
             requestCommissionRateLabel.TabIndex = 9;
-            requestCommissionRateLabel.Text = "ä¿ç†è´¹ç‡:";
+            requestCommissionRateLabel.Text = "±£Àí·ÑÂÊ:";
             // 
             // requestFinancePeriodLabel
             // 
@@ -1484,7 +1485,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             requestFinancePeriodLabel.Name = "requestFinancePeriodLabel";
             requestFinancePeriodLabel.Size = new System.Drawing.Size(79, 16);
             requestFinancePeriodLabel.TabIndex = 13;
-            requestFinancePeriodLabel.Text = "èèµ„æœŸé™(æœˆ):";
+            requestFinancePeriodLabel.Text = "ÈÚ×ÊÆÚÏŞ(ÔÂ):";
             // 
             // requestFinanceType2Label
             // 
@@ -1498,7 +1499,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             requestFinanceType2Label.Name = "requestFinanceType2Label";
             requestFinanceType2Label.Size = new System.Drawing.Size(59, 16);
             requestFinanceType2Label.TabIndex = 17;
-            requestFinanceType2Label.Text = "èèµ„ç®¡ç†:";
+            requestFinanceType2Label.Text = "ÈÚ×Ê¹ÜÀí:";
             // 
             // requestFinanceTypeLabel
             // 
@@ -1512,7 +1513,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             requestFinanceTypeLabel.Name = "requestFinanceTypeLabel";
             requestFinanceTypeLabel.Size = new System.Drawing.Size(59, 16);
             requestFinanceTypeLabel.TabIndex = 11;
-            requestFinanceTypeLabel.Text = "å‡ºè´¦æ–¹å¼:";
+            requestFinanceTypeLabel.Text = "³öÕË·½Ê½:";
             // 
             // lblComment
             // 
@@ -1526,7 +1527,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblComment.Name = "lblComment";
             lblComment.Size = new System.Drawing.Size(34, 16);
             lblComment.TabIndex = 18;
-            lblComment.Text = "å¤‡æ³¨:";
+            lblComment.Text = "±¸×¢:";
             // 
             // lblIsNotice
             // 
@@ -1540,7 +1541,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblIsNotice.Name = "lblIsNotice";
             lblIsNotice.Size = new System.Drawing.Size(62, 16);
             lblIsNotice.TabIndex = 19;
-            lblIsNotice.Text = "æ˜/æš—ä¿ç†:";
+            lblIsNotice.Text = "Ã÷/°µ±£Àí:";
             // 
             // labelX1
             // 
@@ -1554,7 +1555,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             labelX1.Name = "labelX1";
             labelX1.Size = new System.Drawing.Size(47, 16);
             labelX1.TabIndex = 40;
-            labelX1.Text = "ç»åŠäºº:";
+            labelX1.Text = "¾­°ìÈË:";
             // 
             // lblGuaranteeDeposit
             // 
@@ -1568,7 +1569,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblGuaranteeDeposit.Name = "lblGuaranteeDeposit";
             lblGuaranteeDeposit.Size = new System.Drawing.Size(47, 16);
             lblGuaranteeDeposit.TabIndex = 0;
-            lblGuaranteeDeposit.Text = "ä¿è¯é‡‘:";
+            lblGuaranteeDeposit.Text = "±£Ö¤½ğ:";
             // 
             // lblGDCreateUserName
             // 
@@ -1582,7 +1583,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblGDCreateUserName.Name = "lblGDCreateUserName";
             lblGDCreateUserName.Size = new System.Drawing.Size(47, 16);
             lblGDCreateUserName.TabIndex = 17;
-            lblGDCreateUserName.Text = "ç»åŠäºº:";
+            lblGDCreateUserName.Text = "¾­°ìÈË:";
             // 
             // tabControl
             // 
@@ -1659,7 +1660,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colGDCurrency
             // 
             this.colGDCurrency.DataPropertyName = "GuaranteeDepositCurrency";
-            this.colGDCurrency.HeaderText = "å¸åˆ«";
+            this.colGDCurrency.HeaderText = "±Ò±ğ";
             this.colGDCurrency.Name = "colGDCurrency";
             this.colGDCurrency.ReadOnly = true;
             // 
@@ -1668,7 +1669,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colGDAmount.DataPropertyName = "GuaranteeDepositAmount";
             dataGridViewCellStyle1.Format = "N2";
             this.colGDAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colGDAmount.HeaderText = "ä¿è¯é‡‘";
+            this.colGDAmount.HeaderText = "±£Ö¤½ğ";
             this.colGDAmount.Name = "colGDAmount";
             this.colGDAmount.ReadOnly = true;
             // 
@@ -1727,7 +1728,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnGDUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnGDUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnGDUpdate.TabIndex = 5;
-            this.btnGDUpdate.Text = "ç¼–è¾‘";
+            this.btnGDUpdate.Text = "±à¼­";
             this.btnGDUpdate.Click += new System.EventHandler(this.UpdateGD);
             // 
             // btnGDRefresh
@@ -1739,7 +1740,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnGDRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnGDRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnGDRefresh.TabIndex = 3;
-            this.btnGDRefresh.Text = "åˆ·æ–°";
+            this.btnGDRefresh.Text = "Ë¢ĞÂ";
             this.btnGDRefresh.Click += new System.EventHandler(this.RefreshGDs);
             // 
             // btnGDDelete
@@ -1751,7 +1752,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnGDDelete.Size = new System.Drawing.Size(75, 23);
             this.btnGDDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnGDDelete.TabIndex = 7;
-            this.btnGDDelete.Text = "åˆ é™¤";
+            this.btnGDDelete.Text = "É¾³ı";
             this.btnGDDelete.Click += new System.EventHandler(this.DeleteGD);
             // 
             // btnGDSave
@@ -1763,7 +1764,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnGDSave.Size = new System.Drawing.Size(75, 23);
             this.btnGDSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnGDSave.TabIndex = 6;
-            this.btnGDSave.Text = "ä¿å­˜";
+            this.btnGDSave.Text = "±£´æ";
             this.btnGDSave.Click += new System.EventHandler(this.SaveGD);
             // 
             // btnGDNew
@@ -1775,7 +1776,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnGDNew.Size = new System.Drawing.Size(75, 23);
             this.btnGDNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnGDNew.TabIndex = 4;
-            this.btnGDNew.Text = "æ–°å»º";
+            this.btnGDNew.Text = "ĞÂ½¨";
             this.btnGDNew.Click += new System.EventHandler(this.NewGD);
             // 
             // tbGDAmount
@@ -1806,7 +1807,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.itemGuaranteeDeposit.AttachedControl = this.tabPanelGD;
             this.itemGuaranteeDeposit.Name = "itemGuaranteeDeposit";
-            this.itemGuaranteeDeposit.Text = "ä¿è¯é‡‘";
+            this.itemGuaranteeDeposit.Text = "±£Ö¤½ğ";
             // 
             // tabPanelReview
             // 
@@ -1870,21 +1871,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colReviewNo
             // 
             this.colReviewNo.DataPropertyName = "ReviewNo";
-            this.colReviewNo.HeaderText = "åæŸ¥æ„è§ç¼–å·";
+            this.colReviewNo.HeaderText = "Ğ­²éÒâ¼û±àºÅ";
             this.colReviewNo.Name = "colReviewNo";
             this.colReviewNo.ReadOnly = true;
             // 
             // colReviewStatus
             // 
             this.colReviewStatus.DataPropertyName = "ReviewStatus";
-            this.colReviewStatus.HeaderText = "çŠ¶æ€";
+            this.colReviewStatus.HeaderText = "×´Ì¬";
             this.colReviewStatus.Name = "colReviewStatus";
             this.colReviewStatus.ReadOnly = true;
             // 
             // colReviewUser
             // 
             this.colReviewUser.DataPropertyName = "CreateUserName";
-            this.colReviewUser.HeaderText = "ç»åŠäºº";
+            this.colReviewUser.HeaderText = "¾­°ìÈË";
             this.colReviewUser.Name = "colReviewUser";
             this.colReviewUser.ReadOnly = true;
             // 
@@ -1894,14 +1895,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle4.Format = "d";
             dataGridViewCellStyle4.NullValue = null;
             this.colReviewDate.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colReviewDate.HeaderText = "åæŸ¥æ—¥";
+            this.colReviewDate.HeaderText = "Ğ­²éÈÕ";
             this.colReviewDate.Name = "colReviewDate";
             this.colReviewDate.ReadOnly = true;
             // 
             // colReviewComment
             // 
             this.colReviewComment.DataPropertyName = "Comment";
-            this.colReviewComment.HeaderText = "å¤‡æ³¨";
+            this.colReviewComment.HeaderText = "±¸×¢";
             this.colReviewComment.Name = "colReviewComment";
             this.colReviewComment.ReadOnly = true;
             // 
@@ -1992,7 +1993,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsNonRecoarse.Name = "cbIsNonRecoarse";
             this.cbIsNonRecoarse.Size = new System.Drawing.Size(76, 16);
             this.cbIsNonRecoarse.TabIndex = 26;
-            this.cbIsNonRecoarse.Text = "æ— è¿½ç´¢æƒ";
+            this.cbIsNonRecoarse.Text = "ÎŞ×·Ë÷È¨";
             // 
             // reviewBindingSource
             // 
@@ -2011,7 +2012,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsBuyer.Name = "cbIsBuyer";
             this.cbIsBuyer.Size = new System.Drawing.Size(51, 16);
             this.cbIsBuyer.TabIndex = 24;
-            this.cbIsBuyer.Text = "ä¹°æ–¹";
+            this.cbIsBuyer.Text = "Âò·½";
             // 
             // cbIsSeller
             // 
@@ -2026,7 +2027,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsSeller.Name = "cbIsSeller";
             this.cbIsSeller.Size = new System.Drawing.Size(51, 16);
             this.cbIsSeller.TabIndex = 23;
-            this.cbIsSeller.Text = "å–æ–¹";
+            this.cbIsSeller.Text = "Âô·½";
             // 
             // cbIsInternational
             // 
@@ -2041,7 +2042,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsInternational.Name = "cbIsInternational";
             this.cbIsInternational.Size = new System.Drawing.Size(51, 16);
             this.cbIsInternational.TabIndex = 22;
-            this.cbIsInternational.Text = "å›½é™…";
+            this.cbIsInternational.Text = "¹ú¼Ê";
             // 
             // cbIsLocal
             // 
@@ -2056,7 +2057,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsLocal.Name = "cbIsLocal";
             this.cbIsLocal.Size = new System.Drawing.Size(51, 16);
             this.cbIsLocal.TabIndex = 21;
-            this.cbIsLocal.Text = "å›½å†…";
+            this.cbIsLocal.Text = "¹úÄÚ";
             // 
             // cbIsNotice
             // 
@@ -2065,8 +2066,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsNotice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIsNotice.FormattingEnabled = true;
             this.cbIsNotice.Items.AddRange(new object[] {
-            "æ˜ä¿ç†",
-            "æš—ä¿ç†"});
+            "Ã÷±£Àí",
+            "°µ±£Àí"});
             this.cbIsNotice.Location = new System.Drawing.Point(343, 130);
             this.cbIsNotice.Name = "cbIsNotice";
             this.cbIsNotice.Size = new System.Drawing.Size(159, 21);
@@ -2085,17 +2086,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsRecoarse.Name = "cbIsRecoarse";
             this.cbIsRecoarse.Size = new System.Drawing.Size(76, 16);
             this.cbIsRecoarse.TabIndex = 25;
-            this.cbIsRecoarse.Text = "æœ‰è¿½ç´¢æƒ";
+            this.cbIsRecoarse.Text = "ÓĞ×·Ë÷È¨";
             // 
             // requestFinanceTypeCheckedListBox
             // 
             this.requestFinanceTypeCheckedListBox.CheckOnClick = true;
             this.requestFinanceTypeCheckedListBox.FormattingEnabled = true;
             this.requestFinanceTypeCheckedListBox.Items.AddRange(new object[] {
-            "é¢„ä»˜æ¬¾",
-            "ä»£ä»˜",
-            "ä¿¡ç”¨è¯",
-            "é“¶æ‰¿"});
+            "Ô¤¸¶¿î",
+            "´ú¸¶",
+            "ĞÅÓÃÖ¤",
+            "Òø³Ğ"});
             this.requestFinanceTypeCheckedListBox.Location = new System.Drawing.Point(343, 37);
             this.requestFinanceTypeCheckedListBox.Name = "requestFinanceTypeCheckedListBox";
             this.requestFinanceTypeCheckedListBox.Size = new System.Drawing.Size(159, 64);
@@ -2108,8 +2109,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.requestFinanceType2ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.requestFinanceType2ComboBox.FormattingEnabled = true;
             this.requestFinanceType2ComboBox.Items.AddRange(new object[] {
-            "æ± èèµ„",
-            "å•ç¬”èèµ„"});
+            "³ØÈÚ×Ê",
+            "µ¥±ÊÈÚ×Ê"});
             this.requestFinanceType2ComboBox.Location = new System.Drawing.Point(343, 105);
             this.requestFinanceType2ComboBox.Name = "requestFinanceType2ComboBox";
             this.requestFinanceType2ComboBox.Size = new System.Drawing.Size(159, 21);
@@ -2172,7 +2173,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnReviewUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnReviewUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReviewUpdate.TabIndex = 31;
-            this.btnReviewUpdate.Text = "ç¼–è¾‘";
+            this.btnReviewUpdate.Text = "±à¼­";
             this.btnReviewUpdate.Click += new System.EventHandler(this.UpdateReivew);
             // 
             // btnReviewRefresh
@@ -2184,7 +2185,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnReviewRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnReviewRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReviewRefresh.TabIndex = 29;
-            this.btnReviewRefresh.Text = "åˆ·æ–°";
+            this.btnReviewRefresh.Text = "Ë¢ĞÂ";
             this.btnReviewRefresh.Click += new System.EventHandler(this.RefreshReviews);
             // 
             // btnReviewDelete
@@ -2196,7 +2197,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnReviewDelete.Size = new System.Drawing.Size(75, 23);
             this.btnReviewDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReviewDelete.TabIndex = 33;
-            this.btnReviewDelete.Text = "åˆ é™¤";
+            this.btnReviewDelete.Text = "É¾³ı";
             this.btnReviewDelete.Click += new System.EventHandler(this.DeleteReview);
             // 
             // btnReviewSave
@@ -2208,7 +2209,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnReviewSave.Size = new System.Drawing.Size(75, 23);
             this.btnReviewSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReviewSave.TabIndex = 32;
-            this.btnReviewSave.Text = "ä¿å­˜";
+            this.btnReviewSave.Text = "±£´æ";
             this.btnReviewSave.Click += new System.EventHandler(this.SaveReview);
             // 
             // btnReviewNew
@@ -2220,7 +2221,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnReviewNew.Size = new System.Drawing.Size(75, 23);
             this.btnReviewNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReviewNew.TabIndex = 30;
-            this.btnReviewNew.Text = "æ–°å»º";
+            this.btnReviewNew.Text = "ĞÂ½¨";
             this.btnReviewNew.Click += new System.EventHandler(this.NewReview);
             // 
             // commentTextBox
@@ -2296,8 +2297,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.reviewStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.reviewStatusComboBox.FormattingEnabled = true;
             this.reviewStatusComboBox.Items.AddRange(new object[] {
-            "å·²ç”Ÿæ•ˆ",
-            "å·²å¤±æ•ˆ"});
+            "ÒÑÉúĞ§",
+            "ÒÑÊ§Ğ§"});
             this.reviewStatusComboBox.Location = new System.Drawing.Point(112, 31);
             this.reviewStatusComboBox.Name = "reviewStatusComboBox";
             this.reviewStatusComboBox.Size = new System.Drawing.Size(121, 21);
@@ -2321,7 +2322,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.tabItemReview.AttachedControl = this.tabPanelReview;
             this.tabItemReview.Name = "tabItemReview";
-            this.tabItemReview.Text = "åæŸ¥æ„è§";
+            this.tabItemReview.Text = "Ğ­²éÒâ¼û";
             // 
             // tabPanelContract
             // 
@@ -2394,14 +2395,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colContractCode
             // 
             this.colContractCode.DataPropertyName = "ContractCode";
-            this.colContractCode.HeaderText = "åˆåŒå·";
+            this.colContractCode.HeaderText = "ºÏÍ¬ºÅ";
             this.colContractCode.Name = "colContractCode";
             this.colContractCode.ReadOnly = true;
             // 
             // colContractType
             // 
             this.colContractType.DataPropertyName = "ContractType";
-            this.colContractType.HeaderText = "åˆåŒç±»å‹";
+            this.colContractType.HeaderText = "ºÏÍ¬ÀàĞÍ";
             this.colContractType.Name = "colContractType";
             this.colContractType.ReadOnly = true;
             // 
@@ -2411,7 +2412,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle7.Format = "d";
             dataGridViewCellStyle7.NullValue = null;
             this.colContractValueDate.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colContractValueDate.HeaderText = "ç”Ÿæ•ˆæ—¥";
+            this.colContractValueDate.HeaderText = "ÉúĞ§ÈÕ";
             this.colContractValueDate.Name = "colContractValueDate";
             this.colContractValueDate.ReadOnly = true;
             // 
@@ -2420,21 +2421,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colContractDueDate.DataPropertyName = "ContractDueDate";
             dataGridViewCellStyle8.Format = "d";
             this.colContractDueDate.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colContractDueDate.HeaderText = "åˆ°æœŸæ—¥";
+            this.colContractDueDate.HeaderText = "µ½ÆÚÈÕ";
             this.colContractDueDate.Name = "colContractDueDate";
             this.colContractDueDate.ReadOnly = true;
             // 
             // colContractStatus
             // 
             this.colContractStatus.DataPropertyName = "ContractStatus";
-            this.colContractStatus.HeaderText = "åˆåŒçŠ¶æ€";
+            this.colContractStatus.HeaderText = "ºÏÍ¬×´Ì¬";
             this.colContractStatus.Name = "colContractStatus";
             this.colContractStatus.ReadOnly = true;
             // 
             // colCreateUserName
             // 
             this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "ç»åŠäºº";
+            this.colCreateUserName.HeaderText = "¾­°ìÈË";
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
             // 
@@ -2510,7 +2511,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.isSignedCheckBox.Name = "isSignedCheckBox";
             this.isSignedCheckBox.Size = new System.Drawing.Size(76, 16);
             this.isSignedCheckBox.TabIndex = 20;
-            this.isSignedCheckBox.Text = "æ˜¯å¦ç­¾å›";
+            this.isSignedCheckBox.Text = "ÊÇ·ñÇ©»Ø";
             // 
             // contractBindingSource
             // 
@@ -2529,7 +2530,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbComment.Size = new System.Drawing.Size(399, 54);
             this.tbComment.TabIndex = 17;
-            this.tbComment.WatermarkText = "è‹¥æœ‰é™„å±åˆåŒï¼Œè¯·å¤‡æ³¨äºæ­¤ã€‚";
+            this.tbComment.WatermarkText = "ÈôÓĞ¸½ÊôºÏÍ¬£¬Çë±¸×¢ÓÚ´Ë¡£";
             // 
             // cbContractType
             // 
@@ -2538,8 +2539,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbContractType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbContractType.FormattingEnabled = true;
             this.cbContractType.Items.AddRange(new object[] {
-            "æ–°åˆåŒ",
-            "æ—§åˆåŒ"});
+            "ĞÂºÏÍ¬",
+            "¾ÉºÏÍ¬"});
             this.cbContractType.Location = new System.Drawing.Point(99, 4);
             this.cbContractType.Name = "cbContractType";
             this.cbContractType.Size = new System.Drawing.Size(143, 21);
@@ -2555,7 +2556,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnContractUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnContractUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnContractUpdate.TabIndex = 14;
-            this.btnContractUpdate.Text = "ç¼–è¾‘";
+            this.btnContractUpdate.Text = "±à¼­";
             this.btnContractUpdate.Click += new System.EventHandler(this.UpdateContract);
             // 
             // btnContractRefresh
@@ -2567,7 +2568,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnContractRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnContractRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnContractRefresh.TabIndex = 12;
-            this.btnContractRefresh.Text = "åˆ·æ–°";
+            this.btnContractRefresh.Text = "Ë¢ĞÂ";
             // 
             // btnContractDelete
             // 
@@ -2578,7 +2579,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnContractDelete.Size = new System.Drawing.Size(75, 23);
             this.btnContractDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnContractDelete.TabIndex = 16;
-            this.btnContractDelete.Text = "åˆ é™¤";
+            this.btnContractDelete.Text = "É¾³ı";
             this.btnContractDelete.Click += new System.EventHandler(this.DeleteContract);
             // 
             // btnContractSave
@@ -2590,7 +2591,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnContractSave.Size = new System.Drawing.Size(75, 23);
             this.btnContractSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnContractSave.TabIndex = 15;
-            this.btnContractSave.Text = "ä¿å­˜";
+            this.btnContractSave.Text = "±£´æ";
             this.btnContractSave.Click += new System.EventHandler(this.SaveContract);
             // 
             // btnContractNew
@@ -2602,7 +2603,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnContractNew.Size = new System.Drawing.Size(75, 23);
             this.btnContractNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnContractNew.TabIndex = 13;
-            this.btnContractNew.Text = "æ–°å»º";
+            this.btnContractNew.Text = "ĞÂ½¨";
             this.btnContractNew.Click += new System.EventHandler(this.NewContract);
             // 
             // tbContractCode
@@ -2725,7 +2726,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.tabItemContract.AttachedControl = this.tabPanelContract;
             this.tabItemContract.Name = "tabItemContract";
-            this.tabItemContract.Text = "ä¿ç†åˆåŒ";
+            this.tabItemContract.Text = "±£ÀíºÏÍ¬";
             // 
             // tabPanelClient
             // 
@@ -2762,7 +2763,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnClientUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientUpdate.TabIndex = 4;
-            this.btnClientUpdate.Text = "ç¼–è¾‘";
+            this.btnClientUpdate.Text = "±à¼­";
             this.btnClientUpdate.Click += new System.EventHandler(this.UpdateClient);
             // 
             // groupPanelClientContact
@@ -3008,7 +3009,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbGroupNameEN.Name = "tbGroupNameEN";
             this.tbGroupNameEN.Size = new System.Drawing.Size(295, 20);
             this.tbGroupNameEN.TabIndex = 5;
-            this.tbGroupNameEN.WatermarkText = "è‹±æ–‡å";
+            this.tbGroupNameEN.WatermarkText = "Ó¢ÎÄÃû";
             // 
             // tbGroupNameCN
             // 
@@ -3021,7 +3022,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbGroupNameCN.Name = "tbGroupNameCN";
             this.tbGroupNameCN.Size = new System.Drawing.Size(295, 20);
             this.tbGroupNameCN.TabIndex = 4;
-            this.tbGroupNameCN.WatermarkText = "ä¸­æ–‡å";
+            this.tbGroupNameCN.WatermarkText = "ÖĞÎÄÃû";
             // 
             // groupNoTextBox
             // 
@@ -3044,7 +3045,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientSave.Size = new System.Drawing.Size(75, 23);
             this.btnClientSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientSave.TabIndex = 5;
-            this.btnClientSave.Text = "ä¿å­˜";
+            this.btnClientSave.Text = "±£´æ";
             this.btnClientSave.Click += new System.EventHandler(this.SaveClient);
             // 
             // groupPanelClientStat
@@ -3119,17 +3120,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIndustry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIndustry.FormattingEnabled = true;
             this.cbIndustry.Items.AddRange(new object[] {
-            "åŒ–å­¦èƒ½æº",
-            "äº¤é€šè¿è¾“",
-            "å†¶é‡‘",
-            "æˆ¿åœ°äº§",
-            "ç”µå­é€šè®¯",
-            "ç§Ÿèµ",
-            "åŒ»è¯",
-            "æ•™è‚²",
-            "å•†è´¸",
-            "å·¥ç¨‹",
-            "å…¶ä»–"});
+            "»¯Ñ§ÄÜÔ´",
+            "½»Í¨ÔËÊä",
+            "Ò±½ğ",
+            "·¿µØ²ú",
+            "µç×ÓÍ¨Ñ¶",
+            "×âÁŞ",
+            "Ò½Ò©",
+            "½ÌÓı",
+            "ÉÌÃ³",
+            "¹¤³Ì",
+            "ÆäËû"});
             this.cbIndustry.Location = new System.Drawing.Point(471, 7);
             this.cbIndustry.Name = "cbIndustry";
             this.cbIndustry.Size = new System.Drawing.Size(100, 21);
@@ -3197,9 +3198,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.clientTypeComboBox.FormattingEnabled = true;
             this.clientTypeComboBox.Items.AddRange(new object[] {
-            "å›½æœ‰",
-            "æ°‘è¥",
-            "ä¸‰èµ„"});
+            "¹úÓĞ",
+            "ÃñÓª",
+            "Èı×Ê"});
             this.clientTypeComboBox.Location = new System.Drawing.Point(85, 7);
             this.clientTypeComboBox.Name = "clientTypeComboBox";
             this.clientTypeComboBox.Size = new System.Drawing.Size(100, 21);
@@ -3350,7 +3351,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.productENTextBox.Size = new System.Drawing.Size(178, 43);
             this.productENTextBox.TabIndex = 23;
             this.clientValidator.SetValidator2(this.productENTextBox, this.regularExpressionValidator8);
-            this.productENTextBox.WatermarkText = "è‹±æ–‡";
+            this.productENTextBox.WatermarkText = "Ó¢ÎÄ";
             // 
             // productCNTextBox
             // 
@@ -3367,7 +3368,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.productCNTextBox.Size = new System.Drawing.Size(178, 46);
             this.productCNTextBox.TabIndex = 22;
             this.clientValidator.SetValidator2(this.productCNTextBox, this.regularExpressionValidator7);
-            this.productCNTextBox.WatermarkText = "ä¸­æ–‡";
+            this.productCNTextBox.WatermarkText = "ÖĞÎÄ";
             // 
             // provinceENTextBox
             // 
@@ -3381,7 +3382,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.provinceENTextBox.Name = "provinceENTextBox";
             this.provinceENTextBox.Size = new System.Drawing.Size(100, 20);
             this.provinceENTextBox.TabIndex = 16;
-            this.provinceENTextBox.WatermarkText = "è‹±æ–‡";
+            this.provinceENTextBox.WatermarkText = "Ó¢ÎÄ";
             // 
             // provinceCNTextBox
             // 
@@ -3394,7 +3395,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.provinceCNTextBox.Name = "provinceCNTextBox";
             this.provinceCNTextBox.Size = new System.Drawing.Size(100, 20);
             this.provinceCNTextBox.TabIndex = 15;
-            this.provinceCNTextBox.WatermarkText = "ä¸­æ–‡";
+            this.provinceCNTextBox.WatermarkText = "ÖĞÎÄ";
             // 
             // cityENTextBox
             // 
@@ -3408,7 +3409,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cityENTextBox.Name = "cityENTextBox";
             this.cityENTextBox.Size = new System.Drawing.Size(100, 20);
             this.cityENTextBox.TabIndex = 13;
-            this.cityENTextBox.WatermarkText = "è‹±æ–‡";
+            this.cityENTextBox.WatermarkText = "Ó¢ÎÄ";
             // 
             // cityCNTextBox
             // 
@@ -3421,7 +3422,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cityCNTextBox.Name = "cityCNTextBox";
             this.cityCNTextBox.Size = new System.Drawing.Size(100, 20);
             this.cityCNTextBox.TabIndex = 12;
-            this.cityCNTextBox.WatermarkText = "ä¸­æ–‡";
+            this.cityCNTextBox.WatermarkText = "ÖĞÎÄ";
             // 
             // addressENTextBox
             // 
@@ -3436,7 +3437,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.addressENTextBox.TabIndex = 10;
             this.clientValidator.SetValidator1(this.addressENTextBox, this.requiredFieldValidator18);
             this.clientValidator.SetValidator2(this.addressENTextBox, this.regularExpressionValidator6);
-            this.addressENTextBox.WatermarkText = "è‹±æ–‡åœ°å€";
+            this.addressENTextBox.WatermarkText = "Ó¢ÎÄµØÖ·";
             // 
             // addressCNTextBox
             // 
@@ -3451,7 +3452,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.addressCNTextBox.TabIndex = 9;
             this.clientValidator.SetValidator1(this.addressCNTextBox, this.requiredFieldValidator17);
             this.clientValidator.SetValidator2(this.addressCNTextBox, this.regularExpressionValidator5);
-            this.addressCNTextBox.WatermarkText = "ä¸­æ–‡åœ°å€";
+            this.addressCNTextBox.WatermarkText = "ÖĞÎÄµØÖ·";
             // 
             // clientNameENTextBox
             // 
@@ -3466,7 +3467,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientNameENTextBox.TabIndex = 6;
             this.clientValidator.SetValidator1(this.clientNameENTextBox, this.requiredFieldValidator15);
             this.clientValidator.SetValidator2(this.clientNameENTextBox, this.regularExpressionValidator4);
-            this.clientNameENTextBox.WatermarkText = "è‹±æ–‡å";
+            this.clientNameENTextBox.WatermarkText = "Ó¢ÎÄÃû";
             // 
             // clientNameCNTextBox
             // 
@@ -3481,13 +3482,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientNameCNTextBox.TabIndex = 5;
             this.clientValidator.SetValidator1(this.clientNameCNTextBox, this.requiredFieldValidator14);
             this.clientValidator.SetValidator2(this.clientNameCNTextBox, this.regularExpressionValidator3);
-            this.clientNameCNTextBox.WatermarkText = "ä¸­æ–‡å";
+            this.clientNameCNTextBox.WatermarkText = "ÖĞÎÄÃû";
             // 
             // tabItemClient
             // 
             this.tabItemClient.AttachedControl = this.tabPanelClient;
             this.tabItemClient.Name = "tabItemClient";
-            this.tabItemClient.Text = "åŸºæœ¬ä¿¡æ¯";
+            this.tabItemClient.Text = "»ù±¾ĞÅÏ¢";
             // 
             // tabPanelClientCreditLine
             // 
@@ -3570,14 +3571,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colCreditLineType
             // 
             this.colCreditLineType.DataPropertyName = "CreditLineType";
-            this.colCreditLineType.HeaderText = "é¢åº¦ç±»å‹";
+            this.colCreditLineType.HeaderText = "¶î¶ÈÀàĞÍ";
             this.colCreditLineType.Name = "colCreditLineType";
             this.colCreditLineType.ReadOnly = true;
             // 
             // colCreditLineCurrency
             // 
             this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
-            this.colCreditLineCurrency.HeaderText = "é¢åº¦å¸ç§";
+            this.colCreditLineCurrency.HeaderText = "¶î¶È±ÒÖÖ";
             this.colCreditLineCurrency.Name = "colCreditLineCurrency";
             this.colCreditLineCurrency.ReadOnly = true;
             // 
@@ -3587,7 +3588,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle12.Format = "C2";
             dataGridViewCellStyle12.NullValue = null;
             this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle12;
-            this.colCreditLine.HeaderText = "é¢åº¦ä¸Šé™";
+            this.colCreditLine.HeaderText = "¶î¶ÈÉÏÏŞ";
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
             // 
@@ -3597,7 +3598,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle13.Format = "d";
             dataGridViewCellStyle13.NullValue = null;
             this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle13;
-            this.colPeriodBegin.HeaderText = "æœ‰æ•ˆæœŸ(å§‹)";
+            this.colPeriodBegin.HeaderText = "ÓĞĞ§ÆÚ(Ê¼)";
             this.colPeriodBegin.Name = "colPeriodBegin";
             this.colPeriodBegin.ReadOnly = true;
             // 
@@ -3607,42 +3608,42 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle14.Format = "d";
             dataGridViewCellStyle14.NullValue = null;
             this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle14;
-            this.colPeriodEnd.HeaderText = "æœ‰æ•ˆæœŸ(ç»ˆ)";
+            this.colPeriodEnd.HeaderText = "ÓĞĞ§ÆÚ(ÖÕ)";
             this.colPeriodEnd.Name = "colPeriodEnd";
             this.colPeriodEnd.ReadOnly = true;
             // 
             // colApproveNo
             // 
             this.colApproveNo.DataPropertyName = "ApproveNo";
-            this.colApproveNo.HeaderText = "æˆä¿¡ç¼–å·";
+            this.colApproveNo.HeaderText = "ÊÚĞÅ±àºÅ";
             this.colApproveNo.Name = "colApproveNo";
             this.colApproveNo.ReadOnly = true;
             // 
             // colApproveType
             // 
             this.colApproveType.DataPropertyName = "ApproveType";
-            this.colApproveType.HeaderText = "æˆä¿¡ç±»å‹";
+            this.colApproveType.HeaderText = "ÊÚĞÅÀàĞÍ";
             this.colApproveType.Name = "colApproveType";
             this.colApproveType.ReadOnly = true;
             // 
             // colCreditLineStatus
             // 
             this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
-            this.colCreditLineStatus.HeaderText = "é¢åº¦çŠ¶æ€";
+            this.colCreditLineStatus.HeaderText = "¶î¶È×´Ì¬";
             this.colCreditLineStatus.Name = "colCreditLineStatus";
             this.colCreditLineStatus.ReadOnly = true;
             // 
             // colFreezeReason
             // 
             this.colFreezeReason.DataPropertyName = "FreezeReason";
-            this.colFreezeReason.HeaderText = "å†»ç»“åŸå› ";
+            this.colFreezeReason.HeaderText = "¶³½áÔ­Òò";
             this.colFreezeReason.Name = "colFreezeReason";
             this.colFreezeReason.ReadOnly = true;
             // 
             // colFreezer
             // 
             this.colFreezer.DataPropertyName = "Freezer";
-            this.colFreezer.HeaderText = "å†»ç»“äºº";
+            this.colFreezer.HeaderText = "¶³½áÈË";
             this.colFreezer.Name = "colFreezer";
             this.colFreezer.ReadOnly = true;
             // 
@@ -3652,21 +3653,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle15.Format = "d";
             dataGridViewCellStyle15.NullValue = null;
             this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle15;
-            this.colFreezeDate.HeaderText = "å†»ç»“æ—¥æœŸ";
+            this.colFreezeDate.HeaderText = "¶³½áÈÕÆÚ";
             this.colFreezeDate.Name = "colFreezeDate";
             this.colFreezeDate.ReadOnly = true;
             // 
             // colUnfreezeReason
             // 
             this.colUnfreezeReason.DataPropertyName = "UnfreezeReason";
-            this.colUnfreezeReason.HeaderText = "è§£å†»åŸå› ";
+            this.colUnfreezeReason.HeaderText = "½â¶³Ô­Òò";
             this.colUnfreezeReason.Name = "colUnfreezeReason";
             this.colUnfreezeReason.ReadOnly = true;
             // 
             // colUnfreezer
             // 
             this.colUnfreezer.DataPropertyName = "Unfreezer";
-            this.colUnfreezer.HeaderText = "è§£å†»äºº";
+            this.colUnfreezer.HeaderText = "½â¶³ÈË";
             this.colUnfreezer.Name = "colUnfreezer";
             this.colUnfreezer.ReadOnly = true;
             // 
@@ -3676,14 +3677,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle16.Format = "d";
             dataGridViewCellStyle16.NullValue = null;
             this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle16;
-            this.colUnfreezeDate.HeaderText = "è§£å†»æ—¥æœŸ";
+            this.colUnfreezeDate.HeaderText = "½â¶³ÈÕÆÚ";
             this.colUnfreezeDate.Name = "colUnfreezeDate";
             this.colUnfreezeDate.ReadOnly = true;
             // 
             // colComment
             // 
             this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "å¤‡æ³¨";
+            this.colComment.HeaderText = "±¸×¢";
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
             // 
@@ -3831,7 +3832,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditLineUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditLineUpdate.TabIndex = 35;
-            this.btnClientCreditLineUpdate.Text = "ç¼–è¾‘";
+            this.btnClientCreditLineUpdate.Text = "±à¼­";
             this.btnClientCreditLineUpdate.Click += new System.EventHandler(this.UpdateClientCreditLine);
             // 
             // creditLineTextBox
@@ -3857,7 +3858,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditLineRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditLineRefresh.TabIndex = 33;
-            this.btnClientCreditLineRefresh.Text = "åˆ·æ–°";
+            this.btnClientCreditLineRefresh.Text = "Ë¢ĞÂ";
             this.btnClientCreditLineRefresh.Click += new System.EventHandler(this.RefreshClientCreditLine);
             // 
             // creditLineCommentTextBox
@@ -3920,7 +3921,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditLineUnfreeze.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineUnfreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditLineUnfreeze.TabIndex = 39;
-            this.btnClientCreditLineUnfreeze.Text = "è§£å†»";
+            this.btnClientCreditLineUnfreeze.Text = "½â¶³";
             this.btnClientCreditLineUnfreeze.Click += new System.EventHandler(this.UnfreezeClientCreditLine);
             // 
             // unfreezerTextBox
@@ -3982,7 +3983,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditLineFreeze.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineFreeze.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditLineFreeze.TabIndex = 38;
-            this.btnClientCreditLineFreeze.Text = "å†»ç»“";
+            this.btnClientCreditLineFreeze.Text = "¶³½á";
             this.btnClientCreditLineFreeze.Click += new System.EventHandler(this.FreezeClientCreditLine);
             // 
             // unfreezeReasonTextBox
@@ -4026,7 +4027,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditLineDelete.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditLineDelete.TabIndex = 37;
-            this.btnClientCreditLineDelete.Text = "åˆ é™¤";
+            this.btnClientCreditLineDelete.Text = "É¾³ı";
             this.btnClientCreditLineDelete.Click += new System.EventHandler(this.DeleteClientCreditLine);
             // 
             // btnClientCreditLineSave
@@ -4038,7 +4039,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditLineSave.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditLineSave.TabIndex = 36;
-            this.btnClientCreditLineSave.Text = "ä¿å­˜";
+            this.btnClientCreditLineSave.Text = "±£´æ";
             this.btnClientCreditLineSave.Click += new System.EventHandler(this.SaveClientCreditLine);
             // 
             // freezerTextBox
@@ -4063,7 +4064,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnClientCreditLineNew.Size = new System.Drawing.Size(75, 23);
             this.btnClientCreditLineNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClientCreditLineNew.TabIndex = 34;
-            this.btnClientCreditLineNew.Text = "æ–°å»º";
+            this.btnClientCreditLineNew.Text = "ĞÂ½¨";
             this.btnClientCreditLineNew.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // creditLineStatusTextBox
@@ -4086,11 +4087,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.approveTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.approveTypeComboBox.FormattingEnabled = true;
             this.approveTypeComboBox.Items.AddRange(new object[] {
-            "ç»¼åˆæˆä¿¡",
-            "å›½é™…åŒä¿ç†",
-            "è¿›å£ä¿ç†",
-            "æœ‰è¿½ç´¢æƒä¿ç†",
-            "æ— è¿½ç´¢æƒä¿ç†"});
+            "×ÛºÏÊÚĞÅ",
+            "¹ú¼ÊË«±£Àí",
+            "½ø¿Ú±£Àí",
+            "ÓĞ×·Ë÷È¨±£Àí",
+            "ÎŞ×·Ë÷È¨±£Àí"});
             this.approveTypeComboBox.Location = new System.Drawing.Point(317, 49);
             this.approveTypeComboBox.Name = "approveTypeComboBox";
             this.approveTypeComboBox.Size = new System.Drawing.Size(121, 21);
@@ -4192,9 +4193,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.creditLineTypeComboBox.FormattingEnabled = true;
             this.creditLineTypeComboBox.Items.AddRange(new object[] {
-            "ä¿ç†é¢„ä»˜æ¬¾èèµ„é¢åº¦",
-            "ä¹°æ–¹ä¿¡ç”¨é£é™©æ‹…ä¿é¢åº¦",
-            "æ± èèµ„é¢åº¦"});
+            "±£ÀíÔ¤¸¶¿îÈÚ×Ê¶î¶È",
+            "Âò·½ĞÅÓÃ·çÏÕµ£±£¶î¶È",
+            "³ØÈÚ×Ê¶î¶È"});
             this.creditLineTypeComboBox.Location = new System.Drawing.Point(90, 4);
             this.creditLineTypeComboBox.Name = "creditLineTypeComboBox";
             this.creditLineTypeComboBox.Size = new System.Drawing.Size(152, 21);
@@ -4217,7 +4218,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.tabItemClientCreditLine.AttachedControl = this.tabPanelClientCreditLine;
             this.tabItemClientCreditLine.Name = "tabItemClientCreditLine";
-            this.tabItemClientCreditLine.Text = "é¢åº¦ä¿¡æ¯";
+            this.tabItemClientCreditLine.Text = "¶î¶ÈĞÅÏ¢";
             // 
             // clientValidator
             // 
@@ -4227,83 +4228,83 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // requiredFieldValidator1
             // 
-            this.requiredFieldValidator1.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator1.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // regularExpressionValidator1
             // 
-            this.regularExpressionValidator1.ErrorMessage = "ä¸ç¬¦åˆç¼–ç è§„åˆ™ã€‚æ­£ç¡®ç¤ºä¾‹:210HJKN01";
+            this.regularExpressionValidator1.ErrorMessage = "²»·ûºÏ±àÂë¹æÔò¡£ÕıÈ·Ê¾Àı:210HJKN01";
             this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator1.ValidationExpression = "^[a-zA-Z0-9]{2}[a-zA-Z0-9\\\\-]{1}[a-zA-Z0-9]{4}\\d{2}$";
             // 
             // requiredFieldValidator2
             // 
-            this.requiredFieldValidator2.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator2.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // regularExpressionValidator8
             // 
             this.regularExpressionValidator8.EmptyValueIsValid = true;
-            this.regularExpressionValidator8.ErrorMessage = "ä¸èƒ½è¾“å…¥ç‰¹æ®Šå­—ç¬¦";
+            this.regularExpressionValidator8.ErrorMessage = "²»ÄÜÊäÈëÌØÊâ×Ö·û";
             this.regularExpressionValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator8.ValidationExpression = "^[^~!@#$%\\\\^&\\\\*\\\\+=\\\\?]+$";
             // 
             // regularExpressionValidator7
             // 
             this.regularExpressionValidator7.EmptyValueIsValid = true;
-            this.regularExpressionValidator7.ErrorMessage = "ä¸èƒ½è¾“å…¥ç‰¹æ®Šå­—ç¬¦";
+            this.regularExpressionValidator7.ErrorMessage = "²»ÄÜÊäÈëÌØÊâ×Ö·û";
             this.regularExpressionValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator7.ValidationExpression = "^[^~!@#$%\\\\^&\\\\*\\\\+=\\\\?]+$";
             // 
             // requiredFieldValidator18
             // 
-            this.requiredFieldValidator18.ErrorMessage = "è‡³å°‘æœ‰ä¸€ä¸ªåœ°å€";
+            this.requiredFieldValidator18.ErrorMessage = "ÖÁÉÙÓĞÒ»¸öµØÖ·";
             this.requiredFieldValidator18.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.requiredFieldValidator18.OptionalValidationGroup = "Address";
             // 
             // regularExpressionValidator6
             // 
             this.regularExpressionValidator6.EmptyValueIsValid = true;
-            this.regularExpressionValidator6.ErrorMessage = "ä¸èƒ½è¾“å…¥ç‰¹æ®Šå­—ç¬¦";
+            this.regularExpressionValidator6.ErrorMessage = "²»ÄÜÊäÈëÌØÊâ×Ö·û";
             this.regularExpressionValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator6.OptionalValidationGroup = "^[^~!@#$%\\\\^\\\\*\\\\+=\\\\?]+$";
             // 
             // requiredFieldValidator17
             // 
-            this.requiredFieldValidator17.ErrorMessage = "è‡³å°‘æœ‰ä¸€ä¸ªåœ°å€";
+            this.requiredFieldValidator17.ErrorMessage = "ÖÁÉÙÓĞÒ»¸öµØÖ·";
             this.requiredFieldValidator17.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.requiredFieldValidator17.OptionalValidationGroup = "Address";
             // 
             // regularExpressionValidator5
             // 
             this.regularExpressionValidator5.EmptyValueIsValid = true;
-            this.regularExpressionValidator5.ErrorMessage = "ä¸èƒ½è¾“å…¥ç‰¹æ®Šå­—ç¬¦";
+            this.regularExpressionValidator5.ErrorMessage = "²»ÄÜÊäÈëÌØÊâ×Ö·û";
             this.regularExpressionValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator5.ValidationExpression = "^[^~!@#$%\\\\^&\\\\*\\\\+=\\\\?]+$";
             // 
             // requiredFieldValidator15
             // 
-            this.requiredFieldValidator15.ErrorMessage = "è‡³å°‘æœ‰ä¸€ä¸ªå®¢æˆ·å";
+            this.requiredFieldValidator15.ErrorMessage = "ÖÁÉÙÓĞÒ»¸ö¿Í»§Ãû";
             this.requiredFieldValidator15.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.requiredFieldValidator15.OptionalValidationGroup = "ClientName";
             // 
             // regularExpressionValidator4
             // 
             this.regularExpressionValidator4.EmptyValueIsValid = true;
-            this.regularExpressionValidator4.ErrorMessage = "ä¸èƒ½è¾“å…¥ç‰¹æ®Šå­—ç¬¦";
+            this.regularExpressionValidator4.ErrorMessage = "²»ÄÜÊäÈëÌØÊâ×Ö·û";
             this.regularExpressionValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator4.ValidationExpression = "^[^~!@#$%\\\\^\\\\*\\\\+=\\\\?]+$";
             // 
             // requiredFieldValidator14
             // 
-            this.requiredFieldValidator14.ErrorMessage = "è‡³å°‘æœ‰ä¸€ä¸ªå®¢æˆ·å";
+            this.requiredFieldValidator14.ErrorMessage = "ÖÁÉÙÓĞÒ»¸ö¿Í»§Ãû";
             this.requiredFieldValidator14.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.requiredFieldValidator14.OptionalValidationGroup = "ClientName";
             // 
             // regularExpressionValidator3
             // 
             this.regularExpressionValidator3.EmptyValueIsValid = true;
-            this.regularExpressionValidator3.ErrorMessage = "ä¸èƒ½è¾“å…¥ç‰¹æ®Šå­—ç¬¦";
+            this.regularExpressionValidator3.ErrorMessage = "²»ÄÜÊäÈëÌØÊâ×Ö·û";
             this.regularExpressionValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator3.ValidationExpression = "^[^~!@#$%\\\\^&\\\\*\\\\+=\\\\?]+$";
             // 
@@ -4318,13 +4319,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // requiredFieldValidator16
             // 
-            this.requiredFieldValidator16.ErrorMessage = "è‡³å°‘æœ‰ä¸€ä¸ªå®¢æˆ·å";
+            this.requiredFieldValidator16.ErrorMessage = "ÖÁÉÙÓĞÒ»¸ö¿Í»§Ãû";
             this.requiredFieldValidator16.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.requiredFieldValidator16.OptionalValidationGroup = "ClientName";
             // 
             // requiredFieldValidator10
             // 
-            this.requiredFieldValidator10.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator10.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator10.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // creditLineValidator
@@ -4335,54 +4336,54 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // requiredFieldValidator8
             // 
-            this.requiredFieldValidator8.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator8.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // customValidator1
             // 
-            this.customValidator1.ErrorMessage = "é¢åº¦ä¸Šé™å¿…é¡»å¤§äºé›¶";
+            this.customValidator1.ErrorMessage = "¶î¶ÈÉÏÏŞ±ØĞë´óÓÚÁã";
             this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
             // 
             // customValidator5
             // 
-            this.customValidator5.ErrorMessage = "å¿…å¡«";
+            this.customValidator5.ErrorMessage = "±ØÌî";
             this.customValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator5.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator5_ValidateValue);
             // 
             // customValidator4
             // 
-            this.customValidator4.ErrorMessage = "å¿…å¡«";
+            this.customValidator4.ErrorMessage = "±ØÌî";
             this.customValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator4.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator4_ValidateValue);
             // 
             // regularExpressionValidator9
             // 
             this.regularExpressionValidator9.EmptyValueIsValid = true;
-            this.regularExpressionValidator9.ErrorMessage = "åªèƒ½ç”±æ•°å­—å’Œå­—æ¯ç»„æˆ";
+            this.regularExpressionValidator9.ErrorMessage = "Ö»ÄÜÓÉÊı×ÖºÍ×ÖÄ¸×é³É";
             this.regularExpressionValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator9.ValidationExpression = "^[a-zA-Z0-9]+$";
             // 
             // requiredFieldValidator5
             // 
-            this.requiredFieldValidator5.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator5.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // compareValidator2
             // 
             this.compareValidator2.ControlToCompare = this.periodBeginDateTimePicker;
-            this.compareValidator2.ErrorMessage = "ç»ˆæ­¢æ—¥æœŸåº”è¯¥å¤§äºèµ·å§‹æ—¥æœŸ";
+            this.compareValidator2.ErrorMessage = "ÖÕÖ¹ÈÕÆÚÓ¦¸Ã´óÓÚÆğÊ¼ÈÕÆÚ";
             this.compareValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator2.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
             // requiredFieldValidator4
             // 
-            this.requiredFieldValidator4.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator4.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator6
             // 
-            this.requiredFieldValidator6.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator6.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // contractValidator
@@ -4392,35 +4393,35 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // requiredFieldValidator3
             // 
-            this.requiredFieldValidator3.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator3.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator11
             // 
-            this.requiredFieldValidator11.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator11.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator11.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // regularExpressionValidator10
             // 
-            this.regularExpressionValidator10.ErrorMessage = "ä¸èƒ½è¾“å…¥ç‰¹æ®Šå­—ç¬¦";
+            this.regularExpressionValidator10.ErrorMessage = "²»ÄÜÊäÈëÌØÊâ×Ö·û";
             this.regularExpressionValidator10.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator10.ValidationExpression = "^[^~!@#$%\\\\^&\\\\*\\\\+=\\\\?]+$";
             // 
             // requiredFieldValidator13
             // 
-            this.requiredFieldValidator13.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator13.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator13.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // compareValidator1
             // 
             this.compareValidator1.ControlToCompare = this.diContractValueDate;
-            this.compareValidator1.ErrorMessage = "åˆ°æœŸæ—¥åº”è¯¥å¤§äºç”Ÿæ•ˆæ—¥";
+            this.compareValidator1.ErrorMessage = "µ½ÆÚÈÕÓ¦¸Ã´óÓÚÉúĞ§ÈÕ";
             this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
             // requiredFieldValidator12
             // 
-            this.requiredFieldValidator12.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator12.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator12.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // reviewValidator
@@ -4431,17 +4432,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // requiredFieldValidator19
             // 
-            this.requiredFieldValidator19.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator19.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator19.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator7
             // 
-            this.requiredFieldValidator7.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator7.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // regularExpressionValidator2
             // 
-            this.regularExpressionValidator2.ErrorMessage = "åæŸ¥æ„è§ä¹¦ç¼–å·é”™è¯¯ï¼Œä¾‹å­å¦‚ï¼šSH20100101-0001AB-SH";
+            this.regularExpressionValidator2.ErrorMessage = "Ğ­²éÒâ¼ûÊé±àºÅ´íÎó£¬Àı×ÓÈç£ºSH20100101-0001AB-SH";
             this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator2.ValidationExpression = "^[A-Z]{2}\\d{8}-\\d{4}[A-Z]{2,3}(-[A-Z]{2})?$";
             // 
@@ -4457,7 +4458,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblGDComment.Name = "lblGDComment";
             lblGDComment.Size = new System.Drawing.Size(34, 16);
             lblGDComment.TabIndex = 29;
-            lblGDComment.Text = "å¤‡æ³¨:";
+            lblGDComment.Text = "±¸×¢:";
             // 
             // tbGDComment
             // 
@@ -4483,7 +4484,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "ClientDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "å®¢æˆ·è¯¦ç»†ä¿¡æ¯";
+            this.Text = "¿Í»§ÏêÏ¸ĞÅÏ¢";
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabControl.PerformLayout();
@@ -4529,7 +4530,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         }
         #endregion
-
-        private DevComponents.DotNetBar.Controls.TextBoxX tbGDComment;
     }
 }

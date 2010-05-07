@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="CreditCoverNegotiation.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class CreditCoverNegotiation
     {
-        #region Properties (9)
+		#region?Properties?(8)?
 
         /// <summary>
         /// Gets
@@ -106,6 +106,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+		#endregion?Properties?
     }
 }

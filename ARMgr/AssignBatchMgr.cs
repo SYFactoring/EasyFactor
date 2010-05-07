@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="AssignBatchMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -14,17 +14,17 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.Utils.ConstStr;
     using DevComponents.DotNetBar;
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
-    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class AssignBatchMgr : UserControl
     {
-        #regionÂ FieldsÂ (3)
+        #region?Fields?(3)?
 
         /// <summary>
         /// 
@@ -39,9 +39,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        #endregionÂ Fields
+        #endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+        #region?Enums?(1)?
 
         /// <summary>
         ///
@@ -69,9 +69,9 @@ namespace CMBC.EasyFactor.ARMgr
             REPORT
         }
 
-        #endregionÂ Enums
+        #endregion?Enums?
 
-        #regionÂ ConstructorsÂ (3)
+        #region?Constructors?(3)?
 
         /// <summary>
         /// Initializes a new instance of the AssignBatchMgr class
@@ -116,7 +116,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "å…¨éƒ¨" });
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "È«²¿" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";
             this.cbLocation.ValueMember = "LocationCode";
@@ -138,9 +138,9 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregionÂ Constructors
+        #endregion?Constructors?
 
-        #regionÂ PropertiesÂ (3)
+        #region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -169,11 +169,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-        #endregionÂ Properties
+        #endregion?Properties?
 
-        #regionÂ DelegatesÂ andÂ EventsÂ (1)
+        #region?Delegates?and?Events?(1)?
 
-        //Â DelegatesÂ (1)Â 
+        //?Delegates?(1)?
 
         /// <summary>
         /// 
@@ -181,11 +181,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batchGroup"></param>
         private delegate void MakeReport(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType);
 
-        #endregionÂ DelegatesÂ andÂ Events
+        #endregion?Delegates?and?Events?
 
-        #regionÂ MethodsÂ (23)
+        #region?Methods?(25)?
 
-        //Â PrivateÂ MethodsÂ (23)Â 
+        //?Private?Methods?(25)?
 
         /// <summary>
         /// 
@@ -208,18 +208,18 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("æ­¤æ‰¹æ¬¡å·²ç»è¿‡å¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("´ËÅú´ÎÒÑ¾­¹ı¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€šè¿‡è¯¥æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍ¨¹ı¸ÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("ç»åŠäººå’Œå¤æ ¸äººç›¸åŒï¼Œä¸å¯è¿›è¡Œå¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¾­°ìÈËºÍ¸´ºËÈËÏàÍ¬£¬²»¿É½øĞĞ¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -256,20 +256,20 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤æ­¤è½¬è®©æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı´Ë×ªÈÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (selectedBatch.CheckStatus == BATCH.CHECK)
             {
-                MessageBoxEx.Show("ä¸èƒ½åˆ é™¤å·²å¤æ ¸æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("²»ÄÜÉ¾³ıÒÑ¸´ºËÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             if (selectedBatch.Invoices.Count > 0)
             {
-                MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤æ‰¹æ¬¡ï¼Œå®ƒåŒ…å«ç›¸å…³å‘ç¥¨ä¿¡æ¯", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("²»ÄÜÉ¾³ı´ËÅú´Î£¬Ëü°üº¬Ïà¹Ø·¢Æ±ĞÅÏ¢", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -280,7 +280,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("åˆ é™¤å¤±è´¥," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("É¾³ıÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -398,50 +398,13 @@ namespace CMBC.EasyFactor.ARMgr
 
                     if (batch.CheckStatus != BATCH.CHECK)
                     {
-                        MessageBoxEx.Show("è¯¥æ‰¹æ¬¡çŠ¶æ€ä¸å±äºå·²å®¡æ ¸ï¼Œä¸èƒ½ç”ŸæˆæŠ¥è¡¨ï¼Œæ‰¹æ¬¡å·ï¼š " + batch.AssignBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("¸ÃÅú´Î×´Ì¬²»ÊôÓÚÒÑÉóºË£¬²»ÄÜÉú³É±¨±í£¬Åú´ÎºÅ£º " + batch.AssignBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return null;
                     }
                 }
             }
 
             return selectedBatches;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="selectedBatches"></param>
-        /// <param name="makeReport"></param>
-        private void GroupBatchesByTransactionType(List<InvoiceAssignBatch> selectedBatches, MakeReport makeReport)
-        {
-            IEnumerable<IGrouping<string, InvoiceAssignBatch>> caseGroups = selectedBatches.GroupBy(c => c.Case.TransactionType);
-
-            foreach (IGrouping<string, InvoiceAssignBatch> caseGroup in caseGroups)
-            {
-                string transactionType = caseGroup.Key;
-                IEnumerable<IGrouping<Client, InvoiceAssignBatch>> groups = null;
-
-                switch (transactionType)
-                {
-                    case "å›½å†…å–æ–¹ä¿ç†":
-                    case "å‡ºå£ä¿ç†":
-                        groups = caseGroup.GroupBy(c => c.Case.SellerClient);
-                        foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
-                        {
-                            makeReport(group, transactionType);
-                        }
-                        break;
-                    case "å›½å†…ä¹°æ–¹ä¿ç†":
-                    case "è¿›å£ä¿ç†":
-                        groups = caseGroup.GroupBy(c => c.Case.BuyerClient);
-                        foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
-                        {
-                            makeReport(group, transactionType);
-                        }
-                        break;
-                    default: break;
-                }
-            }
         }
 
         /// <summary>
@@ -468,6 +431,43 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="selectedBatches"></param>
+        /// <param name="makeReport"></param>
+        private void GroupBatchesByTransactionType(List<InvoiceAssignBatch> selectedBatches, MakeReport makeReport)
+        {
+            IEnumerable<IGrouping<string, InvoiceAssignBatch>> caseGroups = selectedBatches.GroupBy(c => c.Case.TransactionType);
+
+            foreach (IGrouping<string, InvoiceAssignBatch> caseGroup in caseGroups)
+            {
+                string transactionType = caseGroup.Key;
+                IEnumerable<IGrouping<Client, InvoiceAssignBatch>> groups = null;
+
+                switch (transactionType)
+                {
+                    case "¹úÄÚÂô·½±£Àí":
+                    case "³ö¿Ú±£Àí":
+                        groups = caseGroup.GroupBy(c => c.Case.SellerClient);
+                        foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
+                        {
+                            makeReport(group, transactionType);
+                        }
+                        break;
+                    case "¹úÄÚÂò·½±£Àí":
+                    case "½ø¿Ú±£Àí":
+                        groups = caseGroup.GroupBy(c => c.Case.BuyerClient);
+                        foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
+                        {
+                            makeReport(group, transactionType);
+                        }
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
@@ -482,7 +482,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (String.IsNullOrEmpty(transactionType))
             {
-                transactionType = "å…¨éƒ¨";
+                transactionType = "È«²¿";
             }
 
             context = new DBDataContext();
@@ -493,12 +493,12 @@ namespace CMBC.EasyFactor.ARMgr
                 && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
                 && (status != string.Empty ? i.CheckStatus == status : true)
                 && (i.CreateUserName.Contains(createUserName))
-                && (transactionType == "å…¨éƒ¨" ? true : i.Case.TransactionType == transactionType)
+                && (transactionType == "È«²¿" ? true : i.Case.TransactionType == transactionType)
                 && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
                 && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
         }
 
         /// <summary>
@@ -522,18 +522,18 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("æ­¤æ‰¹æ¬¡å·²ç»è¿‡å¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("´ËÅú´ÎÒÑ¾­¹ı¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€€å›è¯¥æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍË»Ø¸ÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("ç»åŠäººå’Œå¤æ ¸äººç›¸åŒï¼Œä¸å¯è¿›è¡Œå¤æ ¸é€€å›", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¾­°ìÈËºÍ¸´ºËÈËÏàÍ¬£¬²»¿É½øĞĞ¸´ºËÍË»Ø", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -577,7 +577,7 @@ namespace CMBC.EasyFactor.ARMgr
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -594,10 +594,10 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
                 Client seller = batchGroup.Key;
-                sheet.Cells[2, 1] = String.Format("è‡´ï¼š {0}", seller.ToString());
+                sheet.Cells[2, 1] = String.Format("ÖÂ£º {0}", seller.ToString());
                 sheet.get_Range("A4", "E4").MergeCells = true;
                 sheet.get_Range("A4", "A4").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.Cells[4, 1] = "åº”æ”¶è´¦æ¬¾è½¬è®©æ˜ç»†è¡¨";
+                sheet.Cells[4, 1] = "Ó¦ÊÕÕË¿î×ªÈÃÃ÷Ï¸±í";
                 sheet.get_Range("A1", "A3").RowHeight = 20;
                 sheet.get_Range("A4", "A4").RowHeight = 30;
 
@@ -608,40 +608,40 @@ namespace CMBC.EasyFactor.ARMgr
                     Factor factor = null;
                     Client buyer = selectedBatch.Case.BuyerClient;
 
-                    if (transactionType == "å‡ºå£ä¿ç†")
+                    if (transactionType == "³ö¿Ú±£Àí")
                     {
                         factor = selectedBatch.Case.BuyerFactor;
                     }
 
-                    sheet.Cells[row, 1] = "ä¹°æ–¹ï¼š";
-                    sheet.Cells[row++, 2] = String.Format("{0}ï¼ˆåº”æ”¶è´¦æ¬¾å€ºåŠ¡äººï¼‰", buyer.ToString());
+                    sheet.Cells[row, 1] = "Âò·½£º";
+                    sheet.Cells[row++, 2] = String.Format("{0}£¨Ó¦ÊÕÕË¿îÕ®ÎñÈË£©", buyer.ToString());
                     sheet.get_Range("B6", "B6").Font.Underline = true;
                     if (factor != null)
                     {
-                        sheet.Cells[row, 1] = "è¿›å£ä¿ç†å•†ï¼š";
+                        sheet.Cells[row, 1] = "½ø¿Ú±£ÀíÉÌ£º";
                         sheet.Cells[row++, 2] = factor.ToString();
                     }
 
                     CDA cda = selectedBatch.Case.ActiveCDA;
-                    sheet.Cells[row, 1] = "ä¿¡ç”¨é£é™©é¢åº¦ï¼š";
+                    sheet.Cells[row, 1] = "ĞÅÓÃ·çÏÕ¶î¶È£º";
                     sheet.Cells[row, 2] = cda.CreditCover.GetValueOrDefault();
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(cda.CreditCoverCurr);
                     row++;
-                    sheet.Cells[row, 1] = "åº”æ”¶è´¦æ¬¾ä½™é¢ï¼š";
+                    sheet.Cells[row, 1] = "Ó¦ÊÕÕË¿îÓà¶î£º";
                     sheet.Cells[row, 2] = selectedBatch.Case.AssignOutstanding;
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
                     row++;
 
                     sheet.get_Range("D10", "E10").MergeCells = true;
-                    sheet.Cells[row, 4] = String.Format("ä¸šåŠ¡ç¼–å·ï¼š{0}", selectedBatch.AssignBatchNo);
+                    sheet.Cells[row, 4] = String.Format("ÒµÎñ±àºÅ£º{0}", selectedBatch.AssignBatchNo);
 
                     row++;
-                    sheet.Cells[row, 1] = "å‘ç¥¨å·";
-                    sheet.Cells[row, 2] = "è½¬è®©é‡‘é¢";
-                    sheet.Cells[row, 3] = "å‘ç¥¨æ—¥æœŸ";
-                    sheet.Cells[row, 4] = "åˆ°æœŸæ—¥";
-                    sheet.Cells[row, 5] = "æ–‡ä»¶ç‘•ç–µ";
+                    sheet.Cells[row, 1] = "·¢Æ±ºÅ";
+                    sheet.Cells[row, 2] = "×ªÈÃ½ğ¶î";
+                    sheet.Cells[row, 3] = "·¢Æ±ÈÕÆÚ";
+                    sheet.Cells[row, 4] = "µ½ÆÚÈÕ";
+                    sheet.Cells[row, 5] = "ÎÄ¼şè¦´Ã";
 
                     row++;
                     int invoiceStart = row;
@@ -655,7 +655,7 @@ namespace CMBC.EasyFactor.ARMgr
                         row++;
                     }
 
-                    sheet.Cells[row, 1] = "å°è®¡";
+                    sheet.Cells[row, 1] = "Ğ¡¼Æ";
                     sheet.Cells[row, 2] = selectedBatch.AssignAmount;
 
                     int invoiceEnd = row;
@@ -674,11 +674,11 @@ namespace CMBC.EasyFactor.ARMgr
                     row++;
                 }
 
-                sheet.Cells[row, 1] = "æœ¬è¡Œå·²å®Œæˆä¸Šè¿°å‘ç¥¨/è´·é¡¹å‘ç¥¨è½¬è®©ï¼Œç‰¹æ­¤é€šçŸ¥";
-                sheet.Cells[row + 2, 3] = "ä¸­å›½æ°‘ç”Ÿé“¶è¡Œè´¸æ˜“é‡‘èäº‹ä¸šéƒ¨ä¿ç†ä¸šåŠ¡éƒ¨ ï¼ˆä¸šåŠ¡ç« ï¼‰";
-                sheet.Cells[row + 5, 4] = String.Format("{0:yyyy}å¹´{0:MM}æœˆ{0:dd}æ—¥", DateTime.Now);
+                sheet.Cells[row, 1] = "±¾ĞĞÒÑÍê³ÉÉÏÊö·¢Æ±/´ûÏî·¢Æ±×ªÈÃ£¬ÌØ´ËÍ¨Öª";
+                sheet.Cells[row + 2, 3] = "ÖĞ¹úÃñÉúÒøĞĞÃ³Ò×½ğÈÚÊÂÒµ²¿±£ÀíÒµÎñ²¿ £¨ÒµÎñÕÂ£©";
+                sheet.Cells[row + 5, 4] = String.Format("{0:yyyy}Äê{0:MM}ÔÂ{0:dd}ÈÕ", DateTime.Now);
 
-                sheet.UsedRange.Font.Name = "ä»¿å®‹_GB2312";
+                sheet.UsedRange.Font.Name = "·ÂËÎ_GB2312";
                 sheet.UsedRange.Font.Size = 12;
                 sheet.get_Range("A4", "A4").Font.Size = 24;
 
@@ -734,9 +734,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (InvoiceAssignBatch batch in selectedBatches)
             {
-                if (batch.Case.ActiveCDA.CommissionType != "æŒ‰è½¬è®©é‡‘é¢" && batch.Case.ActiveCDA.CommissionType != "å…¶ä»–")
+                if (batch.Case.ActiveCDA.CommissionType != "°´×ªÈÃ½ğ¶î" && batch.Case.ActiveCDA.CommissionType != "ÆäËû")
                 {
-                    MessageBoxEx.Show("æ‰€é€‰æ‰¹æ¬¡ä¸æ˜¯æŒ‰ç…§è½¬è®©é‡‘é¢ï¼ˆæˆ–å…¶ä»–ï¼‰æ”¶å–ä¿ç†è´¹ç”¨ï¼Œæ‰¹æ¬¡å·ï¼š" + batch.AssignBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("ËùÑ¡Åú´Î²»ÊÇ°´ÕÕ×ªÈÃ½ğ¶î£¨»òÆäËû£©ÊÕÈ¡±£Àí·ÑÓÃ£¬Åú´ÎºÅ£º" + batch.AssignBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }
@@ -755,7 +755,7 @@ namespace CMBC.EasyFactor.ARMgr
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -771,10 +771,10 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 180, 3, 170, 30);
 
                 Client seller = batchGroup.Key;
-                sheet.Cells[3, 1] = String.Format("å–æ–¹ï¼š{0}", seller.ToString());
+                sheet.Cells[3, 1] = String.Format("Âô·½£º{0}", seller.ToString());
                 sheet.get_Range("A5", "E5").MergeCells = true;
                 sheet.get_Range("A5", "A5").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.Cells[5, 1] = "ä¿ç†è´¹ç”¨æ˜ç»†è¡¨";
+                sheet.Cells[5, 1] = "±£Àí·ÑÓÃÃ÷Ï¸±í";
 
                 int row = 7;
                 double totalCommission = 0;
@@ -787,21 +787,21 @@ namespace CMBC.EasyFactor.ARMgr
                     CDA cda = selectedBatch.Case.ActiveCDA;
 
                     int beginRow = row;
-                    sheet.Cells[row, 1] = "ä¹°æ–¹";
+                    sheet.Cells[row, 1] = "Âò·½";
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 5]).MergeCells = true;
-                    sheet.Cells[row, 2] = String.Format("{0} ï¼ˆåº”æ”¶è´¦æ¬¾å€ºåŠ¡äººï¼‰", buyer.ToString());
+                    sheet.Cells[row, 2] = String.Format("{0} £¨Ó¦ÊÕÕË¿îÕ®ÎñÈË£©", buyer.ToString());
                     row++;
-                    sheet.Cells[row, 1] = "ä¿ç†å•†";
+                    sheet.Cells[row, 1] = "±£ÀíÉÌ";
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 3]).MergeCells = true;
                     sheet.Cells[row, 2] = factor.ToString();
-                    sheet.Cells[row, 4] = "å¸åˆ«";
+                    sheet.Cells[row, 4] = "±Ò±ğ";
                     sheet.Cells[row, 5] = selectedBatch.BatchCurrency;
                     row++;
-                    sheet.Cells[row, 1] = "æœ¬æ¬¡è½¬è®©é‡‘é¢";
-                    sheet.Cells[row, 2] = "æœ¬æ¬¡è½¬è®©ç¬”æ•°";
-                    sheet.Cells[row, 3] = "è½¬è®©æ—¥";
-                    sheet.Cells[row, 4] = "ä¿ç†è´¹ç‡";
-                    sheet.Cells[row, 5] = "å•æ®å¤„ç†è´¹";
+                    sheet.Cells[row, 1] = "±¾´Î×ªÈÃ½ğ¶î";
+                    sheet.Cells[row, 2] = "±¾´Î×ªÈÃ±ÊÊı";
+                    sheet.Cells[row, 3] = "×ªÈÃÈÕ";
+                    sheet.Cells[row, 4] = "±£Àí·ÑÂÊ";
+                    sheet.Cells[row, 5] = "µ¥¾İ´¦Àí·Ñ";
                     row++;
                     sheet.Cells[row, 1] = selectedBatch.AssignAmount;
                     sheet.get_Range("A" + row, "A" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
@@ -810,7 +810,7 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.Cells[row, 4] = String.Format("{0:0.000%}", selectedBatch.Case.ActiveCDA.Price);
                     sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
                     sheet.Cells[row++, 5] = selectedBatch.Case.ActiveCDA.HandFee;
-                    sheet.Cells[row, 1] = "å°è®¡";
+                    sheet.Cells[row, 1] = "Ğ¡¼Æ";
                     sheet.Cells[row, 4] = selectedBatch.CommissionAmount;
                     sheet.Cells[row, 5] = selectedBatch.HandfeeAmount;
                     sheet.get_Range("D" + row, "D" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
@@ -824,15 +824,15 @@ namespace CMBC.EasyFactor.ARMgr
                     row += 3;
                 }
 
-                sheet.Cells[row, 4] = "è´¹ç”¨æ€»è®¡";
+                sheet.Cells[row, 4] = "·ÑÓÃ×Ü¼Æ";
                 sheet.Cells[row, 5] = totalCommission;
                 sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
                 sheet.get_Range("D" + row, "E" + row).Borders.LineStyle = 1;
 
                 row += 2;
 
-                sheet.Cells[row + 1, 4] = "ä¸­å›½æ°‘ç”Ÿé“¶è¡Œè´¸æ˜“é‡‘èäº‹ä¸šéƒ¨ä¿ç†ä¸šåŠ¡éƒ¨ ï¼ˆä¸šåŠ¡ç« ï¼‰";
-                sheet.Cells[row + 3, 5] = String.Format("{0:yyyy}å¹´{0:MM}æœˆ{0:dd}æ—¥", DateTime.Now);
+                sheet.Cells[row + 1, 4] = "ÖĞ¹úÃñÉúÒøĞĞÃ³Ò×½ğÈÚÊÂÒµ²¿±£ÀíÒµÎñ²¿ £¨ÒµÎñÕÂ£©";
+                sheet.Cells[row + 3, 5] = String.Format("{0:yyyy}Äê{0:MM}ÔÂ{0:dd}ÈÕ", DateTime.Now);
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 17;
@@ -840,7 +840,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
 
-                sheet.UsedRange.Font.Name = "ä»¿å®‹_GB2312";
+                sheet.UsedRange.Font.Name = "·ÂËÎ_GB2312";
                 sheet.UsedRange.Font.Size = 12;
                 sheet.UsedRange.Rows.RowHeight = 20;
 
@@ -903,7 +903,7 @@ namespace CMBC.EasyFactor.ARMgr
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -923,16 +923,16 @@ namespace CMBC.EasyFactor.ARMgr
 
                 sheet.get_Range("A3", "D3").MergeCells = true;
                 sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.Cells[3, 1] = "æ–‡ä»¶æ£€æŸ¥å•";
+                sheet.Cells[3, 1] = "ÎÄ¼ş¼ì²éµ¥";
 
                 sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[5, 2]).MergeCells = true;
-                sheet.Cells[5, 1] = String.Format("å–æ–¹ï¼š{0}", seller.ToString());
+                sheet.Cells[5, 1] = String.Format("Âô·½£º{0}", seller.ToString());
 
                 int row = 7;
                 foreach (InvoiceAssignBatch selectedBatch in batchGroup)
                 {
                     Client buyer = selectedBatch.Case.BuyerClient;
-                    sheet.Cells[row++, 1] = String.Format("ä¹°æ–¹ï¼š{0}", buyer.ToString());
+                    sheet.Cells[row++, 1] = String.Format("Âò·½£º{0}", buyer.ToString());
                     sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 2]).MergeCells = true;
                     sheet.Cells[row++, 1] = String.Format("No. of Invoice(s) attached: {0}", selectedBatch.BatchCount);
                     int rowDueDate = row;
@@ -967,27 +967,27 @@ namespace CMBC.EasyFactor.ARMgr
                 }
 
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " â–¡  ç¬¬ä¸€æ¬¡è½¬è®©ï¼šé€šçŸ¥å‡½";
+                sheet.Cells[row++, 1] = " ¡õ  µÚÒ»´Î×ªÈÃ£ºÍ¨Öªº¯";
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " â–¡  åº”æ”¶å¸æ¬¾è½¬è®©é€šçŸ¥ä¹¦(é¡»æ£€é™„æ­£æœ¬)";
+                sheet.Cells[row++, 1] = " ¡õ  Ó¦ÊÕÕÊ¿î×ªÈÃÍ¨ÖªÊé(Ğë¼ì¸½Õı±¾)";
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " â–¡  å‘ç¥¨å¤å°ä»¶(ç¬¬ä¸€è”)";
+                sheet.Cells[row++, 1] = " ¡õ  ·¢Æ±¸´Ó¡¼ş(µÚÒ»Áª)";
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " â–¡  å‡ºè´§å•å¤å°ä»¶(æˆ–ç­¾æ”¶å•å¤å°ä»¶)";
+                sheet.Cells[row++, 1] = " ¡õ  ³ö»õµ¥¸´Ó¡¼ş(»òÇ©ÊÕµ¥¸´Ó¡¼ş)";
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).RowHeight = 30;
-                sheet.Cells[row++, 1] = " â–¡  èµ„æ–™ä¸€è‡´æ€§ï¼šä¹°å–æ–¹åŸºæœ¬èµ„æ–™ï¼Œå‘ç¥¨ä¸Šç›–è½¬è®©å­—å¥(å¤å°ä»¶)ï¼Œå‘ç¥¨å·ç ï¼Œå‘ç¥¨é‡‘é¢ï¼Œ" + Environment.NewLine +
-                                        "å‘ç¥¨æ—¥ï¼Œåˆ°æœŸæ—¥ï¼Œæ‰¹å¤ä¹¦å…¶å®ƒç›¸å…³æ¡ä»¶ã€‚";
+                sheet.Cells[row++, 1] = " ¡õ  ×ÊÁÏÒ»ÖÂĞÔ£ºÂòÂô·½»ù±¾×ÊÁÏ£¬·¢Æ±ÉÏ¸Ç×ªÈÃ×Ö¾ä(¸´Ó¡¼ş)£¬·¢Æ±ºÅÂë£¬·¢Æ±½ğ¶î£¬" + Environment.NewLine +
+                                        "·¢Æ±ÈÕ£¬µ½ÆÚÈÕ£¬Åú¸´ÊéÆäËüÏà¹ØÌõ¼ş¡£";
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " â–¡  ä¿ç†é¢åº¦é€šçŸ¥ä¹¦(Sign Back/ Expiry date)";
+                sheet.Cells[row++, 1] = " ¡õ  ±£Àí¶î¶ÈÍ¨ÖªÊé(Sign Back/ Expiry date)";
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row++, 1] = " â–¡  åˆçº¦ä¹¦(Sign Back/ Expiry date)";
+                sheet.Cells[row++, 1] = " ¡õ  ºÏÔ¼Êé(Sign Back/ Expiry date)";
                 row++;
-                sheet.Cells[row++, 1] = "Discrepancies  â–¡ Yes   â–¡ No";
+                sheet.Cells[row++, 1] = "Discrepancies  ¡õ Yes   ¡õ No";
 
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row, 1] = String.Format("è¿è¥ç»„ï¼š ç»åŠ {0}               å¤æ ¸ {1}              ä¸»ç®¡{2}", batchGroup.First().CreateUserName, batchGroup.First().CheckUserName, "");
-                sheet.Cells[row + 1, 3] = String.Format("{0:yyyy}å¹´{0:MM}æœˆ{0:dd}æ—¥", DateTime.Now);
+                sheet.Cells[row, 1] = String.Format("ÔËÓª×é£º ¾­°ì {0}               ¸´ºË {1}              Ö÷¹Ü{2}", batchGroup.First().CreateUserName, batchGroup.First().CheckUserName, "");
+                sheet.Cells[row + 1, 3] = String.Format("{0:yyyy}Äê{0:MM}ÔÂ{0:dd}ÈÕ", DateTime.Now);
 
                 sheet.get_Range("A1", "A2").RowHeight = 20;
                 sheet.get_Range("A3", "A3").RowHeight = 30;
@@ -1041,23 +1041,6 @@ namespace CMBC.EasyFactor.ARMgr
             GroupBatchesByTransactionType(selectedBatches, makeReport);
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="batch"></param>
-        private void ReportThree(InvoiceAssignBatch batch)
-        {
-            List<InvoiceAssignBatch> selectedBatches = new List<InvoiceAssignBatch>();
-            selectedBatches.Add(batch);
-            MakeReport assignReport = new MakeReport(ReportAssignImpl);
-            GroupBatchesBySeller(selectedBatches, assignReport);
-            MakeReport financeReport = new MakeReport(ReportFinanceImpl);
-            GroupBatchesByTransactionType(selectedBatches, financeReport);
-            MakeReport commissionReport = new MakeReport(ReportCommissionImpl);
-            GroupBatchesBySeller(selectedBatches, commissionReport);
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1068,7 +1051,7 @@ namespace CMBC.EasyFactor.ARMgr
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1086,24 +1069,24 @@ namespace CMBC.EasyFactor.ARMgr
 
                 sheet.get_Range("A3", "E3").MergeCells = true;
                 sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.Cells[3, 1] = "å¯èèµ„è´¦æ¬¾æ˜ç»†è¡¨";
+                sheet.Cells[3, 1] = "¿ÉÈÚ×ÊÕË¿îÃ÷Ï¸±í";
 
                 Client keyClient = batchGroup.Key;
                 int row = 5;
-                if (transactionType == "å›½å†…å–æ–¹ä¿ç†" || transactionType == "å‡ºå£ä¿ç†")
+                if (transactionType == "¹úÄÚÂô·½±£Àí" || transactionType == "³ö¿Ú±£Àí")
                 {
-                    sheet.Cells[row, 1] = "å–æ–¹ï¼š";
+                    sheet.Cells[row, 1] = "Âô·½£º";
                 }
                 else
                 {
-                    sheet.Cells[row, 1] = "ä¹°æ–¹ï¼š";
+                    sheet.Cells[row, 1] = "Âò·½£º";
                 }
 
                 sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
                 sheet.Cells[row, 2] = String.Format("{0}", keyClient.ToString());
 
                 row++;
-                sheet.Cells[row, 1] = "æœ€é«˜ä¿ç†èèµ„é¢åº¦ï¼š";
+                sheet.Cells[row, 1] = "×î¸ß±£ÀíÈÚ×Ê¶î¶È£º";
 
                 Case firstCase = batchGroup.First().Case;
                 CDA activeCDA = firstCase.ActiveCDA;
@@ -1119,7 +1102,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
 
                 row++;
-                sheet.Cells[row, 1] = "æ€»èèµ„ä½™é¢ï¼š";
+                sheet.Cells[row, 1] = "×ÜÈÚ×ÊÓà¶î£º";
                 if (creditLine != null)
                 {
                     sheet.Cells[row, 2] = keyClient.GetFinanceOutstanding(creditLine.CreditLineCurrency).GetValueOrDefault();
@@ -1127,7 +1110,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
 
                 row++;
-                sheet.Cells[row, 1] = "æœ€é«˜å¯èèµ„é‡‘é¢ï¼š";
+                sheet.Cells[row, 1] = "×î¸ß¿ÉÈÚ×Ê½ğ¶î£º";
                 if (creditLine != null)
                 {
                     sheet.Cells[row, 2] = keyClient.CanBeFinanceAmount(firstCase.TransactionType, firstCase.InvoiceCurrency);
@@ -1140,64 +1123,64 @@ namespace CMBC.EasyFactor.ARMgr
                 {
 
                     Client valueClient = null;
-                    if (transactionType == "å›½å†…å–æ–¹ä¿ç†" || transactionType == "å‡ºå£ä¿ç†")
+                    if (transactionType == "¹úÄÚÂô·½±£Àí" || transactionType == "³ö¿Ú±£Àí")
                     {
                         valueClient = selectedBatch.Case.BuyerClient;
-                        sheet.Cells[row, 1] = "ä¹°æ–¹ï¼š";
+                        sheet.Cells[row, 1] = "Âò·½£º";
                     }
                     else
                     {
                         valueClient = selectedBatch.Case.SellerClient;
-                        sheet.Cells[row, 1] = "å–æ–¹ï¼š";
+                        sheet.Cells[row, 1] = "Âô·½£º";
                     }
 
                     CDA cda = selectedBatch.Case.ActiveCDA;
 
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
-                    sheet.Cells[row, 2] = String.Format("{0} ï¼ˆåº”æ”¶è´¦æ¬¾å€ºåŠ¡äººï¼‰", valueClient.ToString());
+                    sheet.Cells[row, 2] = String.Format("{0} £¨Ó¦ÊÕÕË¿îÕ®ÎñÈË£©", valueClient.ToString());
                     row++;
 
                     Factor factor = null;
-                    if (transactionType == "å‡ºå£ä¿ç†")
+                    if (transactionType == "³ö¿Ú±£Àí")
                     {
                         factor = selectedBatch.Case.BuyerFactor;
                     }
 
                     if (factor != null)
                     {
-                        sheet.Cells[row, 1] = "è¿›å£ä¿ç†å•†";
+                        sheet.Cells[row, 1] = "½ø¿Ú±£ÀíÉÌ";
                         sheet.Cells[row, 2] = factor.ToString();
                     }
 
                     row++;
 
-                    sheet.Cells[row, 1] = "ä¿¡ç”¨é£é™©é¢åº¦ï¼š";
+                    sheet.Cells[row, 1] = "ĞÅÓÃ·çÏÕ¶î¶È£º";
                     sheet.Cells[row, 2] = cda.CreditCover.GetValueOrDefault();
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(cda.CreditCoverCurr);
 
                     row++;
-                    sheet.Cells[row, 1] = "åº”æ”¶è´¦æ¬¾ä½™é¢ï¼š";
+                    sheet.Cells[row, 1] = "Ó¦ÊÕÕË¿îÓà¶î£º";
                     sheet.Cells[row, 2] = selectedBatch.Case.AssignOutstanding;
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
                     row++;
-                    sheet.Cells[row, 1] = "ä¿ç†èèµ„é¢åº¦ï¼š";
+                    sheet.Cells[row, 1] = "±£ÀíÈÚ×Ê¶î¶È£º";
                     sheet.Cells[row, 2] = cda.FinanceLine.GetValueOrDefault();
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(cda.FinanceLineCurr);
 
                     row++;
-                    sheet.Cells[row, 1] = "èèµ„ä½™é¢ï¼š";
+                    sheet.Cells[row, 1] = "ÈÚ×ÊÓà¶î£º";
                     sheet.Cells[row, 2] = selectedBatch.Case.FinanceOutstanding.GetValueOrDefault();
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
                     row++;
-                    if (transactionType == "å›½å†…å–æ–¹ä¿ç†" || transactionType == "å‡ºå£ä¿ç†")
+                    if (transactionType == "¹úÄÚÂô·½±£Àí" || transactionType == "³ö¿Ú±£Àí")
                     {
-                        sheet.Cells[row, 1] = "æ­¤ä¹°æ–¹æœ€é«˜å¯èèµ„é‡‘é¢ï¼š";
+                        sheet.Cells[row, 1] = "´ËÂò·½×î¸ß¿ÉÈÚ×Ê½ğ¶î£º";
                     }
                     else
                     {
-                        sheet.Cells[row, 1] = "æ­¤å–æ–¹æœ€é«˜å¯èèµ„é‡‘é¢ï¼š";
+                        sheet.Cells[row, 1] = "´ËÂô·½×î¸ß¿ÉÈÚ×Ê½ğ¶î£º";
                     }
 
                     sheet.Cells[row, 2] = selectedBatch.Case.CanBeFinanceAmount;
@@ -1205,11 +1188,11 @@ namespace CMBC.EasyFactor.ARMgr
 
                     row++;
                     row++;
-                    sheet.Cells[row, 1] = "å‘ç¥¨å·";
-                    sheet.Cells[row, 2] = "è½¬è®©é‡‘é¢";
-                    sheet.Cells[row, 3] = "å‘ç¥¨æ—¥æœŸ";
-                    sheet.Cells[row, 4] = "åˆ°æœŸæ—¥";
-                    sheet.Cells[row, 5] = "å¤‡æ³¨";
+                    sheet.Cells[row, 1] = "·¢Æ±ºÅ";
+                    sheet.Cells[row, 2] = "×ªÈÃ½ğ¶î";
+                    sheet.Cells[row, 3] = "·¢Æ±ÈÕÆÚ";
+                    sheet.Cells[row, 4] = "µ½ÆÚÈÕ";
+                    sheet.Cells[row, 5] = "±¸×¢";
 
                     row++;
                     int invoiceStart = row;
@@ -1228,7 +1211,7 @@ namespace CMBC.EasyFactor.ARMgr
                         }
                     }
 
-                    sheet.Cells[row, 1] = "å°è®¡";
+                    sheet.Cells[row, 1] = "Ğ¡¼Æ";
                     sheet.Cells[row, 2] = assignAmount;
 
                     int invoiceEnd = row;
@@ -1246,10 +1229,10 @@ namespace CMBC.EasyFactor.ARMgr
                     row += 3;
                 }
 
-                sheet.Cells[row + 1, 3] = "ä¸­å›½æ°‘ç”Ÿé“¶è¡Œè´¸æ˜“é‡‘èäº‹ä¸šéƒ¨ä¿ç†ä¸šåŠ¡éƒ¨ ï¼ˆä¸šåŠ¡ç« ï¼‰";
-                sheet.Cells[row + 3, 4] = String.Format("{0:yyyy}å¹´{0:MM}æœˆ{0:dd}æ—¥", DateTime.Now);
+                sheet.Cells[row + 1, 3] = "ÖĞ¹úÃñÉúÒøĞĞÃ³Ò×½ğÈÚÊÂÒµ²¿±£ÀíÒµÎñ²¿ £¨ÒµÎñÕÂ£©";
+                sheet.Cells[row + 3, 4] = String.Format("{0:yyyy}Äê{0:MM}ÔÂ{0:dd}ÈÕ", DateTime.Now);
 
-                sheet.UsedRange.Font.Name = "ä»¿å®‹_GB2312";
+                sheet.UsedRange.Font.Name = "·ÂËÎ_GB2312";
                 sheet.UsedRange.Font.Size = 12;
                 sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 1]).Font.Size = 24;
                 sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 5]).RowHeight = 30;
@@ -1264,9 +1247,9 @@ namespace CMBC.EasyFactor.ARMgr
 
                 app.Visible = true;
 
-                if (activeCDA != null && activeCDA.CommissionType == "æŒ‰èèµ„é‡‘é¢")
+                if (activeCDA != null && activeCDA.CommissionType == "°´ÈÚ×Ê½ğ¶î")
                 {
-                    MessageBoxEx.Show("æ­¤ä¸šåŠ¡æŒ‰ç…§èèµ„é‡‘é¢æ”¶å–è´¹ç”¨ï¼Œè¯·åŠæ—¶å¯¼å‡ºã€Šä¿ç†è´¹ç”¨æ˜ç»†è¡¨ã€‹");
+                    MessageBoxEx.Show("´ËÒµÎñ°´ÕÕÈÚ×Ê½ğ¶îÊÕÈ¡·ÑÓÃ£¬Çë¼°Ê±µ¼³ö¡¶±£Àí·ÑÓÃÃ÷Ï¸±í¡·");
                 }
             }
             catch (Exception e1)
@@ -1320,7 +1303,7 @@ namespace CMBC.EasyFactor.ARMgr
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1339,28 +1322,28 @@ namespace CMBC.EasyFactor.ARMgr
                 Client seller = batchGroup.Key;
                 sheet.get_Range("A3", "G3").MergeCells = true;
                 sheet.get_Range("A3", "A3").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.Cells[3, 1] = "æ–‡ä»¶ç‘•ç–µé€šçŸ¥ä¹¦";
+                sheet.Cells[3, 1] = "ÎÄ¼şè¦´ÃÍ¨ÖªÊé";
 
                 sheet.get_Range(sheet.Cells[5, 1], sheet.Cells[5, 7]).MergeCells = true;
-                sheet.Cells[5, 1] = String.Format("å–æ–¹ï¼ˆå‡ºå£å•†) : {0}", seller.ToString());
+                sheet.Cells[5, 1] = String.Format("Âô·½£¨³ö¿ÚÉÌ) : {0}", seller.ToString());
 
                 int row = 7;
                 foreach (InvoiceAssignBatch selectedBatch in batchGroup)
                 {
                     Client buyer = selectedBatch.Case.BuyerClient;
                     sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
-                    sheet.Cells[row, 1] = String.Format("ä¹°æ–¹(åº”æ”¶è´¦æ¬¾å€ºåŠ¡äºº) : {0}", buyer.ToString());
+                    sheet.Cells[row, 1] = String.Format("Âò·½(Ó¦ÊÕÕË¿îÕ®ÎñÈË) : {0}", buyer.ToString());
                     row++;
                     row++;
                     int rowBegin = row;
 
                     sheet.Cells[row, 1] = "";
-                    sheet.Cells[row, 2] = "å‘ç¥¨å·ç ";
-                    sheet.Cells[row, 3] = "å‘ç¥¨é‡‘é¢";
-                    sheet.Cells[row, 4] = "å‘ç¥¨æ—¥æœŸ";
-                    sheet.Cells[row, 5] = "åˆ°æœŸæ—¥";
-                    sheet.Cells[row, 6] = "ç‘•ç–µé‡‘é¢";
-                    sheet.Cells[row, 7] = "åŸå› ";
+                    sheet.Cells[row, 2] = "·¢Æ±ºÅÂë";
+                    sheet.Cells[row, 3] = "·¢Æ±½ğ¶î";
+                    sheet.Cells[row, 4] = "·¢Æ±ÈÕÆÚ";
+                    sheet.Cells[row, 5] = "µ½ÆÚÈÕ";
+                    sheet.Cells[row, 6] = "è¦´Ã½ğ¶î";
+                    sheet.Cells[row, 7] = "Ô­Òò";
 
                     row++;
 
@@ -1391,13 +1374,13 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.get_Range(sheet.Cells[rowBegin + 1, 6], sheet.Cells[row - 1, 6]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
 
                     sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
-                    sheet.Cells[row, 1] = "åŸå› ï¼š";
+                    sheet.Cells[row, 1] = "Ô­Òò£º";
                     row++;
                     sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
                     sheet.Cells[row, 1] =
-                          "01-å–æ–¹/ä¹°æ–¹åŸºæœ¬èµ„æ–™ä¸ç¬¦; 02-å‘ç¥¨ä¸ºå­˜æ ¹è”æˆ–å‰¯è”å¤å°ä»¶; 03-å‘ç¥¨æ— è½¬è®©å­—æ®è®°è½½æˆ–è´´é”™; \n"
-                        + "04-è´¦æ¬¾åˆ°æœŸæ—¥ä¸ç¬¦;        05-å•æ®å†…å®¹ä¸ç¬¦;             06-é¢åº¦é€šçŸ¥ä¹¦è¿‡æœŸæˆ–æœªç­¾å›; \n"
-                        + "07-ä¿ç†åˆåŒè¿‡æœŸæˆ–æœªç­¾å›;  08-äº¤è´§å‡­è¯å†…å®¹ä¸å®Œæ•´;       09-é€¾æœŸè½¬è®©;      10-å…¶ä»–;";
+                          "01-Âô·½/Âò·½»ù±¾×ÊÁÏ²»·û; 02-·¢Æ±Îª´æ¸ùÁª»ò¸±Áª¸´Ó¡¼ş; 03-·¢Æ±ÎŞ×ªÈÃ×Ö¾İ¼ÇÔØ»òÌù´í; \n"
+                        + "04-ÕË¿îµ½ÆÚÈÕ²»·û;        05-µ¥¾İÄÚÈİ²»·û;             06-¶î¶ÈÍ¨ÖªÊé¹ıÆÚ»òÎ´Ç©»Ø; \n"
+                        + "07-±£ÀíºÏÍ¬¹ıÆÚ»òÎ´Ç©»Ø;  08-½»»õÆ¾Ö¤ÄÚÈİ²»ÍêÕû;       09-ÓâÆÚ×ªÈÃ;      10-ÆäËû;";
                     sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 60;
                     row++;
                     sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 7]).MergeCells = true;
@@ -1409,47 +1392,47 @@ namespace CMBC.EasyFactor.ARMgr
                 }
 
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 3]).MergeCells = true;
-                sheet.Cells[row, 1] = String.Format("æ—¥æœŸï¼š {0:yyyy-MM-dd}", DateTime.Today);
+                sheet.Cells[row, 1] = String.Format("ÈÕÆÚ£º {0:yyyy-MM-dd}", DateTime.Today);
                 sheet.get_Range(sheet.Cells[row, 4], sheet.Cells[row, 5]).MergeCells = true;
-                sheet.Cells[row, 4] = "å¤æ ¸ï¼š";
+                sheet.Cells[row, 4] = "¸´ºË£º";
                 sheet.get_Range(sheet.Cells[row, 6], sheet.Cells[row, 7]).MergeCells = true;
-                sheet.Cells[row, 6] = "ç»åŠï¼š";
+                sheet.Cells[row, 6] = "¾­°ì£º";
 
                 row++;
                 row++;
-                sheet.Cells[row++, 1] = "ç‘•ç–µè§£é™¤è¯´æ˜ï¼š";
+                sheet.Cells[row++, 1] = "è¦´Ã½â³ıËµÃ÷£º";
                 int table2Begin = row;
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
-                sheet.Cells[row, 1] = "å–æ–¹æ„è§";
-                sheet.Cells[row, 3] = "                                  ç­¾ç« ï¼š                    æ—¥æœŸï¼š";
+                sheet.Cells[row, 1] = "Âô·½Òâ¼û";
+                sheet.Cells[row, 3] = "                                  Ç©ÕÂ£º                    ÈÕÆÚ£º";
                 row++;
 
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row + 1, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
-                sheet.Cells[row, 1] = "åˆ†éƒ¨æ„è§";
-                sheet.Cells[row, 3] = "                                  ç»åŠäººç­¾åï¼š              æ—¥æœŸï¼š";
+                sheet.Cells[row, 1] = "·Ö²¿Òâ¼û";
+                sheet.Cells[row, 3] = "                                  ¾­°ìÈËÇ©Ãû£º              ÈÕÆÚ£º";
                 row++;
 
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
-                sheet.Cells[row, 3] = "                                  æœ‰æƒç­¾å­—äººç­¾åï¼š          æ—¥æœŸï¼š";
+                sheet.Cells[row, 3] = "                                  ÓĞÈ¨Ç©×ÖÈËÇ©Ãû£º          ÈÕÆÚ£º";
                 row++;
 
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 1]).RowHeight = 120;
                 sheet.get_Range(sheet.Cells[row, 3], sheet.Cells[row, 7]).VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignBottom;
-                sheet.Cells[row, 1] = "ä¿ç†éƒ¨æ„è§";
-                sheet.Cells[row, 3] = "                                  æœ‰æƒç­¾å­—äººç­¾åï¼š          æ—¥æœŸï¼š";
+                sheet.Cells[row, 1] = "±£Àí²¿Òâ¼û";
+                sheet.Cells[row, 3] = "                                  ÓĞÈ¨Ç©×ÖÈËÇ©Ãû£º          ÈÕÆÚ£º";
                 sheet.get_Range(sheet.Cells[table2Begin, 1], sheet.Cells[row, 7]).Borders.LineStyle = 1;
 
-                sheet.UsedRange.Font.Name = "ä»¿å®‹_GB2312";
+                sheet.UsedRange.Font.Name = "·ÂËÎ_GB2312";
                 sheet.UsedRange.Font.Size = 12;
                 sheet.get_Range("A1", "A2").RowHeight = 20;
                 sheet.get_Range("A3", "A3").RowHeight = 30;
@@ -1488,6 +1471,22 @@ namespace CMBC.EasyFactor.ARMgr
 
                 MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batch"></param>
+        private void ReportThree(InvoiceAssignBatch batch)
+        {
+            List<InvoiceAssignBatch> selectedBatches = new List<InvoiceAssignBatch>();
+            selectedBatches.Add(batch);
+            MakeReport assignReport = new MakeReport(ReportAssignImpl);
+            GroupBatchesBySeller(selectedBatches, assignReport);
+            MakeReport financeReport = new MakeReport(ReportFinanceImpl);
+            GroupBatchesByTransactionType(selectedBatches, financeReport);
+            MakeReport commissionReport = new MakeReport(ReportCommissionImpl);
+            GroupBatchesBySeller(selectedBatches, commissionReport);
         }
 
         /// <summary>
@@ -1537,6 +1536,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregionÂ Methods
+        #endregion?Methods?
     }
 }

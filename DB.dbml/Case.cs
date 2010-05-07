@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Case.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -10,16 +10,15 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Collections.Generic;
     using System.Linq;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
-    using System.Collections.ObjectModel;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class Case
     {
-        #regionÂ FieldsÂ (11)
+		#region?Fields?(11)?
 
         private CDA _activeCDA;
         private double? _assginOutstanding;
@@ -33,9 +32,9 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _totalAssignOutstanding;
         private double? _valuedAssignOutstanding;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ PropertiesÂ (22)
+		#region?Properties?(22)?
 
         /// <summary>
         /// Gets 
@@ -49,7 +48,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     IList<CDA> cdaList = this.CDAs.Where(c => c.CDAStatus == CDAStr.CHECKED).ToList();
                     if (cdaList.Count > 1)
                     {
-                        MessageBoxEx.Show("åŒ…å«å¤šä¸ªæœ‰æ•ˆçš„CDAï¼Œæ¡ˆä»¶ç¼–å·: " + this.CaseCode, MESSAGE.TITLE_WARNING);
+                        MessageBoxEx.Show("°üº¬¶à¸öÓĞĞ§µÄCDA£¬°¸¼ş±àºÅ: " + this.CaseCode, MESSAGE.TITLE_WARNING);
                         return null;
                     }
                     else if (cdaList.Count == 1)
@@ -92,7 +91,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets è½¬è®©ä½™é¢
+        /// Gets ×ªÈÃÓà¶î
         /// </summary>
         public double AssignOutstanding
         {
@@ -147,12 +146,12 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 switch (TransactionType)
                 {
-                    case "å›½å†…å–æ–¹ä¿ç†":
-                    case "å‡ºå£ä¿ç†":
-                        return SellerClient.ClientReviews.Where(review => review.ReviewStatus == "å·²ç”Ÿæ•ˆ").ToList();
-                    case "å›½å†…ä¹°æ–¹ä¿ç†":
-                    case "è¿›å£ä¿ç†":
-                        return BuyerClient.ClientReviews.Where(review => review.ReviewStatus == "å·²ç”Ÿæ•ˆ").ToList();
+                    case "¹úÄÚÂô·½±£Àí":
+                    case "³ö¿Ú±£Àí":
+                        return SellerClient.ClientReviews.Where(review => review.ReviewStatus == "ÒÑÉúĞ§").ToList();
+                    case "¹úÄÚÂò·½±£Àí":
+                    case "½ø¿Ú±£Àí":
+                        return BuyerClient.ClientReviews.Where(review => review.ReviewStatus == "ÒÑÉúĞ§").ToList();
                     default:
                         return null;
                 }
@@ -224,7 +223,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if ("å›½å†…å–æ–¹ä¿ç†".Equals(this.TransactionType) || "å‡ºå£ä¿ç†".Equals(this.TransactionType))
+                if ("¹úÄÚÂô·½±£Àí".Equals(this.TransactionType) || "³ö¿Ú±£Àí".Equals(this.TransactionType))
                 {
                     return this.BuyerFactor;
                 }
@@ -286,7 +285,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets èèµ„ä½™é¢
+        /// Gets ÈÚ×ÊÓà¶î
         /// </summary>
         public double? FinanceOutstanding
         {
@@ -353,7 +352,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate && i.CheckStatus == BATCH.CHECK);
                     foreach (InvoiceFinanceBatch batch in batches)
                     {
-                        if (batch.FinanceType == "å–æ–¹ä»£ä»˜" || batch.FinanceType == "ä¹°æ–¹ä»£ä»˜")
+                        if (batch.FinanceType == "Âô·½´ú¸¶" || batch.FinanceType == "Âò·½´ú¸¶")
                         {
                             if (result == null)
                             {
@@ -383,7 +382,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate && i.CheckStatus == BATCH.CHECK);
                     foreach (InvoiceFinanceBatch batch in batches)
                     {
-                        if (batch.FinanceType != "å–æ–¹ä»£ä»˜" && batch.FinanceType != "ä¹°æ–¹ä»£ä»˜")
+                        if (batch.FinanceType != "Âô·½´ú¸¶" && batch.FinanceType != "Âò·½´ú¸¶")
                         {
                             if (result == null)
                             {
@@ -453,11 +452,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 switch (TransactionType)
                 {
-                    case "å›½å†…å–æ–¹ä¿ç†":
-                    case "å‡ºå£ä¿ç†":
+                    case "¹úÄÚÂô·½±£Àí":
+                    case "³ö¿Ú±£Àí":
                         return this.BuyerClient;
-                    case "å›½å†…ä¹°æ–¹ä¿ç†":
-                    case "è¿›å£ä¿ç†":
+                    case "¹úÄÚÂò·½±£Àí":
+                    case "½ø¿Ú±£Àí":
                         return this.SellerClient;
                     default:
                         return null;
@@ -490,11 +489,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 switch (this.TransactionType)
                 {
-                    case "å›½å†…å–æ–¹ä¿ç†":
-                    case "å‡ºå£ä¿ç†":
+                    case "¹úÄÚÂô·½±£Àí":
+                    case "³ö¿Ú±£Àí":
                         return this.SellerClient.GetFinanceOutstanding(this.InvoiceCurrency).GetValueOrDefault();
-                    case "å›½å†…ä¹°æ–¹ä¿ç†":
-                    case "è¿›å£ä¿ç†":
+                    case "¹úÄÚÂò·½±£Àí":
+                    case "½ø¿Ú±£Àí":
                         return this.BuyerClient.GetFinanceOutstanding(this.InvoiceCurrency).GetValueOrDefault();
                     default:
                         return 0;
@@ -514,7 +513,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// ç”¨äºæ± èèµ„ï¼Œæœ‰æ•ˆçš„è½¬è®©ä½™é¢
+        /// ÓÃÓÚ³ØÈÚ×Ê£¬ÓĞĞ§µÄ×ªÈÃÓà¶î
         /// </summary>
         public double ValuedAssignOutstanding
         {
@@ -546,11 +545,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (2)
+		#region?Methods?(2)?
 
-        //Â PublicÂ MethodsÂ (2)Â 
+		//?Public?Methods?(2)?
 
         /// <summary>
         /// 
@@ -565,10 +564,10 @@ namespace CMBC.EasyFactor.DB.dbml
             string typeCode = null;
             switch (transactionType)
             {
-                case "å‡ºå£ä¿ç†": typeCode = "EX"; break;
-                case "è¿›å£ä¿ç†": typeCode = "IM"; break;
-                case "å›½å†…å–æ–¹ä¿ç†": typeCode = "SE"; break;
-                case "å›½å†…ä¹°æ–¹ä¿ç†": typeCode = "BY"; break;
+                case "³ö¿Ú±£Àí": typeCode = "EX"; break;
+                case "½ø¿Ú±£Àí": typeCode = "IM"; break;
+                case "¹úÄÚÂô·½±£Àí": typeCode = "SE"; break;
+                case "¹úÄÚÂò·½±£Àí": typeCode = "BY"; break;
                 default:
                     typeCode = "  ";
                     break;
@@ -601,10 +600,10 @@ namespace CMBC.EasyFactor.DB.dbml
             string typeCode = null;
             switch (transactionType)
             {
-                case "å‡ºå£ä¿ç†": typeCode = "EX"; break;
-                case "è¿›å£ä¿ç†": typeCode = "IM"; break;
-                case "å›½å†…å–æ–¹ä¿ç†": typeCode = "SE"; break;
-                case "å›½å†…ä¹°æ–¹ä¿ç†": typeCode = "BY"; break;
+                case "³ö¿Ú±£Àí": typeCode = "EX"; break;
+                case "½ø¿Ú±£Àí": typeCode = "IM"; break;
+                case "¹úÄÚÂô·½±£Àí": typeCode = "SE"; break;
+                case "¹úÄÚÂò·½±£Àí": typeCode = "BY"; break;
                 default:
                     typeCode = "  ";
                     break;
@@ -625,6 +624,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return caseCode;
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

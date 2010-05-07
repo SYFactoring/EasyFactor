@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="CaseMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -20,7 +20,7 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CaseMgr : UserControl
     {
-        #regionÂ FieldsÂ (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -31,9 +31,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCaseType opCaseType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -61,11 +61,11 @@ namespace CMBC.EasyFactor.CaseMgr
             STAT
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (2)
+		#region?Constructors?(2)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the CaseMgr class
         /// </summary>
         /// <param name="isContract"></param>
@@ -75,11 +75,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.opCaseType = opCaseType;
             if (opCaseType == OpCaseType.ENABLE_CASE)
             {
-                this.cbCaseMark.Text = "å¯åŠ¨æ¡ˆ";
+                this.cbCaseMark.Text = "Æô¶¯°¸";
             }
             else if (opCaseType == OpCaseType.APPLICATION_CASE)
             {
-                this.cbCaseMark.Text = "ç”³è¯·æ¡ˆ";
+                this.cbCaseMark.Text = "ÉêÇë°¸";
                 this.QueryCase(null, null);
             }
             else if (opCaseType == OpCaseType.STAT)
@@ -108,12 +108,12 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetDoubleBuffered(this.dgvCases);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
-            this.cbTransactionType.Items.Insert(0, "å…¨éƒ¨");
-            this.cbTransactionType.Text = "å…¨éƒ¨";
-            this.cbCaseMark.Text = "å¯åŠ¨æ¡ˆ";
+            this.cbTransactionType.Items.Insert(0, "È«²¿");
+            this.cbTransactionType.Text = "È«²¿";
+            this.cbCaseMark.Text = "Æô¶¯°¸";
 
             List<Department> deptsList = Department.AllDepartments(new DBDataContext());
-            deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "å…¨éƒ¨" });
+            deptsList.Insert(0, new Department() { DepartmentCode = "CN01300", DepartmentName = "È«²¿" });
             this.cbOwnerDepts.DataSource = deptsList;
             this.cbOwnerDepts.DisplayMembers = "DepartmentName";
             this.cbOwnerDepts.ValueMember = "DepartmentCode";
@@ -126,7 +126,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.ValueMember = "CurrencyCode";
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "å…¨éƒ¨" });
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "È«²¿" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";
             this.cbLocation.ValueMember = "LocationCode";
@@ -135,9 +135,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.UpdateContextMenu();
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ PropertiesÂ (3)
+		#region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -166,11 +166,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (14)
+		#region?Methods?(14)?
 
-        //Â PrivateÂ MethodsÂ (14)Â 
+		//?Private?Methods?(14)?
 
         /// <summary>
         /// 
@@ -250,7 +250,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             Case selectedCase = (Case)this.bs.List[this.dgvCases.CurrentCell.RowIndex];
-            if (MessageBoxEx.Show("æ­¤æ¡ˆä»¶æ˜¯" + selectedCase.CaseMark + "ï¼Œæ˜¯å¦ç¡®å®šåˆ é™¤", MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("´Ë°¸¼şÊÇ" + selectedCase.CaseMark + "£¬ÊÇ·ñÈ·¶¨É¾³ı", MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bool isDeleteOK = true;
                 foreach (InvoiceAssignBatch assignBatch in selectedCase.InvoiceAssignBatches)
@@ -284,12 +284,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 catch (Exception e1)
                 {
                     isDeleteOK = false;
-                    MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤æ¡ˆä»¶: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("²»ÄÜÉ¾³ı´Ë°¸¼ş: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 if (isDeleteOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dgvCases.Rows.RemoveAt(dgvCases.CurrentCell.RowIndex);
                 }
             }
@@ -417,11 +417,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
             var queryResult = context.Cases.Where(c =>
                                    ((string)this.cbOwnerDepts.SelectedValue == "CN01300" ? true : c.OwnerDepartmentCode.Equals((string)this.cbOwnerDepts.SelectedValue))
-                                && (this.cbTransactionType.Text == "å…¨éƒ¨" ? true : c.TransactionType == this.cbTransactionType.Text)
+                                && (this.cbTransactionType.Text == "È«²¿" ? true : c.TransactionType == this.cbTransactionType.Text)
                                 && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency == (string)this.cbCurrency.SelectedValue)
                                 && (location == "00" ? true : c.OwnerDepartment.LocationCode == location)
                                 && c.CaseCode.Contains(this.tbCaseCode.Text)
-                                && (caseMark == "å…¨éƒ¨" ? true : c.CaseMark.Contains(caseMark))
+                                && (caseMark == "È«²¿" ? true : c.CaseMark.Contains(caseMark))
                                 && (c.OPName == null ? true : c.OPName.Contains(opName))
                                 && (opCaseType != OpCaseType.STAT && beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                 && (opCaseType != OpCaseType.STAT && endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
@@ -441,7 +441,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
         }
 
         /// <summary>
@@ -523,6 +523,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

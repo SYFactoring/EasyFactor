@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="FactorCreditLineMgr.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorCreditLineMgr
     {
-        #regionÂ FieldsÂ (16)
+		#region?Fields?(17)?
 
         /// <summary> 
         /// Required designer variable.
@@ -27,17 +27,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactorCreditLines;
+        private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.LabelX lblFactorCode;
         private DevComponents.DotNetBar.LabelX lblFactorName;
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ MethodsÂ (1)
+		#region?Methods?(1)?
 
-        //Â ProtectedÂ MethodsÂ (1)Â 
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -53,7 +54,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             base.Dispose(disposing);
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
+
+
 
         #region Component Designer generated code
 
@@ -134,21 +137,21 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colFactorCode
             // 
             this.colFactorCode.DataPropertyName = "FactorCode";
-            this.colFactorCode.HeaderText = "åˆä½œæœºæ„ä»£ç ";
+            this.colFactorCode.HeaderText = "ºÏ×÷»ú¹¹´úÂë";
             this.colFactorCode.Name = "colFactorCode";
             this.colFactorCode.ReadOnly = true;
             // 
             // colFactorType
             // 
             this.colFactorType.DataPropertyName = "FactorType";
-            this.colFactorType.HeaderText = "åˆä½œæœºæ„ç±»å‹";
+            this.colFactorType.HeaderText = "ºÏ×÷»ú¹¹ÀàĞÍ";
             this.colFactorType.Name = "colFactorType";
             this.colFactorType.ReadOnly = true;
             // 
             // colFactorName
             // 
             this.colFactorName.DataPropertyName = "FactorName";
-            this.colFactorName.HeaderText = "åˆä½œæœºæ„åç§°";
+            this.colFactorName.HeaderText = "ºÏ×÷»ú¹¹Ãû³Æ";
             this.colFactorName.Name = "colFactorName";
             this.colFactorName.ReadOnly = true;
             // 
@@ -156,7 +159,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.colCreditLineCurrency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
-            this.colCreditLineCurrency.HeaderText = "é¢åº¦å¸ç§";
+            this.colCreditLineCurrency.HeaderText = "¶î¶È±ÒÖÖ";
             this.colCreditLineCurrency.Name = "colCreditLineCurrency";
             this.colCreditLineCurrency.ReadOnly = true;
             this.colCreditLineCurrency.Width = 80;
@@ -166,28 +169,28 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colCreditLine.DataPropertyName = "CreditLine";
             dataGridViewCellStyle5.Format = "N2";
             this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colCreditLine.HeaderText = "é¢åº¦ä¸Šé™";
+            this.colCreditLine.HeaderText = "¶î¶ÈÉÏÏŞ";
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
             // 
             // colPeriodBegin
             // 
             this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            this.colPeriodBegin.HeaderText = "æœ‰æ•ˆæœŸï¼ˆå§‹ï¼‰";
+            this.colPeriodBegin.HeaderText = "ÓĞĞ§ÆÚ£¨Ê¼£©";
             this.colPeriodBegin.Name = "colPeriodBegin";
             this.colPeriodBegin.ReadOnly = true;
             // 
             // colPeriodEnd
             // 
             this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            this.colPeriodEnd.HeaderText = "æœ‰æ•ˆæœŸï¼ˆç»ˆï¼‰";
+            this.colPeriodEnd.HeaderText = "ÓĞĞ§ÆÚ£¨ÖÕ£©";
             this.colPeriodEnd.Name = "colPeriodEnd";
             this.colPeriodEnd.ReadOnly = true;
             // 
             // colCreditLineStatus
             // 
             this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
-            this.colCreditLineStatus.HeaderText = "é¢åº¦çŠ¶æ€";
+            this.colCreditLineStatus.HeaderText = "¶î¶È×´Ì¬";
             this.colCreditLineStatus.Name = "colCreditLineStatus";
             this.colCreditLineStatus.ReadOnly = true;
             // 
@@ -223,7 +226,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 9;
-            this.btnQuery.Text = "æŸ¥è¯¢";
+            this.btnQuery.Text = "²éÑ¯";
             this.btnQuery.Click += new System.EventHandler(this.Query);
             // 
             // tbFactorName
@@ -248,7 +251,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorName.Name = "lblFactorName";
             this.lblFactorName.Size = new System.Drawing.Size(81, 16);
             this.lblFactorName.TabIndex = 7;
-            this.lblFactorName.Text = "åˆä½œæœºæ„åç§°";
+            this.lblFactorName.Text = "ºÏ×÷»ú¹¹Ãû³Æ";
             // 
             // tbFactorCode
             // 
@@ -272,7 +275,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorCode.Name = "lblFactorCode";
             this.lblFactorCode.Size = new System.Drawing.Size(81, 16);
             this.lblFactorCode.TabIndex = 5;
-            this.lblFactorCode.Text = "åˆä½œæœºæ„ä»£ç ";
+            this.lblFactorCode.Text = "ºÏ×÷»ú¹¹´úÂë";
             // 
             // lblCount
             // 
@@ -302,7 +305,5 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.LabelX lblCount;
     }
 }

@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="FinanceBatchMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -14,17 +14,17 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.Utils.ConstStr;
     using DevComponents.DotNetBar;
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
-    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class FinanceBatchMgr : UserControl
     {
-        #regionÂ FieldsÂ (3)
+        #region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -35,9 +35,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        #endregionÂ Fields
+        #endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -62,12 +62,17 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            POOL_QUERY
+            POOL_QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            POOL_CHECK,
         }
 
-        #endregionÂ Enums
+        #endregion?Enums?
 
-        #regionÂ ConstructorsÂ (3)
+        #region?Constructors?(4)?
 
         /// <summary>
         /// Initializes a new instance of the FinanceBatchMgr class
@@ -80,6 +85,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Visible = false;
             this.colBuyerName.Visible = false;
             this.colBatchCount.Visible = false;
+            this.colTransactionType.Visible = false;
 
             this.bs.DataSource = selectedClient.InvoiceFinanceBatches;
             this.context = context;
@@ -127,7 +133,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "å…¨éƒ¨" });
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "È«²¿" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";
             this.cbLocation.ValueMember = "LocationCode";
@@ -139,20 +145,33 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.cbCheckStatus.Text = BATCH.UNCHECK;
                 context = new DBDataContext();
-                var queryResult = context.InvoiceFinanceBatches.Where(i => i.CheckStatus == BATCH.UNCHECK);
+                var queryResult = context.InvoiceFinanceBatches.Where(i => i.CheckStatus == BATCH.UNCHECK && i.CaseCode != null);
                 this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+                this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
+            }
+            else if (batchType == OpBatchType.POOL_CHECK)
+            {
+                this.colBuyerName.Visible = false;
+                this.colBatchCount.Visible = false;
+                this.colTransactionType.Visible = false;
+
+                this.cbCheckStatus.Text = BATCH.UNCHECK;
+                context = new DBDataContext();
+                var queryResult = context.InvoiceFinanceBatches.Where(i => i.CheckStatus == BATCH.UNCHECK && i.ClientEDICode != null);
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
             }
             else if (batchType == OpBatchType.POOL_QUERY)
             {
                 this.colBuyerName.Visible = false;
                 this.colBatchCount.Visible = false;
+                this.colTransactionType.Visible = false;
             }
         }
 
-        #endregionÂ Constructors
+        #endregion?Constructors?
 
-        #regionÂ PropertiesÂ (3)
+        #region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -181,19 +200,19 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-        #endregionÂ Properties
+        #endregion?Properties?
 
-        #regionÂ DelegatesÂ andÂ EventsÂ (1)
+        #region?Delegates?and?Events?(1)?
 
-        //Â DelegatesÂ (1)Â 
+        //?Delegates?(1)?
 
         private delegate void MakeReport(IGrouping<Client, InvoiceFinanceBatch> batchGroup);
 
-        #endregionÂ DelegatesÂ andÂ Events
+        #endregion?Delegates?and?Events?
 
-        #regionÂ MethodsÂ (13)
+        #region?Methods?(13)?
 
-        //Â PrivateÂ MethodsÂ (13)Â 
+        //?Private?Methods?(13)?
 
         /// <summary>
         /// 
@@ -216,18 +235,18 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("æ­¤æ‰¹æ¬¡å·²ç»è¿‡å¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("´ËÅú´ÎÒÑ¾­¹ı¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€šè¿‡è¯¥æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍ¨¹ı¸ÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("ç»åŠäººå’Œå¤æ ¸äººç›¸åŒï¼Œä¸å¯è¿›è¡Œå¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¾­°ìÈËºÍ¸´ºËÈËÏàÍ¬£¬²»¿É½øĞĞ¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -244,7 +263,6 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
 
         /// <summary>
         /// 
@@ -264,14 +282,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤æ­¤èèµ„æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı´ËÈÚ×ÊÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (selectedBatch.CheckStatus == BATCH.CHECK)
             {
-                MessageBoxEx.Show("ä¸èƒ½åˆ é™¤å·²å¤æ ¸æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("²»ÄÜÉ¾³ıÒÑ¸´ºËÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -286,7 +304,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             //if (selectedBatch.Invoices.Count > 0)
             //{
-            //    MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤æ‰¹æ¬¡ï¼Œå®ƒåŒ…å«ç›¸å…³å‘ç¥¨ä¿¡æ¯", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    MessageBoxEx.Show("²»ÄÜÉ¾³ı´ËÅú´Î£¬Ëü°üº¬Ïà¹Ø·¢Æ±ĞÅÏ¢", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             //    return;
             //}
 
@@ -297,7 +315,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("åˆ é™¤å¤±è´¥," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("É¾³ıÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -371,7 +389,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                     if (batch.CheckStatus != BATCH.CHECK)
                     {
-                        MessageBoxEx.Show("è¯¥æ‰¹æ¬¡çŠ¶æ€ä¸å±äºå·²å®¡æ ¸ï¼Œä¸èƒ½ç”ŸæˆæŠ¥è¡¨ï¼Œæ‰¹æ¬¡å·ï¼š " + batch.FinanceBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("¸ÃÅú´Î×´Ì¬²»ÊôÓÚÒÑÉóºË£¬²»ÄÜÉú³É±¨±í£¬Åú´ÎºÅ£º " + batch.FinanceBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return null;
                     }
                 }
@@ -416,28 +434,29 @@ namespace CMBC.EasyFactor.ARMgr
             string transactionType = this.cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
-                transactionType = "å…¨éƒ¨";
+                transactionType = "È«²¿";
             }
 
             string financeType = this.cbFinanceType.Text;
             if (String.IsNullOrEmpty(financeType))
             {
-                financeType = "å…¨éƒ¨";
+                financeType = "È«²¿";
             }
 
             context = new DBDataContext();
 
             IEnumerable<InvoiceFinanceBatch> queryResult = null;
-            if (opBatchType != OpBatchType.POOL_QUERY)
+            if (opBatchType != OpBatchType.POOL_QUERY && opBatchType != OpBatchType.POOL_CHECK)
             {
                 queryResult = context.InvoiceFinanceBatches.Where(i =>
                     i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
+                    && (i.CaseCode != null)
                     && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true)
                     && (i.CreateUserName.Contains(createUserName))
-                    && (transactionType == "å…¨éƒ¨" ? true : i.Case.TransactionType == transactionType)
-                    && (financeType == "å…¨éƒ¨" ? true : i.FinanceType == financeType)
+                    && (transactionType == "È«²¿" ? true : i.Case.TransactionType == transactionType)
+                    && (financeType == "È«²¿" ? true : i.FinanceType == financeType)
                     && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
                     && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
             }
@@ -445,16 +464,18 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 queryResult = context.InvoiceFinanceBatches.Where(i =>
                     i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
+                    && (i.ClientEDICode != null)
                     && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
                     && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
                     && (status != string.Empty ? i.CheckStatus == status : true)
                     && (i.CreateUserName.Contains(createUserName))
+                    && (financeType == "È«²¿" ? true : i.FinanceType == financeType)
                     && (location == "00" ? true : i.Client.Department.LocationCode == location)
                     && (i.Client.ClientNameCN.Contains(clientName) || i.Client.ClientNameEN.Contains(clientName)));
             }
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
         }
 
         /// <summary>
@@ -478,18 +499,18 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permission.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("æ­¤æ‰¹æ¬¡å·²ç»è¿‡å¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("´ËÅú´ÎÒÑ¾­¹ı¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€€å›è¯¥æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍË»Ø¸ÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("ç»åŠäººå’Œå¤æ ¸äººç›¸åŒï¼Œä¸å¯è¿›è¡Œå¤æ ¸é€€å›", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¾­°ìÈËºÍ¸´ºËÈËÏàÍ¬£¬²»¿É½øĞĞ¸´ºËÍË»Ø", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -522,9 +543,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (InvoiceFinanceBatch batch in selectedBatches)
             {
-                if (batch.Case.ActiveCDA.CommissionType != "æŒ‰èèµ„é‡‘é¢")
+                if (batch.Case.ActiveCDA.CommissionType != "°´ÈÚ×Ê½ğ¶î")
                 {
-                    MessageBoxEx.Show("æ‰€é€‰æ‰¹æ¬¡ä¸æ˜¯æŒ‰ç…§èèµ„é‡‘é¢æ”¶å–ä¿ç†è´¹ç”¨ï¼Œæ‰¹æ¬¡å·ï¼š" + batch.FinanceBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("ËùÑ¡Åú´Î²»ÊÇ°´ÕÕÈÚ×Ê½ğ¶îÊÕÈ¡±£Àí·ÑÓÃ£¬Åú´ÎºÅ£º" + batch.FinanceBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }
@@ -543,7 +564,7 @@ namespace CMBC.EasyFactor.ARMgr
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -559,10 +580,10 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 220, 3, 170, 30);
 
                 Client seller = batchGroup.Key;
-                sheet.Cells[3, 1] = String.Format("å–æ–¹ï¼š{0}", seller.ToString());
+                sheet.Cells[3, 1] = String.Format("Âô·½£º{0}", seller.ToString());
                 sheet.get_Range("A5", "E5").MergeCells = true;
                 sheet.get_Range("A5", "A5").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.Cells[5, 1] = "ä¿ç†è´¹ç”¨æ˜ç»†è¡¨";
+                sheet.Cells[5, 1] = "±£Àí·ÑÓÃÃ÷Ï¸±í";
 
                 int row = 7;
                 double totalCommission = 0;
@@ -575,22 +596,22 @@ namespace CMBC.EasyFactor.ARMgr
                     CDA cda = selectedBatch.Case.ActiveCDA;
 
                     int beginRow = row;
-                    sheet.Cells[row, 1] = "ä¹°æ–¹";
+                    sheet.Cells[row, 1] = "Âò·½";
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 6]).MergeCells = true;
-                    sheet.Cells[row, 2] = String.Format("{0} ï¼ˆåº”æ”¶è´¦æ¬¾å€ºåŠ¡äººï¼‰", buyer.ToString());
+                    sheet.Cells[row, 2] = String.Format("{0} £¨Ó¦ÊÕÕË¿îÕ®ÎñÈË£©", buyer.ToString());
                     row++;
-                    sheet.Cells[row, 1] = "ä¿ç†å•†";
+                    sheet.Cells[row, 1] = "±£ÀíÉÌ";
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 4]).MergeCells = true;
                     sheet.Cells[row, 2] = factor.ToString();
-                    sheet.Cells[row, 5] = "å¸åˆ«";
+                    sheet.Cells[row, 5] = "±Ò±ğ";
                     sheet.Cells[row, 6] = selectedBatch.BatchCurrency;
                     row++;
-                    sheet.Cells[row, 1] = "æœ¬æ¬¡è½¬è®©é‡‘é¢";
-                    sheet.Cells[row, 2] = "æœ¬æ¬¡èèµ„é‡‘é¢";
-                    sheet.Cells[row, 3] = "æœ¬æ¬¡è½¬è®©ç¬”æ•°";
-                    sheet.Cells[row, 4] = "è½¬è®©æ—¥";
-                    sheet.Cells[row, 5] = "ä¿ç†è´¹ç‡";
-                    sheet.Cells[row, 6] = "å•æ®å¤„ç†è´¹";
+                    sheet.Cells[row, 1] = "±¾´Î×ªÈÃ½ğ¶î";
+                    sheet.Cells[row, 2] = "±¾´ÎÈÚ×Ê½ğ¶î";
+                    sheet.Cells[row, 3] = "±¾´Î×ªÈÃ±ÊÊı";
+                    sheet.Cells[row, 4] = "×ªÈÃÈÕ";
+                    sheet.Cells[row, 5] = "±£Àí·ÑÂÊ";
+                    sheet.Cells[row, 6] = "µ¥¾İ´¦Àí·Ñ";
                     row++;
                     sheet.Cells[row, 1] = selectedBatch.AssignAmount;
                     sheet.get_Range("A" + row, "A" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
@@ -602,7 +623,7 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.Cells[row, 6] = selectedBatch.Case.ActiveCDA.HandFee;
                     sheet.get_Range("F" + row, "F" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
                     row++;
-                    sheet.Cells[row, 1] = "å°è®¡";
+                    sheet.Cells[row, 1] = "Ğ¡¼Æ";
                     sheet.Cells[row, 5] = selectedBatch.CommissionAmount;
                     sheet.Cells[row, 6] = selectedBatch.HandfeeAmount;
                     sheet.get_Range("E" + row, "F" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
@@ -615,16 +636,16 @@ namespace CMBC.EasyFactor.ARMgr
                     row += 3;
                 }
 
-                sheet.Cells[row - 1, 1] = "æ³¨ï¼šä¿ç†æ‰‹ç»­è´¹æŒ‰èèµ„é‡‘é¢æ”¶å–ã€‚";
-                sheet.Cells[row, 5] = "è´¹ç”¨æ€»è®¡";
+                sheet.Cells[row - 1, 1] = "×¢£º±£ÀíÊÖĞø·Ñ°´ÈÚ×Ê½ğ¶îÊÕÈ¡¡£";
+                sheet.Cells[row, 5] = "·ÑÓÃ×Ü¼Æ";
                 sheet.Cells[row, 6] = totalCommission;
                 sheet.get_Range("F" + row, "F" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
                 sheet.get_Range("E" + row, "F" + row).Borders.LineStyle = 1;
 
                 row += 2;
 
-                sheet.Cells[row + 1, 4] = "ä¸­å›½æ°‘ç”Ÿé“¶è¡Œè´¸æ˜“é‡‘èäº‹ä¸šéƒ¨ä¿ç†ä¸šåŠ¡éƒ¨ ï¼ˆä¸šåŠ¡ç« ï¼‰";
-                sheet.Cells[row + 3, 5] = String.Format("{0:yyyy}å¹´{0:MM}æœˆ{0:dd}æ—¥", DateTime.Now);
+                sheet.Cells[row + 1, 4] = "ÖĞ¹úÃñÉúÒøĞĞÃ³Ò×½ğÈÚÊÂÒµ²¿±£ÀíÒµÎñ²¿ £¨ÒµÎñÕÂ£©";
+                sheet.Cells[row + 3, 5] = String.Format("{0:yyyy}Äê{0:MM}ÔÂ{0:dd}ÈÕ", DateTime.Now);
 
                 sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 23;
@@ -633,7 +654,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("F1", Type.Missing).ColumnWidth = 17;
 
-                sheet.UsedRange.Font.Name = "ä»¿å®‹_GB2312";
+                sheet.UsedRange.Font.Name = "·ÂËÎ_GB2312";
                 sheet.UsedRange.Font.Size = 12;
                 sheet.UsedRange.Rows.RowHeight = 20;
 
@@ -715,6 +736,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregionÂ Methods
+        #endregion?Methods?
     }
 }

@@ -1,23 +1,66 @@
-Ôªøusing CMBC.EasyFactor.Utils;
+using CMBC.EasyFactor.Utils;
 namespace CMBC.EasyFactor.CaseMgr
 {
     partial class CDAMgr
     {
-        #region¬†Fields¬†(38)
+		#region?Fields?(54)?
 
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCDA;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDASignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCover;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHighestFinanceLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsRecoarse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsSigned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
+        private DevComponents.DotNetBar.LabelX lbcCDACode;
         private DevComponents.DotNetBar.LabelX lblCheckStatus;
         private DevComponents.DotNetBar.LabelX lblCreateUserName;
+        private DevComponents.DotNetBar.LabelX lblDate;
         private DevComponents.DotNetBar.LabelX lblFactorName;
+        private DevComponents.DotNetBar.LabelX lblLocation;
+        private DevComponents.DotNetBar.LabelX lblTransactionType;
         private System.Windows.Forms.ToolStripMenuItem menuItemCDAReport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCDAsExport;
         private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
         private System.Windows.Forms.ToolStripMenuItem menuItemReject;
+        private System.Windows.Forms.ToolStripMenuItem menuItemUpdateCDAStatus;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCDACode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
 
 
@@ -222,7 +265,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lbcCDACode.Name = "lbcCDACode";
             this.lbcCDACode.Size = new System.Drawing.Size(55, 16);
             this.lbcCDACode.TabIndex = 2;
-            this.lbcCDACode.Text = "CDAÁºñÂè∑";
+            this.lbcCDACode.Text = "CDA±‡∫≈";
             // 
             // cbLocation
             // 
@@ -248,7 +291,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(56, 16);
             this.lblLocation.TabIndex = 10;
-            this.lblLocation.Text = "‰∏öÂä°Âú∞Âå∫";
+            this.lblLocation.Text = "“µŒÒµÿ«¯";
             // 
             // cbTransactionType
             // 
@@ -257,10 +300,10 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbTransactionType.FormattingEnabled = true;
             this.cbTransactionType.ItemHeight = 14;
             this.cbTransactionType.Items.AddRange(new object[] {
-            "ÂõΩÂÜÖÂçñÊñπ‰øùÁêÜ",
-            "ÂõΩÂÜÖ‰π∞Êñπ‰øùÁêÜ",
-            "Âá∫Âè£‰øùÁêÜ",
-            "ËøõÂè£‰øùÁêÜ"});
+            "π˙ƒ⁄¬Ù∑Ω±£¿Ì",
+            "π˙ƒ⁄¬Ú∑Ω±£¿Ì",
+            "≥ˆø⁄±£¿Ì",
+            "Ω¯ø⁄±£¿Ì"});
             this.cbTransactionType.Location = new System.Drawing.Point(418, 3);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(113, 20);
@@ -278,7 +321,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(56, 16);
             this.lblTransactionType.TabIndex = 8;
-            this.lblTransactionType.Text = "‰∏öÂä°Á±ªÂà´";
+            this.lblTransactionType.Text = "“µŒÒ¿‡±";
             // 
             // lblDate
             // 
@@ -291,7 +334,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
             this.lblDate.TabIndex = 14;
-            this.lblDate.Text = "Êü•ËØ¢ÊúüÈôê";
+            this.lblDate.Text = "≤È—Ø∆⁄œﬁ";
             // 
             // diEnd
             // 
@@ -404,7 +447,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
             this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsCDA.TabIndex = 19;
-            this.cbIsCDA.Text = "CDAÊòØÂê¶Á≠æÂõû";
+            this.cbIsCDA.Text = "CDA «∑Ò«©ªÿ";
             this.cbIsCDA.ThreeState = true;
             // 
             // tbCreateUserName
@@ -429,7 +472,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCreateUserName.Name = "lblCreateUserName";
             this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
             this.lblCreateUserName.TabIndex = 17;
-            this.lblCreateUserName.Text = "ÁªèÂäû‰∫∫";
+            this.lblCreateUserName.Text = "æ≠∞Ï»À";
             // 
             // cbCheckStatus
             // 
@@ -439,10 +482,10 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCheckStatus.ItemHeight = 14;
             this.cbCheckStatus.Items.AddRange(new object[] {
             "",
-            "Êú™ÂÆ°Ê†∏",
-            "Â∑≤ÂÆ°Ê†∏",
-            "ÂÆ°Ê†∏Êú™ÈÄöËøá",
-            "Â∑≤Â§±Êïà"});
+            "Œ¥…Û∫À",
+            "“—…Û∫À",
+            "…Û∫ÀŒ¥Õ®π˝",
+            "“— ß–ß"});
             this.cbCheckStatus.Location = new System.Drawing.Point(592, 3);
             this.cbCheckStatus.Name = "cbCheckStatus";
             this.cbCheckStatus.Size = new System.Drawing.Size(101, 20);
@@ -460,7 +503,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCheckStatus.Name = "lblCheckStatus";
             this.lblCheckStatus.Size = new System.Drawing.Size(56, 16);
             this.lblCheckStatus.TabIndex = 12;
-            this.lblCheckStatus.Text = "ÂÆ°Ê†∏Áä∂ÊÄÅ";
+            this.lblCheckStatus.Text = "…Û∫À◊¥Ã¨";
             // 
             // tbFactorName
             // 
@@ -484,7 +527,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblFactorName.Name = "lblFactorName";
             this.lblFactorName.Size = new System.Drawing.Size(44, 16);
             this.lblFactorName.TabIndex = 6;
-            this.lblFactorName.Text = "‰øùÁêÜÂïÜ";
+            this.lblFactorName.Text = "±£¿Ì…Ã";
             // 
             // tbClientName
             // 
@@ -508,7 +551,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(56, 16);
             this.lblClientName.TabIndex = 4;
-            this.lblClientName.Text = "ÂÆ¢Êà∑ÂêçÁß∞";
+            this.lblClientName.Text = "øÕªß√˚≥∆";
             // 
             // lblCount
             // 
@@ -521,7 +564,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(71, 16);
             this.lblCount.TabIndex = 21;
-            this.lblCount.Text = "Ëé∑Âæó Êù°ËÆ∞ÂΩï";
+            this.lblCount.Text = "ªÒµ√ Ãıº«¬º";
             // 
             // btnQuery
             // 
@@ -532,7 +575,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.btnQuery.Size = new System.Drawing.Size(47, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 20;
-            this.btnQuery.Text = "Êü•ËØ¢";
+            this.btnQuery.Text = "≤È—Ø";
             this.btnQuery.Click += new System.EventHandler(this.QueryCDAs);
             // 
             // tbContractCode
@@ -557,7 +600,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblContractCode.Name = "lblContractCode";
             this.lblContractCode.Size = new System.Drawing.Size(81, 16);
             this.lblContractCode.TabIndex = 0;
-            this.lblContractCode.Text = "‰øùÁêÜÂêàÂêåÁºñÂè∑";
+            this.lblContractCode.Text = "±£¿Ì∫œÕ¨±‡∫≈";
             // 
             // dgvCDAs
             // 
@@ -632,7 +675,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCDACode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCDACode.DataPropertyName = "CDACode";
             this.colCDACode.Frozen = true;
-            this.colCDACode.HeaderText = "CDAÁºñÂè∑";
+            this.colCDACode.HeaderText = "CDA±‡∫≈";
             this.colCDACode.Name = "colCDACode";
             this.colCDACode.ReadOnly = true;
             this.colCDACode.Width = 78;
@@ -641,7 +684,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colCaseCode.DataPropertyName = "CaseCode";
             this.colCaseCode.Frozen = true;
-            this.colCaseCode.HeaderText = "Ê°à‰ª∂ÁºñÂè∑";
+            this.colCaseCode.HeaderText = "∞∏º˛±‡∫≈";
             this.colCaseCode.Name = "colCaseCode";
             this.colCaseCode.ReadOnly = true;
             // 
@@ -649,28 +692,28 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colSellerName.DataPropertyName = "SellerName";
             this.colSellerName.Frozen = true;
-            this.colSellerName.HeaderText = "ÂçñÊñπÂêçÁß∞";
+            this.colSellerName.HeaderText = "¬Ù∑Ω√˚≥∆";
             this.colSellerName.Name = "colSellerName";
             this.colSellerName.ReadOnly = true;
             // 
             // colBuyerName
             // 
             this.colBuyerName.DataPropertyName = "BuyerName";
-            this.colBuyerName.HeaderText = "‰π∞ÊñπÂêçÁß∞";
+            this.colBuyerName.HeaderText = "¬Ú∑Ω√˚≥∆";
             this.colBuyerName.Name = "colBuyerName";
             this.colBuyerName.ReadOnly = true;
             // 
             // colFactorName
             // 
             this.colFactorName.DataPropertyName = "FactorName";
-            this.colFactorName.HeaderText = "‰øùÁêÜÂïÜ";
+            this.colFactorName.HeaderText = "±£¿Ì…Ã";
             this.colFactorName.Name = "colFactorName";
             this.colFactorName.ReadOnly = true;
             // 
             // colTransactionType
             // 
             this.colTransactionType.DataPropertyName = "TransactionType";
-            this.colTransactionType.HeaderText = "‰∏öÂä°Á±ªÂà´";
+            this.colTransactionType.HeaderText = "“µŒÒ¿‡±";
             this.colTransactionType.Name = "colTransactionType";
             this.colTransactionType.ReadOnly = true;
             // 
@@ -678,7 +721,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colInvoiceCurrency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colInvoiceCurrency.DataPropertyName = "InvoiceCurrency";
-            this.colInvoiceCurrency.HeaderText = "ÂèëÁ•®Â∏ÅÂà´";
+            this.colInvoiceCurrency.HeaderText = "∑¢∆±±“±";
             this.colInvoiceCurrency.Name = "colInvoiceCurrency";
             this.colInvoiceCurrency.ReadOnly = true;
             this.colInvoiceCurrency.Width = 80;
@@ -687,7 +730,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colIsRecoarse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colIsRecoarse.DataPropertyName = "IsRecoarse";
-            this.colIsRecoarse.HeaderText = "ÊòØÂê¶ÊúâËøΩ";
+            this.colIsRecoarse.HeaderText = " «∑Ò”–◊∑";
             this.colIsRecoarse.Name = "colIsRecoarse";
             this.colIsRecoarse.ReadOnly = true;
             this.colIsRecoarse.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -698,7 +741,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colIsNotice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colIsNotice.DataPropertyName = "IsNotice";
-            this.colIsNotice.HeaderText = "Êòé/Êöó‰øùÁêÜ";
+            this.colIsNotice.HeaderText = "√˜/∞µ±£¿Ì";
             this.colIsNotice.Name = "colIsNotice";
             this.colIsNotice.ReadOnly = true;
             this.colIsNotice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -709,7 +752,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colAssignType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colAssignType.DataPropertyName = "AssignType";
-            this.colAssignType.HeaderText = "ËΩ¨ËÆ©ÊñπÂºè";
+            this.colAssignType.HeaderText = "◊™»√∑Ω Ω";
             this.colAssignType.Name = "colAssignType";
             this.colAssignType.ReadOnly = true;
             this.colAssignType.Width = 80;
@@ -718,7 +761,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colCreditCoverCurr.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colCreditCoverCurr.DataPropertyName = "CreditCoverCurr";
-            this.colCreditCoverCurr.HeaderText = "È¢ùÂ∫¶Â∏ÅÂà´";
+            this.colCreditCoverCurr.HeaderText = "∂Ó∂»±“±";
             this.colCreditCoverCurr.Name = "colCreditCoverCurr";
             this.colCreditCoverCurr.ReadOnly = true;
             this.colCreditCoverCurr.Width = 80;
@@ -730,7 +773,7 @@ namespace CMBC.EasyFactor.CaseMgr
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
             this.colCreditCover.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCreditCover.HeaderText = "‰π∞Êñπ‰ø°Áî®È£éÈô©È¢ùÂ∫¶";
+            this.colCreditCover.HeaderText = "¬Ú∑Ω–≈”√∑Áœ’∂Ó∂»";
             this.colCreditCover.Name = "colCreditCover";
             this.colCreditCover.ReadOnly = true;
             this.colCreditCover.Width = 128;
@@ -740,7 +783,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCreditCoverPeriodBegin.DataPropertyName = "CreditCoverPeriodBegin";
             dataGridViewCellStyle3.Format = "d";
             this.colCreditCoverPeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colCreditCoverPeriodBegin.HeaderText = "ÊúâÊïàÊúü(Âßã)";
+            this.colCreditCoverPeriodBegin.HeaderText = "”––ß∆⁄( º)";
             this.colCreditCoverPeriodBegin.Name = "colCreditCoverPeriodBegin";
             this.colCreditCoverPeriodBegin.ReadOnly = true;
             this.colCreditCoverPeriodBegin.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -751,7 +794,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCreditCoverPeriodEnd.DataPropertyName = "CreditCoverPeriodEnd";
             dataGridViewCellStyle4.Format = "d";
             this.colCreditCoverPeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colCreditCoverPeriodEnd.HeaderText = "ÊúâÊïàÊúü(Áªà)";
+            this.colCreditCoverPeriodEnd.HeaderText = "”––ß∆⁄(÷’)";
             this.colCreditCoverPeriodEnd.Name = "colCreditCoverPeriodEnd";
             this.colCreditCoverPeriodEnd.ReadOnly = true;
             this.colCreditCoverPeriodEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -761,7 +804,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.colFinanceLineCurr.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colFinanceLineCurr.DataPropertyName = "FinanceLineCurr";
-            this.colFinanceLineCurr.HeaderText = "È¢ùÂ∫¶Â∏ÅÂà´";
+            this.colFinanceLineCurr.HeaderText = "∂Ó∂»±“±";
             this.colFinanceLineCurr.Name = "colFinanceLineCurr";
             this.colFinanceLineCurr.ReadOnly = true;
             this.colFinanceLineCurr.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -774,7 +817,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFinanceLine.DataPropertyName = "FinanceLine";
             dataGridViewCellStyle5.Format = "N2";
             this.colFinanceLine.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colFinanceLine.HeaderText = "È¢Ñ‰ªòÊ¨æÈ¢ùÂ∫¶";
+            this.colFinanceLine.HeaderText = "‘§∏∂øÓ∂Ó∂»";
             this.colFinanceLine.Name = "colFinanceLine";
             this.colFinanceLine.ReadOnly = true;
             this.colFinanceLine.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -787,7 +830,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFinanceLinePeriodBegin.DataPropertyName = "FinanceLinePeriodBegin";
             dataGridViewCellStyle6.Format = "d";
             this.colFinanceLinePeriodBegin.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colFinanceLinePeriodBegin.HeaderText = "ÊúâÊïàÊúü(Âßã)";
+            this.colFinanceLinePeriodBegin.HeaderText = "”––ß∆⁄( º)";
             this.colFinanceLinePeriodBegin.Name = "colFinanceLinePeriodBegin";
             this.colFinanceLinePeriodBegin.ReadOnly = true;
             this.colFinanceLinePeriodBegin.Width = 86;
@@ -798,7 +841,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFinanceLinePeriodEnd.DataPropertyName = "FinanceLinePeriodEnd";
             dataGridViewCellStyle7.Format = "d";
             this.colFinanceLinePeriodEnd.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colFinanceLinePeriodEnd.HeaderText = "ÊúâÊïàÊúü(Áªà)";
+            this.colFinanceLinePeriodEnd.HeaderText = "”––ß∆⁄(÷’)";
             this.colFinanceLinePeriodEnd.Name = "colFinanceLinePeriodEnd";
             this.colFinanceLinePeriodEnd.ReadOnly = true;
             this.colFinanceLinePeriodEnd.Width = 86;
@@ -808,14 +851,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colHighestFinanceLine.DataPropertyName = "HighestFinanceLine";
             dataGridViewCellStyle8.Format = "N2";
             this.colHighestFinanceLine.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colHighestFinanceLine.HeaderText = "ÊúÄÈ´ò‰øùÁêÜÈ¢Ñ‰ªòÊ¨æÈ¢ùÂ∫¶";
+            this.colHighestFinanceLine.HeaderText = "◊Ó∏ﬂ±£¿Ì‘§∏∂øÓ∂Ó∂»";
             this.colHighestFinanceLine.Name = "colHighestFinanceLine";
             this.colHighestFinanceLine.ReadOnly = true;
             // 
             // colPaymentTerms
             // 
             this.colPaymentTerms.DataPropertyName = "PaymentTerms";
-            this.colPaymentTerms.HeaderText = "‰ªòÊ¨æÊù°‰ª∂";
+            this.colPaymentTerms.HeaderText = "∏∂øÓÃıº˛";
             this.colPaymentTerms.Name = "colPaymentTerms";
             this.colPaymentTerms.ReadOnly = true;
             // 
@@ -825,7 +868,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colPrice.DataPropertyName = "Price";
             dataGridViewCellStyle9.Format = "p4";
             this.colPrice.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colPrice.HeaderText = "ÊÄªÊâãÁª≠Ë¥πÁéá";
+            this.colPrice.HeaderText = "◊‹ ÷–¯∑—¬ ";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
             this.colPrice.Width = 92;
@@ -836,7 +879,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colIFPrice.DataPropertyName = "IFPrice";
             dataGridViewCellStyle10.Format = "p4";
             this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle10;
-            this.colIFPrice.HeaderText = "IFÊâãÁª≠Ë¥πÁéá";
+            this.colIFPrice.HeaderText = "IF ÷–¯∑—¬ ";
             this.colIFPrice.Name = "colIFPrice";
             this.colIFPrice.ReadOnly = true;
             this.colIFPrice.Width = 89;
@@ -844,14 +887,14 @@ namespace CMBC.EasyFactor.CaseMgr
             // colCommissionType
             // 
             this.colCommissionType.DataPropertyName = "CommissionType";
-            this.colCommissionType.HeaderText = "Êî∂Ë¥πÊñπÂºè";
+            this.colCommissionType.HeaderText = " ’∑—∑Ω Ω";
             this.colCommissionType.Name = "colCommissionType";
             this.colCommissionType.ReadOnly = true;
             // 
             // colHandFeeCurr
             // 
             this.colHandFeeCurr.DataPropertyName = "HandFeeCurr";
-            this.colHandFeeCurr.HeaderText = "Ë¥πÁî®Â∏ÅÂà´";
+            this.colHandFeeCurr.HeaderText = "∑—”√±“±";
             this.colHandFeeCurr.Name = "colHandFeeCurr";
             this.colHandFeeCurr.ReadOnly = true;
             // 
@@ -860,49 +903,49 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colHandFee.DataPropertyName = "HandFee";
             dataGridViewCellStyle11.Format = "N2";
             this.colHandFee.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colHandFee.HeaderText = "ÂçïÊçÆÂ§ÑÁêÜË¥π";
+            this.colHandFee.HeaderText = "µ•æ›¥¶¿Ì∑—";
             this.colHandFee.Name = "colHandFee";
             this.colHandFee.ReadOnly = true;
             // 
             // colCDAStatus
             // 
             this.colCDAStatus.DataPropertyName = "CDAStatus";
-            this.colCDAStatus.HeaderText = "ÂêàÂêåÁä∂ÊÄÅ";
+            this.colCDAStatus.HeaderText = "∫œÕ¨◊¥Ã¨";
             this.colCDAStatus.Name = "colCDAStatus";
             this.colCDAStatus.ReadOnly = true;
             // 
             // colIsSigned
             // 
             this.colIsSigned.DataPropertyName = "IsSigned";
-            this.colIsSigned.HeaderText = "ÊòØÂê¶Á≠æÂõû";
+            this.colIsSigned.HeaderText = " «∑Ò«©ªÿ";
             this.colIsSigned.Name = "colIsSigned";
             this.colIsSigned.ReadOnly = true;
             // 
             // colCDASignDate
             // 
             this.colCDASignDate.DataPropertyName = "CDASignDate";
-            this.colCDASignDate.HeaderText = "Á≠æÂèëÊó•";
+            this.colCDASignDate.HeaderText = "«©∑¢»’";
             this.colCDASignDate.Name = "colCDASignDate";
             this.colCDASignDate.ReadOnly = true;
             // 
             // colCreateUserName
             // 
             this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "ÁªèÂäû‰∫∫";
+            this.colCreateUserName.HeaderText = "æ≠∞Ï»À";
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
             // 
             // colCheckUserName
             // 
             this.colCheckUserName.DataPropertyName = "CheckUserName";
-            this.colCheckUserName.HeaderText = "Â§çÊ†∏‰∫∫";
+            this.colCheckUserName.HeaderText = "∏¥∫À»À";
             this.colCheckUserName.Name = "colCheckUserName";
             this.colCheckUserName.ReadOnly = true;
             // 
             // colCheckDate
             // 
             this.colCheckDate.DataPropertyName = "CheckDate";
-            this.colCheckDate.HeaderText = "Â§çÊ†∏Êó•";
+            this.colCheckDate.HeaderText = "∏¥∫À»’";
             this.colCheckDate.Name = "colCheckDate";
             this.colCheckDate.ReadOnly = true;
             // 
@@ -928,14 +971,14 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.menuItemCDASelect.Name = "menuItemCDASelect";
             this.menuItemCDASelect.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDASelect.Text = "ÈÄâÂÆöCDA(&S)";
+            this.menuItemCDASelect.Text = "—°∂®CDA(&S)";
             this.menuItemCDASelect.Click += new System.EventHandler(this.SelectCDA);
             // 
             // menuItemCDADetail
             // 
             this.menuItemCDADetail.Name = "menuItemCDADetail";
             this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDADetail.Text = "ËØ¶ÁªÜ‰ø°ÊÅØ(&M)";
+            this.menuItemCDADetail.Text = "œÍœ∏–≈œ¢(&M)";
             this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
             // 
             // toolStripSeparator
@@ -947,14 +990,14 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.menuItemCDANew.Name = "menuItemCDANew";
             this.menuItemCDANew.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDANew.Text = "Êñ∞Âª∫CDA(&N)";
+            this.menuItemCDANew.Text = "–¬Ω®CDA(&N)";
             this.menuItemCDANew.Click += new System.EventHandler(this.NewCDA);
             // 
             // menuItemCDADelete
             // 
             this.menuItemCDADelete.Name = "menuItemCDADelete";
             this.menuItemCDADelete.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDADelete.Text = "Âà†Èô§CDA(&D)";
+            this.menuItemCDADelete.Text = "…æ≥˝CDA(&D)";
             this.menuItemCDADelete.Click += new System.EventHandler(this.DeleteCDA);
             // 
             // toolStripSeparator1
@@ -966,14 +1009,14 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.menuItemCheck.Name = "menuItemCheck";
             this.menuItemCheck.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCheck.Text = "ÂÆ°Ê†∏ÈÄöËøá(&P)";
+            this.menuItemCheck.Text = "…Û∫ÀÕ®π˝(&P)";
             this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
             // menuItemReject
             // 
             this.menuItemReject.Name = "menuItemReject";
             this.menuItemReject.Size = new System.Drawing.Size(182, 22);
-            this.menuItemReject.Text = "ÂÆ°Ê†∏ÊãíÁªù(&R)";
+            this.menuItemReject.Text = "…Û∫Àæ‹æ¯(&R)";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
             // toolStripSeparator2
@@ -985,21 +1028,21 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.menuItemCDAReport.Name = "menuItemCDAReport";
             this.menuItemCDAReport.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDAReport.Text = "ÁîüÊàê‰øùÁêÜÈ¢ùÂ∫¶ÈÄöÁü•‰π¶";
+            this.menuItemCDAReport.Text = "…˙≥…±£¿Ì∂Ó∂»Õ®÷™ È";
             this.menuItemCDAReport.Click += new System.EventHandler(this.ReportCDA);
             // 
             // menuItemCDAsExport
             // 
             this.menuItemCDAsExport.Name = "menuItemCDAsExport";
             this.menuItemCDAsExport.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDAsExport.Text = "ÂØºÂá∫È¢ùÂ∫¶ÈÄöÁü•‰π¶";
+            this.menuItemCDAsExport.Text = "µº≥ˆ∂Ó∂»Õ®÷™ È";
             this.menuItemCDAsExport.Click += new System.EventHandler(this.ExportCDAs);
             // 
             // menuItemUpdateCDAStatus
             // 
             this.menuItemUpdateCDAStatus.Name = "menuItemUpdateCDAStatus";
             this.menuItemUpdateCDAStatus.Size = new System.Drawing.Size(182, 22);
-            this.menuItemUpdateCDAStatus.Text = "Êõ¥Êñ∞CDAÁä∂ÊÄÅ(&U)";
+            this.menuItemUpdateCDAStatus.Text = "∏¸–¬CDA◊¥Ã¨(&U)";
             this.menuItemUpdateCDAStatus.Click += new System.EventHandler(this.UpdateCDAStatus);
             // 
             // CDAMgr
@@ -1022,50 +1065,5 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCDA;
-        private DevComponents.DotNetBar.LabelX lblDate;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDACode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsRecoarse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCover;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverPeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLinePeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHighestFinanceLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentTerms;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFeeCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHandFee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDAStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsSigned;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCDASignDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCDAsExport;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
-        private DevComponents.DotNetBar.LabelX lblTransactionType;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCDACode;
-        private DevComponents.DotNetBar.LabelX lbcCDACode;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
-        private DevComponents.DotNetBar.LabelX lblLocation;
-        private System.Windows.Forms.ToolStripMenuItem menuItemUpdateCDAStatus;
-
     }
 }

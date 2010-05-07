@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="RefundBatchMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -13,14 +13,14 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
     /// <summary>
     /// 
     /// </summary>
     public partial class RefundBatchMgr : UserControl
     {
-        #regionÂ FieldsÂ (3)
+        #region?Fields?(3)?
 
         /// <summary>
         /// 
@@ -35,9 +35,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        #endregionÂ Fields
+        #endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -62,12 +62,17 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            POOL_QUERY
+            POOL_QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            POOL_CHECK
         }
 
-        #endregionÂ Enums
+        #endregion?Enums?
 
-        #regionÂ ConstructorsÂ (2)
+        #region?Constructors?(3)?
 
         /// <summary>
         /// Initializes a new instance of the RefundBatchMgr class
@@ -112,7 +117,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "å…¨éƒ¨" });
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "È«²¿" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";
             this.cbLocation.ValueMember = "LocationCode";
@@ -124,15 +129,33 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.cbCheckStatus.Text = BATCH.UNCHECK;
                 context = new DBDataContext();
-                var queryResult = context.InvoiceRefundBatches.Where(i => i.CheckStatus == BATCH.UNCHECK);
+                var queryResult = context.InvoiceRefundBatches.Where(i => i.CheckStatus == BATCH.UNCHECK && i.Case != null);
                 this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+                this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
+            }
+            else if (batchType == OpBatchType.POOL_CHECK)
+            {
+                this.colBuyerName.Visible = false;
+                this.colBatchCount.Visible = false;
+                this.colTransactionType.Visible = false;
+
+                this.cbCheckStatus.Text = BATCH.UNCHECK;
+                context = new DBDataContext();
+                var queryResult = context.InvoiceRefundBatches.Where(i => i.CheckStatus == BATCH.UNCHECK && i.InvoiceFinanceBatch != null);
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
+            }
+            else if (batchType == OpBatchType.POOL_QUERY)
+            {
+                this.colBuyerName.Visible = false;
+                this.colBatchCount.Visible = false;
+                this.colTransactionType.Visible = false;
             }
         }
 
-        #endregionÂ Constructors
+        #endregion?Constructors?
 
-        #regionÂ PropertiesÂ (3)
+        #region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -161,11 +184,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-        #endregionÂ Properties
+        #endregion?Properties?
 
-        #regionÂ MethodsÂ (9)
+        #region?Methods?(9)?
 
-        //Â PrivateÂ MethodsÂ (9)Â 
+        //?Private?Methods?(9)?
 
         /// <summary>
         /// 
@@ -188,18 +211,18 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("æ­¤æ‰¹æ¬¡å·²ç»è¿‡å¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("´ËÅú´ÎÒÑ¾­¹ı¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€šè¿‡è¯¥æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍ¨¹ı¸ÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("ç»åŠäººå’Œå¤æ ¸äººç›¸åŒï¼Œä¸å¯è¿›è¡Œå¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¾­°ìÈËºÍ¸´ºËÈËÏàÍ¬£¬²»¿É½øĞĞ¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -235,14 +258,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤æ­¤" + selectedBatch.BatchCount + "æ¡è¿˜æ¬¾è®°å½•", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı´Ë" + selectedBatch.BatchCount + "Ìõ»¹¿î¼ÇÂ¼", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (selectedBatch.CheckStatus == BATCH.CHECK)
             {
-                MessageBoxEx.Show("ä¸èƒ½åˆ é™¤å·²å¤æ ¸æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("²»ÄÜÉ¾³ıÒÑ¸´ºËÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -261,7 +284,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("åˆ é™¤å¤±è´¥," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("É¾³ıÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -329,31 +352,49 @@ namespace CMBC.EasyFactor.ARMgr
             string transactionType = this.cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
-                transactionType = "å…¨éƒ¨";
+                transactionType = "È«²¿";
             }
 
             string refundType = this.cbRefundType.Text;
             if (String.IsNullOrEmpty(refundType))
             {
-                refundType = "å…¨éƒ¨";
+                refundType = "È«²¿";
             }
 
             context = new DBDataContext();
 
-            var queryResult = context.InvoiceRefundBatches.Where(i =>
-                i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text)
-                && (beginDate != this.dateFrom.MinDate ? i.RefundDate >= beginDate : true)
-                && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
-                && (status != string.Empty ? i.CheckStatus == status : true)
-                && (refundType == "å…¨éƒ¨" ? true : i.RefundType == refundType)
-                && (i.CreateUserName.Contains(createUserName))
-                && (transactionType == "å…¨éƒ¨" ? true : i.Case.TransactionType == transactionType)
-                && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
-                && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
-                );
-
+            IEnumerable<InvoiceRefundBatch> queryResult = null;
+            if (opBatchType != OpBatchType.POOL_QUERY && opBatchType != OpBatchType.POOL_CHECK)
+            {
+                queryResult = context.InvoiceRefundBatches.Where(i =>
+                   i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text)
+                   && (i.CaseCode != null)
+                   && (beginDate != this.dateFrom.MinDate ? i.RefundDate >= beginDate : true)
+                   && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
+                   && (status != string.Empty ? i.CheckStatus == status : true)
+                   && (refundType == "È«²¿" ? true : i.RefundType == refundType)
+                   && (i.CreateUserName.Contains(createUserName))
+                   && (transactionType == "È«²¿" ? true : i.Case.TransactionType == transactionType)
+                   && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
+                   && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
+                   );
+            }
+            else
+            {
+                queryResult = context.InvoiceRefundBatches.Where(i =>
+                   i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text)
+                   && (i.FinanceBatchNo != null)
+                   && (beginDate != this.dateFrom.MinDate ? i.RefundDate >= beginDate : true)
+                   && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
+                   && (status != string.Empty ? i.CheckStatus == status : true)
+                   && (refundType == "È«²¿" ? true : i.RefundType == refundType)
+                   && (i.CreateUserName.Contains(createUserName))
+                   && (location == "00" ? true : i.InvoiceFinanceBatch.Client.Department.LocationCode == location)
+                   && (i.InvoiceFinanceBatch.Client.ClientNameCN.Contains(clientName) || i.InvoiceFinanceBatch.Client.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
+                   );
+            }
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
         }
 
         /// <summary>
@@ -377,18 +418,18 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("æ­¤æ‰¹æ¬¡å·²ç»è¿‡å¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("´ËÅú´ÎÒÑ¾­¹ı¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€€å›è¯¥æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍË»Ø¸ÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("ç»åŠäººå’Œå¤æ ¸äººç›¸åŒï¼Œä¸å¯è¿›è¡Œå¤æ ¸é€€å›", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¾­°ìÈËºÍ¸´ºËÈËÏàÍ¬£¬²»¿É½øĞĞ¸´ºËÍË»Ø", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -453,6 +494,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregionÂ Methods
+        #endregion?Methods?
     }
 }

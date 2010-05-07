@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="DepartmentMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -10,29 +10,28 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
+    using CMBC.EasyFactor.Controls;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
-    using DevComponents.DotNetBar;
-    using CMBC.EasyFactor.Controls;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class DepartmentMgr : UserControl
     {
-        #region Fields (1)
+		#region?Fields?(2)?
 
-        private OpDepartmentType opDepatmentType;
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
+        private OpDepartmentType opDepatmentType;
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Enums (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -55,11 +54,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             LOCATION_STAT,
         }
 
-        #endregion Enums
+		#endregion?Enums?
 
-        #region Constructors (2)
+		#region?Constructors?(2)?
 
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         /// <param name="opDepartmentType"></param>
@@ -120,9 +119,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.UpdateContextMenu();
         }
 
-        #endregion Constructors
+		#endregion?Constructors?
 
-        #region Properties (3)
+		#region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -151,11 +150,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             set;
         }
 
-        #endregion Properties
+		#endregion?Properties?
 
-        #region Methods (9)
+		#region?Methods?(9)?
 
-        // Private Methods (9) 
+		//?Private?Methods?(9)?
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -192,7 +191,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
 
             Department selectedDepartment = (Department)this.bs.List[this.dgvDepts.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("是否确定删除分部: " + selectedDepartment.DepartmentName, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("�Ƿ�ȷ��ɾ���ֲ�: " + selectedDepartment.DepartmentName, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 context.Departments.DeleteOnSubmit(selectedDepartment);
                 bool isDeleteOK = true;
@@ -291,7 +290,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 }
 
                 this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                this.lblCount.Text = String.Format("���{0}����¼", queryResult.Count());
             }
             else if (opDepatmentType == OpDepartmentType.LOCATION_STAT)
             {
@@ -359,6 +358,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
         }
 
-        #endregion Methods
+		#endregion?Methods?
     }
 }

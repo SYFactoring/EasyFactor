@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="CreditCoverNegMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -17,16 +17,16 @@ namespace CMBC.EasyFactor.CaseMgr
 
     public partial class CreditCoverNegMgr : UserControl
     {
-        #region Fields (1)
+		#region?Fields?(1)?
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Constructors (1)
+		#region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -41,11 +41,11 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetDoubleBuffered(this.dgvCreditCoverNegs);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
-            this.cbTransactionType.Items.Insert(0, "全部");
-            this.cbTransactionType.Text = "全部";
+            this.cbTransactionType.Items.Insert(0, "ȫ��");
+            this.cbTransactionType.Text = "ȫ��";
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "ȫ��" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";
             this.cbLocation.ValueMember = "LocationCode";
@@ -58,9 +58,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCurrency.ValueMember = "CurrencyCode";
         }
 
-        #endregion Constructors
+		#endregion?Constructors?
 
-        #region Properties (2)
+		#region?Properties?(2)?
 
         /// <summary>
         /// Gets or sets owner form
@@ -80,11 +80,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-        #endregion Properties
+		#endregion?Properties?
 
-        #region Methods (7)
+		#region?Methods?(8)?
 
-        // Private Methods (7) 
+		//?Private?Methods?(8)?
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -134,6 +134,22 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportCreditCoverNeg(object sender, EventArgs e)
+        {
+            if (this.dgvCreditCoverNegs.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_CREDIT_COVER_NEG, GetSelectedCreditCoverNegs());
+            form.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         private List<CreditCoverNegotiation> GetSelectedCreditCoverNegs()
         {
@@ -155,22 +171,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ExportCreditCoverNeg(object sender, EventArgs e)
-        {
-            if (this.dgvCreditCoverNegs.SelectedCells.Count == 0)
-            {
-                return;
-            }
-
-            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_CREDIT_COVER_NEG, GetSelectedCreditCoverNegs());
-            form.Show();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
             DateTime beginDate = String.IsNullOrEmpty(this.diBegin.Text) ? this.diBegin.MinDate : this.diBegin.Value;
@@ -185,8 +185,8 @@ namespace CMBC.EasyFactor.CaseMgr
             var queryResult = from neg in context.CreditCoverNegotiations
                               let c = neg.Case
                               where
-                               (location == "全部" ? true : c.OwnerDepartment.LocationCode == location)
-                               && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType == (this.cbTransactionType.Text))
+                               (location == "ȫ��" ? true : c.OwnerDepartment.LocationCode == location)
+                               && (this.cbTransactionType.Text == "ȫ��" ? true : c.TransactionType == (this.cbTransactionType.Text))
                                && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency == (string)this.cbCurrency.SelectedValue)
                                && (beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
                                && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
@@ -200,7 +200,7 @@ namespace CMBC.EasyFactor.CaseMgr
                               select neg;
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            this.lblCount.Text = String.Format("���{0}����¼", queryResult.Count());
         }
 
         /// <summary>
@@ -245,6 +245,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
         }
 
-        #endregion Methods
+		#endregion?Methods?
     }
 }

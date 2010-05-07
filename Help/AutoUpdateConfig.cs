@@ -47,25 +47,45 @@ namespace CMBC.EasyFactor.Help
     /// </summary>
     public class AutoUpdateConfig
     {
-
-        private string _AvailableVersion;
-        public string AvailableVersion
-        { get { return _AvailableVersion; } set { _AvailableVersion = value; } }
+		#region?Fields?(4)?
 
         private Uri _AppFileURL;
+        private string _AvailableVersion;
+        private Uri _ChangeLogURL;
+        private string _LatestChanges;
+
+		#endregion?Fields?
+
+		#region?Properties?(4)?
+
         public Uri AppFileURL
         { get { return _AppFileURL; } set { _AppFileURL = value; } }
 
-        private string _LatestChanges;
-        public string LatestChanges
-        { get { return _LatestChanges; } set { _LatestChanges = value; } }
+        public string AvailableVersion
+        { get { return _AvailableVersion; } set { _AvailableVersion = value; } }
 
-        private Uri _ChangeLogURL;
         public Uri ChangeLogURL
         { get { return _ChangeLogURL; } set { _ChangeLogURL = value; } }
 
+        public string LatestChanges
+        { get { return _LatestChanges; } set { _LatestChanges = value; } }
+
+		#endregion?Properties?
+
+		#region?Delegates?and?Events?(2)?
+
+		//?Delegates?(1)?
+
         public delegate void LoadConfigError(string stMessage, Exception e);
+		//?Events?(1)?
+
         public event LoadConfigError OnLoadConfigError;
+
+		#endregion?Delegates?and?Events?
+
+		#region?Methods?(1)?
+
+		//?Public?Methods?(1)?
 
         /// <summary>
         /// LoadConfig: Invoke this method when you are ready to populate this object
@@ -133,8 +153,10 @@ namespace CMBC.EasyFactor.Help
                 return false;
             }
             return true;
-        }//LoadConfig(string url, string user, string pass)
+        }
 
+		#endregion?Methods?
 
+//LoadConfig(string url, string user, string pass)
     }//class AutoUpdateConfig
 }//namespace Conversive.AutoUpdater

@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Factor.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -10,7 +10,6 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using CMBC.EasyFactor.Utils;
     using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
@@ -18,21 +17,20 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Factor 
     {
-        #region Fields (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
         /// </summary>
         private Dictionary<string, string> _dict;
-
         /// <summary>
         /// 
         /// </summary>
         public static readonly string CMBC_CODE = "CN01300";
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Properties (4)
+		#region?Properties?(4)?
 
         /// <summary>
         /// Gets
@@ -98,11 +96,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+		#endregion?Properties?
 
-        #region Methods (6)
+		#region?Methods?(5)?
 
-        // Public Methods (5) 
+		//?Public?Methods?(4)?
 
         /// <summary>
         /// 
@@ -174,7 +172,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _CompanyNameEN;
             }
         }
-        // Private Methods (1) 
+		//?Private?Methods?(1)?
 
         /// <summary>
         /// 
@@ -186,6 +184,6 @@ namespace CMBC.EasyFactor.DB.dbml
             this._dict[e.PropertyName] = String.Format("{0} : {1}\n", e.PropertyName, this.GetType().GetProperty(e.PropertyName).GetValue(this, null));
         }
 
-        #endregion Methods
+		#endregion?Methods?
     }
 }

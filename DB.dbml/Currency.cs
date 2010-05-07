@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Currency.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -16,16 +16,45 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Currency
     {
-        #region Fields (1)
+		#region?Fields?(1)?
 
         /// <summary>
         /// 
         /// </summary>
         private static readonly List<Currency> _currencyList = InitializeCurrency();
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Constructors (1)
+		#region?Properties?(2)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<Currency> AllCurrencies
+        {
+            get
+            {
+                return _currencyList.ToList();
+            }
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        public string CurrencyFormat
+        {
+            get
+            {
+                return _CurrencyCode + " " + _CurrencyName;
+            }
+        }
+
+		#endregion?Properties?
+
+		#region?Methods?(1)?
+
+		//?Private?Methods?(1)?
 
         /// <summary>
         /// Initializes static members of the Currency class
@@ -42,39 +71,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return _currencyList;
         }
 
-        #endregion Constructors
-
-        #region Properties (2)
-
-        /// <summary>
-        /// Gets
-        /// </summary>
-        public string CurrencyFormat
-        {
-            get
-            {
-                return _CurrencyCode + " " + _CurrencyName;
-            }
-        }
-
-        #endregion Properties
-
-        #region Methods (1)
-
-        // Public Methods (1) 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static List<Currency> AllCurrencies
-        {
-            get
-            {
-                return _currencyList.ToList();
-            }
-        }
-
-        #endregion Methods
+		#endregion?Methods?
     }
 }

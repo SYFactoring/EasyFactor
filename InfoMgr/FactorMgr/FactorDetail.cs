@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="FactorDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -12,15 +12,15 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class FactorDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #regionÂ FieldsÂ (6)
+		#region?Fields?(6)?
 
         /// <summary>
         /// 
@@ -47,9 +47,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private OpFactorType opFactorType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (3)
+		#region?Enums?(3)?
 
         /// <summary>
         /// Operation Type
@@ -71,7 +71,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             /// </summary>
             DETAIL_FACTOR
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpFactorCreditLineType
@@ -91,7 +91,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             /// </summary>
             DETAIL_FACTOR_CREDIT_LINE
         }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpAgreementType
@@ -110,11 +110,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DETAIL_AGREEMENT
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (3)
+		#region?Constructors?(3)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the FactorDetail class
         /// </summary>
         /// <param name="factor">selected factor</param>
@@ -194,11 +194,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tabControl.SelectedTab = this.tabItemFactorCreditLine;
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ MethodsÂ (24)
+		#region?Methods?(24)?
 
-        //Â PrivateÂ MethodsÂ (24)Â 
+		//?Private?Methods?(24)?
 
         /// <summary>
         /// 
@@ -263,7 +263,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -292,7 +292,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.bsAgreements.DataSource = typeof(Agreement);
                 this.bsAgreements.DataSource = factor.Agreements;
                 this.factorAgreementBindingSource.DataSource = typeof(Agreement);
@@ -314,7 +314,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -343,7 +343,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.bsCreditLines.DataSource = typeof(FactorCreditLine);
                 this.bsCreditLines.DataSource = factor.FactorCreditLines;
                 this.factorCreditLineBindingSource.DataSource = typeof(FactorCreditLine);
@@ -365,7 +365,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -404,7 +404,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -429,7 +429,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -450,7 +450,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -468,7 +468,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -491,7 +491,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -520,7 +520,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     this.bsAgreements.DataSource = typeof(Agreement);
                     this.bsAgreements.DataSource = factor.Agreements;
@@ -554,7 +554,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İ¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -596,7 +596,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.opFactorType = OpFactorType.UPDATE_FACTOR;
                 }
             }
@@ -632,7 +632,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İ¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -657,7 +657,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -712,7 +712,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (creditLine.CreditLineStatus == FACTOR_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (FactorCreditLine fcl in factor.FactorCreditLines)
@@ -765,7 +765,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İ¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (creditLine.CreditLineStatus == FACTOR_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (FactorCreditLine fcl in factor.FactorCreditLines)
@@ -839,7 +839,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             FactorMgr factorMgr = new FactorMgr();
-            QueryForm queryUI = new QueryForm(factorMgr, "é€‰æ‹©é›†å›¢");
+            QueryForm queryUI = new QueryForm(factorMgr, "Ñ¡Ôñ¼¯ÍÅ");
             factorMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
 
@@ -888,7 +888,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -927,7 +927,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -985,7 +985,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1088,7 +1088,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             Factor factor = (Factor)this.factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰å®šä¸€ä¸ªæœºæ„", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡¶¨Ò»¸ö»ú¹¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1148,6 +1148,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             ControlUtil.SetComponetEditable(this.tbCreditLineCreateUserName, false);
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

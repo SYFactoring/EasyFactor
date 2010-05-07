@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="UserMgrUI.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     /// </summary>
     public partial class UserMgr
     {
-        #region¬†Fields¬†(25)
+		#region?Fields?(21)?
 
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private System.Windows.Forms.ContextMenuStrip cmuUserMgr;
@@ -20,21 +20,29 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvUsers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EDIAccountColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.LabelX lblUserID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LoginDateColumn;
         private System.Windows.Forms.ToolStripMenuItem menuItemDeleteUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemDetailUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemNewUser;
         private System.Windows.Forms.ToolStripMenuItem menuItemSelectUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private DevComponents.DotNetBar.PanelEx panelQuery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RoleColumn;
         private DevComponents.DotNetBar.Controls.TextBoxX tbUserID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TelphoneColumn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserIDColumn;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -50,7 +58,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             base.Dispose(disposing);
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
 
 
 
@@ -105,14 +113,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.menuItemSelectUser.Name = "menuItemSelectUser";
             this.menuItemSelectUser.Size = new System.Drawing.Size(152, 22);
-            this.menuItemSelectUser.Text = "ÈÄâÂÆöÁî®Êà∑";
+            this.menuItemSelectUser.Text = "—°∂®”√ªß";
             this.menuItemSelectUser.Click += new System.EventHandler(this.SelectUser);
             // 
             // menuItemDetailUser
             // 
             this.menuItemDetailUser.Name = "menuItemDetailUser";
             this.menuItemDetailUser.Size = new System.Drawing.Size(152, 22);
-            this.menuItemDetailUser.Text = "ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemDetailUser.Text = "œÍœ∏–≈œ¢";
             this.menuItemDetailUser.Click += new System.EventHandler(this.DetailUser);
             // 
             // toolStripSeparator
@@ -124,14 +132,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.menuItemNewUser.Name = "menuItemNewUser";
             this.menuItemNewUser.Size = new System.Drawing.Size(152, 22);
-            this.menuItemNewUser.Text = "Êñ∞Âª∫Áî®Êà∑";
+            this.menuItemNewUser.Text = "–¬Ω®”√ªß";
             this.menuItemNewUser.Click += new System.EventHandler(this.NewUser);
             // 
             // menuItemDeleteUser
             // 
             this.menuItemDeleteUser.Name = "menuItemDeleteUser";
             this.menuItemDeleteUser.Size = new System.Drawing.Size(152, 22);
-            this.menuItemDeleteUser.Text = "Âà†Èô§Áî®Êà∑";
+            this.menuItemDeleteUser.Text = "…æ≥˝”√ªß";
             this.menuItemDeleteUser.Click += new System.EventHandler(this.DeleteUser);
             // 
             // panelQuery
@@ -175,7 +183,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 2;
-            this.btnQuery.Text = "Êü•ËØ¢";
+            this.btnQuery.Text = "≤È—Ø";
             this.btnQuery.Click += new System.EventHandler(this.QueryUsers);
             // 
             // tbUserID
@@ -199,7 +207,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.lblUserID.Name = "lblUserID";
             this.lblUserID.Size = new System.Drawing.Size(44, 23);
             this.lblUserID.TabIndex = 0;
-            this.lblUserID.Text = "Áî®Êà∑ID";
+            this.lblUserID.Text = "”√ªßID";
             // 
             // dgvUsers
             // 
@@ -250,42 +258,42 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // UserIDColumn
             // 
             this.UserIDColumn.DataPropertyName = "UserID";
-            this.UserIDColumn.HeaderText = "Áî®Êà∑ID";
+            this.UserIDColumn.HeaderText = "”√ªßID";
             this.UserIDColumn.Name = "UserIDColumn";
             this.UserIDColumn.ReadOnly = true;
             // 
             // NameColumn
             // 
             this.NameColumn.DataPropertyName = "Name";
-            this.NameColumn.HeaderText = "ÂßìÂêç";
+            this.NameColumn.HeaderText = "–’√˚";
             this.NameColumn.Name = "NameColumn";
             this.NameColumn.ReadOnly = true;
             // 
             // EDIAccountColumn
             // 
             this.EDIAccountColumn.DataPropertyName = "EDIAccount";
-            this.EDIAccountColumn.HeaderText = "EDIÂ∏êÂè∑";
+            this.EDIAccountColumn.HeaderText = "EDI’ ∫≈";
             this.EDIAccountColumn.Name = "EDIAccountColumn";
             this.EDIAccountColumn.ReadOnly = true;
             // 
             // RoleColumn
             // 
             this.RoleColumn.DataPropertyName = "Role";
-            this.RoleColumn.HeaderText = "ËßíËâ≤";
+            this.RoleColumn.HeaderText = "Ω«…´";
             this.RoleColumn.Name = "RoleColumn";
             this.RoleColumn.ReadOnly = true;
             // 
             // PhoneColumn
             // 
             this.PhoneColumn.DataPropertyName = "Phone";
-            this.PhoneColumn.HeaderText = "ÁîµËØù";
+            this.PhoneColumn.HeaderText = "µÁª∞";
             this.PhoneColumn.Name = "PhoneColumn";
             this.PhoneColumn.ReadOnly = true;
             // 
             // TelphoneColumn
             // 
             this.TelphoneColumn.DataPropertyName = "Telphone";
-            this.TelphoneColumn.HeaderText = "ÊâãÊú∫";
+            this.TelphoneColumn.HeaderText = " ÷ª˙";
             this.TelphoneColumn.Name = "TelphoneColumn";
             this.TelphoneColumn.ReadOnly = true;
             // 
@@ -299,7 +307,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // LoginDateColumn
             // 
             this.LoginDateColumn.DataPropertyName = "LoginDate";
-            this.LoginDateColumn.HeaderText = "ÊúÄÂêéÁôªÂΩïÊó•Êúü";
+            this.LoginDateColumn.HeaderText = "◊Ó∫Ûµ«¬º»’∆⁄";
             this.LoginDateColumn.Name = "LoginDateColumn";
             this.LoginDateColumn.ReadOnly = true;
             // 
@@ -322,14 +330,5 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserIDColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EDIAccountColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RoleColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PhoneColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TelphoneColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EmailColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LoginDateColumn;
     }
 }

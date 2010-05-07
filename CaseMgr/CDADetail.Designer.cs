@@ -1,8 +1,8 @@
-ï»¿namespace CMBC.EasyFactor.CaseMgr
+namespace CMBC.EasyFactor.CaseMgr
 {
     partial class CDADetail
     {
-		#regionÂ FieldsÂ (79)Â 
+		#region?Fields?(81)?
 
         private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
         private DevComponents.DotNetBar.ButtonX btnCaseSelect;
@@ -38,6 +38,7 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput creditCoverPeriodEndDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX creditCoverTextBox;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator10;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator2;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator3;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator4;
@@ -45,6 +46,7 @@
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator6;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator7;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator8;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator9;
         private DevComponents.DotNetBar.Controls.TextBoxX deductiblesTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diCDASignDate;
         private DevComponents.DotNetBar.Controls.TextBoxX emailTextBox;
@@ -87,11 +89,11 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbRemark;
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
 
-		#endregionÂ FieldsÂ 
+		#endregion?Fields?
 
-		#regionÂ MethodsÂ (1)Â 
+		#region?Methods?(1)?
 
-		//Â ProtectedÂ MethodsÂ (1)Â 
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -112,7 +114,7 @@
             base.Dispose(disposing);
         }
 
-		#endregionÂ MethodsÂ 
+		#endregion?Methods?
 
 
 
@@ -230,8 +232,8 @@
             this.customValidator8 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator7 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.customValidator10 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator9 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
@@ -241,7 +243,7 @@
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.customValidator3 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
@@ -308,7 +310,7 @@
             caseCodeLabel.Name = "caseCodeLabel";
             caseCodeLabel.Size = new System.Drawing.Size(59, 16);
             caseCodeLabel.TabIndex = 0;
-            caseCodeLabel.Text = "æ¡ˆä»¶ç¼–å·:";
+            caseCodeLabel.Text = "°¸¼ş±àºÅ:";
             // 
             // sellerClientLabel
             // 
@@ -322,7 +324,7 @@
             sellerClientLabel.Name = "sellerClientLabel";
             sellerClientLabel.Size = new System.Drawing.Size(34, 16);
             sellerClientLabel.TabIndex = 8;
-            sellerClientLabel.Text = "å–æ–¹:";
+            sellerClientLabel.Text = "Âô·½:";
             // 
             // factorCodeLabel
             // 
@@ -336,7 +338,7 @@
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(47, 16);
             factorCodeLabel.TabIndex = 12;
-            factorCodeLabel.Text = "ä¿ç†å•†:";
+            factorCodeLabel.Text = "±£ÀíÉÌ:";
             // 
             // buyerClientEDICodeLabel
             // 
@@ -350,7 +352,7 @@
             buyerClientEDICodeLabel.Name = "buyerClientEDICodeLabel";
             buyerClientEDICodeLabel.Size = new System.Drawing.Size(34, 16);
             buyerClientEDICodeLabel.TabIndex = 16;
-            buyerClientEDICodeLabel.Text = "ä¹°æ–¹:";
+            buyerClientEDICodeLabel.Text = "Âò·½:";
             // 
             // transactionTypeLabel
             // 
@@ -364,7 +366,7 @@
             transactionTypeLabel.Name = "transactionTypeLabel";
             transactionTypeLabel.Size = new System.Drawing.Size(59, 16);
             transactionTypeLabel.TabIndex = 2;
-            transactionTypeLabel.Text = "ä¸šåŠ¡ç±»åˆ«:";
+            transactionTypeLabel.Text = "ÒµÎñÀà±ğ:";
             // 
             // invoiceCurrencyLabel
             // 
@@ -378,7 +380,7 @@
             invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
             invoiceCurrencyLabel.Size = new System.Drawing.Size(59, 16);
             invoiceCurrencyLabel.TabIndex = 4;
-            invoiceCurrencyLabel.Text = "å‘ç¥¨å¸åˆ«:";
+            invoiceCurrencyLabel.Text = "·¢Æ±±Ò±ğ:";
             // 
             // creditCoverCurrLabel
             // 
@@ -392,7 +394,7 @@
             creditCoverCurrLabel.Name = "creditCoverCurrLabel";
             creditCoverCurrLabel.Size = new System.Drawing.Size(84, 16);
             creditCoverCurrLabel.TabIndex = 7;
-            creditCoverCurrLabel.Text = "ä¹°æ–¹é£é™©é¢åº¦:";
+            creditCoverCurrLabel.Text = "Âò·½·çÏÕ¶î¶È:";
             // 
             // pUGProportionLabel
             // 
@@ -406,7 +408,7 @@
             pUGProportionLabel.Name = "pUGProportionLabel";
             pUGProportionLabel.Size = new System.Drawing.Size(59, 16);
             pUGProportionLabel.TabIndex = 14;
-            pUGProportionLabel.Text = "æ‹…ä¿æ¯”ä¾‹:";
+            pUGProportionLabel.Text = "µ£±£±ÈÀı:";
             // 
             // creditCoverPeriodBeginLabel
             // 
@@ -420,7 +422,7 @@
             creditCoverPeriodBeginLabel.Name = "creditCoverPeriodBeginLabel";
             creditCoverPeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
             creditCoverPeriodBeginLabel.TabIndex = 10;
-            creditCoverPeriodBeginLabel.Text = "æœ‰æ•ˆæœŸé™:";
+            creditCoverPeriodBeginLabel.Text = "ÓĞĞ§ÆÚÏŞ:";
             // 
             // pUGPeriodLabel
             // 
@@ -434,7 +436,7 @@
             pUGPeriodLabel.Name = "pUGPeriodLabel";
             pUGPeriodLabel.Size = new System.Drawing.Size(104, 16);
             pUGPeriodLabel.TabIndex = 16;
-            pUGPeriodLabel.Text = "æ‹…ä¿ä»˜æ¬¾æœŸé™(å¤©):";
+            pUGPeriodLabel.Text = "µ£±£¸¶¿îÆÚÏŞ(Ìì):";
             // 
             // reassignGracePeriodLabel
             // 
@@ -448,7 +450,7 @@
             reassignGracePeriodLabel.Name = "reassignGracePeriodLabel";
             reassignGracePeriodLabel.Size = new System.Drawing.Size(92, 16);
             reassignGracePeriodLabel.TabIndex = 18;
-            reassignGracePeriodLabel.Text = "å›è´­å®½é™æœŸ(å¤©):";
+            reassignGracePeriodLabel.Text = "»Ø¹º¿íÏŞÆÚ(Ìì):";
             // 
             // financeLineCurrLabel
             // 
@@ -462,7 +464,7 @@
             financeLineCurrLabel.Name = "financeLineCurrLabel";
             financeLineCurrLabel.Size = new System.Drawing.Size(72, 16);
             financeLineCurrLabel.TabIndex = 20;
-            financeLineCurrLabel.Text = "é¢„ä»˜æ¬¾é¢åº¦:";
+            financeLineCurrLabel.Text = "Ô¤¸¶¿î¶î¶È:";
             // 
             // financeLinePeriodBeginLabel
             // 
@@ -476,7 +478,7 @@
             financeLinePeriodBeginLabel.Name = "financeLinePeriodBeginLabel";
             financeLinePeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
             financeLinePeriodBeginLabel.TabIndex = 23;
-            financeLinePeriodBeginLabel.Text = "æœ‰æ•ˆæœŸé™:";
+            financeLinePeriodBeginLabel.Text = "ÓĞĞ§ÆÚÏŞ:";
             // 
             // lblHighestFinance
             // 
@@ -490,7 +492,7 @@
             lblHighestFinance.Name = "lblHighestFinance";
             lblHighestFinance.Size = new System.Drawing.Size(121, 16);
             lblHighestFinance.TabIndex = 26;
-            lblHighestFinance.Text = "æœ€é«˜ä¿ç†é¢„ä»˜æ¬¾é¢åº¦:";
+            lblHighestFinance.Text = "×î¸ß±£ÀíÔ¤¸¶¿î¶î¶È:";
             // 
             // financeProportionLabel
             // 
@@ -504,7 +506,7 @@
             financeProportionLabel.Name = "financeProportionLabel";
             financeProportionLabel.Size = new System.Drawing.Size(59, 16);
             financeProportionLabel.TabIndex = 28;
-            financeProportionLabel.Text = "é¢„ä»˜æ¯”ä¾‹:";
+            financeProportionLabel.Text = "Ô¤¸¶±ÈÀı:";
             // 
             // orderNumberLabel
             // 
@@ -518,7 +520,7 @@
             orderNumberLabel.Name = "orderNumberLabel";
             orderNumberLabel.Size = new System.Drawing.Size(47, 16);
             orderNumberLabel.TabIndex = 34;
-            orderNumberLabel.Text = "è®¢å•å·:";
+            orderNumberLabel.Text = "¶©µ¥ºÅ:";
             // 
             // paymentTermsLabel
             // 
@@ -532,7 +534,7 @@
             paymentTermsLabel.Name = "paymentTermsLabel";
             paymentTermsLabel.Size = new System.Drawing.Size(57, 15);
             paymentTermsLabel.TabIndex = 32;
-            paymentTermsLabel.Text = "<font color=\'red\'>*</font>ä»˜æ¬¾æ¡ä»¶:";
+            paymentTermsLabel.Text = "<font color=\'red\'>*</font>¸¶¿îÌõ¼ş:";
             // 
             // financeGracePeriodLabel
             // 
@@ -546,7 +548,7 @@
             financeGracePeriodLabel.Name = "financeGracePeriodLabel";
             financeGracePeriodLabel.Size = new System.Drawing.Size(92, 16);
             financeGracePeriodLabel.TabIndex = 30;
-            financeGracePeriodLabel.Text = "èèµ„å®½é™æœŸ(å¤©):";
+            financeGracePeriodLabel.Text = "ÈÚ×Ê¿íÏŞÆÚ(Ìì):";
             // 
             // deductiblesLabel
             // 
@@ -560,7 +562,7 @@
             deductiblesLabel.Name = "deductiblesLabel";
             deductiblesLabel.Size = new System.Drawing.Size(47, 16);
             deductiblesLabel.TabIndex = 36;
-            deductiblesLabel.Text = "è‡ªè´Ÿé¢:";
+            deductiblesLabel.Text = "×Ô¸º¶î:";
             // 
             // lossThresholdLabel
             // 
@@ -574,7 +576,7 @@
             lossThresholdLabel.Name = "lossThresholdLabel";
             lossThresholdLabel.Size = new System.Drawing.Size(84, 16);
             lossThresholdLabel.TabIndex = 38;
-            lossThresholdLabel.Text = "æœ€ä½æŸå¤±é—¨æ§›:";
+            lossThresholdLabel.Text = "×îµÍËğÊ§ÃÅ¼÷:";
             // 
             // priceLabel
             // 
@@ -588,7 +590,7 @@
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new System.Drawing.Size(69, 15);
             priceLabel.TabIndex = 40;
-            priceLabel.Text = "<font color=\'red\'>*</font>æ€»æ‰‹ç»­è´¹ç‡:";
+            priceLabel.Text = "<font color=\'red\'>*</font>×ÜÊÖĞø·ÑÂÊ:";
             // 
             // iFPriceLabel
             // 
@@ -602,7 +604,7 @@
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(69, 16);
             iFPriceLabel.TabIndex = 42;
-            iFPriceLabel.Text = "IFæ‰‹ç»­è´¹ç‡:";
+            iFPriceLabel.Text = "IFÊÖĞø·ÑÂÊ:";
             // 
             // commissonTypeLabel
             // 
@@ -616,7 +618,7 @@
             commissonTypeLabel.Name = "commissonTypeLabel";
             commissonTypeLabel.Size = new System.Drawing.Size(57, 15);
             commissonTypeLabel.TabIndex = 49;
-            commissonTypeLabel.Text = "<font color=\'red\'>*</font>è®¡è´¹æ–¹å¼:";
+            commissonTypeLabel.Text = "<font color=\'red\'>*</font>¼Æ·Ñ·½Ê½:";
             // 
             // commissionTypeCommentLabel
             // 
@@ -630,7 +632,7 @@
             commissionTypeCommentLabel.Name = "commissionTypeCommentLabel";
             commissionTypeCommentLabel.Size = new System.Drawing.Size(34, 16);
             commissionTypeCommentLabel.TabIndex = 51;
-            commissionTypeCommentLabel.Text = "è¯´æ˜:";
+            commissionTypeCommentLabel.Text = "ËµÃ÷:";
             // 
             // handFeeLabel
             // 
@@ -644,7 +646,7 @@
             handFeeLabel.Name = "handFeeLabel";
             handFeeLabel.Size = new System.Drawing.Size(104, 16);
             handFeeLabel.TabIndex = 46;
-            handFeeLabel.Text = "å•æ®å¤„ç†è´¹(æ¯ç¬”):";
+            handFeeLabel.Text = "µ¥¾İ´¦Àí·Ñ(Ã¿±Ê):";
             // 
             // noticePersonLabel
             // 
@@ -658,7 +660,7 @@
             noticePersonLabel.Name = "noticePersonLabel";
             noticePersonLabel.Size = new System.Drawing.Size(47, 16);
             noticePersonLabel.TabIndex = 7;
-            noticePersonLabel.Text = "é€šçŸ¥äºº:";
+            noticePersonLabel.Text = "Í¨ÖªÈË:";
             // 
             // emailLabel
             // 
@@ -672,7 +674,7 @@
             emailLabel.Name = "emailLabel";
             emailLabel.Size = new System.Drawing.Size(63, 16);
             emailLabel.TabIndex = 9;
-            emailLabel.Text = "Emailåœ°å€:";
+            emailLabel.Text = "EmailµØÖ·:";
             // 
             // faxLabel
             // 
@@ -686,7 +688,7 @@
             faxLabel.Name = "faxLabel";
             faxLabel.Size = new System.Drawing.Size(59, 16);
             faxLabel.TabIndex = 11;
-            faxLabel.Text = "ä¼ çœŸå·ç :";
+            faxLabel.Text = "´«ÕæºÅÂë:";
             // 
             // commentLabel
             // 
@@ -700,7 +702,7 @@
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
             commentLabel.TabIndex = 13;
-            commentLabel.Text = "å¤‡æ³¨:";
+            commentLabel.Text = "±¸×¢:";
             // 
             // createUserNameLabel
             // 
@@ -714,7 +716,7 @@
             createUserNameLabel.Name = "createUserNameLabel";
             createUserNameLabel.Size = new System.Drawing.Size(47, 16);
             createUserNameLabel.TabIndex = 15;
-            createUserNameLabel.Text = "ç»åŠäºº:";
+            createUserNameLabel.Text = "¾­°ìÈË:";
             // 
             // cDAStatusLabel
             // 
@@ -728,7 +730,7 @@
             cDAStatusLabel.Name = "cDAStatusLabel";
             cDAStatusLabel.Size = new System.Drawing.Size(58, 16);
             cDAStatusLabel.TabIndex = 2;
-            cDAStatusLabel.Text = "CDAçŠ¶æ€:";
+            cDAStatusLabel.Text = "CDA×´Ì¬:";
             // 
             // noticeMethodLabel
             // 
@@ -742,7 +744,7 @@
             noticeMethodLabel.Name = "noticeMethodLabel";
             noticeMethodLabel.Size = new System.Drawing.Size(59, 16);
             noticeMethodLabel.TabIndex = 4;
-            noticeMethodLabel.Text = "é€šçŸ¥æ–¹å¼:";
+            noticeMethodLabel.Text = "Í¨Öª·½Ê½:";
             // 
             // contractCodeLabel
             // 
@@ -756,7 +758,7 @@
             contractCodeLabel.Name = "contractCodeLabel";
             contractCodeLabel.Size = new System.Drawing.Size(84, 16);
             contractCodeLabel.TabIndex = 6;
-            contractCodeLabel.Text = "ä¿ç†åˆåŒç¼–å·:";
+            contractCodeLabel.Text = "±£ÀíºÏÍ¬±àºÅ:";
             // 
             // lblCDACode
             // 
@@ -770,7 +772,7 @@
             lblCDACode.Name = "lblCDACode";
             lblCDACode.Size = new System.Drawing.Size(58, 16);
             lblCDACode.TabIndex = 0;
-            lblCDACode.Text = "CDAç¼–å·:";
+            lblCDACode.Text = "CDA±àºÅ:";
             // 
             // assignTypeLabel
             // 
@@ -784,7 +786,7 @@
             assignTypeLabel.Name = "assignTypeLabel";
             assignTypeLabel.Size = new System.Drawing.Size(57, 15);
             assignTypeLabel.TabIndex = 2;
-            assignTypeLabel.Text = "<font color=\'red\'>*</font>è½¬è®©æ–¹å¼:";
+            assignTypeLabel.Text = "<font color=\'red\'>*</font>×ªÈÃ·½Ê½:";
             // 
             // lblIsNotice
             // 
@@ -798,7 +800,7 @@
             lblIsNotice.Name = "lblIsNotice";
             lblIsNotice.Size = new System.Drawing.Size(60, 15);
             lblIsNotice.TabIndex = 4;
-            lblIsNotice.Text = "<font color=\'red\'>*</font>æ˜/æš—ä¿ç†:";
+            lblIsNotice.Text = "<font color=\'red\'>*</font>Ã÷/°µ±£Àí:";
             // 
             // lblRemark
             // 
@@ -812,7 +814,7 @@
             lblRemark.Name = "lblRemark";
             lblRemark.Size = new System.Drawing.Size(84, 16);
             lblRemark.TabIndex = 17;
-            lblRemark.Text = "å†…éƒ¨æç¤ºä¿¡æ¯:";
+            lblRemark.Text = "ÄÚ²¿ÌáÊ¾ĞÅÏ¢:";
             // 
             // lblCasePaymentTerm
             // 
@@ -826,7 +828,7 @@
             lblCasePaymentTerm.Name = "lblCasePaymentTerm";
             lblCasePaymentTerm.Size = new System.Drawing.Size(104, 16);
             lblCasePaymentTerm.TabIndex = 21;
-            lblCasePaymentTerm.Text = "æœ€é•¿ä»˜æ¬¾æœŸé™(å¤©):";
+            lblCasePaymentTerm.Text = "×î³¤¸¶¿îÆÚÏŞ(Ìì):";
             // 
             // lblCDASignDate
             // 
@@ -840,7 +842,7 @@
             lblCDASignDate.Name = "lblCDASignDate";
             lblCDASignDate.Size = new System.Drawing.Size(57, 15);
             lblCDASignDate.TabIndex = 35;
-            lblCDASignDate.Text = "<font color=\'red\'>*</font>ç­¾å‘æ—¥æœŸ:";
+            lblCDASignDate.Text = "<font color=\'red\'>*</font>Ç©·¢ÈÕÆÚ:";
             // 
             // groupPanelCase
             // 
@@ -954,7 +956,7 @@
             this.companyNameENTextBox.Name = "companyNameENTextBox";
             this.companyNameENTextBox.Size = new System.Drawing.Size(170, 20);
             this.companyNameENTextBox.TabIndex = 15;
-            this.companyNameENTextBox.WatermarkText = "è‹±æ–‡å";
+            this.companyNameENTextBox.WatermarkText = "Ó¢ÎÄÃû";
             this.companyNameENTextBox.DoubleClick += new System.EventHandler(this.DetailFactor);
             // 
             // contractCodeTextBox
@@ -992,7 +994,7 @@
             this.buyerClientNameENTextBox.Name = "buyerClientNameENTextBox";
             this.buyerClientNameENTextBox.Size = new System.Drawing.Size(216, 20);
             this.buyerClientNameENTextBox.TabIndex = 19;
-            this.buyerClientNameENTextBox.WatermarkText = "è‹±æ–‡å";
+            this.buyerClientNameENTextBox.WatermarkText = "Ó¢ÎÄÃû";
             this.buyerClientNameENTextBox.DoubleClick += new System.EventHandler(this.DetailBuyer);
             // 
             // buyerClientNameCNTextBox
@@ -1006,7 +1008,7 @@
             this.buyerClientNameCNTextBox.Name = "buyerClientNameCNTextBox";
             this.buyerClientNameCNTextBox.Size = new System.Drawing.Size(216, 20);
             this.buyerClientNameCNTextBox.TabIndex = 18;
-            this.buyerClientNameCNTextBox.WatermarkText = "ä¸­æ–‡å";
+            this.buyerClientNameCNTextBox.WatermarkText = "ÖĞÎÄÃû";
             this.buyerClientNameCNTextBox.DoubleClick += new System.EventHandler(this.DetailBuyer);
             // 
             // buyerClientEDICodeTextBox
@@ -1033,7 +1035,7 @@
             this.sellerClientNameENTextBox.Name = "sellerClientNameENTextBox";
             this.sellerClientNameENTextBox.Size = new System.Drawing.Size(216, 20);
             this.sellerClientNameENTextBox.TabIndex = 11;
-            this.sellerClientNameENTextBox.WatermarkText = "è‹±æ–‡å";
+            this.sellerClientNameENTextBox.WatermarkText = "Ó¢ÎÄÃû";
             this.sellerClientNameENTextBox.DoubleClick += new System.EventHandler(this.DetailSeller);
             // 
             // companyNameCNTextBox
@@ -1046,7 +1048,7 @@
             this.companyNameCNTextBox.Name = "companyNameCNTextBox";
             this.companyNameCNTextBox.Size = new System.Drawing.Size(170, 20);
             this.companyNameCNTextBox.TabIndex = 14;
-            this.companyNameCNTextBox.WatermarkText = "ä¸­æ–‡å";
+            this.companyNameCNTextBox.WatermarkText = "ÖĞÎÄÃû";
             this.companyNameCNTextBox.DoubleClick += new System.EventHandler(this.DetailFactor);
             // 
             // factorCodeTextBox
@@ -1072,7 +1074,7 @@
             this.sellerClientNameCNTextBox.Name = "sellerClientNameCNTextBox";
             this.sellerClientNameCNTextBox.Size = new System.Drawing.Size(216, 20);
             this.sellerClientNameCNTextBox.TabIndex = 10;
-            this.sellerClientNameCNTextBox.WatermarkText = "ä¸­æ–‡å";
+            this.sellerClientNameCNTextBox.WatermarkText = "ÖĞÎÄÃû";
             this.sellerClientNameCNTextBox.DoubleClick += new System.EventHandler(this.DetailSeller);
             // 
             // sellerClientEDICodeTextBox
@@ -1198,8 +1200,8 @@
             this.cbIsNotice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIsNotice.FormattingEnabled = true;
             this.cbIsNotice.Items.AddRange(new object[] {
-            "æ˜ä¿ç†",
-            "æš—ä¿ç†"});
+            "Ã÷±£Àí",
+            "°µ±£Àí"});
             this.cbIsNotice.Location = new System.Drawing.Point(351, 1);
             this.cbIsNotice.Name = "cbIsNotice";
             this.cbIsNotice.Size = new System.Drawing.Size(101, 21);
@@ -1218,7 +1220,7 @@
             this.cbIsRecoarse.Name = "cbIsRecoarse";
             this.cbIsRecoarse.Size = new System.Drawing.Size(101, 16);
             this.cbIsRecoarse.TabIndex = 6;
-            this.cbIsRecoarse.Text = "æ˜¯å¦æœ‰è¿½ç´¢æƒ";
+            this.cbIsRecoarse.Text = "ÊÇ·ñÓĞ×·Ë÷È¨";
             this.cbIsRecoarse.CheckedChanged += new System.EventHandler(this.cbIsRecoarse_CheckedChanged);
             // 
             // assignTypeComboBox
@@ -1269,7 +1271,7 @@
             this.handFeeCurrComboBox.Name = "handFeeCurrComboBox";
             this.handFeeCurrComboBox.Size = new System.Drawing.Size(53, 21);
             this.handFeeCurrComboBox.TabIndex = 47;
-            this.handFeeCurrComboBox.WatermarkText = "å¸åˆ«";
+            this.handFeeCurrComboBox.WatermarkText = "±Ò±ğ";
             // 
             // cbIsCreditCoverRevolving
             // 
@@ -1285,7 +1287,7 @@
             this.cbIsCreditCoverRevolving.Size = new System.Drawing.Size(101, 16);
             this.cbIsCreditCoverRevolving.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsCreditCoverRevolving.TabIndex = 13;
-            this.cbIsCreditCoverRevolving.Text = "æ˜¯å¦å¾ªç¯é¢åº¦";
+            this.cbIsCreditCoverRevolving.Text = "ÊÇ·ñÑ­»·¶î¶È";
             this.cbIsCreditCoverRevolving.CheckedChanged += new System.EventHandler(this.cbIsCreditCoverRevolving_CheckedChanged);
             // 
             // handFeeTextBox
@@ -1528,7 +1530,7 @@
             this.financeLineCurrComboBox.Name = "financeLineCurrComboBox";
             this.financeLineCurrComboBox.Size = new System.Drawing.Size(68, 21);
             this.financeLineCurrComboBox.TabIndex = 21;
-            this.financeLineCurrComboBox.WatermarkText = "å¸åˆ«";
+            this.financeLineCurrComboBox.WatermarkText = "±Ò±ğ";
             // 
             // reassignGracePeriodTextBox
             // 
@@ -1664,7 +1666,7 @@
             this.creditCoverCurrComboBox.Name = "creditCoverCurrComboBox";
             this.creditCoverCurrComboBox.Size = new System.Drawing.Size(68, 21);
             this.creditCoverCurrComboBox.TabIndex = 8;
-            this.creditCoverCurrComboBox.WatermarkText = "å¸åˆ«";
+            this.creditCoverCurrComboBox.WatermarkText = "±Ò±ğ";
             // 
             // groupPanelOther
             // 
@@ -1776,7 +1778,7 @@
             this.cbIsSigned.Size = new System.Drawing.Size(76, 16);
             this.cbIsSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsSigned.TabIndex = 19;
-            this.cbIsSigned.Text = "æ˜¯å¦ç­¾å›";
+            this.cbIsSigned.Text = "ÊÇ·ñÇ©»Ø";
             // 
             // tbRemark
             // 
@@ -1805,7 +1807,7 @@
             this.cbNoticeMethodFax.Size = new System.Drawing.Size(51, 16);
             this.cbNoticeMethodFax.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbNoticeMethodFax.TabIndex = 6;
-            this.cbNoticeMethodFax.Text = "ä¼ çœŸ";
+            this.cbNoticeMethodFax.Text = "´«Õæ";
             // 
             // cbNoticeMethodEmail
             // 
@@ -1820,7 +1822,7 @@
             this.cbNoticeMethodEmail.Size = new System.Drawing.Size(51, 16);
             this.cbNoticeMethodEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbNoticeMethodEmail.TabIndex = 5;
-            this.cbNoticeMethodEmail.Text = "ç”µé‚®";
+            this.cbNoticeMethodEmail.Text = "µçÓÊ";
             // 
             // cDAStatusComboBox
             // 
@@ -1906,7 +1908,7 @@
             this.btnCDAUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnCDAUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCDAUpdate.TabIndex = 3;
-            this.btnCDAUpdate.Text = "ç¼–è¾‘";
+            this.btnCDAUpdate.Text = "±à¼­";
             this.btnCDAUpdate.Click += new System.EventHandler(this.UpdateCDA);
             // 
             // btnCDASave
@@ -1918,7 +1920,7 @@
             this.btnCDASave.Size = new System.Drawing.Size(75, 23);
             this.btnCDASave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCDASave.TabIndex = 4;
-            this.btnCDASave.Text = "ä¿å­˜";
+            this.btnCDASave.Text = "±£´æ";
             this.btnCDASave.Click += new System.EventHandler(this.SaveCDA);
             // 
             // superValidator
@@ -1929,97 +1931,97 @@
             // 
             // customValidator8
             // 
-            this.customValidator8.ErrorMessage = "æœ€ä½æŸå¤±é—¨æ§›ä¸èƒ½å¤§äºä¹°æ–¹ä¿¡ç”¨é£é™©é¢åº¦";
+            this.customValidator8.ErrorMessage = "×îµÍËğÊ§ÃÅ¼÷²»ÄÜ´óÓÚÂò·½ĞÅÓÃ·çÏÕ¶î¶È";
             this.customValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator8.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator8_ValidateValue);
             // 
             // customValidator1
             // 
-            this.customValidator1.ErrorMessage = "å¿…å¡«";
+            this.customValidator1.ErrorMessage = "±ØÌî";
             this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
             // 
             // customValidator7
             // 
-            this.customValidator7.ErrorMessage = "è‡ªè´Ÿé¢ä¸èƒ½å¤§äºä¹°æ–¹ä¿¡ç”¨é£é™©é¢åº¦";
+            this.customValidator7.ErrorMessage = "×Ô¸º¶î²»ÄÜ´óÓÚÂò·½ĞÅÓÃ·çÏÕ¶î¶È";
             this.customValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator7.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator7_ValidateValue);
             // 
             // requiredFieldValidator2
             // 
-            this.requiredFieldValidator2.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator2.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator1
             // 
-            this.requiredFieldValidator1.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator1.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // customValidator10
             // 
-            this.customValidator10.ErrorMessage = "å¿…å¡«";
+            this.customValidator10.ErrorMessage = "±ØÌî";
             this.customValidator10.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator10.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator10_ValidateValue);
             // 
             // customValidator9
             // 
-            this.customValidator9.ErrorMessage = "å¿…å¡«";
+            this.customValidator9.ErrorMessage = "±ØÌî";
             this.customValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator9.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator9_ValidateValue);
             // 
             // compareValidator2
             // 
             this.compareValidator2.ControlToCompare = this.financeLinePeriodBeginDateTimePicker;
-            this.compareValidator2.ErrorMessage = "ç»ˆæ­¢æ—¥æœŸåº”è¯¥å¤§äºèµ·å§‹æ—¥æœŸ";
+            this.compareValidator2.ErrorMessage = "ÖÕÖ¹ÈÕÆÚÓ¦¸Ã´óÓÚÆğÊ¼ÈÕÆÚ";
             this.compareValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator2.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
             // customValidator6
             // 
-            this.customValidator6.ErrorMessage = "é¢„ä»˜æ¬¾é¢åº¦æœ‰æ•ˆæœŸé™ä¸èƒ½è¶…å‡ºå®¢æˆ·èèµ„é¢åº¦çš„æœ‰æ•ˆæœŸé™";
+            this.customValidator6.ErrorMessage = "Ô¤¸¶¿î¶î¶ÈÓĞĞ§ÆÚÏŞ²»ÄÜ³¬³ö¿Í»§ÈÚ×Ê¶î¶ÈµÄÓĞĞ§ÆÚÏŞ";
             this.customValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator6.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator6_ValidateValue);
             // 
             // customValidator4
             // 
-            this.customValidator4.ErrorMessage = "é¢„ä»˜æ¬¾é¢åº¦ä¸èƒ½å¤§äºå®¢æˆ·çš„èèµ„é¢åº¦ä¸Šé™";
+            this.customValidator4.ErrorMessage = "Ô¤¸¶¿î¶î¶È²»ÄÜ´óÓÚ¿Í»§µÄÈÚ×Ê¶î¶ÈÉÏÏŞ";
             this.customValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator4.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator4_ValidateValue);
             // 
             // customValidator5
             // 
-            this.customValidator5.ErrorMessage = "é¢„ä»˜æ¬¾é¢åº¦ä¸èƒ½å¤§äºä¹°æ–¹é£é™©æ‹…ä¿é¢åº¦";
+            this.customValidator5.ErrorMessage = "Ô¤¸¶¿î¶î¶È²»ÄÜ´óÓÚÂò·½·çÏÕµ£±£¶î¶È";
             this.customValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator5.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator5_ValidateValue);
             // 
             // compareValidator1
             // 
             this.compareValidator1.ControlToCompare = this.creditCoverPeriodBeginDateTimePicker;
-            this.compareValidator1.ErrorMessage = "ç»ˆæ­¢æ—¥æœŸåº”è¯¥å¤§äºèµ·å§‹æ—¥æœŸ";
+            this.compareValidator1.ErrorMessage = "ÖÕÖ¹ÈÕÆÚÓ¦¸Ã´óÓÚÆğÊ¼ÈÕÆÚ";
             this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
             // customValidator3
             // 
-            this.customValidator3.ErrorMessage = "ä¹°æ–¹ä¿¡ç”¨é£é™©é¢åº¦çš„æœ‰æ•ˆæœŸé™ä¸èƒ½è¶…å‡ºå®¢æˆ·ä¹°æ–¹ä¿¡ç”¨é£é™©é¢åº¦çš„æœ‰æ•ˆæœŸé™";
+            this.customValidator3.ErrorMessage = "Âò·½ĞÅÓÃ·çÏÕ¶î¶ÈµÄÓĞĞ§ÆÚÏŞ²»ÄÜ³¬³ö¿Í»§Âò·½ĞÅÓÃ·çÏÕ¶î¶ÈµÄÓĞĞ§ÆÚÏŞ";
             this.customValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator3.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator3_ValidateValue);
             // 
             // customValidator2
             // 
-            this.customValidator2.ErrorMessage = "é¢åº¦é€šçŸ¥ä¹¦ä¸­ä¹°æ–¹ä¿¡ç”¨é£é™©é¢åº¦ä¸èƒ½å¤§äºæ¡ˆå­ä¸­ä¹°æ–¹ä¿¡ç”¨é£é™©é¢åº¦";
+            this.customValidator2.ErrorMessage = "¶î¶ÈÍ¨ÖªÊéÖĞÂò·½ĞÅÓÃ·çÏÕ¶î¶È²»ÄÜ´óÓÚ°¸×ÓÖĞÂò·½ĞÅÓÃ·çÏÕ¶î¶È";
             this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
             // 
             // requiredFieldValidator3
             // 
-            this.requiredFieldValidator3.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator3.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // regularExpressionValidator1
             // 
             this.regularExpressionValidator1.EmptyValueIsValid = true;
-            this.regularExpressionValidator1.ErrorMessage = "éœ€è¦ç¬¦åˆEmailåœ°å€æ ¼å¼";
+            this.regularExpressionValidator1.ErrorMessage = "ĞèÒª·ûºÏEmailµØÖ·¸ñÊ½";
             this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator1.ValidationExpression = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9" +
                 "})$";
@@ -2048,7 +2050,7 @@
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "CDADetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "é¢åº¦é€šçŸ¥ä¹¦";
+            this.Text = "¶î¶ÈÍ¨ÖªÊé";
             this.groupPanelCase.ResumeLayout(false);
             this.groupPanelCase.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
@@ -2067,8 +2069,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator9;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator10;
     }
 }

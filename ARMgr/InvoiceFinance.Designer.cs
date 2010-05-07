@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoiceFinance.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     partial class InvoiceFinance
     {
-        #regionÂ FieldsÂ (64)
+		#region?Fields?(64)?
 
         private System.Windows.Forms.BindingSource batchBindingSource;
         private DevComponents.DotNetBar.Controls.ComboBoxEx batchCurrencyComboBoxEx;
@@ -31,6 +31,18 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchSave;
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchSelect;
         private System.Windows.Forms.ContextMenuStrip cmuInvoiceFinance;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
         /// <summary> 
         /// Required designer variable.
@@ -66,13 +78,14 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator9;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceLineBalance;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbLoanNo;
         private DevComponents.DotNetBar.Controls.TextBoxX tbTotalInterest;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ MethodsÂ (1)
+		#region?Methods?(1)?
 
-        //Â ProtectedÂ MethodsÂ (1)Â 
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -93,7 +106,7 @@ namespace CMBC.EasyFactor.ARMgr
             base.Dispose(disposing);
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
 
 
 
@@ -162,20 +175,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.customValidator4 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.customValidator3 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
-            this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
+            this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.colCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -221,7 +234,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeBatchNoLabel.Name = "financeBatchNoLabel";
             financeBatchNoLabel.Size = new System.Drawing.Size(59, 16);
             financeBatchNoLabel.TabIndex = 0;
-            financeBatchNoLabel.Text = "èèµ„æ‰¹å·:";
+            financeBatchNoLabel.Text = "ÈÚ×ÊÅúºÅ:";
             // 
             // financeAmountLabel
             // 
@@ -234,7 +247,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeAmountLabel.Name = "financeAmountLabel";
             financeAmountLabel.Size = new System.Drawing.Size(59, 16);
             financeAmountLabel.TabIndex = 13;
-            financeAmountLabel.Text = "èèµ„é‡‘é¢:";
+            financeAmountLabel.Text = "ÈÚ×Ê½ğ¶î:";
             // 
             // financePeriodBeginLabel
             // 
@@ -247,7 +260,7 @@ namespace CMBC.EasyFactor.ARMgr
             financePeriodBeginLabel.Name = "financePeriodBeginLabel";
             financePeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
             financePeriodBeginLabel.TabIndex = 10;
-            financePeriodBeginLabel.Text = "èèµ„æœŸé™:";
+            financePeriodBeginLabel.Text = "ÈÚ×ÊÆÚÏŞ:";
             // 
             // financeRateLabel
             // 
@@ -260,7 +273,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeRateLabel.Name = "financeRateLabel";
             financeRateLabel.Size = new System.Drawing.Size(59, 16);
             financeRateLabel.TabIndex = 6;
-            financeRateLabel.Text = "èèµ„åˆ©ç‡:";
+            financeRateLabel.Text = "ÈÚ×ÊÀûÂÊ:";
             // 
             // factorCodeLabel
             // 
@@ -273,7 +286,7 @@ namespace CMBC.EasyFactor.ARMgr
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(47, 16);
             factorCodeLabel.TabIndex = 16;
-            factorCodeLabel.Text = "ä»£ä»˜è¡Œ:";
+            factorCodeLabel.Text = "´ú¸¶ĞĞ:";
             // 
             // costRateLabel
             // 
@@ -286,7 +299,7 @@ namespace CMBC.EasyFactor.ARMgr
             costRateLabel.Name = "costRateLabel";
             costRateLabel.Size = new System.Drawing.Size(59, 16);
             costRateLabel.TabIndex = 8;
-            costRateLabel.Text = "æˆæœ¬åˆ©ç‡:";
+            costRateLabel.Text = "³É±¾ÀûÂÊ:";
             // 
             // financeTypeLabel
             // 
@@ -299,7 +312,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeTypeLabel.Name = "financeTypeLabel";
             financeTypeLabel.Size = new System.Drawing.Size(59, 16);
             financeTypeLabel.TabIndex = 4;
-            financeTypeLabel.Text = "å‡ºè´¦æ–¹å¼:";
+            financeTypeLabel.Text = "³öÕË·½Ê½:";
             // 
             // lblTotalInterest
             // 
@@ -312,7 +325,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblTotalInterest.Name = "lblTotalInterest";
             lblTotalInterest.Size = new System.Drawing.Size(106, 16);
             lblTotalInterest.TabIndex = 23;
-            lblTotalInterest.Text = "æœ¬æ¬¡åº”æ”¶åˆ©æ¯æ€»é¢";
+            lblTotalInterest.Text = "±¾´ÎÓ¦ÊÕÀûÏ¢×Ü¶î";
             // 
             // lblFinanceLineBalance
             // 
@@ -325,7 +338,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblFinanceLineBalance.Name = "lblFinanceLineBalance";
             lblFinanceLineBalance.Size = new System.Drawing.Size(81, 16);
             lblFinanceLineBalance.TabIndex = 25;
-            lblFinanceLineBalance.Text = "æœ¬æ¬¡èèµ„å·®é¢";
+            lblFinanceLineBalance.Text = "±¾´ÎÈÚ×Ê²î¶î";
             // 
             // lblLoanNo
             // 
@@ -338,7 +351,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblLoanNo.Name = "lblLoanNo";
             lblLoanNo.Size = new System.Drawing.Size(59, 16);
             lblLoanNo.TabIndex = 2;
-            lblLoanNo.Text = "æ”¾æ¬¾ç¼–å·:";
+            lblLoanNo.Text = "·Å¿î±àºÅ:";
             // 
             // panelFinanceBatch
             // 
@@ -410,7 +423,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnFinanceBatchImport.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchImport.TabIndex = 29;
-            this.btnFinanceBatchImport.Text = "å¯¼å…¥æ‰¹æ¬¡";
+            this.btnFinanceBatchImport.Text = "µ¼ÈëÅú´Î";
             this.btnFinanceBatchImport.Click += new System.EventHandler(this.ImportFinanceBatch);
             // 
             // btnFinanceBatchExport
@@ -422,7 +435,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnFinanceBatchExport.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchExport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchExport.TabIndex = 20;
-            this.btnFinanceBatchExport.Text = "å¯¼å‡ºæ‰¹æ¬¡";
+            this.btnFinanceBatchExport.Text = "µ¼³öÅú´Î";
             this.btnFinanceBatchExport.Click += new System.EventHandler(this.ExportFinanceBatch);
             // 
             // btnFinanceBatchSelect
@@ -434,7 +447,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnFinanceBatchSelect.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchSelect.TabIndex = 27;
-            this.btnFinanceBatchSelect.Text = "é€‰æ‹©æ‰¹æ¬¡";
+            this.btnFinanceBatchSelect.Text = "Ñ¡ÔñÅú´Î";
             this.btnFinanceBatchSelect.Click += new System.EventHandler(this.SelectBatch);
             // 
             // tbFinanceLineBalance
@@ -470,7 +483,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnFinanceBatchNew.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchNew.TabIndex = 19;
-            this.btnFinanceBatchNew.Text = "æ–°å»ºæ‰¹æ¬¡";
+            this.btnFinanceBatchNew.Text = "ĞÂ½¨Åú´Î";
             this.btnFinanceBatchNew.Click += new System.EventHandler(this.NewBatch);
             // 
             // btnFactorSelect
@@ -494,7 +507,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnFinanceBatchSave.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchSave.TabIndex = 19;
-            this.btnFinanceBatchSave.Text = "ä¿å­˜æ‰¹æ¬¡";
+            this.btnFinanceBatchSave.Text = "±£´æÅú´Î";
             this.btnFinanceBatchSave.Click += new System.EventHandler(this.SaveBatch);
             // 
             // financeTypeComboBoxEx
@@ -505,16 +518,16 @@ namespace CMBC.EasyFactor.ARMgr
             this.financeTypeComboBoxEx.FormattingEnabled = true;
             this.financeTypeComboBoxEx.ItemHeight = 14;
             this.financeTypeComboBoxEx.Items.AddRange(new object[] {
-                "å…¨éƒ¨",
-            "ä¿ç†é¢„ä»˜æ¬¾(è¡¨å†…)",
-            "å–æ–¹ä»£ä»˜",
-            "ä¹°æ–¹ä»£ä»˜",
-            "é“¶è¡Œæ‰¿å…‘æ±‡ç¥¨",
-            "å•†ä¸šæ‰¿å…‘æ±‡ç¥¨",
-            "å›½å†…ä¿¡ç”¨è¯",
-            "å›½é™…ä¿¡ç”¨è¯",
-            "å…¶ä»–",
-            "æœªçŸ¥"});
+                "È«²¿",
+            "±£ÀíÔ¤¸¶¿î(±íÄÚ)",
+            "Âô·½´ú¸¶",
+            "Âò·½´ú¸¶",
+            "ÒøĞĞ³Ğ¶Ò»ãÆ±",
+            "ÉÌÒµ³Ğ¶Ò»ãÆ±",
+            "¹úÄÚĞÅÓÃÖ¤",
+            "¹ú¼ÊĞÅÓÃÖ¤",
+            "ÆäËû",
+            "Î´Öª"});
             this.financeTypeComboBoxEx.Location = new System.Drawing.Point(440, 3);
             this.financeTypeComboBoxEx.Name = "financeTypeComboBoxEx";
             this.financeTypeComboBoxEx.Size = new System.Drawing.Size(100, 20);
@@ -748,21 +761,21 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
             this.menuItemInvoiceDetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemInvoiceDetail.Text = "è¯¦ç»†ä¿¡æ¯";
+            this.menuItemInvoiceDetail.Text = "ÏêÏ¸ĞÅÏ¢";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // menuItemCDADetail
             // 
             this.menuItemCDADetail.Name = "menuItemCDADetail";
             this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDADetail.Text = "é¢åº¦é€šçŸ¥ä¹¦è¯¦ç»†ä¿¡æ¯";
+            this.menuItemCDADetail.Text = "¶î¶ÈÍ¨ÖªÊéÏêÏ¸ĞÅÏ¢";
             this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
             this.menuItemCaseDetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCaseDetail.Text = "æ¡ˆå­è¯¦ç»†ä¿¡æ¯";
+            this.menuItemCaseDetail.Text = "°¸×ÓÏêÏ¸ĞÅÏ¢";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // bindingNavigatorSeparator
@@ -867,63 +880,63 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // requiredFieldValidator1
             // 
-            this.requiredFieldValidator1.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator1.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // customValidator4
             // 
-            this.customValidator4.ErrorMessage = "ä¸èƒ½æ˜¯è´Ÿå€¼";
+            this.customValidator4.ErrorMessage = "²»ÄÜÊÇ¸ºÖµ";
             this.customValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator4.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator4_ValidateValue);
             // 
             // requiredFieldValidator3
             // 
-            this.requiredFieldValidator3.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator3.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // customValidator3
             // 
-            this.customValidator3.ErrorMessage = "ä¸èƒ½æ˜¯è´Ÿå€¼";
+            this.customValidator3.ErrorMessage = "²»ÄÜÊÇ¸ºÖµ";
             this.customValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator3.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator3_ValidateValue);
             // 
             // requiredFieldValidator5
             // 
-            this.requiredFieldValidator5.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator5.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // compareValidator1
             // 
             this.compareValidator1.ControlToCompare = this.financePeriodBeginDateTimePicker;
-            this.compareValidator1.ErrorMessage = "ç»ˆæ­¢æ—¥æœŸåº”è¯¥å¤§äºèµ·å§‹æ—¥æœŸ";
+            this.compareValidator1.ErrorMessage = "ÖÕÖ¹ÈÕÆÚÓ¦¸Ã´óÓÚÆğÊ¼ÈÕÆÚ";
             this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
             // 
             // customValidator2
             // 
-            this.customValidator2.ErrorMessage = "èèµ„æœŸé™ä¸èƒ½æ—©äºå‘ç¥¨åˆ°æœŸæ—¥";
+            this.customValidator2.ErrorMessage = "ÈÚ×ÊÆÚÏŞ²»ÄÜÔçÓÚ·¢Æ±µ½ÆÚÈÕ";
             this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
             // 
             // requiredFieldValidator4
             // 
-            this.requiredFieldValidator4.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator4.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // customValidator1
             // 
-            this.customValidator1.ErrorMessage = "èèµ„æœŸé™ä¸èƒ½æ—©äºè½¬è®©æ—¥";
+            this.customValidator1.ErrorMessage = "ÈÚ×ÊÆÚÏŞ²»ÄÜÔçÓÚ×ªÈÃÈÕ";
             this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
             // 
             // requiredFieldValidator9
             // 
-            this.requiredFieldValidator9.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator9.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator8
             // 
-            this.requiredFieldValidator8.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator8.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // errorProvider
@@ -937,7 +950,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // requiredFieldValidator7
             // 
-            this.requiredFieldValidator7.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator7.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // colCheckBox
@@ -952,7 +965,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.colInvoiceNo.DataPropertyName = "InvoiceNo2";
             this.colInvoiceNo.Frozen = true;
-            this.colInvoiceNo.HeaderText = "å‘ç¥¨å·";
+            this.colInvoiceNo.HeaderText = "·¢Æ±ºÅ";
             this.colInvoiceNo.Name = "colInvoiceNo";
             this.colInvoiceNo.ReadOnly = true;
             // 
@@ -961,7 +974,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignAmount.DataPropertyName = "AssignAmount";
             dataGridViewCellStyle2.Format = "N2";
             this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignAmount.HeaderText = "è½¬è®©é‡‘é¢";
+            this.colAssignAmount.HeaderText = "×ªÈÃ½ğ¶î";
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
             // 
@@ -970,27 +983,27 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
             dataGridViewCellStyle3.Format = "N2";
             this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colAssignOutstanding.HeaderText = "è½¬è®©ä½™é¢";
+            this.colAssignOutstanding.HeaderText = "×ªÈÃÓà¶î";
             this.colAssignOutstanding.Name = "colAssignOutstanding";
             this.colAssignOutstanding.ReadOnly = true;
             // 
             // colInvoiceDate
             // 
             this.colInvoiceDate.DataPropertyName = "InvoiceDate";
-            this.colInvoiceDate.HeaderText = "å‘ç¥¨æ—¥";
+            this.colInvoiceDate.HeaderText = "·¢Æ±ÈÕ";
             this.colInvoiceDate.Name = "colInvoiceDate";
             // 
             // colDueDate
             // 
             this.colDueDate.DataPropertyName = "DueDate";
-            this.colDueDate.HeaderText = "å‘ç¥¨åˆ°æœŸæ—¥";
+            this.colDueDate.HeaderText = "·¢Æ±µ½ÆÚÈÕ";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.ReadOnly = true;
             // 
             // colAssignDate
             // 
             this.colAssignDate.DataPropertyName = "AssignDate";
-            this.colAssignDate.HeaderText = "è½¬è®©æ—¥";
+            this.colAssignDate.HeaderText = "×ªÈÃÈÕ";
             this.colAssignDate.Name = "colAssignDate";
             // 
             // colInvoiceFinanceOutstanding
@@ -998,7 +1011,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colInvoiceFinanceOutstanding.DataPropertyName = "InvoiceFinanceOutstanding";
             dataGridViewCellStyle4.Format = "N2";
             this.colInvoiceFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colInvoiceFinanceOutstanding.HeaderText = "èèµ„ä½™é¢";
+            this.colInvoiceFinanceOutstanding.HeaderText = "ÈÚ×ÊÓà¶î";
             this.colInvoiceFinanceOutstanding.Name = "colInvoiceFinanceOutstanding";
             this.colInvoiceFinanceOutstanding.ReadOnly = true;
             // 
@@ -1007,7 +1020,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colInvoiceFinanceAmount.DataPropertyName = "InvoiceFinanceAmount";
             dataGridViewCellStyle5.Format = "N2";
             this.colInvoiceFinanceAmount.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colInvoiceFinanceAmount.HeaderText = "å·²èèµ„é‡‘é¢";
+            this.colInvoiceFinanceAmount.HeaderText = "ÒÑÈÚ×Ê½ğ¶î";
             this.colInvoiceFinanceAmount.Name = "colInvoiceFinanceAmount";
             // 
             // colFinanceAmount
@@ -1015,7 +1028,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceAmount.DataPropertyName = "FinanceAmount";
             dataGridViewCellStyle6.Format = "N2";
             this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colFinanceAmount.HeaderText = "æœ¬æ¬¡èèµ„é‡‘é¢";
+            this.colFinanceAmount.HeaderText = "±¾´ÎÈÚ×Ê½ğ¶î";
             this.colFinanceAmount.Name = "colFinanceAmount";
             // 
             // colCommission
@@ -1023,13 +1036,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCommission.DataPropertyName = "Commission";
             dataGridViewCellStyle7.Format = "N2";
             this.colCommission.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colCommission.HeaderText = "æ‰‹ç»­è´¹";
+            this.colCommission.HeaderText = "ÊÖĞø·Ñ";
             this.colCommission.Name = "colCommission";
             // 
             // colComment
             // 
             this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "å¤‡æ³¨";
+            this.colComment.HeaderText = "±¸×¢";
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
             // 
@@ -1062,19 +1075,5 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.TextBoxX tbLoanNo;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

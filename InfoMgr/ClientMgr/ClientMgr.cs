@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ClientMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -7,6 +7,7 @@
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
@@ -14,14 +15,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     using CMBC.EasyFactor.Utils;
     using CMBC.EasyFactor.Utils.ConstStr;
     using DevComponents.DotNetBar;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Client Management User Interface
     /// </summary>
     public partial class ClientMgr : UserControl
     {
-        #regionÂ FieldsÂ (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -32,9 +32,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpClientMgrType opClientMgrType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -57,11 +57,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DOMINATE_CLIENT
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (3)
+		#region?Constructors?(3)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the ClientMgr class
         /// </summary>
         /// <param name="clientMgrType"></param>
@@ -71,17 +71,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.opClientMgrType = clientMgrType;
             if (this.opClientMgrType == OpClientMgrType.DOMINATE_CLIENT)
             {
-                this.cbCaseType.Text = "å›½å†…ä¿ç†";
+                this.cbCaseType.Text = "¹úÄÚ±£Àí";
                 this.QueryClients(null, null);
             }
             else if (this.opClientMgrType == OpClientMgrType.EXPORT_CLIENT)
             {
-                this.cbCaseType.Text = "å‡ºå£ä¿ç†";
+                this.cbCaseType.Text = "³ö¿Ú±£Àí";
                 this.QueryClients(null, null);
             }
             else if (this.opClientMgrType == OpClientMgrType.IMPORT_CLIENT)
             {
-                this.cbCaseType.Text = "è¿›å£ä¿ç†";
+                this.cbCaseType.Text = "½ø¿Ú±£Àí";
                 this.QueryClients(null, null);
             }
         }
@@ -112,7 +112,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ControlUtil.AddEnterListenersForQuery(this.pnlQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "å…¨éƒ¨" });
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "È«²¿" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";
             this.cbLocation.ValueMember = "LocationCode";
@@ -121,9 +121,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.UpdateContextMenu();
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ PropertiesÂ (3)
+		#region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -152,11 +152,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             set;
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (12)
+		#region?Methods?(12)?
 
-        //Â PrivateÂ MethodsÂ (12)Â 
+		//?Private?Methods?(12)?
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -193,41 +193,41 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             Client selectedClient = (Client)this.bs.List[this.dgvClients.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤å®¢æˆ·: " + selectedClient.ClientNameCN, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı¿Í»§: " + selectedClient.ClientNameCN, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (selectedClient.ClientCreditLines.Count > 0)
                 {
-                    MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤å®¢æˆ·,å·²å­˜åœ¨ç›¸å…³é¢åº¦", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("²»ÄÜÉ¾³ı´Ë¿Í»§,ÒÑ´æÔÚÏà¹Ø¶î¶È", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedClient.Contracts.Count > 0)
                 {
-                    MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤å®¢æˆ·,å·²å­˜åœ¨ç›¸å…³ä¿ç†åˆåŒ", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("²»ÄÜÉ¾³ı´Ë¿Í»§,ÒÑ´æÔÚÏà¹Ø±£ÀíºÏÍ¬", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedClient.SellerCases.Count > 0 || selectedClient.BuyerCases.Count > 0)
                 {
-                    MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤å®¢æˆ·,å·²å­˜åœ¨ç›¸å…³æ¡ˆä»¶ä¿¡æ¯", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("²»ÄÜÉ¾³ı´Ë¿Í»§,ÒÑ´æÔÚÏà¹Ø°¸¼şĞÅÏ¢", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedClient.GroupClients.Count > 0)
                 {
-                    MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤å®¢æˆ·,å·²å­˜åœ¨ç›¸å…³å­å…¬å¸ä¿¡æ¯", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("²»ÄÜÉ¾³ı´Ë¿Í»§,ÒÑ´æÔÚÏà¹Ø×Ó¹«Ë¾ĞÅÏ¢", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedClient.ClientAccounts.Count > 0)
                 {
-                    MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤å®¢æˆ·,å·²å­˜åœ¨ç›¸å…³è´¦æˆ·ä¿¡æ¯", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("²»ÄÜÉ¾³ı´Ë¿Í»§,ÒÑ´æÔÚÏà¹ØÕË»§ĞÅÏ¢", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedClient.ClientReviews.Count > 0)
                 {
-                    MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤å®¢æˆ·,å·²å­˜åœ¨ç›¸å…³åæŸ¥æ„è§", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("²»ÄÜÉ¾³ı´Ë¿Í»§,ÒÑ´æÔÚÏà¹ØĞ­²éÒâ¼û", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -238,7 +238,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
                 catch (Exception e1)
                 {
-                    MessageBoxEx.Show("åˆ é™¤å¤±è´¥," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("É¾³ıÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -353,7 +353,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void QueryClients(object sender, System.EventArgs e)
         {
             string clientType = this.cbClientType.Text;
-            if (clientType == "å…¨éƒ¨")
+            if (clientType == "È«²¿")
             {
                 clientType = string.Empty;
             }
@@ -372,12 +372,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                   && ((c.ClientEDICode == null ? string.Empty : c.ClientEDICode).Contains(tbClientEDICode.Text))
                   && ((c.ClientType == null ? string.Empty : c.ClientType).Contains(clientType))
                   && (this.cbIsContractSigned.Checked == false ? true : c.Contracts.Any(con => con.ContractStatus == CONTRACT.AVAILABILITY))
-                  && (caseType == "å‡ºå£ä¿ç†" ? c.SellerCases.Any(ca => ca.TransactionType == "å‡ºå£ä¿ç†") || c.BuyerCases.Any(ca => ca.TransactionType == "å‡ºå£ä¿ç†") : true)
-                  && (caseType == "è¿›å£ä¿ç†" ? c.SellerCases.Any(ca => ca.TransactionType == "è¿›å£ä¿ç†") || c.BuyerCases.Any(ca => ca.TransactionType == "è¿›å£ä¿ç†") : true)
-                  && (caseType == "å›½å†…ä¿ç†" ? c.SellerCases.Any(ca => ca.TransactionType == "å›½å†…å–æ–¹ä¿ç†" || ca.TransactionType == "å›½å†…ä¹°æ–¹ä¿ç†") || c.BuyerCases.Any(ca => ca.TransactionType == "å›½å†…å–æ–¹ä¿ç†" || ca.TransactionType == "å›½å†…ä¹°æ–¹ä¿ç†") : true));
+                  && (caseType == "³ö¿Ú±£Àí" ? c.SellerCases.Any(ca => ca.TransactionType == "³ö¿Ú±£Àí") || c.BuyerCases.Any(ca => ca.TransactionType == "³ö¿Ú±£Àí") : true)
+                  && (caseType == "½ø¿Ú±£Àí" ? c.SellerCases.Any(ca => ca.TransactionType == "½ø¿Ú±£Àí") || c.BuyerCases.Any(ca => ca.TransactionType == "½ø¿Ú±£Àí") : true)
+                  && (caseType == "¹úÄÚ±£Àí" ? c.SellerCases.Any(ca => ca.TransactionType == "¹úÄÚÂô·½±£Àí" || ca.TransactionType == "¹úÄÚÂò·½±£Àí") || c.BuyerCases.Any(ca => ca.TransactionType == "¹úÄÚÂô·½±£Àí" || ca.TransactionType == "¹úÄÚÂò·½±£Àí") : true));
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
         }
 
         /// <summary>
@@ -435,6 +435,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

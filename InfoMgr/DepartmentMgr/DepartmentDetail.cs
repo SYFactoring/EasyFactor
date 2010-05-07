@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="DepartmentDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,29 +11,28 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class DepartmentDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (1)
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpDepartmentType opDepartmentType;
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
         /// </summary>
         private DBDataContext context;
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpDepartmentType opDepartmentType;
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Enums (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// Operation Type
@@ -56,11 +55,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             DETAIL_DEPARTMENT
         }
 
-        #endregion Enums
+		#endregion?Enums?
 
-        #region Constructors (1)
+		#region?Constructors?(1)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the DepartmentDetail class
         /// </summary>
         /// <param name="department"></param>
@@ -92,11 +91,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.UpdateDepartmentControlStatus();
         }
 
-        #endregion Constructors
+		#endregion?Constructors?
 
-        #region Methods (6)
+		#region?Methods?(3)?
 
-        // Private Methods (6) 
+		//?Private?Methods?(3)?
 
         /// <summary>
         /// 
@@ -133,7 +132,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("�����½��ɹ�", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     opDepartmentType = OpDepartmentType.UPDATE_DEPARTMENT;
                 }
             }
@@ -152,7 +151,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("���ݸ��³ɹ�", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -201,6 +200,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             ControlUtil.SetComponetEditable(this.tbAssistant, false);
         }
 
-        #endregion Methods
+		#endregion?Methods?
     }
 }

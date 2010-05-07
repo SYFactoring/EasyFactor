@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoiceAssign.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,7 +11,8 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceAssign
     {
-		#region¬†Fields¬†(49)¬†
+		#region?Fields?(48)?
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -35,6 +36,14 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ButtonX btnAssignBatchSave;
         private DevComponents.DotNetBar.ButtonX btnAssignBatchSelect;
         private System.Windows.Forms.ContextMenuStrip cmuInvoiceAssign;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvInvoices;
@@ -56,11 +65,11 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbTotalHandfee;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
 
-		#endregion¬†Fields¬†
+		#endregion?Fields?
 
-		#region¬†Methods¬†(1)¬†
+		#region?Methods?(1)?
 
-		//¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -81,7 +90,9 @@ namespace CMBC.EasyFactor.ARMgr
             base.Dispose(disposing);
         }
 
-		#endregion¬†Methods¬†
+		#endregion?Methods?
+
+
 
         #region Component Designer generated code
 
@@ -148,7 +159,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÂøÖÂ°´");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ÿÃÓ");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
@@ -180,7 +191,7 @@ namespace CMBC.EasyFactor.ARMgr
             assignBatchNoLabel.Name = "assignBatchNoLabel";
             assignBatchNoLabel.Size = new System.Drawing.Size(59, 16);
             assignBatchNoLabel.TabIndex = 0;
-            assignBatchNoLabel.Text = "ËΩ¨ËÆ©ÊâπÂè∑:";
+            assignBatchNoLabel.Text = "◊™»√≈˙∫≈:";
             // 
             // assignDateLabel
             // 
@@ -193,7 +204,7 @@ namespace CMBC.EasyFactor.ARMgr
             assignDateLabel.Name = "assignDateLabel";
             assignDateLabel.Size = new System.Drawing.Size(47, 16);
             assignDateLabel.TabIndex = 2;
-            assignDateLabel.Text = "ËΩ¨ËÆ©Êó•:";
+            assignDateLabel.Text = "◊™»√»’:";
             // 
             // commentLabel
             // 
@@ -206,7 +217,7 @@ namespace CMBC.EasyFactor.ARMgr
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
             commentLabel.TabIndex = 5;
-            commentLabel.Text = "Â§áÊ≥®:";
+            commentLabel.Text = "±∏◊¢:";
             // 
             // lblTotalAssign
             // 
@@ -219,7 +230,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblTotalAssign.Name = "lblTotalAssign";
             lblTotalAssign.Size = new System.Drawing.Size(93, 16);
             lblTotalAssign.TabIndex = 12;
-            lblTotalAssign.Text = "Êú¨Ê¨°ËΩ¨ËÆ©ÊÄªÈáëÈ¢ù";
+            lblTotalAssign.Text = "±æ¥Œ◊™»√◊‹Ω∂Ó";
             // 
             // lblAssignNumber
             // 
@@ -232,7 +243,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblAssignNumber.Name = "lblAssignNumber";
             lblAssignNumber.Size = new System.Drawing.Size(93, 16);
             lblAssignNumber.TabIndex = 13;
-            lblAssignNumber.Text = "Êú¨Ê¨°ËΩ¨ËÆ©ÊÄªÁ¨îÊï∞";
+            lblAssignNumber.Text = "±æ¥Œ◊™»√◊‹±  ˝";
             // 
             // lblTotalCommission
             // 
@@ -245,7 +256,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblTotalCommission.Name = "lblTotalCommission";
             lblTotalCommission.Size = new System.Drawing.Size(93, 16);
             lblTotalCommission.TabIndex = 14;
-            lblTotalCommission.Text = "Êú¨Ê¨°ÊâãÁª≠Ë¥πÊî∂ÂÖ•";
+            lblTotalCommission.Text = "±æ¥Œ ÷–¯∑— ’»Î";
             // 
             // lblTotalHandfee
             // 
@@ -258,7 +269,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblTotalHandfee.Name = "lblTotalHandfee";
             lblTotalHandfee.Size = new System.Drawing.Size(118, 16);
             lblTotalHandfee.TabIndex = 15;
-            lblTotalHandfee.Text = "Êú¨Ê¨°ÂçïÊçÆÂ§ÑÁêÜË¥πÊî∂ÂÖ•";
+            lblTotalHandfee.Text = "±æ¥Œµ•æ›¥¶¿Ì∑— ’»Î";
             // 
             // panelAssignBatch
             // 
@@ -355,7 +366,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchImport.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAssignBatchImport.TabIndex = 11;
-            this.btnAssignBatchImport.Text = "ÂØºÂÖ•ÊâπÊ¨°";
+            this.btnAssignBatchImport.Text = "µº»Î≈˙¥Œ";
             this.btnAssignBatchImport.Click += new System.EventHandler(this.ImportAssignBatch);
             // 
             // btnAssignBatchExport
@@ -367,7 +378,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchExport.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchExport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAssignBatchExport.TabIndex = 10;
-            this.btnAssignBatchExport.Text = "ÂØºÂá∫ÊâπÊ¨°";
+            this.btnAssignBatchExport.Text = "µº≥ˆ≈˙¥Œ";
             this.btnAssignBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
             // btnAssignBatchSelect
@@ -379,7 +390,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchSelect.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAssignBatchSelect.TabIndex = 9;
-            this.btnAssignBatchSelect.Text = "ÈÄâÊã©ÊâπÊ¨°";
+            this.btnAssignBatchSelect.Text = "—°‘Ò≈˙¥Œ";
             this.btnAssignBatchSelect.Click += new System.EventHandler(this.SelectBatch);
             // 
             // btnAssignBatchNew
@@ -391,7 +402,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchNew.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAssignBatchNew.TabIndex = 7;
-            this.btnAssignBatchNew.Text = "Êñ∞Âª∫ÊâπÊ¨°";
+            this.btnAssignBatchNew.Text = "–¬Ω®≈˙¥Œ";
             this.btnAssignBatchNew.Click += new System.EventHandler(this.NewBatch);
             // 
             // btnAssignBatchSave
@@ -403,7 +414,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchSave.Size = new System.Drawing.Size(75, 23);
             this.btnAssignBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAssignBatchSave.TabIndex = 8;
-            this.btnAssignBatchSave.Text = "‰øùÂ≠òÊâπÊ¨°";
+            this.btnAssignBatchSave.Text = "±£¥Ê≈˙¥Œ";
             this.btnAssignBatchSave.Click += new System.EventHandler(this.SaveAssignBatch);
             // 
             // commentTextBox
@@ -436,7 +447,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.isCreateMsgCheckBox.Name = "isCreateMsgCheckBox";
             this.isCreateMsgCheckBox.Size = new System.Drawing.Size(120, 16);
             this.isCreateMsgCheckBox.TabIndex = 4;
-            this.isCreateMsgCheckBox.Text = "ÊòØÂê¶ÁîüÊàêEDIÊä•Êñá";
+            this.isCreateMsgCheckBox.Text = " «∑Ò…˙≥…EDI±®Œƒ";
             // 
             // assignDateDateTimePicker
             // 
@@ -505,21 +516,21 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
             this.menuItemInvoiceDetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemInvoiceDetail.Text = "ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemInvoiceDetail.Text = "œÍœ∏–≈œ¢";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // menuItemCDADetail
             // 
             this.menuItemCDADetail.Name = "menuItemCDADetail";
             this.menuItemCDADetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCDADetail.Text = "È¢ùÂ∫¶ÈÄöÁü•‰π¶ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemCDADetail.Text = "∂Ó∂»Õ®÷™ ÈœÍœ∏–≈œ¢";
             this.menuItemCDADetail.Click += new System.EventHandler(this.DetailCDA);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
             this.menuItemCaseDetail.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCaseDetail.Text = "Ê°àÂ≠êËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemCaseDetail.Text = "∞∏◊”œÍœ∏–≈œ¢";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // toolStripSeparator
@@ -531,7 +542,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.menuItemFlaw.Name = "menuItemFlaw";
             this.menuItemFlaw.Size = new System.Drawing.Size(182, 22);
-            this.menuItemFlaw.Text = "ÁëïÁñµÂ§ÑÁêÜ";
+            this.menuItemFlaw.Text = "Ë¶¥√¥¶¿Ì";
             this.menuItemFlaw.Click += new System.EventHandler(this.Flaw);
             // 
             // invoiceBindingNavigator
@@ -693,7 +704,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colInvoiceNo
             // 
             this.colInvoiceNo.DataPropertyName = "InvoiceNo";
-            this.colInvoiceNo.HeaderText = "ÂèëÁ•®Âè∑";
+            this.colInvoiceNo.HeaderText = "∑¢∆±∫≈";
             this.colInvoiceNo.Name = "colInvoiceNo";
             // 
             // colInvoiceAmount
@@ -702,7 +713,7 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle1.Format = "N2";
             dataGridViewCellStyle1.NullValue = null;
             this.colInvoiceAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colInvoiceAmount.HeaderText = "Á•®Èù¢ÈáëÈ¢ù";
+            this.colInvoiceAmount.HeaderText = "∆±√ÊΩ∂Ó";
             this.colInvoiceAmount.Name = "colInvoiceAmount";
             // 
             // colAssignAmount
@@ -711,20 +722,20 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
             this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignAmount.HeaderText = "ËΩ¨ËÆ©ÈáëÈ¢ù";
+            this.colAssignAmount.HeaderText = "◊™»√Ω∂Ó";
             this.colAssignAmount.Name = "colAssignAmount";
             // 
             // colInvoiceDate
             // 
             this.colInvoiceDate.DataPropertyName = "InvoiceDate";
-            this.colInvoiceDate.HeaderText = "ÂèëÁ•®Êó•";
+            this.colInvoiceDate.HeaderText = "∑¢∆±»’";
             this.colInvoiceDate.Name = "colInvoiceDate";
             this.colInvoiceDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // colDueDate
             // 
             this.colDueDate.DataPropertyName = "DueDate";
-            this.colDueDate.HeaderText = "Âà∞ÊúüÊó•";
+            this.colDueDate.HeaderText = "µΩ∆⁄»’";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
@@ -733,19 +744,19 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCommission.DataPropertyName = "Commission";
             dataGridViewCellStyle3.Format = "N2";
             this.colCommission.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colCommission.HeaderText = "ÊâãÁª≠Ë¥π";
+            this.colCommission.HeaderText = " ÷–¯∑—";
             this.colCommission.Name = "colCommission";
             // 
             // colIsFlaw
             // 
             this.colIsFlaw.DataPropertyName = "IsFlaw";
-            this.colIsFlaw.HeaderText = "ÊòØÂê¶ÁëïÁñµ";
+            this.colIsFlaw.HeaderText = " «∑ÒË¶¥√";
             this.colIsFlaw.Name = "colIsFlaw";
             // 
             // colComment
             // 
             this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "Â§áÊ≥®";
+            this.colComment.HeaderText = "±∏◊¢";
             this.colComment.Name = "colComment";
             // 
             // superValidator
@@ -756,7 +767,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // requiredFieldValidator1
             // 
-            this.requiredFieldValidator1.ErrorMessage = "ÂøÖÂ°´";
+            this.requiredFieldValidator1.ErrorMessage = "±ÿÃÓ";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // errorProvider
@@ -794,15 +805,5 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-
     }
 }

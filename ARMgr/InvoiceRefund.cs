@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoiceRefund.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -12,18 +12,18 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
+    using CMBC.EasyFactor.Controls;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
-    using CMBC.EasyFactor.Controls;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceRefund : UserControl
     {
-        #regionÂ FieldsÂ (4)
+        #region?Fields?(5)?
 
         /// <summary>
         /// 
@@ -41,15 +41,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         private OpRefundType refundType;
-
         /// <summary>
         /// 
         /// </summary>
         private double totalPayment = 0;
 
-        #endregionÂ Fields
+        #endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -67,9 +66,9 @@ namespace CMBC.EasyFactor.ARMgr
             SELLER_REFUND,
         }
 
-        #endregionÂ Enums
+        #endregion?Enums?
 
-        #regionÂ ConstructorsÂ (1)
+        #region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -102,9 +101,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.context = new DBDataContext();
         }
 
-        #endregionÂ Constructors
+        #endregion?Constructors?
 
-        #regionÂ PropertiesÂ (1)
+        #region?Properties?(1)?
 
         /// <summary>
         /// 
@@ -122,11 +121,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregionÂ Properties
+        #endregion?Properties?
 
-        #regionÂ MethodsÂ (21)
+        #region?Methods?(21)?
 
-        //Â PublicÂ MethodsÂ (2)Â 
+        //?Public?Methods?(2)?
 
         /// <summary>
         /// 
@@ -187,7 +186,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = typeof(InvoiceRefundBatch);
             this.logsBindingSource.DataSource = typeof(InvoiceRefundLog);
         }
-        //Â PrivateÂ MethodsÂ (19)Â 
+        //?Private?Methods?(19)?
 
         /// <summary>
         /// 
@@ -412,7 +411,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("æ²¡æœ‰é€‰å®šæ¡ˆä»¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ã»ÓĞÑ¡¶¨°¸¼ş", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -439,7 +438,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("æ²¡æœ‰é€‰å®šæ¡ˆä»¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ã»ÓĞÑ¡¶¨°¸¼ş", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -489,7 +488,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("æ²¡æœ‰é€‰å®šæ¡ˆä»¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ã»ÓĞÑ¡¶¨°¸¼ş", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -498,10 +497,10 @@ namespace CMBC.EasyFactor.ARMgr
             switch (refundType)
             {
                 case OpRefundType.BUYER_PAYMENT:
-                    batch.RefundType = "ä¹°æ–¹ç›´æ¥è¿˜æ¬¾";
+                    batch.RefundType = "Âò·½Ö±½Ó¸¶¿î";
                     break;
                 case OpRefundType.SELLER_REFUND:
-                    batch.RefundType = "å–æ–¹è¿˜æ¬¾";
+                    batch.RefundType = "Âô·½»¹¿î";
                     break;
                 default:
                     break;
@@ -590,7 +589,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this._case == null)
             {
-                MessageBoxEx.Show("æ²¡æœ‰é€‰å®šæ¡ˆä»¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ã»ÓĞÑ¡¶¨°¸¼ş", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -658,7 +657,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (isSaveOK)
             {
-                MessageBoxEx.Show("æ•°æ®ä¿å­˜æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İ±£´æ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.caseBasic.CaculateOutstanding(this._case);
             }
         }
@@ -672,12 +671,12 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._case == null)
             {
-                MessageBoxEx.Show("æ²¡æœ‰é€‰å®šæ¡ˆä»¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ã»ÓĞÑ¡¶¨°¸¼ş", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             RefundBatchMgr batchMgr = new RefundBatchMgr(this._case, this.context);
-            QueryForm queryUI = new QueryForm(batchMgr, "é€‰æ‹©ä»˜æ¬¾æ‰¹æ¬¡");
+            QueryForm queryUI = new QueryForm(batchMgr, "Ñ¡Ôñ¸¶¿îÅú´Î");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             InvoiceRefundBatch selectedBatch = batchMgr.Selected;
@@ -741,7 +740,7 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoiceRefundLog log = (InvoiceRefundLog)logList[i];
                     if (TypeUtil.LessZero(log.FinanceAmount - log.RefundAmount))
                     {
-                        MessageBoxEx.Show("è¿˜æ¬¾é‡‘é¢ä¸èƒ½å¤§äºèèµ„ä½™é¢: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("»¹¿î½ğ¶î²»ÄÜ´óÓÚÈÚ×ÊÓà¶î: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
 
@@ -749,7 +748,7 @@ namespace CMBC.EasyFactor.ARMgr
                     //{
                     //    if (TypeUtil.LessZero(log.InvoicePaymentAmount - log.InvoiceRefundAmount - log.RefundAmount))
                     //    {
-                    //        MessageBoxEx.Show("è¿˜æ¬¾é‡‘é¢ä¸èƒ½å¤§äºä»˜æ¬¾é‡‘é¢: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //        MessageBoxEx.Show("»¹¿î½ğ¶î²»ÄÜ´óÓÚ¸¶¿î½ğ¶î: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //        return false;
                     //    }
                     //}
@@ -761,7 +760,7 @@ namespace CMBC.EasyFactor.ARMgr
             //{
             //    if (TypeUtil.GreaterZero(totalRefund - this.totalPayment))
             //    {
-            //        MessageBoxEx.Show("æœ¬æ¬¡è¿˜æ¬¾æ€»é¢ä¸èƒ½å¤§äºä»˜æ¬¾æ€»é¢", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        MessageBoxEx.Show("±¾´Î»¹¿î×Ü¶î²»ÄÜ´óÓÚ¸¶¿î×Ü¶î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             //        return false;
             //    }
             //}
@@ -769,6 +768,6 @@ namespace CMBC.EasyFactor.ARMgr
             return true;
         }
 
-        #endregionÂ Methods
+        #endregion?Methods?
     }
 }

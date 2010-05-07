@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="QueryForm.Designer.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class QueryForm
     {
-        #region Fields (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// Required designer variable.
@@ -19,11 +19,11 @@ namespace CMBC.EasyFactor.Utils
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.PanelEx panelRoot;
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Methods (1)
+		#region?Methods?(1)?
 
-        // Protected Methods (1) 
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -39,7 +39,9 @@ namespace CMBC.EasyFactor.Utils
             base.Dispose(disposing);
         }
 
-        #endregion Methods
+		#endregion?Methods?
+
+
 
         #region Windows Form Designer generated code
 
@@ -79,7 +81,7 @@ namespace CMBC.EasyFactor.Utils
             this.DoubleBuffered = true;
             this.Name = "QueryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "查询";
+            this.Text = "��ѯ";
             this.ResumeLayout(false);
 
         }

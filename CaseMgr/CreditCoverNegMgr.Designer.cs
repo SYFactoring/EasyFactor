@@ -1,29 +1,70 @@
-Ôªønamespace CMBC.EasyFactor.CaseMgr
+namespace CMBC.EasyFactor.CaseMgr
 {
     partial class CreditCoverNegMgr
     {
-		#region¬†Fields¬†(27)¬†
+		#region?Fields?(52)?
 
+        private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.ButtonX btnQueryReset;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCurrency;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCDA;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsContractSigned;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
         private System.Windows.Forms.ContextMenuStrip cmuCreditCoverMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorCountry;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNetPaymentTerm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPriceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvCreditCoverNegs;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
         private DevComponents.DotNetBar.LabelX lblBuyerFactorCode;
+        private DevComponents.DotNetBar.LabelX lblCaseCode;
+        private DevComponents.DotNetBar.LabelX lblClientName;
         private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX lblCreateUserName;
+        private DevComponents.DotNetBar.LabelX lblCurrency;
+        private DevComponents.DotNetBar.LabelX lblDate;
+        private DevComponents.DotNetBar.LabelX lblLocation;
         private DevComponents.DotNetBar.LabelX lblSellerFactorCode;
+        private DevComponents.DotNetBar.LabelX lblTransactionType;
         private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNegExport;
         private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverSelect;
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbBuyerFactorCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbSellerFactorCode;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
-		#endregion¬†Fields¬†
+		#endregion?Fields?
 
-		#region¬†Methods¬†(1)¬†
+		#region?Methods?(1)?
 
-		//¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -38,7 +79,7 @@
             base.Dispose(disposing);
         }
 
-		#endregion¬†Methods¬†
+		#endregion?Methods?
 
 
 
@@ -181,7 +222,7 @@
             this.lblCreateUserName.Name = "lblCreateUserName";
             this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
             this.lblCreateUserName.TabIndex = 17;
-            this.lblCreateUserName.Text = "ÁªèÂäû‰∫∫";
+            this.lblCreateUserName.Text = "æ≠∞Ï»À";
             // 
             // cbIsContractSigned
             // 
@@ -195,7 +236,7 @@
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsContractSigned.TabIndex = 19;
-            this.cbIsContractSigned.Text = "ÊòØÂê¶Á≠æËÆ¢‰øùÁêÜÂêàÂêå";
+            this.cbIsContractSigned.Text = " «∑Ò«©∂©±£¿Ì∫œÕ¨";
             // 
             // btnQueryReset
             // 
@@ -206,7 +247,7 @@
             this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQueryReset.TabIndex = 22;
-            this.btnQueryReset.Text = "ÈáçÁΩÆ";
+            this.btnQueryReset.Text = "÷ÿ÷√";
             this.btnQueryReset.Click += new System.EventHandler(this.Reset);
             // 
             // cbIsCDA
@@ -221,7 +262,7 @@
             this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
             this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsCDA.TabIndex = 20;
-            this.cbIsCDA.Text = "CDAÊòØÂê¶Á≠æÂõû";
+            this.cbIsCDA.Text = "CDA «∑Ò«©ªÿ";
             // 
             // tbClientName
             // 
@@ -245,7 +286,7 @@
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(56, 16);
             this.lblClientName.TabIndex = 0;
-            this.lblClientName.Text = "ÂÆ¢Êà∑ÂêçÁß∞";
+            this.lblClientName.Text = "øÕªß√˚≥∆";
             // 
             // tbCaseCode
             // 
@@ -269,7 +310,7 @@
             this.lblCaseCode.Name = "lblCaseCode";
             this.lblCaseCode.Size = new System.Drawing.Size(56, 16);
             this.lblCaseCode.TabIndex = 2;
-            this.lblCaseCode.Text = "Ê°à‰ª∂ÁºñÂè∑";
+            this.lblCaseCode.Text = "∞∏º˛±‡∫≈";
             // 
             // lblDate
             // 
@@ -282,7 +323,7 @@
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
             this.lblDate.TabIndex = 14;
-            this.lblDate.Text = "Áî≥ËØ∑ÊúüÈôê";
+            this.lblDate.Text = "…Í«Î∆⁄œﬁ";
             // 
             // btnQuery
             // 
@@ -293,7 +334,7 @@
             this.btnQuery.Size = new System.Drawing.Size(48, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 21;
-            this.btnQuery.Text = "Êü•ËØ¢";
+            this.btnQuery.Text = "≤È—Ø";
             this.btnQuery.Click += new System.EventHandler(this.Query);
             // 
             // cbCurrency
@@ -320,7 +361,7 @@
             this.lblCurrency.Name = "lblCurrency";
             this.lblCurrency.Size = new System.Drawing.Size(56, 16);
             this.lblCurrency.TabIndex = 8;
-            this.lblCurrency.Text = "ÂèëÁ•®Â∏ÅÂà´";
+            this.lblCurrency.Text = "∑¢∆±±“±";
             // 
             // cbTransactionType
             // 
@@ -329,10 +370,10 @@
             this.cbTransactionType.FormattingEnabled = true;
             this.cbTransactionType.ItemHeight = 14;
             this.cbTransactionType.Items.AddRange(new object[] {
-            "ÂõΩÂÜÖÂçñÊñπ‰øùÁêÜ",
-            "ÂõΩÂÜÖ‰π∞Êñπ‰øùÁêÜ",
-            "Âá∫Âè£‰øùÁêÜ",
-            "ËøõÂè£‰øùÁêÜ"});
+            "π˙ƒ⁄¬Ù∑Ω±£¿Ì",
+            "π˙ƒ⁄¬Ú∑Ω±£¿Ì",
+            "≥ˆø⁄±£¿Ì",
+            "Ω¯ø⁄±£¿Ì"});
             this.cbTransactionType.Location = new System.Drawing.Point(65, 49);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
@@ -350,7 +391,7 @@
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(56, 16);
             this.lblTransactionType.TabIndex = 12;
-            this.lblTransactionType.Text = "‰∏öÂä°Á±ªÂà´";
+            this.lblTransactionType.Text = "“µŒÒ¿‡±";
             // 
             // diEnd
             // 
@@ -478,7 +519,7 @@
             this.lblBuyerFactorCode.Name = "lblBuyerFactorCode";
             this.lblBuyerFactorCode.Size = new System.Drawing.Size(93, 16);
             this.lblBuyerFactorCode.TabIndex = 10;
-            this.lblBuyerFactorCode.Text = "‰π∞Êñπ‰øùÁêÜÂïÜ‰ª£Á†Å";
+            this.lblBuyerFactorCode.Text = "¬Ú∑Ω±£¿Ì…Ã¥˙¬Î";
             // 
             // tbSellerFactorCode
             // 
@@ -502,7 +543,7 @@
             this.lblSellerFactorCode.Name = "lblSellerFactorCode";
             this.lblSellerFactorCode.Size = new System.Drawing.Size(93, 16);
             this.lblSellerFactorCode.TabIndex = 4;
-            this.lblSellerFactorCode.Text = "ÂçñÊñπ‰øùÁêÜÂïÜ‰ª£Á†Å";
+            this.lblSellerFactorCode.Text = "¬Ù∑Ω±£¿Ì…Ã¥˙¬Î";
             // 
             // dgvCreditCoverNegs
             // 
@@ -572,7 +613,7 @@
             // 
             this.colCaseCode.DataPropertyName = "CaseCode";
             this.colCaseCode.Frozen = true;
-            this.colCaseCode.HeaderText = "Ê°à‰ª∂ÁºñÂè∑";
+            this.colCaseCode.HeaderText = "∞∏º˛±‡∫≈";
             this.colCaseCode.Name = "colCaseCode";
             this.colCaseCode.ReadOnly = true;
             this.colCaseCode.Width = 80;
@@ -581,21 +622,21 @@
             // 
             this.colSellerName.DataPropertyName = "SellerName";
             this.colSellerName.Frozen = true;
-            this.colSellerName.HeaderText = "ÂçñÊñπ";
+            this.colSellerName.HeaderText = "¬Ù∑Ω";
             this.colSellerName.Name = "colSellerName";
             this.colSellerName.ReadOnly = true;
             // 
             // colBuyerName
             // 
             this.colBuyerName.DataPropertyName = "BuyerName";
-            this.colBuyerName.HeaderText = "‰π∞Êñπ";
+            this.colBuyerName.HeaderText = "¬Ú∑Ω";
             this.colBuyerName.Name = "colBuyerName";
             this.colBuyerName.ReadOnly = true;
             // 
             // colBuyerFactorCountry
             // 
             this.colBuyerFactorCountry.DataPropertyName = "BuyerCountry";
-            this.colBuyerFactorCountry.HeaderText = "ÂõΩÂà´";
+            this.colBuyerFactorCountry.HeaderText = "π˙±";
             this.colBuyerFactorCountry.Name = "colBuyerFactorCountry";
             this.colBuyerFactorCountry.ReadOnly = true;
             this.colBuyerFactorCountry.Width = 40;
@@ -603,42 +644,42 @@
             // colSellerFactorName
             // 
             this.colSellerFactorName.DataPropertyName = "SellerFactorName";
-            this.colSellerFactorName.HeaderText = "ÂçñÊñπ‰øùÁêÜÂïÜ";
+            this.colSellerFactorName.HeaderText = "¬Ù∑Ω±£¿Ì…Ã";
             this.colSellerFactorName.Name = "colSellerFactorName";
             this.colSellerFactorName.ReadOnly = true;
             // 
             // colBuyerFactorName
             // 
             this.colBuyerFactorName.DataPropertyName = "BuyerFactorName";
-            this.colBuyerFactorName.HeaderText = "‰π∞Êñπ‰øùÁêÜÂïÜ";
+            this.colBuyerFactorName.HeaderText = "¬Ú∑Ω±£¿Ì…Ã";
             this.colBuyerFactorName.Name = "colBuyerFactorName";
             this.colBuyerFactorName.ReadOnly = true;
             // 
             // colTransactionType
             // 
             this.colTransactionType.DataPropertyName = "TransactionType";
-            this.colTransactionType.HeaderText = "‰∏öÂä°Á±ªÂûã";
+            this.colTransactionType.HeaderText = "“µŒÒ¿‡–Õ";
             this.colTransactionType.Name = "colTransactionType";
             this.colTransactionType.ReadOnly = true;
             // 
             // colCaseCurrency
             // 
             this.colCaseCurrency.DataPropertyName = "CaseCurrency";
-            this.colCaseCurrency.HeaderText = "ÂèëÁ•®Â∏ÅÂà´";
+            this.colCaseCurrency.HeaderText = "∑¢∆±±“±";
             this.colCaseCurrency.Name = "colCaseCurrency";
             this.colCaseCurrency.ReadOnly = true;
             // 
             // colRequestType
             // 
             this.colRequestType.DataPropertyName = "RequestType";
-            this.colRequestType.HeaderText = "P/CÊ†áÂøó";
+            this.colRequestType.HeaderText = "P/C±Í÷æ";
             this.colRequestType.Name = "colRequestType";
             this.colRequestType.ReadOnly = true;
             // 
             // colNetPaymentTerm
             // 
             this.colNetPaymentTerm.DataPropertyName = "NetPaymentTerm";
-            this.colNetPaymentTerm.HeaderText = "‰ªòÊ¨æÊù°‰ª∂";
+            this.colNetPaymentTerm.HeaderText = "∏∂øÓÃıº˛";
             this.colNetPaymentTerm.Name = "colNetPaymentTerm";
             this.colNetPaymentTerm.ReadOnly = true;
             this.colNetPaymentTerm.Width = 50;
@@ -648,7 +689,7 @@
             this.colRequestAmount.DataPropertyName = "RequestAmount";
             dataGridViewCellStyle2.Format = "N2";
             this.colRequestAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colRequestAmount.HeaderText = "Áî≥ËØ∑È¢ùÂ∫¶";
+            this.colRequestAmount.HeaderText = "…Í«Î∂Ó∂»";
             this.colRequestAmount.Name = "colRequestAmount";
             this.colRequestAmount.ReadOnly = true;
             // 
@@ -657,7 +698,7 @@
             this.colRequestDate.DataPropertyName = "RequestDate";
             dataGridViewCellStyle3.Format = "d";
             this.colRequestDate.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colRequestDate.HeaderText = "Áî≥ËØ∑Êó•Êúü";
+            this.colRequestDate.HeaderText = "…Í«Î»’∆⁄";
             this.colRequestDate.Name = "colRequestDate";
             this.colRequestDate.ReadOnly = true;
             // 
@@ -666,7 +707,7 @@
             this.colReplyAmount.DataPropertyName = "ReplyAmount";
             dataGridViewCellStyle4.Format = "N2";
             this.colReplyAmount.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colReplyAmount.HeaderText = "ÂõûÂ§çÈ¢ùÂ∫¶";
+            this.colReplyAmount.HeaderText = "ªÿ∏¥∂Ó∂»";
             this.colReplyAmount.Name = "colReplyAmount";
             this.colReplyAmount.ReadOnly = true;
             // 
@@ -675,7 +716,7 @@
             this.colReplyDate.DataPropertyName = "ReplyDate";
             dataGridViewCellStyle5.Format = "d";
             this.colReplyDate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colReplyDate.HeaderText = "ÂõûÂ§çÊó•Êúü";
+            this.colReplyDate.HeaderText = "ªÿ∏¥»’∆⁄";
             this.colReplyDate.Name = "colReplyDate";
             this.colReplyDate.ReadOnly = true;
             // 
@@ -685,7 +726,7 @@
             dataGridViewCellStyle6.Format = "p4";
             dataGridViewCellStyle6.NullValue = null;
             this.colIFPrice.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colIFPrice.HeaderText = "IFÊä•‰ª∑";
+            this.colIFPrice.HeaderText = "IF±®º€";
             this.colIFPrice.Name = "colIFPrice";
             this.colIFPrice.ReadOnly = true;
             this.colIFPrice.Width = 50;
@@ -695,7 +736,7 @@
             this.colPriceDate.DataPropertyName = "PriceDate";
             dataGridViewCellStyle7.Format = "d";
             this.colPriceDate.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colPriceDate.HeaderText = "Êä•‰ª∑Êó•";
+            this.colPriceDate.HeaderText = "±®º€»’";
             this.colPriceDate.Name = "colPriceDate";
             this.colPriceDate.ReadOnly = true;
             // 
@@ -704,21 +745,21 @@
             this.colDueDate.DataPropertyName = "DueDate";
             dataGridViewCellStyle8.Format = "d";
             this.colDueDate.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colDueDate.HeaderText = "È¢ùÂ∫¶ÊúüÈôê";
+            this.colDueDate.HeaderText = "∂Ó∂»∆⁄œﬁ";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.ReadOnly = true;
             // 
             // colOwnerDept
             // 
             this.colOwnerDept.DataPropertyName = "OwnerDept";
-            this.colOwnerDept.HeaderText = "‰∏öÂä°ÂΩíÂ±ûÊú∫ÊûÑ";
+            this.colOwnerDept.HeaderText = "“µŒÒπÈ Ùª˙ππ";
             this.colOwnerDept.Name = "colOwnerDept";
             this.colOwnerDept.ReadOnly = true;
             // 
             // colCreateUserName
             // 
             this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "ÁªèÂäû‰∫∫";
+            this.colCreateUserName.HeaderText = "æ≠∞Ï»À";
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
             this.colCreateUserName.Width = 50;
@@ -737,13 +778,13 @@
             // 
             this.menuItemCreditCoverSelect.Name = "menuItemCreditCoverSelect";
             this.menuItemCreditCoverSelect.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverSelect.Text = "ÈÄâÂÆöÈ¢ùÂ∫¶Áî≥ËØ∑";
+            this.menuItemCreditCoverSelect.Text = "—°∂®∂Ó∂»…Í«Î";
             // 
             // menuItemCreditCoverDetail
             // 
             this.menuItemCreditCoverDetail.Name = "menuItemCreditCoverDetail";
             this.menuItemCreditCoverDetail.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverDetail.Text = "ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemCreditCoverDetail.Text = "œÍœ∏–≈œ¢";
             // 
             // toolStripSeparator1
             // 
@@ -754,7 +795,7 @@
             // 
             this.menuItemCreditCoverNegExport.Name = "menuItemCreditCoverNegExport";
             this.menuItemCreditCoverNegExport.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverNegExport.Text = "ÂØºÂá∫È¢ùÂ∫¶Áî≥ËØ∑";
+            this.menuItemCreditCoverNegExport.Text = "µº≥ˆ∂Ó∂»…Í«Î";
             this.menuItemCreditCoverNegExport.Click += new System.EventHandler(this.ExportCreditCoverNeg);
             // 
             // cbLocation
@@ -781,7 +822,7 @@
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(56, 16);
             this.lblLocation.TabIndex = 24;
-            this.lblLocation.Text = "‰∏öÂä°Âú∞Âå∫";
+            this.lblLocation.Text = "“µŒÒµÿ«¯";
             // 
             // CreditCoverNegMgr
             // 
@@ -803,55 +844,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsContractSigned;
-        private DevComponents.DotNetBar.ButtonX btnQueryReset;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCDA;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.LabelX lblClientName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
-        private DevComponents.DotNetBar.LabelX lblCaseCode;
-        private DevComponents.DotNetBar.LabelX lblDate;
-        private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCurrency;
-        private DevComponents.DotNetBar.LabelX lblCurrency;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
-        private DevComponents.DotNetBar.LabelX lblTransactionType;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
-        private DevComponents.DotNetBar.LabelX lblCreateUserName;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNegExport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorCountry;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNetPaymentTerm;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPriceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
-        private DevComponents.DotNetBar.LabelX lblLocation;
-
-
-
-
-
-
-
-
     }
 }

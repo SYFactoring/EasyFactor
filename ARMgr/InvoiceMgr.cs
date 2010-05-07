@@ -1,4 +1,4 @@
-Ôªø
+
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
@@ -10,15 +10,15 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceMgr : UserControl
     {
-        #region¬†Fields¬†(2)
+        #region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -29,9 +29,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpInvoiceType opInvoiceType;
 
-        #endregion¬†Fields
+        #endregion?Fields?
 
-        #region¬†Enums¬†(1)
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -84,9 +84,9 @@ namespace CMBC.EasyFactor.ARMgr
             FINANCE_DUE_BYDAY,
         }
 
-        #endregion¬†Enums
+        #endregion?Enums?
 
-        #region¬†Constructors¬†(3)
+        #region?Constructors?(3)?
 
         public InvoiceMgr(OpInvoiceType opInvoiceType, int days)
             : this(opInvoiceType)
@@ -112,7 +112,7 @@ namespace CMBC.EasyFactor.ARMgr
                               select invoice;
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("Ëé∑Âæó{0}Êù°ËÆ∞ÂΩï", queryResult.Count());
+            this.lblCount.Text = String.Format("ªÒµ√{0}Ãıº«¬º", queryResult.Count());
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace CMBC.EasyFactor.ARMgr
             : this(OpInvoiceType.BATCH_DETAIL)
         {
             this.bs.DataSource = invoiceList;
-            this.lblCount.Text = String.Format("Ëé∑Âæó{0}Êù°ËÆ∞ÂΩï", invoiceList.Count());
+            this.lblCount.Text = String.Format("ªÒµ√{0}Ãıº«¬º", invoiceList.Count());
             this.panelQuery.Visible = false;
 
             this.context = context;
@@ -144,12 +144,12 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetDoubleBuffered(this.dgvInvoices);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
-            this.cbTransactionType.Items.Insert(0, "ÂÖ®ÈÉ®");
-            this.cbTransactionType.Text = "ÂÖ®ÈÉ®";
-            this.cbCaseMark.Text = "ÂêØÂä®Ê°à";
+            this.cbTransactionType.Items.Insert(0, "»´≤ø");
+            this.cbTransactionType.Text = "»´≤ø";
+            this.cbCaseMark.Text = "∆Ù∂Ø∞∏";
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "ÂÖ®ÈÉ®" });
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "»´≤ø" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";
             this.cbLocation.ValueMember = "LocationCode";
@@ -195,9 +195,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
 
-        #endregion¬†Constructors
+        #endregion?Constructors?
 
-        #region¬†Properties¬†(3)
+        #region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -226,11 +226,52 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-        #endregion¬†Properties
+        #endregion?Properties?
 
-        #region¬†Methods¬†(18)
+        #region?Methods?(19)?
 
-        //¬†Private¬†Methods¬†(18)¬†
+        //?Private?Methods?(19)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CaculateFinance(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            {
+                if (this.dgvInvoices.CurrentCell == null)
+                {
+                    return;
+                }
+
+                List<Invoice> selectedInvoices = new List<Invoice>();
+                foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
+                {
+                    Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
+                    if (!selectedInvoices.Contains(invoice))
+                    {
+                        selectedInvoices.Add(invoice);
+                    }
+                }
+
+                foreach (Invoice invoice in selectedInvoices)
+                {
+                    invoice.CaculateRefund();
+                    invoice.CaculateFinance();
+                }
+
+                try
+                {
+                    context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
 
         /// <summary>
         /// 
@@ -311,7 +352,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            if (MessageBoxEx.Show("ÊòØÂê¶ÊâìÁÆóÂà†Èô§Ê≠§" + selectedInvoices.Count + "Êù°ÂèëÁ•®", MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show(" «∑Ò¥ÚÀ„…æ≥˝¥À" + selectedInvoices.Count + "Ãı∑¢∆±", MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
 
                 try
@@ -320,7 +361,7 @@ namespace CMBC.EasyFactor.ARMgr
                     {
                         if (invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK)
                         {
-                            MessageBoxEx.Show("ËΩ¨ËÆ©ÊâπÊ¨°Â∑≤Â§çÊ†∏Ôºå‰∏çËÉΩÂà†Èô§ÔºåÂèëÁ•®Âè∑Ôºö" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBoxEx.Show("◊™»√≈˙¥Œ“—∏¥∫À£¨≤ªƒ‹…æ≥˝£¨∑¢∆±∫≈£∫" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             return;
                         }
 
@@ -328,7 +369,7 @@ namespace CMBC.EasyFactor.ARMgr
                         {
                             if (batch.CheckStatus == BATCH.CHECK)
                             {
-                                MessageBoxEx.Show("ËûçËµÑÊâπÊ¨°Â∑≤Â§çÊ†∏Ôºå‰∏çËÉΩÂà†Èô§ÔºåÂèëÁ•®Âè∑Ôºö" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBoxEx.Show("»⁄◊ ≈˙¥Œ“—∏¥∫À£¨≤ªƒ‹…æ≥˝£¨∑¢∆±∫≈£∫" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
                             }
                         }
@@ -337,7 +378,7 @@ namespace CMBC.EasyFactor.ARMgr
                         {
                             if (batch.CheckStatus == BATCH.CHECK)
                             {
-                                MessageBoxEx.Show("‰ªòÊ¨æÊâπÊ¨°Â∑≤Â§çÊ†∏Ôºå‰∏çËÉΩÂà†Èô§ÔºåÂèëÁ•®Âè∑Ôºö" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBoxEx.Show("∏∂øÓ≈˙¥Œ“—∏¥∫À£¨≤ªƒ‹…æ≥˝£¨∑¢∆±∫≈£∫" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
                             }
                         }
@@ -346,7 +387,7 @@ namespace CMBC.EasyFactor.ARMgr
                         {
                             if (batch.CheckStatus == BATCH.CHECK)
                             {
-                                MessageBoxEx.Show("ËøòÊ¨æÊâπÊ¨°Â∑≤Â§çÊ†∏Ôºå‰∏çËÉΩÂà†Èô§ÔºåÂèëÁ•®Âè∑Ôºö" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBoxEx.Show("ªπøÓ≈˙¥Œ“—∏¥∫À£¨≤ªƒ‹…æ≥˝£¨∑¢∆±∫≈£∫" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
                             }
                         }
@@ -365,7 +406,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 catch (Exception e1)
                 {
-                    MessageBoxEx.Show("Âà†Èô§Â§±Ë¥•," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("…æ≥˝ ß∞‹," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -665,7 +706,7 @@ namespace CMBC.EasyFactor.ARMgr
             var queryResult = from invoice in context.Invoices
                               let curCase = invoice.InvoiceAssignBatch.Case
                               where curCase.CaseMark == caseMark
-                                    && (transactionType == "ÂÖ®ÈÉ®" ? true : curCase.TransactionType == transactionType)
+                                    && (transactionType == "»´≤ø" ? true : curCase.TransactionType == transactionType)
                                     && (location == "00" ? true : curCase.OwnerDepartment.LocationCode == location)
                               let seller = curCase.SellerClient
                               let buyer = curCase.BuyerClient
@@ -687,7 +728,7 @@ namespace CMBC.EasyFactor.ARMgr
                               select invoice;
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("Ëé∑Âæó{0}Êù°ËÆ∞ÂΩï", queryResult.Count());
+            this.lblCount.Text = String.Format("ªÒµ√{0}Ãıº«¬º", queryResult.Count());
         }
 
         /// <summary>
@@ -731,47 +772,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregion¬†Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaculateFinance(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
-            {
-                if (this.dgvInvoices.CurrentCell == null)
-                {
-                    return;
-                }
-
-                List<Invoice> selectedInvoices = new List<Invoice>();
-                foreach (DataGridViewCell cell in this.dgvInvoices.SelectedCells)
-                {
-                    Invoice invoice = (Invoice)this.bs.List[cell.RowIndex];
-                    if (!selectedInvoices.Contains(invoice))
-                    {
-                        selectedInvoices.Add(invoice);
-                    }
-                }
-
-                foreach (Invoice invoice in selectedInvoices)
-                {
-                    invoice.CaculateRefund();
-                    invoice.CaculateFinance();
-                }
-
-                try
-                {
-                    context.SubmitChanges();
-                }
-                catch (Exception e1)
-                {
-                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-        }
+        #endregion?Methods?
     }
 }

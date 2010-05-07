@@ -1,20 +1,29 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Contract.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Data.Linq;
-using System.Text.RegularExpressions;
-using System;
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System.Data.Linq;
+    using System.Text.RegularExpressions;
+    using System;
+
     /// <summary>
     /// 
     /// </summary>
     public partial class Contract
     {
+		#region?Fields?(1)?
+
         private static Regex ContractCodeRegex = new Regex(@"^[^~!@#$%\\^&\\*\\+=\\?]+$");
+
+		#endregion?Fields?
+
+		#region?Methods?(1)?
+
+		//?Private?Methods?(1)?
 
         partial void OnValidate(System.Data.Linq.ChangeAction action)
         {
@@ -22,9 +31,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!ContractCodeRegex.IsMatch(this.ContractCode))
                 {
-                    throw new ArgumentException("ä¸ç¬¦åˆä¿ç†åˆåŒç¼–ç è§„åˆ™: " + this.ContractCode);
+                    throw new ArgumentException("²»·ûºÏ±£ÀíºÏÍ¬±àÂë¹æÔò: " + this.ContractCode);
                 }
             }
         }
+
+		#endregion?Methods?
     }
 }

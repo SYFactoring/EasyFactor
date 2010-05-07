@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ExportForm.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,24 +11,28 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ExportForm
     {
-        #region¬†Fields¬†(7)
+		#region?Fields?(11)?
 
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private DevComponents.DotNetBar.ButtonX btnCancel;
+        private DevComponents.DotNetBar.ButtonX btnFileSelect;
+        private DevComponents.DotNetBar.ButtonX btnStart;
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.LabelX lblFilePath;
         private DevComponents.DotNetBar.LabelX lblProgress;
         private DevComponents.DotNetBar.LabelX lblStatus;
         private DevComponents.DotNetBar.Controls.ProgressBarX progressBar;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFilePath;
         private DevComponents.DotNetBar.Controls.TextBoxX tbStatus;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -44,7 +48,9 @@ namespace CMBC.EasyFactor.Utils
             base.Dispose(disposing);
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
+
+
 
         #region Windows Form Designer generated code
 
@@ -75,7 +81,7 @@ namespace CMBC.EasyFactor.Utils
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancel.TabIndex = 17;
-            this.btnCancel.Text = "ÂÖ≥Èó≠";
+            this.btnCancel.Text = "πÿ±’";
             this.btnCancel.Click += new System.EventHandler(this.CancelExport);
             // 
             // tbStatus
@@ -102,7 +108,7 @@ namespace CMBC.EasyFactor.Utils
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(59, 16);
             this.lblProgress.TabIndex = 14;
-            this.lblProgress.Text = "ÂØºÂá∫ËøõÂ∫¶:";
+            this.lblProgress.Text = "µº≥ˆΩ¯∂»:";
             // 
             // progressBar
             // 
@@ -127,7 +133,7 @@ namespace CMBC.EasyFactor.Utils
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(34, 16);
             this.lblStatus.TabIndex = 12;
-            this.lblStatus.Text = "Áä∂ÊÄÅ:";
+            this.lblStatus.Text = "◊¥Ã¨:";
             // 
             // backgroundWorker
             // 
@@ -174,7 +180,7 @@ namespace CMBC.EasyFactor.Utils
             this.lblFilePath.Name = "lblFilePath";
             this.lblFilePath.Size = new System.Drawing.Size(59, 16);
             this.lblFilePath.TabIndex = 18;
-            this.lblFilePath.Text = "Êñá‰ª∂Ë∑ØÂæÑ:";
+            this.lblFilePath.Text = "Œƒº˛¬∑æ∂:";
             // 
             // btnStart
             // 
@@ -185,7 +191,7 @@ namespace CMBC.EasyFactor.Utils
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnStart.TabIndex = 21;
-            this.btnStart.Text = "ÂºÄÂßã";
+            this.btnStart.Text = "ø™ º";
             this.btnStart.Click += new System.EventHandler(this.StartExport);
             // 
             // ExportForm
@@ -206,17 +212,12 @@ namespace CMBC.EasyFactor.Utils
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "ExportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Êï∞ÊçÆÂØºÂá∫";
+            this.Text = " ˝æ›µº≥ˆ";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.ButtonX btnFileSelect;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFilePath;
-        private DevComponents.DotNetBar.LabelX lblFilePath;
-        private DevComponents.DotNetBar.ButtonX btnStart;
     }
 }

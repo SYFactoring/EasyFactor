@@ -1,11 +1,34 @@
-Ôªønamespace CMBC.EasyFactor.ARMgr
+namespace CMBC.EasyFactor.ARMgr
 {
     partial class ARPoolBasic
     {
+		#region?Fields?(16)?
+
+        private DevComponents.DotNetBar.ButtonX btnClientQuery;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.LabelX lblCashOutstanding;
+        private DevComponents.DotNetBar.LabelX lblFinanceOustanding;
+        private DevComponents.DotNetBar.LabelX lblTotalAssignOutstanding;
+        private DevComponents.DotNetBar.LabelX lblValuedAssignOutstanding;
+        private DevComponents.DotNetBar.ExpandablePanel panelClient;
+        private DevComponents.DotNetBar.PanelEx panelPool;
+        private DevComponents.DotNetBar.ExpandablePanel panelPoolBasic;
+        private DevComponents.DotNetBar.ExpandablePanel panelPoolOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCashOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssignOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbValuedAssignOutstanding;
+
+		#endregion?Fields?
+
+		#region?Methods?(1)?
+
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -19,6 +42,10 @@
             }
             base.Dispose(disposing);
         }
+
+		#endregion?Methods?
+
+
 
         #region Component Designer generated code
 
@@ -61,7 +88,7 @@
             lblClient.Name = "lblClient";
             lblClient.Size = new System.Drawing.Size(31, 16);
             lblClient.TabIndex = 36;
-            lblClient.Text = "ÂÆ¢Êà∑";
+            lblClient.Text = "øÕªß";
             // 
             // panelPoolBasic
             // 
@@ -81,7 +108,7 @@
             this.panelPoolBasic.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
             this.panelPoolBasic.Style.GradientAngle = 90;
             this.panelPoolBasic.TabIndex = 8;
-            this.panelPoolBasic.TitleHeight = 10;
+            this.panelPoolBasic.TitleHeight = 5;
             this.panelPoolBasic.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
             this.panelPoolBasic.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelPoolBasic.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -105,9 +132,9 @@
             this.panelPoolOutstanding.Controls.Add(this.tbCashOutstanding);
             this.panelPoolOutstanding.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelPoolOutstanding.ExpandOnTitleClick = true;
-            this.panelPoolOutstanding.Location = new System.Drawing.Point(225, 10);
+            this.panelPoolOutstanding.Location = new System.Drawing.Point(225, 5);
             this.panelPoolOutstanding.Name = "panelPoolOutstanding";
-            this.panelPoolOutstanding.Size = new System.Drawing.Size(431, 76);
+            this.panelPoolOutstanding.Size = new System.Drawing.Size(431, 81);
             this.panelPoolOutstanding.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelPoolOutstanding.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelPoolOutstanding.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -124,7 +151,7 @@
             this.panelPoolOutstanding.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelPoolOutstanding.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelPoolOutstanding.TitleStyle.GradientAngle = 90;
-            this.panelPoolOutstanding.TitleText = "‰ΩôÈ¢ù‰ø°ÊÅØ";
+            this.panelPoolOutstanding.TitleText = "”‡∂Ó–≈œ¢";
             // 
             // tbTotalAssignOutstanding
             // 
@@ -149,7 +176,7 @@
             this.lblTotalAssignOutstanding.Name = "lblTotalAssignOutstanding";
             this.lblTotalAssignOutstanding.Size = new System.Drawing.Size(68, 16);
             this.lblTotalAssignOutstanding.TabIndex = 6;
-            this.lblTotalAssignOutstanding.Text = "ÊÄªË¥¶Ê¨æ‰ΩôÈ¢ù";
+            this.lblTotalAssignOutstanding.Text = "◊‹’ÀøÓ”‡∂Ó";
             // 
             // lblValuedAssignOutstanding
             // 
@@ -162,7 +189,7 @@
             this.lblValuedAssignOutstanding.Name = "lblValuedAssignOutstanding";
             this.lblValuedAssignOutstanding.Size = new System.Drawing.Size(93, 16);
             this.lblValuedAssignOutstanding.TabIndex = 0;
-            this.lblValuedAssignOutstanding.Text = "Â∫îÊî∂Ë¥¶Ê¨æÊ±†‰ΩôÈ¢ù";
+            this.lblValuedAssignOutstanding.Text = "”¶ ’’ÀøÓ≥ÿ”‡∂Ó";
             // 
             // tbValuedAssignOutstanding
             // 
@@ -199,7 +226,7 @@
             this.lblCashOutstanding.Name = "lblCashOutstanding";
             this.lblCashOutstanding.Size = new System.Drawing.Size(68, 16);
             this.lblCashOutstanding.TabIndex = 2;
-            this.lblCashOutstanding.Text = "Áé∞ÈáëÊ±†‰ΩôÈ¢ù";
+            this.lblCashOutstanding.Text = "œ÷Ω≥ÿ”‡∂Ó";
             // 
             // lblFinanceOustanding
             // 
@@ -212,7 +239,7 @@
             this.lblFinanceOustanding.Name = "lblFinanceOustanding";
             this.lblFinanceOustanding.Size = new System.Drawing.Size(68, 16);
             this.lblFinanceOustanding.TabIndex = 4;
-            this.lblFinanceOustanding.Text = "ËûçËµÑÊ±†‰ΩôÈ¢ù";
+            this.lblFinanceOustanding.Text = "»⁄◊ ≥ÿ”‡∂Ó";
             // 
             // tbCashOutstanding
             // 
@@ -237,9 +264,9 @@
             this.panelClient.Controls.Add(this.tbClientName);
             this.panelClient.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelClient.ExpandOnTitleClick = true;
-            this.panelClient.Location = new System.Drawing.Point(0, 10);
+            this.panelClient.Location = new System.Drawing.Point(0, 5);
             this.panelClient.Name = "panelClient";
-            this.panelClient.Size = new System.Drawing.Size(225, 76);
+            this.panelClient.Size = new System.Drawing.Size(225, 81);
             this.panelClient.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelClient.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelClient.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -256,7 +283,7 @@
             this.panelClient.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelClient.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelClient.TitleStyle.GradientAngle = 90;
-            this.panelClient.TitleText = "Âü∫Êú¨‰ø°ÊÅØ";
+            this.panelClient.TitleText = "ª˘±æ–≈œ¢";
             // 
             // btnClientQuery
             // 
@@ -331,21 +358,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceOutstanding;
-        private DevComponents.DotNetBar.LabelX lblFinanceOustanding;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCashOutstanding;
-        private DevComponents.DotNetBar.LabelX lblCashOutstanding;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbValuedAssignOutstanding;
-        private DevComponents.DotNetBar.LabelX lblValuedAssignOutstanding;
-        private DevComponents.DotNetBar.ExpandablePanel panelClient;
-        private DevComponents.DotNetBar.ExpandablePanel panelPoolOutstanding;
-        private DevComponents.DotNetBar.ButtonX btnClientQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.ExpandablePanel panelPoolBasic;
-        private DevComponents.DotNetBar.PanelEx panelPool;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssignOutstanding;
-        private DevComponents.DotNetBar.LabelX lblTotalAssignOutstanding;
     }
 }

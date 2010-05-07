@@ -1,10 +1,10 @@
-Ôªøusing CMBC.EasyFactor.Utils;
+using CMBC.EasyFactor.Utils;
 using CMBC.EasyFactor.Utils.ConstStr;
 namespace CMBC.EasyFactor.ARMgr
 {
     partial class PaymentBatchDetail
     {
-		#region¬†Fields¬†(31)¬†
+		#region?Fields?(33)?
 
         private System.Windows.Forms.BindingSource batchBindingSource;
         private DevComponents.DotNetBar.ButtonX btnSave;
@@ -17,10 +17,17 @@ namespace CMBC.EasyFactor.ARMgr
         /// Required designer variable.
         /// </summary>
         private System.Windows.Forms.ContextMenuStrip cmuLogMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvPaymentLogs;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diInputDate;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.Controls.CheckBoxX isCreateMsgCheckBox;
@@ -36,11 +43,11 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.TabItem tabItemBatch;
         private DevComponents.DotNetBar.TabItem tabItemInvoices;
 
-		#endregion¬†Fields¬†
+		#endregion?Fields?
 
-		#region¬†Methods¬†(1)¬†
+		#region?Methods?(1)?
 
-		//¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -61,7 +68,7 @@ namespace CMBC.EasyFactor.ARMgr
             base.Dispose(disposing);
         }
 
-		#endregion¬†Methods¬†
+		#endregion?Methods?
 
 
 
@@ -158,7 +165,7 @@ namespace CMBC.EasyFactor.ARMgr
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
             commentLabel.TabIndex = 8;
-            commentLabel.Text = "Â§áÊ≥®:";
+            commentLabel.Text = "±∏◊¢:";
             // 
             // checkUserNameLabel
             // 
@@ -172,7 +179,7 @@ namespace CMBC.EasyFactor.ARMgr
             checkUserNameLabel.Name = "checkUserNameLabel";
             checkUserNameLabel.Size = new System.Drawing.Size(47, 16);
             checkUserNameLabel.TabIndex = 19;
-            checkUserNameLabel.Text = "Â§çÊ†∏‰∫∫:";
+            checkUserNameLabel.Text = "∏¥∫À»À:";
             // 
             // checkDateLabel
             // 
@@ -186,7 +193,7 @@ namespace CMBC.EasyFactor.ARMgr
             checkDateLabel.Name = "checkDateLabel";
             checkDateLabel.Size = new System.Drawing.Size(47, 16);
             checkDateLabel.TabIndex = 17;
-            checkDateLabel.Text = "Â§çÊ†∏Êó•:";
+            checkDateLabel.Text = "∏¥∫À»’:";
             // 
             // rejectReasonLabel
             // 
@@ -200,7 +207,7 @@ namespace CMBC.EasyFactor.ARMgr
             rejectReasonLabel.Name = "rejectReasonLabel";
             rejectReasonLabel.Size = new System.Drawing.Size(59, 16);
             rejectReasonLabel.TabIndex = 15;
-            rejectReasonLabel.Text = "ÈÄÄÂõûÂéüÂõ†:";
+            rejectReasonLabel.Text = "ÕÀªÿ‘≠“Ú:";
             // 
             // checkStatusLabel
             // 
@@ -214,7 +221,7 @@ namespace CMBC.EasyFactor.ARMgr
             checkStatusLabel.Name = "checkStatusLabel";
             checkStatusLabel.Size = new System.Drawing.Size(59, 16);
             checkStatusLabel.TabIndex = 13;
-            checkStatusLabel.Text = "Â§çÊ†∏Áä∂ÊÄÅ:";
+            checkStatusLabel.Text = "∏¥∫À◊¥Ã¨:";
             // 
             // createUserNameLabel
             // 
@@ -228,7 +235,7 @@ namespace CMBC.EasyFactor.ARMgr
             createUserNameLabel.Name = "createUserNameLabel";
             createUserNameLabel.Size = new System.Drawing.Size(47, 16);
             createUserNameLabel.TabIndex = 11;
-            createUserNameLabel.Text = "ÁªèÂäû‰∫∫:";
+            createUserNameLabel.Text = "æ≠∞Ï»À:";
             // 
             // paymentDateLabel
             // 
@@ -242,7 +249,7 @@ namespace CMBC.EasyFactor.ARMgr
             paymentDateLabel.Name = "paymentDateLabel";
             paymentDateLabel.Size = new System.Drawing.Size(47, 16);
             paymentDateLabel.TabIndex = 6;
-            paymentDateLabel.Text = "‰ªòÊ¨æÊó•:";
+            paymentDateLabel.Text = "∏∂øÓ»’:";
             // 
             // paymentBatchNoLabel
             // 
@@ -256,7 +263,7 @@ namespace CMBC.EasyFactor.ARMgr
             paymentBatchNoLabel.Name = "paymentBatchNoLabel";
             paymentBatchNoLabel.Size = new System.Drawing.Size(59, 16);
             paymentBatchNoLabel.TabIndex = 2;
-            paymentBatchNoLabel.Text = "‰ªòÊ¨æÊâπÂè∑:";
+            paymentBatchNoLabel.Text = "∏∂øÓ≈˙∫≈:";
             // 
             // CaseLabel
             // 
@@ -270,7 +277,7 @@ namespace CMBC.EasyFactor.ARMgr
             CaseLabel.Name = "CaseLabel";
             CaseLabel.Size = new System.Drawing.Size(59, 16);
             CaseLabel.TabIndex = 0;
-            CaseLabel.Text = "Ê°à‰ª∂ÁºñÂè∑:";
+            CaseLabel.Text = "∞∏º˛±‡∫≈:";
             // 
             // paymentTypeLabel
             // 
@@ -284,7 +291,7 @@ namespace CMBC.EasyFactor.ARMgr
             paymentTypeLabel.Name = "paymentTypeLabel";
             paymentTypeLabel.Size = new System.Drawing.Size(59, 16);
             paymentTypeLabel.TabIndex = 4;
-            paymentTypeLabel.Text = "‰ªòÊ¨æÁ±ªÂûã:";
+            paymentTypeLabel.Text = "∏∂øÓ¿‡–Õ:";
             // 
             // lblInputDate
             // 
@@ -298,7 +305,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblInputDate.Name = "lblInputDate";
             lblInputDate.Size = new System.Drawing.Size(47, 16);
             lblInputDate.TabIndex = 23;
-            lblInputDate.Text = "ÂΩïÂÖ•Êó•:";
+            lblInputDate.Text = "¬º»Î»’:";
             // 
             // cmuLogMgr
             // 
@@ -311,7 +318,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.menuItemLogDelete.Name = "menuItemLogDelete";
             this.menuItemLogDelete.Size = new System.Drawing.Size(114, 22);
-            this.menuItemLogDelete.Text = "Âà†Èô§(&D)";
+            this.menuItemLogDelete.Text = "…æ≥˝(&D)";
             this.menuItemLogDelete.Click += new System.EventHandler(this.DeleteLog);
             // 
             // tabControl
@@ -395,7 +402,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tabItemInvoices.AttachedControl = this.panelInvoices;
             this.tabItemInvoices.Name = "tabItemInvoices";
-            this.tabItemInvoices.Text = "ÂèëÁ•®";
+            this.tabItemInvoices.Text = "∑¢∆±";
             // 
             // panelBatch
             // 
@@ -486,11 +493,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.paymentTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.paymentTypeComboBox.FormattingEnabled = true;
             this.paymentTypeComboBox.Items.AddRange(new object[] {
-            "‰π∞ÊñπÁõ¥Êé•‰ªòÊ¨æ",
-            "‰π∞ÊñπÈó¥Êé•‰ªòÊ¨æ",
-            "ÊãÖ‰øù‰ªòÊ¨æ",
-            "ÂèçËΩ¨ËÆ©",
-            "Ë¥∑È°πÈÄöÁü•"});
+            "¬Ú∑Ω÷±Ω”∏∂øÓ",
+            "¬Ú∑Ωº‰Ω”∏∂øÓ",
+            "µ£±£∏∂øÓ",
+            "∑¥◊™»√",
+            "¥˚œÓÕ®÷™"});
             this.paymentTypeComboBox.Location = new System.Drawing.Point(116, 54);
             this.paymentTypeComboBox.Name = "paymentTypeComboBox";
             this.paymentTypeComboBox.Size = new System.Drawing.Size(162, 21);
@@ -520,7 +527,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSave.TabIndex = 22;
-            this.btnSave.Text = "‰øùÂ≠ò";
+            this.btnSave.Text = "±£¥Ê";
             this.btnSave.Click += new System.EventHandler(this.SaveBatch);
             // 
             // btnUpdate
@@ -532,7 +539,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUpdate.TabIndex = 21;
-            this.btnUpdate.Text = "ÁºñËæë";
+            this.btnUpdate.Text = "±‡º≠";
             this.btnUpdate.Click += new System.EventHandler(this.UpdateBatch);
             // 
             // commentTextBox
@@ -637,7 +644,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.isCreateMsgCheckBox.Name = "isCreateMsgCheckBox";
             this.isCreateMsgCheckBox.Size = new System.Drawing.Size(101, 16);
             this.isCreateMsgCheckBox.TabIndex = 10;
-            this.isCreateMsgCheckBox.Text = "ÊòØÂê¶ÁîüÊàêÊä•Êñá";
+            this.isCreateMsgCheckBox.Text = " «∑Ò…˙≥…±®Œƒ";
             // 
             // paymentDateDateTimePicker
             // 
@@ -704,7 +711,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tabItemBatch.AttachedControl = this.panelBatch;
             this.tabItemBatch.Name = "tabItemBatch";
-            this.tabItemBatch.Text = "ÊâπÊ¨°";
+            this.tabItemBatch.Text = "≈˙¥Œ";
             // 
             // superValidator
             // 
@@ -719,7 +726,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colInvoiceNo
             // 
             this.colInvoiceNo.DataPropertyName = "InvoiceNo";
-            this.colInvoiceNo.HeaderText = "ÂèëÁ•®Âè∑";
+            this.colInvoiceNo.HeaderText = "∑¢∆±∫≈";
             this.colInvoiceNo.Name = "colInvoiceNo";
             this.colInvoiceNo.ReadOnly = true;
             // 
@@ -728,7 +735,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
             dataGridViewCellStyle2.Format = "N2";
             this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignOutstanding.HeaderText = "ËΩ¨ËÆ©‰ΩôÈ¢ù";
+            this.colAssignOutstanding.HeaderText = "◊™»√”‡∂Ó";
             this.colAssignOutstanding.Name = "colAssignOutstanding";
             this.colAssignOutstanding.ReadOnly = true;
             // 
@@ -737,28 +744,28 @@ namespace CMBC.EasyFactor.ARMgr
             this.colPaymentAmount.DataPropertyName = "PaymentAmount";
             dataGridViewCellStyle3.Format = "N2";
             this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPaymentAmount.HeaderText = "‰ªòÊ¨æÈáëÈ¢ù";
+            this.colPaymentAmount.HeaderText = "∏∂øÓΩ∂Ó";
             this.colPaymentAmount.Name = "colPaymentAmount";
             this.colPaymentAmount.ReadOnly = true;
             // 
             // colCreditNoteNo
             // 
             this.colCreditNoteNo.DataPropertyName = "CreditNoteNo";
-            this.colCreditNoteNo.HeaderText = "Ë¥∑È°πÈÄöÁü•ÁºñÂè∑";
+            this.colCreditNoteNo.HeaderText = "¥˚œÓÕ®÷™±‡∫≈";
             this.colCreditNoteNo.Name = "colCreditNoteNo";
             this.colCreditNoteNo.ReadOnly = true;
             // 
             // colCreditNoteDate
             // 
             this.colCreditNoteDate.DataPropertyName = "CreditNoteDate";
-            this.colCreditNoteDate.HeaderText = "Ë¥∑È°πÈÄöÁü•Êó•";
+            this.colCreditNoteDate.HeaderText = "¥˚œÓÕ®÷™»’";
             this.colCreditNoteDate.Name = "colCreditNoteDate";
             this.colCreditNoteDate.ReadOnly = true;
             // 
             // colComment
             // 
             this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "Â§áÊ≥®";
+            this.colComment.HeaderText = "±∏◊¢";
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
             // 
@@ -771,7 +778,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.DoubleBuffered = true;
             this.Name = "PaymentBatchDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "‰ªòÊ¨æÊâπÊ¨°‰ø°ÊÅØ";
+            this.Text = "∏∂øÓ≈˙¥Œ–≈œ¢";
             this.cmuLogMgr.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
@@ -789,13 +796,5 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion
-
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diInputDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

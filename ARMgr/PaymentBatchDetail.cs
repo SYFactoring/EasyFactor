@@ -1,23 +1,23 @@
-﻿
+
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
+    using System.Data.Linq;
     using System.Drawing;
+    using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
-    using System.Linq;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class PaymentBatchDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (3)
+        #region?Fields?(3)?
 
         /// <summary>
         /// 
@@ -32,9 +32,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        #endregion Fields
+        #endregion?Fields?
 
-        #region Enums (1)
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -52,9 +52,9 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-        #endregion Enums
+        #endregion?Enums?
 
-        #region Constructors (1)
+        #region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -83,11 +83,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.UpdateBatchControlStatus();
         }
 
-        #endregion Constructors
+        #endregion?Constructors?
 
-        #region Methods (7)
+        #region?Methods?(7)?
 
-        // Private Methods (7) 
+        //?Private?Methods?(7)?
 
         /// <summary>
         /// 
@@ -119,7 +119,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("ɾ��ʧ��," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -210,7 +210,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (isUpdateOK)
             {
-                MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("���ݸ��³ɹ�", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -256,6 +256,6 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(this.diInputDate, false);
         }
 
-        #endregion Methods
+        #endregion?Methods?
     }
 }

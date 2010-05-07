@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ExportForm.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -25,7 +25,7 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ExportForm : DevComponents.DotNetBar.Office2007Form
     {
-        #regionÂ FieldsÂ (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -36,9 +36,9 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         private ExportType exportType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -126,11 +126,11 @@ namespace CMBC.EasyFactor.Utils
             EXPORT_CDAS
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (1)
+		#region?Constructors?(1)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the ExportForm class
         /// </summary>
         /// <param name="exportType"></param>
@@ -147,11 +147,11 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ MethodsÂ (21)
+		#region?Methods?(24)?
 
-        //Â PublicÂ MethodsÂ (1)Â 
+		//?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -165,7 +165,7 @@ namespace CMBC.EasyFactor.Utils
             {
                 if (this.exportType == ExportType.EXPORT_MSG09 || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
                 {
-                    this.tbStatus.Text = "è¯·å…ˆé€‰æ‹©ä¿å­˜è·¯å¾„";
+                    this.tbStatus.Text = "ÇëÏÈÑ¡Ôñ±£´æÂ·¾¶";
                     return;
                 }
             }
@@ -174,18 +174,18 @@ namespace CMBC.EasyFactor.Utils
                 DirectoryInfo info = new DirectoryInfo(filePath);
                 if (info.Parent == null)
                 {
-                    this.tbStatus.Text = "ä¸è¦é€‰æ‹©ç¡¬ç›˜æ ¹ç›®å½•";
+                    this.tbStatus.Text = "²»ÒªÑ¡ÔñÓ²ÅÌ¸ùÄ¿Â¼";
                     return;
                 }
             }
 
 
-            this.btnCancel.Text = "å–æ¶ˆ";
+            this.btnCancel.Text = "È¡Ïû";
             this.backgroundWorker.RunWorkerAsync();
 
             this.btnStart.Enabled = false;
         }
-        //Â PrivateÂ MethodsÂ (20)Â 
+		//?Private?Methods?(23)?
 
         /// <summary>
         /// 
@@ -258,7 +258,7 @@ namespace CMBC.EasyFactor.Utils
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.progressBar.Value = e.ProgressPercentage;
-            this.tbStatus.Text = String.Format("å¯¼å‡ºè¿›åº¦ {0:G}%", e.ProgressPercentage);
+            this.tbStatus.Text = String.Format("µ¼³ö½ø¶È {0:G}%", e.ProgressPercentage);
         }
 
         /// <summary>
@@ -270,19 +270,19 @@ namespace CMBC.EasyFactor.Utils
         {
             if (e.Error != null)
             {
-                this.tbStatus.Text = "å‘ç”Ÿå¼‚å¸¸: " + e.Error.Message;
+                this.tbStatus.Text = "·¢ÉúÒì³£: " + e.Error.Message;
             }
             else if (e.Cancelled)
             {
-                this.tbStatus.Text = "å¯¼å‡ºè¢«å–æ¶ˆ";
+                this.tbStatus.Text = "µ¼³ö±»È¡Ïû";
                 this.progressBar.Value = 0;
             }
             else
             {
-                this.tbStatus.Text = String.Format("å¯¼å‡ºç»“æŸ,å…±å¯¼å‡º{0}æ¡è®°å½•", e.Result);
+                this.tbStatus.Text = String.Format("µ¼³ö½áÊø,¹²µ¼³ö{0}Ìõ¼ÇÂ¼", e.Result);
             }
 
-            this.btnCancel.Text = "å…³é—­";
+            this.btnCancel.Text = "¹Ø±Õ";
             if (e.Error == null)
             {
                 this.Close();
@@ -317,7 +317,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -330,14 +330,14 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
-                datasheet.Cells[1, column++] = "ç¥¨é¢é‡‘é¢";
-                datasheet.Cells[1, column++] = "è½¬è®©é‡‘é¢";
-                datasheet.Cells[1, column++] = "å‘ç¥¨æ—¥";
-                datasheet.Cells[1, column++] = "åˆ°æœŸæ—¥";
-                datasheet.Cells[1, column++] = "æ˜¯å¦ç‘•ç–µ";
-                datasheet.Cells[1, column++] = "æ‰‹ç»­è´¹";
-                datasheet.Cells[1, column++] = "å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
+                datasheet.Cells[1, column++] = "Æ±Ãæ½ğ¶î";
+                datasheet.Cells[1, column++] = "×ªÈÃ½ğ¶î";
+                datasheet.Cells[1, column++] = "·¢Æ±ÈÕ";
+                datasheet.Cells[1, column++] = "µ½ÆÚÈÕ";
+                datasheet.Cells[1, column++] = "ÊÇ·ñè¦´Ã";
+                datasheet.Cells[1, column++] = "ÊÖĞø·Ñ";
+                datasheet.Cells[1, column++] = "±¸×¢";
 
                 int size = this.exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -429,13 +429,145 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
+        private object ExportCases(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+
+            if (app == null)
+            {
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return -1;
+            }
+            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            if (datasheet == null)
+            {
+                return -1;
+            }
+
+            try
+            {
+                int column = 1;
+                datasheet.Cells[1, column++] = "ÒµÎñµØÇø";
+                datasheet.Cells[1, column++] = "°¸¼ş±àºÅ";
+                datasheet.Cells[1, column++] = "Âô·½±£Àí´úÂë";
+                datasheet.Cells[1, column++] = "Âô·½Ãû³Æ";
+                datasheet.Cells[1, column++] = "Âô·½±£ÀíÉÌ´úÂë";
+                datasheet.Cells[1, column++] = "Âô·½±£ÀíÉÌ";
+                datasheet.Cells[1, column++] = "Âò·½±£Àí´úÂë";
+                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
+                datasheet.Cells[1, column++] = "Âò·½±£ÀíÉÌ´úÂë";
+                datasheet.Cells[1, column++] = "Âò·½±£ÀíÉÌ";
+                datasheet.Cells[1, column++] = "·¢Æ±±Ò±ğ";
+                datasheet.Cells[1, column++] = "ÒµÎñÀàĞÍ";
+                datasheet.Cells[1, column++] = "²Ù×÷ÀàĞÍ";
+                datasheet.Cells[1, column++] = "ÒµÎñ¹éÊô»ú¹¹";
+                datasheet.Cells[1, column++] = "ÉêÇëÈÕÆÚ";
+                datasheet.Cells[1, column++] = "°¸¼ş×´Ì¬";
+                datasheet.Cells[1, column++] = "OPÈËÔ±";
+
+                int size = this.exportData.Count;
+                for (int row = 0; row < size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        if (datasheet != null)
+                        {
+                            Marshal.ReleaseComObject(datasheet);
+                            datasheet = null;
+                        }
+
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
+
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
+
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    column = 1;
+                    Case selectedCase = (Case)exportData[row];
+                    datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.Location.LocationName;
+                    datasheet.Cells[row + 2, column++] = selectedCase.CaseCode;
+                    datasheet.Cells[row + 2, column++] = selectedCase.SellerCode;
+                    datasheet.Cells[row + 2, column++] = selectedCase.SellerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = selectedCase.SellerFactorCode;
+                    datasheet.Cells[row + 2, column++] = selectedCase.SellerFactor.ToString();
+                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerCode;
+                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerFactorCode;
+                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerFactor.ToString();
+                    datasheet.Cells[row + 2, column++] = selectedCase.InvoiceCurrency;
+                    datasheet.Cells[row + 2, column++] = selectedCase.TransactionType;
+                    datasheet.Cells[row + 2, column++] = selectedCase.OperationType;
+                    datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.DepartmentName;
+                    datasheet.Cells[row + 2, column++] = selectedCase.CaseAppDate;
+                    datasheet.Cells[row + 2, column++] = selectedCase.CaseMark;
+                    datasheet.Cells[row + 2, column++] = selectedCase.OPName;
+
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+
+                foreach (Range range in datasheet.UsedRange.Columns)
+                {
+                    range.EntireColumn.AutoFit();
+                    if (range.Column == 16)
+                    {
+                        range.NumberFormatLocal = "yyyy-MM-dd";
+                    }
+                }
+
+                app.Visible = true;
+            }
+            catch (Exception e1)
+            {
+                if (datasheet != null)
+                {
+                    Marshal.ReleaseComObject(datasheet);
+                    datasheet = null;
+                }
+
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+                throw e1;
+            }
+
+            return exportData.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private object ExportCDAs(BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
 
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
 
@@ -445,10 +577,10 @@ namespace CMBC.EasyFactor.Utils
             {
                 workbook = app.Workbooks.Add(true);
                 Worksheet sheetLocal = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-                sheetLocal.Name = "å›½å†…";
+                sheetLocal.Name = "¹úÄÚ";
 
                 Worksheet sheetInternal = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-                sheetInternal.Name = "å›½é™…";
+                sheetInternal.Name = "¹ú¼Ê";
 
                 if (sheetInternal == null || sheetLocal == null)
                 {
@@ -456,65 +588,65 @@ namespace CMBC.EasyFactor.Utils
                 }
 
                 int column = 1;
-                sheetInternal.Cells[1, column++] = "ä¸šåŠ¡ç±»å‹";
-                sheetInternal.Cells[1, column++] = "æ˜¯å¦æœ‰è¿½ç´¢æƒ";
-                sheetInternal.Cells[1, column++] = "æ˜/æš—ä¿ç†";
-                sheetInternal.Cells[1, column++] = "æ–°æ—§åˆåŒ";
-                sheetInternal.Cells[1, column++] = "åˆåŒç¼–å·";
-                sheetInternal.Cells[1, column++] = "ä¸»åˆåŒç”Ÿæ•ˆæ—¥";
-                sheetInternal.Cells[1, column++] = "ä¸»åˆåŒåˆ°æœŸæ—¥";
-                sheetInternal.Cells[1, column++] = "CDAç¼–å·";
-                sheetInternal.Cells[1, column++] = "å–æ–¹åç§°";
-                sheetInternal.Cells[1, column++] = "ä¹°æ–¹åç§°";
-                sheetInternal.Cells[1, column++] = "ä¹°æ–¹åœ°å€";
-                sheetInternal.Cells[1, column++] = "ç­¾å‘æ—¥æœŸ";
-                sheetInternal.Cells[1, column++] = "ä»˜æ¬¾æ–¹å¼";
-                sheetInternal.Cells[1, column++] = "ä¹°æ–¹ä¿¡ç”¨é£é™©é¢åº¦å¸åˆ«";
-                sheetInternal.Cells[1, column++] = "ä¿¡ç”¨é£é™©é¢åº¦";
-                sheetInternal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™(å§‹)";
-                sheetInternal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™(ç»ˆ)";
-                sheetInternal.Cells[1, column++] = "é¢„ä»˜æ¬¾é¢åº¦å¸åˆ«";
-                sheetInternal.Cells[1, column++] = "ä¿ç†é¢„ä»˜æ¬¾é¢åº¦";
-                sheetInternal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™ï¼ˆå§‹ï¼‰";
-                sheetInternal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™ï¼ˆç»ˆï¼‰";
-                sheetInternal.Cells[1, column++] = "æœ€é«˜ä¿ç†é¢„ä»˜æ¬¾é¢åº¦";
-                sheetInternal.Cells[1, column++] = "é¢„ä»˜æ¯”ä¾‹";
-                sheetInternal.Cells[1, column++] = "ä¿ç†è´¹ç‡";
-                sheetInternal.Cells[1, column++] = "è®¡è´¹æ–¹å¼";
-                sheetInternal.Cells[1, column++] = "å•æ®å¤„ç†è´¹å¸åˆ«";
-                sheetInternal.Cells[1, column++] = "å•æ®å¤„ç†è´¹";
-                sheetInternal.Cells[1, column++] = "å¤‡æ³¨";
-                sheetInternal.Cells[1, column++] = "è¿›å£ä¿ç†å•†";
+                sheetInternal.Cells[1, column++] = "ÒµÎñÀàĞÍ";
+                sheetInternal.Cells[1, column++] = "ÊÇ·ñÓĞ×·Ë÷È¨";
+                sheetInternal.Cells[1, column++] = "Ã÷/°µ±£Àí";
+                sheetInternal.Cells[1, column++] = "ĞÂ¾ÉºÏÍ¬";
+                sheetInternal.Cells[1, column++] = "ºÏÍ¬±àºÅ";
+                sheetInternal.Cells[1, column++] = "Ö÷ºÏÍ¬ÉúĞ§ÈÕ";
+                sheetInternal.Cells[1, column++] = "Ö÷ºÏÍ¬µ½ÆÚÈÕ";
+                sheetInternal.Cells[1, column++] = "CDA±àºÅ";
+                sheetInternal.Cells[1, column++] = "Âô·½Ãû³Æ";
+                sheetInternal.Cells[1, column++] = "Âò·½Ãû³Æ";
+                sheetInternal.Cells[1, column++] = "Âò·½µØÖ·";
+                sheetInternal.Cells[1, column++] = "Ç©·¢ÈÕÆÚ";
+                sheetInternal.Cells[1, column++] = "¸¶¿î·½Ê½";
+                sheetInternal.Cells[1, column++] = "Âò·½ĞÅÓÃ·çÏÕ¶î¶È±Ò±ğ";
+                sheetInternal.Cells[1, column++] = "ĞÅÓÃ·çÏÕ¶î¶È";
+                sheetInternal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ(Ê¼)";
+                sheetInternal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ(ÖÕ)";
+                sheetInternal.Cells[1, column++] = "Ô¤¸¶¿î¶î¶È±Ò±ğ";
+                sheetInternal.Cells[1, column++] = "±£ÀíÔ¤¸¶¿î¶î¶È";
+                sheetInternal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ£¨Ê¼£©";
+                sheetInternal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ£¨ÖÕ£©";
+                sheetInternal.Cells[1, column++] = "×î¸ß±£ÀíÔ¤¸¶¿î¶î¶È";
+                sheetInternal.Cells[1, column++] = "Ô¤¸¶±ÈÀı";
+                sheetInternal.Cells[1, column++] = "±£Àí·ÑÂÊ";
+                sheetInternal.Cells[1, column++] = "¼Æ·Ñ·½Ê½";
+                sheetInternal.Cells[1, column++] = "µ¥¾İ´¦Àí·Ñ±Ò±ğ";
+                sheetInternal.Cells[1, column++] = "µ¥¾İ´¦Àí·Ñ";
+                sheetInternal.Cells[1, column++] = "±¸×¢";
+                sheetInternal.Cells[1, column++] = "½ø¿Ú±£ÀíÉÌ";
 
                 column = 1;
-                sheetLocal.Cells[1, column++] = "ä¸šåŠ¡ç±»å‹";
-                sheetLocal.Cells[1, column++] = "æ˜¯å¦æœ‰è¿½ç´¢æƒ";
-                sheetLocal.Cells[1, column++] = "æ˜/æš—ä¿ç†";
-                sheetLocal.Cells[1, column++] = "æ–°æ—§åˆåŒ";
-                sheetLocal.Cells[1, column++] = "åˆåŒç¼–å·";
-                sheetLocal.Cells[1, column++] = "ä¸»åˆåŒç”Ÿæ•ˆæ—¥";
-                sheetLocal.Cells[1, column++] = "ä¸»åˆåŒåˆ°æœŸæ—¥";
-                sheetLocal.Cells[1, column++] = "CDAç¼–å·";
-                sheetLocal.Cells[1, column++] = "å–æ–¹åç§°";
-                sheetLocal.Cells[1, column++] = "ä¹°æ–¹åç§°";
-                sheetLocal.Cells[1, column++] = "ä¹°æ–¹åœ°å€";
-                sheetLocal.Cells[1, column++] = "ç­¾å‘æ—¥æœŸ";
-                sheetLocal.Cells[1, column++] = "ä»˜æ¬¾æ–¹å¼";
-                sheetLocal.Cells[1, column++] = "ä¹°æ–¹ä¿¡ç”¨é£é™©é¢åº¦å¸åˆ«";
-                sheetLocal.Cells[1, column++] = "ä¿¡ç”¨é£é™©é¢åº¦";
-                sheetLocal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™(å§‹)";
-                sheetLocal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™(ç»ˆ)";
-                sheetLocal.Cells[1, column++] = "é¢„ä»˜æ¬¾é¢åº¦å¸åˆ«";
-                sheetLocal.Cells[1, column++] = "ä¿ç†é¢„ä»˜æ¬¾é¢åº¦";
-                sheetLocal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™ï¼ˆå§‹ï¼‰";
-                sheetLocal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™ï¼ˆç»ˆï¼‰";
-                sheetLocal.Cells[1, column++] = "æœ€é«˜ä¿ç†é¢„ä»˜æ¬¾é¢åº¦";
-                sheetLocal.Cells[1, column++] = "é¢„ä»˜æ¯”ä¾‹";
-                sheetLocal.Cells[1, column++] = "ä¿ç†è´¹ç‡";
-                sheetLocal.Cells[1, column++] = "è®¡è´¹æ–¹å¼";
-                sheetLocal.Cells[1, column++] = "å•æ®å¤„ç†è´¹å¸åˆ«";
-                sheetLocal.Cells[1, column++] = "å•æ®å¤„ç†è´¹";
-                sheetLocal.Cells[1, column++] = "å¤‡æ³¨";
+                sheetLocal.Cells[1, column++] = "ÒµÎñÀàĞÍ";
+                sheetLocal.Cells[1, column++] = "ÊÇ·ñÓĞ×·Ë÷È¨";
+                sheetLocal.Cells[1, column++] = "Ã÷/°µ±£Àí";
+                sheetLocal.Cells[1, column++] = "ĞÂ¾ÉºÏÍ¬";
+                sheetLocal.Cells[1, column++] = "ºÏÍ¬±àºÅ";
+                sheetLocal.Cells[1, column++] = "Ö÷ºÏÍ¬ÉúĞ§ÈÕ";
+                sheetLocal.Cells[1, column++] = "Ö÷ºÏÍ¬µ½ÆÚÈÕ";
+                sheetLocal.Cells[1, column++] = "CDA±àºÅ";
+                sheetLocal.Cells[1, column++] = "Âô·½Ãû³Æ";
+                sheetLocal.Cells[1, column++] = "Âò·½Ãû³Æ";
+                sheetLocal.Cells[1, column++] = "Âò·½µØÖ·";
+                sheetLocal.Cells[1, column++] = "Ç©·¢ÈÕÆÚ";
+                sheetLocal.Cells[1, column++] = "¸¶¿î·½Ê½";
+                sheetLocal.Cells[1, column++] = "Âò·½ĞÅÓÃ·çÏÕ¶î¶È±Ò±ğ";
+                sheetLocal.Cells[1, column++] = "ĞÅÓÃ·çÏÕ¶î¶È";
+                sheetLocal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ(Ê¼)";
+                sheetLocal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ(ÖÕ)";
+                sheetLocal.Cells[1, column++] = "Ô¤¸¶¿î¶î¶È±Ò±ğ";
+                sheetLocal.Cells[1, column++] = "±£ÀíÔ¤¸¶¿î¶î¶È";
+                sheetLocal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ£¨Ê¼£©";
+                sheetLocal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ£¨ÖÕ£©";
+                sheetLocal.Cells[1, column++] = "×î¸ß±£ÀíÔ¤¸¶¿î¶î¶È";
+                sheetLocal.Cells[1, column++] = "Ô¤¸¶±ÈÀı";
+                sheetLocal.Cells[1, column++] = "±£Àí·ÑÂÊ";
+                sheetLocal.Cells[1, column++] = "¼Æ·Ñ·½Ê½";
+                sheetLocal.Cells[1, column++] = "µ¥¾İ´¦Àí·Ñ±Ò±ğ";
+                sheetLocal.Cells[1, column++] = "µ¥¾İ´¦Àí·Ñ";
+                sheetLocal.Cells[1, column++] = "±¸×¢";
 
                 int size = this.exportData.Count;
                 int inter = 0;
@@ -551,7 +683,7 @@ namespace CMBC.EasyFactor.Utils
 
                     Worksheet sheet = null;
                     int rowID = 0;
-                    if (cda.TransactionType == "è¿›å£ä¿ç†" || cda.TransactionType == "å‡ºå£ä¿ç†")
+                    if (cda.TransactionType == "½ø¿Ú±£Àí" || cda.TransactionType == "³ö¿Ú±£Àí")
                     {
                         rowID = ++inter;
                         sheet = sheetInternal;
@@ -695,145 +827,13 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private object ExportCases(BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
-
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return -1;
-            }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
-
-            if (datasheet == null)
-            {
-                return -1;
-            }
-
-            try
-            {
-                int column = 1;
-                datasheet.Cells[1, column++] = "ä¸šåŠ¡åœ°åŒº";
-                datasheet.Cells[1, column++] = "æ¡ˆä»¶ç¼–å·";
-                datasheet.Cells[1, column++] = "å–æ–¹ä¿ç†ä»£ç ";
-                datasheet.Cells[1, column++] = "å–æ–¹åç§°";
-                datasheet.Cells[1, column++] = "å–æ–¹ä¿ç†å•†ä»£ç ";
-                datasheet.Cells[1, column++] = "å–æ–¹ä¿ç†å•†";
-                datasheet.Cells[1, column++] = "ä¹°æ–¹ä¿ç†ä»£ç ";
-                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
-                datasheet.Cells[1, column++] = "ä¹°æ–¹ä¿ç†å•†ä»£ç ";
-                datasheet.Cells[1, column++] = "ä¹°æ–¹ä¿ç†å•†";
-                datasheet.Cells[1, column++] = "å‘ç¥¨å¸åˆ«";
-                datasheet.Cells[1, column++] = "ä¸šåŠ¡ç±»å‹";
-                datasheet.Cells[1, column++] = "æ“ä½œç±»å‹";
-                datasheet.Cells[1, column++] = "ä¸šåŠ¡å½’å±æœºæ„";
-                datasheet.Cells[1, column++] = "ç”³è¯·æ—¥æœŸ";
-                datasheet.Cells[1, column++] = "æ¡ˆä»¶çŠ¶æ€";
-                datasheet.Cells[1, column++] = "OPäººå‘˜";
-
-                int size = this.exportData.Count;
-                for (int row = 0; row < size; row++)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        if (datasheet != null)
-                        {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
-                        }
-
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
-
-                        e.Cancel = true;
-                        return -1;
-                    }
-
-                    column = 1;
-                    Case selectedCase = (Case)exportData[row];
-                    datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.Location.LocationName;
-                    datasheet.Cells[row + 2, column++] = selectedCase.CaseCode;
-                    datasheet.Cells[row + 2, column++] = selectedCase.SellerCode;
-                    datasheet.Cells[row + 2, column++] = selectedCase.SellerClient.ToString();
-                    datasheet.Cells[row + 2, column++] = selectedCase.SellerFactorCode;
-                    datasheet.Cells[row + 2, column++] = selectedCase.SellerFactor.ToString();
-                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerCode;
-                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerClient.ToString();
-                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerFactorCode;
-                    datasheet.Cells[row + 2, column++] = selectedCase.BuyerFactor.ToString();
-                    datasheet.Cells[row + 2, column++] = selectedCase.InvoiceCurrency;
-                    datasheet.Cells[row + 2, column++] = selectedCase.TransactionType;
-                    datasheet.Cells[row + 2, column++] = selectedCase.OperationType;
-                    datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.DepartmentName;
-                    datasheet.Cells[row + 2, column++] = selectedCase.CaseAppDate;
-                    datasheet.Cells[row + 2, column++] = selectedCase.CaseMark;
-                    datasheet.Cells[row + 2, column++] = selectedCase.OPName;
-
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
-                }
-
-                foreach (Range range in datasheet.UsedRange.Columns)
-                {
-                    range.EntireColumn.AutoFit();
-                    if (range.Column == 16)
-                    {
-                        range.NumberFormatLocal = "yyyy-MM-dd";
-                    }
-                }
-
-                app.Visible = true;
-            }
-            catch (Exception e1)
-            {
-                if (datasheet != null)
-                {
-                    Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
-                }
-
-                if (app != null)
-                {
-                    foreach (Workbook wb in app.Workbooks)
-                    {
-                        wb.Close(false, Type.Missing, Type.Missing);
-                    }
-
-                    app.Workbooks.Close();
-                    app.Quit();
-                    Marshal.ReleaseComObject(app);
-                    app = null;
-                }
-
-                throw e1;
-            }
-
-            return exportData.Count;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="worker"></param>
-        /// <param name="e"></param>
-        /// <returns></returns>
         private object ExportClientReviews(BackgroundWorker worker, DoWorkEventArgs e)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
 
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -845,36 +845,36 @@ namespace CMBC.EasyFactor.Utils
 
             try
             {
-                datasheet.Cells[1, 1] = "åæŸ¥æ„è§å°å¸";
+                datasheet.Cells[1, 1] = "Ğ­²éÒâ¼ûÌ¨ÕÊ";
                 datasheet.get_Range("A1", "S1").MergeCells = true;
                 datasheet.get_Range("A1", "S1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
                 int column = 1;
-                datasheet.Cells[2, column++] = "å›å¤æ—¶é—´";
-                datasheet.Cells[2, column++] = "åæŸ¥æ„è§ç¼–ç ";
-                datasheet.Cells[2, column++] = "åŒºåŸŸè´Ÿè´£äºº";
-                datasheet.Cells[2, column++] = "å½’å±äº‹ä¸šéƒ¨/åˆ†è¡Œ";
-                datasheet.Cells[2, column++] = "å½’å±åˆ†éƒ¨";
-                datasheet.Cells[2, column++] = "äº§å“ç»ç†";
-                datasheet.Cells[2, column++] = "å®¢æˆ·åç§°";
-                datasheet.Cells[2, column++] = "æ‰€å±è¡Œä¸š";
-                datasheet.Cells[2, column++] = "æˆä¿¡é‡‘é¢ï¼ˆä¸‡ï¼‰";
-                datasheet.Cells[2, column++] = "å›½å†…";
-                datasheet.Cells[2, column++] = "å›½é™…";
-                datasheet.Cells[2, column++] = "å–æ–¹";
-                datasheet.Cells[2, column++] = "ä¹°æ–¹";
-                datasheet.Cells[2, column++] = "æœ‰è¿½";
-                datasheet.Cells[2, column++] = "æ— è¿½";
-                datasheet.Cells[2, column++] = "æ˜ä¿/æš—ä¿";
-                datasheet.Cells[2, column++] = "é¢„ä»˜æ¬¾";
-                datasheet.Cells[2, column++] = "ä»£ä»˜";
-                datasheet.Cells[2, column++] = "ä¿¡ç”¨è¯";
-                datasheet.Cells[2, column++] = "é“¶æ‰¿";
-                datasheet.Cells[2, column++] = "èèµ„ç®¡ç†";
-                datasheet.Cells[2, column++] = "å¯ç”¨çŠ¶æ€";
-                datasheet.Cells[2, column++] = "ä¿ç†è´¹";
-                datasheet.Cells[2, column++] = "èèµ„æœŸï¼ˆæœˆï¼‰";
-                datasheet.Cells[2, column++] = "å¤‡æ³¨";
+                datasheet.Cells[2, column++] = "»Ø¸´Ê±¼ä";
+                datasheet.Cells[2, column++] = "Ğ­²éÒâ¼û±àÂë";
+                datasheet.Cells[2, column++] = "ÇøÓò¸ºÔğÈË";
+                datasheet.Cells[2, column++] = "¹éÊôÊÂÒµ²¿/·ÖĞĞ";
+                datasheet.Cells[2, column++] = "¹éÊô·Ö²¿";
+                datasheet.Cells[2, column++] = "²úÆ·¾­Àí";
+                datasheet.Cells[2, column++] = "¿Í»§Ãû³Æ";
+                datasheet.Cells[2, column++] = "ËùÊôĞĞÒµ";
+                datasheet.Cells[2, column++] = "ÊÚĞÅ½ğ¶î£¨Íò£©";
+                datasheet.Cells[2, column++] = "¹úÄÚ";
+                datasheet.Cells[2, column++] = "¹ú¼Ê";
+                datasheet.Cells[2, column++] = "Âô·½";
+                datasheet.Cells[2, column++] = "Âò·½";
+                datasheet.Cells[2, column++] = "ÓĞ×·";
+                datasheet.Cells[2, column++] = "ÎŞ×·";
+                datasheet.Cells[2, column++] = "Ã÷±£/°µ±£";
+                datasheet.Cells[2, column++] = "Ô¤¸¶¿î";
+                datasheet.Cells[2, column++] = "´ú¸¶";
+                datasheet.Cells[2, column++] = "ĞÅÓÃÖ¤";
+                datasheet.Cells[2, column++] = "Òø³Ğ";
+                datasheet.Cells[2, column++] = "ÈÚ×Ê¹ÜÀí";
+                datasheet.Cells[2, column++] = "ÆôÓÃ×´Ì¬";
+                datasheet.Cells[2, column++] = "±£Àí·Ñ";
+                datasheet.Cells[2, column++] = "ÈÚ×ÊÆÚ£¨ÔÂ£©";
+                datasheet.Cells[2, column++] = "±¸×¢";
 
                 int size = this.exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -927,23 +927,23 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 3, column++] = review.Client.Industry;
                     datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = TypeUtil.GetExcelCurr(review.RequestCurrency);
                     datasheet.Cells[row + 3, column++] = review.RequestAmount;
-                    datasheet.Cells[row + 3, column++] = review.IsLocal ? "å›½å†…" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsInternational ? "å›½é™…" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsSeller ? "å–æ–¹" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsBuyer ? "ä¹°æ–¹" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsRecoarse ? "æœ‰è¿½" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsNonRecoarse ? "æ— è¿½" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsLocal ? "¹úÄÚ" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsInternational ? "¹ú¼Ê" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsSeller ? "Âô·½" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsBuyer ? "Âò·½" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsRecoarse ? "ÓĞ×·" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsNonRecoarse ? "ÎŞ×·" : "---";
                     datasheet.Cells[row + 3, column++] = review.IsNotice;
                     string[] financeTypes = review.RequestFinanceType.Split(new char[] { ';' });
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("é¢„ä»˜æ¬¾") ? "é¢„ä»˜æ¬¾" : "---";
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("ä»£ä»˜") ? "ä»£ä»˜" : "---";
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("ä¿¡ç”¨è¯") ? "ä¿¡ç”¨è¯" : "---";
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("é“¶æ‰¿") ? "é“¶æ‰¿" : "---";
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("Ô¤¸¶¿î") ? "Ô¤¸¶¿î" : "---";
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("´ú¸¶") ? "´ú¸¶" : "---";
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("ĞÅÓÃÖ¤") ? "ĞÅÓÃÖ¤" : "---";
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("Òø³Ğ") ? "Òø³Ğ" : "---";
                     datasheet.Cells[row + 3, column++] = review.RequestFinanceType2;
-                    datasheet.Cells[row + 3, column++] = review.Client.Contract != null ? "å·²å¯åŠ¨" : "æœªå¯åŠ¨";
+                    datasheet.Cells[row + 3, column++] = review.Client.Contract != null ? "ÒÑÆô¶¯" : "Î´Æô¶¯";
                     datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "0.000%";
                     datasheet.Cells[row + 3, column++] = review.RequestCommissionRate;
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "##æœˆ";
+                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "##ÔÂ";
                     datasheet.Cells[row + 3, column++] = review.RequestFinancePeriod;
                     datasheet.Cells[row + 3, column++] = review.Comment;
 
@@ -1000,7 +1000,7 @@ namespace CMBC.EasyFactor.Utils
 
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -1013,39 +1013,39 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "å®¢æˆ·å·";
-                datasheet.Cells[1, column++] = "ä¿ç†ä»£ç ";
-                datasheet.Cells[1, column++] = "å®¢æˆ·åç§°(ä¸­)";
-                datasheet.Cells[1, column++] = "å®¢æˆ·åç§°(è‹±)";
-                datasheet.Cells[1, column++] = "åœ°å€(ä¸­)";
-                datasheet.Cells[1, column++] = "åœ°å€(è‹±)";
-                datasheet.Cells[1, column++] = "æ‰€åœ¨åŸå¸‚(ä¸­)";
-                datasheet.Cells[1, column++] = "æ‰€åœ¨åŸå¸‚(è‹±)";
-                datasheet.Cells[1, column++] = "æ‰€åœ¨çœ/å·(ä¸­)";
-                datasheet.Cells[1, column++] = "æ‰€åœ¨çœ/å·(è‹±)";
-                datasheet.Cells[1, column++] = "é‚®ç¼–";
-                datasheet.Cells[1, column++] = "æ‰€åœ¨å›½";
-                datasheet.Cells[1, column++] = "å…¬å¸æ³•äºº/è´£ä»»äºº";
-                datasheet.Cells[1, column++] = "å…¬å¸ç½‘å€";
-                datasheet.Cells[1, column++] = "è”ç³»äºº";
-                datasheet.Cells[1, column++] = "è”ç³»ç”µè¯";
+                datasheet.Cells[1, column++] = "¿Í»§ºÅ";
+                datasheet.Cells[1, column++] = "±£Àí´úÂë";
+                datasheet.Cells[1, column++] = "¿Í»§Ãû³Æ(ÖĞ)";
+                datasheet.Cells[1, column++] = "¿Í»§Ãû³Æ(Ó¢)";
+                datasheet.Cells[1, column++] = "µØÖ·(ÖĞ)";
+                datasheet.Cells[1, column++] = "µØÖ·(Ó¢)";
+                datasheet.Cells[1, column++] = "ËùÔÚ³ÇÊĞ(ÖĞ)";
+                datasheet.Cells[1, column++] = "ËùÔÚ³ÇÊĞ(Ó¢)";
+                datasheet.Cells[1, column++] = "ËùÔÚÊ¡/Öİ(ÖĞ)";
+                datasheet.Cells[1, column++] = "ËùÔÚÊ¡/Öİ(Ó¢)";
+                datasheet.Cells[1, column++] = "ÓÊ±à";
+                datasheet.Cells[1, column++] = "ËùÔÚ¹ú";
+                datasheet.Cells[1, column++] = "¹«Ë¾·¨ÈË/ÔğÈÎÈË";
+                datasheet.Cells[1, column++] = "¹«Ë¾ÍøÖ·";
+                datasheet.Cells[1, column++] = "ÁªÏµÈË";
+                datasheet.Cells[1, column++] = "ÁªÏµµç»°";
                 datasheet.Cells[1, column++] = "E-MAIL";
-                datasheet.Cells[1, column++] = "ä¼ çœŸå·ç ";
-                datasheet.Cells[1, column++] = "æ‰‹æœºå·ç ";
-                datasheet.Cells[1, column++] = "å®¢æˆ·ç±»å‹";
-                datasheet.Cells[1, column++] = "è¡Œä¸šç±»åˆ«";
-                datasheet.Cells[1, column++] = "ç»è¥èŒƒå›´(ä¸­)";
-                datasheet.Cells[1, column++] = "ç»è¥èŒƒå›´(è‹±)";
-                datasheet.Cells[1, column++] = "å®¢æˆ·çº§åˆ«";
-                datasheet.Cells[1, column++] = "æ‰€å±é›†å›¢å®¢æˆ·ä¿ç†ä»£ç ";
-                datasheet.Cells[1, column++] = "æ‰€å±é›†å›¢å®¢æˆ·åç§°";
-                datasheet.Cells[1, column++] = "è¥ä¸šæ‰§ç…§å·ç ";
-                datasheet.Cells[1, column++] = "ç»„ç»‡æœºæ„ä»£ç ";
-                datasheet.Cells[1, column++] = "æ‰€å±æœºæ„";
-                datasheet.Cells[1, column++] = "äº§å“ç»ç†";
-                datasheet.Cells[1, column++] = "å®¢æˆ·ç»ç†";
-                datasheet.Cells[1, column++] = "å¤‡æ³¨";
-                datasheet.Cells[1, column++] = "ç»åŠäºº";
+                datasheet.Cells[1, column++] = "´«ÕæºÅÂë";
+                datasheet.Cells[1, column++] = "ÊÖ»úºÅÂë";
+                datasheet.Cells[1, column++] = "¿Í»§ÀàĞÍ";
+                datasheet.Cells[1, column++] = "ĞĞÒµÀà±ğ";
+                datasheet.Cells[1, column++] = "¾­Óª·¶Î§(ÖĞ)";
+                datasheet.Cells[1, column++] = "¾­Óª·¶Î§(Ó¢)";
+                datasheet.Cells[1, column++] = "¿Í»§¼¶±ğ";
+                datasheet.Cells[1, column++] = "ËùÊô¼¯ÍÅ¿Í»§±£Àí´úÂë";
+                datasheet.Cells[1, column++] = "ËùÊô¼¯ÍÅ¿Í»§Ãû³Æ";
+                datasheet.Cells[1, column++] = "ÓªÒµÖ´ÕÕºÅÂë";
+                datasheet.Cells[1, column++] = "×éÖ¯»ú¹¹´úÂë";
+                datasheet.Cells[1, column++] = "ËùÊô»ú¹¹";
+                datasheet.Cells[1, column++] = "²úÆ·¾­Àí";
+                datasheet.Cells[1, column++] = "¿Í»§¾­Àí";
+                datasheet.Cells[1, column++] = "±¸×¢";
+                datasheet.Cells[1, column++] = "¾­°ìÈË";
 
                 int size = this.exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -1164,7 +1164,7 @@ namespace CMBC.EasyFactor.Utils
 
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -1177,21 +1177,21 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "æ¡ˆä»¶ç¼–å·";
-                datasheet.Cells[1, column++] = "æ‰€å±åœ°åŒº";
-                datasheet.Cells[1, column++] = "å–æ–¹åç§°";
-                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
-                datasheet.Cells[1, column++] = "åˆä½œä¿ç†å•†";
-                datasheet.Cells[1, column++] = "P/Cæ ‡å¿—";
-                datasheet.Cells[1, column++] = "ç”³è¯·é¢åº¦";
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾æ¡ä»¶";
-                datasheet.Cells[1, column++] = "ç”³è¯·æ—¥æœŸ";
-                datasheet.Cells[1, column++] = "å›å¤é¢åº¦";
-                datasheet.Cells[1, column++] = "å›å¤æ—¥æœŸ";
-                datasheet.Cells[1, column++] = "IFæŠ¥ä»·";
-                datasheet.Cells[1, column++] = "æŠ¥ä»·æ—¥";
-                datasheet.Cells[1, column++] = "é¢åº¦æœŸé™";
-                datasheet.Cells[1, column++] = "å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "°¸¼ş±àºÅ";
+                datasheet.Cells[1, column++] = "ËùÊôµØÇø";
+                datasheet.Cells[1, column++] = "Âô·½Ãû³Æ";
+                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
+                datasheet.Cells[1, column++] = "ºÏ×÷±£ÀíÉÌ";
+                datasheet.Cells[1, column++] = "P/C±êÖ¾";
+                datasheet.Cells[1, column++] = "ÉêÇë¶î¶È";
+                datasheet.Cells[1, column++] = "¸¶¿îÌõ¼ş";
+                datasheet.Cells[1, column++] = "ÉêÇëÈÕÆÚ";
+                datasheet.Cells[1, column++] = "»Ø¸´¶î¶È";
+                datasheet.Cells[1, column++] = "»Ø¸´ÈÕÆÚ";
+                datasheet.Cells[1, column++] = "IF±¨¼Û";
+                datasheet.Cells[1, column++] = "±¨¼ÛÈÕ";
+                datasheet.Cells[1, column++] = "¶î¶ÈÆÚÏŞ";
+                datasheet.Cells[1, column++] = "±¸×¢";
 
                 int size = this.exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -1261,7 +1261,7 @@ namespace CMBC.EasyFactor.Utils
 
                 datasheet.UsedRange.WrapText = false;
                 datasheet.UsedRange.Borders.LineStyle = 1;
-                datasheet.UsedRange.Font.Name = "ä»¿å®‹_GB2312";
+                datasheet.UsedRange.Font.Name = "·ÂËÎ_GB2312";
                 datasheet.UsedRange.Font.Size = 12;
 
                 app.Visible = true;
@@ -1304,7 +1304,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -1318,21 +1318,21 @@ namespace CMBC.EasyFactor.Utils
             {
                 int column = 1;
                 //Case
-                datasheet.Cells[1, column++] = "æ¡ˆä»¶ç¼–å·";
-                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
-                //ä»˜æ¬¾æ‰¹æ¬¡
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾æ‰¹æ¬¡å·";
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾ç±»å‹";
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾æ‰¹æ¬¡æ—¥";
-                datasheet.Cells[1, column++] = "æ˜¯å¦ç”ŸæˆæŠ¥æ–‡";
-                datasheet.Cells[1, column++] = "æœ¬æ¬¡ä»˜æ¬¾å¤‡æ³¨";
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾ç»åŠäºº";
-                //è´·é¡¹é€šçŸ¥
-                datasheet.Cells[1, column++] = "è´·é¡¹é€šçŸ¥å·";
-                datasheet.Cells[1, column++] = "è´·é¡¹é€šçŸ¥é‡‘é¢";
-                datasheet.Cells[1, column++] = "è´·é¡¹é€šçŸ¥æ—¥";
-                datasheet.Cells[1, column++] = "å¯¹åº”å‘ç¥¨å·";
-                datasheet.Cells[1, column++] = "å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "°¸¼ş±àºÅ";
+                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
+                //¸¶¿îÅú´Î
+                datasheet.Cells[1, column++] = "¸¶¿îÅú´ÎºÅ";
+                datasheet.Cells[1, column++] = "¸¶¿îÀàĞÍ";
+                datasheet.Cells[1, column++] = "¸¶¿îÅú´ÎÈÕ";
+                datasheet.Cells[1, column++] = "ÊÇ·ñÉú³É±¨ÎÄ";
+                datasheet.Cells[1, column++] = "±¾´Î¸¶¿î±¸×¢";
+                datasheet.Cells[1, column++] = "¸¶¿î¾­°ìÈË";
+                //´ûÏîÍ¨Öª
+                datasheet.Cells[1, column++] = "´ûÏîÍ¨ÖªºÅ";
+                datasheet.Cells[1, column++] = "´ûÏîÍ¨Öª½ğ¶î";
+                datasheet.Cells[1, column++] = "´ûÏîÍ¨ÖªÈÕ";
+                datasheet.Cells[1, column++] = "¶ÔÓ¦·¢Æ±ºÅ";
+                datasheet.Cells[1, column++] = "±¸×¢";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -1434,7 +1434,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -1447,11 +1447,11 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
-                datasheet.Cells[1, column++] = "è½¬è®©ä½™é¢";
-                datasheet.Cells[1, column++] = "èèµ„é‡‘é¢";
-                datasheet.Cells[1, column++] = "æ‰‹ç»­è´¹";
-                datasheet.Cells[1, column++] = "å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
+                datasheet.Cells[1, column++] = "×ªÈÃÓà¶î";
+                datasheet.Cells[1, column++] = "ÈÚ×Ê½ğ¶î";
+                datasheet.Cells[1, column++] = "ÊÖĞø·Ñ";
+                datasheet.Cells[1, column++] = "±¸×¢";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -1541,7 +1541,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -1555,58 +1555,58 @@ namespace CMBC.EasyFactor.Utils
             {
                 int column = 1;
                 //Case
-                datasheet.Cells[1, column++] = "æ¡ˆä»¶ç¼–å·";
-                datasheet.Cells[1, column++] = "å–æ–¹åç§°";
-                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
-                //è½¬è®©æ‰¹æ¬¡
-                datasheet.Cells[1, column++] = "è½¬è®©æ‰¹æ¬¡å·";
-                datasheet.Cells[1, column++] = "è½¬è®©æ‰¹æ¬¡æ—¥";
-                datasheet.Cells[1, column++] = "æ˜¯å¦ç”ŸæˆæŠ¥æ–‡";
-                datasheet.Cells[1, column++] = "æœ¬æ¬¡è½¬è®©å¤‡æ³¨";
-                datasheet.Cells[1, column++] = "è½¬è®©ç»åŠäºº";
-                //è½¬è®©
-                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
-                datasheet.Cells[1, column++] = "ç¥¨é¢é‡‘é¢";
-                datasheet.Cells[1, column++] = "è½¬è®©é‡‘é¢";
-                datasheet.Cells[1, column++] = "å‘ç¥¨æ—¥";
-                datasheet.Cells[1, column++] = "åˆ°æœŸæ—¥";
-                datasheet.Cells[1, column++] = "æ˜¯å¦ç‘•ç–µ";
-                //èèµ„æ‰¹å·
-                datasheet.Cells[1, column++] = "èèµ„ç¼–å·";
-                datasheet.Cells[1, column++] = "èèµ„ç±»å‹";
-                datasheet.Cells[1, column++] = "ä»£ä»˜è¡Œç¼–ç ";
-                datasheet.Cells[1, column++] = "ä»£ä»˜è¡Œåç§°";
-                datasheet.Cells[1, column++] = "èèµ„å¸åˆ«";
-                datasheet.Cells[1, column++] = "èèµ„åˆ©ç‡";
-                datasheet.Cells[1, column++] = "æˆæœ¬åˆ©ç‡";
-                datasheet.Cells[1, column++] = "æœ¬æ¬¡èèµ„èµ·å§‹æ—¥";
-                datasheet.Cells[1, column++] = "æœ¬æ¬¡èèµ„åˆ°æœŸæ—¥";
-                datasheet.Cells[1, column++] = "æœ¬æ¬¡èèµ„å¤‡æ³¨";
-                datasheet.Cells[1, column++] = "æœ¬æ¬¡èèµ„ç»åŠäºº";
-                //èèµ„
-                datasheet.Cells[1, column++] = "èèµ„é‡‘é¢";
-                //ä»˜æ¬¾æ‰¹æ¬¡
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾æ‰¹æ¬¡å·";
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾ç±»å‹";
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾æ‰¹æ¬¡æ—¥";
-                datasheet.Cells[1, column++] = "æ˜¯å¦ç”ŸæˆæŠ¥æ–‡";
-                datasheet.Cells[1, column++] = "æœ¬æ¬¡ä»˜æ¬¾å¤‡æ³¨";
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾ç»åŠäºº";
-                //ä»˜æ¬¾
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾é‡‘é¢";
-                //è¿˜æ¬¾æ‰¹æ¬¡
-                datasheet.Cells[1, column++] = "è¿˜æ¬¾æ‰¹æ¬¡ç¼–å·";
-                datasheet.Cells[1, column++] = "è¿˜æ¬¾ç±»å‹";
-                datasheet.Cells[1, column++] = "è¿˜æ¬¾æ‰¹æ¬¡æ—¥";
-                datasheet.Cells[1, column++] = "æœ¬æ¬¡è¿˜æ¬¾å¤‡æ³¨";
-                datasheet.Cells[1, column++] = "è¿˜æ¬¾ç»åŠäºº";
-                //è¿˜æ¬¾
-                datasheet.Cells[1, column++] = "è¿˜æ¬¾é‡‘é¢";
-                //æ‰‹ç»­è´¹
-                datasheet.Cells[1, column++] = "æ‰‹ç»­è´¹";
-                //åˆ©æ¯
-                datasheet.Cells[1, column++] = "åˆ©æ¯";
-                datasheet.Cells[1, column++] = "å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "°¸¼ş±àºÅ";
+                datasheet.Cells[1, column++] = "Âô·½Ãû³Æ";
+                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
+                //×ªÈÃÅú´Î
+                datasheet.Cells[1, column++] = "×ªÈÃÅú´ÎºÅ";
+                datasheet.Cells[1, column++] = "×ªÈÃÅú´ÎÈÕ";
+                datasheet.Cells[1, column++] = "ÊÇ·ñÉú³É±¨ÎÄ";
+                datasheet.Cells[1, column++] = "±¾´Î×ªÈÃ±¸×¢";
+                datasheet.Cells[1, column++] = "×ªÈÃ¾­°ìÈË";
+                //×ªÈÃ
+                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
+                datasheet.Cells[1, column++] = "Æ±Ãæ½ğ¶î";
+                datasheet.Cells[1, column++] = "×ªÈÃ½ğ¶î";
+                datasheet.Cells[1, column++] = "·¢Æ±ÈÕ";
+                datasheet.Cells[1, column++] = "µ½ÆÚÈÕ";
+                datasheet.Cells[1, column++] = "ÊÇ·ñè¦´Ã";
+                //ÈÚ×ÊÅúºÅ
+                datasheet.Cells[1, column++] = "ÈÚ×Ê±àºÅ";
+                datasheet.Cells[1, column++] = "ÈÚ×ÊÀàĞÍ";
+                datasheet.Cells[1, column++] = "´ú¸¶ĞĞ±àÂë";
+                datasheet.Cells[1, column++] = "´ú¸¶ĞĞÃû³Æ";
+                datasheet.Cells[1, column++] = "ÈÚ×Ê±Ò±ğ";
+                datasheet.Cells[1, column++] = "ÈÚ×ÊÀûÂÊ";
+                datasheet.Cells[1, column++] = "³É±¾ÀûÂÊ";
+                datasheet.Cells[1, column++] = "±¾´ÎÈÚ×ÊÆğÊ¼ÈÕ";
+                datasheet.Cells[1, column++] = "±¾´ÎÈÚ×Êµ½ÆÚÈÕ";
+                datasheet.Cells[1, column++] = "±¾´ÎÈÚ×Ê±¸×¢";
+                datasheet.Cells[1, column++] = "±¾´ÎÈÚ×Ê¾­°ìÈË";
+                //ÈÚ×Ê
+                datasheet.Cells[1, column++] = "ÈÚ×Ê½ğ¶î";
+                //¸¶¿îÅú´Î
+                datasheet.Cells[1, column++] = "¸¶¿îÅú´ÎºÅ";
+                datasheet.Cells[1, column++] = "¸¶¿îÀàĞÍ";
+                datasheet.Cells[1, column++] = "¸¶¿îÅú´ÎÈÕ";
+                datasheet.Cells[1, column++] = "ÊÇ·ñÉú³É±¨ÎÄ";
+                datasheet.Cells[1, column++] = "±¾´Î¸¶¿î±¸×¢";
+                datasheet.Cells[1, column++] = "¸¶¿î¾­°ìÈË";
+                //¸¶¿î
+                datasheet.Cells[1, column++] = "¸¶¿î½ğ¶î";
+                //»¹¿îÅú´Î
+                datasheet.Cells[1, column++] = "»¹¿îÅú´Î±àºÅ";
+                datasheet.Cells[1, column++] = "»¹¿îÀàĞÍ";
+                datasheet.Cells[1, column++] = "»¹¿îÅú´ÎÈÕ";
+                datasheet.Cells[1, column++] = "±¾´Î»¹¿î±¸×¢";
+                datasheet.Cells[1, column++] = "»¹¿î¾­°ìÈË";
+                //»¹¿î
+                datasheet.Cells[1, column++] = "»¹¿î½ğ¶î";
+                //ÊÖĞø·Ñ
+                datasheet.Cells[1, column++] = "ÊÖĞø·Ñ";
+                //ÀûÏ¢
+                datasheet.Cells[1, column++] = "ÀûÏ¢";
+                datasheet.Cells[1, column++] = "±¸×¢";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -1642,13 +1642,13 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.CaseCode;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
-                    //è½¬è®©æ‰¹æ¬¡
+                    //×ªÈÃÅú´Î
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignBatchNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.InvoiceAssignBatch.IsCreateMsg);
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Comment;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CreateUserName;
-                    //è½¬è®©
+                    //×ªÈÃ
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAmount;
                     datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
@@ -1656,7 +1656,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
 
-                    //èèµ„æ‰¹æ¬¡
+                    //ÈÚ×ÊÅú´Î
                     int recordStep = 0;
                     for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
                     {
@@ -1679,11 +1679,11 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.Comment;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.CreateUserName;
 
-                        //èèµ„
+                        //ÈÚ×Ê
                         column = 26;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.FinanceAmount;
 
-                        //è¿˜æ¬¾æ‰¹æ¬¡
+                        //»¹¿îÅú´Î
                         for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
                         {
                             column = 34;
@@ -1694,7 +1694,7 @@ namespace CMBC.EasyFactor.Utils
                             datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.Comment;
                             datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.CreateUserName;
 
-                            //è¿˜æ¬¾
+                            //»¹¿î
                             column = 39;
                             datasheet.Cells[row + 2 + j + recordStep, column++] = log.RefundAmount;
                         }
@@ -1703,7 +1703,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
 
-                    //ä»˜æ¬¾æ‰¹æ¬¡
+                    //¸¶¿îÅú´Î
                     for (int i = 0; i < invoice.InvoicePaymentLogs.Count; i++)
                     {
                         column = 27;
@@ -1715,16 +1715,16 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.Comment;
                         datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.CreateUserName;
 
-                        //ä»˜æ¬¾
+                        //¸¶¿î
                         column = 33;
                         datasheet.Cells[row + 2 + i, column++] = log.PaymentAmount;
                     }
 
                     column = 40;
 
-                    //æ‰‹ç»­è´¹
+                    //ÊÖĞø·Ñ
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
-                    //åˆ©æ¯
+                    //ÀûÏ¢
                     datasheet.Cells[row + 2, column++] = invoice.NetInterest;
                     datasheet.Cells[row + 2, column++] = invoice.Comment;
 
@@ -1789,7 +1789,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -1802,23 +1802,23 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "æ‰€å±åœ°åŒº";
-                datasheet.Cells[1, column++] = "å–æ–¹åç§°";
-                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
-                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
-                datasheet.Cells[1, column++] = "å‘ç¥¨å¸åˆ«";
-                datasheet.Cells[1, column++] = "è½¬è®©é‡‘é¢";
-                datasheet.Cells[1, column++] = "è½¬è®©ä½™é¢";
-                datasheet.Cells[1, column++] = "å‘ç¥¨æ—¥";
-                datasheet.Cells[1, column++] = "åˆ°æœŸæ—¥";
-                datasheet.Cells[1, column++] = "è½¬è®©æ—¥";
-                datasheet.Cells[1, column++] = "èèµ„å¸åˆ«";
-                datasheet.Cells[1, column++] = "èèµ„é‡‘é¢";
-                datasheet.Cells[1, column++] = "èèµ„ä½™é¢";
-                datasheet.Cells[1, column++] = "èèµ„æ—¥";
-                datasheet.Cells[1, column++] = "èèµ„åˆ°æœŸæ—¥";
-                datasheet.Cells[1, column++] = "è´¦æ¬¾é€¾æœŸå¤©æ•°";
-                datasheet.Cells[1, column++] = "èèµ„é€¾æœŸå¤©æ•°";
+                datasheet.Cells[1, column++] = "ËùÊôµØÇø";
+                datasheet.Cells[1, column++] = "Âô·½Ãû³Æ";
+                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
+                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
+                datasheet.Cells[1, column++] = "·¢Æ±±Ò±ğ";
+                datasheet.Cells[1, column++] = "×ªÈÃ½ğ¶î";
+                datasheet.Cells[1, column++] = "×ªÈÃÓà¶î";
+                datasheet.Cells[1, column++] = "·¢Æ±ÈÕ";
+                datasheet.Cells[1, column++] = "µ½ÆÚÈÕ";
+                datasheet.Cells[1, column++] = "×ªÈÃÈÕ";
+                datasheet.Cells[1, column++] = "ÈÚ×Ê±Ò±ğ";
+                datasheet.Cells[1, column++] = "ÈÚ×Ê½ğ¶î";
+                datasheet.Cells[1, column++] = "ÈÚ×ÊÓà¶î";
+                datasheet.Cells[1, column++] = "ÈÚ×ÊÈÕ";
+                datasheet.Cells[1, column++] = "ÈÚ×Êµ½ÆÚÈÕ";
+                datasheet.Cells[1, column++] = "ÕË¿îÓâÆÚÌìÊı";
+                datasheet.Cells[1, column++] = "ÈÚ×ÊÓâÆÚÌìÊı";
 
                 int size = exportData.Count;
                 int row = 0;
@@ -1955,12 +1955,12 @@ namespace CMBC.EasyFactor.Utils
                 string transactionType = caseGroup.Key;
                 switch (transactionType)
                 {
-                    case "å›½å†…å–æ–¹ä¿ç†":
-                    case "å‡ºå£ä¿ç†":
+                    case "¹úÄÚÂô·½±£Àí":
+                    case "³ö¿Ú±£Àí":
                         groups = caseGroup.GroupBy(c => c.SellerClient);
                         break;
-                    case "å›½å†…ä¹°æ–¹ä¿ç†":
-                    case "è¿›å£ä¿ç†":
+                    case "¹úÄÚÂò·½±£Àí":
+                    case "½ø¿Ú±£Àí":
                         groups = caseGroup.GroupBy(c => c.BuyerClient);
                         break;
                     default:
@@ -2256,7 +2256,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -2269,12 +2269,12 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
-                datasheet.Cells[1, column++] = "è½¬è®©ä½™é¢";
-                datasheet.Cells[1, column++] = "ä»˜æ¬¾é‡‘é¢";
-                datasheet.Cells[1, column++] = "å¤‡æ³¨";
-                datasheet.Cells[1, column++] = "è´·é¡¹é€šçŸ¥å·";
-                datasheet.Cells[1, column++] = "è´·é¡¹é€šçŸ¥æ—¥";
+                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
+                datasheet.Cells[1, column++] = "×ªÈÃÓà¶î";
+                datasheet.Cells[1, column++] = "¸¶¿î½ğ¶î";
+                datasheet.Cells[1, column++] = "±¸×¢";
+                datasheet.Cells[1, column++] = "´ûÏîÍ¨ÖªºÅ";
+                datasheet.Cells[1, column++] = "´ûÏîÍ¨ÖªÈÕ";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -2372,7 +2372,7 @@ namespace CMBC.EasyFactor.Utils
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return -1;
             }
             Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -2385,11 +2385,11 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
-                datasheet.Cells[1, column++] = "èèµ„ç¼–å·";
-                datasheet.Cells[1, column++] = "èèµ„ä½™é¢";
-                datasheet.Cells[1, column++] = "è¿˜æ¬¾é‡‘é¢";
-                datasheet.Cells[1, column++] = "å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
+                datasheet.Cells[1, column++] = "ÈÚ×Ê±àºÅ";
+                datasheet.Cells[1, column++] = "ÈÚ×ÊÓà¶î";
+                datasheet.Cells[1, column++] = "»¹¿î½ğ¶î";
+                datasheet.Cells[1, column++] = "±¸×¢";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -2471,27 +2471,336 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="caseGroup"></param>
+        private void ExportReportLegarImpl(IGrouping<Client, Case> caseGroup)
+        {
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+            if (app == null)
+            {
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Workbook workbook = null;
+            try
+            {
+                workbook = app.Workbooks.Add(true);
+                Worksheet totalSheet = (Worksheet)workbook.Sheets[1];
+                totalSheet.Name = "×ÜÌ¨ÕÊ";
+
+                Client client = caseGroup.Key;
+                foreach (Case selectedCase in caseGroup)
+                {
+                    CDA cda = selectedCase.ActiveCDA;
+
+                    if (cda == null)
+                    {
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
+
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
+
+                        MessageBoxEx.Show("°¸¼şÃ»ÓĞÓĞĞ§µÄ¶î¶ÈÍ¨ÖªÊé£¬°¸¼ş±àºÅ£º" + selectedCase.CaseCode);
+
+                        return;
+                    }
+
+                    Worksheet sheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+
+                    string name = selectedCase.TargetClient.ToString();
+                    if (name.Length > 15)
+                    {
+                        name = name.Substring(0, 15);
+                    }
+
+                    sheet.Name = String.Format("{0}-{1}", selectedCase.CaseCode, name);
+
+                    sheet.get_Range("A1", "Q1").MergeCells = true;
+                    sheet.get_Range("A1", "A1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.Cells[1, "A"] = "ÏúÊÛ·Ö»§ÕËÌ¨ÕË";
+                    sheet.Cells[2, "P"] = String.Format("µ¥Î»£º{0}", selectedCase.InvoiceCurrency);
+                    sheet.Cells[3, "A"] = "·ÖĞĞ/·Ö²¿";
+                    sheet.Cells[3, "B"] = selectedCase.OwnerDepartment.DepartmentName;
+
+                    sheet.Cells[4, "A"] = "Seller Name";
+                    sheet.get_Range("B4", "F4").MergeCells = true;
+                    sheet.Cells[4, "B"] = selectedCase.SellerClient.ToString();
+                    sheet.Cells[5, "A"] = "Buyer Name";
+                    sheet.get_Range("B5", "F5").MergeCells = true;
+                    sheet.Cells[5, "B"] = selectedCase.BuyerClient.ToString();
+
+                    sheet.get_Range("B6", "F6").MergeCells = true;
+                    if (selectedCase.TransactionType == "½ø¿Ú±£Àí")
+                    {
+                        sheet.Cells[6, "A"] = "Export Factor";
+                        sheet.Cells[6, "B"] = selectedCase.SellerFactor.ToString();
+                    }
+                    else
+                    {
+                        sheet.Cells[6, "A"] = "Import Factor";
+                        sheet.Cells[6, "B"] = selectedCase.BuyerFactor.ToString();
+                    }
+
+                    sheet.get_Range("B7", "F7").MergeCells = true;
+                    sheet.Cells[7, "A"] = "Ğ­²éÒâ¼ûÊé±àºÅ";
+                    List<ClientReview> reviewList = selectedCase.ClientReviews;
+                    if (reviewList != null)
+                    {
+                        String reviews = string.Empty;
+                        foreach (ClientReview review in reviewList)
+                        {
+                            reviews += review.ReviewNo + ";";
+                        }
+
+                        sheet.Cells[7, "B"] = reviews;
+                    }
+
+                    sheet.Cells[4, "G"] = "°¸¼ş±àºÅ";
+                    sheet.get_Range(sheet.Cells[4, "H"], sheet.Cells[4, "I"]).MergeCells = true;
+                    sheet.Cells[4, "H"] = selectedCase.CaseCode;
+
+                    sheet.Cells[5, "G"] = "×ÜÊÖĞø·ÑÂÊ";
+                    sheet.get_Range(sheet.Cells[5, "H"], sheet.Cells[5, "I"]).MergeCells = true;
+                    if (cda != null)
+                    {
+                        sheet.Cells[5, "H"] = String.Format("{0:P4}", cda.Price);
+                    }
+
+                    sheet.get_Range(sheet.Cells[6, "H"], sheet.Cells[6, "I"]).MergeCells = true;
+                    sheet.Cells[6, "G"] = "ÊÕ·Ñ·½Ê½";
+                    if (cda != null)
+                    {
+                        sheet.Cells[6, "H"] = cda.CommissionType;
+                    }
+
+
+                    sheet.Cells[7, "G"] = "µ¥¾İ´¦Àí·Ñ/±Ê";
+                    sheet.get_Range(sheet.Cells[7, "H"], sheet.Cells[7, "I"]).MergeCells = true;
+                    sheet.Cells[7, "H"] = String.Format("{0} {1:N2}", cda.HandFeeCurr, cda.HandFee);
+
+                    sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
+                    sheet.Cells[4, "L"] = "ĞÅÓÃ·çÏÕµ£±£";
+                    sheet.Cells[5, "L"] = "ºË×¼¶î¶È";
+                    sheet.Cells[5, "M"] = cda.CreditCover;
+                    sheet.get_Range(sheet.Cells[5, "M"], sheet.Cells[5, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.CreditCoverCurr);
+                    sheet.Cells[6, "L"] = "µ½ÆÚÈÕ";
+                    sheet.Cells[6, "M"] = cda.CreditCoverPeriodEnd;
+                    sheet.get_Range(sheet.Cells[6, "M"], sheet.Cells[6, "M"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Cells[7, "L"] = "Ê£Óà¶î¶È";
+                    sheet.Cells[7, "M"] = cda.CreditCoverOutstanding;
+                    sheet.get_Range(sheet.Cells[7, "M"], sheet.Cells[7, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.CreditCoverCurr);
+                    sheet.Cells[8, "L"] = "Ó¦ÊÕÕÊ¿îÓà¶î";
+                    sheet.Cells[8, "M"] = selectedCase.AssignOutstanding;
+                    sheet.get_Range(sheet.Cells[8, "M"], sheet.Cells[8, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
+
+                    sheet.get_Range(sheet.Cells[4, "O"], sheet.Cells[4, "P"]).MergeCells = true;
+                    sheet.Cells[4, "O"] = "ÈÚ×Ê¶î¶È";
+                    sheet.Cells[5, "O"] = "ºË×¼¶î¶È";
+                    sheet.Cells[5, "P"] = cda.FinanceLine;
+                    sheet.get_Range(sheet.Cells[5, "P"], sheet.Cells[5, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.FinanceLineCurr);
+                    sheet.Cells[6, "O"] = "µ½ÆÚÈÕ";
+                    sheet.Cells[6, "P"] = cda.FinanceLinePeriodEnd;
+                    sheet.get_Range(sheet.Cells[6, "P"], sheet.Cells[6, "P"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Cells[7, "O"] = "Ê£Óà¶î¶È";
+                    sheet.Cells[7, "P"] = cda.FinanceLineOutstanding;
+                    sheet.get_Range(sheet.Cells[7, "P"], sheet.Cells[7, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.FinanceLineCurr);
+                    sheet.Cells[8, "O"] = "ÈÚ×ÊÓà¶î";
+                    sheet.Cells[8, "P"] = selectedCase.FinanceOutstanding;
+                    sheet.get_Range(sheet.Cells[8, "P"], sheet.Cells[8, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
+
+                    sheet.Cells[9, "A"] = "ÒµÎñ±àºÅ";
+                    sheet.Cells[9, "B"] = "·¢Æ±ºÅ";
+                    sheet.Cells[9, "C"] = "×ªÈÃ½ğ¶î";
+                    sheet.Cells[9, "D"] = "·¢Æ±ÈÕ";
+                    sheet.Cells[9, "E"] = "µ½ÆÚÈÕ";
+                    sheet.Cells[9, "F"] = "×ªÈÃÈÕ";
+                    sheet.Cells[9, "G"] = "ÈÚ×Ê½ğ¶î";
+                    sheet.Cells[9, "H"] = "ÈÚ×ÊÈÕ";
+                    sheet.Cells[9, "I"] = "ÈÚ×Êµ½ÆÚÈÕ";
+                    sheet.Cells[9, "J"] = "¸¶¿î½ğ¶î";
+                    sheet.Cells[9, "K"] = "ÕË¿îÓà¶î";
+                    sheet.Cells[9, "L"] = "¸¶¿îÈÕ";
+                    sheet.Cells[9, "M"] = "»¹¿î½ğ¶î";
+                    sheet.Cells[9, "N"] = "ÈÚ×ÊÓà¶î";
+                    sheet.Cells[9, "O"] = "»¹¿îÈÕ";
+                    sheet.Cells[9, "P"] = "ÊÖĞø·Ñ";
+                    sheet.Cells[9, "Q"] = "±¸×¢";
+
+                    sheet.get_Range("A4", "I7").Borders.LineStyle = 1;
+                    sheet.get_Range("L4", "M8").Borders.LineStyle = 1;
+                    sheet.get_Range("O4", "P8").Borders.LineStyle = 1;
+
+                    int row = 10;
+                    foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
+                    {
+                        foreach (Invoice invoice in batch.Invoices)
+                        {
+                            int step = 1;
+                            sheet.Cells[row, "A"] = invoice.InvoiceAssignBatch.AssignBatchNo;
+                            sheet.Cells[row, "B"] = "'" + invoice.InvoiceNo;
+                            sheet.Cells[row, "C"] = invoice.AssignAmount;
+                            sheet.Cells[row, "D"] = invoice.InvoiceDate;
+                            sheet.Cells[row, "E"] = invoice.DueDate;
+                            sheet.Cells[row, "F"] = batch.AssignDate;
+
+                            int recordStep = 0;
+                            for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
+                            {
+                                InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
+                                sheet.Cells[row + recordStep, "G"] = financeLog.FinanceAmount;
+                                sheet.Cells[row + recordStep, "H"] = financeLog.FinanceDate;
+                                sheet.Cells[row + recordStep, "I"] = financeLog.FinanceDueDate;
+                                sheet.Cells[row + recordStep, "N"] = financeLog.FinanceOutstanding;
+
+                                for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
+                                {
+                                    InvoiceRefundLog refundLog = financeLog.InvoiceRefundLogs[j];
+                                    sheet.Cells[row + recordStep + j, "M"] = refundLog.RefundAmount;
+                                    sheet.Cells[row + recordStep + j, "O"] = refundLog.RefundDate;
+                                }
+
+                                recordStep += financeLog.InvoiceRefundLogs.Count;
+                            }
+
+                            step = step < recordStep ? recordStep : step;
+
+                            for (int i = 0; i < invoice.InvoicePaymentLogs.Count; i++)
+                            {
+                                InvoicePaymentLog paymentLog = invoice.InvoicePaymentLogs[i];
+                                sheet.Cells[row + i, "J"] = paymentLog.PaymentAmount;
+                                sheet.Cells[row + i, "L"] = paymentLog.PaymentDate;
+                            }
+
+                            step = step < invoice.InvoicePaymentLogs.Count ? invoice.InvoicePaymentLogs.Count : step;
+
+                            sheet.Cells[row, "K"] = invoice.AssignOutstanding;
+
+                            sheet.Cells[row, "P"] = invoice.Commission;
+                            sheet.Cells[row, "Q"] = invoice.Comment;
+
+                            row += step;
+                        }
+                    }
+
+                    string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
+                    sheet.get_Range(sheet.Cells[9, "A"], sheet.Cells[row - 1, "Q"]).Borders.LineStyle = 1;
+                    sheet.get_Range(sheet.Cells[10, "C"], sheet.Cells[row - 1, "C"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "D"], sheet.Cells[row - 1, "D"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "E"], sheet.Cells[row - 1, "E"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "F"], sheet.Cells[row - 1, "F"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "G"], sheet.Cells[row - 1, "G"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "H"], sheet.Cells[row - 1, "H"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = currencyFormat;
+                    sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]).NumberFormatLocal = currencyFormat;
+
+                    foreach (Range range in sheet.UsedRange.Rows)
+                    {
+                        range.EntireRow.AutoFit();
+                    }
+
+                    foreach (Range range in sheet.UsedRange.Columns)
+                    {
+                        range.EntireColumn.AutoFit();
+                    }
+
+                    sheet.UsedRange.Font.Name = "·ÂËÎ";
+                }
+
+                this.FillLegarTotalSheet(totalSheet, caseGroup);
+                totalSheet.Move(workbook.Sheets[1], Type.Missing);
+
+                if (app != null)
+                {
+                    app.DisplayAlerts = false;
+                    app.AlertBeforeOverwriting = false;
+                    if (workbook != null)
+                    {
+                        string ext = ".xls";
+
+                        string location = caseGroup.First().OwnerDepartment.Location.LocationName;
+                        if (!System.IO.Directory.Exists(this.tbFilePath.Text + "\\" + location + "\\"))
+                        {
+                            System.IO.Directory.CreateDirectory(this.tbFilePath.Text + "\\" + location + "\\");
+                        }
+
+                        string filePath = this.tbFilePath.Text + "\\" + location + "\\" + caseGroup.Key.ToString() + ext;
+                        int count = 1;
+                        while (System.IO.File.Exists(filePath))
+                        {
+                            filePath = this.tbFilePath.Text + "\\" + location + "\\" + caseGroup.Key.ToString() + "_" + count + ext;
+                            count++;
+                        }
+
+                        workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false, Type.Missing, Type.Missing, Type.Missing);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+                throw;
+            }
+            finally
+            {
+                if (app != null)
+                {
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sheet"></param>
         /// <param name="caseGroup"></param>
         private void FillLegarTotalSheet(Worksheet sheet, IGrouping<Client, Case> caseGroup)
         {
-            sheet.Cells[9, "A"] = "ä¸šåŠ¡ç¼–å·";
-            sheet.Cells[9, "B"] = "å‘ç¥¨å·";
-            sheet.Cells[9, "C"] = "è½¬è®©é‡‘é¢";
-            sheet.Cells[9, "D"] = "å‘ç¥¨æ—¥";
-            sheet.Cells[9, "E"] = "åˆ°æœŸæ—¥";
-            sheet.Cells[9, "F"] = "è½¬è®©æ—¥";
-            sheet.Cells[9, "G"] = "èèµ„é‡‘é¢";
-            sheet.Cells[9, "H"] = "èèµ„æ—¥";
-            sheet.Cells[9, "I"] = "èèµ„åˆ°æœŸæ—¥";
-            sheet.Cells[9, "J"] = "ä»˜æ¬¾é‡‘é¢";
-            sheet.Cells[9, "K"] = "è´¦æ¬¾ä½™é¢";
-            sheet.Cells[9, "L"] = "ä»˜æ¬¾æ—¥";
-            sheet.Cells[9, "M"] = "è¿˜æ¬¾é‡‘é¢";
-            sheet.Cells[9, "N"] = "èèµ„ä½™é¢";
-            sheet.Cells[9, "O"] = "è¿˜æ¬¾æ—¥";
-            sheet.Cells[9, "P"] = "æ‰‹ç»­è´¹";
-            sheet.Cells[9, "Q"] = "å¤‡æ³¨";
+            sheet.Cells[9, "A"] = "ÒµÎñ±àºÅ";
+            sheet.Cells[9, "B"] = "·¢Æ±ºÅ";
+            sheet.Cells[9, "C"] = "×ªÈÃ½ğ¶î";
+            sheet.Cells[9, "D"] = "·¢Æ±ÈÕ";
+            sheet.Cells[9, "E"] = "µ½ÆÚÈÕ";
+            sheet.Cells[9, "F"] = "×ªÈÃÈÕ";
+            sheet.Cells[9, "G"] = "ÈÚ×Ê½ğ¶î";
+            sheet.Cells[9, "H"] = "ÈÚ×ÊÈÕ";
+            sheet.Cells[9, "I"] = "ÈÚ×Êµ½ÆÚÈÕ";
+            sheet.Cells[9, "J"] = "¸¶¿î½ğ¶î";
+            sheet.Cells[9, "K"] = "ÕË¿îÓà¶î";
+            sheet.Cells[9, "L"] = "¸¶¿îÈÕ";
+            sheet.Cells[9, "M"] = "»¹¿î½ğ¶î";
+            sheet.Cells[9, "N"] = "ÈÚ×ÊÓà¶î";
+            sheet.Cells[9, "O"] = "»¹¿îÈÕ";
+            sheet.Cells[9, "P"] = "ÊÖĞø·Ñ";
+            sheet.Cells[9, "Q"] = "±¸×¢";
 
             Client client = caseGroup.Key;
             string transactionType = caseGroup.First().TransactionType;
@@ -2631,9 +2940,9 @@ namespace CMBC.EasyFactor.Utils
 
             sheet.get_Range("A1", "Q1").MergeCells = true;
             sheet.get_Range("A1", "A1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-            sheet.Cells[1, "A"] = "é”€å”®åˆ†æˆ·è´¦å°è´¦";
-            sheet.Cells[2, "P"] = String.Format("å•ä½ï¼š{0}", invoiceCurrency);
-            sheet.Cells[3, "A"] = "åˆ†è¡Œ/åˆ†éƒ¨";
+            sheet.Cells[1, "A"] = "ÏúÊÛ·Ö»§ÕËÌ¨ÕË";
+            sheet.Cells[2, "P"] = String.Format("µ¥Î»£º{0}", invoiceCurrency);
+            sheet.Cells[3, "A"] = "·ÖĞĞ/·Ö²¿";
             sheet.Cells[3, "B"] = caseGroup.First().OwnerDepartment.DepartmentName;
 
             sheet.Cells[4, "A"] = "Seller Name";
@@ -2648,15 +2957,15 @@ namespace CMBC.EasyFactor.Utils
             sheet.Cells[6, "B"] = factorList.Count == 1 ? factorList[0] : String.Join(";", factorList.ToArray());
 
             sheet.get_Range("B7", "I7").MergeCells = true;
-            sheet.Cells[7, "A"] = "åæŸ¥æ„è§ä¹¦ç¼–å·";
+            sheet.Cells[7, "A"] = "Ğ­²éÒâ¼ûÊé±àºÅ";
             sheet.Cells[7, "B"] = clientReviewList.Count == 1 ? clientReviewList[0] : String.Join(";", clientReviewList.ToArray());
 
             sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
-            sheet.Cells[4, "L"] = "ä¿¡ç”¨é£é™©æ‹…ä¿";
-            sheet.Cells[5, "L"] = "æ ¸å‡†é¢åº¦";
-            sheet.Cells[6, "L"] = "åˆ°æœŸæ—¥";
-            sheet.Cells[7, "L"] = "æ€»å‰©ä½™é¢åº¦";
-            if (transactionType == "è¿›å£ä¿ç†")
+            sheet.Cells[4, "L"] = "ĞÅÓÃ·çÏÕµ£±£";
+            sheet.Cells[5, "L"] = "ºË×¼¶î¶È";
+            sheet.Cells[6, "L"] = "µ½ÆÚÈÕ";
+            sheet.Cells[7, "L"] = "×ÜÊ£Óà¶î¶È";
+            if (transactionType == "½ø¿Ú±£Àí")
             {
                 ClientCreditLine creditLine = client.AssignCreditLine;
                 if (creditLine != null)
@@ -2671,15 +2980,15 @@ namespace CMBC.EasyFactor.Utils
             }
 
 
-            sheet.Cells[8, "L"] = "æ€»è´¦æ¬¾ä½™é¢";
+            sheet.Cells[8, "L"] = "×ÜÕË¿îÓà¶î";
             sheet.Cells[8, "M"] = totalAssignOutstanding;
             sheet.get_Range(sheet.Cells[8, "M"], sheet.Cells[8, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoiceCurrency);
 
             sheet.get_Range(sheet.Cells[4, "O"], sheet.Cells[4, "P"]).MergeCells = true;
-            sheet.Cells[4, "O"] = "èèµ„é¢åº¦";
-            sheet.Cells[5, "O"] = "æ ¸å‡†æ€»é¢åº¦";
-            sheet.Cells[6, "O"] = "åˆ°æœŸæ—¥";
-            sheet.Cells[7, "O"] = "æ€»å‰©ä½™é¢åº¦";
+            sheet.Cells[4, "O"] = "ÈÚ×Ê¶î¶È";
+            sheet.Cells[5, "O"] = "ºË×¼×Ü¶î¶È";
+            sheet.Cells[6, "O"] = "µ½ÆÚÈÕ";
+            sheet.Cells[7, "O"] = "×ÜÊ£Óà¶î¶È";
 
             {
                 ClientCreditLine creditLine = client.FinanceCreditLine;
@@ -2694,7 +3003,7 @@ namespace CMBC.EasyFactor.Utils
                 }
             }
 
-            sheet.Cells[8, "O"] = "æ€»èèµ„ä½™é¢";
+            sheet.Cells[8, "O"] = "×ÜÈÚ×ÊÓà¶î";
             sheet.Cells[8, "P"] = totalFinanceOutstanding;
             sheet.get_Range(sheet.Cells[8, "P"], sheet.Cells[8, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoiceCurrency);
 
@@ -2708,317 +3017,8 @@ namespace CMBC.EasyFactor.Utils
                 range.EntireColumn.AutoFit();
             }
 
-            sheet.UsedRange.Font.Name = "ä»¿å®‹";
+            sheet.UsedRange.Font.Name = "·ÂËÎ";
 
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="caseGroup"></param>
-        private void ExportReportLegarImpl(IGrouping<Client, Case> caseGroup)
-        {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            Workbook workbook = null;
-            try
-            {
-                workbook = app.Workbooks.Add(true);
-                Worksheet totalSheet = (Worksheet)workbook.Sheets[1];
-                totalSheet.Name = "æ€»å°å¸";
-
-                Client client = caseGroup.Key;
-                foreach (Case selectedCase in caseGroup)
-                {
-                    CDA cda = selectedCase.ActiveCDA;
-
-                    if (cda == null)
-                    {
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
-
-                        MessageBoxEx.Show("æ¡ˆä»¶æ²¡æœ‰æœ‰æ•ˆçš„é¢åº¦é€šçŸ¥ä¹¦ï¼Œæ¡ˆä»¶ç¼–å·ï¼š" + selectedCase.CaseCode);
-
-                        return;
-                    }
-
-                    Worksheet sheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-
-                    string name = selectedCase.TargetClient.ToString();
-                    if (name.Length > 15)
-                    {
-                        name = name.Substring(0, 15);
-                    }
-
-                    sheet.Name = String.Format("{0}-{1}", selectedCase.CaseCode, name);
-
-                    sheet.get_Range("A1", "Q1").MergeCells = true;
-                    sheet.get_Range("A1", "A1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                    sheet.Cells[1, "A"] = "é”€å”®åˆ†æˆ·è´¦å°è´¦";
-                    sheet.Cells[2, "P"] = String.Format("å•ä½ï¼š{0}", selectedCase.InvoiceCurrency);
-                    sheet.Cells[3, "A"] = "åˆ†è¡Œ/åˆ†éƒ¨";
-                    sheet.Cells[3, "B"] = selectedCase.OwnerDepartment.DepartmentName;
-
-                    sheet.Cells[4, "A"] = "Seller Name";
-                    sheet.get_Range("B4", "F4").MergeCells = true;
-                    sheet.Cells[4, "B"] = selectedCase.SellerClient.ToString();
-                    sheet.Cells[5, "A"] = "Buyer Name";
-                    sheet.get_Range("B5", "F5").MergeCells = true;
-                    sheet.Cells[5, "B"] = selectedCase.BuyerClient.ToString();
-
-                    sheet.get_Range("B6", "F6").MergeCells = true;
-                    if (selectedCase.TransactionType == "è¿›å£ä¿ç†")
-                    {
-                        sheet.Cells[6, "A"] = "Export Factor";
-                        sheet.Cells[6, "B"] = selectedCase.SellerFactor.ToString();
-                    }
-                    else
-                    {
-                        sheet.Cells[6, "A"] = "Import Factor";
-                        sheet.Cells[6, "B"] = selectedCase.BuyerFactor.ToString();
-                    }
-
-                    sheet.get_Range("B7", "F7").MergeCells = true;
-                    sheet.Cells[7, "A"] = "åæŸ¥æ„è§ä¹¦ç¼–å·";
-                    List<ClientReview> reviewList = selectedCase.ClientReviews;
-                    if (reviewList != null)
-                    {
-                        String reviews = string.Empty;
-                        foreach (ClientReview review in reviewList)
-                        {
-                            reviews += review.ReviewNo + ";";
-                        }
-
-                        sheet.Cells[7, "B"] = reviews;
-                    }
-
-                    sheet.Cells[4, "G"] = "æ¡ˆä»¶ç¼–å·";
-                    sheet.get_Range(sheet.Cells[4, "H"], sheet.Cells[4, "I"]).MergeCells = true;
-                    sheet.Cells[4, "H"] = selectedCase.CaseCode;
-
-                    sheet.Cells[5, "G"] = "æ€»æ‰‹ç»­è´¹ç‡";
-                    sheet.get_Range(sheet.Cells[5, "H"], sheet.Cells[5, "I"]).MergeCells = true;
-                    if (cda != null)
-                    {
-                        sheet.Cells[5, "H"] = String.Format("{0:P4}", cda.Price);
-                    }
-
-                    sheet.get_Range(sheet.Cells[6, "H"], sheet.Cells[6, "I"]).MergeCells = true;
-                    sheet.Cells[6, "G"] = "æ”¶è´¹æ–¹å¼";
-                    if (cda != null)
-                    {
-                        sheet.Cells[6, "H"] = cda.CommissionType;
-                    }
-
-
-                    sheet.Cells[7, "G"] = "å•æ®å¤„ç†è´¹/ç¬”";
-                    sheet.get_Range(sheet.Cells[7, "H"], sheet.Cells[7, "I"]).MergeCells = true;
-                    sheet.Cells[7, "H"] = String.Format("{0} {1:N2}", cda.HandFeeCurr, cda.HandFee);
-
-                    sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
-                    sheet.Cells[4, "L"] = "ä¿¡ç”¨é£é™©æ‹…ä¿";
-                    sheet.Cells[5, "L"] = "æ ¸å‡†é¢åº¦";
-                    sheet.Cells[5, "M"] = cda.CreditCover;
-                    sheet.get_Range(sheet.Cells[5, "M"], sheet.Cells[5, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.CreditCoverCurr);
-                    sheet.Cells[6, "L"] = "åˆ°æœŸæ—¥";
-                    sheet.Cells[6, "M"] = cda.CreditCoverPeriodEnd;
-                    sheet.get_Range(sheet.Cells[6, "M"], sheet.Cells[6, "M"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.Cells[7, "L"] = "å‰©ä½™é¢åº¦";
-                    sheet.Cells[7, "M"] = cda.CreditCoverOutstanding;
-                    sheet.get_Range(sheet.Cells[7, "M"], sheet.Cells[7, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.CreditCoverCurr);
-                    sheet.Cells[8, "L"] = "åº”æ”¶å¸æ¬¾ä½™é¢";
-                    sheet.Cells[8, "M"] = selectedCase.AssignOutstanding;
-                    sheet.get_Range(sheet.Cells[8, "M"], sheet.Cells[8, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
-
-                    sheet.get_Range(sheet.Cells[4, "O"], sheet.Cells[4, "P"]).MergeCells = true;
-                    sheet.Cells[4, "O"] = "èèµ„é¢åº¦";
-                    sheet.Cells[5, "O"] = "æ ¸å‡†é¢åº¦";
-                    sheet.Cells[5, "P"] = cda.FinanceLine;
-                    sheet.get_Range(sheet.Cells[5, "P"], sheet.Cells[5, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.FinanceLineCurr);
-                    sheet.Cells[6, "O"] = "åˆ°æœŸæ—¥";
-                    sheet.Cells[6, "P"] = cda.FinanceLinePeriodEnd;
-                    sheet.get_Range(sheet.Cells[6, "P"], sheet.Cells[6, "P"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.Cells[7, "O"] = "å‰©ä½™é¢åº¦";
-                    sheet.Cells[7, "P"] = cda.FinanceLineOutstanding;
-                    sheet.get_Range(sheet.Cells[7, "P"], sheet.Cells[7, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.FinanceLineCurr);
-                    sheet.Cells[8, "O"] = "èèµ„ä½™é¢";
-                    sheet.Cells[8, "P"] = selectedCase.FinanceOutstanding;
-                    sheet.get_Range(sheet.Cells[8, "P"], sheet.Cells[8, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
-
-                    sheet.Cells[9, "A"] = "ä¸šåŠ¡ç¼–å·";
-                    sheet.Cells[9, "B"] = "å‘ç¥¨å·";
-                    sheet.Cells[9, "C"] = "è½¬è®©é‡‘é¢";
-                    sheet.Cells[9, "D"] = "å‘ç¥¨æ—¥";
-                    sheet.Cells[9, "E"] = "åˆ°æœŸæ—¥";
-                    sheet.Cells[9, "F"] = "è½¬è®©æ—¥";
-                    sheet.Cells[9, "G"] = "èèµ„é‡‘é¢";
-                    sheet.Cells[9, "H"] = "èèµ„æ—¥";
-                    sheet.Cells[9, "I"] = "èèµ„åˆ°æœŸæ—¥";
-                    sheet.Cells[9, "J"] = "ä»˜æ¬¾é‡‘é¢";
-                    sheet.Cells[9, "K"] = "è´¦æ¬¾ä½™é¢";
-                    sheet.Cells[9, "L"] = "ä»˜æ¬¾æ—¥";
-                    sheet.Cells[9, "M"] = "è¿˜æ¬¾é‡‘é¢";
-                    sheet.Cells[9, "N"] = "èèµ„ä½™é¢";
-                    sheet.Cells[9, "O"] = "è¿˜æ¬¾æ—¥";
-                    sheet.Cells[9, "P"] = "æ‰‹ç»­è´¹";
-                    sheet.Cells[9, "Q"] = "å¤‡æ³¨";
-
-                    sheet.get_Range("A4", "I7").Borders.LineStyle = 1;
-                    sheet.get_Range("L4", "M8").Borders.LineStyle = 1;
-                    sheet.get_Range("O4", "P8").Borders.LineStyle = 1;
-
-                    int row = 10;
-                    foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
-                    {
-                        foreach (Invoice invoice in batch.Invoices)
-                        {
-                            int step = 1;
-                            sheet.Cells[row, "A"] = invoice.InvoiceAssignBatch.AssignBatchNo;
-                            sheet.Cells[row, "B"] = "'" + invoice.InvoiceNo;
-                            sheet.Cells[row, "C"] = invoice.AssignAmount;
-                            sheet.Cells[row, "D"] = invoice.InvoiceDate;
-                            sheet.Cells[row, "E"] = invoice.DueDate;
-                            sheet.Cells[row, "F"] = batch.AssignDate;
-
-                            int recordStep = 0;
-                            for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
-                            {
-                                InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
-                                sheet.Cells[row + recordStep, "G"] = financeLog.FinanceAmount;
-                                sheet.Cells[row + recordStep, "H"] = financeLog.FinanceDate;
-                                sheet.Cells[row + recordStep, "I"] = financeLog.FinanceDueDate;
-                                sheet.Cells[row + recordStep, "N"] = financeLog.FinanceOutstanding;
-
-                                for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
-                                {
-                                    InvoiceRefundLog refundLog = financeLog.InvoiceRefundLogs[j];
-                                    sheet.Cells[row + recordStep + j, "M"] = refundLog.RefundAmount;
-                                    sheet.Cells[row + recordStep + j, "O"] = refundLog.RefundDate;
-                                }
-
-                                recordStep += financeLog.InvoiceRefundLogs.Count;
-                            }
-
-                            step = step < recordStep ? recordStep : step;
-
-                            for (int i = 0; i < invoice.InvoicePaymentLogs.Count; i++)
-                            {
-                                InvoicePaymentLog paymentLog = invoice.InvoicePaymentLogs[i];
-                                sheet.Cells[row + i, "J"] = paymentLog.PaymentAmount;
-                                sheet.Cells[row + i, "L"] = paymentLog.PaymentDate;
-                            }
-
-                            step = step < invoice.InvoicePaymentLogs.Count ? invoice.InvoicePaymentLogs.Count : step;
-
-                            sheet.Cells[row, "K"] = invoice.AssignOutstanding;
-
-                            sheet.Cells[row, "P"] = invoice.Commission;
-                            sheet.Cells[row, "Q"] = invoice.Comment;
-
-                            row += step;
-                        }
-                    }
-
-                    string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
-                    sheet.get_Range(sheet.Cells[9, "A"], sheet.Cells[row - 1, "Q"]).Borders.LineStyle = 1;
-                    sheet.get_Range(sheet.Cells[10, "C"], sheet.Cells[row - 1, "C"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "D"], sheet.Cells[row - 1, "D"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "E"], sheet.Cells[row - 1, "E"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "F"], sheet.Cells[row - 1, "F"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "G"], sheet.Cells[row - 1, "G"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "H"], sheet.Cells[row - 1, "H"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]).NumberFormatLocal = currencyFormat;
-
-                    foreach (Range range in sheet.UsedRange.Rows)
-                    {
-                        range.EntireRow.AutoFit();
-                    }
-
-                    foreach (Range range in sheet.UsedRange.Columns)
-                    {
-                        range.EntireColumn.AutoFit();
-                    }
-
-                    sheet.UsedRange.Font.Name = "ä»¿å®‹";
-                }
-
-                this.FillLegarTotalSheet(totalSheet, caseGroup);
-                totalSheet.Move(workbook.Sheets[1], Type.Missing);
-
-                if (app != null)
-                {
-                    app.DisplayAlerts = false;
-                    app.AlertBeforeOverwriting = false;
-                    if (workbook != null)
-                    {
-                        string ext = ".xls";
-
-                        string location = caseGroup.First().OwnerDepartment.Location.LocationName;
-                        if (!System.IO.Directory.Exists(this.tbFilePath.Text + "\\" + location + "\\"))
-                        {
-                            System.IO.Directory.CreateDirectory(this.tbFilePath.Text + "\\" + location + "\\");
-                        }
-
-                        string filePath = this.tbFilePath.Text + "\\" + location + "\\" + caseGroup.Key.ToString() + ext;
-                        int count = 1;
-                        while (System.IO.File.Exists(filePath))
-                        {
-                            filePath = this.tbFilePath.Text + "\\" + location + "\\" + caseGroup.Key.ToString() + "_" + count + ext;
-                            count++;
-                        }
-
-                        workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false, Type.Missing, Type.Missing, Type.Missing);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                if (app != null)
-                {
-                    foreach (Workbook wb in app.Workbooks)
-                    {
-                        wb.Close(false, Type.Missing, Type.Missing);
-                    }
-
-                    app.Workbooks.Close();
-                    app.Quit();
-                    Marshal.ReleaseComObject(app);
-                    app = null;
-                }
-
-                throw;
-            }
-            finally
-            {
-                if (app != null)
-                {
-                    app.Quit();
-                    Marshal.ReleaseComObject(app);
-                    app = null;
-                }
-            }
         }
 
         /// <summary>
@@ -3035,6 +3035,6 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

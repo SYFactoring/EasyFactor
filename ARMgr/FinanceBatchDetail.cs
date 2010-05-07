@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="FinanceBatchDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -7,22 +7,23 @@
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
+    using System.Data.Linq;
+    using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
-    using System.Linq;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class FinanceBatchDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #regionÂ FieldsÂ (3)
+        #region?Fields?(3)?
 
         /// <summary>
         /// 
@@ -37,9 +38,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        #endregionÂ Fields
+        #endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -57,9 +58,9 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-        #endregionÂ Enums
+        #endregion?Enums?
 
-        #regionÂ ConstructorsÂ (1)
+        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the FinanceBatchDetail class
@@ -91,11 +92,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.UpdateBatchControlStatus();
         }
 
-        #endregionÂ Constructors
+        #endregion?Constructors?
 
-        #regionÂ MethodsÂ (7)
+        #region?Methods?(8)?
 
-        //Â PrivateÂ MethodsÂ (7)Â 
+        //?Private?Methods?(8)?
 
         /// <summary>
         /// 
@@ -117,7 +118,7 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceFinanceLog log = (InvoiceFinanceLog)this.bs.List[this.dgvFinanceLogs.SelectedRows[0].Index];
             if (log.InvoiceRefundLogs.Count > 0)
             {
-                DialogResult dr = MessageBoxEx.Show("æ­¤ç¬”èèµ„å·²è¿˜æ¬¾ï¼Œæ˜¯å¦ç¡®è®¤åˆ é™¤æ­¤ç¬”èèµ„ä»¥åŠå…³è”è¿˜æ¬¾è®°å½•", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBoxEx.Show("´Ë±ÊÈÚ×ÊÒÑ»¹¿î£¬ÊÇ·ñÈ·ÈÏÉ¾³ı´Ë±ÊÈÚ×ÊÒÔ¼°¹ØÁª»¹¿î¼ÇÂ¼", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     return;
@@ -146,7 +147,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("åˆ é™¤å¤±è´¥," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("É¾³ıÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -161,8 +162,26 @@ namespace CMBC.EasyFactor.ARMgr
         private void DetailCase(object sender, EventArgs e)
         {
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
-            detail.Show();
+            if (batch.Case != null)
+            {
+                CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+                detail.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailClient(object sender, EventArgs e)
+        {
+            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            if (batch.Client != null)
+            {
+                ClientDetail detail = new ClientDetail(batch.Client, ClientDetail.OpClientType.DETAIL_CLIENT);
+                detail.Show();
+            }
         }
 
         /// <summary>
@@ -226,7 +245,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (isUpdateOK)
             {
-                MessageBoxEx.Show("æ•°æ®æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İ¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -244,7 +263,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
             FactorMgr factorMgr = new FactorMgr();
-            QueryForm queryForm = new QueryForm(factorMgr, "é€‰æ‹©ä»£ä»˜è¡Œ");
+            QueryForm queryForm = new QueryForm(factorMgr, "Ñ¡Ôñ´ú¸¶ĞĞ");
             factorMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
 
@@ -304,6 +323,6 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(this.diInputDate, false);
         }
 
-        #endregionÂ Methods
+        #endregion?Methods?
     }
 }

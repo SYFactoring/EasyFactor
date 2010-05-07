@@ -1,4 +1,9 @@
-ï»¿
+//-----------------------------------------------------------------------
+// <copyright file="WorkAlert.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
@@ -9,16 +14,15 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
-    using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class WorkAlert : UserControl
     {
-        #regionÂ ConstructorsÂ (1)
+        #region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -30,11 +34,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.CheckUpdates();
         }
 
-        #endregionÂ Constructors
+        #endregion?Constructors?
 
-        #regionÂ MethodsÂ (31)
+        #region?Methods?(31)?
 
-        //Â PrivateÂ MethodsÂ (31)Â 
+        //?Private?Methods?(31)?
 
         /// <summary>
         /// 
@@ -42,37 +46,37 @@ namespace CMBC.EasyFactor.ARMgr
         private void AddSuperToolTip()
         {
             eTooltipColor color = eTooltipColor.Apple;
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckCDA, new SuperTooltipInfo("éœ€è¦æ”¾è¡Œçš„é¢åº¦é€šçŸ¥ä¹¦", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckAssign, new SuperTooltipInfo("éœ€è¦æ”¾è¡Œçš„è½¬è®©æ‰¹æ¬¡", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckFinance, new SuperTooltipInfo("éœ€è¦æ”¾è¡Œçš„èèµ„æ‰¹æ¬¡", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckPayment, new SuperTooltipInfo("éœ€è¦æ”¾è¡Œçš„ä»˜æ¬¾æ‰¹æ¬¡", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckRefund, new SuperTooltipInfo("éœ€è¦æ”¾è¡Œçš„è¿˜æ¬¾æ‰¹æ¬¡", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckCDA, new SuperTooltipInfo("ĞèÒª·ÅĞĞµÄ¶î¶ÈÍ¨ÖªÊé", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckAssign, new SuperTooltipInfo("ĞèÒª·ÅĞĞµÄ×ªÈÃÅú´Î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckFinance, new SuperTooltipInfo("ĞèÒª·ÅĞĞµÄÈÚ×ÊÅú´Î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckPayment, new SuperTooltipInfo("ĞèÒª·ÅĞĞµÄ¸¶¿îÅú´Î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnNeedCheckRefund, new SuperTooltipInfo("ĞèÒª·ÅĞĞµÄ»¹¿îÅú´Î", "", "", null, null, color));
 
-            this.superTooltip.SetSuperTooltip(this.btnWaitCheckCDA, new SuperTooltipInfo("ç­‰å¾…æ”¾è¡Œçš„é¢åº¦é€šçŸ¥ä¹¦", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnWaitCheckAssign, new SuperTooltipInfo("ç­‰å¾…æ”¾è¡Œçš„è½¬è®©æ‰¹æ¬¡", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnWaitCheckFinance, new SuperTooltipInfo("ç­‰å¾…æ”¾è¡Œçš„èèµ„æ‰¹æ¬¡", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnWaitCheckPayment, new SuperTooltipInfo("ç­‰å¾…æ”¾è¡Œçš„ä»˜æ¬¾æ‰¹æ¬¡", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnWaitCheckRefund, new SuperTooltipInfo("ç­‰å¾…æ”¾è¡Œçš„è¿˜æ¬¾æ‰¹æ¬¡", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnWaitCheckCDA, new SuperTooltipInfo("µÈ´ı·ÅĞĞµÄ¶î¶ÈÍ¨ÖªÊé", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnWaitCheckAssign, new SuperTooltipInfo("µÈ´ı·ÅĞĞµÄ×ªÈÃÅú´Î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnWaitCheckFinance, new SuperTooltipInfo("µÈ´ı·ÅĞĞµÄÈÚ×ÊÅú´Î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnWaitCheckPayment, new SuperTooltipInfo("µÈ´ı·ÅĞĞµÄ¸¶¿îÅú´Î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnWaitCheckRefund, new SuperTooltipInfo("µÈ´ı·ÅĞĞµÄ»¹¿îÅú´Î", "", "", null, null, color));
 
-            this.superTooltip.SetSuperTooltip(this.btnRejectCheckCDA, new SuperTooltipInfo("æ‹’ç»æ”¾è¡Œçš„é¢åº¦é€šçŸ¥ä¹¦", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnRejectCheckAssign, new SuperTooltipInfo("æ‹’ç»æ”¾è¡Œçš„è½¬è®©æ‰¹æ¬¡", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnRejectCheckFinance, new SuperTooltipInfo("æ‹’ç»æ”¾è¡Œçš„èèµ„æ‰¹æ¬¡", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnRejectCheckPayment, new SuperTooltipInfo("æ‹’ç»æ”¾è¡Œçš„ä»˜æ¬¾æ‰¹æ¬¡", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnRejectCheckRefund, new SuperTooltipInfo("æ‹’ç»æ”¾è¡Œçš„è¿˜æ¬¾æ‰¹æ¬¡", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnRejectCheckCDA, new SuperTooltipInfo("¾Ü¾ø·ÅĞĞµÄ¶î¶ÈÍ¨ÖªÊé", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnRejectCheckAssign, new SuperTooltipInfo("¾Ü¾ø·ÅĞĞµÄ×ªÈÃÅú´Î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnRejectCheckFinance, new SuperTooltipInfo("¾Ü¾ø·ÅĞĞµÄÈÚ×ÊÅú´Î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnRejectCheckPayment, new SuperTooltipInfo("¾Ü¾ø·ÅĞĞµÄ¸¶¿îÅú´Î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnRejectCheckRefund, new SuperTooltipInfo("¾Ü¾ø·ÅĞĞµÄ»¹¿îÅú´Î", "", "", null, null, color));
 
-            this.superTooltip.SetSuperTooltip(this.btnDueAssign7, new SuperTooltipInfo("7æ—¥å†…åˆ°æœŸçš„åº”æ”¶è´¦æ¬¾", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnDueAssign0, new SuperTooltipInfo("ä»Šæ—¥åˆ°æœŸçš„åº”æ”¶è´¦æ¬¾", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnDueAssign, new SuperTooltipInfo("å·²ç»é€¾æœŸçš„åº”æ”¶è´¦æ¬¾", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnInvoiceDispute, new SuperTooltipInfo("å•†çº è´¦æ¬¾", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueAssign7, new SuperTooltipInfo("7ÈÕÄÚµ½ÆÚµÄÓ¦ÊÕÕË¿î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueAssign0, new SuperTooltipInfo("½ñÈÕµ½ÆÚµÄÓ¦ÊÕÕË¿î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueAssign, new SuperTooltipInfo("ÒÑ¾­ÓâÆÚµÄÓ¦ÊÕÕË¿î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnInvoiceDispute, new SuperTooltipInfo("ÉÌ¾ÀÕË¿î", "", "", null, null, color));
 
-            this.superTooltip.SetSuperTooltip(this.btnDueFinance7, new SuperTooltipInfo("7æ—¥å†…åˆ°æœŸçš„åº”æ”¶è´¦æ¬¾", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnDueFinance0, new SuperTooltipInfo("ä»Šæ—¥åˆ°æœŸçš„åº”æ”¶è´¦æ¬¾", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnDueFinance, new SuperTooltipInfo("å·²ç»é€¾æœŸçš„åº”æ”¶è´¦æ¬¾", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueFinance7, new SuperTooltipInfo("7ÈÕÄÚµ½ÆÚµÄÓ¦ÊÕÕË¿î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueFinance0, new SuperTooltipInfo("½ñÈÕµ½ÆÚµÄÓ¦ÊÕÕË¿î", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueFinance, new SuperTooltipInfo("ÒÑ¾­ÓâÆÚµÄÓ¦ÊÕÕË¿î", "", "", null, null, color));
 
-            this.superTooltip.SetSuperTooltip(this.btnDueClientCreditLine, new SuperTooltipInfo("å®¢æˆ·é¢åº¦åˆ°æœŸ", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnDueFactorCreditLine, new SuperTooltipInfo("ä¿ç†å•†é¢åº¦åˆ°æœŸ", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnDueCDA, new SuperTooltipInfo("é¢åº¦é€šçŸ¥ä¹¦åˆ°æœŸ", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnDueContract, new SuperTooltipInfo("ä¿ç†åˆåŒåˆ°æœŸ", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueClientCreditLine, new SuperTooltipInfo("¿Í»§¶î¶Èµ½ÆÚ", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueFactorCreditLine, new SuperTooltipInfo("±£ÀíÉÌ¶î¶Èµ½ÆÚ", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueCDA, new SuperTooltipInfo("¶î¶ÈÍ¨ÖªÊéµ½ÆÚ", "", "", null, null, color));
+            this.superTooltip.SetSuperTooltip(this.btnDueContract, new SuperTooltipInfo("±£ÀíºÏÍ¬µ½ÆÚ", "", "", null, null, color));
         }
 
         /// <summary>
@@ -203,7 +207,7 @@ namespace CMBC.EasyFactor.ARMgr
             BackgroundWorker worker = sender as BackgroundWorker;
             ButtonX button = (ButtonX)e.UserState;
             SuperTooltipInfo tipInfo = this.superTooltip.GetSuperTooltip(button);
-            tipInfo.BodyText = String.Format("æœ‰{0}æ¡è®°å½•éœ€è¦å¤„ç†", e.ProgressPercentage);
+            tipInfo.BodyText = String.Format("ÓĞ{0}Ìõ¼ÇÂ¼ĞèÒª´¦Àí", e.ProgressPercentage);
             button.Text = String.Format("{0} ({1})", button.Text, e.ProgressPercentage);
         }
 
@@ -511,6 +515,6 @@ namespace CMBC.EasyFactor.ARMgr
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 
-        #endregionÂ Methods
+        #endregion?Methods?
     }
 }

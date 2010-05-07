@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoiceFinanceBatch.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceFinanceBatch
     {
-        #regionÂ FieldsÂ (6)
+		#region?Fields?(6)?
 
         private double? _assignAmount;
         private double? _commissionAmount;
@@ -25,9 +25,9 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _marginIncome;
         private double? _netInterestIncome;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ PropertiesÂ (14)
+		#region?Properties?(14)?
 
         /// <summary>
         /// Gets
@@ -139,7 +139,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// æ¯›åˆ©æ¯æ”¶å…¥
+        /// Ã«ÀûÏ¢ÊÕÈë
         /// </summary>
         public double GrossInterestIncome
         {
@@ -185,7 +185,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// ä»£ä»˜åˆ©å·®æ”¶å…¥
+        /// ´ú¸¶Àû²îÊÕÈë
         /// </summary>
         public double? MarginIncome
         {
@@ -201,7 +201,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// å‡€åˆ©æ¯æ”¶å…¥
+        /// ¾»ÀûÏ¢ÊÕÈë
         /// </summary>
         public double NetInterestIncome
         {
@@ -226,11 +226,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? PoolFinanceOutstanding
+        public double PoolFinanceOutstanding
         {
             get
             {
-                return this.FinanceAmount - PoolRefundAmount;
+                return this.FinanceAmount - PoolRefundAmount.GetValueOrDefault();
             }
         }
 
@@ -285,11 +285,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (4)
+		#region?Methods?(4)?
 
-        //Â PublicÂ MethodsÂ (3)Â 
+		//?Public?Methods?(3)?
 
         /// <summary>
         /// 
@@ -351,7 +351,7 @@ namespace CMBC.EasyFactor.DB.dbml
             string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
             return financeNo;
         }
-        //Â PrivateÂ MethodsÂ (1)Â 
+		//?Private?Methods?(1)?
 
         /// <summary>
         /// 
@@ -371,6 +371,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return invoices;
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

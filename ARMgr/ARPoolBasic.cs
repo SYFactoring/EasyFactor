@@ -1,4 +1,4 @@
-锘縩amespace CMBC.EasyFactor.ARMgr
+namespace CMBC.EasyFactor.ARMgr
 {
     using System;
     using System.Windows.Forms;
@@ -10,27 +10,32 @@
     {
 
         /// <summary>
-        /// 铻嶈祫
+        /// 融资
         /// </summary>
         FINANCE,
 
         /// <summary>
-        /// 鍗栨柟杩樻
+        /// 卖方还款
         /// </summary>
         REFUND
     }
 
     public partial class ARPoolBasic : UserControl
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        private Client _client;
+        #region?Fields?(2)?
 
         /// <summary>
         /// 
         /// </summary>
+        private Client _client;
+        /// <summary>
+        /// 
+        /// </summary>
         private OpPoolARType opARType;
+
+        #endregion?Fields?
+
+        #region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -59,6 +64,10 @@
             this.panelPool.Controls.Add(this.PoolControl);
         }
 
+        #endregion?Constructors?
+
+        #region?Properties?(2)?
+
         /// <summary>
         /// Gets or sets
         /// </summary>
@@ -84,6 +93,12 @@
             set;
         }
 
+        #endregion?Properties?
+
+        #region?Methods?(4)?
+
+        //?Public?Methods?(1)?
+
         /// <summary>
         /// 
         /// </summary>
@@ -100,6 +115,7 @@
             this.tbCashOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolCashOutstanding);
             this.tbFinanceOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolFinanceOutstanding);
         }
+        //?Private?Methods?(3)?
 
         /// <summary>
         /// 
@@ -144,7 +160,7 @@
         private void SelectClient(object sender, EventArgs e)
         {
             ClientMgr clientMgr = new ClientMgr();
-            QueryForm queryForm = new QueryForm(clientMgr, "閫夋嫨瀹㈡埛");
+            QueryForm queryForm = new QueryForm(clientMgr, "选择客户");
             clientMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
             Client curClient = clientMgr.Selected;
@@ -153,5 +169,7 @@
                 this.Client = curClient;
             }
         }
+
+        #endregion?Methods?
     }
 }

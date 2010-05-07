@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="UserDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,16 +11,15 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// User Detail User Interface
     /// </summary>
     public partial class UserDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #regionÂ FieldsÂ (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -31,9 +30,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private OpUserType opUserType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// Operation Type
@@ -56,11 +55,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             DETAIL_USER
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (1)
+		#region?Constructors?(1)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the UserDetailUI class
         /// </summary>
         /// <param name="user">selected user</param>
@@ -101,11 +100,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.UpdateUserControlStatus();
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ MethodsÂ (5)
+		#region?Methods?(5)?
 
-        //Â PrivateÂ MethodsÂ (5)Â 
+		//?Private?Methods?(5)?
 
         /// <summary>
         /// 
@@ -117,11 +116,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             User user = (User)userBindingSource.DataSource;
             if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
             {
-                MessageBoxEx.Show("å¯¹ä¸èµ·ï¼Œæ‚¨æ²¡æœ‰æ‰§è¡Œè¯¥æ“ä½œçš„æƒé™ã€‚", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¶Ô²»Æğ£¬ÄúÃ»ÓĞÖ´ĞĞ¸Ã²Ù×÷µÄÈ¨ÏŞ¡£", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (DialogResult.No == MessageBoxEx.Show("æ˜¯å¦ä¿å­˜æƒé™è®¾å®š", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if (DialogResult.No == MessageBoxEx.Show("ÊÇ·ñ±£´æÈ¨ÏŞÉè¶¨", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 return;
             }
@@ -147,7 +146,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
             if (isUpdateOK)
             {
-                MessageBoxEx.Show("æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -161,7 +160,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             User user = (User)userBindingSource.DataSource;
             if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
             {
-                MessageBoxEx.Show("å¯¹ä¸èµ·ï¼Œæ‚¨æ²¡æœ‰æ‰§è¡Œè¯¥æ“ä½œçš„æƒé™ã€‚", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¶Ô²»Æğ£¬ÄúÃ»ÓĞÖ´ĞĞ¸Ã²Ù×÷µÄÈ¨ÏŞ¡£", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -194,7 +193,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     opUserType = OpUserType.UPDATE_USER;
                 }
             }
@@ -213,7 +212,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İ¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -242,7 +241,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             User user = (User)userBindingSource.DataSource;
             if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
             {
-                MessageBoxEx.Show("å¯¹ä¸èµ·ï¼Œæ‚¨æ²¡æœ‰æ‰§è¡Œè¯¥æ“ä½œçš„æƒé™ã€‚", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¶Ô²»Æğ£¬ÄúÃ»ÓĞÖ´ĞĞ¸Ã²Ù×÷µÄÈ¨ÏŞ¡£", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -290,6 +289,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.loginDate.ReadOnly = true;
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

@@ -1,11 +1,11 @@
-ï»¿namespace CMBC.EasyFactor.Help
+namespace CMBC.EasyFactor.Help
 {
     /// <summary>
     /// 
     /// </summary>
     partial class ReportBug
     {
-        #regionÂ FieldsÂ (15)
+		#region?Fields?(15)?
 
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private DevComponents.DotNetBar.ButtonX btnFileSelect;
@@ -26,11 +26,11 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbSubmitPerson;
         private DevComponents.DotNetBar.Controls.TextBoxX tbTitle;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ MethodsÂ (1)
+		#region?Methods?(1)?
 
-        //Â ProtectedÂ MethodsÂ (1)Â 
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -51,7 +51,7 @@
             base.Dispose(disposing);
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
 
 
 
@@ -138,7 +138,7 @@
             this.cbBugType.ItemHeight = 14;
             this.cbBugType.Items.AddRange(new object[] {
             "Bug",
-            "æ„è§"});
+            "Òâ¼û"});
             this.cbBugType.Location = new System.Drawing.Point(225, 202);
             this.cbBugType.Name = "cbBugType";
             this.cbBugType.Size = new System.Drawing.Size(101, 20);
@@ -157,7 +157,7 @@
             this.lblBugType.Name = "lblBugType";
             this.lblBugType.Size = new System.Drawing.Size(56, 16);
             this.lblBugType.TabIndex = 9;
-            this.lblBugType.Text = "åé¦ˆç±»å‹";
+            this.lblBugType.Text = "·´À¡ÀàĞÍ";
             // 
             // btnFileSelect
             // 
@@ -195,7 +195,7 @@
             this.lblAttachment.Name = "lblAttachment";
             this.lblAttachment.Size = new System.Drawing.Size(31, 16);
             this.lblAttachment.TabIndex = 4;
-            this.lblAttachment.Text = "é™„ä»¶";
+            this.lblAttachment.Text = "¸½¼ş";
             // 
             // tbSubmitPerson
             // 
@@ -220,7 +220,7 @@
             this.lblSubmitPerson.Name = "lblSubmitPerson";
             this.lblSubmitPerson.Size = new System.Drawing.Size(44, 16);
             this.lblSubmitPerson.TabIndex = 7;
-            this.lblSubmitPerson.Text = "æäº¤è€…";
+            this.lblSubmitPerson.Text = "Ìá½»Õß";
             // 
             // tbBug
             // 
@@ -247,7 +247,7 @@
             this.lblBug.Name = "lblBug";
             this.lblBug.Size = new System.Drawing.Size(56, 16);
             this.lblBug.TabIndex = 2;
-            this.lblBug.Text = "é—®é¢˜æè¿°";
+            this.lblBug.Text = "ÎÊÌâÃèÊö";
             // 
             // btnSubmit
             // 
@@ -258,7 +258,7 @@
             this.btnSubmit.Size = new System.Drawing.Size(75, 23);
             this.btnSubmit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSubmit.TabIndex = 1;
-            this.btnSubmit.Text = "æäº¤";
+            this.btnSubmit.Text = "Ìá½»";
             this.btnSubmit.Click += new System.EventHandler(this.SubmitBug);
             // 
             // tbTitle
@@ -284,7 +284,7 @@
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(31, 16);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "é¢˜ç›®";
+            this.lblTitle.Text = "ÌâÄ¿";
             // 
             // backgroundWorker
             // 
@@ -301,7 +301,7 @@
             this.DoubleBuffered = true;
             this.Name = "ReportBug";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "é—®é¢˜åé¦ˆ";
+            this.Text = "ÎÊÌâ·´À¡";
             this.panelBug.ResumeLayout(false);
             this.panelBug.PerformLayout();
             this.ResumeLayout(false);

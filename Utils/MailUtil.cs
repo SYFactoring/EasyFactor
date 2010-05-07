@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
@@ -12,17 +12,22 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     class SendMail : IDisposable
     {
-        private MailMessage mailMessage;
+		#region?Fields?(2)?
 
+        private MailMessage mailMessage;
         private string path;
+
+		#endregion?Fields?
+
+		#region?Constructors?(1)?
 
         /// <summary>  
         /// 
         /// </summary>  
-        /// <param name="To">æ”¶ä»¶äººåœ°å€</param>  
-        /// <param name="From">å‘ä»¶äººåœ°å€</param>  
-        /// <param name="Body">é‚®ä»¶æ­£æ–‡</param>  
-        /// <param name="Title">é‚®ä»¶çš„ä¸»é¢˜</param>  
+        /// <param name="To">ÊÕ¼şÈËµØÖ·</param>  
+        /// <param name="From">·¢¼şÈËµØÖ·</param>  
+        /// <param name="Body">ÓÊ¼şÕıÎÄ</param>  
+        /// <param name="Title">ÓÊ¼şµÄÖ÷Ìâ</param>  
         public SendMail(string To, string From, string Title, string Body, string Path)
         {
             string[] toAddresses = To.Split(new char[] { ';' });
@@ -51,21 +56,14 @@ namespace CMBC.EasyFactor.Utils
             this.path = Path;
         }
 
-        /// <summary>  
-        /// æ·»åŠ é™„ä»¶  
-        /// </summary>  
-        private void AddAttachment(string attachmentPath)
-        {
-            Attachment data = new Attachment(attachmentPath, MediaTypeNames.Application.Octet);//å®ä¾‹åŒ–é™„ä»¶  
-            ContentDisposition disposition = data.ContentDisposition;
-            disposition.CreationDate = File.GetCreationTime(attachmentPath);//è·å–é™„ä»¶çš„åˆ›å»ºæ—¥æœŸ  
-            disposition.ModificationDate = File.GetLastWriteTime(attachmentPath);//è·å–é™„ä»¶çš„ä¿®æ”¹æ—¥æœŸ  
-            disposition.ReadDate = File.GetLastAccessTime(attachmentPath);//è·å–é™„ä»¶çš„è¯»å–æ—¥æœŸ  
-            mailMessage.Attachments.Add(data);//æ·»åŠ åˆ°é™„ä»¶ä¸­  
-        }
+		#endregion?Constructors?
+
+		#region?Methods?(2)?
+
+		//?Public?Methods?(1)?
 
         /// <summary>  
-        /// å‘é€é‚®ä»¶  
+        /// ·¢ËÍÓÊ¼ş  
         /// </summary>  
         public void Send()
         {
@@ -78,11 +76,29 @@ namespace CMBC.EasyFactor.Utils
 
                 SmtpClient smtpClient = new SmtpClient();
                 smtpClient.Host = "mail.fudan.edu.cn";
-                smtpClient.Credentials = new NetworkCredential("yimingliu", "p0o9i8u7y6");//è®¾ç½®å‘ä»¶äººèº«ä»½çš„ç¥¨æ®  
+                smtpClient.Credentials = new NetworkCredential("yimingliu", "p0o9i8u7y6");//ÉèÖÃ·¢¼şÈËÉí·İµÄÆ±¾İ  
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.Send(mailMessage);
             }
         }
+		//?Private?Methods?(1)?
+
+        /// <summary>  
+        /// Ìí¼Ó¸½¼ş  
+        /// </summary>  
+        private void AddAttachment(string attachmentPath)
+        {
+            Attachment data = new Attachment(attachmentPath, MediaTypeNames.Application.Octet);//ÊµÀı»¯¸½¼ş  
+            ContentDisposition disposition = data.ContentDisposition;
+            disposition.CreationDate = File.GetCreationTime(attachmentPath);//»ñÈ¡¸½¼şµÄ´´½¨ÈÕÆÚ  
+            disposition.ModificationDate = File.GetLastWriteTime(attachmentPath);//»ñÈ¡¸½¼şµÄĞŞ¸ÄÈÕÆÚ  
+            disposition.ReadDate = File.GetLastAccessTime(attachmentPath);//»ñÈ¡¸½¼şµÄ¶ÁÈ¡ÈÕÆÚ  
+            mailMessage.Attachments.Add(data);//Ìí¼Óµ½¸½¼şÖĞ  
+        }
+
+		#endregion?Methods?
+
+
 
         #region IDisposable Members
 

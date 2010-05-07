@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="DepartmentDetail.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,12 +11,16 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     /// </summary>
     public partial class DepartmentDetail
     {
-        #regionÂ FieldsÂ (20)
+		#region?Fields?(29)?
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private DevComponents.DotNetBar.Controls.TextBoxX addressCNTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX addressENTextBox;
+        private DevComponents.DotNetBar.ButtonX btnSave;
+        private DevComponents.DotNetBar.ButtonX btnUpdate;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX contact_1TextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX contact_2TextBox;
@@ -26,19 +30,27 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private DevComponents.DotNetBar.Controls.ComboBoxEx domainComboBox;
         private DevComponents.DotNetBar.Controls.TextBoxX email_1TextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX email_2TextBox;
+        private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Controls.TextBoxX fax_1TextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX fax_2TextBox;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelDepartment;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.Controls.TextBoxX managerTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX phone_1TextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX phone_2TextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX postCodeTextBox;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbAssistant;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPManager;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ MethodsÂ (1)
+		#region?Methods?(1)?
 
-        //Â ProtectedÂ MethodsÂ (1)Â 
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -60,7 +72,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             base.Dispose(disposing);
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
+
+
 
         #region Windows Form Designer generated code
 
@@ -112,11 +126,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…é€‰");
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÑ¡");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("å¿…å¡«");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ØÌî");
             departmentCodeLabel = new DevComponents.DotNetBar.LabelX();
             departmentNameLabel = new DevComponents.DotNetBar.LabelX();
             domainLabel = new DevComponents.DotNetBar.LabelX();
@@ -151,7 +165,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             departmentCodeLabel.Name = "departmentCodeLabel";
             departmentCodeLabel.Size = new System.Drawing.Size(57, 15);
             departmentCodeLabel.TabIndex = 0;
-            departmentCodeLabel.Text = "<font color=\'red\'>*</font>éƒ¨é—¨ç¼–ç :";
+            departmentCodeLabel.Text = "<font color=\'red\'>*</font>²¿ÃÅ±àÂë:";
             // 
             // departmentNameLabel
             // 
@@ -165,7 +179,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             departmentNameLabel.Name = "departmentNameLabel";
             departmentNameLabel.Size = new System.Drawing.Size(45, 15);
             departmentNameLabel.TabIndex = 2;
-            departmentNameLabel.Text = "<font color=\'red\'>*</font>éƒ¨é—¨å:";
+            departmentNameLabel.Text = "<font color=\'red\'>*</font>²¿ÃÅÃû:";
             // 
             // domainLabel
             // 
@@ -179,7 +193,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             domainLabel.Name = "domainLabel";
             domainLabel.Size = new System.Drawing.Size(45, 15);
             domainLabel.TabIndex = 8;
-            domainLabel.Text = "<font color=\'red\'>*</font>äº‹ä¸šéƒ¨:";
+            domainLabel.Text = "<font color=\'red\'>*</font>ÊÂÒµ²¿:";
             // 
             // locationLabel
             // 
@@ -193,7 +207,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             locationLabel.Name = "locationLabel";
             locationLabel.Size = new System.Drawing.Size(33, 15);
             locationLabel.TabIndex = 6;
-            locationLabel.Text = "<font color=\'red\'>*</font>åŸå¸‚:";
+            locationLabel.Text = "<font color=\'red\'>*</font>³ÇÊĞ:";
             // 
             // addressCNLabel
             // 
@@ -207,7 +221,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             addressCNLabel.Name = "addressCNLabel";
             addressCNLabel.Size = new System.Drawing.Size(34, 16);
             addressCNLabel.TabIndex = 10;
-            addressCNLabel.Text = "åœ°å€:";
+            addressCNLabel.Text = "µØÖ·:";
             // 
             // contact_1Label
             // 
@@ -221,7 +235,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             contact_1Label.Name = "contact_1Label";
             contact_1Label.Size = new System.Drawing.Size(53, 16);
             contact_1Label.TabIndex = 15;
-            contact_1Label.Text = "è”ç³»äºº1:";
+            contact_1Label.Text = "ÁªÏµÈË1:";
             // 
             // contact_2Label
             // 
@@ -235,7 +249,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             contact_2Label.Name = "contact_2Label";
             contact_2Label.Size = new System.Drawing.Size(53, 16);
             contact_2Label.TabIndex = 23;
-            contact_2Label.Text = "è”ç³»äºº2:";
+            contact_2Label.Text = "ÁªÏµÈË2:";
             // 
             // phone_1Label
             // 
@@ -249,7 +263,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             phone_1Label.Name = "phone_1Label";
             phone_1Label.Size = new System.Drawing.Size(34, 16);
             phone_1Label.TabIndex = 17;
-            phone_1Label.Text = "ç”µè¯:";
+            phone_1Label.Text = "µç»°:";
             // 
             // phone_2Label
             // 
@@ -263,7 +277,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             phone_2Label.Name = "phone_2Label";
             phone_2Label.Size = new System.Drawing.Size(34, 16);
             phone_2Label.TabIndex = 25;
-            phone_2Label.Text = "ç”µè¯:";
+            phone_2Label.Text = "µç»°:";
             // 
             // email_1Label
             // 
@@ -333,7 +347,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             postCodeLabel.Name = "postCodeLabel";
             postCodeLabel.Size = new System.Drawing.Size(34, 16);
             postCodeLabel.TabIndex = 13;
-            postCodeLabel.Text = "é‚®ç¼–:";
+            postCodeLabel.Text = "ÓÊ±à:";
             // 
             // managerLabel
             // 
@@ -347,7 +361,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             managerLabel.Name = "managerLabel";
             managerLabel.Size = new System.Drawing.Size(47, 16);
             managerLabel.TabIndex = 4;
-            managerLabel.Text = "è´Ÿè´£äºº:";
+            managerLabel.Text = "¸ºÔğÈË:";
             // 
             // lblMaintainManager
             // 
@@ -361,7 +375,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             lblMaintainManager.Name = "lblMaintainManager";
             lblMaintainManager.Size = new System.Drawing.Size(84, 16);
             lblMaintainManager.TabIndex = 33;
-            lblMaintainManager.Text = "äº§å“ç»ç†åŠ©ç†:";
+            lblMaintainManager.Text = "²úÆ·¾­ÀíÖúÀí:";
             // 
             // lblMarketManager
             // 
@@ -375,7 +389,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             lblMarketManager.Name = "lblMarketManager";
             lblMarketManager.Size = new System.Drawing.Size(72, 16);
             lblMarketManager.TabIndex = 31;
-            lblMarketManager.Text = "åŒºåŸŸè´Ÿè´£äºº:";
+            lblMarketManager.Text = "ÇøÓò¸ºÔğÈË:";
             // 
             // groupPanelDepartment
             // 
@@ -458,14 +472,14 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.Items.AddRange(new object[] {
-            "è´¸æ˜“é‡‘èäº‹ä¸šéƒ¨",
-            "åˆ†è¡Œè¥ä¸šéƒ¨",
-            "åœ°äº§é‡‘èäº‹ä¸šéƒ¨",
-            "äº¤é€šé‡‘èäº‹ä¸šéƒ¨",
-            "é‡‘èå¸‚åœºäº‹ä¸šéƒ¨",
-            "èƒ½æºé‡‘èäº‹ä¸šéƒ¨",
-            "å†¶é‡‘é‡‘èäº‹ä¸šéƒ¨",
-            "ä¸­å°ä¼ä¸šé‡‘èäº‹ä¸šéƒ¨"});
+            "Ã³Ò×½ğÈÚÊÂÒµ²¿",
+            "·ÖĞĞÓªÒµ²¿",
+            "µØ²ú½ğÈÚÊÂÒµ²¿",
+            "½»Í¨½ğÈÚÊÂÒµ²¿",
+            "½ğÈÚÊĞ³¡ÊÂÒµ²¿",
+            "ÄÜÔ´½ğÈÚÊÂÒµ²¿",
+            "Ò±½ğ½ğÈÚÊÂÒµ²¿",
+            "ÖĞĞ¡ÆóÒµ½ğÈÚÊÂÒµ²¿"});
             this.cbLocation.Location = new System.Drawing.Point(104, 48);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(121, 21);
@@ -631,7 +645,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.addressENTextBox.Name = "addressENTextBox";
             this.addressENTextBox.Size = new System.Drawing.Size(360, 20);
             this.addressENTextBox.TabIndex = 12;
-            this.addressENTextBox.WatermarkText = "è‹±æ–‡åœ°å€";
+            this.addressENTextBox.WatermarkText = "Ó¢ÎÄµØÖ·";
             // 
             // addressCNTextBox
             // 
@@ -644,7 +658,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.addressCNTextBox.Name = "addressCNTextBox";
             this.addressCNTextBox.Size = new System.Drawing.Size(360, 20);
             this.addressCNTextBox.TabIndex = 11;
-            this.addressCNTextBox.WatermarkText = "ä¸­æ–‡åœ°å€";
+            this.addressCNTextBox.WatermarkText = "ÖĞÎÄµØÖ·";
             // 
             // domainComboBox
             // 
@@ -653,14 +667,14 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.domainComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.domainComboBox.FormattingEnabled = true;
             this.domainComboBox.Items.AddRange(new object[] {
-            "è´¸æ˜“é‡‘èäº‹ä¸šéƒ¨",
-            "åˆ†è¡Œè¥ä¸šéƒ¨",
-            "åœ°äº§é‡‘èäº‹ä¸šéƒ¨",
-            "äº¤é€šé‡‘èäº‹ä¸šéƒ¨",
-            "é‡‘èå¸‚åœºäº‹ä¸šéƒ¨",
-            "èƒ½æºé‡‘èäº‹ä¸šéƒ¨",
-            "å†¶é‡‘é‡‘èäº‹ä¸šéƒ¨",
-            "ä¸­å°ä¼ä¸šé‡‘èäº‹ä¸šéƒ¨"});
+            "Ã³Ò×½ğÈÚÊÂÒµ²¿",
+            "·ÖĞĞÓªÒµ²¿",
+            "µØ²ú½ğÈÚÊÂÒµ²¿",
+            "½»Í¨½ğÈÚÊÂÒµ²¿",
+            "½ğÈÚÊĞ³¡ÊÂÒµ²¿",
+            "ÄÜÔ´½ğÈÚÊÂÒµ²¿",
+            "Ò±½ğ½ğÈÚÊÂÒµ²¿",
+            "ÖĞĞ¡ÆóÒµ½ğÈÚÊÂÒµ²¿"});
             this.domainComboBox.Location = new System.Drawing.Point(344, 48);
             this.domainComboBox.Name = "domainComboBox";
             this.domainComboBox.Size = new System.Drawing.Size(121, 21);
@@ -701,7 +715,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "ä¿å­˜";
+            this.btnSave.Text = "±£´æ";
             this.btnSave.Click += new System.EventHandler(this.SaveDepartment);
             // 
             // btnUpdate
@@ -713,7 +727,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUpdate.TabIndex = 3;
-            this.btnUpdate.Text = "ç¼–è¾‘";
+            this.btnUpdate.Text = "±à¼­";
             this.btnUpdate.Click += new System.EventHandler(this.UpdateDepartment);
             // 
             // superValidator
@@ -724,12 +738,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // requiredFieldValidator2
             // 
-            this.requiredFieldValidator2.ErrorMessage = "å¿…é€‰";
+            this.requiredFieldValidator2.ErrorMessage = "±ØÑ¡";
             this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator3
             // 
-            this.requiredFieldValidator3.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator3.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // errorProvider
@@ -743,7 +757,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             // requiredFieldValidator1
             // 
-            this.requiredFieldValidator1.ErrorMessage = "å¿…å¡«";
+            this.requiredFieldValidator1.ErrorMessage = "±ØÌî";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // DepartmentDetail
@@ -759,7 +773,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "DepartmentDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "éƒ¨é—¨ä¿¡æ¯";
+            this.Text = "²¿ÃÅĞÅÏ¢";
             this.groupPanelDepartment.ResumeLayout(false);
             this.groupPanelDepartment.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.departmentBindingSource)).EndInit();
@@ -769,17 +783,5 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.ButtonX btnSave;
-        private DevComponents.DotNetBar.ButtonX btnUpdate;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbAssistant;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPManager;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
     }
 }

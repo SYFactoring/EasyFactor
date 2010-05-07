@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Country.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -16,29 +16,16 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Country
     {
-        #region Fields (1)
+		#region?Fields?(1)?
 
         /// <summary>
         /// 
         /// </summary>
         private static readonly List<Country> _countryList = InitializeCountry();
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Constructors (1)
-
-        /// <summary>
-        /// Initializes static members of the Country class
-        /// </summary>
-        static List<Country> InitializeCountry()
-        {
-            DBDataContext context = new DBDataContext();
-            return context.Countries.ToList();
-        }
-
-        #endregion Constructors
-
-        #region Properties (2)
+		#region?Properties?(2)?
 
         /// <summary>
         /// Gets
@@ -62,11 +49,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+		#endregion?Properties?
 
-        #region Methods (1)
+		#region?Methods?(2)?
 
-        // Public Methods (1) 
+		//?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -76,7 +63,17 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             return _countryList.ToList();
         }
+		//?Private?Methods?(1)?
 
-        #endregion Methods
+        /// <summary>
+        /// Initializes static members of the Country class
+        /// </summary>
+        static List<Country> InitializeCountry()
+        {
+            DBDataContext context = new DBDataContext();
+            return context.Countries.ToList();
+        }
+
+		#endregion?Methods?
     }
 }

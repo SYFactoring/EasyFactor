@@ -440,7 +440,7 @@
   <Table Name="dbo.InvoiceRefundBatch" Member="InvoiceRefundBatches">
     <Type Name="InvoiceRefundBatch">
       <Column Name="RefundBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="CaseCode" Storage="_CDACode" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="CaseCode" Storage="_CDACode" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="RefundType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="RefundDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />

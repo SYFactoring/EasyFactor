@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoiceRefundBatch.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceRefundBatch
     {
-        #region Properties (4)
+		#region?Properties?(4)?
 
         /// <summary>
         /// Gets
@@ -47,7 +47,18 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.Case.SellerClient.ToString();
+                if (this.Case != null)
+                {
+                    return this.Case.SellerClient.ToString();
+                }
+                else if (this.InvoiceFinanceBatch != null)
+                {
+                    return this.InvoiceFinanceBatch.SellerName;
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 
@@ -62,11 +73,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+		#endregion?Properties?
 
-        #region Methods (3)
+		#region?Methods?(3)?
 
-        // Public Methods (3) 
+		//?Public?Methods?(3)?
 
         /// <summary>
         /// 
@@ -129,6 +140,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return refundNo;
         }
 
-        #endregion Methods
+		#endregion?Methods?
     }
 }

@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ConstStr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -12,25 +12,31 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class MESSAGE
     {
+		#region?Fields?(4)?
+
+        /// <summary>
+        /// Êı¾İ¸üĞÂ³É¹¦
+        /// </summary>
+        public static string DATA_UPDATE_SUCCESS = "Êı¾İ¸üĞÂ³É¹¦";
+        public static string MAIN_DEFAULT = "»¶Ó­Ê¹ÓÃÖĞ¹úÃñÉúÒøĞĞ±£ÀíÔËÓªÏµÍ³";
+        /// <summary>
+        /// ÌáÊ¾
+        /// </summary>
+        public static string TITLE_INFORMATION = "ÌáÊ¾";
+        /// <summary>
+        /// ¾¯¸æ
+        /// </summary>
+        public static string TITLE_WARNING = "¾¯¸æ";
+
+		#endregion?Fields?
+
+		#region?Constructors?(1)?
+
         private MESSAGE()
         {
         }
 
-        public static string MAIN_DEFAULT = "æ¬¢è¿ä½¿ç”¨ä¸­å›½æ°‘ç”Ÿé“¶è¡Œä¿ç†è¿è¥ç³»ç»Ÿ";
-        /// <summary>
-        /// è­¦å‘Š
-        /// </summary>
-        public static string TITLE_WARNING = "è­¦å‘Š";
-
-        /// <summary>
-        /// æç¤º
-        /// </summary>
-        public static string TITLE_INFORMATION = "æç¤º";
-
-        /// <summary>
-        /// æ•°æ®æ›´æ–°æˆåŠŸ
-        /// </summary>
-        public static string DATA_UPDATE_SUCCESS = "æ•°æ®æ›´æ–°æˆåŠŸ";
+		#endregion?Constructors?
     }
 
     /// <summary>
@@ -38,24 +44,30 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CLIENT_CREDIT_LINE
     {
+		#region?Fields?(3)?
+
+        /// <summary>
+        /// ÒÑÉúĞ§
+        /// </summary>
+        public static string AVAILABILITY = "ÒÑÉúĞ§";
+        /// <summary>
+        /// ÒÑ¹ıÆÚ
+        /// </summary>
+        public static string EXPIRY = "ÒÑ¹ıÆÚ";
+        /// <summary>
+        /// ÒÑ¶³½á
+        /// </summary>
+        public static string FREEZE = "ÒÑ¶³½á";
+
+		#endregion?Fields?
+
+		#region?Constructors?(1)?
+
         private CLIENT_CREDIT_LINE()
         {
         }
 
-        /// <summary>
-        /// å·²ç”Ÿæ•ˆ
-        /// </summary>
-        public static string AVAILABILITY = "å·²ç”Ÿæ•ˆ";
-
-        /// <summary>
-        /// å·²è¿‡æœŸ
-        /// </summary>
-        public static string EXPIRY = "å·²è¿‡æœŸ";
-
-        /// <summary>
-        /// å·²å†»ç»“
-        /// </summary>
-        public static string FREEZE = "å·²å†»ç»“";
+		#endregion?Constructors?
     }
 
     /// <summary>
@@ -63,19 +75,26 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CONTRACT
     {
+		#region?Fields?(2)?
+
+        /// <summary>
+        /// ÒÑÉúĞ§
+        /// </summary>
+        public static string AVAILABILITY = "ÒÑÉúĞ§";
+        /// <summary>
+        /// ÒÑ¹ıÆÚ
+        /// </summary>
+        public static string EXPIRY = "ÒÑ¹ıÆÚ";
+
+		#endregion?Fields?
+
+		#region?Constructors?(1)?
+
         private CONTRACT()
         {
         }
 
-        /// <summary>
-        /// å·²ç”Ÿæ•ˆ
-        /// </summary>
-        public static string AVAILABILITY = "å·²ç”Ÿæ•ˆ";
-
-        /// <summary>
-        /// å·²è¿‡æœŸ
-        /// </summary>
-        public static string EXPIRY = "å·²è¿‡æœŸ";
+		#endregion?Constructors?
     }
 
     /// <summary>
@@ -83,24 +102,30 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class FACTOR_CREDIT_LINE
     {
+		#region?Fields?(3)?
+
+        /// <summary>
+        /// ÒÑÉúĞ§
+        /// </summary>
+        public static string AVAILABILITY = "ÒÑÉúĞ§";
+        /// <summary>
+        /// ÒÑ¹ıÆÚ
+        /// </summary>
+        public static string EXPIRY = "ÒÑ¹ıÆÚ";
+        /// <summary>
+        /// ÒÑ¶³½á
+        /// </summary>
+        public static string FREEZE = "ÒÑ¶³½á";
+
+		#endregion?Fields?
+
+		#region?Constructors?(1)?
+
         private FACTOR_CREDIT_LINE()
         {
         }
 
-        /// <summary>
-        /// å·²ç”Ÿæ•ˆ
-        /// </summary>
-        public static string AVAILABILITY = "å·²ç”Ÿæ•ˆ";
-
-        /// <summary>
-        /// å·²è¿‡æœŸ
-        /// </summary>
-        public static string EXPIRY = "å·²è¿‡æœŸ";
-
-        /// <summary>
-        /// å·²å†»ç»“
-        /// </summary>
-        public static string FREEZE = "å·²å†»ç»“";
+		#endregion?Constructors?
     }
 
     /// <summary>
@@ -108,24 +133,30 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CASEStr
     {
+		#region?Fields?(3)?
+
+        /// <summary>
+        /// ÉêÇë°¸
+        /// </summary>
+        public static string APPLICATION = "ÉêÇë°¸";
+        /// <summary>
+        /// ÒÑ½á°¸
+        /// </summary>
+        public static string CLOSED = "ÒÑ½á°¸";
+        /// <summary>
+        /// Æô¶¯°¸
+        /// </summary>
+        public static string ENABLE = "Æô¶¯°¸";
+
+		#endregion?Fields?
+
+		#region?Constructors?(1)?
+
         private CASEStr()
         {
         }
 
-        /// <summary>
-        /// ç”³è¯·æ¡ˆ
-        /// </summary>
-        public static string APPLICATION = "ç”³è¯·æ¡ˆ";
-
-        /// <summary>
-        /// å¯åŠ¨æ¡ˆ
-        /// </summary>
-        public static string ENABLE = "å¯åŠ¨æ¡ˆ";
-
-        /// <summary>
-        /// å·²ç»“æ¡ˆ
-        /// </summary>
-        public static string CLOSED = "å·²ç»“æ¡ˆ";
+		#endregion?Constructors?
     }
 
     /// <summary>
@@ -133,29 +164,34 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CDAStr
     {
+		#region?Fields?(4)?
+
+        /// <summary>
+        /// ÒÑ¸´ºË
+        /// </summary>
+        public static string CHECKED = "ÒÑÉóºË";
+        /// <summary>
+        /// ÒÑÊ§Ğ§
+        /// </summary>
+        public static string INVALID = "ÒÑÊ§Ğ§";
+        /// <summary>
+        /// ¸´ºËÎ´Í¨¹ı
+        /// </summary>
+        public static string REJECT = "ÉóºËÎ´Í¨¹ı";
+        /// <summary>
+        /// Î´ÉóºË
+        /// </summary>
+        public static string UNCHECK = "Î´ÉóºË";
+
+		#endregion?Fields?
+
+		#region?Constructors?(1)?
+
         private CDAStr()
         {
         }
 
-        /// <summary>
-        /// æœªå®¡æ ¸
-        /// </summary>
-        public static string UNCHECK = "æœªå®¡æ ¸";
-
-        /// <summary>
-        /// å·²å¤æ ¸
-        /// </summary>
-        public static string CHECKED = "å·²å®¡æ ¸";
-
-        /// <summary>
-        /// å¤æ ¸æœªé€šè¿‡
-        /// </summary>
-        public static string REJECT = "å®¡æ ¸æœªé€šè¿‡";
-
-        /// <summary>
-        /// å·²å¤±æ•ˆ
-        /// </summary>
-        public static string INVALID = "å·²å¤±æ•ˆ";
+		#endregion?Constructors?
     }
 
     /// <summary>
@@ -163,23 +199,29 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class BATCH
     {
+		#region?Fields?(3)?
+
+        /// <summary>
+        /// ÒÑ¸´ºË
+        /// </summary>
+        public static string CHECK = "ÒÑ¸´ºË";
+        /// <summary>
+        /// ¸´ºËÎ´Í¨¹ı
+        /// </summary>
+        public static string REJECT = "¸´ºËÎ´Í¨¹ı";
+        /// <summary>
+        /// Î´¸´ºË
+        /// </summary>
+        public static string UNCHECK = "Î´¸´ºË";
+
+		#endregion?Fields?
+
+		#region?Constructors?(1)?
+
         private BATCH()
         {
         }
 
-        /// <summary>
-        /// æœªå¤æ ¸
-        /// </summary>
-        public static string UNCHECK = "æœªå¤æ ¸";
-
-        /// <summary>
-        /// å·²å¤æ ¸
-        /// </summary>
-        public static string CHECK = "å·²å¤æ ¸";
-
-        /// <summary>
-        /// å¤æ ¸æœªé€šè¿‡
-        /// </summary>
-        public static string REJECT = "å¤æ ¸æœªé€šè¿‡";
+		#endregion?Constructors?
     }
 }

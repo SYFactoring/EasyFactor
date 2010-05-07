@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ClientMgr.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,40 +11,56 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientMgr
     {
-        #regionÂ FieldsÂ (44)
+		#region?Fields?(37)?
 
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.ButtonX btnReset;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseType;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientType;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsContractSigned;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameENColumn;
         private System.Windows.Forms.ContextMenuStrip cmuClientMgr;
         private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClients;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
         private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX lblLocation;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientCreditLineNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientsExport;
         private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
         private DevComponents.DotNetBar.PanelEx pnlQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbPM;
         private DevComponents.DotNetBar.Controls.TextBoxX tbRM;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ MethodsÂ (1)
+		#region?Methods?(1)?
 
-        //Â ProtectedÂ MethodsÂ (1)Â 
+		//?Protected?Methods?(1)?
 
         /// <summary> 
-        /// æ¸…ç†æ‰€æœ‰æ­£åœ¨ä½¿ç”¨çš„èµ„æºã€‚
+        /// ÇåÀíËùÓĞÕıÔÚÊ¹ÓÃµÄ×ÊÔ´¡£
         /// </summary>
-        /// <param name="disposing">å¦‚æœåº”é‡Šæ”¾æ‰˜ç®¡èµ„æºï¼Œä¸º trueï¼›å¦åˆ™ä¸º falseã€‚</param>
+        /// <param name="disposing">Èç¹ûÓ¦ÊÍ·ÅÍĞ¹Ü×ÊÔ´£¬Îª true£»·ñÔòÎª false¡£</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (this.components != null))
@@ -55,13 +71,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             base.Dispose(disposing);
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
 
-        #region ç»„ä»¶è®¾è®¡å™¨ç”Ÿæˆçš„ä»£ç 
+
+
+        #region ×é¼şÉè¼ÆÆ÷Éú³ÉµÄ´úÂë
 
         /// <summary> 
-        /// è®¾è®¡å™¨æ”¯æŒæ‰€éœ€çš„æ–¹æ³• - ä¸è¦
-        /// ä½¿ç”¨ä»£ç ç¼–è¾‘å™¨ä¿®æ”¹æ­¤æ–¹æ³•çš„å†…å®¹ã€‚
+        /// Éè¼ÆÆ÷Ö§³ÖËùĞèµÄ·½·¨ - ²»Òª
+        /// Ê¹ÓÃ´úÂë±à¼­Æ÷ĞŞ¸Ä´Ë·½·¨µÄÄÚÈİ¡£
         /// </summary>
         private void InitializeComponent()
         {
@@ -134,7 +152,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblClientType.Name = "lblClientType";
             lblClientType.Size = new System.Drawing.Size(56, 16);
             lblClientType.TabIndex = 4;
-            lblClientType.Text = "å®¢æˆ·ç±»å‹";
+            lblClientType.Text = "¿Í»§ÀàĞÍ";
             lblClientType.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // lblClientNo
@@ -149,7 +167,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblClientNo.Size = new System.Drawing.Size(56, 16);
             lblClientNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             lblClientNo.TabIndex = 0;
-            lblClientNo.Text = "ä¿ç†ä»£ç ";
+            lblClientNo.Text = "±£Àí´úÂë";
             lblClientNo.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // lblClientName
@@ -163,7 +181,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblClientName.Name = "lblClientName";
             lblClientName.Size = new System.Drawing.Size(56, 16);
             lblClientName.TabIndex = 2;
-            lblClientName.Text = "å®¢æˆ·åç§°";
+            lblClientName.Text = "¿Í»§Ãû³Æ";
             lblClientName.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // lblRM
@@ -177,7 +195,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblRM.Name = "lblRM";
             lblRM.Size = new System.Drawing.Size(56, 16);
             lblRM.TabIndex = 11;
-            lblRM.Text = "å®¢æˆ·ç»ç†";
+            lblRM.Text = "¿Í»§¾­Àí";
             lblRM.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // lblPM
@@ -191,7 +209,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblPM.Name = "lblPM";
             lblPM.Size = new System.Drawing.Size(56, 16);
             lblPM.TabIndex = 9;
-            lblPM.Text = "äº§å“ç»ç†";
+            lblPM.Text = "²úÆ·¾­Àí";
             lblPM.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // lblCaseType
@@ -205,7 +223,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblCaseType.Name = "lblCaseType";
             lblCaseType.Size = new System.Drawing.Size(56, 16);
             lblCaseType.TabIndex = 16;
-            lblCaseType.Text = "æ¡ˆä»¶ç±»å‹";
+            lblCaseType.Text = "°¸¼şÀàĞÍ";
             lblCaseType.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // cmuClientMgr
@@ -227,14 +245,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.menuItemClientSelect.Name = "menuItemClientSelect";
             this.menuItemClientSelect.Size = new System.Drawing.Size(152, 22);
-            this.menuItemClientSelect.Text = "é€‰å®šå®¢æˆ·";
+            this.menuItemClientSelect.Text = "Ñ¡¶¨¿Í»§";
             this.menuItemClientSelect.Click += new System.EventHandler(this.SelectClient);
             // 
             // menuItemClientDetail
             // 
             this.menuItemClientDetail.Name = "menuItemClientDetail";
             this.menuItemClientDetail.Size = new System.Drawing.Size(152, 22);
-            this.menuItemClientDetail.Text = "è¯¦ç»†ä¿¡æ¯";
+            this.menuItemClientDetail.Text = "ÏêÏ¸ĞÅÏ¢";
             this.menuItemClientDetail.Click += new System.EventHandler(this.DetailClient);
             // 
             // toolStripSeparator
@@ -246,28 +264,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.menuItemClientNew.Name = "menuItemClientNew";
             this.menuItemClientNew.Size = new System.Drawing.Size(152, 22);
-            this.menuItemClientNew.Text = "æ–°å»ºå®¢æˆ·";
+            this.menuItemClientNew.Text = "ĞÂ½¨¿Í»§";
             this.menuItemClientNew.Click += new System.EventHandler(this.NewClient);
             // 
             // menuItemClientCreditLineNew
             // 
             this.menuItemClientCreditLineNew.Name = "menuItemClientCreditLineNew";
             this.menuItemClientCreditLineNew.Size = new System.Drawing.Size(152, 22);
-            this.menuItemClientCreditLineNew.Text = "æ–°å»ºé¢åº¦ä¿¡æ¯";
+            this.menuItemClientCreditLineNew.Text = "ĞÂ½¨¶î¶ÈĞÅÏ¢";
             this.menuItemClientCreditLineNew.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // menuItemContractNew
             // 
             this.menuItemContractNew.Name = "menuItemContractNew";
             this.menuItemContractNew.Size = new System.Drawing.Size(152, 22);
-            this.menuItemContractNew.Text = "æ–°å»ºä¿ç†åˆåŒ";
+            this.menuItemContractNew.Text = "ĞÂ½¨±£ÀíºÏÍ¬";
             this.menuItemContractNew.Click += new System.EventHandler(this.NewContract);
             // 
             // menuItemClientDelete
             // 
             this.menuItemClientDelete.Name = "menuItemClientDelete";
             this.menuItemClientDelete.Size = new System.Drawing.Size(152, 22);
-            this.menuItemClientDelete.Text = "åˆ é™¤å®¢æˆ·";
+            this.menuItemClientDelete.Text = "É¾³ı¿Í»§";
             this.menuItemClientDelete.Click += new System.EventHandler(this.DeleteClient);
             // 
             // toolStripSeparator1
@@ -279,7 +297,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.menuItemClientsExport.Name = "menuItemClientsExport";
             this.menuItemClientsExport.Size = new System.Drawing.Size(152, 22);
-            this.menuItemClientsExport.Text = "å¯¼å‡ºæ‰€æœ‰å®¢æˆ·";
+            this.menuItemClientsExport.Text = "µ¼³öËùÓĞ¿Í»§";
             this.menuItemClientsExport.Click += new System.EventHandler(this.ExportClients);
             // 
             // pnlQuery
@@ -339,7 +357,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(59, 23);
             this.lblLocation.TabIndex = 24;
-            this.lblLocation.Text = "ä¸šåŠ¡åœ°åŒº";
+            this.lblLocation.Text = "ÒµÎñµØÇø";
             // 
             // cbCaseType
             // 
@@ -347,10 +365,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbCaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCaseType.ItemHeight = 14;
             this.cbCaseType.Items.AddRange(new object[] {
-            "å…¨éƒ¨",
-            "è¿›å£ä¿ç†",
-            "å‡ºå£ä¿ç†",
-            "å›½å†…ä¿ç†"});
+            "È«²¿",
+            "½ø¿Ú±£Àí",
+            "³ö¿Ú±£Àí",
+            "¹úÄÚ±£Àí"});
             this.cbCaseType.Location = new System.Drawing.Point(566, 7);
             this.cbCaseType.Name = "cbCaseType";
             this.cbCaseType.Size = new System.Drawing.Size(100, 20);
@@ -366,7 +384,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnReset.Size = new System.Drawing.Size(60, 23);
             this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReset.TabIndex = 14;
-            this.btnReset.Text = "æ¸…ç©º";
+            this.btnReset.Text = "Çå¿Õ";
             this.btnReset.Click += new System.EventHandler(this.Reset);
             // 
             // cbIsContractSigned
@@ -381,7 +399,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsContractSigned.TabIndex = 6;
-            this.cbIsContractSigned.Text = "æ˜¯å¦ç­¾è®¢ä¿ç†åˆåŒ";
+            this.cbIsContractSigned.Text = "ÊÇ·ñÇ©¶©±£ÀíºÏÍ¬";
             // 
             // lblCount
             // 
@@ -405,7 +423,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnQuery.Size = new System.Drawing.Size(60, 22);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 13;
-            this.btnQuery.Text = "æŸ¥è¯¢";
+            this.btnQuery.Text = "²éÑ¯";
             this.btnQuery.Click += new System.EventHandler(this.QueryClients);
             // 
             // cbClientType
@@ -414,10 +432,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbClientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbClientType.ItemHeight = 14;
             this.cbClientType.Items.AddRange(new object[] {
-            "å…¨éƒ¨",
-            "å›½æœ‰",
-            "æ°‘è¥",
-            "ä¸‰èµ„"});
+            "È«²¿",
+            "¹úÓĞ",
+            "ÃñÓª",
+            "Èı×Ê"});
             this.cbClientType.Location = new System.Drawing.Point(397, 7);
             this.cbClientType.Name = "cbClientType";
             this.cbClientType.Size = new System.Drawing.Size(100, 20);
@@ -532,70 +550,70 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // clientEDICodeColumn
             // 
             this.clientEDICodeColumn.DataPropertyName = "ClientEDICode";
-            this.clientEDICodeColumn.HeaderText = "ä¿ç†ä»£ç ";
+            this.clientEDICodeColumn.HeaderText = "±£Àí´úÂë";
             this.clientEDICodeColumn.Name = "clientEDICodeColumn";
             this.clientEDICodeColumn.ReadOnly = true;
             // 
             // ClientCoreNoColumn
             // 
             this.ClientCoreNoColumn.DataPropertyName = "ClientCoreNo";
-            this.ClientCoreNoColumn.HeaderText = "å®¢æˆ·å·";
+            this.ClientCoreNoColumn.HeaderText = "¿Í»§ºÅ";
             this.ClientCoreNoColumn.Name = "ClientCoreNoColumn";
             this.ClientCoreNoColumn.ReadOnly = true;
             // 
             // ClientNameCNColumn
             // 
             this.ClientNameCNColumn.DataPropertyName = "ClientNameCN";
-            this.ClientNameCNColumn.HeaderText = "å®¢æˆ·åç§°(ä¸­)";
+            this.ClientNameCNColumn.HeaderText = "¿Í»§Ãû³Æ(ÖĞ)";
             this.ClientNameCNColumn.Name = "ClientNameCNColumn";
             this.ClientNameCNColumn.ReadOnly = true;
             // 
             // ClientNameENColumn
             // 
             this.ClientNameENColumn.DataPropertyName = "ClientNameEN";
-            this.ClientNameENColumn.HeaderText = "å®¢æˆ·åç§°(è‹±)";
+            this.ClientNameENColumn.HeaderText = "¿Í»§Ãû³Æ(Ó¢)";
             this.ClientNameENColumn.Name = "ClientNameENColumn";
             this.ClientNameENColumn.ReadOnly = true;
             // 
             // AddressCNColumn
             // 
             this.AddressCNColumn.DataPropertyName = "AddressCN";
-            this.AddressCNColumn.HeaderText = "åœ°å€(ä¸­)";
+            this.AddressCNColumn.HeaderText = "µØÖ·(ÖĞ)";
             this.AddressCNColumn.Name = "AddressCNColumn";
             this.AddressCNColumn.ReadOnly = true;
             // 
             // AddressENColumn
             // 
             this.AddressENColumn.DataPropertyName = "AddressEN";
-            this.AddressENColumn.HeaderText = "åœ°å€(è‹±)";
+            this.AddressENColumn.HeaderText = "µØÖ·(Ó¢)";
             this.AddressENColumn.Name = "AddressENColumn";
             this.AddressENColumn.ReadOnly = true;
             // 
             // CountryNameCNColumn
             // 
             this.CountryNameCNColumn.DataPropertyName = "CountryCode";
-            this.CountryNameCNColumn.HeaderText = "å›½å®¶";
+            this.CountryNameCNColumn.HeaderText = "¹ú¼Ò";
             this.CountryNameCNColumn.Name = "CountryNameCNColumn";
             this.CountryNameCNColumn.ReadOnly = true;
             // 
             // GroupNoColumn
             // 
             this.GroupNoColumn.DataPropertyName = "GroupEDICode";
-            this.GroupNoColumn.HeaderText = "æ‰€å±é›†å›¢å®¢æˆ·å·";
+            this.GroupNoColumn.HeaderText = "ËùÊô¼¯ÍÅ¿Í»§ºÅ";
             this.GroupNoColumn.Name = "GroupNoColumn";
             this.GroupNoColumn.ReadOnly = true;
             // 
             // IndustryColumn
             // 
             this.IndustryColumn.DataPropertyName = "Industry";
-            this.IndustryColumn.HeaderText = "æ‰€å±è¡Œä¸š";
+            this.IndustryColumn.HeaderText = "ËùÊôĞĞÒµ";
             this.IndustryColumn.Name = "IndustryColumn";
             this.IndustryColumn.ReadOnly = true;
             // 
             // DepartmentCodeColumn
             // 
             this.DepartmentCodeColumn.DataPropertyName = "BranchCode";
-            this.DepartmentCodeColumn.HeaderText = "æ‰€å±æœºæ„ä»£ç ";
+            this.DepartmentCodeColumn.HeaderText = "ËùÊô»ú¹¹´úÂë";
             this.DepartmentCodeColumn.Name = "DepartmentCodeColumn";
             this.DepartmentCodeColumn.ReadOnly = true;
             this.DepartmentCodeColumn.Visible = false;
@@ -603,14 +621,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // DepartmentColumn
             // 
             this.DepartmentColumn.DataPropertyName = "Department";
-            this.DepartmentColumn.HeaderText = "æ‰€å±æœºæ„";
+            this.DepartmentColumn.HeaderText = "ËùÊô»ú¹¹";
             this.DepartmentColumn.Name = "DepartmentColumn";
             this.DepartmentColumn.ReadOnly = true;
             // 
             // PMNameColumn
             // 
             this.PMNameColumn.DataPropertyName = "PMName";
-            this.PMNameColumn.HeaderText = "äº§å“ç»ç†";
+            this.PMNameColumn.HeaderText = "²úÆ·¾­Àí";
             this.PMNameColumn.Name = "PMNameColumn";
             this.PMNameColumn.ReadOnly = true;
             // 
@@ -633,22 +651,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
-        private DevComponents.DotNetBar.LabelX lblLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientNameENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddressCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddressENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientsExport;
     }
 }

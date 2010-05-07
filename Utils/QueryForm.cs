@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="QueryForm.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -13,6 +13,8 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class QueryForm : DevComponents.DotNetBar.Office2007Form
     {
+		#region?Constructors?(1)?
+
         /// <summary>
         /// Initializes a new instance of the QueryForm class.
         /// </summary>
@@ -32,5 +34,7 @@ namespace CMBC.EasyFactor.Utils
             this.panelRoot.Controls.Clear();
             this.panelRoot.Controls.Add(userControl);
         }
+
+		#endregion?Constructors?
     }
 }

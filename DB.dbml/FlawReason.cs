@@ -1,4 +1,9 @@
-ï»¿
+//-----------------------------------------------------------------------
+// <copyright file="FlawReason.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System.Collections.Generic;
@@ -8,9 +13,14 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public class FlawReason
     {
-        private string index;
+		#region?Fields?(2)?
 
+        private string index;
         private string reason;
+
+		#endregion?Fields?
+
+		#region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -21,6 +31,33 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             this.index = index;
             this.reason = reason;
+        }
+
+		#endregion?Constructors?
+
+		#region?Properties?(3)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<FlawReason> AllFlawReasons
+        {
+            get
+            {
+                List<FlawReason> reasonList = new List<FlawReason>();
+                reasonList.Add(new FlawReason("01", "01-Âô·½/Âò·½»ù±¾×ÊÁÏ²»·û"));
+                reasonList.Add(new FlawReason("02", "02-·¢Æ±Îª´æ¸ùÁª»ò¸±Áª¸´Ó¡¼ş"));
+                reasonList.Add(new FlawReason("03", "03-·¢Æ±ÎŞ×ªÈÃ×Ö¾İ¼ÇÔØ»òÌù´í"));
+                reasonList.Add(new FlawReason("04", "04-ÕË¿îµ½ÆÚÈÕ²»·û"));
+                reasonList.Add(new FlawReason("05", "05-µ¥¾İÄÚÈİ²»·û"));
+                reasonList.Add(new FlawReason("06", "06-¶î¶ÈÍ¨ÖªÊé¹ıÆÚ»òÎ´Ç©»Ø"));
+                reasonList.Add(new FlawReason("07", "07-±£ÀíºÏÍ¬¹ıÆÚ»òÎ´Ç©»Ø"));
+                reasonList.Add(new FlawReason("08", "08-½»»õÆ¾Ö¤ÄÚÈİ²»ÍêÕû"));
+                reasonList.Add(new FlawReason("09", "09-ÓâÆÚ×ªÈÃ"));
+                reasonList.Add(new FlawReason("10", "10-ÆäËû"));
+                return reasonList;
+            }
         }
 
         /// <summary>
@@ -45,27 +82,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static List<FlawReason> AllFlawReasons
-        {
-            get
-            {
-                List<FlawReason> reasonList = new List<FlawReason>();
-                reasonList.Add(new FlawReason("01", "01-å–æ–¹/ä¹°æ–¹åŸºæœ¬èµ„æ–™ä¸ç¬¦"));
-                reasonList.Add(new FlawReason("02", "02-å‘ç¥¨ä¸ºå­˜æ ¹è”æˆ–å‰¯è”å¤å°ä»¶"));
-                reasonList.Add(new FlawReason("03", "03-å‘ç¥¨æ— è½¬è®©å­—æ®è®°è½½æˆ–è´´é”™"));
-                reasonList.Add(new FlawReason("04", "04-è´¦æ¬¾åˆ°æœŸæ—¥ä¸ç¬¦"));
-                reasonList.Add(new FlawReason("05", "05-å•æ®å†…å®¹ä¸ç¬¦"));
-                reasonList.Add(new FlawReason("06", "06-é¢åº¦é€šçŸ¥ä¹¦è¿‡æœŸæˆ–æœªç­¾å›"));
-                reasonList.Add(new FlawReason("07", "07-ä¿ç†åˆåŒè¿‡æœŸæˆ–æœªç­¾å›"));
-                reasonList.Add(new FlawReason("08", "08-äº¤è´§å‡­è¯å†…å®¹ä¸å®Œæ•´"));
-                reasonList.Add(new FlawReason("09", "09-é€¾æœŸè½¬è®©"));
-                reasonList.Add(new FlawReason("10", "10-å…¶ä»–"));
-                return reasonList;
-            }
-        }
+		#endregion?Properties?
     }
 }

@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="FactorMgrUI.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -14,25 +14,24 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// Factor Management User Interface 
     /// </summary>
     public partial class FactorMgr : UserControl
     {
-        #region¬†Fields¬†(1)
+		#region?Fields?(1)?
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Constructors¬†(1)
+		#region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the FactorMgrUI class
@@ -49,7 +48,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             List<Country> countryList = Country.AllCountries();
-            countryList.Insert(0, new Country() { CountryCode = "AA", CountryNameCN = "ÂÖ®ÈÉ®", CountryNameEN = "All" });
+            countryList.Insert(0, new Country() { CountryCode = "AA", CountryNameCN = "»´≤ø", CountryNameEN = "All" });
             this.cbCountry.DataSource = countryList;
             this.cbCountry.DisplayMember = "CountryFormatEN";
             this.cbCountry.ValueMember = "CountryNameEN";
@@ -57,9 +56,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.UpdateContextMenu();
         }
 
-        #endregion¬†Constructors
+		#endregion?Constructors?
 
-        #region¬†Properties¬†(3)
+		#region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -88,11 +87,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             set;
         }
 
-        #endregion¬†Properties
+		#endregion?Properties?
 
-        #region¬†Methods¬†(10)
+		#region?Methods?(10)?
 
-        //¬†Private¬†Methods¬†(10)¬†
+		//?Private?Methods?(10)?
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -129,29 +128,29 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             Factor selectedFactor = (Factor)this.bs.List[this.dgvFactors.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("ÊòØÂê¶Á°ÆÂÆöÂà†Èô§‰øùÁêÜÂïÜ: " + selectedFactor.FactorCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show(" «∑Ò»∑∂®…æ≥˝±£¿Ì…Ã: " + selectedFactor.FactorCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (selectedFactor.FactorCreditLines.Count > 0)
                 {
-                    MessageBoxEx.Show("‰∏çËÉΩÂà†Èô§Ê≠§Êú∫ÊûÑ,Â∑≤Â≠òÂú®Áõ∏ÂÖ≥È¢ùÂ∫¶.", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("≤ªƒ‹…æ≥˝¥Àª˙ππ,“—¥Ê‘⁄œ‡πÿ∂Ó∂».", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedFactor.SellerCases.Count > 0 || selectedFactor.BuyerCases.Count > 0)
                 {
-                    MessageBoxEx.Show("‰∏çËÉΩÂà†Èô§Ê≠§Êú∫ÊûÑ,Â∑≤Â≠òÂú®Áõ∏ÂÖ≥Ê°à‰ª∂‰ø°ÊÅØ", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("≤ªƒ‹…æ≥˝¥Àª˙ππ,“—¥Ê‘⁄œ‡πÿ∞∏º˛–≈œ¢", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedFactor.FactorAccounts.Count > 0)
                 {
-                    MessageBoxEx.Show("‰∏çËÉΩÂà†Èô§Ê≠§Êú∫ÊûÑ,Â∑≤Â≠òÂú®Áõ∏ÂÖ≥Ë¥¶Êà∑‰ø°ÊÅØ", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("≤ªƒ‹…æ≥˝¥Àª˙ππ,“—¥Ê‘⁄œ‡πÿ’Àªß–≈œ¢", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedFactor.GroupFactors.Count > 0)
                 {
-                    MessageBoxEx.Show("‰∏çËÉΩÂà†Èô§Ê≠§Êú∫ÊûÑ,Â∑≤Â≠òÂú®Áõ∏ÂÖ≥Â≠êÊú∫ÊûÑ‰ø°ÊÅØ", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("≤ªƒ‹…æ≥˝¥Àª˙ππ,“—¥Ê‘⁄œ‡πÿ◊”ª˙ππ–≈œ¢", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -162,7 +161,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 }
                 catch (SqlException e1)
                 {
-                    MessageBoxEx.Show("Âà†Èô§Â§±Ë¥•:" + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("…æ≥˝ ß∞‹:" + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -247,7 +246,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             if (cbFactorType.SelectedIndex >= 0)
             {
                 factorType = cbFactorType.Text;
-                if ("ÂÖ®ÈÉ®".Equals(factorType))
+                if ("»´≤ø".Equals(factorType))
                 {
                     factorType = string.Empty;
                 }
@@ -276,7 +275,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                                                 && ((f.CountryName == null ? string.Empty : f.CountryName).Contains(country)));
 
             bs.DataSource = queryResult;
-            lblCount.Text = String.Format("Ëé∑Âæó{0}Êù°ËÆ∞ÂΩï", queryResult.Count());
+            lblCount.Text = String.Format("ªÒµ√{0}Ãıº«¬º", queryResult.Count());
         }
 
         /// <summary>
@@ -332,6 +331,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
     }
 }

@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="LoginWindow.designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class LogOnWindow
     {
-		#region Fields (13) 
+		#region?Fields?(13)?
 
         /// <summary> 
         /// Required designer variable.
@@ -30,11 +30,11 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.Controls.TextBoxX tbPassword;
         private DevComponents.DotNetBar.Controls.TextBoxX tbUserId;
 
-		#endregion Fields 
+		#endregion?Fields?
 
-		#region Methods (1) 
+		#region?Methods?(1)?
 
-		// Protected Methods (1) 
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -50,7 +50,9 @@ namespace CMBC.EasyFactor
             base.Dispose(disposing);
         }
 
-		#endregion Methods 
+		#endregion?Methods?
+
+
 
         #region Component Designer generated code
 
@@ -110,7 +112,7 @@ namespace CMBC.EasyFactor
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "取消";
+            this.btnCancel.Text = "ȡ��";
             this.btnCancel.Click += new System.EventHandler(this.Cancel);
             // 
             // btnLogin
@@ -122,7 +124,7 @@ namespace CMBC.EasyFactor
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
             this.btnLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnLogin.TabIndex = 0;
-            this.btnLogin.Text = "登录";
+            this.btnLogin.Text = "��¼";
             this.btnLogin.Click += new System.EventHandler(this.LogOn);
             // 
             // panelCenter
@@ -172,7 +174,7 @@ namespace CMBC.EasyFactor
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(34, 16);
             this.lblPassword.TabIndex = 2;
-            this.lblPassword.Text = "密码:";
+            this.lblPassword.Text = "����:";
             // 
             // lblUserId
             // 
@@ -185,7 +187,7 @@ namespace CMBC.EasyFactor
             this.lblUserId.Name = "lblUserId";
             this.lblUserId.Size = new System.Drawing.Size(34, 16);
             this.lblUserId.TabIndex = 0;
-            this.lblUserId.Text = "帐号:";
+            this.lblUserId.Text = "�ʺ�:";
             // 
             // superValidator
             // 
@@ -217,7 +219,7 @@ namespace CMBC.EasyFactor
             this.Name = "LoginWindow";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "登录";
+            this.Text = "��¼";
             this.TopMost = true;
             this.panelFooter.ResumeLayout(false);
             this.panelCenter.ResumeLayout(false);

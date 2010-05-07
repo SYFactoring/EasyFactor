@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Department.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -6,10 +6,10 @@
 
 namespace CMBC.EasyFactor.DB.dbml
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using CMBC.EasyFactor.Utils;
-    using System;
     using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
@@ -17,7 +17,28 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Department
     {
-        #regionÂ PropertiesÂ (12)
+		#region?Properties?(16)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<String> AllDomains
+        {
+            get
+            {
+                List<String> allDomains = new List<string>();
+                allDomains.Add("Ã³Ò×½ğÈÚÊÂÒµ²¿");
+                allDomains.Add("·ÖĞĞÓªÒµ²¿");
+                allDomains.Add("µØ²ú½ğÈÚÊÂÒµ²¿");
+                allDomains.Add("½»Í¨½ğÈÚÊÂÒµ²¿");
+                allDomains.Add("½ğÈÚÊĞ³¡ÊÂÒµ²¿");
+                allDomains.Add("ÄÜÔ´½ğÈÚÊÂÒµ²¿");
+                allDomains.Add("Ò±½ğ½ğÈÚÊÂÒµ²¿");
+                allDomains.Add("ÖĞĞ¡ÆóÒµ½ğÈÚÊÂÒµ²¿");
+                return allDomains;
+            }
+        }
 
         /// <summary>
         /// 
@@ -71,6 +92,28 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Assistant
+        {
+            get
+            {
+                return this.Location.Assistant;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string City
+        {
+            get
+            {
+                return this.Location.LocationName;
             }
         }
 
@@ -286,6 +329,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public string PManager
+        {
+            get
+            {
+                return this.Location.PManager;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime QueryDateFrom
         {
             get;
@@ -312,43 +366,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string City
-        {
-            get
-            {
-                return this.Location.LocationName;
-            }
-        }
+		#endregion?Properties?
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string PManager
-        {
-            get
-            {
-                return this.Location.PManager;
-            }
-        }
+		#region?Methods?(3)?
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Assistant
-        {
-            get
-            {
-                return this.Location.Assistant;
-            }
-        }
-        #endregionÂ Properties
-
-        #regionÂ MethodsÂ (4)
-
-        //Â PublicÂ MethodsÂ (4)Â 
+		//?Public?Methods?(3)?
 
         /// <summary>
         /// 
@@ -362,9 +384,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             List<Department> _allDepartment = new List<Department>();
-            _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "è´¸æ˜“é‡‘èäº‹ä¸šéƒ¨"));
-            _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "åˆ†è¡Œè¥ä¸šéƒ¨"));
-            _allDepartment.AddRange(context.Departments.Where(d => d.Domain != "è´¸æ˜“é‡‘èäº‹ä¸šéƒ¨" && d.Domain != "åˆ†è¡Œäº‹ä¸šéƒ¨"));
+            _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "Ã³Ò×½ğÈÚÊÂÒµ²¿"));
+            _allDepartment.AddRange(context.Departments.Where(d => d.Domain == "·ÖĞĞÓªÒµ²¿"));
+            _allDepartment.AddRange(context.Departments.Where(d => d.Domain != "Ã³Ò×½ğÈÚÊÂÒµ²¿" && d.Domain != "·ÖĞĞÊÂÒµ²¿"));
 
             return _allDepartment;
         }
@@ -384,33 +406,12 @@ namespace CMBC.EasyFactor.DB.dbml
         /// 
         /// </summary>
         /// <returns></returns>
-        public static List<String> AllDomains
-        {
-            get
-            {
-                List<String> allDomains = new List<string>();
-                allDomains.Add("è´¸æ˜“é‡‘èäº‹ä¸šéƒ¨");
-                allDomains.Add("åˆ†è¡Œè¥ä¸šéƒ¨");
-                allDomains.Add("åœ°äº§é‡‘èäº‹ä¸šéƒ¨");
-                allDomains.Add("äº¤é€šé‡‘èäº‹ä¸šéƒ¨");
-                allDomains.Add("é‡‘èå¸‚åœºäº‹ä¸šéƒ¨");
-                allDomains.Add("èƒ½æºé‡‘èäº‹ä¸šéƒ¨");
-                allDomains.Add("å†¶é‡‘é‡‘èäº‹ä¸šéƒ¨");
-                allDomains.Add("ä¸­å°ä¼ä¸šé‡‘èäº‹ä¸šéƒ¨");
-                return allDomains;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
             return this._DepartmentName;
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 
     /// <summary>
@@ -418,7 +419,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public class City
     {
-        #regionÂ ConstructorsÂ (1)
+		#region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -445,9 +446,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ PropertiesÂ (8)
+		#region?Properties?(8)?
 
         /// <summary>
         /// 
@@ -521,6 +522,6 @@ namespace CMBC.EasyFactor.DB.dbml
             set;
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
     }
 }

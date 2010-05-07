@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="MainWindow.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,36 +11,48 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow
     {
-		#region¬†Fields¬†(133)¬†
+		#region?Fields?(174)?
 
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private DevComponents.DotNetBar.ButtonItem btnApplicationCaseQuery;
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private DevComponents.DotNetBar.ButtonItem btnARAssignReport;
+        private DevComponents.DotNetBar.ButtonItem btnAssignBatchQuery;
         private DevComponents.DotNetBar.ButtonItem btnAssignCheck;
+        private DevComponents.DotNetBar.ButtonItem btnAssignImport;
+        private DevComponents.DotNetBar.ButtonItem btnBugReport;
         private DevComponents.DotNetBar.ButtonItem btnBuyerPayment;
+        private DevComponents.DotNetBar.ButtonItem btnCaseImport;
         private DevComponents.DotNetBar.ButtonItem btnCaseNew;
         private DevComponents.DotNetBar.ButtonItem btnCaseQuery;
+        private DevComponents.DotNetBar.ButtonItem btnCaseStat;
         private DevComponents.DotNetBar.ButtonItem btnCDACheck;
         private DevComponents.DotNetBar.ButtonItem btnCDAImport;
         private DevComponents.DotNetBar.ButtonItem btnCDANew;
         private DevComponents.DotNetBar.ButtonItem btnCDAQuery;
         private DevComponents.DotNetBar.ButtonItem btnCDAQuery1;
         private DevComponents.DotNetBar.ButtonItem btnCDAReport;
+        private DevComponents.DotNetBar.ButtonItem btnCheckUpdate;
         private DevComponents.DotNetBar.ButtonItem btnClientCreditLineImport;
         private DevComponents.DotNetBar.ButtonItem btnClientImport;
         private DevComponents.DotNetBar.ButtonItem btnClientMgr;
         private DevComponents.DotNetBar.ButtonItem btnClientNew;
+        private DevComponents.DotNetBar.ButtonItem btnClientOverwriteImport;
         private DevComponents.DotNetBar.ButtonItem btnClientQuery;
         private DevComponents.DotNetBar.ButtonItem btnClientReviewImport;
+        private DevComponents.DotNetBar.ButtonItem btnClientReviewQuery;
         private DevComponents.DotNetBar.ButtonItem btnClinetCreditLineQuery;
         private DevComponents.DotNetBar.ButtonItem btnContractImport;
         private DevComponents.DotNetBar.ButtonItem btnContractQuery;
+        private DevComponents.DotNetBar.ButtonItem btnCreditCoverNegImport;
         private DevComponents.DotNetBar.ButtonItem btnCreditCoverNegQuery;
         private DevComponents.DotNetBar.ButtonItem btnCreditCoverNegQuery2;
+        private DevComponents.DotNetBar.ButtonItem btnCreditNoteImport;
         private DevComponents.DotNetBar.ButtonItem btnCreditNotePayment;
         private DevComponents.DotNetBar.ButtonItem btnDepartmentImport;
+        private DevComponents.DotNetBar.ButtonItem btnDepartmentStat;
         private DevComponents.DotNetBar.ButtonItem btnDepartMgr;
         private DevComponents.DotNetBar.ButtonItem btnDeptQuery;
         private DevComponents.DotNetBar.ButtonItem btnDispute;
@@ -55,7 +67,9 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnFactorNew;
         private DevComponents.DotNetBar.ButtonItem btnFactorsQuery;
         private DevComponents.DotNetBar.ButtonItem btnFeeReport;
+        private DevComponents.DotNetBar.ButtonItem btnFinanceBatchQuery;
         private DevComponents.DotNetBar.ButtonItem btnFinanceCheck;
+        private DevComponents.DotNetBar.ButtonItem btnFinanceImport;
         private DevComponents.DotNetBar.ButtonItem btnFinanceReport;
         private DevComponents.DotNetBar.ButtonItem btnFlawReport;
         private DevComponents.DotNetBar.ButtonItem btnFlawResolve;
@@ -68,15 +82,27 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnInvoiceQuery;
         private DevComponents.DotNetBar.ButtonItem btnInvoicesImport;
         private DevComponents.DotNetBar.ButtonItem btnLeger;
-        private DevComponents.DotNetBar.ButtonItem btnCaseImport;
+        private DevComponents.DotNetBar.ButtonItem btnLocationStat;
         private DevComponents.DotNetBar.ButtonItem btnMainPage;
         private DevComponents.DotNetBar.ButtonItem btnOverDueQuery;
+        private DevComponents.DotNetBar.ButtonItem btnPaymentBatchQuery;
         private DevComponents.DotNetBar.ButtonItem btnPaymentCheck;
+        private DevComponents.DotNetBar.ButtonItem btnPaymentImport;
+        private DevComponents.DotNetBar.ButtonItem btnPoolFinance;
+        private DevComponents.DotNetBar.ButtonItem btnPoolFinanceBatchQuery;
+        private DevComponents.DotNetBar.ButtonItem btnPoolFinanceCheck;
+        private DevComponents.DotNetBar.ButtonItem btnPoolFinanceImport;
+        private DevComponents.DotNetBar.ButtonItem btnPoolRefund;
+        private DevComponents.DotNetBar.ButtonItem btnPoolRefundCheck;
+        private DevComponents.DotNetBar.ButtonItem btnPoolRefundImport;
+        private DevComponents.DotNetBar.ButtonItem btnPoolRefundQuery;
         private DevComponents.DotNetBar.ButtonItem btnQueryClientDominate;
         private DevComponents.DotNetBar.ButtonItem btnQueryClientExport;
         private DevComponents.DotNetBar.ButtonItem btnQueryClientImport;
         private DevComponents.DotNetBar.ButtonItem btnReassignment;
+        private DevComponents.DotNetBar.ButtonItem btnRefundBatchQuery;
         private DevComponents.DotNetBar.ButtonItem btnRefundCheck;
+        private DevComponents.DotNetBar.ButtonItem btnRefundImport;
         private DevComponents.DotNetBar.ButtonItem btnSellerRefund;
         private DevComponents.DotNetBar.ButtonItem btnStartClose;
         private DevComponents.DotNetBar.ButtonItem btnStartExit;
@@ -89,7 +115,6 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnUserImport;
         private DevComponents.DotNetBar.ButtonItem btnUserMgr;
         private DevComponents.DotNetBar.ButtonItem btnUserUpdate;
-        private DevComponents.DotNetBar.ButtonItem btnCreditCoverNegImport;
         private DevComponents.DotNetBar.ComboBoxItem cbStyleManager;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.GalleryContainer galleryContainer;
@@ -107,11 +132,19 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.LabelItem lblCurrentUser;
         private DevComponents.DotNetBar.LabelItem lblRecentDocs;
         private DevComponents.DotNetBar.Controls.ReflectionLabel logoLabel;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCheckAlert;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExit;
+        private System.Windows.Forms.ToolStripMenuItem menuItemHide;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOpen;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip notifyMenu;
         private DevComponents.DotNetBar.Office2007StartButton office2007StartButton;
         private DevComponents.DotNetBar.QatCustomizeItem qatCustomizeItem;
         private DevComponents.DotNetBar.RibbonBar ribbonBarAnalysisReport;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarARImport;
         private DevComponents.DotNetBar.RibbonBar ribbonBarAssign;
         private DevComponents.DotNetBar.RibbonBar ribbonBarBasicInfoImport;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarBatchQuery;
         private DevComponents.DotNetBar.RibbonBar ribbonBarCase;
         private DevComponents.DotNetBar.RibbonBar ribbonBarCaseImport;
         private DevComponents.DotNetBar.RibbonBar ribbonBarCaseQuery;
@@ -129,14 +162,20 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.RibbonBar ribbonBarInvoiceCheck;
         private DevComponents.DotNetBar.RibbonBar ribbonBarInvoiceImport;
         private DevComponents.DotNetBar.RibbonBar ribbonBarPayment;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarPool;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarPoolCheck;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarPoolIMport;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarPoolQuery;
         private DevComponents.DotNetBar.RibbonBar ribbonBarSystem;
         private DevComponents.DotNetBar.RibbonBar ribbonBarTransactionReport;
         private DevComponents.DotNetBar.RibbonBar ribbonBarUserMgr;
         private DevComponents.DotNetBar.RibbonControl ribbonControl;
         private DevComponents.DotNetBar.Ribbon.RibbonClientPanel ribbonDetailPanel;
+        private DevComponents.DotNetBar.RibbonTabItem ribbonItemARImport;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanel1;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanel2;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanel3;
+        private DevComponents.DotNetBar.RibbonPanel ribbonPanelARImport;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanelHelp;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanelInfoMgr;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanelInvoiceMgr;
@@ -149,12 +188,14 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.Bar statusbar;
         private DevComponents.DotNetBar.StyleManager styleManager;
         private DevComponents.DotNetBar.RibbonTabItem tabItemMigration;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
-		#endregion¬†Fields¬†
+		#endregion?Fields?
 
-		#region¬†Methods¬†(1)¬†
+		#region?Methods?(1)?
 
-		//¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -170,7 +211,7 @@ namespace CMBC.EasyFactor
             base.Dispose(disposing);
         }
 
-		#endregion¬†Methods¬†
+		#endregion?Methods?
 
 
 
@@ -185,50 +226,6 @@ namespace CMBC.EasyFactor
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
-            this.ribbonPanelARImport = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarPoolIMport = new DevComponents.DotNetBar.RibbonBar();
-            this.btnPoolFinanceImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnPoolRefundImport = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBarARImport = new DevComponents.DotNetBar.RibbonBar();
-            this.btnAssignImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFinanceImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnPaymentImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnRefundImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCreditNoteImport = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonPanel3 = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarUserMgr = new DevComponents.DotNetBar.RibbonBar();
-            this.btnUserMgr = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBarSystem = new DevComponents.DotNetBar.RibbonBar();
-            this.btnUserImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnDepartmentImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFactorImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnExchangeRateImport = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonPanelMigration = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarInvoiceImport = new DevComponents.DotNetBar.RibbonBar();
-            this.btnInvoicesImport = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBarCreditLineImport = new DevComponents.DotNetBar.RibbonBar();
-            this.btnClientCreditLineImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFactorCreditLineImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCDAImport = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBarCaseImport = new DevComponents.DotNetBar.RibbonBar();
-            this.btnCaseImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCreditCoverNegImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnContractImport = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBarBasicInfoImport = new DevComponents.DotNetBar.RibbonBar();
-            this.btnClientImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnClientOverwriteImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnClientReviewImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFactorImport2 = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonPanel4 = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarPool = new DevComponents.DotNetBar.RibbonBar();
-            this.btnPoolFinance = new DevComponents.DotNetBar.ButtonItem();
-            this.btnPoolRefund = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonPanelHelp = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarHelp = new DevComponents.DotNetBar.RibbonBar();
-            this.btnUserUpdate = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCheckUpdate = new DevComponents.DotNetBar.ButtonItem();
-            this.btnBugReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnHelp = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelQuery = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarPoolQuery = new DevComponents.DotNetBar.RibbonBar();
             this.btnPoolFinanceBatchQuery = new DevComponents.DotNetBar.ButtonItem();
@@ -259,33 +256,29 @@ namespace CMBC.EasyFactor
             this.btnDeptQuery = new DevComponents.DotNetBar.ButtonItem();
             this.btnClientReviewQuery = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanel2 = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarPoolCheck = new DevComponents.DotNetBar.RibbonBar();
+            this.btnPoolFinanceCheck = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPoolRefundCheck = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarInvoiceCheck = new DevComponents.DotNetBar.RibbonBar();
             this.btnCDACheck = new DevComponents.DotNetBar.ButtonItem();
             this.btnAssignCheck = new DevComponents.DotNetBar.ButtonItem();
             this.btnFinanceCheck = new DevComponents.DotNetBar.ButtonItem();
             this.btnPaymentCheck = new DevComponents.DotNetBar.ButtonItem();
             this.btnRefundCheck = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonPanel1 = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarCDA = new DevComponents.DotNetBar.RibbonBar();
-            this.btnCDANew = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCDAQuery1 = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBarCase = new DevComponents.DotNetBar.RibbonBar();
-            this.btnCaseNew = new DevComponents.DotNetBar.ButtonItem();
-            this.btnApplicationCaseQuery = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCreditCoverNegQuery = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonPanelReport = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarAnalysisReport = new DevComponents.DotNetBar.RibbonBar();
-            this.btnCaseStat = new DevComponents.DotNetBar.ButtonItem();
-            this.btnDepartmentStat = new DevComponents.DotNetBar.ButtonItem();
-            this.btnLocationStat = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBarTransactionReport = new DevComponents.DotNetBar.RibbonBar();
-            this.btnARAssignReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFinanceReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFeeReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnFlawReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnCDAReport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnLeger = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonPanelARImport = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarPoolIMport = new DevComponents.DotNetBar.RibbonBar();
+            this.btnPoolFinanceImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPoolRefundImport = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarARImport = new DevComponents.DotNetBar.RibbonBar();
+            this.btnAssignImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFinanceImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPaymentImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnRefundImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCreditNoteImport = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelInvoiceMgr = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarPool = new DevComponents.DotNetBar.RibbonBar();
+            this.btnPoolFinance = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPoolRefund = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarDispute = new DevComponents.DotNetBar.RibbonBar();
             this.btnDispute = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarPayment = new DevComponents.DotNetBar.RibbonBar();
@@ -300,6 +293,14 @@ namespace CMBC.EasyFactor
             this.ribbonBarAssign = new DevComponents.DotNetBar.RibbonBar();
             this.btnInvoiceAssign = new DevComponents.DotNetBar.ButtonItem();
             this.btnFlawResolve = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonPanel1 = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarCDA = new DevComponents.DotNetBar.RibbonBar();
+            this.btnCDANew = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCDAQuery1 = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarCase = new DevComponents.DotNetBar.RibbonBar();
+            this.btnCaseNew = new DevComponents.DotNetBar.ButtonItem();
+            this.btnApplicationCaseQuery = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCreditCoverNegQuery = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelInfoMgr = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarExchange = new DevComponents.DotNetBar.RibbonBar();
             this.btnExchangeQuery = new DevComponents.DotNetBar.ButtonItem();
@@ -311,10 +312,51 @@ namespace CMBC.EasyFactor
             this.ribbonBarClient = new DevComponents.DotNetBar.RibbonBar();
             this.btnClientMgr = new DevComponents.DotNetBar.ButtonItem();
             this.btnClientNew = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonPanelReport = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarAnalysisReport = new DevComponents.DotNetBar.RibbonBar();
+            this.btnCaseStat = new DevComponents.DotNetBar.ButtonItem();
+            this.btnDepartmentStat = new DevComponents.DotNetBar.ButtonItem();
+            this.btnLocationStat = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarTransactionReport = new DevComponents.DotNetBar.RibbonBar();
+            this.btnARAssignReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFinanceReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFeeReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFlawReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCDAReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnLeger = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonPanelMigration = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarInvoiceImport = new DevComponents.DotNetBar.RibbonBar();
+            this.btnInvoicesImport = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarCreditLineImport = new DevComponents.DotNetBar.RibbonBar();
+            this.btnClientCreditLineImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFactorCreditLineImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCDAImport = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarCaseImport = new DevComponents.DotNetBar.RibbonBar();
+            this.btnCaseImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCreditCoverNegImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnContractImport = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarBasicInfoImport = new DevComponents.DotNetBar.RibbonBar();
+            this.btnClientImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnClientOverwriteImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnClientReviewImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFactorImport2 = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonPanel3 = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarUserMgr = new DevComponents.DotNetBar.RibbonBar();
+            this.btnUserMgr = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarSystem = new DevComponents.DotNetBar.RibbonBar();
+            this.btnUserImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnDepartmentImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnFactorImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnExchangeRateImport = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonPanelHelp = new DevComponents.DotNetBar.RibbonPanel();
+            this.ribbonBarHelp = new DevComponents.DotNetBar.RibbonBar();
+            this.btnUserUpdate = new DevComponents.DotNetBar.ButtonItem();
+            this.btnCheckUpdate = new DevComponents.DotNetBar.ButtonItem();
+            this.btnBugReport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnHelp = new DevComponents.DotNetBar.ButtonItem();
             this.itemInfoMgr = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonTabItemCaseMgr = new DevComponents.DotNetBar.RibbonTabItem();
             this.itemAccountsReceivableMgr = new DevComponents.DotNetBar.RibbonTabItem();
-            this.ribbonTabItemPool = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonItemARImport = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonTabItemCheck = new DevComponents.DotNetBar.RibbonTabItem();
             this.itemQuery = new DevComponents.DotNetBar.RibbonTabItem();
@@ -357,17 +399,16 @@ namespace CMBC.EasyFactor
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.ribbonControl.SuspendLayout();
-            this.ribbonPanelARImport.SuspendLayout();
-            this.ribbonPanel3.SuspendLayout();
-            this.ribbonPanelMigration.SuspendLayout();
-            this.ribbonPanel4.SuspendLayout();
-            this.ribbonPanelHelp.SuspendLayout();
             this.ribbonPanelQuery.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
-            this.ribbonPanel1.SuspendLayout();
-            this.ribbonPanelReport.SuspendLayout();
+            this.ribbonPanelARImport.SuspendLayout();
             this.ribbonPanelInvoiceMgr.SuspendLayout();
+            this.ribbonPanel1.SuspendLayout();
             this.ribbonPanelInfoMgr.SuspendLayout();
+            this.ribbonPanelReport.SuspendLayout();
+            this.ribbonPanelMigration.SuspendLayout();
+            this.ribbonPanel3.SuspendLayout();
+            this.ribbonPanelHelp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).BeginInit();
             this.ribbonDetailPanel.SuspendLayout();
             this.notifyMenu.SuspendLayout();
@@ -380,13 +421,12 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
-            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanel1);
-            this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanel4);
-            this.ribbonControl.Controls.Add(this.ribbonPanelARImport);
-            this.ribbonControl.Controls.Add(this.ribbonPanel2);
             this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
+            this.ribbonControl.Controls.Add(this.ribbonPanel2);
+            this.ribbonControl.Controls.Add(this.ribbonPanelARImport);
+            this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
+            this.ribbonControl.Controls.Add(this.ribbonPanel1);
+            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanel3);
@@ -396,7 +436,6 @@ namespace CMBC.EasyFactor
             this.itemInfoMgr,
             this.ribbonTabItemCaseMgr,
             this.itemAccountsReceivableMgr,
-            this.ribbonTabItemPool,
             this.ribbonItemARImport,
             this.ribbonTabItemCheck,
             this.itemQuery,
@@ -415,16 +454,511 @@ namespace CMBC.EasyFactor
             this.qatCustomizeItem});
             this.ribbonControl.Size = new System.Drawing.Size(1082, 154);
             this.ribbonControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonControl.SystemText.MaximizeRibbonText = "ËèúÂçïÊúÄÂ§ßÂåñ";
-            this.ribbonControl.SystemText.MinimizeRibbonText = "ËèúÂçïÊúÄÂ∞èÂåñ";
-            this.ribbonControl.SystemText.QatCustomizeMenuLabel = "ÈÖçÁΩÆÂø´Êç∑Â∑•ÂÖ∑Ê†è";
-            this.ribbonControl.SystemText.QatCustomizeText = "ÈÖçÁΩÆÂø´Êç∑Â∑•ÂÖ∑Ê†è...";
-            this.ribbonControl.SystemText.QatDialogCaption = "ÈÖçÁΩÆÂø´Êç∑Â∑•ÂÖ∑Ê†è";
-            this.ribbonControl.SystemText.QatDialogPlacementCheckbox = "Â∞ÜÂø´Êç∑Â∑•ÂÖ∑Ê†èÁΩÆ‰∫éËèúÂçï‰πã‰∏ã";
-            this.ribbonControl.SystemText.QatPlaceAboveRibbonText = "Â∞ÜÂø´Êç∑Â∑•ÂÖ∑Ê†èÁΩÆ‰∫éËèúÂçï‰πã‰∏ä";
-            this.ribbonControl.SystemText.QatPlaceBelowRibbonText = "Â∞ÜÂø´Êç∑Â∑•ÂÖ∑Ê†èÁΩÆ‰∫éËèúÂçï‰πã‰∏ã";
+            this.ribbonControl.SystemText.MaximizeRibbonText = "≤Àµ•◊Ó¥ÛªØ";
+            this.ribbonControl.SystemText.MinimizeRibbonText = "≤Àµ•◊Ó–°ªØ";
+            this.ribbonControl.SystemText.QatCustomizeMenuLabel = "≈‰÷√øÏΩ›π§æﬂ¿∏";
+            this.ribbonControl.SystemText.QatCustomizeText = "≈‰÷√øÏΩ›π§æﬂ¿∏...";
+            this.ribbonControl.SystemText.QatDialogCaption = "≈‰÷√øÏΩ›π§æﬂ¿∏";
+            this.ribbonControl.SystemText.QatDialogPlacementCheckbox = "Ω´øÏΩ›π§æﬂ¿∏÷√”⁄≤Àµ•÷Æœ¬";
+            this.ribbonControl.SystemText.QatPlaceAboveRibbonText = "Ω´øÏΩ›π§æﬂ¿∏÷√”⁄≤Àµ•÷Æ…œ";
+            this.ribbonControl.SystemText.QatPlaceBelowRibbonText = "Ω´øÏΩ›π§æﬂ¿∏÷√”⁄≤Àµ•÷Æœ¬";
             this.ribbonControl.TabGroupHeight = 14;
             this.ribbonControl.TabIndex = 0;
+            // 
+            // ribbonPanelQuery
+            // 
+            this.ribbonPanelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelQuery.Controls.Add(this.ribbonBarPoolQuery);
+            this.ribbonPanelQuery.Controls.Add(this.ribbonBarBatchQuery);
+            this.ribbonPanelQuery.Controls.Add(this.ribbonBarCaseQuery);
+            this.ribbonPanelQuery.Controls.Add(this.ribbonBarCreditLineQuery);
+            this.ribbonPanelQuery.Controls.Add(this.ribbonBarClientQuery);
+            this.ribbonPanelQuery.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelQuery.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanelQuery.Name = "ribbonPanelQuery";
+            this.ribbonPanelQuery.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelQuery.Size = new System.Drawing.Size(1082, 96);
+            // 
+            // 
+            // 
+            this.ribbonPanelQuery.Style.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanelQuery.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanelQuery.StyleMouseOver.Class = "";
+            this.ribbonPanelQuery.TabIndex = 7;
+            // 
+            // ribbonBarPoolQuery
+            // 
+            this.ribbonBarPoolQuery.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarPoolQuery.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarPoolQuery.BackgroundStyle.Class = "";
+            this.ribbonBarPoolQuery.ContainerControlProcessDialogKey = true;
+            this.ribbonBarPoolQuery.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarPoolQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnPoolFinanceBatchQuery,
+            this.btnPoolRefundQuery});
+            this.ribbonBarPoolQuery.Location = new System.Drawing.Point(945, 0);
+            this.ribbonBarPoolQuery.Name = "ribbonBarPoolQuery";
+            this.ribbonBarPoolQuery.Size = new System.Drawing.Size(100, 93);
+            this.ribbonBarPoolQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarPoolQuery.TabIndex = 4;
+            this.ribbonBarPoolQuery.Text = "≥ÿ≤È—Ø";
+            // 
+            // 
+            // 
+            this.ribbonBarPoolQuery.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarPoolQuery.TitleStyleMouseOver.Class = "";
+            // 
+            // btnPoolFinanceBatchQuery
+            // 
+            this.btnPoolFinanceBatchQuery.Name = "btnPoolFinanceBatchQuery";
+            this.btnPoolFinanceBatchQuery.SubItemsExpandWidth = 14;
+            this.btnPoolFinanceBatchQuery.Text = "≥ÿ»⁄◊ ";
+            this.btnPoolFinanceBatchQuery.Click += new System.EventHandler(this.QueryPoolFinanceBatch);
+            // 
+            // btnPoolRefundQuery
+            // 
+            this.btnPoolRefundQuery.Name = "btnPoolRefundQuery";
+            this.btnPoolRefundQuery.SubItemsExpandWidth = 14;
+            this.btnPoolRefundQuery.Text = "≥ÿªπøÓ";
+            this.btnPoolRefundQuery.Click += new System.EventHandler(this.QueryPoolRefundBatch);
+            // 
+            // ribbonBarBatchQuery
+            // 
+            this.ribbonBarBatchQuery.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarBatchQuery.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarBatchQuery.BackgroundStyle.Class = "";
+            this.ribbonBarBatchQuery.ContainerControlProcessDialogKey = true;
+            this.ribbonBarBatchQuery.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarBatchQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnAssignBatchQuery,
+            this.btnFinanceBatchQuery,
+            this.btnPaymentBatchQuery,
+            this.btnRefundBatchQuery});
+            this.ribbonBarBatchQuery.Location = new System.Drawing.Point(793, 0);
+            this.ribbonBarBatchQuery.Name = "ribbonBarBatchQuery";
+            this.ribbonBarBatchQuery.Size = new System.Drawing.Size(152, 93);
+            this.ribbonBarBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarBatchQuery.TabIndex = 3;
+            this.ribbonBarBatchQuery.Text = "≈˙¥Œ≤È—Ø";
+            // 
+            // 
+            // 
+            this.ribbonBarBatchQuery.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarBatchQuery.TitleStyleMouseOver.Class = "";
+            // 
+            // btnAssignBatchQuery
+            // 
+            this.btnAssignBatchQuery.Name = "btnAssignBatchQuery";
+            this.btnAssignBatchQuery.SubItemsExpandWidth = 14;
+            this.btnAssignBatchQuery.Text = "◊™»√";
+            this.btnAssignBatchQuery.Click += new System.EventHandler(this.QueryAssignBatch);
+            // 
+            // btnFinanceBatchQuery
+            // 
+            this.btnFinanceBatchQuery.Name = "btnFinanceBatchQuery";
+            this.btnFinanceBatchQuery.SubItemsExpandWidth = 14;
+            this.btnFinanceBatchQuery.Text = "»⁄◊ ";
+            this.btnFinanceBatchQuery.Click += new System.EventHandler(this.QueryFinanceBatch);
+            // 
+            // btnPaymentBatchQuery
+            // 
+            this.btnPaymentBatchQuery.Name = "btnPaymentBatchQuery";
+            this.btnPaymentBatchQuery.SubItemsExpandWidth = 14;
+            this.btnPaymentBatchQuery.Text = "∏∂øÓ";
+            this.btnPaymentBatchQuery.Click += new System.EventHandler(this.QueryPaymentBatch);
+            // 
+            // btnRefundBatchQuery
+            // 
+            this.btnRefundBatchQuery.Name = "btnRefundBatchQuery";
+            this.btnRefundBatchQuery.SubItemsExpandWidth = 14;
+            this.btnRefundBatchQuery.Text = "ªπøÓ";
+            this.btnRefundBatchQuery.Click += new System.EventHandler(this.QueryRefundBatch);
+            // 
+            // ribbonBarCaseQuery
+            // 
+            this.ribbonBarCaseQuery.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarCaseQuery.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarCaseQuery.BackgroundStyle.Class = "";
+            this.ribbonBarCaseQuery.ContainerControlProcessDialogKey = true;
+            this.ribbonBarCaseQuery.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarCaseQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnContractQuery,
+            this.btnCaseQuery,
+            this.btnCreditCoverNegQuery2,
+            this.btnInvoiceQuery,
+            this.btnOverDueQuery});
+            this.ribbonBarCaseQuery.Location = new System.Drawing.Point(555, 0);
+            this.ribbonBarCaseQuery.Name = "ribbonBarCaseQuery";
+            this.ribbonBarCaseQuery.Size = new System.Drawing.Size(238, 93);
+            this.ribbonBarCaseQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarCaseQuery.TabIndex = 2;
+            this.ribbonBarCaseQuery.Text = "∞∏◊”≤È—Ø";
+            // 
+            // 
+            // 
+            this.ribbonBarCaseQuery.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarCaseQuery.TitleStyleMouseOver.Class = "";
+            // 
+            // btnContractQuery
+            // 
+            this.btnContractQuery.Name = "btnContractQuery";
+            this.btnContractQuery.SubItemsExpandWidth = 14;
+            this.btnContractQuery.Text = "±£¿Ì∫œÕ¨";
+            this.btnContractQuery.Click += new System.EventHandler(this.QueryContract);
+            // 
+            // btnCaseQuery
+            // 
+            this.btnCaseQuery.Name = "btnCaseQuery";
+            this.btnCaseQuery.SubItemsExpandWidth = 14;
+            this.btnCaseQuery.Text = "∞∏º˛";
+            this.btnCaseQuery.Click += new System.EventHandler(this.QueryCase);
+            // 
+            // btnCreditCoverNegQuery2
+            // 
+            this.btnCreditCoverNegQuery2.Name = "btnCreditCoverNegQuery2";
+            this.btnCreditCoverNegQuery2.SubItemsExpandWidth = 14;
+            this.btnCreditCoverNegQuery2.Text = "∂Ó∂»…Í«Î";
+            this.btnCreditCoverNegQuery2.Click += new System.EventHandler(this.QueryCreditCoverNegs);
+            // 
+            // btnInvoiceQuery
+            // 
+            this.btnInvoiceQuery.Name = "btnInvoiceQuery";
+            this.btnInvoiceQuery.SubItemsExpandWidth = 14;
+            this.btnInvoiceQuery.Text = "∑¢∆±";
+            this.btnInvoiceQuery.Click += new System.EventHandler(this.QueryInvoice);
+            // 
+            // btnOverDueQuery
+            // 
+            this.btnOverDueQuery.Name = "btnOverDueQuery";
+            this.btnOverDueQuery.SubItemsExpandWidth = 14;
+            this.btnOverDueQuery.Text = "”‚∆⁄";
+            this.btnOverDueQuery.Click += new System.EventHandler(this.QueryOverDue);
+            // 
+            // ribbonBarCreditLineQuery
+            // 
+            this.ribbonBarCreditLineQuery.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarCreditLineQuery.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarCreditLineQuery.BackgroundStyle.Class = "";
+            this.ribbonBarCreditLineQuery.ContainerControlProcessDialogKey = true;
+            this.ribbonBarCreditLineQuery.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarCreditLineQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnClinetCreditLineQuery,
+            this.btnGroupCreditLineQuery,
+            this.btnFactorCreditLine,
+            this.btnCDAQuery});
+            this.ribbonBarCreditLineQuery.Location = new System.Drawing.Point(266, 0);
+            this.ribbonBarCreditLineQuery.Name = "ribbonBarCreditLineQuery";
+            this.ribbonBarCreditLineQuery.Size = new System.Drawing.Size(289, 93);
+            this.ribbonBarCreditLineQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarCreditLineQuery.TabIndex = 1;
+            this.ribbonBarCreditLineQuery.Text = "∂Ó∂»≤È—Ø";
+            // 
+            // 
+            // 
+            this.ribbonBarCreditLineQuery.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarCreditLineQuery.TitleStyleMouseOver.Class = "";
+            // 
+            // btnClinetCreditLineQuery
+            // 
+            this.btnClinetCreditLineQuery.Name = "btnClinetCreditLineQuery";
+            this.btnClinetCreditLineQuery.SubItemsExpandWidth = 14;
+            this.btnClinetCreditLineQuery.Text = "øÕªß∂Ó∂»";
+            this.btnClinetCreditLineQuery.Click += new System.EventHandler(this.QueryClientCreditLine);
+            // 
+            // btnGroupCreditLineQuery
+            // 
+            this.btnGroupCreditLineQuery.Name = "btnGroupCreditLineQuery";
+            this.btnGroupCreditLineQuery.SubItemsExpandWidth = 14;
+            this.btnGroupCreditLineQuery.Text = "ºØÕ≈∂Ó∂»";
+            this.btnGroupCreditLineQuery.Click += new System.EventHandler(this.QueryClientGroupCreditLine);
+            // 
+            // btnFactorCreditLine
+            // 
+            this.btnFactorCreditLine.Name = "btnFactorCreditLine";
+            this.btnFactorCreditLine.SubItemsExpandWidth = 14;
+            this.btnFactorCreditLine.Text = "∫œ◊˜ª˙ππ∂Ó∂»";
+            this.btnFactorCreditLine.Click += new System.EventHandler(this.QueryFactorCreditLine);
+            // 
+            // btnCDAQuery
+            // 
+            this.btnCDAQuery.Name = "btnCDAQuery";
+            this.btnCDAQuery.SubItemsExpandWidth = 14;
+            this.btnCDAQuery.Text = "∂Ó∂»Õ®÷™ È";
+            this.btnCDAQuery.Click += new System.EventHandler(this.QueryCDA);
+            // 
+            // ribbonBarClientQuery
+            // 
+            this.ribbonBarClientQuery.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarClientQuery.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarClientQuery.BackgroundStyle.Class = "";
+            this.ribbonBarClientQuery.ContainerControlProcessDialogKey = true;
+            this.ribbonBarClientQuery.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarClientQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnClientQuery,
+            this.itemContainerClientQuery,
+            this.btnFactorsQuery,
+            this.btnDeptQuery,
+            this.btnClientReviewQuery});
+            this.ribbonBarClientQuery.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarClientQuery.Name = "ribbonBarClientQuery";
+            this.ribbonBarClientQuery.Size = new System.Drawing.Size(263, 93);
+            this.ribbonBarClientQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarClientQuery.TabIndex = 0;
+            this.ribbonBarClientQuery.Text = "øÕªß≤È—Ø";
+            // 
+            // 
+            // 
+            this.ribbonBarClientQuery.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarClientQuery.TitleStyleMouseOver.Class = "";
+            // 
+            // btnClientQuery
+            // 
+            this.btnClientQuery.Name = "btnClientQuery";
+            this.btnClientQuery.SubItemsExpandWidth = 14;
+            this.btnClientQuery.Text = "øÕªß";
+            this.btnClientQuery.Click += new System.EventHandler(this.QueryClients);
+            // 
+            // itemContainerClientQuery
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerClientQuery.BackgroundStyle.Class = "";
+            this.itemContainerClientQuery.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerClientQuery.Name = "itemContainerClientQuery";
+            this.itemContainerClientQuery.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnQueryClientExport,
+            this.btnQueryClientImport,
+            this.btnQueryClientDominate});
+            // 
+            // btnQueryClientExport
+            // 
+            this.btnQueryClientExport.Name = "btnQueryClientExport";
+            this.btnQueryClientExport.Text = "≥ˆø⁄±£¿Ì";
+            this.btnQueryClientExport.Click += new System.EventHandler(this.QueryClientExport);
+            // 
+            // btnQueryClientImport
+            // 
+            this.btnQueryClientImport.Name = "btnQueryClientImport";
+            this.btnQueryClientImport.Text = "Ω¯ø⁄±£¿Ì";
+            this.btnQueryClientImport.Click += new System.EventHandler(this.QueryClientImport);
+            // 
+            // btnQueryClientDominate
+            // 
+            this.btnQueryClientDominate.Name = "btnQueryClientDominate";
+            this.btnQueryClientDominate.Text = "π˙ƒ⁄±£¿Ì";
+            this.btnQueryClientDominate.Click += new System.EventHandler(this.QueryClientDominate);
+            // 
+            // btnFactorsQuery
+            // 
+            this.btnFactorsQuery.Name = "btnFactorsQuery";
+            this.btnFactorsQuery.SubItemsExpandWidth = 14;
+            this.btnFactorsQuery.Text = "∫œ◊˜ª˙ππ";
+            this.btnFactorsQuery.Click += new System.EventHandler(this.QueryFactors);
+            // 
+            // btnDeptQuery
+            // 
+            this.btnDeptQuery.Name = "btnDeptQuery";
+            this.btnDeptQuery.SubItemsExpandWidth = 14;
+            this.btnDeptQuery.Text = "≤ø√≈";
+            this.btnDeptQuery.Click += new System.EventHandler(this.QueryDepartments);
+            // 
+            // btnClientReviewQuery
+            // 
+            this.btnClientReviewQuery.Name = "btnClientReviewQuery";
+            this.btnClientReviewQuery.SubItemsExpandWidth = 14;
+            this.btnClientReviewQuery.Text = "–≠≤È“‚º˚";
+            this.btnClientReviewQuery.Click += new System.EventHandler(this.QueryClientReviews);
+            // 
+            // ribbonPanel2
+            // 
+            this.ribbonPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanel2.Controls.Add(this.ribbonBarPoolCheck);
+            this.ribbonPanel2.Controls.Add(this.ribbonBarInvoiceCheck);
+            this.ribbonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanel2.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanel2.Name = "ribbonPanel2";
+            this.ribbonPanel2.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanel2.Size = new System.Drawing.Size(1082, 96);
+            // 
+            // 
+            // 
+            this.ribbonPanel2.Style.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanel2.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanel2.StyleMouseOver.Class = "";
+            this.ribbonPanel2.TabIndex = 10;
+            this.ribbonPanel2.Visible = false;
+            // 
+            // ribbonBarPoolCheck
+            // 
+            this.ribbonBarPoolCheck.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarPoolCheck.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarPoolCheck.BackgroundStyle.Class = "";
+            this.ribbonBarPoolCheck.ContainerControlProcessDialogKey = true;
+            this.ribbonBarPoolCheck.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarPoolCheck.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnPoolFinanceCheck,
+            this.btnPoolRefundCheck});
+            this.ribbonBarPoolCheck.Location = new System.Drawing.Point(353, 0);
+            this.ribbonBarPoolCheck.Name = "ribbonBarPoolCheck";
+            this.ribbonBarPoolCheck.Size = new System.Drawing.Size(154, 93);
+            this.ribbonBarPoolCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarPoolCheck.TabIndex = 5;
+            this.ribbonBarPoolCheck.Text = "≥ÿ∏¥∫À";
+            // 
+            // 
+            // 
+            this.ribbonBarPoolCheck.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarPoolCheck.TitleStyleMouseOver.Class = "";
+            // 
+            // btnPoolFinanceCheck
+            // 
+            this.btnPoolFinanceCheck.Name = "btnPoolFinanceCheck";
+            this.btnPoolFinanceCheck.SubItemsExpandWidth = 14;
+            this.btnPoolFinanceCheck.Text = "≥ÿ»⁄◊ ∏¥∫À";
+            this.btnPoolFinanceCheck.Click += new System.EventHandler(this.CheckPoolFinance);
+            // 
+            // btnPoolRefundCheck
+            // 
+            this.btnPoolRefundCheck.Name = "btnPoolRefundCheck";
+            this.btnPoolRefundCheck.SubItemsExpandWidth = 14;
+            this.btnPoolRefundCheck.Text = "≥ÿªπøÓ∏¥∫À";
+            this.btnPoolRefundCheck.Click += new System.EventHandler(this.CheckPoolRefund);
+            // 
+            // ribbonBarInvoiceCheck
+            // 
+            this.ribbonBarInvoiceCheck.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarInvoiceCheck.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarInvoiceCheck.BackgroundStyle.Class = "";
+            this.ribbonBarInvoiceCheck.ContainerControlProcessDialogKey = true;
+            this.ribbonBarInvoiceCheck.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarInvoiceCheck.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnCDACheck,
+            this.btnAssignCheck,
+            this.btnFinanceCheck,
+            this.btnPaymentCheck,
+            this.btnRefundCheck});
+            this.ribbonBarInvoiceCheck.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarInvoiceCheck.Name = "ribbonBarInvoiceCheck";
+            this.ribbonBarInvoiceCheck.Size = new System.Drawing.Size(350, 93);
+            this.ribbonBarInvoiceCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarInvoiceCheck.TabIndex = 4;
+            this.ribbonBarInvoiceCheck.Text = "∏¥∫À";
+            // 
+            // 
+            // 
+            this.ribbonBarInvoiceCheck.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarInvoiceCheck.TitleStyleMouseOver.Class = "";
+            // 
+            // btnCDACheck
+            // 
+            this.btnCDACheck.Name = "btnCDACheck";
+            this.btnCDACheck.SubItemsExpandWidth = 14;
+            this.btnCDACheck.Text = "∂Ó∂»Õ®÷™ È…Û∫À";
+            this.btnCDACheck.Click += new System.EventHandler(this.CheckCDA);
+            // 
+            // btnAssignCheck
+            // 
+            this.btnAssignCheck.Name = "btnAssignCheck";
+            this.btnAssignCheck.SubItemsExpandWidth = 14;
+            this.btnAssignCheck.Text = "◊™»√∏¥∫À";
+            this.btnAssignCheck.Click += new System.EventHandler(this.CheckAssignBatch);
+            // 
+            // btnFinanceCheck
+            // 
+            this.btnFinanceCheck.Name = "btnFinanceCheck";
+            this.btnFinanceCheck.SubItemsExpandWidth = 14;
+            this.btnFinanceCheck.Text = "»⁄◊ ∏¥∫À";
+            this.btnFinanceCheck.Click += new System.EventHandler(this.CheckFinanceBatch);
+            // 
+            // btnPaymentCheck
+            // 
+            this.btnPaymentCheck.Name = "btnPaymentCheck";
+            this.btnPaymentCheck.SubItemsExpandWidth = 14;
+            this.btnPaymentCheck.Text = "∏∂øÓ∏¥∫À";
+            this.btnPaymentCheck.Click += new System.EventHandler(this.CheckPaymentBatch);
+            // 
+            // btnRefundCheck
+            // 
+            this.btnRefundCheck.Name = "btnRefundCheck";
+            this.btnRefundCheck.SubItemsExpandWidth = 14;
+            this.btnRefundCheck.Text = "ªπøÓ∏¥∫À";
+            this.btnRefundCheck.Click += new System.EventHandler(this.CheckRefundBatch);
             // 
             // ribbonPanelARImport
             // 
@@ -472,7 +1006,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarPoolIMport.Size = new System.Drawing.Size(305, 93);
             this.ribbonBarPoolIMport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarPoolIMport.TabIndex = 1;
-            this.ribbonBarPoolIMport.Text = "Ê±†ËûçËµÑË°®ÂçïÂØºÂÖ•";
+            this.ribbonBarPoolIMport.Text = "≥ÿ»⁄◊ ±Ìµ•µº»Î";
             // 
             // 
             // 
@@ -486,14 +1020,14 @@ namespace CMBC.EasyFactor
             // 
             this.btnPoolFinanceImport.Name = "btnPoolFinanceImport";
             this.btnPoolFinanceImport.SubItemsExpandWidth = 14;
-            this.btnPoolFinanceImport.Text = "ÊîæÊ¨æÊòéÁªÜË°®ÔºàÊ±†ËûçËµÑÔºâ";
+            this.btnPoolFinanceImport.Text = "∑≈øÓ√˜œ∏±Ì£®≥ÿ»⁄◊ £©";
             this.btnPoolFinanceImport.Click += new System.EventHandler(this.ImportPoolFinance);
             // 
             // btnPoolRefundImport
             // 
             this.btnPoolRefundImport.Name = "btnPoolRefundImport";
             this.btnPoolRefundImport.SubItemsExpandWidth = 14;
-            this.btnPoolRefundImport.Text = "ÂÜ≤ÈîÄËûçËµÑÊòéÁªÜË°®ÔºàÊ±†ËûçËµÑÔºâ";
+            this.btnPoolRefundImport.Text = "≥Âœ˙»⁄◊ √˜œ∏±Ì£®≥ÿ»⁄◊ £©";
             this.btnPoolRefundImport.Click += new System.EventHandler(this.ImportPoolRefund);
             // 
             // ribbonBarARImport
@@ -520,7 +1054,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarARImport.Size = new System.Drawing.Size(511, 93);
             this.ribbonBarARImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarARImport.TabIndex = 0;
-            this.ribbonBarARImport.Text = "Â∫îÊî∂Ë¥¶Ê¨æË°®ÂçïÂØºÂÖ•";
+            this.ribbonBarARImport.Text = "”¶ ’’ÀøÓ±Ìµ•µº»Î";
             // 
             // 
             // 
@@ -534,416 +1068,64 @@ namespace CMBC.EasyFactor
             // 
             this.btnAssignImport.Name = "btnAssignImport";
             this.btnAssignImport.SubItemsExpandWidth = 14;
-            this.btnAssignImport.Text = "Â∫îÊî∂Ë¥¶Ê¨æËΩ¨ËÆ©Ê∏ÖÂçï";
+            this.btnAssignImport.Text = "”¶ ’’ÀøÓ◊™»√«Âµ•";
             this.btnAssignImport.Click += new System.EventHandler(this.ImportAssign);
             // 
             // btnFinanceImport
             // 
             this.btnFinanceImport.Name = "btnFinanceImport";
             this.btnFinanceImport.SubItemsExpandWidth = 14;
-            this.btnFinanceImport.Text = "ÊîæÊ¨æÊòéÁªÜË°®";
+            this.btnFinanceImport.Text = "∑≈øÓ√˜œ∏±Ì";
             this.btnFinanceImport.Click += new System.EventHandler(this.ImportFinance);
             // 
             // btnPaymentImport
             // 
             this.btnPaymentImport.Name = "btnPaymentImport";
             this.btnPaymentImport.SubItemsExpandWidth = 14;
-            this.btnPaymentImport.Text = "ÂÜ≤ÈîÄË¥¶Ê¨æÊòéÁªÜË°®";
+            this.btnPaymentImport.Text = "≥Âœ˙’ÀøÓ√˜œ∏±Ì";
             this.btnPaymentImport.Click += new System.EventHandler(this.ImportPayment);
             // 
             // btnRefundImport
             // 
             this.btnRefundImport.Name = "btnRefundImport";
             this.btnRefundImport.SubItemsExpandWidth = 14;
-            this.btnRefundImport.Text = "ÂÜ≤ÈîÄËûçËµÑÊòéÁªÜË°®";
+            this.btnRefundImport.Text = "≥Âœ˙»⁄◊ √˜œ∏±Ì";
             this.btnRefundImport.Click += new System.EventHandler(this.ImportRefund);
             // 
             // btnCreditNoteImport
             // 
             this.btnCreditNoteImport.Name = "btnCreditNoteImport";
             this.btnCreditNoteImport.SubItemsExpandWidth = 14;
-            this.btnCreditNoteImport.Text = "Ë¥∑È°πÂÜ≤ÈîÄË¥¶Ê¨æÊòéÁªÜË°®";
+            this.btnCreditNoteImport.Text = "¥˚œÓ≥Âœ˙’ÀøÓ√˜œ∏±Ì";
             this.btnCreditNoteImport.Click += new System.EventHandler(this.ImportCreditNote);
             // 
-            // ribbonPanel3
+            // ribbonPanelInvoiceMgr
             // 
-            this.ribbonPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanel3.Controls.Add(this.ribbonBarUserMgr);
-            this.ribbonPanel3.Controls.Add(this.ribbonBarSystem);
-            this.ribbonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanel3.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanel3.Name = "ribbonPanel3";
-            this.ribbonPanel3.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanel3.Size = new System.Drawing.Size(1082, 96);
+            this.ribbonPanelInvoiceMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelInvoiceMgr.Controls.Add(this.ribbonBarPool);
+            this.ribbonPanelInvoiceMgr.Controls.Add(this.ribbonBarDispute);
+            this.ribbonPanelInvoiceMgr.Controls.Add(this.ribbonBarPayment);
+            this.ribbonPanelInvoiceMgr.Controls.Add(this.ribbonBarFinance);
+            this.ribbonPanelInvoiceMgr.Controls.Add(this.ribbonBarAssign);
+            this.ribbonPanelInvoiceMgr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelInvoiceMgr.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanelInvoiceMgr.Name = "ribbonPanelInvoiceMgr";
+            this.ribbonPanelInvoiceMgr.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelInvoiceMgr.Size = new System.Drawing.Size(1082, 96);
             // 
             // 
             // 
-            this.ribbonPanel3.Style.Class = "";
+            this.ribbonPanelInvoiceMgr.Style.Class = "";
             // 
             // 
             // 
-            this.ribbonPanel3.StyleMouseDown.Class = "";
+            this.ribbonPanelInvoiceMgr.StyleMouseDown.Class = "";
             // 
             // 
             // 
-            this.ribbonPanel3.StyleMouseOver.Class = "";
-            this.ribbonPanel3.TabIndex = 11;
-            this.ribbonPanel3.Visible = false;
-            // 
-            // ribbonBarUserMgr
-            // 
-            this.ribbonBarUserMgr.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarUserMgr.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarUserMgr.BackgroundStyle.Class = "";
-            this.ribbonBarUserMgr.ContainerControlProcessDialogKey = true;
-            this.ribbonBarUserMgr.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarUserMgr.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnUserMgr});
-            this.ribbonBarUserMgr.Location = new System.Drawing.Point(367, 0);
-            this.ribbonBarUserMgr.Name = "ribbonBarUserMgr";
-            this.ribbonBarUserMgr.Size = new System.Drawing.Size(71, 93);
-            this.ribbonBarUserMgr.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarUserMgr.TabIndex = 4;
-            this.ribbonBarUserMgr.Text = "Áî®Êà∑";
-            // 
-            // 
-            // 
-            this.ribbonBarUserMgr.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarUserMgr.TitleStyleMouseOver.Class = "";
-            // 
-            // btnUserMgr
-            // 
-            this.btnUserMgr.Image = ((System.Drawing.Image)(resources.GetObject("btnUserMgr.Image")));
-            this.btnUserMgr.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnUserMgr.Name = "btnUserMgr";
-            this.btnUserMgr.SubItemsExpandWidth = 14;
-            this.btnUserMgr.Text = "Áî®Êà∑‰ø°ÊÅØ";
-            this.btnUserMgr.Click += new System.EventHandler(this.QueryUsers);
-            // 
-            // ribbonBarSystem
-            // 
-            this.ribbonBarSystem.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarSystem.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarSystem.BackgroundStyle.Class = "";
-            this.ribbonBarSystem.ContainerControlProcessDialogKey = true;
-            this.ribbonBarSystem.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarSystem.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnUserImport,
-            this.btnDepartmentImport,
-            this.btnFactorImport,
-            this.btnExchangeRateImport});
-            this.ribbonBarSystem.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarSystem.Name = "ribbonBarSystem";
-            this.ribbonBarSystem.Size = new System.Drawing.Size(364, 93);
-            this.ribbonBarSystem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarSystem.TabIndex = 0;
-            this.ribbonBarSystem.Text = "ÁÆ°ÁêÜ";
-            // 
-            // 
-            // 
-            this.ribbonBarSystem.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarSystem.TitleStyleMouseOver.Class = "";
-            // 
-            // btnUserImport
-            // 
-            this.btnUserImport.Name = "btnUserImport";
-            this.btnUserImport.SubItemsExpandWidth = 14;
-            this.btnUserImport.Text = "ÂØºÂÖ•Áî®Êà∑‰ø°ÊÅØ";
-            this.btnUserImport.Click += new System.EventHandler(this.ImportUsers);
-            // 
-            // btnDepartmentImport
-            // 
-            this.btnDepartmentImport.Name = "btnDepartmentImport";
-            this.btnDepartmentImport.SubItemsExpandWidth = 14;
-            this.btnDepartmentImport.Text = "ÂØºÂÖ•ÈÉ®Èó®‰ø°ÊÅØ";
-            this.btnDepartmentImport.Click += new System.EventHandler(this.ImportDepartments);
-            // 
-            // btnFactorImport
-            // 
-            this.btnFactorImport.Name = "btnFactorImport";
-            this.btnFactorImport.SubItemsExpandWidth = 14;
-            this.btnFactorImport.Text = "ÂØºÂÖ•‰øùÁêÜÂïÜ‰ø°ÊÅØ";
-            this.btnFactorImport.Click += new System.EventHandler(this.ImportFactors);
-            // 
-            // btnExchangeRateImport
-            // 
-            this.btnExchangeRateImport.Name = "btnExchangeRateImport";
-            this.btnExchangeRateImport.SubItemsExpandWidth = 14;
-            this.btnExchangeRateImport.Text = "ÂØºÂÖ•Ê±áÁéá‰ø°ÊÅØ";
-            this.btnExchangeRateImport.Click += new System.EventHandler(this.ImportExchangeRate);
-            // 
-            // ribbonPanelMigration
-            // 
-            this.ribbonPanelMigration.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelMigration.Controls.Add(this.ribbonBarInvoiceImport);
-            this.ribbonPanelMigration.Controls.Add(this.ribbonBarCreditLineImport);
-            this.ribbonPanelMigration.Controls.Add(this.ribbonBarCaseImport);
-            this.ribbonPanelMigration.Controls.Add(this.ribbonBarBasicInfoImport);
-            this.ribbonPanelMigration.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelMigration.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanelMigration.Name = "ribbonPanelMigration";
-            this.ribbonPanelMigration.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelMigration.Size = new System.Drawing.Size(1082, 96);
-            // 
-            // 
-            // 
-            this.ribbonPanelMigration.Style.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanelMigration.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanelMigration.StyleMouseOver.Class = "";
-            this.ribbonPanelMigration.TabIndex = 8;
-            this.ribbonPanelMigration.Visible = false;
-            // 
-            // ribbonBarInvoiceImport
-            // 
-            this.ribbonBarInvoiceImport.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceImport.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceImport.BackgroundStyle.Class = "";
-            this.ribbonBarInvoiceImport.ContainerControlProcessDialogKey = true;
-            this.ribbonBarInvoiceImport.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarInvoiceImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnInvoicesImport});
-            this.ribbonBarInvoiceImport.Location = new System.Drawing.Point(805, 0);
-            this.ribbonBarInvoiceImport.Name = "ribbonBarInvoiceImport";
-            this.ribbonBarInvoiceImport.Size = new System.Drawing.Size(59, 93);
-            this.ribbonBarInvoiceImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarInvoiceImport.TabIndex = 3;
-            this.ribbonBarInvoiceImport.Text = "Âè∞Â∏êÂØºÂÖ•";
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceImport.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceImport.TitleStyleMouseOver.Class = "";
-            // 
-            // btnInvoicesImport
-            // 
-            this.btnInvoicesImport.Name = "btnInvoicesImport";
-            this.btnInvoicesImport.SubItemsExpandWidth = 14;
-            this.btnInvoicesImport.Text = "Âè∞Â∏ê";
-            this.btnInvoicesImport.Click += new System.EventHandler(this.ImportInvoices);
-            // 
-            // ribbonBarCreditLineImport
-            // 
-            this.ribbonBarCreditLineImport.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarCreditLineImport.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarCreditLineImport.BackgroundStyle.Class = "";
-            this.ribbonBarCreditLineImport.ContainerControlProcessDialogKey = true;
-            this.ribbonBarCreditLineImport.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarCreditLineImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnClientCreditLineImport,
-            this.btnFactorCreditLineImport,
-            this.btnCDAImport});
-            this.ribbonBarCreditLineImport.Location = new System.Drawing.Point(527, 0);
-            this.ribbonBarCreditLineImport.Name = "ribbonBarCreditLineImport";
-            this.ribbonBarCreditLineImport.Size = new System.Drawing.Size(278, 93);
-            this.ribbonBarCreditLineImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarCreditLineImport.TabIndex = 4;
-            this.ribbonBarCreditLineImport.Text = "È¢ùÂ∫¶‰ø°ÊÅØÂØºÂÖ•";
-            // 
-            // 
-            // 
-            this.ribbonBarCreditLineImport.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarCreditLineImport.TitleStyleMouseOver.Class = "";
-            // 
-            // btnClientCreditLineImport
-            // 
-            this.btnClientCreditLineImport.Name = "btnClientCreditLineImport";
-            this.btnClientCreditLineImport.SubItemsExpandWidth = 14;
-            this.btnClientCreditLineImport.Text = "ÂÆ¢Êà∑È¢ùÂ∫¶‰ø°ÊÅØ";
-            this.btnClientCreditLineImport.Click += new System.EventHandler(this.ImportClientCreditLine);
-            // 
-            // btnFactorCreditLineImport
-            // 
-            this.btnFactorCreditLineImport.Name = "btnFactorCreditLineImport";
-            this.btnFactorCreditLineImport.SubItemsExpandWidth = 14;
-            this.btnFactorCreditLineImport.Text = "Âêà‰ΩúÊú∫ÊûÑÈ¢ùÂ∫¶‰ø°ÊÅØ";
-            this.btnFactorCreditLineImport.Click += new System.EventHandler(this.ImportFactorCreditLine);
-            // 
-            // btnCDAImport
-            // 
-            this.btnCDAImport.Name = "btnCDAImport";
-            this.btnCDAImport.SubItemsExpandWidth = 14;
-            this.btnCDAImport.Text = "È¢ùÂ∫¶ÈÄöÁü•‰π¶";
-            this.btnCDAImport.Click += new System.EventHandler(this.ImportCDA);
-            // 
-            // ribbonBarCaseImport
-            // 
-            this.ribbonBarCaseImport.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarCaseImport.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarCaseImport.BackgroundStyle.Class = "";
-            this.ribbonBarCaseImport.ContainerControlProcessDialogKey = true;
-            this.ribbonBarCaseImport.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarCaseImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnCaseImport,
-            this.btnCreditCoverNegImport,
-            this.btnContractImport});
-            this.ribbonBarCaseImport.Location = new System.Drawing.Point(312, 0);
-            this.ribbonBarCaseImport.Name = "ribbonBarCaseImport";
-            this.ribbonBarCaseImport.Size = new System.Drawing.Size(215, 93);
-            this.ribbonBarCaseImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarCaseImport.TabIndex = 5;
-            this.ribbonBarCaseImport.Text = "Ê°à‰ª∂ÂØºÂÖ•";
-            // 
-            // 
-            // 
-            this.ribbonBarCaseImport.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarCaseImport.TitleStyleMouseOver.Class = "";
-            // 
-            // btnCaseImport
-            // 
-            this.btnCaseImport.Name = "btnCaseImport";
-            this.btnCaseImport.SubItemsExpandWidth = 14;
-            this.btnCaseImport.Text = "‰øùÁêÜÊ°à";
-            this.btnCaseImport.Click += new System.EventHandler(this.ImportCases);
-            // 
-            // btnCreditCoverNegImport
-            // 
-            this.btnCreditCoverNegImport.Name = "btnCreditCoverNegImport";
-            this.btnCreditCoverNegImport.SubItemsExpandWidth = 14;
-            this.btnCreditCoverNegImport.Text = "ÂÖ≥ËÅîÈ¢ùÂ∫¶Áî≥ËØ∑";
-            this.btnCreditCoverNegImport.Click += new System.EventHandler(this.ImportCreditCoverNeg);
-            // 
-            // btnContractImport
-            // 
-            this.btnContractImport.Name = "btnContractImport";
-            this.btnContractImport.SubItemsExpandWidth = 14;
-            this.btnContractImport.Text = "‰øùÁêÜÂêàÂêå";
-            this.btnContractImport.Click += new System.EventHandler(this.ImportContract);
-            // 
-            // ribbonBarBasicInfoImport
-            // 
-            this.ribbonBarBasicInfoImport.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarBasicInfoImport.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarBasicInfoImport.BackgroundStyle.Class = "";
-            this.ribbonBarBasicInfoImport.ContainerControlProcessDialogKey = true;
-            this.ribbonBarBasicInfoImport.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarBasicInfoImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnClientImport,
-            this.btnClientOverwriteImport,
-            this.btnClientReviewImport,
-            this.btnFactorImport2});
-            this.ribbonBarBasicInfoImport.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarBasicInfoImport.Name = "ribbonBarBasicInfoImport";
-            this.ribbonBarBasicInfoImport.Size = new System.Drawing.Size(309, 93);
-            this.ribbonBarBasicInfoImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarBasicInfoImport.TabIndex = 2;
-            this.ribbonBarBasicInfoImport.Text = "Âü∫Á°Ä‰ø°ÊÅØÂØºÂÖ•";
-            // 
-            // 
-            // 
-            this.ribbonBarBasicInfoImport.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarBasicInfoImport.TitleStyleMouseOver.Class = "";
-            // 
-            // btnClientImport
-            // 
-            this.btnClientImport.Name = "btnClientImport";
-            this.btnClientImport.SubItemsExpandWidth = 14;
-            this.btnClientImport.Text = "ÂÆ¢Êà∑‰ø°ÊÅØ";
-            this.btnClientImport.Click += new System.EventHandler(this.ImportClients);
-            // 
-            // btnClientOverwriteImport
-            // 
-            this.btnClientOverwriteImport.Name = "btnClientOverwriteImport";
-            this.btnClientOverwriteImport.SubItemsExpandWidth = 14;
-            this.btnClientOverwriteImport.Text = "ÂÆ¢Êà∑‰ø°ÊÅØ(Ë¶ÜÁõñ)";
-            this.btnClientOverwriteImport.Click += new System.EventHandler(this.ImportClientsOverwrite);
-            // 
-            // btnClientReviewImport
-            // 
-            this.btnClientReviewImport.Name = "btnClientReviewImport";
-            this.btnClientReviewImport.SubItemsExpandWidth = 14;
-            this.btnClientReviewImport.Text = "ÂçèÊü•ÊÑèËßÅ";
-            this.btnClientReviewImport.Click += new System.EventHandler(this.ImportClientsReview);
-            // 
-            // btnFactorImport2
-            // 
-            this.btnFactorImport2.Name = "btnFactorImport2";
-            this.btnFactorImport2.SubItemsExpandWidth = 14;
-            this.btnFactorImport2.Text = "Âêà‰ΩúÊú∫ÊûÑ‰ø°ÊÅØ";
-            this.btnFactorImport2.Click += new System.EventHandler(this.ImportFactors);
-            // 
-            // ribbonPanel4
-            // 
-            this.ribbonPanel4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanel4.Controls.Add(this.ribbonBarPool);
-            this.ribbonPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanel4.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanel4.Name = "ribbonPanel4";
-            this.ribbonPanel4.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanel4.Size = new System.Drawing.Size(1082, 96);
-            // 
-            // 
-            // 
-            this.ribbonPanel4.Style.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanel4.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanel4.StyleMouseOver.Class = "";
-            this.ribbonPanel4.TabIndex = 12;
-            this.ribbonPanel4.Visible = false;
+            this.ribbonPanelInvoiceMgr.StyleMouseOver.Class = "";
+            this.ribbonPanelInvoiceMgr.TabIndex = 1;
+            this.ribbonPanelInvoiceMgr.Visible = false;
             // 
             // ribbonBarPool
             // 
@@ -961,12 +1143,12 @@ namespace CMBC.EasyFactor
             this.ribbonBarPool.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnPoolFinance,
             this.btnPoolRefund});
-            this.ribbonBarPool.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarPool.Location = new System.Drawing.Point(703, 0);
             this.ribbonBarPool.Name = "ribbonBarPool";
             this.ribbonBarPool.Size = new System.Drawing.Size(130, 93);
             this.ribbonBarPool.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarPool.TabIndex = 0;
-            this.ribbonBarPool.Text = "Ê±†ËûçËµÑ";
+            this.ribbonBarPool.TabIndex = 7;
+            this.ribbonBarPool.Text = "≥ÿ»⁄◊ ";
             // 
             // 
             // 
@@ -980,553 +1162,219 @@ namespace CMBC.EasyFactor
             // 
             this.btnPoolFinance.Name = "btnPoolFinance";
             this.btnPoolFinance.SubItemsExpandWidth = 14;
-            this.btnPoolFinance.Text = "Ê±†ËûçËµÑ";
+            this.btnPoolFinance.Text = "≥ÿ»⁄◊ ";
             this.btnPoolFinance.Click += new System.EventHandler(this.PoolFinance);
             // 
             // btnPoolRefund
             // 
             this.btnPoolRefund.Name = "btnPoolRefund";
             this.btnPoolRefund.SubItemsExpandWidth = 14;
-            this.btnPoolRefund.Text = "Ê±†ËûçËµÑËøòÊ¨æ";
+            this.btnPoolRefund.Text = "≥ÿ»⁄◊ ªπøÓ";
             this.btnPoolRefund.Click += new System.EventHandler(this.PoolRefund);
             // 
-            // ribbonPanelHelp
+            // ribbonBarDispute
             // 
-            this.ribbonPanelHelp.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelHelp.Controls.Add(this.ribbonBarHelp);
-            this.ribbonPanelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelHelp.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanelHelp.Name = "ribbonPanelHelp";
-            this.ribbonPanelHelp.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelHelp.Size = new System.Drawing.Size(1082, 96);
+            this.ribbonBarDispute.AutoOverflowEnabled = true;
             // 
             // 
             // 
-            this.ribbonPanelHelp.Style.Class = "";
+            this.ribbonBarDispute.BackgroundMouseOverStyle.Class = "";
             // 
             // 
             // 
-            this.ribbonPanelHelp.StyleMouseDown.Class = "";
+            this.ribbonBarDispute.BackgroundStyle.Class = "";
+            this.ribbonBarDispute.ContainerControlProcessDialogKey = true;
+            this.ribbonBarDispute.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarDispute.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnDispute});
+            this.ribbonBarDispute.Location = new System.Drawing.Point(634, 0);
+            this.ribbonBarDispute.Name = "ribbonBarDispute";
+            this.ribbonBarDispute.Size = new System.Drawing.Size(69, 93);
+            this.ribbonBarDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarDispute.TabIndex = 6;
+            this.ribbonBarDispute.Text = "…Ãæ¿";
             // 
             // 
             // 
-            this.ribbonPanelHelp.StyleMouseOver.Class = "";
-            this.ribbonPanelHelp.TabIndex = 6;
-            this.ribbonPanelHelp.Visible = false;
+            this.ribbonBarDispute.TitleStyle.Class = "";
             // 
-            // ribbonBarHelp
             // 
-            this.ribbonBarHelp.AutoOverflowEnabled = true;
             // 
+            this.ribbonBarDispute.TitleStyleMouseOver.Class = "";
             // 
+            // btnDispute
             // 
-            this.ribbonBarHelp.BackgroundMouseOverStyle.Class = "";
+            this.btnDispute.Name = "btnDispute";
+            this.btnDispute.SubItemsExpandWidth = 14;
+            this.btnDispute.Text = "…Ãæ¿¥¶¿Ì";
+            this.btnDispute.Click += new System.EventHandler(this.DisputeResolve);
             // 
+            // ribbonBarPayment
             // 
+            this.ribbonBarPayment.AutoOverflowEnabled = true;
             // 
-            this.ribbonBarHelp.BackgroundStyle.Class = "";
-            this.ribbonBarHelp.ContainerControlProcessDialogKey = true;
-            this.ribbonBarHelp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarHelp.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnUserUpdate,
-            this.btnCheckUpdate,
-            this.btnBugReport,
-            this.btnHelp});
-            this.ribbonBarHelp.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarHelp.Name = "ribbonBarHelp";
-            this.ribbonBarHelp.Size = new System.Drawing.Size(258, 93);
-            this.ribbonBarHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarHelp.TabIndex = 0;
-            this.ribbonBarHelp.Text = "Â∏ÆÂä©";
             // 
             // 
+            this.ribbonBarPayment.BackgroundMouseOverStyle.Class = "";
             // 
-            this.ribbonBarHelp.TitleStyle.Class = "";
             // 
             // 
+            this.ribbonBarPayment.BackgroundStyle.Class = "";
+            this.ribbonBarPayment.ContainerControlProcessDialogKey = true;
+            this.ribbonBarPayment.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarPayment.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnBuyerPayment,
+            this.btnIndirectPayment,
+            this.btnGuaranteePayment,
+            this.btnReassignment,
+            this.btnCreditNotePayment,
+            this.btnSellerRefund});
+            this.ribbonBarPayment.Location = new System.Drawing.Point(218, 0);
+            this.ribbonBarPayment.Name = "ribbonBarPayment";
+            this.ribbonBarPayment.Size = new System.Drawing.Size(416, 93);
+            this.ribbonBarPayment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarPayment.TabIndex = 0;
+            this.ribbonBarPayment.Text = "œ˙’ ";
             // 
-            this.ribbonBarHelp.TitleStyleMouseOver.Class = "";
             // 
-            // btnUserUpdate
             // 
-            this.btnUserUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUserUpdate.Image")));
-            this.btnUserUpdate.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnUserUpdate.Name = "btnUserUpdate";
-            this.btnUserUpdate.SubItemsExpandWidth = 14;
-            this.btnUserUpdate.Text = "‰∏™‰∫∫‰ø°ÊÅØ";
-            this.btnUserUpdate.Click += new System.EventHandler(this.DetailUser);
+            this.ribbonBarPayment.TitleStyle.Class = "";
             // 
-            // btnCheckUpdate
             // 
-            this.btnCheckUpdate.Name = "btnCheckUpdate";
-            this.btnCheckUpdate.SubItemsExpandWidth = 14;
-            this.btnCheckUpdate.Text = "Ê£ÄÊü•Êõ¥Êñ∞";
-            this.btnCheckUpdate.Click += new System.EventHandler(this.CheckUpdate);
             // 
-            // btnBugReport
+            this.ribbonBarPayment.TitleStyleMouseOver.Class = "";
             // 
-            this.btnBugReport.Name = "btnBugReport";
-            this.btnBugReport.SubItemsExpandWidth = 14;
-            this.btnBugReport.Text = "ÈóÆÈ¢òÂèçÈ¶à";
-            this.btnBugReport.Click += new System.EventHandler(this.ReportBug);
+            // btnBuyerPayment
             // 
-            // btnHelp
+            this.btnBuyerPayment.Image = ((System.Drawing.Image)(resources.GetObject("btnBuyerPayment.Image")));
+            this.btnBuyerPayment.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnBuyerPayment.Name = "btnBuyerPayment";
+            this.btnBuyerPayment.SubItemsExpandWidth = 14;
+            this.btnBuyerPayment.Text = "¬Ú∑Ω÷±Ω”∏∂øÓ";
+            this.btnBuyerPayment.Click += new System.EventHandler(this.InvoiceBuyerPayment);
             // 
-            this.btnHelp.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.SubItemsExpandWidth = 14;
-            this.btnHelp.Text = "ÂÖ≥‰∫é";
-            this.btnHelp.Click += new System.EventHandler(this.About);
+            // btnIndirectPayment
             // 
-            // ribbonPanelQuery
+            this.btnIndirectPayment.Name = "btnIndirectPayment";
+            this.btnIndirectPayment.SubItemsExpandWidth = 14;
+            this.btnIndirectPayment.Text = "¬Ú∑Ωº‰Ω”∏∂øÓ";
+            this.btnIndirectPayment.Click += new System.EventHandler(this.InvoiceIndirectPayment);
             // 
-            this.ribbonPanelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelQuery.Controls.Add(this.ribbonBarPoolQuery);
-            this.ribbonPanelQuery.Controls.Add(this.ribbonBarBatchQuery);
-            this.ribbonPanelQuery.Controls.Add(this.ribbonBarCaseQuery);
-            this.ribbonPanelQuery.Controls.Add(this.ribbonBarCreditLineQuery);
-            this.ribbonPanelQuery.Controls.Add(this.ribbonBarClientQuery);
-            this.ribbonPanelQuery.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelQuery.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanelQuery.Name = "ribbonPanelQuery";
-            this.ribbonPanelQuery.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelQuery.Size = new System.Drawing.Size(1082, 96);
+            // btnGuaranteePayment
             // 
+            this.btnGuaranteePayment.Name = "btnGuaranteePayment";
+            this.btnGuaranteePayment.SubItemsExpandWidth = 14;
+            this.btnGuaranteePayment.Text = "µ£±£∏∂øÓ";
+            this.btnGuaranteePayment.Click += new System.EventHandler(this.InvoiceGuaranteePayment);
             // 
+            // btnReassignment
             // 
-            this.ribbonPanelQuery.Style.Class = "";
+            this.btnReassignment.Name = "btnReassignment";
+            this.btnReassignment.SubItemsExpandWidth = 14;
+            this.btnReassignment.Text = "∑¥◊™»√";
+            this.btnReassignment.Click += new System.EventHandler(this.InvoiceSellerReassign);
             // 
+            // btnCreditNotePayment
             // 
+            this.btnCreditNotePayment.Name = "btnCreditNotePayment";
+            this.btnCreditNotePayment.SubItemsExpandWidth = 14;
+            this.btnCreditNotePayment.Text = "¥˚œÓÕ®÷™";
+            this.btnCreditNotePayment.Click += new System.EventHandler(this.CreditNotePayment);
             // 
-            this.ribbonPanelQuery.StyleMouseDown.Class = "";
+            // btnSellerRefund
             // 
+            this.btnSellerRefund.Image = ((System.Drawing.Image)(resources.GetObject("btnSellerRefund.Image")));
+            this.btnSellerRefund.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnSellerRefund.Name = "btnSellerRefund";
+            this.btnSellerRefund.SubItemsExpandWidth = 14;
+            this.btnSellerRefund.Text = "¬Ù∑ΩªπøÓ";
+            this.btnSellerRefund.Click += new System.EventHandler(this.InvoiceSellerRefund);
             // 
+            // ribbonBarFinance
             // 
-            this.ribbonPanelQuery.StyleMouseOver.Class = "";
-            this.ribbonPanelQuery.TabIndex = 7;
-            this.ribbonPanelQuery.Visible = false;
+            this.ribbonBarFinance.AutoOverflowEnabled = true;
             // 
-            // ribbonBarPoolQuery
             // 
-            this.ribbonBarPoolQuery.AutoOverflowEnabled = true;
             // 
+            this.ribbonBarFinance.BackgroundMouseOverStyle.Class = "";
             // 
             // 
-            this.ribbonBarPoolQuery.BackgroundMouseOverStyle.Class = "";
             // 
+            this.ribbonBarFinance.BackgroundStyle.Class = "";
+            this.ribbonBarFinance.ContainerControlProcessDialogKey = true;
+            this.ribbonBarFinance.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarFinance.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnInvoiceFinance});
+            this.ribbonBarFinance.Location = new System.Drawing.Point(135, 0);
+            this.ribbonBarFinance.Name = "ribbonBarFinance";
+            this.ribbonBarFinance.Size = new System.Drawing.Size(83, 93);
+            this.ribbonBarFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarFinance.TabIndex = 5;
+            this.ribbonBarFinance.Text = "»⁄◊ ";
             // 
             // 
-            this.ribbonBarPoolQuery.BackgroundStyle.Class = "";
-            this.ribbonBarPoolQuery.ContainerControlProcessDialogKey = true;
-            this.ribbonBarPoolQuery.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarPoolQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnPoolFinanceBatchQuery,
-            this.btnPoolRefundQuery});
-            this.ribbonBarPoolQuery.Location = new System.Drawing.Point(945, 0);
-            this.ribbonBarPoolQuery.Name = "ribbonBarPoolQuery";
-            this.ribbonBarPoolQuery.Size = new System.Drawing.Size(100, 93);
-            this.ribbonBarPoolQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarPoolQuery.TabIndex = 4;
-            this.ribbonBarPoolQuery.Text = "Ê±†Êü•ËØ¢";
             // 
+            this.ribbonBarFinance.TitleStyle.Class = "";
             // 
             // 
-            this.ribbonBarPoolQuery.TitleStyle.Class = "";
             // 
+            this.ribbonBarFinance.TitleStyleMouseOver.Class = "";
             // 
+            // btnInvoiceFinance
             // 
-            this.ribbonBarPoolQuery.TitleStyleMouseOver.Class = "";
+            this.btnInvoiceFinance.Image = ((System.Drawing.Image)(resources.GetObject("btnInvoiceFinance.Image")));
+            this.btnInvoiceFinance.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnInvoiceFinance.Name = "btnInvoiceFinance";
+            this.btnInvoiceFinance.SubItemsExpandWidth = 14;
+            this.btnInvoiceFinance.Text = "‘§∏∂øÓ÷ß”√";
+            this.btnInvoiceFinance.Click += new System.EventHandler(this.InvoiceFinance);
             // 
-            // btnPoolFinanceBatchQuery
+            // ribbonBarAssign
             // 
-            this.btnPoolFinanceBatchQuery.Name = "btnPoolFinanceBatchQuery";
-            this.btnPoolFinanceBatchQuery.SubItemsExpandWidth = 14;
-            this.btnPoolFinanceBatchQuery.Text = "Ê±†ËûçËµÑ";
-            this.btnPoolFinanceBatchQuery.Click += new System.EventHandler(this.QueryPoolFinanceBatch);
+            this.ribbonBarAssign.AutoOverflowEnabled = true;
             // 
-            // btnPoolRefundQuery
             // 
-            this.btnPoolRefundQuery.Name = "btnPoolRefundQuery";
-            this.btnPoolRefundQuery.SubItemsExpandWidth = 14;
-            this.btnPoolRefundQuery.Text = "Ê±†ËøòÊ¨æ";
-            this.btnPoolRefundQuery.Click += new System.EventHandler(this.QueryPoolRefundBatch);
             // 
-            // ribbonBarBatchQuery
+            this.ribbonBarAssign.BackgroundMouseOverStyle.Class = "";
             // 
-            this.ribbonBarBatchQuery.AutoOverflowEnabled = true;
             // 
             // 
+            this.ribbonBarAssign.BackgroundStyle.Class = "";
+            this.ribbonBarAssign.ContainerControlProcessDialogKey = true;
+            this.ribbonBarAssign.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarAssign.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnInvoiceAssign,
+            this.btnFlawResolve});
+            this.ribbonBarAssign.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarAssign.Name = "ribbonBarAssign";
+            this.ribbonBarAssign.Size = new System.Drawing.Size(132, 93);
+            this.ribbonBarAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarAssign.TabIndex = 4;
+            this.ribbonBarAssign.Text = "◊™»√";
             // 
-            this.ribbonBarBatchQuery.BackgroundMouseOverStyle.Class = "";
             // 
             // 
+            this.ribbonBarAssign.TitleStyle.Class = "";
             // 
-            this.ribbonBarBatchQuery.BackgroundStyle.Class = "";
-            this.ribbonBarBatchQuery.ContainerControlProcessDialogKey = true;
-            this.ribbonBarBatchQuery.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarBatchQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnAssignBatchQuery,
-            this.btnFinanceBatchQuery,
-            this.btnPaymentBatchQuery,
-            this.btnRefundBatchQuery});
-            this.ribbonBarBatchQuery.Location = new System.Drawing.Point(793, 0);
-            this.ribbonBarBatchQuery.Name = "ribbonBarBatchQuery";
-            this.ribbonBarBatchQuery.Size = new System.Drawing.Size(152, 93);
-            this.ribbonBarBatchQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarBatchQuery.TabIndex = 3;
-            this.ribbonBarBatchQuery.Text = "ÊâπÊ¨°Êü•ËØ¢";
             // 
             // 
+            this.ribbonBarAssign.TitleStyleMouseOver.Class = "";
             // 
-            this.ribbonBarBatchQuery.TitleStyle.Class = "";
+            // btnInvoiceAssign
             // 
+            this.btnInvoiceAssign.Image = ((System.Drawing.Image)(resources.GetObject("btnInvoiceAssign.Image")));
+            this.btnInvoiceAssign.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnInvoiceAssign.Name = "btnInvoiceAssign";
+            this.btnInvoiceAssign.SubItemsExpandWidth = 14;
+            this.btnInvoiceAssign.Text = "∑¢∆±¬º»Î";
+            this.btnInvoiceAssign.Click += new System.EventHandler(this.InvoiceAssign);
             // 
+            // btnFlawResolve
             // 
-            this.ribbonBarBatchQuery.TitleStyleMouseOver.Class = "";
-            // 
-            // btnAssignBatchQuery
-            // 
-            this.btnAssignBatchQuery.Name = "btnAssignBatchQuery";
-            this.btnAssignBatchQuery.SubItemsExpandWidth = 14;
-            this.btnAssignBatchQuery.Text = "ËΩ¨ËÆ©";
-            this.btnAssignBatchQuery.Click += new System.EventHandler(this.QueryAssignBatch);
-            // 
-            // btnFinanceBatchQuery
-            // 
-            this.btnFinanceBatchQuery.Name = "btnFinanceBatchQuery";
-            this.btnFinanceBatchQuery.SubItemsExpandWidth = 14;
-            this.btnFinanceBatchQuery.Text = "ËûçËµÑ";
-            this.btnFinanceBatchQuery.Click += new System.EventHandler(this.QueryFinanceBatch);
-            // 
-            // btnPaymentBatchQuery
-            // 
-            this.btnPaymentBatchQuery.Name = "btnPaymentBatchQuery";
-            this.btnPaymentBatchQuery.SubItemsExpandWidth = 14;
-            this.btnPaymentBatchQuery.Text = "‰ªòÊ¨æ";
-            this.btnPaymentBatchQuery.Click += new System.EventHandler(this.QueryPaymentBatch);
-            // 
-            // btnRefundBatchQuery
-            // 
-            this.btnRefundBatchQuery.Name = "btnRefundBatchQuery";
-            this.btnRefundBatchQuery.SubItemsExpandWidth = 14;
-            this.btnRefundBatchQuery.Text = "ËøòÊ¨æ";
-            this.btnRefundBatchQuery.Click += new System.EventHandler(this.QueryRefundBatch);
-            // 
-            // ribbonBarCaseQuery
-            // 
-            this.ribbonBarCaseQuery.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarCaseQuery.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarCaseQuery.BackgroundStyle.Class = "";
-            this.ribbonBarCaseQuery.ContainerControlProcessDialogKey = true;
-            this.ribbonBarCaseQuery.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarCaseQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnContractQuery,
-            this.btnCaseQuery,
-            this.btnCreditCoverNegQuery2,
-            this.btnInvoiceQuery,
-            this.btnOverDueQuery});
-            this.ribbonBarCaseQuery.Location = new System.Drawing.Point(555, 0);
-            this.ribbonBarCaseQuery.Name = "ribbonBarCaseQuery";
-            this.ribbonBarCaseQuery.Size = new System.Drawing.Size(238, 93);
-            this.ribbonBarCaseQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarCaseQuery.TabIndex = 2;
-            this.ribbonBarCaseQuery.Text = "Ê°àÂ≠êÊü•ËØ¢";
-            // 
-            // 
-            // 
-            this.ribbonBarCaseQuery.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarCaseQuery.TitleStyleMouseOver.Class = "";
-            // 
-            // btnContractQuery
-            // 
-            this.btnContractQuery.Name = "btnContractQuery";
-            this.btnContractQuery.SubItemsExpandWidth = 14;
-            this.btnContractQuery.Text = "‰øùÁêÜÂêàÂêå";
-            this.btnContractQuery.Click += new System.EventHandler(this.QueryContract);
-            // 
-            // btnCaseQuery
-            // 
-            this.btnCaseQuery.Name = "btnCaseQuery";
-            this.btnCaseQuery.SubItemsExpandWidth = 14;
-            this.btnCaseQuery.Text = "Ê°à‰ª∂";
-            this.btnCaseQuery.Click += new System.EventHandler(this.QueryCase);
-            // 
-            // btnCreditCoverNegQuery2
-            // 
-            this.btnCreditCoverNegQuery2.Name = "btnCreditCoverNegQuery2";
-            this.btnCreditCoverNegQuery2.SubItemsExpandWidth = 14;
-            this.btnCreditCoverNegQuery2.Text = "È¢ùÂ∫¶Áî≥ËØ∑";
-            this.btnCreditCoverNegQuery2.Click += new System.EventHandler(this.QueryCreditCoverNegs);
-            // 
-            // btnInvoiceQuery
-            // 
-            this.btnInvoiceQuery.Name = "btnInvoiceQuery";
-            this.btnInvoiceQuery.SubItemsExpandWidth = 14;
-            this.btnInvoiceQuery.Text = "ÂèëÁ•®";
-            this.btnInvoiceQuery.Click += new System.EventHandler(this.QueryInvoice);
-            // 
-            // btnOverDueQuery
-            // 
-            this.btnOverDueQuery.Name = "btnOverDueQuery";
-            this.btnOverDueQuery.SubItemsExpandWidth = 14;
-            this.btnOverDueQuery.Text = "ÈÄæÊúü";
-            this.btnOverDueQuery.Click += new System.EventHandler(this.QueryOverDue);
-            // 
-            // ribbonBarCreditLineQuery
-            // 
-            this.ribbonBarCreditLineQuery.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarCreditLineQuery.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarCreditLineQuery.BackgroundStyle.Class = "";
-            this.ribbonBarCreditLineQuery.ContainerControlProcessDialogKey = true;
-            this.ribbonBarCreditLineQuery.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarCreditLineQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnClinetCreditLineQuery,
-            this.btnGroupCreditLineQuery,
-            this.btnFactorCreditLine,
-            this.btnCDAQuery});
-            this.ribbonBarCreditLineQuery.Location = new System.Drawing.Point(266, 0);
-            this.ribbonBarCreditLineQuery.Name = "ribbonBarCreditLineQuery";
-            this.ribbonBarCreditLineQuery.Size = new System.Drawing.Size(289, 93);
-            this.ribbonBarCreditLineQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarCreditLineQuery.TabIndex = 1;
-            this.ribbonBarCreditLineQuery.Text = "È¢ùÂ∫¶Êü•ËØ¢";
-            // 
-            // 
-            // 
-            this.ribbonBarCreditLineQuery.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarCreditLineQuery.TitleStyleMouseOver.Class = "";
-            // 
-            // btnClinetCreditLineQuery
-            // 
-            this.btnClinetCreditLineQuery.Name = "btnClinetCreditLineQuery";
-            this.btnClinetCreditLineQuery.SubItemsExpandWidth = 14;
-            this.btnClinetCreditLineQuery.Text = "ÂÆ¢Êà∑È¢ùÂ∫¶";
-            this.btnClinetCreditLineQuery.Click += new System.EventHandler(this.QueryClientCreditLine);
-            // 
-            // btnGroupCreditLineQuery
-            // 
-            this.btnGroupCreditLineQuery.Name = "btnGroupCreditLineQuery";
-            this.btnGroupCreditLineQuery.SubItemsExpandWidth = 14;
-            this.btnGroupCreditLineQuery.Text = "ÈõÜÂõ¢È¢ùÂ∫¶";
-            this.btnGroupCreditLineQuery.Click += new System.EventHandler(this.QueryClientGroupCreditLine);
-            // 
-            // btnFactorCreditLine
-            // 
-            this.btnFactorCreditLine.Name = "btnFactorCreditLine";
-            this.btnFactorCreditLine.SubItemsExpandWidth = 14;
-            this.btnFactorCreditLine.Text = "Âêà‰ΩúÊú∫ÊûÑÈ¢ùÂ∫¶";
-            this.btnFactorCreditLine.Click += new System.EventHandler(this.QueryFactorCreditLine);
-            // 
-            // btnCDAQuery
-            // 
-            this.btnCDAQuery.Name = "btnCDAQuery";
-            this.btnCDAQuery.SubItemsExpandWidth = 14;
-            this.btnCDAQuery.Text = "È¢ùÂ∫¶ÈÄöÁü•‰π¶";
-            this.btnCDAQuery.Click += new System.EventHandler(this.QueryCDA);
-            // 
-            // ribbonBarClientQuery
-            // 
-            this.ribbonBarClientQuery.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarClientQuery.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarClientQuery.BackgroundStyle.Class = "";
-            this.ribbonBarClientQuery.ContainerControlProcessDialogKey = true;
-            this.ribbonBarClientQuery.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarClientQuery.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnClientQuery,
-            this.itemContainerClientQuery,
-            this.btnFactorsQuery,
-            this.btnDeptQuery,
-            this.btnClientReviewQuery});
-            this.ribbonBarClientQuery.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarClientQuery.Name = "ribbonBarClientQuery";
-            this.ribbonBarClientQuery.Size = new System.Drawing.Size(263, 93);
-            this.ribbonBarClientQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarClientQuery.TabIndex = 0;
-            this.ribbonBarClientQuery.Text = "ÂÆ¢Êà∑Êü•ËØ¢";
-            // 
-            // 
-            // 
-            this.ribbonBarClientQuery.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarClientQuery.TitleStyleMouseOver.Class = "";
-            // 
-            // btnClientQuery
-            // 
-            this.btnClientQuery.Name = "btnClientQuery";
-            this.btnClientQuery.SubItemsExpandWidth = 14;
-            this.btnClientQuery.Text = "ÂÆ¢Êà∑";
-            this.btnClientQuery.Click += new System.EventHandler(this.QueryClients);
-            // 
-            // itemContainerClientQuery
-            // 
-            // 
-            // 
-            // 
-            this.itemContainerClientQuery.BackgroundStyle.Class = "";
-            this.itemContainerClientQuery.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            this.itemContainerClientQuery.Name = "itemContainerClientQuery";
-            this.itemContainerClientQuery.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnQueryClientExport,
-            this.btnQueryClientImport,
-            this.btnQueryClientDominate});
-            // 
-            // btnQueryClientExport
-            // 
-            this.btnQueryClientExport.Name = "btnQueryClientExport";
-            this.btnQueryClientExport.Text = "Âá∫Âè£‰øùÁêÜ";
-            this.btnQueryClientExport.Click += new System.EventHandler(this.QueryClientExport);
-            // 
-            // btnQueryClientImport
-            // 
-            this.btnQueryClientImport.Name = "btnQueryClientImport";
-            this.btnQueryClientImport.Text = "ËøõÂè£‰øùÁêÜ";
-            this.btnQueryClientImport.Click += new System.EventHandler(this.QueryClientImport);
-            // 
-            // btnQueryClientDominate
-            // 
-            this.btnQueryClientDominate.Name = "btnQueryClientDominate";
-            this.btnQueryClientDominate.Text = "ÂõΩÂÜÖ‰øùÁêÜ";
-            this.btnQueryClientDominate.Click += new System.EventHandler(this.QueryClientDominate);
-            // 
-            // btnFactorsQuery
-            // 
-            this.btnFactorsQuery.Name = "btnFactorsQuery";
-            this.btnFactorsQuery.SubItemsExpandWidth = 14;
-            this.btnFactorsQuery.Text = "Âêà‰ΩúÊú∫ÊûÑ";
-            this.btnFactorsQuery.Click += new System.EventHandler(this.QueryFactors);
-            // 
-            // btnDeptQuery
-            // 
-            this.btnDeptQuery.Name = "btnDeptQuery";
-            this.btnDeptQuery.SubItemsExpandWidth = 14;
-            this.btnDeptQuery.Text = "ÈÉ®Èó®";
-            this.btnDeptQuery.Click += new System.EventHandler(this.QueryDepartments);
-            // 
-            // btnClientReviewQuery
-            // 
-            this.btnClientReviewQuery.Name = "btnClientReviewQuery";
-            this.btnClientReviewQuery.SubItemsExpandWidth = 14;
-            this.btnClientReviewQuery.Text = "ÂçèÊü•ÊÑèËßÅ";
-            this.btnClientReviewQuery.Click += new System.EventHandler(this.QueryClientReviews);
-            // 
-            // ribbonPanel2
-            // 
-            this.ribbonPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanel2.Controls.Add(this.ribbonBarInvoiceCheck);
-            this.ribbonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanel2.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanel2.Name = "ribbonPanel2";
-            this.ribbonPanel2.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanel2.Size = new System.Drawing.Size(1082, 96);
-            // 
-            // 
-            // 
-            this.ribbonPanel2.Style.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanel2.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanel2.StyleMouseOver.Class = "";
-            this.ribbonPanel2.TabIndex = 10;
-            this.ribbonPanel2.Visible = false;
-            // 
-            // ribbonBarInvoiceCheck
-            // 
-            this.ribbonBarInvoiceCheck.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceCheck.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceCheck.BackgroundStyle.Class = "";
-            this.ribbonBarInvoiceCheck.ContainerControlProcessDialogKey = true;
-            this.ribbonBarInvoiceCheck.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarInvoiceCheck.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnCDACheck,
-            this.btnAssignCheck,
-            this.btnFinanceCheck,
-            this.btnPaymentCheck,
-            this.btnRefundCheck});
-            this.ribbonBarInvoiceCheck.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarInvoiceCheck.Name = "ribbonBarInvoiceCheck";
-            this.ribbonBarInvoiceCheck.Size = new System.Drawing.Size(350, 93);
-            this.ribbonBarInvoiceCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarInvoiceCheck.TabIndex = 4;
-            this.ribbonBarInvoiceCheck.Text = "Â§çÊ†∏";
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceCheck.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceCheck.TitleStyleMouseOver.Class = "";
-            // 
-            // btnCDACheck
-            // 
-            this.btnCDACheck.Name = "btnCDACheck";
-            this.btnCDACheck.SubItemsExpandWidth = 14;
-            this.btnCDACheck.Text = "È¢ùÂ∫¶ÈÄöÁü•‰π¶ÂÆ°Ê†∏";
-            this.btnCDACheck.Click += new System.EventHandler(this.CheckCDA);
-            // 
-            // btnAssignCheck
-            // 
-            this.btnAssignCheck.Name = "btnAssignCheck";
-            this.btnAssignCheck.SubItemsExpandWidth = 14;
-            this.btnAssignCheck.Text = "ËΩ¨ËÆ©Â§çÊ†∏";
-            this.btnAssignCheck.Click += new System.EventHandler(this.CheckAssignBatch);
-            // 
-            // btnFinanceCheck
-            // 
-            this.btnFinanceCheck.Name = "btnFinanceCheck";
-            this.btnFinanceCheck.SubItemsExpandWidth = 14;
-            this.btnFinanceCheck.Text = "ËûçËµÑÂ§çÊ†∏";
-            this.btnFinanceCheck.Click += new System.EventHandler(this.CheckFinanceBatch);
-            // 
-            // btnPaymentCheck
-            // 
-            this.btnPaymentCheck.Name = "btnPaymentCheck";
-            this.btnPaymentCheck.SubItemsExpandWidth = 14;
-            this.btnPaymentCheck.Text = "‰ªòÊ¨æÂ§çÊ†∏";
-            this.btnPaymentCheck.Click += new System.EventHandler(this.CheckPaymentBatch);
-            // 
-            // btnRefundCheck
-            // 
-            this.btnRefundCheck.Name = "btnRefundCheck";
-            this.btnRefundCheck.SubItemsExpandWidth = 14;
-            this.btnRefundCheck.Text = "ËøòÊ¨æÂ§çÊ†∏";
-            this.btnRefundCheck.Click += new System.EventHandler(this.CheckRefundBatch);
+            this.btnFlawResolve.Name = "btnFlawResolve";
+            this.btnFlawResolve.SubItemsExpandWidth = 14;
+            this.btnFlawResolve.Text = "Ë¶¥√Ω‚≥˝";
+            this.btnFlawResolve.Click += new System.EventHandler(this.FlawResolve);
             // 
             // ribbonPanel1
             // 
@@ -1574,7 +1422,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarCDA.Size = new System.Drawing.Size(204, 93);
             this.ribbonBarCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarCDA.TabIndex = 7;
-            this.ribbonBarCDA.Text = "È¢ùÂ∫¶ÈÄöÁü•‰π¶";
+            this.ribbonBarCDA.Text = "∂Ó∂»Õ®÷™ È";
             // 
             // 
             // 
@@ -1588,14 +1436,14 @@ namespace CMBC.EasyFactor
             // 
             this.btnCDANew.Name = "btnCDANew";
             this.btnCDANew.SubItemsExpandWidth = 14;
-            this.btnCDANew.Text = "Âà∂‰ΩúÈ¢ùÂ∫¶ÈÄöÁü•‰π¶";
+            this.btnCDANew.Text = "÷∆◊˜∂Ó∂»Õ®÷™ È";
             this.btnCDANew.Click += new System.EventHandler(this.NewCDA);
             // 
             // btnCDAQuery1
             // 
             this.btnCDAQuery1.Name = "btnCDAQuery1";
             this.btnCDAQuery1.SubItemsExpandWidth = 14;
-            this.btnCDAQuery1.Text = "È¢ùÂ∫¶ÈÄöÁü•‰π¶Êü•ËØ¢";
+            this.btnCDAQuery1.Text = "∂Ó∂»Õ®÷™ È≤È—Ø";
             this.btnCDAQuery1.Click += new System.EventHandler(this.QueryCDA);
             // 
             // ribbonBarCase
@@ -1620,7 +1468,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarCase.Size = new System.Drawing.Size(240, 93);
             this.ribbonBarCase.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarCase.TabIndex = 6;
-            this.ribbonBarCase.Text = "Ê°à‰ª∂Áî≥ËØ∑";
+            this.ribbonBarCase.Text = "∞∏º˛…Í«Î";
             // 
             // 
             // 
@@ -1634,22 +1482,216 @@ namespace CMBC.EasyFactor
             // 
             this.btnCaseNew.Name = "btnCaseNew";
             this.btnCaseNew.SubItemsExpandWidth = 14;
-            this.btnCaseNew.Text = "Êñ∞Â¢ûÁî≥ËØ∑Ê°à";
+            this.btnCaseNew.Text = "–¬‘ˆ…Í«Î∞∏";
             this.btnCaseNew.Click += new System.EventHandler(this.NewCase);
             // 
             // btnApplicationCaseQuery
             // 
             this.btnApplicationCaseQuery.Name = "btnApplicationCaseQuery";
             this.btnApplicationCaseQuery.SubItemsExpandWidth = 14;
-            this.btnApplicationCaseQuery.Text = "Áî≥ËØ∑Ê°àÊü•ËØ¢";
+            this.btnApplicationCaseQuery.Text = "…Í«Î∞∏≤È—Ø";
             this.btnApplicationCaseQuery.Click += new System.EventHandler(this.QueryApplicationCase);
             // 
             // btnCreditCoverNegQuery
             // 
             this.btnCreditCoverNegQuery.Name = "btnCreditCoverNegQuery";
             this.btnCreditCoverNegQuery.SubItemsExpandWidth = 14;
-            this.btnCreditCoverNegQuery.Text = "È¢ùÂ∫¶Áî≥ËØ∑Êü•ËØ¢";
+            this.btnCreditCoverNegQuery.Text = "∂Ó∂»…Í«Î≤È—Ø";
             this.btnCreditCoverNegQuery.Click += new System.EventHandler(this.QueryCreditCoverNegs);
+            // 
+            // ribbonPanelInfoMgr
+            // 
+            this.ribbonPanelInfoMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelInfoMgr.Controls.Add(this.ribbonBarExchange);
+            this.ribbonPanelInfoMgr.Controls.Add(this.ribbonBarDepartment);
+            this.ribbonPanelInfoMgr.Controls.Add(this.ribbonBarFactor);
+            this.ribbonPanelInfoMgr.Controls.Add(this.ribbonBarClient);
+            this.ribbonPanelInfoMgr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelInfoMgr.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanelInfoMgr.Name = "ribbonPanelInfoMgr";
+            this.ribbonPanelInfoMgr.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelInfoMgr.Size = new System.Drawing.Size(1082, 96);
+            // 
+            // 
+            // 
+            this.ribbonPanelInfoMgr.Style.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanelInfoMgr.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonPanelInfoMgr.StyleMouseOver.Class = "";
+            this.ribbonPanelInfoMgr.TabIndex = 2;
+            this.ribbonPanelInfoMgr.Visible = false;
+            // 
+            // ribbonBarExchange
+            // 
+            this.ribbonBarExchange.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarExchange.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarExchange.BackgroundStyle.Class = "";
+            this.ribbonBarExchange.ContainerControlProcessDialogKey = true;
+            this.ribbonBarExchange.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarExchange.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnExchangeQuery});
+            this.ribbonBarExchange.Location = new System.Drawing.Point(359, 0);
+            this.ribbonBarExchange.Name = "ribbonBarExchange";
+            this.ribbonBarExchange.Size = new System.Drawing.Size(71, 93);
+            this.ribbonBarExchange.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarExchange.TabIndex = 0;
+            this.ribbonBarExchange.Text = "ª„¬ ";
+            // 
+            // 
+            // 
+            this.ribbonBarExchange.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarExchange.TitleStyleMouseOver.Class = "";
+            // 
+            // btnExchangeQuery
+            // 
+            this.btnExchangeQuery.Image = ((System.Drawing.Image)(resources.GetObject("btnExchangeQuery.Image")));
+            this.btnExchangeQuery.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnExchangeQuery.Name = "btnExchangeQuery";
+            this.btnExchangeQuery.SubItemsExpandWidth = 14;
+            this.btnExchangeQuery.Text = "ª„¬ –≈œ¢";
+            this.btnExchangeQuery.Click += new System.EventHandler(this.QueryExchanges);
+            // 
+            // ribbonBarDepartment
+            // 
+            this.ribbonBarDepartment.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarDepartment.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarDepartment.BackgroundStyle.Class = "";
+            this.ribbonBarDepartment.ContainerControlProcessDialogKey = true;
+            this.ribbonBarDepartment.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarDepartment.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnDepartMgr});
+            this.ribbonBarDepartment.Location = new System.Drawing.Point(290, 0);
+            this.ribbonBarDepartment.Name = "ribbonBarDepartment";
+            this.ribbonBarDepartment.Size = new System.Drawing.Size(69, 93);
+            this.ribbonBarDepartment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarDepartment.TabIndex = 2;
+            this.ribbonBarDepartment.Text = "≤ø√≈";
+            // 
+            // 
+            // 
+            this.ribbonBarDepartment.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarDepartment.TitleStyleMouseOver.Class = "";
+            // 
+            // btnDepartMgr
+            // 
+            this.btnDepartMgr.Name = "btnDepartMgr";
+            this.btnDepartMgr.SubItemsExpandWidth = 14;
+            this.btnDepartMgr.Text = "≤ø√≈–≈œ¢";
+            this.btnDepartMgr.Click += new System.EventHandler(this.QueryDepartments);
+            // 
+            // ribbonBarFactor
+            // 
+            this.ribbonBarFactor.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarFactor.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarFactor.BackgroundStyle.Class = "";
+            this.ribbonBarFactor.ContainerControlProcessDialogKey = true;
+            this.ribbonBarFactor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarFactor.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnFactorMgr,
+            this.btnFactorNew});
+            this.ribbonBarFactor.Location = new System.Drawing.Point(135, 0);
+            this.ribbonBarFactor.Name = "ribbonBarFactor";
+            this.ribbonBarFactor.Size = new System.Drawing.Size(155, 93);
+            this.ribbonBarFactor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarFactor.TabIndex = 1;
+            this.ribbonBarFactor.Text = "∫œ◊˜ª˙ππ";
+            // 
+            // 
+            // 
+            this.ribbonBarFactor.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarFactor.TitleStyleMouseOver.Class = "";
+            // 
+            // btnFactorMgr
+            // 
+            this.btnFactorMgr.Name = "btnFactorMgr";
+            this.btnFactorMgr.SubItemsExpandWidth = 14;
+            this.btnFactorMgr.Text = "ª˙ππ–≈œ¢";
+            this.btnFactorMgr.Click += new System.EventHandler(this.QueryFactors);
+            // 
+            // btnFactorNew
+            // 
+            this.btnFactorNew.Name = "btnFactorNew";
+            this.btnFactorNew.SubItemsExpandWidth = 14;
+            this.btnFactorNew.Text = "–¬‘ˆ∫œ◊˜ª˙ππ";
+            this.btnFactorNew.Click += new System.EventHandler(this.NewFactor);
+            // 
+            // ribbonBarClient
+            // 
+            this.ribbonBarClient.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarClient.BackgroundMouseOverStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarClient.BackgroundStyle.Class = "";
+            this.ribbonBarClient.ContainerControlProcessDialogKey = true;
+            this.ribbonBarClient.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarClient.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnClientMgr,
+            this.btnClientNew});
+            this.ribbonBarClient.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarClient.Name = "ribbonBarClient";
+            this.ribbonBarClient.Size = new System.Drawing.Size(132, 93);
+            this.ribbonBarClient.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarClient.TabIndex = 0;
+            this.ribbonBarClient.Text = "øÕªß";
+            // 
+            // 
+            // 
+            this.ribbonBarClient.TitleStyle.Class = "";
+            // 
+            // 
+            // 
+            this.ribbonBarClient.TitleStyleMouseOver.Class = "";
+            // 
+            // btnClientMgr
+            // 
+            this.btnClientMgr.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnClientMgr.Name = "btnClientMgr";
+            this.btnClientMgr.SubItemsExpandWidth = 14;
+            this.btnClientMgr.Text = "øÕªß–≈œ¢";
+            this.btnClientMgr.Click += new System.EventHandler(this.QueryClients);
+            // 
+            // btnClientNew
+            // 
+            this.btnClientNew.Name = "btnClientNew";
+            this.btnClientNew.SubItemsExpandWidth = 14;
+            this.btnClientNew.Text = "–¬‘ˆøÕªß";
+            this.btnClientNew.Click += new System.EventHandler(this.NewClient);
             // 
             // ribbonPanelReport
             // 
@@ -1698,7 +1740,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarAnalysisReport.Size = new System.Drawing.Size(191, 93);
             this.ribbonBarAnalysisReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarAnalysisReport.TabIndex = 1;
-            this.ribbonBarAnalysisReport.Text = "ÁªüËÆ°ÂàÜÊûê";
+            this.ribbonBarAnalysisReport.Text = "Õ≥º∆∑÷Œˆ";
             // 
             // 
             // 
@@ -1712,21 +1754,21 @@ namespace CMBC.EasyFactor
             // 
             this.btnCaseStat.Name = "btnCaseStat";
             this.btnCaseStat.SubItemsExpandWidth = 14;
-            this.btnCaseStat.Text = "Ê°à‰ª∂ÁªüËÆ°";
+            this.btnCaseStat.Text = "∞∏º˛Õ≥º∆";
             this.btnCaseStat.Click += new System.EventHandler(this.StatCase);
             // 
             // btnDepartmentStat
             // 
             this.btnDepartmentStat.Name = "btnDepartmentStat";
             this.btnDepartmentStat.SubItemsExpandWidth = 14;
-            this.btnDepartmentStat.Text = "ÂàÜÈÉ®ÁªüËÆ°";
+            this.btnDepartmentStat.Text = "∑÷≤øÕ≥º∆";
             this.btnDepartmentStat.Click += new System.EventHandler(this.StatDepartment);
             // 
             // btnLocationStat
             // 
             this.btnLocationStat.Name = "btnLocationStat";
             this.btnLocationStat.SubItemsExpandWidth = 14;
-            this.btnLocationStat.Text = "Âå∫ÂüüÁªüËÆ°";
+            this.btnLocationStat.Text = "«¯”ÚÕ≥º∆";
             this.btnLocationStat.Click += new System.EventHandler(this.StatLocation);
             // 
             // ribbonBarTransactionReport
@@ -1754,7 +1796,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarTransactionReport.Size = new System.Drawing.Size(524, 93);
             this.ribbonBarTransactionReport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarTransactionReport.TabIndex = 0;
-            this.ribbonBarTransactionReport.Text = "‰∏öÂä°Êä•Ë°®";
+            this.ribbonBarTransactionReport.Text = "“µŒÒ±®±Ì";
             // 
             // 
             // 
@@ -1770,534 +1812,548 @@ namespace CMBC.EasyFactor
             this.btnARAssignReport.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
             this.btnARAssignReport.Name = "btnARAssignReport";
             this.btnARAssignReport.SubItemsExpandWidth = 14;
-            this.btnARAssignReport.Text = "Â∫îÊî∂Ë¥¶Ê¨æËΩ¨ËÆ©ÊòéÁªÜË°®";
+            this.btnARAssignReport.Text = "”¶ ’’ÀøÓ◊™»√√˜œ∏±Ì";
             this.btnARAssignReport.Click += new System.EventHandler(this.ReportARPayment);
             // 
             // btnFinanceReport
             // 
             this.btnFinanceReport.Name = "btnFinanceReport";
             this.btnFinanceReport.SubItemsExpandWidth = 14;
-            this.btnFinanceReport.Text = "ÂèØËûçËµÑË¥¶Ê¨æÊòéÁªÜË°®";
+            this.btnFinanceReport.Text = "ø…»⁄◊ ’ÀøÓ√˜œ∏±Ì";
             this.btnFinanceReport.Click += new System.EventHandler(this.ReportFinance);
             // 
             // btnFeeReport
             // 
             this.btnFeeReport.Name = "btnFeeReport";
             this.btnFeeReport.SubItemsExpandWidth = 14;
-            this.btnFeeReport.Text = "‰øùÁêÜË¥πÁî®ÊòéÁªÜË°®";
+            this.btnFeeReport.Text = "±£¿Ì∑—”√√˜œ∏±Ì";
             this.btnFeeReport.Click += new System.EventHandler(this.ReportFee);
             // 
             // btnFlawReport
             // 
             this.btnFlawReport.Name = "btnFlawReport";
             this.btnFlawReport.SubItemsExpandWidth = 14;
-            this.btnFlawReport.Text = "ÁëïÁñµÈÄöÁü•‰π¶";
+            this.btnFlawReport.Text = "Ë¶¥√Õ®÷™ È";
             this.btnFlawReport.Click += new System.EventHandler(this.ReportInvoiceFlaw);
             // 
             // btnCDAReport
             // 
             this.btnCDAReport.Name = "btnCDAReport";
             this.btnCDAReport.SubItemsExpandWidth = 14;
-            this.btnCDAReport.Text = "È¢ùÂ∫¶ÈÄöÁü•‰π¶";
+            this.btnCDAReport.Text = "∂Ó∂»Õ®÷™ È";
             this.btnCDAReport.Click += new System.EventHandler(this.ReportCDA);
             // 
             // btnLeger
             // 
             this.btnLeger.Name = "btnLeger";
             this.btnLeger.SubItemsExpandWidth = 14;
-            this.btnLeger.Text = "Âè∞Â∏ê";
+            this.btnLeger.Text = "Ã®’ ";
             this.btnLeger.Click += new System.EventHandler(this.ReportLeger);
             // 
-            // ribbonPanelInvoiceMgr
+            // ribbonPanelMigration
             // 
-            this.ribbonPanelInvoiceMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelInvoiceMgr.Controls.Add(this.ribbonBarDispute);
-            this.ribbonPanelInvoiceMgr.Controls.Add(this.ribbonBarPayment);
-            this.ribbonPanelInvoiceMgr.Controls.Add(this.ribbonBarFinance);
-            this.ribbonPanelInvoiceMgr.Controls.Add(this.ribbonBarAssign);
-            this.ribbonPanelInvoiceMgr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelInvoiceMgr.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanelInvoiceMgr.Name = "ribbonPanelInvoiceMgr";
-            this.ribbonPanelInvoiceMgr.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelInvoiceMgr.Size = new System.Drawing.Size(1082, 96);
+            this.ribbonPanelMigration.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelMigration.Controls.Add(this.ribbonBarInvoiceImport);
+            this.ribbonPanelMigration.Controls.Add(this.ribbonBarCreditLineImport);
+            this.ribbonPanelMigration.Controls.Add(this.ribbonBarCaseImport);
+            this.ribbonPanelMigration.Controls.Add(this.ribbonBarBasicInfoImport);
+            this.ribbonPanelMigration.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelMigration.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanelMigration.Name = "ribbonPanelMigration";
+            this.ribbonPanelMigration.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelMigration.Size = new System.Drawing.Size(1082, 96);
             // 
             // 
             // 
-            this.ribbonPanelInvoiceMgr.Style.Class = "";
+            this.ribbonPanelMigration.Style.Class = "";
             // 
             // 
             // 
-            this.ribbonPanelInvoiceMgr.StyleMouseDown.Class = "";
+            this.ribbonPanelMigration.StyleMouseDown.Class = "";
             // 
             // 
             // 
-            this.ribbonPanelInvoiceMgr.StyleMouseOver.Class = "";
-            this.ribbonPanelInvoiceMgr.TabIndex = 1;
-            this.ribbonPanelInvoiceMgr.Visible = false;
+            this.ribbonPanelMigration.StyleMouseOver.Class = "";
+            this.ribbonPanelMigration.TabIndex = 8;
+            this.ribbonPanelMigration.Visible = false;
             // 
-            // ribbonBarDispute
+            // ribbonBarInvoiceImport
             // 
-            this.ribbonBarDispute.AutoOverflowEnabled = true;
+            this.ribbonBarInvoiceImport.AutoOverflowEnabled = true;
             // 
             // 
             // 
-            this.ribbonBarDispute.BackgroundMouseOverStyle.Class = "";
+            this.ribbonBarInvoiceImport.BackgroundMouseOverStyle.Class = "";
             // 
             // 
             // 
-            this.ribbonBarDispute.BackgroundStyle.Class = "";
-            this.ribbonBarDispute.ContainerControlProcessDialogKey = true;
-            this.ribbonBarDispute.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarDispute.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnDispute});
-            this.ribbonBarDispute.Location = new System.Drawing.Point(634, 0);
-            this.ribbonBarDispute.Name = "ribbonBarDispute";
-            this.ribbonBarDispute.Size = new System.Drawing.Size(69, 93);
-            this.ribbonBarDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarDispute.TabIndex = 6;
-            this.ribbonBarDispute.Text = "ÂïÜÁ∫†";
+            this.ribbonBarInvoiceImport.BackgroundStyle.Class = "";
+            this.ribbonBarInvoiceImport.ContainerControlProcessDialogKey = true;
+            this.ribbonBarInvoiceImport.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarInvoiceImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnInvoicesImport});
+            this.ribbonBarInvoiceImport.Location = new System.Drawing.Point(805, 0);
+            this.ribbonBarInvoiceImport.Name = "ribbonBarInvoiceImport";
+            this.ribbonBarInvoiceImport.Size = new System.Drawing.Size(59, 93);
+            this.ribbonBarInvoiceImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarInvoiceImport.TabIndex = 3;
+            this.ribbonBarInvoiceImport.Text = "Ã®’ µº»Î";
             // 
             // 
             // 
-            this.ribbonBarDispute.TitleStyle.Class = "";
+            this.ribbonBarInvoiceImport.TitleStyle.Class = "";
             // 
             // 
             // 
-            this.ribbonBarDispute.TitleStyleMouseOver.Class = "";
+            this.ribbonBarInvoiceImport.TitleStyleMouseOver.Class = "";
             // 
-            // btnDispute
+            // btnInvoicesImport
             // 
-            this.btnDispute.Name = "btnDispute";
-            this.btnDispute.SubItemsExpandWidth = 14;
-            this.btnDispute.Text = "ÂïÜÁ∫†Â§ÑÁêÜ";
-            this.btnDispute.Click += new System.EventHandler(this.DisputeResolve);
+            this.btnInvoicesImport.Name = "btnInvoicesImport";
+            this.btnInvoicesImport.SubItemsExpandWidth = 14;
+            this.btnInvoicesImport.Text = "Ã®’ ";
+            this.btnInvoicesImport.Click += new System.EventHandler(this.ImportInvoices);
             // 
-            // ribbonBarPayment
+            // ribbonBarCreditLineImport
             // 
-            this.ribbonBarPayment.AutoOverflowEnabled = true;
+            this.ribbonBarCreditLineImport.AutoOverflowEnabled = true;
             // 
             // 
             // 
-            this.ribbonBarPayment.BackgroundMouseOverStyle.Class = "";
+            this.ribbonBarCreditLineImport.BackgroundMouseOverStyle.Class = "";
             // 
             // 
             // 
-            this.ribbonBarPayment.BackgroundStyle.Class = "";
-            this.ribbonBarPayment.ContainerControlProcessDialogKey = true;
-            this.ribbonBarPayment.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarPayment.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnBuyerPayment,
-            this.btnIndirectPayment,
-            this.btnGuaranteePayment,
-            this.btnReassignment,
-            this.btnCreditNotePayment,
-            this.btnSellerRefund});
-            this.ribbonBarPayment.Location = new System.Drawing.Point(218, 0);
-            this.ribbonBarPayment.Name = "ribbonBarPayment";
-            this.ribbonBarPayment.Size = new System.Drawing.Size(416, 93);
-            this.ribbonBarPayment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarPayment.TabIndex = 0;
-            this.ribbonBarPayment.Text = "ÈîÄÂ∏ê";
+            this.ribbonBarCreditLineImport.BackgroundStyle.Class = "";
+            this.ribbonBarCreditLineImport.ContainerControlProcessDialogKey = true;
+            this.ribbonBarCreditLineImport.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarCreditLineImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnClientCreditLineImport,
+            this.btnFactorCreditLineImport,
+            this.btnCDAImport});
+            this.ribbonBarCreditLineImport.Location = new System.Drawing.Point(527, 0);
+            this.ribbonBarCreditLineImport.Name = "ribbonBarCreditLineImport";
+            this.ribbonBarCreditLineImport.Size = new System.Drawing.Size(278, 93);
+            this.ribbonBarCreditLineImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarCreditLineImport.TabIndex = 4;
+            this.ribbonBarCreditLineImport.Text = "∂Ó∂»–≈œ¢µº»Î";
             // 
             // 
             // 
-            this.ribbonBarPayment.TitleStyle.Class = "";
+            this.ribbonBarCreditLineImport.TitleStyle.Class = "";
             // 
             // 
             // 
-            this.ribbonBarPayment.TitleStyleMouseOver.Class = "";
+            this.ribbonBarCreditLineImport.TitleStyleMouseOver.Class = "";
             // 
-            // btnBuyerPayment
+            // btnClientCreditLineImport
             // 
-            this.btnBuyerPayment.Image = ((System.Drawing.Image)(resources.GetObject("btnBuyerPayment.Image")));
-            this.btnBuyerPayment.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnBuyerPayment.Name = "btnBuyerPayment";
-            this.btnBuyerPayment.SubItemsExpandWidth = 14;
-            this.btnBuyerPayment.Text = "‰π∞ÊñπÁõ¥Êé•‰ªòÊ¨æ";
-            this.btnBuyerPayment.Click += new System.EventHandler(this.InvoiceBuyerPayment);
+            this.btnClientCreditLineImport.Name = "btnClientCreditLineImport";
+            this.btnClientCreditLineImport.SubItemsExpandWidth = 14;
+            this.btnClientCreditLineImport.Text = "øÕªß∂Ó∂»–≈œ¢";
+            this.btnClientCreditLineImport.Click += new System.EventHandler(this.ImportClientCreditLine);
             // 
-            // btnIndirectPayment
+            // btnFactorCreditLineImport
             // 
-            this.btnIndirectPayment.Name = "btnIndirectPayment";
-            this.btnIndirectPayment.SubItemsExpandWidth = 14;
-            this.btnIndirectPayment.Text = "‰π∞ÊñπÈó¥Êé•‰ªòÊ¨æ";
-            this.btnIndirectPayment.Click += new System.EventHandler(this.InvoiceIndirectPayment);
+            this.btnFactorCreditLineImport.Name = "btnFactorCreditLineImport";
+            this.btnFactorCreditLineImport.SubItemsExpandWidth = 14;
+            this.btnFactorCreditLineImport.Text = "∫œ◊˜ª˙ππ∂Ó∂»–≈œ¢";
+            this.btnFactorCreditLineImport.Click += new System.EventHandler(this.ImportFactorCreditLine);
             // 
-            // btnGuaranteePayment
+            // btnCDAImport
             // 
-            this.btnGuaranteePayment.Name = "btnGuaranteePayment";
-            this.btnGuaranteePayment.SubItemsExpandWidth = 14;
-            this.btnGuaranteePayment.Text = "ÊãÖ‰øù‰ªòÊ¨æ";
-            this.btnGuaranteePayment.Click += new System.EventHandler(this.InvoiceGuaranteePayment);
+            this.btnCDAImport.Name = "btnCDAImport";
+            this.btnCDAImport.SubItemsExpandWidth = 14;
+            this.btnCDAImport.Text = "∂Ó∂»Õ®÷™ È";
+            this.btnCDAImport.Click += new System.EventHandler(this.ImportCDA);
             // 
-            // btnReassignment
+            // ribbonBarCaseImport
             // 
-            this.btnReassignment.Name = "btnReassignment";
-            this.btnReassignment.SubItemsExpandWidth = 14;
-            this.btnReassignment.Text = "ÂèçËΩ¨ËÆ©";
-            this.btnReassignment.Click += new System.EventHandler(this.InvoiceSellerReassign);
+            this.ribbonBarCaseImport.AutoOverflowEnabled = true;
             // 
-            // btnCreditNotePayment
             // 
-            this.btnCreditNotePayment.Name = "btnCreditNotePayment";
-            this.btnCreditNotePayment.SubItemsExpandWidth = 14;
-            this.btnCreditNotePayment.Text = "Ë¥∑È°πÈÄöÁü•";
-            this.btnCreditNotePayment.Click += new System.EventHandler(this.CreditNotePayment);
             // 
-            // btnSellerRefund
+            this.ribbonBarCaseImport.BackgroundMouseOverStyle.Class = "";
             // 
-            this.btnSellerRefund.Image = ((System.Drawing.Image)(resources.GetObject("btnSellerRefund.Image")));
-            this.btnSellerRefund.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnSellerRefund.Name = "btnSellerRefund";
-            this.btnSellerRefund.SubItemsExpandWidth = 14;
-            this.btnSellerRefund.Text = "ÂçñÊñπËøòÊ¨æ";
-            this.btnSellerRefund.Click += new System.EventHandler(this.InvoiceSellerRefund);
             // 
-            // ribbonBarFinance
             // 
-            this.ribbonBarFinance.AutoOverflowEnabled = true;
+            this.ribbonBarCaseImport.BackgroundStyle.Class = "";
+            this.ribbonBarCaseImport.ContainerControlProcessDialogKey = true;
+            this.ribbonBarCaseImport.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarCaseImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnCaseImport,
+            this.btnCreditCoverNegImport,
+            this.btnContractImport});
+            this.ribbonBarCaseImport.Location = new System.Drawing.Point(312, 0);
+            this.ribbonBarCaseImport.Name = "ribbonBarCaseImport";
+            this.ribbonBarCaseImport.Size = new System.Drawing.Size(215, 93);
+            this.ribbonBarCaseImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarCaseImport.TabIndex = 5;
+            this.ribbonBarCaseImport.Text = "∞∏º˛µº»Î";
             // 
             // 
             // 
-            this.ribbonBarFinance.BackgroundMouseOverStyle.Class = "";
+            this.ribbonBarCaseImport.TitleStyle.Class = "";
             // 
             // 
             // 
-            this.ribbonBarFinance.BackgroundStyle.Class = "";
-            this.ribbonBarFinance.ContainerControlProcessDialogKey = true;
-            this.ribbonBarFinance.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarFinance.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnInvoiceFinance});
-            this.ribbonBarFinance.Location = new System.Drawing.Point(135, 0);
-            this.ribbonBarFinance.Name = "ribbonBarFinance";
-            this.ribbonBarFinance.Size = new System.Drawing.Size(83, 93);
-            this.ribbonBarFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarFinance.TabIndex = 5;
-            this.ribbonBarFinance.Text = "ËûçËµÑ";
+            this.ribbonBarCaseImport.TitleStyleMouseOver.Class = "";
             // 
+            // btnCaseImport
             // 
+            this.btnCaseImport.Name = "btnCaseImport";
+            this.btnCaseImport.SubItemsExpandWidth = 14;
+            this.btnCaseImport.Text = "±£¿Ì∞∏";
+            this.btnCaseImport.Click += new System.EventHandler(this.ImportCases);
             // 
-            this.ribbonBarFinance.TitleStyle.Class = "";
+            // btnCreditCoverNegImport
             // 
+            this.btnCreditCoverNegImport.Name = "btnCreditCoverNegImport";
+            this.btnCreditCoverNegImport.SubItemsExpandWidth = 14;
+            this.btnCreditCoverNegImport.Text = "πÿ¡™∂Ó∂»…Í«Î";
+            this.btnCreditCoverNegImport.Click += new System.EventHandler(this.ImportCreditCoverNeg);
             // 
+            // btnContractImport
             // 
-            this.ribbonBarFinance.TitleStyleMouseOver.Class = "";
+            this.btnContractImport.Name = "btnContractImport";
+            this.btnContractImport.SubItemsExpandWidth = 14;
+            this.btnContractImport.Text = "±£¿Ì∫œÕ¨";
+            this.btnContractImport.Click += new System.EventHandler(this.ImportContract);
             // 
-            // btnInvoiceFinance
+            // ribbonBarBasicInfoImport
             // 
-            this.btnInvoiceFinance.Image = ((System.Drawing.Image)(resources.GetObject("btnInvoiceFinance.Image")));
-            this.btnInvoiceFinance.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnInvoiceFinance.Name = "btnInvoiceFinance";
-            this.btnInvoiceFinance.SubItemsExpandWidth = 14;
-            this.btnInvoiceFinance.Text = "È¢Ñ‰ªòÊ¨æÊîØÁî®";
-            this.btnInvoiceFinance.Click += new System.EventHandler(this.InvoiceFinance);
+            this.ribbonBarBasicInfoImport.AutoOverflowEnabled = true;
             // 
-            // ribbonBarAssign
             // 
-            this.ribbonBarAssign.AutoOverflowEnabled = true;
             // 
+            this.ribbonBarBasicInfoImport.BackgroundMouseOverStyle.Class = "";
             // 
             // 
-            this.ribbonBarAssign.BackgroundMouseOverStyle.Class = "";
             // 
+            this.ribbonBarBasicInfoImport.BackgroundStyle.Class = "";
+            this.ribbonBarBasicInfoImport.ContainerControlProcessDialogKey = true;
+            this.ribbonBarBasicInfoImport.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarBasicInfoImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnClientImport,
+            this.btnClientOverwriteImport,
+            this.btnClientReviewImport,
+            this.btnFactorImport2});
+            this.ribbonBarBasicInfoImport.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarBasicInfoImport.Name = "ribbonBarBasicInfoImport";
+            this.ribbonBarBasicInfoImport.Size = new System.Drawing.Size(309, 93);
+            this.ribbonBarBasicInfoImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarBasicInfoImport.TabIndex = 2;
+            this.ribbonBarBasicInfoImport.Text = "ª˘¥°–≈œ¢µº»Î";
             // 
             // 
-            this.ribbonBarAssign.BackgroundStyle.Class = "";
-            this.ribbonBarAssign.ContainerControlProcessDialogKey = true;
-            this.ribbonBarAssign.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarAssign.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnInvoiceAssign,
-            this.btnFlawResolve});
-            this.ribbonBarAssign.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarAssign.Name = "ribbonBarAssign";
-            this.ribbonBarAssign.Size = new System.Drawing.Size(132, 93);
-            this.ribbonBarAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarAssign.TabIndex = 4;
-            this.ribbonBarAssign.Text = "ËΩ¨ËÆ©";
             // 
+            this.ribbonBarBasicInfoImport.TitleStyle.Class = "";
             // 
             // 
-            this.ribbonBarAssign.TitleStyle.Class = "";
             // 
+            this.ribbonBarBasicInfoImport.TitleStyleMouseOver.Class = "";
             // 
+            // btnClientImport
             // 
-            this.ribbonBarAssign.TitleStyleMouseOver.Class = "";
+            this.btnClientImport.Name = "btnClientImport";
+            this.btnClientImport.SubItemsExpandWidth = 14;
+            this.btnClientImport.Text = "øÕªß–≈œ¢";
+            this.btnClientImport.Click += new System.EventHandler(this.ImportClients);
             // 
-            // btnInvoiceAssign
+            // btnClientOverwriteImport
             // 
-            this.btnInvoiceAssign.Image = ((System.Drawing.Image)(resources.GetObject("btnInvoiceAssign.Image")));
-            this.btnInvoiceAssign.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnInvoiceAssign.Name = "btnInvoiceAssign";
-            this.btnInvoiceAssign.SubItemsExpandWidth = 14;
-            this.btnInvoiceAssign.Text = "ÂèëÁ•®ÂΩïÂÖ•";
-            this.btnInvoiceAssign.Click += new System.EventHandler(this.InvoiceAssign);
+            this.btnClientOverwriteImport.Name = "btnClientOverwriteImport";
+            this.btnClientOverwriteImport.SubItemsExpandWidth = 14;
+            this.btnClientOverwriteImport.Text = "øÕªß–≈œ¢(∏≤∏«)";
+            this.btnClientOverwriteImport.Click += new System.EventHandler(this.ImportClientsOverwrite);
             // 
-            // btnFlawResolve
+            // btnClientReviewImport
             // 
-            this.btnFlawResolve.Name = "btnFlawResolve";
-            this.btnFlawResolve.SubItemsExpandWidth = 14;
-            this.btnFlawResolve.Text = "ÁëïÁñµËß£Èô§";
-            this.btnFlawResolve.Click += new System.EventHandler(this.FlawResolve);
+            this.btnClientReviewImport.Name = "btnClientReviewImport";
+            this.btnClientReviewImport.SubItemsExpandWidth = 14;
+            this.btnClientReviewImport.Text = "–≠≤È“‚º˚";
+            this.btnClientReviewImport.Click += new System.EventHandler(this.ImportClientsReview);
             // 
-            // ribbonPanelInfoMgr
+            // btnFactorImport2
             // 
-            this.ribbonPanelInfoMgr.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelInfoMgr.Controls.Add(this.ribbonBarExchange);
-            this.ribbonPanelInfoMgr.Controls.Add(this.ribbonBarDepartment);
-            this.ribbonPanelInfoMgr.Controls.Add(this.ribbonBarFactor);
-            this.ribbonPanelInfoMgr.Controls.Add(this.ribbonBarClient);
-            this.ribbonPanelInfoMgr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelInfoMgr.Location = new System.Drawing.Point(0, 56);
-            this.ribbonPanelInfoMgr.Name = "ribbonPanelInfoMgr";
-            this.ribbonPanelInfoMgr.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelInfoMgr.Size = new System.Drawing.Size(1082, 96);
+            this.btnFactorImport2.Name = "btnFactorImport2";
+            this.btnFactorImport2.SubItemsExpandWidth = 14;
+            this.btnFactorImport2.Text = "∫œ◊˜ª˙ππ–≈œ¢";
+            this.btnFactorImport2.Click += new System.EventHandler(this.ImportFactors);
             // 
+            // ribbonPanel3
             // 
+            this.ribbonPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanel3.Controls.Add(this.ribbonBarUserMgr);
+            this.ribbonPanel3.Controls.Add(this.ribbonBarSystem);
+            this.ribbonPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanel3.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanel3.Name = "ribbonPanel3";
+            this.ribbonPanel3.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanel3.Size = new System.Drawing.Size(1082, 96);
             // 
-            this.ribbonPanelInfoMgr.Style.Class = "";
             // 
             // 
+            this.ribbonPanel3.Style.Class = "";
             // 
-            this.ribbonPanelInfoMgr.StyleMouseDown.Class = "";
             // 
             // 
+            this.ribbonPanel3.StyleMouseDown.Class = "";
             // 
-            this.ribbonPanelInfoMgr.StyleMouseOver.Class = "";
-            this.ribbonPanelInfoMgr.TabIndex = 2;
             // 
-            // ribbonBarExchange
             // 
-            this.ribbonBarExchange.AutoOverflowEnabled = true;
+            this.ribbonPanel3.StyleMouseOver.Class = "";
+            this.ribbonPanel3.TabIndex = 11;
+            this.ribbonPanel3.Visible = false;
             // 
+            // ribbonBarUserMgr
             // 
+            this.ribbonBarUserMgr.AutoOverflowEnabled = true;
             // 
-            this.ribbonBarExchange.BackgroundMouseOverStyle.Class = "";
             // 
             // 
+            this.ribbonBarUserMgr.BackgroundMouseOverStyle.Class = "";
             // 
-            this.ribbonBarExchange.BackgroundStyle.Class = "";
-            this.ribbonBarExchange.ContainerControlProcessDialogKey = true;
-            this.ribbonBarExchange.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarExchange.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnExchangeQuery});
-            this.ribbonBarExchange.Location = new System.Drawing.Point(359, 0);
-            this.ribbonBarExchange.Name = "ribbonBarExchange";
-            this.ribbonBarExchange.Size = new System.Drawing.Size(71, 93);
-            this.ribbonBarExchange.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarExchange.TabIndex = 0;
-            this.ribbonBarExchange.Text = "Ê±áÁéá";
             // 
             // 
+            this.ribbonBarUserMgr.BackgroundStyle.Class = "";
+            this.ribbonBarUserMgr.ContainerControlProcessDialogKey = true;
+            this.ribbonBarUserMgr.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarUserMgr.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnUserMgr});
+            this.ribbonBarUserMgr.Location = new System.Drawing.Point(367, 0);
+            this.ribbonBarUserMgr.Name = "ribbonBarUserMgr";
+            this.ribbonBarUserMgr.Size = new System.Drawing.Size(71, 93);
+            this.ribbonBarUserMgr.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarUserMgr.TabIndex = 4;
+            this.ribbonBarUserMgr.Text = "”√ªß";
             // 
-            this.ribbonBarExchange.TitleStyle.Class = "";
             // 
             // 
+            this.ribbonBarUserMgr.TitleStyle.Class = "";
             // 
-            this.ribbonBarExchange.TitleStyleMouseOver.Class = "";
             // 
-            // btnExchangeQuery
             // 
-            this.btnExchangeQuery.Image = ((System.Drawing.Image)(resources.GetObject("btnExchangeQuery.Image")));
-            this.btnExchangeQuery.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnExchangeQuery.Name = "btnExchangeQuery";
-            this.btnExchangeQuery.SubItemsExpandWidth = 14;
-            this.btnExchangeQuery.Text = "Ê±áÁéá‰ø°ÊÅØ";
-            this.btnExchangeQuery.Click += new System.EventHandler(this.QueryExchanges);
+            this.ribbonBarUserMgr.TitleStyleMouseOver.Class = "";
             // 
-            // ribbonBarDepartment
+            // btnUserMgr
             // 
-            this.ribbonBarDepartment.AutoOverflowEnabled = true;
+            this.btnUserMgr.Image = ((System.Drawing.Image)(resources.GetObject("btnUserMgr.Image")));
+            this.btnUserMgr.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnUserMgr.Name = "btnUserMgr";
+            this.btnUserMgr.SubItemsExpandWidth = 14;
+            this.btnUserMgr.Text = "”√ªß–≈œ¢";
+            this.btnUserMgr.Click += new System.EventHandler(this.QueryUsers);
             // 
+            // ribbonBarSystem
             // 
+            this.ribbonBarSystem.AutoOverflowEnabled = true;
             // 
-            this.ribbonBarDepartment.BackgroundMouseOverStyle.Class = "";
             // 
             // 
+            this.ribbonBarSystem.BackgroundMouseOverStyle.Class = "";
             // 
-            this.ribbonBarDepartment.BackgroundStyle.Class = "";
-            this.ribbonBarDepartment.ContainerControlProcessDialogKey = true;
-            this.ribbonBarDepartment.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarDepartment.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnDepartMgr});
-            this.ribbonBarDepartment.Location = new System.Drawing.Point(290, 0);
-            this.ribbonBarDepartment.Name = "ribbonBarDepartment";
-            this.ribbonBarDepartment.Size = new System.Drawing.Size(69, 93);
-            this.ribbonBarDepartment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarDepartment.TabIndex = 2;
-            this.ribbonBarDepartment.Text = "ÈÉ®Èó®";
             // 
             // 
+            this.ribbonBarSystem.BackgroundStyle.Class = "";
+            this.ribbonBarSystem.ContainerControlProcessDialogKey = true;
+            this.ribbonBarSystem.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarSystem.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnUserImport,
+            this.btnDepartmentImport,
+            this.btnFactorImport,
+            this.btnExchangeRateImport});
+            this.ribbonBarSystem.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarSystem.Name = "ribbonBarSystem";
+            this.ribbonBarSystem.Size = new System.Drawing.Size(364, 93);
+            this.ribbonBarSystem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarSystem.TabIndex = 0;
+            this.ribbonBarSystem.Text = "π‹¿Ì";
             // 
-            this.ribbonBarDepartment.TitleStyle.Class = "";
             // 
             // 
+            this.ribbonBarSystem.TitleStyle.Class = "";
             // 
-            this.ribbonBarDepartment.TitleStyleMouseOver.Class = "";
             // 
-            // btnDepartMgr
             // 
-            this.btnDepartMgr.Name = "btnDepartMgr";
-            this.btnDepartMgr.SubItemsExpandWidth = 14;
-            this.btnDepartMgr.Text = "ÈÉ®Èó®‰ø°ÊÅØ";
-            this.btnDepartMgr.Click += new System.EventHandler(this.QueryDepartments);
+            this.ribbonBarSystem.TitleStyleMouseOver.Class = "";
             // 
-            // ribbonBarFactor
+            // btnUserImport
             // 
-            this.ribbonBarFactor.AutoOverflowEnabled = true;
+            this.btnUserImport.Name = "btnUserImport";
+            this.btnUserImport.SubItemsExpandWidth = 14;
+            this.btnUserImport.Text = "µº»Î”√ªß–≈œ¢";
+            this.btnUserImport.Click += new System.EventHandler(this.ImportUsers);
             // 
+            // btnDepartmentImport
             // 
+            this.btnDepartmentImport.Name = "btnDepartmentImport";
+            this.btnDepartmentImport.SubItemsExpandWidth = 14;
+            this.btnDepartmentImport.Text = "µº»Î≤ø√≈–≈œ¢";
+            this.btnDepartmentImport.Click += new System.EventHandler(this.ImportDepartments);
             // 
-            this.ribbonBarFactor.BackgroundMouseOverStyle.Class = "";
+            // btnFactorImport
             // 
+            this.btnFactorImport.Name = "btnFactorImport";
+            this.btnFactorImport.SubItemsExpandWidth = 14;
+            this.btnFactorImport.Text = "µº»Î±£¿Ì…Ã–≈œ¢";
+            this.btnFactorImport.Click += new System.EventHandler(this.ImportFactors);
             // 
+            // btnExchangeRateImport
             // 
-            this.ribbonBarFactor.BackgroundStyle.Class = "";
-            this.ribbonBarFactor.ContainerControlProcessDialogKey = true;
-            this.ribbonBarFactor.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarFactor.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnFactorMgr,
-            this.btnFactorNew});
-            this.ribbonBarFactor.Location = new System.Drawing.Point(135, 0);
-            this.ribbonBarFactor.Name = "ribbonBarFactor";
-            this.ribbonBarFactor.Size = new System.Drawing.Size(155, 93);
-            this.ribbonBarFactor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarFactor.TabIndex = 1;
-            this.ribbonBarFactor.Text = "Âêà‰ΩúÊú∫ÊûÑ";
+            this.btnExchangeRateImport.Name = "btnExchangeRateImport";
+            this.btnExchangeRateImport.SubItemsExpandWidth = 14;
+            this.btnExchangeRateImport.Text = "µº»Îª„¬ –≈œ¢";
+            this.btnExchangeRateImport.Click += new System.EventHandler(this.ImportExchangeRate);
             // 
+            // ribbonPanelHelp
             // 
+            this.ribbonPanelHelp.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelHelp.Controls.Add(this.ribbonBarHelp);
+            this.ribbonPanelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelHelp.Location = new System.Drawing.Point(0, 56);
+            this.ribbonPanelHelp.Name = "ribbonPanelHelp";
+            this.ribbonPanelHelp.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelHelp.Size = new System.Drawing.Size(1082, 96);
             // 
-            this.ribbonBarFactor.TitleStyle.Class = "";
             // 
             // 
+            this.ribbonPanelHelp.Style.Class = "";
             // 
-            this.ribbonBarFactor.TitleStyleMouseOver.Class = "";
             // 
-            // btnFactorMgr
             // 
-            this.btnFactorMgr.Name = "btnFactorMgr";
-            this.btnFactorMgr.SubItemsExpandWidth = 14;
-            this.btnFactorMgr.Text = "Êú∫ÊûÑ‰ø°ÊÅØ";
-            this.btnFactorMgr.Click += new System.EventHandler(this.QueryFactors);
+            this.ribbonPanelHelp.StyleMouseDown.Class = "";
             // 
-            // btnFactorNew
             // 
-            this.btnFactorNew.Name = "btnFactorNew";
-            this.btnFactorNew.SubItemsExpandWidth = 14;
-            this.btnFactorNew.Text = "Êñ∞Â¢ûÂêà‰ΩúÊú∫ÊûÑ";
-            this.btnFactorNew.Click += new System.EventHandler(this.NewFactor);
             // 
-            // ribbonBarClient
+            this.ribbonPanelHelp.StyleMouseOver.Class = "";
+            this.ribbonPanelHelp.TabIndex = 6;
+            this.ribbonPanelHelp.Visible = false;
             // 
-            this.ribbonBarClient.AutoOverflowEnabled = true;
+            // ribbonBarHelp
             // 
+            this.ribbonBarHelp.AutoOverflowEnabled = true;
             // 
             // 
-            this.ribbonBarClient.BackgroundMouseOverStyle.Class = "";
             // 
+            this.ribbonBarHelp.BackgroundMouseOverStyle.Class = "";
             // 
             // 
-            this.ribbonBarClient.BackgroundStyle.Class = "";
-            this.ribbonBarClient.ContainerControlProcessDialogKey = true;
-            this.ribbonBarClient.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarClient.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnClientMgr,
-            this.btnClientNew});
-            this.ribbonBarClient.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarClient.Name = "ribbonBarClient";
-            this.ribbonBarClient.Size = new System.Drawing.Size(132, 93);
-            this.ribbonBarClient.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarClient.TabIndex = 0;
-            this.ribbonBarClient.Text = "ÂÆ¢Êà∑";
             // 
+            this.ribbonBarHelp.BackgroundStyle.Class = "";
+            this.ribbonBarHelp.ContainerControlProcessDialogKey = true;
+            this.ribbonBarHelp.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarHelp.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnUserUpdate,
+            this.btnCheckUpdate,
+            this.btnBugReport,
+            this.btnHelp});
+            this.ribbonBarHelp.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarHelp.Name = "ribbonBarHelp";
+            this.ribbonBarHelp.Size = new System.Drawing.Size(258, 93);
+            this.ribbonBarHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarHelp.TabIndex = 0;
+            this.ribbonBarHelp.Text = "∞Ô÷˙";
             // 
             // 
-            this.ribbonBarClient.TitleStyle.Class = "";
             // 
+            this.ribbonBarHelp.TitleStyle.Class = "";
             // 
             // 
-            this.ribbonBarClient.TitleStyleMouseOver.Class = "";
             // 
-            // btnClientMgr
+            this.ribbonBarHelp.TitleStyleMouseOver.Class = "";
             // 
-            this.btnClientMgr.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnClientMgr.Name = "btnClientMgr";
-            this.btnClientMgr.SubItemsExpandWidth = 14;
-            this.btnClientMgr.Text = "ÂÆ¢Êà∑‰ø°ÊÅØ";
-            this.btnClientMgr.Click += new System.EventHandler(this.QueryClients);
+            // btnUserUpdate
             // 
-            // btnClientNew
+            this.btnUserUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUserUpdate.Image")));
+            this.btnUserUpdate.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnUserUpdate.Name = "btnUserUpdate";
+            this.btnUserUpdate.SubItemsExpandWidth = 14;
+            this.btnUserUpdate.Text = "∏ˆ»À–≈œ¢";
+            this.btnUserUpdate.Click += new System.EventHandler(this.DetailUser);
             // 
-            this.btnClientNew.Name = "btnClientNew";
-            this.btnClientNew.SubItemsExpandWidth = 14;
-            this.btnClientNew.Text = "Êñ∞Â¢ûÂÆ¢Êà∑";
-            this.btnClientNew.Click += new System.EventHandler(this.NewClient);
+            // btnCheckUpdate
+            // 
+            this.btnCheckUpdate.Name = "btnCheckUpdate";
+            this.btnCheckUpdate.SubItemsExpandWidth = 14;
+            this.btnCheckUpdate.Text = "ºÏ≤È∏¸–¬";
+            this.btnCheckUpdate.Click += new System.EventHandler(this.CheckUpdate);
+            // 
+            // btnBugReport
+            // 
+            this.btnBugReport.Name = "btnBugReport";
+            this.btnBugReport.SubItemsExpandWidth = 14;
+            this.btnBugReport.Text = "Œ Ã‚∑¥¿°";
+            this.btnBugReport.Click += new System.EventHandler(this.ReportBug);
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.SubItemsExpandWidth = 14;
+            this.btnHelp.Text = "πÿ”⁄";
+            this.btnHelp.Click += new System.EventHandler(this.About);
             // 
             // itemInfoMgr
             // 
-            this.itemInfoMgr.Checked = true;
             this.itemInfoMgr.Name = "itemInfoMgr";
             this.itemInfoMgr.Panel = this.ribbonPanelInfoMgr;
-            this.itemInfoMgr.Text = "‰ø°ÊÅØÁÆ°ÁêÜ";
+            this.itemInfoMgr.Text = "–≈œ¢π‹¿Ì";
             // 
             // ribbonTabItemCaseMgr
             // 
             this.ribbonTabItemCaseMgr.Name = "ribbonTabItemCaseMgr";
             this.ribbonTabItemCaseMgr.Panel = this.ribbonPanel1;
-            this.ribbonTabItemCaseMgr.Text = "Ê°à‰ª∂ÁÆ°ÁêÜ";
+            this.ribbonTabItemCaseMgr.Text = "∞∏º˛π‹¿Ì";
             // 
             // itemAccountsReceivableMgr
             // 
             this.itemAccountsReceivableMgr.Name = "itemAccountsReceivableMgr";
             this.itemAccountsReceivableMgr.Panel = this.ribbonPanelInvoiceMgr;
-            this.itemAccountsReceivableMgr.Text = "Â∫îÊî∂Ë¥¶Ê¨æÁÆ°ÁêÜ";
-            // 
-            // ribbonTabItemPool
-            // 
-            this.ribbonTabItemPool.Name = "ribbonTabItemPool";
-            this.ribbonTabItemPool.Panel = this.ribbonPanel4;
-            this.ribbonTabItemPool.Text = "Ê±†ËûçËµÑ";
+            this.itemAccountsReceivableMgr.Text = "”¶ ’’ÀøÓπ‹¿Ì";
             // 
             // ribbonItemARImport
             // 
             this.ribbonItemARImport.Name = "ribbonItemARImport";
             this.ribbonItemARImport.Panel = this.ribbonPanelARImport;
-            this.ribbonItemARImport.Text = "Ë°®ÂçïÂØºÂÖ•";
+            this.ribbonItemARImport.Text = "±Ìµ•µº»Î";
             // 
             // ribbonTabItemCheck
             // 
             this.ribbonTabItemCheck.Name = "ribbonTabItemCheck";
             this.ribbonTabItemCheck.Panel = this.ribbonPanel2;
-            this.ribbonTabItemCheck.Text = "Â§çÊ†∏";
+            this.ribbonTabItemCheck.Text = "∏¥∫À";
             // 
             // itemQuery
             // 
+            this.itemQuery.Checked = true;
             this.itemQuery.Name = "itemQuery";
             this.itemQuery.Panel = this.ribbonPanelQuery;
-            this.itemQuery.Text = "Êü•ËØ¢";
+            this.itemQuery.Text = "≤È—Ø";
             // 
             // itemReport
             // 
             this.itemReport.Name = "itemReport";
             this.itemReport.Panel = this.ribbonPanelReport;
-            this.itemReport.Text = "Êä•Ë°®";
+            this.itemReport.Text = "±®±Ì";
             // 
             // tabItemMigration
             // 
             this.tabItemMigration.Name = "tabItemMigration";
             this.tabItemMigration.Panel = this.ribbonPanelMigration;
-            this.tabItemMigration.Text = "Êï∞ÊçÆÁßªÊ§ç";
+            this.tabItemMigration.Text = " ˝æ›“∆÷≤";
             // 
             // ribbonTabItemSystem
             // 
             this.ribbonTabItemSystem.Name = "ribbonTabItemSystem";
             this.ribbonTabItemSystem.Panel = this.ribbonPanel3;
-            this.ribbonTabItemSystem.Text = "Á≥ªÁªüÁÆ°ÁêÜ";
+            this.ribbonTabItemSystem.Text = "œµÕ≥π‹¿Ì";
             // 
             // itemHelp
             // 
             this.itemHelp.Name = "itemHelp";
             this.itemHelp.Panel = this.ribbonPanelHelp;
-            this.itemHelp.Text = "Â∏ÆÂä©";
+            this.itemHelp.Text = "∞Ô÷˙";
             // 
             // office2007StartButton
             // 
@@ -2478,13 +2534,13 @@ namespace CMBC.EasyFactor
             "Office2010Silver",
             "Windows7Blue"});
             this.cbStyleManager.Name = "cbStyleManager";
-            this.cbStyleManager.WatermarkText = "ÁïåÈù¢È£éÊ†º";
+            this.cbStyleManager.WatermarkText = "ΩÁ√Ê∑Á∏Ò";
             this.cbStyleManager.SelectedIndexChanged += new System.EventHandler(this.ChangeStyle);
             // 
             // btnMainPage
             // 
             this.btnMainPage.Name = "btnMainPage";
-            this.btnMainPage.Text = "È¶ñÈ°µ";
+            this.btnMainPage.Text = " ◊“≥";
             this.btnMainPage.Click += new System.EventHandler(this.MainPage);
             // 
             // qatCustomizeItem
@@ -2581,14 +2637,14 @@ namespace CMBC.EasyFactor
             // 
             this.menuItemOpen.Name = "menuItemOpen";
             this.menuItemOpen.Size = new System.Drawing.Size(139, 22);
-            this.menuItemOpen.Text = "ÊÅ¢Â§çÁ™óÂè£(&O)";
+            this.menuItemOpen.Text = "ª÷∏¥¥∞ø⁄(&O)";
             this.menuItemOpen.Click += new System.EventHandler(this.ShowFromTray);
             // 
             // menuItemHide
             // 
             this.menuItemHide.Name = "menuItemHide";
             this.menuItemHide.Size = new System.Drawing.Size(139, 22);
-            this.menuItemHide.Text = "ÈöêËóèÁ™óÂè£(&H)";
+            this.menuItemHide.Text = "“˛≤ÿ¥∞ø⁄(&H)";
             this.menuItemHide.Click += new System.EventHandler(this.HideInTray);
             // 
             // toolStripSeparator1
@@ -2600,7 +2656,7 @@ namespace CMBC.EasyFactor
             // 
             this.menuItemCheckAlert.Name = "menuItemCheckAlert";
             this.menuItemCheckAlert.Size = new System.Drawing.Size(139, 22);
-            this.menuItemCheckAlert.Text = "Ê£ÄÊü•ÊèêÈÜí(&C)";
+            this.menuItemCheckAlert.Text = "ºÏ≤ÈÃ·–—(&C)";
             // 
             // toolStripSeparator2
             // 
@@ -2611,7 +2667,7 @@ namespace CMBC.EasyFactor
             // 
             this.menuItemExit.Name = "menuItemExit";
             this.menuItemExit.Size = new System.Drawing.Size(139, 22);
-            this.menuItemExit.Text = "ÈÄÄÂá∫Á≥ªÁªü(&E)";
+            this.menuItemExit.Text = "ÕÀ≥ˆœµÕ≥(&E)";
             this.menuItemExit.Click += new System.EventHandler(this.Exit);
             // 
             // backgroundWorker
@@ -2633,17 +2689,16 @@ namespace CMBC.EasyFactor
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.ribbonControl.ResumeLayout(false);
             this.ribbonControl.PerformLayout();
-            this.ribbonPanelARImport.ResumeLayout(false);
-            this.ribbonPanel3.ResumeLayout(false);
-            this.ribbonPanelMigration.ResumeLayout(false);
-            this.ribbonPanel4.ResumeLayout(false);
-            this.ribbonPanelHelp.ResumeLayout(false);
             this.ribbonPanelQuery.ResumeLayout(false);
             this.ribbonPanel2.ResumeLayout(false);
-            this.ribbonPanel1.ResumeLayout(false);
-            this.ribbonPanelReport.ResumeLayout(false);
+            this.ribbonPanelARImport.ResumeLayout(false);
             this.ribbonPanelInvoiceMgr.ResumeLayout(false);
+            this.ribbonPanel1.ResumeLayout(false);
             this.ribbonPanelInfoMgr.ResumeLayout(false);
+            this.ribbonPanelReport.ResumeLayout(false);
+            this.ribbonPanelMigration.ResumeLayout(false);
+            this.ribbonPanel3.ResumeLayout(false);
+            this.ribbonPanelHelp.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).EndInit();
             this.ribbonDetailPanel.ResumeLayout(false);
             this.notifyMenu.ResumeLayout(false);
@@ -2652,46 +2707,5 @@ namespace CMBC.EasyFactor
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.ButtonItem btnCaseStat;
-        private DevComponents.DotNetBar.ButtonItem btnDepartmentStat;
-        private DevComponents.DotNetBar.ButtonItem btnLocationStat;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarBatchQuery;
-        private DevComponents.DotNetBar.ButtonItem btnAssignBatchQuery;
-        private DevComponents.DotNetBar.ButtonItem btnFinanceBatchQuery;
-        private DevComponents.DotNetBar.ButtonItem btnPaymentBatchQuery;
-        private DevComponents.DotNetBar.ButtonItem btnRefundBatchQuery;
-        private DevComponents.DotNetBar.RibbonPanel ribbonPanel4;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarPool;
-        private DevComponents.DotNetBar.RibbonTabItem ribbonTabItemPool;
-        private DevComponents.DotNetBar.ButtonItem btnPoolFinance;
-        private DevComponents.DotNetBar.ButtonItem btnPoolRefund;
-        private System.Windows.Forms.NotifyIcon notifyIcon;
-        private System.Windows.Forms.ContextMenuStrip notifyMenu;
-        private System.Windows.Forms.ToolStripMenuItem menuItemOpen;
-        private System.Windows.Forms.ToolStripMenuItem menuItemHide;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem menuItemExit;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCheckAlert;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private DevComponents.DotNetBar.ButtonItem btnClientReviewQuery;
-        private DevComponents.DotNetBar.ButtonItem btnBugReport;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
-        private DevComponents.DotNetBar.ButtonItem btnCheckUpdate;
-        private DevComponents.DotNetBar.ButtonItem btnClientOverwriteImport;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarPoolQuery;
-        private DevComponents.DotNetBar.ButtonItem btnPoolFinanceBatchQuery;
-        private DevComponents.DotNetBar.ButtonItem btnPoolRefundQuery;
-        private DevComponents.DotNetBar.RibbonPanel ribbonPanelARImport;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarARImport;
-        private DevComponents.DotNetBar.ButtonItem btnAssignImport;
-        private DevComponents.DotNetBar.ButtonItem btnFinanceImport;
-        private DevComponents.DotNetBar.ButtonItem btnPaymentImport;
-        private DevComponents.DotNetBar.ButtonItem btnCreditNoteImport;
-        private DevComponents.DotNetBar.RibbonTabItem ribbonItemARImport;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarPoolIMport;
-        private DevComponents.DotNetBar.ButtonItem btnPoolFinanceImport;
-        private DevComponents.DotNetBar.ButtonItem btnRefundImport;
-        private DevComponents.DotNetBar.ButtonItem btnPoolRefundImport;
     }
 }

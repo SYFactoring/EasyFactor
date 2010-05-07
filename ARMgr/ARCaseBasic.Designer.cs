@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ARCaseBasic.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class ARCaseBasic
     {
-		#region¬†Fields¬†(44)¬†
+		#region?Fields?(44)?
 
         /// <summary> 
         /// Required designer variable.
@@ -57,13 +57,15 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbIsNotice;
         private DevComponents.DotNetBar.Controls.TextBoxX tbNetPaymentTerm;
         private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentTerms;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssignOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalFinanceOustanding;
         private DevComponents.DotNetBar.Controls.TextBoxX transactionTypeTextBox;
 
-		#endregion¬†Fields¬†
+		#endregion?Fields?
 
-		#region¬†Methods¬†(1)¬†
+		#region?Methods?(1)?
 
-		//¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -79,7 +81,9 @@ namespace CMBC.EasyFactor.ARMgr
             base.Dispose(disposing);
         }
 
-		#endregion¬†Methods¬†
+		#endregion?Methods?
+
+
 
         #region Component Designer generated code
 
@@ -206,7 +210,7 @@ namespace CMBC.EasyFactor.ARMgr
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new System.Drawing.Size(68, 16);
             priceLabel.TabIndex = 0;
-            priceLabel.Text = "ÊÄªÊâãÁª≠Ë¥πÁéá";
+            priceLabel.Text = "◊‹ ÷–¯∑—¬ ";
             // 
             // iFPriceLabel
             // 
@@ -219,7 +223,7 @@ namespace CMBC.EasyFactor.ARMgr
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(66, 16);
             iFPriceLabel.TabIndex = 2;
-            iFPriceLabel.Text = "IFÊâãÁª≠Ë¥πÁéá";
+            iFPriceLabel.Text = "IF ÷–¯∑—¬ ";
             // 
             // handFeeCurrLabel
             // 
@@ -232,7 +236,7 @@ namespace CMBC.EasyFactor.ARMgr
             handFeeCurrLabel.Name = "handFeeCurrLabel";
             handFeeCurrLabel.Size = new System.Drawing.Size(68, 16);
             handFeeCurrLabel.TabIndex = 4;
-            handFeeCurrLabel.Text = "ÂçïÊçÆÂ§ÑÁêÜË¥π";
+            handFeeCurrLabel.Text = "µ•æ›¥¶¿Ì∑—";
             // 
             // financeProportionLabel
             // 
@@ -245,7 +249,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeProportionLabel.Name = "financeProportionLabel";
             financeProportionLabel.Size = new System.Drawing.Size(56, 16);
             financeProportionLabel.TabIndex = 0;
-            financeProportionLabel.Text = "È¢Ñ‰ªòÊØî‰æã";
+            financeProportionLabel.Text = "‘§∏∂±»¿˝";
             // 
             // creditCoverCurrLabel
             // 
@@ -258,7 +262,7 @@ namespace CMBC.EasyFactor.ARMgr
             creditCoverCurrLabel.Name = "creditCoverCurrLabel";
             creditCoverCurrLabel.Size = new System.Drawing.Size(81, 16);
             creditCoverCurrLabel.TabIndex = 0;
-            creditCoverCurrLabel.Text = "‰ø°Áî®È£éÈô©È¢ùÂ∫¶";
+            creditCoverCurrLabel.Text = "–≈”√∑Áœ’∂Ó∂»";
             // 
             // periodEndLabel
             // 
@@ -271,7 +275,7 @@ namespace CMBC.EasyFactor.ARMgr
             periodEndLabel.Name = "periodEndLabel";
             periodEndLabel.Size = new System.Drawing.Size(44, 16);
             periodEndLabel.TabIndex = 3;
-            periodEndLabel.Text = "Âà∞ÊúüÊó•";
+            periodEndLabel.Text = "µΩ∆⁄»’";
             // 
             // lblBuyerCreditCoverBalance
             // 
@@ -284,7 +288,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblBuyerCreditCoverBalance.Name = "lblBuyerCreditCoverBalance";
             lblBuyerCreditCoverBalance.Size = new System.Drawing.Size(56, 16);
             lblBuyerCreditCoverBalance.TabIndex = 5;
-            lblBuyerCreditCoverBalance.Text = "Ââ©‰ΩôÈ¢ùÂ∫¶";
+            lblBuyerCreditCoverBalance.Text = " £”‡∂Ó∂»";
             // 
             // lblBuyerARBalance
             // 
@@ -297,7 +301,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblBuyerARBalance.Name = "lblBuyerARBalance";
             lblBuyerARBalance.Size = new System.Drawing.Size(81, 16);
             lblBuyerARBalance.TabIndex = 7;
-            lblBuyerARBalance.Text = "Â∫îÊî∂Â∏êÊ¨æ‰ΩôÈ¢ù";
+            lblBuyerARBalance.Text = "”¶ ’’ øÓ”‡∂Ó";
             // 
             // lblFinanceARBalance
             // 
@@ -310,7 +314,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblFinanceARBalance.Name = "lblFinanceARBalance";
             lblFinanceARBalance.Size = new System.Drawing.Size(56, 16);
             lblFinanceARBalance.TabIndex = 9;
-            lblFinanceARBalance.Text = "ËûçËµÑ‰ΩôÈ¢ù";
+            lblFinanceARBalance.Text = "»⁄◊ ”‡∂Ó";
             // 
             // lblFinanceCreditCoverBalance
             // 
@@ -323,7 +327,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblFinanceCreditCoverBalance.Name = "lblFinanceCreditCoverBalance";
             lblFinanceCreditCoverBalance.Size = new System.Drawing.Size(56, 16);
             lblFinanceCreditCoverBalance.TabIndex = 7;
-            lblFinanceCreditCoverBalance.Text = "Ââ©‰ΩôÈ¢ùÂ∫¶";
+            lblFinanceCreditCoverBalance.Text = " £”‡∂Ó∂»";
             // 
             // lblDueDate
             // 
@@ -336,7 +340,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblDueDate.Name = "lblDueDate";
             lblDueDate.Size = new System.Drawing.Size(44, 16);
             lblDueDate.TabIndex = 5;
-            lblDueDate.Text = "Âà∞ÊúüÊó•";
+            lblDueDate.Text = "µΩ∆⁄»’";
             // 
             // lblCreditLine
             // 
@@ -349,7 +353,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblCreditLine.Name = "lblCreditLine";
             lblCreditLine.Size = new System.Drawing.Size(68, 16);
             lblCreditLine.TabIndex = 2;
-            lblCreditLine.Text = "È¢Ñ‰ªòÊ¨æÈ¢ùÂ∫¶";
+            lblCreditLine.Text = "‘§∏∂øÓ∂Ó∂»";
             // 
             // efPriceLbl
             // 
@@ -362,7 +366,7 @@ namespace CMBC.EasyFactor.ARMgr
             efPriceLbl.Name = "efPriceLbl";
             efPriceLbl.Size = new System.Drawing.Size(70, 16);
             efPriceLbl.TabIndex = 7;
-            efPriceLbl.Text = "EFÊâãÁª≠Ë¥πÁéá";
+            efPriceLbl.Text = "EF ÷–¯∑—¬ ";
             // 
             // lblCommissionType
             // 
@@ -375,7 +379,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblCommissionType.Name = "lblCommissionType";
             lblCommissionType.Size = new System.Drawing.Size(56, 16);
             lblCommissionType.TabIndex = 9;
-            lblCommissionType.Text = "ËÆ°Ë¥πÊñπÂºè";
+            lblCommissionType.Text = "º∆∑—∑Ω Ω";
             // 
             // lblCaseCode
             // 
@@ -388,7 +392,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblCaseCode.Name = "lblCaseCode";
             lblCaseCode.Size = new System.Drawing.Size(56, 16);
             lblCaseCode.TabIndex = 56;
-            lblCaseCode.Text = "Ê°à‰ª∂ÁºñÂè∑";
+            lblCaseCode.Text = "∞∏º˛±‡∫≈";
             // 
             // lblCDACode
             // 
@@ -401,7 +405,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblCDACode.Name = "lblCDACode";
             lblCDACode.Size = new System.Drawing.Size(55, 16);
             lblCDACode.TabIndex = 54;
-            lblCDACode.Text = "CDAÁºñÂè∑";
+            lblCDACode.Text = "CDA±‡∫≈";
             // 
             // lblIsNotice
             // 
@@ -414,7 +418,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblIsNotice.Name = "lblIsNotice";
             lblIsNotice.Size = new System.Drawing.Size(59, 16);
             lblIsNotice.TabIndex = 51;
-            lblIsNotice.Text = "Êòé/Êöó‰øùÁêÜ";
+            lblIsNotice.Text = "√˜/∞µ±£¿Ì";
             // 
             // ownerDepartmentCodeLabel
             // 
@@ -427,7 +431,7 @@ namespace CMBC.EasyFactor.ARMgr
             ownerDepartmentCodeLabel.Name = "ownerDepartmentCodeLabel";
             ownerDepartmentCodeLabel.Size = new System.Drawing.Size(84, 16);
             ownerDepartmentCodeLabel.TabIndex = 30;
-            ownerDepartmentCodeLabel.Text = " ‰∏öÂä°ÂΩíÂ±ûÊú∫ÊûÑ";
+            ownerDepartmentCodeLabel.Text = " “µŒÒπÈ Ùª˙ππ";
             // 
             // assignTypeLabel
             // 
@@ -440,7 +444,7 @@ namespace CMBC.EasyFactor.ARMgr
             assignTypeLabel.Name = "assignTypeLabel";
             assignTypeLabel.Size = new System.Drawing.Size(56, 16);
             assignTypeLabel.TabIndex = 49;
-            assignTypeLabel.Text = "ËΩ¨ËÆ©ÊñπÂºè";
+            assignTypeLabel.Text = "◊™»√∑Ω Ω";
             // 
             // sellerEDICodeLabel
             // 
@@ -453,7 +457,7 @@ namespace CMBC.EasyFactor.ARMgr
             sellerEDICodeLabel.Name = "sellerEDICodeLabel";
             sellerEDICodeLabel.Size = new System.Drawing.Size(31, 16);
             sellerEDICodeLabel.TabIndex = 32;
-            sellerEDICodeLabel.Text = "ÂçñÊñπ";
+            sellerEDICodeLabel.Text = "¬Ù∑Ω";
             // 
             // buyerEDICodeLabel
             // 
@@ -466,7 +470,7 @@ namespace CMBC.EasyFactor.ARMgr
             buyerEDICodeLabel.Name = "buyerEDICodeLabel";
             buyerEDICodeLabel.Size = new System.Drawing.Size(31, 16);
             buyerEDICodeLabel.TabIndex = 35;
-            buyerEDICodeLabel.Text = "‰π∞Êñπ";
+            buyerEDICodeLabel.Text = "¬Ú∑Ω";
             // 
             // invoiceCurrencyLabel
             // 
@@ -479,7 +483,7 @@ namespace CMBC.EasyFactor.ARMgr
             invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
             invoiceCurrencyLabel.Size = new System.Drawing.Size(31, 16);
             invoiceCurrencyLabel.TabIndex = 43;
-            invoiceCurrencyLabel.Text = "Â∏ÅÂà´";
+            invoiceCurrencyLabel.Text = "±“±";
             // 
             // factorCodeLabel
             // 
@@ -492,7 +496,7 @@ namespace CMBC.EasyFactor.ARMgr
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(44, 16);
             factorCodeLabel.TabIndex = 38;
-            factorCodeLabel.Text = "‰øùÁêÜÂïÜ";
+            factorCodeLabel.Text = "±£¿Ì…Ã";
             // 
             // transactionTypeLabel
             // 
@@ -505,7 +509,7 @@ namespace CMBC.EasyFactor.ARMgr
             transactionTypeLabel.Name = "transactionTypeLabel";
             transactionTypeLabel.Size = new System.Drawing.Size(56, 16);
             transactionTypeLabel.TabIndex = 41;
-            transactionTypeLabel.Text = "‰∏öÂä°Á±ªÂà´";
+            transactionTypeLabel.Text = "“µŒÒ¿‡±";
             // 
             // lblHighestFinance
             // 
@@ -518,7 +522,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblHighestFinance.Name = "lblHighestFinance";
             lblHighestFinance.Size = new System.Drawing.Size(93, 16);
             lblHighestFinance.TabIndex = 11;
-            lblHighestFinance.Text = "ÊúÄÈ´òÈ¢Ñ‰ªòÊ¨æÈ¢ùÂ∫¶";
+            lblHighestFinance.Text = "◊Ó∏ﬂ‘§∏∂øÓ∂Ó∂»";
             // 
             // lblPaymentTerms
             // 
@@ -531,7 +535,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblPaymentTerms.Name = "lblPaymentTerms";
             lblPaymentTerms.Size = new System.Drawing.Size(56, 16);
             lblPaymentTerms.TabIndex = 58;
-            lblPaymentTerms.Text = "‰ªòÊ¨æÊù°‰ª∂";
+            lblPaymentTerms.Text = "∏∂øÓÃıº˛";
             // 
             // panelCaseBasic
             // 
@@ -598,7 +602,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelFinanceCreditLine.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelFinanceCreditLine.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelFinanceCreditLine.TitleStyle.GradientAngle = 90;
-            this.panelFinanceCreditLine.TitleText = "ËûçËµÑÈ¢ùÂ∫¶‰ø°ÊÅØ";
+            this.panelFinanceCreditLine.TitleText = "»⁄◊ ∂Ó∂»–≈œ¢";
             // 
             // tbHighestFinance
             // 
@@ -721,7 +725,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBuyer.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelBuyer.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelBuyer.TitleStyle.GradientAngle = 90;
-            this.panelBuyer.TitleText = "‰π∞Êñπ‰ø°Áî®ÊãÖ‰øù";
+            this.panelBuyer.TitleText = "¬Ú∑Ω–≈”√µ£±£";
             // 
             // tbAROutstanding
             // 
@@ -822,7 +826,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelFee.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelFee.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelFee.TitleStyle.GradientAngle = 90;
-            this.panelFee.TitleText = "Ë¥πÁéá/ÂÖ∂‰ªñ‰ø°ÊÅØ";
+            this.panelFee.TitleText = "∑—¬ /∆‰À˚–≈œ¢";
             // 
             // commissionTypeTextBox
             // 
@@ -950,7 +954,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCase.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelCase.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelCase.TitleStyle.GradientAngle = 90;
-            this.panelCase.TitleText = "Âü∫Êú¨‰ø°ÊÅØ";
+            this.panelCase.TitleText = "ª˘±æ–≈œ¢";
             // 
             // tbNetPaymentTerm
             // 
@@ -1114,7 +1118,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.isRecoarseCheckBox.Name = "isRecoarseCheckBox";
             this.isRecoarseCheckBox.Size = new System.Drawing.Size(101, 16);
             this.isRecoarseCheckBox.TabIndex = 53;
-            this.isRecoarseCheckBox.Text = "ÊòØÂê¶ÊúâËøΩÁ¥¢ÊùÉ";
+            this.isRecoarseCheckBox.Text = " «∑Ò”–◊∑À˜»®";
             // 
             // factorCodeTextBox
             // 
@@ -1206,7 +1210,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblSellerAssignOutstanding.Name = "lblSellerAssignOutstanding";
             lblSellerAssignOutstanding.Size = new System.Drawing.Size(68, 16);
             lblSellerAssignOutstanding.TabIndex = 9;
-            lblSellerAssignOutstanding.Text = "ÊÄªË¥¶Ê¨æ‰ΩôÈ¢ù";
+            lblSellerAssignOutstanding.Text = "◊‹’ÀøÓ”‡∂Ó";
             // 
             // tbTotalFinanceOustanding
             // 
@@ -1231,7 +1235,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblTotalFinanceOutstanding.Name = "lblTotalFinanceOutstanding";
             lblTotalFinanceOutstanding.Size = new System.Drawing.Size(68, 16);
             lblTotalFinanceOutstanding.TabIndex = 13;
-            lblTotalFinanceOutstanding.Text = "ÊÄªËûçËµÑ‰ΩôÈ¢ù";
+            lblTotalFinanceOutstanding.Text = "◊‹»⁄◊ ”‡∂Ó";
             // 
             // ARCaseBasic
             // 
@@ -1255,8 +1259,5 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
         #endregion
-
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssignOutstanding;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalFinanceOustanding;
     }
 }

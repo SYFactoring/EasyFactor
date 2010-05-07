@@ -1,4 +1,4 @@
-﻿
+
 namespace CMBC.EasyFactor.Utils
 {
     using System;
@@ -75,13 +75,17 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public sealed class PermUtil
     {
+		#region?Constructors?(1)?
+
         private PermUtil()
         {
         }
 
-        #region Methods (3)
+		#endregion?Constructors?
 
-        // Public Methods (2) 
+		#region?Methods?(3)?
+
+		//?Public?Methods?(2)?
 
         /// <summary>
         /// 
@@ -96,7 +100,7 @@ namespace CMBC.EasyFactor.Utils
             }
             else
             {
-                MessageBoxEx.Show("对不起，您没有执行该操作的权限。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("�Բ�����û��ִ�иò�����Ȩ�ޡ�", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
         }
@@ -110,7 +114,7 @@ namespace CMBC.EasyFactor.Utils
         {
             return ValidatePermission(App.Current.CurUser, perm);
         }
-        // Internal Methods (1) 
+		//?Internal?Methods?(1)?
 
         internal static bool ValidatePermission(User user, Permission perm)
         {
@@ -124,6 +128,6 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-        #endregion Methods
+		#endregion?Methods?
     }
 }

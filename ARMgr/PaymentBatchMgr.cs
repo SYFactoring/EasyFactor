@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="PaymentBatchMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -13,14 +13,14 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
     /// <summary>
     /// 
     /// </summary>
     public partial class PaymentBatchMgr : UserControl
     {
-        #regionÂ FieldsÂ (3)
+        #region?Fields?(3)?
 
         /// <summary>
         /// 
@@ -35,9 +35,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        #endregionÂ Fields
+        #endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -60,9 +60,9 @@ namespace CMBC.EasyFactor.ARMgr
             QUERY,
         }
 
-        #endregionÂ Enums
+        #endregion?Enums?
 
-        #regionÂ ConstructorsÂ (2)
+        #region?Constructors?(3)?
 
         /// <summary>
         /// Initializes a new instance of the PaymentBatchMgr class
@@ -107,7 +107,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "å…¨éƒ¨" });
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "È«²¿" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";
             this.cbLocation.ValueMember = "LocationCode";
@@ -121,13 +121,13 @@ namespace CMBC.EasyFactor.ARMgr
                 context = new DBDataContext();
                 var queryResult = context.InvoicePaymentBatches.Where(i => i.CheckStatus == BATCH.UNCHECK);
                 this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+                this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
             }
         }
 
-        #endregionÂ Constructors
+        #endregion?Constructors?
 
-        #regionÂ PropertiesÂ (3)
+        #region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -156,11 +156,11 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-        #endregionÂ Properties
+        #endregion?Properties?
 
-        #regionÂ MethodsÂ (12)
+        #region?Methods?(12)?
 
-        //Â PrivateÂ MethodsÂ (12)Â 
+        //?Private?Methods?(12)?
 
         /// <summary>
         /// 
@@ -183,18 +183,18 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("æ­¤æ‰¹æ¬¡å·²ç»è¿‡å¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("´ËÅú´ÎÒÑ¾­¹ı¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€šè¿‡è¯¥æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍ¨¹ı¸ÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("ç»åŠäººå’Œå¤æ ¸äººç›¸åŒï¼Œä¸å¯è¿›è¡Œå¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¾­°ìÈËºÍ¸´ºËÈËÏàÍ¬£¬²»¿É½øĞĞ¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -230,14 +230,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤æ­¤" + selectedBatch.BatchCount + "æ¡ä»˜æ¬¾è®°å½•", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı´Ë" + selectedBatch.BatchCount + "Ìõ¸¶¿î¼ÇÂ¼", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (selectedBatch.CheckStatus == BATCH.CHECK)
             {
-                MessageBoxEx.Show("ä¸èƒ½åˆ é™¤å·²å¤æ ¸æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("²»ÄÜÉ¾³ıÒÑ¸´ºËÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -256,7 +256,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("åˆ é™¤å¤±è´¥," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("É¾³ıÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -349,9 +349,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (selectedBatch.PaymentType != "ä¹°æ–¹ä»˜æ¬¾")
+            if (selectedBatch.PaymentType != "Âò·½¸¶¿î")
             {
-                MessageBoxEx.Show("åªæœ‰ä¹°æ–¹ä»˜æ¬¾å¯ä»¥ç”ŸæˆMSG11", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ö»ÓĞÂò·½¸¶¿î¿ÉÒÔÉú³ÉMSG11", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -373,9 +373,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (selectedBatch.PaymentType != "ä¹°æ–¹é—´æ¥ä»˜æ¬¾")
+            if (selectedBatch.PaymentType != "Âò·½¼ä½Ó¸¶¿î")
             {
-                MessageBoxEx.Show("åªæœ‰ä¹°æ–¹é—´æ¥ä»˜æ¬¾å¯ä»¥ç”ŸæˆMSG12", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ö»ÓĞÂò·½¼ä½Ó¸¶¿î¿ÉÒÔÉú³ÉMSG12", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -399,13 +399,13 @@ namespace CMBC.EasyFactor.ARMgr
             string transactionType = this.cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
-                transactionType = "å…¨éƒ¨";
+                transactionType = "È«²¿";
             }
 
             string paymentType = this.cbPaymentType.Text;
             if (String.IsNullOrEmpty(paymentType))
             {
-                paymentType = "å…¨éƒ¨";
+                paymentType = "È«²¿";
             }
             context = new DBDataContext();
 
@@ -414,15 +414,15 @@ namespace CMBC.EasyFactor.ARMgr
                 && (beginDate != this.dateFrom.MinDate ? i.PaymentDate >= beginDate : true)
                 && (endDate != this.dateTo.MinDate ? i.PaymentDate <= endDate : true)
                 && (status != string.Empty ? i.CheckStatus == status : true)
-                && (paymentType == "å…¨éƒ¨" ? true : i.PaymentType == paymentType)
+                && (paymentType == "È«²¿" ? true : i.PaymentType == paymentType)
                 && (i.CreateUserName.Contains(createUserName))
-                && (transactionType == "å…¨éƒ¨" ? true : i.Case.TransactionType == transactionType)
+                && (transactionType == "È«²¿" ? true : i.Case.TransactionType == transactionType)
                 && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
                 && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
                );
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
         }
 
         /// <summary>
@@ -446,18 +446,18 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("æ­¤æ‰¹æ¬¡å·²ç»è¿‡å¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("´ËÅú´ÎÒÑ¾­¹ı¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€€å›è¯¥æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍË»Ø¸ÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("ç»åŠäººå’Œå¤æ ¸äººç›¸åŒï¼Œä¸å¯è¿›è¡Œå¤æ ¸é€€å›", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¾­°ìÈËºÍ¸´ºËÈËÏàÍ¬£¬²»¿É½øĞĞ¸´ºËÍË»Ø", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -522,6 +522,6 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
-        #endregionÂ Methods
+        #endregion?Methods?
     }
 }

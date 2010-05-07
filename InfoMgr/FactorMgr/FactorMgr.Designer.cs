@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="FactorDetailUI.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,17 +11,23 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorMgr
     {
-		#region¬†Fields¬†(65)¬†
+		#region?Fields?(26)?
 
         private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.ButtonX btnReset;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCountry;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbFactorType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameCNColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameENColumn;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.ContextMenuStrip contextMenuFactorMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameColumn;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvFactors;
+        private System.Windows.Forms.DataGridViewTextBoxColumn factorCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactorTypeColumn;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.LabelX lblCountry;
         private DevComponents.DotNetBar.LabelX lblFactorCode;
@@ -37,11 +43,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
 
-		#endregion¬†Fields¬†
+		#endregion?Fields?
 
-		#region¬†Methods¬†(1)¬†
+		#region?Methods?(1)?
 
-		//¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -57,7 +63,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             base.Dispose(disposing);
         }
 
-		#endregion¬†Methods¬†
+		#endregion?Methods?
 
 
 
@@ -118,14 +124,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.menuItemFactorSelect.Name = "menuItemFactorSelect";
             this.menuItemFactorSelect.Size = new System.Drawing.Size(146, 22);
-            this.menuItemFactorSelect.Text = "ÈÄâÂÆöÊú∫ÊûÑ";
+            this.menuItemFactorSelect.Text = "—°∂®ª˙ππ";
             this.menuItemFactorSelect.Click += new System.EventHandler(this.SelectFactor);
             // 
             // menuItemFactorDetail
             // 
             this.menuItemFactorDetail.Name = "menuItemFactorDetail";
             this.menuItemFactorDetail.Size = new System.Drawing.Size(146, 22);
-            this.menuItemFactorDetail.Text = "ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemFactorDetail.Text = "œÍœ∏–≈œ¢";
             this.menuItemFactorDetail.Click += new System.EventHandler(this.DetailFactor);
             // 
             // toolStripSeparator
@@ -137,21 +143,21 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.menuItemFactorNew.Name = "menuItemFactorNew";
             this.menuItemFactorNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemFactorNew.Text = "Êñ∞Âª∫Êú∫ÊûÑ";
+            this.menuItemFactorNew.Text = "–¬Ω®ª˙ππ";
             this.menuItemFactorNew.Click += new System.EventHandler(this.NewFactor);
             // 
             // menuItemFactorCreditLineNew
             // 
             this.menuItemFactorCreditLineNew.Name = "menuItemFactorCreditLineNew";
             this.menuItemFactorCreditLineNew.Size = new System.Drawing.Size(146, 22);
-            this.menuItemFactorCreditLineNew.Text = "Êñ∞Âª∫È¢ùÂ∫¶‰ø°ÊÅØ";
+            this.menuItemFactorCreditLineNew.Text = "–¬Ω®∂Ó∂»–≈œ¢";
             this.menuItemFactorCreditLineNew.Click += new System.EventHandler(this.NewFactorCreditLine);
             // 
             // menuItemFactorDelete
             // 
             this.menuItemFactorDelete.Name = "menuItemFactorDelete";
             this.menuItemFactorDelete.Size = new System.Drawing.Size(146, 22);
-            this.menuItemFactorDelete.Text = "Âà†Èô§Êú∫ÊûÑ";
+            this.menuItemFactorDelete.Text = "…æ≥˝ª˙ππ";
             this.menuItemFactorDelete.Click += new System.EventHandler(this.DeleteFactor);
             // 
             // panelQuery
@@ -191,7 +197,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.btnReset.Size = new System.Drawing.Size(41, 23);
             this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReset.TabIndex = 9;
-            this.btnReset.Text = "ÈáçÁΩÆ";
+            this.btnReset.Text = "÷ÿ÷√";
             this.btnReset.Click += new System.EventHandler(this.Reset);
             // 
             // cbCountry
@@ -217,7 +223,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblCountry.Name = "lblCountry";
             this.lblCountry.Size = new System.Drawing.Size(44, 16);
             this.lblCountry.TabIndex = 2;
-            this.lblCountry.Text = "ÊâÄÂú®ÂõΩ";
+            this.lblCountry.Text = "À˘‘⁄π˙";
             // 
             // cbFactorType
             // 
@@ -226,11 +232,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbFactorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFactorType.FormattingEnabled = true;
             this.cbFactorType.Items.AddRange(new object[] {
-            "ÂÖ®ÈÉ®",
-            "‰øùÁêÜÂïÜ",
-            "‰øùÈô©ÂÖ¨Âè∏",
-            "ÁõëÁÆ°Êú∫ÊûÑ",
-            "‰ª£‰ªòË°å"});
+            "»´≤ø",
+            "±£¿Ì…Ã",
+            "±£œ’π´Àæ",
+            "º‡π‹ª˙ππ",
+            "¥˙∏∂––"});
             this.cbFactorType.Location = new System.Drawing.Point(70, 5);
             this.cbFactorType.Name = "cbFactorType";
             this.cbFactorType.Size = new System.Drawing.Size(99, 21);
@@ -258,7 +264,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.btnQuery.Size = new System.Drawing.Size(41, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 8;
-            this.btnQuery.Text = "Êü•ËØ¢";
+            this.btnQuery.Text = "≤È—Ø";
             this.btnQuery.Click += new System.EventHandler(this.QueryFactors);
             // 
             // tbFactorName
@@ -283,7 +289,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorName.Name = "lblFactorName";
             this.lblFactorName.Size = new System.Drawing.Size(56, 16);
             this.lblFactorName.TabIndex = 6;
-            this.lblFactorName.Text = "Êú∫ÊûÑÂêçÁß∞";
+            this.lblFactorName.Text = "ª˙ππ√˚≥∆";
             // 
             // tbFactorCode
             // 
@@ -307,7 +313,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorCode.Name = "lblFactorCode";
             this.lblFactorCode.Size = new System.Drawing.Size(56, 16);
             this.lblFactorCode.TabIndex = 4;
-            this.lblFactorCode.Text = "Êú∫ÊûÑÁºñÂè∑";
+            this.lblFactorCode.Text = "ª˙ππ±‡∫≈";
             // 
             // lblFactorType
             // 
@@ -320,7 +326,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorType.Name = "lblFactorType";
             this.lblFactorType.Size = new System.Drawing.Size(56, 16);
             this.lblFactorType.TabIndex = 0;
-            this.lblFactorType.Text = "Êú∫ÊûÑÁ±ªÂûã";
+            this.lblFactorType.Text = "ª˙ππ¿‡–Õ";
             // 
             // dgvFactors
             // 
@@ -369,21 +375,21 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // factorCodeColumn
             // 
             this.factorCodeColumn.DataPropertyName = "FactorCode";
-            this.factorCodeColumn.HeaderText = "Êú∫ÊûÑ‰ª£Á†Å";
+            this.factorCodeColumn.HeaderText = "ª˙ππ¥˙¬Î";
             this.factorCodeColumn.Name = "factorCodeColumn";
             this.factorCodeColumn.ReadOnly = true;
             // 
             // FactorTypeColumn
             // 
             this.FactorTypeColumn.DataPropertyName = "FactorType";
-            this.FactorTypeColumn.HeaderText = "Êú∫ÊûÑÁ±ªÂûã";
+            this.FactorTypeColumn.HeaderText = "ª˙ππ¿‡–Õ";
             this.FactorTypeColumn.Name = "FactorTypeColumn";
             this.FactorTypeColumn.ReadOnly = true;
             // 
             // CompanyNameCNColumn
             // 
             this.CompanyNameCNColumn.DataPropertyName = "CompanyNameCN";
-            this.CompanyNameCNColumn.HeaderText = "ÂÖ¨Âè∏ÂêçÁß∞(‰∏≠)";
+            this.CompanyNameCNColumn.HeaderText = "π´Àæ√˚≥∆(÷–)";
             this.CompanyNameCNColumn.Name = "CompanyNameCNColumn";
             this.CompanyNameCNColumn.ReadOnly = true;
             // 
@@ -391,7 +397,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.CompanyNameENColumn.DataPropertyName = "CompanyNameEN";
             this.CompanyNameENColumn.FillWeight = 300F;
-            this.CompanyNameENColumn.HeaderText = "ÂÖ¨Âè∏ÂêçÁß∞(Ëã±)";
+            this.CompanyNameENColumn.HeaderText = "π´Àæ√˚≥∆(”¢)";
             this.CompanyNameENColumn.Name = "CompanyNameENColumn";
             this.CompanyNameENColumn.ReadOnly = true;
             // 
@@ -399,7 +405,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.CountryNameColumn.DataPropertyName = "CountryName";
             this.CountryNameColumn.FillWeight = 120F;
-            this.CountryNameColumn.HeaderText = "ÂõΩÂÆ∂";
+            this.CountryNameColumn.HeaderText = "π˙º“";
             this.CountryNameColumn.Name = "CountryNameColumn";
             this.CountryNameColumn.ReadOnly = true;
             // 
@@ -422,12 +428,5 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.ButtonX btnReset;
-        private System.Windows.Forms.DataGridViewTextBoxColumn factorCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FactorTypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameCNColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameENColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CountryNameColumn;
     }
 }

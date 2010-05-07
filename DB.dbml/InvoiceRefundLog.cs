@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoiceRefundLog.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceRefundLog
     {
-        #region Properties (5)
+		#region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -33,52 +33,9 @@ namespace CMBC.EasyFactor.DB.dbml
             this.RefundCurrency2 = financeLog.InvoiceFinanceBatch.BatchCurrency;
         }
 
-        public string InvoiceNo2
-        {
-            get;
-            set;
-        }
+		#endregion?Constructors?
 
-        public string InvoiceNo
-        {
-            get
-            {
-                return this.InvoiceFinanceLog.InvoiceNo;
-            }
-        }
-
-        public int FinanceLogID2
-        {
-            get;
-            set;
-        }
-
-        public string RefundCurrency2
-        {
-            get;
-            set;
-        }
-
-        public string RefundCurrency
-        {
-            get
-            {
-                if (this.InvoiceFinanceLog != null)
-                {
-                    return this.InvoiceFinanceLog.InvoiceFinanceBatch.BatchCurrency;
-                }
-                else
-                {
-                    return RefundCurrency2;
-                }
-            }
-        }
-
-        public double? FinanceAmount2
-        {
-            get;
-            set;
-        }
+		#region?Properties?(18)?
 
         /// <summary>
         /// 
@@ -98,7 +55,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public DateTime? FinanceDate2
+        public double? FinanceAmount2
         {
             get;
             set;
@@ -122,7 +79,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public DateTime? FinanceDueDate2
+        public DateTime? FinanceDate2
         {
             get;
             set;
@@ -146,7 +103,13 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double? FinanceOutstanding2
+        public DateTime? FinanceDueDate2
+        {
+            get;
+            set;
+        }
+
+        public int FinanceLogID2
         {
             get;
             set;
@@ -170,7 +133,21 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double? InvoicePaymentAmount2
+        public double? FinanceOutstanding2
+        {
+            get;
+            set;
+        }
+
+        public string InvoiceNo
+        {
+            get
+            {
+                return this.InvoiceFinanceLog.InvoiceNo;
+            }
+        }
+
+        public string InvoiceNo2
         {
             get;
             set;
@@ -191,7 +168,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double? InvoiceRefundAmount2
+        public double? InvoicePaymentAmount2
         {
             get;
             set;
@@ -215,6 +192,33 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        public double? InvoiceRefundAmount2
+        {
+            get;
+            set;
+        }
+
+        public string RefundCurrency
+        {
+            get
+            {
+                if (this.InvoiceFinanceLog != null)
+                {
+                    return this.InvoiceFinanceLog.InvoiceFinanceBatch.BatchCurrency;
+                }
+                else
+                {
+                    return RefundCurrency2;
+                }
+            }
+        }
+
+        public string RefundCurrency2
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -226,6 +230,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+		#endregion?Properties?
     }
 }

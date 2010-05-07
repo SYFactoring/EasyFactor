@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoiceDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -13,16 +13,15 @@ namespace CMBC.EasyFactor.ARMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Collections;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (2)
+        #region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -33,9 +32,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpInvoiceType opInvoiceType;
 
-        #endregion Fields
+        #endregion?Fields?
 
-        #region Enums (1)
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -63,9 +62,9 @@ namespace CMBC.EasyFactor.ARMgr
             DISPUTE
         }
 
-        #endregion Enums
+        #endregion?Enums?
 
-        #region Constructors (1)
+        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the InvoiceDetail class
@@ -157,11 +156,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.UpdateContextMenu();
         }
 
-        #endregion Constructors
+        #endregion?Constructors?
 
-        #region Methods (15)
+        #region?Methods?(15)?
 
-        // Private Methods (15) 
+        //?Private?Methods?(15)?
 
         /// <summary>
         /// 
@@ -193,7 +192,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("ɾ��ʧ��," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -230,7 +229,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("ɾ��ʧ��," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -360,7 +359,7 @@ namespace CMBC.EasyFactor.ARMgr
             string disputeResolveReason = string.Empty;
             foreach (string reason in reasonList)
             {
-                disputeResolveReason += (reason + " 已解除" + Environment.NewLine);
+                disputeResolveReason += (reason + " �ѽ��" + Environment.NewLine);
             }
 
             invoice.DisputeResolveReason = disputeResolveReason;
@@ -410,7 +409,7 @@ namespace CMBC.EasyFactor.ARMgr
             string flawResolveReason = string.Empty;
             foreach (string reason in reasonList)
             {
-                flawResolveReason += (reason + " 已解除" + Environment.NewLine);
+                flawResolveReason += (reason + " �ѽ��" + Environment.NewLine);
             }
 
             invoice.FlawResolveReason = flawResolveReason;
@@ -477,7 +476,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (isUpdateOK)
             {
-                MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("���ݸ��³ɹ�", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -546,7 +545,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (isUpdateOK)
             {
-                MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("���ݸ��³ɹ�", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -673,7 +672,6 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(this.disputeUserNameTextBox, false);
         }
 
-        #endregion Methods
-
+        #endregion?Methods?
     }
 }

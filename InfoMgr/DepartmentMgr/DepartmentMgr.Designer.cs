@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="DepartmentMgr.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,11 +11,25 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     /// </summary>
     public partial class DepartmentMgr
     {
-        #region¬†Fields¬†(33)
+		#region?Fields?(37)?
 
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.ButtonX btnReset;
         private System.Windows.Forms.ContextMenuStrip cmuDeptMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssistant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDomain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -27,6 +41,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private DevComponents.DotNetBar.LabelX lblDate;
         private DevComponents.DotNetBar.LabelX lblDepartmentCode;
         private DevComponents.DotNetBar.LabelX lblDepartmentName;
+        private DevComponents.DotNetBar.LabelX lblManager;
+        private DevComponents.DotNetBar.LabelX lblPManager;
         private System.Windows.Forms.ToolStripMenuItem menuItemDepartmentDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemDepartmentNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemDetail;
@@ -34,13 +50,15 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDepartmentName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbManager;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPManager;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -56,7 +74,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             base.Dispose(disposing);
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
 
 
 
@@ -162,7 +180,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
             this.lblDate.TabIndex = 17;
-            this.lblDate.Text = "Êü•ËØ¢ÊúüÈôê";
+            this.lblDate.Text = "≤È—Ø∆⁄œﬁ";
             // 
             // diEnd
             // 
@@ -269,7 +287,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.btnReset.Size = new System.Drawing.Size(42, 23);
             this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReset.TabIndex = 5;
-            this.btnReset.Text = "ÈáçÁΩÆ";
+            this.btnReset.Text = "÷ÿ÷√";
             this.btnReset.Click += new System.EventHandler(this.Reset);
             // 
             // lblCount
@@ -284,7 +302,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.lblCount.Size = new System.Drawing.Size(71, 16);
             this.lblCount.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblCount.TabIndex = 6;
-            this.lblCount.Text = "Ëé∑Âæó Êù°ËÆ∞ÂΩï";
+            this.lblCount.Text = "ªÒµ√ Ãıº«¬º";
             // 
             // btnQuery
             // 
@@ -295,7 +313,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.btnQuery.Size = new System.Drawing.Size(43, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 4;
-            this.btnQuery.Text = "Êü•ËØ¢";
+            this.btnQuery.Text = "≤È—Ø";
             this.btnQuery.Click += new System.EventHandler(this.Query);
             // 
             // tbDepartmentName
@@ -321,7 +339,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.lblDepartmentName.Size = new System.Drawing.Size(56, 16);
             this.lblDepartmentName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblDepartmentName.TabIndex = 2;
-            this.lblDepartmentName.Text = "ÂàÜÈÉ®ÂêçÁß∞";
+            this.lblDepartmentName.Text = "∑÷≤ø√˚≥∆";
             // 
             // tbDepartmentCode
             // 
@@ -346,7 +364,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.lblDepartmentCode.Size = new System.Drawing.Size(56, 16);
             this.lblDepartmentCode.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblDepartmentCode.TabIndex = 0;
-            this.lblDepartmentCode.Text = "ÂàÜÈÉ®ÁºñÂè∑";
+            this.lblDepartmentCode.Text = "∑÷≤ø±‡∫≈";
             // 
             // dgvDepts
             // 
@@ -402,14 +420,14 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.colCity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colCity.DataPropertyName = "City";
-            this.colCity.HeaderText = "ÂüéÂ∏Ç";
+            this.colCity.HeaderText = "≥« –";
             this.colCity.Name = "colCity";
             this.colCity.ReadOnly = true;
             // 
             // colDepartmentCode
             // 
             this.colDepartmentCode.DataPropertyName = "DepartmentCode";
-            this.colDepartmentCode.HeaderText = "ÈÉ®Èó®‰ª£Á†Å";
+            this.colDepartmentCode.HeaderText = "≤ø√≈¥˙¬Î";
             this.colDepartmentCode.Name = "colDepartmentCode";
             this.colDepartmentCode.ReadOnly = true;
             // 
@@ -417,7 +435,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.colDepartmentName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDepartmentName.DataPropertyName = "DepartmentName";
-            this.colDepartmentName.HeaderText = "ÈÉ®Èó®ÂêçÁß∞";
+            this.colDepartmentName.HeaderText = "≤ø√≈√˚≥∆";
             this.colDepartmentName.Name = "colDepartmentName";
             this.colDepartmentName.ReadOnly = true;
             // 
@@ -425,21 +443,21 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.colDomain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDomain.DataPropertyName = "Domain";
-            this.colDomain.HeaderText = "‰∫ã‰∏öÈÉ®";
+            this.colDomain.HeaderText = " ¬“µ≤ø";
             this.colDomain.Name = "colDomain";
             this.colDomain.ReadOnly = true;
             // 
             // colPManager
             // 
             this.colPManager.DataPropertyName = "PManager";
-            this.colPManager.HeaderText = "Âå∫ÂüüË¥üË¥£‰∫∫";
+            this.colPManager.HeaderText = "«¯”Ú∏∫‘»À";
             this.colPManager.Name = "colPManager";
             this.colPManager.ReadOnly = true;
             // 
             // colAssistant
             // 
             this.colAssistant.DataPropertyName = "Assistant";
-            this.colAssistant.HeaderText = "‰∫ßÂìÅÁªèÁêÜÂä©ÁêÜ";
+            this.colAssistant.HeaderText = "≤˙∆∑æ≠¿Ì÷˙¿Ì";
             this.colAssistant.Name = "colAssistant";
             this.colAssistant.ReadOnly = true;
             // 
@@ -447,7 +465,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.colManager.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colManager.DataPropertyName = "Manager";
-            this.colManager.HeaderText = "ÂàÜÈÉ®Ë¥üË¥£‰∫∫";
+            this.colManager.HeaderText = "∑÷≤ø∏∫‘»À";
             this.colManager.Name = "colManager";
             this.colManager.ReadOnly = true;
             // 
@@ -455,7 +473,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.colContact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colContact.DataPropertyName = "Contact_1";
-            this.colContact.HeaderText = "ÂàÜÈÉ®ËÅîÁ≥ª‰∫∫";
+            this.colContact.HeaderText = "∑÷≤ø¡™œµ»À";
             this.colContact.Name = "colContact";
             this.colContact.ReadOnly = true;
             // 
@@ -465,7 +483,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
             this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignAmount.HeaderText = "ËΩ¨ËÆ©Èáè";
+            this.colAssignAmount.HeaderText = "◊™»√¡ø";
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
             this.colAssignAmount.Visible = false;
@@ -476,7 +494,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             dataGridViewCellStyle3.Format = "N2";
             dataGridViewCellStyle3.NullValue = null;
             this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colFinanceAmount.HeaderText = "ËûçËµÑÈáè";
+            this.colFinanceAmount.HeaderText = "»⁄◊ ¡ø";
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
             this.colFinanceAmount.Visible = false;
@@ -486,7 +504,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colCommissionIncome.DataPropertyName = "CommissionIncomeByDate";
             dataGridViewCellStyle4.Format = "N2";
             this.colCommissionIncome.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colCommissionIncome.HeaderText = "‰øùÁêÜË¥πÊî∂ÂÖ•";
+            this.colCommissionIncome.HeaderText = "±£¿Ì∑— ’»Î";
             this.colCommissionIncome.Name = "colCommissionIncome";
             this.colCommissionIncome.ReadOnly = true;
             this.colCommissionIncome.Visible = false;
@@ -496,7 +514,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colNetInterestIncome.DataPropertyName = "NetInterestIncomeByDate";
             dataGridViewCellStyle5.Format = "N2";
             this.colNetInterestIncome.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colNetInterestIncome.HeaderText = "ÂáÄÂà©ÊÅØÊî∂ÂÖ•";
+            this.colNetInterestIncome.HeaderText = "æª¿˚œ¢ ’»Î";
             this.colNetInterestIncome.Name = "colNetInterestIncome";
             this.colNetInterestIncome.ReadOnly = true;
             this.colNetInterestIncome.Visible = false;
@@ -506,7 +524,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colMarginIncome.DataPropertyName = "MarginIncomeByDate";
             dataGridViewCellStyle6.Format = "N2";
             this.colMarginIncome.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colMarginIncome.HeaderText = "‰ª£‰ªòÂà©Â∑ÆÊî∂ÂÖ•";
+            this.colMarginIncome.HeaderText = "¥˙∏∂¿˚≤Ó ’»Î";
             this.colMarginIncome.Name = "colMarginIncome";
             this.colMarginIncome.ReadOnly = true;
             this.colMarginIncome.Visible = false;
@@ -516,7 +534,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colTotalIncome.DataPropertyName = "TotalIncomeByDate";
             dataGridViewCellStyle7.Format = "N2";
             this.colTotalIncome.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colTotalIncome.HeaderText = "ÊÄªÊî∂ÂÖ•";
+            this.colTotalIncome.HeaderText = "◊‹ ’»Î";
             this.colTotalIncome.Name = "colTotalIncome";
             this.colTotalIncome.ReadOnly = true;
             this.colTotalIncome.Visible = false;
@@ -536,14 +554,14 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.menuItemDetail.Name = "menuItemDetail";
             this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDetail.Text = "ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemDetail.Text = "œÍœ∏–≈œ¢";
             this.menuItemDetail.Click += new System.EventHandler(this.Detail);
             // 
             // menuItemSelect
             // 
             this.menuItemSelect.Name = "menuItemSelect";
             this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
-            this.menuItemSelect.Text = "ÈÄâÂÆöÂàÜÈÉ®";
+            this.menuItemSelect.Text = "—°∂®∑÷≤ø";
             this.menuItemSelect.Click += new System.EventHandler(this.Select);
             // 
             // toolStripSeparator1
@@ -555,14 +573,14 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             // 
             this.menuItemDepartmentNew.Name = "menuItemDepartmentNew";
             this.menuItemDepartmentNew.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDepartmentNew.Text = "Êñ∞Âª∫ÂàÜÈÉ®";
+            this.menuItemDepartmentNew.Text = "–¬Ω®∑÷≤ø";
             this.menuItemDepartmentNew.Click += new System.EventHandler(this.NewDepartment);
             // 
             // menuItemDepartmentDelete
             // 
             this.menuItemDepartmentDelete.Name = "menuItemDepartmentDelete";
             this.menuItemDepartmentDelete.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDepartmentDelete.Text = "Âà†Èô§ÂàÜÈÉ®";
+            this.menuItemDepartmentDelete.Text = "…æ≥˝∑÷≤ø";
             this.menuItemDepartmentDelete.Click += new System.EventHandler(this.DeleteDepartment);
             // 
             // tbPManager
@@ -588,7 +606,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.lblPManager.Size = new System.Drawing.Size(68, 16);
             this.lblPManager.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblPManager.TabIndex = 20;
-            this.lblPManager.Text = "ÊÄªÈÉ®Ë¥üË¥£‰∫∫";
+            this.lblPManager.Text = "◊‹≤ø∏∫‘»À";
             // 
             // tbManager
             // 
@@ -613,7 +631,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.lblManager.Size = new System.Drawing.Size(68, 16);
             this.lblManager.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.lblManager.TabIndex = 22;
-            this.lblManager.Text = "ÂàÜÈÉ®Ë¥üË¥£‰∫∫";
+            this.lblManager.Text = "∑÷≤ø∏∫‘»À";
             // 
             // DepartmentMgr
             // 
@@ -635,27 +653,5 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDomain;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPManager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssistant;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colManager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbManager;
-        private DevComponents.DotNetBar.LabelX lblManager;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPManager;
-        private DevComponents.DotNetBar.LabelX lblPManager;
-
-
-
     }
 }

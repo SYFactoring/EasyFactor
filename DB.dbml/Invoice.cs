@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Invoice.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -18,13 +18,13 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Invoice
     {
-        #regionÂ FieldsÂ (1)
+		#region?Fields?(1)?
 
         public static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>\\.\\(\\)/]+$");
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ PropertiesÂ (18)
+		#region?Properties?(18)?
 
         /// <summary>
         /// Gets
@@ -336,11 +336,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (6)
+		#region?Methods?(7)?
 
-        //Â PublicÂ MethodsÂ (6)Â 
+		//?Public?Methods?(6)?
 
         /// <summary>
         /// 
@@ -351,7 +351,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 CDA cda = this.InvoiceAssignBatch.Case.ActiveCDA;
 
-                if (cda.CommissionType == "æŒ‰èèµ„é‡‘é¢")
+                if (cda.CommissionType == "°´ÈÚ×Ê½ğ¶î")
                 {
                     if (isOverwrite)
                     {
@@ -363,7 +363,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
                     Commission = this.InvoiceFinanceLogs.Sum(log => log.Commission);
                 }
-                else if (cda.CommissionType == "æŒ‰è½¬è®©é‡‘é¢")
+                else if (cda.CommissionType == "°´×ªÈÃ½ğ¶î")
                 {
                     if (!TypeUtil.GreaterZero(this.Commission) || isOverwrite)
                     {
@@ -520,8 +520,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 return this.InvoiceNo.GetHashCode();
             }
         }
-
-        #endregionÂ Methods
+		//?Private?Methods?(1)?
 
         /// <summary>
         /// 
@@ -533,7 +532,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!InvoiceNoRegex.IsMatch(this.InvoiceNo))
                 {
-                    throw new Exception("ä¸ç¬¦åˆå‘ç¥¨ç¼–ç è§„åˆ™: " + this.InvoiceNo);
+                    throw new Exception("²»·ûºÏ·¢Æ±±àÂë¹æÔò: " + this.InvoiceNo);
                 }
             }
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
@@ -542,31 +541,33 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     if (TypeUtil.GreaterZero(this.FinanceAmount - this.AssignAmount))
                     {
-                        throw new Exception("èèµ„é‡‘é¢ä¸èƒ½å¤§äºè½¬è®©é‡‘é¢: " + this.InvoiceNo);
+                        throw new Exception("ÈÚ×Ê½ğ¶î²»ÄÜ´óÓÚ×ªÈÃ½ğ¶î: " + this.InvoiceNo);
                     }
 
                 }
 
                 if (TypeUtil.GreaterZero(this.PaymentAmount.GetValueOrDefault() - this.AssignAmount))
                 {
-                    throw new Exception("ä»˜æ¬¾é‡‘é¢ä¸èƒ½å¤§äºè½¬è®©é‡‘é¢: " + this.InvoiceNo);
+                    throw new Exception("¸¶¿î½ğ¶î²»ÄÜ´óÓÚ×ªÈÃ½ğ¶î: " + this.InvoiceNo);
                 }
 
                 if (TypeUtil.GreaterZero(this.RefundAmount.GetValueOrDefault() - this.FinanceAmount.GetValueOrDefault()))
                 {
-                    throw new Exception("è¿˜æ¬¾é‡‘é¢ä¸èƒ½å¤§äºèèµ„é‡‘é¢: " + this.InvoiceNo);
+                    throw new Exception("»¹¿î½ğ¶î²»ÄÜ´óÓÚÈÚ×Ê½ğ¶î: " + this.InvoiceNo);
                 }
 
                 if (this.DueDate < this.InvoiceDate)
                 {
-                    throw new Exception("å‘ç¥¨åˆ°æœŸæ—¥ä¸èƒ½æ—©äºå‘ç¥¨æ—¥: " + this.InvoiceNo);
+                    throw new Exception("·¢Æ±µ½ÆÚÈÕ²»ÄÜÔçÓÚ·¢Æ±ÈÕ: " + this.InvoiceNo);
                 }
 
                 if (this.FinanceDueDate.GetValueOrDefault() < this.FinanceDate.GetValueOrDefault())
                 {
-                    throw new Exception("èèµ„åˆ°æœŸæ—¥ä¸èƒ½æ—©äºèèµ„æ—¥: " + this.InvoiceNo);
+                    throw new Exception("ÈÚ×Êµ½ÆÚÈÕ²»ÄÜÔçÓÚÈÚ×ÊÈÕ: " + this.InvoiceNo);
                 }
             }
         }
+
+		#endregion?Methods?
     }
 }

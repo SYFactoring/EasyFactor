@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="CDA.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -9,8 +9,6 @@ namespace CMBC.EasyFactor.DB.dbml
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using CMBC.EasyFactor.Utils;
     using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
@@ -18,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class CDA
     {
-        #regionÂ PropertiesÂ (7)
+		#region?Properties?(8)?
 
         /// <summary>
         /// Gets
@@ -39,7 +37,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets å…³è”é¢åº¦ä¸­çš„ä¹°æ–¹ä¿¡ç”¨é£é™©æ‹…ä¿é¢åº¦ä½™é¢
+        /// Gets ¹ØÁª¶î¶ÈÖĞµÄÂò·½ĞÅÓÃ·çÏÕµ£±£¶î¶ÈÓà¶î
         /// </summary>
         public System.Nullable<double> CreditCoverOutstanding
         {
@@ -65,11 +63,11 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     switch (this.Case.TransactionType)
                     {
-                        case "å›½å†…å–æ–¹ä¿ç†":
-                        case "å‡ºå£ä¿ç†":
+                        case "¹úÄÚÂô·½±£Àí":
+                        case "³ö¿Ú±£Àí":
                             return this.Case.BuyerFactor.ToString();
-                        case "å›½å†…ä¹°æ–¹ä¿ç†":
-                        case "è¿›å£ä¿ç†":
+                        case "¹úÄÚÂò·½±£Àí":
+                        case "½ø¿Ú±£Àí":
                             return this.Case.SellerFactor.ToString();
                         default:
                             return string.Empty;
@@ -83,7 +81,32 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets å…³è”é¢åº¦ä¸­é¢„ä»˜æ¬¾èèµ„é¢åº¦ä½™é¢
+        /// 
+        /// </summary>
+        public ClientCreditLine FinanceCreditLine
+        {
+            get
+            {
+                if (Case.IsPool)
+                {
+                    return Case.SellerClient.PoolFinanceCreditLine;
+                }
+                else
+                {
+                    if (Case.TransactionType == "¹úÄÚÂò·½±£Àí" || Case.TransactionType == "½ø¿Ú±£Àí")
+                    {
+                        return Case.BuyerClient.FinanceCreditLine;
+                    }
+                    else
+                    {
+                        return Case.SellerClient.FinanceCreditLine;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets ¹ØÁª¶î¶ÈÖĞÔ¤¸¶¿îÈÚ×Ê¶î¶ÈÓà¶î
         /// </summary>
         public System.Nullable<double> FinanceLineOutstanding
         {
@@ -160,36 +183,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public ClientCreditLine FinanceCreditLine
-        {
-            get
-            {
-                if (Case.IsPool)
-                {
-                    return Case.SellerClient.PoolFinanceCreditLine;
-                }
-                else
-                {
-                    if (Case.TransactionType == "å›½å†…ä¹°æ–¹ä¿ç†" || Case.TransactionType == "è¿›å£ä¿ç†")
-                    {
-                        return Case.BuyerClient.FinanceCreditLine;
-                    }
-                    else
-                    {
-                        return Case.SellerClient.FinanceCreditLine;
-                    }
-                }
-            }
-        }
+		#endregion?Properties?
 
-        #endregionÂ Properties
+		#region?Methods?(3)?
 
-        #regionÂ MethodsÂ (3)
-
-        //Â PublicÂ MethodsÂ (3)Â 
+		//?Public?Methods?(3)?
 
         /// <summary>
         /// 
@@ -212,6 +210,59 @@ namespace CMBC.EasyFactor.DB.dbml
         /// 
         /// </summary>
         /// <param name="selectedCase"></param>
+        /// <returns></returns>
+        public static string GenerateCDACode(Case selectedCase)
+        {
+            if (selectedCase == null)
+            {
+                return string.Empty;
+            }
+
+            DBDataContext context = new DBDataContext();
+            Contract contract = selectedCase.SellerClient.Contract;
+            if (contract != null)
+            {
+                if (contract.ContractType == "ĞÂºÏÍ¬")
+                {
+                    var queryResult = from cda in context.CDAs
+                                      where cda.CDACode.StartsWith(contract.ContractCode)
+                                      select cda.CDACode;
+                    int count = 0;
+                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(no.LastIndexOf("-") + 1)), out count))
+                    {
+                        count = 0;
+                    }
+
+                    return String.Format("{0}-{1:000}", contract.ContractCode, count + 1);
+                }
+                else
+                {
+                    return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, selectedCase.CDAs.Count + 1);
+                }
+            }
+            else if (selectedCase.TransactionType == "½ø¿Ú±£Àí")
+            {
+                var queryResult = from cda in context.CDAs
+                                  where cda.CDACode.StartsWith(selectedCase.CaseCode)
+                                  select cda.CDACode;
+                int count = 0;
+                if (!Int32.TryParse(queryResult.Max(no => no.Substring(no.LastIndexOf("-") + 1)), out count))
+                {
+                    count = 0;
+                }
+
+                return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, count + 1);
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedCase"></param>
         /// <param name="cdaList"></param>
         /// <returns></returns>
         public static string GenerateCDACode(Case selectedCase, List<CDA> cdaList)
@@ -225,7 +276,7 @@ namespace CMBC.EasyFactor.DB.dbml
             Contract contract = selectedCase.SellerClient.Contract;
             if (contract != null)
             {
-                if (contract.ContractType == "æ–°åˆåŒ")
+                if (contract.ContractType == "ĞÂºÏÍ¬")
                 {
                     var queryResult = from cda in context.CDAs
                                       where cda.CDACode.StartsWith(contract.ContractCode)
@@ -244,7 +295,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, selectedCase.CDAs.Count + 1);
                 }
             }
-            else if (selectedCase.TransactionType == "è¿›å£ä¿ç†")
+            else if (selectedCase.TransactionType == "½ø¿Ú±£Àí")
             {
                 var queryResult = from cda in context.CDAs
                                   where cda.CDACode.StartsWith(selectedCase.CaseCode)
@@ -264,59 +315,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="selectedCase"></param>
-        /// <returns></returns>
-        public static string GenerateCDACode(Case selectedCase)
-        {
-            if (selectedCase == null)
-            {
-                return string.Empty;
-            }
-
-            DBDataContext context = new DBDataContext();
-            Contract contract = selectedCase.SellerClient.Contract;
-            if (contract != null)
-            {
-                if (contract.ContractType == "æ–°åˆåŒ")
-                {
-                    var queryResult = from cda in context.CDAs
-                                      where cda.CDACode.StartsWith(contract.ContractCode)
-                                      select cda.CDACode;
-                    int count = 0;
-                    if (!Int32.TryParse(queryResult.Max(no => no.Substring(no.LastIndexOf("-") + 1)), out count))
-                    {
-                        count = 0;
-                    }
-
-                    return String.Format("{0}-{1:000}", contract.ContractCode, count + 1);
-                }
-                else
-                {
-                    return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, selectedCase.CDAs.Count + 1);
-                }
-            }
-            else if (selectedCase.TransactionType == "è¿›å£ä¿ç†")
-            {
-                var queryResult = from cda in context.CDAs
-                                  where cda.CDACode.StartsWith(selectedCase.CaseCode)
-                                  select cda.CDACode;
-                int count = 0;
-                if (!Int32.TryParse(queryResult.Max(no => no.Substring(no.LastIndexOf("-") + 1)), out count))
-                {
-                    count = 0;
-                }
-
-                return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, count + 1);
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
-
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

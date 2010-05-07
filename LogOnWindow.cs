@@ -1,5 +1,5 @@
-ï»¿//-----------------------------------------------------------------------
-// <copyright file="LoginWindow.cs" company="Yiming Liu@Fudan">
+//-----------------------------------------------------------------------
+// <copyright file="LogOnWindow.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -10,16 +10,15 @@ namespace CMBC.EasyFactor
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// Login Window
     /// </summary>
     public partial class LogOnWindow : DevComponents.DotNetBar.Office2007Form
     {
-        #regionÂ ConstructorsÂ (1)
+        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the LoginWindow class
@@ -29,11 +28,11 @@ namespace CMBC.EasyFactor
             this.InitializeComponent();
         }
 
-        #endregionÂ Constructors
+        #endregion?Constructors?
 
-        #regionÂ MethodsÂ (4)
+        #region?Methods?(3)?
 
-        //Â PublicÂ MethodsÂ (2)Â 
+        //?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -49,17 +48,17 @@ namespace CMBC.EasyFactor
                     return true;
                 }
 
-                MessageBoxEx.Show("æ•°æ®åº“è¿æ¥å¤±è´¥", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("Êı¾İ¿âÁ¬½ÓÊ§°Ü", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception e)
             {
-                MessageBoxEx.Show("æ•°æ®åº“è¿æ¥å¤±è´¥: " + e.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("Êı¾İ¿âÁ¬½ÓÊ§°Ü: " + e.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             return false;
         }
-        //Â PrivateÂ MethodsÂ (2)Â 
+        //?Private?Methods?(2)?
 
         /// <summary>
         /// Event handler when cancel button clicked
@@ -93,7 +92,7 @@ namespace CMBC.EasyFactor
             {
                 if (!curUser.Password.Equals(pass))
                 {
-                    this.errorProvider.SetError(this.tbPassword, "å¯†ç ä¸æ­£ç¡®");
+                    this.errorProvider.SetError(this.tbPassword, "ÃÜÂë²»ÕıÈ·");
                     return;
                 }
 
@@ -104,10 +103,10 @@ namespace CMBC.EasyFactor
             }
             else
             {
-                this.errorProvider.SetError(this.tbUserId, "ç”¨æˆ·åä¸å­˜åœ¨");
+                this.errorProvider.SetError(this.tbUserId, "ÓÃ»§Ãû²»´æÔÚ");
             }
         }
 
-        #endregionÂ Methods
+        #endregion?Methods?
     }
 }

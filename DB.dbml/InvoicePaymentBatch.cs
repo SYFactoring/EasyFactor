@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoicePaymentBatch.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoicePaymentBatch
     {
-		#region Properties (5) 
+		#region?Properties?(5)?
 
         /// <summary>
         /// Gets
@@ -79,11 +79,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion Properties 
+		#endregion?Properties?
 
-		#region Methods (2) 
+		#region?Methods?(2)?
 
-		// Public Methods (2) 
+		//?Public?Methods?(2)?
 
         /// <summary>
         /// 
@@ -139,6 +139,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return paymentNo;
         }
 
-		#endregion Methods 
+		#endregion?Methods?
     }
 }

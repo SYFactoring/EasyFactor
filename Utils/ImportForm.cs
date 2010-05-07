@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ImportForm.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -14,16 +14,16 @@ namespace CMBC.EasyFactor.Utils
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils.ConstStr;
     using DevComponents.DotNetBar;
     using Microsoft.Office.Interop.Excel;
-    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class ImportForm : DevComponents.DotNetBar.Office2007Form
     {
-        #regionÂ FieldsÂ (5)
+		#region?Fields?(5)?
 
         /// <summary>
         /// 
@@ -46,9 +46,9 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         private Workbook workbook;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -181,11 +181,11 @@ namespace CMBC.EasyFactor.Utils
             IMPORT_POOL_REFUND
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (2)
+		#region?Constructors?(2)?
 
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         /// <param name="importType"></param>
@@ -207,88 +207,88 @@ namespace CMBC.EasyFactor.Utils
             switch (importType)
             {
                 case ImportType.IMPORT_USERS:
-                    this.Text = "ç”¨æˆ·ä¿¡æ¯å¯¼å…¥";
+                    this.Text = "ÓÃ»§ĞÅÏ¢µ¼Èë";
                     break;
                 case ImportType.IMPORT_CLIENTS:
-                    this.Text = "å®¢æˆ·ä¿¡æ¯å¯¼å…¥";
+                    this.Text = "¿Í»§ĞÅÏ¢µ¼Èë";
                     break;
                 case ImportType.IMPORT_CLIENTS_OVERWRITE:
-                    this.Text = "å®¢æˆ·ä¿¡æ¯å¯¼å…¥(è¦†ç›–æ¨¡å¼)";
+                    this.Text = "¿Í»§ĞÅÏ¢µ¼Èë(¸²¸ÇÄ£Ê½)";
                     break;
                 case ImportType.IMPORT_CLIENTS_CREDITLINE:
-                    this.Text = "å®¢æˆ·é¢åº¦ä¿¡æ¯å¯¼å…¥";
+                    this.Text = "¿Í»§¶î¶ÈĞÅÏ¢µ¼Èë";
                     break;
                 case ImportType.IMPORT_CLIENTS_REVIEW:
-                    this.Text = "å®¢æˆ·åæŸ¥æ„è§å¯¼å…¥";
+                    this.Text = "¿Í»§Ğ­²éÒâ¼ûµ¼Èë";
                     break;
                 case ImportType.IMPORT_FACTORS:
-                    this.Text = "åˆä½œæœºæ„ä¿¡æ¯å¯¼å…¥";
+                    this.Text = "ºÏ×÷»ú¹¹ĞÅÏ¢µ¼Èë";
                     break;
                 case ImportType.IMPORT_FACTORS_CREDITLINE:
-                    this.Text = "åˆä½œæœºæ„é¢åº¦ä¿¡æ¯å¯¼å…¥";
+                    this.Text = "ºÏ×÷»ú¹¹¶î¶ÈĞÅÏ¢µ¼Èë";
                     break;
                 case ImportType.IMPORT_DEPARTMENTS:
-                    this.Text = "éƒ¨é—¨ä¿¡æ¯å¯¼å…¥";
+                    this.Text = "²¿ÃÅĞÅÏ¢µ¼Èë";
                     break;
                 case ImportType.IMPORT_RATES:
-                    this.Text = "æ±‡ç‡ä¿¡æ¯å¯¼å…¥";
+                    this.Text = "»ãÂÊĞÅÏ¢µ¼Èë";
                     break;
                 case ImportType.IMPORT_CASES:
-                    this.Text = "æ¡ˆä»¶ä¿¡æ¯å¯¼å…¥";
+                    this.Text = "°¸¼şĞÅÏ¢µ¼Èë";
                     break;
                 case ImportType.IMPORT_CREDIT_COVER_NEG:
-                    this.Text = "å›½é™…ä¿ç†æ¡ˆå…³è”é¢åº¦å¯¼å…¥";
+                    this.Text = "¹ú¼Ê±£Àí°¸¹ØÁª¶î¶Èµ¼Èë";
                     break;
                 case ImportType.IMPORT_CONTRACT:
-                    this.Text = "ä¿ç†åˆåŒå¯¼å…¥";
+                    this.Text = "±£ÀíºÏÍ¬µ¼Èë";
                     break;
                 case ImportType.IMPORT_CDA:
-                    this.Text = "é¢åº¦é€šçŸ¥ä¹¦å¯¼å…¥";
+                    this.Text = "¶î¶ÈÍ¨ÖªÊéµ¼Èë";
                     break;
                 case ImportType.IMPORT_ASSIGN_BY_BATCH:
-                    this.Text = "å½“å‰è½¬è®©æ‰¹æ¬¡å¯¼å…¥";
+                    this.Text = "µ±Ç°×ªÈÃÅú´Îµ¼Èë";
                     break;
                 case ImportType.IMPORT_FINANCE_BY_BATCH:
-                    this.Text = "å½“å‰èèµ„æ‰¹æ¬¡å¯¼å…¥";
+                    this.Text = "µ±Ç°ÈÚ×ÊÅú´Îµ¼Èë";
                     break;
                 case ImportType.IMPORT_PAYMENT_BY_BATCH:
-                    this.Text = "å½“å‰ä»˜æ¬¾æ‰¹æ¬¡å¯¼å…¥";
+                    this.Text = "µ±Ç°¸¶¿îÅú´Îµ¼Èë";
                     break;
                 case ImportType.IMPORT_REFUND_BY_BATCH:
-                    this.Text = "å½“å‰è¿˜æ¬¾æ‰¹æ¬¡å¯¼å…¥";
+                    this.Text = "µ±Ç°»¹¿îÅú´Îµ¼Èë";
                     break;
                 case ImportType.IMPORT_INVOICES:
-                    this.Text = "å°å¸å¯¼å…¥";
+                    this.Text = "Ì¨ÕÊµ¼Èë";
                     break;
                 case ImportType.IMPORT_ASSIGN:
-                    this.Text = "åº”æ”¶è´¦æ¬¾è½¬è®©æ¸…å•å¯¼å…¥";
+                    this.Text = "Ó¦ÊÕÕË¿î×ªÈÃÇåµ¥µ¼Èë";
                     break;
                 case ImportType.IMPORT_FINANCE:
-                    this.Text = "æ”¾æ¬¾æ˜ç»†è¡¨å¯¼å…¥";
+                    this.Text = "·Å¿îÃ÷Ï¸±íµ¼Èë";
                     break;
                 case ImportType.IMPORT_PAYMENT:
-                    this.Text = "å†²é”€è´¦æ¬¾æ˜ç»†è¡¨å¯¼å…¥";
+                    this.Text = "³åÏúÕË¿îÃ÷Ï¸±íµ¼Èë";
                     break;
                 case ImportType.IMPORT_REFUND:
-                    this.Text = "å†²é”€èèµ„æ˜ç»†è¡¨å¯¼å…¥";
+                    this.Text = "³åÏúÈÚ×ÊÃ÷Ï¸±íµ¼Èë";
                     break;
                 case ImportType.IMPORT_CREDIT_NOTE:
-                    this.Text = "è´·é¡¹å†²é”€è´¦æ¬¾æ˜ç»†è¡¨å¯¼å…¥";
+                    this.Text = "´ûÏî³åÏúÕË¿îÃ÷Ï¸±íµ¼Èë";
                     break;
                 case ImportType.IMPORT_POOL_FINANCE:
-                    this.Text = "æ”¾æ¬¾æ˜ç»†è¡¨ï¼ˆæ± èèµ„ï¼‰å¯¼å…¥";
+                    this.Text = "·Å¿îÃ÷Ï¸±í£¨³ØÈÚ×Ê£©µ¼Èë";
                     break;
                 case ImportType.IMPORT_POOL_REFUND:
-                    this.Text = "å†²é”€èèµ„æ˜ç»†è¡¨ï¼ˆæ± èèµ„ï¼‰å¯¼å…¥";
+                    this.Text = "³åÏúÈÚ×ÊÃ÷Ï¸±í£¨³ØÈÚ×Ê£©µ¼Èë";
                     break;
                 default:
                     break;
             }
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ PropertiesÂ (1)
+		#region?Properties?(1)?
 
         /// <summary>
         /// Gets or sets Imported List
@@ -299,11 +299,11 @@ namespace CMBC.EasyFactor.Utils
             set;
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (33)
+		#region?Methods?(33)?
 
-        //Â PrivateÂ MethodsÂ (33)Â 
+		//?Private?Methods?(33)?
 
         /// <summary>
         /// 
@@ -403,7 +403,7 @@ namespace CMBC.EasyFactor.Utils
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.progressBar.Value = e.ProgressPercentage;
-            this.tbStatus.Text = String.Format("å¯¼å…¥è¿›åº¦ {0:G}%", e.ProgressPercentage);
+            this.tbStatus.Text = String.Format("µ¼Èë½ø¶È {0:G}%", e.ProgressPercentage);
         }
 
         /// <summary>
@@ -416,35 +416,35 @@ namespace CMBC.EasyFactor.Utils
             this.ReleaseResource();
             if (e.Error != null)
             {
-                if (e.Error.Data.Contains("column"))
+                if (e.Error.Data.Contains("ID"))
                 {
-                    this.tbStatus.Text = String.Format("ç¬¬{0}æ¡è®°å½•ç¬¬{1}åˆ—ï¼Œå‘ç”Ÿå¼‚å¸¸: {2}", e.Error.Data["row"], e.Error.Data["column"], e.Error.Message);
+                    this.tbStatus.Text = String.Format("¼ÇÂ¼: {0} ·¢ÉúÒì³£: {1}", e.Error.Data["ID"], e.Error.Message);
+                }
+                else if (e.Error.Data.Contains("column"))
+                {
+                    this.tbStatus.Text = String.Format("µÚ{0}Ìõ¼ÇÂ¼µÚ{1}ÁĞ£¬·¢ÉúÒì³£: {2}", e.Error.Data["row"], e.Error.Data["column"], e.Error.Message);
                 }
                 else if (e.Error.Data.Contains("row"))
                 {
-                    this.tbStatus.Text = String.Format("ç¬¬{0}æ¡è®°å½•å‘ç”Ÿå¼‚å¸¸: {1}", e.Error.Data["row"], e.Error.Message);
-                }
-                else if (e.Error.Data.Contains("ID"))
-                {
-                    this.tbStatus.Text = String.Format("è®°å½•: {0} å‘ç”Ÿå¼‚å¸¸: {1}", e.Error.Data["ID"], e.Error.Message);
+                    this.tbStatus.Text = String.Format("µÚ{0}Ìõ¼ÇÂ¼·¢ÉúÒì³£: {1}", e.Error.Data["row"], e.Error.Message);
                 }
                 else
                 {
-                    this.tbStatus.Text = String.Format("å‘ç”Ÿå¼‚å¸¸: {0}", e.Error.Message);
+                    this.tbStatus.Text = String.Format("·¢ÉúÒì³£: {0}", e.Error.Message);
                 }
             }
             else if (e.Cancelled)
             {
-                this.tbStatus.Text = "å¯¼å…¥è¢«å–æ¶ˆ";
+                this.tbStatus.Text = "µ¼Èë±»È¡Ïû";
                 this.progressBar.Value = 0;
             }
             else
             {
-                this.tbStatus.Text = String.Format("å¯¼å…¥ç»“æŸ,å…±å¯¼å…¥{0}æ¡è®°å½•", e.Result);
+                this.tbStatus.Text = String.Format("µ¼Èë½áÊø,¹²µ¼Èë{0}Ìõ¼ÇÂ¼", e.Result);
             }
 
             this.btnStart.Enabled = true;
-            this.btnCancel.Text = "å…³é—­";
+            this.btnCancel.Text = "¹Ø±Õ";
             if (e.Error == null && (this.importType == ImportType.IMPORT_ASSIGN_BY_BATCH || this.importType == ImportType.IMPORT_FINANCE_BY_BATCH || this.importType == ImportType.IMPORT_PAYMENT_BY_BATCH || this.importType == ImportType.IMPORT_REFUND_BY_BATCH))
             {
                 this.Close();
@@ -480,7 +480,7 @@ namespace CMBC.EasyFactor.Utils
             this.app = new ApplicationClass() { Visible = false };
             if (this.app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return null;
             }
 
@@ -538,14 +538,14 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("æ¡ˆä»¶ç¼–å·ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                                throw new Exception("°¸¼ş±àºÅ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + invoiceNo);
                             }
                         }
                         else
                         {
                             if (String.IsNullOrEmpty(invoiceNo))
                             {
-                                throw new Exception("å‘ç¥¨ç¼–å·ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼Œæ¡ˆä»¶ç¼–å·ï¼š " + caseCode);
+                                throw new Exception("·¢Æ±±àºÅ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£¬°¸¼ş±àºÅ£º " + caseCode);
                             }
                         }
 
@@ -560,14 +560,14 @@ namespace CMBC.EasyFactor.Utils
 
                             if (curCase == null)
                             {
-                                throw new Exception("æ¡ˆä»¶ç¼–å·é”™è¯¯: " + caseCode);
+                                throw new Exception("°¸¼ş±àºÅ´íÎó: " + caseCode);
                             }
                         }
 
                         CDA cda = curCase.ActiveCDA;
                         if (cda == null)
                         {
-                            throw new Exception("æ²¡æœ‰æœ‰æ•ˆçš„é¢åº¦é€šçŸ¥ä¹¦: " + caseCode);
+                            throw new Exception("Ã»ÓĞÓĞĞ§µÄ¶î¶ÈÍ¨ÖªÊé: " + caseCode);
                         }
 
                         if (batch == null || batch.CaseCode != caseCode)
@@ -599,28 +599,28 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("å½“å‰å¯¼å…¥æ–‡ä»¶ä¸­å‘ç¥¨å·é‡å¤: " + old.InvoiceNo);
+                                throw new Exception("µ±Ç°µ¼ÈëÎÄ¼şÖĞ·¢Æ±ºÅÖØ¸´: " + old.InvoiceNo);
                             }
                         }
                         else
                         {
-                            throw new Exception("å‘ç¥¨å·å·²ç»å­˜åœ¨ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + invoiceNo);
+                            throw new Exception("·¢Æ±ºÅÒÑ¾­´æÔÚ£¬²»ÄÜµ¼Èë£º " + invoiceNo);
                         }
 
                         string currency = string.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(currency))
                         {
-                            throw new Exception("å‘ç¥¨å¸åˆ«ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                            throw new Exception("·¢Æ±±Ò±ğ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + invoiceNo);
                         }
                         else if (currency != curCase.InvoiceCurrency)
                         {
-                            throw new Exception("å‘ç¥¨å¸åˆ«ä¸æ¡ˆä»¶å¸åˆ«ä¸åŒ¹é…ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                            throw new Exception("·¢Æ±±Ò±ğÓë°¸¼ş±Ò±ğ²»Æ¥Åä£¬²»ÄÜµ¼Èë£º" + invoiceNo);
                         }
 
                         string invoiceAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(invoiceAmountStr))
                         {
-                            throw new Exception("å‘ç¥¨é‡‘é¢ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                            throw new Exception("·¢Æ±½ğ¶î²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + invoiceNo);
                         }
                         double invoiceAmount = 0;
                         if (Double.TryParse(invoiceAmountStr, out invoiceAmount))
@@ -629,13 +629,13 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("å‘ç¥¨é‡‘é¢ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                            throw new Exception("·¢Æ±½ğ¶îÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + invoiceNo);
                         }
 
                         string assignAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(assignAmountStr))
                         {
-                            throw new Exception("è½¬è®©é‡‘é¢ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                            throw new Exception("×ªÈÃ½ğ¶î²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + invoiceNo);
                         }
                         double assignAmount = 0;
                         if (Double.TryParse(assignAmountStr, out assignAmount))
@@ -644,7 +644,7 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("è½¬è®©é‡‘é¢ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                            throw new Exception("×ªÈÃ½ğ¶îÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + invoiceNo);
                         }
 
                         string invoiceDateStr = String.Format("{0:G}", valueArray[row, column++]);
@@ -657,14 +657,14 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("å‘ç¥¨æ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                                throw new Exception("·¢Æ±ÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + invoiceNo);
                             }
                         }
 
                         string dueDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(dueDateStr))
                         {
-                            throw new Exception("è½¬è®©æ—¥ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                            throw new Exception("×ªÈÃÈÕ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + invoiceNo);
                         }
                         DateTime dueDate = default(DateTime);
                         if (DateTime.TryParse(dueDateStr, out dueDate))
@@ -673,7 +673,7 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("è½¬è®©æ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                            throw new Exception("×ªÈÃÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + invoiceNo);
                         }
 
                         string commissionStr = String.Format("{0:G}", valueArray[row, column++]);
@@ -682,18 +682,18 @@ namespace CMBC.EasyFactor.Utils
                             double commissionAmount = 0;
                             if (Double.TryParse(commissionStr, out commissionAmount))
                             {
-                                if (cda.CommissionType == "å…¶ä»–")
+                                if (cda.CommissionType == "ÆäËû")
                                 {
                                     invoice.Commission = commissionAmount;
                                 }
                             }
                             else
                             {
-                                throw new Exception("æ‰‹ç»­è´¹ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                                throw new Exception("ÊÖĞø·ÑÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + invoiceNo);
                             }
                         }
 
-                        if (cda.CommissionType == "æŒ‰è½¬è®©é‡‘é¢")
+                        if (cda.CommissionType == "°´×ªÈÃ½ğ¶î")
                         {
                             invoice.Commission = invoice.AssignAmount * cda.Price;
                         }
@@ -777,7 +777,7 @@ namespace CMBC.EasyFactor.Utils
                             Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                             if (old != null)
                             {
-                                throw new Exception("å‘ç¥¨å·é‡å¤: " + old.InvoiceNo);
+                                throw new Exception("·¢Æ±ºÅÖØ¸´: " + old.InvoiceNo);
                             }
                         }
 
@@ -851,7 +851,7 @@ namespace CMBC.EasyFactor.Utils
                         Department ownerDept = context.Departments.SingleOrDefault(d => d.DepartmentName == ownerDeptName);
                         if (ownerDept == null)
                         {
-                            throw new Exception("æ‰€å±åˆ†éƒ¨åç§°é”™è¯¯ï¼š " + ownerDeptName);
+                            throw new Exception("ËùÊô·Ö²¿Ãû³Æ´íÎó£º " + ownerDeptName);
                         }
 
 
@@ -864,13 +864,13 @@ namespace CMBC.EasyFactor.Utils
                         Case curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                         if (curCase != null)
                         {
-                            throw new Exception("æ¡ˆä»¶å·²å­˜åœ¨ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + caseCode);
+                            throw new Exception("°¸¼şÒÑ´æÔÚ£¬²»ÄÜµ¼Èë£º " + caseCode);
                         }
 
                         curCase = caseList.SingleOrDefault(c => c.CaseCode == caseCode);
                         if (curCase != null)
                         {
-                            throw new Exception("æ¡ˆä»¶ç¼–å·é‡å¤ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + caseCode);
+                            throw new Exception("°¸¼ş±àºÅÖØ¸´£¬²»ÄÜµ¼Èë£º " + caseCode);
                         }
 
                         curCase = new Case();
@@ -888,7 +888,7 @@ namespace CMBC.EasyFactor.Utils
                         Client sellerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == sellerEDICode);
                         if (sellerClient == null)
                         {
-                            throw new Exception("å–æ–¹ä¿ç†ä»£ç é”™è¯¯ï¼š " + sellerEDICode);
+                            throw new Exception("Âô·½±£Àí´úÂë´íÎó£º " + sellerEDICode);
                         }
 
                         curCase.SellerClient = sellerClient;
@@ -898,7 +898,7 @@ namespace CMBC.EasyFactor.Utils
                         Client buyerClient = context.Clients.SingleOrDefault(c => c.ClientEDICode == buyerEDICode);
                         if (buyerClient == null)
                         {
-                            throw new Exception("ä¹°æ–¹ä¿ç†ä»£ç é”™è¯¯ï¼š " + buyerEDICode);
+                            throw new Exception("Âò·½±£Àí´úÂë´íÎó£º " + buyerEDICode);
                         }
 
                         curCase.BuyerClient = buyerClient;
@@ -908,7 +908,7 @@ namespace CMBC.EasyFactor.Utils
                         Factor sellerFactor = context.Factors.SingleOrDefault(f => f.FactorCode == EFCode);
                         if (sellerFactor == null)
                         {
-                            throw new Exception("å–æ–¹ä¿ç†å•†ä»£ç é”™è¯¯ï¼š " + EFCode);
+                            throw new Exception("Âô·½±£ÀíÉÌ´úÂë´íÎó£º " + EFCode);
                         }
 
                         curCase.SellerFactor = sellerFactor;
@@ -916,7 +916,7 @@ namespace CMBC.EasyFactor.Utils
                         Factor buyerFactor = context.Factors.SingleOrDefault(f => f.FactorCode == IFCode);
                         if (buyerFactor == null)
                         {
-                            throw new Exception("ä¹°æ–¹ä¿ç†å•†ä»£ç é”™è¯¯ï¼š " + IFCode);
+                            throw new Exception("Âò·½±£ÀíÉÌ´úÂë´íÎó£º " + IFCode);
                         }
 
                         curCase.BuyerFactor = buyerFactor;
@@ -999,19 +999,19 @@ namespace CMBC.EasyFactor.Utils
                         curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                         if (curCase == null)
                         {
-                            throw new Exception("æ¡ˆä»¶ç¼–å·é”™è¯¯: " + caseCode);
+                            throw new Exception("°¸¼ş±àºÅ´íÎó: " + caseCode);
                         }
 
-                        if (curCase.TransactionType != "è¿›å£ä¿ç†" && curCase.SellerClient.Contract == null)
+                        if (curCase.TransactionType != "½ø¿Ú±£Àí" && curCase.SellerClient.Contract == null)
                         {
-                            throw new Exception("ç¼ºå°‘ä¸»åˆåŒï¼š" + caseCode);
+                            throw new Exception("È±ÉÙÖ÷ºÏÍ¬£º" + caseCode);
                         }
 
                         //string cdaCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         CDA cda = null;
                         //if (String.IsNullOrEmpty(cdaCode))
                         //{
-                        //    throw new Exception("CDAç¼–å·ä¸èƒ½ä¸ºç©º");
+                        //    throw new Exception("CDA±àºÅ²»ÄÜÎª¿Õ");
                         //}
 
                         column++;
@@ -1020,13 +1020,13 @@ namespace CMBC.EasyFactor.Utils
                         cda = context.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                         if (cda != null)
                         {
-                            throw new Exception("CDAå·²å­˜åœ¨ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + cdaCode);
+                            throw new Exception("CDAÒÑ´æÔÚ£¬²»ÄÜµ¼Èë£º " + cdaCode);
                         }
 
                         cda = cdaList.SingleOrDefault(c => c.CDACode == cdaCode);
                         if (cda != null)
                         {
-                            throw new Exception("CDAç¼–å·é‡å¤ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + cdaCode);
+                            throw new Exception("CDA±àºÅÖØ¸´£¬²»ÄÜµ¼Èë£º " + cdaCode);
                         }
 
                         cda = new CDA();
@@ -1035,11 +1035,11 @@ namespace CMBC.EasyFactor.Utils
                         cdaList.Add(cda);
                         cda.Case = curCase;
 
-                        column++;//å–æ–¹
-                        column++;//ä¹°æ–¹
-                        column++;//ä¿ç†å•†
-                        column++;//ä¸šåŠ¡ç±»åˆ«
-                        column++;//å‘ç¥¨å¸åˆ«
+                        column++;//Âô·½
+                        column++;//Âò·½
+                        column++;//±£ÀíÉÌ
+                        column++;//ÒµÎñÀà±ğ
+                        column++;//·¢Æ±±Ò±ğ
                         cda.IsRecoarse = "Y".Equals(valueArray[row, column++]);
                         cda.IsNotice = String.Format("{0:G}", valueArray[row, column++]);
                         cda.AssignType = String.Format("{0:G}", valueArray[row, column++]);
@@ -1161,13 +1161,13 @@ namespace CMBC.EasyFactor.Utils
                         Client client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client != null)
                         {
-                            throw new Exception("å®¢æˆ·å·²ç»å­˜åœ¨ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + clientEDICode);
+                            throw new Exception("¿Í»§ÒÑ¾­´æÔÚ£¬²»ÄÜµ¼Èë£º " + clientEDICode);
                         }
 
                         client = clientList.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client != null)
                         {
-                            throw new Exception("å®¢æˆ·ç¼–å·é‡å¤ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + clientEDICode);
+                            throw new Exception("¿Í»§±àºÅÖØ¸´£¬²»ÄÜµ¼Èë£º " + clientEDICode);
                         }
 
                         client = new Client();
@@ -1205,7 +1205,7 @@ namespace CMBC.EasyFactor.Utils
                             Client clientGroup = context.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
                             if (clientGroup == null)
                             {
-                                throw new Exception("é›†å›¢å®¢æˆ·å·é”™è¯¯ï¼š " + groupNo);
+                                throw new Exception("¼¯ÍÅ¿Í»§ºÅ´íÎó£º " + groupNo);
                             }
                         }
 
@@ -1290,7 +1290,7 @@ namespace CMBC.EasyFactor.Utils
                         Client client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
-                            throw new Exception("å®¢æˆ·ä¿ç†ä»£ç é”™è¯¯: " + clientEDICode);
+                            throw new Exception("¿Í»§±£Àí´úÂë´íÎó: " + clientEDICode);
                         }
 
                         int column = 3;
@@ -1377,12 +1377,12 @@ namespace CMBC.EasyFactor.Utils
                         Client client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
-                            throw new Exception("å®¢æˆ·ä¸å­˜åœ¨ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + clientEDICode);
+                            throw new Exception("¿Í»§²»´æÔÚ£¬²»ÄÜµ¼Èë£º " + clientEDICode);
                         }
 
                         if (clientList.SingleOrDefault(c => c.ClientEDICode == clientEDICode) != null)
                         {
-                            throw new Exception("å®¢æˆ·ç¼–å·é‡å¤ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + clientEDICode);
+                            throw new Exception("¿Í»§±àºÅÖØ¸´£¬²»ÄÜµ¼Èë£º " + clientEDICode);
                         }
 
                         clientList.Add(client);
@@ -1418,7 +1418,7 @@ namespace CMBC.EasyFactor.Utils
                             Client clientGroup = context.Clients.SingleOrDefault(c => c.ClientEDICode == groupNo);
                             if (clientGroup == null)
                             {
-                                throw new Exception("é›†å›¢å®¢æˆ·å·é”™è¯¯ï¼š " + groupNo);
+                                throw new Exception("¼¯ÍÅ¿Í»§ºÅ´íÎó£º " + groupNo);
                             }
                         }
 
@@ -1496,26 +1496,26 @@ namespace CMBC.EasyFactor.Utils
                         Client client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
-                            throw new Exception("å®¢æˆ·ä¿ç†ä»£ç é”™è¯¯ï¼Œä¸èƒ½å¯¼å…¥åæŸ¥æ„è§ä¹¦ï¼š " + clientEDICode);
+                            throw new Exception("¿Í»§±£Àí´úÂë´íÎó£¬²»ÄÜµ¼ÈëĞ­²éÒâ¼ûÊé£º " + clientEDICode);
                         }
 
                         int column = 3;
                         string reviewNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         if (String.IsNullOrEmpty(reviewNo))
                         {
-                            throw new Exception("åæŸ¥æ„è§ç¼–å·ä¸èƒ½ä¸ºç©º");
+                            throw new Exception("Ğ­²éÒâ¼û±àºÅ²»ÄÜÎª¿Õ");
                         }
 
                         ClientReview review = context.ClientReviews.SingleOrDefault(c => c.ReviewNo == reviewNo);
                         if (review != null)
                         {
-                            throw new Exception("åæŸ¥æ„è§å·²å­˜åœ¨ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + reviewNo);
+                            throw new Exception("Ğ­²éÒâ¼ûÒÑ´æÔÚ£¬²»ÄÜµ¼Èë£º " + reviewNo);
                         }
 
                         review = reviewList.SingleOrDefault(c => c.ReviewNo == reviewNo);
                         if (review != null)
                         {
-                            throw new Exception("åæŸ¥æ„è§ç¼–å·é‡å¤ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + reviewNo);
+                            throw new Exception("Ğ­²éÒâ¼û±àºÅÖØ¸´£¬²»ÄÜµ¼Èë£º " + reviewNo);
                         }
 
                         review = new ClientReview();
@@ -1605,26 +1605,26 @@ namespace CMBC.EasyFactor.Utils
                         client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
-                            throw new Exception("å®¢æˆ·ç¼–å·é”™è¯¯: " + clientEDICode);
+                            throw new Exception("¿Í»§±àºÅ´íÎó: " + clientEDICode);
                         }
 
                         string contractCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         Contract contract = null;
                         if (String.IsNullOrEmpty(contractCode))
                         {
-                            throw new Exception("ä¿ç†åˆåŒå·ä¸èƒ½ä¸ºç©º");
+                            throw new Exception("±£ÀíºÏÍ¬ºÅ²»ÄÜÎª¿Õ");
                         }
 
                         contract = context.Contracts.SingleOrDefault(c => c.ContractCode == contractCode);
                         if (contract != null)
                         {
-                            throw new Exception("ä¿ç†åˆåŒå·²å­˜åœ¨ï¼Œä¸èƒ½å¯¼å…¥: " + contractCode);
+                            throw new Exception("±£ÀíºÏÍ¬ÒÑ´æÔÚ£¬²»ÄÜµ¼Èë: " + contractCode);
                         }
 
                         contract = contractList.SingleOrDefault(c => c.ContractCode == contractCode);
                         if (contract != null)
                         {
-                            throw new Exception("ä¿ç†åˆåŒé‡å¤ï¼Œä¸èƒ½å¯¼å…¥: " + contractCode);
+                            throw new Exception("±£ÀíºÏÍ¬ÖØ¸´£¬²»ÄÜµ¼Èë: " + contractCode);
                         }
 
                         contract = new Contract();
@@ -1698,7 +1698,7 @@ namespace CMBC.EasyFactor.Utils
                         Case curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                         if (curCase == null)
                         {
-                            throw new Exception("æ¡ˆä»¶ä¸å­˜åœ¨ï¼Œä¸èƒ½å¯¼å…¥å…³è”é¢åº¦ï¼š " + caseCode);
+                            throw new Exception("°¸¼ş²»´æÔÚ£¬²»ÄÜµ¼Èë¹ØÁª¶î¶È£º " + caseCode);
                         }
 
                         int column = 5;
@@ -1795,7 +1795,7 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("ä¸šåŠ¡ç¼–å·ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥");
+                                throw new Exception("ÒµÎñ±àºÅ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë");
                             }
                         }
                         else
@@ -1811,31 +1811,31 @@ namespace CMBC.EasyFactor.Utils
 
                                 if (assignBatch == null)
                                 {
-                                    throw new Exception("ä¸šåŠ¡ç¼–å·é”™è¯¯ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                    throw new Exception("ÒµÎñ±àºÅ´íÎó£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                                 }
 
                                 CDA cda = assignBatch.Case.ActiveCDA;
                                 if (cda == null)
                                 {
-                                    throw new Exception("æ²¡æœ‰æœ‰æ•ˆçš„é¢åº¦é€šçŸ¥ä¹¦: " + assignBatchCode);
+                                    throw new Exception("Ã»ÓĞÓĞĞ§µÄ¶î¶ÈÍ¨ÖªÊé: " + assignBatchCode);
                                 }
                             }
 
                             if (String.IsNullOrEmpty(creditNoteNo))
                             {
-                                throw new Exception("è´·é¡¹é€šçŸ¥å·ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼Œä¸šåŠ¡ç¼–å·ï¼š " + assignBatchCode);
+                                throw new Exception("´ûÏîÍ¨ÖªºÅ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£¬ÒµÎñ±àºÅ£º " + assignBatchCode);
                             }
 
                             if (String.IsNullOrEmpty(invoiceNo))
                             {
-                                throw new Exception("å¯¹åº”å‘ç¥¨å·ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼Œä¸šåŠ¡ç¼–å·ï¼š " + assignBatchCode);
+                                throw new Exception("¶ÔÓ¦·¢Æ±ºÅ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£¬ÒµÎñ±àºÅ£º " + assignBatchCode);
                             }
                         }
 
                         invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                         if (invoice == null)
                         {
-                            throw new Exception("å‘ç¥¨å·é”™è¯¯ï¼Œä¸èƒ½å¯¼å…¥ï¼Œå‘ç¥¨å·ï¼š" + invoiceNo);
+                            throw new Exception("·¢Æ±ºÅ´íÎó£¬²»ÄÜµ¼Èë£¬·¢Æ±ºÅ£º" + invoiceNo);
                         }
 
                         creditNote = context.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == creditNoteNo);
@@ -1851,7 +1851,7 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("è´·é¡¹é€šçŸ¥å·å·²å­˜åœ¨ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + creditNoteNo);
+                            throw new Exception("´ûÏîÍ¨ÖªºÅÒÑ´æÔÚ£¬²»ÄÜµ¼Èë£º" + creditNoteNo);
                         }
 
                         log = new InvoicePaymentLog();
@@ -1861,7 +1861,7 @@ namespace CMBC.EasyFactor.Utils
                         double creditNoteAmount = 0;
                         if (String.IsNullOrEmpty(creditNoteAmountStr))
                         {
-                            throw new Exception("è´·é¡¹é€šçŸ¥é‡‘é¢ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + creditNoteNo);
+                            throw new Exception("´ûÏîÍ¨Öª½ğ¶î²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + creditNoteNo);
                         }
                         if (Double.TryParse(creditNoteAmountStr, out creditNoteAmount))
                         {
@@ -1869,13 +1869,13 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("è´·é¡¹é€šçŸ¥é‡‘é¢ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + creditNoteNo);
+                            throw new Exception("´ûÏîÍ¨Öª½ğ¶îÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + creditNoteNo);
                         }
 
                         string creditNoteDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(creditNoteDateStr))
                         {
-                            throw new Exception("è´·é¡¹é€šçŸ¥æ—¥ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + creditNoteNo);
+                            throw new Exception("´ûÏîÍ¨ÖªÈÕ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + creditNoteNo);
                         }
 
                         DateTime creditNoteDate = default(DateTime);
@@ -1885,7 +1885,7 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("è´·é¡¹é€šçŸ¥æ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + creditNoteNo);
+                            throw new Exception("´ûÏîÍ¨ÖªÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + creditNoteNo);
                         }
 
                         string comment = String.Format("{0:G}", valueArray[row, 6]);
@@ -1900,14 +1900,14 @@ namespace CMBC.EasyFactor.Utils
                             paymentBatch.InputDate = DateTime.Now;
                             paymentBatch.IsCreateMsg = false;
                             paymentBatch.PaymentDate = DateTime.Now;
-                            paymentBatch.PaymentType = "è´·é¡¹é€šçŸ¥";
+                            paymentBatch.PaymentType = "´ûÏîÍ¨Öª";
                             paymentBatch.CreateUserName = App.Current.CurUser.Name;
                             paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(DateTime.Now, paymentBatchList);
                         }
 
                         if (TypeUtil.GreaterZero(creditNoteAmount - invoice.AssignOutstanding))
                         {
-                            throw new Exception("è´·é¡¹é€šçŸ¥é‡‘é¢ä¸èƒ½å¤§äºè½¬è®©ä½™é¢ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + creditNoteNo);
+                            throw new Exception("´ûÏîÍ¨Öª½ğ¶î²»ÄÜ´óÓÚ×ªÈÃÓà¶î£¬²»ÄÜµ¼Èë£º" + creditNoteNo);
                         }
 
                         log.Invoice = invoice;
@@ -2129,10 +2129,10 @@ namespace CMBC.EasyFactor.Utils
                             isNew = true;
                             factor = new Factor();
                             factor.FactorCode = factorCode;
-                            factor.FactorType = "ä¿ç†å•†";
+                            factor.FactorType = "±£ÀíÉÌ";
                         }
 
-                        if (factor.FactorType != "ä¿ç†å•†")
+                        if (factor.FactorType != "±£ÀíÉÌ")
                         {
                             factor.BeginMonitor();
                         }
@@ -2176,7 +2176,7 @@ namespace CMBC.EasyFactor.Utils
                         string monitorResult = factor.EndMonitor();
                         if (!String.IsNullOrEmpty(monitorResult))
                         {
-                            DialogResult dr = MessageBoxEx.Show(monitorResult, "æ˜¯å¦æ›´æ–°", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            DialogResult dr = MessageBoxEx.Show(monitorResult, "ÊÇ·ñ¸üĞÂ", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                             if (dr == DialogResult.Yes)
                             {
                                 factor.LastModifiedDate = DateTime.Now;
@@ -2263,7 +2263,7 @@ namespace CMBC.EasyFactor.Utils
                         Factor factor = context.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                         if (factor == null)
                         {
-                            throw new Exception("åˆä½œæœºæ„ä»£ç é”™è¯¯: " + factorCode);
+                            throw new Exception("ºÏ×÷»ú¹¹´úÂë´íÎó: " + factorCode);
                         }
 
                         int column = 2;
@@ -2352,18 +2352,18 @@ namespace CMBC.EasyFactor.Utils
                         assignBatch = context.InvoiceAssignBatches.SingleOrDefault(c => c.AssignBatchNo == assignBatchCode);
                         if (assignBatch == null)
                         {
-                            throw new Exception("ä¸šåŠ¡ç¼–å·é”™è¯¯ï¼š" + assignBatchCode);
+                            throw new Exception("ÒµÎñ±àºÅ´íÎó£º" + assignBatchCode);
                         }
 
                         if (assignBatch.CheckStatus != BATCH.CHECK)
                         {
-                            throw new Exception("è¯¥ä¸šåŠ¡æœªå¤æ ¸ï¼ˆæˆ–å¤æ ¸æœªé€šè¿‡ï¼‰ï¼š" + assignBatchCode);
+                            throw new Exception("¸ÃÒµÎñÎ´¸´ºË£¨»ò¸´ºËÎ´Í¨¹ı£©£º" + assignBatchCode);
                         }
 
                         CDA cda = assignBatch.Case.ActiveCDA;
                         if (cda == null)
                         {
-                            throw new Exception("æ²¡æœ‰æœ‰æ•ˆçš„é¢åº¦é€šçŸ¥ä¹¦ï¼Œä¸šåŠ¡ç¼–å·ï¼š" + assignBatchCode);
+                            throw new Exception("Ã»ÓĞÓĞĞ§µÄ¶î¶ÈÍ¨ÖªÊé£¬ÒµÎñ±àºÅ£º" + assignBatchCode);
                         }
 
                         InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
@@ -2371,7 +2371,7 @@ namespace CMBC.EasyFactor.Utils
                         string financeType = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(financeType))
                         {
-                            throw new Exception("å‡ºè´¦æ–¹å¼ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("³öÕË·½Ê½²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
                         else
                         {
@@ -2381,7 +2381,7 @@ namespace CMBC.EasyFactor.Utils
                         string batchCurrency = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(batchCurrency))
                         {
-                            throw new Exception("èèµ„å¸åˆ«ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÈÚ×Ê±Ò±ğ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
                         else
                         {
@@ -2391,7 +2391,7 @@ namespace CMBC.EasyFactor.Utils
                         string financeAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(financeAmountStr))
                         {
-                            throw new Exception("èèµ„é‡‘é¢ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÈÚ×Ê½ğ¶î²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
                         double financeAmount = 0;
                         if (Double.TryParse(financeAmountStr, out financeAmount))
@@ -2400,13 +2400,13 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("èèµ„é‡‘é¢ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÈÚ×Ê½ğ¶îÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
 
                         string beginDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(beginDateStr))
                         {
-                            throw new Exception("èèµ„æ—¥ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÈÚ×ÊÈÕ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
                         DateTime beginDate = default(DateTime);
                         if (DateTime.TryParse(beginDateStr, out beginDate))
@@ -2415,13 +2415,13 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("èèµ„æ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÈÚ×ÊÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
 
                         string endDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(endDateStr))
                         {
-                            throw new Exception("èèµ„åˆ°æœŸæ—¥ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÈÚ×Êµ½ÆÚÈÕ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
                         DateTime endDate = default(DateTime);
                         if (DateTime.TryParse(endDateStr, out endDate))
@@ -2430,13 +2430,13 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("èèµ„åˆ°æœŸæ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÈÚ×Êµ½ÆÚÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
 
                         string financeRateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(financeRateStr))
                         {
-                            throw new Exception("èèµ„åˆ©ç‡ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÈÚ×ÊÀûÂÊ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
                         double financeRate = 0;
                         if (Double.TryParse(financeRateStr, out financeRate))
@@ -2445,7 +2445,7 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("èèµ„åˆ©ç‡ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÈÚ×ÊÀûÂÊÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
 
                         string costRateStr = String.Format("{0:G}", valueArray[row, column++]);
@@ -2458,7 +2458,7 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("æˆæœ¬åˆ©ç‡ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                throw new Exception("³É±¾ÀûÂÊÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                             }
                         }
 
@@ -2468,7 +2468,7 @@ namespace CMBC.EasyFactor.Utils
                             Factor factor = context.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                             if (factor == null)
                             {
-                                throw new Exception("ä»£ä»˜è¡Œç¼–ç é”™è¯¯ï¼š" + factorCode);
+                                throw new Exception("´ú¸¶ĞĞ±àÂë´íÎó£º" + factorCode);
                             }
 
                             financeBatch.Factor = factor;
@@ -2512,7 +2512,7 @@ namespace CMBC.EasyFactor.Utils
                                     log.InvoiceFinanceBatch = financeBatch;
                                     log.FinanceAmount = logFinanceAmount;
                                     currentFinanceAmount += logFinanceAmount;
-                                    if (cda.CommissionType == "æŒ‰èèµ„é‡‘é¢")
+                                    if (cda.CommissionType == "°´ÈÚ×Ê½ğ¶î")
                                     {
                                         log.Commission = log.FinanceAmount * cda.Price;
                                     }
@@ -2525,13 +2525,13 @@ namespace CMBC.EasyFactor.Utils
 
                         if (TypeUtil.GreaterZero(financeBatch.FinanceAmount - currentFinanceAmount))
                         {
-                            throw new Exception("èèµ„é‡‘é¢ä¸èƒ½å¤§äºè½¬è®©é‡‘é¢ï¼Œä¸šåŠ¡ç¼–å·ï¼š" + assignBatchCode);
+                            throw new Exception("ÈÚ×Ê½ğ¶î²»ÄÜ´óÓÚ×ªÈÃ½ğ¶î£¬ÒµÎñ±àºÅ£º" + assignBatchCode);
                         }
 
-                        if (assignBatch.Case.TransactionType == "å›½å†…ä¹°æ–¹ä¿ç†")
+                        if (assignBatch.Case.TransactionType == "¹úÄÚÂò·½±£Àí")
                         {
                             InvoicePaymentBatch paymentBatch = new InvoicePaymentBatch();
-                            paymentBatch.PaymentType = "ä¹°æ–¹ç›´æ¥ä»˜æ¬¾";
+                            paymentBatch.PaymentType = "Âò·½Ö±½Ó¸¶¿î";
                             paymentBatch.PaymentDate = financeBatch.FinancePeriodBegin;
                             paymentBatch.CheckStatus = BATCH.UNCHECK;
                             paymentBatch.CreateUserName = App.Current.CurUser.Name;
@@ -2623,7 +2623,7 @@ namespace CMBC.EasyFactor.Utils
                         Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                         if (invoice == null)
                         {
-                            throw new Exception("å‘ç¥¨å·é”™è¯¯: " + invoiceNo);
+                            throw new Exception("·¢Æ±ºÅ´íÎó: " + invoiceNo);
                         }
 
                         column++;
@@ -2714,30 +2714,30 @@ namespace CMBC.EasyFactor.Utils
                             curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                             if (curCase == null)
                             {
-                                throw new Exception("æ¡ˆä»¶ç¼–å·é”™è¯¯: " + caseCode);
+                                throw new Exception("°¸¼ş±àºÅ´íÎó: " + caseCode);
                             }
                         }
 
                         CDA activeCDA = curCase.ActiveCDA;
                         if (activeCDA == null)
                         {
-                            throw new Exception("æ²¡æœ‰æœ‰æ•ˆçš„é¢åº¦é€šçŸ¥ä¹¦: " + caseCode);
+                            throw new Exception("Ã»ÓĞÓĞĞ§µÄ¶î¶ÈÍ¨ÖªÊé: " + caseCode);
                         }
 
                         string type = String.Format("{0:G}", valueArray[row, 4]);
                         if (String.IsNullOrEmpty(type))
                         {
-                            throw new Exception("å‘ç¥¨/è´·é¡¹é€šçŸ¥éœ€è¦å£°æ˜: " + row);
+                            throw new Exception("·¢Æ±/´ûÏîÍ¨ÖªĞèÒªÉùÃ÷: " + row);
                         }
 
-                        if ("å‘ç¥¨".Equals(type))
+                        if ("·¢Æ±".Equals(type))
                         {
-                            //å‘ç¥¨ä¿¡æ¯
+                            //·¢Æ±ĞÅÏ¢
                             column = 5;
                             string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                             if (String.IsNullOrEmpty(invoiceNo))
                             {
-                                throw new Exception("å‘ç¥¨å·ä¸èƒ½ä¸ºç©º");
+                                throw new Exception("·¢Æ±ºÅ²»ÄÜÎª¿Õ");
                             }
 
                             invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
@@ -2752,12 +2752,12 @@ namespace CMBC.EasyFactor.Utils
                                 }
                                 else
                                 {
-                                    throw new Exception("å½“å‰å¯¼å…¥æ–‡ä»¶ä¸­å‘ç¥¨å·é‡å¤: " + old.InvoiceNo);
+                                    throw new Exception("µ±Ç°µ¼ÈëÎÄ¼şÖĞ·¢Æ±ºÅÖØ¸´: " + old.InvoiceNo);
                                 }
                             }
                             else
                             {
-                                throw new Exception("å‘ç¥¨å·²ç»å­˜åœ¨ï¼Œä¸èƒ½å¯¼å…¥ï¼š " + invoiceNo);
+                                throw new Exception("·¢Æ±ÒÑ¾­´æÔÚ£¬²»ÄÜµ¼Èë£º " + invoiceNo);
                             }
 
                             column = 8;
@@ -2768,7 +2768,7 @@ namespace CMBC.EasyFactor.Utils
                             DateTime assignDate = (DateTime)valueArray[row, column++];
                             invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
 
-                            //è½¬è®©æ‰¹æ¬¡ä¿¡æ¯
+                            //×ªÈÃÅú´ÎĞÅÏ¢
                             assignBatch = assignBatches.SingleOrDefault(i => i.Case.CaseCode == caseCode && i.AssignDate == assignDate);
                             if (assignBatch == null)
                             {
@@ -2783,7 +2783,7 @@ namespace CMBC.EasyFactor.Utils
 
                             invoice.InvoiceAssignBatch = assignBatch;
 
-                            //èèµ„æ‰¹æ¬¡ä¿¡æ¯
+                            //ÈÚ×ÊÅú´ÎĞÅÏ¢
                             column = 13;
                             string financeType = String.Format("{0:G}", valueArray[row, column++]);
                             column = 16;
@@ -2811,14 +2811,14 @@ namespace CMBC.EasyFactor.Utils
                                 }
                             }
 
-                            //èèµ„ä¿¡æ¯
+                            //ÈÚ×ÊĞÅÏ¢
                             column = 15;
                             double? financeAmount = (System.Nullable<double>)valueArray[row, column++];
                             if (financeAmount.HasValue)
                             {
                                 if (financeBatch == null)
                                 {
-                                    throw new Exception("ç¼ºå°‘èèµ„æ‰¹æ¬¡ä¿¡æ¯: " + invoice.InvoiceNo);
+                                    throw new Exception("È±ÉÙÈÚ×ÊÅú´ÎĞÅÏ¢: " + invoice.InvoiceNo);
                                 }
 
                                 financeLog = new InvoiceFinanceLog();
@@ -2829,9 +2829,9 @@ namespace CMBC.EasyFactor.Utils
                                 financeBatch.CaculateFinanceAmount();
                             }
 
-                            //ä»˜æ¬¾æ‰¹æ¬¡ä¿¡æ¯
+                            //¸¶¿îÅú´ÎĞÅÏ¢
                             column = 18;
-                            string paymentType = "ä¹°æ–¹ä»˜æ¬¾";
+                            string paymentType = "Âò·½¸¶¿î";
                             column = 19;
                             DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             if (paymentDate != null)
@@ -2850,7 +2850,7 @@ namespace CMBC.EasyFactor.Utils
                                 }
                             }
 
-                            //ä»˜æ¬¾ä¿¡æ¯
+                            //¸¶¿îĞÅÏ¢
                             column = 18;
                             double? paymentAmount = (System.Nullable<double>)valueArray[row, column++];
                             if (paymentAmount.HasValue)
@@ -2860,16 +2860,16 @@ namespace CMBC.EasyFactor.Utils
                                 paymentLog.Invoice = invoice;
                                 if (paymentBatch == null)
                                 {
-                                    throw new Exception("ç¼ºå°‘ä»˜æ¬¾æ‰¹æ¬¡ä¿¡æ¯: " + invoice.InvoiceNo);
+                                    throw new Exception("È±ÉÙ¸¶¿îÅú´ÎĞÅÏ¢: " + invoice.InvoiceNo);
                                 }
 
                                 paymentLog.InvoicePaymentBatch = paymentBatch;
                                 invoice.CaculatePayment();
                             }
 
-                            //è¿˜æ¬¾æ‰¹æ¬¡ä¿¡æ¯
+                            //»¹¿îÅú´ÎĞÅÏ¢
                             column = 21;
-                            string refundType = "ä¹°æ–¹ä»˜æ¬¾";
+                            string refundType = "Âò·½¸¶¿î";
 
                             DateTime? refundDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             if (refundDate != null)
@@ -2888,7 +2888,7 @@ namespace CMBC.EasyFactor.Utils
                                 }
                             }
 
-                            //è¿˜æ¬¾ä¿¡æ¯
+                            //»¹¿îĞÅÏ¢
                             column = 20;
                             double? refundAmount = (System.Nullable<double>)valueArray[row, column++];
                             if (refundAmount.HasValue)
@@ -2898,7 +2898,7 @@ namespace CMBC.EasyFactor.Utils
                                 refundLog.InvoiceFinanceLog = financeLog;
                                 if (refundBatch == null)
                                 {
-                                    throw new Exception("ç¼ºå°‘è¿˜æ¬¾æ‰¹æ¬¡ä¿¡æ¯: " + invoice.InvoiceNo);
+                                    throw new Exception("È±ÉÙ»¹¿îÅú´ÎĞÅÏ¢: " + invoice.InvoiceNo);
                                 }
 
                                 refundLog.InvoiceRefundBatch = refundBatch;
@@ -2906,13 +2906,13 @@ namespace CMBC.EasyFactor.Utils
                                 refundBatch.CaculateRefundAmount();
                             }
 
-                            //æ‰‹ç»­è´¹
+                            //ÊÖĞø·Ñ
                             column = 22;
                             double? Commission = (System.Nullable<double>)valueArray[row, column++];
 
                             if (Commission.HasValue)
                             {
-                                if (activeCDA.CommissionType == "æŒ‰èèµ„é‡‘é¢" && financeLog != null)
+                                if (activeCDA.CommissionType == "°´ÈÚ×Ê½ğ¶î" && financeLog != null)
                                 {
                                     financeLog.Commission = Commission;
                                 }
@@ -2927,10 +2927,10 @@ namespace CMBC.EasyFactor.Utils
                             column = 25;
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         }
-                        else if ("è´·é¡¹é€šçŸ¥".Equals(type))
+                        else if ("´ûÏîÍ¨Öª".Equals(type))
                         {
                             paymentBatch = null;
-                            string paymentType = "è´·é¡¹é€šçŸ¥";
+                            string paymentType = "´ûÏîÍ¨Öª";
                             DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, 11];
                             if (paymentDate != null)
                             {
@@ -2951,7 +2951,7 @@ namespace CMBC.EasyFactor.Utils
                             string creditNoteNo = String.Format("{0:G}", valueArray[row, 5]);
                             if (String.IsNullOrEmpty(creditNoteNo))
                             {
-                                throw new Exception("è´·é¡¹é€šçŸ¥ç¼–å·ä¸èƒ½ä¸ºç©º");
+                                throw new Exception("´ûÏîÍ¨Öª±àºÅ²»ÄÜÎª¿Õ");
                             }
 
                             CreditNote creditNote = context.CreditNotes.SingleOrDefault(c => c.CreditNoteNo == creditNoteNo);
@@ -2973,7 +2973,7 @@ namespace CMBC.EasyFactor.Utils
                             string invoiceNo = String.Format("{0:G}", valueArray[row, 6]);
                             if (String.IsNullOrEmpty(invoiceNo))
                             {
-                                throw new Exception("è´·é¡¹é€šçŸ¥å¯¹åº”å‘ç¥¨å·ä¸èƒ½ä¸ºç©º");
+                                throw new Exception("´ûÏîÍ¨Öª¶ÔÓ¦·¢Æ±ºÅ²»ÄÜÎª¿Õ");
                             }
 
                             invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
@@ -2982,14 +2982,14 @@ namespace CMBC.EasyFactor.Utils
                                 invoice = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                                 if (invoice == null)
                                 {
-                                    throw new Exception("è´·é¡¹é€šçŸ¥å¯¹åº”å‘ç¥¨å·é”™è¯¯: " + invoiceNo);
+                                    throw new Exception("´ûÏîÍ¨Öª¶ÔÓ¦·¢Æ±ºÅ´íÎó: " + invoiceNo);
                                 }
                             }
 
                             paymentLog.Invoice = invoice;
                             if (paymentBatch == null)
                             {
-                                throw new Exception("ç¼ºå°‘è´·é¡¹é€šçŸ¥ä»˜æ¬¾æ‰¹æ¬¡ä¿¡æ¯: " + invoice.InvoiceNo);
+                                throw new Exception("È±ÉÙ´ûÏîÍ¨Öª¸¶¿îÅú´ÎĞÅÏ¢: " + invoice.InvoiceNo);
                             }
 
                             paymentLog.InvoicePaymentBatch = paymentBatch;
@@ -3107,7 +3107,7 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("ä¸šåŠ¡ç¼–å·ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥");
+                                throw new Exception("ÒµÎñ±àºÅ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë");
                             }
                         }
                         else
@@ -3121,23 +3121,23 @@ namespace CMBC.EasyFactor.Utils
 
                             if (assignBatch == null)
                             {
-                                throw new Exception("ä¸šåŠ¡ç¼–å·é”™è¯¯ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                throw new Exception("ÒµÎñ±àºÅ´íÎó£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                             }
 
                             CDA cda = assignBatch.Case.ActiveCDA;
                             if (cda == null)
                             {
-                                throw new Exception("æ²¡æœ‰æœ‰æ•ˆçš„é¢åº¦é€šçŸ¥ä¹¦: " + assignBatchCode);
+                                throw new Exception("Ã»ÓĞÓĞĞ§µÄ¶î¶ÈÍ¨ÖªÊé: " + assignBatchCode);
                             }
 
-                            if (assignBatch.Case.TransactionType == "å‡ºå£ä¿ç†" || assignBatch.Case.TransactionType == "è¿›å£ä¿ç†")
+                            if (assignBatch.Case.TransactionType == "³ö¿Ú±£Àí" || assignBatch.Case.TransactionType == "½ø¿Ú±£Àí")
                             {
                                 isInInvoice = true;
                             }
 
                             if (isInInvoice && String.IsNullOrEmpty(invoiceNo))
                             {
-                                throw new Exception("æœ¬æ¡ˆä¸ºå›½é™…ä¿ç†æ¡ˆï¼Œå‘ç¥¨ç¼–å·ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼Œä¸šåŠ¡ç¼–å·ï¼š " + assignBatchCode);
+                                throw new Exception("±¾°¸Îª¹ú¼Ê±£Àí°¸£¬·¢Æ±±àºÅ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£¬ÒµÎñ±àºÅ£º " + assignBatchCode);
                             }
                         }
 
@@ -3146,7 +3146,7 @@ namespace CMBC.EasyFactor.Utils
                             invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                             if (invoice == null)
                             {
-                                throw new Exception("å‘ç¥¨å·é”™è¯¯ï¼Œä¸èƒ½å¯¼å…¥ï¼Œå‘ç¥¨å·ï¼š" + invoiceNo);
+                                throw new Exception("·¢Æ±ºÅ´íÎó£¬²»ÄÜµ¼Èë£¬·¢Æ±ºÅ£º" + invoiceNo);
                             }
                         }
 
@@ -3160,11 +3160,11 @@ namespace CMBC.EasyFactor.Utils
                             {
                                 if (isInInvoice)
                                 {
-                                    throw new Exception("å†²é”€è´¦æ¬¾é‡‘é¢ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                                    throw new Exception("³åÏúÕË¿î½ğ¶îÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + invoiceNo);
                                 }
                                 else
                                 {
-                                    throw new Exception("å†²é”€è´¦æ¬¾é‡‘é¢ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                    throw new Exception("³åÏúÕË¿î½ğ¶îÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                                 }
                             }
                         }
@@ -3174,11 +3174,11 @@ namespace CMBC.EasyFactor.Utils
                         {
                             if (isInInvoice)
                             {
-                                throw new Exception("é”€å¸æ—¥ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                                throw new Exception("ÏúÕÊÈÕ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + invoiceNo);
                             }
                             else
                             {
-                                throw new Exception("é”€å¸æ—¥ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                throw new Exception("ÏúÕÊÈÕ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                             }
                         }
 
@@ -3187,11 +3187,11 @@ namespace CMBC.EasyFactor.Utils
                         {
                             if (isInInvoice)
                             {
-                                throw new Exception("é”€å¸æ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                                throw new Exception("ÏúÕÊÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + invoiceNo);
                             }
                             else
                             {
-                                throw new Exception("é”€å¸æ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                throw new Exception("ÏúÕÊÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                             }
                         }
 
@@ -3219,7 +3219,7 @@ namespace CMBC.EasyFactor.Utils
 
                                 if (TypeUtil.GreaterZero(paymentAmount - invoice.AssignOutstanding))
                                 {
-                                    throw new Exception("å†²é”€è´¦æ¬¾é‡‘é¢ä¸èƒ½å¤§äºè½¬è®©ä½™é¢ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + invoiceNo);
+                                    throw new Exception("³åÏúÕË¿î½ğ¶î²»ÄÜ´óÓÚ×ªÈÃÓà¶î£¬²»ÄÜµ¼Èë£º" + invoiceNo);
                                 }
 
                                 InvoicePaymentLog log = new InvoicePaymentLog();
@@ -3243,7 +3243,7 @@ namespace CMBC.EasyFactor.Utils
 
                                 if (TypeUtil.GreaterZero(paymentAmount - assignBatch.AssignOutstanding))
                                 {
-                                    throw new Exception("å†²é”€è´¦æ¬¾é‡‘é¢ä¸èƒ½å¤§äºè½¬è®©ä½™é¢ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                    throw new Exception("³åÏúÕË¿î½ğ¶î²»ÄÜ´óÓÚ×ªÈÃÓà¶î£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                                 }
 
                                 foreach (Invoice inv in assignBatch.Invoices.OrderBy(i => i.DueDate))
@@ -3333,7 +3333,7 @@ namespace CMBC.EasyFactor.Utils
                         Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                         if (invoice == null)
                         {
-                            throw new Exception("å‘ç¥¨å·é”™è¯¯: " + invoiceNo);
+                            throw new Exception("·¢Æ±ºÅ´íÎó: " + invoiceNo);
                         }
 
                         InvoicePaymentLog log = new InvoicePaymentLog(invoice);
@@ -3419,7 +3419,7 @@ namespace CMBC.EasyFactor.Utils
                         client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
-                            throw new Exception("å®¢æˆ·ç¼–å·é”™è¯¯ï¼š" + clientEDICode);
+                            throw new Exception("¿Í»§±àºÅ´íÎó£º" + clientEDICode);
                         }
 
                         InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
@@ -3427,7 +3427,7 @@ namespace CMBC.EasyFactor.Utils
                         string financeType = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(financeType))
                         {
-                            throw new Exception("å‡ºè´¦æ–¹å¼ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("³öÕË·½Ê½²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
                         else
                         {
@@ -3437,7 +3437,7 @@ namespace CMBC.EasyFactor.Utils
                         string batchCurrency = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(batchCurrency))
                         {
-                            throw new Exception("èèµ„å¸åˆ«ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÈÚ×Ê±Ò±ğ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
                         else
                         {
@@ -3447,7 +3447,7 @@ namespace CMBC.EasyFactor.Utils
                         string financeAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(financeAmountStr))
                         {
-                            throw new Exception("èèµ„é‡‘é¢ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÈÚ×Ê½ğ¶î²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
                         double financeAmount = 0;
                         if (Double.TryParse(financeAmountStr, out financeAmount))
@@ -3456,13 +3456,13 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("èèµ„é‡‘é¢ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÈÚ×Ê½ğ¶îÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
 
                         string beginDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(beginDateStr))
                         {
-                            throw new Exception("èèµ„æ—¥ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÈÚ×ÊÈÕ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
                         DateTime beginDate = default(DateTime);
                         if (DateTime.TryParse(beginDateStr, out beginDate))
@@ -3471,13 +3471,13 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("èèµ„æ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÈÚ×ÊÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
 
                         string endDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(endDateStr))
                         {
-                            throw new Exception("èèµ„åˆ°æœŸæ—¥ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÈÚ×Êµ½ÆÚÈÕ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
                         DateTime endDate = default(DateTime);
                         if (DateTime.TryParse(endDateStr, out endDate))
@@ -3486,13 +3486,13 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("èèµ„åˆ°æœŸæ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÈÚ×Êµ½ÆÚÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
 
                         string financeRateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(financeRateStr))
                         {
-                            throw new Exception("èèµ„åˆ©ç‡ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÈÚ×ÊÀûÂÊ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
                         double financeRate = 0;
                         if (Double.TryParse(financeRateStr, out financeRate))
@@ -3501,7 +3501,7 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("èèµ„åˆ©ç‡ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÈÚ×ÊÀûÂÊÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
 
                         string costRateStr = String.Format("{0:G}", valueArray[row, column++]);
@@ -3514,7 +3514,7 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("æˆæœ¬åˆ©ç‡ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                                throw new Exception("³É±¾ÀûÂÊÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + clientEDICode);
                             }
                         }
 
@@ -3524,7 +3524,7 @@ namespace CMBC.EasyFactor.Utils
                             Factor factor = context.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                             if (factor == null)
                             {
-                                throw new Exception("ä»£ä»˜è¡Œç¼–ç é”™è¯¯ï¼š" + factorCode);
+                                throw new Exception("´ú¸¶ĞĞ±àÂë´íÎó£º" + factorCode);
                             }
 
                             financeBatch.Factor = factor;
@@ -3603,7 +3603,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (String.IsNullOrEmpty(clientEDICode))
                         {
-                            throw new Exception("å®¢æˆ·ç¼–å·ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥");
+                            throw new Exception("¿Í»§±àºÅ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë");
                         }
                         else
                         {
@@ -3616,11 +3616,17 @@ namespace CMBC.EasyFactor.Utils
 
                             if (client == null)
                             {
-                                throw new Exception("å®¢æˆ·ç¼–å·é”™è¯¯ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                                throw new Exception("¿Í»§±àºÅ´íÎó£¬²»ÄÜµ¼Èë£º" + clientEDICode);
                             }
                         }
 
                         string refundType = String.Format("{0:G}", valueArray[row, column++]);
+
+                        string batchCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        if (String.IsNullOrEmpty(batchCurrency))
+                        {
+                            throw new Exception("»¹¿î±Ò±ğ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + clientEDICode);
+                        }
 
                         string refundAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         double refundAmount = 0;
@@ -3628,20 +3634,20 @@ namespace CMBC.EasyFactor.Utils
                         {
                             if (!Double.TryParse(refundAmountStr, out refundAmount))
                             {
-                                throw new Exception("å†²é”€èèµ„é‡‘é¢ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                                throw new Exception("³åÏúÈÚ×Ê½ğ¶îÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + clientEDICode);
                             }
                         }
 
                         string refundDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(refundDateStr))
                         {
-                            throw new Exception("é”€å¸æ—¥ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÏúÕÊÈÕ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
 
                         DateTime refundDate = default(DateTime);
                         if (!DateTime.TryParse(refundDateStr, out refundDate))
                         {
-                            throw new Exception("é”€å¸æ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + clientEDICode);
+                            throw new Exception("ÏúÕÊÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + clientEDICode);
                         }
 
                         string comment = String.Format("{0:G}", valueArray[row, column++]);
@@ -3650,12 +3656,18 @@ namespace CMBC.EasyFactor.Utils
                         {
                             foreach (InvoiceFinanceBatch financeBatch in client.InvoiceFinanceBatches.OrderBy(i => i.FinancePeriodEnd))
                             {
-                                if (TypeUtil.GreaterZero(refundAmount))
+                                if (TypeUtil.GreaterZero(refundAmount) && TypeUtil.GreaterZero(financeBatch.PoolFinanceOutstanding))
                                 {
+                                    if (financeBatch.BatchCurrency != batchCurrency)
+                                    {
+                                        double rate = Exchange.GetExchangeRate(batchCurrency, financeBatch.BatchCurrency);
+                                        refundAmount *= rate;
+                                    }
+
                                     InvoiceRefundBatch refundBatch = new InvoiceRefundBatch();
                                     refundBatch.InvoiceFinanceBatch = financeBatch;
+                                    refundBatch.RefundAmount = Math.Min(refundAmount, financeBatch.PoolFinanceOutstanding);
                                     refundAmount -= refundBatch.RefundAmount.GetValueOrDefault();
-                                    refundBatch.RefundAmount = Math.Min(refundAmount, financeBatch.PoolFinanceOutstanding.GetValueOrDefault());
                                     refundBatch.CheckStatus = BATCH.UNCHECK;
                                     refundBatch.Comment = comment;
                                     refundBatch.InputDate = DateTime.Now;
@@ -3663,10 +3675,10 @@ namespace CMBC.EasyFactor.Utils
                                     refundBatch.RefundType = refundType;
                                     refundBatch.CreateUserName = App.Current.CurUser.Name;
                                     refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(refundDate, refundBatchList);
+                                    refundBatchList.Add(refundBatch);
                                 }
                             }
                         }
-
 
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
@@ -3753,13 +3765,13 @@ namespace CMBC.EasyFactor.Utils
 
                             if (assignBatch == null)
                             {
-                                throw new Exception("ä¸šåŠ¡ç¼–å·é”™è¯¯ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                throw new Exception("ÒµÎñ±àºÅ´íÎó£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                             }
 
                             CDA cda = assignBatch.Case.ActiveCDA;
                             if (cda == null)
                             {
-                                throw new Exception("æ²¡æœ‰æœ‰æ•ˆçš„é¢åº¦é€šçŸ¥ä¹¦: " + assignBatchCode);
+                                throw new Exception("Ã»ÓĞÓĞĞ§µÄ¶î¶ÈÍ¨ÖªÊé: " + assignBatchCode);
                             }
 
                         }
@@ -3774,20 +3786,20 @@ namespace CMBC.EasyFactor.Utils
                         {
                             if (!Double.TryParse(refundAmountStr, out refundAmount))
                             {
-                                throw new Exception("å†²é”€èèµ„é‡‘é¢ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                throw new Exception("³åÏúÈÚ×Ê½ğ¶îÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                             }
                         }
 
                         string refundDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(refundDateStr))
                         {
-                            throw new Exception("é”€å¸æ—¥ä¸èƒ½ä¸ºç©ºï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÏúÕÊÈÕ²»ÄÜÎª¿Õ£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
 
                         DateTime refundDate = default(DateTime);
                         if (!DateTime.TryParse(refundDateStr, out refundDate))
                         {
-                            throw new Exception("é”€å¸æ—¥ç±»å‹å¼‚å¸¸ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                            throw new Exception("ÏúÕÊÈÕÀàĞÍÒì³££¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                         }
 
                         string comment = String.Format("{0:G}", valueArray[row, column++]);
@@ -3810,14 +3822,14 @@ namespace CMBC.EasyFactor.Utils
                                 double rate = Exchange.GetExchangeRate(refundCurrency, assignBatch.BatchCurrency);
                                 if (TypeUtil.GreaterZero(refundAmount * rate - assignBatch.FinanceOutstanding))
                                 {
-                                    throw new Exception("å†²é”€èèµ„é‡‘é¢ä¸èƒ½å¤§äºèèµ„ä½™é¢ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                    throw new Exception("³åÏúÈÚ×Ê½ğ¶î²»ÄÜ´óÓÚÈÚ×ÊÓà¶î£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                                 }
                             }
                             else
                             {
                                 if (TypeUtil.GreaterZero(refundAmount - assignBatch.FinanceOutstanding))
                                 {
-                                    throw new Exception("å†²é”€èèµ„é‡‘é¢ä¸èƒ½å¤§äºèèµ„ä½™é¢ï¼Œä¸èƒ½å¯¼å…¥ï¼š" + assignBatchCode);
+                                    throw new Exception("³åÏúÈÚ×Ê½ğ¶î²»ÄÜ´óÓÚÈÚ×ÊÓà¶î£¬²»ÄÜµ¼Èë£º" + assignBatchCode);
                                 }
                             }
 
@@ -3921,7 +3933,7 @@ namespace CMBC.EasyFactor.Utils
                         Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
                         if (invoice == null)
                         {
-                            throw new Exception("å‘ç¥¨å·é”™è¯¯: " + invoiceNo);
+                            throw new Exception("·¢Æ±ºÅ´íÎó: " + invoiceNo);
                         }
 
                         int financeLogID = Convert.ToInt32(String.Format("{0:G}", valueArray[row, column++]));
@@ -4101,12 +4113,12 @@ namespace CMBC.EasyFactor.Utils
                 return;
             }
 
-            this.btnCancel.Text = "å–æ¶ˆ";
+            this.btnCancel.Text = "È¡Ïû";
             this.backgroundWorker.RunWorkerAsync(filePath);
 
             this.btnStart.Enabled = false;
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

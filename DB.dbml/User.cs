@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="User.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -15,6 +15,8 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class User
     {
+		#region?Properties?(1)?
+
         /// <summary>
         /// 
         /// </summary>
@@ -24,20 +26,26 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 List<PermissionItem> reasonList = new List<PermissionItem>();
-                reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_QUERY, "æŸ¥è¯¢æƒé™"));
-                reasonList.Add(new PermissionItem(Utils.Permission.BASICINFO_UPDATE, "å®¢æˆ·/åˆä½œæœºæ„æ›´æ–°æƒé™"));
-                reasonList.Add(new PermissionItem(Utils.Permission.CASE_UPDATE, "æ¡ˆä»¶ä¿¡æ¯æ›´æ–°æƒé™"));
-                reasonList.Add(new PermissionItem(Utils.Permission.CDA_UPDATE, "é¢åº¦é€šçŸ¥ä¹¦æ›´æ–°æƒé™"));
-                reasonList.Add(new PermissionItem(Utils.Permission.CDA_APPROVE, "é¢åº¦é€šçŸ¥ä¹¦å®¡æ ¸æƒé™"));
-                reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_UPDATE, "å‘ç¥¨æ›´æ–°æƒé™"));
-                reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_CHECK, "å‘ç¥¨å¤æ ¸æƒé™"));
-                reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_APPROVE, "å‘ç¥¨å®¡æ ¸æƒé™"));
-                reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_IMPORT, "ç³»ç»Ÿæ•°æ®å¯¼å…¥æƒé™"));
-                reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_UPDATE, "ç³»ç»Ÿæ•°æ®æ›´æ–°æƒé™"));
+                reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_QUERY, "²éÑ¯È¨ÏŞ"));
+                reasonList.Add(new PermissionItem(Utils.Permission.BASICINFO_UPDATE, "¿Í»§/ºÏ×÷»ú¹¹¸üĞÂÈ¨ÏŞ"));
+                reasonList.Add(new PermissionItem(Utils.Permission.CASE_UPDATE, "°¸¼şĞÅÏ¢¸üĞÂÈ¨ÏŞ"));
+                reasonList.Add(new PermissionItem(Utils.Permission.CDA_UPDATE, "¶î¶ÈÍ¨ÖªÊé¸üĞÂÈ¨ÏŞ"));
+                reasonList.Add(new PermissionItem(Utils.Permission.CDA_APPROVE, "¶î¶ÈÍ¨ÖªÊéÉóºËÈ¨ÏŞ"));
+                reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_UPDATE, "·¢Æ±¸üĞÂÈ¨ÏŞ"));
+                reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_CHECK, "·¢Æ±¸´ºËÈ¨ÏŞ"));
+                reasonList.Add(new PermissionItem(Utils.Permission.INVOICE_APPROVE, "·¢Æ±ÉóºËÈ¨ÏŞ"));
+                reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_IMPORT, "ÏµÍ³Êı¾İµ¼ÈëÈ¨ÏŞ"));
+                reasonList.Add(new PermissionItem(Utils.Permission.SYSTEM_UPDATE, "ÏµÍ³Êı¾İ¸üĞÂÈ¨ÏŞ"));
 
                 return reasonList;
             }
         }
+
+		#endregion?Properties?
+
+		#region?Methods?(1)?
+
+		//?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -57,14 +65,21 @@ namespace CMBC.EasyFactor.DB.dbml
                 return string.Empty;
             }
         }
+
+		#endregion?Methods?
     }
 
 
     public class PermissionItem
     {
-        private Permission perm;
+		#region?Fields?(2)?
 
         private string name;
+        private Permission perm;
+
+		#endregion?Fields?
+
+		#region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -75,6 +90,21 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             this.perm = perm;
             this.name = name;
+        }
+
+		#endregion?Constructors?
+
+		#region?Properties?(2)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
         }
 
         /// <summary>
@@ -88,15 +118,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name
-        {
-            get
-            {
-                return this.name;
-            }
-        }
+		#endregion?Properties?
     }
 }

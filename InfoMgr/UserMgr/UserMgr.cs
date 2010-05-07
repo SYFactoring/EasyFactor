@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="UserMgrUI.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -12,24 +12,24 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// User Management User Interface
     /// </summary>
     public partial class UserMgr : UserControl
     {
-        #region Fields (1)
+		#region?Fields?(1)?
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Constructors (1)
+		#region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the UserMgrUI class
@@ -48,9 +48,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.UpdateContextMenu();
         }
 
-        #endregion Constructors
+		#endregion?Constructors?
 
-        #region Properties (3)
+		#region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -76,11 +76,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             set;
         }
 
-        #endregion Properties
+		#endregion?Properties?
 
-        #region Methods (8)
+		#region?Methods?(8)?
 
-        // Private Methods (8) 
+		//?Private?Methods?(8)?
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -117,7 +117,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
 
             User selectedUser = (User)this.bs.List[this.dgvUsers.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("是否确定删除帐号: " + selectedUser.UserID, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("�Ƿ�ȷ��ɾ���ʺ�: " + selectedUser.UserID, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 context.Users.DeleteOnSubmit(selectedUser);
                 bool isDeleteOK = true;
@@ -198,7 +198,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
             var queryResult = context.Users.Where(u => u.UserID.Contains(tbUserID.Text));
             bs.DataSource = queryResult;
-            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            lblCount.Text = String.Format("���{0}����¼", queryResult.Count());
         }
 
         /// <summary>
@@ -239,6 +239,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             }
         }
 
-        #endregion Methods
+		#endregion?Methods?
     }
 }

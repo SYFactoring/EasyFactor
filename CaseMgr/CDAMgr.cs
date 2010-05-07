@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="CDAMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -7,24 +7,23 @@
 namespace CMBC.EasyFactor.CaseMgr
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using Microsoft.Office.Interop.Excel;
-    using System.Data.Linq;
-    using DevComponents.DotNetBar;
-    using System.Collections.Generic;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
+    using Microsoft.Office.Interop.Excel;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class CDAMgr : UserControl
     {
-        #regionÂ FieldsÂ (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -35,9 +34,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCDAType opCDAType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -60,16 +59,16 @@ namespace CMBC.EasyFactor.CaseMgr
             REPORT,
 
             /// <summary>
-            /// é¢åº¦é€šçŸ¥ä¹¦åˆ°æœŸ
+            /// ¶î¶ÈÍ¨ÖªÊéµ½ÆÚ
             /// </summary>
             DUE,
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (2)
+		#region?Constructors?(2)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the CDAMgr class.
         /// </summary>
         /// <param name="createUseraName"></param>
@@ -96,11 +95,11 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetDoubleBuffered(this.dgvCDAs);
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
-            this.cbTransactionType.Items.Insert(0, "å…¨éƒ¨");
-            this.cbTransactionType.Text = "å…¨éƒ¨";
+            this.cbTransactionType.Items.Insert(0, "È«²¿");
+            this.cbTransactionType.Text = "È«²¿";
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "å…¨éƒ¨" });
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "È«²¿" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";
             this.cbLocation.ValueMember = "LocationCode";
@@ -129,13 +128,13 @@ namespace CMBC.EasyFactor.CaseMgr
                                   select cda;
 
                 this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+                this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
             }
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ PropertiesÂ (3)
+		#region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -164,11 +163,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (15)
+		#region?Methods?(16)?
 
-        //Â PrivateÂ MethodsÂ (15)Â 
+		//?Private?Methods?(16)?
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -206,7 +205,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
 
-            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€šè¿‡è¯¥é¢åº¦é€šçŸ¥ä¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍ¨¹ı¸Ã¶î¶ÈÍ¨ÖªÊé", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
@@ -271,11 +270,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (cda.CDAStatus == CDAStr.CHECKED)
             {
-                MessageBoxEx.Show("æ­¤é¢åº¦é€šçŸ¥ä¹¦å·²ç»è¿‡å®¡æ ¸ï¼Œä¸èƒ½åˆ é™¤ã€‚", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("´Ë¶î¶ÈÍ¨ÖªÊéÒÑ¾­¹ıÉóºË£¬²»ÄÜÉ¾³ı¡£", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤é¢åº¦é€šçŸ¥ä¹¦: " + cda.CDACode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı¶î¶ÈÍ¨ÖªÊé: " + cda.CDACode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -290,12 +289,12 @@ namespace CMBC.EasyFactor.CaseMgr
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤é¢åº¦é€šçŸ¥ä¹¦: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("²»ÄÜÉ¾³ı´Ë¶î¶ÈÍ¨ÖªÊé: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvCDAs.Rows.RemoveAt(this.dgvCDAs.CurrentCell.RowIndex);
             }
         }
@@ -453,7 +452,7 @@ namespace CMBC.EasyFactor.CaseMgr
             var queryResult =
                 from cda in context.CDAs
                 let curCase = cda.Case
-                where (transactionType == "å…¨éƒ¨" ? true : curCase.TransactionType == transactionType) && (location == "00" ? true : curCase.OwnerDepartment.LocationCode == location)
+                where (transactionType == "È«²¿" ? true : curCase.TransactionType == transactionType) && (location == "00" ? true : curCase.OwnerDepartment.LocationCode == location)
                 let contracts = cda.Case.SellerClient.Contracts
                 where contractCode == string.Empty ? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
                 let seller = cda.Case.SellerClient
@@ -473,7 +472,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 select cda;
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
         }
 
         /// <summary>
@@ -495,7 +494,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
 
-            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€€å›è¯¥é¢åº¦é€šçŸ¥ä¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍË»Ø¸Ã¶î¶ÈÍ¨ÖªÊé", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
@@ -531,7 +530,7 @@ namespace CMBC.EasyFactor.CaseMgr
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
@@ -544,36 +543,36 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.PageSetup.FitToPagesTall = false;
 
                 bool isZero = false;
-                if (selectedCDA.Case.TransactionType == "å›½å†…ä¹°æ–¹ä¿ç†" || selectedCDA.Case.TransactionType == "è¿›å£ä¿ç†")
+                if (selectedCDA.Case.TransactionType == "¹úÄÚÂò·½±£Àí" || selectedCDA.Case.TransactionType == "½ø¿Ú±£Àí")
                 {
                     isZero = true;
                 }
 
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.Cells[1, 1] = "ä¸­å›½æ°‘ç”Ÿé“¶è¡Œä¿ç†é¢åº¦é€šçŸ¥ä¹¦ ";
+                sheet.Cells[1, 1] = "ÖĞ¹úÃñÉúÒøĞĞ±£Àí¶î¶ÈÍ¨ÖªÊé ";
 
-                sheet.Cells[3, 2] = String.Format("æ¡ˆä»¶ç¼–å·ï¼š{0}", selectedCDA.CaseCode);
+                sheet.Cells[3, 2] = String.Format("°¸¼ş±àºÅ£º{0}", selectedCDA.CaseCode);
                 sheet.get_Range(sheet.Cells[3, 2], sheet.Cells[3, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
 
-                sheet.Cells[5, 1] = String.Format("è´µï¼ˆ{0}ï¼‰å‰æ´½æœ¬è¡ŒåŠç†ä¿ç†ä¸šåŠ¡å¹¶ç­¾ç«‹ä¿ç†æœåŠ¡åˆåŒ", selectedCDA.SellerName);
+                sheet.Cells[5, 1] = String.Format("¹ó£¨{0}£©Ç°Ç¢±¾ĞĞ°ìÀí±£ÀíÒµÎñ²¢Ç©Á¢±£Àí·şÎñºÏÍ¬", selectedCDA.SellerName);
                 if (selectedCDA.Case.SellerClient.Contract != null)
                 {
-                    sheet.Cells[6, 1] = String.Format("(åˆåŒç¼–å·:ç¬¬[ {0} ]å· ), ç»æœ¬è¡Œè¯„ä¼°å,æ ¸å®šé¢åº¦å¦‚ä¸‹:", selectedCDA.Case.SellerClient.Contract.ContractCode);
+                    sheet.Cells[6, 1] = String.Format("(ºÏÍ¬±àºÅ:µÚ[ {0} ]ºÅ ), ¾­±¾ĞĞÆÀ¹Àºó,ºË¶¨¶î¶ÈÈçÏÂ:", selectedCDA.Case.SellerClient.Contract.ContractCode);
                 }
                 else
                 {
-                    sheet.Cells[6, 1] = String.Format("(åˆåŒç¼–å·:ç¬¬[  ]å· ), ç»æœ¬è¡Œè¯„ä¼°å,æ ¸å®šé¢åº¦å¦‚ä¸‹:");
+                    sheet.Cells[6, 1] = String.Format("(ºÏÍ¬±àºÅ:µÚ[  ]ºÅ ), ¾­±¾ĞĞÆÀ¹Àºó,ºË¶¨¶î¶ÈÈçÏÂ:");
                 }
 
                 int row = 8;
-                sheet.Cells[row, 1] = "ä¹°æ–¹åç§°";
+                sheet.Cells[row, 1] = "Âò·½Ãû³Æ";
                 sheet.Cells[row++, 2] = selectedCDA.BuyerName;
-                sheet.Cells[row, 1] = "ä¹°æ–¹åœ°å€";
+                sheet.Cells[row, 1] = "Âò·½µØÖ·";
                 sheet.Cells[row++, 2] = String.IsNullOrEmpty(selectedCDA.Case.BuyerClient.AddressCN) ? selectedCDA.Case.BuyerClient.AddressEN : selectedCDA.Case.BuyerClient.AddressCN;
-                sheet.Cells[row, 1] = "ä»˜æ¬¾æ¡ä»¶";
+                sheet.Cells[row, 1] = "¸¶¿îÌõ¼ş";
                 sheet.Cells[row++, 2] = selectedCDA.PaymentTerms;
-                sheet.Cells[row, 1] = "ä¿¡ç”¨é£é™©é¢åº¦";
+                sheet.Cells[row, 1] = "ĞÅÓÃ·çÏÕ¶î¶È";
                 if (selectedCDA.CreditCover.HasValue)
                 {
                     if (isZero)
@@ -582,7 +581,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
                     else
                     {
-                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} ï¼ˆ{2}{3}ï¼‰", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.CreditCover, TypeUtil.ToPrintCurrencyChinese(selectedCDA.CreditCoverCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.CreditCover));
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} £¨{2}{3}£©", TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr), selectedCDA.CreditCover, TypeUtil.ToPrintCurrencyChinese(selectedCDA.CreditCoverCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.CreditCover));
                     }
                 }
                 else
@@ -590,7 +589,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = "0";
                 }
 
-                sheet.Cells[row, 1] = "ä¿¡ç”¨é£é™©æ‰¿æ‹…æ¯”ä¾‹";
+                sheet.Cells[row, 1] = "ĞÅÓÃ·çÏÕ³Ğµ£±ÈÀı";
                 if (isZero)
                 {
                     sheet.Cells[row++, 2] = "0%";
@@ -600,23 +599,23 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = String.Format("{0:0%}", selectedCDA.PUGProportion.GetValueOrDefault());
                 }
 
-                sheet.Cells[row, 1] = "ä¿¡ç”¨é£é™©é¢åº¦æœ‰æ•ˆæœŸé™";
+                sheet.Cells[row, 1] = "ĞÅÓÃ·çÏÕ¶î¶ÈÓĞĞ§ÆÚÏŞ";
                 if (selectedCDA.CreditCoverPeriodBegin.HasValue)
                 {
                     if (isZero)
                     {
-                        sheet.Cells[row++, 2] = "æ— ";
+                        sheet.Cells[row++, 2] = "ÎŞ";
                     }
                     else
                     {
-                        sheet.Cells[row++, 2] = String.Format("{0:yyyy}å¹´{0:MM}æœˆ{0:dd}æ—¥ è‡³ {1:yyyy}å¹´{1:MM}æœˆ{1:dd}æ—¥", selectedCDA.CreditCoverPeriodBegin, selectedCDA.CreditCoverPeriodEnd);
+                        sheet.Cells[row++, 2] = String.Format("{0:yyyy}Äê{0:MM}ÔÂ{0:dd}ÈÕ ÖÁ {1:yyyy}Äê{1:MM}ÔÂ{1:dd}ÈÕ", selectedCDA.CreditCoverPeriodBegin, selectedCDA.CreditCoverPeriodEnd);
                     }
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = "æ— ";
+                    sheet.Cells[row++, 2] = "ÎŞ";
                 }
-                sheet.Cells[row, 1] = "ä¿ç†é¢„ä»˜æ¬¾é¢åº¦";
+                sheet.Cells[row, 1] = "±£ÀíÔ¤¸¶¿î¶î¶È";
                 if (selectedCDA.FinanceLine.HasValue)
                 {
                     if (isZero)
@@ -625,7 +624,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
                     else
                     {
-                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} ï¼ˆ{2}{3}ï¼‰", TypeUtil.ToPrintCurrency(selectedCDA.FinanceLineCurr), selectedCDA.FinanceLine, TypeUtil.ToPrintCurrencyChinese(selectedCDA.FinanceLineCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.FinanceLine));
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} £¨{2}{3}£©", TypeUtil.ToPrintCurrency(selectedCDA.FinanceLineCurr), selectedCDA.FinanceLine, TypeUtil.ToPrintCurrencyChinese(selectedCDA.FinanceLineCurr), TypeUtil.ConvertToChineseMoney(selectedCDA.FinanceLine));
                     }
                 }
                 else
@@ -633,24 +632,24 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = "0";
                 }
 
-                sheet.Cells[row, 1] = "é¢„ä»˜æ¬¾é¢åº¦æœ‰æ•ˆæœŸé™";
+                sheet.Cells[row, 1] = "Ô¤¸¶¿î¶î¶ÈÓĞĞ§ÆÚÏŞ";
                 if (selectedCDA.FinanceLinePeriodBegin.HasValue)
                 {
                     if (isZero)
                     {
-                        sheet.Cells[row++, 2] = "æ— ";
+                        sheet.Cells[row++, 2] = "ÎŞ";
                     }
                     else
                     {
-                        sheet.Cells[row++, 2] = String.Format("{0:yyyy}å¹´{0:MM}æœˆ{0:dd}æ—¥ è‡³ {1:yyyy}å¹´{1:MM}æœˆ{1:dd}æ—¥", selectedCDA.FinanceLinePeriodBegin, selectedCDA.FinanceLinePeriodEnd);
+                        sheet.Cells[row++, 2] = String.Format("{0:yyyy}Äê{0:MM}ÔÂ{0:dd}ÈÕ ÖÁ {1:yyyy}Äê{1:MM}ÔÂ{1:dd}ÈÕ", selectedCDA.FinanceLinePeriodBegin, selectedCDA.FinanceLinePeriodEnd);
                     }
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = "æ— ";
+                    sheet.Cells[row++, 2] = "ÎŞ";
                 }
 
-                sheet.Cells[row, 1] = "æœ€é«˜ä¿ç†é¢„ä»˜æ¬¾é¢åº¦";
+                sheet.Cells[row, 1] = "×î¸ß±£ÀíÔ¤¸¶¿î¶î¶È";
                 ClientCreditLine creditLine = selectedCDA.Case.SellerClient.FinanceCreditLine;
                 if (creditLine != null)
                 {
@@ -660,7 +659,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
                     else
                     {
-                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} ï¼ˆ{2}{3}ï¼‰", TypeUtil.ToPrintCurrency(creditLine.CreditLineCurrency), creditLine.CreditLine, TypeUtil.ToPrintCurrencyChinese(creditLine.CreditLineCurrency), TypeUtil.ConvertToChineseMoney(creditLine.CreditLine));
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} £¨{2}{3}£©", TypeUtil.ToPrintCurrency(creditLine.CreditLineCurrency), creditLine.CreditLine, TypeUtil.ToPrintCurrencyChinese(creditLine.CreditLineCurrency), TypeUtil.ConvertToChineseMoney(creditLine.CreditLine));
                     }
                 }
                 else
@@ -668,27 +667,27 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = "0";
                 }
 
-                sheet.Cells[row, 1] = "é¢„ä»˜æ¯”ä¾‹";
+                sheet.Cells[row, 1] = "Ô¤¸¶±ÈÀı";
                 if (isZero)
                 {
-                    sheet.Cells[row++, 2] = "æ— ";
+                    sheet.Cells[row++, 2] = "ÎŞ";
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = String.Format("å•ç¬”èèµ„ä¸è¶…è¿‡å‘ç¥¨é‡‘é¢çš„ {0:p0}", selectedCDA.FinanceProportion);
+                    sheet.Cells[row++, 2] = String.Format("µ¥±ÊÈÚ×Ê²»³¬¹ı·¢Æ±½ğ¶îµÄ {0:p0}", selectedCDA.FinanceProportion);
                 }
 
-                sheet.Cells[row, 1] = "ä¿ç†è´¹ç‡";
+                sheet.Cells[row, 1] = "±£Àí·ÑÂÊ";
                 if (isZero)
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0}çš„ {1:p4}ï¼Œç”±ä¹°æ–¹æ‰¿æ‹…", selectedCDA.CommissionType == "æŒ‰è½¬è®©é‡‘é¢" ? "æŒ‰å‘ç¥¨é‡‘é¢" : "æŒ‰èèµ„é‡‘é¢", selectedCDA.Price.GetValueOrDefault());
+                    sheet.Cells[row++, 2] = String.Format("{0}µÄ {1:p4}£¬ÓÉÂò·½³Ğµ£", selectedCDA.CommissionType == "°´×ªÈÃ½ğ¶î" ? "°´·¢Æ±½ğ¶î" : "°´ÈÚ×Ê½ğ¶î", selectedCDA.Price.GetValueOrDefault());
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0}çš„ {1:p4}", selectedCDA.CommissionType == "æŒ‰è½¬è®©é‡‘é¢" ? "æŒ‰å‘ç¥¨é‡‘é¢" : "æŒ‰èèµ„é‡‘é¢", selectedCDA.Price.GetValueOrDefault());
+                    sheet.Cells[row++, 2] = String.Format("{0}µÄ {1:p4}", selectedCDA.CommissionType == "°´×ªÈÃ½ğ¶î" ? "°´·¢Æ±½ğ¶î" : "°´ÈÚ×Ê½ğ¶î", selectedCDA.Price.GetValueOrDefault());
                 }
 
-                sheet.Cells[row, 1] = "å•æ®å¤„ç†è´¹";
+                sheet.Cells[row, 1] = "µ¥¾İ´¦Àí·Ñ";
                 if (selectedCDA.HandFee.HasValue)
                 {
                     if (isZero)
@@ -697,7 +696,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
                     else
                     {
-                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} å…ƒ ï¼ˆæ¯å¼ å‘ç¥¨ï¼‰", TypeUtil.ToPrintCurrencyChinese(selectedCDA.HandFeeCurr), selectedCDA.HandFee);
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} Ôª £¨Ã¿ÕÅ·¢Æ±£©", TypeUtil.ToPrintCurrencyChinese(selectedCDA.HandFeeCurr), selectedCDA.HandFee);
                     }
                 }
                 else
@@ -706,14 +705,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 int rowEnd = 21;
-                if (selectedCDA.Case.TransactionType == "å‡ºå£ä¿ç†")
+                if (selectedCDA.Case.TransactionType == "³ö¿Ú±£Àí")
                 {
-                    sheet.Cells[row, 1] = "è¿›å£ä¿ç†å•†";
+                    sheet.Cells[row, 1] = "½ø¿Ú±£ÀíÉÌ";
                     sheet.Cells[row++, 2] = selectedCDA.Case.BuyerFactor.ToString();
                     rowEnd = 22;
                 }
 
-                sheet.Cells[row, 1] = "è‡ªè´Ÿé¢";
+                sheet.Cells[row, 1] = "×Ô¸º¶î";
                 if (selectedCDA.Deductibles.HasValue)
                 {
                     if (isZero)
@@ -730,7 +729,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = "0";
                 }
 
-                sheet.Cells[row, 1] = "æœ€ä½æŸå¤±é—¨æ§›";
+                sheet.Cells[row, 1] = "×îµÍËğÊ§ÃÅ¼÷";
                 if (selectedCDA.LossThreshold.HasValue)
                 {
                     if (isZero)
@@ -754,35 +753,35 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[rowEnd, 2]).Borders.LineStyle = 1;
                 sheet.get_Range(sheet.Cells[8, 1], sheet.Cells[rowEnd, 2]).WrapText = true;
 
-                sheet.Cells[23, 1] = "å¤‡æ³¨ï¼š";
+                sheet.Cells[23, 1] = "±¸×¢£º";
 
                 bool isSingle = selectedCDA.Case.SellerFactorCode == selectedCDA.Case.BuyerFactorCode;
 
-                string recoarse = selectedCDA.IsRecoarse.GetValueOrDefault() ? "æœ‰è¿½ç´¢æƒ" : "æ— è¿½ç´¢æƒ";
-                string single = isSingle ? "å•ä¿ç†" : "åŒä¿ç†";
+                string recoarse = selectedCDA.IsRecoarse.GetValueOrDefault() ? "ÓĞ×·Ë÷È¨" : "ÎŞ×·Ë÷È¨";
+                string single = isSingle ? "µ¥±£Àí" : "Ë«±£Àí";
                 string line1 = string.Empty;
                 switch (selectedCDA.Case.TransactionType)
                 {
-                    case "å›½å†…å–æ–¹ä¿ç†":
-                        line1 = String.Format("ï¼ˆ1ï¼‰æœ¬ä¸šåŠ¡ä¸º{0}{1}{2}ï¼ˆ{3}ï¼‰ä¸šåŠ¡ã€‚", recoarse, "å›½å†…", single, selectedCDA.IsNotice);
+                    case "¹úÄÚÂô·½±£Àí":
+                        line1 = String.Format("£¨1£©±¾ÒµÎñÎª{0}{1}{2}£¨{3}£©ÒµÎñ¡£", recoarse, "¹úÄÚ", single, selectedCDA.IsNotice);
                         break;
-                    case "å‡ºå£ä¿ç†":
-                        line1 = String.Format("ï¼ˆ1ï¼‰æœ¬ä¸šåŠ¡ä¸º{0}{1}{2}ï¼ˆ{3}ï¼‰ä¸šåŠ¡ã€‚", recoarse, "å‡ºå£", single, selectedCDA.IsNotice);
+                    case "³ö¿Ú±£Àí":
+                        line1 = String.Format("£¨1£©±¾ÒµÎñÎª{0}{1}{2}£¨{3}£©ÒµÎñ¡£", recoarse, "³ö¿Ú", single, selectedCDA.IsNotice);
                         break;
-                    case "å›½å†…ä¹°æ–¹ä¿ç†":
-                        line1 = String.Format("ï¼ˆ1ï¼‰æœ¬ä¸šåŠ¡ä¸º{0}{1}ï¼ˆ{2}ï¼‰ä¸šåŠ¡ã€‚", recoarse, "å›½å†…", selectedCDA.IsNotice);
+                    case "¹úÄÚÂò·½±£Àí":
+                        line1 = String.Format("£¨1£©±¾ÒµÎñÎª{0}{1}£¨{2}£©ÒµÎñ¡£", recoarse, "¹úÄÚ", selectedCDA.IsNotice);
                         break;
-                    case "è¿›å£ä¿ç†":
-                        line1 = String.Format("ï¼ˆ1ï¼‰æœ¬ä¸šåŠ¡ä¸º{0}{1}{2}ï¼ˆ{3}ï¼‰ä¸šåŠ¡ã€‚", recoarse, "è¿›å£", single, selectedCDA.IsNotice);
+                    case "½ø¿Ú±£Àí":
+                        line1 = String.Format("£¨1£©±¾ÒµÎñÎª{0}{1}{2}£¨{3}£©ÒµÎñ¡£", recoarse, "½ø¿Ú", single, selectedCDA.IsNotice);
                         break;
                     default:
                         break;
                 }
 
-                string line2 = "ï¼ˆ2ï¼‰å¦‚åº”æ”¶è´¦æ¬¾å€ºåŠ¡äºº(ä»¥ä¸‹ç®€ç§°ä¹°æ–¹)äºåˆ°åº”æ”¶è´¦æ¬¾æœŸæ—¥å  æ—¥å†…ï¼ˆæœ€é•¿ä¸è¶…è¿‡  å¤©ï¼‰ä»æœªä»˜æ¬¾ï¼Œå–æ–¹è‡³è¿Ÿäºä¸Šè¿°çº¦å®šåˆ°æœŸæ—¥åçš„ç¬¬ä¸€ä¸ªè¥ä¸šæ—¥é€šçŸ¥æ°‘ç”Ÿé“¶è¡Œæ­¤å»¶è¿Ÿä»˜æ¬¾ã€‚æ°‘ç”Ÿé“¶è¡Œä¾å–æ–¹çš„å‰è¿°é€šçŸ¥ï¼Œé€šçŸ¥ä¹°æ–¹åº”æ”¶è´¦æ¬¾è½¬è®©äº‹å®œåŠå…¶æœªä»˜ä½™é¢ï¼Œå¦‚å–æ–¹æœªå°½é€šçŸ¥è´£ä»»ï¼Œæ°‘ç”Ÿé“¶è¡Œè‡ªåŠ¨å…é™¤å…¶æ‰¿æ‹…çš„ä¿¡ç”¨é£é™©æ‹…ä¿è´£ä»»ã€‚";
-                string line3 = "ï¼ˆ3ï¼‰æ ¸å‡†åº”æ”¶è´¦æ¬¾çš„é”€å”®åˆåŒæœ‰ç¦æ­¢è½¬è®©çš„çº¦å®šæ—¶ï¼Œæ°‘ç”Ÿé“¶è¡Œå°±è¯¥åº”æ”¶è´¦æ¬¾ä¸é¡»è´Ÿä»»ä½•è´£ä»»ã€‚";
-                string line4 = "ï¼ˆ4ï¼‰ä¹°æ–¹æœªæ¸…å¿æ ¸å‡†åº”æ”¶è´¦æ¬¾ä¸”å®˜æ–¹è®¤å®šæ— åŠ›æ¸…å¿æ—¶ï¼Œæ°‘ç”Ÿé“¶è¡Œå¾—å°†æ‰€æœ‰ä¹°æ–¹å°šæœªæ¸…å¿ä¹‹åº”æ”¶è´¦æ¬¾ä¸šå·²è½¬è®©äºˆæ°‘ç”Ÿé“¶è¡Œäº‹å®œé€šçŸ¥ä¹°æ–¹ã€‚";
-                string line5 = "ï¼ˆ5ï¼‰å…³äºå–æ–¹ä¸ä¹°æ–¹é—´å…¨éƒ¨å¥‘çº¦ä¹‹åº”æ”¶è´¦æ¬¾ï¼ˆä¸è®ºæ˜¯å¦ä¸ºä¿¡ç”¨é£é™©æ‹…ä¿é‡‘é¢æ‰€æ¶µç›–ï¼‰ï¼Œå–æ–¹åº”æŒ‰åˆ°æœŸæ—¥ä¹‹é¡ºåºæ’åˆ—ã€‚å–æ–¹åº”å°½å–„è‰¯ç®¡ç†äººçš„æ³¨æ„ä¹‰åŠ¡ç»´æŒå…¶å¯¹è¯¥åº”æ”¶è´¦æ¬¾çš„æƒåˆ©å¹¶ä¿å­˜ç›¸å…³çºªå½•ã€‚";
+                string line2 = "£¨2£©ÈçÓ¦ÊÕÕË¿îÕ®ÎñÈË(ÒÔÏÂ¼ò³ÆÂò·½)ÓÚµ½Ó¦ÊÕÕË¿îÆÚÈÕºó  ÈÕÄÚ£¨×î³¤²»³¬¹ı  Ìì£©ÈÔÎ´¸¶¿î£¬Âô·½ÖÁ³ÙÓÚÉÏÊöÔ¼¶¨µ½ÆÚÈÕºóµÄµÚÒ»¸öÓªÒµÈÕÍ¨ÖªÃñÉúÒøĞĞ´ËÑÓ³Ù¸¶¿î¡£ÃñÉúÒøĞĞÒÀÂô·½µÄÇ°ÊöÍ¨Öª£¬Í¨ÖªÂò·½Ó¦ÊÕÕË¿î×ªÈÃÊÂÒË¼°ÆäÎ´¸¶Óà¶î£¬ÈçÂô·½Î´¾¡Í¨ÖªÔğÈÎ£¬ÃñÉúÒøĞĞ×Ô¶¯Ãâ³ıÆä³Ğµ£µÄĞÅÓÃ·çÏÕµ£±£ÔğÈÎ¡£";
+                string line3 = "£¨3£©ºË×¼Ó¦ÊÕÕË¿îµÄÏúÊÛºÏÍ¬ÓĞ½ûÖ¹×ªÈÃµÄÔ¼¶¨Ê±£¬ÃñÉúÒøĞĞ¾Í¸ÃÓ¦ÊÕÕË¿î²»Ğë¸ºÈÎºÎÔğÈÎ¡£";
+                string line4 = "£¨4£©Âò·½Î´Çå³¥ºË×¼Ó¦ÊÕÕË¿îÇÒ¹Ù·½ÈÏ¶¨ÎŞÁ¦Çå³¥Ê±£¬ÃñÉúÒøĞĞµÃ½«ËùÓĞÂò·½ÉĞÎ´Çå³¥Ö®Ó¦ÊÕÕË¿îÒµÒÑ×ªÈÃÓèÃñÉúÒøĞĞÊÂÒËÍ¨ÖªÂò·½¡£";
+                string line5 = "£¨5£©¹ØÓÚÂô·½ÓëÂò·½¼äÈ«²¿ÆõÔ¼Ö®Ó¦ÊÕÕË¿î£¨²»ÂÛÊÇ·ñÎªĞÅÓÃ·çÏÕµ£±£½ğ¶îËùº­¸Ç£©£¬Âô·½Ó¦°´µ½ÆÚÈÕÖ®Ë³ĞòÅÅÁĞ¡£Âô·½Ó¦¾¡ÉÆÁ¼¹ÜÀíÈËµÄ×¢ÒâÒåÎñÎ¬³ÖÆä¶Ô¸ÃÓ¦ÊÕÕË¿îµÄÈ¨Àû²¢±£´æÏà¹Ø¼ÍÂ¼¡£";
 
                 sheet.get_Range(sheet.Cells[24, 1], sheet.Cells[24, 1]).WrapText = true;
                 sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 1]).WrapText = true;
@@ -792,12 +791,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 2]).MergeCells = true;
                 sheet.get_Range(sheet.Cells[28, 1], sheet.Cells[28, 2]).MergeCells = true;
 
-                if (selectedCDA.IsNotice == "æš—ä¿ç†")
+                if (selectedCDA.IsNotice == "°µ±£Àí")
                 {
                     string comment = line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5;
                     if (!String.IsNullOrEmpty(selectedCDA.Comment))
                     {
-                        comment += "\n\nï¼ˆ6ï¼‰" + selectedCDA.Comment;
+                        comment += "\n\n£¨6£©" + selectedCDA.Comment;
                     }
 
                     sheet.Cells[24, 1] = comment;
@@ -808,7 +807,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     string comment = line1;
                     if (!String.IsNullOrEmpty(selectedCDA.Comment))
                     {
-                        comment += "\n\nï¼ˆ2ï¼‰" + selectedCDA.Comment;
+                        comment += "\n\n£¨2£©" + selectedCDA.Comment;
                     }
 
                     sheet.Cells[24, 1] = comment;
@@ -816,26 +815,26 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
 
-                sheet.Cells[26, 1] = "å¦‚è´µå…¬å¸äºæœ¬è¡Œå‘å‡ºæœ¬é€šçŸ¥ä¹¦å10æ—¥å†…æœªç­¾å›æˆ–äºæœ¬è¡Œæ”¶åˆ°ç­¾å›é€šçŸ¥ä¹¦å30æ—¥å†…æœªåŠ¨ç”¨é¢åº¦æ—¶ï¼Œæœ¬è¡Œå¾—åœæ­¢é¢åº¦ä¹‹åŠ¨ç”¨ã€‚è´µå…¬å¸å—£åå¦‚æ¬²åŠ¨ç”¨è¯¥é¢åº¦ï¼Œé¡»é‡æ–°æå‡ºç”³è¯·ã€‚";
-                sheet.Cells[28, 1] = "ä¸ºåˆ©ç›Šè€ƒè™‘ï¼Œè¯·åŠ¡å¿…ç¡®è®¤ä¸Šå¼€ä¹°æ–¹ç³»è´µå…¬å¸é¢„å®šäº¤æ˜“ä¹‹å¯¹è±¡ï¼Œæœ¬ä¿ç†é¢åº¦é€šçŸ¥ä¹¦å–ä»£å…ˆå‰åŒä¸€ä¹°æ–¹ä¹‹ä¿ç†é¢åº¦é€šçŸ¥ä¹¦åŠå…ˆå‰æ‰€æœ‰è´µå…¬å¸ä¸æœ¬åˆåŒç›¸å…³ä¿ç†é¢åº¦é€šçŸ¥ä¹¦ä¸­ä¹‹æœ€é«˜ä¿ç†é¢„ä»˜æ¬¾é¢åº¦ã€‚";
+                sheet.Cells[26, 1] = "Èç¹ó¹«Ë¾ÓÚ±¾ĞĞ·¢³ö±¾Í¨ÖªÊéºó10ÈÕÄÚÎ´Ç©»Ø»òÓÚ±¾ĞĞÊÕµ½Ç©»ØÍ¨ÖªÊéºó30ÈÕÄÚÎ´¶¯ÓÃ¶î¶ÈÊ±£¬±¾ĞĞµÃÍ£Ö¹¶î¶ÈÖ®¶¯ÓÃ¡£¹ó¹«Ë¾ËÃºóÈçÓû¶¯ÓÃ¸Ã¶î¶È£¬ĞëÖØĞÂÌá³öÉêÇë¡£";
+                sheet.Cells[28, 1] = "ÎªÀûÒæ¿¼ÂÇ£¬ÇëÎñ±ØÈ·ÈÏÉÏ¿ªÂò·½Ïµ¹ó¹«Ë¾Ô¤¶¨½»Ò×Ö®¶ÔÏó£¬±¾±£Àí¶î¶ÈÍ¨ÖªÊéÈ¡´úÏÈÇ°Í¬Ò»Âò·½Ö®±£Àí¶î¶ÈÍ¨ÖªÊé¼°ÏÈÇ°ËùÓĞ¹ó¹«Ë¾Óë±¾ºÏÍ¬Ïà¹Ø±£Àí¶î¶ÈÍ¨ÖªÊéÖĞÖ®×î¸ß±£ÀíÔ¤¸¶¿î¶î¶È¡£";
 
 
                 sheet.get_Range(sheet.Cells[26, 1], sheet.Cells[26, 2]).RowHeight = 40;
                 sheet.get_Range(sheet.Cells[28, 1], sheet.Cells[28, 2]).RowHeight = 40;
 
-                sheet.Cells[30, 2] = String.Format("ä¸­å›½æ°‘ç”Ÿé“¶è¡Œè‚¡ä»½æœ‰é™å…¬å¸{0}åˆ†è¡Œ", selectedCDA.Case.OwnerDepartment.Location.LocationName);
-                sheet.Cells[31, 2] = String.Format("æ—¥æœŸï¼š{0:yyyy}å¹´ {0:MM}æœˆ {0:dd}æ—¥", selectedCDA.CDASignDate);
+                sheet.Cells[30, 2] = String.Format("ÖĞ¹úÃñÉúÒøĞĞ¹É·İÓĞÏŞ¹«Ë¾{0}·ÖĞĞ", selectedCDA.Case.OwnerDepartment.Location.LocationName);
+                sheet.Cells[31, 2] = String.Format("ÈÕÆÚ£º{0:yyyy}Äê {0:MM}ÔÂ {0:dd}ÈÕ", selectedCDA.CDASignDate);
                 sheet.get_Range(sheet.Cells[30, 2], sheet.Cells[31, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
 
-                sheet.Cells[33, 1] = "æˆ‘å…¬å¸çŸ¥æ™“å¹¶åŒæ„ä¸Šè¿°ä¿ç†é¢åº¦é€šçŸ¥ä¹¦å†…å®¹ã€‚";
+                sheet.Cells[33, 1] = "ÎÒ¹«Ë¾ÖªÏş²¢Í¬ÒâÉÏÊö±£Àí¶î¶ÈÍ¨ÖªÊéÄÚÈİ¡£";
 
                 sheet.Cells[35, 2] = selectedCDA.SellerName;
-                sheet.Cells[36, 2] = "å…¬å¸å°é‰´          ";
-                sheet.Cells[37, 2] = String.Format("æ—¥æœŸ:      å¹´    æœˆ    æ—¥");
+                sheet.Cells[36, 2] = "¹«Ë¾Ó¡¼ø          ";
+                sheet.Cells[37, 2] = String.Format("ÈÕÆÚ:      Äê    ÔÂ    ÈÕ");
                 sheet.get_Range(sheet.Cells[35, 2], sheet.Cells[37, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
 
 
-                sheet.UsedRange.Font.Name = "ä»¿å®‹_GB2312";
+                sheet.UsedRange.Font.Name = "·ÂËÎ_GB2312";
                 sheet.UsedRange.Font.Size = 12;
 
                 sheet.get_Range(sheet.Cells[1, 1], sheet.Cells[1, 1]).Font.Size = 16;
@@ -900,6 +899,39 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateCDAStatus(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            {
+                return;
+            }
+
+            if (this.dgvCDAs.CurrentCell == null)
+            {
+                return;
+            }
+
+            CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
+            cda.AdjustCDAStatus();
+
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show("¸üĞÂ¶î¶ÈÍ¨ÖªÊé×´Ì¬Ê§°Ü: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            MessageBoxEx.Show("¸üĞÂ¶î¶ÈÍ¨ÖªÊé×´Ì¬³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateContextMenu()
         {
             if (PermUtil.ValidatePermission(Permission.CDA_UPDATE))
@@ -925,39 +957,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregionÂ Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateCDAStatus(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
-            {
-                return;
-            }
-
-            if (this.dgvCDAs.CurrentCell == null)
-            {
-                return;
-            }
-
-            CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
-            cda.AdjustCDAStatus();
-
-            try
-            {
-                context.SubmitChanges();
-            }
-            catch (Exception e1)
-            {
-                MessageBoxEx.Show("æ›´æ–°é¢åº¦é€šçŸ¥ä¹¦çŠ¶æ€å¤±è´¥: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            MessageBoxEx.Show("æ›´æ–°é¢åº¦é€šçŸ¥ä¹¦çŠ¶æ€æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+		#endregion?Methods?
     }
 }

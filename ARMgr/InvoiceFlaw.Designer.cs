@@ -1,11 +1,11 @@
-Ôªønamespace CMBC.EasyFactor.ARMgr
+namespace CMBC.EasyFactor.ARMgr
 {
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceFlaw
     {
-		#region¬†Fields¬†(18)¬†
+		#region?Fields?(17)?
 
         private DevComponents.DotNetBar.ButtonX btnFlawClose;
         private DevComponents.DotNetBar.ButtonX btnFlawResolve;
@@ -25,14 +25,14 @@
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelFlaw;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelFlawResolve;
         private DevComponents.DotNetBar.Controls.CheckBoxX isFlawCheckBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbOtherFlawReason;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFlawResolveReason;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbOtherFlawReason;
 
-		#endregion¬†Fields¬†
+		#endregion?Fields?
 
-		#region¬†Methods¬†(1)¬†
+		#region?Methods?(1)?
 
-		//¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -53,7 +53,7 @@
             base.Dispose(disposing);
         }
 
-		#endregion¬†Methods¬†
+		#endregion?Methods?
 
 
 
@@ -109,7 +109,7 @@
             flawResolveReasonLabel.Name = "flawResolveReasonLabel";
             flawResolveReasonLabel.Size = new System.Drawing.Size(59, 16);
             flawResolveReasonLabel.TabIndex = 1;
-            flawResolveReasonLabel.Text = "Ëß£Èô§ÂéüÂõ†:";
+            flawResolveReasonLabel.Text = "Ω‚≥˝‘≠“Ú:";
             // 
             // flawResolveUserNameLabel
             // 
@@ -123,7 +123,7 @@
             flawResolveUserNameLabel.Name = "flawResolveUserNameLabel";
             flawResolveUserNameLabel.Size = new System.Drawing.Size(47, 16);
             flawResolveUserNameLabel.TabIndex = 5;
-            flawResolveUserNameLabel.Text = "ÁªèÂäû‰∫∫:";
+            flawResolveUserNameLabel.Text = "æ≠∞Ï»À:";
             // 
             // flawResolveDateLabel
             // 
@@ -137,7 +137,7 @@
             flawResolveDateLabel.Name = "flawResolveDateLabel";
             flawResolveDateLabel.Size = new System.Drawing.Size(47, 16);
             flawResolveDateLabel.TabIndex = 3;
-            flawResolveDateLabel.Text = "Ëß£Èô§Êó•:";
+            flawResolveDateLabel.Text = "Ω‚≥˝»’:";
             // 
             // flawReasonLabel
             // 
@@ -151,7 +151,7 @@
             flawReasonLabel.Name = "flawReasonLabel";
             flawReasonLabel.Size = new System.Drawing.Size(59, 16);
             flawReasonLabel.TabIndex = 1;
-            flawReasonLabel.Text = "ÁëïÁñµÂéüÂõ†:";
+            flawReasonLabel.Text = "Ë¶¥√‘≠“Ú:";
             // 
             // groupPanelFlawResolve
             // 
@@ -210,7 +210,7 @@
             this.btnFlawClose.Size = new System.Drawing.Size(75, 23);
             this.btnFlawClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFlawClose.TabIndex = 8;
-            this.btnFlawClose.Text = "ÂÖ≥Èó≠";
+            this.btnFlawClose.Text = "πÿ±’";
             this.btnFlawClose.Click += new System.EventHandler(this.CloseFlaw);
             // 
             // btnFlawSave
@@ -222,7 +222,7 @@
             this.btnFlawSave.Size = new System.Drawing.Size(75, 23);
             this.btnFlawSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFlawSave.TabIndex = 7;
-            this.btnFlawSave.Text = "‰øùÂ≠ò";
+            this.btnFlawSave.Text = "±£¥Ê";
             this.btnFlawSave.Click += new System.EventHandler(this.SaveFlaw);
             // 
             // btnFlawResolve
@@ -234,7 +234,7 @@
             this.btnFlawResolve.Size = new System.Drawing.Size(75, 23);
             this.btnFlawResolve.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFlawResolve.TabIndex = 0;
-            this.btnFlawResolve.Text = "ÁëïÁñµËß£Èô§";
+            this.btnFlawResolve.Text = "Ë¶¥√Ω‚≥˝";
             this.btnFlawResolve.Click += new System.EventHandler(this.ResolveFlaw);
             // 
             // tbFlawResolveReason
@@ -351,7 +351,7 @@
             this.isFlawCheckBox.Name = "isFlawCheckBox";
             this.isFlawCheckBox.Size = new System.Drawing.Size(76, 16);
             this.isFlawCheckBox.TabIndex = 6;
-            this.isFlawCheckBox.Text = "ÊòØÂê¶ÁëïÁñµ";
+            this.isFlawCheckBox.Text = " «∑ÒË¶¥√";
             // 
             // tbOtherFlawReason
             // 
@@ -365,7 +365,7 @@
             this.tbOtherFlawReason.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbOtherFlawReason.Size = new System.Drawing.Size(195, 123);
             this.tbOtherFlawReason.TabIndex = 3;
-            this.tbOtherFlawReason.WatermarkText = "ÂÖ∂‰ªñÂéüÂõ†";
+            this.tbOtherFlawReason.WatermarkText = "∆‰À˚‘≠“Ú";
             // 
             // flawReasonCheckedListBox
             // 
@@ -407,21 +407,21 @@
             // colInvoiceNo
             // 
             this.colInvoiceNo.DataPropertyName = "InvoiceNo";
-            this.colInvoiceNo.HeaderText = "ÂèëÁ•®Âè∑";
+            this.colInvoiceNo.HeaderText = "∑¢∆±∫≈";
             this.colInvoiceNo.Name = "colInvoiceNo";
             this.colInvoiceNo.ReadOnly = true;
             // 
             // colInvoiceDate
             // 
             this.colInvoiceDate.DataPropertyName = "InvoiceDate";
-            this.colInvoiceDate.HeaderText = "ÂèëÁ•®Êó•";
+            this.colInvoiceDate.HeaderText = "∑¢∆±»’";
             this.colInvoiceDate.Name = "colInvoiceDate";
             this.colInvoiceDate.ReadOnly = true;
             // 
             // colInvoiceCurrency
             // 
             this.colInvoiceCurrency.DataPropertyName = "InvoiceCurrency";
-            this.colInvoiceCurrency.HeaderText = "ÂèëÁ•®Â∏ÅÂà´";
+            this.colInvoiceCurrency.HeaderText = "∑¢∆±±“±";
             this.colInvoiceCurrency.Name = "colInvoiceCurrency";
             this.colInvoiceCurrency.ReadOnly = true;
             // 
@@ -431,7 +431,7 @@
             dataGridViewCellStyle1.Format = "N2";
             dataGridViewCellStyle1.NullValue = null;
             this.colInvoiceAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colInvoiceAmount.HeaderText = "ÂèëÁ•®ÈáëÈ¢ù";
+            this.colInvoiceAmount.HeaderText = "∑¢∆±Ω∂Ó";
             this.colInvoiceAmount.Name = "colInvoiceAmount";
             this.colInvoiceAmount.ReadOnly = true;
             // 
@@ -447,7 +447,7 @@
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "InvoiceFlaw";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ÁëïÁñµÂ§ÑÁêÜ";
+            this.Text = "Ë¶¥√¥¶¿Ì";
             this.groupPanelFlawResolve.ResumeLayout(false);
             this.groupPanelFlawResolve.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flawResolveDateDateTimePicker)).EndInit();

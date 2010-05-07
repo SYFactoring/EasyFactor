@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ClientCreditLineMgr.Designer.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,13 +11,22 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientCreditLineMgr
     {
-        #region¬†Fields¬†(19)
+		#region?Fields?(19)?
 
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientGroupType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientCreditLines;
         private DevComponents.DotNetBar.LabelX lblClientEDICode;
@@ -27,11 +36,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -47,7 +56,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             base.Dispose(disposing);
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
+
+
 
         #region Component Designer generated code
 
@@ -125,9 +136,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbClientGroupType.FocusHighlightEnabled = true;
             this.cbClientGroupType.ItemHeight = 14;
             this.cbClientGroupType.Items.AddRange(new object[] {
-            "ÂÖ®ÈÉ®",
-            "ÂÆ¢Êà∑",
-            "ÈõÜÂõ¢"});
+            "»´≤ø",
+            "øÕªß",
+            "ºØÕ≈"});
             this.cbClientGroupType.Location = new System.Drawing.Point(342, 3);
             this.cbClientGroupType.Name = "cbClientGroupType";
             this.cbClientGroupType.Size = new System.Drawing.Size(100, 20);
@@ -143,7 +154,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 4;
-            this.btnQuery.Text = "Êü•ËØ¢";
+            this.btnQuery.Text = "≤È—Ø";
             this.btnQuery.Click += new System.EventHandler(this.Query);
             // 
             // tbClientName
@@ -168,7 +179,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(56, 16);
             this.lblClientName.TabIndex = 2;
-            this.lblClientName.Text = "ÂÆ¢Êà∑ÂêçÁß∞";
+            this.lblClientName.Text = "øÕªß√˚≥∆";
             // 
             // tbClientEDICode
             // 
@@ -192,7 +203,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblClientEDICode.Name = "lblClientEDICode";
             this.lblClientEDICode.Size = new System.Drawing.Size(56, 16);
             this.lblClientEDICode.TabIndex = 0;
-            this.lblClientEDICode.Text = "‰øùÁêÜ‰ª£Á†Å";
+            this.lblClientEDICode.Text = "±£¿Ì¥˙¬Î";
             // 
             // dgvClientCreditLines
             // 
@@ -245,7 +256,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colClientEDICode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClientEDICode.DataPropertyName = "ClientEDICode";
             this.colClientEDICode.Frozen = true;
-            this.colClientEDICode.HeaderText = "‰øùÁêÜ‰ª£Á†Å";
+            this.colClientEDICode.HeaderText = "±£¿Ì¥˙¬Î";
             this.colClientEDICode.Name = "colClientEDICode";
             this.colClientEDICode.ReadOnly = true;
             this.colClientEDICode.Width = 99;
@@ -253,28 +264,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colClientNameCN
             // 
             this.colClientNameCN.DataPropertyName = "ClientNameCN";
-            this.colClientNameCN.HeaderText = "ÂÆ¢Êà∑ÂêçÁß∞Ôºà‰∏≠Ôºâ";
+            this.colClientNameCN.HeaderText = "øÕªß√˚≥∆£®÷–£©";
             this.colClientNameCN.Name = "colClientNameCN";
             this.colClientNameCN.ReadOnly = true;
             // 
             // colClientNameEN
             // 
             this.colClientNameEN.DataPropertyName = "ClientNameEN";
-            this.colClientNameEN.HeaderText = "ÂÆ¢Êà∑ÂêçÁß∞ÔºàËã±Ôºâ";
+            this.colClientNameEN.HeaderText = "øÕªß√˚≥∆£®”¢£©";
             this.colClientNameEN.Name = "colClientNameEN";
             this.colClientNameEN.ReadOnly = true;
             // 
             // colCreditLineType
             // 
             this.colCreditLineType.DataPropertyName = "CreditLineType";
-            this.colCreditLineType.HeaderText = "È¢ùÂ∫¶Á±ªÂûã";
+            this.colCreditLineType.HeaderText = "∂Ó∂»¿‡–Õ";
             this.colCreditLineType.Name = "colCreditLineType";
             this.colCreditLineType.ReadOnly = true;
             // 
             // colCreditLineCurrency
             // 
             this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
-            this.colCreditLineCurrency.HeaderText = "È¢ùÂ∫¶Â∏ÅÁßç";
+            this.colCreditLineCurrency.HeaderText = "∂Ó∂»±“÷÷";
             this.colCreditLineCurrency.Name = "colCreditLineCurrency";
             this.colCreditLineCurrency.ReadOnly = true;
             // 
@@ -283,28 +294,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colCreditLine.DataPropertyName = "CreditLine";
             dataGridViewCellStyle2.Format = "N2";
             this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCreditLine.HeaderText = "È¢ùÂ∫¶‰∏äÈôê";
+            this.colCreditLine.HeaderText = "∂Ó∂»…œœﬁ";
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
             // 
             // colPeriodBegin
             // 
             this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            this.colPeriodBegin.HeaderText = "ÊúâÊïàÊúüÔºàÂßãÔºâ";
+            this.colPeriodBegin.HeaderText = "”––ß∆⁄£® º£©";
             this.colPeriodBegin.Name = "colPeriodBegin";
             this.colPeriodBegin.ReadOnly = true;
             // 
             // colPeriodEnd
             // 
             this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            this.colPeriodEnd.HeaderText = "ÊúâÊïàÊúüÔºàÁªàÔºâ";
+            this.colPeriodEnd.HeaderText = "”––ß∆⁄£®÷’£©";
             this.colPeriodEnd.Name = "colPeriodEnd";
             this.colPeriodEnd.ReadOnly = true;
             // 
             // colCreditLineStatus
             // 
             this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
-            this.colCreditLineStatus.HeaderText = "È¢ùÂ∫¶Áä∂ÊÄÅ";
+            this.colCreditLineStatus.HeaderText = "∂Ó∂»◊¥Ã¨";
             this.colCreditLineStatus.Name = "colCreditLineStatus";
             this.colCreditLineStatus.ReadOnly = true;
             // 
@@ -324,15 +335,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
     }
 }

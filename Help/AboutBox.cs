@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="AboutBox.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.Help
     /// </summary>
     public partial class AboutBox : DevComponents.DotNetBar.Office2007Form
     {
-        #region Constructors (1)
+		#region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the AboutBox class
@@ -24,17 +24,17 @@ namespace CMBC.EasyFactor.Help
         public AboutBox()
         {
             this.InitializeComponent();
-            this.Text = String.Format("关于 {0}", this.AssemblyTitle);
+            this.Text = String.Format("���� {0}", this.AssemblyTitle);
             this.labelProductName.Text = this.AssemblyProduct;
-            this.labelVersion.Text = String.Format("版本 {0}", this.AssemblyVersion);
+            this.labelVersion.Text = String.Format("�汾 {0}", this.AssemblyVersion);
             this.labelCopyright.Text = this.AssemblyCopyright;
             this.labelCompanyName.Text = this.AssemblyCompany;
             this.textBoxDescription.Text = this.AssemblyDescription;
         }
 
-        #endregion Constructors
+		#endregion?Constructors?
 
-        #region Properties (6)
+		#region?Properties?(6)?
 
         /// <summary>
         /// Gets assembly company
@@ -136,11 +136,11 @@ namespace CMBC.EasyFactor.Help
             }
         }
 
-        #endregion Properties
+		#endregion?Properties?
 
-        #region Methods (2)
+		#region?Methods?(1)?
 
-        // Private Methods (2) 
+		//?Private?Methods?(1)?
 
         /// <summary>
         /// Close the dialog
@@ -152,6 +152,6 @@ namespace CMBC.EasyFactor.Help
             this.Close();
         }
 
-        #endregion Methods
+		#endregion?Methods?
     }
 }

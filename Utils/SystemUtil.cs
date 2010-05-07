@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections;
 using System.Globalization;
 using System.IO;
@@ -10,6 +10,10 @@ namespace CMBC.EasyFactor.Utils
 {
     public sealed class SystemUtil
     {
+		#region?Methods?(2)?
+
+		//?Public?Methods?(2)?
+
         public static string GetAllDirFilesRecurse(FileSystemInfo mainDir, string[] extensions, int level)
         {
             if (level < mainDir.FullName.Split(new char[] { '\\' }).Length - 1)
@@ -62,39 +66,39 @@ namespace CMBC.EasyFactor.Utils
         {
             StringBuilder sb = new StringBuilder();
 
-            //èŽ·å–æ“ä½œç³»ç»Ÿè®¾ç½®
-            sb.AppendLine("èŽ·å–æ“ä½œç³»ç»Ÿè®¾ç½®");
-            sb.AppendLine("è®¡ç®—æœºå : " + SystemInformation.ComputerName);
-            sb.AppendLine("æ˜¯å¦å·²è¿žæŽ¥ç½‘ç»œ : " + SystemInformation.Network);
-            sb.AppendLine("ç”¨æˆ·åŸŸ : " + SystemInformation.UserDomainName);
-            sb.AppendLine("å½“å‰çº¿ç¨‹ç”¨æˆ·å   : " + SystemInformation.UserName);
-            sb.AppendLine("å¯åŠ¨æ–¹å¼ : " + SystemInformation.BootMode);
-            sb.AppendLine("èœå•çš„å­—ä½“ : " + SystemInformation.MenuFont);
-            sb.AppendLine("æ˜¾ç¤ºå™¨çš„æ•°ç›® : " + SystemInformation.MonitorCount);
-            sb.AppendLine("é¼ æ ‡å·²å®‰è£… : " + SystemInformation.MousePresent);
-            sb.AppendLine("é¼ æ ‡æŒ‰é’®æ•°    : " + SystemInformation.MouseButtons);
-            sb.AppendLine("æ˜¯å¦äº¤äº’æ¨¡å¼    : " + SystemInformation.UserInteractive);
-            sb.AppendLine("å±å¹•ç•Œé™: " + SystemInformation.VirtualScreen);
+            //»ñÈ¡²Ù×÷ÏµÍ³ÉèÖÃ
+            sb.AppendLine("»ñÈ¡²Ù×÷ÏµÍ³ÉèÖÃ");
+            sb.AppendLine("¼ÆËã»úÃû : " + SystemInformation.ComputerName);
+            sb.AppendLine("ÊÇ·ñÒÑÁ¬½ÓÍøÂç : " + SystemInformation.Network);
+            sb.AppendLine("ÓÃ»§Óò : " + SystemInformation.UserDomainName);
+            sb.AppendLine("µ±Ç°Ïß³ÌÓÃ»§Ãû   : " + SystemInformation.UserName);
+            sb.AppendLine("Æô¶¯·½Ê½ : " + SystemInformation.BootMode);
+            sb.AppendLine("²Ëµ¥µÄ×ÖÌå : " + SystemInformation.MenuFont);
+            sb.AppendLine("ÏÔÊ¾Æ÷µÄÊýÄ¿ : " + SystemInformation.MonitorCount);
+            sb.AppendLine("Êó±êÒÑ°²×° : " + SystemInformation.MousePresent);
+            sb.AppendLine("Êó±ê°´Å¥Êý    : " + SystemInformation.MouseButtons);
+            sb.AppendLine("ÊÇ·ñ½»»¥Ä£Ê½    : " + SystemInformation.UserInteractive);
+            sb.AppendLine("ÆÁÄ»½çÏÞ: " + SystemInformation.VirtualScreen);
             sb.AppendLine();
 
-            //èŽ·å–ç¨‹åºè¿è¡Œçš„ç›¸å…³ä¿¡æ¯.
-            sb.AppendLine("èŽ·å–ç¨‹åºè¿è¡Œçš„ç›¸å…³ä¿¡æ¯");
-            sb.AppendLine("å‘½ä»¤è¡Œ:" + Environment.CommandLine);
-            sb.AppendLine("å‘½ä»¤è¡Œå‚æ•°:" + String.Join(", ", Environment.GetCommandLineArgs()));
-            sb.AppendLine("å½“å‰ç›®å½•:" + Environment.CurrentDirectory);
-            sb.AppendLine("æ“ä½œç³»ç»Ÿç‰ˆæœ¬:" + Environment.OSVersion);
-            sb.AppendLine("ç³»ç»Ÿç›®å½•:" + Environment.SystemDirectory);
-            sb.AppendLine("ç”¨æˆ·åŸŸ:" + Environment.UserDomainName);
-            sb.AppendLine("CLRç‰ˆæœ¬:" + Environment.Version);
-            sb.AppendLine("ç³»ç»Ÿå¯åŠ¨åŽç»è¿‡çš„æ¯«ç§’:" + Environment.TickCount);
-            sb.AppendLine("è¿›ç¨‹ä¸Šä¸‹æ–‡çš„ç‰©ç†å†…å­˜é‡:" + Environment.WorkingSet);
+            //»ñÈ¡³ÌÐòÔËÐÐµÄÏà¹ØÐÅÏ¢.
+            sb.AppendLine("»ñÈ¡³ÌÐòÔËÐÐµÄÏà¹ØÐÅÏ¢");
+            sb.AppendLine("ÃüÁîÐÐ:" + Environment.CommandLine);
+            sb.AppendLine("ÃüÁîÐÐ²ÎÊý:" + String.Join(", ", Environment.GetCommandLineArgs()));
+            sb.AppendLine("µ±Ç°Ä¿Â¼:" + Environment.CurrentDirectory);
+            sb.AppendLine("²Ù×÷ÏµÍ³°æ±¾:" + Environment.OSVersion);
+            sb.AppendLine("ÏµÍ³Ä¿Â¼:" + Environment.SystemDirectory);
+            sb.AppendLine("ÓÃ»§Óò:" + Environment.UserDomainName);
+            sb.AppendLine("CLR°æ±¾:" + Environment.Version);
+            sb.AppendLine("ÏµÍ³Æô¶¯ºó¾­¹ýµÄºÁÃë:" + Environment.TickCount);
+            sb.AppendLine("½ø³ÌÉÏÏÂÎÄµÄÎïÀíÄÚ´æÁ¿:" + Environment.WorkingSet);
 
             string[] drives = Environment.GetLogicalDrives();
-            sb.AppendLine("æœ¬æœºç£ç›˜é©±åŠ¨å™¨: " + String.Join(", ", drives));
+            sb.AppendLine("±¾»ú´ÅÅÌÇý¶¯Æ÷: " + String.Join(", ", drives));
 
-            // èŽ·å–æœ¬æœºæ‰€æœ‰çŽ¯å¢ƒå˜é‡
+            // »ñÈ¡±¾»úËùÓÐ»·¾³±äÁ¿
             sb.AppendLine();
-            sb.AppendLine("èŽ·å–æœ¬æœºæ‰€æœ‰çŽ¯å¢ƒå˜é‡");
+            sb.AppendLine("»ñÈ¡±¾»úËùÓÐ»·¾³±äÁ¿");
             IDictionary environmentVariables = Environment.GetEnvironmentVariables();
             foreach (DictionaryEntry de in environmentVariables)
             {
@@ -103,5 +107,7 @@ namespace CMBC.EasyFactor.Utils
 
             return sb.ToString();
         }
+
+		#endregion?Methods?
     }
 }

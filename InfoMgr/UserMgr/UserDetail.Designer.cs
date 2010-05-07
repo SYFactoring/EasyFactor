@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="UserDetailUI.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,9 +11,10 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
     /// </summary>
     public partial class UserDetail
     {
-        #region¬†Fields¬†(30)
+		#region?Fields?(30)?
 
         private DevComponents.DotNetBar.ButtonX btnPermissionUpdate;
+        private DevComponents.DotNetBar.ButtonX btnSavePermission;
         private DevComponents.DotNetBar.ButtonX btnUserSave;
         private DevComponents.DotNetBar.ButtonX btnUserUpdate;
         private System.Windows.Forms.CheckedListBox cbPermission;
@@ -46,11 +47,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private DevComponents.DotNetBar.Controls.TextBoxX userIDTextBox;
         private DevComponents.DotNetBar.Validator.SuperValidator userValidator;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -71,7 +72,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             base.Dispose(disposing);
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
 
 
 
@@ -103,9 +104,9 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.passwordTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.nameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÂøÖÂ°´");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ÿÃÓ");
             this.userIDTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÂøÖÂ°´");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ÿÃÓ");
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelPermission = new DevComponents.DotNetBar.TabControlPanel();
             this.btnSavePermission = new DevComponents.DotNetBar.ButtonX();
@@ -155,7 +156,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             userIDLabel.Name = "userIDLabel";
             userIDLabel.Size = new System.Drawing.Size(41, 15);
             userIDLabel.TabIndex = 0;
-            userIDLabel.Text = "<font color=\'red\'>*</font>ÁôªÂΩïID";
+            userIDLabel.Text = "<font color=\'red\'>*</font>µ«¬ºID";
             // 
             // roleLabel
             // 
@@ -169,7 +170,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             roleLabel.Name = "roleLabel";
             roleLabel.Size = new System.Drawing.Size(30, 15);
             roleLabel.TabIndex = 9;
-            roleLabel.Text = "<font color=\'red\'>*</font>ËßíËâ≤";
+            roleLabel.Text = "<font color=\'red\'>*</font>Ω«…´";
             // 
             // userNameLabel
             // 
@@ -183,7 +184,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             userNameLabel.Name = "userNameLabel";
             userNameLabel.Size = new System.Drawing.Size(42, 15);
             userNameLabel.TabIndex = 2;
-            userNameLabel.Text = "<font color=\'red\'>*</font>Áî®Êà∑Âêç";
+            userNameLabel.Text = "<font color=\'red\'>*</font>”√ªß√˚";
             // 
             // eDIAccountLabel
             // 
@@ -197,7 +198,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             eDIAccountLabel.Name = "eDIAccountLabel";
             eDIAccountLabel.Size = new System.Drawing.Size(50, 16);
             eDIAccountLabel.TabIndex = 4;
-            eDIAccountLabel.Text = "EDIÂ∏êÂè∑";
+            eDIAccountLabel.Text = "EDI’ ∫≈";
             // 
             // telphoneLabel
             // 
@@ -211,7 +212,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             telphoneLabel.Name = "telphoneLabel";
             telphoneLabel.Size = new System.Drawing.Size(31, 16);
             telphoneLabel.TabIndex = 15;
-            telphoneLabel.Text = "ÊâãÊú∫";
+            telphoneLabel.Text = " ÷ª˙";
             // 
             // emailLabel
             // 
@@ -239,7 +240,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             phoneLabel.Name = "phoneLabel";
             phoneLabel.Size = new System.Drawing.Size(31, 16);
             phoneLabel.TabIndex = 13;
-            phoneLabel.Text = "ÁîµËØù";
+            phoneLabel.Text = "µÁª∞";
             // 
             // loginDateLabel
             // 
@@ -253,7 +254,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             loginDateLabel.Name = "loginDateLabel";
             loginDateLabel.Size = new System.Drawing.Size(56, 16);
             loginDateLabel.TabIndex = 19;
-            loginDateLabel.Text = "ÁôªÂΩïÊó∂Èó¥";
+            loginDateLabel.Text = "µ«¬º ±º‰";
             // 
             // passwordLabel
             // 
@@ -267,7 +268,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             passwordLabel.Name = "passwordLabel";
             passwordLabel.Size = new System.Drawing.Size(30, 15);
             passwordLabel.TabIndex = 6;
-            passwordLabel.Text = "<font color=\'red\'>*</font>ÂØÜÁ†Å";
+            passwordLabel.Text = "<font color=\'red\'>*</font>√‹¬Î";
             // 
             // mSNLabel
             // 
@@ -318,7 +319,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // compareValidator1
             // 
             this.compareValidator1.ControlToCompare = this.passwordTextBox;
-            this.compareValidator1.ErrorMessage = "‰∏§Ê¨°ÂØÜÁ†ÅËæìÂÖ•ÂøÖÈ°ªÁõ∏Âêå";
+            this.compareValidator1.ErrorMessage = "¡Ω¥Œ√‹¬Î ‰»Î±ÿ–Îœ‡Õ¨";
             this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // passwordTextBox
@@ -350,7 +351,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             // requiredFieldValidator2
             // 
-            this.requiredFieldValidator2.ErrorMessage = "ÂøÖÂ°´";
+            this.requiredFieldValidator2.ErrorMessage = "±ÿÃÓ";
             this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // userIDTextBox
@@ -368,7 +369,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             // requiredFieldValidator1
             // 
-            this.requiredFieldValidator1.ErrorMessage = "ÂøÖÂ°´";
+            this.requiredFieldValidator1.ErrorMessage = "±ÿÃÓ";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // tabControl
@@ -419,7 +420,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnSavePermission.Size = new System.Drawing.Size(66, 23);
             this.btnSavePermission.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSavePermission.TabIndex = 3;
-            this.btnSavePermission.Text = "‰øùÂ≠ò";
+            this.btnSavePermission.Text = "±£¥Ê";
             this.btnSavePermission.Click += new System.EventHandler(this.SavePermission);
             // 
             // btnPermissionUpdate
@@ -431,7 +432,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnPermissionUpdate.Size = new System.Drawing.Size(66, 23);
             this.btnPermissionUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPermissionUpdate.TabIndex = 2;
-            this.btnPermissionUpdate.Text = "ÁºñËæë";
+            this.btnPermissionUpdate.Text = "±‡º≠";
             this.btnPermissionUpdate.Click += new System.EventHandler(this.UpdatePermission);
             // 
             // cbPermission
@@ -449,7 +450,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             // 
             this.tabItemPermission.AttachedControl = this.tabPanelPermission;
             this.tabItemPermission.Name = "tabItemPermission";
-            this.tabItemPermission.Text = "ÊùÉÈôê";
+            this.tabItemPermission.Text = "»®œﬁ";
             // 
             // tabPanelUser
             // 
@@ -480,7 +481,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnUserUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUserUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUserUpdate.TabIndex = 1;
-            this.btnUserUpdate.Text = "ÁºñËæë";
+            this.btnUserUpdate.Text = "±‡º≠";
             this.btnUserUpdate.Click += new System.EventHandler(this.UpdateUser);
             // 
             // groupPanelUser
@@ -550,11 +551,11 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.roleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.roleComboBox.FormattingEnabled = true;
             this.roleComboBox.Items.AddRange(new object[] {
-            "Ëê•ÈîÄÁªÑ",
-            "Â∑•‰ΩúÁªÑ",
-            "Áª¥Êä§ÁªÑ",
-            "‰∏ªÁÆ°",
-            "ÊúâÊùÉ‰∫∫"});
+            "”™œ˙◊È",
+            "π§◊˜◊È",
+            "Œ¨ª§◊È",
+            "÷˜π‹",
+            "”–»®»À"});
             this.roleComboBox.Location = new System.Drawing.Point(92, 122);
             this.roleComboBox.Name = "roleComboBox";
             this.roleComboBox.Size = new System.Drawing.Size(154, 21);
@@ -642,14 +643,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.btnUserSave.Size = new System.Drawing.Size(75, 23);
             this.btnUserSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUserSave.TabIndex = 2;
-            this.btnUserSave.Text = "‰øùÂ≠ò";
+            this.btnUserSave.Text = "±£¥Ê";
             this.btnUserSave.Click += new System.EventHandler(this.SaveUser);
             // 
             // tabItemUser
             // 
             this.tabItemUser.AttachedControl = this.tabPanelUser;
             this.tabItemUser.Name = "tabItemUser";
-            this.tabItemUser.Text = "Âü∫Êú¨‰ø°ÊÅØ";
+            this.tabItemUser.Text = "ª˘±æ–≈œ¢";
             // 
             // UserDetail
             // 
@@ -663,7 +664,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "UserDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Áî®Êà∑ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.Text = "”√ªßœÍœ∏–≈œ¢";
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
@@ -677,7 +678,5 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.ButtonX btnSavePermission;
     }
 }

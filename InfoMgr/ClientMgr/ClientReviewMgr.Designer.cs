@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ClientReviewMgr.Designer.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,25 +11,56 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientReviewMgr
     {
-        #regionÂ FieldsÂ (22)
+		#region?Fields?(39)?
 
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private DevComponents.DotNetBar.ButtonX btnQuery;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbDomains;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
+        private System.Windows.Forms.ContextMenuStrip cmuClientReviewMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocalInternational;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecoarseNon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCommissionRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinancePeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerBuyer;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientReviews;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
         private DevComponents.DotNetBar.LabelX lblClientName;
+        private DevComponents.DotNetBar.LabelX lblClientReviewNo;
         private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX lblDate;
+        private DevComponents.DotNetBar.LabelX lblLocation;
+        private DevComponents.DotNetBar.LabelX lblOnwerDept;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientReviewDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientReviewDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientReviewExport;
         private DevComponents.DotNetBar.PanelEx panelQuery;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbClientReviewNo;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbClientReviewNo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ MethodsÂ (1)
+		#region?Methods?(1)?
 
-        //Â ProtectedÂ MethodsÂ (1)Â 
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -45,7 +76,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             base.Dispose(disposing);
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
 
 
 
@@ -146,36 +177,36 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbDomains.FormattingEnabled = true;
             this.cbDomains.ItemHeight = 14;
             this.cbDomains.Items.AddRange(new object[] {
-            "å…¨éƒ¨",
-            "åŒ—äº¬",
-            "å¹¿å·",
-            "ä¸Šæµ·",
-            "æ·±åœ³",
-            "æ­¦æ±‰",
-            "å¤ªåŸ",
-            "çŸ³å®¶åº„",
-            "å¤§è¿",
-            "æ­å·",
-            "å—äº¬",
-            "é‡åº†",
-            "è¥¿å®‰",
-            "ç¦å·",
-            "æµå—",
-            "å®æ³¢",
-            "æˆéƒ½",
-            "å¤©æ´¥",
-            "è‹å·",
-            "é’å²›",
-            "å¦é—¨",
-            "éƒ‘å·",
-            "æ˜†æ˜",
-            "æ¸©å·",
-            "æ³‰å·",
-            "é•¿æ²™",
-            "é•¿æ˜¥",
-            "æ±•å¤´",
-            "å—æ˜Œ",
-            "é¦™æ¸¯"});
+            "È«²¿",
+            "±±¾©",
+            "¹ãÖİ",
+            "ÉÏº£",
+            "ÉîÛÚ",
+            "Îäºº",
+            "Ì«Ô­",
+            "Ê¯¼Ò×¯",
+            "´óÁ¬",
+            "º¼Öİ",
+            "ÄÏ¾©",
+            "ÖØÇì",
+            "Î÷°²",
+            "¸£Öİ",
+            "¼ÃÄÏ",
+            "Äş²¨",
+            "³É¶¼",
+            "Ìì½ò",
+            "ËÕÖİ",
+            "Çàµº",
+            "ÏÃÃÅ",
+            "Ö£Öİ",
+            "À¥Ã÷",
+            "ÎÂÖİ",
+            "ÈªÖİ",
+            "³¤É³",
+            "³¤´º",
+            "ÉÇÍ·",
+            "ÄÏ²ı",
+            "Ïã¸Û"});
             this.cbDomains.Location = new System.Drawing.Point(272, 29);
             this.cbDomains.Name = "cbDomains";
             this.cbDomains.Size = new System.Drawing.Size(133, 20);
@@ -193,7 +224,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblOnwerDept.Name = "lblOnwerDept";
             this.lblOnwerDept.Size = new System.Drawing.Size(68, 16);
             this.lblOnwerDept.TabIndex = 29;
-            this.lblOnwerDept.Text = "æ‰€å±äº‹ä¸šéƒ¨";
+            this.lblOnwerDept.Text = "ËùÊôÊÂÒµ²¿";
             // 
             // cbLocation
             // 
@@ -203,36 +234,36 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 14;
             this.cbLocation.Items.AddRange(new object[] {
-            "å…¨éƒ¨",
-            "åŒ—äº¬",
-            "å¹¿å·",
-            "ä¸Šæµ·",
-            "æ·±åœ³",
-            "æ­¦æ±‰",
-            "å¤ªåŸ",
-            "çŸ³å®¶åº„",
-            "å¤§è¿",
-            "æ­å·",
-            "å—äº¬",
-            "é‡åº†",
-            "è¥¿å®‰",
-            "ç¦å·",
-            "æµå—",
-            "å®æ³¢",
-            "æˆéƒ½",
-            "å¤©æ´¥",
-            "è‹å·",
-            "é’å²›",
-            "å¦é—¨",
-            "éƒ‘å·",
-            "æ˜†æ˜",
-            "æ¸©å·",
-            "æ³‰å·",
-            "é•¿æ²™",
-            "é•¿æ˜¥",
-            "æ±•å¤´",
-            "å—æ˜Œ",
-            "é¦™æ¸¯"});
+            "È«²¿",
+            "±±¾©",
+            "¹ãÖİ",
+            "ÉÏº£",
+            "ÉîÛÚ",
+            "Îäºº",
+            "Ì«Ô­",
+            "Ê¯¼Ò×¯",
+            "´óÁ¬",
+            "º¼Öİ",
+            "ÄÏ¾©",
+            "ÖØÇì",
+            "Î÷°²",
+            "¸£Öİ",
+            "¼ÃÄÏ",
+            "Äş²¨",
+            "³É¶¼",
+            "Ìì½ò",
+            "ËÕÖİ",
+            "Çàµº",
+            "ÏÃÃÅ",
+            "Ö£Öİ",
+            "À¥Ã÷",
+            "ÎÂÖİ",
+            "ÈªÖİ",
+            "³¤É³",
+            "³¤´º",
+            "ÉÇÍ·",
+            "ÄÏ²ı",
+            "Ïã¸Û"});
             this.cbLocation.Location = new System.Drawing.Point(96, 29);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(100, 20);
@@ -249,7 +280,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(59, 23);
             this.lblLocation.TabIndex = 27;
-            this.lblLocation.Text = "ä¸šåŠ¡åœ°åŒº";
+            this.lblLocation.Text = "ÒµÎñµØÇø";
             // 
             // lblDate
             // 
@@ -262,7 +293,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
             this.lblDate.TabIndex = 24;
-            this.lblDate.Text = "æŸ¥è¯¢æœŸé™";
+            this.lblDate.Text = "²éÑ¯ÆÚÏŞ";
             // 
             // diEnd
             // 
@@ -381,7 +412,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 4;
-            this.btnQuery.Text = "æŸ¥è¯¢";
+            this.btnQuery.Text = "²éÑ¯";
             this.btnQuery.Click += new System.EventHandler(this.Query);
             // 
             // tbClientName
@@ -406,7 +437,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(56, 16);
             this.lblClientName.TabIndex = 2;
-            this.lblClientName.Text = "å®¢æˆ·åç§°";
+            this.lblClientName.Text = "¿Í»§Ãû³Æ";
             // 
             // tbClientReviewNo
             // 
@@ -430,7 +461,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblClientReviewNo.Name = "lblClientReviewNo";
             this.lblClientReviewNo.Size = new System.Drawing.Size(93, 16);
             this.lblClientReviewNo.TabIndex = 0;
-            this.lblClientReviewNo.Text = "åæŸ¥æ„è§ä¹¦ç¼–å·";
+            this.lblClientReviewNo.Text = "Ğ­²éÒâ¼ûÊé±àºÅ";
             // 
             // dgvClientReviews
             // 
@@ -500,7 +531,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.menuItemClientReviewDetail.Name = "menuItemClientReviewDetail";
             this.menuItemClientReviewDetail.Size = new System.Drawing.Size(170, 22);
-            this.menuItemClientReviewDetail.Text = "è¯¦ç»†ä¿¡æ¯(&M)";
+            this.menuItemClientReviewDetail.Text = "ÏêÏ¸ĞÅÏ¢(&M)";
             this.menuItemClientReviewDetail.Click += new System.EventHandler(this.DetailClientReview);
             // 
             // toolStripSeparator
@@ -512,7 +543,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.menuItemClientReviewDelete.Name = "menuItemClientReviewDelete";
             this.menuItemClientReviewDelete.Size = new System.Drawing.Size(170, 22);
-            this.menuItemClientReviewDelete.Text = "åˆ é™¤åæŸ¥æ„è§(&D)";
+            this.menuItemClientReviewDelete.Text = "É¾³ıĞ­²éÒâ¼û(&D)";
             this.menuItemClientReviewDelete.Click += new System.EventHandler(this.DeleteClientReview);
             // 
             // toolStripSeparator1
@@ -520,11 +551,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
             // 
-            // å¯¼å‡ºé€‰å®šåæŸ¥æ„è§ToolStripMenuItem
+            // µ¼³öÑ¡¶¨Ğ­²éÒâ¼ûToolStripMenuItem
             // 
-            this.menuItemClientReviewExport.Name = "å¯¼å‡ºé€‰å®šåæŸ¥æ„è§ToolStripMenuItem";
+            this.menuItemClientReviewExport.Name = "µ¼³öÑ¡¶¨Ğ­²éÒâ¼ûToolStripMenuItem";
             this.menuItemClientReviewExport.Size = new System.Drawing.Size(170, 22);
-            this.menuItemClientReviewExport.Text = "å¯¼å‡ºé€‰å®šåæŸ¥æ„è§";
+            this.menuItemClientReviewExport.Text = "µ¼³öÑ¡¶¨Ğ­²éÒâ¼û";
             this.menuItemClientReviewExport.Click += new System.EventHandler(this.ExportClientReviews);
             // 
             // colClientLocation
@@ -532,7 +563,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colClientLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClientLocation.DataPropertyName = "ClientLocation";
             this.colClientLocation.Frozen = true;
-            this.colClientLocation.HeaderText = "æ‰€å±ä¸šåŠ¡åœ°åŒº";
+            this.colClientLocation.HeaderText = "ËùÊôÒµÎñµØÇø";
             this.colClientLocation.Name = "colClientLocation";
             this.colClientLocation.ReadOnly = true;
             this.colClientLocation.Width = 52;
@@ -542,7 +573,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colClientEDICode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClientEDICode.DataPropertyName = "ClientEDICode";
             this.colClientEDICode.Frozen = true;
-            this.colClientEDICode.HeaderText = "ä¿ç†ä»£ç ";
+            this.colClientEDICode.HeaderText = "±£Àí´úÂë";
             this.colClientEDICode.Name = "colClientEDICode";
             this.colClientEDICode.ReadOnly = true;
             this.colClientEDICode.Width = 53;
@@ -552,7 +583,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClientName.DataPropertyName = "Client";
             this.colClientName.Frozen = true;
-            this.colClientName.HeaderText = "å®¢æˆ·åç§°";
+            this.colClientName.HeaderText = "¿Í»§Ãû³Æ";
             this.colClientName.Name = "colClientName";
             this.colClientName.ReadOnly = true;
             this.colClientName.Width = 52;
@@ -560,42 +591,42 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colReviewNo
             // 
             this.colReviewNo.DataPropertyName = "ReviewNo";
-            this.colReviewNo.HeaderText = "åæŸ¥æ„è§ä¹¦ç¼–å·";
+            this.colReviewNo.HeaderText = "Ğ­²éÒâ¼ûÊé±àºÅ";
             this.colReviewNo.Name = "colReviewNo";
             this.colReviewNo.ReadOnly = true;
             // 
             // colLocalInternational
             // 
             this.colLocalInternational.DataPropertyName = "LocalInternational";
-            this.colLocalInternational.HeaderText = "å›½å†…/å›½é™…";
+            this.colLocalInternational.HeaderText = "¹úÄÚ/¹ú¼Ê";
             this.colLocalInternational.Name = "colLocalInternational";
             this.colLocalInternational.ReadOnly = true;
             // 
             // colSellerBuyer
             // 
             this.colSellerBuyer.DataPropertyName = "SellerBuyer";
-            this.colSellerBuyer.HeaderText = "å–æ–¹/ä¹°æ–¹";
+            this.colSellerBuyer.HeaderText = "Âô·½/Âò·½";
             this.colSellerBuyer.Name = "colSellerBuyer";
             this.colSellerBuyer.ReadOnly = true;
             // 
             // colRecoarseNon
             // 
             this.colRecoarseNon.DataPropertyName = "RecoarseNon";
-            this.colRecoarseNon.HeaderText = "æœ‰è¿½/æ— è¿½";
+            this.colRecoarseNon.HeaderText = "ÓĞ×·/ÎŞ×·";
             this.colRecoarseNon.Name = "colRecoarseNon";
             this.colRecoarseNon.ReadOnly = true;
             // 
             // colIsNotice
             // 
             this.colIsNotice.DataPropertyName = "IsNotice";
-            this.colIsNotice.HeaderText = "æ˜/æš—ä¿ç†";
+            this.colIsNotice.HeaderText = "Ã÷/°µ±£Àí";
             this.colIsNotice.Name = "colIsNotice";
             this.colIsNotice.ReadOnly = true;
             // 
             // colRequestCurrency
             // 
             this.colRequestCurrency.DataPropertyName = "RequestCurrency";
-            this.colRequestCurrency.HeaderText = "æˆä¿¡å¸ç§";
+            this.colRequestCurrency.HeaderText = "ÊÚĞÅ±ÒÖÖ";
             this.colRequestCurrency.Name = "colRequestCurrency";
             this.colRequestCurrency.ReadOnly = true;
             // 
@@ -605,28 +636,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
             this.colRequestAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colRequestAmount.HeaderText = "æˆä¿¡é‡‘é¢";
+            this.colRequestAmount.HeaderText = "ÊÚĞÅ½ğ¶î";
             this.colRequestAmount.Name = "colRequestAmount";
             this.colRequestAmount.ReadOnly = true;
             // 
             // colRequestFinanceType
             // 
             this.colRequestFinanceType.DataPropertyName = "RequestFinanceType";
-            this.colRequestFinanceType.HeaderText = "å‡ºè´¦æ–¹å¼";
+            this.colRequestFinanceType.HeaderText = "³öÕË·½Ê½";
             this.colRequestFinanceType.Name = "colRequestFinanceType";
             this.colRequestFinanceType.ReadOnly = true;
             // 
             // colRequestFinanceType2
             // 
             this.colRequestFinanceType2.DataPropertyName = "RequestFinanceType2";
-            this.colRequestFinanceType2.HeaderText = "èèµ„ç®¡ç†";
+            this.colRequestFinanceType2.HeaderText = "ÈÚ×Ê¹ÜÀí";
             this.colRequestFinanceType2.Name = "colRequestFinanceType2";
             this.colRequestFinanceType2.ReadOnly = true;
             // 
             // colRequestFinancePeriod
             // 
             this.colRequestFinancePeriod.DataPropertyName = "RequestFinancePeriod";
-            this.colRequestFinancePeriod.HeaderText = "èèµ„æœŸé™(æœˆ)";
+            this.colRequestFinancePeriod.HeaderText = "ÈÚ×ÊÆÚÏŞ(ÔÂ)";
             this.colRequestFinancePeriod.Name = "colRequestFinancePeriod";
             this.colRequestFinancePeriod.ReadOnly = true;
             // 
@@ -635,14 +666,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colRequestCommissionRate.DataPropertyName = "RequestCommissionRate";
             dataGridViewCellStyle3.Format = "p4";
             this.colRequestCommissionRate.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colRequestCommissionRate.HeaderText = "æ‰‹ç»­è´¹ç‡";
+            this.colRequestCommissionRate.HeaderText = "ÊÖĞø·ÑÂÊ";
             this.colRequestCommissionRate.Name = "colRequestCommissionRate";
             this.colRequestCommissionRate.ReadOnly = true;
             // 
             // colReviewStatus
             // 
             this.colReviewStatus.DataPropertyName = "ReviewStatus";
-            this.colReviewStatus.HeaderText = "çŠ¶æ€";
+            this.colReviewStatus.HeaderText = "×´Ì¬";
             this.colReviewStatus.Name = "colReviewStatus";
             this.colReviewStatus.ReadOnly = true;
             // 
@@ -652,14 +683,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle4.Format = "d";
             dataGridViewCellStyle4.NullValue = null;
             this.colReviewDate.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colReviewDate.HeaderText = "ç­¾å‘æ—¥æœŸ";
+            this.colReviewDate.HeaderText = "Ç©·¢ÈÕÆÚ";
             this.colReviewDate.Name = "colReviewDate";
             this.colReviewDate.ReadOnly = true;
             // 
             // colCreateUserName
             // 
             this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "ç»åŠäºº";
+            this.colCreateUserName.HeaderText = "¾­°ìÈË";
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
             // 
@@ -682,37 +713,5 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.LabelX lblClientReviewNo;
-        private System.Windows.Forms.ContextMenuStrip cmuClientReviewMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientReviewDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientReviewDelete;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientReviewExport;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
-        private DevComponents.DotNetBar.LabelX lblLocation;
-        private DevComponents.DotNetBar.LabelX lblDate;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
-        private DevComponents.DotNetBar.LabelX lblOnwerDept;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbDomains;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLocalInternational;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerBuyer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRecoarseNon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinancePeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCommissionRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
     }
 }

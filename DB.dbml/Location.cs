@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Location.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -16,32 +16,16 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Location
     {
-        #region Fields (1)
+		#region?Fields?(1)?
 
         /// <summary>
         /// 
         /// </summary>
         private static readonly List<Location> _locationList = InitializeLocation();
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Constructors (1)
-
-        /// <summary>
-        /// Initializes static members of the Country class
-        /// </summary>
-        static List<Location> InitializeLocation()
-        {
-            DBDataContext context = new DBDataContext();
-            context.ObjectTrackingEnabled = false;
-            return context.Locations.ToList();
-        }
-
-        #endregion Constructors
-
-        #region Methods (1)
-
-        // Public Methods (1) 
+		#region?Properties?(1)?
 
         /// <summary>
         /// 
@@ -54,6 +38,22 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Methods
+		#endregion?Properties?
+
+		#region?Methods?(1)?
+
+		//?Private?Methods?(1)?
+
+        /// <summary>
+        /// Initializes static members of the Country class
+        /// </summary>
+        static List<Location> InitializeLocation()
+        {
+            DBDataContext context = new DBDataContext();
+            context.ObjectTrackingEnabled = false;
+            return context.Locations.ToList();
+        }
+
+		#endregion?Methods?
     }
 }

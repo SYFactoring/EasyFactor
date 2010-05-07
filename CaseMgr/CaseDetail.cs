@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="CaseDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -15,15 +15,15 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// Case Detail
     /// </summary>
     public partial class CaseDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #regionÂ FieldsÂ (3)
+		#region?Fields?(3)?
 
         /// <summary>
         /// 
@@ -38,9 +38,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (2)
+		#region?Enums?(2)?
 
         /// <summary>
         /// Operation types of Credit Cover Negotiation
@@ -62,7 +62,7 @@ namespace CMBC.EasyFactor.CaseMgr
             /// </summary>
             DETAIL_CREDIT_COVER_NEG
         }
-        /// <summary>
+/// <summary>
         /// Operation types of Case
         /// </summary>
         public enum OpCaseType
@@ -83,11 +83,11 @@ namespace CMBC.EasyFactor.CaseMgr
             DETAIL_CASE,
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (4)
+		#region?Constructors?(4)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the CaseDetail class
         /// </summary>
         /// <param name="curCase">Selected case</param>
@@ -127,8 +127,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 curCase = new Case();
                 curCase.CreateUserName = App.Current.CurUser.Name;
                 curCase.CaseAppDate = DateTime.Now.Date;
-                curCase.OperationType = "è‡ªè¥";
-                curCase.CaseMark = "ç”³è¯·æ¡ˆ";
+                curCase.OperationType = "×ÔÓª";
+                curCase.CaseMark = "ÉêÇë°¸";
                 this.caseBindingSource.DataSource = curCase;
             }
             else
@@ -140,14 +140,14 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 switch (curCase.TransactionType)
                 {
-                    case "å›½å†…å–æ–¹ä¿ç†":
-                    case "å‡ºå£ä¿ç†":
+                    case "¹úÄÚÂô·½±£Àí":
+                    case "³ö¿Ú±£Àí":
                         this.tbCaseFactorCode.Text = curCase.BuyerFactor.FactorCode;
                         this.tbCaseFactorNameCN.Text = curCase.BuyerFactor.CompanyNameCN;
                         this.tbCaseFactorNameEN.Text = curCase.BuyerFactor.CompanyNameEN;
                         break;
-                    case "å›½å†…ä¹°æ–¹ä¿ç†":
-                    case "è¿›å£ä¿ç†":
+                    case "¹úÄÚÂò·½±£Àí":
+                    case "½ø¿Ú±£Àí":
                         this.tbCaseFactorCode.Text = curCase.SellerFactor.FactorCode;
                         this.tbCaseFactorNameCN.Text = curCase.SellerFactor.CompanyNameCN;
                         this.tbCaseFactorNameEN.Text = curCase.SellerFactor.CompanyNameEN;
@@ -213,11 +213,11 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ MethodsÂ (24)
+		#region?Methods?(24)?
 
-        //Â PrivateÂ MethodsÂ (24)Â 
+		//?Private?Methods?(24)?
 
         /// <summary>
         /// Case owner deparment changed event handler
@@ -250,21 +250,21 @@ namespace CMBC.EasyFactor.CaseMgr
             Factor cmbc = this.context.Factors.SingleOrDefault(f => f.FactorCode == Factor.CMBC_CODE);
             switch (transactionType)
             {
-                case "å›½å†…å–æ–¹ä¿ç†":
-                case "å›½å†…ä¹°æ–¹ä¿ç†":
+                case "¹úÄÚÂô·½±£Àí":
+                case "¹úÄÚÂò·½±£Àí":
                     this.btnCaseFactorSelect.Enabled = false;
                     curCase.SellerFactor = cmbc;
                     curCase.BuyerFactor = cmbc;
                     curCase.InvoiceCurrency = "CNY";
                     this.cbCaseInvoiceCurrency.Enabled = false;
                     break;
-                case "å‡ºå£ä¿ç†":
+                case "³ö¿Ú±£Àí":
                     this.btnCaseFactorSelect.Enabled = true;
                     curCase.SellerFactor = cmbc;
                     curCase.InvoiceCurrency = "USD";
                     this.cbCaseInvoiceCurrency.Enabled = true;
                     break;
-                case "è¿›å£ä¿ç†":
+                case "½ø¿Ú±£Àí":
                     this.btnCaseFactorSelect.Enabled = true;
                     curCase.BuyerFactor = cmbc;
                     curCase.InvoiceCurrency = "USD";
@@ -273,7 +273,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 default: break;
             }
 
-            if (!"è¿›å£ä¿ç†".Equals(curCase.TransactionType) && curCase.SellerClient != null)
+            if (!"½ø¿Ú±£Àí".Equals(curCase.TransactionType) && curCase.SellerClient != null)
             {
                 if (curCase.SellerClient.Contract == null)
                 {
@@ -290,7 +290,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             Case curCase = (Case)this.caseBindingSource.DataSource;
-            string[] caseTypes = new string[] { "å‡ºå£ä¿ç†", "è¿›å£ä¿ç†" };
+            string[] caseTypes = new string[] { "³ö¿Ú±£Àí", "½ø¿Ú±£Àí" };
             if (caseTypes.Contains(curCase.TransactionType))
             {
                 if (!String.IsNullOrEmpty(this.tbCaseFactorCode.Text))
@@ -331,7 +331,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 CDA selectedCDA = this.context.CDAs.SingleOrDefault(c => c.CDACode == cdaCode);
                 if (selectedCDA != null)
                 {
-                    if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤é¢åº¦é€šçŸ¥ä¹¦: " + cdaCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+                    if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı¶î¶ÈÍ¨ÖªÊé: " + cdaCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                     {
                         return;
                     }
@@ -346,12 +346,12 @@ namespace CMBC.EasyFactor.CaseMgr
                     catch (Exception e1)
                     {
                         isDeleteOK = false;
-                        MessageBoxEx.Show("ä¸èƒ½åˆ é™¤æ­¤é¢åº¦é€šçŸ¥ä¹¦: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBoxEx.Show("²»ÄÜÉ¾³ı´Ë¶î¶ÈÍ¨ÖªÊé: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
 
                     if (isDeleteOK)
                     {
-                        MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.dgvCDAs.Rows.RemoveAt(this.dgvCDAs.SelectedRows[0].Index);
                     }
                 }
@@ -373,7 +373,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰æ‹©ä¸€ä¸ªæ¡ˆå­", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡ÔñÒ»¸ö°¸×Ó", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -402,7 +402,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
                 this.creditCoverNegBindingSource.DataSource = new CreditCoverNegotiation();
             }
@@ -465,12 +465,12 @@ namespace CMBC.EasyFactor.CaseMgr
             Factor factor = null;
             switch (curCase.TransactionType)
             {
-                case "å›½å†…å–æ–¹ä¿ç†":
-                case "å‡ºå£ä¿ç†":
+                case "¹úÄÚÂô·½±£Àí":
+                case "³ö¿Ú±£Àí":
                     factor = curCase.BuyerFactor;
                     break;
-                case "å›½å†…ä¹°æ–¹ä¿ç†":
-                case "è¿›å£ä¿ç†":
+                case "¹úÄÚÂò·½±£Àí":
+                case "½ø¿Ú±£Àí":
                     factor = curCase.SellerFactor;
                     break;
                 default: break;
@@ -541,7 +541,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰æ‹©ä¸€ä¸ªæ¡ˆå­", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡ÔñÒ»¸ö°¸×Ó", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -564,11 +564,11 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰æ‹©ä¸€ä¸ªæ¡ˆå­", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡ÔñÒ»¸ö°¸×Ó", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (curCase.TransactionType == "å‡ºå£ä¿ç†" || curCase.TransactionType == "è¿›å£ä¿ç†")
+            if (curCase.TransactionType == "³ö¿Ú±£Àí" || curCase.TransactionType == "½ø¿Ú±£Àí")
             {
                 CreditCoverNegotiation creditCoverNeg = new CreditCoverNegotiation();
                 creditCoverNeg.CreateUserName = App.Current.CurUser.Name;
@@ -578,7 +578,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             else
             {
-                MessageBoxEx.Show("å›½å†…ä¿ç†æ¡ˆä¸éœ€è¦å‘å›½å¤–ä¿ç†å•†ç”³è¯·é¢åº¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("¹úÄÚ±£Àí°¸²»ĞèÒªÏò¹úÍâ±£ÀíÉÌÉêÇë¶î¶È", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -592,7 +592,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰æ‹©ä¸€ä¸ªæ¡ˆå­", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡ÔñÒ»¸ö°¸×Ó", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -609,7 +609,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰æ‹©ä¸€ä¸ªæ¡ˆå­", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡ÔñÒ»¸ö°¸×Ó", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -654,7 +654,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.opCaseType = OpCaseType.UPDATE_CASE;
                 }
             }
@@ -690,11 +690,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (isUpdateOK)
                 {
-                    if (curCase.CaseMark == "å·²ç»“æ¡ˆ")
+                    if (curCase.CaseMark == "ÒÑ½á°¸")
                     {
                         foreach (CDA cda in curCase.CDAs)
                         {
-                            cda.CDAStatus = "å·²å¤±æ•ˆ";
+                            cda.CDAStatus = "ÒÑÊ§Ğ§";
                         }
 
                         try
@@ -707,7 +707,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         }
                     }
 
-                    MessageBoxEx.Show("æ•°æ®æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İ¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -732,7 +732,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰æ‹©ä¸€ä¸ªæ¡ˆå­", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡ÔñÒ»¸ö°¸×Ó", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -762,7 +762,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.dgvCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
                     this.NewCreditCoverNeg(null, null);
                 }
@@ -794,7 +794,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İ¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.dgvCreditCoverNegs.Refresh();
                 }
             }
@@ -814,7 +814,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             Case curCase = (Case)this.caseBindingSource.DataSource;
             ClientMgr clientMgr = new ClientMgr();
-            QueryForm queryUI = new QueryForm(clientMgr, "é€‰æ‹©ä¹°æ–¹");
+            QueryForm queryUI = new QueryForm(clientMgr, "Ñ¡ÔñÂò·½");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
@@ -822,17 +822,17 @@ namespace CMBC.EasyFactor.CaseMgr
                 curCase.BuyerClient = this.context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
                 switch (this.cbCaseTransactionType.Text)
                 {
-                    case "å›½å†…å–æ–¹ä¿ç†":
-                    case "å‡ºå£ä¿ç†":
+                    case "¹úÄÚÂô·½±£Àí":
+                    case "³ö¿Ú±£Àí":
                         break;
-                    case "å›½å†…ä¹°æ–¹ä¿ç†":
-                    case "è¿›å£ä¿ç†":
+                    case "¹úÄÚÂò·½±£Àí":
+                    case "½ø¿Ú±£Àí":
                         curCase.OwnerDepartment = curCase.BuyerClient.Department;
                         if (curCase.OwnerDepartment != null)
                         {
-                            if (!curCase.OwnerDepartment.DepartmentName.Contains("è´¸é‡‘"))
+                            if (!curCase.OwnerDepartment.DepartmentName.Contains("Ã³½ğ"))
                             {
-                                curCase.OperationType = "åé”€";
+                                curCase.OperationType = "Ğ­Ïú";
                             }
                             List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
                             this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
@@ -859,7 +859,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             Case curCase = (Case)this.caseBindingSource.DataSource;
             ClientMgr clientMgr = new ClientMgr();
-            QueryForm queryUI = new QueryForm(clientMgr, "é€‰æ‹©å–æ–¹");
+            QueryForm queryUI = new QueryForm(clientMgr, "Ñ¡ÔñÂô·½");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
@@ -867,14 +867,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 curCase.SellerClient = this.context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
                 switch (this.cbCaseTransactionType.Text)
                 {
-                    case "å›½å†…å–æ–¹ä¿ç†":
-                    case "å‡ºå£ä¿ç†":
+                    case "¹úÄÚÂô·½±£Àí":
+                    case "³ö¿Ú±£Àí":
                         curCase.OwnerDepartment = curCase.SellerClient.Department;
                         if (curCase.OwnerDepartment != null)
                         {
-                            if (!curCase.OwnerDepartment.DepartmentName.Contains("è´¸é‡‘"))
+                            if (!curCase.OwnerDepartment.DepartmentName.Contains("Ã³½ğ"))
                             {
-                                curCase.OperationType = "åé”€";
+                                curCase.OperationType = "Ğ­Ïú";
                             }
 
                             List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
@@ -883,8 +883,8 @@ namespace CMBC.EasyFactor.CaseMgr
 
                         this.cbReviews.DataSource = curCase.ClientReviews;
                         break;
-                    case "å›½å†…ä¹°æ–¹ä¿ç†":
-                    case "è¿›å£ä¿ç†":
+                    case "¹úÄÚÂò·½±£Àí":
+                    case "½ø¿Ú±£Àí":
                         break;
                     default: break;
                 }
@@ -928,7 +928,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             Case curCase = (Case)this.caseBindingSource.DataSource;
             FactorMgr factorMgr = new FactorMgr();
-            QueryForm queryUI = new QueryForm(factorMgr, "é€‰æ‹©ä¿ç†å•†");
+            QueryForm queryUI = new QueryForm(factorMgr, "Ñ¡Ôñ±£ÀíÉÌ");
             factorMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
 
@@ -942,12 +942,12 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 switch (this.cbCaseTransactionType.Text)
                 {
-                    case "å›½å†…å–æ–¹ä¿ç†":
-                    case "å‡ºå£ä¿ç†":
+                    case "¹úÄÚÂô·½±£Àí":
+                    case "³ö¿Ú±£Àí":
                         curCase.BuyerFactor = factor;
                         break;
-                    case "å›½å†…ä¹°æ–¹ä¿ç†":
-                    case "è¿›å£ä¿ç†":
+                    case "¹úÄÚÂò·½±£Àí":
+                    case "½ø¿Ú±£Àí":
                         curCase.SellerFactor = factor;
                         break;
                     default: break;
@@ -970,7 +970,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰æ‹©ä¸€ä¸ªæ¡ˆå­", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡ÔñÒ»¸ö°¸×Ó", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1047,7 +1047,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Case curCase = (Case)this.caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰æ‹©ä¸€ä¸ªæ¡ˆå­", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡ÔñÒ»¸ö°¸×Ó", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1091,6 +1091,6 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetComponetEditable(this.tbCreditCoverCreateUserName, false);
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

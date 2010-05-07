@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ImportForm.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ImportForm
     {
-        #region¬†Fields¬†(11)
+		#region?Fields?(11)?
 
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,11 @@ namespace CMBC.EasyFactor.Utils
         private DevComponents.DotNetBar.Controls.TextBoxX tbFilePath;
         private DevComponents.DotNetBar.Controls.TextBoxX tbStatus;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -53,7 +53,9 @@ namespace CMBC.EasyFactor.Utils
             base.Dispose(disposing);
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
+
+
 
         #region Windows Form Designer generated code
 
@@ -87,7 +89,7 @@ namespace CMBC.EasyFactor.Utils
             this.lblFilePath.Name = "lblFilePath";
             this.lblFilePath.Size = new System.Drawing.Size(59, 16);
             this.lblFilePath.TabIndex = 0;
-            this.lblFilePath.Text = "Êñá‰ª∂Ë∑ØÂæÑ:";
+            this.lblFilePath.Text = "Œƒº˛¬∑æ∂:";
             // 
             // lblStatus
             // 
@@ -101,7 +103,7 @@ namespace CMBC.EasyFactor.Utils
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(34, 16);
             this.lblStatus.TabIndex = 3;
-            this.lblStatus.Text = "Áä∂ÊÄÅ:";
+            this.lblStatus.Text = "◊¥Ã¨:";
             // 
             // progressBar
             // 
@@ -126,7 +128,7 @@ namespace CMBC.EasyFactor.Utils
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(59, 16);
             this.lblProgress.TabIndex = 5;
-            this.lblProgress.Text = "ÂØºÂÖ•ËøõÂ∫¶:";
+            this.lblProgress.Text = "µº»ÎΩ¯∂»:";
             // 
             // tbStatus
             // 
@@ -161,7 +163,7 @@ namespace CMBC.EasyFactor.Utils
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnStart.TabIndex = 7;
-            this.btnStart.Text = "ÂºÄÂßã";
+            this.btnStart.Text = "ø™ º";
             this.btnStart.Click += new System.EventHandler(this.StartImport);
             // 
             // btnCancel
@@ -173,7 +175,7 @@ namespace CMBC.EasyFactor.Utils
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancel.TabIndex = 8;
-            this.btnCancel.Text = "ÂÖ≥Èó≠";
+            this.btnCancel.Text = "πÿ±’";
             this.btnCancel.Click += new System.EventHandler(this.CancelImport);
             // 
             // btnFileSelect
@@ -214,7 +216,7 @@ namespace CMBC.EasyFactor.Utils
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "ImportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Êï∞ÊçÆÂØºÂÖ•";
+            this.Text = " ˝æ›µº»Î";
             this.ResumeLayout(false);
             this.PerformLayout();
 

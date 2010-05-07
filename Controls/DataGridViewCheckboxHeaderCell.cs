@@ -1,37 +1,93 @@
-ï»¿using System;
-using System.Drawing;
-using System.Windows.Forms;
+//-----------------------------------------------------------------------
+// <copyright file="DataGridViewCheckboxHeaderCell.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.Controls
 {
-    //å®šä¹‰è§¦å‘å•å‡»äº‹ä»¶çš„å§”æ‰˜ 
+    using System;
+    using System.Drawing;
+    using System.Windows.Forms;
+
+    //¶¨Òå´¥·¢µ¥»÷ÊÂ¼şµÄÎ¯ÍĞ 
     delegate void DataGridViewCheckboxHeaderEventHander(object sender, DataGridViewCheckboxHeaderEventArgs e);
 
-    //å®šä¹‰åŒ…å«åˆ—å¤´checkboxé€‰æ‹©çŠ¶æ€çš„å‚æ•°ç±» 
+    //¶¨Òå°üº¬ÁĞÍ·checkboxÑ¡Ôñ×´Ì¬µÄ²ÎÊıÀà 
     class DataGridViewCheckboxHeaderEventArgs : EventArgs
     {
+		#region?Properties?(1)?
 
         public bool CheckedState
         {
             get;
             set;
         }
+
+		#endregion?Properties?
     }
 
 
-    //å®šä¹‰ç»§æ‰¿äºDataGridViewColumnHeaderCellçš„ç±»ï¼Œç”¨äºç»˜åˆ¶checkboxï¼Œå®šä¹‰checkboxé¼ æ ‡å•å‡»äº‹ä»¶
+    //¶¨Òå¼Ì³ĞÓÚDataGridViewColumnHeaderCellµÄÀà£¬ÓÃÓÚ»æÖÆcheckbox£¬¶¨ÒåcheckboxÊó±êµ¥»÷ÊÂ¼ş
     class DataGridViewCheckboxHeaderCell : DataGridViewColumnHeaderCell
     {
-        Point checkBoxLocation;
-        Size checkBoxSize;
-        bool _checked = false;
-        Point _cellLocation = new Point();
+		#region?Fields?(5)?
+
         System.Windows.Forms.VisualStyles.CheckBoxState _cbState =
             System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal;
+        Point _cellLocation = new Point();
+        bool _checked = false;
+        Point checkBoxLocation;
+        Size checkBoxSize;
+
+		#endregion?Fields?
+
+		#region?Delegates?and?Events?(1)?
+
+		//?Events?(1)?
+
         public event DataGridViewCheckboxHeaderEventHander OnCheckBoxClicked;
 
+		#endregion?Delegates?and?Events?
 
-        //ç»˜åˆ¶åˆ—å¤´checkbox 
+		#region?Methods?(2)?
+
+		//?Protected?Methods?(2)?
+
+        /// <summary> 
+        /// µã»÷ÁĞÍ·checkboxµ¥»÷ÊÂ¼ş 
+        /// </summary> 
+        protected override void OnMouseClick(DataGridViewCellMouseEventArgs e)
+        {
+            if (e == null)
+            {
+                throw new ArgumentNullException("DataGridViewCellMouseEventArgs");
+            }
+
+            Point p = new Point(e.X + _cellLocation.X, e.Y + _cellLocation.Y);
+            if (p.X >= checkBoxLocation.X && p.X <=
+                checkBoxLocation.X + checkBoxSize.Width
+            && p.Y >= checkBoxLocation.Y && p.Y <=
+                checkBoxLocation.Y + checkBoxSize.Height)
+            {
+                _checked = !_checked;
+
+                //»ñÈ¡ÁĞÍ·checkboxµÄÑ¡Ôñ×´Ì¬ 
+                DataGridViewCheckboxHeaderEventArgs ex = new DataGridViewCheckboxHeaderEventArgs();
+                ex.CheckedState = _checked;
+
+                object sender = new object();//´Ë´¦²»´ú±íÑ¡ÔñµÄÁĞÍ·checkbox£¬Ö»ÊÇ×÷Îª²ÎÊı´«µİ¡£Ó¦¸ÃÁĞÍ·checkboxÊÇ»æÖÆ³öÀ´µÄ£¬ÎŞ·¨»ñµÃËüµÄÊµÀı
+
+                if (OnCheckBoxClicked != null)
+                {
+                    OnCheckBoxClicked(sender, ex);//´¥·¢µ¥»÷ÊÂ¼ş 
+                    this.DataGridView.InvalidateCell(this);
+                }
+            }
+            base.OnMouseClick(e);
+        }
+
+        //»æÖÆÁĞÍ·checkbox 
         protected override void Paint(System.Drawing.Graphics graphics,
           System.Drawing.Rectangle clipBounds,
           System.Drawing.Rectangle cellBounds,
@@ -52,9 +108,9 @@ namespace CMBC.EasyFactor.Controls
             Size s = CheckBoxRenderer.GetGlyphSize(graphics,
             System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal);
             p.X = cellBounds.Location.X +
-                (cellBounds.Width / 2) - (s.Width / 2) - 1;//åˆ—å¤´checkboxçš„Xåæ ‡ 
+                (cellBounds.Width / 2) - (s.Width / 2) - 1;//ÁĞÍ·checkboxµÄX×ø±ê 
             p.Y = cellBounds.Location.Y +
-                (cellBounds.Height / 2) - (s.Height / 2);//åˆ—å¤´checkboxçš„Yåæ ‡ 
+                (cellBounds.Height / 2) - (s.Height / 2);//ÁĞÍ·checkboxµÄY×ø±ê 
             _cellLocation = cellBounds.Location;
             checkBoxLocation = p;
             checkBoxSize = s;
@@ -68,37 +124,6 @@ namespace CMBC.EasyFactor.Controls
             (graphics, checkBoxLocation, _cbState);
         }
 
-        /// <summary> 
-        /// ç‚¹å‡»åˆ—å¤´checkboxå•å‡»äº‹ä»¶ 
-        /// </summary> 
-        protected override void OnMouseClick(DataGridViewCellMouseEventArgs e)
-        {
-            if (e == null)
-            {
-                throw new ArgumentNullException("DataGridViewCellMouseEventArgs");
-            }
-
-            Point p = new Point(e.X + _cellLocation.X, e.Y + _cellLocation.Y);
-            if (p.X >= checkBoxLocation.X && p.X <=
-                checkBoxLocation.X + checkBoxSize.Width
-            && p.Y >= checkBoxLocation.Y && p.Y <=
-                checkBoxLocation.Y + checkBoxSize.Height)
-            {
-                _checked = !_checked;
-
-                //è·å–åˆ—å¤´checkboxçš„é€‰æ‹©çŠ¶æ€ 
-                DataGridViewCheckboxHeaderEventArgs ex = new DataGridViewCheckboxHeaderEventArgs();
-                ex.CheckedState = _checked;
-
-                object sender = new object();//æ­¤å¤„ä¸ä»£è¡¨é€‰æ‹©çš„åˆ—å¤´checkboxï¼Œåªæ˜¯ä½œä¸ºå‚æ•°ä¼ é€’ã€‚åº”è¯¥åˆ—å¤´checkboxæ˜¯ç»˜åˆ¶å‡ºæ¥çš„ï¼Œæ— æ³•è·å¾—å®ƒçš„å®ä¾‹
-
-                if (OnCheckBoxClicked != null)
-                {
-                    OnCheckBoxClicked(sender, ex);//è§¦å‘å•å‡»äº‹ä»¶ 
-                    this.DataGridView.InvalidateCell(this);
-                }
-            }
-            base.OnMouseClick(e);
-        }
+		#endregion?Methods?
     }
 }

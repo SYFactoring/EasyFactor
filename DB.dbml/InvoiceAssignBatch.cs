@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoiceAssignBatch.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -16,16 +16,16 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceAssignBatch
     {
-        #region Fields (4)
+		#region?Fields?(4)?
 
         private double? _assignAmount;
         private double? _assignOutstanding;
         private double? _commissionAmount;
         private double? _financeOutstanding;
 
-        #endregion Fields
+		#endregion?Fields?
 
-        #region Properties (10)
+		#region?Properties?(10)?
 
         /// <summary>
         /// Gets
@@ -170,11 +170,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+		#endregion?Properties?
 
-        #region Methods (2)
+		#region?Methods?(2)?
 
-        // Public Methods (2) 
+		//?Public?Methods?(2)?
 
         /// <summary>
         /// 
@@ -222,6 +222,6 @@ namespace CMBC.EasyFactor.DB.dbml
             return assignNo;
         }
 
-        #endregion Methods
+		#endregion?Methods?
     }
 }

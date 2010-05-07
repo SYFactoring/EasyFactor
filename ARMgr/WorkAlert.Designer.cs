@@ -1,9 +1,10 @@
-Ôªønamespace CMBC.EasyFactor.ARMgr
+namespace CMBC.EasyFactor.ARMgr
 {
     partial class WorkAlert
     {
-		#region¬†Fields¬†(35)¬†
+		#region?Fields?(39)?
 
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private DevComponents.DotNetBar.ButtonX btnDueAssign;
         private DevComponents.DotNetBar.ButtonX btnDueAssign0;
         private DevComponents.DotNetBar.ButtonX btnDueAssign7;
@@ -30,10 +31,12 @@
         private DevComponents.DotNetBar.ButtonX btnWaitCheckFinance;
         private DevComponents.DotNetBar.ButtonX btnWaitCheckPayment;
         private DevComponents.DotNetBar.ButtonX btnWaitCheckRefund;
+        private DevComponents.DotNetBar.BubbleBarTab bubbleBarTab1;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
         private DevComponents.DotNetBar.ExpandablePanel panelAssign;
         private DevComponents.DotNetBar.ExpandablePanel panelFinance;
         private DevComponents.DotNetBar.PanelEx panelLeft;
@@ -42,12 +45,13 @@
         private DevComponents.DotNetBar.ExpandablePanel panelRejectCheck;
         private DevComponents.DotNetBar.PanelEx panelRight;
         private DevComponents.DotNetBar.ExpandablePanel panelWaitCheck;
+        private DevComponents.DotNetBar.SuperTooltip superTooltip;
 
-		#endregion¬†Fields¬†
+		#endregion?Fields?
 
-		#region¬†Methods¬†(1)¬†
+		#region?Methods?(1)?
 
-		//¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -62,7 +66,7 @@
             base.Dispose(disposing);
         }
 
-		#endregion¬†Methods¬†
+		#endregion?Methods?
 
 
 
@@ -172,7 +176,7 @@
             this.panelRejectCheck.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelRejectCheck.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelRejectCheck.TitleStyle.GradientAngle = 90;
-            this.panelRejectCheck.TitleText = "ÊãíÁªùÊîæË°åÁöÑËµÑÊñô";
+            this.panelRejectCheck.TitleText = "æ‹æ¯∑≈––µƒ◊ ¡œ";
             // 
             // btnRejectCheckRefund
             // 
@@ -184,7 +188,7 @@
             this.btnRejectCheckRefund.Size = new System.Drawing.Size(106, 23);
             this.btnRejectCheckRefund.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRejectCheckRefund.TabIndex = 4;
-            this.btnRejectCheckRefund.Text = "e) ËøòÊ¨æ";
+            this.btnRejectCheckRefund.Text = "e) ªπøÓ";
             this.btnRejectCheckRefund.Click += new System.EventHandler(this.QueryRejectCheckRefunds);
             // 
             // btnRejectCheckPayment
@@ -197,7 +201,7 @@
             this.btnRejectCheckPayment.Size = new System.Drawing.Size(106, 23);
             this.btnRejectCheckPayment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRejectCheckPayment.TabIndex = 3;
-            this.btnRejectCheckPayment.Text = "d) ‰ªòÊ¨æ";
+            this.btnRejectCheckPayment.Text = "d) ∏∂øÓ";
             this.btnRejectCheckPayment.Click += new System.EventHandler(this.QueryRejectCheckPayments);
             // 
             // btnRejectCheckFinance
@@ -210,7 +214,7 @@
             this.btnRejectCheckFinance.Size = new System.Drawing.Size(106, 23);
             this.btnRejectCheckFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRejectCheckFinance.TabIndex = 2;
-            this.btnRejectCheckFinance.Text = "c) ËûçËµÑ";
+            this.btnRejectCheckFinance.Text = "c) »⁄◊ ";
             this.btnRejectCheckFinance.Click += new System.EventHandler(this.QueryRejectCheckFinances);
             // 
             // btnRejectCheckAssign
@@ -223,7 +227,7 @@
             this.btnRejectCheckAssign.Size = new System.Drawing.Size(106, 23);
             this.btnRejectCheckAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRejectCheckAssign.TabIndex = 1;
-            this.btnRejectCheckAssign.Text = "b) ËΩ¨ËÆ©";
+            this.btnRejectCheckAssign.Text = "b) ◊™»√";
             this.btnRejectCheckAssign.Click += new System.EventHandler(this.QueryRejectCheckAssigns);
             // 
             // btnRejectCheckCDA
@@ -236,7 +240,7 @@
             this.btnRejectCheckCDA.Size = new System.Drawing.Size(106, 23);
             this.btnRejectCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRejectCheckCDA.TabIndex = 0;
-            this.btnRejectCheckCDA.Text = "a) È¢ùÂ∫¶ÈÄöÁü•‰π¶";
+            this.btnRejectCheckCDA.Text = "a) ∂Ó∂»Õ®÷™ È";
             this.btnRejectCheckCDA.Click += new System.EventHandler(this.QueryRejectCheckCDAs);
             // 
             // panelWaitCheck
@@ -268,7 +272,7 @@
             this.panelWaitCheck.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelWaitCheck.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelWaitCheck.TitleStyle.GradientAngle = 90;
-            this.panelWaitCheck.TitleText = "Á≠âÂæÖÊîæË°åÁöÑËµÑÊñô";
+            this.panelWaitCheck.TitleText = "µ»¥˝∑≈––µƒ◊ ¡œ";
             // 
             // btnWaitCheckRefund
             // 
@@ -280,7 +284,7 @@
             this.btnWaitCheckRefund.Size = new System.Drawing.Size(106, 23);
             this.btnWaitCheckRefund.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnWaitCheckRefund.TabIndex = 4;
-            this.btnWaitCheckRefund.Text = "e) ËøòÊ¨æ";
+            this.btnWaitCheckRefund.Text = "e) ªπøÓ";
             this.btnWaitCheckRefund.Click += new System.EventHandler(this.QueryWaitCheckRefunds);
             // 
             // btnWaitCheckPayment
@@ -293,7 +297,7 @@
             this.btnWaitCheckPayment.Size = new System.Drawing.Size(106, 23);
             this.btnWaitCheckPayment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnWaitCheckPayment.TabIndex = 3;
-            this.btnWaitCheckPayment.Text = "d) ‰ªòÊ¨æ";
+            this.btnWaitCheckPayment.Text = "d) ∏∂øÓ";
             this.btnWaitCheckPayment.Click += new System.EventHandler(this.QueryWaitCheckPayments);
             // 
             // btnWaitCheckFinance
@@ -306,7 +310,7 @@
             this.btnWaitCheckFinance.Size = new System.Drawing.Size(106, 23);
             this.btnWaitCheckFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnWaitCheckFinance.TabIndex = 2;
-            this.btnWaitCheckFinance.Text = "c) ËûçËµÑ";
+            this.btnWaitCheckFinance.Text = "c) »⁄◊ ";
             this.btnWaitCheckFinance.Click += new System.EventHandler(this.QueryWaitCheckFinances);
             // 
             // btnWaitCheckAssign
@@ -319,7 +323,7 @@
             this.btnWaitCheckAssign.Size = new System.Drawing.Size(106, 23);
             this.btnWaitCheckAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnWaitCheckAssign.TabIndex = 1;
-            this.btnWaitCheckAssign.Text = "b) ËΩ¨ËÆ©";
+            this.btnWaitCheckAssign.Text = "b) ◊™»√";
             this.btnWaitCheckAssign.Click += new System.EventHandler(this.QueryWaitCheckAssigns);
             // 
             // btnWaitCheckCDA
@@ -332,7 +336,7 @@
             this.btnWaitCheckCDA.Size = new System.Drawing.Size(106, 23);
             this.btnWaitCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnWaitCheckCDA.TabIndex = 0;
-            this.btnWaitCheckCDA.Text = "a) È¢ùÂ∫¶ÈÄöÁü•‰π¶";
+            this.btnWaitCheckCDA.Text = "a) ∂Ó∂»Õ®÷™ È";
             this.btnWaitCheckCDA.Click += new System.EventHandler(this.QueryWaitCheckCDAs);
             // 
             // panelNeedCheck
@@ -364,7 +368,7 @@
             this.panelNeedCheck.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelNeedCheck.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelNeedCheck.TitleStyle.GradientAngle = 90;
-            this.panelNeedCheck.TitleText = "ÈúÄË¶ÅÊîæË°åÁöÑËµÑÊñô";
+            this.panelNeedCheck.TitleText = "–Ë“™∑≈––µƒ◊ ¡œ";
             // 
             // btnNeedCheckRefund
             // 
@@ -376,7 +380,7 @@
             this.btnNeedCheckRefund.Size = new System.Drawing.Size(106, 23);
             this.btnNeedCheckRefund.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckRefund.TabIndex = 4;
-            this.btnNeedCheckRefund.Text = "e) ËøòÊ¨æ";
+            this.btnNeedCheckRefund.Text = "e) ªπøÓ";
             this.btnNeedCheckRefund.Click += new System.EventHandler(this.QueryNeedCheckRefunds);
             // 
             // btnNeedCheckPayment
@@ -389,7 +393,7 @@
             this.btnNeedCheckPayment.Size = new System.Drawing.Size(106, 23);
             this.btnNeedCheckPayment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckPayment.TabIndex = 3;
-            this.btnNeedCheckPayment.Text = "d) ‰ªòÊ¨æ";
+            this.btnNeedCheckPayment.Text = "d) ∏∂øÓ";
             this.btnNeedCheckPayment.Click += new System.EventHandler(this.QueryNeedCheckPayments);
             // 
             // btnNeedCheckFinance
@@ -402,7 +406,7 @@
             this.btnNeedCheckFinance.Size = new System.Drawing.Size(106, 23);
             this.btnNeedCheckFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckFinance.TabIndex = 2;
-            this.btnNeedCheckFinance.Text = "c) ËûçËµÑ";
+            this.btnNeedCheckFinance.Text = "c) »⁄◊ ";
             this.btnNeedCheckFinance.Click += new System.EventHandler(this.QueryNeedCheckFinances);
             // 
             // btnNeedCheckAssign
@@ -415,7 +419,7 @@
             this.btnNeedCheckAssign.Size = new System.Drawing.Size(106, 23);
             this.btnNeedCheckAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckAssign.TabIndex = 1;
-            this.btnNeedCheckAssign.Text = "b) ËΩ¨ËÆ©";
+            this.btnNeedCheckAssign.Text = "b) ◊™»√";
             this.btnNeedCheckAssign.Click += new System.EventHandler(this.QueryNeedCheckAssigns);
             // 
             // btnNeedCheckCDA
@@ -428,7 +432,7 @@
             this.btnNeedCheckCDA.Size = new System.Drawing.Size(106, 23);
             this.btnNeedCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckCDA.TabIndex = 0;
-            this.btnNeedCheckCDA.Text = "a) È¢ùÂ∫¶ÈÄöÁü•‰π¶";
+            this.btnNeedCheckCDA.Text = "a) ∂Ó∂»Õ®÷™ È";
             this.btnNeedCheckCDA.Click += new System.EventHandler(this.QueryNeedCheckCDAs);
             // 
             // panelRight
@@ -479,7 +483,7 @@
             this.panelOther.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelOther.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelOther.TitleStyle.GradientAngle = 90;
-            this.panelOther.TitleText = "ÂÖ∂ÂÆÉ‰ø°ÊÅØÊèêÁ§∫";
+            this.panelOther.TitleText = "∆‰À¸–≈œ¢Ã· æ";
             // 
             // btnDueFactorCreditLine
             // 
@@ -491,7 +495,7 @@
             this.btnDueFactorCreditLine.Size = new System.Drawing.Size(152, 23);
             this.btnDueFactorCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueFactorCreditLine.TabIndex = 1;
-            this.btnDueFactorCreditLine.Text = "b) ‰øùÁêÜÂïÜÈ¢ùÂ∫¶Âà∞Êúü";
+            this.btnDueFactorCreditLine.Text = "b) ±£¿Ì…Ã∂Ó∂»µΩ∆⁄";
             this.btnDueFactorCreditLine.Click += new System.EventHandler(this.QueryFactorCreditLineDue);
             // 
             // btnDueContract
@@ -504,7 +508,7 @@
             this.btnDueContract.Size = new System.Drawing.Size(152, 23);
             this.btnDueContract.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueContract.TabIndex = 3;
-            this.btnDueContract.Text = "d) ‰øùÁêÜÂêàÂêåÂà∞Êúü";
+            this.btnDueContract.Text = "d) ±£¿Ì∫œÕ¨µΩ∆⁄";
             this.btnDueContract.Click += new System.EventHandler(this.QueryContractDue);
             // 
             // btnDueCDA
@@ -517,7 +521,7 @@
             this.btnDueCDA.Size = new System.Drawing.Size(152, 23);
             this.btnDueCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueCDA.TabIndex = 2;
-            this.btnDueCDA.Text = "c) È¢ùÂ∫¶ÈÄöÁü•‰π¶Âà∞Êúü";
+            this.btnDueCDA.Text = "c) ∂Ó∂»Õ®÷™ ÈµΩ∆⁄";
             this.btnDueCDA.Click += new System.EventHandler(this.QueryCDADue);
             // 
             // btnDueClientCreditLine
@@ -530,7 +534,7 @@
             this.btnDueClientCreditLine.Size = new System.Drawing.Size(152, 23);
             this.btnDueClientCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueClientCreditLine.TabIndex = 0;
-            this.btnDueClientCreditLine.Text = "a) ÂÆ¢Êà∑È¢ùÂ∫¶Âà∞Êúü";
+            this.btnDueClientCreditLine.Text = "a) øÕªß∂Ó∂»µΩ∆⁄";
             this.btnDueClientCreditLine.Click += new System.EventHandler(this.QueryClientCreditLineDue);
             // 
             // panelFinance
@@ -560,7 +564,7 @@
             this.panelFinance.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelFinance.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelFinance.TitleStyle.GradientAngle = 90;
-            this.panelFinance.TitleText = "ËûçËµÑ‰ø°ÊÅØÈ¢ÑË≠¶ÊèêÁ§∫";
+            this.panelFinance.TitleText = "»⁄◊ –≈œ¢‘§æØÃ· æ";
             // 
             // btnDueFinance
             // 
@@ -572,7 +576,7 @@
             this.btnDueFinance.Size = new System.Drawing.Size(106, 23);
             this.btnDueFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueFinance.TabIndex = 2;
-            this.btnDueFinance.Text = "c) Â∑≤ÁªèÈÄæÊúü";
+            this.btnDueFinance.Text = "c) “—æ≠”‚∆⁄";
             this.btnDueFinance.Click += new System.EventHandler(this.QueryInvoiceFinanceDue);
             // 
             // btnDueFinance0
@@ -585,7 +589,7 @@
             this.btnDueFinance0.Size = new System.Drawing.Size(106, 23);
             this.btnDueFinance0.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueFinance0.TabIndex = 1;
-            this.btnDueFinance0.Text = "b) ‰ªäÊó•Âà∞Êúü";
+            this.btnDueFinance0.Text = "b) ΩÒ»’µΩ∆⁄";
             this.btnDueFinance0.Click += new System.EventHandler(this.QueryInvoiceFinanceDueBy0);
             // 
             // btnDueFinance7
@@ -598,7 +602,7 @@
             this.btnDueFinance7.Size = new System.Drawing.Size(106, 23);
             this.btnDueFinance7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueFinance7.TabIndex = 0;
-            this.btnDueFinance7.Text = "a) 7Êó•ÂÜÖÂà∞Êúü";
+            this.btnDueFinance7.Text = "a) 7»’ƒ⁄µΩ∆⁄";
             this.btnDueFinance7.Click += new System.EventHandler(this.QueryInvoiceFinanceDueBy7);
             // 
             // panelAssign
@@ -629,7 +633,7 @@
             this.panelAssign.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelAssign.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelAssign.TitleStyle.GradientAngle = 90;
-            this.panelAssign.TitleText = "Â∫îÊî∂Ë¥¶Ê¨æÈ¢ÑË≠¶ÊèêÁ§∫";
+            this.panelAssign.TitleText = "”¶ ’’ÀøÓ‘§æØÃ· æ";
             // 
             // btnInvoiceDispute
             // 
@@ -641,7 +645,7 @@
             this.btnInvoiceDispute.Size = new System.Drawing.Size(106, 23);
             this.btnInvoiceDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnInvoiceDispute.TabIndex = 3;
-            this.btnInvoiceDispute.Text = "d) ÂïÜÁ∫†Ë¥¶Ê¨æ";
+            this.btnInvoiceDispute.Text = "d) …Ãæ¿’ÀøÓ";
             this.btnInvoiceDispute.Click += new System.EventHandler(this.QueryInvoiceDispute);
             // 
             // btnDueAssign
@@ -654,7 +658,7 @@
             this.btnDueAssign.Size = new System.Drawing.Size(106, 23);
             this.btnDueAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueAssign.TabIndex = 2;
-            this.btnDueAssign.Text = "c) Â∑≤ÁªèÈÄæÊúü";
+            this.btnDueAssign.Text = "c) “—æ≠”‚∆⁄";
             this.btnDueAssign.Click += new System.EventHandler(this.QueryInvoiceAssignDue);
             // 
             // btnDueAssign0
@@ -667,7 +671,7 @@
             this.btnDueAssign0.Size = new System.Drawing.Size(106, 23);
             this.btnDueAssign0.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueAssign0.TabIndex = 1;
-            this.btnDueAssign0.Text = "b) ‰ªäÊó•Âà∞Êúü";
+            this.btnDueAssign0.Text = "b) ΩÒ»’µΩ∆⁄";
             this.btnDueAssign0.Click += new System.EventHandler(this.QueryInvoiceAssignDueBy0);
             // 
             // btnDueAssign7
@@ -680,7 +684,7 @@
             this.btnDueAssign7.Size = new System.Drawing.Size(106, 23);
             this.btnDueAssign7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDueAssign7.TabIndex = 0;
-            this.btnDueAssign7.Text = "a) 7Êó•ÂÜÖÂà∞Êúü";
+            this.btnDueAssign7.Text = "a) 7»’ƒ⁄µΩ∆⁄";
             this.btnDueAssign7.Click += new System.EventHandler(this.QueryInvoiceAssignDueBy7);
             // 
             // bubbleBarTab1
@@ -720,10 +724,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.BubbleBarTab bubbleBarTab1;
-        private DevComponents.DotNetBar.SuperTooltip superTooltip;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
     }
 }

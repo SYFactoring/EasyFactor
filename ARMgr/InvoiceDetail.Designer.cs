@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoiceDetail.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class InvoiceDetail
     {
-		#region¬†Fields¬†(76)¬†
+		#region?Fields?(104)?
 
         /// <summary>
         /// Required designer variable.
@@ -22,14 +22,34 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ButtonX btnDispute;
         private DevComponents.DotNetBar.ButtonX btnDisputeResolve;
         private DevComponents.DotNetBar.ButtonX btnDisputeSave;
+        private DevComponents.DotNetBar.ButtonX btnEDISave;
         private DevComponents.DotNetBar.ButtonX btnFlaw;
         private DevComponents.DotNetBar.ButtonX btnFlawResolve;
         private DevComponents.DotNetBar.ButtonX btnFlawSave;
         private DevComponents.DotNetBar.ButtonX btnInvoiceSave;
         private DevComponents.DotNetBar.ButtonX btnInvoiceUpdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX commissionTextBox;
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFinanceLogs;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvPaymentLogs;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvRefundLogs;
         private DevComponents.DotNetBar.Controls.TextBoxX disputeAmountTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput disputeDateDateTimePicker;
         private System.Windows.Forms.CheckedListBox disputeReasonCheckedListBox;
@@ -47,6 +67,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.CheckedListBox flawReasonCheckedListBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput flawResolveDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.TextBoxX flawResolveUserNameTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX grossInterestTextBox;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelDispute;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelDisputeResolve;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelFlaw;
@@ -55,7 +76,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelInvoiceBasic;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanelInvoiceProcess;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.Controls.TextBoxX netInterestTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX invoiceAmountTextBox;
         private System.Windows.Forms.BindingSource invoiceBindingSource;
         private DevComponents.DotNetBar.Controls.ComboBoxEx invoiceCurrencyComboBox;
@@ -64,15 +84,20 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.TextBoxX invoiceReferenceNumberTextBox;
         private DevComponents.DotNetBar.Controls.CheckBoxX isDisputeCheckBox;
         private DevComponents.DotNetBar.Controls.CheckBoxX isFlawCheckBox;
+        private System.Windows.Forms.ToolStripMenuItem menuItemPaymentLogDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRefundLogDelete;
+        private DevComponents.DotNetBar.Controls.TextBoxX netInterestTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX netPaymentTermsTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX orderNumberReferenceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX paymentAmountTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx paymentConditionsComboBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput paymentDateDateTimePicker;
+        private System.Windows.Forms.ContextMenuStrip paymentLogMgr;
         private DevComponents.DotNetBar.Controls.TextBoxX primaryDiscountDaysTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX primaryDiscountRateTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX refundAmountTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput refundDateDateTimePicker;
+        private System.Windows.Forms.ContextMenuStrip refundLogMgr;
         private DevComponents.DotNetBar.Controls.TextBoxX secondaryDiscountDaysTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX secondaryDiscountRateTextBox;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
@@ -82,19 +107,25 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.TabItem tabItemEDI;
         private DevComponents.DotNetBar.TabItem tabItemFlaw;
         private DevComponents.DotNetBar.TabItem tabItemInvoice;
+        private DevComponents.DotNetBar.TabItem tabItemLog;
         private DevComponents.DotNetBar.TabControlPanel tabPanelEDI;
         private DevComponents.DotNetBar.TabControlPanel tabPanelFlaw;
         private DevComponents.DotNetBar.TabControlPanel tabPanelInvoice;
+        private DevComponents.DotNetBar.TabControlPanel tabPanelLog;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbAssignBatch;
         private DevComponents.DotNetBar.Controls.TextBoxX tbDisputeReason;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceBatch;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFlawReason;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFlawResolveReason;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentBatch;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbRefundBatch;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput valueDateTextBox;
 
-		#endregion¬†Fields¬†
+		#endregion?Fields?
 
-		#region¬†Methods¬†(1)¬†
+		#region?Methods?(1)?
 
-		//¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary>
         /// Clean up any resources being used.
@@ -115,7 +146,9 @@ namespace CMBC.EasyFactor.ARMgr
             base.Dispose(disposing);
         }
 
-		#endregion¬†Methods¬†
+		#endregion?Methods?
+
+
 
         #region Windows Form Designer generated code
 
@@ -380,7 +413,7 @@ namespace CMBC.EasyFactor.ARMgr
             flawResolveReasonLabel.Name = "flawResolveReasonLabel";
             flawResolveReasonLabel.Size = new System.Drawing.Size(59, 16);
             flawResolveReasonLabel.TabIndex = 1;
-            flawResolveReasonLabel.Text = "Ëß£Èô§ÂéüÂõ†:";
+            flawResolveReasonLabel.Text = "Ω‚≥˝‘≠“Ú:";
             // 
             // flawResolveDateLabel
             // 
@@ -394,7 +427,7 @@ namespace CMBC.EasyFactor.ARMgr
             flawResolveDateLabel.Name = "flawResolveDateLabel";
             flawResolveDateLabel.Size = new System.Drawing.Size(47, 16);
             flawResolveDateLabel.TabIndex = 3;
-            flawResolveDateLabel.Text = "Ëß£Èô§Êó•:";
+            flawResolveDateLabel.Text = "Ω‚≥˝»’:";
             // 
             // flawResolveUserNameLabel
             // 
@@ -408,7 +441,7 @@ namespace CMBC.EasyFactor.ARMgr
             flawResolveUserNameLabel.Name = "flawResolveUserNameLabel";
             flawResolveUserNameLabel.Size = new System.Drawing.Size(47, 16);
             flawResolveUserNameLabel.TabIndex = 5;
-            flawResolveUserNameLabel.Text = "ÁªèÂäû‰∫∫:";
+            flawResolveUserNameLabel.Text = "æ≠∞Ï»À:";
             // 
             // assignDateLabel
             // 
@@ -422,7 +455,7 @@ namespace CMBC.EasyFactor.ARMgr
             assignDateLabel.Name = "assignDateLabel";
             assignDateLabel.Size = new System.Drawing.Size(47, 16);
             assignDateLabel.TabIndex = 2;
-            assignDateLabel.Text = "ËΩ¨ËÆ©Êó•:";
+            assignDateLabel.Text = "◊™»√»’:";
             // 
             // assignAmountLabel
             // 
@@ -436,7 +469,7 @@ namespace CMBC.EasyFactor.ARMgr
             assignAmountLabel.Name = "assignAmountLabel";
             assignAmountLabel.Size = new System.Drawing.Size(59, 16);
             assignAmountLabel.TabIndex = 0;
-            assignAmountLabel.Text = "ËΩ¨ËÆ©ÈáëÈ¢ù:";
+            assignAmountLabel.Text = "◊™»√Ω∂Ó:";
             // 
             // dueDateLabel
             // 
@@ -450,7 +483,7 @@ namespace CMBC.EasyFactor.ARMgr
             dueDateLabel.Name = "dueDateLabel";
             dueDateLabel.Size = new System.Drawing.Size(47, 16);
             dueDateLabel.TabIndex = 10;
-            dueDateLabel.Text = "Âà∞ÊúüÊó•:";
+            dueDateLabel.Text = "µΩ∆⁄»’:";
             // 
             // invoiceAmountLabel
             // 
@@ -464,7 +497,7 @@ namespace CMBC.EasyFactor.ARMgr
             invoiceAmountLabel.Name = "invoiceAmountLabel";
             invoiceAmountLabel.Size = new System.Drawing.Size(59, 16);
             invoiceAmountLabel.TabIndex = 6;
-            invoiceAmountLabel.Text = "Á•®Èù¢ÈáëÈ¢ù:";
+            invoiceAmountLabel.Text = "∆±√ÊΩ∂Ó:";
             // 
             // invoiceDateLabel
             // 
@@ -478,7 +511,7 @@ namespace CMBC.EasyFactor.ARMgr
             invoiceDateLabel.Name = "invoiceDateLabel";
             invoiceDateLabel.Size = new System.Drawing.Size(47, 16);
             invoiceDateLabel.TabIndex = 8;
-            invoiceDateLabel.Text = "ÂèëÁ•®Êó•:";
+            invoiceDateLabel.Text = "∑¢∆±»’:";
             // 
             // invoiceNoLabel
             // 
@@ -492,7 +525,7 @@ namespace CMBC.EasyFactor.ARMgr
             invoiceNoLabel.Name = "invoiceNoLabel";
             invoiceNoLabel.Size = new System.Drawing.Size(47, 16);
             invoiceNoLabel.TabIndex = 0;
-            invoiceNoLabel.Text = "ÂèëÁ•®Âè∑:";
+            invoiceNoLabel.Text = "∑¢∆±∫≈:";
             // 
             // flawReasonLabel
             // 
@@ -506,7 +539,7 @@ namespace CMBC.EasyFactor.ARMgr
             flawReasonLabel.Name = "flawReasonLabel";
             flawReasonLabel.Size = new System.Drawing.Size(59, 16);
             flawReasonLabel.TabIndex = 1;
-            flawReasonLabel.Text = "ÁëïÁñµÂéüÂõ†:";
+            flawReasonLabel.Text = "Ë¶¥√‘≠“Ú:";
             // 
             // invoiceReferenceNumberLabel
             // 
@@ -646,7 +679,7 @@ namespace CMBC.EasyFactor.ARMgr
             invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
             invoiceCurrencyLabel.Size = new System.Drawing.Size(34, 16);
             invoiceCurrencyLabel.TabIndex = 2;
-            invoiceCurrencyLabel.Text = "Â∏ÅÂà´:";
+            invoiceCurrencyLabel.Text = "±“±:";
             // 
             // financeAmountLabel
             // 
@@ -660,7 +693,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeAmountLabel.Name = "financeAmountLabel";
             financeAmountLabel.Size = new System.Drawing.Size(59, 16);
             financeAmountLabel.TabIndex = 4;
-            financeAmountLabel.Text = "ËûçËµÑÈáëÈ¢ù:";
+            financeAmountLabel.Text = "»⁄◊ Ω∂Ó:";
             // 
             // financeDateLabel
             // 
@@ -674,7 +707,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeDateLabel.Name = "financeDateLabel";
             financeDateLabel.Size = new System.Drawing.Size(47, 16);
             financeDateLabel.TabIndex = 6;
-            financeDateLabel.Text = "ËûçËµÑÊó•:";
+            financeDateLabel.Text = "»⁄◊ »’:";
             // 
             // financeDueDateLabel
             // 
@@ -688,7 +721,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeDueDateLabel.Name = "financeDueDateLabel";
             financeDueDateLabel.Size = new System.Drawing.Size(72, 16);
             financeDueDateLabel.TabIndex = 8;
-            financeDueDateLabel.Text = "ËûçËµÑÂà∞ÊúüÊó•:";
+            financeDueDateLabel.Text = "»⁄◊ µΩ∆⁄»’:";
             // 
             // paymentAmountLabel
             // 
@@ -702,7 +735,7 @@ namespace CMBC.EasyFactor.ARMgr
             paymentAmountLabel.Name = "paymentAmountLabel";
             paymentAmountLabel.Size = new System.Drawing.Size(59, 16);
             paymentAmountLabel.TabIndex = 10;
-            paymentAmountLabel.Text = "‰ªòÊ¨æÈáëÈ¢ù:";
+            paymentAmountLabel.Text = "∏∂øÓΩ∂Ó:";
             // 
             // paymentDateLabel
             // 
@@ -716,7 +749,7 @@ namespace CMBC.EasyFactor.ARMgr
             paymentDateLabel.Name = "paymentDateLabel";
             paymentDateLabel.Size = new System.Drawing.Size(47, 16);
             paymentDateLabel.TabIndex = 12;
-            paymentDateLabel.Text = "‰ªòÊ¨æÊó•:";
+            paymentDateLabel.Text = "∏∂øÓ»’:";
             // 
             // refundAmountLabel
             // 
@@ -730,7 +763,7 @@ namespace CMBC.EasyFactor.ARMgr
             refundAmountLabel.Name = "refundAmountLabel";
             refundAmountLabel.Size = new System.Drawing.Size(59, 16);
             refundAmountLabel.TabIndex = 14;
-            refundAmountLabel.Text = "ËøòÊ¨æÈáëÈ¢ù:";
+            refundAmountLabel.Text = "ªπøÓΩ∂Ó:";
             // 
             // refundDateLabel
             // 
@@ -744,7 +777,7 @@ namespace CMBC.EasyFactor.ARMgr
             refundDateLabel.Name = "refundDateLabel";
             refundDateLabel.Size = new System.Drawing.Size(47, 16);
             refundDateLabel.TabIndex = 16;
-            refundDateLabel.Text = "ËøòÊ¨æÊó•:";
+            refundDateLabel.Text = "ªπøÓ»’:";
             // 
             // commissionLabel
             // 
@@ -758,7 +791,7 @@ namespace CMBC.EasyFactor.ARMgr
             commissionLabel.Name = "commissionLabel";
             commissionLabel.Size = new System.Drawing.Size(47, 16);
             commissionLabel.TabIndex = 18;
-            commissionLabel.Text = "ÊâãÁª≠Ë¥π:";
+            commissionLabel.Text = " ÷–¯∑—:";
             // 
             // netInterestLabel
             // 
@@ -772,7 +805,7 @@ namespace CMBC.EasyFactor.ARMgr
             netInterestLabel.Name = "netInterestLabel";
             netInterestLabel.Size = new System.Drawing.Size(47, 16);
             netInterestLabel.TabIndex = 22;
-            netInterestLabel.Text = "ÂáÄÂà©ÊÅØ:";
+            netInterestLabel.Text = "æª¿˚œ¢:";
             // 
             // commentLabel
             // 
@@ -786,7 +819,7 @@ namespace CMBC.EasyFactor.ARMgr
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(34, 16);
             commentLabel.TabIndex = 12;
-            commentLabel.Text = "Â§áÊ≥®:";
+            commentLabel.Text = "±∏◊¢:";
             // 
             // disputeReasonLabel
             // 
@@ -800,7 +833,7 @@ namespace CMBC.EasyFactor.ARMgr
             disputeReasonLabel.Name = "disputeReasonLabel";
             disputeReasonLabel.Size = new System.Drawing.Size(59, 16);
             disputeReasonLabel.TabIndex = 1;
-            disputeReasonLabel.Text = "ÂïÜÁ∫†ÂéüÂõ†:";
+            disputeReasonLabel.Text = "…Ãæ¿‘≠“Ú:";
             // 
             // disputeDateLabel
             // 
@@ -814,7 +847,7 @@ namespace CMBC.EasyFactor.ARMgr
             disputeDateLabel.Name = "disputeDateLabel";
             disputeDateLabel.Size = new System.Drawing.Size(47, 16);
             disputeDateLabel.TabIndex = 6;
-            disputeDateLabel.Text = "ÂïÜÁ∫†Êó•:";
+            disputeDateLabel.Text = "…Ãæ¿»’:";
             // 
             // disputeResolveReasonLabel
             // 
@@ -828,7 +861,7 @@ namespace CMBC.EasyFactor.ARMgr
             disputeResolveReasonLabel.Name = "disputeResolveReasonLabel";
             disputeResolveReasonLabel.Size = new System.Drawing.Size(59, 16);
             disputeResolveReasonLabel.TabIndex = 1;
-            disputeResolveReasonLabel.Text = "Ëß£Èô§ÂéüÂõ†:";
+            disputeResolveReasonLabel.Text = "Ω‚≥˝‘≠“Ú:";
             // 
             // disputeResolveUserNameLabel
             // 
@@ -842,7 +875,7 @@ namespace CMBC.EasyFactor.ARMgr
             disputeResolveUserNameLabel.Name = "disputeResolveUserNameLabel";
             disputeResolveUserNameLabel.Size = new System.Drawing.Size(47, 16);
             disputeResolveUserNameLabel.TabIndex = 5;
-            disputeResolveUserNameLabel.Text = "ÁªèÂäû‰∫∫:";
+            disputeResolveUserNameLabel.Text = "æ≠∞Ï»À:";
             // 
             // disputeTypeLabel
             // 
@@ -856,7 +889,7 @@ namespace CMBC.EasyFactor.ARMgr
             disputeTypeLabel.Name = "disputeTypeLabel";
             disputeTypeLabel.Size = new System.Drawing.Size(59, 16);
             disputeTypeLabel.TabIndex = 4;
-            disputeTypeLabel.Text = "ÂïÜÁ∫†Á±ªÂûã:";
+            disputeTypeLabel.Text = "…Ãæ¿¿‡–Õ:";
             // 
             // disputeUserNameLabel
             // 
@@ -870,7 +903,7 @@ namespace CMBC.EasyFactor.ARMgr
             disputeUserNameLabel.Name = "disputeUserNameLabel";
             disputeUserNameLabel.Size = new System.Drawing.Size(47, 16);
             disputeUserNameLabel.TabIndex = 10;
-            disputeUserNameLabel.Text = "ÁªèÂäû‰∫∫:";
+            disputeUserNameLabel.Text = "æ≠∞Ï»À:";
             // 
             // disputeAmountLabel
             // 
@@ -884,7 +917,7 @@ namespace CMBC.EasyFactor.ARMgr
             disputeAmountLabel.Name = "disputeAmountLabel";
             disputeAmountLabel.Size = new System.Drawing.Size(59, 16);
             disputeAmountLabel.TabIndex = 8;
-            disputeAmountLabel.Text = "ÂïÜÁ∫†ÈáëÈ¢ù:";
+            disputeAmountLabel.Text = "…Ãæ¿Ω∂Ó:";
             // 
             // disputeResolveDateLabel
             // 
@@ -898,7 +931,7 @@ namespace CMBC.EasyFactor.ARMgr
             disputeResolveDateLabel.Name = "disputeResolveDateLabel";
             disputeResolveDateLabel.Size = new System.Drawing.Size(47, 16);
             disputeResolveDateLabel.TabIndex = 3;
-            disputeResolveDateLabel.Text = "Ëß£Èô§Êó•:";
+            disputeResolveDateLabel.Text = "Ω‚≥˝»’:";
             // 
             // assignBatchNoLabel
             // 
@@ -912,7 +945,7 @@ namespace CMBC.EasyFactor.ARMgr
             assignBatchNoLabel.Name = "assignBatchNoLabel";
             assignBatchNoLabel.Size = new System.Drawing.Size(59, 16);
             assignBatchNoLabel.TabIndex = 26;
-            assignBatchNoLabel.Text = "ËΩ¨ËÆ©‰ΩôÈ¢ù:";
+            assignBatchNoLabel.Text = "◊™»√”‡∂Ó:";
             // 
             // financeBatchNoLabel
             // 
@@ -926,7 +959,7 @@ namespace CMBC.EasyFactor.ARMgr
             financeBatchNoLabel.Name = "financeBatchNoLabel";
             financeBatchNoLabel.Size = new System.Drawing.Size(59, 16);
             financeBatchNoLabel.TabIndex = 28;
-            financeBatchNoLabel.Text = "ËûçËµÑ‰ΩôÈ¢ù:";
+            financeBatchNoLabel.Text = "»⁄◊ ”‡∂Ó:";
             // 
             // lblRefundBatch
             // 
@@ -940,7 +973,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblRefundBatch.Name = "lblRefundBatch";
             lblRefundBatch.Size = new System.Drawing.Size(59, 16);
             lblRefundBatch.TabIndex = 36;
-            lblRefundBatch.Text = "ËøòÊ¨æÊâπÊ¨°:";
+            lblRefundBatch.Text = "ªπøÓ≈˙¥Œ:";
             // 
             // lblPaymentBatch
             // 
@@ -954,7 +987,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblPaymentBatch.Name = "lblPaymentBatch";
             lblPaymentBatch.Size = new System.Drawing.Size(59, 16);
             lblPaymentBatch.TabIndex = 34;
-            lblPaymentBatch.Text = "‰ªòÊ¨æÊâπÊ¨°:";
+            lblPaymentBatch.Text = "∏∂øÓ≈˙¥Œ:";
             // 
             // lblFinanceBatch
             // 
@@ -968,7 +1001,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblFinanceBatch.Name = "lblFinanceBatch";
             lblFinanceBatch.Size = new System.Drawing.Size(59, 16);
             lblFinanceBatch.TabIndex = 32;
-            lblFinanceBatch.Text = "ËûçËµÑÊâπÊ¨°:";
+            lblFinanceBatch.Text = "»⁄◊ ≈˙¥Œ:";
             // 
             // lblAssignBatch
             // 
@@ -982,7 +1015,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblAssignBatch.Name = "lblAssignBatch";
             lblAssignBatch.Size = new System.Drawing.Size(59, 16);
             lblAssignBatch.TabIndex = 30;
-            lblAssignBatch.Text = "ËΩ¨ËÆ©ÊâπÊ¨°:";
+            lblAssignBatch.Text = "◊™»√≈˙¥Œ:";
             // 
             // grossInterestLbl
             // 
@@ -996,7 +1029,7 @@ namespace CMBC.EasyFactor.ARMgr
             grossInterestLbl.Name = "grossInterestLbl";
             grossInterestLbl.Size = new System.Drawing.Size(47, 16);
             grossInterestLbl.TabIndex = 38;
-            grossInterestLbl.Text = "ÊØõÂà©ÊÅØ:";
+            grossInterestLbl.Text = "√´¿˚œ¢:";
             // 
             // tabControl
             // 
@@ -1645,7 +1678,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnInvoiceSave.Size = new System.Drawing.Size(75, 23);
             this.btnInvoiceSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnInvoiceSave.TabIndex = 1;
-            this.btnInvoiceSave.Text = "‰øùÂ≠ò";
+            this.btnInvoiceSave.Text = "±£¥Ê";
             this.btnInvoiceSave.Click += new System.EventHandler(this.SaveInvoice);
             // 
             // btnInvoiceUpdate
@@ -1657,14 +1690,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnInvoiceUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnInvoiceUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnInvoiceUpdate.TabIndex = 0;
-            this.btnInvoiceUpdate.Text = "ÁºñËæë";
+            this.btnInvoiceUpdate.Text = "±‡º≠";
             this.btnInvoiceUpdate.Click += new System.EventHandler(this.UpdateInvoice);
             // 
             // tabItemInvoice
             // 
             this.tabItemInvoice.AttachedControl = this.tabPanelInvoice;
             this.tabItemInvoice.Name = "tabItemInvoice";
-            this.tabItemInvoice.Text = "ÂèëÁ•®ÊòéÁªÜ";
+            this.tabItemInvoice.Text = "∑¢∆±√˜œ∏";
             // 
             // tabPanelLog
             // 
@@ -1737,7 +1770,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.menuItemPaymentLogDelete.Name = "menuItemPaymentLogDelete";
             this.menuItemPaymentLogDelete.Size = new System.Drawing.Size(114, 22);
-            this.menuItemPaymentLogDelete.Text = "Âà†Èô§(&D)";
+            this.menuItemPaymentLogDelete.Text = "…æ≥˝(&D)";
             this.menuItemPaymentLogDelete.Click += new System.EventHandler(this.DeletePaymentLog);
             // 
             // dgvFinanceLogs
@@ -1829,14 +1862,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.menuItemRefundLogDelete.Name = "menuItemRefundLogDelete";
             this.menuItemRefundLogDelete.Size = new System.Drawing.Size(106, 22);
-            this.menuItemRefundLogDelete.Text = "&DÂà†Èô§";
+            this.menuItemRefundLogDelete.Text = "&D…æ≥˝";
             this.menuItemRefundLogDelete.Click += new System.EventHandler(this.DeleteRefundLog);
             // 
             // tabItemLog
             // 
             this.tabItemLog.AttachedControl = this.tabPanelLog;
             this.tabItemLog.Name = "tabItemLog";
-            this.tabItemLog.Text = "ËûçËµÑ/‰ªòÊ¨æ/ËøòÊ¨æËÆ∞ÂΩï";
+            this.tabItemLog.Text = "»⁄◊ /∏∂øÓ/ªπøÓº«¬º";
             // 
             // tabPanelFlaw
             // 
@@ -1868,7 +1901,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnFlawSave.Size = new System.Drawing.Size(75, 23);
             this.btnFlawSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFlawSave.TabIndex = 2;
-            this.btnFlawSave.Text = "‰øùÂ≠ò";
+            this.btnFlawSave.Text = "±£¥Ê";
             this.btnFlawSave.Click += new System.EventHandler(this.SaveInvoice);
             // 
             // groupPanelFlawResolve
@@ -1926,7 +1959,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnFlawResolve.Size = new System.Drawing.Size(75, 23);
             this.btnFlawResolve.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFlawResolve.TabIndex = 0;
-            this.btnFlawResolve.Text = "ÁëïÁñµËß£Èô§";
+            this.btnFlawResolve.Text = "Ë¶¥√Ω‚≥˝";
             this.btnFlawResolve.Click += new System.EventHandler(this.FlawResolve);
             // 
             // tbFlawResolveReason
@@ -2049,7 +2082,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.isFlawCheckBox.Name = "isFlawCheckBox";
             this.isFlawCheckBox.Size = new System.Drawing.Size(76, 16);
             this.isFlawCheckBox.TabIndex = 5;
-            this.isFlawCheckBox.Text = "ÊòØÂê¶ÁëïÁñµ";
+            this.isFlawCheckBox.Text = " «∑ÒË¶¥√";
             // 
             // btnFlaw
             // 
@@ -2060,7 +2093,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnFlaw.Size = new System.Drawing.Size(75, 23);
             this.btnFlaw.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFlaw.TabIndex = 0;
-            this.btnFlaw.Text = "ÁëïÁñµËÆæÂÆö";
+            this.btnFlaw.Text = "Ë¶¥√…Ë∂®";
             this.btnFlaw.Click += new System.EventHandler(this.Flaw);
             // 
             // tbFlawReason
@@ -2076,7 +2109,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbFlawReason.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbFlawReason.Size = new System.Drawing.Size(195, 125);
             this.tbFlawReason.TabIndex = 3;
-            this.tbFlawReason.WatermarkText = "ÂÖ∂‰ªñÂéüÂõ†";
+            this.tbFlawReason.WatermarkText = "∆‰À˚‘≠“Ú";
             // 
             // flawReasonCheckedListBox
             // 
@@ -2091,7 +2124,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tabItemFlaw.AttachedControl = this.tabPanelFlaw;
             this.tabItemFlaw.Name = "tabItemFlaw";
-            this.tabItemFlaw.Text = "ÁëïÁñµÂ§ÑÁêÜ";
+            this.tabItemFlaw.Text = "Ë¶¥√¥¶¿Ì";
             // 
             // tabPanelEDI
             // 
@@ -2121,7 +2154,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnEDISave.Size = new System.Drawing.Size(75, 23);
             this.btnEDISave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEDISave.TabIndex = 4;
-            this.btnEDISave.Text = "‰øùÂ≠ò";
+            this.btnEDISave.Text = "±£¥Ê";
             this.btnEDISave.Click += new System.EventHandler(this.SaveEDI);
             // 
             // groupPanelInvoiceAdv
@@ -2326,7 +2359,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tabItemEDI.AttachedControl = this.tabPanelEDI;
             this.tabItemEDI.Name = "tabItemEDI";
-            this.tabItemEDI.Text = "Êõ¥Â§ö";
+            this.tabItemEDI.Text = "∏¸∂‡";
             // 
             // tabControlPanelDispute
             // 
@@ -2357,7 +2390,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDisputeSave.Size = new System.Drawing.Size(75, 23);
             this.btnDisputeSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDisputeSave.TabIndex = 3;
-            this.btnDisputeSave.Text = "‰øùÂ≠ò";
+            this.btnDisputeSave.Text = "±£¥Ê";
             this.btnDisputeSave.Click += new System.EventHandler(this.SaveInvoice);
             // 
             // groupPanelDisputeResolve
@@ -2416,7 +2449,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDisputeResolve.Size = new System.Drawing.Size(75, 23);
             this.btnDisputeResolve.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDisputeResolve.TabIndex = 0;
-            this.btnDisputeResolve.Text = "ÂïÜÁ∫†Ëß£Èô§";
+            this.btnDisputeResolve.Text = "…Ãæ¿Ω‚≥˝";
             this.btnDisputeResolve.Click += new System.EventHandler(this.DisputeResolve);
             // 
             // disputeResolveDateDateTimePicker
@@ -2548,7 +2581,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.isDisputeCheckBox.Name = "isDisputeCheckBox";
             this.isDisputeCheckBox.Size = new System.Drawing.Size(76, 16);
             this.isDisputeCheckBox.TabIndex = 12;
-            this.isDisputeCheckBox.Text = "ÊòØÂê¶ÂïÜÁ∫†";
+            this.isDisputeCheckBox.Text = " «∑Ò…Ãæ¿";
             // 
             // btnDispute
             // 
@@ -2559,7 +2592,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDispute.Size = new System.Drawing.Size(75, 23);
             this.btnDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDispute.TabIndex = 0;
-            this.btnDispute.Text = "ÂïÜÁ∫†ËÆæÂÆö";
+            this.btnDispute.Text = "…Ãæ¿…Ë∂®";
             this.btnDispute.Click += new System.EventHandler(this.Dispute);
             // 
             // tbDisputeReason
@@ -2574,7 +2607,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbDisputeReason.Name = "tbDisputeReason";
             this.tbDisputeReason.Size = new System.Drawing.Size(171, 110);
             this.tbDisputeReason.TabIndex = 3;
-            this.tbDisputeReason.WatermarkText = "ÂÖ∂‰ªñÂéüÂõ†";
+            this.tbDisputeReason.WatermarkText = "∆‰À˚‘≠“Ú";
             // 
             // disputeReasonCheckedListBox
             // 
@@ -2670,7 +2703,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tabItemDispute.AttachedControl = this.tabControlPanelDispute;
             this.tabItemDispute.Name = "tabItemDispute";
-            this.tabItemDispute.Text = "ÂïÜÁ∫†Â§ÑÁêÜ";
+            this.tabItemDispute.Text = "…Ãæ¿¥¶¿Ì";
             // 
             // superValidator
             // 
@@ -2690,7 +2723,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinanceCurrency
             // 
             this.colFinanceCurrency.DataPropertyName = "FinanceCurrency";
-            this.colFinanceCurrency.HeaderText = "Â∏ÅÂà´";
+            this.colFinanceCurrency.HeaderText = "±“±";
             this.colFinanceCurrency.Name = "colFinanceCurrency";
             this.colFinanceCurrency.ReadOnly = true;
             // 
@@ -2699,7 +2732,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceAmount.DataPropertyName = "FinanceAmount";
             dataGridViewCellStyle6.Format = "N2";
             this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colFinanceAmount.HeaderText = "ËûçËµÑÈáëÈ¢ù";
+            this.colFinanceAmount.HeaderText = "»⁄◊ Ω∂Ó";
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
             // 
@@ -2709,14 +2742,14 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle7.Format = "d";
             dataGridViewCellStyle7.NullValue = null;
             this.colFinanceDate.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colFinanceDate.HeaderText = "ËûçËµÑÊó•";
+            this.colFinanceDate.HeaderText = "»⁄◊ »’";
             this.colFinanceDate.Name = "colFinanceDate";
             this.colFinanceDate.ReadOnly = true;
             // 
             // colFinanceDueDate
             // 
             this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
-            this.colFinanceDueDate.HeaderText = "ËûçËµÑÂà∞ÊúüÊó•";
+            this.colFinanceDueDate.HeaderText = "»⁄◊ µΩ∆⁄»’";
             this.colFinanceDueDate.Name = "colFinanceDueDate";
             this.colFinanceDueDate.ReadOnly = true;
             // 
@@ -2725,21 +2758,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCommission.DataPropertyName = "Commission";
             dataGridViewCellStyle8.Format = "N2";
             this.colCommission.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colCommission.HeaderText = "ÊâãÁª≠Ë¥π";
+            this.colCommission.HeaderText = " ÷–¯∑—";
             this.colCommission.Name = "colCommission";
             this.colCommission.ReadOnly = true;
             // 
             // colFinanceComment
             // 
             this.colFinanceComment.DataPropertyName = "Comment";
-            this.colFinanceComment.HeaderText = "Â§áÊ≥®";
+            this.colFinanceComment.HeaderText = "±∏◊¢";
             this.colFinanceComment.Name = "colFinanceComment";
             this.colFinanceComment.ReadOnly = true;
             // 
             // colPaymentCurrency
             // 
             this.colPaymentCurrency.DataPropertyName = "PaymentCurrency";
-            this.colPaymentCurrency.HeaderText = "Â∏ÅÂà´";
+            this.colPaymentCurrency.HeaderText = "±“±";
             this.colPaymentCurrency.Name = "colPaymentCurrency";
             this.colPaymentCurrency.ReadOnly = true;
             // 
@@ -2748,7 +2781,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colPaymentAmount.DataPropertyName = "PaymentAmount";
             dataGridViewCellStyle2.Format = "N2";
             this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colPaymentAmount.HeaderText = "‰ªòÊ¨æÈáëÈ¢ù";
+            this.colPaymentAmount.HeaderText = "∏∂øÓΩ∂Ó";
             this.colPaymentAmount.Name = "colPaymentAmount";
             this.colPaymentAmount.ReadOnly = true;
             // 
@@ -2758,14 +2791,14 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle3.Format = "d";
             dataGridViewCellStyle3.NullValue = null;
             this.colPaymentDate.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPaymentDate.HeaderText = "‰ªòÊ¨æÊó•";
+            this.colPaymentDate.HeaderText = "∏∂øÓ»’";
             this.colPaymentDate.Name = "colPaymentDate";
             this.colPaymentDate.ReadOnly = true;
             // 
             // colCreditNoteNo
             // 
             this.colCreditNoteNo.DataPropertyName = "CreditNoteNo";
-            this.colCreditNoteNo.HeaderText = "Ë¥∑È°πÈÄöÁü•ÁºñÂè∑";
+            this.colCreditNoteNo.HeaderText = "¥˚œÓÕ®÷™±‡∫≈";
             this.colCreditNoteNo.Name = "colCreditNoteNo";
             this.colCreditNoteNo.ReadOnly = true;
             this.colCreditNoteNo.Visible = false;
@@ -2773,7 +2806,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colCreditNoteDate
             // 
             this.colCreditNoteDate.DataPropertyName = "CreditNoteDate";
-            this.colCreditNoteDate.HeaderText = "Ë¥∑È°πÈÄöÁü•Êó•";
+            this.colCreditNoteDate.HeaderText = "¥˚œÓÕ®÷™»’";
             this.colCreditNoteDate.Name = "colCreditNoteDate";
             this.colCreditNoteDate.ReadOnly = true;
             this.colCreditNoteDate.Visible = false;
@@ -2781,14 +2814,14 @@ namespace CMBC.EasyFactor.ARMgr
             // colComment
             // 
             this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "Â§áÊ≥®";
+            this.colComment.HeaderText = "±∏◊¢";
             this.colComment.Name = "colComment";
             this.colComment.ReadOnly = true;
             // 
             // colRefundCurrency
             // 
             this.colRefundCurrency.DataPropertyName = "RefundCurrency";
-            this.colRefundCurrency.HeaderText = "Â∏ÅÂà´";
+            this.colRefundCurrency.HeaderText = "±“±";
             this.colRefundCurrency.Name = "colRefundCurrency";
             this.colRefundCurrency.ReadOnly = true;
             // 
@@ -2797,7 +2830,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRefundAmount.DataPropertyName = "RefundAmount";
             dataGridViewCellStyle11.Format = "N2";
             this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colRefundAmount.HeaderText = "ËøòÊ¨æÈáëÈ¢ù";
+            this.colRefundAmount.HeaderText = "ªπøÓΩ∂Ó";
             this.colRefundAmount.Name = "colRefundAmount";
             this.colRefundAmount.ReadOnly = true;
             // 
@@ -2807,7 +2840,7 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle12.Format = "d";
             dataGridViewCellStyle12.NullValue = null;
             this.colRefundDate.DefaultCellStyle = dataGridViewCellStyle12;
-            this.colRefundDate.HeaderText = "ËøòÊ¨æÊó•";
+            this.colRefundDate.HeaderText = "ªπøÓ»’";
             this.colRefundDate.Name = "colRefundDate";
             this.colRefundDate.ReadOnly = true;
             // 
@@ -2817,7 +2850,7 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle13.Format = "d";
             dataGridViewCellStyle13.NullValue = null;
             this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Â§áÊ≥®";
+            this.dataGridViewTextBoxColumn2.HeaderText = "±∏◊¢";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
@@ -2831,7 +2864,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "InvoiceDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ÂèëÁ•®ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.Text = "∑¢∆±œÍœ∏–≈œ¢";
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPanelInvoice.ResumeLayout(false);
@@ -2876,37 +2909,5 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.TextBoxX tbRefundBatch;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPaymentBatch;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceBatch;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbAssignBatch;
-        private DevComponents.DotNetBar.TabControlPanel tabPanelLog;
-        private DevComponents.DotNetBar.TabItem tabItemLog;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvRefundLogs;
-        private DevComponents.DotNetBar.Controls.TextBoxX grossInterestTextBox;
-        private System.Windows.Forms.ContextMenuStrip refundLogMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemRefundLogDelete;
-        private System.Windows.Forms.ContextMenuStrip paymentLogMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemPaymentLogDelete;
-        private DevComponents.DotNetBar.ButtonX btnEDISave;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvPaymentLogs;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvFinanceLogs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     }
 }

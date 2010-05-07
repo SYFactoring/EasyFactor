@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoiceFinanceLog.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -9,14 +9,13 @@ namespace CMBC.EasyFactor.DB.dbml
     using System;
     using System.Linq;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceFinanceLog
     {
-        #region¬†Constructors¬†(1)
+		#region?Constructors?(1)?
 
         public InvoiceFinanceLog(Invoice invoice)
             : this()
@@ -31,9 +30,9 @@ namespace CMBC.EasyFactor.DB.dbml
             this.InvoiceFinanceOutstanding2 = invoice.FinanceOutstanding;
         }
 
-        #endregion¬†Constructors
+		#endregion?Constructors?
 
-        #region¬†Properties¬†(22)
+		#region?Properties?(23)?
 
         /// <summary>
         /// 
@@ -190,6 +189,25 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// Gets
+        /// </summary>
+        public System.Nullable<int> FinanceOverDueDays
+        {
+            get
+            {
+                if (TypeUtil.GreaterZero(this.FinanceOutstanding))
+                {
+                    TimeSpan duedays = DateTime.Now.Date - this.FinanceDueDate.Value;
+                    return duedays.Days;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public double GrossInterest
@@ -200,7 +218,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 if (InvoiceFinanceBatch != null)
                 {
-                    if (InvoiceFinanceBatch.FinanceType == "ÂçñÊñπ‰ª£‰ªò" || InvoiceFinanceBatch.FinanceType == "‰π∞Êñπ‰ª£‰ªò")
+                    if (InvoiceFinanceBatch.FinanceType == "¬Ù∑Ω¥˙∏∂" || InvoiceFinanceBatch.FinanceType == "¬Ú∑Ω¥˙∏∂")
                     {
                         int period = (InvoiceFinanceBatch.FinancePeriodEnd - InvoiceFinanceBatch.FinancePeriodBegin).Days;
                         interest = this.FinanceAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * period;
@@ -321,7 +339,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 double interest = 0;
                 if (InvoiceFinanceBatch != null)
                 {
-                    if (InvoiceFinanceBatch.FinanceType == "ÂçñÊñπ‰ª£‰ªò" || InvoiceFinanceBatch.FinanceType == "‰π∞Êñπ‰ª£‰ªò")
+                    if (InvoiceFinanceBatch.FinanceType == "¬Ù∑Ω¥˙∏∂" || InvoiceFinanceBatch.FinanceType == "¬Ú∑Ω¥˙∏∂")
                     {
                         int period = (InvoiceFinanceBatch.FinancePeriodEnd - InvoiceFinanceBatch.FinancePeriodBegin).Days;
                         interest = this.FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
@@ -355,25 +373,6 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets
-        /// </summary>
-        public System.Nullable<int> FinanceOverDueDays
-        {
-            get
-            {
-                if (TypeUtil.GreaterZero(this.FinanceOutstanding))
-                {
-                    TimeSpan duedays = DateTime.Now.Date - this.FinanceDueDate.Value;
-                    return duedays.Days;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         public double? RefundAmount
@@ -391,11 +390,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion¬†Properties
+		#endregion?Properties?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Public¬†Methods¬†(1)¬†
+		//?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -403,9 +402,9 @@ namespace CMBC.EasyFactor.DB.dbml
         public void CaculateCommission()
         {
             CDA cda = this.Invoice.InvoiceAssignBatch.Case.ActiveCDA;
-            if (cda.CommissionType == "ÊåâËûçËµÑÈáëÈ¢ù")
+            if (cda.CommissionType == "∞¥»⁄◊ Ω∂Ó")
             {
-                //if (cda.Case.TransactionType == "ËøõÂè£‰øùÁêÜ")
+                //if (cda.Case.TransactionType == "Ω¯ø⁄±£¿Ì")
                 //{
                 //    Commission = FinanceAmount * cda.IFPrice;
                 //}
@@ -416,6 +415,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
     }
 }

@@ -1,14 +1,22 @@
-ï»¿using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.DB.dbml;
 using CMBC.EasyFactor.Utils;
 namespace CMBC.EasyFactor.CaseMgr
 {
     partial class ContractMgr
     {
-		#regionÂ FieldsÂ (26)Â 
+		#region?Fields?(27)?
 
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbContractStatus;
         private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colContractValueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsSigned;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -18,6 +26,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.LabelX lblContractCode;
         private DevComponents.DotNetBar.LabelX lblContractStatus;
         private DevComponents.DotNetBar.LabelX lblCount;
+        private DevComponents.DotNetBar.LabelX lblCreateUserName;
         private System.Windows.Forms.ToolStripMenuItem menuItemContractDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemContractDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
@@ -25,13 +34,14 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbContractCode;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
 
-		#endregionÂ FieldsÂ 
+		#endregion?Fields?
 
-		#regionÂ MethodsÂ (1)Â 
+		#region?Methods?(1)?
 
-		//Â ProtectedÂ MethodsÂ (1)Â 
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -46,7 +56,7 @@ namespace CMBC.EasyFactor.CaseMgr
             base.Dispose(disposing);
         }
 
-		#endregionÂ MethodsÂ 
+		#endregion?Methods?
 
 
 
@@ -142,7 +152,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCreateUserName.Name = "lblCreateUserName";
             this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
             this.lblCreateUserName.TabIndex = 6;
-            this.lblCreateUserName.Text = "ç»åŠäºº";
+            this.lblCreateUserName.Text = "¾­°ìÈË";
             // 
             // cbContractStatus
             // 
@@ -151,8 +161,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbContractStatus.FormattingEnabled = true;
             this.cbContractStatus.ItemHeight = 14;
             this.cbContractStatus.Items.AddRange(new object[] {
-            "å·²ç”Ÿæ•ˆ",
-            "å·²è¿‡æœŸ"});
+            "ÒÑÉúĞ§",
+            "ÒÑ¹ıÆÚ"});
             this.cbContractStatus.Location = new System.Drawing.Point(377, 5);
             this.cbContractStatus.Name = "cbContractStatus";
             this.cbContractStatus.Size = new System.Drawing.Size(98, 20);
@@ -169,7 +179,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblContractStatus.Name = "lblContractStatus";
             this.lblContractStatus.Size = new System.Drawing.Size(58, 23);
             this.lblContractStatus.TabIndex = 4;
-            this.lblContractStatus.Text = "åˆåŒçŠ¶æ€";
+            this.lblContractStatus.Text = "ºÏÍ¬×´Ì¬";
             // 
             // tbClientName
             // 
@@ -193,7 +203,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(58, 23);
             this.lblClientName.TabIndex = 2;
-            this.lblClientName.Text = "å®¢æˆ·åç§°";
+            this.lblClientName.Text = "¿Í»§Ãû³Æ";
             // 
             // lblCount
             // 
@@ -216,7 +226,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 8;
-            this.btnQuery.Text = "æŸ¥è¯¢";
+            this.btnQuery.Text = "²éÑ¯";
             this.btnQuery.Click += new System.EventHandler(this.QueryContracts);
             // 
             // tbContractCode
@@ -241,7 +251,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblContractCode.Name = "lblContractCode";
             this.lblContractCode.Size = new System.Drawing.Size(58, 23);
             this.lblContractCode.TabIndex = 0;
-            this.lblContractCode.Text = "åˆåŒç¼–å·";
+            this.lblContractCode.Text = "ºÏÍ¬±àºÅ";
             // 
             // dgvContracts
             // 
@@ -303,14 +313,14 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.menuItemContractSelect.Name = "menuItemContractSelect";
             this.menuItemContractSelect.Size = new System.Drawing.Size(122, 22);
-            this.menuItemContractSelect.Text = "é€‰å®šåˆåŒ";
+            this.menuItemContractSelect.Text = "Ñ¡¶¨ºÏÍ¬";
             this.menuItemContractSelect.Click += new System.EventHandler(this.SelectContract);
             // 
             // menuItemContractDetail
             // 
             this.menuItemContractDetail.Name = "menuItemContractDetail";
             this.menuItemContractDetail.Size = new System.Drawing.Size(122, 22);
-            this.menuItemContractDetail.Text = "è¯¦ç»†ä¿¡æ¯";
+            this.menuItemContractDetail.Text = "ÏêÏ¸ĞÅÏ¢";
             this.menuItemContractDetail.Click += new System.EventHandler(this.DetailContract);
             // 
             // toolStripSeparator
@@ -322,14 +332,14 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.menuItemContractNew.Name = "menuItemContractNew";
             this.menuItemContractNew.Size = new System.Drawing.Size(122, 22);
-            this.menuItemContractNew.Text = "æ–°å»ºåˆåŒ";
+            this.menuItemContractNew.Text = "ĞÂ½¨ºÏÍ¬";
             this.menuItemContractNew.Click += new System.EventHandler(this.NewContract);
             // 
             // menuItemContractDelete
             // 
             this.menuItemContractDelete.Name = "menuItemContractDelete";
             this.menuItemContractDelete.Size = new System.Drawing.Size(122, 22);
-            this.menuItemContractDelete.Text = "åˆ é™¤åˆåŒ";
+            this.menuItemContractDelete.Text = "É¾³ıºÏÍ¬";
             this.menuItemContractDelete.Click += new System.EventHandler(this.DeleteContract);
             // 
             // colContractCode
@@ -337,7 +347,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colContractCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colContractCode.DataPropertyName = "ContractCode";
             this.colContractCode.Frozen = true;
-            this.colContractCode.HeaderText = "åˆåŒç¼–å·";
+            this.colContractCode.HeaderText = "ºÏÍ¬±àºÅ";
             this.colContractCode.Name = "colContractCode";
             this.colContractCode.ReadOnly = true;
             this.colContractCode.Width = 75;
@@ -347,7 +357,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colClientEDICode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClientEDICode.DataPropertyName = "ClientEDICode";
             this.colClientEDICode.Frozen = true;
-            this.colClientEDICode.HeaderText = "å®¢æˆ·ä¿ç†ä»£ç ";
+            this.colClientEDICode.HeaderText = "¿Í»§±£Àí´úÂë";
             this.colClientEDICode.Name = "colClientEDICode";
             this.colClientEDICode.ReadOnly = true;
             this.colClientEDICode.Width = 75;
@@ -357,7 +367,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colClient.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colClient.DataPropertyName = "Client";
             this.colClient.Frozen = true;
-            this.colClient.HeaderText = "å®¢æˆ·åç§°";
+            this.colClient.HeaderText = "¿Í»§Ãû³Æ";
             this.colClient.Name = "colClient";
             this.colClient.ReadOnly = true;
             this.colClient.Width = 200;
@@ -365,35 +375,35 @@ namespace CMBC.EasyFactor.CaseMgr
             // colContractValueDate
             // 
             this.colContractValueDate.DataPropertyName = "ContractValueDate";
-            this.colContractValueDate.HeaderText = "ç”Ÿæ•ˆæ—¥";
+            this.colContractValueDate.HeaderText = "ÉúĞ§ÈÕ";
             this.colContractValueDate.Name = "colContractValueDate";
             this.colContractValueDate.ReadOnly = true;
             // 
             // colContractDueDate
             // 
             this.colContractDueDate.DataPropertyName = "ContractDueDate";
-            this.colContractDueDate.HeaderText = "è¿‡æœŸæ—¥";
+            this.colContractDueDate.HeaderText = "¹ıÆÚÈÕ";
             this.colContractDueDate.Name = "colContractDueDate";
             this.colContractDueDate.ReadOnly = true;
             // 
             // colContractStatus
             // 
             this.colContractStatus.DataPropertyName = "ContractStatus";
-            this.colContractStatus.HeaderText = "åˆåŒçŠ¶æ€";
+            this.colContractStatus.HeaderText = "ºÏÍ¬×´Ì¬";
             this.colContractStatus.Name = "colContractStatus";
             this.colContractStatus.ReadOnly = true;
             // 
             // colIsSigned
             // 
             this.colIsSigned.DataPropertyName = "IsSigned";
-            this.colIsSigned.HeaderText = "æ˜¯å¦ç­¾å›";
+            this.colIsSigned.HeaderText = "ÊÇ·ñÇ©»Ø";
             this.colIsSigned.Name = "colIsSigned";
             this.colIsSigned.ReadOnly = true;
             // 
             // colCreateUserName
             // 
             this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "ç»åŠäºº";
+            this.colCreateUserName.HeaderText = "¾­°ìÈË";
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
             // 
@@ -415,16 +425,5 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
-        private DevComponents.DotNetBar.LabelX lblCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractValueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContractStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsSigned;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
     }
 }

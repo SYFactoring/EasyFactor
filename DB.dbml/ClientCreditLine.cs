@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ClientCreditLine.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -7,9 +7,6 @@
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Data.Linq;
     using System.Text.RegularExpressions;
 
@@ -18,7 +15,13 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class ClientCreditLine
     {
-        #region¬†Properties¬†(4)
+		#region?Fields?(1)?
+
+        private static Regex ApproveNoRegex = new Regex(@"^[a-zA-Z0-9]+$");
+
+		#endregion?Fields?
+
+		#region?Properties?(4)?
 
         /// <summary>
         /// Gets
@@ -96,7 +99,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        private static Regex ApproveNoRegex = new Regex(@"^[a-zA-Z0-9]+$");
+		#endregion?Properties?
+
+		#region?Methods?(1)?
+
+		//?Private?Methods?(1)?
 
         partial void OnValidate(System.Data.Linq.ChangeAction action)
         {
@@ -104,11 +111,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!String.IsNullOrEmpty(this.ApproveNo) && !ApproveNoRegex.IsMatch(this.ApproveNo))
                 {
-                    throw new ArgumentException("‰∏çÁ¨¶ÂêàÊéà‰ø°ÁºñÂè∑ËßÑÂàô: " + this.ApproveNo);
+                    throw new ArgumentException("≤ª∑˚∫œ ⁄–≈±‡∫≈πÊ‘Ú: " + this.ApproveNo);
                 }
             }
         }
 
-        #endregion¬†Properties
+		#endregion?Methods?
     }
 }

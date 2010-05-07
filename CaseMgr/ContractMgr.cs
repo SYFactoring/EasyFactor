@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ContractMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -9,20 +9,19 @@ namespace CMBC.EasyFactor.CaseMgr
     using System;
     using System.Drawing;
     using System.Linq;
-    using System.Threading;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class ContractMgr : UserControl
     {
-        #regionÂ FieldsÂ (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -33,9 +32,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpContractType opType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -53,11 +52,11 @@ namespace CMBC.EasyFactor.CaseMgr
             DUE,
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (2)
+		#region?Constructors?(2)?
 
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         /// <param name="opType"></param>
@@ -71,7 +70,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 var queryResult = context.Contracts.Where(c => c.ContractStatus == CONTRACT.AVAILABILITY && c.ContractDueDate < DateTime.Now.Date);
 
                 this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+                this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
             }
         }
 
@@ -91,9 +90,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.UpdateContextMenu();
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ PropertiesÂ (3)
+		#region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -122,11 +121,11 @@ namespace CMBC.EasyFactor.CaseMgr
             set;
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (9)
+		#region?Methods?(9)?
 
-        //Â PrivateÂ MethodsÂ (9)Â 
+		//?Private?Methods?(9)?
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -163,7 +162,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             Contract selectedContract = (Contract)this.bs.List[this.dgvContracts.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤ä¿ç†åˆåŒ: " + selectedContract.ContractCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı±£ÀíºÏÍ¬: " + selectedContract.ContractCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -182,7 +181,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show("æ•°æ®åˆ é™¤æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êı¾İÉ¾³ı³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dgvContracts.Rows.RemoveAt(dgvContracts.SelectedRows[0].Index);
             }
         }
@@ -290,7 +289,7 @@ namespace CMBC.EasyFactor.CaseMgr
                               select contract;
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
         }
 
         /// <summary>
@@ -331,6 +330,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

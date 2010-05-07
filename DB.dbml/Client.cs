@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Client.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,22 +11,21 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Data.Linq;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class Client
     {
-        #regionÂ FieldsÂ (1)
+		#region?Fields?(1)?
 
         private static Regex ClientEDICodeRegex = new Regex(@"^[a-zA-Z0-9]{2}[a-zA-Z0-9\\-]{1}[a-zA-Z0-9]{4}\d{2}$");
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ PropertiesÂ (12)
+		#region?Properties?(13)?
 
         /// <summary>
         /// 
@@ -51,16 +50,16 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets ä¹°æ–¹ä¿¡ç”¨é£é™©æ‹…ä¿é¢åº¦
+        /// Gets Âò·½ĞÅÓÃ·çÏÕµ£±£¶î¶È
         /// </summary>
         public ClientCreditLine AssignCreditLine
         {
             get
             {
-                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "ä¹°æ–¹ä¿¡ç”¨é£é™©æ‹…ä¿é¢åº¦").ToList();
+                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "Âò·½ĞÅÓÃ·çÏÕµ£±£¶î¶È").ToList();
                 if (creditLines.Count > 1)
                 {
-                    MessageBoxEx.Show("åŒ…å«å¤šä¸ªæœ‰æ•ˆçš„ä¹°æ–¹ä¿¡ç”¨é£é™©æ‹…ä¿é¢åº¦ï¼Œå®¢æˆ·ç¼–å·: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
+                    MessageBoxEx.Show("°üº¬¶à¸öÓĞĞ§µÄÂò·½ĞÅÓÃ·çÏÕµ£±£¶î¶È£¬¿Í»§±àºÅ: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
                     return null;
                 }
                 else if (creditLines.Count == 1)
@@ -75,7 +74,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         ///<summary>
-        /// Gets ä¹°æ–¹ä¿¡ç”¨é£é™©æ‹…ä¿é¢åº¦ä½™é¢
+        /// Gets Âò·½ĞÅÓÃ·çÏÕµ£±£¶î¶ÈÓà¶î
         ///</summary>
         public System.Nullable<double> AssignCreditLineOutstanding
         {
@@ -92,7 +91,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets ä¸»åˆåŒ
+        /// Gets Ö÷ºÏÍ¬
         /// </summary>
         public Contract Contract
         {
@@ -101,7 +100,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 IList<Contract> contractList = this.Contracts.Where(c => c.ContractStatus == CONTRACT.AVAILABILITY).ToList();
                 if (contractList.Count > 1)
                 {
-                    MessageBoxEx.Show("åŒ…å«å¤šä¸ªæœ‰æ•ˆçš„ä¸»åˆåŒï¼Œå®¢æˆ·ç¼–å·: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
+                    MessageBoxEx.Show("°üº¬¶à¸öÓĞĞ§µÄÖ÷ºÏÍ¬£¬¿Í»§±àºÅ: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
                     return null;
                 }
                 else if (contractList.Count == 1)
@@ -114,40 +113,16 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets æ± èèµ„é¢åº¦
-        /// </summary>
-        public ClientCreditLine PoolFinanceCreditLine
-        {
-            get
-            {
-                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "æ± èèµ„é¢åº¦").ToList();
-                if (creditLines.Count > 1)
-                {
-                    MessageBoxEx.Show("åŒ…å«å¤šä¸ªæœ‰æ•ˆçš„æ± èèµ„é¢åº¦ï¼Œå®¢æˆ·ç¼–å·: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
-                    return null;
-                }
-                else if (creditLines.Count == 1)
-                {
-                    return creditLines[0];
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets ä¿ç†é¢„ä»˜æ¬¾èèµ„é¢åº¦
+        /// Gets ±£ÀíÔ¤¸¶¿îÈÚ×Ê¶î¶È
         /// </summary>
         public ClientCreditLine FinanceCreditLine
         {
             get
             {
-                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "ä¿ç†é¢„ä»˜æ¬¾èèµ„é¢åº¦").ToList();
+                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "±£ÀíÔ¤¸¶¿îÈÚ×Ê¶î¶È").ToList();
                 if (creditLines.Count > 1)
                 {
-                    MessageBoxEx.Show("åŒ…å«å¤šä¸ªæœ‰æ•ˆçš„ä¿ç†é¢„ä»˜æ¬¾èèµ„é¢åº¦ï¼Œå®¢æˆ·ç¼–å·: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
+                    MessageBoxEx.Show("°üº¬¶à¸öÓĞĞ§µÄ±£ÀíÔ¤¸¶¿îÈÚ×Ê¶î¶È£¬¿Í»§±àºÅ: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
                     return null;
                 }
                 else if (creditLines.Count == 1)
@@ -162,7 +137,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets æœ€é«˜ä¿ç†é¢„ä»˜æ¬¾èèµ„é¢åº¦ä½™é¢
+        /// Gets ×î¸ß±£ÀíÔ¤¸¶¿îÈÚ×Ê¶î¶ÈÓà¶î
         /// </summary>
         public System.Nullable<double> FinanceLineOutstanding
         {
@@ -213,7 +188,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// ç°é‡‘æ± ä½™é¢
+        /// ÏÖ½ğ³ØÓà¶î
         /// </summary>
         public double? PoolCashOutstanding
         {
@@ -236,7 +211,31 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// èèµ„æ± ä½™é¢
+        /// Gets ³ØÈÚ×Ê¶î¶È
+        /// </summary>
+        public ClientCreditLine PoolFinanceCreditLine
+        {
+            get
+            {
+                IList<ClientCreditLine> creditLines = this.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.CreditLineType == "³ØÈÚ×Ê¶î¶È").ToList();
+                if (creditLines.Count > 1)
+                {
+                    MessageBoxEx.Show("°üº¬¶à¸öÓĞĞ§µÄ³ØÈÚ×Ê¶î¶È£¬¿Í»§±àºÅ: " + this.ClientEDICode, MESSAGE.TITLE_WARNING);
+                    return null;
+                }
+                else if (creditLines.Count == 1)
+                {
+                    return creditLines[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// ÈÚ×Ê³ØÓà¶î
         /// </summary>
         public double? PoolFinanceOutstanding
         {
@@ -268,7 +267,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// æ± èèµ„çš„æ€»è´¦æ¬¾ä½™é¢
+        /// ³ØÈÚ×ÊµÄ×ÜÕË¿îÓà¶î
         /// </summary>
         public double PoolTotalAssignOutstading
         {
@@ -292,7 +291,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// æ± èèµ„æœ‰æ•ˆçš„è´¦æ¬¾ä½™é¢ï¼Œå³åº”æ”¶è´¦æ¬¾æ± ä½™é¢
+        /// ³ØÈÚ×ÊÓĞĞ§µÄÕË¿îÓà¶î£¬¼´Ó¦ÊÕÕË¿î³ØÓà¶î
         /// </summary>
         public double PoolValuedAssignOutstanding
         {
@@ -315,11 +314,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (5)
+		#region?Methods?(6)?
 
-        //Â PublicÂ MethodsÂ (5)Â 
+		//?Public?Methods?(5)?
 
         /// <summary>
         /// 
@@ -358,7 +357,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// è½¬è®©ä½™é¢
+        /// ×ªÈÃÓà¶î
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
@@ -405,7 +404,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// èèµ„ä½™é¢
+        /// ÈÚ×ÊÓà¶î
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
@@ -450,8 +449,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _ClientNameEN;
             }
         }
-
-        #endregionÂ Methods
+		//?Private?Methods?(1)?
 
         /// <summary>
         /// 
@@ -463,9 +461,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!ClientEDICodeRegex.IsMatch(this.ClientEDICode))
                 {
-                    throw new ArgumentException("ä¸ç¬¦åˆä¿ç†ä»£ç è§„åˆ™: " + this.ClientEDICode);
+                    throw new ArgumentException("²»·ûºÏ±£Àí´úÂë¹æÔò: " + this.ClientEDICode);
                 }
             }
         }
+
+		#endregion?Methods?
     }
 }

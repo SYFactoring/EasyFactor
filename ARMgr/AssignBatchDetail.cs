@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="AssignBatchDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -13,29 +13,28 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class AssignBatchDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (1)
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpBatchType opBatchType;
+        #region?Fields?(2)?
 
         /// <summary>
         /// 
         /// </summary>
         private DBDataContext context;
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpBatchType opBatchType;
 
-        #endregion Fields
+        #endregion?Fields?
 
-        #region Enums (1)
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -53,9 +52,9 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-        #endregion Enums
+        #endregion?Enums?
 
-        #region Constructors (1)
+        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the AssignBatchDetail class
@@ -77,11 +76,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.UpdateBatchControlStatus();
         }
 
-        #endregion Constructors
+        #endregion?Constructors?
 
-        #region Methods (5)
+        #region?Methods?(4)?
 
-        // Private Methods (5) 
+        //?Private?Methods?(4)?
 
         /// <summary>
         /// 
@@ -140,7 +139,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (isUpdateOK)
             {
-                MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("���ݸ��³ɹ�", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -186,6 +185,6 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(this.diInputDate, false);
         }
 
-        #endregion Methods
+        #endregion?Methods?
     }
 }

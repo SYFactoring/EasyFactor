@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ClientReviewMgr.cs" company="CISL@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -7,21 +7,21 @@
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
-    using System.Collections.Generic;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class ClientReviewMgr : UserControl
     {
-        #regionÂ FieldsÂ (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -32,9 +32,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private OpClientReviewMgrType opType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -48,11 +48,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (1)
+		#region?Constructors?(1)?
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the ClientCreditLineMgr class.
         /// </summary>
         /// <param name="opType"></param>
@@ -68,13 +68,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             List<string> domainList = Department.AllDomains;
-            domainList.Insert(0, "å…¨éƒ¨");
+            domainList.Insert(0, "È«²¿");
             this.cbDomains.DataSource = domainList;
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ PropertiesÂ (3)
+		#region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -103,11 +103,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             set;
         }
 
-        #endregionÂ Properties
+		#endregion?Properties?
 
-        #regionÂ MethodsÂ (9)
+		#region?Methods?(8)?
 
-        //Â PrivateÂ MethodsÂ (9)Â 
+		//?Private?Methods?(8)?
 
         /// <summary>
         /// 
@@ -139,7 +139,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             ClientReview review = (ClientReview)this.bs.List[this.dgvClientReviews.CurrentCell.RowIndex];
-            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤åæŸ¥æ„è§: " + review.ReviewNo, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ıĞ­²éÒâ¼û: " + review.ReviewNo, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 context.ClientReviews.DeleteOnSubmit(review);
                 try
@@ -148,7 +148,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 }
                 catch (Exception e1)
                 {
-                    MessageBoxEx.Show("åˆ é™¤å¤±è´¥," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("É¾³ıÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -229,12 +229,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             string clientReviewNo = this.tbClientReviewNo.Text;
             string clientName = this.tbClientName.Text;
             string location = this.cbLocation.Text;
-            if (location == "å…¨éƒ¨")
+            if (location == "È«²¿")
             {
                 location = string.Empty;
             }
             string domain = this.cbDomains.Text;
-            if (domain == "å…¨éƒ¨")
+            if (domain == "È«²¿")
             {
                 domain = string.Empty;
             }
@@ -253,7 +253,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
              && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName)));
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
+            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
         }
 
         /// <summary>
@@ -277,6 +277,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

@@ -1,22 +1,28 @@
-ï»¿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using CMBC.EasyFactor.DB.dbml;
-using DevComponents.DotNetBar;
-using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.InfoMgr.FactorMgr;
-using CMBC.EasyFactor.CaseMgr;
-using CMBC.EasyFactor.Utils.ConstStr;
+//-----------------------------------------------------------------------
+// <copyright file="PoolFinance.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace CMBC.EasyFactor.ARMgr
 {
+    using System;
+    using System.Linq;
+    using System.Windows.Forms;
+    using CMBC.EasyFactor.CaseMgr;
+    using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.InfoMgr.FactorMgr;
+    using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class PoolFinance : UserControl
     {
+        #region?Fields?(3)?
+
         /// <summary>
         /// 
         /// </summary>
@@ -24,11 +30,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private ARPoolBasic poolBasic;
+        private DBDataContext context;
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context;
+        private ARPoolBasic poolBasic;
+
+        #endregion?Fields?
+
+        #region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -56,6 +66,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
         }
 
+        #endregion?Constructors?
+
+        #region?Properties?(1)?
+
         /// <summary>
         /// Sets
         /// </summary>
@@ -72,6 +86,12 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        #endregion?Properties?
+
+        #region?Methods?(7)?
+
+        //?Public?Methods?(1)?
+
         /// <summary>
         /// 
         /// </summary>
@@ -85,6 +105,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
             this.dgvCases.DataSource = typeof(Case);
         }
+        //?Private?Methods?(6)?
 
         /// <summary>
         /// Show detail info of selected Case
@@ -122,13 +143,14 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._client == null)
             {
-                MessageBoxEx.Show("æ²¡æœ‰é€‰å®šå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ã»ÓÐÑ¡¶¨¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.CreateUserName = App.Current.CurUser.Name;
             financeBatch.CheckStatus = BATCH.UNCHECK;
+            financeBatch.InputDate = DateTime.Today;
             this.batchBindingSource.DataSource = financeBatch;
 
             var caseResult = from c in context.Cases
@@ -152,7 +174,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (this._client == null)
             {
-                MessageBoxEx.Show("æ²¡æœ‰é€‰å®šå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ã»ÓÐÑ¡¶¨¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -189,7 +211,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (isSaveOK)
             {
-                MessageBoxEx.Show("æ•°æ®ä¿å­˜æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Êý¾Ý±£´æ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.poolBasic.CaculateOutstanding(this._client);
             }
         }
@@ -203,12 +225,12 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._client == null)
             {
-                MessageBoxEx.Show("æ²¡æœ‰é€‰å®šå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ã»ÓÐÑ¡¶¨¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             FinanceBatchMgr batchMgr = new FinanceBatchMgr(this._client, this.context);
-            QueryForm queryUI = new QueryForm(batchMgr, "é€‰æ‹©èžèµ„æ‰¹æ¬¡");
+            QueryForm queryUI = new QueryForm(batchMgr, "Ñ¡ÔñÈÚ×ÊÅú´Î");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             InvoiceFinanceBatch selectedBatch = batchMgr.Selected;
@@ -233,7 +255,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (this._client == null)
             {
-                MessageBoxEx.Show("æ²¡æœ‰é€‰å®šå®¢æˆ·", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Ã»ÓÐÑ¡¶¨¿Í»§", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -244,7 +266,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
             FactorMgr factorMgr = new FactorMgr();
-            QueryForm queryForm = new QueryForm(factorMgr, "é€‰æ‹©ä»£ä»˜è¡Œ");
+            QueryForm queryForm = new QueryForm(factorMgr, "Ñ¡Ôñ´ú¸¶ÐÐ");
             factorMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
 
@@ -254,5 +276,7 @@ namespace CMBC.EasyFactor.ARMgr
                 financeBatch.Factor = this.context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
             }
         }
+
+        #endregion?Methods?
     }
 }

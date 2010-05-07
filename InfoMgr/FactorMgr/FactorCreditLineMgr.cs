@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="FactorCreditLineMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -12,7 +12,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using System.Data.Linq;
     using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
@@ -20,17 +19,20 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorCreditLineMgr : UserControl
     {
-        #region¬†Fields¬†(1)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
-
         /// <summary>
         /// 
         /// </summary>
         private OpFactorCreditMgrType opType;
+
+		#endregion?Fields?
+
+		#region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -48,11 +50,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DUE,
         }
 
-        #endregion¬†Fields
+		#endregion?Enums?
 
-        #region¬†Constructors¬†(1)
+		#region?Constructors?(2)?
 
-        public FactorCreditLineMgr(OpFactorCreditMgrType opType)
+public FactorCreditLineMgr(OpFactorCreditMgrType opType)
             : this()
         {
             this.opType = opType;
@@ -65,7 +67,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 var queryResult = context.FactorCreditLines.Where(f => f.CreditLineStatus == FACTOR_CREDIT_LINE.AVAILABILITY && f.PeriodEnd < overDueDate);
 
                 this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("Ëé∑Âæó{0}Êù°ËÆ∞ÂΩï", queryResult.Count());
+                this.lblCount.Text = String.Format("ªÒµ√{0}Ãıº«¬º", queryResult.Count());
             }
         }
 
@@ -83,11 +85,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
         }
 
-        #endregion¬†Constructors
+		#endregion?Constructors?
 
-        #region¬†Methods¬†(4)
+		#region?Methods?(4)?
 
-        //¬†Private¬†Methods¬†(4)¬†
+		//?Private?Methods?(4)?
 
         /// <summary>
         /// 
@@ -148,9 +150,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             var queryResult = context.FactorCreditLines.Where(f => f.Factor.FactorCode.Contains(factorCode) && (f.Factor.CompanyNameCN.Contains(factorName) || f.Factor.CompanyNameEN.Contains(factorName)));
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("Ëé∑Âæó{0}Êù°ËÆ∞ÂΩï", queryResult.Count());
+            this.lblCount.Text = String.Format("ªÒµ√{0}Ãıº«¬º", queryResult.Count());
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
     }
 }

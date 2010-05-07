@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="MainWindow.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -8,8 +8,6 @@ namespace CMBC.EasyFactor
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Data.Linq;
     using System.Reflection;
     using System.Windows.Forms;
     using CMBC.EasyFactor.ARMgr;
@@ -22,15 +20,15 @@ namespace CMBC.EasyFactor
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.InfoMgr.UserMgr;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// Main Window Form
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-        #regionÂ ConstructorsÂ (1)
+        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class
@@ -50,9 +48,9 @@ namespace CMBC.EasyFactor
             this.backgroundWorker.RunWorkerAsync();
         }
 
-        #endregionÂ Constructors
+        #endregion?Constructors?
 
-        #regionÂ PropertiesÂ (2)
+        #region?Properties?(2)?
 
         /// <summary>
         /// Sets command status
@@ -84,11 +82,11 @@ namespace CMBC.EasyFactor
             }
         }
 
-        #endregionÂ Properties
+        #endregion?Properties?
 
-        #regionÂ MethodsÂ (93)
+        #region?Methods?(94)?
 
-        //Â PublicÂ MethodsÂ (2)Â 
+        //?Public?Methods?(2)?
 
         /// <summary>
         /// 
@@ -118,7 +116,7 @@ namespace CMBC.EasyFactor
 
             if (uc is CaseMgr.CaseMgr)
             {
-                this.CommandStatus = "æ‰‹ç»­è´¹æ”¶å…¥çš„å¸åˆ«ä¸å‘ç¥¨å¸åˆ«ç›¸åŒï¼›åˆ©æ¯æ”¶å…¥çš„å¸åˆ«ä¸ºäººæ°‘å¸";
+                this.CommandStatus = "ÊÖĞø·ÑÊÕÈëµÄ±Ò±ğÓë·¢Æ±±Ò±ğÏàÍ¬£»ÀûÏ¢ÊÕÈëµÄ±Ò±ğÎªÈËÃñ±Ò";
             }
             else
             {
@@ -129,7 +127,7 @@ namespace CMBC.EasyFactor
             this.ribbonDetailPanel.Controls.Clear();
             this.ribbonDetailPanel.Controls.Add(uc);
         }
-        //Â PrivateÂ MethodsÂ (91)Â 
+        //?Private?Methods?(92)?
 
         /// <summary>
         /// 
@@ -272,6 +270,34 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void CheckPoolFinance(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            {
+                FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.POOL_CHECK);
+                this.SetDetailPanel(batchMgr);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckPoolRefund(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            {
+                RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_CHECK);
+                this.SetDetailPanel(batchMgr);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckRefundBatch(object sender, EventArgs e)
         {
             if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
@@ -353,7 +379,7 @@ namespace CMBC.EasyFactor
         /// <param name="args"></param>
         private void Exit(object sender, EventArgs args)
         {
-            DialogResult dr = MessageBoxEx.Show("ç‚¹å‡»â€œYesâ€é€€å‡ºç³»ç»Ÿï¼Œç‚¹å‡»â€œCancelâ€æ›´æ¢ç”¨æˆ·", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBoxEx.Show("µã»÷¡°Yes¡±ÍË³öÏµÍ³£¬µã»÷¡°Cancel¡±¸ü»»ÓÃ»§", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
             if (dr == DialogResult.Yes)
             {
@@ -375,7 +401,7 @@ namespace CMBC.EasyFactor
                     this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
                     this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
                     this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-                    this.CommandStatus = "æ¬¢è¿ä½¿ç”¨ä¸­å›½æ°‘ç”Ÿé“¶è¡Œä¿ç†è¿è¥ç³»ç»Ÿ";
+                    this.CommandStatus = "»¶Ó­Ê¹ÓÃÖĞ¹úÃñÉúÒøĞĞ±£ÀíÔËÓªÏµÍ³";
                     this.MainPage(null, null);
                 }
             }
@@ -837,7 +863,7 @@ namespace CMBC.EasyFactor
                 return;
             }
 
-            DialogResult dr = MessageBoxEx.Show("ç‚¹å‡»â€œYesâ€é€€å‡ºç³»ç»Ÿï¼Œç‚¹å‡»â€œCancelâ€æ›´æ¢ç”¨æˆ·", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBoxEx.Show("µã»÷¡°Yes¡±ÍË³öÏµÍ³£¬µã»÷¡°Cancel¡±¸ü»»ÓÃ»§", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
                 this.notifyIcon.Visible = false;
@@ -859,7 +885,7 @@ namespace CMBC.EasyFactor
                     this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
                     this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
                     this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-                    this.CommandStatus = "æ¬¢è¿ä½¿ç”¨ä¸­å›½æ°‘ç”Ÿé“¶è¡Œä¿ç†è¿è¥ç³»ç»Ÿ";
+                    this.CommandStatus = "»¶Ó­Ê¹ÓÃÖĞ¹úÃñÉúÒøĞĞ±£ÀíÔËÓªÏµÍ³";
                     this.MainPage(null, null);
                 }
             }
@@ -1197,8 +1223,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryPoolRefundBatch(object sender, EventArgs e)
         {
-            //  RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_QUERY);
-            //  this.SetDetailPanel(batchMgr);
+            RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_QUERY);
+            this.SetDetailPanel(batchMgr);
         }
 
         /// <summary>
@@ -1345,6 +1371,6 @@ namespace CMBC.EasyFactor
             this.SetDetailPanel(mgr);
         }
 
-        #endregionÂ Methods
+        #endregion?Methods?
     }
 }

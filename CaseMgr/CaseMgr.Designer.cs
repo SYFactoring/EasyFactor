@@ -1,8 +1,8 @@
-Ôªønamespace CMBC.EasyFactor.CaseMgr
+namespace CMBC.EasyFactor.CaseMgr
 {
     partial class CaseMgr
     {
-        #region¬†Fields¬†(61)
+		#region?Fields?(62)?
 
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.ButtonX btnQueryReset;
@@ -14,6 +14,30 @@
         private DevComponents.DotNetBar.Controls.ComboTree cbOwnerDepts;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
         private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAppDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseMark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperationType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOPName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -34,6 +58,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemCaculateCurr;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaseExport;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseSelect;
         private System.Windows.Forms.ToolStripMenuItem menuItemCreditCoverNegNew;
@@ -45,11 +70,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -64,7 +89,7 @@
             base.Dispose(disposing);
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
 
 
 
@@ -225,7 +250,7 @@
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(56, 16);
             this.lblLocation.TabIndex = 22;
-            this.lblLocation.Text = "‰∏öÂä°Âú∞Âå∫";
+            this.lblLocation.Text = "“µŒÒµÿ«¯";
             // 
             // tbOPName
             // 
@@ -249,7 +274,7 @@
             this.lblOPName.Name = "lblOPName";
             this.lblOPName.Size = new System.Drawing.Size(47, 16);
             this.lblOPName.TabIndex = 4;
-            this.lblOPName.Text = "OP‰∫∫Âëò";
+            this.lblOPName.Text = "OP»À‘±";
             // 
             // cbCaseMark
             // 
@@ -259,10 +284,10 @@
             this.cbCaseMark.FormattingEnabled = true;
             this.cbCaseMark.ItemHeight = 14;
             this.cbCaseMark.Items.AddRange(new object[] {
-            "ÂÖ®ÈÉ®",
-            "Áî≥ËØ∑Ê°à",
-            "ÂêØÂä®Ê°à",
-            "Â∑≤ÁªìÊ°à"});
+            "»´≤ø",
+            "…Í«Î∞∏",
+            "∆Ù∂Ø∞∏",
+            "“—Ω·∞∏"});
             this.cbCaseMark.Location = new System.Drawing.Point(460, 28);
             this.cbCaseMark.Name = "cbCaseMark";
             this.cbCaseMark.Size = new System.Drawing.Size(100, 20);
@@ -280,7 +305,7 @@
             this.lblCaseMark.Name = "lblCaseMark";
             this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
             this.lblCaseMark.TabIndex = 8;
-            this.lblCaseMark.Text = "Ê°à‰ª∂Áä∂ÊÄÅ";
+            this.lblCaseMark.Text = "∞∏º˛◊¥Ã¨";
             // 
             // cbIsContractSigned
             // 
@@ -294,7 +319,7 @@
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsContractSigned.TabIndex = 10;
-            this.cbIsContractSigned.Text = "ÊòØÂê¶Á≠æËÆ¢‰øùÁêÜÂêàÂêå";
+            this.cbIsContractSigned.Text = " «∑Ò«©∂©±£¿Ì∫œÕ¨";
             // 
             // btnQueryReset
             // 
@@ -305,7 +330,7 @@
             this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQueryReset.TabIndex = 20;
-            this.btnQueryReset.Text = "ÈáçÁΩÆ";
+            this.btnQueryReset.Text = "÷ÿ÷√";
             this.btnQueryReset.Click += new System.EventHandler(this.Reset);
             // 
             // cbIsCDA
@@ -320,7 +345,7 @@
             this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
             this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsCDA.TabIndex = 11;
-            this.cbIsCDA.Text = "CDAÊòØÂê¶Á≠æÂõû";
+            this.cbIsCDA.Text = "CDA «∑Ò«©ªÿ";
             // 
             // tbClientName
             // 
@@ -344,7 +369,7 @@
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(56, 16);
             this.lblClientName.TabIndex = 0;
-            this.lblClientName.Text = "ÂÆ¢Êà∑ÂêçÁß∞";
+            this.lblClientName.Text = "øÕªß√˚≥∆";
             // 
             // tbCaseCode
             // 
@@ -368,7 +393,7 @@
             this.lblCaseCode.Name = "lblCaseCode";
             this.lblCaseCode.Size = new System.Drawing.Size(56, 16);
             this.lblCaseCode.TabIndex = 2;
-            this.lblCaseCode.Text = "Ê°à‰ª∂ÁºñÂè∑";
+            this.lblCaseCode.Text = "∞∏º˛±‡∫≈";
             // 
             // lblCount
             // 
@@ -381,7 +406,7 @@
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(71, 16);
             this.lblCount.TabIndex = 21;
-            this.lblCount.Text = "Ëé∑Âæó Êù°ËÆ∞ÂΩï";
+            this.lblCount.Text = "ªÒµ√ Ãıº«¬º";
             // 
             // lblDate
             // 
@@ -394,7 +419,7 @@
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
             this.lblDate.TabIndex = 14;
-            this.lblDate.Text = "Êü•ËØ¢ÊúüÈôê";
+            this.lblDate.Text = "≤È—Ø∆⁄œﬁ";
             // 
             // btnQuery
             // 
@@ -405,7 +430,7 @@
             this.btnQuery.Size = new System.Drawing.Size(48, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 19;
-            this.btnQuery.Text = "Êü•ËØ¢";
+            this.btnQuery.Text = "≤È—Ø";
             this.btnQuery.Click += new System.EventHandler(this.QueryCase);
             // 
             // cbCurrency
@@ -432,7 +457,7 @@
             this.lblCurrency.Name = "lblCurrency";
             this.lblCurrency.Size = new System.Drawing.Size(31, 16);
             this.lblCurrency.TabIndex = 17;
-            this.lblCurrency.Text = "Â∏ÅÂà´";
+            this.lblCurrency.Text = "±“±";
             // 
             // cbTransactionType
             // 
@@ -441,10 +466,10 @@
             this.cbTransactionType.FormattingEnabled = true;
             this.cbTransactionType.ItemHeight = 14;
             this.cbTransactionType.Items.AddRange(new object[] {
-            "ÂõΩÂÜÖÂçñÊñπ‰øùÁêÜ",
-            "ÂõΩÂÜÖ‰π∞Êñπ‰øùÁêÜ",
-            "Âá∫Âè£‰øùÁêÜ",
-            "ËøõÂè£‰øùÁêÜ"});
+            "π˙ƒ⁄¬Ù∑Ω±£¿Ì",
+            "π˙ƒ⁄¬Ú∑Ω±£¿Ì",
+            "≥ˆø⁄±£¿Ì",
+            "Ω¯ø⁄±£¿Ì"});
             this.cbTransactionType.Location = new System.Drawing.Point(59, 50);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
@@ -462,7 +487,7 @@
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(56, 16);
             this.lblTransactionType.TabIndex = 12;
-            this.lblTransactionType.Text = "‰∏öÂä°Á±ªÂà´";
+            this.lblTransactionType.Text = "“µŒÒ¿‡±";
             // 
             // diEnd
             // 
@@ -585,7 +610,7 @@
             this.lblOnwerDept.Name = "lblOnwerDept";
             this.lblOnwerDept.Size = new System.Drawing.Size(56, 16);
             this.lblOnwerDept.TabIndex = 6;
-            this.lblOnwerDept.Text = "‰∏öÂä°ÂΩíÂ±û";
+            this.lblOnwerDept.Text = "“µŒÒπÈ Ù";
             // 
             // dgvCases
             // 
@@ -650,7 +675,7 @@
             // 
             this.colCaseCode.DataPropertyName = "CaseCode";
             this.colCaseCode.Frozen = true;
-            this.colCaseCode.HeaderText = "Ê°à‰ª∂ÁºñÂè∑";
+            this.colCaseCode.HeaderText = "∞∏º˛±‡∫≈";
             this.colCaseCode.Name = "colCaseCode";
             this.colCaseCode.ReadOnly = true;
             this.colCaseCode.Width = 80;
@@ -659,7 +684,7 @@
             // 
             this.colSellerClient.DataPropertyName = "SellerClient";
             this.colSellerClient.Frozen = true;
-            this.colSellerClient.HeaderText = "ÂçñÊñπÂêçÁß∞";
+            this.colSellerClient.HeaderText = "¬Ù∑Ω√˚≥∆";
             this.colSellerClient.Name = "colSellerClient";
             this.colSellerClient.ReadOnly = true;
             this.colSellerClient.Width = 80;
@@ -667,7 +692,7 @@
             // colSellerFactor
             // 
             this.colSellerFactor.DataPropertyName = "SellerFactor";
-            this.colSellerFactor.HeaderText = "ÂçñÊñπ‰øùÁêÜÂïÜ";
+            this.colSellerFactor.HeaderText = "¬Ù∑Ω±£¿Ì…Ã";
             this.colSellerFactor.Name = "colSellerFactor";
             this.colSellerFactor.ReadOnly = true;
             this.colSellerFactor.Width = 92;
@@ -675,7 +700,7 @@
             // colBuyerClient
             // 
             this.colBuyerClient.DataPropertyName = "BuyerClient";
-            this.colBuyerClient.HeaderText = "‰π∞ÊñπÂêçÁß∞";
+            this.colBuyerClient.HeaderText = "¬Ú∑Ω√˚≥∆";
             this.colBuyerClient.Name = "colBuyerClient";
             this.colBuyerClient.ReadOnly = true;
             this.colBuyerClient.Width = 80;
@@ -683,7 +708,7 @@
             // colBuyerFactor
             // 
             this.colBuyerFactor.DataPropertyName = "BuyerFactor";
-            this.colBuyerFactor.HeaderText = "‰π∞Êñπ‰øùÁêÜÂïÜ";
+            this.colBuyerFactor.HeaderText = "¬Ú∑Ω±£¿Ì…Ã";
             this.colBuyerFactor.Name = "colBuyerFactor";
             this.colBuyerFactor.ReadOnly = true;
             this.colBuyerFactor.Width = 92;
@@ -691,7 +716,7 @@
             // colInvoiceCurrency
             // 
             this.colInvoiceCurrency.DataPropertyName = "InvoiceCurrency";
-            this.colInvoiceCurrency.HeaderText = "ÂèëÁ•®Â∏ÅÂà´";
+            this.colInvoiceCurrency.HeaderText = "∑¢∆±±“±";
             this.colInvoiceCurrency.Name = "colInvoiceCurrency";
             this.colInvoiceCurrency.ReadOnly = true;
             this.colInvoiceCurrency.Width = 80;
@@ -699,7 +724,7 @@
             // colTransactionType
             // 
             this.colTransactionType.DataPropertyName = "TransactionType";
-            this.colTransactionType.HeaderText = "‰∏öÂä°Á±ªÂà´";
+            this.colTransactionType.HeaderText = "“µŒÒ¿‡±";
             this.colTransactionType.Name = "colTransactionType";
             this.colTransactionType.ReadOnly = true;
             this.colTransactionType.Width = 80;
@@ -707,7 +732,7 @@
             // colOperationType
             // 
             this.colOperationType.DataPropertyName = "OperationType";
-            this.colOperationType.HeaderText = "Êìç‰ΩúÁ±ªÂûã";
+            this.colOperationType.HeaderText = "≤Ÿ◊˜¿‡–Õ";
             this.colOperationType.Name = "colOperationType";
             this.colOperationType.ReadOnly = true;
             this.colOperationType.Width = 80;
@@ -715,7 +740,7 @@
             // colOwnerDept
             // 
             this.colOwnerDept.DataPropertyName = "OwnerDepartment";
-            this.colOwnerDept.HeaderText = "‰∏öÂä°ÂΩíÂ±ûÊú∫ÊûÑ";
+            this.colOwnerDept.HeaderText = "“µŒÒπÈ Ùª˙ππ";
             this.colOwnerDept.Name = "colOwnerDept";
             this.colOwnerDept.ReadOnly = true;
             this.colOwnerDept.Width = 104;
@@ -725,7 +750,7 @@
             this.colAppDate.DataPropertyName = "CaseAppDate";
             dataGridViewCellStyle2.Format = "d";
             this.colAppDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAppDate.HeaderText = "Áî≥ËØ∑Êó•Êúü";
+            this.colAppDate.HeaderText = "…Í«Î»’∆⁄";
             this.colAppDate.Name = "colAppDate";
             this.colAppDate.ReadOnly = true;
             this.colAppDate.Width = 80;
@@ -733,7 +758,7 @@
             // colCaseMark
             // 
             this.colCaseMark.DataPropertyName = "CaseMark";
-            this.colCaseMark.HeaderText = "Ê°à‰ª∂Áä∂ÊÄÅ";
+            this.colCaseMark.HeaderText = "∞∏º˛◊¥Ã¨";
             this.colCaseMark.Name = "colCaseMark";
             this.colCaseMark.ReadOnly = true;
             this.colCaseMark.Width = 80;
@@ -741,7 +766,7 @@
             // colOPName
             // 
             this.colOPName.DataPropertyName = "OPName";
-            this.colOPName.HeaderText = "OP‰∫∫Âëò";
+            this.colOPName.HeaderText = "OP»À‘±";
             this.colOPName.Name = "colOPName";
             this.colOPName.ReadOnly = true;
             this.colOPName.Width = 68;
@@ -752,7 +777,7 @@
             dataGridViewCellStyle3.Format = "N2";
             dataGridViewCellStyle3.NullValue = null;
             this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colAssignAmount.HeaderText = "ËΩ¨ËÆ©Èáè";
+            this.colAssignAmount.HeaderText = "◊™»√¡ø";
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
             this.colAssignAmount.Visible = false;
@@ -763,7 +788,7 @@
             dataGridViewCellStyle4.Format = "N2";
             dataGridViewCellStyle4.NullValue = null;
             this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colFinanceAmount.HeaderText = "ËûçËµÑÈáè";
+            this.colFinanceAmount.HeaderText = "»⁄◊ ¡ø";
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
             this.colFinanceAmount.Visible = false;
@@ -774,7 +799,7 @@
             dataGridViewCellStyle5.Format = "N2";
             dataGridViewCellStyle5.NullValue = null;
             this.colCommissionIncome.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colCommissionIncome.HeaderText = "‰øùÁêÜË¥πÊî∂ÂÖ•";
+            this.colCommissionIncome.HeaderText = "±£¿Ì∑— ’»Î";
             this.colCommissionIncome.Name = "colCommissionIncome";
             this.colCommissionIncome.ReadOnly = true;
             this.colCommissionIncome.Visible = false;
@@ -784,7 +809,7 @@
             this.colNetInterestIncome.DataPropertyName = "NetInterestIncomeByDate";
             dataGridViewCellStyle6.Format = "N2";
             this.colNetInterestIncome.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colNetInterestIncome.HeaderText = "ÂáÄÂà©ÊÅØÊî∂ÂÖ•";
+            this.colNetInterestIncome.HeaderText = "æª¿˚œ¢ ’»Î";
             this.colNetInterestIncome.Name = "colNetInterestIncome";
             this.colNetInterestIncome.ReadOnly = true;
             this.colNetInterestIncome.Visible = false;
@@ -794,7 +819,7 @@
             this.colMarginIncome.DataPropertyName = "MarginIncomeByDate";
             dataGridViewCellStyle7.Format = "N2";
             this.colMarginIncome.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colMarginIncome.HeaderText = "‰ª£‰ªòÂà©Â∑ÆÊî∂ÂÖ•";
+            this.colMarginIncome.HeaderText = "¥˙∏∂¿˚≤Ó ’»Î";
             this.colMarginIncome.Name = "colMarginIncome";
             this.colMarginIncome.ReadOnly = true;
             this.colMarginIncome.Visible = false;
@@ -804,7 +829,7 @@
             this.colTotalIncome.DataPropertyName = "TotalIncomeByDate";
             dataGridViewCellStyle8.Format = "N2";
             this.colTotalIncome.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colTotalIncome.HeaderText = "ÊÄªÊî∂ÂÖ•";
+            this.colTotalIncome.HeaderText = "◊‹ ’»Î";
             this.colTotalIncome.Name = "colTotalIncome";
             this.colTotalIncome.ReadOnly = true;
             this.colTotalIncome.Visible = false;
@@ -814,7 +839,7 @@
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
             dataGridViewCellStyle9.Format = "N2";
             this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colAssignOutstanding.HeaderText = "Â∫îÊî∂Â∏êÊ¨æ‰ΩôÈ¢ù";
+            this.colAssignOutstanding.HeaderText = "”¶ ’’ øÓ”‡∂Ó";
             this.colAssignOutstanding.Name = "colAssignOutstanding";
             this.colAssignOutstanding.ReadOnly = true;
             // 
@@ -824,7 +849,7 @@
             dataGridViewCellStyle10.Format = "N2";
             dataGridViewCellStyle10.NullValue = null;
             this.colTotalAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle10;
-            this.colTotalAssignOutstanding.HeaderText = "ÊÄªÂ∏êÊ¨æ‰ΩôÈ¢ù";
+            this.colTotalAssignOutstanding.HeaderText = "◊‹’ øÓ”‡∂Ó";
             this.colTotalAssignOutstanding.Name = "colTotalAssignOutstanding";
             this.colTotalAssignOutstanding.ReadOnly = true;
             // 
@@ -833,7 +858,7 @@
             this.colCreditCoverOutstanding.DataPropertyName = "CreditCoverOutstanding";
             dataGridViewCellStyle11.Format = "N2";
             this.colCreditCoverOutstanding.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colCreditCoverOutstanding.HeaderText = "Ââ©‰Ωô‰ø°Áî®È£éÈô©È¢ùÂ∫¶";
+            this.colCreditCoverOutstanding.HeaderText = " £”‡–≈”√∑Áœ’∂Ó∂»";
             this.colCreditCoverOutstanding.Name = "colCreditCoverOutstanding";
             this.colCreditCoverOutstanding.ReadOnly = true;
             // 
@@ -843,7 +868,7 @@
             dataGridViewCellStyle12.Format = "N2";
             dataGridViewCellStyle12.NullValue = null;
             this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle12;
-            this.colFinanceOutstanding.HeaderText = "ËûçËµÑ‰ΩôÈ¢ù";
+            this.colFinanceOutstanding.HeaderText = "»⁄◊ ”‡∂Ó";
             this.colFinanceOutstanding.Name = "colFinanceOutstanding";
             this.colFinanceOutstanding.ReadOnly = true;
             // 
@@ -852,7 +877,7 @@
             this.colTotalFinanceOutstanding.DataPropertyName = "TotalFinanceOutstanding";
             dataGridViewCellStyle13.Format = "N2";
             this.colTotalFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle13;
-            this.colTotalFinanceOutstanding.HeaderText = "ÊÄªËûçËµÑ‰ΩôÈ¢ù";
+            this.colTotalFinanceOutstanding.HeaderText = "◊‹»⁄◊ ”‡∂Ó";
             this.colTotalFinanceOutstanding.Name = "colTotalFinanceOutstanding";
             this.colTotalFinanceOutstanding.ReadOnly = true;
             // 
@@ -861,7 +886,7 @@
             this.colFinanceLineOutstanding.DataPropertyName = "FinanceLineOutstanding";
             dataGridViewCellStyle14.Format = "N2";
             this.colFinanceLineOutstanding.DefaultCellStyle = dataGridViewCellStyle14;
-            this.colFinanceLineOutstanding.HeaderText = "Ââ©‰ΩôËûçËµÑÈ¢ùÂ∫¶";
+            this.colFinanceLineOutstanding.HeaderText = " £”‡»⁄◊ ∂Ó∂»";
             this.colFinanceLineOutstanding.Name = "colFinanceLineOutstanding";
             this.colFinanceLineOutstanding.ReadOnly = true;
             // 
@@ -885,14 +910,14 @@
             // 
             this.menuItemCaseSelect.Name = "menuItemCaseSelect";
             this.menuItemCaseSelect.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseSelect.Text = "ÈÄâÂÆöÊ°à‰ª∂";
+            this.menuItemCaseSelect.Text = "—°∂®∞∏º˛";
             this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
             this.menuItemCaseDetail.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseDetail.Text = "ËØ¶ÁªÜ‰ø°ÊÅØ";
+            this.menuItemCaseDetail.Text = "œÍœ∏–≈œ¢";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // toolStripSeparator
@@ -904,21 +929,21 @@
             // 
             this.menuItemCaseNew.Name = "menuItemCaseNew";
             this.menuItemCaseNew.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseNew.Text = "Êñ∞Âª∫Ê°à‰ª∂";
+            this.menuItemCaseNew.Text = "–¬Ω®∞∏º˛";
             this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
             // 
             // menuItemCreditCoverNegNew
             // 
             this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
             this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCreditCoverNegNew.Text = "Êñ∞Âª∫È¢ùÂ∫¶Áî≥ËØ∑";
+            this.menuItemCreditCoverNegNew.Text = "–¬Ω®∂Ó∂»…Í«Î";
             this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
             // 
             // menuItemCaseDelete
             // 
             this.menuItemCaseDelete.Name = "menuItemCaseDelete";
             this.menuItemCaseDelete.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseDelete.Text = "Âà†Èô§Ê°à‰ª∂";
+            this.menuItemCaseDelete.Text = "…æ≥˝∞∏º˛";
             this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
             // 
             // toolStripSeparator1
@@ -930,21 +955,21 @@
             // 
             this.menuItemLegerReport.Name = "menuItemLegerReport";
             this.menuItemLegerReport.Size = new System.Drawing.Size(155, 22);
-            this.menuItemLegerReport.Text = "ÂØºÂá∫Âè∞Â∏ê";
+            this.menuItemLegerReport.Text = "µº≥ˆÃ®’ ";
             this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
             // 
             // menuItemCaseExport
             // 
             this.menuItemCaseExport.Name = "menuItemCaseExport";
             this.menuItemCaseExport.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseExport.Text = "ÂØºÂá∫Ê°àÂ≠ê";
+            this.menuItemCaseExport.Text = "µº≥ˆ∞∏◊”";
             this.menuItemCaseExport.Click += new System.EventHandler(this.ExportCases);
             // 
             // menuItemCaculateCurr
             // 
             this.menuItemCaculateCurr.Name = "menuItemCaculateCurr";
             this.menuItemCaculateCurr.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaculateCurr.Text = "‰øÆÂ§çÂ§öÂ∏ÅÁßçBug";
+            this.menuItemCaculateCurr.Text = "–ﬁ∏¥∂‡±“÷÷Bug";
             this.menuItemCaculateCurr.Click += new System.EventHandler(this.CaculateFinance);
             // 
             // CaseMgr
@@ -967,31 +992,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaseExport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperationType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAppDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseMark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOPName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
     }
 }

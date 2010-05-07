@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="CDADetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -14,15 +14,15 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class CDADetail : DevComponents.DotNetBar.Office2007Form
     {
-        #regionÂ FieldsÂ (2)
+		#region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -33,9 +33,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCDAType opCDAType;
 
-        #endregionÂ Fields
+		#endregion?Fields?
 
-        #regionÂ EnumsÂ (1)
+		#region?Enums?(1)?
 
         /// <summary>
         /// Operation Type 
@@ -58,12 +58,12 @@ namespace CMBC.EasyFactor.CaseMgr
             DETAIL_CDA
         }
 
-        #endregionÂ Enums
+		#endregion?Enums?
 
-        #regionÂ ConstructorsÂ (3)
+		#region?Constructors?(3)?
 
-        /// <summary>
-        /// é€šè¿‡Caseæ–°å»ºCDA
+/// <summary>
+        /// Í¨¹ıCaseĞÂ½¨CDA
         /// </summary>
         /// <param name="selectedCase"></param>
         /// <param name="opCDAType"></param>
@@ -113,8 +113,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.handFeeCurrComboBox.ValueMember = "CurrencyCode";
             this.handFeeCurrComboBox.SelectedIndex = -1;
 
-            this.assignTypeComboBox.Items.AddRange(new string[] { "å…¨éƒ¨", "éƒ¨åˆ†" });
-            this.commissionTypeComboBox.Items.AddRange(new string[] { "æŒ‰è½¬è®©é‡‘é¢", "æŒ‰èèµ„é‡‘é¢", "å…¶ä»–" });
+            this.assignTypeComboBox.Items.AddRange(new string[] { "È«²¿", "²¿·Ö" });
+            this.commissionTypeComboBox.Items.AddRange(new string[] { "°´×ªÈÃ½ğ¶î", "°´ÈÚ×Ê½ğ¶î", "ÆäËû" });
             this.cDAStatusComboBox.Items.AddRange(new string[] { CDAStr.UNCHECK, CDAStr.CHECKED, CDAStr.REJECT, CDAStr.INVALID });
 
             if (opCDAType == OpCDAType.NEW_CDA)
@@ -158,11 +158,11 @@ namespace CMBC.EasyFactor.CaseMgr
 
         }
 
-        #endregionÂ Constructors
+		#endregion?Constructors?
 
-        #regionÂ MethodsÂ (25)
+		#region?Methods?(25)?
 
-        //Â PrivateÂ MethodsÂ (25)Â 
+		//?Private?Methods?(25)?
 
         private void cbIsCreditCoverRevolving_CheckedChanged(object sender, EventArgs e)
         {
@@ -218,7 +218,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             CDA cda = this.CDABindingSource.DataSource as CDA;
-            if ("å…¶ä»–".Equals(cda.CommissionType))
+            if ("ÆäËû".Equals(cda.CommissionType))
             {
                 if (String.IsNullOrEmpty(e.ControlToValidate.Text))
                 {
@@ -248,7 +248,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            if (cda.Case.TransactionType == "è¿›å£ä¿ç†")
+            if (cda.Case.TransactionType == "½ø¿Ú±£Àí")
             {
                 if (String.IsNullOrEmpty(this.iFPriceTextBox.Text))
                 {
@@ -486,7 +486,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            if (cda.Case.TransactionType != "è¿›å£ä¿ç†")
+            if (cda.Case.TransactionType != "½ø¿Ú±£Àí")
             {
                 if (String.IsNullOrEmpty(this.priceTextBox.Text))
                 {
@@ -719,16 +719,16 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             CDA cda = new CDA();
             cda.CDASignDate = DateTime.Now.Date;
-            cda.CommissionType = "æŒ‰è½¬è®©é‡‘é¢";
+            cda.CommissionType = "°´×ªÈÃ½ğ¶î";
             cda.PUGProportion = 1;
             cda.PUGPeriod = 90;
             cda.ReassignGracePeriod = 60;
             cda.FinanceProportion = 0.8;
-            cda.IsNotice = "æ˜ä¿ç†";
+            cda.IsNotice = "Ã÷±£Àí";
             cda.IsRecoarse = false;
             cda.CDAStatus = CDAStr.UNCHECK;
             cda.IsCreditCoverRevolving = true;
-            cda.AssignType = "å…¨éƒ¨";
+            cda.AssignType = "È«²¿";
             cda.Case = curCase;
             return cda;
         }
@@ -793,7 +793,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 string cdaCode = CDA.GenerateCDACode(cda.Case);
                 if (String.IsNullOrEmpty(cdaCode))
                 {
-                    MessageBoxEx.Show("CDAç¼–å·ç”Ÿæˆå¤±è´¥", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("CDA±àºÅÉú³ÉÊ§°Ü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -813,7 +813,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ–°å»ºæˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İĞÂ½¨³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.opCDAType = OpCDAType.UPDATE_CDA;
                 }
             }
@@ -849,7 +849,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("æ•°æ®æ›´æ–°æˆåŠŸ", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êı¾İ¸üĞÂ³É¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (cda.CDAStatus == CDAStr.CHECKED)
                     {
                         foreach (CDA c in cda.Case.CDAs)
@@ -886,7 +886,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             CaseMgr caseMgr = new CaseMgr(CaseMgr.OpCaseType.ENABLE_CASE);
-            QueryForm queryForm = new QueryForm(caseMgr, "é€‰æ‹©æ¡ˆä»¶");
+            QueryForm queryForm = new QueryForm(caseMgr, "Ñ¡Ôñ°¸¼ş");
             caseMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
             Case curCase = caseMgr.Selected;
@@ -914,13 +914,13 @@ namespace CMBC.EasyFactor.CaseMgr
             CDA cda = (CDA)this.CDABindingSource.DataSource;
             if (cda == null)
             {
-                MessageBoxEx.Show("è¯·é¦–å…ˆé€‰æ‹©ä¸€ä¸ªé¢åº¦é€šçŸ¥ä¹¦", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ÇëÊ×ÏÈÑ¡ÔñÒ»¸ö¶î¶ÈÍ¨ÖªÊé", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             //if (cda.CDAStatus == CDAStr.CHECKED)
             //{
-            //    MessageBoxEx.Show("é¢åº¦é€šçŸ¥ä¹¦å·²å®¡æ ¸ï¼Œä¸èƒ½ä¿®æ”¹", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    MessageBoxEx.Show("¶î¶ÈÍ¨ÖªÊéÒÑÉóºË£¬²»ÄÜĞŞ¸Ä", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             //    return;
             //}
 
@@ -1020,6 +1020,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        #endregionÂ Methods
+		#endregion?Methods?
     }
 }

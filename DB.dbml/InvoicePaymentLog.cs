@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InvoicePaymentLog.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -13,7 +13,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoicePaymentLog
     {
-        #region Constructors (1)
+		#region?Constructors?(1)?
 
         public InvoicePaymentLog(Invoice invoice)
             : this()
@@ -26,9 +26,9 @@ namespace CMBC.EasyFactor.DB.dbml
             this.InvoicePaymentAmount2 = invoice.PaymentAmount;
         }
 
-        #endregion Constructors
+		#endregion?Constructors?
 
-        #region Properties (14)
+		#region?Properties?(16)?
 
         /// <summary>
         /// 
@@ -108,10 +108,19 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public string CreditNoteNo2
+        public DateTime? CreditNoteDate
         {
-            get;
-            set;
+            get
+            {
+                if (this.CreditNote != null)
+                {
+                    return this.CreditNote.CreditNoteDate;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         /// <summary>
@@ -126,19 +135,10 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? CreditNoteDate
+        public string CreditNoteNo2
         {
-            get
-            {
-                if (this.CreditNote != null)
-                {
-                    return this.CreditNote.CreditNoteDate;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -217,6 +217,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        #endregion Properties
+		#endregion?Properties?
     }
 }

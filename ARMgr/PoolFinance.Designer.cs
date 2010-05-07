@@ -1,11 +1,63 @@
-Ôªønamespace CMBC.EasyFactor.ARMgr
+namespace CMBC.EasyFactor.ARMgr
 {
     partial class PoolFinance
     {
+		#region?Fields?(45)?
+
+        private System.Windows.Forms.BindingSource batchBindingSource;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx batchCurrencyComboBoxEx;
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private DevComponents.DotNetBar.ButtonX btnFactorSelect;
+        private DevComponents.DotNetBar.ButtonX btnFinanceBatchNew;
+        private DevComponents.DotNetBar.ButtonX btnFinanceBatchSave;
+        private DevComponents.DotNetBar.ButtonX btnFinanceBatchSelect;
+        private System.Windows.Forms.BindingSource casesBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCanBeFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colValuedAssignOutstanding;
+        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private DevComponents.DotNetBar.Controls.TextBoxX costRateTextBoxX;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCases;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX financeAmountTextBoxX;
+        private DevComponents.DotNetBar.Controls.TextBoxX financeBatchNoTextBox;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput financePeriodBeginDateTimePicker;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput financePeriodEndDateTimePicker;
+        private DevComponents.DotNetBar.Controls.TextBoxX financeRateTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx financeTypeComboBoxEx;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
+        private DevComponents.DotNetBar.PanelEx panelFinanceBatch;
+        private System.Windows.Forms.BindingNavigator poolBindingNavigator;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator6;
+        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbLoanNo;
+
+		#endregion?Fields?
+
+		#region?Methods?(1)?
+
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -26,6 +78,10 @@
             base.Dispose(disposing);
         }
 
+		#endregion?Methods?
+
+
+
         #region Component Designer generated code
 
         /// <summary> 
@@ -45,12 +101,18 @@
             DevComponents.DotNetBar.LabelX financeBatchNoLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PoolFinance));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PoolFinance));
             this.dgvCases = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValuedAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceProportion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCanBeFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.poolBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -63,6 +125,7 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.panelFinanceBatch = new DevComponents.DotNetBar.PanelEx();
             this.tbLoanNo = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnFinanceBatchSelect = new DevComponents.DotNetBar.ButtonX();
             this.btnFinanceBatchNew = new DevComponents.DotNetBar.ButtonX();
             this.btnFactorSelect = new DevComponents.DotNetBar.ButtonX();
@@ -77,23 +140,16 @@
             this.batchCurrencyComboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.financeBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.casesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ÿÃÓ");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ÿÃÓ");
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ÿÃÓ");
+            this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ÿÃÓ");
+            this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ÿÃÓ");
+            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("±ÿÃÓ");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÂøÖÂ°´");
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÂøÖÂ°´");
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÂøÖÂ°´");
-            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÂøÖÂ°´");
-            this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
-            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÂøÖÂ°´");
-            this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("ÂøÖÂ°´");
-            this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBuyerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colValuedAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceProportion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCanBeFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             lblLoanNo = new DevComponents.DotNetBar.LabelX();
             financeTypeLabel = new DevComponents.DotNetBar.LabelX();
             costRateLabel = new DevComponents.DotNetBar.LabelX();
@@ -106,10 +162,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.poolBindingNavigator)).BeginInit();
             this.poolBindingNavigator.SuspendLayout();
             this.panelFinanceBatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.casesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,7 +180,7 @@
             lblLoanNo.Name = "lblLoanNo";
             lblLoanNo.Size = new System.Drawing.Size(59, 16);
             lblLoanNo.TabIndex = 2;
-            lblLoanNo.Text = "ÊîæÊ¨æÁºñÂè∑:";
+            lblLoanNo.Text = "∑≈øÓ±‡∫≈:";
             // 
             // financeTypeLabel
             // 
@@ -137,7 +193,7 @@
             financeTypeLabel.Name = "financeTypeLabel";
             financeTypeLabel.Size = new System.Drawing.Size(59, 16);
             financeTypeLabel.TabIndex = 4;
-            financeTypeLabel.Text = "Âá∫Ë¥¶ÊñπÂºè:";
+            financeTypeLabel.Text = "≥ˆ’À∑Ω Ω:";
             // 
             // costRateLabel
             // 
@@ -150,7 +206,7 @@
             costRateLabel.Name = "costRateLabel";
             costRateLabel.Size = new System.Drawing.Size(59, 16);
             costRateLabel.TabIndex = 8;
-            costRateLabel.Text = "ÊàêÊú¨Âà©Áéá:";
+            costRateLabel.Text = "≥…±æ¿˚¬ :";
             // 
             // factorCodeLabel
             // 
@@ -163,7 +219,7 @@
             factorCodeLabel.Name = "factorCodeLabel";
             factorCodeLabel.Size = new System.Drawing.Size(47, 16);
             factorCodeLabel.TabIndex = 16;
-            factorCodeLabel.Text = "‰ª£‰ªòË°å:";
+            factorCodeLabel.Text = "¥˙∏∂––:";
             // 
             // financeRateLabel
             // 
@@ -176,7 +232,7 @@
             financeRateLabel.Name = "financeRateLabel";
             financeRateLabel.Size = new System.Drawing.Size(59, 16);
             financeRateLabel.TabIndex = 6;
-            financeRateLabel.Text = "ËûçËµÑÂà©Áéá:";
+            financeRateLabel.Text = "»⁄◊ ¿˚¬ :";
             // 
             // financePeriodBeginLabel
             // 
@@ -189,7 +245,7 @@
             financePeriodBeginLabel.Name = "financePeriodBeginLabel";
             financePeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
             financePeriodBeginLabel.TabIndex = 10;
-            financePeriodBeginLabel.Text = "ËûçËµÑÊúüÈôê:";
+            financePeriodBeginLabel.Text = "»⁄◊ ∆⁄œﬁ:";
             // 
             // financeAmountLabel
             // 
@@ -202,7 +258,7 @@
             financeAmountLabel.Name = "financeAmountLabel";
             financeAmountLabel.Size = new System.Drawing.Size(59, 16);
             financeAmountLabel.TabIndex = 13;
-            financeAmountLabel.Text = "ËûçËµÑÈáëÈ¢ù:";
+            financeAmountLabel.Text = "»⁄◊ Ω∂Ó:";
             // 
             // financeBatchNoLabel
             // 
@@ -215,7 +271,7 @@
             financeBatchNoLabel.Name = "financeBatchNoLabel";
             financeBatchNoLabel.Size = new System.Drawing.Size(59, 16);
             financeBatchNoLabel.TabIndex = 0;
-            financeBatchNoLabel.Text = "ËûçËµÑÊâπÂè∑:";
+            financeBatchNoLabel.Text = "»⁄◊ ≈˙∫≈:";
             // 
             // dgvCases
             // 
@@ -257,6 +313,56 @@
             this.dgvCases.Size = new System.Drawing.Size(1075, 269);
             this.dgvCases.TabIndex = 5;
             this.dgvCases.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCases_RowHeaderMouseDoubleClick);
+            // 
+            // colCaseCode
+            // 
+            this.colCaseCode.DataPropertyName = "CaseCode";
+            this.colCaseCode.HeaderText = "∞∏º˛±‡∫≈";
+            this.colCaseCode.Name = "colCaseCode";
+            this.colCaseCode.ReadOnly = true;
+            // 
+            // colBuyerClient
+            // 
+            this.colBuyerClient.DataPropertyName = "BuyerClient";
+            this.colBuyerClient.HeaderText = "¬Ú∑Ω√˚≥∆";
+            this.colBuyerClient.Name = "colBuyerClient";
+            this.colBuyerClient.ReadOnly = true;
+            // 
+            // colAssignOutstanding
+            // 
+            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle2.Format = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAssignOutstanding.HeaderText = "’ÀøÓ”‡∂Ó";
+            this.colAssignOutstanding.Name = "colAssignOutstanding";
+            this.colAssignOutstanding.ReadOnly = true;
+            // 
+            // colValuedAssignOutstanding
+            // 
+            this.colValuedAssignOutstanding.DataPropertyName = "ValuedAssignOutstanding";
+            dataGridViewCellStyle3.Format = "N2";
+            this.colValuedAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colValuedAssignOutstanding.HeaderText = "”––ß’ÀøÓ”‡∂Ó";
+            this.colValuedAssignOutstanding.Name = "colValuedAssignOutstanding";
+            this.colValuedAssignOutstanding.ReadOnly = true;
+            // 
+            // colFinanceProportion
+            // 
+            this.colFinanceProportion.DataPropertyName = "FinanceProportion";
+            dataGridViewCellStyle4.Format = "p0";
+            this.colFinanceProportion.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colFinanceProportion.HeaderText = "‘§∏∂±»¿˝";
+            this.colFinanceProportion.Name = "colFinanceProportion";
+            this.colFinanceProportion.ReadOnly = true;
+            // 
+            // colCanBeFinanceAmount
+            // 
+            this.colCanBeFinanceAmount.DataPropertyName = "CanBeFinanceAmount";
+            dataGridViewCellStyle5.Format = "N2";
+            this.colCanBeFinanceAmount.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colCanBeFinanceAmount.HeaderText = "ø…»⁄◊ Ω∂Ó";
+            this.colCanBeFinanceAmount.Name = "colCanBeFinanceAmount";
+            this.colCanBeFinanceAmount.ReadOnly = true;
             // 
             // poolBindingNavigator
             // 
@@ -401,6 +507,10 @@
             this.tbLoanNo.Size = new System.Drawing.Size(100, 20);
             this.tbLoanNo.TabIndex = 3;
             // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch);
+            // 
             // btnFinanceBatchSelect
             // 
             this.btnFinanceBatchSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -410,7 +520,7 @@
             this.btnFinanceBatchSelect.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchSelect.TabIndex = 27;
-            this.btnFinanceBatchSelect.Text = "ÈÄâÊã©ÊâπÊ¨°";
+            this.btnFinanceBatchSelect.Text = "—°‘Ò≈˙¥Œ";
             this.btnFinanceBatchSelect.Click += new System.EventHandler(this.SelectBatch);
             // 
             // btnFinanceBatchNew
@@ -422,7 +532,7 @@
             this.btnFinanceBatchNew.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchNew.TabIndex = 19;
-            this.btnFinanceBatchNew.Text = "Êñ∞Âª∫ÊâπÊ¨°";
+            this.btnFinanceBatchNew.Text = "–¬Ω®≈˙¥Œ";
             this.btnFinanceBatchNew.Click += new System.EventHandler(this.NewBatch);
             // 
             // btnFactorSelect
@@ -446,7 +556,7 @@
             this.btnFinanceBatchSave.Size = new System.Drawing.Size(61, 23);
             this.btnFinanceBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFinanceBatchSave.TabIndex = 19;
-            this.btnFinanceBatchSave.Text = "‰øùÂ≠òÊâπÊ¨°";
+            this.btnFinanceBatchSave.Text = "±£¥Ê≈˙¥Œ";
             this.btnFinanceBatchSave.Click += new System.EventHandler(this.SaveBatch);
             // 
             // financeTypeComboBoxEx
@@ -457,15 +567,15 @@
             this.financeTypeComboBoxEx.FormattingEnabled = true;
             this.financeTypeComboBoxEx.ItemHeight = 14;
             this.financeTypeComboBoxEx.Items.AddRange(new object[] {
-            "‰øùÁêÜÈ¢Ñ‰ªòÊ¨æ(Ë°®ÂÜÖ)",
-            "ÂçñÊñπ‰ª£‰ªò",
-            "‰π∞Êñπ‰ª£‰ªò",
-            "Èì∂Ë°åÊâøÂÖëÊ±áÁ•®",
-            "ÂïÜ‰∏öÊâøÂÖëÊ±áÁ•®",
-            "ÂõΩÂÜÖ‰ø°Áî®ËØÅ",
-            "ÂõΩÈôÖ‰ø°Áî®ËØÅ",
-            "ÂÖ∂‰ªñ",
-            "Êú™Áü•"});
+            "±£¿Ì‘§∏∂øÓ(±Ìƒ⁄)",
+            "¬Ù∑Ω¥˙∏∂",
+            "¬Ú∑Ω¥˙∏∂",
+            "“¯––≥–∂“ª„∆±",
+            "…Ã“µ≥–∂“ª„∆±",
+            "π˙ƒ⁄–≈”√÷§",
+            "π˙º –≈”√÷§",
+            "∆‰À˚",
+            "Œ¥÷™"});
             this.financeTypeComboBoxEx.Location = new System.Drawing.Point(440, 3);
             this.financeTypeComboBoxEx.Name = "financeTypeComboBoxEx";
             this.financeTypeComboBoxEx.Size = new System.Drawing.Size(100, 20);
@@ -635,15 +745,48 @@
             // 
             this.casesBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Case);
             // 
-            // batchBindingSource
-            // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceFinanceBatch);
-            // 
             // superValidator
             // 
             this.superValidator.ContainerControl = this;
             this.superValidator.ErrorProvider = this.errorProvider;
             this.superValidator.Highlighter = this.highlighter;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "±ÿÃÓ";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "±ÿÃÓ";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator4
+            // 
+            this.requiredFieldValidator4.ErrorMessage = "±ÿÃÓ";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // compareValidator1
+            // 
+            this.compareValidator1.ControlToCompare = this.financePeriodBeginDateTimePicker;
+            this.compareValidator1.ErrorMessage = "÷’÷π»’∆⁄”¶∏√¥Û”⁄∆ º»’∆⁄";
+            this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
+            // 
+            // requiredFieldValidator3
+            // 
+            this.requiredFieldValidator3.ErrorMessage = "±ÿÃÓ";
+            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator6
+            // 
+            this.requiredFieldValidator6.ErrorMessage = "±ÿÃÓ";
+            this.requiredFieldValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator5
+            // 
+            this.requiredFieldValidator5.ErrorMessage = "±ÿÃÓ";
+            this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // errorProvider
             // 
@@ -653,93 +796,6 @@
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "ÂøÖÂ°´";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator2
-            // 
-            this.requiredFieldValidator2.ErrorMessage = "ÂøÖÂ°´";
-            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator3
-            // 
-            this.requiredFieldValidator3.ErrorMessage = "ÂøÖÂ°´";
-            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator4
-            // 
-            this.requiredFieldValidator4.ErrorMessage = "ÂøÖÂ°´";
-            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // compareValidator1
-            // 
-            this.compareValidator1.ControlToCompare = this.financePeriodBeginDateTimePicker;
-            this.compareValidator1.ErrorMessage = "ÁªàÊ≠¢Êó•ÊúüÂ∫îËØ•Â§ß‰∫éËµ∑ÂßãÊó•Êúü";
-            this.compareValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.compareValidator1.Operator = DevComponents.DotNetBar.Validator.eValidationCompareOperator.GreaterThan;
-            // 
-            // requiredFieldValidator5
-            // 
-            this.requiredFieldValidator5.ErrorMessage = "ÂøÖÂ°´";
-            this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator6
-            // 
-            this.requiredFieldValidator6.ErrorMessage = "ÂøÖÂ°´";
-            this.requiredFieldValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // colCaseCode
-            // 
-            this.colCaseCode.DataPropertyName = "CaseCode";
-            this.colCaseCode.HeaderText = "Ê°à‰ª∂ÁºñÂè∑";
-            this.colCaseCode.Name = "colCaseCode";
-            this.colCaseCode.ReadOnly = true;
-            // 
-            // colBuyerClient
-            // 
-            this.colBuyerClient.DataPropertyName = "BuyerClient";
-            this.colBuyerClient.HeaderText = "‰π∞ÊñπÂêçÁß∞";
-            this.colBuyerClient.Name = "colBuyerClient";
-            this.colBuyerClient.ReadOnly = true;
-            // 
-            // colAssignOutstanding
-            // 
-            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignOutstanding.HeaderText = "Ë¥¶Ê¨æ‰ΩôÈ¢ù";
-            this.colAssignOutstanding.Name = "colAssignOutstanding";
-            this.colAssignOutstanding.ReadOnly = true;
-            // 
-            // colValuedAssignOutstanding
-            // 
-            this.colValuedAssignOutstanding.DataPropertyName = "ValuedAssignOutstanding";
-            dataGridViewCellStyle3.Format = "N2";
-            this.colValuedAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colValuedAssignOutstanding.HeaderText = "ÊúâÊïàË¥¶Ê¨æ‰ΩôÈ¢ù";
-            this.colValuedAssignOutstanding.Name = "colValuedAssignOutstanding";
-            this.colValuedAssignOutstanding.ReadOnly = true;
-            // 
-            // colFinanceProportion
-            // 
-            this.colFinanceProportion.DataPropertyName = "FinanceProportion";
-            dataGridViewCellStyle4.Format = "p0";
-            this.colFinanceProportion.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colFinanceProportion.HeaderText = "È¢Ñ‰ªòÊØî‰æã";
-            this.colFinanceProportion.Name = "colFinanceProportion";
-            this.colFinanceProportion.ReadOnly = true;
-            // 
-            // colCanBeFinanceAmount
-            // 
-            this.colCanBeFinanceAmount.DataPropertyName = "CanBeFinanceAmount";
-            dataGridViewCellStyle5.Format = "N2";
-            this.colCanBeFinanceAmount.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colCanBeFinanceAmount.HeaderText = "ÂèØËûçËµÑÈáëÈ¢ù";
-            this.colCanBeFinanceAmount.Name = "colCanBeFinanceAmount";
-            this.colCanBeFinanceAmount.ReadOnly = true;
             // 
             // PoolFinance
             // 
@@ -756,10 +812,10 @@
             this.poolBindingNavigator.PerformLayout();
             this.panelFinanceBatch.ResumeLayout(false);
             this.panelFinanceBatch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodEndDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.financePeriodBeginDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.casesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -767,50 +823,5 @@
         }
 
         #endregion
-
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCases;
-        private System.Windows.Forms.BindingNavigator poolBindingNavigator;
-        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
-        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private DevComponents.DotNetBar.PanelEx panelFinanceBatch;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbLoanNo;
-        private DevComponents.DotNetBar.ButtonX btnFinanceBatchSelect;
-        private DevComponents.DotNetBar.ButtonX btnFinanceBatchNew;
-        private DevComponents.DotNetBar.ButtonX btnFactorSelect;
-        private DevComponents.DotNetBar.ButtonX btnFinanceBatchSave;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx financeTypeComboBoxEx;
-        private DevComponents.DotNetBar.Controls.TextBoxX costRateTextBoxX;
-        private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX financeRateTextBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput financePeriodEndDateTimePicker;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput financePeriodBeginDateTimePicker;
-        private DevComponents.DotNetBar.Controls.TextBoxX financeAmountTextBoxX;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx batchCurrencyComboBoxEx;
-        private DevComponents.DotNetBar.Controls.TextBoxX financeBatchNoTextBox;
-        private System.Windows.Forms.BindingSource casesBindingSource;
-        private System.Windows.Forms.BindingSource batchBindingSource;
-        private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colValuedAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCanBeFinanceAmount;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
-        private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator6;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
     }
 }

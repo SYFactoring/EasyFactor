@@ -1,24 +1,28 @@
-﻿
+//-----------------------------------------------------------------------
+// <copyright file="RefundBatchDetail.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.ARMgr
 {
     using System;
-    using System.Collections.Generic;
+    using System.Data.Linq;
     using System.Drawing;
+    using System.Linq;
     using System.Windows.Forms;
+    using CMBC.EasyFactor.CaseMgr;
     using CMBC.EasyFactor.DB.dbml;
     using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.CaseMgr;
-    using System.Data.Linq;
-    using System.Linq;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class RefundBatchDetail : DevComponents.DotNetBar.Office2007Form
     {
-        #region Fields (3)
+        #region?Fields?(3)?
 
         /// <summary>
         /// 
@@ -33,9 +37,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private OpBatchType opBatchType;
 
-        #endregion Fields
+        #endregion?Fields?
 
-        #region Enums (1)
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -53,9 +57,9 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-        #endregion Enums
+        #endregion?Enums?
 
-        #region Constructors (1)
+        #region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -78,11 +82,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.UpdateBatchControlStatus();
         }
 
-        #endregion Constructors
+        #endregion?Constructors?
 
-        #region Methods (7)
+        #region?Methods?(8)?
 
-        // Private Methods (7) 
+        //?Private?Methods?(8)?
 
         /// <summary>
         /// 
@@ -118,7 +122,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("ɾ��ʧ��," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -133,8 +137,26 @@ namespace CMBC.EasyFactor.ARMgr
         private void DetailCase(object sender, EventArgs e)
         {
             InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
-            CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
-            detail.Show();
+            if (batch.Case != null)
+            {
+                CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+                detail.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailFinanceBatch(object sender, EventArgs e)
+        {
+            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
+            if (batch.InvoiceFinanceBatch != null)
+            {
+                FinanceBatchDetail detail = new FinanceBatchDetail(batch.InvoiceFinanceBatch);
+                detail.Show();
+            }
         }
 
         /// <summary>
@@ -209,7 +231,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (isUpdateOK)
             {
-                MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("���ݸ��³ɹ�", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -255,6 +277,6 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(this.diInputDate, false);
         }
 
-        #endregion Methods
+        #endregion?Methods?
     }
 }

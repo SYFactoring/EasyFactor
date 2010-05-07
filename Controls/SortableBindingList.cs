@@ -1,4 +1,9 @@
-Ôªø
+//-----------------------------------------------------------------------
+// <copyright file="SortableBindingList.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
 namespace CMBC.EasyFactor.Controls
 {
     using System;
@@ -11,40 +16,48 @@ namespace CMBC.EasyFactor.Controls
     /// <typeparam name="T"></typeparam>
     public class SortableBindingList<T> : BindingList<T>
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        private ListSortDirection sortDirection = ListSortDirection.Ascending;
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        private PropertyDescriptor propertyDescriptor;
-        
+		#region?Fields?(3)?
+
         /// <summary>
         /// 
         /// </summary>
         private bool isSorted;
+        /// <summary>
+        /// 
+        /// </summary>
+        private PropertyDescriptor propertyDescriptor;
+        /// <summary>
+        /// 
+        /// </summary>
+        private ListSortDirection sortDirection = ListSortDirection.Ascending;
+
+		#endregion?Fields?
+
+		#region?Constructors?(2)?
 
         /// <summary>
         /// 
         /// </summary>
-        protected override bool SupportsSortingCore
-        {
-            get
-            {
-                return true;
-            }
-        }
+        /// <param name="t"></param>
+        public SortableBindingList(IList<T> t) : base(t) { }
 
         /// <summary>
         /// 
         /// </summary>
-        protected override PropertyDescriptor SortPropertyCore
+        public SortableBindingList() : base() { }
+
+		#endregion?Constructors?
+
+		#region?Properties?(4)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected override bool IsSortedCore
         {
             get
             {
-                return propertyDescriptor;
+                return isSorted;
             }
         }
 
@@ -62,93 +75,30 @@ namespace CMBC.EasyFactor.Controls
         /// <summary>
         /// 
         /// </summary>
-        protected override bool IsSortedCore
+        protected override PropertyDescriptor SortPropertyCore
         {
             get
             {
-                return isSorted;
+                return propertyDescriptor;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public SortableBindingList() : base() { }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="t"></param>
-        public SortableBindingList(IList<T> t) : base(t) { }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="propertyName"></param>
-        /// <returns></returns>
-        private PropertyDescriptor GetPropertyDescriptor(string propertyName)
+        protected override bool SupportsSortingCore
         {
-            bool findName = false;
-            PropertyDescriptorCollection propertyCollection = TypeDescriptor.GetProperties(typeof(T));
-            foreach (PropertyDescriptor item in propertyCollection)
+            get
             {
-                if (item.Name == propertyName)
-                {
-                    findName = true;
-                    return item;
-                }
-            }
-
-            if (!findName)
-            {
-                throw (new Exception("ÊéíÂ∫èÂ≠óÊÆµÂêç‰∏çÂ≠òÂú®!"));
-            }
-            else
-            {
-                return null;
+                return true;
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="prop"></param>
-        /// <param name="direction"></param>
-        protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction)
-        {
-            propertyDescriptor = prop;
-            sortDirection = direction;
-            InnerSort();
-            isSorted = true;
-        }
+		#endregion?Properties?
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void InnerSort()
-        {
-            List<T> list = (this.Items as List<T>);
-            list.Sort(Compare);
-            ResetBindings();
-        }
+		#region?Methods?(6)?
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        private int Compare(T x, T y)
-        {
-            if (sortDirection == ListSortDirection.Descending)
-            {
-                return CompareValue(propertyDescriptor.GetValue(y), propertyDescriptor.GetValue(x));
-            }
-            else
-            {
-                return CompareValue(propertyDescriptor.GetValue(x), propertyDescriptor.GetValue(y));
-            }
-        }
+		//?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -168,6 +118,39 @@ namespace CMBC.EasyFactor.Controls
 
             propertyDescriptor = GetPropertyDescriptor(sortPropertyName);
             ApplySortCore(propertyDescriptor, sortDirection);
+        }
+		//?Protected?Methods?(1)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="prop"></param>
+        /// <param name="direction"></param>
+        protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction)
+        {
+            propertyDescriptor = prop;
+            sortDirection = direction;
+            InnerSort();
+            isSorted = true;
+        }
+		//?Private?Methods?(4)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private int Compare(T x, T y)
+        {
+            if (sortDirection == ListSortDirection.Descending)
+            {
+                return CompareValue(propertyDescriptor.GetValue(y), propertyDescriptor.GetValue(x));
+            }
+            else
+            {
+                return CompareValue(propertyDescriptor.GetValue(x), propertyDescriptor.GetValue(y));
+            }
         }
 
         /// <summary>
@@ -197,5 +180,45 @@ namespace CMBC.EasyFactor.Controls
             else
                 return o1.ToString().CompareTo(o2.ToString());
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        private PropertyDescriptor GetPropertyDescriptor(string propertyName)
+        {
+            bool findName = false;
+            PropertyDescriptorCollection propertyCollection = TypeDescriptor.GetProperties(typeof(T));
+            foreach (PropertyDescriptor item in propertyCollection)
+            {
+                if (item.Name == propertyName)
+                {
+                    findName = true;
+                    return item;
+                }
+            }
+
+            if (!findName)
+            {
+                throw (new Exception("≈≈–Ú◊÷∂Œ√˚≤ª¥Ê‘⁄!"));
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InnerSort()
+        {
+            List<T> list = (this.Items as List<T>);
+            list.Sort(Compare);
+            ResetBindings();
+        }
+
+		#endregion?Methods?
     }
 }

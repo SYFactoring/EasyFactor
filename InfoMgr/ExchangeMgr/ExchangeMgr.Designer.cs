@@ -1,4 +1,4 @@
-Ôªø//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ExchangeMgr.Designer.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -11,16 +11,20 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
     /// </summary>
     public partial class ExchangeMgr
     {
-        #region¬†Fields¬†(5)
+		#region?Fields?(6)?
 
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExchangeRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFromCurr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastModifiedDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colToCurr;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvExchange;
 
-        #endregion¬†Fields
+		#endregion?Fields?
 
-        #region¬†Methods¬†(1)
+		#region?Methods?(1)?
 
-        //¬†Protected¬†Methods¬†(1)¬†
+		//?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -36,7 +40,9 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
             base.Dispose(disposing);
         }
 
-        #endregion¬†Methods
+		#endregion?Methods?
+
+
 
         #region Component Designer generated code
 
@@ -86,21 +92,21 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
             // colFromCurr
             // 
             this.colFromCurr.DataPropertyName = "FromCurr";
-            this.colFromCurr.HeaderText = "Â∏ÅÂà´";
+            this.colFromCurr.HeaderText = "±“±";
             this.colFromCurr.Name = "colFromCurr";
             this.colFromCurr.ReadOnly = true;
             // 
             // colToCurr
             // 
             this.colToCurr.DataPropertyName = "ToCurr";
-            this.colToCurr.HeaderText = "Â∏ÅÂà´";
+            this.colToCurr.HeaderText = "±“±";
             this.colToCurr.Name = "colToCurr";
             this.colToCurr.ReadOnly = true;
             // 
             // colExchangeRate
             // 
             this.colExchangeRate.DataPropertyName = "ExchangeRate";
-            this.colExchangeRate.HeaderText = "Ê±áÁéá";
+            this.colExchangeRate.HeaderText = "ª„¬ ";
             this.colExchangeRate.Name = "colExchangeRate";
             this.colExchangeRate.ReadOnly = true;
             // 
@@ -110,7 +116,7 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
             dataGridViewCellStyle1.Format = "d";
             dataGridViewCellStyle1.NullValue = null;
             this.colLastModifiedDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colLastModifiedDate.HeaderText = "Êõ¥Êñ∞Êó•Êúü";
+            this.colLastModifiedDate.HeaderText = "∏¸–¬»’∆⁄";
             this.colLastModifiedDate.Name = "colLastModifiedDate";
             this.colLastModifiedDate.ReadOnly = true;
             // 
@@ -127,10 +133,5 @@ namespace CMBC.EasyFactor.InfoMgr.ExchangeMgr
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFromCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colToCurr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExchangeRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLastModifiedDate;
     }
 }

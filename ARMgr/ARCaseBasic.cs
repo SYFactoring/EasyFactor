@@ -1,4 +1,4 @@
-ï»¿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="ARCaseBasic.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -13,48 +13,48 @@ namespace CMBC.EasyFactor.ARMgr
     using CMBC.EasyFactor.InfoMgr.ClientMgr;
     using CMBC.EasyFactor.InfoMgr.FactorMgr;
     using CMBC.EasyFactor.Utils;
-    using DevComponents.DotNetBar;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using DevComponents.DotNetBar;
 
     public enum OpARType
     {
         /// <summary>
-        /// è½¬è®©
+        /// ×ªÈÃ
         /// </summary>
         ASSIGN,
 
         /// <summary>
-        /// èèµ„
+        /// ÈÚ×Ê
         /// </summary>
         FINANCE,
 
         /// <summary>
-        /// ä¹°æ–¹ä»˜æ¬¾
+        /// Âò·½¸¶¿î
         /// </summary>
         BUYER_PAYMENT,
 
         /// <summary>
-        /// å–æ–¹è¿˜æ¬¾
+        /// Âô·½»¹¿î
         /// </summary>
         SELLER_REFUND,
 
         /// <summary>
-        /// é—´æ¥ä»˜æ¬¾
+        /// ¼ä½Ó¸¶¿î
         /// </summary>
         INDIRECT_PAYMENT,
 
         /// <summary>
-        /// æ‹…ä¿ä»˜æ¬¾
+        /// µ£±£¸¶¿î
         /// </summary>
         GUARANTEE_PAYMENT,
 
         /// <summary>
-        /// å–æ–¹å›è´­
+        /// Âô·½»Ø¹º
         /// </summary>
         SELLER_REASSIGN,
 
         /// <summary>
-        /// è´·é¡¹é€šçŸ¥
+        /// ´ûÏîÍ¨Öª
         /// </summary>
         CREDIT_NOTE,
     }
@@ -64,21 +64,23 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class ARCaseBasic : UserControl
     {
-        #regionÂ FieldsÂ (2)
+
+
+        #region?Fields?(2)?
 
         /// <summary>
         /// 
         /// </summary>
         private Case _case;
-
         /// <summary>
         /// 
         /// </summary>
         private OpARType opARType;
 
-        #endregionÂ Fields
+        #endregion?Fields?
 
-        #regionÂ ConstructorsÂ (1)
+
+        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the ARCaseBasic class
@@ -124,9 +126,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelInvoiceMgr.Controls.Add(this.InvoiceControl);
         }
 
-        #endregionÂ Constructors
+        #endregion?Constructors?
 
-        #regionÂ PropertiesÂ (2)
+
+        #region?Properties?(2)?
 
         /// <summary>
         /// Gets or sets
@@ -153,11 +156,12 @@ namespace CMBC.EasyFactor.ARMgr
             set;
         }
 
-        #endregionÂ Properties
+        #endregion?Properties?
 
-        #regionÂ MethodsÂ (8)
 
-        //Â PublicÂ MethodsÂ (1)Â 
+        #region?Methods?(8)?
+
+        //?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -186,7 +190,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.tbFinanceOutstanding.Text = String.Empty;
             }
         }
-        //Â PrivateÂ MethodsÂ (7)Â 
+        //?Private?Methods?(7)?
 
         /// <summary>
         /// 
@@ -281,13 +285,13 @@ namespace CMBC.EasyFactor.ARMgr
 
             switch (this.Case.TransactionType)
             {
-                case "å›½å†…å–æ–¹ä¿ç†":
-                case "å‡ºå£ä¿ç†":
+                case "¹úÄÚÂô·½±£Àí":
+                case "³ö¿Ú±£Àí":
                     this.factorCodeTextBox.Text = this.Case.BuyerFactor.FactorCode;
                     this.factorNameTextBox.Text = this.Case.BuyerFactor.ToString();
                     break;
-                case "å›½å†…ä¹°æ–¹ä¿ç†":
-                case "è¿›å£ä¿ç†":
+                case "¹úÄÚÂò·½±£Àí":
+                case "½ø¿Ú±£Àí":
                     this.factorCodeTextBox.Text = this.Case.SellerFactor.FactorCode;
                     this.factorNameTextBox.Text = this.Case.SellerFactor.ToString();
                     break;
@@ -330,7 +334,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (!cda.FinanceLine.HasValue && this.opARType == OpARType.FINANCE)
                 {
-                    MessageBoxEx.Show("æœ¬æ¡ˆæ— é¢„ä»˜æ¬¾é¢åº¦ï¼Œä¸èƒ½èèµ„ã€‚", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("±¾°¸ÎŞÔ¤¸¶¿î¶î¶È£¬²»ÄÜÈÚ×Ê¡£", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }
@@ -367,7 +371,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void SelectCase(object sender, EventArgs e)
         {
             CaseMgr caseMgr = new CaseMgr(CaseMgr.OpCaseType.ENABLE_CASE);
-            QueryForm queryForm = new QueryForm(caseMgr, "é€‰æ‹©æ¡ˆä»¶");
+            QueryForm queryForm = new QueryForm(caseMgr, "Ñ¡Ôñ°¸¼ş");
             caseMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
             Case curCase = caseMgr.Selected;
@@ -375,13 +379,13 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (curCase.ActiveCDA == null)
                 {
-                    MessageBoxEx.Show("æ²¡æœ‰æœ‰æ•ˆçš„é¢åº¦é€šçŸ¥ä¹¦ï¼Œä¸èƒ½è¿›è¡Œåº”æ”¶è´¦æ¬¾ç®¡ç†", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Ã»ÓĞÓĞĞ§µÄ¶î¶ÈÍ¨ÖªÊé£¬²»ÄÜ½øĞĞÓ¦ÊÕÕË¿î¹ÜÀí", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 this.Case = curCase;
             }
         }
 
-        #endregionÂ Methods
+        #endregion?Methods?
     }
 }
