@@ -423,7 +423,10 @@ namespace CMBC.EasyFactor.Utils
                 else if (e.Error.Data.Contains("row"))
                 {
                     this.tbStatus.Text = String.Format("第{0}条记录发生异常: {1}", e.Error.Data["row"], e.Error.Message);
-
+                }
+                else if (e.Error.Data.Contains("ID"))
+                {
+                    this.tbStatus.Text = String.Format("记录: {0} 发生异常: {1}", e.Error.Data["ID"], e.Error.Message);
                 }
                 else
                 {
@@ -2903,8 +2906,7 @@ namespace CMBC.EasyFactor.Utils
                         {
                             paymentBatch = null;
                             string paymentType = "贷项通知";
-                            column = 19;
-                            DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
+                            DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, 11];
                             if (paymentDate != null)
                             {
                                 paymentBatch = paymentBatches.SingleOrDefault(i => i.Case.CaseCode == caseCode && i.PaymentDate == paymentDate && i.PaymentType == paymentType);
@@ -2921,8 +2923,7 @@ namespace CMBC.EasyFactor.Utils
                                 }
                             }
 
-                            column = 5;
-                            string creditNoteNo = String.Format("{0:G}", valueArray[row, column++]);
+                            string creditNoteNo = String.Format("{0:G}", valueArray[row, 5]);
                             if (String.IsNullOrEmpty(creditNoteNo))
                             {
                                 throw new Exception("贷项通知编号不能为空");
@@ -2936,18 +2937,15 @@ namespace CMBC.EasyFactor.Utils
                                 {
                                     creditNote = new CreditNote();
                                     creditNote.CreditNoteNo = creditNoteNo;
-                                    column = 9;
-                                    creditNote.CreditNoteDate = (DateTime)valueArray[row, column++];
+                                    creditNote.CreditNoteDate = (DateTime)valueArray[row, 9];
                                     creditNoteList.Add(creditNote);
                                 }
                             }
 
                             paymentLog = new InvoicePaymentLog();
                             paymentLog.CreditNote = creditNote;
-                            column = 19;
-                            paymentLog.PaymentAmount = (double)valueArray[row, column++];
-                            column = 6;
-                            string invoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                            paymentLog.PaymentAmount = (double)valueArray[row, 8];
+                            string invoiceNo = String.Format("{0:G}", valueArray[row, 6]);
                             if (String.IsNullOrEmpty(invoiceNo))
                             {
                                 throw new Exception("贷项通知对应发票号不能为空");
@@ -3020,6 +3018,10 @@ namespace CMBC.EasyFactor.Utils
 
                 if (invoiceList.Count != result)
                 {
+                    if (invoice != null)
+                    {
+                        e1.Data["ID"] = invoice.InvoiceNo;
+                    }
                     e1.Data["row"] = result + 1;
                     e1.Data["column"] = column - 1;
                 }

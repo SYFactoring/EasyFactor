@@ -208,6 +208,12 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedCase"></param>
+        /// <param name="cdaList"></param>
+        /// <returns></returns>
         public static string GenerateCDACode(Case selectedCase, List<CDA> cdaList)
         {
             if (selectedCase == null)
