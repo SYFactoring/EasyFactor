@@ -514,11 +514,11 @@ namespace CMBC.EasyFactor.Utils
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
+                Case curCase = null;
+                InvoiceAssignBatch batch = null;
 
                 try
                 {
-                    Case curCase = null;
-                    InvoiceAssignBatch batch = null;
                     for (int row = 3; row <= size; row++)
                     {
                         if (worker.CancellationPending)
@@ -710,14 +710,19 @@ namespace CMBC.EasyFactor.Utils
                 }
                 catch (Exception e1)
                 {
-                    foreach (InvoiceAssignBatch batch in batchList)
+                    foreach (InvoiceAssignBatch b in batchList)
                     {
-                        batch.Case = null;
+                        b.Case = null;
                     }
 
                     if (result != invoiceList.Count)
                     {
                         e1.Data["row"] = result;
+                    }
+
+                    if (curCase != null)
+                    {
+                        e1.Data["ID"] = curCase.CaseCode;
                     }
 
                     throw;
@@ -964,14 +969,16 @@ namespace CMBC.EasyFactor.Utils
         private int ImportCDA(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
-
             int result = 0;
             this.context = new DBDataContext();
+
+            List<CDA> cdaList = new List<CDA>();
 
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
-                List<CDA> cdaList = new List<CDA>();
+                Case curCase = null;
+
                 try
                 {
                     for (int row = 2; row <= size; row++)
@@ -989,7 +996,6 @@ namespace CMBC.EasyFactor.Utils
                             continue;
                         }
 
-                        Case curCase = null;
                         curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
                         if (curCase == null)
                         {
@@ -1102,6 +1108,11 @@ namespace CMBC.EasyFactor.Utils
                     if (cdaList.Count != result)
                     {
                         e1.Data["row"] = result;
+                    }
+
+                    if (curCase != null)
+                    {
+                        e1.Data["ID"] = curCase.CaseCode;
                     }
 
                     throw;
@@ -1748,22 +1759,21 @@ namespace CMBC.EasyFactor.Utils
             int result = 0;
 
             List<InvoicePaymentBatch> paymentBatchList = new List<InvoicePaymentBatch>();
+            List<CreditNote> creditNoteList = new List<CreditNote>();
 
             this.context = new DBDataContext();
 
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
+                InvoiceAssignBatch assignBatch = null;
+                InvoicePaymentBatch paymentBatch = null;
+                Invoice invoice = null;
+                InvoicePaymentLog log = null;
+                CreditNote creditNote = null;
 
                 try
                 {
-                    InvoiceAssignBatch assignBatch = null;
-                    InvoicePaymentBatch paymentBatch = null;
-                    Invoice invoice = null;
-                    InvoicePaymentLog log = null;
-                    CreditNote creditNote = null;
-                    List<CreditNote> creditNoteList = new List<CreditNote>();
-
                     for (int row = 3; row <= size; row++)
                     {
                         if (worker.CancellationPending)
@@ -1914,12 +1924,12 @@ namespace CMBC.EasyFactor.Utils
                 {
                     foreach (InvoicePaymentBatch batch in paymentBatchList)
                     {
-                        foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
+                        foreach (InvoicePaymentLog l in batch.InvoicePaymentLogs)
                         {
-                            Invoice invoice = log.Invoice;
-                            log.Invoice = null;
-                            log.CreditNote = null;
-                            invoice.CaculatePayment();
+                            Invoice i = l.Invoice;
+                            l.Invoice = null;
+                            l.CreditNote = null;
+                            i.CaculatePayment();
                         }
 
                         batch.Case = null;
@@ -2086,12 +2096,16 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+
             this.context = new DBDataContext();
+
+            List<Factor> factorList = new List<Factor>();
 
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
-                List<Factor> factorList = new List<Factor>();
+                Factor factor = null;
+
                 try
                 {
                     for (int row = 2; row <= size; row++)
@@ -2109,7 +2123,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         bool isNew = false;
-                        Factor factor = context.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
+                        factor = context.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                         if (factor == null)
                         {
                             isNew = true;
@@ -2188,14 +2202,19 @@ namespace CMBC.EasyFactor.Utils
                 }
                 catch (Exception e1)
                 {
-                    foreach (Factor factor in factorList)
+                    foreach (Factor f in factorList)
                     {
-                        factor.FactorGroup = null;
+                        f.FactorGroup = null;
                     }
 
                     if (result != factorList.Count)
                     {
                         e1.Data["row"] = result;
+                    }
+
+                    if (factor != null)
+                    {
+                        e1.Data["ID"] = factor.FactorCode;
                     }
 
                     throw;
@@ -2310,6 +2329,7 @@ namespace CMBC.EasyFactor.Utils
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
+                InvoiceAssignBatch assignBatch = null;
 
                 try
                 {
@@ -2329,7 +2349,7 @@ namespace CMBC.EasyFactor.Utils
                             break;
                         }
 
-                        InvoiceAssignBatch assignBatch = context.InvoiceAssignBatches.SingleOrDefault(c => c.AssignBatchNo == assignBatchCode);
+                        assignBatch = context.InvoiceAssignBatches.SingleOrDefault(c => c.AssignBatchNo == assignBatchCode);
                         if (assignBatch == null)
                         {
                             throw new Exception("业务编号错误：" + assignBatchCode);
@@ -2536,7 +2556,7 @@ namespace CMBC.EasyFactor.Utils
 
                     context.SubmitChanges();
                 }
-                catch (Exception)
+                catch (Exception e1)
                 {
                     foreach (InvoiceFinanceBatch batch in financeBatchList)
                     {
@@ -2549,6 +2569,11 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         batch.Case = null;
+                    }
+
+                    if (assignBatch != null)
+                    {
+                        e1.Data["ID"] = assignBatch.AssignBatchNo;
                     }
 
                     throw;
@@ -3054,12 +3079,12 @@ namespace CMBC.EasyFactor.Utils
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
+                InvoiceAssignBatch assignBatch = null;
+                InvoicePaymentBatch paymentBatch = null;
+                Invoice invoice = null;
 
                 try
                 {
-                    InvoiceAssignBatch assignBatch = null;
-                    InvoicePaymentBatch paymentBatch = null;
-                    Invoice invoice = null;
                     bool isInInvoice = false;
 
                     for (int row = 3; row <= size; row++)
@@ -3242,18 +3267,23 @@ namespace CMBC.EasyFactor.Utils
 
                     context.SubmitChanges();
                 }
-                catch (Exception)
+                catch (Exception e1)
                 {
                     foreach (InvoicePaymentBatch batch in paymentBatchList)
                     {
                         foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
                         {
-                            Invoice invoice = log.Invoice;
+                            Invoice i = log.Invoice;
                             log.Invoice = null;
-                            invoice.CaculatePayment();
+                            i.CaculatePayment();
                         }
 
                         batch.Case = null;
+                    }
+
+                    if (assignBatch != null)
+                    {
+                        e1.Data["ID"] = assignBatch.AssignBatchNo;
                     }
 
                     throw;
@@ -3366,6 +3396,7 @@ namespace CMBC.EasyFactor.Utils
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
+                Client client = null;
 
                 try
                 {
@@ -3385,7 +3416,7 @@ namespace CMBC.EasyFactor.Utils
                             break;
                         }
 
-                        Client client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
+                        client = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientEDICode);
                         if (client == null)
                         {
                             throw new Exception("客户编号错误：" + clientEDICode);
@@ -3514,11 +3545,16 @@ namespace CMBC.EasyFactor.Utils
 
                     context.SubmitChanges();
                 }
-                catch (Exception)
+                catch (Exception e1)
                 {
                     foreach (InvoiceFinanceBatch batch in batchList)
                     {
                         batch.Client = null;
+                    }
+
+                    if (client != null)
+                    {
+                        e1.Data["ID"] = client.ClientEDICode;
                     }
 
                     throw;
@@ -3550,11 +3586,10 @@ namespace CMBC.EasyFactor.Utils
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
+                Client client = null;
 
                 try
                 {
-                    Client client = null;
-
                     for (int row = 3; row <= size; row++)
                     {
                         if (worker.CancellationPending)
@@ -3639,7 +3674,7 @@ namespace CMBC.EasyFactor.Utils
 
                     context.SubmitChanges();
                 }
-                catch (Exception)
+                catch (Exception e1)
                 {
                     foreach (InvoiceRefundBatch batch in refundBatchList)
                     {
@@ -3651,6 +3686,11 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         batch.Case = null;
+                    }
+
+                    if (client != null)
+                    {
+                        e1.Data["ID"] = client.ClientEDICode;
                     }
 
                     throw;
@@ -3682,12 +3722,11 @@ namespace CMBC.EasyFactor.Utils
             if (valueArray != null)
             {
                 int size = valueArray.GetUpperBound(0);
+                InvoiceAssignBatch assignBatch = null;
+                InvoiceRefundBatch refundBatch = null;
 
                 try
                 {
-                    InvoiceAssignBatch assignBatch = null;
-                    InvoiceRefundBatch refundBatch = null;
-
                     for (int row = 3; row <= size; row++)
                     {
                         if (worker.CancellationPending)
@@ -3816,7 +3855,7 @@ namespace CMBC.EasyFactor.Utils
 
                     context.SubmitChanges();
                 }
-                catch (Exception)
+                catch (Exception e1)
                 {
                     foreach (InvoiceRefundBatch batch in refundBatchList)
                     {
@@ -3828,6 +3867,11 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         batch.Case = null;
+                    }
+
+                    if (assignBatch != null)
+                    {
+                        e1.Data["ID"] = assignBatch.AssignBatchNo;
                     }
 
                     throw;
