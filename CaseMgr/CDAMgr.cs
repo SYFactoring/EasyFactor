@@ -926,5 +926,38 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateCDAStatus(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            {
+                return;
+            }
+
+            if (this.dgvCDAs.CurrentCell == null)
+            {
+                return;
+            }
+
+            CDA cda = (CDA)this.bs.List[this.dgvCDAs.CurrentCell.RowIndex];
+            cda.AdjustCDAStatus();
+
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show("更新额度通知书状态失败: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            MessageBoxEx.Show("更新额度通知书状态成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

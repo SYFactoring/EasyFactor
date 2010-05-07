@@ -196,17 +196,14 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public void AdjustCDAStatus()
         {
-            if (CDAStatus == CDAStr.CHECKED)
-            {
-                CDA checkCDA = Case.CDAs.OrderByDescending(c => c.CDASignDate).First();
-                checkCDA.CDAStatus = CDAStr.CHECKED;
+            CDA checkCDA = Case.CDAs.OrderByDescending(c => c.CDASignDate).First();
+            checkCDA.CDAStatus = CDAStr.CHECKED;
 
-                foreach (CDA c in Case.CDAs)
+            foreach (CDA c in Case.CDAs)
+            {
+                if (c != checkCDA)
                 {
-                    if (c != checkCDA && c.CDAStatus == CDAStr.CHECKED)
-                    {
-                        c.CDAStatus = CDAStr.INVALID;
-                    }
+                    c.CDAStatus = CDAStr.INVALID;
                 }
             }
         }
@@ -252,7 +249,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     count = 0;
                 }
 
-                count+=cdaList.Count(cda=>cda.CDACode.StartsWith(selectedCase.CaseCode));
+                count += cdaList.Count(cda => cda.CDACode.StartsWith(selectedCase.CaseCode));
                 return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, count + 1);
             }
             else
