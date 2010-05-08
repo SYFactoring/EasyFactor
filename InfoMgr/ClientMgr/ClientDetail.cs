@@ -471,7 +471,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DeleteClientCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -528,7 +528,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DeleteContract(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -585,7 +585,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DeleteGD(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -642,7 +642,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DeleteReview(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -714,7 +714,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void FreezeClientCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -753,7 +753,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewClientCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -778,7 +778,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewContract(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -803,7 +803,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewGD(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -828,7 +828,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewReview(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -940,7 +940,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void SaveClient(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1017,7 +1017,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SaveClientCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1172,7 +1172,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void SaveContract(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1328,7 +1328,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SaveGD(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1412,7 +1412,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SaveReview(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1562,7 +1562,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectGroup(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1585,7 +1585,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectGroupCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1705,7 +1705,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UnfreezeClientCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1744,7 +1744,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UpdateClient(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1849,7 +1849,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UpdateClientCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1925,7 +1925,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UpdateContract(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1975,7 +1975,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UpdateGD(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -2022,7 +2022,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void UpdateReivew(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }

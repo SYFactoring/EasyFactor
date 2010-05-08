@@ -151,7 +151,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void DeleteContract(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -247,7 +247,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void NewContract(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -275,7 +275,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string createUserName = this.tbCreateUserName.Text;
 
             context = new DBDataContext();
-            if (!PermUtil.ValidatePermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.ValidatePermission(Permissions.BASICINFO_UPDATE))
             {
                 context.ObjectTrackingEnabled = false;
             }
@@ -318,7 +318,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permission.BASICINFO_UPDATE))
+            if (PermUtil.ValidatePermission(Permissions.BASICINFO_UPDATE))
             {
                 this.menuItemContractNew.Enabled = true;
                 this.menuItemContractDelete.Enabled = true;

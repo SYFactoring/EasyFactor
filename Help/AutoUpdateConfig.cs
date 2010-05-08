@@ -76,10 +76,10 @@ namespace CMBC.EasyFactor.Help
 
 		//?Delegates?(1)?
 
-        public delegate void LoadConfigError(string stMessage, Exception e);
+        public delegate void LoadConfigErrorEventHandler(string stMessage, Exception loadConfigError);
 		//?Events?(1)?
 
-        public event LoadConfigError OnLoadConfigError;
+        public event LoadConfigErrorEventHandler OnLoadConfigError;
 
 		#endregion?Delegates?and?Events?
 

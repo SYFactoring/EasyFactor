@@ -182,7 +182,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void DeleteClient(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -292,7 +292,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void NewClient(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -308,7 +308,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewClientCreditLine(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -330,7 +330,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void NewContract(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -419,7 +419,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permission.BASICINFO_UPDATE))
+            if (PermUtil.ValidatePermission(Permissions.BASICINFO_UPDATE))
             {
                 this.menuItemClientNew.Enabled = true;
                 this.menuItemClientDelete.Enabled = true;

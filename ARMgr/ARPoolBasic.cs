@@ -107,7 +107,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (selectedClient == null)
             {
-                throw new ArgumentNullException("Selected Client");
+                throw new ArgumentNullException("selectedClient", "selectedClient cannot be a null reference");
             }
 
             this.tbTotalAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolTotalAssignOutstading);

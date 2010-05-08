@@ -104,7 +104,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e"></param>
         private void SaveDepartment(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
                 return;
             }

@@ -95,7 +95,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DeleteLog(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -194,7 +194,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveBatch(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -242,7 +242,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void UpdateBatch(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }

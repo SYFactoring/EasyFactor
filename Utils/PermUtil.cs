@@ -11,7 +11,7 @@ namespace CMBC.EasyFactor.Utils
     /// 
     /// </summary>
     [FlagsAttribute]
-    public enum Permission
+    public enum Permissions
     {
         /// <summary>
         /// 
@@ -92,7 +92,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="perm"></param>
         /// <returns></returns>
-        public static bool CheckPermission(Permission perm)
+        public static bool CheckPermission(Permissions perm)
         {
             if (ValidatePermission(perm))
             {
@@ -110,13 +110,13 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="perm"></param>
         /// <returns></returns>
-        public static bool ValidatePermission(Permission perm)
+        public static bool ValidatePermission(Permissions perm)
         {
             return ValidatePermission(App.Current.CurUser, perm);
         }
 		//?Internal?Methods?(1)?
 
-        internal static bool ValidatePermission(User user, Permission perm)
+        internal static bool ValidatePermission(User user, Permissions perm)
         {
             if ((user.Permission & (int)perm) == (int)perm)
             {

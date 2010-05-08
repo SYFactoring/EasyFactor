@@ -106,7 +106,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void DeleteUser(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
                 return;
             }
@@ -174,7 +174,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void NewUser(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
                 return;
             }
@@ -191,7 +191,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private void QueryUsers(object sender, System.EventArgs e)
         {
             context = new DBDataContext();
-            if (!PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            if (!PermUtil.ValidatePermission(Permissions.SYSTEM_UPDATE))
             {
                 context.ObjectTrackingEnabled = false;
             }
@@ -227,7 +227,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            if (PermUtil.ValidatePermission(Permissions.SYSTEM_UPDATE))
             {
                 this.menuItemDeleteUser.Enabled = true;
                 this.menuItemNewUser.Enabled = true;

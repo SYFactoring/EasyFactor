@@ -180,7 +180,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e"></param>
         private void DeleteDepartment(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
                 return;
             }
@@ -248,7 +248,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e"></param>
         private void NewDepartment(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
                 return;
             }
@@ -298,7 +298,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                              group dept by dept.Location into depts
                              select new { Location = depts.Key, Departments = depts };
 
-                SortableBindingList<City> locations = new SortableBindingList<City>();
+                SortableBindingCollection<City> locations = new SortableBindingCollection<City>();
 
                 foreach (var loc in result)
                 {
@@ -346,7 +346,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            if (PermUtil.ValidatePermission(Permissions.SYSTEM_UPDATE))
             {
                 this.menuItemDepartmentNew.Enabled = true;
                 this.menuItemDepartmentDelete.Enabled = true;

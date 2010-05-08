@@ -38,7 +38,7 @@ namespace CMBC.EasyFactor
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool PreLogOn()
+        public static bool PreLogOn()
         {
             DBDataContext context = new DBDataContext();
             try

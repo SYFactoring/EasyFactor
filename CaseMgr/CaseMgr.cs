@@ -179,7 +179,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void CaculateFinance(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
                 return;
             }
@@ -239,7 +239,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void DeleteCase(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -369,7 +369,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void NewCase(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -385,7 +385,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void NewCreditCoverNeg(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -509,7 +509,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permission.CASE_UPDATE))
+            if (PermUtil.ValidatePermission(Permissions.CASE_UPDATE))
             {
                 this.menuItemCaseNew.Enabled = true;
                 this.menuItemCaseDelete.Enabled = true;

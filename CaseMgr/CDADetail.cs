@@ -715,7 +715,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="curCase"></param>
         /// <returns></returns>
-        private CDA GenerateDefaultCDA(Case curCase)
+        private static CDA GenerateDefaultCDA(Case curCase)
         {
             CDA cda = new CDA();
             cda.CDASignDate = DateTime.Now.Date;
@@ -740,7 +740,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SaveCDA(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CDA_UPDATE))
             {
                 return;
             }
@@ -880,7 +880,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SelectCase(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CDA_UPDATE))
             {
                 return;
             }
@@ -906,7 +906,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void UpdateCDA(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CDA_UPDATE))
             {
                 return;
             }

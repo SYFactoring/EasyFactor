@@ -94,7 +94,7 @@ namespace CMBC.EasyFactor
         /// <param name="invoiceList"></param>
         public void InvoiceRefund(List<Invoice> invoiceList, InvoicePaymentBatch batch)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ARCaseBasic invoiceRefund = new ARCaseBasic(OpARType.SELLER_REFUND);
                 this.SetDetailPanel(invoiceRefund);
@@ -111,7 +111,7 @@ namespace CMBC.EasyFactor
         {
             if (uc == null)
             {
-                throw new ArgumentNullException("Set Detail Panel");
+                throw new ArgumentNullException("uc", "uc cannot be a null reference");
             }
 
             if (uc is CaseMgr.CaseMgr)
@@ -216,7 +216,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckAssignBatch(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
             {
                 AssignBatchMgr batchMgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.CHECK);
                 this.SetDetailPanel(batchMgr);
@@ -230,7 +230,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckCDA(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.CDA_APPROVE))
+            if (PermUtil.CheckPermission(Permissions.CDA_APPROVE))
             {
                 CDAMgr cdaMgr = new CDAMgr(CDAMgr.OpCDAType.CHECK);
                 this.SetDetailPanel(cdaMgr);
@@ -244,7 +244,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckFinanceBatch(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
             {
                 FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.CHECK);
                 this.SetDetailPanel(batchMgr);
@@ -258,7 +258,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckPaymentBatch(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
             {
                 PaymentBatchMgr batchMgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.CHECK);
                 this.SetDetailPanel(batchMgr);
@@ -272,7 +272,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckPoolFinance(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
             {
                 FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.POOL_CHECK);
                 this.SetDetailPanel(batchMgr);
@@ -286,7 +286,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckPoolRefund(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
             {
                 RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_CHECK);
                 this.SetDetailPanel(batchMgr);
@@ -300,7 +300,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckRefundBatch(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
             {
                 RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
                 this.SetDetailPanel(batchMgr);
@@ -323,7 +323,7 @@ namespace CMBC.EasyFactor
         /// <summary>
         /// 
         /// </summary>
-        private void CheckUpdateBackground()
+        private static void CheckUpdateBackground()
         {
             AutoUpdater autoUpdater = new AutoUpdater();
             autoUpdater.ConfigURL = new Uri("http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml");
@@ -339,7 +339,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CreditNotePayment(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ARCaseBasic creditNotePayment = new ARCaseBasic(OpARType.CREDIT_NOTE);
                 this.SetDetailPanel(creditNotePayment);
@@ -365,7 +365,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void DisputeResolve(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DISPUTE_RESOLVE);
                 this.SetDetailPanel(invoiceMgr);
@@ -418,7 +418,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void FlawResolve(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
                 this.SetDetailPanel(invoiceMgr);
@@ -444,7 +444,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportAssign(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
                 form.ShowDialog(this);
@@ -458,7 +458,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportCases(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CASES);
                 form.Show();
@@ -472,7 +472,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportCDA(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CDA);
                 form.Show();
@@ -486,7 +486,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClientCreditLine(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_CREDITLINE);
                 form.Show();
@@ -500,7 +500,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClients(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
                 form.Show();
@@ -514,7 +514,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClientsOverwrite(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_OVERWRITE);
                 form.Show();
@@ -528,7 +528,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportClientsReview(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_REVIEW);
                 form.Show();
@@ -542,7 +542,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportContract(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT);
                 form.Show();
@@ -556,7 +556,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportCreditCoverNeg(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CREDIT_COVER_NEG);
                 form.Show();
@@ -571,7 +571,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportCreditNote(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CREDIT_NOTE);
                 form.ShowDialog(this);
@@ -585,7 +585,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportDepartments(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENTS);
                 form.Show();
@@ -599,7 +599,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportExchangeRate(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_RATES);
                 form.Show();
@@ -613,7 +613,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportFactorCreditLine(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS_CREDITLINE);
                 form.Show();
@@ -627,7 +627,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportFactors(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
                 form.Show();
@@ -641,7 +641,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportFinance(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE);
                 form.ShowDialog(this);
@@ -655,7 +655,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportInvoices(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES);
                 form.Show();
@@ -669,7 +669,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportPayment(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_PAYMENT);
                 form.Show();
@@ -683,7 +683,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportPoolFinance(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_POOL_FINANCE);
                 form.Show();
@@ -697,7 +697,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportPoolRefund(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_POOL_REFUND);
                 form.Show();
@@ -711,7 +711,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportRefund(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_REFUND);
                 form.Show();
@@ -725,7 +725,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ImportUsers(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_IMPORT))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
                 ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USERS);
                 importForm.Show();
@@ -739,7 +739,7 @@ namespace CMBC.EasyFactor
         /// <param name="e">event args</param>
         private void InvoiceAssign(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ARCaseBasic invoiceAssign = new ARCaseBasic(OpARType.ASSIGN);
                 this.SetDetailPanel(invoiceAssign);
@@ -753,7 +753,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceBuyerPayment(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.BUYER_PAYMENT);
                 this.SetDetailPanel(invoicePayment);
@@ -767,7 +767,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceFinance(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ARCaseBasic invoiceFinance = new ARCaseBasic(OpARType.FINANCE);
                 this.SetDetailPanel(invoiceFinance);
@@ -781,7 +781,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceGuaranteePayment(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.GUARANTEE_PAYMENT);
                 this.SetDetailPanel(invoicePayment);
@@ -795,7 +795,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceIndirectPayment(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.INDIRECT_PAYMENT);
                 this.SetDetailPanel(invoicePayment);
@@ -809,7 +809,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceSellerReassign(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.SELLER_REASSIGN);
                 this.SetDetailPanel(invoicePayment);
@@ -823,7 +823,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void InvoiceSellerRefund(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 ARCaseBasic invoiceRefund = new ARCaseBasic(OpARType.SELLER_REFUND);
                 this.SetDetailPanel(invoiceRefund);
@@ -903,7 +903,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void NewCase(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE);
                 caseDetail.ShowDialog(this);
@@ -917,7 +917,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void NewCDA(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.CDA_UPDATE))
             {
                 CDADetail cdaDetail = new CDADetail(CDADetail.OpCDAType.NEW_CDA);
                 cdaDetail.ShowDialog(this);
@@ -931,7 +931,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void NewClient(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
                 clientDetail.ShowDialog(this);
@@ -945,7 +945,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void NewFactor(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
                 factorDetail.ShowDialog(this);

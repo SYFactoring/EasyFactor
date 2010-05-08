@@ -255,7 +255,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void DeleteAgreement(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -306,7 +306,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void DeleteFactorCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -357,7 +357,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void FreezeFactorCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -396,7 +396,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void NewAgreement(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -421,7 +421,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void NewFactorCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -483,7 +483,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void SaveAgreement(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -566,7 +566,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void SaveFactor(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -644,7 +644,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void SaveFactorCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -832,7 +832,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void SelectGroup(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -880,7 +880,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void UnfreezeFactorCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -919,7 +919,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void UpdateAgreement(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -977,7 +977,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void UpdateFactor(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -1080,7 +1080,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void UpdateFactorCreditLine(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }

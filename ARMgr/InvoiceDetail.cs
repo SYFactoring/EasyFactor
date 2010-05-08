@@ -169,7 +169,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DeletePaymentLog(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -206,7 +206,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DeleteRefundLog(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -318,7 +318,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Dispute(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -340,7 +340,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DisputeResolve(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -372,7 +372,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Flaw(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -390,7 +390,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void FlawResolve(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -422,7 +422,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveEDI(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -487,7 +487,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveInvoice(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -554,7 +554,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE))
             {
                 this.menuItemPaymentLogDelete.Enabled = true;
                 this.menuItemRefundLogDelete.Enabled = true;
@@ -573,7 +573,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void UpdateInvoice(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }

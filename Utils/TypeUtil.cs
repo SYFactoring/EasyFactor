@@ -15,23 +15,23 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public sealed class TypeUtil
     {
-		#region?Fields?(1)?
+        #region?Fields?(1)?
 
-        public static DateTime MIN_DATE = new DateTime(1753, 1, 1);
+        public static readonly DateTime MIN_DATE = new DateTime(1753, 1, 1);
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         private TypeUtil()
         {
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Methods?(12)?
+        #region?Methods?(12)?
 
-		//?Public?Methods?(12)?
+        //?Public?Methods?(12)?
 
         /// <summary>
         /// 
@@ -158,7 +158,7 @@ namespace CMBC.EasyFactor.Utils
         {
             if (e == null)
             {
-                throw new ArgumentNullException("Format Float To Percent");
+                throw new ArgumentNullException("e", "e cannot be a null reference");
             }
 
             if (e.DesiredType == typeof(string) && e.Value != null && !String.IsNullOrEmpty(e.Value.ToString()))
@@ -238,7 +238,7 @@ namespace CMBC.EasyFactor.Utils
         {
             if (e == null)
             {
-                throw new ArgumentNullException("Parse Percent To Float");
+                throw new ArgumentNullException("e", "e cannot be a null reference");
             }
 
             if ((e.DesiredType == typeof(double) || e.DesiredType == typeof(System.Nullable<double>)) && e.Value != null && !String.IsNullOrEmpty(e.Value.ToString()))
@@ -286,6 +286,6 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }

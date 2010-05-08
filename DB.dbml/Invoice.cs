@@ -18,13 +18,13 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Invoice
     {
-		#region?Fields?(1)?
+        #region?Fields?(1)?
 
-        public static Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>\\.\\(\\)/]+$");
+        public static readonly Regex InvoiceNoRegex = new Regex("^[a-zA-Z0-9]+[a-zA-Z0-9\\-<>\\.\\(\\)/]+$");
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Properties?(18)?
+        #region?Properties?(18)?
 
         /// <summary>
         /// Gets
@@ -336,11 +336,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Methods?(7)?
+        #region?Methods?(7)?
 
-		//?Public?Methods?(6)?
+        //?Public?Methods?(6)?
 
         /// <summary>
         /// 
@@ -520,7 +520,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 return this.InvoiceNo.GetHashCode();
             }
         }
-		//?Private?Methods?(1)?
+        //?Private?Methods?(1)?
 
         /// <summary>
         /// 
@@ -568,6 +568,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }

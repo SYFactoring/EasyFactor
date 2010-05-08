@@ -197,7 +197,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Check(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
             {
                 return;
             }
@@ -209,7 +209,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
+            if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
             {
                 MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -247,7 +247,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DeleteBatch(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -404,7 +404,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void Reject(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_CHECK))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
             {
                 return;
             }
@@ -416,7 +416,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permission.INVOICE_APPROVE))
+            if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
             {
                 MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -473,7 +473,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE))
             {
                 this.menuItemBatchDelete.Enabled = true;
             }
@@ -482,7 +482,7 @@ namespace CMBC.EasyFactor.ARMgr
                 this.menuItemBatchDelete.Enabled = false;
             }
 
-            if (PermUtil.ValidatePermission(Permission.INVOICE_CHECK))
+            if (PermUtil.ValidatePermission(Permissions.INVOICE_CHECK))
             {
                 this.menuItemCheck.Enabled = true;
                 this.menuItemReject.Enabled = true;

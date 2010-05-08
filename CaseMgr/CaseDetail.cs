@@ -315,7 +315,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DeleteCDA(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CDA_UPDATE))
             {
                 return;
             }
@@ -365,7 +365,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DeleteCreditCoverNeg(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -533,7 +533,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void NewCDA(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CDA_UPDATE))
             {
                 return;
             }
@@ -556,7 +556,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void NewCreditCoverNeg(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -623,7 +623,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SaveCase(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -719,7 +719,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SaveCreditCoverNeg(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -807,7 +807,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SelectCaseBuyer(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -852,7 +852,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SelectCaseSeller(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -921,7 +921,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SelectFactor(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -962,7 +962,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void UpdateCase(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }
@@ -1039,7 +1039,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void UpdateCreditCoverNeg(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CASE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
                 return;
             }

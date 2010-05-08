@@ -59,11 +59,6 @@ namespace CMBC.EasyFactor.Controls
         /// </summary> 
         protected override void OnMouseClick(DataGridViewCellMouseEventArgs e)
         {
-            if (e == null)
-            {
-                throw new ArgumentNullException("DataGridViewCellMouseEventArgs");
-            }
-
             Point p = new Point(e.X + _cellLocation.X, e.Y + _cellLocation.Y);
             if (p.X >= checkBoxLocation.X && p.X <=
                 checkBoxLocation.X + checkBoxSize.Width

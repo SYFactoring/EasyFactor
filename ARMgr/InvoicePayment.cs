@@ -168,7 +168,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="log"></param>
-        private void ClickLog(InvoicePaymentLog log)
+        private static void ClickLog(InvoicePaymentLog log)
         {
             log.PaymentAmount = log.AssignOutstanding;
             log.CreditNoteDate2 = DateTime.Now;
@@ -567,7 +567,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveBatch(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }

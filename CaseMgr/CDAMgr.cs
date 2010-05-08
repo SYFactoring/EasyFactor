@@ -193,7 +193,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Check(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CDA_APPROVE))
+            if (!PermUtil.CheckPermission(Permissions.CDA_APPROVE))
             {
                 return;
             }
@@ -256,7 +256,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void DeleteCDA(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CDA_UPDATE))
             {
                 return;
             }
@@ -420,7 +420,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void NewCDA(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CDA_UPDATE))
             {
                 return;
             }
@@ -482,7 +482,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Reject(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CDA_APPROVE))
+            if (!PermUtil.CheckPermission(Permissions.CDA_APPROVE))
             {
                 return;
             }
@@ -903,7 +903,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void UpdateCDAStatus(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.CDA_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.CDA_UPDATE))
             {
                 return;
             }
@@ -934,7 +934,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permission.CDA_UPDATE))
+            if (PermUtil.ValidatePermission(Permissions.CDA_UPDATE))
             {
                 this.menuItemCDANew.Enabled = true;
                 this.menuItemCDADelete.Enabled = true;
@@ -945,7 +945,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.menuItemCDADelete.Enabled = false;
             }
 
-            if (PermUtil.ValidatePermission(Permission.CDA_APPROVE))
+            if (PermUtil.ValidatePermission(Permissions.CDA_APPROVE))
             {
                 this.menuItemCheck.Enabled = true;
                 this.menuItemReject.Enabled = true;

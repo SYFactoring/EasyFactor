@@ -239,7 +239,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void CaculateFinance(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
                 if (this.dgvInvoices.CurrentCell == null)
                 {
@@ -290,7 +290,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ComputeCommission(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
                 if (this.dgvInvoices.CurrentCell == null)
                 {
@@ -330,7 +330,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DeleteInvoice(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -602,7 +602,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void InvoiceDispute(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -624,7 +624,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void InvoiceFlaw(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
@@ -758,7 +758,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permission.INVOICE_UPDATE))
+            if (PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE))
             {
                 this.menuItemInvoiceDelete.Enabled = true;
                 this.menuItemInvoiceDispute.Enabled = true;

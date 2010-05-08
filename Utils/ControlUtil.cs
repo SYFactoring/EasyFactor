@@ -7,28 +7,28 @@
 namespace CMBC.EasyFactor.Utils
 {
     using System;
+    using System.Globalization;
     using System.Reflection;
     using System.Windows.Forms;
     using DevComponents.DotNetBar.Controls;
     using DevComponents.Editors.DateTimeAdv;
-    using System.Globalization;
 
     /// <summary>
     /// 
     /// </summary>
     public sealed class ControlUtil
     {
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         private ControlUtil()
         {
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Methods?(4)?
+        #region?Methods?(4)?
 
-		//?Public?Methods?(4)?
+        //?Public?Methods?(4)?
 
         /// <summary>
         /// 
@@ -37,6 +37,11 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="btn"></param>
         public static void AddEnterListenersForQuery(Control.ControlCollection controls, IButtonControl btn)
         {
+            if (controls == null)
+            {
+                return;
+            }
+
             foreach (Control control in controls)
             {
                 if (control is TextBox || control is TextBoxX)
@@ -58,41 +63,44 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="comp"></param>
         public static void SetComponetDefault(Control comp)
         {
-            if (comp is TextBoxX)
+            TextBoxBase textControl = comp as TextBoxBase;
+            if (textControl != null)
             {
-                (comp as TextBoxX).Text = string.Empty;
+                textControl.Text = string.Empty;
+                return;
             }
-            else if (comp is TextBox)
+
+            ComboBox comboControl = comp as ComboBox;
+            if (comboControl != null)
             {
-                (comp as TextBox).Text = string.Empty;
+                comboControl.SelectedIndex = -1;
+                return;
             }
-            else if (comp is ComboBoxEx)
+
+            DateTimePicker timePickerControl = comp as DateTimePicker;
+            if (timePickerControl != null)
             {
-                (comp as ComboBoxEx).SelectedIndex = -1;
+                timePickerControl.Value = default(DateTime);
+                return;
             }
-            else if (comp is ComboTree)
+
+            DateTimeInput timeInputControl = comp as DateTimeInput;
+            if (timeInputControl != null)
             {
-                (comp as ComboTree).SelectedIndex = -1;
+                timeInputControl.Value = default(DateTime);
+                return;
             }
-            else if (comp is ComboBox)
+
+            CheckedListBox listBoxControl = comp as CheckedListBox;
+            if (listBoxControl != null)
             {
-                (comp as ComboBox).SelectedIndex = -1;
-            }
-            else if (comp is DateTimePicker)
-            {
-                (comp as DateTimePicker).Value = default(DateTime);
-            }
-            else if (comp is DateTimeInput)
-            {
-                (comp as DateTimeInput).Value = default(DateTime);
-            }
-            else if (comp is CheckedListBox)
-            {
-                (comp as CheckedListBox).ClearSelected();
-                for (int i = 0; i < (comp as CheckedListBox).Items.Count; i++)
+                listBoxControl.ClearSelected();
+                for (int i = 0; i < listBoxControl.Items.Count; i++)
                 {
-                    (comp as CheckedListBox).SetItemChecked(i, false);
+                    listBoxControl.SetItemChecked(i, false);
                 }
+
+                return;
             }
         }
 
@@ -103,42 +111,19 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="isEditable"></param>
         public static void SetComponetEditable(Control comp, bool isEditable)
         {
-            if (comp is TextBoxX)
+            if (comp == null)
             {
-                (comp as TextBoxX).ReadOnly = !isEditable;
+                return;
             }
-            else if (comp is TextBox)
+
+            TextBoxBase textControl = comp as TextBoxBase;
+            if (textControl != null)
             {
-                (comp as TextBox).ReadOnly = !isEditable;
+                textControl.ReadOnly = !isEditable;
+                return;
             }
-            else if (comp is ComboBoxEx)
-            {
-                (comp as ComboBoxEx).Enabled = isEditable;
-            }
-            else if (comp is ComboTree)
-            {
-                (comp as ComboTree).Enabled = isEditable;
-            }
-            else if (comp is ComboBox)
-            {
-                (comp as ComboBox).Enabled = isEditable;
-            }
-            else if (comp is CheckBoxX)
-            {
-                (comp as CheckBoxX).Enabled = isEditable;
-            }
-            else if (comp is DateTimePicker)
-            {
-                (comp as DateTimePicker).Enabled = isEditable;
-            }
-            else if (comp is DateTimeInput)
-            {
-                (comp as DateTimeInput).Enabled = isEditable;
-            }
-            else if (comp is CheckedListBox)
-            {
-                (comp as CheckedListBox).Enabled = isEditable;
-            }
+
+            comp.Enabled = isEditable;
         }
 
         /// <summary>
@@ -150,6 +135,6 @@ namespace CMBC.EasyFactor.Utils
             typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, control, new object[] { true }, CultureInfo.CurrentCulture);
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }

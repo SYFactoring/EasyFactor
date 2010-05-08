@@ -89,7 +89,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
 
             for (int i = 0; i < this.cbPermission.Items.Count; i++)
             {
-                Permission item = ((PermissionItem)this.cbPermission.Items[i]).Permission;
+                Permissions item = ((PermissionItem)this.cbPermission.Items[i]).Permission;
                 if (PermUtil.ValidatePermission(user, item))
                 {
                     this.cbPermission.SetItemChecked(i, true);
@@ -114,7 +114,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private void SavePermission(object sender, EventArgs e)
         {
             User user = (User)userBindingSource.DataSource;
-            if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permissions.SYSTEM_UPDATE))
             {
                 MessageBoxEx.Show("对不起，您没有执行该操作的权限。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -158,7 +158,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private void SaveUser(object sender, EventArgs e)
         {
             User user = (User)userBindingSource.DataSource;
-            if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permissions.SYSTEM_UPDATE))
             {
                 MessageBoxEx.Show("对不起，您没有执行该操作的权限。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -224,7 +224,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e"></param>
         private void UpdatePermission(object sender, EventArgs e)
         {
-            if (PermUtil.CheckPermission(Permission.SYSTEM_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
                 this.cbPermission.Enabled = true;
                 this.btnSavePermission.Enabled = true;
@@ -239,7 +239,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         private void UpdateUser(object sender, EventArgs e)
         {
             User user = (User)userBindingSource.DataSource;
-            if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+            if (user != App.Current.CurUser && !PermUtil.ValidatePermission(Permissions.SYSTEM_UPDATE))
             {
                 MessageBoxEx.Show("对不起，您没有执行该操作的权限。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -276,7 +276,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 }
 
                 userIDTextBox.ReadOnly = true;
-                if (PermUtil.ValidatePermission(Permission.SYSTEM_UPDATE))
+                if (PermUtil.ValidatePermission(Permissions.SYSTEM_UPDATE))
                 {
                     roleComboBox.Enabled = true;
                 }

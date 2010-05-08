@@ -28,7 +28,7 @@ namespace CMBC.EasyFactor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LogOnWindow loginWindow = new LogOnWindow();
-            if (!loginWindow.PreLogOn())
+            if (!LogOnWindow.PreLogOn())
             {
                 return;
             }

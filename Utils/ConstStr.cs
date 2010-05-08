@@ -12,31 +12,31 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class MESSAGE
     {
-		#region?Fields?(4)?
+        #region?Fields?(4)?
 
         /// <summary>
         /// 数据更新成功
         /// </summary>
-        public static string DATA_UPDATE_SUCCESS = "数据更新成功";
-        public static string MAIN_DEFAULT = "欢迎使用中国民生银行保理运营系统";
+        public static readonly string DATA_UPDATE_SUCCESS = "数据更新成功";
+        public static readonly string MAIN_DEFAULT = "欢迎使用中国民生银行保理运营系统";
         /// <summary>
         /// 提示
         /// </summary>
-        public static string TITLE_INFORMATION = "提示";
+        public static readonly string TITLE_INFORMATION = "提示";
         /// <summary>
         /// 警告
         /// </summary>
-        public static string TITLE_WARNING = "警告";
+        public static readonly string TITLE_WARNING = "警告";
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         private MESSAGE()
         {
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
     }
 
     /// <summary>
@@ -44,30 +44,30 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CLIENT_CREDIT_LINE
     {
-		#region?Fields?(3)?
+        #region?Fields?(3)?
 
         /// <summary>
         /// 已生效
         /// </summary>
-        public static string AVAILABILITY = "已生效";
+        public static readonly string AVAILABILITY = "已生效";
         /// <summary>
         /// 已过期
         /// </summary>
-        public static string EXPIRY = "已过期";
+        public static readonly string EXPIRY = "已过期";
         /// <summary>
         /// 已冻结
         /// </summary>
-        public static string FREEZE = "已冻结";
+        public static readonly string FREEZE = "已冻结";
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         private CLIENT_CREDIT_LINE()
         {
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
     }
 
     /// <summary>
@@ -75,26 +75,26 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CONTRACT
     {
-		#region?Fields?(2)?
+        #region?Fields?(2)?
 
         /// <summary>
         /// 已生效
         /// </summary>
-        public static string AVAILABILITY = "已生效";
+        public static readonly string AVAILABILITY = "已生效";
         /// <summary>
         /// 已过期
         /// </summary>
-        public static string EXPIRY = "已过期";
+        public static readonly string EXPIRY = "已过期";
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         private CONTRACT()
         {
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
     }
 
     /// <summary>
@@ -102,30 +102,30 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class FACTOR_CREDIT_LINE
     {
-		#region?Fields?(3)?
+        #region?Fields?(3)?
 
         /// <summary>
         /// 已生效
         /// </summary>
-        public static string AVAILABILITY = "已生效";
+        public static readonly string AVAILABILITY = "已生效";
         /// <summary>
         /// 已过期
         /// </summary>
-        public static string EXPIRY = "已过期";
+        public static readonly string EXPIRY = "已过期";
         /// <summary>
         /// 已冻结
         /// </summary>
-        public static string FREEZE = "已冻结";
+        public static readonly string FREEZE = "已冻结";
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         private FACTOR_CREDIT_LINE()
         {
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
     }
 
     /// <summary>
@@ -133,30 +133,30 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CASEStr
     {
-		#region?Fields?(3)?
+        #region?Fields?(3)?
 
         /// <summary>
         /// 申请案
         /// </summary>
-        public static string APPLICATION = "申请案";
+        public static readonly string APPLICATION = "申请案";
         /// <summary>
         /// 已结案
         /// </summary>
-        public static string CLOSED = "已结案";
+        public static readonly string CLOSED = "已结案";
         /// <summary>
         /// 启动案
         /// </summary>
-        public static string ENABLE = "启动案";
+        public static readonly string ENABLE = "启动案";
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         private CASEStr()
         {
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
     }
 
     /// <summary>
@@ -164,34 +164,34 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CDAStr
     {
-		#region?Fields?(4)?
+        #region?Fields?(4)?
 
         /// <summary>
         /// 已复核
         /// </summary>
-        public static string CHECKED = "已审核";
+        public static readonly string CHECKED = "已审核";
         /// <summary>
         /// 已失效
         /// </summary>
-        public static string INVALID = "已失效";
+        public static readonly string INVALID = "已失效";
         /// <summary>
         /// 复核未通过
         /// </summary>
-        public static string REJECT = "审核未通过";
+        public static readonly string REJECT = "审核未通过";
         /// <summary>
         /// 未审核
         /// </summary>
-        public static string UNCHECK = "未审核";
+        public static readonly string UNCHECK = "未审核";
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         private CDAStr()
         {
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
     }
 
     /// <summary>
@@ -199,29 +199,29 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class BATCH
     {
-		#region?Fields?(3)?
+        #region?Fields?(3)?
 
         /// <summary>
         /// 已复核
         /// </summary>
-        public static string CHECK = "已复核";
+        public static readonly string CHECK = "已复核";
         /// <summary>
         /// 复核未通过
         /// </summary>
-        public static string REJECT = "复核未通过";
+        public static readonly string REJECT = "复核未通过";
         /// <summary>
         /// 未复核
         /// </summary>
-        public static string UNCHECK = "未复核";
+        public static readonly string UNCHECK = "未复核";
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         private BATCH()
         {
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
     }
 }

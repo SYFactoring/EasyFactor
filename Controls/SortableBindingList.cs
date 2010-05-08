@@ -14,7 +14,7 @@ namespace CMBC.EasyFactor.Controls
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SortableBindingList<T> : BindingList<T>
+    public class SortableBindingCollection<T> : BindingList<T>
     {
 		#region?Fields?(3)?
 
@@ -38,13 +38,13 @@ namespace CMBC.EasyFactor.Controls
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="t"></param>
-        public SortableBindingList(IList<T> t) : base(t) { }
+        /// <param name="list"></param>
+        public SortableBindingCollection(IList<T> list) : base(list) { }
 
         /// <summary>
         /// 
         /// </summary>
-        public SortableBindingList() : base() { }
+        public SortableBindingCollection() : base() { }
 
 		#endregion?Constructors?
 

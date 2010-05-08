@@ -2720,7 +2720,7 @@ namespace CMBC.EasyFactor.Utils
                     sheet.UsedRange.Font.Name = "·ÂËÎ";
                 }
 
-                this.FillLegarTotalSheet(totalSheet, caseGroup);
+                ExportForm.FillLegarTotalSheet(totalSheet, caseGroup);
                 totalSheet.Move(workbook.Sheets[1], Type.Missing);
 
                 if (app != null)
@@ -2782,7 +2782,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="sheet"></param>
         /// <param name="caseGroup"></param>
-        private void FillLegarTotalSheet(Worksheet sheet, IGrouping<Client, Case> caseGroup)
+        private static void FillLegarTotalSheet(Worksheet sheet, IGrouping<Client, Case> caseGroup)
         {
             sheet.Cells[9, "A"] = "ÒµÎñ±àºÅ";
             sheet.Cells[9, "B"] = "·¢Æ±ºÅ";

@@ -117,7 +117,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void DeleteFactor(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -204,7 +204,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void NewFactor(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -220,7 +220,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void NewFactorCreditLine(object sender, System.EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
@@ -263,7 +263,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             context = new DBDataContext();
-            if (!PermUtil.ValidatePermission(Permission.BASICINFO_UPDATE))
+            if (!PermUtil.ValidatePermission(Permissions.BASICINFO_UPDATE))
             {
                 context.ObjectTrackingEnabled = false;
             }
@@ -317,7 +317,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permission.BASICINFO_UPDATE))
+            if (PermUtil.ValidatePermission(Permissions.BASICINFO_UPDATE))
             {
                 this.menuItemFactorNew.Enabled = true;
                 this.menuItemFactorCreditLineNew.Enabled = true;

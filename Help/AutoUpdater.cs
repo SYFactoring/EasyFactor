@@ -58,8 +58,8 @@ namespace CMBC.EasyFactor.Help
         private bool _AutoRestart;
         private AutoUpdateConfig _AutoUpdateConfig;
         private Uri _ConfigURL;
-        private string _LoginUserName;
-        private string _LoginUserPass;
+        private string _LogOnUserName;
+        private string _LogOnUserPass;
         //Added 11/16/2004 For Proxy Clients, Thanks George for submitting these changes
         private bool _ProxyEnabled;
         //Added 11/16/2004 For Proxy Clients, Thanks George for submitting these changes
@@ -104,7 +104,7 @@ namespace CMBC.EasyFactor.Help
         { get { return _ConfigURL; } set { _ConfigURL = value; } }
 
         [BrowsableAttribute(false)]
-        public Version CurrentAppVersion
+        public static Version CurrentAppVersion
         { get { return System.Reflection.Assembly.GetEntryAssembly().GetName().Version; } }
 
         [BrowsableAttribute(false)]
@@ -136,18 +136,18 @@ namespace CMBC.EasyFactor.Help
         [DefaultValue(@"")]
         [Description("The UserName to authenticate with."),
         Category("AutoUpdater Configuration")]
-        public string LoginUserName
-        { get { return _LoginUserName; } set { _LoginUserName = value; } }
+        public string LogOnUserName
+        { get { return _LogOnUserName; } set { _LogOnUserName = value; } }
 
         [DefaultValue(@"")]
         [Description("The Password to authenticate with."),
         Category("AutoUpdater Configuration")]
-        public string LoginUserPass
-        { get { return _LoginUserPass; } set { _LoginUserPass = value; } }
+        public string LogOnUserPass
+        { get { return _LogOnUserPass; } set { _LogOnUserPass = value; } }
 
         [BrowsableAttribute(false)]
-        public bool NewVersionAvailable
-        { get { return this.LatestConfigVersion > this.CurrentAppVersion; } }
+        public bool IsNewVersionAvailable
+        { get { return this.LatestConfigVersion > AutoUpdater.CurrentAppVersion; } }
 
         [DefaultValue(false)]
         [Description("Set to True if you want to use http proxy."),
@@ -170,16 +170,16 @@ namespace CMBC.EasyFactor.Help
 
 		//?Delegates?(3)?
 
-        public delegate void AutoUpdateComplete();
-        public delegate void AutoUpdateError(string stMessage, Exception e);
-        public delegate void ConfigFileDownloaded(bool bNewVersionAvailable);
+        public delegate void AutoUpdateCompleteEventHandler();
+        public delegate void AutoUpdateErrorEventHandler(string stMessage, Exception autoUpdateError);
+        public delegate void ConfigFileDownloadedEventHandler(bool isNewVersionAvailable);
 		//?Events?(3)?
 
-        public event AutoUpdateComplete OnAutoUpdateComplete;
+        public event AutoUpdateCompleteEventHandler OnAutoUpdateComplete;
 
-        public event AutoUpdateError OnAutoUpdateError;
+        public event AutoUpdateErrorEventHandler OnAutoUpdateError;
 
-        public event ConfigFileDownloaded OnConfigFileDownloaded;
+        public event ConfigFileDownloadedEventHandler OnConfigFileDownloaded;
 
 		#endregion?Delegates?and?Events?
 
@@ -238,8 +238,8 @@ namespace CMBC.EasyFactor.Help
 
                 Request = (HttpWebRequest)HttpWebRequest.Create(url);
                 //Request.Headers.Add("Translate: f"); //Commented out 11/16/2004 Matt Palmerlee, this Header is more for DAV and causes a known security issue
-                if (!String.IsNullOrEmpty(this.LoginUserName))
-                    Request.Credentials = new NetworkCredential(this.LoginUserName, this.LoginUserPass);
+                if (!String.IsNullOrEmpty(this.LogOnUserName))
+                    Request.Credentials = new NetworkCredential(this.LogOnUserName, this.LogOnUserPass);
                 else
                     Request.Credentials = CredentialCache.DefaultCredentials;
 
@@ -285,15 +285,15 @@ namespace CMBC.EasyFactor.Help
         private void loadConfigThread()
         {
             AutoUpdateConfig config = new AutoUpdateConfig();
-            config.OnLoadConfigError += new AutoUpdateConfig.LoadConfigError(config_OnLoadConfigError);
+            config.OnLoadConfigError += new AutoUpdateConfig.LoadConfigErrorEventHandler(config_OnLoadConfigError);
 
             //Do the load of the config file
-            if (config.LoadConfig(this.ConfigURL, this.LoginUserName, this.LoginUserPass, this.ProxyURL, this.ProxyEnabled))
+            if (config.LoadConfig(this.ConfigURL, this.LogOnUserName, this.LogOnUserPass, this.ProxyURL, this.ProxyEnabled))
             {
                 this._AutoUpdateConfig = config;
                 if (this.OnConfigFileDownloaded != null)
                 {
-                    this.OnConfigFileDownloaded(this.NewVersionAvailable);
+                    this.OnConfigFileDownloaded(this.IsNewVersionAvailable);
                 }
             }
             //else
@@ -385,7 +385,7 @@ namespace CMBC.EasyFactor.Help
             if (this._AutoUpdateConfig != null)//make sure we were able to download it
             {
                 //Check the file for an update
-                if (this.LatestConfigVersion > this.CurrentAppVersion)
+                if (this.LatestConfigVersion > AutoUpdater.CurrentAppVersion)
                 {
                     DialogResult dr = MessageBoxEx.Show(String.Format("存在新版本：{0}，是否下载？", LatestConfigVersion), MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     //Download file if the user requests or AutoDownload is True
@@ -441,7 +441,7 @@ namespace CMBC.EasyFactor.Help
             if (this._AutoUpdateConfig != null)//make sure we were able to download it
             {
                 //Check the file for an update
-                if (this.LatestConfigVersion > this.CurrentAppVersion)
+                if (this.LatestConfigVersion > AutoUpdater.CurrentAppVersion)
                 {
                     string stPath = Path.GetTempPath() + stUpdateName + ".zip";
                     //There is a new version available
