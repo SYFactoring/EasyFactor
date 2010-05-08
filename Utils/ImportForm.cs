@@ -3779,6 +3779,10 @@ namespace CMBC.EasyFactor.Utils
                         string refundType = String.Format("{0:G}", valueArray[row, column++]);
 
                         string refundCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        if (String.IsNullOrEmpty(refundCurrency))
+                        {
+                            throw new Exception("冲销融资金额币别不能为空，不能导入：" + assignBatchCode);
+                        }
 
                         string refundAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         double refundAmount = 0;
