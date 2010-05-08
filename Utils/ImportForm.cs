@@ -58,12 +58,12 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_USERS,
+            IMPORT_USER,
 
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_CLIENTS,
+            IMPORT_CLIENT,
 
             /// <summary>
             /// 
@@ -83,7 +83,7 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_FACTORS,
+            IMPORT_FACTOR,
 
             /// <summary>
             /// 
@@ -93,17 +93,17 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_DEPARTMENTS,
+            IMPORT_DEPARTMENT,
 
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_RATES,
+            IMPORT_RATE,
 
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_CASES,
+            IMPORT_CASE,
 
             /// <summary>
             /// 
@@ -143,7 +143,7 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_INVOICES,
+            IMPORT_INVOICE,
 
             /// <summary>
             /// 
@@ -206,10 +206,10 @@ namespace CMBC.EasyFactor.Utils
             this.importType = importType;
             switch (importType)
             {
-                case ImportType.IMPORT_USERS:
+                case ImportType.IMPORT_USER:
                     this.Text = "用户信息导入";
                     break;
-                case ImportType.IMPORT_CLIENTS:
+                case ImportType.IMPORT_CLIENT:
                     this.Text = "客户信息导入";
                     break;
                 case ImportType.IMPORT_CLIENTS_OVERWRITE:
@@ -221,19 +221,19 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CLIENTS_REVIEW:
                     this.Text = "客户协查意见导入";
                     break;
-                case ImportType.IMPORT_FACTORS:
+                case ImportType.IMPORT_FACTOR:
                     this.Text = "合作机构信息导入";
                     break;
                 case ImportType.IMPORT_FACTORS_CREDITLINE:
                     this.Text = "合作机构额度信息导入";
                     break;
-                case ImportType.IMPORT_DEPARTMENTS:
+                case ImportType.IMPORT_DEPARTMENT:
                     this.Text = "部门信息导入";
                     break;
-                case ImportType.IMPORT_RATES:
+                case ImportType.IMPORT_RATE:
                     this.Text = "汇率信息导入";
                     break;
-                case ImportType.IMPORT_CASES:
+                case ImportType.IMPORT_CASE:
                     this.Text = "案件信息导入";
                     break;
                 case ImportType.IMPORT_CREDIT_COVER_NEG:
@@ -257,7 +257,7 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_REFUND_BY_BATCH:
                     this.Text = "当前还款批次导入";
                     break;
-                case ImportType.IMPORT_INVOICES:
+                case ImportType.IMPORT_INVOICE:
                     this.Text = "台帐导入";
                     break;
                 case ImportType.IMPORT_ASSIGN:
@@ -315,11 +315,11 @@ namespace CMBC.EasyFactor.Utils
             BackgroundWorker worker = sender as BackgroundWorker;
             switch (this.importType)
             {
-                case ImportType.IMPORT_USERS:
-                    e.Result = this.ImportUsers((string)e.Argument, worker, e);
+                case ImportType.IMPORT_USER:
+                    e.Result = this.ImportUser((string)e.Argument, worker, e);
                     break;
-                case ImportType.IMPORT_CLIENTS:
-                    e.Result = this.ImportClients((string)e.Argument, worker, e);
+                case ImportType.IMPORT_CLIENT:
+                    e.Result = this.ImportClient((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_CLIENTS_OVERWRITE:
                     e.Result = this.ImportClientsOverwrite((string)e.Argument, worker, e);
@@ -330,23 +330,23 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_CLIENTS_REVIEW:
                     e.Result = this.ImportClientsReivew((string)e.Argument, worker, e);
                     break;
-                case ImportType.IMPORT_FACTORS:
-                    e.Result = this.ImportFactors((string)e.Argument, worker, e);
+                case ImportType.IMPORT_FACTOR:
+                    e.Result = this.ImportFactor((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_FACTORS_CREDITLINE:
                     e.Result = this.ImportFactorsCreditLine((string)e.Argument, worker, e);
                     break;
-                case ImportType.IMPORT_DEPARTMENTS:
-                    e.Result = this.ImportDepartments((string)e.Argument, worker, e);
+                case ImportType.IMPORT_DEPARTMENT:
+                    e.Result = this.ImportDepartment((string)e.Argument, worker, e);
                     break;
-                case ImportType.IMPORT_RATES:
-                    e.Result = this.ImportExchangeRates((string)e.Argument, worker, e);
+                case ImportType.IMPORT_RATE:
+                    e.Result = this.ImportExchangeRate((string)e.Argument, worker, e);
                     break;
-                case ImportType.IMPORT_CASES:
-                    e.Result = this.ImportCases((string)e.Argument, worker, e);
+                case ImportType.IMPORT_CASE:
+                    e.Result = this.ImportCase((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_CREDIT_COVER_NEG:
-                    e.Result = this.ImportCreditCoverNegs((string)e.Argument, worker, e);
+                    e.Result = this.ImportCreditCoverNeg((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_CONTRACT:
                     e.Result = this.ImportContract((string)e.Argument, worker, e);
@@ -366,8 +366,8 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_REFUND_BY_BATCH:
                     e.Result = this.ImportRefundByBatch((string)e.Argument, worker, e);
                     break;
-                case ImportType.IMPORT_INVOICES:
-                    e.Result = this.ImportInvoices((string)e.Argument, worker, e);
+                case ImportType.IMPORT_INVOICE:
+                    e.Result = this.ImportInvoice((string)e.Argument, worker, e);
                     break;
                 case ImportType.IMPORT_ASSIGN:
                     e.Result = this.ImportAssign((string)e.Argument, worker, e);
@@ -819,7 +819,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportCases(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportCase(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
@@ -1031,7 +1031,7 @@ namespace CMBC.EasyFactor.Utils
 
                         cda = new CDA();
                         cda.CDACode = cdaCode;
-                        cda.CDAStatus = ConstStr.CDAStr.CHECKED;
+                        cda.CDAStatus = CDAStr.CHECKED;
                         cdaList.Add(cda);
                         cda.Case = curCase;
 
@@ -1090,6 +1090,23 @@ namespace CMBC.EasyFactor.Utils
                         cda.CreateUserName = String.Format("{0:G}", valueArray[row, column++]);
                         cda.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
+                        if (cda.HandFee.HasValue == false)
+                        {
+                            cda.HandFeeCurr = null;
+                        }
+
+                        if (cda.IFPrice.HasValue == false)
+                        {
+                            cda.IFPrice = 0;
+                        }
+
+                        if (cda.Price.HasValue == false)
+                        {
+                            cda.Price = cda.IFPrice;
+                        }
+
+                        cda.EFPrice = cda.Price - cda.IFPrice;
+
                         cda.AdjustCDAStatus();
 
                         result++;
@@ -1132,7 +1149,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportClients(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportClient(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
@@ -1668,7 +1685,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportCreditCoverNegs(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportCreditCoverNeg(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
@@ -1952,7 +1969,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportDepartments(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportDepartment(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
@@ -2036,7 +2053,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportExchangeRates(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportExchangeRate(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
@@ -2092,7 +2109,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportFactors(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportFactor(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
@@ -2662,7 +2679,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportInvoices(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportInvoice(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             this.context = new DBDataContext();
@@ -3977,7 +3994,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportUsers(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportUser(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;

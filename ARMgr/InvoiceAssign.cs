@@ -723,13 +723,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return false;
                 }
 
-                if (invoice.DueDate == null)
-                {
-                    MessageBoxEx.Show("到期日必填: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
-                }
-
-                if (invoice.DueDate != null && invoice.InvoiceDate != null && invoice.DueDate < invoice.InvoiceDate)
+                if (invoice.InvoiceDate != null && invoice.DueDate < invoice.InvoiceDate)
                 {
                     MessageBoxEx.Show("到期日不可早于发票日: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;

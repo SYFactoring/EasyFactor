@@ -460,7 +460,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CASES);
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CASE);
                 form.Show();
             }
         }
@@ -502,7 +502,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS);
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENT);
                 form.Show();
             }
         }
@@ -587,7 +587,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENTS);
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENT);
                 form.Show();
             }
         }
@@ -601,7 +601,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_RATES);
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_RATE);
                 form.Show();
             }
         }
@@ -629,7 +629,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS);
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_FACTOR);
                 form.Show();
             }
         }
@@ -657,7 +657,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_INVOICES);
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_INVOICE);
                 form.Show();
             }
         }
@@ -727,7 +727,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USERS);
+                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USER);
                 importForm.Show();
             }
         }

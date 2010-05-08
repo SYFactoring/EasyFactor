@@ -526,7 +526,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// 
         /// </summary>
         /// <param name="action"></param>
-        partial void OnValidate(System.Data.Linq.ChangeAction action)
+        partial void OnValidate(ChangeAction action)
         {
             if (action == ChangeAction.Insert)
             {
@@ -537,6 +537,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
+                if (this.AssignAmount > this.InvoiceAmount)
+                {
+                    throw new Exception("转让金额不能大于票面金额: " + this.InvoiceNo);
+                }
+
                 if (this.FinanceAmount.HasValue)
                 {
                     if (TypeUtil.GreaterZero(this.FinanceAmount - this.AssignAmount))
@@ -556,7 +561,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     throw new Exception("还款金额不能大于融资金额: " + this.InvoiceNo);
                 }
 
-                if (this.DueDate < this.InvoiceDate)
+                if (this.InvoiceDate != null && this.DueDate < this.InvoiceDate)
                 {
                     throw new Exception("发票到期日不能早于发票日: " + this.InvoiceNo);
                 }
@@ -564,6 +569,28 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (this.FinanceDueDate.GetValueOrDefault() < this.FinanceDate.GetValueOrDefault())
                 {
                     throw new Exception("融资到期日不能早于融资日: " + this.InvoiceNo);
+                }
+
+                if (this.InvoiceAssignBatch.Case.NetPaymentTerm.HasValue)
+                {
+                    if (InvoiceDate != null && this.InvoiceAssignBatch.AssignDate > InvoiceDate.Value.AddDays(this.InvoiceAssignBatch.Case.NetPaymentTerm.Value))
+                    {
+                        throw new Exception("转让日不能晚于发票日+付款期限: " + this.InvoiceNo);
+                    }
+                }
+
+                CDA activeCDA = this.InvoiceAssignBatch.Case.ActiveCDA;
+                if (activeCDA == null)
+                {
+                    throw new Exception("没有有效的额度通知书：" + this.InvoiceNo);
+                }
+
+                if (InvoiceDate != null && activeCDA.CreditCoverPeriodEnd != null)
+                {
+                    if (InvoiceDate > activeCDA.CreditCoverPeriodEnd)
+                    {
+                        throw new Exception("发票日不能晚于额度通知书融资到期日: " + this.InvoiceNo);
+                    }
                 }
             }
         }

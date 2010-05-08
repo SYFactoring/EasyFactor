@@ -10,6 +10,7 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -220,6 +221,17 @@ namespace CMBC.EasyFactor.DB.dbml
             batchCount += batchesInMemory.Count(batch => batch.AssignBatchNo.StartsWith(String.Format("{0}ASS{1:yy}", caseCode, assignDate)));
             string assignNo = String.Format("{0}ASS{1:yy}{2:D3}", caseCode, assignDate, batchCount + 1);
             return assignNo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        partial void OnValidate(ChangeAction action)
+        {
+            if (action == ChangeAction.Insert)
+            {
+            }
         }
 
 		#endregion?Methods?
