@@ -383,21 +383,24 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (this.Case != null)
                 {
                     List<Invoice> invoiceList = this.GetInvoices();
-                    DateTime assignDate = invoiceList.OrderByDescending(i => i.AssignDate).First().AssignDate;
-                    if (FinancePeriodBegin < assignDate)
+                    if (invoiceList.Count > 0)
                     {
-                        throw new Exception("融资日不能早于转让日: " + this.FinanceBatchNo);
-                    }
+                        DateTime assignDate = invoiceList.OrderByDescending(i => i.AssignDate).First().AssignDate;
+                        if (FinancePeriodBegin < assignDate)
+                        {
+                            throw new Exception("融资日不能早于转让日: " + this.FinanceBatchNo);
+                        }
 
-                    if (FinancePeriodBegin > FinancePeriodEnd)
-                    {
-                        throw new Exception("终止日期应该大于起始日期: " + this.FinanceBatchNo);
-                    }
+                        if (FinancePeriodBegin > FinancePeriodEnd)
+                        {
+                            throw new Exception("终止日期应该大于起始日期: " + this.FinanceBatchNo);
+                        }
 
-                    DateTime dueDate = invoiceList.OrderByDescending(i => i.DueDate).First().DueDate;
-                    if (FinancePeriodEnd < dueDate)
-                    {
-                        throw new Exception("融资到期日不能早于发票到期日: " + this.FinanceBatchNo);
+                        DateTime dueDate = invoiceList.OrderByDescending(i => i.DueDate).First().DueDate;
+                        if (FinancePeriodEnd < dueDate)
+                        {
+                            throw new Exception("融资到期日不能早于发票到期日: " + this.FinanceBatchNo);
+                        }
                     }
 
                     if (TypeUtil.LessZero(FinanceRate))
