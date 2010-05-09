@@ -12,12 +12,15 @@ namespace CMBC.EasyFactor.Utils
     using System.Windows.Forms;
     using DevComponents.DotNetBar.Controls;
     using DevComponents.Editors.DateTimeAdv;
+    using DevComponents.DotNetBar;
 
     /// <summary>
     /// 
     /// </summary>
     public sealed class ControlUtil
     {
+
+
         #region?Constructors?(1)?
 
         private ControlUtil()
@@ -25,6 +28,7 @@ namespace CMBC.EasyFactor.Utils
         }
 
         #endregion?Constructors?
+
 
         #region?Methods?(4)?
 
@@ -123,7 +127,33 @@ namespace CMBC.EasyFactor.Utils
                 return;
             }
 
-            comp.Enabled = isEditable;
+            ComboBox comboControl = comp as ComboBox;
+            if (comboControl != null)
+            {
+                comboControl.Enabled = isEditable; 
+                return;
+            }
+
+            DateTimePicker timePickerControl = comp as DateTimePicker;
+            if (timePickerControl != null)
+            {
+                timePickerControl.Enabled = isEditable; 
+                return;
+            }
+
+            DateTimeInput timeInputControl = comp as DateTimeInput;
+            if (timeInputControl != null)
+            {
+                timeInputControl.Enabled = isEditable; 
+                return;
+            }
+
+            CheckedListBox listBoxControl = comp as CheckedListBox;
+            if (listBoxControl != null)
+            {
+                listBoxControl.Enabled = isEditable; 
+                return;
+            }
         }
 
         /// <summary>
