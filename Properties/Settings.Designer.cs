@@ -33,16 +33,5 @@ namespace CMBC.EasyFactor.Properties {
                 return ((string)(this["FOSConnectionString"]));
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=YIMING-PC-HOME\\SQLEXPRESS;Initial Catalog=FOS;User ID=Factoring;Passw" +
-            "ord=gnirotcaF")]
-        public string FOSConnectionString1 {
-            get {
-                return ((string)(this["FOSConnectionString1"]));
-            }
-        }
     }
 }

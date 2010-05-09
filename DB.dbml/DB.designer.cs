@@ -120,7 +120,7 @@ namespace CMBC.EasyFactor.DB.dbml
     #endregion
 		
 		public DBDataContext() : 
-				base(global::CMBC.EasyFactor.Properties.Settings.Default.FOSConnectionString1, mappingSource)
+				base(global::CMBC.EasyFactor.Properties.Settings.Default.FOSConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
