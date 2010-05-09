@@ -154,6 +154,13 @@ namespace CMBC.EasyFactor.Utils
                 listBoxControl.Enabled = isEditable; 
                 return;
             }
+
+            CheckBoxX checkBoxControl = comp as CheckBoxX;
+            if (checkBoxControl != null)
+            {
+                checkBoxControl.Enabled = isEditable;
+                return;
+            }
         }
 
         /// <summary>

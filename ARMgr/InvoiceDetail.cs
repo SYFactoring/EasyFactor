@@ -620,20 +620,16 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK)
                 {
-                    this.invoiceAmountTextBox.ReadOnly = true;
-                    this.invoiceDateTextBox.Enabled = false;
-                    this.dueDateTextBox.Enabled = false;
-                    this.commentTextBox.ReadOnly = true;
-                    this.assignAmountTextBox.ReadOnly = true;
+                    MessageBoxEx.Show("此发票已复核，不能修改", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
-                else
-                {
-                    this.invoiceAmountTextBox.ReadOnly = false;
-                    this.invoiceDateTextBox.Enabled = true;
-                    this.dueDateTextBox.Enabled = true;
-                    this.commentTextBox.ReadOnly = false;
-                    this.assignAmountTextBox.ReadOnly = false;
-                }
+
+                this.invoiceNoTextBox.ReadOnly = false;
+                this.invoiceAmountTextBox.ReadOnly = false;
+                this.invoiceDateTextBox.Enabled = true;
+                this.dueDateTextBox.Enabled = true;
+                this.commentTextBox.ReadOnly = false;
+                this.assignAmountTextBox.ReadOnly = false;
 
                 foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
                 {
