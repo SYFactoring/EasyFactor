@@ -107,8 +107,8 @@ namespace CMBC.EasyFactor.ARMgr
 
             var queryResult = from invoice in context.Invoices
                               where
-                                 (tbAssignOverDueDays.Text == string.Empty ? true : (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0001 && invoice.DueDate <= DateTime.Now.Date.AddDays(0 - days) && invoice.DueDate >= DateTime.Now.Date))
-                                && (tbFinanceOverDueDays.Text == string.Empty ? true : (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0001 && invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(0 - days) && invoice.FinanceDueDate >= DateTime.Now.Date))
+                                 (tbAssignOverDueDays.Text == string.Empty ? true : (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION && invoice.DueDate <= DateTime.Now.Date.AddDays(0 - days) && invoice.DueDate >= DateTime.Now.Date))
+                                && (tbFinanceOverDueDays.Text == string.Empty ? true : (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -TypeUtil.PRECISION && invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(0 - days) && invoice.FinanceDueDate >= DateTime.Now.Date))
                               select invoice;
 
             this.bs.DataSource = queryResult;
@@ -718,12 +718,12 @@ namespace CMBC.EasyFactor.ARMgr
                               where (invoiceNo == string.Empty ? true : invoice.InvoiceNo == invoiceNo)
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                 && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
-                                && (tbAssignOverDueDays.Text == string.Empty ? true : (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.0001 && invoice.DueDate <= assignOverDueDate))
-                                && (tbFinanceOverDueDays.Text == string.Empty ? true : (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -0.0001 && invoice.FinanceDueDate <= financeOverDueDate))
+                                && (tbAssignOverDueDays.Text == string.Empty ? true : (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION && invoice.DueDate <= assignOverDueDate))
+                                && (tbFinanceOverDueDays.Text == string.Empty ? true : (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -TypeUtil.PRECISION && invoice.FinanceDueDate <= financeOverDueDate))
                                 && (beginDate != this.dateFrom.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
                                 && (endDate != this.dateTo.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
-                                && (needAssignOutstanding ? invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount + assignOustanding < -0.0001 : true)
-                                && (needFinanceOutstanding ? invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() + financeOutstanding < -0.0001 : true)
+                                && (needAssignOutstanding ? invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount + assignOustanding < -TypeUtil.PRECISION : true)
+                                && (needFinanceOutstanding ? invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() + financeOutstanding < -TypeUtil.PRECISION : true)
                               orderby invoice.InvoiceAssignBatch.AssignDate
                               select invoice;
 

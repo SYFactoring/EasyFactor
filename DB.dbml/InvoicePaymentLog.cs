@@ -7,17 +7,23 @@
 namespace CMBC.EasyFactor.DB.dbml
 {
     using System;
+    using System.Data.Linq;
+    using CMBC.EasyFactor.Utils;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoicePaymentLog
     {
-		#region?Constructors?(1)?
+
+
+        #region?Constructors?(1)?
 
         public InvoicePaymentLog(Invoice invoice)
             : this()
         {
+            this.AssignBatchNo2 = invoice.AssignBatchNo;
+            this.InvoiceID2 = invoice.InvoiceID;
             this.InvoiceNo2 = invoice.InvoiceNo;
             this.AssignAmount2 = invoice.AssignAmount;
             this.AssignOutstanding2 = invoice.AssignOutstanding;
@@ -26,10 +32,37 @@ namespace CMBC.EasyFactor.DB.dbml
             this.InvoicePaymentAmount2 = invoice.PaymentAmount;
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Properties?(16)?
 
+        #region?Properties?(16)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string AssignBatchNo2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string InvoiceNo
+        {
+            get
+            {
+                if (this.Invoice != null)
+                {
+                    return this.Invoice.InvoiceNo;
+                }
+                else
+                {
+                    return InvoiceNo2;
+                }
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -48,6 +81,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double AssignAmount2
         {
             get;
@@ -72,6 +108,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime AssignDate2
         {
             get;
@@ -159,13 +198,28 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime? DueDate2
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string InvoiceNo2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int InvoiceID2
         {
             get;
             set;
@@ -217,6 +271,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
     }
 }

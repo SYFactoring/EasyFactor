@@ -15,11 +15,15 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceFinanceLog
     {
-		#region?Constructors?(1)?
+
+
+        #region?Constructors?(1)?
 
         public InvoiceFinanceLog(Invoice invoice)
             : this()
         {
+            this.AssignBatchNo2 = invoice.AssignBatchNo;
+            this.InvoiceID2 = invoice.InvoiceID;
             this.InvoiceNo2 = invoice.InvoiceNo;
             this.AssignAmount2 = invoice.AssignAmount;
             this.AssignOutstanding2 = invoice.AssignOutstanding;
@@ -30,9 +34,37 @@ namespace CMBC.EasyFactor.DB.dbml
             this.InvoiceFinanceOutstanding2 = invoice.FinanceOutstanding;
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Properties?(23)?
+
+        #region?Properties?(23)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string InvoiceNo
+        {
+            get
+            {
+                if (this.Invoice != null)
+                {
+                    return this.Invoice.InvoiceNo;
+                }
+                else
+                {
+                    return InvoiceNo2;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string AssignBatchNo2
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 
@@ -52,6 +84,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double AssignAmount2
         {
             get;
@@ -76,6 +111,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime AssignDate2
         {
             get;
@@ -100,6 +138,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double AssignOutstanding2
         {
             get;
@@ -124,6 +165,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime? DueDate2
         {
             get;
@@ -269,6 +313,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime? InvoiceDate2
         {
             get;
@@ -317,12 +364,27 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double? InvoiceFinanceOutstanding2
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public int InvoiceID2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string InvoiceNo2
         {
             get;
@@ -390,11 +452,12 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Methods?(1)?
 
-		//?Public?Methods?(1)?
+        #region?Methods?(1)?
+
+        //?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -404,17 +467,10 @@ namespace CMBC.EasyFactor.DB.dbml
             CDA cda = this.Invoice.InvoiceAssignBatch.Case.ActiveCDA;
             if (cda.CommissionType == "按融资金额")
             {
-                //if (cda.Case.TransactionType == "进口保理")
-                //{
-                //    Commission = FinanceAmount * cda.IFPrice;
-                //}
-                //else
-                //{
-                    Commission = FinanceAmount * cda.Price;
-                //}
+                Commission = FinanceAmount * cda.Price;
             }
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }

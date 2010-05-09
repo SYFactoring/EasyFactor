@@ -19,6 +19,8 @@ namespace CMBC.EasyFactor.Utils
 
         public static readonly DateTime MIN_DATE = new DateTime(1753, 1, 1);
 
+        public static readonly double PRECISION = 0.01;
+
         #endregion?Fields?
 
         #region?Constructors?(1)?
@@ -146,7 +148,7 @@ namespace CMBC.EasyFactor.Utils
                 return false;
             }
 
-            return Math.Abs(double1.Value) < 0.01;
+            return Math.Abs(double1.Value) < PRECISION;
         }
 
         /// <summary>
@@ -211,7 +213,7 @@ namespace CMBC.EasyFactor.Utils
                 return false;
             }
 
-            return double1 > 0.01;
+            return double1 > PRECISION;
         }
 
         /// <summary>
@@ -226,7 +228,7 @@ namespace CMBC.EasyFactor.Utils
                 return false;
             }
 
-            return double1 < -0.01;
+            return double1 < -PRECISION;
         }
 
         /// <summary>

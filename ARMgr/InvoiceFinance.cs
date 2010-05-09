@@ -642,7 +642,7 @@ namespace CMBC.EasyFactor.ARMgr
             double financeProp = this._case.ActiveCDA.FinanceProportion.GetValueOrDefault();
 
             var invoiceResult = from invoice in context.Invoices
-                                where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.IsFlaw == false && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp < -0.01)
+                                where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.IsFlaw == false && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp < -TypeUtil.PRECISION)
                                 select invoice;
 
             List<InvoiceFinanceLog> logs = new List<InvoiceFinanceLog>();
@@ -779,7 +779,7 @@ namespace CMBC.EasyFactor.ARMgr
                 InvoiceFinanceLog log = (InvoiceFinanceLog)this.logsBindingSource.List[i];
                 if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    log.Invoice = context.Invoices.SingleOrDefault(invoice => invoice.InvoiceNo == log.InvoiceNo2);
+                    log.Invoice = context.Invoices.SingleOrDefault(invoice => invoice.InvoiceID == log.InvoiceID2);
                     logList.Add(log);
                     log.InvoiceFinanceBatch = batch;
                     log.Invoice.CaculateFinance();
@@ -846,7 +846,7 @@ namespace CMBC.EasyFactor.ARMgr
                 for (int i = 0; i < this.logsBindingSource.List.Count; i++)
                 {
                     InvoiceFinanceLog log = (InvoiceFinanceLog)this.logsBindingSource.List[i];
-                    log.InvoiceNo2 = log.InvoiceNo;
+                    log.InvoiceNo2 = log.InvoiceNo2;
 
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvLogs.Rows[i].Cells[0];
                     cell.Value = 1;
@@ -930,13 +930,13 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoiceFinanceLog log = (InvoiceFinanceLog)logList[i];
                     if (!TypeUtil.GreaterZero(log.FinanceAmount))
                     {
-                        MessageBoxEx.Show("融资金额不能为空: " + log.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("融资金额不能为空: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
 
                     if (log.FinanceAmount > log.AssignOutstanding)
                     {
-                        MessageBoxEx.Show("融资金额不能大于转让余额: " + log.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("融资金额不能大于转让余额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }

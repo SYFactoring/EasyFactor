@@ -551,7 +551,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                if (batch.AssignBatchNo == null && context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo) != null)
+                if (batch.AssignBatchNo == null && context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo && i.InvoiceAssignBatch.CaseCode == this._case.CaseCode) != null)
                 {
                     MessageBoxEx.Show("∑¢∆±∫≈“—¥Ê‘⁄: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;

@@ -25,7 +25,7 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ExportForm : DevComponents.DotNetBar.Office2007Form
     {
-		#region?Fields?(2)?
+        #region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -36,9 +36,9 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         private ExportType exportType;
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Enums?(1)?
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -126,11 +126,11 @@ namespace CMBC.EasyFactor.Utils
             EXPORT_CDAS
         }
 
-		#endregion?Enums?
+        #endregion?Enums?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the ExportForm class
         /// </summary>
         /// <param name="exportType"></param>
@@ -147,11 +147,11 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Methods?(24)?
+        #region?Methods?(24)?
 
-		//?Public?Methods?(1)?
+        //?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -185,7 +185,7 @@ namespace CMBC.EasyFactor.Utils
 
             this.btnStart.Enabled = false;
         }
-		//?Private?Methods?(23)?
+        //?Private?Methods?(23)?
 
         /// <summary>
         /// 
@@ -330,6 +330,7 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
+                datasheet.Cells[1, column++] = "案件编号";
                 datasheet.Cells[1, column++] = "发票号";
                 datasheet.Cells[1, column++] = "票面金额";
                 datasheet.Cells[1, column++] = "转让金额";
@@ -369,6 +370,7 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     Invoice invoice = (Invoice)exportData[row];
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CaseCode;
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAmount;
                     datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
@@ -384,11 +386,11 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 2 || range.Column == 3 || range.Column == 7)
+                    if (range.Column == 3 || range.Column == 4 || range.Column == 8)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
-                    else if (range.Column == 4 || range.Column == 5)
+                    else if (range.Column == 5 || range.Column == 6)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -1375,7 +1377,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = creditNote.CreditNoteNo;
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].PaymentAmount;
                     datasheet.Cells[row + 2, column++] = creditNote.CreditNoteDate;
-                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoiceNo;
+                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].Invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
@@ -1447,6 +1449,7 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
+                datasheet.Cells[1, column++] = "业务编号";
                 datasheet.Cells[1, column++] = "发票号";
                 datasheet.Cells[1, column++] = "转让余额";
                 datasheet.Cells[1, column++] = "融资金额";
@@ -1483,6 +1486,7 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     InvoiceFinanceLog log = (InvoiceFinanceLog)exportData[row];
+                    datasheet.Cells[row + 2, column++] = log.AssignBatchNo2;
                     datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = log.FinanceAmount;
@@ -2120,7 +2124,7 @@ namespace CMBC.EasyFactor.Utils
                 //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
                 sb.Append(',');
                 sb.Append(1).Append(',');
-                sb.Append(log.InvoiceNo).Append(',');
+                sb.Append(log.Invoice.InvoiceNo).Append(',');
                 sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
                 sb.Append(log.Invoice.InvoiceAmount).Append(',');
                 sb.Append(log.PaymentAmount).Append(',');
@@ -2210,7 +2214,7 @@ namespace CMBC.EasyFactor.Utils
                 //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
                 sb.Append(',');
                 sb.Append(1).Append(',');
-                sb.Append(log.InvoiceNo).Append(',');
+                sb.Append(log.Invoice.InvoiceNo).Append(',');
                 sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
                 sb.Append(log.Invoice.InvoiceAmount).Append(',');
                 sb.Append(log.PaymentAmount).Append(',');
@@ -2269,6 +2273,7 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
+                datasheet.Cells[1, column++] = "业务编号";
                 datasheet.Cells[1, column++] = "发票号";
                 datasheet.Cells[1, column++] = "转让余额";
                 datasheet.Cells[1, column++] = "付款金额";
@@ -2306,6 +2311,7 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     InvoicePaymentLog log = (InvoicePaymentLog)exportData[row];
+                    datasheet.Cells[row + 2, column++] = log.AssignBatchNo2;
                     datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = log.PaymentAmount;
@@ -2322,11 +2328,11 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 2 || range.Column == 3)
+                    if (range.Column == 3 || range.Column == 4)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
-                    else if (range.Column == 6)
+                    else if (range.Column == 7)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -2385,6 +2391,7 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
+                datasheet.Cells[1, column++] = "业务编号";
                 datasheet.Cells[1, column++] = "发票号";
                 datasheet.Cells[1, column++] = "融资编号";
                 datasheet.Cells[1, column++] = "融资余额";
@@ -2421,6 +2428,7 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     InvoiceRefundLog log = (InvoiceRefundLog)exportData[row];
+                    datasheet.Cells[row + 2, column++] = log.AssignBatchNo2;
                     datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.FinanceLogID2;
                     datasheet.Cells[row + 2, column++] = log.FinanceOutstanding;
@@ -2433,7 +2441,7 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 3 || range.Column == 4)
+                    if (range.Column == 4 || range.Column == 5)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
@@ -3035,6 +3043,6 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }

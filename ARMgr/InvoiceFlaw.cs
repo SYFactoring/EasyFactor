@@ -55,7 +55,7 @@ namespace CMBC.EasyFactor.ARMgr
             List<Invoice> list = new List<Invoice>();
             foreach (Invoice invoice in invoiceList)
             {
-                list.Add(context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo));
+                list.Add(context.Invoices.SingleOrDefault(i => i.InvoiceID == invoice.InvoiceID));
             }
 
             bs.DataSource = list;

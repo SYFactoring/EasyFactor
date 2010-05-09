@@ -496,7 +496,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in context.Invoices
-                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -0.01)
+                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.InvoiceAssignBatch.CheckStatus == "已复核" && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION)
                               select invoice;
 
             List<InvoicePaymentLog> logs = new List<InvoicePaymentLog>();
@@ -612,7 +612,7 @@ namespace CMBC.EasyFactor.ARMgr
                     if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                     {
                         InvoicePaymentLog log = (InvoicePaymentLog)this.logsBindingSource.List[i];
-                        log.Invoice = context.Invoices.SingleOrDefault(invoice => invoice.InvoiceNo == log.InvoiceNo2);
+                        log.Invoice = context.Invoices.SingleOrDefault(invoice => invoice.InvoiceID == log.InvoiceID2);
                         logList.Add(log);
                         log.InvoicePaymentBatch = batch;
                         log.Invoice.CaculatePayment();
@@ -699,7 +699,7 @@ namespace CMBC.EasyFactor.ARMgr
                 for (int i = 0; i < this.logsBindingSource.List.Count; i++)
                 {
                     InvoicePaymentLog log = (InvoicePaymentLog)this.logsBindingSource.List[i];
-                    log.InvoiceNo2 = log.InvoiceNo;
+                    log.InvoiceNo2 = log.Invoice.InvoiceNo;
                     DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvLogs.Rows[i].Cells[0];
                     cell.Value = 1;
                     ResetRow(i, true);
@@ -743,7 +743,7 @@ namespace CMBC.EasyFactor.ARMgr
                     InvoicePaymentLog log = (InvoicePaymentLog)logList[i];
                     if (TypeUtil.LessZero(log.AssignOutstanding))
                     {
-                        MessageBoxEx.Show("付款金额不能大于转让金额: " + log.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("付款金额不能大于转让金额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
 

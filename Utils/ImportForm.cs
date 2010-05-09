@@ -23,7 +23,7 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ImportForm : DevComponents.DotNetBar.Office2007Form
     {
-		#region?Fields?(5)?
+        #region?Fields?(5)?
 
         /// <summary>
         /// 
@@ -46,9 +46,9 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         private Workbook workbook;
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Enums?(1)?
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -181,11 +181,11 @@ namespace CMBC.EasyFactor.Utils
             IMPORT_POOL_REFUND
         }
 
-		#endregion?Enums?
+        #endregion?Enums?
 
-		#region?Constructors?(2)?
+        #region?Constructors?(2)?
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="importType"></param>
@@ -286,9 +286,9 @@ namespace CMBC.EasyFactor.Utils
             }
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Properties?(1)?
+        #region?Properties?(1)?
 
         /// <summary>
         /// Gets or sets Imported List
@@ -299,11 +299,11 @@ namespace CMBC.EasyFactor.Utils
             set;
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Methods?(33)?
+        #region?Methods?(33)?
 
-		//?Private?Methods?(33)?
+        //?Private?Methods?(33)?
 
         /// <summary>
         /// 
@@ -587,7 +587,7 @@ namespace CMBC.EasyFactor.Utils
                             }
                         }
 
-                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.InvoiceAssignBatch.CaseCode == caseCode);
                         if (invoice == null)
                         {
                             invoice = new Invoice();
@@ -763,13 +763,14 @@ namespace CMBC.EasyFactor.Utils
                         }
                         //int column = 12;
                         int column = 1;
+                        string caseCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         if (String.IsNullOrEmpty(invoiceNo))
                         {
                             continue;
                         }
 
-                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.InvoiceAssignBatch.CaseCode == caseCode);
                         if (invoice == null)
                         {
                             invoice = new Invoice();
@@ -1849,7 +1850,7 @@ namespace CMBC.EasyFactor.Utils
                             }
                         }
 
-                        invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.AssignBatchNo == assignBatchCode);
                         if (invoice == null)
                         {
                             throw new Exception("发票号错误，不能导入，发票号：" + invoiceNo);
@@ -2377,10 +2378,30 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("该业务未复核（或复核未通过）：" + assignBatchCode);
                         }
 
-                        CDA cda = assignBatch.Case.ActiveCDA;
-                        if (cda == null)
+                        CDA activeCDA = assignBatch.Case.ActiveCDA;
+                        if (activeCDA == null)
                         {
                             throw new Exception("没有有效的额度通知书，业务编号：" + assignBatchCode);
+                        }
+
+                        if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding))
+                        {
+                            throw new Exception("该案件的预付款融资额度余额不足，不能融资： " + assignBatchCode);
+                        }
+
+                        if (activeCDA.FinanceCreditLine == null)
+                        {
+                            throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
+                        }
+
+                        if (activeCDA.FinanceCreditLine.PeriodEnd < DateTime.Today)
+                        {
+                            throw new Exception("融资额度已到期，不能融资：" + assignBatchCode);
+                        }
+
+                        if (!TypeUtil.GreaterZero(activeCDA.FinanceCreditLine.CreditLine - assignBatch.Case.TotalFinanceOutstanding))
+                        {
+                            throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
                         }
 
                         InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
@@ -2501,9 +2522,9 @@ namespace CMBC.EasyFactor.Utils
                         financeBatchList.Add(financeBatch);
 
                         double currentFinanceAmount = 0;
-                        foreach (Invoice invoice in assignBatch.Invoices.Where(i => (i.IsDispute.HasValue == false || i.IsDispute == false) && i.IsFlaw == false).OrderBy(i => i.DueDate))
+                        foreach (Invoice invoice in assignBatch.Invoices.Where(i => (i.IsDispute.HasValue == false || i.IsDispute == false) && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == BATCH.CHECK && i.DueDate > financeBatch.FinancePeriodBegin).OrderBy(i => i.DueDate))
                         {
-                            double canBeFinanceAmount = invoice.AssignOutstanding * cda.FinanceProportion.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault();
+                            double canBeFinanceAmount = invoice.AssignOutstanding * activeCDA.FinanceProportion.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault();
                             if (TypeUtil.GreaterZero(canBeFinanceAmount))
                             {
                                 if (invoice.InvoiceCurrency != financeBatch.BatchCurrency)
@@ -2529,9 +2550,9 @@ namespace CMBC.EasyFactor.Utils
                                     log.InvoiceFinanceBatch = financeBatch;
                                     log.FinanceAmount = logFinanceAmount;
                                     currentFinanceAmount += logFinanceAmount;
-                                    if (cda.CommissionType == "按融资金额")
+                                    if (activeCDA.CommissionType == "按融资金额")
                                     {
-                                        log.Commission = log.FinanceAmount * cda.Price;
+                                        log.Commission = log.FinanceAmount * activeCDA.Price;
                                     }
 
                                     log.Invoice.CaculateCommission(true);
@@ -2547,6 +2568,11 @@ namespace CMBC.EasyFactor.Utils
 
                         if (assignBatch.Case.TransactionType == "国内买方保理")
                         {
+                            if (financeBatch.BatchCurrency != assignBatch.Case.InvoiceCurrency)
+                            {
+                                throw new Exception("国内买方保理，融资币别需要与发票币别相同，业务编号：" + assignBatchCode);
+                            }
+
                             InvoicePaymentBatch paymentBatch = new InvoicePaymentBatch();
                             paymentBatch.PaymentType = "买方直接付款";
                             paymentBatch.PaymentDate = financeBatch.FinancePeriodBegin;
@@ -2631,13 +2657,14 @@ namespace CMBC.EasyFactor.Utils
                         }
                         //int column = 12;
                         int column = 1;
+                        string assignBatchNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         if (String.IsNullOrEmpty(invoiceNo))
                         {
                             continue;
                         }
 
-                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.AssignBatchNo == assignBatchNo);
                         if (invoice == null)
                         {
                             throw new Exception("发票号错误: " + invoiceNo);
@@ -2757,7 +2784,7 @@ namespace CMBC.EasyFactor.Utils
                                 throw new Exception("发票号不能为空");
                             }
 
-                            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.InvoiceAssignBatch.CaseCode == caseCode);
                             if (invoice == null)
                             {
                                 invoice = new Invoice();
@@ -2993,7 +3020,7 @@ namespace CMBC.EasyFactor.Utils
                                 throw new Exception("贷项通知对应发票号不能为空");
                             }
 
-                            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.InvoiceAssignBatch.CaseCode == caseCode);
                             if (invoice == null)
                             {
                                 invoice = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
@@ -3160,7 +3187,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (isInInvoice)
                         {
-                            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.AssignBatchNo == assignBatchCode);
                             if (invoice == null)
                             {
                                 throw new Exception("发票号错误，不能导入，发票号：" + invoiceNo);
@@ -3265,7 +3292,7 @@ namespace CMBC.EasyFactor.Utils
 
                                 foreach (Invoice inv in assignBatch.Invoices.OrderBy(i => i.DueDate))
                                 {
-                                    if (TypeUtil.GreaterZero(paymentAmount))
+                                    if (TypeUtil.GreaterZero(paymentAmount) && TypeUtil.GreaterZero(inv.AssignOutstanding))
                                     {
                                         InvoicePaymentLog log = new InvoicePaymentLog();
                                         log.PaymentAmount = Math.Min(paymentAmount, inv.AssignOutstanding);
@@ -3341,13 +3368,14 @@ namespace CMBC.EasyFactor.Utils
                         }
                         //int column = 12;
                         int column = 1;
+                        string assignBatchNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         if (String.IsNullOrEmpty(invoiceNo))
                         {
                             continue;
                         }
 
-                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.InvoiceAssignBatch.AssignBatchNo == assignBatchNo);
                         if (invoice == null)
                         {
                             throw new Exception("发票号错误: " + invoiceNo);
@@ -3868,7 +3896,7 @@ namespace CMBC.EasyFactor.Utils
 
                             foreach (InvoiceFinanceLog financeLog in financeLogs.OrderBy(f => f.FinanceDueDate))
                             {
-                                if (TypeUtil.GreaterZero(refundAmount))
+                                if (TypeUtil.GreaterZero(refundAmount) && TypeUtil.GreaterZero(financeLog.FinanceOutstanding))
                                 {
                                     InvoiceRefundLog log = new InvoiceRefundLog();
                                     log.RefundAmount = Math.Min(refundAmount, financeLog.FinanceOutstanding);
@@ -3945,13 +3973,14 @@ namespace CMBC.EasyFactor.Utils
                         }
                         //int column = 12;
                         int column = 1;
+                        string assignBatchNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         if (String.IsNullOrEmpty(invoiceNo))
                         {
                             continue;
                         }
 
-                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                        Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.InvoiceAssignBatch.AssignBatchNo == assignBatchNo);
                         if (invoice == null)
                         {
                             throw new Exception("发票号错误: " + invoiceNo);
@@ -4140,6 +4169,6 @@ namespace CMBC.EasyFactor.Utils
             this.btnStart.Enabled = false;
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }

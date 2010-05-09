@@ -378,62 +378,37 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <param name="action"></param>
         partial void OnValidate(ChangeAction action)
         {
-            if (action == ChangeAction.Insert)
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-
-                List<Invoice> invoiceList = this.GetInvoices();
-                DateTime assignDate = invoiceList.OrderByDescending(i => i.AssignDate).First().AssignDate;
-                if (FinancePeriodBegin < assignDate)
+                if (this.Case != null)
                 {
-                    throw new Exception("融资期限不能早于转让日: " + this.FinanceBatchNo);
-                }
+                    List<Invoice> invoiceList = this.GetInvoices();
+                    DateTime assignDate = invoiceList.OrderByDescending(i => i.AssignDate).First().AssignDate;
+                    if (FinancePeriodBegin < assignDate)
+                    {
+                        throw new Exception("融资日不能早于转让日: " + this.FinanceBatchNo);
+                    }
 
-                if (FinancePeriodBegin > FinancePeriodEnd)
-                {
-                    throw new Exception("终止日期应该大于起始日期: " + this.FinanceBatchNo);
-                }
+                    if (FinancePeriodBegin > FinancePeriodEnd)
+                    {
+                        throw new Exception("终止日期应该大于起始日期: " + this.FinanceBatchNo);
+                    }
 
+                    DateTime dueDate = invoiceList.OrderByDescending(i => i.DueDate).First().DueDate;
+                    if (FinancePeriodEnd < dueDate)
+                    {
+                        throw new Exception("融资到期日不能早于发票到期日: " + this.FinanceBatchNo);
+                    }
 
-                DateTime dueDate = invoiceList.OrderByDescending(i => i.DueDate).First().DueDate;
-                if (FinancePeriodEnd < dueDate)
-                {
-                    throw new Exception("融资期限不能早于发票到期日: " + this.FinanceBatchNo);
-                }
+                    if (TypeUtil.LessZero(FinanceRate))
+                    {
+                        throw new Exception("融资利率不能小于零: " + this.FinanceBatchNo);
+                    }
 
-                if (TypeUtil.LessZero(FinanceRate))
-                {
-                    throw new Exception("融资利率不能小于零: " + this.FinanceBatchNo);
-                }
-
-                if (this.CostRate.HasValue && TypeUtil.LessZero(CostRate))
-                {
-                    throw new Exception("成本利率不能小于零: " + this.FinanceBatchNo);
-                }
-
-                CDA activeCDA = this.Case.ActiveCDA;
-                if (activeCDA == null)
-                {
-                    throw new Exception("没有有效的额度通知书: " + this.FinanceBatchNo);
-                }
-
-                if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding))
-                {
-                    throw new Exception("该案件的预付款融资额度余额不足，不能融资： " + this.FinanceBatchNo);
-                }
-
-                if (activeCDA.FinanceCreditLine == null)
-                {
-                    throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + this.FinanceBatchNo);
-                }
-
-                if (activeCDA.FinanceCreditLine.PeriodEnd < DateTime.Today)
-                {
-                    throw new Exception("融资额度已到期，不能融资：" +this.FinanceBatchNo);
-                }
-
-                if (!TypeUtil.GreaterZero(activeCDA.FinanceCreditLine.CreditLine - this.Case.TotalFinanceOutstanding))
-                {
-                    throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + this.FinanceBatchNo);
+                    if (this.CostRate.HasValue && TypeUtil.LessZero(CostRate))
+                    {
+                        throw new Exception("成本利率不能小于零: " + this.FinanceBatchNo);
+                    }
                 }
             }
         }

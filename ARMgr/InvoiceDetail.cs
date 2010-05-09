@@ -77,7 +77,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.context = new DBDataContext();
             this.ImeMode = ImeMode.OnHalf;
             this.opInvoiceType = opInvoiceType;
-            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
+            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceID == invoice.InvoiceID);
             this.invoiceBindingSource.DataSource = invoice;
             this.dgvFinanceLogs.AutoGenerateColumns = false;
             this.dgvPaymentLogs.AutoGenerateColumns = false;

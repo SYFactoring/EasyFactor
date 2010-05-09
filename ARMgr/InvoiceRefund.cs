@@ -145,7 +145,7 @@ namespace CMBC.EasyFactor.ARMgr
             List<InvoiceRefundLog> refundList = new List<InvoiceRefundLog>();
             foreach (Invoice invoice in invoiceList)
             {
-                Invoice newInvoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo);
+                Invoice newInvoice = context.Invoices.SingleOrDefault(i => i.InvoiceID == invoice.InvoiceID);
                 foreach (InvoiceFinanceLog financeLog in newInvoice.InvoiceFinanceLogs)
                 {
                     InvoiceRefundLog refundLog = new InvoiceRefundLog(financeLog);
@@ -513,7 +513,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             var queryResult = from log in context.InvoiceFinanceLogs
                               where log.Invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode
-                              && (log.Invoice.RefundAmount.GetValueOrDefault() - log.Invoice.FinanceAmount.GetValueOrDefault() < -0.0001)
+                              && (log.Invoice.RefundAmount.GetValueOrDefault() - log.Invoice.FinanceAmount.GetValueOrDefault() < -TypeUtil.PRECISION)
                               select log;
 
             List<InvoiceRefundLog> result = new List<InvoiceRefundLog>();

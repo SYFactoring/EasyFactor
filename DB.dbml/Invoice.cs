@@ -548,7 +548,6 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         throw new Exception("融资金额不能大于转让金额: " + this.InvoiceNo);
                     }
-
                 }
 
                 if (TypeUtil.GreaterZero(this.PaymentAmount.GetValueOrDefault() - this.AssignAmount))
