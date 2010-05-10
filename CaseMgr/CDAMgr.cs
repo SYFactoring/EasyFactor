@@ -650,8 +650,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 sheet.Cells[row, 1] = "最高保理预付款额度";
-                ClientCreditLine creditLine = selectedCDA.Case.SellerClient.FinanceCreditLine;
-                if (creditLine != null)
+                
+                double? highestCreditLine = selectedCDA.HighestFinanceLine;
+                if (highestCreditLine.HasValue)
                 {
                     if (isZero)
                     {
@@ -659,7 +660,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
                     else
                     {
-                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(creditLine.CreditLineCurrency), creditLine.CreditLine, TypeUtil.ToPrintCurrencyChinese(creditLine.CreditLineCurrency), TypeUtil.ConvertToChineseMoney(creditLine.CreditLine));
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）", TypeUtil.ToPrintCurrency(selectedCDA.FinanceLineCurr), highestCreditLine, TypeUtil.ToPrintCurrencyChinese(selectedCDA.FinanceLineCurr), TypeUtil.ConvertToChineseMoney(highestCreditLine));
                     }
                 }
                 else
