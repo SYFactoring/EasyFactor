@@ -16,7 +16,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class CDA
     {
-		#region?Properties?(8)?
+        #region?Properties?(8)?
 
         /// <summary>
         /// Gets
@@ -183,23 +183,31 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Methods?(3)?
+        #region?Methods?(3)?
 
-		//?Public?Methods?(3)?
+        //?Public?Methods?(3)?
 
         /// <summary>
         /// 
         /// </summary>
         public void AdjustCDAStatus()
         {
+            if (String.IsNullOrEmpty(this.CDAStatus))
+            {
+                return;
+            }
+
             CDA checkCDA = Case.CDAs.OrderByDescending(c => c.CDASignDate).First();
-            checkCDA.CDAStatus = CDAStr.CHECKED;
+            if (String.IsNullOrEmpty(checkCDA.CDAStatus))
+            {
+                checkCDA.CDAStatus = CDAStr.CHECKED;
+            }
 
             foreach (CDA c in Case.CDAs)
             {
-                if (c != checkCDA)
+                if (c != checkCDA && (String.IsNullOrEmpty(c.CDAStatus) || c.CDAStatus == CDAStr.CHECKED))
                 {
                     c.CDAStatus = CDAStr.INVALID;
                 }
@@ -315,6 +323,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }

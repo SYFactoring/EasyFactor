@@ -673,6 +673,7 @@ namespace CMBC.EasyFactor.ARMgr
             string caseMark = this.cbCaseMark.Text;
             string location = (string)this.cbLocation.SelectedValue;
             string transactionType = this.cbTransactionType.Text;
+            string caseCode = this.tbCaseCode.Text;
 
             int assignOverDueDays = 0;
             DateTime assignOverDueDate = DateTime.Now.Date;
@@ -708,6 +709,7 @@ namespace CMBC.EasyFactor.ARMgr
                               where curCase.CaseMark == caseMark
                                     && (transactionType == "È«²¿" ? true : curCase.TransactionType == transactionType)
                                     && (location == "00" ? true : curCase.OwnerDepartment.LocationCode == location)
+                                    && curCase.CaseCode.Contains(caseCode)
                               let seller = curCase.SellerClient
                               let buyer = curCase.BuyerClient
                               where seller.ClientNameCN.Contains(clientName) || seller.ClientNameEN.Contains(clientName) || buyer.ClientNameCN.Contains(clientName) || buyer.ClientNameEN.Contains(clientName)

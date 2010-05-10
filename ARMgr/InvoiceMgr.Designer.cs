@@ -157,22 +157,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClient = new DevComponents.DotNetBar.LabelX();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuInvoiceMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemInvoiceFlaw = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemInvoiceDispute = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaculateFinance = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCommission = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemExportAllInvoices = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemAllInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemAllInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSelectedInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSelectedInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -198,6 +182,24 @@ namespace CMBC.EasyFactor.ARMgr
             this.colIsDispute = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignOverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceOverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuInvoiceMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemInvoiceFlaw = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemInvoiceDispute = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaculateFinance = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCommission = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemExportAllInvoices = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAllInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAllInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelectedInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelectedInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblCaseCode = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -209,6 +211,8 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.tbCaseCode);
+            this.panelQuery.Controls.Add(this.lblCaseCode);
             this.panelQuery.Controls.Add(this.cbTransactionType);
             this.panelQuery.Controls.Add(this.lblTransactionType);
             this.panelQuery.Controls.Add(this.tbFinanceOutstanding);
@@ -248,7 +252,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
-            this.panelQuery.TabIndex = 1;
+            this.panelQuery.TabIndex = 0;
             // 
             // cbTransactionType
             // 
@@ -265,7 +269,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(101, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbTransactionType.TabIndex = 31;
+            this.cbTransactionType.TabIndex = 11;
             // 
             // lblTransactionType
             // 
@@ -276,7 +280,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblTransactionType.Location = new System.Drawing.Point(173, 52);
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(59, 23);
-            this.lblTransactionType.TabIndex = 30;
+            this.lblTransactionType.TabIndex = 10;
             this.lblTransactionType.Text = "业务类别";
             // 
             // tbFinanceOutstanding
@@ -285,10 +289,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbFinanceOutstanding.Border.Class = "TextBoxBorder";
-            this.tbFinanceOutstanding.Location = new System.Drawing.Point(631, 31);
+            this.tbFinanceOutstanding.Location = new System.Drawing.Point(598, 31);
             this.tbFinanceOutstanding.Name = "tbFinanceOutstanding";
             this.tbFinanceOutstanding.Size = new System.Drawing.Size(98, 20);
-            this.tbFinanceOutstanding.TabIndex = 29;
+            this.tbFinanceOutstanding.TabIndex = 21;
             // 
             // lblFinanceOutstanding
             // 
@@ -297,10 +301,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblFinanceOutstanding.BackgroundStyle.Class = "";
-            this.lblFinanceOutstanding.Location = new System.Drawing.Point(569, 32);
+            this.lblFinanceOutstanding.Location = new System.Drawing.Point(536, 32);
             this.lblFinanceOutstanding.Name = "lblFinanceOutstanding";
             this.lblFinanceOutstanding.Size = new System.Drawing.Size(56, 16);
-            this.lblFinanceOutstanding.TabIndex = 28;
+            this.lblFinanceOutstanding.TabIndex = 20;
             this.lblFinanceOutstanding.Text = "融资余额";
             // 
             // tbAssignOutstanding
@@ -309,10 +313,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbAssignOutstanding.Border.Class = "TextBoxBorder";
-            this.tbAssignOutstanding.Location = new System.Drawing.Point(630, 9);
+            this.tbAssignOutstanding.Location = new System.Drawing.Point(597, 9);
             this.tbAssignOutstanding.Name = "tbAssignOutstanding";
             this.tbAssignOutstanding.Size = new System.Drawing.Size(98, 20);
-            this.tbAssignOutstanding.TabIndex = 27;
+            this.tbAssignOutstanding.TabIndex = 19;
             // 
             // lblAssignOutstanding
             // 
@@ -321,10 +325,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblAssignOutstanding.BackgroundStyle.Class = "";
-            this.lblAssignOutstanding.Location = new System.Drawing.Point(568, 12);
+            this.lblAssignOutstanding.Location = new System.Drawing.Point(535, 12);
             this.lblAssignOutstanding.Name = "lblAssignOutstanding";
             this.lblAssignOutstanding.Size = new System.Drawing.Size(56, 16);
-            this.lblAssignOutstanding.TabIndex = 26;
+            this.lblAssignOutstanding.TabIndex = 18;
             this.lblAssignOutstanding.Text = "转让余额";
             // 
             // cbLocation
@@ -334,11 +338,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 14;
-            this.cbLocation.Location = new System.Drawing.Point(235, 31);
+            this.cbLocation.Location = new System.Drawing.Point(432, 53);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(100, 20);
             this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbLocation.TabIndex = 25;
+            this.cbLocation.TabIndex = 17;
             // 
             // lblLocation
             // 
@@ -347,10 +351,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblLocation.BackgroundStyle.Class = "";
-            this.lblLocation.Location = new System.Drawing.Point(173, 33);
+            this.lblLocation.Location = new System.Drawing.Point(373, 55);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(56, 16);
-            this.lblLocation.TabIndex = 24;
+            this.lblLocation.TabIndex = 16;
             this.lblLocation.Text = "业务地区";
             // 
             // dateTo
@@ -361,7 +365,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateTo.BackgroundStyle.Class = "DateTimeInputBackground";
             this.dateTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateTo.ButtonDropDown.Visible = true;
-            this.dateTo.Location = new System.Drawing.Point(568, 53);
+            this.dateTo.Location = new System.Drawing.Point(702, 53);
             // 
             // 
             // 
@@ -397,7 +401,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateTo.Name = "dateTo";
             this.dateTo.Size = new System.Drawing.Size(100, 20);
             this.dateTo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dateTo.TabIndex = 22;
+            this.dateTo.TabIndex = 24;
             // 
             // lblDatePicker
             // 
@@ -406,10 +410,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblDatePicker.BackgroundStyle.Class = "";
-            this.lblDatePicker.Location = new System.Drawing.Point(414, 55);
+            this.lblDatePicker.Location = new System.Drawing.Point(548, 55);
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(44, 16);
-            this.lblDatePicker.TabIndex = 20;
+            this.lblDatePicker.TabIndex = 22;
             this.lblDatePicker.Text = "转让日";
             // 
             // dateFrom
@@ -420,7 +424,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateFrom.BackgroundStyle.Class = "DateTimeInputBackground";
             this.dateFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateFrom.ButtonDropDown.Visible = true;
-            this.dateFrom.Location = new System.Drawing.Point(464, 53);
+            this.dateFrom.Location = new System.Drawing.Point(598, 53);
             // 
             // 
             // 
@@ -456,7 +460,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateFrom.Name = "dateFrom";
             this.dateFrom.Size = new System.Drawing.Size(100, 20);
             this.dateFrom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dateFrom.TabIndex = 21;
+            this.dateFrom.TabIndex = 23;
             // 
             // lblCaseMark
             // 
@@ -468,7 +472,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblCaseMark.Location = new System.Drawing.Point(5, 56);
             this.lblCaseMark.Name = "lblCaseMark";
             this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
-            this.lblCaseMark.TabIndex = 19;
+            this.lblCaseMark.TabIndex = 4;
             this.lblCaseMark.Text = "案件状态";
             // 
             // cbCaseMark
@@ -485,7 +489,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbCaseMark.Name = "cbCaseMark";
             this.cbCaseMark.Size = new System.Drawing.Size(100, 20);
             this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseMark.TabIndex = 17;
+            this.cbCaseMark.TabIndex = 5;
             // 
             // tbFinanceOverDueDays
             // 
@@ -493,10 +497,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbFinanceOverDueDays.Border.Class = "TextBoxBorder";
-            this.tbFinanceOverDueDays.Location = new System.Drawing.Point(464, 31);
+            this.tbFinanceOverDueDays.Location = new System.Drawing.Point(431, 31);
             this.tbFinanceOverDueDays.Name = "tbFinanceOverDueDays";
             this.tbFinanceOverDueDays.Size = new System.Drawing.Size(98, 20);
-            this.tbFinanceOverDueDays.TabIndex = 16;
+            this.tbFinanceOverDueDays.TabIndex = 15;
             // 
             // lblFinanceOverDueDays
             // 
@@ -505,10 +509,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblFinanceOverDueDays.BackgroundStyle.Class = "";
-            this.lblFinanceOverDueDays.Location = new System.Drawing.Point(377, 33);
+            this.lblFinanceOverDueDays.Location = new System.Drawing.Point(352, 33);
             this.lblFinanceOverDueDays.Name = "lblFinanceOverDueDays";
             this.lblFinanceOverDueDays.Size = new System.Drawing.Size(81, 16);
-            this.lblFinanceOverDueDays.TabIndex = 15;
+            this.lblFinanceOverDueDays.TabIndex = 14;
             this.lblFinanceOverDueDays.Text = "融资逾期天数";
             // 
             // tbAssignOverDueDays
@@ -517,10 +521,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbAssignOverDueDays.Border.Class = "TextBoxBorder";
-            this.tbAssignOverDueDays.Location = new System.Drawing.Point(464, 9);
+            this.tbAssignOverDueDays.Location = new System.Drawing.Point(431, 9);
             this.tbAssignOverDueDays.Name = "tbAssignOverDueDays";
             this.tbAssignOverDueDays.Size = new System.Drawing.Size(98, 20);
-            this.tbAssignOverDueDays.TabIndex = 14;
+            this.tbAssignOverDueDays.TabIndex = 13;
             // 
             // lblAssignOverDueDays
             // 
@@ -531,9 +535,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblAssignOverDueDays.BackgroundStyle.Class = "";
             this.lblAssignOverDueDays.Location = new System.Drawing.Point(352, 11);
             this.lblAssignOverDueDays.Name = "lblAssignOverDueDays";
-            this.lblAssignOverDueDays.Size = new System.Drawing.Size(106, 16);
-            this.lblAssignOverDueDays.TabIndex = 13;
-            this.lblAssignOverDueDays.Text = "应收帐款逾期天数";
+            this.lblAssignOverDueDays.Size = new System.Drawing.Size(81, 16);
+            this.lblAssignOverDueDays.TabIndex = 12;
+            this.lblAssignOverDueDays.Text = "账款逾期天数";
             // 
             // cbIsDispute
             // 
@@ -546,11 +550,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbIsDispute.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIsDispute.CheckValue = "A";
             this.cbIsDispute.CheckValueIndeterminate = "A";
-            this.cbIsDispute.Location = new System.Drawing.Point(754, 34);
+            this.cbIsDispute.Location = new System.Drawing.Point(721, 34);
             this.cbIsDispute.Name = "cbIsDispute";
             this.cbIsDispute.Size = new System.Drawing.Size(76, 16);
             this.cbIsDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsDispute.TabIndex = 9;
+            this.cbIsDispute.TabIndex = 26;
             this.cbIsDispute.Text = "是否商纠";
             this.cbIsDispute.ThreeState = true;
             // 
@@ -565,11 +569,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbIsFlaw.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.cbIsFlaw.CheckValue = "A";
             this.cbIsFlaw.CheckValueIndeterminate = "A";
-            this.cbIsFlaw.Location = new System.Drawing.Point(754, 9);
+            this.cbIsFlaw.Location = new System.Drawing.Point(721, 9);
             this.cbIsFlaw.Name = "cbIsFlaw";
             this.cbIsFlaw.Size = new System.Drawing.Size(76, 16);
             this.cbIsFlaw.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsFlaw.TabIndex = 8;
+            this.cbIsFlaw.TabIndex = 25;
             this.cbIsFlaw.Text = "是否瑕疵";
             this.cbIsFlaw.ThreeState = true;
             // 
@@ -604,20 +608,21 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(836, 55);
+            this.lblCount.Location = new System.Drawing.Point(803, 55);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
-            this.lblCount.TabIndex = 12;
+            this.lblCount.Size = new System.Drawing.Size(71, 16);
+            this.lblCount.TabIndex = 29;
+            this.lblCount.Text = "获得 条记录";
             // 
             // btnQueryReset
             // 
             this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQueryReset.Location = new System.Drawing.Point(836, 29);
+            this.btnQueryReset.Location = new System.Drawing.Point(803, 29);
             this.btnQueryReset.Name = "btnQueryReset";
             this.btnQueryReset.Size = new System.Drawing.Size(46, 22);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQueryReset.TabIndex = 11;
+            this.btnQueryReset.TabIndex = 28;
             this.btnQueryReset.Text = "重置";
             this.btnQueryReset.Click += new System.EventHandler(this.Reset);
             // 
@@ -625,11 +630,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(836, 6);
+            this.btnQuery.Location = new System.Drawing.Point(803, 6);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(46, 22);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 10;
+            this.btnQuery.TabIndex = 27;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryInvoices);
             // 
@@ -642,7 +647,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbFactor.Location = new System.Drawing.Point(67, 29);
             this.tbFactor.Name = "tbFactor";
             this.tbFactor.Size = new System.Drawing.Size(100, 20);
-            this.tbFactor.TabIndex = 5;
+            this.tbFactor.TabIndex = 3;
             // 
             // lblFactor
             // 
@@ -654,7 +659,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblFactor.Location = new System.Drawing.Point(17, 31);
             this.lblFactor.Name = "lblFactor";
             this.lblFactor.Size = new System.Drawing.Size(44, 16);
-            this.lblFactor.TabIndex = 4;
+            this.lblFactor.TabIndex = 2;
             this.lblFactor.Text = "保理商";
             // 
             // tbClientName
@@ -741,128 +746,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvInvoices_CellFormatting);
             this.dgvInvoices.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvInvoices_DataBindingComplete);
             this.dgvInvoices.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvInvoices_RowPostPaint);
-            // 
-            // cmuInvoiceMgr
-            // 
-            this.cmuInvoiceMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemInvoiceDetail,
-            this.menuItemCaseDetail,
-            this.toolStripSeparator,
-            this.menuItemInvoiceFlaw,
-            this.menuItemInvoiceDispute,
-            this.menuItemInvoiceDelete,
-            this.menuItemCaculateFinance,
-            this.menuItemCommission,
-            this.toolStripSeparator1,
-            this.menuItemExportAllInvoices,
-            this.menuItemExportSelectedInvoices});
-            this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(159, 214);
-            // 
-            // menuItemInvoiceDetail
-            // 
-            this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(158, 22);
-            this.menuItemInvoiceDetail.Text = "详细信息";
-            this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
-            // 
-            // menuItemCaseDetail
-            // 
-            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(158, 22);
-            this.menuItemCaseDetail.Text = "案子详细信息";
-            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(155, 6);
-            // 
-            // menuItemInvoiceFlaw
-            // 
-            this.menuItemInvoiceFlaw.Name = "menuItemInvoiceFlaw";
-            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(158, 22);
-            this.menuItemInvoiceFlaw.Text = "瑕疵处理";
-            this.menuItemInvoiceFlaw.Click += new System.EventHandler(this.InvoiceFlaw);
-            // 
-            // menuItemInvoiceDispute
-            // 
-            this.menuItemInvoiceDispute.Name = "menuItemInvoiceDispute";
-            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(158, 22);
-            this.menuItemInvoiceDispute.Text = "商纠处理";
-            this.menuItemInvoiceDispute.Click += new System.EventHandler(this.InvoiceDispute);
-            // 
-            // menuItemInvoiceDelete
-            // 
-            this.menuItemInvoiceDelete.Name = "menuItemInvoiceDelete";
-            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(158, 22);
-            this.menuItemInvoiceDelete.Text = "删除发票";
-            this.menuItemInvoiceDelete.Click += new System.EventHandler(this.DeleteInvoice);
-            // 
-            // menuItemCaculateFinance
-            // 
-            this.menuItemCaculateFinance.Name = "menuItemCaculateFinance";
-            this.menuItemCaculateFinance.Size = new System.Drawing.Size(158, 22);
-            this.menuItemCaculateFinance.Text = "修正多币种Bug";
-            this.menuItemCaculateFinance.Click += new System.EventHandler(this.CaculateFinance);
-            // 
-            // menuItemCommission
-            // 
-            this.menuItemCommission.Name = "menuItemCommission";
-            this.menuItemCommission.Size = new System.Drawing.Size(158, 22);
-            this.menuItemCommission.Text = "重新计算手续费";
-            this.menuItemCommission.Click += new System.EventHandler(this.ComputeCommission);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
-            // 
-            // menuItemExportAllInvoices
-            // 
-            this.menuItemExportAllInvoices.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemAllInvoiceFull,
-            this.menuItemAllInvoiceOverDue});
-            this.menuItemExportAllInvoices.Name = "menuItemExportAllInvoices";
-            this.menuItemExportAllInvoices.Size = new System.Drawing.Size(158, 22);
-            this.menuItemExportAllInvoices.Text = "导出全部发票";
-            // 
-            // menuItemAllInvoiceFull
-            // 
-            this.menuItemAllInvoiceFull.Name = "menuItemAllInvoiceFull";
-            this.menuItemAllInvoiceFull.Size = new System.Drawing.Size(146, 22);
-            this.menuItemAllInvoiceFull.Text = "完整格式";
-            this.menuItemAllInvoiceFull.Click += new System.EventHandler(this.ExportAllInvoicesFull);
-            // 
-            // menuItemAllInvoiceOverDue
-            // 
-            this.menuItemAllInvoiceOverDue.Name = "menuItemAllInvoiceOverDue";
-            this.menuItemAllInvoiceOverDue.Size = new System.Drawing.Size(146, 22);
-            this.menuItemAllInvoiceOverDue.Text = "逾期台帐格式";
-            this.menuItemAllInvoiceOverDue.Click += new System.EventHandler(this.ExportAllInvoiceOverDue);
-            // 
-            // menuItemExportSelectedInvoices
-            // 
-            this.menuItemExportSelectedInvoices.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemSelectedInvoiceFull,
-            this.menuItemSelectedInvoiceOverDue});
-            this.menuItemExportSelectedInvoices.Name = "menuItemExportSelectedInvoices";
-            this.menuItemExportSelectedInvoices.Size = new System.Drawing.Size(158, 22);
-            this.menuItemExportSelectedInvoices.Text = "导出所选发票";
-            // 
-            // menuItemSelectedInvoiceFull
-            // 
-            this.menuItemSelectedInvoiceFull.Name = "menuItemSelectedInvoiceFull";
-            this.menuItemSelectedInvoiceFull.Size = new System.Drawing.Size(146, 22);
-            this.menuItemSelectedInvoiceFull.Text = "完整格式";
-            this.menuItemSelectedInvoiceFull.Click += new System.EventHandler(this.ExportSelectedInvoicesFull);
-            // 
-            // menuItemSelectedInvoiceOverDue
-            // 
-            this.menuItemSelectedInvoiceOverDue.Name = "menuItemSelectedInvoiceOverDue";
-            this.menuItemSelectedInvoiceOverDue.Size = new System.Drawing.Size(146, 22);
-            this.menuItemSelectedInvoiceOverDue.Text = "逾期台帐格式";
-            this.menuItemSelectedInvoiceOverDue.Click += new System.EventHandler(this.ExportSelectedInvoicesOverDue);
             // 
             // colSellerName
             // 
@@ -1090,6 +973,152 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceOverDueDays.Visible = false;
             this.colFinanceOverDueDays.Width = 104;
             // 
+            // cmuInvoiceMgr
+            // 
+            this.cmuInvoiceMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemInvoiceDetail,
+            this.menuItemCaseDetail,
+            this.toolStripSeparator,
+            this.menuItemInvoiceFlaw,
+            this.menuItemInvoiceDispute,
+            this.menuItemInvoiceDelete,
+            this.menuItemCaculateFinance,
+            this.menuItemCommission,
+            this.toolStripSeparator1,
+            this.menuItemExportAllInvoices,
+            this.menuItemExportSelectedInvoices});
+            this.cmuInvoiceMgr.Name = "cmuContractMgr";
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(159, 214);
+            // 
+            // menuItemInvoiceDetail
+            // 
+            this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(158, 22);
+            this.menuItemInvoiceDetail.Text = "详细信息";
+            this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
+            // 
+            // menuItemCaseDetail
+            // 
+            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(158, 22);
+            this.menuItemCaseDetail.Text = "案子详细信息";
+            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(155, 6);
+            // 
+            // menuItemInvoiceFlaw
+            // 
+            this.menuItemInvoiceFlaw.Name = "menuItemInvoiceFlaw";
+            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(158, 22);
+            this.menuItemInvoiceFlaw.Text = "瑕疵处理";
+            this.menuItemInvoiceFlaw.Click += new System.EventHandler(this.InvoiceFlaw);
+            // 
+            // menuItemInvoiceDispute
+            // 
+            this.menuItemInvoiceDispute.Name = "menuItemInvoiceDispute";
+            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(158, 22);
+            this.menuItemInvoiceDispute.Text = "商纠处理";
+            this.menuItemInvoiceDispute.Click += new System.EventHandler(this.InvoiceDispute);
+            // 
+            // menuItemInvoiceDelete
+            // 
+            this.menuItemInvoiceDelete.Name = "menuItemInvoiceDelete";
+            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(158, 22);
+            this.menuItemInvoiceDelete.Text = "删除发票";
+            this.menuItemInvoiceDelete.Click += new System.EventHandler(this.DeleteInvoice);
+            // 
+            // menuItemCaculateFinance
+            // 
+            this.menuItemCaculateFinance.Name = "menuItemCaculateFinance";
+            this.menuItemCaculateFinance.Size = new System.Drawing.Size(158, 22);
+            this.menuItemCaculateFinance.Text = "修正多币种Bug";
+            this.menuItemCaculateFinance.Click += new System.EventHandler(this.CaculateFinance);
+            // 
+            // menuItemCommission
+            // 
+            this.menuItemCommission.Name = "menuItemCommission";
+            this.menuItemCommission.Size = new System.Drawing.Size(158, 22);
+            this.menuItemCommission.Text = "重新计算手续费";
+            this.menuItemCommission.Click += new System.EventHandler(this.ComputeCommission);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
+            // 
+            // menuItemExportAllInvoices
+            // 
+            this.menuItemExportAllInvoices.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemAllInvoiceFull,
+            this.menuItemAllInvoiceOverDue});
+            this.menuItemExportAllInvoices.Name = "menuItemExportAllInvoices";
+            this.menuItemExportAllInvoices.Size = new System.Drawing.Size(158, 22);
+            this.menuItemExportAllInvoices.Text = "导出全部发票";
+            // 
+            // menuItemAllInvoiceFull
+            // 
+            this.menuItemAllInvoiceFull.Name = "menuItemAllInvoiceFull";
+            this.menuItemAllInvoiceFull.Size = new System.Drawing.Size(146, 22);
+            this.menuItemAllInvoiceFull.Text = "完整格式";
+            this.menuItemAllInvoiceFull.Click += new System.EventHandler(this.ExportAllInvoicesFull);
+            // 
+            // menuItemAllInvoiceOverDue
+            // 
+            this.menuItemAllInvoiceOverDue.Name = "menuItemAllInvoiceOverDue";
+            this.menuItemAllInvoiceOverDue.Size = new System.Drawing.Size(146, 22);
+            this.menuItemAllInvoiceOverDue.Text = "逾期台帐格式";
+            this.menuItemAllInvoiceOverDue.Click += new System.EventHandler(this.ExportAllInvoiceOverDue);
+            // 
+            // menuItemExportSelectedInvoices
+            // 
+            this.menuItemExportSelectedInvoices.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemSelectedInvoiceFull,
+            this.menuItemSelectedInvoiceOverDue});
+            this.menuItemExportSelectedInvoices.Name = "menuItemExportSelectedInvoices";
+            this.menuItemExportSelectedInvoices.Size = new System.Drawing.Size(158, 22);
+            this.menuItemExportSelectedInvoices.Text = "导出所选发票";
+            // 
+            // menuItemSelectedInvoiceFull
+            // 
+            this.menuItemSelectedInvoiceFull.Name = "menuItemSelectedInvoiceFull";
+            this.menuItemSelectedInvoiceFull.Size = new System.Drawing.Size(146, 22);
+            this.menuItemSelectedInvoiceFull.Text = "完整格式";
+            this.menuItemSelectedInvoiceFull.Click += new System.EventHandler(this.ExportSelectedInvoicesFull);
+            // 
+            // menuItemSelectedInvoiceOverDue
+            // 
+            this.menuItemSelectedInvoiceOverDue.Name = "menuItemSelectedInvoiceOverDue";
+            this.menuItemSelectedInvoiceOverDue.Size = new System.Drawing.Size(146, 22);
+            this.menuItemSelectedInvoiceOverDue.Text = "逾期台帐格式";
+            this.menuItemSelectedInvoiceOverDue.Click += new System.EventHandler(this.ExportSelectedInvoicesOverDue);
+            // 
+            // tbCaseCode
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseCode.Border.Class = "TextBoxBorder";
+            this.tbCaseCode.Location = new System.Drawing.Point(234, 31);
+            this.tbCaseCode.Name = "tbCaseCode";
+            this.tbCaseCode.Size = new System.Drawing.Size(101, 20);
+            this.tbCaseCode.TabIndex = 9;
+            // 
+            // lblCaseCode
+            // 
+            this.lblCaseCode.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCaseCode.BackgroundStyle.Class = "";
+            this.lblCaseCode.Location = new System.Drawing.Point(172, 33);
+            this.lblCaseCode.Name = "lblCaseCode";
+            this.lblCaseCode.Size = new System.Drawing.Size(56, 16);
+            this.lblCaseCode.TabIndex = 8;
+            this.lblCaseCode.Text = "案件编号";
+            // 
             // InvoiceMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1110,5 +1139,8 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCaseCode;
+        private DevComponents.DotNetBar.LabelX lblCaseCode;
     }
 }

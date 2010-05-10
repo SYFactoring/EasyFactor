@@ -388,29 +388,29 @@ namespace CMBC.EasyFactor.DB.dbml
                         DateTime assignDate = invoiceList.OrderByDescending(i => i.AssignDate).First().AssignDate;
                         if (FinancePeriodBegin < assignDate)
                         {
-                            throw new Exception("融资日不能早于转让日: " + this.FinanceBatchNo);
+                            throw new Exception(String.Format("融资日{0:yyyyMMdd}不能早于转让日{1:yyyyMMdd}，融资批号：{2} ", this.FinancePeriodBegin, assignDate, this.FinanceBatchNo));
                         }
 
                         if (FinancePeriodBegin > FinancePeriodEnd)
                         {
-                            throw new Exception("终止日期应该大于起始日期: " + this.FinanceBatchNo);
+                            throw new Exception(String.Format("融资到期日{0:yyyyMMdd}应该大于融资日{1:yyyyMMdd}，融资批号：{2} ", this.FinancePeriodBegin, this.FinancePeriodEnd, this.FinanceBatchNo));
                         }
 
                         DateTime dueDate = invoiceList.OrderByDescending(i => i.DueDate).First().DueDate;
                         if (FinancePeriodEnd < dueDate)
                         {
-                            throw new Exception("融资到期日不能早于发票到期日: " + this.FinanceBatchNo);
+                            throw new Exception(String.Format("融资到期日{0:yyyyMMdd}不能早于发票到期日{1:yyyyMMdd}，融资批号：{2} ", this.FinancePeriodEnd, dueDate, this.FinanceBatchNo));
                         }
                     }
 
                     if (TypeUtil.LessZero(FinanceRate))
                     {
-                        throw new Exception("融资利率不能小于零: " + this.FinanceBatchNo);
+                        throw new Exception(String.Format("融资利率{0:N2}，不能小于零，融资批号：{1} ", this.FinanceRate, this.FinanceBatchNo));
                     }
 
                     if (this.CostRate.HasValue && TypeUtil.LessZero(CostRate))
                     {
-                        throw new Exception("成本利率不能小于零: " + this.FinanceBatchNo);
+                        throw new Exception(String.Format("成本利率{0:N2}，不能小于零，融资批号: {1}", this.CostRate, this.FinanceBatchNo));
                     }
                 }
             }
