@@ -497,10 +497,10 @@ namespace CMBC.EasyFactor.ARMgr
             switch (refundType)
             {
                 case OpRefundType.BUYER_PAYMENT:
-                    batch.RefundType = "买方直接付款";
+                    batch.RefundType = Refund.BUYER_PAYMENT;
                     break;
                 case OpRefundType.SELLER_REFUND:
-                    batch.RefundType = "卖方还款";
+                    batch.RefundType = Refund.SELLER_REFUND;
                     break;
                 default:
                     break;

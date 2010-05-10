@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------
+ï»¿//-----------------------------------------------------------------------
 // <copyright file="PaymentBatchMgr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -20,6 +20,8 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class PaymentBatchMgr : UserControl
     {
+
+
         #region?Fields?(3)?
 
         /// <summary>
@@ -36,6 +38,7 @@ namespace CMBC.EasyFactor.ARMgr
         private OpBatchType opBatchType;
 
         #endregion?Fields?
+
 
         #region?Enums?(1)?
 
@@ -61,6 +64,7 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion?Enums?
+
 
         #region?Constructors?(3)?
 
@@ -107,7 +111,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "È«²¿" });
+            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "å…¨éƒ¨" });
             this.cbLocation.DataSource = allLocations;
             this.cbLocation.DisplayMember = "LocationName";
             this.cbLocation.ValueMember = "LocationCode";
@@ -121,11 +125,12 @@ namespace CMBC.EasyFactor.ARMgr
                 context = new DBDataContext();
                 var queryResult = context.InvoicePaymentBatches.Where(i => i.CheckStatus == BATCH.UNCHECK);
                 this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
+                this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
             }
         }
 
         #endregion?Constructors?
+
 
         #region?Properties?(3)?
 
@@ -158,6 +163,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion?Properties?
 
+
         #region?Methods?(12)?
 
         //?Private?Methods?(12)?
@@ -183,18 +189,18 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("´ËÅú´ÎÒÑ¾­¹ı¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("æ­¤æ‰¹æ¬¡å·²ç»è¿‡å¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍ¨¹ı¸ÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€šè¿‡è¯¥æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("¾­°ìÈËºÍ¸´ºËÈËÏàÍ¬£¬²»¿É½øĞĞ¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ç»åŠäººå’Œå¤æ ¸äººç›¸åŒï¼Œä¸å¯è¿›è¡Œå¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -230,14 +236,14 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("ÊÇ·ñ´òËãÉ¾³ı´Ë" + selectedBatch.BatchCount + "Ìõ¸¶¿î¼ÇÂ¼", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("æ˜¯å¦æ‰“ç®—åˆ é™¤æ­¤" + selectedBatch.BatchCount + "æ¡ä»˜æ¬¾è®°å½•", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (selectedBatch.CheckStatus == BATCH.CHECK)
             {
-                MessageBoxEx.Show("²»ÄÜÉ¾³ıÒÑ¸´ºËÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ä¸èƒ½åˆ é™¤å·²å¤æ ¸æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -256,7 +262,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("É¾³ıÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("åˆ é™¤å¤±è´¥," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -340,6 +346,30 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ExportMSG09(object sender, EventArgs e)
+        {
+            if (this.dgvBatches.CurrentCell == null)
+            {
+                return;
+            }
+
+            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
+
+            if (selectedBatch.PaymentType != Payment.CREDIT_NOTE_PAYMENT)
+            {
+                MessageBoxEx.Show("åªæœ‰è´·é¡¹é€šçŸ¥å¯ä»¥ç”ŸæˆMSG09", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09_CREDITNOTE, selectedBatch.InvoicePaymentLogs);
+            form.Show();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExportMSG11(object sender, EventArgs e)
         {
             if (this.dgvBatches.SelectedRows.Count == 0)
@@ -349,9 +379,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (selectedBatch.PaymentType != "Âò·½¸¶¿î")
+            if (selectedBatch.PaymentType != Payment.BUYER_PAYMENT)
             {
-                MessageBoxEx.Show("Ö»ÓĞÂò·½¸¶¿î¿ÉÒÔÉú³ÉMSG11", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("åªæœ‰ä¹°æ–¹ä»˜æ¬¾å¯ä»¥ç”ŸæˆMSG11", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -373,9 +403,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
 
-            if (selectedBatch.PaymentType != "Âò·½¼ä½Ó¸¶¿î")
+            if (selectedBatch.PaymentType != Payment.INDIRECT_PAYMENT)
             {
-                MessageBoxEx.Show("Ö»ÓĞÂò·½¼ä½Ó¸¶¿î¿ÉÒÔÉú³ÉMSG12", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("åªæœ‰ä¹°æ–¹é—´æ¥ä»˜æ¬¾å¯ä»¥ç”ŸæˆMSG12", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -399,13 +429,13 @@ namespace CMBC.EasyFactor.ARMgr
             string transactionType = this.cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
-                transactionType = "È«²¿";
+                transactionType = "å…¨éƒ¨";
             }
 
             string paymentType = this.cbPaymentType.Text;
             if (String.IsNullOrEmpty(paymentType))
             {
-                paymentType = "È«²¿";
+                paymentType = "å…¨éƒ¨";
             }
             context = new DBDataContext();
 
@@ -414,15 +444,15 @@ namespace CMBC.EasyFactor.ARMgr
                 && (beginDate != this.dateFrom.MinDate ? i.PaymentDate >= beginDate : true)
                 && (endDate != this.dateTo.MinDate ? i.PaymentDate <= endDate : true)
                 && (status != string.Empty ? i.CheckStatus == status : true)
-                && (paymentType == "È«²¿" ? true : i.PaymentType == paymentType)
+                && (paymentType == "å…¨éƒ¨" ? true : i.PaymentType == paymentType)
                 && (i.CreateUserName.Contains(createUserName))
-                && (transactionType == "È«²¿" ? true : i.Case.TransactionType == transactionType)
+                && (transactionType == "å…¨éƒ¨" ? true : i.Case.TransactionType == transactionType)
                 && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
                 && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
                );
 
             this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("»ñµÃ{0}Ìõ¼ÇÂ¼", queryResult.Count());
+            this.lblCount.Text = String.Format("è·å¾—{0}æ¡è®°å½•", queryResult.Count());
         }
 
         /// <summary>
@@ -446,18 +476,18 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
             {
-                MessageBoxEx.Show("´ËÅú´ÎÒÑ¾­¹ı¸´ºË", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("æ­¤æ‰¹æ¬¡å·²ç»è¿‡å¤æ ¸", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (MessageBoxEx.Show("ÊÇ·ñÈ·ÈÏ¸´ºËÍË»Ø¸ÃÅú´Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBoxEx.Show("æ˜¯å¦ç¡®è®¤å¤æ ¸é€€å›è¯¥æ‰¹æ¬¡", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
             if (App.Current.CurUser.Name == batch.CreateUserName)
             {
-                MessageBoxEx.Show("¾­°ìÈËºÍ¸´ºËÈËÏàÍ¬£¬²»¿É½øĞĞ¸´ºËÍË»Ø", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ç»åŠäººå’Œå¤æ ¸äººç›¸åŒï¼Œä¸å¯è¿›è¡Œå¤æ ¸é€€å›", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

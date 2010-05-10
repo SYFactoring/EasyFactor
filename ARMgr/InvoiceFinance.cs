@@ -606,7 +606,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (activeCDA.FinanceCreditLine == null)
+            if (activeCDA.HighestFinanceLine.HasValue == false)
             {
                 MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -618,7 +618,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (!TypeUtil.GreaterZero(activeCDA.FinanceCreditLine.CreditLine - this._case.TotalFinanceOutstanding))
+            if (!TypeUtil.GreaterZero(activeCDA.HighestFinanceLine - this._case.TotalFinanceOutstanding))
             {
                 MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;

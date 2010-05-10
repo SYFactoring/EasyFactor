@@ -2389,7 +2389,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("该案件的预付款融资额度余额不足，不能融资： " + assignBatchCode);
                         }
 
-                        if (activeCDA.FinanceCreditLine == null)
+                        if (activeCDA.HighestFinanceLine.HasValue == false)
                         {
                             throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
                         }
@@ -2399,7 +2399,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("融资额度已到期，不能融资：" + assignBatchCode);
                         }
 
-                        if (!TypeUtil.GreaterZero(activeCDA.FinanceCreditLine.CreditLine - assignBatch.Case.TotalFinanceOutstanding))
+                        if (!TypeUtil.GreaterZero(activeCDA.HighestFinanceLine - assignBatch.Case.TotalFinanceOutstanding))
                         {
                             throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
                         }
@@ -2574,7 +2574,7 @@ namespace CMBC.EasyFactor.Utils
                             }
 
                             InvoicePaymentBatch paymentBatch = new InvoicePaymentBatch();
-                            paymentBatch.PaymentType = "买方直接付款";
+                            paymentBatch.PaymentType = Payment.BUYER_PAYMENT;
                             paymentBatch.PaymentDate = financeBatch.FinancePeriodBegin;
                             paymentBatch.CheckStatus = BATCH.UNCHECK;
                             paymentBatch.CreateUserName = App.Current.CurUser.Name;
@@ -2875,7 +2875,7 @@ namespace CMBC.EasyFactor.Utils
 
                             //付款批次信息
                             column = 18;
-                            string paymentType = "买方付款";
+                            string paymentType = Payment.BUYER_PAYMENT;
                             column = 19;
                             DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             if (paymentDate != null)
@@ -2913,7 +2913,7 @@ namespace CMBC.EasyFactor.Utils
 
                             //还款批次信息
                             column = 21;
-                            string refundType = "买方付款";
+                            string refundType = Refund.BUYER_PAYMENT;
 
                             DateTime? refundDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             if (refundDate != null)

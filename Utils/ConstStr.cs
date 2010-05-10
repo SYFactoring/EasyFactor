@@ -224,4 +224,59 @@ namespace CMBC.EasyFactor.Utils.ConstStr
 
         #endregion?Constructors?
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Payment
+    {
+        /// <summary>
+        /// 买方直接付款
+        /// </summary>
+        public static readonly string BUYER_PAYMENT = "买方直接付款";
+        
+        /// <summary>
+        /// 买方间接付款
+        /// </summary>
+        public static readonly string INDIRECT_PAYMENT = "买方间接付款";
+
+        /// <summary>
+        /// 担保付款
+        /// </summary>
+        public static readonly string GUARANTEE_PAYMENT = "担保付款";
+
+        /// <summary>
+        /// 反转让
+        /// </summary>
+        public static readonly string SELLER_REASSIGN = "反转让";
+
+        /// <summary>
+        /// 贷项通知
+        /// </summary>
+        public static readonly string CREDIT_NOTE_PAYMENT = "贷项通知";
+
+        private Payment()
+        {
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Refund
+    {
+        private Refund()
+        {
+        }
+
+        /// <summary>
+        /// 买方直接付款
+        /// </summary>
+        public static readonly string BUYER_PAYMENT = "买方直接付款";
+
+        /// <summary>
+        /// 卖方还款
+        /// </summary>
+        public static readonly string SELLER_REFUND = "卖方还款";
+    }
 }

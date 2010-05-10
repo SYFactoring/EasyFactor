@@ -83,7 +83,12 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            EXPORT_MSG09,
+            EXPORT_MSG09_INVOICE,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            EXPORT_MSG09_CREDITNOTE,
 
             /// <summary>
             /// 
@@ -141,7 +146,7 @@ namespace CMBC.EasyFactor.Utils
             this.exportType = exportType;
             this.exportData = exportData;
 
-            if (this.exportType == ExportType.EXPORT_MSG09 || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
+            if (this.exportType == ExportType.EXPORT_MSG09_INVOICE || this.exportType == ExportType.EXPORT_MSG09_CREDITNOTE || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
             {
                 this.btnFileSelect.Enabled = true;
             }
@@ -163,7 +168,7 @@ namespace CMBC.EasyFactor.Utils
             string filePath = this.tbFilePath.Text;
             if (String.IsNullOrEmpty(filePath.Trim()))
             {
-                if (this.exportType == ExportType.EXPORT_MSG09 || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
+                if (this.exportType == ExportType.EXPORT_MSG09_INVOICE || this.exportType == ExportType.EXPORT_MSG09_CREDITNOTE || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
                 {
                     this.tbStatus.Text = "请先选择保存路径";
                     return;
@@ -218,8 +223,11 @@ namespace CMBC.EasyFactor.Utils
                 case ExportType.EXPORT_INVOICES_OVERDUE:
                     e.Result = this.ExportInvoicesOverDue(worker, e);
                     break;
-                case ExportType.EXPORT_MSG09:
-                    e.Result = this.ExportMsg09(worker, e);
+                case ExportType.EXPORT_MSG09_INVOICE:
+                    e.Result = this.ExportMsg09Invoice(worker, e);
+                    break;
+                case ExportType.EXPORT_MSG09_CREDITNOTE:
+                    e.Result = this.ExportMsg09CreditNote(worker, e);
                     break;
                 case ExportType.EXPORT_MSG11:
                     e.Result = this.ExportMsg11(worker, e);
@@ -1991,7 +1999,7 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ExportMsg09(BackgroundWorker worker, DoWorkEventArgs e)
+        private int ExportMsg09Invoice(BackgroundWorker worker, DoWorkEventArgs e)
         {
             if (exportData.Count == 0)
             {
@@ -2034,7 +2042,7 @@ namespace CMBC.EasyFactor.Utils
                 sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.InvoiceAssignBatch.AssignDate)).Append(',');
                 sb.Append(invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
                 sb.Append(invoice.InvoiceAssignBatch.AssignAmount).Append(',');
-                sb.Append(',');//CreditNote
+                sb.Append("0,");//CreditNote
                 sb.Append(curCase.SellerCode).Append(',');
                 //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
                 sb.Append(',');
@@ -2058,6 +2066,90 @@ namespace CMBC.EasyFactor.Utils
                 sb.Append(invoice.InvoiceAssignBatch.BatchCount).Append(',');
                 sb.Append(0).Append(',');//Total of CreditNote
                 sb.Append(invoice.Comment).Append(' ');
+
+                fileWriter.WriteLine(sb.ToString());
+
+                worker.ReportProgress((int)((float)row * 100 / (float)size));
+            }
+
+            fileWriter.Flush();
+            fileWriter.Close();
+            return this.exportData.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ExportMsg09CreditNote(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            if (exportData.Count == 0)
+            {
+                return 0;
+            }
+
+            string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((Invoice)exportData[0]).InvoiceAssignBatch.Case.SellerCode, DateTime.Today);
+            StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
+
+            int size = exportData.Count;
+            for (int row = 0; row < size; row++)
+            {
+                if (worker.CancellationPending)
+                {
+                    fileWriter.Close();
+                    e.Cancel = true;
+                    return -1;
+                }
+
+                InvoicePaymentLog log = (InvoicePaymentLog)exportData[row];
+                StringBuilder sb = new StringBuilder();
+                Case curCase = log.Invoice.InvoiceAssignBatch.Case;
+                sb.Append(((int)row / 1000 + 1)).Append(',');
+                sb.Append("MSG09").Append(',');
+                sb.Append(curCase.SellerFactorCode).Append(',');
+                sb.Append(curCase.BuyerFactorCode).Append(',');
+                sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                sb.Append(',');
+                sb.Append(',');
+                sb.Append(',');
+                sb.Append(',');
+                sb.Append(',');
+                sb.Append(curCase.SellerFactorCode).Append(',');
+                //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
+                sb.Append(',');
+                sb.Append(curCase.BuyerFactorCode).Append(',');
+                //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
+                sb.Append(',');
+                sb.Append(log.Invoice.AssignBatchNo).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceAssignBatch.AssignDate)).Append(',');
+                sb.Append(log.Invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
+                sb.Append(log.Invoice.InvoiceAssignBatch.AssignAmount).Append(',');
+                sb.Append(log.PaymentAmount).Append(',');//CreditNote
+                sb.Append(curCase.SellerCode).Append(',');
+                //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
+                sb.Append(',');
+                sb.Append(curCase.BuyerCode).Append(',');
+                //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
+                sb.Append(',');
+                sb.Append(1).Append(',');
+                sb.Append(log.InvoiceNo).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
+                sb.Append(log.Invoice.InvoiceAmount).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.DueDate)).Append(',');
+                sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.ValueDate)).Append(',');
+                sb.Append(curCase.NetPaymentTerm).Append(',');
+                sb.Append(log.Invoice.PrimaryDiscountDays).Append(',');
+                sb.Append(log.Invoice.PrimaryDiscountRate).Append(',');
+                sb.Append(log.Invoice.SecondaryDiscountDays).Append(',');
+                sb.Append(log.Invoice.SecondaryDiscountRate).Append(',');
+                sb.Append(log.Invoice.PaymentConditions).Append(',');
+                sb.Append(log.Invoice.OrderNumberReference).Append(',');
+                sb.Append(log.Invoice.InvoiceReferenceNumber).Append(',');
+                sb.Append(log.Invoice.InvoiceAssignBatch.BatchCount).Append(',');
+                sb.Append(log.InvoicePaymentBatch.BatchCount).Append(',');//Total of CreditNote
+                sb.Append(log.Comment).Append(' ');
 
                 fileWriter.WriteLine(sb.ToString());
 

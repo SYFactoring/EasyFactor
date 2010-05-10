@@ -372,7 +372,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
-            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09, selectedBatch.Invoices);
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09_INVOICE, selectedBatch.Invoices);
             form.Show();
         }
 
