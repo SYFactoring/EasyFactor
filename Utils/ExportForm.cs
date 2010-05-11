@@ -16,9 +16,9 @@ namespace CMBC.EasyFactor.Utils
     using System.Text;
     using System.Windows.Forms;
     using CMBC.EasyFactor.DB.dbml;
+    using CMBC.EasyFactor.Utils.ConstStr;
     using DevComponents.DotNetBar;
     using Microsoft.Office.Interop.Excel;
-    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 

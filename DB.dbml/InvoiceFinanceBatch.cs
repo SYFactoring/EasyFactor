@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Data.Linq;
     using System.Linq;
     using CMBC.EasyFactor.Utils;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
@@ -396,10 +397,13 @@ namespace CMBC.EasyFactor.DB.dbml
                             throw new Exception(String.Format("融资到期日{0:yyyyMMdd}应该大于融资日{1:yyyyMMdd}，融资批号：{2} ", this.FinancePeriodBegin, this.FinancePeriodEnd, this.FinanceBatchNo));
                         }
 
-                        DateTime dueDate = invoiceList.OrderByDescending(i => i.DueDate).First().DueDate;
-                        if (FinancePeriodEnd < dueDate)
+                        if (this.Case.TransactionType != "国内买方保理")
                         {
-                            throw new Exception(String.Format("融资到期日{0:yyyyMMdd}不能早于发票到期日{1:yyyyMMdd}，融资批号：{2} ", this.FinancePeriodEnd, dueDate, this.FinanceBatchNo));
+                            DateTime dueDate = invoiceList.OrderByDescending(i => i.DueDate).First().DueDate;
+                            if (FinancePeriodEnd < dueDate)
+                            {
+                                throw new Exception(String.Format("融资到期日{0:yyyyMMdd}不能早于发票到期日{1:yyyyMMdd}，融资批号：{2} ", this.FinancePeriodEnd, dueDate, this.FinanceBatchNo));
+                            }
                         }
                     }
 
@@ -411,6 +415,20 @@ namespace CMBC.EasyFactor.DB.dbml
                     if (this.CostRate.HasValue && TypeUtil.LessZero(CostRate))
                     {
                         throw new Exception(String.Format("成本利率{0:N2}，不能小于零，融资批号: {1}", this.CostRate, this.FinanceBatchNo));
+                    }
+
+                    switch (this.FinanceType)
+                    {
+                        case Finance.FINANCE_TYPE1: break;
+                        case Finance.FINANCE_TYPE2: break;
+                        case Finance.FINANCE_TYPE3: break;
+                        case Finance.FINANCE_TYPE4: break;
+                        case Finance.FINANCE_TYPE5: break;
+                        case Finance.FINANCE_TYPE6: break;
+                        case Finance.FINANCE_TYPE7: break;
+                        case Finance.FINANCE_TYPE8: break;
+                        case Finance.FINANCE_TYPE9: break;
+                        default: throw new Exception(String.Format("融资类型：{0}，不符合规范", this.FinanceType));
                     }
                 }
             }

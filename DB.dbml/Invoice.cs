@@ -570,20 +570,6 @@ namespace CMBC.EasyFactor.DB.dbml
                         throw new Exception("转让日不能晚于发票日+付款期限: " + this.InvoiceNo);
                     }
                 }
-
-                CDA activeCDA = this.InvoiceAssignBatch.Case.ActiveCDA;
-                if (activeCDA == null)
-                {
-                    throw new Exception("没有有效的额度通知书：" + this.InvoiceNo);
-                }
-
-                if (InvoiceDate != null && activeCDA.CreditCoverPeriodEnd != null)
-                {
-                    if (InvoiceDate > activeCDA.CreditCoverPeriodEnd)
-                    {
-                        throw new Exception("发票日不能晚于额度通知书融资到期日: " + this.InvoiceNo);
-                    }
-                }
             }
         }
 

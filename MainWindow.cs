@@ -835,6 +835,20 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void InvoiceBuyerRefund(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
+            {
+                ARCaseBasic invoiceRefund = new ARCaseBasic(OpARType.BUYER_REFUND);
+                this.SetDetailPanel(invoiceRefund);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainPage(object sender, EventArgs e)
         {
             WorkAlert alert = new WorkAlert();
@@ -1372,5 +1386,8 @@ namespace CMBC.EasyFactor
         }
 
         #endregion?Methods?
+
+
+
     }
 }

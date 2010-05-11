@@ -34,6 +34,11 @@ namespace CMBC.EasyFactor.ARMgr
         BUYER_PAYMENT,
 
         /// <summary>
+        /// 买方直接付款
+        /// </summary>
+        BUYER_REFUND,
+
+        /// <summary>
         /// 卖方还款
         /// </summary>
         SELLER_REFUND,
@@ -116,6 +121,9 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
                 case OpARType.SELLER_REFUND:
                     this.InvoiceControl = new InvoiceRefund(this, InvoiceRefund.OpRefundType.SELLER_REFUND);
+                    break;
+                case OpARType.BUYER_REFUND:
+                    this.InvoiceControl = new InvoiceRefund(this, InvoiceRefund.OpRefundType.BUYER_PAYMENT);
                     break;
                 default:
                     this.InvoiceControl = new UserControl();
