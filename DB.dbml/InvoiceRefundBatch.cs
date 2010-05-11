@@ -10,13 +10,15 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Data.Linq;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceRefundBatch
     {
-		#region?Properties?(4)?
+        #region?Properties?(4)?
 
         /// <summary>
         /// Gets
@@ -73,11 +75,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Methods?(3)?
+        #region?Methods?(3)?
 
-		//?Public?Methods?(3)?
+        //?Public?Methods?(3)?
 
         /// <summary>
         /// 
@@ -140,6 +142,21 @@ namespace CMBC.EasyFactor.DB.dbml
             return refundNo;
         }
 
-		#endregion?Methods?
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        partial void OnValidate(ChangeAction action)
+        {
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (this.RefundType != Refund.SELLER_REFUND && this.RefundType != Refund.BUYER_PAYMENT)
+                {
+                    throw new Exception(String.Format("还款类型：{0}，设置无效，还款批次号{1}", this.RefundType, this.RefundBatchNo));
+                }
+            }
+        }
+
+        #endregion?Methods?
     }
 }

@@ -10,13 +10,15 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Data.Linq;
+    using CMBC.EasyFactor.Utils.ConstStr;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoicePaymentBatch
     {
-		#region?Properties?(5)?
+        #region?Properties?(5)?
 
         /// <summary>
         /// Gets
@@ -79,11 +81,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Methods?(2)?
+        #region?Methods?(2)?
 
-		//?Public?Methods?(2)?
+        //?Public?Methods?(2)?
 
         /// <summary>
         /// 
@@ -139,6 +141,20 @@ namespace CMBC.EasyFactor.DB.dbml
             return paymentNo;
         }
 
-		#endregion?Methods?
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        partial void OnValidate(ChangeAction action)
+        {
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (this.PaymentType != Payment.BUYER_PAYMENT && this.PaymentType != Payment.CREDIT_NOTE_PAYMENT && this.PaymentType != Payment.GUARANTEE_PAYMENT && this.PaymentType != Payment.INDIRECT_PAYMENT && this.PaymentType != Payment.SELLER_REASSIGN)
+                {
+                    throw new Exception(String.Format("付款类型：{0}，设置无效，还款批次号{1}", this.PaymentType, this.PaymentBatchNo));
+                }
+            }
+        }
+        #endregion?Methods?
     }
 }

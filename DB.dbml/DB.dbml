@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=YIMING-PC-HOME\SQLEXPRESS;Initial Catalog=FOS;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="Char(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -505,6 +505,7 @@
       <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="DepositDate" Storage="_DepositDate" Type="System.DateTime" DbType="DateTime" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Association Name="Client_GuaranteeDeposit" Member="Client" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>

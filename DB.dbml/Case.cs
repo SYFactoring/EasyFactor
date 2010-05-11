@@ -467,6 +467,27 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public Client GuaranteeDepositClient
+        {
+            get
+            {
+                switch (TransactionType)
+                {
+                    case "国内卖方保理":
+                    case "出口保理":
+                        return this.SellerClient;
+                    case "国内买方保理":
+                    case "进口保理":
+                        return this.BuyerClient;
+                    default:
+                        return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public double TotalAssignOutstanding
         {
             get

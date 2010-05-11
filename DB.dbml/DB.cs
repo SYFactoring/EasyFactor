@@ -13,5 +13,5 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class DBDataContext
     {
 
-}
+    }
 }

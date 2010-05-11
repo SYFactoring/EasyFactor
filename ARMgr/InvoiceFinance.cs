@@ -599,12 +599,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             CDA activeCDA = this._case.ActiveCDA;
-
-            if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding))
-            {
-                MessageBoxEx.Show("该案件的预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            bool hasGD = this._case.GuaranteeDepositClient.GuaranteeDeposits.Count > 0;
 
             if (activeCDA.HighestFinanceLine.HasValue == false)
             {
@@ -618,10 +613,19 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (!TypeUtil.GreaterZero(activeCDA.HighestFinanceLine - this._case.TotalFinanceOutstanding))
+            if (!hasGD)
             {
-                MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding))
+                {
+                    MessageBoxEx.Show("该案件的预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                if (!TypeUtil.GreaterZero(activeCDA.HighestFinanceLine - this._case.TotalFinanceOutstanding))
+                {
+                    MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
             }
 
             if (activeCDA.CommissionType == "按融资金额" || activeCDA.CommissionType == "其他")
@@ -763,6 +767,23 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 MessageBoxEx.Show("融资额未分配结束，不能保存", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
+            }
+
+            GuaranteeDeposit gd = this._case.GuaranteeDepositClient.GetGuaranteeDeposit(batch.BatchCurrency);
+            double guaranteeDeposit = 0;
+            CDA activeCDA = this._case.ActiveCDA;
+            if (gd != null)
+            {
+                guaranteeDeposit = gd.GuaranteeDepositAmount;
+            }
+            if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding - batch.FinanceAmount + guaranteeDeposit))
+            {
+                throw new Exception("该案件的预付款融资额度余额不足，不能融资。");
+            }
+
+            if (!TypeUtil.GreaterZero(activeCDA.HighestFinanceLine - this._case.TotalFinanceOutstanding - batch.FinanceAmount + guaranteeDeposit))
+            {
+                throw new Exception("该案件的最高预付款融资额度余额不足，不能融资。");
             }
 
             bool isSaveOK = true;

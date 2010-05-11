@@ -2378,32 +2378,6 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("该业务未复核（或复核未通过）：" + assignBatchCode);
                         }
 
-                        CDA activeCDA = assignBatch.Case.ActiveCDA;
-                        if (activeCDA == null)
-                        {
-                            throw new Exception("没有有效的额度通知书，业务编号：" + assignBatchCode);
-                        }
-
-                        if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding))
-                        {
-                            throw new Exception("该案件的预付款融资额度余额不足，不能融资： " + assignBatchCode);
-                        }
-
-                        if (activeCDA.HighestFinanceLine.HasValue == false)
-                        {
-                            throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
-                        }
-
-                        if (activeCDA.FinanceCreditLine.PeriodEnd < DateTime.Today)
-                        {
-                            throw new Exception("融资额度已到期，不能融资：" + assignBatchCode);
-                        }
-
-                        if (!TypeUtil.GreaterZero(activeCDA.HighestFinanceLine - assignBatch.Case.TotalFinanceOutstanding))
-                        {
-                            throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
-                        }
-
                         InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
 
                         string financeType = String.Format("{0:G}", valueArray[row, column++]);
@@ -2512,6 +2486,40 @@ namespace CMBC.EasyFactor.Utils
                             financeBatch.Factor = factor;
                         }
 
+                        CDA activeCDA = assignBatch.Case.ActiveCDA;
+                        GuaranteeDeposit gd = assignBatch.Case.GuaranteeDepositClient.GetGuaranteeDeposit(batchCurrency);
+                        double guaranteeDeposit = 0;
+
+                        if (activeCDA == null)
+                        {
+                            throw new Exception("没有有效的额度通知书，业务编号：" + assignBatchCode);
+                        }
+
+                        if (gd != null)
+                        {
+                            guaranteeDeposit = gd.GuaranteeDepositAmount;
+                        }
+
+                        if (activeCDA.HighestFinanceLine.HasValue == false)
+                        {
+                            throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
+                        }
+
+                        if (activeCDA.FinanceCreditLine.PeriodEnd < DateTime.Today)
+                        {
+                            throw new Exception("融资额度已到期，不能融资：" + assignBatchCode);
+                        }
+                        if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding - financeAmount + guaranteeDeposit))
+                        {
+                            throw new Exception("该案件的预付款融资额度余额不足，不能融资： " + assignBatchCode);
+                        }
+
+                        if (!TypeUtil.GreaterZero(activeCDA.HighestFinanceLine - assignBatch.Case.TotalFinanceOutstanding - financeAmount + guaranteeDeposit))
+                        {
+                            throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
+                        }
+
+
                         financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         financeBatch.CheckStatus = BATCH.UNCHECK;
                         financeBatch.InputDate = DateTime.Today;
@@ -2520,6 +2528,8 @@ namespace CMBC.EasyFactor.Utils
                         financeBatch.Case = assignBatch.Case;
 
                         financeBatchList.Add(financeBatch);
+
+
 
                         double currentFinanceAmount = 0;
                         foreach (Invoice invoice in assignBatch.Invoices.Where(i => (i.IsDispute.HasValue == false || i.IsDispute == false) && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == BATCH.CHECK && i.DueDate > financeBatch.FinancePeriodBegin).OrderBy(i => i.DueDate))

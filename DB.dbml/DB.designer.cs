@@ -11557,6 +11557,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private System.DateTime _DepositDate;
+		
 		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
@@ -11575,6 +11577,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnDepositDateChanging(System.DateTime value);
+    partial void OnDepositDateChanged();
     #endregion
 		
 		public GuaranteeDeposit()
@@ -11703,6 +11707,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepositDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.DateTime DepositDate
+		{
+			get
+			{
+				return this._DepositDate;
+			}
+			set
+			{
+				if ((this._DepositDate != value))
+				{
+					this.OnDepositDateChanging(value);
+					this.SendPropertyChanging();
+					this._DepositDate = value;
+					this.SendPropertyChanged("DepositDate");
+					this.OnDepositDateChanged();
 				}
 			}
 		}

@@ -19,13 +19,13 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Client
     {
-		#region?Fields?(1)?
+        #region?Fields?(1)?
 
         private static Regex ClientEDICodeRegex = new Regex(@"^[a-zA-Z0-9]{2}[a-zA-Z0-9\\-]{1}[a-zA-Z0-9]{4}\d{2}$");
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Properties?(13)?
+        #region?Properties?(13)?
 
         /// <summary>
         /// 
@@ -314,11 +314,11 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Methods?(6)?
+        #region?Methods?(6)?
 
-		//?Public?Methods?(5)?
+        //?Public?Methods?(5)?
 
         /// <summary>
         /// 
@@ -449,7 +449,26 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _ClientNameEN;
             }
         }
-		//?Private?Methods?(1)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public GuaranteeDeposit GetGuaranteeDeposit(string currency)
+        {
+            IList<GuaranteeDeposit> gdList = this.GuaranteeDeposits.Where(g => g.GuaranteeDepositCurrency == currency).OrderByDescending(d => d.DepositDate).ToList();
+            if (gdList.Count > 0)
+            {
+                return gdList[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        //?Private?Methods?(1)?
 
         /// <summary>
         /// 
@@ -466,6 +485,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }
