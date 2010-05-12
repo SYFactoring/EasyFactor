@@ -674,6 +674,7 @@ namespace CMBC.EasyFactor.ARMgr
             string location = (string)this.cbLocation.SelectedValue;
             string transactionType = this.cbTransactionType.Text;
             string caseCode = this.tbCaseCode.Text;
+            string assignBatchNo = this.tbAssignBatchNo.Text;
 
             int assignOverDueDays = 0;
             DateTime assignOverDueDate = DateTime.Now.Date;
@@ -705,6 +706,10 @@ namespace CMBC.EasyFactor.ARMgr
             context = new DBDataContext();
 
             var queryResult = from invoice in context.Invoices
+                              let assignBatch = invoice.InvoiceAssignBatch
+                              where
+                                   (beginDate != this.dateFrom.MinDate ? assignBatch.AssignDate >= beginDate : true)
+                                && (endDate != this.dateTo.MinDate ? assignBatch.AssignDate <= endDate : true)
                               let curCase = invoice.InvoiceAssignBatch.Case
                               where curCase.CaseMark == caseMark
                                     && (transactionType == "È«²¿" ? true : curCase.TransactionType == transactionType)
@@ -717,13 +722,12 @@ namespace CMBC.EasyFactor.ARMgr
                               where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName)
                               let buyerFactor = curCase.BuyerFactor
                               where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
-                              where (invoiceNo == string.Empty ? true : invoice.InvoiceNo == invoiceNo)
+                              where (invoiceNo == string.Empty ? true : invoice.InvoiceNo.Contains(invoiceNo))
+                                && (assignBatchNo==string.Empty?true:invoice.AssignBatchNo.Contains(assignBatchNo))
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                 && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
                                 && (tbAssignOverDueDays.Text == string.Empty ? true : (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION && invoice.DueDate <= assignOverDueDate))
                                 && (tbFinanceOverDueDays.Text == string.Empty ? true : (invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() < -TypeUtil.PRECISION && invoice.FinanceDueDate <= financeOverDueDate))
-                                && (beginDate != this.dateFrom.MinDate ? invoice.InvoiceAssignBatch.AssignDate >= beginDate : true)
-                                && (endDate != this.dateTo.MinDate ? invoice.InvoiceAssignBatch.AssignDate <= endDate : true)
                                 && (needAssignOutstanding ? invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount + assignOustanding < -TypeUtil.PRECISION : true)
                                 && (needFinanceOutstanding ? invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() + financeOutstanding < -TypeUtil.PRECISION : true)
                               orderby invoice.InvoiceAssignBatch.AssignDate
