@@ -151,7 +151,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (this.PaymentType != Payment.BUYER_PAYMENT && this.PaymentType != Payment.CREDIT_NOTE_PAYMENT && this.PaymentType != Payment.GUARANTEE_PAYMENT && this.PaymentType != Payment.INDIRECT_PAYMENT && this.PaymentType != Payment.SELLER_REASSIGN)
                 {
-                    throw new Exception(String.Format("付款类型：{0}，设置无效，还款批次号{1}", this.PaymentType, this.PaymentBatchNo));
+                    throw new Exception(String.Format("付款类型：{0}，不符合规范类型，还款批次号{1}", this.PaymentType, this.PaymentBatchNo));
                 }
             }
         }

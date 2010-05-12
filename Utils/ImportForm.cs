@@ -2532,7 +2532,17 @@ namespace CMBC.EasyFactor.Utils
 
 
                         double currentFinanceAmount = 0;
-                        foreach (Invoice invoice in assignBatch.Invoices.Where(i => (i.IsDispute.HasValue == false || i.IsDispute == false) && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == BATCH.CHECK && i.DueDate > financeBatch.FinancePeriodBegin).OrderBy(i => i.DueDate))
+                        IEnumerable<Invoice> invoices = null;
+                        if (assignBatch.Case.TransactionType == "国内买方保理")
+                        {
+                            invoices = assignBatch.Invoices.Where(i => (i.IsDispute.HasValue == false || i.IsDispute == false) && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == BATCH.CHECK).OrderBy(i => i.DueDate);
+                        }
+                        else
+                        {
+                            invoices = assignBatch.Invoices.Where(i => (i.IsDispute.HasValue == false || i.IsDispute == false) && i.IsFlaw == false && i.InvoiceAssignBatch.CheckStatus == BATCH.CHECK && i.DueDate > financeBatch.FinancePeriodBegin).OrderBy(i => i.DueDate);
+                        }
+
+                        foreach (Invoice invoice in invoices)
                         {
                             double canBeFinanceAmount = invoice.AssignOutstanding * activeCDA.FinanceProportion.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault();
                             if (TypeUtil.GreaterZero(canBeFinanceAmount))

@@ -27,7 +27,7 @@
     <SignManifests>false</SignManifests>
     <TargetZone>LocalIntranet</TargetZone>
     <ApplicationIcon>EasyFactoring.ico</ApplicationIcon>
-    <PublishUrl>C:\Users\Yiming\Desktop\</PublishUrl>
+    <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -632,7 +632,9 @@
     <Compile Include="Utils\TypeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="cmbc.config" />
     <None Include="DB.dbml\DB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>

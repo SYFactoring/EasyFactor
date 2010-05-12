@@ -20,19 +20,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
         private System.Windows.Forms.ContextMenuStrip cmuBatchMgr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsCreateMsg;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -102,10 +89,15 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblLocation = new DevComponents.DotNetBar.LabelX();
             this.cbTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblTransactionType = new DevComponents.DotNetBar.LabelX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -138,8 +130,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.lblLocation = new DevComponents.DotNetBar.LabelX();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -147,7 +137,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsCreateMsg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -193,6 +185,32 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // cbLocation
+            // 
+            this.cbLocation.DisplayMember = "Text";
+            this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLocation.FormattingEnabled = true;
+            this.cbLocation.ItemHeight = 14;
+            this.cbLocation.Location = new System.Drawing.Point(398, 4);
+            this.cbLocation.Name = "cbLocation";
+            this.cbLocation.Size = new System.Drawing.Size(100, 20);
+            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbLocation.TabIndex = 5;
+            // 
+            // lblLocation
+            // 
+            this.lblLocation.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblLocation.BackgroundStyle.Class = "";
+            this.lblLocation.Location = new System.Drawing.Point(337, 6);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(56, 16);
+            this.lblLocation.TabIndex = 4;
+            this.lblLocation.Text = "业务地区";
             // 
             // cbTransactionType
             // 
@@ -294,9 +312,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbCheckStatus.ItemHeight = 14;
             this.cbCheckStatus.Items.AddRange(new object[] {
             "",
-            BATCH.UNCHECK,
-            BATCH.CHECK,
-            BATCH.REJECT});
+            "未复核",
+            "已复核",
+            "复核未通过"});
             this.cbCheckStatus.Location = new System.Drawing.Point(230, 27);
             this.cbCheckStatus.Name = "cbCheckStatus";
             this.cbCheckStatus.Size = new System.Drawing.Size(101, 20);
@@ -480,21 +498,23 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignDate,
             this.colBatchCurrency,
             this.colAssignAmount,
-            this.colIsCreateMsg,
+            this.colFinanceAmount,
+            this.colPaymentAmount,
+            this.colRefundAmount,
             this.colCreateUserName,
             this.colCheckStatus,
             this.colCheckUserName,
             this.colCheckDate,
             this.colBatchCount});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvBatches.Location = new System.Drawing.Point(0, 51);
@@ -504,7 +524,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.Size = new System.Drawing.Size(894, 306);
             this.dgvBatches.TabIndex = 1;
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
-            this.dgvBatches.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvBatches_CellFormatting);
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBatches_RowPostPaint);
             // 
             // cmuBatchMgr
@@ -625,32 +644,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemMSG09.Text = "生成MSG09";
             this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
             // 
-            // cbLocation
-            // 
-            this.cbLocation.DisplayMember = "Text";
-            this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLocation.FormattingEnabled = true;
-            this.cbLocation.ItemHeight = 14;
-            this.cbLocation.Location = new System.Drawing.Point(398, 4);
-            this.cbLocation.Name = "cbLocation";
-            this.cbLocation.Size = new System.Drawing.Size(100, 20);
-            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbLocation.TabIndex = 5;
-            // 
-            // lblLocation
-            // 
-            this.lblLocation.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblLocation.BackgroundStyle.Class = "";
-            this.lblLocation.Location = new System.Drawing.Point(337, 6);
-            this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(56, 16);
-            this.lblLocation.TabIndex = 4;
-            this.lblLocation.Text = "业务地区";
-            // 
             // colSellerName
             // 
             this.colSellerName.DataPropertyName = "SellerName";
@@ -693,7 +686,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colBatchCurrency
             // 
             this.colBatchCurrency.DataPropertyName = "BatchCurrency";
-            this.colBatchCurrency.HeaderText = "币种";
+            this.colBatchCurrency.HeaderText = "发票币别";
             this.colBatchCurrency.Name = "colBatchCurrency";
             this.colBatchCurrency.ReadOnly = true;
             // 
@@ -706,12 +699,32 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
             // 
-            // colIsCreateMsg
+            // colFinanceAmount
             // 
-            this.colIsCreateMsg.DataPropertyName = "IsCreateMsg";
-            this.colIsCreateMsg.HeaderText = "是否生成报文";
-            this.colIsCreateMsg.Name = "colIsCreateMsg";
-            this.colIsCreateMsg.ReadOnly = true;
+            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            dataGridViewCellStyle4.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colFinanceAmount.HeaderText = "融资金额";
+            this.colFinanceAmount.Name = "colFinanceAmount";
+            this.colFinanceAmount.ReadOnly = true;
+            // 
+            // colPaymentAmount
+            // 
+            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle5.Format = "N2";
+            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colPaymentAmount.HeaderText = "付款金额";
+            this.colPaymentAmount.Name = "colPaymentAmount";
+            this.colPaymentAmount.ReadOnly = true;
+            // 
+            // colRefundAmount
+            // 
+            this.colRefundAmount.DataPropertyName = "RefundAmount";
+            dataGridViewCellStyle6.Format = "N2";
+            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colRefundAmount.HeaderText = "还款金额";
+            this.colRefundAmount.Name = "colRefundAmount";
+            this.colRefundAmount.ReadOnly = true;
             // 
             // colCreateUserName
             // 
@@ -768,5 +781,21 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
     }
 }

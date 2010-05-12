@@ -326,32 +326,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvBatches_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            DataGridViewColumn column = this.dgvBatches.Columns[e.ColumnIndex];
-            if (column == this.colIsCreateMsg)
-            {
-                object originalData = e.Value;
-                if (originalData != null)
-                {
-                    bool result = (bool)originalData;
-                    if (result)
-                    {
-                        e.Value = "Y";
-                    }
-                    else
-                    {
-                        e.Value = "N";
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvBatches.RowHeadersWidth - 4, e.RowBounds.Height);

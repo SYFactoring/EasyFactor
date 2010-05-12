@@ -20,6 +20,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		#region?Fields?(4)?
 
         private double? _assignAmount;
+        private double? _financeAmount;
+        private double? _paymentAmount;
+        private double? _refundAmount;
         private double? _assignOutstanding;
         private double? _commissionAmount;
         private double? _financeOutstanding;
@@ -29,7 +32,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		#region?Properties?(10)?
 
         /// <summary>
-        /// Gets
+        /// Gets assign amount
         /// </summary>
         public double AssignAmount
         {
@@ -44,6 +47,53 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// Gets finance amount
+        /// </summary>
+        public double FinanceAmount
+        {
+            get
+            {
+                if (_financeAmount.HasValue == false)
+                {
+                    _financeAmount = this.Invoices.Sum(i => i.FinanceAmount);
+                }
+
+                return _financeAmount.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets payment amount
+        /// </summary>
+        public double PaymentAmount
+        {
+            get
+            {
+                if (_paymentAmount.HasValue == false)
+                {
+                    _paymentAmount = this.Invoices.Sum(i => i.PaymentAmount);
+                }
+
+                return _paymentAmount.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets refund amount
+        /// </summary>
+        public double RefundAmount
+        {
+            get
+            {
+                if (_refundAmount.HasValue == false)
+                {
+                    _refundAmount = this.Invoices.Sum(i => i.RefundAmount);
+                }
+
+                return _refundAmount.Value;
+            }
+        }
         /// <summary>
         /// Gets
         /// </summary>

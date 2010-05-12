@@ -157,7 +157,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
             this.tbTotalRefund.Text = string.Empty;
             InvoiceRefundBatch batch = new InvoiceRefundBatch();
-            batch.RefundType = paymentBatch.PaymentType;
+            if (paymentBatch.PaymentType == Payment.BUYER_PAYMENT)
+            {
+                batch.RefundType = Refund.BUYER_PAYMENT;
+            }
+            else if (paymentBatch.PaymentType == Payment.INDIRECT_PAYMENT || paymentBatch.PaymentType == Payment.SELLER_REASSIGN || paymentBatch.PaymentType == Payment.CREDIT_NOTE_PAYMENT)
+            {
+                batch.RefundType = Refund.SELLER_REFUND;
+            }
             batch.RefundDate = paymentBatch.PaymentDate;
             batch.CreateUserName = App.Current.CurUser.Name;
             batch.CheckStatus = BATCH.UNCHECK;
