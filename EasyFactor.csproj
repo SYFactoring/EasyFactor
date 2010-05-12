@@ -679,7 +679,9 @@
     <Content Include="Dll\CSharpZipLib.dll" />
     <Content Include="Dll\DevComponents.DotNetBar2.dll" />
     <Content Include="EasyFactoring.ico" />
-    <Content Include="Help\change_log.htm" />
+    <Content Include="Help\change_log.htm">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Help\UpdateVersion.xml" />
   </ItemGroup>
   <ItemGroup>

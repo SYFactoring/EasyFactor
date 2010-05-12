@@ -17,6 +17,8 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceAssignBatch
     {
+
+
 		#region?Fields?(4)?
 
         private double? _assignAmount;
@@ -28,6 +30,7 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _financeOutstanding;
 
 		#endregion?Fields?
+
 
 		#region?Properties?(10)?
 
@@ -222,6 +225,7 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
 		#endregion?Properties?
+
 
 		#region?Methods?(2)?
 

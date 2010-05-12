@@ -164,7 +164,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             foreach (InvoiceRefundLog log in this.InvoiceRefundLogs)
             {
-                log.InvoiceFinanceLog.Invoice.CaculatePaymentDate();
+                log.InvoiceFinanceLog.Invoice.CaculateRefundDate();
             }
         }
 

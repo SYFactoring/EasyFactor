@@ -422,15 +422,15 @@ namespace CMBC.EasyFactor
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
             this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
-            this.ribbonControl.Controls.Add(this.ribbonPanel3);
-            this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
-            this.ribbonControl.Controls.Add(this.ribbonPanelReport);
-            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
-            this.ribbonControl.Controls.Add(this.ribbonPanel2);
-            this.ribbonControl.Controls.Add(this.ribbonPanelARImport);
-            this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanel1);
+            this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
+            this.ribbonControl.Controls.Add(this.ribbonPanelARImport);
+            this.ribbonControl.Controls.Add(this.ribbonPanel2);
+            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
+            this.ribbonControl.Controls.Add(this.ribbonPanelReport);
+            this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
+            this.ribbonControl.Controls.Add(this.ribbonPanel3);
+            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemInfoMgr,
@@ -954,6 +954,7 @@ namespace CMBC.EasyFactor
             // 
             // btnInvoicesImport
             // 
+            this.btnInvoicesImport.Image = ((System.Drawing.Image)(resources.GetObject("btnInvoicesImport.Image")));
             this.btnInvoicesImport.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
             this.btnInvoicesImport.Name = "btnInvoicesImport";
             this.btnInvoicesImport.SubItemsExpandWidth = 14;
@@ -1056,6 +1057,7 @@ namespace CMBC.EasyFactor
             // 
             // btnCaseImport
             // 
+            this.btnCaseImport.Image = ((System.Drawing.Image)(resources.GetObject("btnCaseImport.Image")));
             this.btnCaseImport.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
             this.btnCaseImport.Name = "btnCaseImport";
             this.btnCaseImport.SubItemsExpandWidth = 14;
@@ -1064,6 +1066,7 @@ namespace CMBC.EasyFactor
             // 
             // btnCreditCoverNegImport
             // 
+            this.btnCreditCoverNegImport.Image = ((System.Drawing.Image)(resources.GetObject("btnCreditCoverNegImport.Image")));
             this.btnCreditCoverNegImport.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
             this.btnCreditCoverNegImport.Name = "btnCreditCoverNegImport";
             this.btnCreditCoverNegImport.SubItemsExpandWidth = 14;
