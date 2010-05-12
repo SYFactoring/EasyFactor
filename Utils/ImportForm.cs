@@ -746,6 +746,7 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+            this.context = new DBDataContext();
             List<Invoice> invoiceList = new List<Invoice>();
 
             if (valueArray != null)
@@ -2659,6 +2660,7 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+            this.context = new DBDataContext();
             List<InvoiceFinanceLog> logList = new List<InvoiceFinanceLog>();
 
             if (valueArray != null)
@@ -3378,6 +3380,7 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+            this.context = new DBDataContext();
             List<InvoicePaymentLog> logList = new List<InvoicePaymentLog>();
 
             if (valueArray != null)
@@ -3984,6 +3987,7 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = this.GetValueArray(fileName, 1);
             int result = 0;
+            this.context = new DBDataContext();
             List<InvoiceRefundLog> logList = new List<InvoiceRefundLog>();
 
             if (valueArray != null)
