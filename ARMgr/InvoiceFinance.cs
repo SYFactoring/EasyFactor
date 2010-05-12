@@ -620,13 +620,13 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (!hasGD)
             {
-                if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding))
+                if (TypeUtil.LessZero(activeCDA.FinanceLineOutstanding))
                 {
                     MessageBoxEx.Show("该案件的预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                if (!TypeUtil.GreaterZero(activeCDA.HighestFinanceLine - this._case.TotalFinanceOutstanding))
+                if (TypeUtil.LessZero(activeCDA.HighestFinanceLine - this._case.TotalFinanceOutstanding))
                 {
                     MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -781,14 +781,14 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 guaranteeDeposit = gd.GuaranteeDepositAmount;
             }
-            if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding - batch.FinanceAmount + guaranteeDeposit))
+            if (TypeUtil.LessZero(activeCDA.FinanceLineOutstanding - batch.FinanceAmount + guaranteeDeposit))
             {
-                throw new Exception("该案件的预付款融资额度余额不足，不能融资。");
+                throw new Exception(String.Format("该案件的预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资", (activeCDA.FinanceLineOutstanding + guaranteeDeposit), batch.FinanceAmount));
             }
 
-            if (!TypeUtil.GreaterZero(activeCDA.HighestFinanceLine - this._case.TotalFinanceOutstanding - batch.FinanceAmount + guaranteeDeposit))
+            if (TypeUtil.LessZero(activeCDA.HighestFinanceLine - this._case.TotalFinanceOutstanding - batch.FinanceAmount + guaranteeDeposit))
             {
-                throw new Exception("该案件的最高预付款融资额度余额不足，不能融资。");
+                throw new Exception(String.Format("该案件的最高预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}", (activeCDA.HighestFinanceLine - this._case.TotalFinanceOutstanding + guaranteeDeposit), batch.FinanceAmount));
             }
 
             bool isSaveOK = true;

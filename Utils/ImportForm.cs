@@ -2509,16 +2509,15 @@ namespace CMBC.EasyFactor.Utils
                         {
                             throw new Exception(String.Format("融资额度已到期{0:d}，不能融资：{1}", activeCDA.FinanceCreditLine.PeriodEnd, assignBatchCode));
                         }
-                        if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding - financeAmount + guaranteeDeposit))
+                        if (TypeUtil.LessZero(activeCDA.FinanceLineOutstanding - financeAmount + guaranteeDeposit))
                         {
-                            throw new Exception("该案件的预付款融资额度余额不足，不能融资： " + assignBatchCode);
+                            throw new Exception(String.Format("该案件的预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}", (activeCDA.FinanceLineOutstanding + guaranteeDeposit), financeAmount, assignBatchCode));
                         }
 
-                        if (!TypeUtil.GreaterZero(activeCDA.HighestFinanceLine - assignBatch.Case.TotalFinanceOutstanding - financeAmount + guaranteeDeposit))
+                        if (TypeUtil.LessZero(activeCDA.HighestFinanceLine - assignBatch.Case.TotalFinanceOutstanding - financeAmount + guaranteeDeposit))
                         {
-                            throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
+                            throw new Exception(String.Format("该案件的最高预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}", (activeCDA.HighestFinanceLine - assignBatch.Case.TotalFinanceOutstanding + guaranteeDeposit), financeAmount, assignBatchCode));
                         }
-
 
                         financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         financeBatch.CheckStatus = BATCH.UNCHECK;
