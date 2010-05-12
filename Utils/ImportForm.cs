@@ -3215,6 +3215,12 @@ namespace CMBC.EasyFactor.Utils
 
                         string paymentType = String.Format("{0:G}", valueArray[row, column++]);
 
+                        string paymentCurrenty = String.Format("{0:G}", valueArray[row, column++]);
+                        if (paymentCurrenty != assignBatch.BatchCurrency)
+                        {
+                            throw new Exception(String.Format("销帐币种{0}与案件币种{1}不相同，不能导入：{2}", paymentCurrenty, assignBatch.BatchCurrency, invoiceNo));
+                        }
+
                         string paymentAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         double paymentAmount = 0;
                         if (!String.IsNullOrEmpty(paymentAmountStr))
@@ -3278,6 +3284,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatch.PaymentType = paymentType;
                                     paymentBatch.CreateUserName = App.Current.CurUser.Name;
                                     paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate, paymentBatchList);
+                                    paymentBatchList.Add(paymentBatch);
                                 }
 
                                 if (TypeUtil.GreaterZero(paymentAmount - invoice.AssignOutstanding))
@@ -3303,6 +3310,7 @@ namespace CMBC.EasyFactor.Utils
                                 paymentBatch.PaymentType = paymentType;
                                 paymentBatch.CreateUserName = App.Current.CurUser.Name;
                                 paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(paymentDate, paymentBatchList);
+                                paymentBatchList.Add(paymentBatch);
 
                                 if (TypeUtil.GreaterZero(paymentAmount - assignBatch.AssignOutstanding))
                                 {
@@ -3884,6 +3892,7 @@ namespace CMBC.EasyFactor.Utils
                             refundBatch.RefundType = refundType;
                             refundBatch.CreateUserName = App.Current.CurUser.Name;
                             refundBatch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(refundDate, refundBatchList);
+                            refundBatchList.Add(refundBatch);
 
                             if (refundCurrency != assignBatch.BatchCurrency)
                             {

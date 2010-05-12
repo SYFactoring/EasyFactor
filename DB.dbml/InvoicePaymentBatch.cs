@@ -94,13 +94,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GeneratePaymentBatchNo(DateTime date)
         {
-            string dateStr = String.Format("{0:yyyMMdd}", date);
+            string prefix = String.Format("{0:yyyyMMdd}", date);
             int batchCount;
 
             using (DBDataContext context = new DBDataContext())
             {
                 var queryResult = from batch in context.InvoicePaymentBatches
-                                  where batch.PaymentBatchNo.Contains(dateStr)
+                                  where batch.PaymentBatchNo.StartsWith(prefix)
                                   select batch.PaymentBatchNo;
 
                 if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
@@ -109,7 +109,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
 
-            string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            string paymentNo = String.Format("{0}-{1:d2}", prefix, batchCount + 1);
             return paymentNo;
         }
 
@@ -121,13 +121,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GeneratePaymentBatchNo(DateTime date, List<InvoicePaymentBatch> batchesInMemory)
         {
-            string dateStr = String.Format("{0:yyyMMdd}", date);
+            string prefix = String.Format("PAY{0:yyyyMMdd}", date);
             int batchCount;
 
             using (DBDataContext context = new DBDataContext())
             {
                 var queryResult = from batch in context.InvoicePaymentBatches
-                                  where batch.PaymentBatchNo.Contains(dateStr)
+                                  where batch.PaymentBatchNo.StartsWith(prefix)
                                   select batch.PaymentBatchNo;
 
                 if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
@@ -136,8 +136,8 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
 
-            batchCount += batchesInMemory.Count(batch => batch.PaymentBatchNo.Contains(dateStr));
-            string paymentNo = String.Format("PAY{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            batchCount += batchesInMemory.Count(batch => batch.PaymentBatchNo.Contains(prefix));
+            string paymentNo = String.Format("{0}-{1:d2}", prefix, batchCount + 1);
             return paymentNo;
         }
 
