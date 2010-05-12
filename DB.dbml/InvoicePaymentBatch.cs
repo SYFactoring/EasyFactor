@@ -155,6 +155,17 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        partial void OnPaymentDateChanged()
+        {
+            foreach (InvoicePaymentLog log in this.InvoicePaymentLogs)
+            {
+                log.Invoice.CaculatePaymentDate();
+            }
+        }
         #endregion?Methods?
     }
 }

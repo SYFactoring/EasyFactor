@@ -214,10 +214,10 @@ namespace CMBC.EasyFactor.ARMgr
         private void customValidator2_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            if (batch.Case.TransactionType == "国内买方保理")
-            {
-                e.IsValid = true;
-            }
+            //if (batch.Case.TransactionType == "国内买方保理")
+            //{
+            //    e.IsValid = true;
+            //}
 
             IList logList = this.logsBindingSource.List;
 

@@ -376,6 +376,28 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        partial void OnFinancePeriodBeginChanged()
+        {
+            foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+            {
+                log.Invoice.CaculateFinanceDate();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        partial void OnFinancePeriodEndChanged()
+        {
+            foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+            {
+                log.Invoice.CaculateFinanceDate();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="action"></param>
         partial void OnValidate(ChangeAction action)
         {

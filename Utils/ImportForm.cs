@@ -2507,7 +2507,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (activeCDA.FinanceCreditLine.PeriodEnd < DateTime.Today)
                         {
-                            throw new Exception("融资额度已到期，不能融资：" + assignBatchCode);
+                            throw new Exception(String.Format("融资额度已到期{0:d}，不能融资：{1}", activeCDA.FinanceCreditLine.PeriodEnd, assignBatchCode));
                         }
                         if (!TypeUtil.GreaterZero(activeCDA.FinanceLineOutstanding - financeAmount + guaranteeDeposit))
                         {
@@ -2580,7 +2580,7 @@ namespace CMBC.EasyFactor.Utils
                         {
                             if (financeBatch.BatchCurrency != assignBatch.Case.InvoiceCurrency)
                             {
-                                throw new Exception("国内买方保理，融资币别需要与发票币别相同，业务编号：" + assignBatchCode);
+                                throw new Exception(String.Format("国内买方保理，融资币别{0}需要与发票币别{1}相同，业务编号：{2}", financeBatch.BatchCurrency, assignBatch.Case.InvoiceCurrency, assignBatchCode));
                             }
 
                             InvoicePaymentBatch paymentBatch = new InvoicePaymentBatch();

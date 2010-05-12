@@ -406,6 +406,25 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             CaculateCommission(false);
+
+            this.CaculateFinanceDate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculateFinanceDate()
+        {
+            if (InvoiceFinanceLogs.Count > 0)
+            {
+                FinanceDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodBegin);
+                FinanceDueDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodEnd);
+            }
+            else
+            {
+                FinanceDate = null;
+                FinanceDueDate = null;
+            }
         }
 
         /// <summary>
@@ -416,11 +435,26 @@ namespace CMBC.EasyFactor.DB.dbml
             if (InvoicePaymentLogs.Count > 0)
             {
                 PaymentAmount = InvoicePaymentLogs.Sum(log => log.PaymentAmount);
-                PaymentDate = InvoicePaymentLogs.Max(log => log.InvoicePaymentBatch.PaymentDate);
             }
             else
             {
                 PaymentAmount = null;
+            }
+
+            this.CaculatePaymentDate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculatePaymentDate()
+        {
+            if (InvoicePaymentLogs.Count > 0)
+            {
+                PaymentDate = InvoicePaymentLogs.Max(log => log.InvoicePaymentBatch.PaymentDate);
+            }
+            else
+            {
                 PaymentDate = null;
             }
         }
@@ -433,7 +467,6 @@ namespace CMBC.EasyFactor.DB.dbml
             if (InvoiceFinanceLogs.Count > 0)
             {
                 double refundAmount = 0;
-                DateTime maxDate = default(DateTime);
                 foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
                 {
                     double refund = 0;
@@ -449,14 +482,6 @@ namespace CMBC.EasyFactor.DB.dbml
                     }
 
                     refundAmount += refund;
-                    if (financeLog.InvoiceRefundLogs.Count > 0)
-                    {
-                        DateTime maxDate2 = financeLog.InvoiceRefundLogs.Max(log => log.InvoiceRefundBatch.RefundDate);
-                        if (maxDate2 > maxDate)
-                        {
-                            maxDate = maxDate2;
-                        }
-                    }
                 }
 
                 if (TypeUtil.GreaterZero(refundAmount))
@@ -466,6 +491,34 @@ namespace CMBC.EasyFactor.DB.dbml
                 else
                 {
                     this.RefundAmount = null;
+                }
+            }
+            else
+            {
+                RefundAmount = null;
+            }
+
+            this.CaculateRefundDate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculateRefundDate()
+        {
+            if (InvoiceFinanceLogs.Count > 0)
+            {
+                DateTime maxDate = default(DateTime);
+                foreach (InvoiceFinanceLog financeLog in this.InvoiceFinanceLogs)
+                {
+                    if (financeLog.InvoiceRefundLogs.Count > 0)
+                    {
+                        DateTime maxDate2 = financeLog.InvoiceRefundLogs.Max(log => log.InvoiceRefundBatch.RefundDate);
+                        if (maxDate2 > maxDate)
+                        {
+                            maxDate = maxDate2;
+                        }
+                    }
                 }
 
                 if (maxDate != default(DateTime))
@@ -479,11 +532,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             else
             {
-                RefundAmount = null;
                 RefundDate = null;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
