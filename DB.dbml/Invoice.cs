@@ -532,42 +532,42 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (this.AssignAmount > this.InvoiceAmount)
                 {
-                    throw new Exception("转让金额不能大于票面金额: " + this.InvoiceNo);
+                    throw new Exception(String.Format("转让金额{0:N2}不能大于票面金额{1:N2}: {2}", this.AssignAmount, this.InvoiceAmount, this.InvoiceNo));
                 }
 
                 if (this.FinanceAmount.HasValue)
                 {
                     if (TypeUtil.GreaterZero(this.FinanceAmount - this.AssignAmount))
                     {
-                        throw new Exception("融资金额不能大于转让金额: " + this.InvoiceNo);
+                        throw new Exception(String.Format("融资金额{0:N2}不能大于转让金额{1:N2}: {2}", this.FinanceAmount, this.AssignAmount, this.InvoiceNo));
                     }
                 }
 
                 if (TypeUtil.GreaterZero(this.PaymentAmount.GetValueOrDefault() - this.AssignAmount))
                 {
-                    throw new Exception("付款金额不能大于转让金额: " + this.InvoiceNo);
+                    throw new Exception(String.Format("付款金额{0:N2}不能大于转让金额{1:N2}: {2}", this.PaymentAmount, this.AssignAmount, this.InvoiceNo));
                 }
 
                 if (TypeUtil.GreaterZero(this.RefundAmount.GetValueOrDefault() - this.FinanceAmount.GetValueOrDefault()))
                 {
-                    throw new Exception("还款金额不能大于融资金额: " + this.InvoiceNo);
+                    throw new Exception(String.Format("还款金额{0:N2}不能大于融资金额{1:N2}: {2}", this.RefundAmount, this.FinanceAmount, this.InvoiceNo));
                 }
 
                 if (this.InvoiceDate != null && this.DueDate < this.InvoiceDate)
                 {
-                    throw new Exception("发票到期日不能早于发票日: " + this.InvoiceNo);
+                    throw new Exception(String.Format("发票到期日{0:d}不能早于发票日{1:d}: {2}", this.DueDate, this.InvoiceDate, this.InvoiceNo));
                 }
 
                 if (this.FinanceDueDate.GetValueOrDefault() < this.FinanceDate.GetValueOrDefault())
                 {
-                    throw new Exception("融资到期日不能早于融资日: " + this.InvoiceNo);
+                    throw new Exception(String.Format("融资到期日{0:d}不能早于融资日{1:d}: {2}", this.FinanceDueDate, this.FinanceDate, this.InvoiceNo));
                 }
 
                 if (this.InvoiceAssignBatch.Case.NetPaymentTerm.HasValue)
                 {
                     if (InvoiceDate != null && this.InvoiceAssignBatch.AssignDate > InvoiceDate.Value.AddDays(this.InvoiceAssignBatch.Case.NetPaymentTerm.Value))
                     {
-                        throw new Exception("转让日不能晚于发票日+付款期限: " + this.InvoiceNo);
+                        throw new Exception(String.Format("转让日{0:d}不能晚于发票日{1:d}+付款期限{2}: {3}", this.InvoiceAssignBatch.AssignDate, this.InvoiceDate, this.InvoiceAssignBatch.Case.NetPaymentTerm, this.InvoiceNo));
                     }
                 }
             }

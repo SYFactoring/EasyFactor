@@ -2573,7 +2573,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (TypeUtil.GreaterZero(financeBatch.FinanceAmount - currentFinanceAmount))
                         {
-                            throw new Exception("融资金额不能大于转让金额，业务编号：" + assignBatchCode);
+                            throw new Exception(String.Format("本次申请融资金额{0:N2}，大于实际融资金额{1:N2}，业务编号：{2}", financeBatch.FinanceAmount, currentFinanceAmount, assignBatchCode));
                         }
 
                         if (assignBatch.Case.TransactionType == "国内买方保理")
