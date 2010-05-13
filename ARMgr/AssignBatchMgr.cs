@@ -664,6 +664,10 @@ namespace CMBC.EasyFactor.ARMgr
 
                 //                ((Worksheet)app.ActiveSheet).Protect(Type.Missing, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
+                Range sealRange = ((Range)sheet.Cells[row, 3]);
+                string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+                sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 100, 100);
+
                 ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
                 app.Visible = true;
@@ -822,6 +826,10 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("A1", "A4").RowHeight = 20;
                 sheet.get_Range("A5", "A5").RowHeight = 30;
 
+                Range sealRange = ((Range)sheet.Cells[row - 1, 3]);
+                string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+                sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 150, Convert.ToSingle(sealRange.Top), 100, 100);
+
                 ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
                 app.Visible = true;
@@ -971,6 +979,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("B1", Type.Missing).ColumnWidth = 20;
                 sheet.get_Range("C1", Type.Missing).ColumnWidth = 20;
                 sheet.get_Range("D1", Type.Missing).ColumnWidth = 20;
+
                 app.Visible = true;
             }
             catch (Exception e1)
@@ -1216,6 +1225,11 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("C1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("D1", Type.Missing).ColumnWidth = 17;
                 sheet.get_Range("E1", Type.Missing).ColumnWidth = 23;
+
+                Range sealRange = ((Range)sheet.Cells[row - 1, 3]);
+                string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+                sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 100, 100);
+
 
                 ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 

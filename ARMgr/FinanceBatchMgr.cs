@@ -298,6 +298,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 Invoice invoice = log.Invoice;
                 log.Invoice = null;
+                invoice.Commission -= log.Commission;
                 invoice.CaculateFinance();
                 context.InvoiceFinanceLogs.DeleteOnSubmit(log);
             }
@@ -661,6 +662,10 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("A5", "A5").Font.Size = 22;
                 sheet.get_Range("A1", "A4").RowHeight = 20;
                 sheet.get_Range("A5", "A5").RowHeight = 30;
+
+                Range sealRange = ((Range)sheet.Cells[row, 3]);
+                string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+                sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 150, Convert.ToSingle(sealRange.Top), 100, 100);
 
                 app.Visible = true;
             }

@@ -465,6 +465,12 @@ namespace CMBC.EasyFactor.DB.dbml
         public void CaculateCommission()
         {
             CDA cda = this.Invoice.InvoiceAssignBatch.Case.ActiveCDA;
+            
+            if (cda == null)
+            {
+                return;
+            }
+
             if (cda.CommissionType == "°´ÈÚ×Ê½ð¶î")
             {
                 Commission = FinanceAmount * cda.Price;

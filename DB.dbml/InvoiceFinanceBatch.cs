@@ -308,12 +308,12 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(DateTime date)
         {
-            string dateStr = String.Format("{0:yyyMMdd}", date);
+            string prefix = String.Format("FIN{0:yyyMMdd}", date);
             int batchCount;
             using (DBDataContext context = new DBDataContext())
             {
                 var queryResult = from batch in context.InvoiceFinanceBatches
-                                  where batch.FinanceBatchNo.Contains(dateStr)
+                                  where batch.FinanceBatchNo.StartsWith(prefix)
                                   select batch.FinanceBatchNo;
 
                 if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
@@ -322,7 +322,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
 
-            string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            string financeNo = String.Format("{0}-{1:d2}", prefix, batchCount + 1);
             return financeNo;
         }
 
@@ -334,13 +334,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateFinanceBatchNo(DateTime date, List<InvoiceFinanceBatch> batchesInMemory)
         {
-            string dateStr = String.Format("{0:yyyMMdd}", date);
+            string prefix = String.Format("FIN{0:yyyMMdd}", date);
             int batchCount;
 
             using (DBDataContext context = new DBDataContext())
             {
                 var queryResult = from batch in context.InvoiceFinanceBatches
-                                  where batch.FinanceBatchNo.Contains(dateStr)
+                                  where batch.FinanceBatchNo.StartsWith(prefix)
                                   select batch.FinanceBatchNo;
 
                 if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
@@ -349,8 +349,8 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
 
-            batchCount += batchesInMemory.Count(batch => batch.FinanceBatchNo.Contains(dateStr));
-            string financeNo = String.Format("FIN{0:yyyyMMdd}-{1:d2}", date, batchCount + 1);
+            batchCount += batchesInMemory.Count(batch => batch.FinanceBatchNo.StartsWith(prefix));
+            string financeNo = String.Format("{0}-{1:d2}", prefix, batchCount + 1);
             return financeNo;
         }
         //?Private?Methods?(1)?

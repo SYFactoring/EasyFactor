@@ -351,11 +351,6 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 CDA cda = this.InvoiceAssignBatch.Case.ActiveCDA;
 
-                if (cda == null)
-                {
-                    return;
-                }
-
                 if (cda.CommissionType == "°´ÈÚ×Ê½ð¶î")
                 {
                     if (isOverwrite)
