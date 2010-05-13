@@ -2489,6 +2489,8 @@ namespace CMBC.EasyFactor.Utils
                             financeBatch.Factor = factor;
                         }
 
+                        financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
+
                         CDA activeCDA = assignBatch.Case.ActiveCDA;
                         GuaranteeDeposit gd = assignBatch.Case.GuaranteeDepositClient.GetGuaranteeDeposit(batchCurrency);
                         double guaranteeDeposit = 0;
@@ -2522,7 +2524,6 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception(String.Format("该案件的最高预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}", (activeCDA.HighestFinanceLine - assignBatch.Case.TotalFinanceOutstanding + guaranteeDeposit), financeAmount, assignBatchCode));
                         }
 
-                        financeBatch.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         financeBatch.CheckStatus = BATCH.UNCHECK;
                         financeBatch.InputDate = DateTime.Today;
                         financeBatch.CreateUserName = App.Current.CurUser.Name;
