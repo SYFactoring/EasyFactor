@@ -94,7 +94,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GeneratePaymentBatchNo(DateTime date)
         {
-            string prefix = String.Format("{0:yyyyMMdd}", date);
+            string prefix = String.Format("PAY{0:yyyyMMdd}", date);
             int batchCount;
 
             using (DBDataContext context = new DBDataContext())

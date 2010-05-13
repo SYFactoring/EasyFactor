@@ -2347,7 +2347,9 @@ namespace CMBC.EasyFactor.Utils
 
             if (valueArray != null)
             {
-                int size = valueArray.GetUpperBound(0);
+                int size = valueArray.GetLength(0);            
+                int w = valueArray.GetLength(1);
+
                 InvoiceAssignBatch assignBatch = null;
 
                 try
@@ -3143,7 +3145,8 @@ namespace CMBC.EasyFactor.Utils
 
             if (valueArray != null)
             {
-                int size = valueArray.GetUpperBound(0);
+                int width = valueArray.GetLength(1);
+                int size = valueArray.GetLength(0);
                 InvoiceAssignBatch assignBatch = null;
                 InvoicePaymentBatch paymentBatch = null;
                 Invoice invoice = null;
@@ -3217,10 +3220,10 @@ namespace CMBC.EasyFactor.Utils
 
                         string paymentType = String.Format("{0:G}", valueArray[row, column++]);
 
-                        string paymentCurrenty = String.Format("{0:G}", valueArray[row, column++]);
-                        if (paymentCurrenty != assignBatch.BatchCurrency)
+                        string paymentCurrency = String.Format("{0:G}", valueArray[row, column++]);
+                        if (paymentCurrency != assignBatch.BatchCurrency)
                         {
-                            throw new Exception(String.Format("销帐币种{0}与案件币种{1}不相同，不能导入：{2}", paymentCurrenty, assignBatch.BatchCurrency, invoiceNo));
+                            throw new Exception(String.Format("销帐币种{0}与案件币种{1}不相同，不能导入：{2}", paymentCurrency, assignBatch.BatchCurrency, invoiceNo));
                         }
 
                         string paymentAmountStr = String.Format("{0:G}", valueArray[row, column++]);
