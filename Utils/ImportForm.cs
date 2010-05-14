@@ -677,26 +677,27 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         string commissionStr = String.Format("{0:G}", valueArray[row, column++]);
-                        if (!String.IsNullOrEmpty(commissionStr))
+                        if (String.IsNullOrEmpty(commissionStr))
                         {
-                            double commissionAmount = 0;
-                            if (Double.TryParse(commissionStr, out commissionAmount))
+                            throw new Exception("手续费不能为空，不能导入：" + invoiceNo);
+                        }
+                        double commissionAmount = 0;
+                        if (Double.TryParse(commissionStr, out commissionAmount))
+                        {
+                            if (cda.CommissionType == "其他")
                             {
-                                if (cda.CommissionType == "其他")
-                                {
-                                    invoice.Commission = commissionAmount;
-                                }
+                                invoice.Commission = commissionAmount;
                             }
-                            else
+                            else if (cda.CommissionType == "按转让金额")
                             {
-                                throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
+                                invoice.Commission = invoice.AssignAmount * cda.Price;
                             }
+                        }
+                        else
+                        {
+                            throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
                         }
 
-                        if (cda.CommissionType == "按转让金额")
-                        {
-                            invoice.Commission = invoice.AssignAmount * cda.Price;
-                        }
 
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         invoice.InvoiceAssignBatch = batch;
@@ -2347,7 +2348,7 @@ namespace CMBC.EasyFactor.Utils
 
             if (valueArray != null)
             {
-                int size = valueArray.GetLength(0);            
+                int size = valueArray.GetLength(0);
                 int w = valueArray.GetLength(1);
 
                 InvoiceAssignBatch assignBatch = null;
