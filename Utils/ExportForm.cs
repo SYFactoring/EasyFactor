@@ -738,7 +738,7 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Cells[rowID + 1, column++] = cda.FinanceLinePeriodBegin;
                     sheet.Cells[rowID + 1, column++] = cda.FinanceLinePeriodEnd;
                     sheet.Cells[rowID + 1, column++] = cda.HighestFinanceLine;
-                    sheet.Cells[rowID + 1, column++] = cda.PUGProportion;
+                    sheet.Cells[rowID + 1, column++] = cda.FinanceProportion;
                     sheet.Cells[rowID + 1, column++] = cda.Price;
                     sheet.Cells[rowID + 1, column++] = cda.CommissionType;
                     sheet.Cells[rowID + 1, column++] = cda.HandFeeCurr;
