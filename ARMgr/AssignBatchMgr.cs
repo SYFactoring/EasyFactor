@@ -1131,7 +1131,14 @@ namespace CMBC.EasyFactor.ARMgr
                     CDA cda = selectedBatch.Case.ActiveCDA;
 
                     sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).Font.Underline = true;
-                    sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", valueClient.ToString());
+                    if (transactionType == "国内卖方保理" || transactionType == "出口保理")
+                    {
+                        sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", valueClient.ToString());
+                    }
+                    else
+                    {
+                        sheet.Cells[row, 2] = String.Format("{0} ", valueClient.ToString());
+                    }
                     row++;
 
                     Factor factor = null;
