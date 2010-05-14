@@ -578,7 +578,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.PageSetup.FitToPagesTall = false;
 
                 string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 220, 3, 170, 30);
+                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
                 Client seller = batchGroup.Key;
                 sheet.Cells[3, 1] = String.Format("卖方：{0}", seller.ToString());
@@ -644,16 +644,20 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("E" + row, "F" + row).Borders.LineStyle = 1;
 
                 row += 2;
+                sheet.get_Range(sheet.Cells[row, "A"], sheet.Cells[row, "F"]).MergeCells = true;
+                sheet.get_Range(sheet.Cells[row, "A"], sheet.Cells[row, "A"]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）";
+                row += 2;
+                sheet.get_Range(sheet.Cells[row, "D"], sheet.Cells[row, "E"]).MergeCells = true;
+                sheet.get_Range(sheet.Cells[row, "D"], sheet.Cells[row, "D"]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                sheet.Cells[row, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
-                sheet.Cells[row + 1, 4] = "中国民生银行贸易金融事业部保理业务部 （业务章）";
-                sheet.Cells[row + 3, 5] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
-
-                sheet.get_Range("A1", Type.Missing).ColumnWidth = 23;
-                sheet.get_Range("B1", Type.Missing).ColumnWidth = 23;
-                sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("E1", Type.Missing).ColumnWidth = 17;
-                sheet.get_Range("F1", Type.Missing).ColumnWidth = 17;
+                sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
+                sheet.get_Range("C1", Type.Missing).ColumnWidth = 10;
+                sheet.get_Range("D1", Type.Missing).ColumnWidth = 13;
+                sheet.get_Range("E1", Type.Missing).ColumnWidth = 12;
+                sheet.get_Range("F1", Type.Missing).ColumnWidth = 15;
 
                 sheet.UsedRange.Font.Name = "仿宋_GB2312";
                 sheet.UsedRange.Font.Size = 12;
@@ -663,9 +667,11 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("A1", "A4").RowHeight = 20;
                 sheet.get_Range("A5", "A5").RowHeight = 30;
 
-                Range sealRange = ((Range)sheet.Cells[row, 3]);
+                Range sealRange = ((Range)sheet.Cells[row - 3, 3]);
                 string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-                sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 150, Convert.ToSingle(sealRange.Top), 100, 100);
+                sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 190, 190);
+
+                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
                 app.Visible = true;
             }
