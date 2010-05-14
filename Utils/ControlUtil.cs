@@ -81,6 +81,13 @@ namespace CMBC.EasyFactor.Utils
                 return;
             }
 
+            ComboTree treeControl = comp as ComboTree;
+            if (treeControl != null)
+            {
+                treeControl.SelectedIndex = -1;
+                return;
+            }
+
             DateTimePicker timePickerControl = comp as DateTimePicker;
             if (timePickerControl != null)
             {
@@ -131,6 +138,13 @@ namespace CMBC.EasyFactor.Utils
             if (comboControl != null)
             {
                 comboControl.Enabled = isEditable; 
+                return;
+            }
+
+            ComboTree treeControl = comp as ComboTree;
+            if (treeControl != null)
+            {
+                treeControl.Enabled = isEditable;
                 return;
             }
 
