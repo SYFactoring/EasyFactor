@@ -298,7 +298,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 Invoice invoice = log.Invoice;
                 log.Invoice = null;
-                invoice.Commission -= log.Commission;
+                invoice.Commission -= log.Commission.GetValueOrDefault();
                 invoice.CaculateFinance();
                 context.InvoiceFinanceLogs.DeleteOnSubmit(log);
             }
