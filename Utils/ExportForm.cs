@@ -25,6 +25,8 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ExportForm : DevComponents.DotNetBar.Office2007Form
     {
+
+
         #region?Fields?(2)?
 
         /// <summary>
@@ -37,6 +39,7 @@ namespace CMBC.EasyFactor.Utils
         private ExportType exportType;
 
         #endregion?Fields?
+
 
         #region?Enums?(1)?
 
@@ -133,6 +136,7 @@ namespace CMBC.EasyFactor.Utils
 
         #endregion?Enums?
 
+
         #region?Constructors?(1)?
 
         /// <summary>
@@ -154,43 +158,8 @@ namespace CMBC.EasyFactor.Utils
 
         #endregion?Constructors?
 
+
         #region?Methods?(24)?
-
-        //?Public?Methods?(1)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void StartExport(object sender, EventArgs e)
-        {
-            string filePath = this.tbFilePath.Text;
-            if (String.IsNullOrEmpty(filePath.Trim()))
-            {
-                if (this.exportType == ExportType.EXPORT_MSG09_INVOICE || this.exportType == ExportType.EXPORT_MSG09_CREDITNOTE || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
-                {
-                    this.tbStatus.Text = "请先选择保存路径";
-                    return;
-                }
-            }
-            else if (this.exportType == ExportType.EXPORT_LEGER)
-            {
-                DirectoryInfo info = new DirectoryInfo(filePath);
-                if (info.Parent == null)
-                {
-                    this.tbStatus.Text = "不要选择硬盘根目录";
-                    return;
-                }
-            }
-
-
-            this.btnCancel.Text = "取消";
-            this.backgroundWorker.RunWorkerAsync();
-
-            this.btnStart.Enabled = false;
-        }
-        //?Private?Methods?(23)?
 
         /// <summary>
         /// 
@@ -1983,7 +1952,7 @@ namespace CMBC.EasyFactor.Utils
                 {
                     foreach (IGrouping<Client, Case> group in groups)
                     {
-                        ExportReportLegarImpl(group);
+                        ExportReportLegarImpl(group, transactionType);
                         result += (int)group.LongCount();
                         worker.ReportProgress((int)((float)result * 100 / (float)size));
                     }
@@ -2572,7 +2541,7 @@ namespace CMBC.EasyFactor.Utils
         /// 
         /// </summary>
         /// <param name="caseGroup"></param>
-        private void ExportReportLegarImpl(IGrouping<Client, Case> caseGroup)
+        private void ExportReportLegarImpl(IGrouping<Client, Case> caseGroup, string transactionType)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -2638,7 +2607,7 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Cells[5, "B"] = selectedCase.BuyerClient.ToString();
 
                     sheet.get_Range("B6", "F6").MergeCells = true;
-                    if (selectedCase.TransactionType == "进口保理")
+                    if (transactionType == "进口保理")
                     {
                         sheet.Cells[6, "A"] = "Export Factor";
                         sheet.Cells[6, "B"] = selectedCase.SellerFactor.ToString();
@@ -2837,11 +2806,11 @@ namespace CMBC.EasyFactor.Utils
                             System.IO.Directory.CreateDirectory(this.tbFilePath.Text + "\\" + location + "\\");
                         }
 
-                        string filePath = this.tbFilePath.Text + "\\" + location + "\\" + caseGroup.Key.ToString() + ext;
+                        string filePath = String.Format("{0}\\{1}\\{2}({3}){4:yyyyMMdd}{5}", this.tbFilePath.Text, location, caseGroup.Key.ToString(), transactionType, DateTime.Today, ext);
                         int count = 1;
                         while (System.IO.File.Exists(filePath))
                         {
-                            filePath = this.tbFilePath.Text + "\\" + location + "\\" + caseGroup.Key.ToString() + "_" + count + ext;
+                            filePath = String.Format("{0}\\{1}\\{2}({3})_{4}{5:yyyyMMdd}{6}", this.tbFilePath.Text, location, caseGroup.Key.ToString(), transactionType, count, DateTime.Today, ext);
                             count++;
                         }
 
@@ -3119,6 +3088,39 @@ namespace CMBC.EasyFactor.Utils
 
             sheet.UsedRange.Font.Name = "仿宋";
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartExport(object sender, EventArgs e)
+        {
+            string filePath = this.tbFilePath.Text;
+            if (String.IsNullOrEmpty(filePath.Trim()))
+            {
+                if (this.exportType == ExportType.EXPORT_MSG09_INVOICE || this.exportType == ExportType.EXPORT_MSG09_CREDITNOTE || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
+                {
+                    this.tbStatus.Text = "请先选择保存路径";
+                    return;
+                }
+            }
+            else if (this.exportType == ExportType.EXPORT_LEGER)
+            {
+                DirectoryInfo info = new DirectoryInfo(filePath);
+                if (info.Parent == null)
+                {
+                    this.tbStatus.Text = "不要选择硬盘根目录";
+                    return;
+                }
+            }
+
+
+            this.btnCancel.Text = "取消";
+            this.backgroundWorker.RunWorkerAsync();
+
+            this.btnStart.Enabled = false;
         }
 
         /// <summary>

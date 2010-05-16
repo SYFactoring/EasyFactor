@@ -17,12 +17,15 @@ namespace CMBC.EasyFactor.Utils
     using CMBC.EasyFactor.Utils.ConstStr;
     using DevComponents.DotNetBar;
     using Microsoft.Office.Interop.Excel;
+    using System.IO;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class ImportForm : DevComponents.DotNetBar.Office2007Form
     {
+
+
         #region?Fields?(5)?
 
         /// <summary>
@@ -47,6 +50,7 @@ namespace CMBC.EasyFactor.Utils
         private Workbook workbook;
 
         #endregion?Fields?
+
 
         #region?Enums?(1)?
 
@@ -178,10 +182,16 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_POOL_REFUND
+            IMPORT_POOL_REFUND,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            SEND_LEGERS
         }
 
         #endregion?Enums?
+
 
         #region?Constructors?(2)?
 
@@ -281,12 +291,16 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_POOL_REFUND:
                     this.Text = "冲销融资明细表（池融资）导入";
                     break;
+                case ImportType.SEND_LEGERS:
+                    this.Text = "给分部/分行发送台帐";
+                    break;
                 default:
                     break;
             }
         }
 
         #endregion?Constructors?
+
 
         #region?Properties?(1)?
 
@@ -300,6 +314,7 @@ namespace CMBC.EasyFactor.Utils
         }
 
         #endregion?Properties?
+
 
         #region?Methods?(33)?
 
@@ -390,9 +405,65 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_POOL_REFUND:
                     e.Result = this.ImportPoolRefund((string)e.Argument, worker, e);
                     break;
+                case ImportType.SEND_LEGERS:
+                    e.Result = this.SendLegers((string)e.Argument, worker, e);
+                    break;
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int SendLegers(string dirPath, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            DirectoryInfo rootPath = new DirectoryInfo(dirPath);
+            if (rootPath.Exists)
+            {
+                this.context = new DBDataContext();
+
+                DirectoryInfo[] subDirs = rootPath.GetDirectories();
+
+                for (int i = 0; i < subDirs.Length; i++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return i;
+                    }
+
+                    DirectoryInfo dir = subDirs[i];
+                    worker.ReportProgress((int)((float)i * 100 / subDirs.Length), dir.Name);
+                    Location location = context.Locations.SingleOrDefault(loc => loc.LocationName == dir.Name);
+                    if (location == null)
+                    {
+                        throw new Exception(String.Format("部门名称：{0}，异常，不能发送", dir.Name));
+                    }
+
+                    if (String.IsNullOrEmpty(location.LegerContactEmail1))
+                    {
+                        throw new Exception(String.Format("台帐第一接收人不能为空，分部：{0}", dir.Name));
+                    }
+
+                    SendMail mail = new SendMail(location.LegerContactEmail1, location.LegerContactEmail2, App.Current.CurUser.Email, String.Format("{0}保理台帐{1:yyyyMMdd}", dir.Name, DateTime.Today), "本邮件由中国民生银行保理运营系统自动生成。");
+                    foreach (FileInfo file in dir.GetFiles("*.xls"))
+                    {
+                        mail.AddAttachment(file.FullName);
+                    }
+
+                    mail.Send();
+                }
+
+                worker.ReportProgress(100);
+                return subDirs.Length;
+            }
+
+            return 0;
         }
 
         /// <summary>
@@ -403,7 +474,14 @@ namespace CMBC.EasyFactor.Utils
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.progressBar.Value = e.ProgressPercentage;
-            this.tbStatus.Text = String.Format("导入进度 {0:G}%", e.ProgressPercentage);
+            if (this.importType == ImportType.SEND_LEGERS)
+            {
+                this.tbStatus.Text = String.Format("正在给{0}发送邮件", e.UserState);
+            }
+            else
+            {
+                this.tbStatus.Text = String.Format("导入进度 {0:G}%", e.ProgressPercentage);
+            }
         }
 
         /// <summary>
@@ -435,12 +513,26 @@ namespace CMBC.EasyFactor.Utils
             }
             else if (e.Cancelled)
             {
-                this.tbStatus.Text = "导入被取消";
+                if (this.importType == ImportType.SEND_LEGERS)
+                {
+                    this.tbStatus.Text = "发送被取消";
+                }
+                else
+                {
+                    this.tbStatus.Text = "导入被取消";
+                }
                 this.progressBar.Value = 0;
             }
             else
             {
-                this.tbStatus.Text = String.Format("导入结束,共导入{0}条记录", e.Result);
+                if (this.importType == ImportType.SEND_LEGERS)
+                {
+                    this.tbStatus.Text = String.Format("发送邮件结束，共发送{0}封邮件", e.Result);
+                }
+                else
+                {
+                    this.tbStatus.Text = String.Format("导入结束, 共导入{0}条记录", e.Result);
+                }
             }
 
             this.btnStart.Enabled = true;
@@ -4178,12 +4270,23 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         private void SelectFile(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;*.xlsx";
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
+            if (this.importType == ImportType.SEND_LEGERS)
             {
-                this.tbFilePath.Text = fileDialog.FileName;
+                FolderBrowserDialog dirDialog = new FolderBrowserDialog();
+                if (dirDialog.ShowDialog() == DialogResult.OK)
+                {
+                    this.tbFilePath.Text = dirDialog.SelectedPath;
+                }
+            }
+            else
+            {
+                OpenFileDialog fileDialog = new OpenFileDialog();
+                fileDialog.Filter = "Excel files (*.xls;*.xlsx)|*.xls;*.xlsx";
+
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    this.tbFilePath.Text = fileDialog.FileName;
+                }
             }
         }
 
@@ -4197,6 +4300,14 @@ namespace CMBC.EasyFactor.Utils
             string filePath = this.tbFilePath.Text;
             if (String.IsNullOrEmpty(filePath.Trim()))
             {
+                if (this.importType == ImportType.SEND_LEGERS)
+                {
+                    this.tbStatus.Text = "请先选择台帐所在根目录";
+                }
+                else
+                {
+                    this.tbStatus.Text = "请先选择导入文件路径";
+                }
                 return;
             }
 

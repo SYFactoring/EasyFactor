@@ -1387,7 +1387,24 @@ namespace CMBC.EasyFactor
 
         #endregion?Methods?
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EmailLeger(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
+            {
+                ImportForm form = new ImportForm(ImportForm.ImportType.SEND_LEGERS);
+                form.Show();
+            }
+        }
 
+        private void itemInfoMgr_Click(object sender, EventArgs e)
+        {
 
+        }
+        
     }
 }

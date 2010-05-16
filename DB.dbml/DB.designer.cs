@@ -11800,6 +11800,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Assistant;
 		
+		private string _LegerContactEmail1;
+		
+		private string _LegerContactEmail2;
+		
 		private EntitySet<Department> _Departments;
 		
     #region Extensibility Method Definitions
@@ -11814,6 +11818,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPManagerChanged();
     partial void OnAssistantChanging(string value);
     partial void OnAssistantChanged();
+    partial void OnLegerContactEmail1Changing(string value);
+    partial void OnLegerContactEmail1Changed();
+    partial void OnLegerContactEmail2Changing(string value);
+    partial void OnLegerContactEmail2Changed();
     #endregion
 		
 		public Location()
@@ -11898,6 +11906,46 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Assistant = value;
 					this.SendPropertyChanged("Assistant");
 					this.OnAssistantChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LegerContactEmail1", DbType="NVarchar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string LegerContactEmail1
+		{
+			get
+			{
+				return this._LegerContactEmail1;
+			}
+			set
+			{
+				if ((this._LegerContactEmail1 != value))
+				{
+					this.OnLegerContactEmail1Changing(value);
+					this.SendPropertyChanging();
+					this._LegerContactEmail1 = value;
+					this.SendPropertyChanged("LegerContactEmail1");
+					this.OnLegerContactEmail1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LegerContactEmail2", DbType="NVarchar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string LegerContactEmail2
+		{
+			get
+			{
+				return this._LegerContactEmail2;
+			}
+			set
+			{
+				if ((this._LegerContactEmail2 != value))
+				{
+					this.OnLegerContactEmail2Changing(value);
+					this.SendPropertyChanging();
+					this._LegerContactEmail2 = value;
+					this.SendPropertyChanged("LegerContactEmail2");
+					this.OnLegerContactEmail2Changed();
 				}
 			}
 		}

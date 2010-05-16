@@ -51,7 +51,15 @@ namespace CMBC.EasyFactor.Help
         /// <param name="e"></param>
         private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            mail.Send();
+            if (!String.IsNullOrEmpty(this.tbAttachment.Text))
+            {
+                mail.AddAttachment(this.tbAttachment.Text);
+            }
+
+            if (mail != null)
+            {
+                mail.Send();
+            }
         }
 
         /// <summary>
@@ -100,11 +108,11 @@ namespace CMBC.EasyFactor.Help
             string title = this.tbTitle.Text;
             string who = this.tbSubmitPerson.Text;
             string type = this.cbBugType.Text;
-            string path = this.tbAttachment.Text;
             string mailTitle = String.Format("{0}_{1}_{2}_{3:yyyy/MM/dd HH:mm:ss}", type, who, title, DateTime.Now);
             string bug = this.tbBug.Text + "\n----------------------------------------------\n" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            mail = new SendMail("liuyiming.vip@gmail.com;xiaolan.pub@gmail.com", App.Current.CurUser.Email, mailTitle, bug, path);
+            mail = new SendMail("liuyiming.vip@gmail.com","xiaolan.pub@gmail.com", App.Current.CurUser.Email, mailTitle, bug);
+            
             this.backgroundWorker.RunWorkerAsync();
         }
 
