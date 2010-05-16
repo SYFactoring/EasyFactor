@@ -54,6 +54,156 @@ namespace CMBC.EasyFactor.DB.dbml
             return context.Locations.ToList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime QueryDateFrom
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime QueryDateTo
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double AssignAmountByDate
+        {
+            get
+            {
+                double result = 0;
+                foreach (Department dept in this.Departments)
+                {
+                    dept.QueryDateFrom = this.QueryDateFrom;
+                    dept.QueryDateTo = this.QueryDateTo;
+                    result += dept.AssignAmountByDate;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double CommissionIncomeByDate
+        {
+            get
+            {
+                double result = 0;
+                foreach (Department dept in this.Departments)
+                {
+                    dept.QueryDateFrom = this.QueryDateFrom;
+                    dept.QueryDateTo = this.QueryDateTo;
+                    result += dept.CommissionIncomeByDate;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double FinanceAmountByDate
+        {
+            get
+            {
+                double result = 0;
+                foreach (Department dept in this.Departments)
+                {
+                    dept.QueryDateFrom = this.QueryDateFrom;
+                    dept.QueryDateTo = this.QueryDateTo;
+                    result += dept.FinanceAmountByDate;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double MarginIncomeByDate
+        {
+            get
+            {
+                double result = 0;
+                foreach (Department dept in this.Departments)
+                {
+                    dept.QueryDateFrom = this.QueryDateFrom;
+                    dept.QueryDateTo = this.QueryDateTo;
+                    result += dept.MarginIncomeByDate.GetValueOrDefault();
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double NetInterestIncomeByDate
+        {
+            get
+            {
+                double result = 0;
+                foreach (Department dept in this.Departments)
+                {
+                    dept.QueryDateFrom = this.QueryDateFrom;
+                    dept.QueryDateTo = this.QueryDateTo;
+                    result += dept.NetInterestIncomeByDate.GetValueOrDefault();
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double PaymentAmountByDate
+        {
+            get
+            {
+                double result = 0;
+                foreach (Department dept in this.Departments)
+                {
+                    dept.QueryDateFrom = this.QueryDateFrom;
+                    dept.QueryDateTo = this.QueryDateTo;
+                    result += dept.PaymentAmountByDate;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double TotalIncomeByDate
+        {
+            get
+            {
+                double result = 0;
+                foreach (Department dept in this.Departments)
+                {
+                    dept.QueryDateFrom = this.QueryDateFrom;
+                    dept.QueryDateTo = this.QueryDateTo;
+                    result += dept.TotalIncomeByDate;
+                }
+
+                return result;
+            }
+        }
 		#endregion?Methods?
     }
 }

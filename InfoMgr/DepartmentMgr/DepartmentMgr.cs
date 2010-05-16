@@ -21,7 +21,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     /// </summary>
     public partial class DepartmentMgr : UserControl
     {
-		#region?Fields?(2)?
+        #region?Fields?(2)?
 
         /// <summary>
         /// 
@@ -29,9 +29,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         private BindingSource bs;
         private OpDepartmentType opDepatmentType;
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Enums?(1)?
+        #region?Enums?(1)?
 
         /// <summary>
         /// 
@@ -54,11 +54,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             LOCATION_STAT,
         }
 
-		#endregion?Enums?
+        #endregion?Enums?
 
-		#region?Constructors?(2)?
+        #region?Constructors?(2)?
 
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="opDepartmentType"></param>
@@ -89,10 +89,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 this.colNetInterestIncome.Visible = true;
                 this.colMarginIncome.Visible = true;
                 this.colTotalIncome.Visible = true;
-                this.lblDepartmentCode.Visible = false;
                 this.lblDepartmentName.Visible = false;
-                this.tbDepartmentCode.Visible = false;
                 this.tbDepartmentName.Visible = false;
+                this.tbManager.Visible = false;
+                this.lblManager.Visible = false;
+
             }
             else
             {
@@ -119,9 +120,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.UpdateContextMenu();
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Properties?(3)?
+        #region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -150,11 +151,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             set;
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Methods?(9)?
+        #region?Methods?(9)?
 
-		//?Private?Methods?(9)?
+        //?Private?Methods?(9)?
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -274,9 +275,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             if (opDepatmentType == OpDepartmentType.QUERY || opDepatmentType == OpDepartmentType.DEPARTMENT_STAT)
             {
                 var queryResult = context.Departments.Where(d =>
-                                 (d.DepartmentCode == null ? string.Empty : d.DepartmentCode).Contains(this.tbDepartmentCode.Text)
-                              && (d.DepartmentName == null ? string.Empty : d.DepartmentName).Contains(this.tbDepartmentName.Text)
-                              && (d.Location.PManager.Contains(pmanager)||d.Location.Assistant.Contains(pmanager))
+                               (d.DepartmentName).Contains(this.tbDepartmentName.Text)
+                              && (d.Location.PManager.Contains(pmanager) || d.Location.Assistant.Contains(pmanager))
                               && (d.Manager.Contains(manager) || d.Contact_1.Contains(manager) || d.Contact_2.Contains(manager))
                               );
 
@@ -294,18 +294,16 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
             else if (opDepatmentType == OpDepartmentType.LOCATION_STAT)
             {
-                var result = from dept in context.Departments
-                             group dept by dept.Location into depts
-                             select new { Location = depts.Key, Departments = depts };
+                var queryResult = context.Locations.Where(loc => loc.PManager.Contains(pmanager) || loc.Assistant.Contains(pmanager));
 
-                SortableBindingCollection<City> locations = new SortableBindingCollection<City>();
-
-                foreach (var loc in result)
+                foreach (var c in queryResult)
                 {
-                    locations.Add(new City(loc.Location.LocationName, loc.Departments.ToList(), beginDate, endDate));
+                    c.QueryDateFrom = beginDate;
+                    c.QueryDateTo = endDate;
                 }
 
-                this.bs.DataSource = locations;
+                this.bs.DataSource = queryResult;
+                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
         }
 
@@ -316,8 +314,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e"></param>
         private void Reset(object sender, EventArgs e)
         {
-            this.tbDepartmentCode.Text = string.Empty;
+            this.tbManager.Text = string.Empty;
             this.tbDepartmentName.Text = string.Empty;
+            this.tbPManager.Text = string.Empty;
         }
 
         /// <summary>
@@ -358,6 +357,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }

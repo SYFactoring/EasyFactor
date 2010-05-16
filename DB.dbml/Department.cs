@@ -17,6 +17,8 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Department
     {
+
+
 		#region?Properties?(16)?
 
         /// <summary>
@@ -37,32 +39,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 allDomains.Add("冶金金融事业部");
                 allDomains.Add("中小企业金融事业部");
                 return allDomains;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double AssignAmount
-        {
-            get
-            {
-                double result = 0;
-                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
-                {
-                    foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
-                    {
-                        double assign = batch.AssignAmount;
-                        if (selectedCase.InvoiceCurrency != "CNY")
-                        {
-                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
-                            assign *= rate;
-                        }
-                        result += assign;
-                    }
-                }
-
-                return result;
             }
         }
 
@@ -109,17 +85,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public string City
-        {
-            get
-            {
-                return this.Location.LocationName;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public double CommissionIncomeByDate
         {
             get
@@ -139,33 +104,6 @@ namespace CMBC.EasyFactor.DB.dbml
                     }
 
                     result += commission;
-                }
-
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double FinanceAmount
-        {
-            get
-            {
-                double result = 0;
-                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
-                {
-                    foreach (InvoiceFinanceBatch batch in selectedCase.InvoiceFinanceBatches)
-                    {
-                        double finance = batch.FinanceAmount;
-                        if (batch.BatchCurrency != "CNY")
-                        {
-                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
-                            finance *= rate;
-                        }
-
-                        result += finance;
-                    }
                 }
 
                 return result;
@@ -271,33 +209,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double PaymentAmount
-        {
-            get
-            {
-                double result = 0;
-                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
-                {
-                    foreach (InvoicePaymentBatch batch in selectedCase.InvoicePaymentBatches)
-                    {
-                        double payment = batch.PaymentAmount;
-                        if (selectedCase.InvoiceCurrency != "CNY")
-                        {
-                            double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
-                            payment *= rate;
-                        }
-
-                        result += payment;
-                    }
-                }
-
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public double PaymentAmountByDate
         {
             get
@@ -368,6 +279,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
 		#endregion?Properties?
 
+
 		#region?Methods?(3)?
 
 		//?Public?Methods?(3)?
@@ -411,117 +323,17 @@ namespace CMBC.EasyFactor.DB.dbml
             return this._DepartmentName;
         }
 
-		#endregion?Methods?
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class City
-    {
-		#region?Constructors?(1)?
-
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="loc"></param>
-        /// <param name="depts"></param>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        public City(string loc, List<Department> depts, DateTime from, DateTime to)
+        public string LocationName
         {
-            Location = loc;
-
-            foreach (Department dept in depts)
+            get
             {
-                dept.QueryDateFrom = from;
-                dept.QueryDateTo = to;
-                AssignAmountByDate += dept.AssignAmountByDate;
-                FinanceAmountByDate += dept.FinanceAmountByDate;
-                PaymentAmountByDate += dept.PaymentAmountByDate;
-                CommissionIncomeByDate += dept.CommissionIncomeByDate;
-                NetInterestIncomeByDate += dept.NetInterestIncomeByDate;
-                MarginIncomeByDate += dept.MarginIncomeByDate;
-                TotalIncomeByDate += dept.TotalIncomeByDate;
+                return this.Location.LocationName;
             }
         }
 
-		#endregion?Constructors?
-
-		#region?Properties?(8)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double AssignAmountByDate
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double CommissionIncomeByDate
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double FinanceAmountByDate
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Location
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? MarginIncomeByDate
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? NetInterestIncomeByDate
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double PaymentAmountByDate
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double TotalIncomeByDate
-        {
-            get;
-            set;
-        }
-
-		#endregion?Properties?
+		#endregion?Methods?
     }
 }
