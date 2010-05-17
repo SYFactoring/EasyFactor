@@ -157,6 +157,11 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
+            IMPORT_ASSIGN_II,
+            
+            /// <summary>
+            /// 
+            /// </summary>
             IMPORT_FINANCE,
 
             /// <summary>
@@ -273,6 +278,9 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_ASSIGN:
                     this.Text = "应收账款转让清单导入";
                     break;
+                case ImportType.IMPORT_ASSIGN_II:
+                    this.Text = "应收账款转让清单导入";
+                    break;
                 case ImportType.IMPORT_FINANCE:
                     this.Text = "放款明细表导入";
                     break;
@@ -387,6 +395,9 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_ASSIGN:
                     e.Result = this.ImportAssign((string)e.Argument, worker, e);
                     break;
+                case ImportType.IMPORT_ASSIGN_II:
+                    e.Result = this.ImportAssignII((string)e.Argument, worker, e);
+                    break;
                 case ImportType.IMPORT_FINANCE:
                     e.Result = this.ImportFinance((string)e.Argument, worker, e);
                     break;
@@ -451,7 +462,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     SendMail mail = new SendMail(location.LegerContactEmail1, location.LegerContactEmail2, App.Current.CurUser.Email, String.Format("{0}保理台帐{1:yyyyMMdd}", dir.Name, DateTime.Today), "本邮件由中国民生银行保理运营系统自动生成。");
-                    foreach (FileInfo file in dir.GetFiles("*.xls"))
+                    foreach (FileInfo file in dir.GetFiles())
                     {
                         mail.AddAttachment(file.FullName);
                     }
@@ -784,7 +795,7 @@ namespace CMBC.EasyFactor.Utils
                             {
                                 throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
                             }
-                           
+
                         }
                         else if (cda.CommissionType == "按转让金额")
                         {
@@ -794,7 +805,6 @@ namespace CMBC.EasyFactor.Utils
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         invoice.InvoiceAssignBatch = batch;
 
-                        invoiceList.Add(invoice);
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / (float)size));
                     }
@@ -806,6 +816,402 @@ namespace CMBC.EasyFactor.Utils
                     foreach (InvoiceAssignBatch b in batchList)
                     {
                         b.Case = null;
+                    }
+
+                    if (result != invoiceList.Count)
+                    {
+                        e1.Data["row"] = result;
+                    }
+
+                    if (curCase != null)
+                    {
+                        e1.Data["ID"] = curCase.CaseCode;
+                    }
+
+                    throw;
+                }
+            }
+
+            worker.ReportProgress(100);
+            this.workbook.Close(false, fileName, null);
+            this.ReleaseResource();
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ImportAssignII(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            object[,] valueArray = this.GetValueArray(fileName, 1);
+            int result = 0;
+            List<Invoice> invoiceList = new List<Invoice>();
+            List<CreditNote> creditNoteList = new List<CreditNote>();
+            List<InvoiceAssignBatch> assignBatchList = new List<InvoiceAssignBatch>();
+            List<InvoicePaymentBatch> paymentBatchList = new List<InvoicePaymentBatch>();
+
+            this.context = new DBDataContext();
+
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                Case curCase = null;
+                InvoiceAssignBatch assignBatch = null;
+                InvoicePaymentBatch paymentBatch = null;
+
+                try
+                {
+                    for (int row = 3; row <= size; row++)
+                    {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+                        //int column = 12;
+                        int column = 1;
+                        string caseCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
+                        column++;
+                        string type = String.Format("{0:G}", valueArray[row, column++]).Trim();
+                        string invoiceNo = null;
+                        string creditNoteNo = null;
+                        if ("发票" == type)
+                        {
+                            invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
+                            if (String.IsNullOrEmpty(caseCode))
+                            {
+                                if (String.IsNullOrEmpty(invoiceNo))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    throw new Exception("案件编号不能为空，不能导入：" + invoiceNo);
+                                }
+                            }
+                            else
+                            {
+                                if (caseCode.Length > 20)
+                                {
+                                    break;
+                                }
+
+                                if (String.IsNullOrEmpty(invoiceNo))
+                                {
+                                    throw new Exception("发票编号不能为空，不能导入，案件编号： " + caseCode);
+                                }
+                            }
+
+                            column++;
+                        }
+                        else if ("贷项通知" == type)
+                        {
+                            creditNoteNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
+                            if (String.IsNullOrEmpty(caseCode))
+                            {
+                                if (String.IsNullOrEmpty(creditNoteNo))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    throw new Exception("案件编号不能为空，不能导入：" + creditNoteNo);
+                                }
+                            }
+                            else
+                            {
+                                if (caseCode.Length > 20)
+                                {
+                                    break;
+                                }
+
+                                if (String.IsNullOrEmpty(creditNoteNo))
+                                {
+                                    throw new Exception("贷项通知编号不能为空，不能导入，案件编号： " + caseCode);
+                                }
+                            }
+                        }
+
+                        if (curCase == null || curCase.CaseCode != caseCode)
+                        {
+                            curCase = context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
+
+                            if (curCase == null)
+                            {
+                                throw new Exception("案件编号错误: " + caseCode);
+                            }
+                        }
+
+                        CDA cda = curCase.ActiveCDA;
+                        if (cda == null)
+                        {
+                            throw new Exception("没有有效的额度通知书: " + caseCode);
+                        }
+
+                        if (assignBatch == null || assignBatch.CaseCode != caseCode)
+                        {
+                            assignBatch = assignBatchList.SingleOrDefault(b => b.CaseCode == caseCode);
+                            if (assignBatch == null)
+                            {
+                                assignBatch = new InvoiceAssignBatch();
+                                assignBatch.AssignDate = DateTime.Today;
+                                assignBatch.Case = curCase;
+                                assignBatch.CreateUserName = App.Current.CurUser.Name;
+                                assignBatch.InputDate = DateTime.Today;
+                                assignBatch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase.CaseCode, assignBatch.AssignDate, assignBatchList);
+                                assignBatch.CheckStatus = BATCH.UNCHECK;
+                                assignBatch.IsCreateMsg = false;
+                                assignBatchList.Add(assignBatch);
+                            }
+                        }
+
+                        if ("发票" == type)
+                        {
+                            Invoice invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.InvoiceAssignBatch.CaseCode == caseCode);
+                            if (invoice == null)
+                            {
+                                invoice = new Invoice();
+                                invoice.InvoiceNo = invoiceNo;
+                                Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
+                                if (old == null)
+                                {
+                                    invoiceList.Add(invoice);
+                                }
+                                else
+                                {
+                                    throw new Exception("当前导入文件中发票号重复: " + old.InvoiceNo);
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
+                            }
+                            string currency = string.Format("{0:G}", valueArray[row, column++]);
+                            if (String.IsNullOrEmpty(currency))
+                            {
+                                throw new Exception("发票币别不能为空，不能导入：" + invoiceNo);
+                            }
+                            else if (currency != curCase.InvoiceCurrency)
+                            {
+                                throw new Exception("发票币别与案件币别不匹配，不能导入：" + invoiceNo);
+                            }
+
+                            string invoiceAmountStr = String.Format("{0:G}", valueArray[row, column++]);
+                            if (String.IsNullOrEmpty(invoiceAmountStr))
+                            {
+                                throw new Exception("发票金额不能为空，不能导入：" + invoiceNo);
+                            }
+                            double invoiceAmount = 0;
+                            if (Double.TryParse(invoiceAmountStr, out invoiceAmount))
+                            {
+                                invoice.InvoiceAmount = invoiceAmount;
+                            }
+                            else
+                            {
+                                throw new Exception("发票金额类型异常，不能导入：" + invoiceNo);
+                            }
+
+                            string assignAmountStr = String.Format("{0:G}", valueArray[row, column++]);
+                            if (String.IsNullOrEmpty(assignAmountStr))
+                            {
+                                throw new Exception("转让金额不能为空，不能导入：" + invoiceNo);
+                            }
+                            double assignAmount = 0;
+                            if (Double.TryParse(assignAmountStr, out assignAmount))
+                            {
+                                invoice.AssignAmount = assignAmount;
+                            }
+                            else
+                            {
+                                throw new Exception("转让金额类型异常，不能导入：" + invoiceNo);
+                            }
+
+                            string invoiceDateStr = String.Format("{0:G}", valueArray[row, column++]);
+                            if (!String.IsNullOrEmpty(invoiceDateStr))
+                            {
+                                DateTime invoiceDate = default(DateTime);
+                                if (DateTime.TryParse(invoiceDateStr, out  invoiceDate))
+                                {
+                                    invoice.InvoiceDate = invoiceDate;
+                                }
+                                else
+                                {
+                                    throw new Exception("发票日类型异常，不能导入：" + invoiceNo);
+                                }
+                            }
+
+                            string dueDateStr = String.Format("{0:G}", valueArray[row, column++]);
+                            if (String.IsNullOrEmpty(dueDateStr))
+                            {
+                                throw new Exception("转让日不能为空，不能导入：" + invoiceNo);
+                            }
+                            DateTime dueDate = default(DateTime);
+                            if (DateTime.TryParse(dueDateStr, out dueDate))
+                            {
+                                invoice.DueDate = dueDate;
+                            }
+                            else
+                            {
+                                throw new Exception("转让日类型异常，不能导入：" + invoiceNo);
+                            }
+
+                            string commissionStr = String.Format("{0:G}", valueArray[row, column++]);
+                            if (cda.CommissionType == "其他")
+                            {
+                                if (String.IsNullOrEmpty(commissionStr))
+                                {
+                                    throw new Exception("手续费不能为空，不能导入：" + invoiceNo);
+                                }
+                                double commissionAmount = 0;
+                                if (Double.TryParse(commissionStr, out commissionAmount))
+                                {
+                                    invoice.Commission = commissionAmount;
+                                }
+                                else
+                                {
+                                    throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
+                                }
+
+                            }
+                            else if (cda.CommissionType == "按转让金额")
+                            {
+                                invoice.Commission = invoice.AssignAmount * cda.Price;
+                            }
+
+                            invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
+                            invoice.InvoiceAssignBatch = assignBatch;
+                        }
+                        else if ("贷项通知" == type)
+                        {
+                            CreditNote creditNote = context.CreditNotes.SingleOrDefault(i => i.CreditNoteNo == creditNoteNo);
+                            if (creditNote == null)
+                            {
+                                creditNote = creditNoteList.SingleOrDefault(i => i.CreditNoteNo == creditNoteNo);
+                                if (creditNote == null)
+                                {
+                                    creditNote = new CreditNote();
+                                    creditNoteList.Add(creditNote);
+                                }
+                            }
+
+                            String toInvoiceNo = String.Format("{0:G}", valueArray[row, column++]);
+                            if (String.IsNullOrEmpty(toInvoiceNo))
+                            {
+                                throw new Exception(String.Format("贷项通知{0}对应发票编号不能为空", creditNoteNo));
+                            }
+
+                            Invoice toInvoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == toInvoiceNo && i.InvoiceAssignBatch.CaseCode == caseCode);
+                            if (toInvoice == null)
+                            {
+                                toInvoice = invoiceList.SingleOrDefault(i => i.InvoiceNo == toInvoiceNo);
+                                if (toInvoice == null)
+                                {
+                                    throw new Exception(String.Format("贷项通知{0}对应发票编号{1}错误", creditNoteNo, toInvoiceNo));
+                                }
+                            }
+
+                            string currency = string.Format("{0:G}", valueArray[row, column++]);
+                            if (String.IsNullOrEmpty(currency))
+                            {
+                                throw new Exception("贷项通知币别不能为空，不能导入：" + creditNoteNo);
+                            }
+                            else if (currency != toInvoice.InvoiceCurrency)
+                            {
+                                throw new Exception("贷项通知币别与发票币别不匹配，不能导入：" + creditNoteNo);
+                            }
+
+                            string paymentAmountStr = String.Format("{0:G}", valueArray[row, column++]);
+                            if (String.IsNullOrEmpty(paymentAmountStr))
+                            {
+                                throw new Exception("贷项通知金额不能为空，不能导入：" + creditNoteNo);
+                            }
+
+                            double paymentAmount = 0;
+                            if (!Double.TryParse(paymentAmountStr, out paymentAmount))
+                            {
+                                throw new Exception("贷项通知金额类型异常，不能导入：" + creditNoteNo);
+                            }
+
+                            column++;
+
+                            string creditNoteDateStr = String.Format("{0:G}", valueArray[row, column++]);
+                            DateTime creditNoteDate = default(DateTime);
+                            if (String.IsNullOrEmpty(creditNoteDateStr))
+                            {
+                                throw new Exception("贷项通知日不能为空," + creditNoteNo);
+                            }
+                            else
+                            {
+                                if (DateTime.TryParse(creditNoteDateStr, out  creditNoteDate))
+                                {
+                                    creditNote.CreditNoteDate = creditNoteDate;
+                                }
+                                else
+                                {
+                                    throw new Exception("贷项通知日类型异常，不能导入：" + creditNoteNo);
+                                }
+                            }
+
+                            column++;
+
+                            column++;
+
+                            string Comment = String.Format("{0:G}", valueArray[row, column++]);
+
+                            paymentBatch = paymentBatchList.SingleOrDefault(batch => batch.CaseCode == caseCode && batch.PaymentType == Payment.CREDIT_NOTE_PAYMENT);
+                            if (paymentBatch == null)
+                            {
+                                paymentBatch = new InvoicePaymentBatch();
+                                paymentBatch.Case = curCase;
+                                paymentBatch.CheckStatus = BATCH.UNCHECK;
+                                paymentBatch.InputDate = DateTime.Today;
+                                paymentBatch.IsCreateMsg = false;
+                                paymentBatch.PaymentDate = DateTime.Today;
+                                paymentBatch.PaymentType = Payment.CREDIT_NOTE_PAYMENT;
+                                paymentBatch.CreateUserName = App.Current.CurUser.Name;
+                                paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(DateTime.Today, paymentBatchList);
+                                paymentBatchList.Add(paymentBatch);
+                            }
+
+                            InvoicePaymentLog paymentLog = new InvoicePaymentLog();
+                            paymentLog.CreditNote = creditNote;
+                            paymentLog.Invoice = toInvoice;
+                            paymentLog.PaymentAmount = paymentAmount;
+                            paymentLog.Comment = Comment;
+                            paymentLog.InvoicePaymentBatch = paymentBatch;
+                            creditNote.InvoiceAssignBatch = assignBatch;
+                        }
+
+                        result++;
+                        worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    }
+
+                    context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    foreach (InvoiceAssignBatch b in assignBatchList)
+                    {
+                        b.Case = null;
+                    }
+
+                    foreach (Invoice i in invoiceList)
+                    {
+                        i.InvoiceAssignBatch = null;
+                    }
+
+                    foreach (InvoicePaymentBatch b in paymentBatchList)
+                    {
+                        b.Case = null;
+                    }
+
+                    foreach (CreditNote c in creditNoteList)
+                    {
+                        c.InvoiceAssignBatch = null;
                     }
 
                     if (result != invoiceList.Count)

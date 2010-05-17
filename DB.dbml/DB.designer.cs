@@ -8424,6 +8424,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<Invoice> _Invoices;
 		
+		private EntitySet<CreditNote> _CreditNotes;
+		
 		private EntityRef<Case> _Case;
 		
     #region Extensibility Method Definitions
@@ -8457,6 +8459,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		public InvoiceAssignBatch()
 		{
 			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
+			this._CreditNotes = new EntitySet<CreditNote>(new Action<CreditNote>(this.attach_CreditNotes), new Action<CreditNote>(this.detach_CreditNotes));
 			this._Case = default(EntityRef<Case>);
 			OnCreated();
 		}
@@ -8698,6 +8701,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceAssignBatch_CreditNote", Storage="_CreditNotes", ThisKey="AssignBatchNo", OtherKey="AssignBatchNo")]
+		public EntitySet<CreditNote> CreditNotes
+		{
+			get
+			{
+				return this._CreditNotes;
+			}
+			set
+			{
+				this._CreditNotes.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Case_InvoiceAssignBatch", Storage="_Case", ThisKey="CaseCode", OtherKey="CaseCode", IsForeignKey=true)]
 		public Case Case
 		{
@@ -8759,6 +8775,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_Invoices(Invoice entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceAssignBatch = null;
+		}
+		
+		private void attach_CreditNotes(CreditNote entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceAssignBatch = this;
+		}
+		
+		private void detach_CreditNotes(CreditNote entity)
 		{
 			this.SendPropertyChanging();
 			entity.InvoiceAssignBatch = null;
@@ -9867,7 +9895,11 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.DateTime _CreditNoteDate;
 		
+		private string _AssignBatchNo;
+		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
+		
+		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -9877,11 +9909,14 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreditNoteNoChanged();
     partial void OnCreditNoteDateChanging(System.DateTime value);
     partial void OnCreditNoteDateChanged();
+    partial void OnAssignBatchNoChanging(string value);
+    partial void OnAssignBatchNoChanged();
     #endregion
 		
 		public CreditNote()
 		{
 			this._InvoicePaymentLogs = new EntitySet<InvoicePaymentLog>(new Action<InvoicePaymentLog>(this.attach_InvoicePaymentLogs), new Action<InvoicePaymentLog>(this.detach_InvoicePaymentLogs));
+			this._InvoiceAssignBatch = default(EntityRef<InvoiceAssignBatch>);
 			OnCreated();
 		}
 		
@@ -9925,6 +9960,30 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AssignBatchNo", DbType="Char(20)", CanBeNull=false)]
+		public string AssignBatchNo
+		{
+			get
+			{
+				return this._AssignBatchNo;
+			}
+			set
+			{
+				if ((this._AssignBatchNo != value))
+				{
+					if (this._InvoiceAssignBatch.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAssignBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._AssignBatchNo = value;
+					this.SendPropertyChanged("AssignBatchNo");
+					this.OnAssignBatchNoChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CreditNote_InvoicePaymentLog", Storage="_InvoicePaymentLogs", ThisKey="CreditNoteNo", OtherKey="CreditNoteNo")]
 		public EntitySet<InvoicePaymentLog> InvoicePaymentLogs
 		{
@@ -9935,6 +9994,40 @@ namespace CMBC.EasyFactor.DB.dbml
 			set
 			{
 				this._InvoicePaymentLogs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceAssignBatch_CreditNote", Storage="_InvoiceAssignBatch", ThisKey="AssignBatchNo", OtherKey="AssignBatchNo", IsForeignKey=true)]
+		public InvoiceAssignBatch InvoiceAssignBatch
+		{
+			get
+			{
+				return this._InvoiceAssignBatch.Entity;
+			}
+			set
+			{
+				InvoiceAssignBatch previousValue = this._InvoiceAssignBatch.Entity;
+				if (((previousValue != value) 
+							|| (this._InvoiceAssignBatch.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InvoiceAssignBatch.Entity = null;
+						previousValue.CreditNotes.Remove(this);
+					}
+					this._InvoiceAssignBatch.Entity = value;
+					if ((value != null))
+					{
+						value.CreditNotes.Add(this);
+						this._AssignBatchNo = value.AssignBatchNo;
+					}
+					else
+					{
+						this._AssignBatchNo = default(string);
+					}
+					this.SendPropertyChanged("InvoiceAssignBatch");
+				}
 			}
 		}
 		

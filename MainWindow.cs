@@ -1416,6 +1416,34 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportAssignNew(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
+            {
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_II);
+                form.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryCreditNote(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
+            {
+                CreditNoteMgr mgr = new CreditNoteMgr(CreditNoteMgr.OpCreditNoteType.CREDIT_NOTE_QUERY);
+                this.SetDetailPanel(mgr);
+            }
+        }
        
     }
 }

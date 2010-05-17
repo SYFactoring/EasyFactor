@@ -218,7 +218,7 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         /// <summary>
-        /// Gets or sets selected AssignBatch
+        /// Gets or sets selected Invoice
         /// </summary>
         public Invoice Selected
         {
@@ -749,6 +749,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbInvoiceNo.Text = string.Empty;
             this.tbAssignOverDueDays.Text = string.Empty;
             this.tbFinanceOverDueDays.Text = string.Empty;
+            this.tbAssignBatchNo.Text = string.Empty;
+            this.tbAssignOutstanding.Text = string.Empty;
+            this.tbCaseCode.Text = string.Empty;
+            this.tbFinanceOutstanding.Text = string.Empty;
 
             switch (opInvoiceType)
             {
