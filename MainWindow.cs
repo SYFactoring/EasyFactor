@@ -89,21 +89,6 @@ namespace CMBC.EasyFactor
         //?Public?Methods?(2)?
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="invoiceList"></param>
-        public void InvoiceRefund(List<Invoice> invoiceList, InvoicePaymentBatch batch)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
-            {
-                ARCaseBasic invoiceRefund = new ARCaseBasic(OpARType.SELLER_REFUND);
-                this.SetDetailPanel(invoiceRefund);
-                InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
-                uc.NewBatchFromPayment(invoiceList, batch);
-            }
-        }
-
-        /// <summary>
         /// Fill detail panel with user control
         /// </summary>
         /// <param name="uc">user control</param>
@@ -402,7 +387,7 @@ namespace CMBC.EasyFactor
                     this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
                     this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
                     this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
-                    this.MainPage(null, null);
+                    this.AlertPage(null, null);
                 }
             }
             else if (dr == DialogResult.No)
@@ -847,12 +832,43 @@ namespace CMBC.EasyFactor
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="invoiceList"></param>
+        public void InvoiceRefundFromPayment(List<Invoice> invoiceList, InvoicePaymentBatch batch)
+        {
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
+            {
+                ARCaseBasic invoiceRefund = new ARCaseBasic(OpARType.SELLER_REFUND);
+                this.SetDetailPanel(invoiceRefund);
+                InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
+                uc.NewBatchFromPayment(invoiceList, batch);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AlertPage(object sender, EventArgs e)
+        {
+            WorkAlert alert = new WorkAlert();
+            this.SetDetailPanel(alert);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MainPage(object sender, EventArgs e)
         {
-            WorkAlert alert = new WorkAlert();
-            this.SetDetailPanel(alert);
+            this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
+            this.CommandStatus = MESSAGE.MAIN_DEFAULT;
+
+            this.notifyIcon.Visible = false;
+
+            this.ribbonDetailPanel.Controls.Clear();
+            this.ribbonDetailPanel.Controls.Add(this.logoLabel);
         }
 
         private void MainWindow_Deactivate(object sender, EventArgs e)
@@ -900,7 +916,7 @@ namespace CMBC.EasyFactor
                     this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
                     this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
                     this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
-                    this.MainPage(null, null);
+                    this.AlertPage(null, null);
                 }
             }
             else if (dr == DialogResult.No)
@@ -1400,11 +1416,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
-        private void itemInfoMgr_Click(object sender, EventArgs e)
-        {
-
-        }
-        
+       
     }
 }

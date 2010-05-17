@@ -562,7 +562,14 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return this.InvoiceNo.GetHashCode();
+            if (this.InvoiceNo != null)
+            {
+                return this.InvoiceNo.GetHashCode();
+            }
+            else
+            {
+                return -1;
+            }
         }
         //?Private?Methods?(1)?
 
