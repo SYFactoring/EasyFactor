@@ -119,7 +119,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="invoiceList"></param>
-        public InvoiceMgr(EntitySet<Invoice> invoiceList, DBDataContext context)
+        public InvoiceMgr(IEnumerable<Invoice> invoiceList, DBDataContext context)
             : this(OpInvoiceType.BATCH_DETAIL)
         {
             this.bs.DataSource = invoiceList;

@@ -575,6 +575,21 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public List<Invoice> GetInvoices()
+        {
+            List<Invoice> result = new List<Invoice>();
+            foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
+            {
+                result.AddRange(batch.Invoices);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="transactionType"></param>
         /// <param name="appDate"></param>
         /// <returns></returns>

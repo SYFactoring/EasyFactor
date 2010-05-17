@@ -635,15 +635,15 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
+                            if (caseCode.Length > 20)
+                            {
+                                break;
+                            }
+
                             if (String.IsNullOrEmpty(invoiceNo))
                             {
                                 throw new Exception("发票编号不能为空，不能导入，案件编号： " + caseCode);
                             }
-                        }
-
-                        if (caseCode.Length > 20)
-                        {
-                            break;
                         }
 
                         if (curCase == null || curCase.CaseCode != caseCode)
@@ -769,27 +769,27 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         string commissionStr = String.Format("{0:G}", valueArray[row, column++]);
-                        if (String.IsNullOrEmpty(commissionStr))
+                        if (cda.CommissionType == "其他")
                         {
-                            throw new Exception("手续费不能为空，不能导入：" + invoiceNo);
-                        }
-                        double commissionAmount = 0;
-                        if (Double.TryParse(commissionStr, out commissionAmount))
-                        {
-                            if (cda.CommissionType == "其他")
+                            if (String.IsNullOrEmpty(commissionStr))
+                            {
+                                throw new Exception("手续费不能为空，不能导入：" + invoiceNo);
+                            }
+                            double commissionAmount = 0;
+                            if (Double.TryParse(commissionStr, out commissionAmount))
                             {
                                 invoice.Commission = commissionAmount;
                             }
-                            else if (cda.CommissionType == "按转让金额")
+                            else
                             {
-                                invoice.Commission = invoice.AssignAmount * cda.Price;
+                                throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
                             }
+                           
                         }
-                        else
+                        else if (cda.CommissionType == "按转让金额")
                         {
-                            throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
+                            invoice.Commission = invoice.AssignAmount * cda.Price;
                         }
-
 
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);
                         invoice.InvoiceAssignBatch = batch;

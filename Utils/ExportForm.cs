@@ -2934,6 +2934,7 @@ namespace CMBC.EasyFactor.Utils
                 }
                 totalFinanceOutstanding += financeOutstanding;
 
+                int recordStep = 0;
                 foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
                 {
                     foreach (Invoice invoice in batch.Invoices)
@@ -2946,7 +2947,6 @@ namespace CMBC.EasyFactor.Utils
                         sheet.Cells[row, "E"] = invoice.DueDate;
                         sheet.Cells[row, "F"] = batch.AssignDate;
 
-                        int recordStep = 0;
                         for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
                         {
                             InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
@@ -2983,6 +2983,25 @@ namespace CMBC.EasyFactor.Utils
 
                         row += step;
                     }
+                }
+
+                foreach (InvoiceFinanceBatch financeBatch in client.InvoiceFinanceBatches)
+                {
+                    sheet.Cells[row, "G"] = financeBatch.FinanceAmount;
+                    sheet.Cells[row, "H"] = financeBatch.FinancePeriodBegin;
+                    sheet.Cells[row, "I"] = financeBatch.FinancePeriodEnd;
+                    sheet.Cells[row, "N"] = financeBatch.PoolFinanceOutstanding;
+                    sheet.Cells[row, "Q"] = financeBatch.Comment;
+
+                    int j = 0;
+                    foreach (InvoiceRefundBatch refundBatch in financeBatch.InvoiceRefundBatches)
+                    {
+                        sheet.Cells[row + j, "M"] = refundBatch.RefundAmount;
+                        sheet.Cells[row + j, "O"] = refundBatch.RefundDate;
+                        j++;
+                    }
+
+                    row += financeBatch.InvoiceRefundBatches.Count > 0 ? financeBatch.InvoiceRefundBatches.Count : 1;
                 }
 
                 string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);

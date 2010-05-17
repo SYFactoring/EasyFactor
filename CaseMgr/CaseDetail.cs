@@ -17,6 +17,7 @@ namespace CMBC.EasyFactor.CaseMgr
     using CMBC.EasyFactor.Utils;
     using CMBC.EasyFactor.Utils.ConstStr;
     using DevComponents.DotNetBar;
+    using CMBC.EasyFactor.ARMgr;
 
     /// <summary>
     /// Case Detail
@@ -165,6 +166,10 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
             }
+
+            InvoiceMgr invoiceMgr = new InvoiceMgr(curCase.GetInvoices(), context);
+            invoiceMgr.Dock = DockStyle.Fill;
+            this.tabPanelInvoice.Controls.Add(invoiceMgr);
 
             this.UpdateCaseControlStatus();
             this.UpdateCreditCoverNegControlStatus();
