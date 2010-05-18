@@ -82,6 +82,17 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
+        public static string DesktopPath
+        {
+            get
+            {
+                return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public static string SystemInformationStr
         {

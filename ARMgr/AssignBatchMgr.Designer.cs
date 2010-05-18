@@ -90,13 +90,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -105,6 +98,13 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblLocation = new DevComponents.DotNetBar.LabelX();
@@ -124,6 +124,22 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbAssignBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAssignBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCommissionAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,22 +171,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCommissionAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuItemThreeReports = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -552,6 +553,142 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBatches_RowPostPaint);
             // 
+            // colSellerName
+            // 
+            this.colSellerName.DataPropertyName = "SellerName";
+            this.colSellerName.HeaderText = "卖方名称";
+            this.colSellerName.Name = "colSellerName";
+            this.colSellerName.ReadOnly = true;
+            this.colSellerName.Width = 120;
+            // 
+            // colBuyerName
+            // 
+            this.colBuyerName.DataPropertyName = "BuyerName";
+            this.colBuyerName.HeaderText = "买方名称";
+            this.colBuyerName.Name = "colBuyerName";
+            this.colBuyerName.ReadOnly = true;
+            this.colBuyerName.Width = 120;
+            // 
+            // colTransactionType
+            // 
+            this.colTransactionType.DataPropertyName = "TransactionType";
+            this.colTransactionType.HeaderText = "业务类别";
+            this.colTransactionType.Name = "colTransactionType";
+            this.colTransactionType.ReadOnly = true;
+            // 
+            // colAssignBatchNo
+            // 
+            this.colAssignBatchNo.DataPropertyName = "AssignBatchNo";
+            this.colAssignBatchNo.HeaderText = "业务编号";
+            this.colAssignBatchNo.Name = "colAssignBatchNo";
+            this.colAssignBatchNo.ReadOnly = true;
+            this.colAssignBatchNo.Width = 120;
+            // 
+            // colAssignDate
+            // 
+            this.colAssignDate.DataPropertyName = "AssignDate";
+            dataGridViewCellStyle2.Format = "d";
+            this.colAssignDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAssignDate.HeaderText = "转让日";
+            this.colAssignDate.Name = "colAssignDate";
+            this.colAssignDate.ReadOnly = true;
+            this.colAssignDate.Width = 80;
+            // 
+            // colBatchCurrency
+            // 
+            this.colBatchCurrency.DataPropertyName = "BatchCurrency";
+            this.colBatchCurrency.HeaderText = "币别";
+            this.colBatchCurrency.Name = "colBatchCurrency";
+            this.colBatchCurrency.ReadOnly = true;
+            this.colBatchCurrency.Width = 50;
+            // 
+            // colAssignAmount
+            // 
+            this.colAssignAmount.DataPropertyName = "AssignAmount";
+            dataGridViewCellStyle3.Format = "N2";
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colAssignAmount.HeaderText = "转让金额";
+            this.colAssignAmount.Name = "colAssignAmount";
+            this.colAssignAmount.ReadOnly = true;
+            // 
+            // colAssignOutstanding
+            // 
+            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle4.Format = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colAssignOutstanding.HeaderText = "转让余额";
+            this.colAssignOutstanding.Name = "colAssignOutstanding";
+            this.colAssignOutstanding.ReadOnly = true;
+            // 
+            // colFinanceAmount
+            // 
+            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            dataGridViewCellStyle5.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colFinanceAmount.HeaderText = "融资金额";
+            this.colFinanceAmount.Name = "colFinanceAmount";
+            this.colFinanceAmount.ReadOnly = true;
+            // 
+            // colFinanceOutstanding
+            // 
+            this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
+            dataGridViewCellStyle6.Format = "N2";
+            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colFinanceOutstanding.HeaderText = "融资余额";
+            this.colFinanceOutstanding.Name = "colFinanceOutstanding";
+            this.colFinanceOutstanding.ReadOnly = true;
+            // 
+            // colPaymentAmount
+            // 
+            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle7.Format = "N2";
+            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colPaymentAmount.HeaderText = "付款金额";
+            this.colPaymentAmount.Name = "colPaymentAmount";
+            this.colPaymentAmount.ReadOnly = true;
+            // 
+            // colRefundAmount
+            // 
+            this.colRefundAmount.DataPropertyName = "RefundAmount";
+            dataGridViewCellStyle8.Format = "N2";
+            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colRefundAmount.HeaderText = "还款金额";
+            this.colRefundAmount.Name = "colRefundAmount";
+            this.colRefundAmount.ReadOnly = true;
+            // 
+            // colCommissionAmount
+            // 
+            this.colCommissionAmount.DataPropertyName = "CommissionAmount";
+            dataGridViewCellStyle9.Format = "N2";
+            this.colCommissionAmount.DefaultCellStyle = dataGridViewCellStyle9;
+            this.colCommissionAmount.HeaderText = "手续费";
+            this.colCommissionAmount.Name = "colCommissionAmount";
+            this.colCommissionAmount.ReadOnly = true;
+            // 
+            // colCreateUserName
+            // 
+            this.colCreateUserName.DataPropertyName = "CreateUserName";
+            this.colCreateUserName.HeaderText = "经办人";
+            this.colCreateUserName.Name = "colCreateUserName";
+            this.colCreateUserName.ReadOnly = true;
+            this.colCreateUserName.Width = 80;
+            // 
+            // colCheckStatus
+            // 
+            this.colCheckStatus.DataPropertyName = "CheckStatus";
+            this.colCheckStatus.HeaderText = "复核结果";
+            this.colCheckStatus.Name = "colCheckStatus";
+            this.colCheckStatus.ReadOnly = true;
+            this.colCheckStatus.Width = 80;
+            // 
+            // colBatchCount
+            // 
+            this.colBatchCount.DataPropertyName = "BatchCount";
+            this.colBatchCount.HeaderText = "发票笔数";
+            this.colBatchCount.Name = "colBatchCount";
+            this.colBatchCount.ReadOnly = true;
+            this.colBatchCount.Width = 80;
+            // 
             // cmuBatchMgr
             // 
             this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -566,107 +703,108 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemAssignReport,
             this.menuItemFinanceReport,
             this.menuItemCommissionReport,
+            this.menuItemThreeReports,
             this.menuItemFlawReport,
             this.menuItemFileCheckList,
             this.toolStripSeparator4,
             this.menuItemMSG09});
             this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(183, 270);
+            this.cmuBatchMgr.Size = new System.Drawing.Size(199, 292);
             // 
             // menuItemBatchSelect
             // 
             this.menuItemBatchSelect.Name = "menuItemBatchSelect";
-            this.menuItemBatchSelect.Size = new System.Drawing.Size(182, 22);
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(198, 22);
             this.menuItemBatchSelect.Text = "选择批次(&S)";
             this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
             // 
             // menuItemBatchDetail
             // 
             this.menuItemBatchDetail.Name = "menuItemBatchDetail";
-            this.menuItemBatchDetail.Size = new System.Drawing.Size(182, 22);
+            this.menuItemBatchDetail.Size = new System.Drawing.Size(198, 22);
             this.menuItemBatchDetail.Text = "批次详情(&M)";
             this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
             // 
             // menuItemCheck
             // 
             this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(182, 22);
+            this.menuItemCheck.Size = new System.Drawing.Size(198, 22);
             this.menuItemCheck.Text = "复核通过(&P)";
             this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
             // menuItemReject
             // 
             this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(182, 22);
+            this.menuItemReject.Size = new System.Drawing.Size(198, 22);
             this.menuItemReject.Text = "复核拒绝(&R)";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
             // 
             // menuItemBatchDelete
             // 
             this.menuItemBatchDelete.Name = "menuItemBatchDelete";
-            this.menuItemBatchDelete.Size = new System.Drawing.Size(182, 22);
+            this.menuItemBatchDelete.Size = new System.Drawing.Size(198, 22);
             this.menuItemBatchDelete.Text = "删除批次(&D)";
             this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(179, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
             // 
             // menuItemAssignReport
             // 
             this.menuItemAssignReport.Name = "menuItemAssignReport";
-            this.menuItemAssignReport.Size = new System.Drawing.Size(182, 22);
-            this.menuItemAssignReport.Text = "应收账款转让明细表";
+            this.menuItemAssignReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemAssignReport.Text = "应收账款转让明细表(&A)";
             this.menuItemAssignReport.Click += new System.EventHandler(this.ReportAssign);
             // 
             // menuItemFinanceReport
             // 
             this.menuItemFinanceReport.Name = "menuItemFinanceReport";
-            this.menuItemFinanceReport.Size = new System.Drawing.Size(182, 22);
-            this.menuItemFinanceReport.Text = "可融资账款明细表";
+            this.menuItemFinanceReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemFinanceReport.Text = "可融资账款明细表(&F)";
             this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
             // 
             // menuItemCommissionReport
             // 
             this.menuItemCommissionReport.Name = "menuItemCommissionReport";
-            this.menuItemCommissionReport.Size = new System.Drawing.Size(182, 22);
-            this.menuItemCommissionReport.Text = "保理费用明细表";
+            this.menuItemCommissionReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemCommissionReport.Text = "保理费用明细表(&C)";
             this.menuItemCommissionReport.Click += new System.EventHandler(this.ReportCommission);
             // 
             // menuItemFlawReport
             // 
             this.menuItemFlawReport.Name = "menuItemFlawReport";
-            this.menuItemFlawReport.Size = new System.Drawing.Size(182, 22);
+            this.menuItemFlawReport.Size = new System.Drawing.Size(198, 22);
             this.menuItemFlawReport.Text = "瑕疵通知书";
             this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
             // 
             // menuItemFileCheckList
             // 
             this.menuItemFileCheckList.Name = "menuItemFileCheckList";
-            this.menuItemFileCheckList.Size = new System.Drawing.Size(182, 22);
+            this.menuItemFileCheckList.Size = new System.Drawing.Size(198, 22);
             this.menuItemFileCheckList.Text = "文件检查单";
             this.menuItemFileCheckList.Click += new System.EventHandler(this.ReportFileCheckList);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(179, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(195, 6);
             // 
             // menuItemMSG09
             // 
             this.menuItemMSG09.Name = "menuItemMSG09";
-            this.menuItemMSG09.Size = new System.Drawing.Size(182, 22);
+            this.menuItemMSG09.Size = new System.Drawing.Size(198, 22);
             this.menuItemMSG09.Text = "生成MSG09";
             this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
             // 
@@ -805,141 +943,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn15.ReadOnly = true;
             this.dataGridViewTextBoxColumn15.Width = 52;
             // 
-            // colSellerName
+            // menuItemThreeReports
             // 
-            this.colSellerName.DataPropertyName = "SellerName";
-            this.colSellerName.HeaderText = "卖方名称";
-            this.colSellerName.Name = "colSellerName";
-            this.colSellerName.ReadOnly = true;
-            this.colSellerName.Width = 120;
-            // 
-            // colBuyerName
-            // 
-            this.colBuyerName.DataPropertyName = "BuyerName";
-            this.colBuyerName.HeaderText = "买方名称";
-            this.colBuyerName.Name = "colBuyerName";
-            this.colBuyerName.ReadOnly = true;
-            this.colBuyerName.Width = 120;
-            // 
-            // colTransactionType
-            // 
-            this.colTransactionType.DataPropertyName = "TransactionType";
-            this.colTransactionType.HeaderText = "业务类别";
-            this.colTransactionType.Name = "colTransactionType";
-            this.colTransactionType.ReadOnly = true;
-            // 
-            // colAssignBatchNo
-            // 
-            this.colAssignBatchNo.DataPropertyName = "AssignBatchNo";
-            this.colAssignBatchNo.HeaderText = "业务编号";
-            this.colAssignBatchNo.Name = "colAssignBatchNo";
-            this.colAssignBatchNo.ReadOnly = true;
-            this.colAssignBatchNo.Width = 120;
-            // 
-            // colAssignDate
-            // 
-            this.colAssignDate.DataPropertyName = "AssignDate";
-            dataGridViewCellStyle2.Format = "d";
-            this.colAssignDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignDate.HeaderText = "转让日";
-            this.colAssignDate.Name = "colAssignDate";
-            this.colAssignDate.ReadOnly = true;
-            this.colAssignDate.Width = 80;
-            // 
-            // colBatchCurrency
-            // 
-            this.colBatchCurrency.DataPropertyName = "BatchCurrency";
-            this.colBatchCurrency.HeaderText = "币别";
-            this.colBatchCurrency.Name = "colBatchCurrency";
-            this.colBatchCurrency.ReadOnly = true;
-            this.colBatchCurrency.Width = 50;
-            // 
-            // colAssignAmount
-            // 
-            this.colAssignAmount.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle3.Format = "N2";
-            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colAssignAmount.HeaderText = "转让金额";
-            this.colAssignAmount.Name = "colAssignAmount";
-            this.colAssignAmount.ReadOnly = true;
-            // 
-            // colAssignOutstanding
-            // 
-            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
-            dataGridViewCellStyle4.Format = "N2";
-            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colAssignOutstanding.HeaderText = "转让余额";
-            this.colAssignOutstanding.Name = "colAssignOutstanding";
-            this.colAssignOutstanding.ReadOnly = true;
-            // 
-            // colFinanceAmount
-            // 
-            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle5.Format = "N2";
-            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colFinanceAmount.HeaderText = "融资金额";
-            this.colFinanceAmount.Name = "colFinanceAmount";
-            this.colFinanceAmount.ReadOnly = true;
-            // 
-            // colFinanceOutstanding
-            // 
-            this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
-            dataGridViewCellStyle6.Format = "N2";
-            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colFinanceOutstanding.HeaderText = "融资余额";
-            this.colFinanceOutstanding.Name = "colFinanceOutstanding";
-            this.colFinanceOutstanding.ReadOnly = true;
-            // 
-            // colPaymentAmount
-            // 
-            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
-            dataGridViewCellStyle7.Format = "N2";
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colPaymentAmount.HeaderText = "付款金额";
-            this.colPaymentAmount.Name = "colPaymentAmount";
-            this.colPaymentAmount.ReadOnly = true;
-            // 
-            // colRefundAmount
-            // 
-            this.colRefundAmount.DataPropertyName = "RefundAmount";
-            dataGridViewCellStyle8.Format = "N2";
-            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colRefundAmount.HeaderText = "还款金额";
-            this.colRefundAmount.Name = "colRefundAmount";
-            this.colRefundAmount.ReadOnly = true;
-            // 
-            // colCommissionAmount
-            // 
-            this.colCommissionAmount.DataPropertyName = "CommissionAmount";
-            dataGridViewCellStyle9.Format = "N2";
-            this.colCommissionAmount.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colCommissionAmount.HeaderText = "手续费";
-            this.colCommissionAmount.Name = "colCommissionAmount";
-            this.colCommissionAmount.ReadOnly = true;
-            // 
-            // colCreateUserName
-            // 
-            this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "经办人";
-            this.colCreateUserName.Name = "colCreateUserName";
-            this.colCreateUserName.ReadOnly = true;
-            this.colCreateUserName.Width = 80;
-            // 
-            // colCheckStatus
-            // 
-            this.colCheckStatus.DataPropertyName = "CheckStatus";
-            this.colCheckStatus.HeaderText = "复核结果";
-            this.colCheckStatus.Name = "colCheckStatus";
-            this.colCheckStatus.ReadOnly = true;
-            this.colCheckStatus.Width = 80;
-            // 
-            // colBatchCount
-            // 
-            this.colBatchCount.DataPropertyName = "BatchCount";
-            this.colBatchCount.HeaderText = "发票笔数";
-            this.colBatchCount.Name = "colBatchCount";
-            this.colBatchCount.ReadOnly = true;
-            this.colBatchCount.Width = 80;
+            this.menuItemThreeReports.Name = "menuItemThreeReports";
+            this.menuItemThreeReports.Size = new System.Drawing.Size(198, 22);
+            this.menuItemThreeReports.Text = "直接生成三表(&T)";
+            this.menuItemThreeReports.Click += new System.EventHandler(this.ReportThree);
             // 
             // AssignBatchMgr
             // 
@@ -993,6 +1002,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
+        private System.Windows.Forms.ToolStripMenuItem menuItemThreeReports;
 
 
     }

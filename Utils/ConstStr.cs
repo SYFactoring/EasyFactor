@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------
+ï»¿//-----------------------------------------------------------------------
 // <copyright file="ConstStr.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -12,30 +12,35 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class MESSAGE
     {
+
+
         #region?Fields?(4)?
 
         /// <summary>
-        /// Êı¾İ¸üĞÂ³É¹¦
+        /// æ•°æ®æ›´æ–°æˆåŠŸ
         /// </summary>
-        public const string DATA_UPDATE_SUCCESS = "Êı¾İ¸üĞÂ³É¹¦";
+        public const string DATA_UPDATE_SUCCESS = "æ•°æ®æ›´æ–°æˆåŠŸ";
 
         /// <summary>
         /// 
         /// </summary>
-        public const string MAIN_DEFAULT = "»¶Ó­Ê¹ÓÃÖĞ¹úÃñÉúÒøĞĞ±£ÀíÔËÓªÏµÍ³";
+        public const string MAIN_DEFAULT = "æ¬¢è¿ä½¿ç”¨ä¸­å›½æ°‘ç”Ÿé“¶è¡Œä¿ç†è¿è¥ç³»ç»Ÿ";
         /// <summary>
-        /// ÌáÊ¾
+        /// æç¤º
         /// </summary>
-        public const string TITLE_INFORMATION = "ÌáÊ¾";
+        public const string TITLE_INFORMATION = "æç¤º";
         /// <summary>
-        /// ¾¯¸æ
+        /// è­¦å‘Š
         /// </summary>
-        public const string TITLE_WARNING = "¾¯¸æ";
+        public const string TITLE_WARNING = "è­¦å‘Š";
 
         #endregion?Fields?
 
-        #region?Constructors?(1)?
 
+        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
         private MESSAGE()
         {
         }
@@ -48,25 +53,30 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CLIENT_CREDIT_LINE
     {
+
+
         #region?Fields?(3)?
 
         /// <summary>
-        /// ÒÑÉúĞ§
+        /// å·²ç”Ÿæ•ˆ
         /// </summary>
-        public const string AVAILABILITY = "ÒÑÉúĞ§";
+        public const string AVAILABILITY = "å·²ç”Ÿæ•ˆ";
         /// <summary>
-        /// ÒÑ¹ıÆÚ
+        /// å·²è¿‡æœŸ
         /// </summary>
-        public const string EXPIRY = "ÒÑ¹ıÆÚ";
+        public const string EXPIRY = "å·²è¿‡æœŸ";
         /// <summary>
-        /// ÒÑ¶³½á
+        /// å·²å†»ç»“
         /// </summary>
-        public const string FREEZE = "ÒÑ¶³½á";
+        public const string FREEZE = "å·²å†»ç»“";
 
         #endregion?Fields?
 
-        #region?Constructors?(1)?
 
+        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
         private CLIENT_CREDIT_LINE()
         {
         }
@@ -79,21 +89,26 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CONTRACT
     {
+
+
         #region?Fields?(2)?
 
         /// <summary>
-        /// ÒÑÉúĞ§
+        /// å·²ç”Ÿæ•ˆ
         /// </summary>
-        public const string AVAILABILITY = "ÒÑÉúĞ§";
+        public const string AVAILABILITY = "å·²ç”Ÿæ•ˆ";
         /// <summary>
-        /// ÒÑ¹ıÆÚ
+        /// å·²è¿‡æœŸ
         /// </summary>
-        public const string EXPIRY = "ÒÑ¹ıÆÚ";
+        public const string EXPIRY = "å·²è¿‡æœŸ";
 
         #endregion?Fields?
 
-        #region?Constructors?(1)?
 
+        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
         private CONTRACT()
         {
         }
@@ -106,25 +121,30 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class FACTOR_CREDIT_LINE
     {
+
+
         #region?Fields?(3)?
 
         /// <summary>
-        /// ÒÑÉúĞ§
+        /// å·²ç”Ÿæ•ˆ
         /// </summary>
-        public const string AVAILABILITY = "ÒÑÉúĞ§";
+        public const string AVAILABILITY = "å·²ç”Ÿæ•ˆ";
         /// <summary>
-        /// ÒÑ¹ıÆÚ
+        /// å·²è¿‡æœŸ
         /// </summary>
-        public const string EXPIRY = "ÒÑ¹ıÆÚ";
+        public const string EXPIRY = "å·²è¿‡æœŸ";
         /// <summary>
-        /// ÒÑ¶³½á
+        /// å·²å†»ç»“
         /// </summary>
-        public const string FREEZE = "ÒÑ¶³½á";
+        public const string FREEZE = "å·²å†»ç»“";
 
         #endregion?Fields?
 
-        #region?Constructors?(1)?
 
+        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
         private FACTOR_CREDIT_LINE()
         {
         }
@@ -137,25 +157,30 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CASEStr
     {
+
+
         #region?Fields?(3)?
 
         /// <summary>
-        /// ÉêÇë°¸
+        /// ç”³è¯·æ¡ˆ
         /// </summary>
-        public const string APPLICATION = "ÉêÇë°¸";
+        public const string APPLICATION = "ç”³è¯·æ¡ˆ";
         /// <summary>
-        /// ÒÑ½á°¸
+        /// å·²ç»“æ¡ˆ
         /// </summary>
-        public const string CLOSED = "ÒÑ½á°¸";
+        public const string CLOSED = "å·²ç»“æ¡ˆ";
         /// <summary>
-        /// Æô¶¯°¸
+        /// å¯åŠ¨æ¡ˆ
         /// </summary>
-        public const string ENABLE = "Æô¶¯°¸";
+        public const string ENABLE = "å¯åŠ¨æ¡ˆ";
 
         #endregion?Fields?
 
-        #region?Constructors?(1)?
 
+        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
         private CASEStr()
         {
         }
@@ -168,29 +193,34 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class CDAStr
     {
+
+
         #region?Fields?(4)?
 
         /// <summary>
-        /// ÒÑ¸´ºË
+        /// å·²å¤æ ¸
         /// </summary>
-        public const string CHECKED = "ÒÑÉóºË";
+        public const string CHECKED = "å·²å®¡æ ¸";
         /// <summary>
-        /// ÒÑÊ§Ğ§
+        /// å·²å¤±æ•ˆ
         /// </summary>
-        public const string INVALID = "ÒÑÊ§Ğ§";
+        public const string INVALID = "å·²å¤±æ•ˆ";
         /// <summary>
-        /// ¸´ºËÎ´Í¨¹ı
+        /// å¤æ ¸æœªé€šè¿‡
         /// </summary>
-        public const string REJECT = "ÉóºËÎ´Í¨¹ı";
+        public const string REJECT = "å®¡æ ¸æœªé€šè¿‡";
         /// <summary>
-        /// Î´ÉóºË
+        /// æœªå®¡æ ¸
         /// </summary>
-        public const string UNCHECK = "Î´ÉóºË";
+        public const string UNCHECK = "æœªå®¡æ ¸";
 
         #endregion?Fields?
 
-        #region?Constructors?(1)?
 
+        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
         private CDAStr()
         {
         }
@@ -203,25 +233,30 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public sealed class BATCH
     {
+
+
         #region?Fields?(3)?
 
         /// <summary>
-        /// ÒÑ¸´ºË
+        /// å·²å¤æ ¸
         /// </summary>
-        public const string CHECK = "ÒÑ¸´ºË";
+        public const string CHECK = "å·²å¤æ ¸";
         /// <summary>
-        /// ¸´ºËÎ´Í¨¹ı
+        /// å¤æ ¸æœªé€šè¿‡
         /// </summary>
-        public const string REJECT = "¸´ºËÎ´Í¨¹ı";
+        public const string REJECT = "å¤æ ¸æœªé€šè¿‡";
         /// <summary>
-        /// Î´¸´ºË
+        /// æœªå¤æ ¸
         /// </summary>
-        public const string UNCHECK = "Î´¸´ºË";
+        public const string UNCHECK = "æœªå¤æ ¸";
 
         #endregion?Fields?
 
-        #region?Constructors?(1)?
 
+        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
         private BATCH()
         {
         }
@@ -234,34 +269,40 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public class Payment
     {
-        /// <summary>
-        /// Âò·½Ö±½Ó¸¶¿î
-        /// </summary>
-        public const string BUYER_PAYMENT = "Âò·½Ö±½Ó¸¶¿î";
+        #regionÂ FieldsÂ (5)
 
         /// <summary>
-        /// Âò·½¼ä½Ó¸¶¿î
+        /// ä¹°æ–¹ç›´æ¥ä»˜æ¬¾
         /// </summary>
-        public const string INDIRECT_PAYMENT = "Âò·½¼ä½Ó¸¶¿î";
-
+        public const string BUYER_PAYMENT = "ä¹°æ–¹ç›´æ¥ä»˜æ¬¾";
         /// <summary>
-        /// µ£±£¸¶¿î
+        /// è´·é¡¹é€šçŸ¥
         /// </summary>
-        public const string GUARANTEE_PAYMENT = "µ£±£¸¶¿î";
-
+        public const string CREDIT_NOTE_PAYMENT = "è´·é¡¹é€šçŸ¥";
         /// <summary>
-        /// ·´×ªÈÃ
+        /// æ‹…ä¿ä»˜æ¬¾
         /// </summary>
-        public const string SELLER_REASSIGN = "·´×ªÈÃ";
-
+        public const string GUARANTEE_PAYMENT = "æ‹…ä¿ä»˜æ¬¾";
         /// <summary>
-        /// ´ûÏîÍ¨Öª
+        /// ä¹°æ–¹é—´æ¥ä»˜æ¬¾
         /// </summary>
-        public const string CREDIT_NOTE_PAYMENT = "´ûÏîÍ¨Öª";
+        public const string INDIRECT_PAYMENT = "ä¹°æ–¹é—´æ¥ä»˜æ¬¾";
+        /// <summary>
+        /// åè½¬è®©
+        /// </summary>
+        public const string SELLER_REASSIGN = "åè½¬è®©";
 
+        #endregionÂ Fields
+
+        #regionÂ ConstructorsÂ (1)
+        /// <summary>
+        /// 
+        /// </summary>
         private Payment()
         {
         }
+
+        #endregionÂ Constructors
     }
 
     /// <summary>
@@ -269,19 +310,29 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public class Refund
     {
+        #regionÂ FieldsÂ (2)
+
+        /// <summary>
+        /// ä¹°æ–¹ç›´æ¥ä»˜æ¬¾
+        /// </summary>
+        public const string BUYER_PAYMENT = "ä¹°æ–¹ç›´æ¥ä»˜æ¬¾";
+        /// <summary>
+        /// å–æ–¹è¿˜æ¬¾
+        /// </summary>
+        public const string SELLER_REFUND = "å–æ–¹è¿˜æ¬¾";
+
+        #endregionÂ Fields
+
+        #regionÂ ConstructorsÂ (1)
+
+        /// <summary>
+        /// 
+        /// </summary>
         private Refund()
         {
         }
 
-        /// <summary>
-        /// Âò·½Ö±½Ó¸¶¿î
-        /// </summary>
-        public const string BUYER_PAYMENT = "Âò·½Ö±½Ó¸¶¿î";
-
-        /// <summary>
-        /// Âô·½»¹¿î
-        /// </summary>
-        public const string SELLER_REFUND = "Âô·½»¹¿î";
+        #endregionÂ Constructors
     }
 
     /// <summary>
@@ -289,53 +340,79 @@ namespace CMBC.EasyFactor.Utils.ConstStr
     /// </summary>
     public class Finance
     {
+        #regionÂ FieldsÂ (9)
+
+        /// <summary>
+        /// ä¿ç†é¢„ä»˜æ¬¾(è¡¨å†…)
+        /// </summary>
+        public const string FINANCE_TYPE1 = "ä¿ç†é¢„ä»˜æ¬¾(è¡¨å†…)";
+        /// <summary>
+        /// å–æ–¹ä»£ä»˜
+        /// </summary>
+        public const string FINANCE_TYPE2 = "å–æ–¹ä»£ä»˜";
+        /// <summary>
+        /// ä¹°æ–¹ä»£ä»˜
+        /// </summary>
+        public const string FINANCE_TYPE3 = "ä¹°æ–¹ä»£ä»˜";
+        /// <summary>
+        /// é“¶è¡Œæ‰¿å…‘æ±‡ç¥¨
+        /// </summary>
+        public const string FINANCE_TYPE4 = "é“¶è¡Œæ‰¿å…‘æ±‡ç¥¨";
+        /// <summary>
+        /// å•†ä¸šæ‰¿å…‘æ±‡ç¥¨
+        /// </summary>
+        public const string FINANCE_TYPE5 = "å•†ä¸šæ‰¿å…‘æ±‡ç¥¨";
+        /// <summary>
+        /// å›½å†…ä¿¡ç”¨è¯
+        /// </summary>
+        public const string FINANCE_TYPE6 = "å›½å†…ä¿¡ç”¨è¯";
+        /// <summary>
+        /// å›½é™…ä¿¡ç”¨è¯
+        /// </summary>
+        public const string FINANCE_TYPE7 = "å›½é™…ä¿¡ç”¨è¯";
+        /// <summary>
+        /// å…¶ä»–
+        /// </summary>
+        public const string FINANCE_TYPE8 = "å…¶ä»–";
+        /// <summary>
+        /// æœªçŸ¥
+        /// </summary>
+        public const string FINANCE_TYPE9 = "æœªçŸ¥";
+
+        #endregionÂ Fields
+
+        #regionÂ ConstructorsÂ (1)
+
+        /// <summary>
+        /// 
+        /// </summary>
         private Finance()
         {
         }
 
-        /// <summary>
-        /// ±£ÀíÔ¤¸¶¿î(±íÄÚ)
-        /// </summary>
-        public const string FINANCE_TYPE1 = "±£ÀíÔ¤¸¶¿î(±íÄÚ)";
+        #endregionÂ Constructors
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Report
+    {
+        #regionÂ FieldsÂ (1)
 
         /// <summary>
-        /// Âô·½´ú¸¶
+        /// 
         /// </summary>
-        public const string FINANCE_TYPE2 = "Âô·½´ú¸¶";
+        public const string REPORT_PASSWORD = "CMBC2010";
 
-        /// <summary>
-        /// Âò·½´ú¸¶
-        /// </summary>
-        public const string FINANCE_TYPE3 = "Âò·½´ú¸¶";
+        #endregionÂ Fields
 
-        /// <summary>
-        /// ÒøĞĞ³Ğ¶Ò»ãÆ±
-        /// </summary>
-        public const string FINANCE_TYPE4 = "ÒøĞĞ³Ğ¶Ò»ãÆ±";
+        #regionÂ ConstructorsÂ (1)
 
-        /// <summary>
-        /// ÉÌÒµ³Ğ¶Ò»ãÆ±
-        /// </summary>
-        public const string FINANCE_TYPE5 = "ÉÌÒµ³Ğ¶Ò»ãÆ±";
+        private Report()
+        {
+        }
 
-        /// <summary>
-        /// ¹úÄÚĞÅÓÃÖ¤
-        /// </summary>
-        public const string FINANCE_TYPE6 = "¹úÄÚĞÅÓÃÖ¤";
-
-        /// <summary>
-        /// ¹ú¼ÊĞÅÓÃÖ¤
-        /// </summary>
-        public const string FINANCE_TYPE7 = "¹ú¼ÊĞÅÓÃÖ¤";
-
-        /// <summary>
-        /// ÆäËû
-        /// </summary>
-        public const string FINANCE_TYPE8 = "ÆäËû";
-
-        /// <summary>
-        /// Î´Öª
-        /// </summary>
-        public const string FINANCE_TYPE9 = "Î´Öª";
+        #endregionÂ Constructors
     }
 }

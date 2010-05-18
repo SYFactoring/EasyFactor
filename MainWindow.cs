@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------
+ï»¿//-----------------------------------------------------------------------
 // <copyright file="MainWindow.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -28,6 +28,56 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
+		#regionÂ MethodsÂ (3)Â 
+
+		//Â PrivateÂ MethodsÂ (3)Â 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EmailLeger(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
+            {
+                ImportForm form = new ImportForm(ImportForm.ImportType.SEND_LEGERS);
+                form.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportAssignNew(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
+            {
+                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_II);
+                form.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryCreditNote(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
+            {
+                CreditNoteMgr mgr = new CreditNoteMgr(CreditNoteMgr.OpCreditNoteType.CREDIT_NOTE_QUERY);
+                this.SetDetailPanel(mgr);
+            }
+        }
+
+		#endregionÂ MethodsÂ 
+
+
+
         #region?Constructors?(1)?
 
         /// <summary>
@@ -49,6 +99,7 @@ namespace CMBC.EasyFactor
         }
 
         #endregion?Constructors?
+
 
         #region?Properties?(2)?
 
@@ -84,6 +135,7 @@ namespace CMBC.EasyFactor
 
         #endregion?Properties?
 
+
         #region?Methods?(94)?
 
         //?Public?Methods?(2)?
@@ -101,7 +153,7 @@ namespace CMBC.EasyFactor
 
             if (uc is CaseMgr.CaseMgr)
             {
-                this.CommandStatus = "ÊÖĞø·ÑÊÕÈëµÄ±Ò±ğÓë·¢Æ±±Ò±ğÏàÍ¬£»ÀûÏ¢ÊÕÈëµÄ±Ò±ğÎªÈËÃñ±Ò";
+                this.CommandStatus = "æ‰‹ç»­è´¹æ”¶å…¥çš„å¸åˆ«ä¸å‘ç¥¨å¸åˆ«ç›¸åŒï¼›åˆ©æ¯æ”¶å…¥çš„å¸åˆ«ä¸ºäººæ°‘å¸";
             }
             else
             {
@@ -364,7 +416,7 @@ namespace CMBC.EasyFactor
         /// <param name="args"></param>
         private void Exit(object sender, EventArgs args)
         {
-            DialogResult dr = MessageBoxEx.Show("µã»÷¡°Yes¡±ÍË³öÏµÍ³£¬µã»÷¡°Cancel¡±¸ü»»ÓÃ»§", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBoxEx.Show("ç‚¹å‡»â€œYesâ€é€€å‡ºç³»ç»Ÿï¼Œç‚¹å‡»â€œCancelâ€æ›´æ¢ç”¨æˆ·", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
             if (dr == DialogResult.Yes)
             {
@@ -386,7 +438,7 @@ namespace CMBC.EasyFactor
                     this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
                     this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
                     this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-                    this.CommandStatus = "»¶Ó­Ê¹ÓÃÖĞ¹úÃñÉúÒøĞĞ±£ÀíÔËÓªÏµÍ³";
+                    this.CommandStatus = "æ¬¢è¿ä½¿ç”¨ä¸­å›½æ°‘ç”Ÿé“¶è¡Œä¿ç†è¿è¥ç³»ç»Ÿ";
                     this.AlertPage(null, null);
                 }
             }
@@ -893,7 +945,7 @@ namespace CMBC.EasyFactor
                 return;
             }
 
-            DialogResult dr = MessageBoxEx.Show("µã»÷¡°Yes¡±ÍË³öÏµÍ³£¬µã»÷¡°Cancel¡±¸ü»»ÓÃ»§", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBoxEx.Show("ç‚¹å‡»â€œYesâ€é€€å‡ºç³»ç»Ÿï¼Œç‚¹å‡»â€œCancelâ€æ›´æ¢ç”¨æˆ·", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
                 this.notifyIcon.Visible = false;
@@ -915,7 +967,7 @@ namespace CMBC.EasyFactor
                     this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
                     this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
                     this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-                    this.CommandStatus = "»¶Ó­Ê¹ÓÃÖĞ¹úÃñÉúÒøĞĞ±£ÀíÔËÓªÏµÍ³";
+                    this.CommandStatus = "æ¬¢è¿ä½¿ç”¨ä¸­å›½æ°‘ç”Ÿé“¶è¡Œä¿ç†è¿è¥ç³»ç»Ÿ";
                     this.AlertPage(null, null);
                 }
             }
@@ -1402,48 +1454,5 @@ namespace CMBC.EasyFactor
         }
 
         #endregion?Methods?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void EmailLeger(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
-            {
-                ImportForm form = new ImportForm(ImportForm.ImportType.SEND_LEGERS);
-                form.Show();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImportAssignNew(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
-            {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_II);
-                form.Show();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryCreditNote(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
-            {
-                CreditNoteMgr mgr = new CreditNoteMgr(CreditNoteMgr.OpCreditNoteType.CREDIT_NOTE_QUERY);
-                this.SetDetailPanel(mgr);
-            }
-        }
-       
     }
 }
