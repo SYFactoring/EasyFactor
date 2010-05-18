@@ -630,6 +630,14 @@ namespace CMBC.EasyFactor.ARMgr
                         row++;
                     }
 
+                    foreach (CreditNote creditNote in selectedBatch.CreditNotes)
+                    {
+                        sheet.Cells[row, 1] = "'" + creditNote.CreditNoteNo;
+                        sheet.Cells[row, 2] = creditNote.PaymentAmount;
+                        sheet.Cells[row, 3] = creditNote.CreditNoteDate;
+                        row++;
+                    }
+
                     sheet.Cells[row, 1] = "Ð¡¼Æ";
                     sheet.Cells[row, 2] = selectedBatch.AssignAmount;
 

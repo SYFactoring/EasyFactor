@@ -70,5 +70,16 @@ namespace CMBC.EasyFactor.DB.dbml
                 return sb.ToString();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? PaymentAmount
+        {
+            get
+            {
+                return this.InvoicePaymentLogs.Sum(log => log.PaymentAmount);
+            }
+        }
     }
 }

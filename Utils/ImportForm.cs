@@ -990,6 +990,7 @@ namespace CMBC.EasyFactor.Utils
                             {
                                 throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
                             }
+
                             string currency = string.Format("{0:G}", valueArray[row, column++]);
                             if (String.IsNullOrEmpty(currency))
                             {
@@ -1096,6 +1097,10 @@ namespace CMBC.EasyFactor.Utils
                                     creditNote = new CreditNote();
                                     creditNoteList.Add(creditNote);
                                 }
+                            }
+                            else
+                            {
+                                throw new Exception("贷项通知号已经存在，不能导入： " + creditNoteNo);
                             }
 
                             String toInvoiceNo = String.Format("{0:G}", valueArray[row, column++]);

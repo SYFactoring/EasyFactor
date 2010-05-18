@@ -73,6 +73,10 @@ namespace CMBC.EasyFactor.ARMgr
             invoiceMgr.Dock = DockStyle.Fill;
             this.panelInvoices.Controls.Add(invoiceMgr);
 
+            CreditNoteMgr creditNoteMgr = new CreditNoteMgr(batch.CreditNotes, context);
+            creditNoteMgr.Dock = DockStyle.Fill;
+            this.panelCreditNote.Controls.Add(creditNoteMgr);
+
             this.UpdateBatchControlStatus();
         }
 

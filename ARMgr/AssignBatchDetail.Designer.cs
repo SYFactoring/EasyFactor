@@ -89,12 +89,13 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX checkDateLabel;
             DevComponents.DotNetBar.LabelX checkUserNameLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssignBatchDetail));
             DevComponents.DotNetBar.LabelX lblInputDate;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssignBatchDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
-            this.checkStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.checkStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -112,7 +113,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.tabItemCreditNote = new DevComponents.DotNetBar.TabItem(this.components);
+            this.panelCreditNote = new DevComponents.DotNetBar.TabControlPanel();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             assignDateLabel = new DevComponents.DotNetBar.LabelX();
@@ -126,11 +128,11 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.panelBatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -259,12 +261,27 @@ namespace CMBC.EasyFactor.ARMgr
             commentLabel.TabIndex = 18;
             commentLabel.Text = "备注:";
             // 
+            // lblInputDate
+            // 
+            lblInputDate.AutoSize = true;
+            lblInputDate.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblInputDate.BackgroundStyle.Class = "";
+            lblInputDate.Location = new System.Drawing.Point(218, 58);
+            lblInputDate.Name = "lblInputDate";
+            lblInputDate.Size = new System.Drawing.Size(47, 16);
+            lblInputDate.TabIndex = 23;
+            lblInputDate.Text = "录入日:";
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
             this.tabControl.Controls.Add(this.panelBatch);
             this.tabControl.Controls.Add(this.panelInvoices);
+            this.tabControl.Controls.Add(this.panelCreditNote);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -275,6 +292,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemBatch);
             this.tabControl.Tabs.Add(this.tabItemInvoices);
+            this.tabControl.Tabs.Add(this.tabItemCreditNote);
             // 
             // panelBatch
             // 
@@ -317,6 +335,46 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.TabIndex = 1;
             this.panelBatch.TabItem = this.tabItemBatch;
             // 
+            // diInputDate
+            // 
+            // 
+            // 
+            // 
+            this.diInputDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diInputDate.ButtonDropDown.Visible = true;
+            this.diInputDate.ButtonFreeText.Checked = true;
+            this.diInputDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "InputDate", true));
+            this.diInputDate.FreeTextEntryMode = true;
+            this.diInputDate.Location = new System.Drawing.Point(271, 56);
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diInputDate.MonthCalendar.BackgroundStyle.Class = "";
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.diInputDate.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diInputDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diInputDate.Name = "diInputDate";
+            this.diInputDate.Size = new System.Drawing.Size(100, 20);
+            this.diInputDate.TabIndex = 24;
+            // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch);
+            // 
             // checkStatusComboBox
             // 
             this.checkStatusComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CheckStatus", true));
@@ -324,17 +382,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.checkStatusComboBox.FormattingEnabled = true;
             this.checkStatusComboBox.Items.AddRange(new object[] {
-            BATCH.UNCHECK,
-            BATCH.CHECK,
-            BATCH.REJECT});
+            "未复核",
+            "已复核",
+            "复核未通过"});
             this.checkStatusComboBox.Location = new System.Drawing.Point(115, 181);
             this.checkStatusComboBox.Name = "checkStatusComboBox";
             this.checkStatusComboBox.Size = new System.Drawing.Size(162, 21);
             this.checkStatusComboBox.TabIndex = 22;
-            // 
-            // batchBindingSource
-            // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch);
             // 
             // btnSave
             // 
@@ -569,55 +623,28 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // lblInputDate
+            // tabItemCreditNote
             // 
-            lblInputDate.AutoSize = true;
-            lblInputDate.BackColor = System.Drawing.Color.Transparent;
+            this.tabItemCreditNote.AttachedControl = this.panelCreditNote;
+            this.tabItemCreditNote.Name = "tabItemCreditNote";
+            this.tabItemCreditNote.Text = "贷项通知";
             // 
+            // tabPanelCreditNote
             // 
-            // 
-            lblInputDate.BackgroundStyle.Class = "";
-            lblInputDate.Location = new System.Drawing.Point(218, 58);
-            lblInputDate.Name = "lblInputDate";
-            lblInputDate.Size = new System.Drawing.Size(47, 16);
-            lblInputDate.TabIndex = 23;
-            lblInputDate.Text = "录入日:";
-            // 
-            // diInputDate
-            // 
-            // 
-            // 
-            // 
-            this.diInputDate.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diInputDate.ButtonDropDown.Visible = true;
-            this.diInputDate.ButtonFreeText.Checked = true;
-            this.diInputDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "InputDate", true));
-            this.diInputDate.FreeTextEntryMode = true;
-            this.diInputDate.Location = new System.Drawing.Point(271, 56);
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diInputDate.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diInputDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.diInputDate.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diInputDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diInputDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diInputDate.Name = "diInputDate";
-            this.diInputDate.Size = new System.Drawing.Size(100, 20);
-            this.diInputDate.TabIndex = 24;
+            this.panelCreditNote.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCreditNote.Location = new System.Drawing.Point(0, 26);
+            this.panelCreditNote.Name = "tabPanelCreditNote";
+            this.panelCreditNote.Padding = new System.Windows.Forms.Padding(1);
+            this.panelCreditNote.Size = new System.Drawing.Size(384, 344);
+            this.panelCreditNote.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.panelCreditNote.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.panelCreditNote.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelCreditNote.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.panelCreditNote.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.panelCreditNote.Style.GradientAngle = 90;
+            this.panelCreditNote.TabIndex = 3;
+            this.panelCreditNote.TabItem = this.tabItemCreditNote;
             // 
             // AssignBatchDetail
             // 
@@ -633,14 +660,17 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl.ResumeLayout(false);
             this.panelBatch.ResumeLayout(false);
             this.panelBatch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             this.ResumeLayout(false);
 
         }
         #endregion
+
+        private DevComponents.DotNetBar.TabControlPanel panelCreditNote;
+        private DevComponents.DotNetBar.TabItem tabItemCreditNote;
     }
 }
