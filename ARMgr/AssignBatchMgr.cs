@@ -691,7 +691,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             Range sealRange = ((Range)sheet.Cells[row - 4, 3]);
             string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 110, 110);
+            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 115, 115);
 
             //((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
@@ -886,7 +886,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             Range sealRange = ((Range)sheet.Cells[row - 3, 3]);
             string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 110, 110);
+            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 115, 115);
 
             //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
@@ -1329,7 +1329,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             Range sealRange = ((Range)sheet.Cells[row - 4, 3]);
             string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 110, 110);
+            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 115, 115);
 
             //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
@@ -1601,13 +1601,33 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 Workbook workbook = app.Workbooks.Add(true);
 
-                Worksheet commissionSheet = (Worksheet)workbook.Sheets[1];
-                commissionSheet.Name = "保理费用明细表";
-                this.ReportCommissionSheet(commissionSheet, batchGroup, transactionType);
+                Boolean hasCommission = false;
 
-                Worksheet financeSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-                financeSheet.Name = "可融资账款明细表";
-                this.ReportFinanceSheet(financeSheet, batchGroup, transactionType);
+                foreach (InvoiceAssignBatch selectedBatch in batchGroup)
+                {
+                    if (selectedBatch.Case.ActiveCDA.CommissionType == "按转让金额" || selectedBatch.Case.ActiveCDA.CommissionType == "其他")
+                    {
+                        hasCommission = true;
+                        break;
+                    }
+                }
+
+                if (hasCommission)
+                {
+                    Worksheet commissionSheet = (Worksheet)workbook.Sheets[1];
+                    commissionSheet.Name = "保理费用明细表";
+                    this.ReportCommissionSheet(commissionSheet, batchGroup, transactionType);
+
+                    Worksheet financeSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                    financeSheet.Name = "可融资账款明细表";
+                    this.ReportFinanceSheet(financeSheet, batchGroup, transactionType);
+                }
+                else
+                {
+                    Worksheet financeSheet = (Worksheet)workbook.Sheets[1];
+                    financeSheet.Name = "可融资账款明细表";
+                    this.ReportFinanceSheet(financeSheet, batchGroup, transactionType);
+                }
 
                 Worksheet assignSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
                 assignSheet.Name = "应收账款转让明细表";
