@@ -25,10 +25,9 @@ namespace CMBC.EasyFactor.Help
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.Container components = null;
-        private TextBoxX latestChangesTextBox;
         private LabelX lblInformation;
+        private WebBrowser webBrowser;
         private LinkLabel lblSVNStat;
-        private LabelX lblUpdate;
 
 		#endregion?Fields?
 
@@ -80,7 +79,7 @@ namespace CMBC.EasyFactor.Help
 
         private void Confirm_Activated(object sender, System.EventArgs e)
         {
-            this.latestChangesTextBox.Text = this.autoUpdater.LatestConfigChanges;
+            this.webBrowser.Navigate(this.autoUpdater.AutoUpdateConfig.ChangeLogURL);
         }
 
         /// <summary>
@@ -113,11 +112,10 @@ namespace CMBC.EasyFactor.Help
         private void InitializeComponent()
         {
             this.lblInformation = new DevComponents.DotNetBar.LabelX();
-            this.lblUpdate = new DevComponents.DotNetBar.LabelX();
-            this.latestChangesTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnYes = new DevComponents.DotNetBar.ButtonX();
             this.btnNo = new DevComponents.DotNetBar.ButtonX();
             this.lblSVNStat = new System.Windows.Forms.LinkLabel();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
             // lblInformation
@@ -129,45 +127,20 @@ namespace CMBC.EasyFactor.Help
             // 
             this.lblInformation.BackgroundStyle.Class = "";
             this.lblInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInformation.Location = new System.Drawing.Point(26, 21);
+            this.lblInformation.Location = new System.Drawing.Point(26, 17);
             this.lblInformation.Name = "lblInformation";
             this.lblInformation.Size = new System.Drawing.Size(230, 16);
             this.lblInformation.TabIndex = 0;
             this.lblInformation.Text = "新版本已下载本地，是否执行更新程序？";
             this.lblInformation.WordWrap = true;
             // 
-            // lblUpdate
-            // 
-            this.lblUpdate.AutoSize = true;
-            this.lblUpdate.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.lblUpdate.BackgroundStyle.Class = "";
-            this.lblUpdate.Location = new System.Drawing.Point(26, 77);
-            this.lblUpdate.Name = "lblUpdate";
-            this.lblUpdate.Size = new System.Drawing.Size(68, 16);
-            this.lblUpdate.TabIndex = 2;
-            this.lblUpdate.Text = "最新更新：";
-            // 
-            // latestChangesTextBox
-            // 
-            // 
-            // 
-            // 
-            this.latestChangesTextBox.Border.Class = "";
-            this.latestChangesTextBox.Location = new System.Drawing.Point(26, 99);
-            this.latestChangesTextBox.Multiline = true;
-            this.latestChangesTextBox.Name = "latestChangesTextBox";
-            this.latestChangesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.latestChangesTextBox.Size = new System.Drawing.Size(221, 74);
-            this.latestChangesTextBox.TabIndex = 3;
-            // 
             // btnYes
             // 
             this.btnYes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnYes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.btnYes.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnYes.Location = new System.Drawing.Point(51, 193);
+            this.btnYes.Location = new System.Drawing.Point(51, 202);
             this.btnYes.Name = "btnYes";
             this.btnYes.Size = new System.Drawing.Size(75, 23);
             this.btnYes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -178,8 +151,10 @@ namespace CMBC.EasyFactor.Help
             // btnNo
             // 
             this.btnNo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnNo.Location = new System.Drawing.Point(132, 193);
+            this.btnNo.Location = new System.Drawing.Point(132, 202);
             this.btnNo.Name = "btnNo";
             this.btnNo.Size = new System.Drawing.Size(75, 23);
             this.btnNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -190,7 +165,7 @@ namespace CMBC.EasyFactor.Help
             // lblSVNStat
             // 
             this.lblSVNStat.AutoSize = true;
-            this.lblSVNStat.Location = new System.Drawing.Point(23, 50);
+            this.lblSVNStat.Location = new System.Drawing.Point(23, 43);
             this.lblSVNStat.Name = "lblSVNStat";
             this.lblSVNStat.Size = new System.Drawing.Size(79, 13);
             this.lblSVNStat.TabIndex = 1;
@@ -198,15 +173,24 @@ namespace CMBC.EasyFactor.Help
             this.lblSVNStat.Text = "项目进展统计";
             this.lblSVNStat.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.VisitSVNStat);
             // 
+            // webBrowser
+            // 
+            this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.webBrowser.Location = new System.Drawing.Point(26, 67);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(236, 129);
+            this.webBrowser.TabIndex = 6;
+            // 
             // ConfirmForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(274, 232);
+            this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.lblSVNStat);
             this.Controls.Add(this.btnNo);
             this.Controls.Add(this.btnYes);
-            this.Controls.Add(this.latestChangesTextBox);
-            this.Controls.Add(this.lblUpdate);
             this.Controls.Add(this.lblInformation);
             this.DoubleBuffered = true;
             this.Name = "ConfirmForm";

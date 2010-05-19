@@ -875,7 +875,6 @@ namespace CMBC.EasyFactor.Utils
                         //int column = 12;
                         int column = 1;
                         string caseCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
-                        column++;
                         string type = String.Format("{0:G}", valueArray[row, column++]).Trim();
                         string invoiceNo = null;
                         string creditNoteNo = null;
@@ -934,6 +933,10 @@ namespace CMBC.EasyFactor.Utils
                                     throw new Exception("贷项通知编号不能为空，不能导入，案件编号： " + caseCode);
                                 }
                             }
+                        }
+                        else
+                        {
+                            continue;
                         }
 
                         if (curCase == null || curCase.CaseCode != caseCode)

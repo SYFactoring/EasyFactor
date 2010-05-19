@@ -1454,5 +1454,16 @@ namespace CMBC.EasyFactor
         }
 
         #endregion?Methods?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SystemSetting(object sender, EventArgs e)
+        {
+            //SystemSetting form = new SystemSetting();
+            //form.ShowDialog(this);
+        }
     }
 }

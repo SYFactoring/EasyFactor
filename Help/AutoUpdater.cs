@@ -203,6 +203,7 @@ namespace CMBC.EasyFactor.Help
         public void TryUpdate()
         {
             Thread backgroundThread = new Thread(new ThreadStart(this.updateThread));
+            backgroundThread.SetApartmentState(ApartmentState.STA);
             backgroundThread.IsBackground = true;
             backgroundThread.Start();
         }
@@ -213,6 +214,7 @@ namespace CMBC.EasyFactor.Help
         public void TryUpdateBackground()
         {
             Thread backgroundThread = new Thread(new ThreadStart(this.updateThreadBackground));
+            backgroundThread.SetApartmentState(ApartmentState.STA);
             backgroundThread.IsBackground = true;
             backgroundThread.Start();
         }

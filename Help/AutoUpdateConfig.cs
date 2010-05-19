@@ -39,6 +39,7 @@ using System.IO;
 using System.Net;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Text;
 
 namespace CMBC.EasyFactor.Help
 {
