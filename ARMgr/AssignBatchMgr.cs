@@ -690,7 +690,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             Range sealRange = ((Range)sheet.Cells[row - 4, 3]);
             string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 120, 120);
+            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
             //((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
@@ -886,7 +886,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             Range sealRange = ((Range)sheet.Cells[row - 3, 3]);
             string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 120, 120);
+            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
             //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
@@ -1111,10 +1111,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="transactionType"></param>
         private void ReportFinanceSheet(Worksheet sheet, IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
-            sheet.PageSetup.Zoom = false;
-            sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
-            sheet.PageSetup.FitToPagesWide = 1;
-            sheet.PageSetup.FitToPagesTall = false;
+            //sheet.PageSetup.Zoom = false;
+            //sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+            //sheet.PageSetup.FitToPagesWide = 1;
+            //sheet.PageSetup.FitToPagesTall = false;
 
             string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
@@ -1163,9 +1163,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             row++;
             sheet.Cells[row, 1] = "最高可融资金额：";
+            GuaranteeDeposit gd = keyClient.GetGuaranteeDeposit(firstCase.InvoiceCurrency);
             if (creditLine != null)
             {
-                GuaranteeDeposit gd = keyClient.GetGuaranteeDeposit(firstCase.InvoiceCurrency);
                 if (gd != null)
                 {
                     sheet.Cells[row, 2] = keyClient.CanBeFinanceAmount(firstCase.TransactionType, firstCase.InvoiceCurrency) + gd.GuaranteeDepositAmount;
@@ -1251,10 +1251,9 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.Cells[row, 1] = "此卖方最高可融资金额：";
                 }
 
-                GuaranteeDeposit gd = selectedBatch.Case.TargetClient.GetGuaranteeDeposit(selectedBatch.Case.InvoiceCurrency); ;
                 if (gd != null)
                 {
-                    sheet.Cells[row, 2] = selectedBatch.Case.CanBeFinanceAmount+gd.GuaranteeDepositAmount;
+                    sheet.Cells[row, 2] = selectedBatch.Case.CanBeFinanceAmount + gd.GuaranteeDepositAmount;
                     sheet.Cells[row, 3] = String.Format("（保证金 {0:N2})", gd.GuaranteeDepositAmount);
                 }
                 else
@@ -1262,7 +1261,7 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.Cells[row, 2] = selectedBatch.Case.CanBeFinanceAmount;
                 }
 
-                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
+                sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 2]).NumberFormatLocal = TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
                 row++;
                 row++;
@@ -1307,6 +1306,19 @@ namespace CMBC.EasyFactor.ARMgr
                 row += 3;
             }
 
+            row -= 1;
+
+            if (gd != null)
+            {
+                sheet.get_Range(sheet.Cells[row, "A"], sheet.Cells[row, "E"]).MergeCells = true;
+                sheet.get_Range(sheet.Cells[row, "A"], sheet.Cells[row, "A"]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 5]).RowHeight = 30;
+                sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 5]).WrapText = true;
+                sheet.Cells[row, 1] = String.Format("注：{0:yyyy}年{0:MM}月{0:dd}日客户回款{1}{2:N2}，因融资未到期，此笔款项暂存入保证金账户。请确保我行融资还款风险无误。", gd.DepositDate, gd.GuaranteeDepositCurrency, gd.GuaranteeDepositAmount);
+                row++;
+            }
+
+            row += 2;
             sheet.get_Range(sheet.Cells[row, "A"], sheet.Cells[row, "E"]).MergeCells = true;
             sheet.get_Range(sheet.Cells[row, "A"], sheet.Cells[row, "A"]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
             sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
@@ -1321,15 +1333,15 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 1]).Font.Size = 24;
             sheet.get_Range(sheet.Cells[3, 1], sheet.Cells[3, 5]).RowHeight = 30;
 
-            sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("B1", Type.Missing).ColumnWidth = 25;
+            sheet.get_Range("A1", Type.Missing).ColumnWidth = 20;
+            sheet.get_Range("B1", Type.Missing).ColumnWidth = 22;
             sheet.get_Range("C1", Type.Missing).ColumnWidth = 15;
             sheet.get_Range("D1", Type.Missing).ColumnWidth = 15;
-            sheet.get_Range("E1", Type.Missing).ColumnWidth = 10;
+            sheet.get_Range("E1", Type.Missing).ColumnWidth = 8;
 
             Range sealRange = ((Range)sheet.Cells[row - 4, 3]);
             string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 50, Convert.ToSingle(sealRange.Top), 120, 120);
+            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
             //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
