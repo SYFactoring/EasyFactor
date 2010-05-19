@@ -48,7 +48,6 @@ namespace CMBC.EasyFactor.ARMgr
         #endregion Methods
 
 
-
         #region?Fields?(3)?
 
         /// <summary>
@@ -1356,7 +1355,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                this.ReportCommissionSheet(sheet, batchGroup, transactionType);
+                this.ReportFinanceSheet(sheet, batchGroup, transactionType);
                 Case firstCase = batchGroup.First().Case;
                 CDA activeCDA = firstCase.ActiveCDA;
                 if (activeCDA != null && activeCDA.CommissionType == "按融资金额")
