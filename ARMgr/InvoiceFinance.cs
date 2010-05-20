@@ -612,6 +612,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            if (activeCDA.FinanceCreditLine == null)
+            {
+                MessageBoxEx.Show("该案件额度通知书融资额度为空，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (activeCDA.FinanceCreditLine.PeriodEnd < DateTime.Today)
             {
                 MessageBoxEx.Show("融资额度已到期，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);

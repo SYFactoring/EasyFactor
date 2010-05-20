@@ -2720,26 +2720,26 @@ namespace CMBC.EasyFactor.Utils
                             sheet.Cells[row, "E"] = invoice.DueDate;
                             sheet.Cells[row, "F"] = batch.AssignDate;
 
-                            int recordStep = 0;
+                            int financeStep = 0;
                             for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
                             {
                                 InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
-                                sheet.Cells[row + recordStep, "G"] = financeLog.FinanceAmount;
-                                sheet.Cells[row + recordStep, "H"] = financeLog.FinanceDate;
-                                sheet.Cells[row + recordStep, "I"] = financeLog.FinanceDueDate;
-                                sheet.Cells[row + recordStep, "N"] = financeLog.FinanceOutstanding;
+                                sheet.Cells[row + financeStep, "G"] = financeLog.FinanceAmount;
+                                sheet.Cells[row + financeStep, "H"] = financeLog.FinanceDate;
+                                sheet.Cells[row + financeStep, "I"] = financeLog.FinanceDueDate;
+                                sheet.Cells[row + financeStep, "N"] = financeLog.FinanceOutstanding;
 
                                 for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
                                 {
                                     InvoiceRefundLog refundLog = financeLog.InvoiceRefundLogs[j];
-                                    sheet.Cells[row + recordStep + j, "M"] = refundLog.RefundAmount;
-                                    sheet.Cells[row + recordStep + j, "O"] = refundLog.RefundDate;
+                                    sheet.Cells[row + financeStep + j, "M"] = refundLog.RefundAmount;
+                                    sheet.Cells[row + financeStep + j, "O"] = refundLog.RefundDate;
                                 }
 
-                                recordStep += financeLog.InvoiceRefundLogs.Count;
+                                financeStep += financeLog.InvoiceRefundLogs.Count;
                             }
 
-                            step = step < recordStep ? recordStep : step;
+                            step = step < financeStep ? financeStep : step;
 
                             for (int i = 0; i < invoice.InvoicePaymentLogs.Count; i++)
                             {
@@ -2934,7 +2934,6 @@ namespace CMBC.EasyFactor.Utils
                 }
                 totalFinanceOutstanding += financeOutstanding;
 
-                int recordStep = 0;
                 foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
                 {
                     foreach (Invoice invoice in batch.Invoices)
@@ -2947,25 +2946,26 @@ namespace CMBC.EasyFactor.Utils
                         sheet.Cells[row, "E"] = invoice.DueDate;
                         sheet.Cells[row, "F"] = batch.AssignDate;
 
+                        int financeStep = 0;
                         for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
                         {
                             InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
-                            sheet.Cells[row + recordStep, "G"] = financeLog.FinanceAmount;
-                            sheet.Cells[row + recordStep, "H"] = financeLog.FinanceDate;
-                            sheet.Cells[row + recordStep, "I"] = financeLog.FinanceDueDate;
-                            sheet.Cells[row + recordStep, "N"] = financeLog.FinanceOutstanding;
+                            sheet.Cells[row + financeStep, "G"] = financeLog.FinanceAmount;
+                            sheet.Cells[row + financeStep, "H"] = financeLog.FinanceDate;
+                            sheet.Cells[row + financeStep, "I"] = financeLog.FinanceDueDate;
+                            sheet.Cells[row + financeStep, "N"] = financeLog.FinanceOutstanding;
 
                             for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
                             {
                                 InvoiceRefundLog refundLog = financeLog.InvoiceRefundLogs[j];
-                                sheet.Cells[row + recordStep + j, "M"] = refundLog.RefundAmount;
-                                sheet.Cells[row + recordStep + j, "O"] = refundLog.RefundDate;
+                                sheet.Cells[row + financeStep + j, "M"] = refundLog.RefundAmount;
+                                sheet.Cells[row + financeStep + j, "O"] = refundLog.RefundDate;
                             }
 
-                            recordStep += financeLog.InvoiceRefundLogs.Count;
+                            financeStep += financeLog.InvoiceRefundLogs.Count;
                         }
 
-                        step = step < recordStep ? recordStep : step;
+                        step = step < financeStep ? financeStep : step;
 
                         for (int i = 0; i < invoice.InvoicePaymentLogs.Count; i++)
                         {

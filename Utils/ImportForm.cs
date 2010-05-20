@@ -3017,6 +3017,11 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
                         }
 
+                        if (activeCDA.FinanceCreditLine == null)
+                        {
+                            throw new Exception("该案件额度通知书融资额度为空，不能融资：" + assignBatchCode);
+                        }
+
                         if (activeCDA.FinanceCreditLine.PeriodEnd < DateTime.Today)
                         {
                             throw new Exception(String.Format("融资额度已到期{0:d}，不能融资：{1}", activeCDA.FinanceCreditLine.PeriodEnd, assignBatchCode));
