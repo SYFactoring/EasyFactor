@@ -85,12 +85,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.components = new System.ComponentModel.Container();
             DevComponents.DotNetBar.LabelX financeTypeLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblLocation = new DevComponents.DotNetBar.LabelX();
@@ -128,6 +129,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinancePeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinancePeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -528,6 +530,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceType,
             this.colBatchCurrency,
             this.colFinanceAmount,
+            this.colFinanceOutstanding,
             this.colFinancePeriodBegin,
             this.colFinancePeriodEnd,
             this.colFinanceRate,
@@ -539,14 +542,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCheckDate,
             this.colBatchCount});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvBatches.Location = new System.Drawing.Point(0, 49);
@@ -687,11 +690,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
             // 
+            // colFinanceOutstanding
+            // 
+            this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
+            dataGridViewCellStyle3.Format = "N2";
+            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colFinanceOutstanding.HeaderText = "融资余额";
+            this.colFinanceOutstanding.Name = "colFinanceOutstanding";
+            this.colFinanceOutstanding.ReadOnly = true;
+            // 
             // colFinancePeriodBegin
             // 
             this.colFinancePeriodBegin.DataPropertyName = "FinancePeriodBegin";
-            dataGridViewCellStyle3.Format = "d";
-            this.colFinancePeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Format = "d";
+            this.colFinancePeriodBegin.DefaultCellStyle = dataGridViewCellStyle4;
             this.colFinancePeriodBegin.HeaderText = "融资日";
             this.colFinancePeriodBegin.Name = "colFinancePeriodBegin";
             this.colFinancePeriodBegin.ReadOnly = true;
@@ -701,8 +713,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinancePeriodEnd
             // 
             this.colFinancePeriodEnd.DataPropertyName = "FinancePeriodEnd";
-            dataGridViewCellStyle4.Format = "d";
-            this.colFinancePeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Format = "d";
+            this.colFinancePeriodEnd.DefaultCellStyle = dataGridViewCellStyle5;
             this.colFinancePeriodEnd.HeaderText = "融资到期日";
             this.colFinancePeriodEnd.Name = "colFinancePeriodEnd";
             this.colFinancePeriodEnd.ReadOnly = true;
@@ -712,9 +724,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinanceRate
             // 
             this.colFinanceRate.DataPropertyName = "FinanceRate";
-            dataGridViewCellStyle5.Format = "p4";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colFinanceRate.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Format = "p4";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colFinanceRate.DefaultCellStyle = dataGridViewCellStyle6;
             this.colFinanceRate.HeaderText = "融资利率";
             this.colFinanceRate.Name = "colFinanceRate";
             this.colFinanceRate.ReadOnly = true;
@@ -731,8 +743,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colCostRate
             // 
             this.colCostRate.DataPropertyName = "CostRate";
-            dataGridViewCellStyle6.Format = "p4";
-            this.colCostRate.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Format = "p4";
+            this.colCostRate.DefaultCellStyle = dataGridViewCellStyle7;
             this.colCostRate.HeaderText = "成本利率";
             this.colCostRate.Name = "colCostRate";
             this.colCostRate.ReadOnly = true;
@@ -806,6 +818,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinancePeriodBegin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinancePeriodEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceRate;
@@ -816,6 +829,8 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
+
+
 
     }
 }

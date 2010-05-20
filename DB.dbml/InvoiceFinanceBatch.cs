@@ -141,6 +141,23 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public double FinanceOutstanding
+        {
+            get
+            {
+                double result = 0;
+                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                {
+                    result += log.FinanceOutstanding;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
         /// 毛利息收入
         /// </summary>
         public double GrossInterestIncome
