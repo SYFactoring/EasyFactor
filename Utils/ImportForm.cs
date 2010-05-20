@@ -2371,6 +2371,7 @@ namespace CMBC.EasyFactor.Utils
 
                         log = new InvoicePaymentLog();
                         log.CreditNote = creditNote;
+                        creditNote.InvoiceAssignBatch = log.Invoice.InvoiceAssignBatch;
 
                         string creditNoteAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         double creditNoteAmount = 0;
