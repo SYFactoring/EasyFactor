@@ -116,6 +116,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelPoolBasic.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelPoolBasic.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelPoolBasic.TitleStyle.GradientAngle = 90;
+            this.panelPoolBasic.TitleText = "Title Bar";
             // 
             // panelPoolOutstanding
             // 
@@ -306,7 +307,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbClientEDICode.Location = new System.Drawing.Point(78, 24);
             this.tbClientEDICode.Name = "tbClientEDICode";
             this.tbClientEDICode.ReadOnly = true;
-            this.tbClientEDICode.Size = new System.Drawing.Size(64, 20);
+            this.tbClientEDICode.Size = new System.Drawing.Size(136, 20);
             this.tbClientEDICode.TabIndex = 37;
             this.tbClientEDICode.DoubleClick += new System.EventHandler(this.DetailClient);
             // 

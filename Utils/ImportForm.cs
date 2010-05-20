@@ -201,17 +201,6 @@ namespace CMBC.EasyFactor.Utils
         #region?Constructors?(2)?
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="importType"></param>
-        /// <param name="context"></param>
-        public ImportForm(ImportType importType, DBDataContext context)
-            : this(importType)
-        {
-            this.context = context;
-        }
-
-        /// <summary>
         /// Initializes a new instance of the ImportForm class.
         /// </summary>
         /// <param name="importType"></param>
@@ -4194,7 +4183,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (String.IsNullOrEmpty(clientEDICode))
                         {
-                            throw new Exception("客户编号不能为空，不能导入");
+                            continue;
                         }
                         else
                         {

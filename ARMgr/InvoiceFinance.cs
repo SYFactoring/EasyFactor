@@ -558,7 +558,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE_BY_BATCH, context);
+            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE_BY_BATCH);
             importForm.ShowDialog(this);
             List<InvoiceFinanceLog> logList = (List<InvoiceFinanceLog>)importForm.ImportedList;
             if (logList != null)
