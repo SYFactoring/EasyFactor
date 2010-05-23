@@ -828,7 +828,8 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.get_Range("A" + row, "A" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
                 sheet.Cells[row, 2] = selectedBatch.Invoices.Count;
                 sheet.Cells[row, 3] = selectedBatch.AssignDate;
-                sheet.Cells[row, 4] = String.Format("{0:0.000%}", selectedBatch.Case.ActiveCDA.Price);
+                sheet.Cells[row, 4] = selectedBatch.Case.ActiveCDA.Price;
+                sheet.get_Range("D" + row, "D" + row).NumberFormatLocal = "0.0000%";
                 sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
                 sheet.Cells[row++, 5] = selectedBatch.Case.ActiveCDA.HandFee;
                 sheet.Cells[row, 1] = "小计";

@@ -876,7 +876,7 @@ namespace CMBC.EasyFactor.Utils
                     }
                     else if (range.Column == 24)
                     {
-                        range.NumberFormatLocal = "0.000%";
+                        range.NumberFormatLocal = "0.0000%";
                     }
 
                     range.EntireColumn.AutoFit();
