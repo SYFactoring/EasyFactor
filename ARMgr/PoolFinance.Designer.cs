@@ -20,12 +20,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchSave;
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchSelect;
         private System.Windows.Forms.BindingSource casesBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCanBeFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colValuedAssignOutstanding;
         private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
         /// <summary> 
         /// Required designer variable.
@@ -101,18 +95,12 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX financeBatchNoLabel;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PoolFinance));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PoolFinance));
             this.dgvCases = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBuyerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colValuedAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceProportion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCanBeFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.poolBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -150,6 +138,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValuedAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceProportion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCanBeFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             lblLoanNo = new DevComponents.DotNetBar.LabelX();
             financeTypeLabel = new DevComponents.DotNetBar.LabelX();
             costRateLabel = new DevComponents.DotNetBar.LabelX();
@@ -313,56 +307,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvCases.Size = new System.Drawing.Size(1075, 269);
             this.dgvCases.TabIndex = 5;
             this.dgvCases.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCases_RowHeaderMouseDoubleClick);
-            // 
-            // colCaseCode
-            // 
-            this.colCaseCode.DataPropertyName = "CaseCode";
-            this.colCaseCode.HeaderText = "案件编号";
-            this.colCaseCode.Name = "colCaseCode";
-            this.colCaseCode.ReadOnly = true;
-            // 
-            // colBuyerClient
-            // 
-            this.colBuyerClient.DataPropertyName = "BuyerClient";
-            this.colBuyerClient.HeaderText = "买方名称";
-            this.colBuyerClient.Name = "colBuyerClient";
-            this.colBuyerClient.ReadOnly = true;
-            // 
-            // colAssignOutstanding
-            // 
-            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
-            dataGridViewCellStyle2.Format = "N2";
-            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignOutstanding.HeaderText = "账款余额";
-            this.colAssignOutstanding.Name = "colAssignOutstanding";
-            this.colAssignOutstanding.ReadOnly = true;
-            // 
-            // colValuedAssignOutstanding
-            // 
-            this.colValuedAssignOutstanding.DataPropertyName = "ValuedAssignOutstanding";
-            dataGridViewCellStyle3.Format = "N2";
-            this.colValuedAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colValuedAssignOutstanding.HeaderText = "有效账款余额";
-            this.colValuedAssignOutstanding.Name = "colValuedAssignOutstanding";
-            this.colValuedAssignOutstanding.ReadOnly = true;
-            // 
-            // colFinanceProportion
-            // 
-            this.colFinanceProportion.DataPropertyName = "FinanceProportion";
-            dataGridViewCellStyle4.Format = "p0";
-            this.colFinanceProportion.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colFinanceProportion.HeaderText = "预付比例";
-            this.colFinanceProportion.Name = "colFinanceProportion";
-            this.colFinanceProportion.ReadOnly = true;
-            // 
-            // colCanBeFinanceAmount
-            // 
-            this.colCanBeFinanceAmount.DataPropertyName = "CanBeFinanceAmount";
-            dataGridViewCellStyle5.Format = "N2";
-            this.colCanBeFinanceAmount.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colCanBeFinanceAmount.HeaderText = "可融资金额";
-            this.colCanBeFinanceAmount.Name = "colCanBeFinanceAmount";
-            this.colCanBeFinanceAmount.ReadOnly = true;
             // 
             // poolBindingNavigator
             // 
@@ -797,6 +741,59 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // colCaseCode
+            // 
+            this.colCaseCode.DataPropertyName = "CaseCode";
+            this.colCaseCode.HeaderText = "案件编号";
+            this.colCaseCode.Name = "colCaseCode";
+            this.colCaseCode.ReadOnly = true;
+            // 
+            // colBuyerClient
+            // 
+            this.colBuyerClient.DataPropertyName = "BuyerClient";
+            this.colBuyerClient.HeaderText = "买方名称";
+            this.colBuyerClient.Name = "colBuyerClient";
+            this.colBuyerClient.ReadOnly = true;
+            // 
+            // colAssignOutstanding
+            // 
+            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAssignOutstanding.HeaderText = "账款余额";
+            this.colAssignOutstanding.Name = "colAssignOutstanding";
+            this.colAssignOutstanding.ReadOnly = true;
+            // 
+            // colValuedAssignOutstanding
+            // 
+            this.colValuedAssignOutstanding.DataPropertyName = "ValuedAssignOutstanding";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.colValuedAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colValuedAssignOutstanding.HeaderText = "有效账款余额";
+            this.colValuedAssignOutstanding.Name = "colValuedAssignOutstanding";
+            this.colValuedAssignOutstanding.ReadOnly = true;
+            // 
+            // colFinanceProportion
+            // 
+            this.colFinanceProportion.DataPropertyName = "FinanceProportion";
+            dataGridViewCellStyle4.Format = "p0";
+            this.colFinanceProportion.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colFinanceProportion.HeaderText = "预付比例";
+            this.colFinanceProportion.Name = "colFinanceProportion";
+            this.colFinanceProportion.ReadOnly = true;
+            // 
+            // colCanBeFinanceAmount
+            // 
+            this.colCanBeFinanceAmount.DataPropertyName = "CanBeFinanceAmount";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.colCanBeFinanceAmount.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colCanBeFinanceAmount.HeaderText = "可融资金额";
+            this.colCanBeFinanceAmount.Name = "colCanBeFinanceAmount";
+            this.colCanBeFinanceAmount.ReadOnly = true;
+            // 
             // PoolFinance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -823,5 +820,12 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colValuedAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceProportion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCanBeFinanceAmount;
     }
 }

@@ -71,6 +71,11 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
+            EXPORT_ASSIGN,
+
+            /// <summary>
+            /// 
+            /// </summary>
             EXPORT_FINANCE_BY_BATCH,
 
             /// <summary>
@@ -177,6 +182,9 @@ namespace CMBC.EasyFactor.Utils
                 case ExportType.EXPORT_ASSIGN_BY_BATCH:
                     e.Result = this.ExportAssignByBatch(worker, e);
                     break;
+                case ExportType.EXPORT_ASSIGN:
+                    e.Result = this.ExportAssign(worker, e);
+                    break;
                 case ExportType.EXPORT_FINANCE_BY_BATCH:
                     e.Result = this.ExportFinanceByBatch(worker, e);
                     break;
@@ -281,6 +289,136 @@ namespace CMBC.EasyFactor.Utils
             {
                 this.Close();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ExportAssign(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            ApplicationClass app = new ApplicationClass() { Visible = false };
+
+            if (app == null)
+            {
+                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return -1;
+            }
+            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            if (datasheet == null)
+            {
+                return -1;
+            }
+
+            try
+            {
+                int column = 1;
+                datasheet.Cells[1, column++] = "卖方名称";
+                datasheet.Cells[1, column++] = "买方名称";
+                datasheet.Cells[1, column++] = "业务类别";
+                datasheet.Cells[1, column++] = "业务编号";
+                datasheet.Cells[1, column++] = "转让日";
+                datasheet.Cells[1, column++] = "币别";
+                datasheet.Cells[1, column++] = "转让金额";
+                datasheet.Cells[1, column++] = "转让余额";
+                datasheet.Cells[1, column++] = "融资金额";
+                datasheet.Cells[1, column++] = "融资余额";
+                datasheet.Cells[1, column++] = "付款金额";
+                datasheet.Cells[1, column++] = "还款金额";
+                datasheet.Cells[1, column++] = "手续费";
+                datasheet.Cells[1, column++] = "发票笔数";
+
+                int size = this.exportData.Count;
+                for (int row = 0; row < size; row++)
+                {
+                    if (worker.CancellationPending)
+                    {
+                        if (datasheet != null)
+                        {
+                            Marshal.ReleaseComObject(datasheet);
+                            datasheet = null;
+                        }
+
+                        if (app != null)
+                        {
+                            foreach (Workbook wb in app.Workbooks)
+                            {
+                                wb.Close(false, Type.Missing, Type.Missing);
+                            }
+
+                            app.Workbooks.Close();
+                            app.Quit();
+                            Marshal.ReleaseComObject(app);
+                            app = null;
+                        }
+
+                        e.Cancel = true;
+                        return -1;
+                    }
+
+                    column = 1;
+                    InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)exportData[row];
+                    datasheet.Cells[row + 2, column++] = assignBatch.SellerName;
+                    datasheet.Cells[row + 2, column++] = assignBatch.BuyerName;
+                    datasheet.Cells[row + 2, column++] = assignBatch.TransactionType;
+                    datasheet.Cells[row + 2, column++] = assignBatch.AssignBatchNo;
+                    datasheet.Cells[row + 2, column++] = assignBatch.AssignDate;
+                    datasheet.Cells[row + 2, column++] = assignBatch.BatchCurrency;
+                    datasheet.Cells[row + 2, column++] = assignBatch.AssignAmount;
+                    datasheet.Cells[row + 2, column++] = assignBatch.AssignOutstanding;
+                    datasheet.Cells[row + 2, column++] = assignBatch.FinanceAmount;
+                    datasheet.Cells[row + 2, column++] = assignBatch.FinanceOutstanding;
+                    datasheet.Cells[row + 2, column++] = assignBatch.PaymentAmount;
+                    datasheet.Cells[row + 2, column++] = assignBatch.RefundAmount;
+                    datasheet.Cells[row + 2, column++] = assignBatch.CommissionAmount;
+                    datasheet.Cells[row + 2, column++] = assignBatch.BatchCount;
+
+                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                }
+
+                foreach (Range range in datasheet.UsedRange.Columns)
+                {
+                    range.EntireColumn.AutoFit();
+                    if (range.Column == 5)
+                    {
+                        range.NumberFormatLocal = "yyyy-MM-dd";
+                    }
+                    else if (range.Column == 7 || range.Column == 8 || range.Column == 9 || range.Column == 10 || range.Column == 11 || range.Column == 12 || range.Column == 13)
+                    {
+                        range.NumberFormatLocal = "#,##0.00";
+                    }
+                }
+
+                app.Visible = true;
+            }
+            catch (Exception e1)
+            {
+                if (datasheet != null)
+                {
+                    Marshal.ReleaseComObject(datasheet);
+                    datasheet = null;
+                }
+
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                    app = null;
+                }
+
+                throw e1;
+            }
+
+            return exportData.Count;
         }
 
         /// <summary>
@@ -2712,6 +2850,11 @@ namespace CMBC.EasyFactor.Utils
                     {
                         foreach (Invoice invoice in batch.Invoices)
                         {
+                            if (invoice.IsClear)
+                            {
+                                continue;
+                            }
+
                             int step = 1;
                             sheet.Cells[row, "A"] = invoice.InvoiceAssignBatch.AssignBatchNo;
                             sheet.Cells[row, "B"] = "'" + invoice.InvoiceNo;
@@ -2938,6 +3081,11 @@ namespace CMBC.EasyFactor.Utils
                 {
                     foreach (Invoice invoice in batch.Invoices)
                     {
+                        if (invoice.IsClear)
+                        {
+                            continue;
+                        }
+
                         int step = 1;
                         sheet.Cells[row, "A"] = invoice.InvoiceAssignBatch.AssignBatchNo;
                         sheet.Cells[row, "B"] = "'" + invoice.InvoiceNo;

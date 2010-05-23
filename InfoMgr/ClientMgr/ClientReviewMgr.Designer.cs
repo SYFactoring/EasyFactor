@@ -20,23 +20,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbDomains;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
         private System.Windows.Forms.ContextMenuStrip cmuClientReviewMgr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLocalInternational;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRecoarseNon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCommissionRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinancePeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerBuyer;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientReviews;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
@@ -115,7 +98,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemClientReviewDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemClientReviewExport = new System.Windows.Forms.ToolStripMenuItem();
-             this.colClientLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClientLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReviewNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -551,9 +534,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
             // 
-            // 导出选定协查意见ToolStripMenuItem
+            // menuItemClientReviewExport
             // 
-            this.menuItemClientReviewExport.Name = "导出选定协查意见ToolStripMenuItem";
+            this.menuItemClientReviewExport.Name = "menuItemClientReviewExport";
             this.menuItemClientReviewExport.Size = new System.Drawing.Size(170, 22);
             this.menuItemClientReviewExport.Text = "导出选定协查意见";
             this.menuItemClientReviewExport.Click += new System.EventHandler(this.ExportClientReviews);
@@ -633,6 +616,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colRequestAmount
             // 
             this.colRequestAmount.DataPropertyName = "RequestAmount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
             this.colRequestAmount.DefaultCellStyle = dataGridViewCellStyle2;
@@ -713,5 +697,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocalInternational;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerBuyer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRecoarseNon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsNotice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinanceType2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestFinancePeriod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestCommissionRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
     }
 }

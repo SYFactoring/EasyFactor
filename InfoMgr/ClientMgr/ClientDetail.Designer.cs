@@ -71,32 +71,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX clientNameENTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx clientTypeComboBox;
         private DevComponents.DotNetBar.Validator.SuperValidator clientValidator;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
         private System.Windows.Forms.DataGridViewTextBoxColumn colContractCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colContractDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colContractStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colContractType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colContractValueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFreezeDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFreezer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFreezeReason;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReviewComment;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReviewDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReviewNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReviewStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReviewUser;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUnfreezeDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUnfreezer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUnfreezeReason;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX companyCodeTextBox;
         private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
@@ -323,8 +308,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX lblGDComment;
             DevComponents.DotNetBar.LabelX lblDepositDate;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -336,18 +319,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientDetail));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientDetail));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelGD = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvGDs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colGDCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGDAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDepositDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupPanelGuaranteePanel = new DevComponents.DotNetBar.PanelEx();
             this.diDepositDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.gdBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -361,39 +343,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbGDAmount = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cbGDCurr = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.itemGuaranteeDeposit = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelReview = new DevComponents.DotNetBar.TabControlPanel();
-            this.dgvReviews = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colReviewNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReviewStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReviewUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReviewDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReviewComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupPanelReview = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.cbIsNonRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.reviewBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cbIsBuyer = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.cbIsSeller = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.cbIsInternational = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.cbIsLocal = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.cbIsNotice = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.requestFinanceTypeCheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.requestFinanceType2ComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.requestFinancePeriodTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.requestCommissionRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.requestAmountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.requestCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.btnReviewUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.btnReviewRefresh = new DevComponents.DotNetBar.ButtonX();
-            this.btnReviewDelete = new DevComponents.DotNetBar.ButtonX();
-            this.btnReviewSave = new DevComponents.DotNetBar.ButtonX();
-            this.btnReviewNew = new DevComponents.DotNetBar.ButtonX();
-            this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbReviewCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.reviewDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.reviewStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.reviewNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tabItemReview = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClient = new DevComponents.DotNetBar.TabControlPanel();
             this.btnClientUpdate = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelClientContact = new DevComponents.DotNetBar.Controls.GroupPanel();
@@ -438,6 +387,39 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelReview = new DevComponents.DotNetBar.TabControlPanel();
+            this.dgvReviews = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colReviewNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReviewStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReviewUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReviewDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReviewComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupPanelReview = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbIsNonRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.reviewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cbIsBuyer = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.cbIsSeller = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.cbIsInternational = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.cbIsLocal = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.cbIsNotice = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.requestFinanceTypeCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.requestFinanceType2ComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.requestFinancePeriodTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.requestCommissionRateTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.requestAmountTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.requestCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.btnReviewUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.btnReviewRefresh = new DevComponents.DotNetBar.ButtonX();
+            this.btnReviewDelete = new DevComponents.DotNetBar.ButtonX();
+            this.btnReviewSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnReviewNew = new DevComponents.DotNetBar.ButtonX();
+            this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbReviewCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.reviewDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.reviewStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.reviewNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tabItemReview = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelContract = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvContracts = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colContractCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -464,21 +446,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemContract = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClientCreditLine = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvClientCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colCreditLineType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLineCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApproveNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colApproveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnfreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnfreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnfreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupPanelClientCreditLine = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbCreditLineCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientCreditLineBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -551,6 +518,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.requiredFieldValidator21 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator20 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.colCreditLineType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLineCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApproveNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApproveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnfreezeReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnfreezer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnfreezeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGDCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGDAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDepositDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             clientNameCNLabel = new DevComponents.DotNetBar.LabelX();
             addressCNLabel = new DevComponents.DotNetBar.LabelX();
             cityCNLabel = new DevComponents.DotNetBar.LabelX();
@@ -624,17 +609,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelGuaranteePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diDepositDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gdBindingSource)).BeginInit();
-            this.tabPanelReview.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReviews)).BeginInit();
-            this.groupPanelReview.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.reviewBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reviewDateDateTimePicker)).BeginInit();
             this.tabPanelClient.SuspendLayout();
             this.groupPanelClientContact.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
             this.groupPanelClientGroup.SuspendLayout();
             this.groupPanelClientStat.SuspendLayout();
             this.groupPanelClientBasic.SuspendLayout();
+            this.tabPanelReview.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReviews)).BeginInit();
+            this.groupPanelReview.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reviewBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reviewDateDateTimePicker)).BeginInit();
             this.tabPanelContract.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContracts)).BeginInit();
             this.groupPanelContract.SuspendLayout();
@@ -1625,10 +1610,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
             this.tabControl.Controls.Add(this.tabPanelGD);
-            this.tabControl.Controls.Add(this.tabPanelClient);
             this.tabControl.Controls.Add(this.tabPanelReview);
             this.tabControl.Controls.Add(this.tabPanelContract);
             this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
+            this.tabControl.Controls.Add(this.tabPanelClient);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -1692,31 +1677,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvGDs.Size = new System.Drawing.Size(584, 354);
             this.dgvGDs.TabIndex = 1;
             this.dgvGDs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectGD);
-            // 
-            // colGDCurrency
-            // 
-            this.colGDCurrency.DataPropertyName = "GuaranteeDepositCurrency";
-            this.colGDCurrency.HeaderText = "币别";
-            this.colGDCurrency.Name = "colGDCurrency";
-            this.colGDCurrency.ReadOnly = true;
-            // 
-            // colGDAmount
-            // 
-            this.colGDAmount.DataPropertyName = "GuaranteeDepositAmount";
-            dataGridViewCellStyle1.Format = "N2";
-            this.colGDAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colGDAmount.HeaderText = "保证金";
-            this.colGDAmount.Name = "colGDAmount";
-            this.colGDAmount.ReadOnly = true;
-            // 
-            // colDepositDate
-            // 
-            this.colDepositDate.DataPropertyName = "DepositDate";
-            dataGridViewCellStyle2.Format = "d";
-            this.colDepositDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colDepositDate.HeaderText = "保证金日";
-            this.colDepositDate.Name = "colDepositDate";
-            this.colDepositDate.ReadOnly = true;
             // 
             // groupPanelGuaranteePanel
             // 
@@ -1910,521 +1870,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.itemGuaranteeDeposit.AttachedControl = this.tabPanelGD;
             this.itemGuaranteeDeposit.Name = "itemGuaranteeDeposit";
             this.itemGuaranteeDeposit.Text = "保证金";
-            // 
-            // tabPanelReview
-            // 
-            this.tabPanelReview.Controls.Add(this.dgvReviews);
-            this.tabPanelReview.Controls.Add(this.groupPanelReview);
-            this.tabPanelReview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelReview.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelReview.Name = "tabPanelReview";
-            this.tabPanelReview.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelReview.Size = new System.Drawing.Size(586, 588);
-            this.tabPanelReview.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelReview.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelReview.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelReview.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelReview.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelReview.Style.GradientAngle = 90;
-            this.tabPanelReview.TabIndex = 5;
-            this.tabPanelReview.TabItem = this.tabItemReview;
-            // 
-            // dgvReviews
-            // 
-            this.dgvReviews.AllowUserToAddRows = false;
-            this.dgvReviews.AllowUserToDeleteRows = false;
-            this.dgvReviews.AllowUserToOrderColumns = true;
-            this.dgvReviews.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReviews.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvReviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReviews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colReviewNo,
-            this.colReviewStatus,
-            this.colReviewUser,
-            this.colReviewDate,
-            this.colReviewComment});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReviews.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvReviews.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvReviews.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvReviews.Location = new System.Drawing.Point(1, 368);
-            this.dgvReviews.MultiSelect = false;
-            this.dgvReviews.Name = "dgvReviews";
-            this.dgvReviews.ReadOnly = true;
-            this.dgvReviews.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvReviews.Size = new System.Drawing.Size(584, 219);
-            this.dgvReviews.TabIndex = 1;
-            this.dgvReviews.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectReview);
-            // 
-            // colReviewNo
-            // 
-            this.colReviewNo.DataPropertyName = "ReviewNo";
-            this.colReviewNo.HeaderText = "协查意见编号";
-            this.colReviewNo.Name = "colReviewNo";
-            this.colReviewNo.ReadOnly = true;
-            // 
-            // colReviewStatus
-            // 
-            this.colReviewStatus.DataPropertyName = "ReviewStatus";
-            this.colReviewStatus.HeaderText = "状态";
-            this.colReviewStatus.Name = "colReviewStatus";
-            this.colReviewStatus.ReadOnly = true;
-            // 
-            // colReviewUser
-            // 
-            this.colReviewUser.DataPropertyName = "CreateUserName";
-            this.colReviewUser.HeaderText = "经办人";
-            this.colReviewUser.Name = "colReviewUser";
-            this.colReviewUser.ReadOnly = true;
-            // 
-            // colReviewDate
-            // 
-            this.colReviewDate.DataPropertyName = "ReviewDate";
-            dataGridViewCellStyle5.Format = "d";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colReviewDate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colReviewDate.HeaderText = "协查日";
-            this.colReviewDate.Name = "colReviewDate";
-            this.colReviewDate.ReadOnly = true;
-            // 
-            // colReviewComment
-            // 
-            this.colReviewComment.DataPropertyName = "Comment";
-            this.colReviewComment.HeaderText = "备注";
-            this.colReviewComment.Name = "colReviewComment";
-            this.colReviewComment.ReadOnly = true;
-            // 
-            // groupPanelReview
-            // 
-            this.groupPanelReview.AutoScroll = true;
-            this.groupPanelReview.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelReview.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelReview.Controls.Add(this.cbIsNonRecoarse);
-            this.groupPanelReview.Controls.Add(this.cbIsBuyer);
-            this.groupPanelReview.Controls.Add(this.cbIsSeller);
-            this.groupPanelReview.Controls.Add(this.cbIsInternational);
-            this.groupPanelReview.Controls.Add(this.cbIsLocal);
-            this.groupPanelReview.Controls.Add(lblIsNotice);
-            this.groupPanelReview.Controls.Add(this.cbIsNotice);
-            this.groupPanelReview.Controls.Add(this.cbIsRecoarse);
-            this.groupPanelReview.Controls.Add(requestFinanceTypeLabel);
-            this.groupPanelReview.Controls.Add(this.requestFinanceTypeCheckedListBox);
-            this.groupPanelReview.Controls.Add(requestFinanceType2Label);
-            this.groupPanelReview.Controls.Add(this.requestFinanceType2ComboBox);
-            this.groupPanelReview.Controls.Add(requestFinancePeriodLabel);
-            this.groupPanelReview.Controls.Add(this.requestFinancePeriodTextBox);
-            this.groupPanelReview.Controls.Add(requestCommissionRateLabel);
-            this.groupPanelReview.Controls.Add(this.requestCommissionRateTextBox);
-            this.groupPanelReview.Controls.Add(requestAmountLabel);
-            this.groupPanelReview.Controls.Add(this.requestAmountTextBox);
-            this.groupPanelReview.Controls.Add(this.requestCurrencyComboBox);
-            this.groupPanelReview.Controls.Add(this.btnReviewUpdate);
-            this.groupPanelReview.Controls.Add(this.btnReviewRefresh);
-            this.groupPanelReview.Controls.Add(this.btnReviewDelete);
-            this.groupPanelReview.Controls.Add(this.btnReviewSave);
-            this.groupPanelReview.Controls.Add(this.btnReviewNew);
-            this.groupPanelReview.Controls.Add(commentLabel1);
-            this.groupPanelReview.Controls.Add(this.commentTextBox);
-            this.groupPanelReview.Controls.Add(createUserNameLabel);
-            this.groupPanelReview.Controls.Add(this.tbReviewCreateUserName);
-            this.groupPanelReview.Controls.Add(reviewDateLabel);
-            this.groupPanelReview.Controls.Add(this.reviewDateDateTimePicker);
-            this.groupPanelReview.Controls.Add(reviewStatusLabel);
-            this.groupPanelReview.Controls.Add(this.reviewStatusComboBox);
-            this.groupPanelReview.Controls.Add(reviewNoLabel);
-            this.groupPanelReview.Controls.Add(this.reviewNoTextBox);
-            this.groupPanelReview.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelReview.Location = new System.Drawing.Point(1, 1);
-            this.groupPanelReview.Name = "groupPanelReview";
-            this.groupPanelReview.Size = new System.Drawing.Size(584, 367);
-            // 
-            // 
-            // 
-            this.groupPanelReview.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelReview.Style.BackColorGradientAngle = 90;
-            this.groupPanelReview.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelReview.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelReview.Style.BorderBottomWidth = 1;
-            this.groupPanelReview.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelReview.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelReview.Style.BorderLeftWidth = 1;
-            this.groupPanelReview.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelReview.Style.BorderRightWidth = 1;
-            this.groupPanelReview.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelReview.Style.BorderTopWidth = 1;
-            this.groupPanelReview.Style.Class = "";
-            this.groupPanelReview.Style.CornerDiameter = 4;
-            this.groupPanelReview.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelReview.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelReview.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelReview.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelReview.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelReview.StyleMouseOver.Class = "";
-            this.groupPanelReview.TabIndex = 0;
-            // 
-            // cbIsNonRecoarse
-            // 
-            this.cbIsNonRecoarse.AutoSize = true;
-            this.cbIsNonRecoarse.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.cbIsNonRecoarse.BackgroundStyle.Class = "";
-            this.cbIsNonRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsNonRecoarse", true));
-            this.cbIsNonRecoarse.Location = new System.Drawing.Point(343, 176);
-            this.cbIsNonRecoarse.Name = "cbIsNonRecoarse";
-            this.cbIsNonRecoarse.Size = new System.Drawing.Size(76, 16);
-            this.cbIsNonRecoarse.TabIndex = 26;
-            this.cbIsNonRecoarse.Text = "无追索权";
-            // 
-            // reviewBindingSource
-            // 
-            this.reviewBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.ClientReview);
-            // 
-            // cbIsBuyer
-            // 
-            this.cbIsBuyer.AutoSize = true;
-            this.cbIsBuyer.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.cbIsBuyer.BackgroundStyle.Class = "";
-            this.cbIsBuyer.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsBuyer", true));
-            this.cbIsBuyer.Location = new System.Drawing.Point(233, 176);
-            this.cbIsBuyer.Name = "cbIsBuyer";
-            this.cbIsBuyer.Size = new System.Drawing.Size(51, 16);
-            this.cbIsBuyer.TabIndex = 24;
-            this.cbIsBuyer.Text = "买方";
-            // 
-            // cbIsSeller
-            // 
-            this.cbIsSeller.AutoSize = true;
-            this.cbIsSeller.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.cbIsSeller.BackgroundStyle.Class = "";
-            this.cbIsSeller.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsSeller", true));
-            this.cbIsSeller.Location = new System.Drawing.Point(233, 154);
-            this.cbIsSeller.Name = "cbIsSeller";
-            this.cbIsSeller.Size = new System.Drawing.Size(51, 16);
-            this.cbIsSeller.TabIndex = 23;
-            this.cbIsSeller.Text = "卖方";
-            // 
-            // cbIsInternational
-            // 
-            this.cbIsInternational.AutoSize = true;
-            this.cbIsInternational.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.cbIsInternational.BackgroundStyle.Class = "";
-            this.cbIsInternational.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsInternational", true));
-            this.cbIsInternational.Location = new System.Drawing.Point(112, 176);
-            this.cbIsInternational.Name = "cbIsInternational";
-            this.cbIsInternational.Size = new System.Drawing.Size(51, 16);
-            this.cbIsInternational.TabIndex = 22;
-            this.cbIsInternational.Text = "国际";
-            // 
-            // cbIsLocal
-            // 
-            this.cbIsLocal.AutoSize = true;
-            this.cbIsLocal.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.cbIsLocal.BackgroundStyle.Class = "";
-            this.cbIsLocal.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsLocal", true));
-            this.cbIsLocal.Location = new System.Drawing.Point(112, 154);
-            this.cbIsLocal.Name = "cbIsLocal";
-            this.cbIsLocal.Size = new System.Drawing.Size(51, 16);
-            this.cbIsLocal.TabIndex = 21;
-            this.cbIsLocal.Text = "国内";
-            // 
-            // cbIsNotice
-            // 
-            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "IsNotice", true));
-            this.cbIsNotice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbIsNotice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbIsNotice.FormattingEnabled = true;
-            this.cbIsNotice.Items.AddRange(new object[] {
-            "明保理",
-            "暗保理"});
-            this.cbIsNotice.Location = new System.Drawing.Point(343, 130);
-            this.cbIsNotice.Name = "cbIsNotice";
-            this.cbIsNotice.Size = new System.Drawing.Size(159, 21);
-            this.cbIsNotice.TabIndex = 20;
-            // 
-            // cbIsRecoarse
-            // 
-            this.cbIsRecoarse.AutoSize = true;
-            this.cbIsRecoarse.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.cbIsRecoarse.BackgroundStyle.Class = "";
-            this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsRecoarse", true));
-            this.cbIsRecoarse.Location = new System.Drawing.Point(343, 154);
-            this.cbIsRecoarse.Name = "cbIsRecoarse";
-            this.cbIsRecoarse.Size = new System.Drawing.Size(76, 16);
-            this.cbIsRecoarse.TabIndex = 25;
-            this.cbIsRecoarse.Text = "有追索权";
-            // 
-            // requestFinanceTypeCheckedListBox
-            // 
-            this.requestFinanceTypeCheckedListBox.CheckOnClick = true;
-            this.requestFinanceTypeCheckedListBox.FormattingEnabled = true;
-            this.requestFinanceTypeCheckedListBox.Items.AddRange(new object[] {
-            "预付款",
-            "代付",
-            "信用证",
-            "银承"});
-            this.requestFinanceTypeCheckedListBox.Location = new System.Drawing.Point(343, 37);
-            this.requestFinanceTypeCheckedListBox.Name = "requestFinanceTypeCheckedListBox";
-            this.requestFinanceTypeCheckedListBox.Size = new System.Drawing.Size(159, 64);
-            this.requestFinanceTypeCheckedListBox.TabIndex = 12;
-            // 
-            // requestFinanceType2ComboBox
-            // 
-            this.requestFinanceType2ComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "RequestFinanceType2", true));
-            this.requestFinanceType2ComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.requestFinanceType2ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.requestFinanceType2ComboBox.FormattingEnabled = true;
-            this.requestFinanceType2ComboBox.Items.AddRange(new object[] {
-            "池融资",
-            "单笔融资"});
-            this.requestFinanceType2ComboBox.Location = new System.Drawing.Point(343, 105);
-            this.requestFinanceType2ComboBox.Name = "requestFinanceType2ComboBox";
-            this.requestFinanceType2ComboBox.Size = new System.Drawing.Size(159, 21);
-            this.requestFinanceType2ComboBox.TabIndex = 18;
-            // 
-            // requestFinancePeriodTextBox
-            // 
-            // 
-            // 
-            // 
-            this.requestFinancePeriodTextBox.Border.Class = "TextBoxBorder";
-            this.requestFinancePeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "RequestFinancePeriod", true));
-            this.requestFinancePeriodTextBox.Location = new System.Drawing.Point(112, 106);
-            this.requestFinancePeriodTextBox.Name = "requestFinancePeriodTextBox";
-            this.requestFinancePeriodTextBox.Size = new System.Drawing.Size(121, 20);
-            this.requestFinancePeriodTextBox.TabIndex = 14;
-            // 
-            // requestCommissionRateTextBox
-            // 
-            // 
-            // 
-            // 
-            this.requestCommissionRateTextBox.Border.Class = "TextBoxBorder";
-            this.requestCommissionRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "RequestCommissionRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p"));
-            this.requestCommissionRateTextBox.Location = new System.Drawing.Point(112, 81);
-            this.requestCommissionRateTextBox.Name = "requestCommissionRateTextBox";
-            this.requestCommissionRateTextBox.Size = new System.Drawing.Size(121, 20);
-            this.requestCommissionRateTextBox.TabIndex = 10;
-            // 
-            // requestAmountTextBox
-            // 
-            // 
-            // 
-            // 
-            this.requestAmountTextBox.Border.Class = "TextBoxBorder";
-            this.requestAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "RequestAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.requestAmountTextBox.Location = new System.Drawing.Point(402, 7);
-            this.requestAmountTextBox.Name = "requestAmountTextBox";
-            this.requestAmountTextBox.Size = new System.Drawing.Size(100, 20);
-            this.requestAmountTextBox.TabIndex = 4;
-            // 
-            // requestCurrencyComboBox
-            // 
-            this.requestCurrencyComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.requestCurrencyComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.requestCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "RequestCurrency", true));
-            this.requestCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.requestCurrencyComboBox.FormattingEnabled = true;
-            this.requestCurrencyComboBox.Location = new System.Drawing.Point(343, 7);
-            this.requestCurrencyComboBox.Name = "requestCurrencyComboBox";
-            this.requestCurrencyComboBox.Size = new System.Drawing.Size(53, 21);
-            this.requestCurrencyComboBox.TabIndex = 3;
-            // 
-            // btnReviewUpdate
-            // 
-            this.btnReviewUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnReviewUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnReviewUpdate.Location = new System.Drawing.Point(272, 309);
-            this.btnReviewUpdate.Name = "btnReviewUpdate";
-            this.btnReviewUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnReviewUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnReviewUpdate.TabIndex = 31;
-            this.btnReviewUpdate.Text = "编辑";
-            this.btnReviewUpdate.Click += new System.EventHandler(this.UpdateReivew);
-            // 
-            // btnReviewRefresh
-            // 
-            this.btnReviewRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnReviewRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnReviewRefresh.Location = new System.Drawing.Point(112, 309);
-            this.btnReviewRefresh.Name = "btnReviewRefresh";
-            this.btnReviewRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnReviewRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnReviewRefresh.TabIndex = 29;
-            this.btnReviewRefresh.Text = "刷新";
-            this.btnReviewRefresh.Click += new System.EventHandler(this.RefreshReviews);
-            // 
-            // btnReviewDelete
-            // 
-            this.btnReviewDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnReviewDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnReviewDelete.Location = new System.Drawing.Point(434, 309);
-            this.btnReviewDelete.Name = "btnReviewDelete";
-            this.btnReviewDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnReviewDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnReviewDelete.TabIndex = 33;
-            this.btnReviewDelete.Text = "删除";
-            this.btnReviewDelete.Click += new System.EventHandler(this.DeleteReview);
-            // 
-            // btnReviewSave
-            // 
-            this.btnReviewSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnReviewSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnReviewSave.Location = new System.Drawing.Point(353, 309);
-            this.btnReviewSave.Name = "btnReviewSave";
-            this.btnReviewSave.Size = new System.Drawing.Size(75, 23);
-            this.btnReviewSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnReviewSave.TabIndex = 32;
-            this.btnReviewSave.Text = "保存";
-            this.btnReviewSave.Click += new System.EventHandler(this.SaveReview);
-            // 
-            // btnReviewNew
-            // 
-            this.btnReviewNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnReviewNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnReviewNew.Location = new System.Drawing.Point(191, 309);
-            this.btnReviewNew.Name = "btnReviewNew";
-            this.btnReviewNew.Size = new System.Drawing.Size(75, 23);
-            this.btnReviewNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnReviewNew.TabIndex = 30;
-            this.btnReviewNew.Text = "新建";
-            this.btnReviewNew.Click += new System.EventHandler(this.NewReview);
-            // 
-            // commentTextBox
-            // 
-            // 
-            // 
-            // 
-            this.commentTextBox.Border.Class = "TextBoxBorder";
-            this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "Comment", true));
-            this.commentTextBox.Location = new System.Drawing.Point(112, 198);
-            this.commentTextBox.Multiline = true;
-            this.commentTextBox.Name = "commentTextBox";
-            this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.commentTextBox.Size = new System.Drawing.Size(390, 102);
-            this.commentTextBox.TabIndex = 28;
-            // 
-            // tbReviewCreateUserName
-            // 
-            // 
-            // 
-            // 
-            this.tbReviewCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbReviewCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "CreateUserName", true));
-            this.tbReviewCreateUserName.Location = new System.Drawing.Point(112, 128);
-            this.tbReviewCreateUserName.Name = "tbReviewCreateUserName";
-            this.tbReviewCreateUserName.ReadOnly = true;
-            this.tbReviewCreateUserName.Size = new System.Drawing.Size(121, 20);
-            this.tbReviewCreateUserName.TabIndex = 16;
-            // 
-            // reviewDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.reviewDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.reviewDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.reviewDateDateTimePicker.ButtonFreeText.Checked = true;
-            this.reviewDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.reviewBindingSource, "ReviewDate", true));
-            this.reviewDateDateTimePicker.FreeTextEntryMode = true;
-            this.reviewDateDateTimePicker.Location = new System.Drawing.Point(112, 55);
-            // 
-            // 
-            // 
-            this.reviewDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.reviewDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.reviewDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            this.reviewDateDateTimePicker.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.reviewDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.reviewDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.reviewDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.reviewDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.reviewDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.reviewDateDateTimePicker.MonthCalendar.TodayButtonVisible = true;
-            this.reviewDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.reviewDateDateTimePicker.Name = "reviewDateDateTimePicker";
-            this.reviewDateDateTimePicker.Size = new System.Drawing.Size(121, 20);
-            this.reviewDateDateTimePicker.TabIndex = 8;
-            this.reviewValidator.SetValidator1(this.reviewDateDateTimePicker, this.requiredFieldValidator19);
-            // 
-            // reviewStatusComboBox
-            // 
-            this.reviewStatusComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "ReviewStatus", true));
-            this.reviewStatusComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.reviewStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.reviewStatusComboBox.FormattingEnabled = true;
-            this.reviewStatusComboBox.Items.AddRange(new object[] {
-            "已生效",
-            "已失效"});
-            this.reviewStatusComboBox.Location = new System.Drawing.Point(112, 31);
-            this.reviewStatusComboBox.Name = "reviewStatusComboBox";
-            this.reviewStatusComboBox.Size = new System.Drawing.Size(121, 21);
-            this.reviewStatusComboBox.TabIndex = 6;
-            this.reviewValidator.SetValidator1(this.reviewStatusComboBox, this.requiredFieldValidator7);
-            // 
-            // reviewNoTextBox
-            // 
-            // 
-            // 
-            // 
-            this.reviewNoTextBox.Border.Class = "TextBoxBorder";
-            this.reviewNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "ReviewNo", true));
-            this.reviewNoTextBox.Location = new System.Drawing.Point(112, 6);
-            this.reviewNoTextBox.Name = "reviewNoTextBox";
-            this.reviewNoTextBox.Size = new System.Drawing.Size(121, 20);
-            this.reviewNoTextBox.TabIndex = 1;
-            this.reviewValidator.SetValidator1(this.reviewNoTextBox, this.regularExpressionValidator2);
-            // 
-            // tabItemReview
-            // 
-            this.tabItemReview.AttachedControl = this.tabPanelReview;
-            this.tabItemReview.Name = "tabItemReview";
-            this.tabItemReview.Text = "协查意见";
             // 
             // tabPanelClient
             // 
@@ -3188,6 +2633,521 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClient.Name = "tabItemClient";
             this.tabItemClient.Text = "基本信息";
             // 
+            // tabPanelReview
+            // 
+            this.tabPanelReview.Controls.Add(this.dgvReviews);
+            this.tabPanelReview.Controls.Add(this.groupPanelReview);
+            this.tabPanelReview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelReview.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelReview.Name = "tabPanelReview";
+            this.tabPanelReview.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelReview.Size = new System.Drawing.Size(586, 588);
+            this.tabPanelReview.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelReview.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelReview.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelReview.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelReview.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabPanelReview.Style.GradientAngle = 90;
+            this.tabPanelReview.TabIndex = 5;
+            this.tabPanelReview.TabItem = this.tabItemReview;
+            // 
+            // dgvReviews
+            // 
+            this.dgvReviews.AllowUserToAddRows = false;
+            this.dgvReviews.AllowUserToDeleteRows = false;
+            this.dgvReviews.AllowUserToOrderColumns = true;
+            this.dgvReviews.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReviews.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvReviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReviews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colReviewNo,
+            this.colReviewStatus,
+            this.colReviewUser,
+            this.colReviewDate,
+            this.colReviewComment});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReviews.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvReviews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvReviews.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvReviews.Location = new System.Drawing.Point(1, 368);
+            this.dgvReviews.MultiSelect = false;
+            this.dgvReviews.Name = "dgvReviews";
+            this.dgvReviews.ReadOnly = true;
+            this.dgvReviews.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvReviews.Size = new System.Drawing.Size(584, 219);
+            this.dgvReviews.TabIndex = 1;
+            this.dgvReviews.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectReview);
+            // 
+            // colReviewNo
+            // 
+            this.colReviewNo.DataPropertyName = "ReviewNo";
+            this.colReviewNo.HeaderText = "协查意见编号";
+            this.colReviewNo.Name = "colReviewNo";
+            this.colReviewNo.ReadOnly = true;
+            // 
+            // colReviewStatus
+            // 
+            this.colReviewStatus.DataPropertyName = "ReviewStatus";
+            this.colReviewStatus.HeaderText = "状态";
+            this.colReviewStatus.Name = "colReviewStatus";
+            this.colReviewStatus.ReadOnly = true;
+            // 
+            // colReviewUser
+            // 
+            this.colReviewUser.DataPropertyName = "CreateUserName";
+            this.colReviewUser.HeaderText = "经办人";
+            this.colReviewUser.Name = "colReviewUser";
+            this.colReviewUser.ReadOnly = true;
+            // 
+            // colReviewDate
+            // 
+            this.colReviewDate.DataPropertyName = "ReviewDate";
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colReviewDate.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colReviewDate.HeaderText = "协查日";
+            this.colReviewDate.Name = "colReviewDate";
+            this.colReviewDate.ReadOnly = true;
+            // 
+            // colReviewComment
+            // 
+            this.colReviewComment.DataPropertyName = "Comment";
+            this.colReviewComment.HeaderText = "备注";
+            this.colReviewComment.Name = "colReviewComment";
+            this.colReviewComment.ReadOnly = true;
+            // 
+            // groupPanelReview
+            // 
+            this.groupPanelReview.AutoScroll = true;
+            this.groupPanelReview.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelReview.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelReview.Controls.Add(this.cbIsNonRecoarse);
+            this.groupPanelReview.Controls.Add(this.cbIsBuyer);
+            this.groupPanelReview.Controls.Add(this.cbIsSeller);
+            this.groupPanelReview.Controls.Add(this.cbIsInternational);
+            this.groupPanelReview.Controls.Add(this.cbIsLocal);
+            this.groupPanelReview.Controls.Add(lblIsNotice);
+            this.groupPanelReview.Controls.Add(this.cbIsNotice);
+            this.groupPanelReview.Controls.Add(this.cbIsRecoarse);
+            this.groupPanelReview.Controls.Add(requestFinanceTypeLabel);
+            this.groupPanelReview.Controls.Add(this.requestFinanceTypeCheckedListBox);
+            this.groupPanelReview.Controls.Add(requestFinanceType2Label);
+            this.groupPanelReview.Controls.Add(this.requestFinanceType2ComboBox);
+            this.groupPanelReview.Controls.Add(requestFinancePeriodLabel);
+            this.groupPanelReview.Controls.Add(this.requestFinancePeriodTextBox);
+            this.groupPanelReview.Controls.Add(requestCommissionRateLabel);
+            this.groupPanelReview.Controls.Add(this.requestCommissionRateTextBox);
+            this.groupPanelReview.Controls.Add(requestAmountLabel);
+            this.groupPanelReview.Controls.Add(this.requestAmountTextBox);
+            this.groupPanelReview.Controls.Add(this.requestCurrencyComboBox);
+            this.groupPanelReview.Controls.Add(this.btnReviewUpdate);
+            this.groupPanelReview.Controls.Add(this.btnReviewRefresh);
+            this.groupPanelReview.Controls.Add(this.btnReviewDelete);
+            this.groupPanelReview.Controls.Add(this.btnReviewSave);
+            this.groupPanelReview.Controls.Add(this.btnReviewNew);
+            this.groupPanelReview.Controls.Add(commentLabel1);
+            this.groupPanelReview.Controls.Add(this.commentTextBox);
+            this.groupPanelReview.Controls.Add(createUserNameLabel);
+            this.groupPanelReview.Controls.Add(this.tbReviewCreateUserName);
+            this.groupPanelReview.Controls.Add(reviewDateLabel);
+            this.groupPanelReview.Controls.Add(this.reviewDateDateTimePicker);
+            this.groupPanelReview.Controls.Add(reviewStatusLabel);
+            this.groupPanelReview.Controls.Add(this.reviewStatusComboBox);
+            this.groupPanelReview.Controls.Add(reviewNoLabel);
+            this.groupPanelReview.Controls.Add(this.reviewNoTextBox);
+            this.groupPanelReview.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelReview.Location = new System.Drawing.Point(1, 1);
+            this.groupPanelReview.Name = "groupPanelReview";
+            this.groupPanelReview.Size = new System.Drawing.Size(584, 367);
+            // 
+            // 
+            // 
+            this.groupPanelReview.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelReview.Style.BackColorGradientAngle = 90;
+            this.groupPanelReview.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelReview.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelReview.Style.BorderBottomWidth = 1;
+            this.groupPanelReview.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelReview.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelReview.Style.BorderLeftWidth = 1;
+            this.groupPanelReview.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelReview.Style.BorderRightWidth = 1;
+            this.groupPanelReview.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.groupPanelReview.Style.BorderTopWidth = 1;
+            this.groupPanelReview.Style.Class = "";
+            this.groupPanelReview.Style.CornerDiameter = 4;
+            this.groupPanelReview.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.groupPanelReview.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
+            this.groupPanelReview.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelReview.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
+            // 
+            // 
+            // 
+            this.groupPanelReview.StyleMouseDown.Class = "";
+            // 
+            // 
+            // 
+            this.groupPanelReview.StyleMouseOver.Class = "";
+            this.groupPanelReview.TabIndex = 0;
+            // 
+            // cbIsNonRecoarse
+            // 
+            this.cbIsNonRecoarse.AutoSize = true;
+            this.cbIsNonRecoarse.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsNonRecoarse.BackgroundStyle.Class = "";
+            this.cbIsNonRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsNonRecoarse", true));
+            this.cbIsNonRecoarse.Location = new System.Drawing.Point(343, 176);
+            this.cbIsNonRecoarse.Name = "cbIsNonRecoarse";
+            this.cbIsNonRecoarse.Size = new System.Drawing.Size(76, 16);
+            this.cbIsNonRecoarse.TabIndex = 26;
+            this.cbIsNonRecoarse.Text = "无追索权";
+            // 
+            // reviewBindingSource
+            // 
+            this.reviewBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.ClientReview);
+            // 
+            // cbIsBuyer
+            // 
+            this.cbIsBuyer.AutoSize = true;
+            this.cbIsBuyer.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsBuyer.BackgroundStyle.Class = "";
+            this.cbIsBuyer.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsBuyer", true));
+            this.cbIsBuyer.Location = new System.Drawing.Point(233, 176);
+            this.cbIsBuyer.Name = "cbIsBuyer";
+            this.cbIsBuyer.Size = new System.Drawing.Size(51, 16);
+            this.cbIsBuyer.TabIndex = 24;
+            this.cbIsBuyer.Text = "买方";
+            // 
+            // cbIsSeller
+            // 
+            this.cbIsSeller.AutoSize = true;
+            this.cbIsSeller.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsSeller.BackgroundStyle.Class = "";
+            this.cbIsSeller.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsSeller", true));
+            this.cbIsSeller.Location = new System.Drawing.Point(233, 154);
+            this.cbIsSeller.Name = "cbIsSeller";
+            this.cbIsSeller.Size = new System.Drawing.Size(51, 16);
+            this.cbIsSeller.TabIndex = 23;
+            this.cbIsSeller.Text = "卖方";
+            // 
+            // cbIsInternational
+            // 
+            this.cbIsInternational.AutoSize = true;
+            this.cbIsInternational.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsInternational.BackgroundStyle.Class = "";
+            this.cbIsInternational.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsInternational", true));
+            this.cbIsInternational.Location = new System.Drawing.Point(112, 176);
+            this.cbIsInternational.Name = "cbIsInternational";
+            this.cbIsInternational.Size = new System.Drawing.Size(51, 16);
+            this.cbIsInternational.TabIndex = 22;
+            this.cbIsInternational.Text = "国际";
+            // 
+            // cbIsLocal
+            // 
+            this.cbIsLocal.AutoSize = true;
+            this.cbIsLocal.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsLocal.BackgroundStyle.Class = "";
+            this.cbIsLocal.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsLocal", true));
+            this.cbIsLocal.Location = new System.Drawing.Point(112, 154);
+            this.cbIsLocal.Name = "cbIsLocal";
+            this.cbIsLocal.Size = new System.Drawing.Size(51, 16);
+            this.cbIsLocal.TabIndex = 21;
+            this.cbIsLocal.Text = "国内";
+            // 
+            // cbIsNotice
+            // 
+            this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "IsNotice", true));
+            this.cbIsNotice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbIsNotice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbIsNotice.FormattingEnabled = true;
+            this.cbIsNotice.Items.AddRange(new object[] {
+            "明保理",
+            "暗保理"});
+            this.cbIsNotice.Location = new System.Drawing.Point(343, 130);
+            this.cbIsNotice.Name = "cbIsNotice";
+            this.cbIsNotice.Size = new System.Drawing.Size(159, 21);
+            this.cbIsNotice.TabIndex = 20;
+            // 
+            // cbIsRecoarse
+            // 
+            this.cbIsRecoarse.AutoSize = true;
+            this.cbIsRecoarse.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.cbIsRecoarse.BackgroundStyle.Class = "";
+            this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.reviewBindingSource, "IsRecoarse", true));
+            this.cbIsRecoarse.Location = new System.Drawing.Point(343, 154);
+            this.cbIsRecoarse.Name = "cbIsRecoarse";
+            this.cbIsRecoarse.Size = new System.Drawing.Size(76, 16);
+            this.cbIsRecoarse.TabIndex = 25;
+            this.cbIsRecoarse.Text = "有追索权";
+            // 
+            // requestFinanceTypeCheckedListBox
+            // 
+            this.requestFinanceTypeCheckedListBox.CheckOnClick = true;
+            this.requestFinanceTypeCheckedListBox.FormattingEnabled = true;
+            this.requestFinanceTypeCheckedListBox.Items.AddRange(new object[] {
+            "预付款",
+            "代付",
+            "信用证",
+            "银承"});
+            this.requestFinanceTypeCheckedListBox.Location = new System.Drawing.Point(343, 37);
+            this.requestFinanceTypeCheckedListBox.Name = "requestFinanceTypeCheckedListBox";
+            this.requestFinanceTypeCheckedListBox.Size = new System.Drawing.Size(159, 64);
+            this.requestFinanceTypeCheckedListBox.TabIndex = 12;
+            // 
+            // requestFinanceType2ComboBox
+            // 
+            this.requestFinanceType2ComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "RequestFinanceType2", true));
+            this.requestFinanceType2ComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.requestFinanceType2ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.requestFinanceType2ComboBox.FormattingEnabled = true;
+            this.requestFinanceType2ComboBox.Items.AddRange(new object[] {
+            "池融资",
+            "单笔融资"});
+            this.requestFinanceType2ComboBox.Location = new System.Drawing.Point(343, 105);
+            this.requestFinanceType2ComboBox.Name = "requestFinanceType2ComboBox";
+            this.requestFinanceType2ComboBox.Size = new System.Drawing.Size(159, 21);
+            this.requestFinanceType2ComboBox.TabIndex = 18;
+            // 
+            // requestFinancePeriodTextBox
+            // 
+            // 
+            // 
+            // 
+            this.requestFinancePeriodTextBox.Border.Class = "TextBoxBorder";
+            this.requestFinancePeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "RequestFinancePeriod", true));
+            this.requestFinancePeriodTextBox.Location = new System.Drawing.Point(112, 106);
+            this.requestFinancePeriodTextBox.Name = "requestFinancePeriodTextBox";
+            this.requestFinancePeriodTextBox.Size = new System.Drawing.Size(121, 20);
+            this.requestFinancePeriodTextBox.TabIndex = 14;
+            // 
+            // requestCommissionRateTextBox
+            // 
+            // 
+            // 
+            // 
+            this.requestCommissionRateTextBox.Border.Class = "TextBoxBorder";
+            this.requestCommissionRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "RequestCommissionRate", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p"));
+            this.requestCommissionRateTextBox.Location = new System.Drawing.Point(112, 81);
+            this.requestCommissionRateTextBox.Name = "requestCommissionRateTextBox";
+            this.requestCommissionRateTextBox.Size = new System.Drawing.Size(121, 20);
+            this.requestCommissionRateTextBox.TabIndex = 10;
+            // 
+            // requestAmountTextBox
+            // 
+            // 
+            // 
+            // 
+            this.requestAmountTextBox.Border.Class = "TextBoxBorder";
+            this.requestAmountTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "RequestAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.requestAmountTextBox.Location = new System.Drawing.Point(402, 7);
+            this.requestAmountTextBox.Name = "requestAmountTextBox";
+            this.requestAmountTextBox.Size = new System.Drawing.Size(100, 20);
+            this.requestAmountTextBox.TabIndex = 4;
+            // 
+            // requestCurrencyComboBox
+            // 
+            this.requestCurrencyComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.requestCurrencyComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.requestCurrencyComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "RequestCurrency", true));
+            this.requestCurrencyComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.requestCurrencyComboBox.FormattingEnabled = true;
+            this.requestCurrencyComboBox.Location = new System.Drawing.Point(343, 7);
+            this.requestCurrencyComboBox.Name = "requestCurrencyComboBox";
+            this.requestCurrencyComboBox.Size = new System.Drawing.Size(53, 21);
+            this.requestCurrencyComboBox.TabIndex = 3;
+            // 
+            // btnReviewUpdate
+            // 
+            this.btnReviewUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReviewUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReviewUpdate.Location = new System.Drawing.Point(272, 309);
+            this.btnReviewUpdate.Name = "btnReviewUpdate";
+            this.btnReviewUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnReviewUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReviewUpdate.TabIndex = 31;
+            this.btnReviewUpdate.Text = "编辑";
+            this.btnReviewUpdate.Click += new System.EventHandler(this.UpdateReivew);
+            // 
+            // btnReviewRefresh
+            // 
+            this.btnReviewRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReviewRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReviewRefresh.Location = new System.Drawing.Point(112, 309);
+            this.btnReviewRefresh.Name = "btnReviewRefresh";
+            this.btnReviewRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnReviewRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReviewRefresh.TabIndex = 29;
+            this.btnReviewRefresh.Text = "刷新";
+            this.btnReviewRefresh.Click += new System.EventHandler(this.RefreshReviews);
+            // 
+            // btnReviewDelete
+            // 
+            this.btnReviewDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReviewDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReviewDelete.Location = new System.Drawing.Point(434, 309);
+            this.btnReviewDelete.Name = "btnReviewDelete";
+            this.btnReviewDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnReviewDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReviewDelete.TabIndex = 33;
+            this.btnReviewDelete.Text = "删除";
+            this.btnReviewDelete.Click += new System.EventHandler(this.DeleteReview);
+            // 
+            // btnReviewSave
+            // 
+            this.btnReviewSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReviewSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReviewSave.Location = new System.Drawing.Point(353, 309);
+            this.btnReviewSave.Name = "btnReviewSave";
+            this.btnReviewSave.Size = new System.Drawing.Size(75, 23);
+            this.btnReviewSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReviewSave.TabIndex = 32;
+            this.btnReviewSave.Text = "保存";
+            this.btnReviewSave.Click += new System.EventHandler(this.SaveReview);
+            // 
+            // btnReviewNew
+            // 
+            this.btnReviewNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReviewNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReviewNew.Location = new System.Drawing.Point(191, 309);
+            this.btnReviewNew.Name = "btnReviewNew";
+            this.btnReviewNew.Size = new System.Drawing.Size(75, 23);
+            this.btnReviewNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReviewNew.TabIndex = 30;
+            this.btnReviewNew.Text = "新建";
+            this.btnReviewNew.Click += new System.EventHandler(this.NewReview);
+            // 
+            // commentTextBox
+            // 
+            // 
+            // 
+            // 
+            this.commentTextBox.Border.Class = "TextBoxBorder";
+            this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "Comment", true));
+            this.commentTextBox.Location = new System.Drawing.Point(112, 198);
+            this.commentTextBox.Multiline = true;
+            this.commentTextBox.Name = "commentTextBox";
+            this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.commentTextBox.Size = new System.Drawing.Size(390, 102);
+            this.commentTextBox.TabIndex = 28;
+            // 
+            // tbReviewCreateUserName
+            // 
+            // 
+            // 
+            // 
+            this.tbReviewCreateUserName.Border.Class = "TextBoxBorder";
+            this.tbReviewCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "CreateUserName", true));
+            this.tbReviewCreateUserName.Location = new System.Drawing.Point(112, 128);
+            this.tbReviewCreateUserName.Name = "tbReviewCreateUserName";
+            this.tbReviewCreateUserName.ReadOnly = true;
+            this.tbReviewCreateUserName.Size = new System.Drawing.Size(121, 20);
+            this.tbReviewCreateUserName.TabIndex = 16;
+            // 
+            // reviewDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.reviewDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.reviewDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.reviewDateDateTimePicker.ButtonFreeText.Checked = true;
+            this.reviewDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.reviewBindingSource, "ReviewDate", true));
+            this.reviewDateDateTimePicker.FreeTextEntryMode = true;
+            this.reviewDateDateTimePicker.Location = new System.Drawing.Point(112, 55);
+            // 
+            // 
+            // 
+            this.reviewDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.reviewDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.reviewDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.reviewDateDateTimePicker.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.reviewDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.reviewDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.reviewDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.reviewDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.reviewDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.reviewDateDateTimePicker.MonthCalendar.TodayButtonVisible = true;
+            this.reviewDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.reviewDateDateTimePicker.Name = "reviewDateDateTimePicker";
+            this.reviewDateDateTimePicker.Size = new System.Drawing.Size(121, 20);
+            this.reviewDateDateTimePicker.TabIndex = 8;
+            this.reviewValidator.SetValidator1(this.reviewDateDateTimePicker, this.requiredFieldValidator19);
+            // 
+            // reviewStatusComboBox
+            // 
+            this.reviewStatusComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "ReviewStatus", true));
+            this.reviewStatusComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.reviewStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.reviewStatusComboBox.FormattingEnabled = true;
+            this.reviewStatusComboBox.Items.AddRange(new object[] {
+            "已生效",
+            "已失效"});
+            this.reviewStatusComboBox.Location = new System.Drawing.Point(112, 31);
+            this.reviewStatusComboBox.Name = "reviewStatusComboBox";
+            this.reviewStatusComboBox.Size = new System.Drawing.Size(121, 21);
+            this.reviewStatusComboBox.TabIndex = 6;
+            this.reviewValidator.SetValidator1(this.reviewStatusComboBox, this.requiredFieldValidator7);
+            // 
+            // reviewNoTextBox
+            // 
+            // 
+            // 
+            // 
+            this.reviewNoTextBox.Border.Class = "TextBoxBorder";
+            this.reviewNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.reviewBindingSource, "ReviewNo", true));
+            this.reviewNoTextBox.Location = new System.Drawing.Point(112, 6);
+            this.reviewNoTextBox.Name = "reviewNoTextBox";
+            this.reviewNoTextBox.Size = new System.Drawing.Size(121, 20);
+            this.reviewNoTextBox.TabIndex = 1;
+            this.reviewValidator.SetValidator1(this.reviewNoTextBox, this.regularExpressionValidator2);
+            // 
+            // tabItemReview
+            // 
+            this.tabItemReview.AttachedControl = this.tabPanelReview;
+            this.tabItemReview.Name = "tabItemReview";
+            this.tabItemReview.Text = "协查意见";
+            // 
             // tabPanelContract
             // 
             this.tabPanelContract.Controls.Add(this.dgvContracts);
@@ -3669,126 +3629,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.Size = new System.Drawing.Size(584, 225);
             this.dgvClientCreditLines.TabIndex = 0;
             this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectClientCreditLine);
-            // 
-            // colCreditLineType
-            // 
-            this.colCreditLineType.DataPropertyName = "CreditLineType";
-            this.colCreditLineType.HeaderText = "额度类型";
-            this.colCreditLineType.Name = "colCreditLineType";
-            this.colCreditLineType.ReadOnly = true;
-            // 
-            // colCreditLineCurrency
-            // 
-            this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
-            this.colCreditLineCurrency.HeaderText = "额度币种";
-            this.colCreditLineCurrency.Name = "colCreditLineCurrency";
-            this.colCreditLineCurrency.ReadOnly = true;
-            // 
-            // colCreditLine
-            // 
-            this.colCreditLine.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle13.Format = "C2";
-            dataGridViewCellStyle13.NullValue = null;
-            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle13;
-            this.colCreditLine.HeaderText = "额度上限";
-            this.colCreditLine.Name = "colCreditLine";
-            this.colCreditLine.ReadOnly = true;
-            // 
-            // colPeriodBegin
-            // 
-            this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle14.Format = "d";
-            dataGridViewCellStyle14.NullValue = null;
-            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle14;
-            this.colPeriodBegin.HeaderText = "有效期(始)";
-            this.colPeriodBegin.Name = "colPeriodBegin";
-            this.colPeriodBegin.ReadOnly = true;
-            // 
-            // colPeriodEnd
-            // 
-            this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle15.Format = "d";
-            dataGridViewCellStyle15.NullValue = null;
-            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle15;
-            this.colPeriodEnd.HeaderText = "有效期(终)";
-            this.colPeriodEnd.Name = "colPeriodEnd";
-            this.colPeriodEnd.ReadOnly = true;
-            // 
-            // colApproveNo
-            // 
-            this.colApproveNo.DataPropertyName = "ApproveNo";
-            this.colApproveNo.HeaderText = "授信编号";
-            this.colApproveNo.Name = "colApproveNo";
-            this.colApproveNo.ReadOnly = true;
-            // 
-            // colApproveType
-            // 
-            this.colApproveType.DataPropertyName = "ApproveType";
-            this.colApproveType.HeaderText = "授信类型";
-            this.colApproveType.Name = "colApproveType";
-            this.colApproveType.ReadOnly = true;
-            // 
-            // colCreditLineStatus
-            // 
-            this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
-            this.colCreditLineStatus.HeaderText = "额度状态";
-            this.colCreditLineStatus.Name = "colCreditLineStatus";
-            this.colCreditLineStatus.ReadOnly = true;
-            // 
-            // colFreezeReason
-            // 
-            this.colFreezeReason.DataPropertyName = "FreezeReason";
-            this.colFreezeReason.HeaderText = "冻结原因";
-            this.colFreezeReason.Name = "colFreezeReason";
-            this.colFreezeReason.ReadOnly = true;
-            // 
-            // colFreezer
-            // 
-            this.colFreezer.DataPropertyName = "Freezer";
-            this.colFreezer.HeaderText = "冻结人";
-            this.colFreezer.Name = "colFreezer";
-            this.colFreezer.ReadOnly = true;
-            // 
-            // colFreezeDate
-            // 
-            this.colFreezeDate.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle16.Format = "d";
-            dataGridViewCellStyle16.NullValue = null;
-            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle16;
-            this.colFreezeDate.HeaderText = "冻结日期";
-            this.colFreezeDate.Name = "colFreezeDate";
-            this.colFreezeDate.ReadOnly = true;
-            // 
-            // colUnfreezeReason
-            // 
-            this.colUnfreezeReason.DataPropertyName = "UnfreezeReason";
-            this.colUnfreezeReason.HeaderText = "解冻原因";
-            this.colUnfreezeReason.Name = "colUnfreezeReason";
-            this.colUnfreezeReason.ReadOnly = true;
-            // 
-            // colUnfreezer
-            // 
-            this.colUnfreezer.DataPropertyName = "Unfreezer";
-            this.colUnfreezer.HeaderText = "解冻人";
-            this.colUnfreezer.Name = "colUnfreezer";
-            this.colUnfreezer.ReadOnly = true;
-            // 
-            // colUnfreezeDate
-            // 
-            this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle17.Format = "d";
-            dataGridViewCellStyle17.NullValue = null;
-            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle17;
-            this.colUnfreezeDate.HeaderText = "解冻日期";
-            this.colUnfreezeDate.Name = "colUnfreezeDate";
-            this.colUnfreezeDate.ReadOnly = true;
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
             // 
             // groupPanelClientCreditLine
             // 
@@ -4568,6 +4408,153 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.requiredFieldValidator9.ErrorMessage = "必填";
             this.requiredFieldValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
+            // colCreditLineType
+            // 
+            this.colCreditLineType.DataPropertyName = "CreditLineType";
+            this.colCreditLineType.HeaderText = "额度类型";
+            this.colCreditLineType.Name = "colCreditLineType";
+            this.colCreditLineType.ReadOnly = true;
+            // 
+            // colCreditLineCurrency
+            // 
+            this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
+            this.colCreditLineCurrency.HeaderText = "额度币种";
+            this.colCreditLineCurrency.Name = "colCreditLineCurrency";
+            this.colCreditLineCurrency.ReadOnly = true;
+            // 
+            // colCreditLine
+            // 
+            this.colCreditLine.DataPropertyName = "CreditLine";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "C2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle13;
+            this.colCreditLine.HeaderText = "额度上限";
+            this.colCreditLine.Name = "colCreditLine";
+            this.colCreditLine.ReadOnly = true;
+            // 
+            // colPeriodBegin
+            // 
+            this.colPeriodBegin.DataPropertyName = "PeriodBegin";
+            dataGridViewCellStyle14.Format = "d";
+            dataGridViewCellStyle14.NullValue = null;
+            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle14;
+            this.colPeriodBegin.HeaderText = "有效期(始)";
+            this.colPeriodBegin.Name = "colPeriodBegin";
+            this.colPeriodBegin.ReadOnly = true;
+            // 
+            // colPeriodEnd
+            // 
+            this.colPeriodEnd.DataPropertyName = "PeriodEnd";
+            dataGridViewCellStyle15.Format = "d";
+            dataGridViewCellStyle15.NullValue = null;
+            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle15;
+            this.colPeriodEnd.HeaderText = "有效期(终)";
+            this.colPeriodEnd.Name = "colPeriodEnd";
+            this.colPeriodEnd.ReadOnly = true;
+            // 
+            // colApproveNo
+            // 
+            this.colApproveNo.DataPropertyName = "ApproveNo";
+            this.colApproveNo.HeaderText = "授信编号";
+            this.colApproveNo.Name = "colApproveNo";
+            this.colApproveNo.ReadOnly = true;
+            // 
+            // colApproveType
+            // 
+            this.colApproveType.DataPropertyName = "ApproveType";
+            this.colApproveType.HeaderText = "授信类型";
+            this.colApproveType.Name = "colApproveType";
+            this.colApproveType.ReadOnly = true;
+            // 
+            // colCreditLineStatus
+            // 
+            this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
+            this.colCreditLineStatus.HeaderText = "额度状态";
+            this.colCreditLineStatus.Name = "colCreditLineStatus";
+            this.colCreditLineStatus.ReadOnly = true;
+            // 
+            // colFreezeReason
+            // 
+            this.colFreezeReason.DataPropertyName = "FreezeReason";
+            this.colFreezeReason.HeaderText = "冻结原因";
+            this.colFreezeReason.Name = "colFreezeReason";
+            this.colFreezeReason.ReadOnly = true;
+            // 
+            // colFreezer
+            // 
+            this.colFreezer.DataPropertyName = "Freezer";
+            this.colFreezer.HeaderText = "冻结人";
+            this.colFreezer.Name = "colFreezer";
+            this.colFreezer.ReadOnly = true;
+            // 
+            // colFreezeDate
+            // 
+            this.colFreezeDate.DataPropertyName = "FreezeDate";
+            dataGridViewCellStyle16.Format = "d";
+            dataGridViewCellStyle16.NullValue = null;
+            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle16;
+            this.colFreezeDate.HeaderText = "冻结日期";
+            this.colFreezeDate.Name = "colFreezeDate";
+            this.colFreezeDate.ReadOnly = true;
+            // 
+            // colUnfreezeReason
+            // 
+            this.colUnfreezeReason.DataPropertyName = "UnfreezeReason";
+            this.colUnfreezeReason.HeaderText = "解冻原因";
+            this.colUnfreezeReason.Name = "colUnfreezeReason";
+            this.colUnfreezeReason.ReadOnly = true;
+            // 
+            // colUnfreezer
+            // 
+            this.colUnfreezer.DataPropertyName = "Unfreezer";
+            this.colUnfreezer.HeaderText = "解冻人";
+            this.colUnfreezer.Name = "colUnfreezer";
+            this.colUnfreezer.ReadOnly = true;
+            // 
+            // colUnfreezeDate
+            // 
+            this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
+            dataGridViewCellStyle17.Format = "d";
+            dataGridViewCellStyle17.NullValue = null;
+            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle17;
+            this.colUnfreezeDate.HeaderText = "解冻日期";
+            this.colUnfreezeDate.Name = "colUnfreezeDate";
+            this.colUnfreezeDate.ReadOnly = true;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
+            // 
+            // colGDCurrency
+            // 
+            this.colGDCurrency.DataPropertyName = "GuaranteeDepositCurrency";
+            this.colGDCurrency.HeaderText = "币别";
+            this.colGDCurrency.Name = "colGDCurrency";
+            this.colGDCurrency.ReadOnly = true;
+            // 
+            // colGDAmount
+            // 
+            this.colGDAmount.DataPropertyName = "GuaranteeDepositAmount";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            this.colGDAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colGDAmount.HeaderText = "保证金";
+            this.colGDAmount.Name = "colGDAmount";
+            this.colGDAmount.ReadOnly = true;
+            // 
+            // colDepositDate
+            // 
+            this.colDepositDate.DataPropertyName = "DepositDate";
+            dataGridViewCellStyle2.Format = "d";
+            this.colDepositDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDepositDate.HeaderText = "保证金日";
+            this.colDepositDate.Name = "colDepositDate";
+            this.colDepositDate.ReadOnly = true;
+            // 
             // ClientDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4588,12 +4575,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelGuaranteePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diDepositDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gdBindingSource)).EndInit();
-            this.tabPanelReview.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReviews)).EndInit();
-            this.groupPanelReview.ResumeLayout(false);
-            this.groupPanelReview.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.reviewBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reviewDateDateTimePicker)).EndInit();
             this.tabPanelClient.ResumeLayout(false);
             this.groupPanelClientContact.ResumeLayout(false);
             this.groupPanelClientContact.PerformLayout();
@@ -4604,6 +4585,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientStat.PerformLayout();
             this.groupPanelClientBasic.ResumeLayout(false);
             this.groupPanelClientBasic.PerformLayout();
+            this.tabPanelReview.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReviews)).EndInit();
+            this.groupPanelReview.ResumeLayout(false);
+            this.groupPanelReview.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reviewBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reviewDateDateTimePicker)).EndInit();
             this.tabPanelContract.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvContracts)).EndInit();
             this.groupPanelContract.ResumeLayout(false);
@@ -4627,13 +4614,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         #endregion
 
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diDepositDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGDCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGDAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepositDate;
         private DevComponents.DotNetBar.Validator.SuperValidator gdValidator;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator21;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator20;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator9;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGDCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGDAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepositDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colApproveType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFreezeReason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFreezer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFreezeDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnfreezeReason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnfreezer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnfreezeDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

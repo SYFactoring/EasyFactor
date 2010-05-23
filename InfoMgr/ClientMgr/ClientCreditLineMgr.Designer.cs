@@ -18,15 +18,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbClientGroupType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvClientCreditLines;
         private DevComponents.DotNetBar.LabelX lblClientEDICode;
@@ -248,8 +239,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.Size = new System.Drawing.Size(935, 314);
             this.dgvClientCreditLines.TabIndex = 1;
             this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            this.dgvClientCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvClientCreditLines_RowPostPaint);
             this.dgvClientCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvClientCreditLines_DataBindingComplete);
+            this.dgvClientCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvClientCreditLines_RowPostPaint);
             // 
             // colClientEDICode
             // 
@@ -292,6 +283,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colCreditLine
             // 
             this.colCreditLine.DataPropertyName = "CreditLine";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Format = "N2";
             this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
             this.colCreditLine.HeaderText = "╤Н╤хиооч";
@@ -335,5 +327,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
     }
 }

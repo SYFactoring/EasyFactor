@@ -633,6 +633,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colRefundAmount
             // 
             this.colRefundAmount.DataPropertyName = "RefundAmount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Format = "N2";
             this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colRefundAmount.HeaderText = "»¹¿î½ð¶î";
@@ -712,5 +713,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
+
     }
 }

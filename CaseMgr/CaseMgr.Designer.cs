@@ -14,30 +14,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.Controls.ComboTree cbOwnerDepts;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
         private System.Windows.Forms.ContextMenuStrip cmuContractMgr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAppDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseMark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperationType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOPName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -143,6 +119,17 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblOnwerDept = new DevComponents.DotNetBar.LabelX();
             this.dgvCases = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaculateCurr = new System.Windows.Forms.ToolStripMenuItem();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -167,17 +154,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuContractMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCaseSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCaseNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverNegNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaculateCurr = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -671,6 +647,88 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCases_RowPostPaint);
             // 
+            // cmuContractMgr
+            // 
+            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCaseSelect,
+            this.menuItemCaseDetail,
+            this.toolStripSeparator,
+            this.menuItemCaseNew,
+            this.menuItemCreditCoverNegNew,
+            this.menuItemCaseDelete,
+            this.toolStripSeparator1,
+            this.menuItemLegerReport,
+            this.menuItemCaseExport,
+            this.menuItemCaculateCurr});
+            this.cmuContractMgr.Name = "cmuContractMgr";
+            this.cmuContractMgr.Size = new System.Drawing.Size(156, 192);
+            // 
+            // menuItemCaseSelect
+            // 
+            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
+            this.menuItemCaseSelect.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCaseSelect.Text = "选定案件";
+            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
+            // 
+            // menuItemCaseDetail
+            // 
+            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCaseDetail.Text = "详细信息";
+            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(152, 6);
+            // 
+            // menuItemCaseNew
+            // 
+            this.menuItemCaseNew.Name = "menuItemCaseNew";
+            this.menuItemCaseNew.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCaseNew.Text = "新建案件";
+            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
+            // 
+            // menuItemCreditCoverNegNew
+            // 
+            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
+            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
+            this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
+            // 
+            // menuItemCaseDelete
+            // 
+            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
+            this.menuItemCaseDelete.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCaseDelete.Text = "删除案件";
+            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
+            // 
+            // menuItemLegerReport
+            // 
+            this.menuItemLegerReport.Name = "menuItemLegerReport";
+            this.menuItemLegerReport.Size = new System.Drawing.Size(155, 22);
+            this.menuItemLegerReport.Text = "导出台帐";
+            this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
+            // 
+            // menuItemCaseExport
+            // 
+            this.menuItemCaseExport.Name = "menuItemCaseExport";
+            this.menuItemCaseExport.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCaseExport.Text = "导出案子";
+            this.menuItemCaseExport.Click += new System.EventHandler(this.ExportCases);
+            // 
+            // menuItemCaculateCurr
+            // 
+            this.menuItemCaculateCurr.Name = "menuItemCaculateCurr";
+            this.menuItemCaculateCurr.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCaculateCurr.Text = "修复多币种Bug";
+            this.menuItemCaculateCurr.Click += new System.EventHandler(this.CaculateFinance);
+            // 
             // colCaseCode
             // 
             this.colCaseCode.DataPropertyName = "CaseCode";
@@ -774,6 +832,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colAssignAmount
             // 
             this.colAssignAmount.DataPropertyName = "AssignAmountByDate";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle3.Format = "N2";
             dataGridViewCellStyle3.NullValue = null;
             this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle3;
@@ -785,6 +844,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colFinanceAmount
             // 
             this.colFinanceAmount.DataPropertyName = "FinanceAmountByDate";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle4.Format = "N2";
             dataGridViewCellStyle4.NullValue = null;
             this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle4;
@@ -796,6 +856,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colCommissionIncome
             // 
             this.colCommissionIncome.DataPropertyName = "CommissionIncomeByDate";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle5.Format = "N2";
             dataGridViewCellStyle5.NullValue = null;
             this.colCommissionIncome.DefaultCellStyle = dataGridViewCellStyle5;
@@ -807,6 +868,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colNetInterestIncome
             // 
             this.colNetInterestIncome.DataPropertyName = "NetInterestIncomeByDate";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle6.Format = "N2";
             this.colNetInterestIncome.DefaultCellStyle = dataGridViewCellStyle6;
             this.colNetInterestIncome.HeaderText = "净利息收入";
@@ -817,6 +879,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colMarginIncome
             // 
             this.colMarginIncome.DataPropertyName = "MarginIncomeByDate";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle7.Format = "N2";
             this.colMarginIncome.DefaultCellStyle = dataGridViewCellStyle7;
             this.colMarginIncome.HeaderText = "代付利差收入";
@@ -827,6 +890,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colTotalIncome
             // 
             this.colTotalIncome.DataPropertyName = "TotalIncomeByDate";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle8.Format = "N2";
             this.colTotalIncome.DefaultCellStyle = dataGridViewCellStyle8;
             this.colTotalIncome.HeaderText = "总收入";
@@ -837,6 +901,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colAssignOutstanding
             // 
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle9.Format = "N2";
             this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle9;
             this.colAssignOutstanding.HeaderText = "应收帐款余额";
@@ -846,6 +911,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colTotalAssignOutstanding
             // 
             this.colTotalAssignOutstanding.DataPropertyName = "TotalAssignOutstanding";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle10.Format = "N2";
             dataGridViewCellStyle10.NullValue = null;
             this.colTotalAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle10;
@@ -856,6 +922,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colCreditCoverOutstanding
             // 
             this.colCreditCoverOutstanding.DataPropertyName = "CreditCoverOutstanding";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle11.Format = "N2";
             this.colCreditCoverOutstanding.DefaultCellStyle = dataGridViewCellStyle11;
             this.colCreditCoverOutstanding.HeaderText = "剩余信用风险额度";
@@ -865,6 +932,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colFinanceOutstanding
             // 
             this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle12.Format = "N2";
             dataGridViewCellStyle12.NullValue = null;
             this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle12;
@@ -875,6 +943,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colTotalFinanceOutstanding
             // 
             this.colTotalFinanceOutstanding.DataPropertyName = "TotalFinanceOutstanding";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle13.Format = "N2";
             this.colTotalFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle13;
             this.colTotalFinanceOutstanding.HeaderText = "总融资余额";
@@ -884,93 +953,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // colFinanceLineOutstanding
             // 
             this.colFinanceLineOutstanding.DataPropertyName = "FinanceLineOutstanding";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle14.Format = "N2";
             this.colFinanceLineOutstanding.DefaultCellStyle = dataGridViewCellStyle14;
             this.colFinanceLineOutstanding.HeaderText = "剩余融资额度";
             this.colFinanceLineOutstanding.Name = "colFinanceLineOutstanding";
             this.colFinanceLineOutstanding.ReadOnly = true;
-            // 
-            // cmuContractMgr
-            // 
-            this.cmuContractMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCaseSelect,
-            this.menuItemCaseDetail,
-            this.toolStripSeparator,
-            this.menuItemCaseNew,
-            this.menuItemCreditCoverNegNew,
-            this.menuItemCaseDelete,
-            this.toolStripSeparator1,
-            this.menuItemLegerReport,
-            this.menuItemCaseExport,
-            this.menuItemCaculateCurr});
-            this.cmuContractMgr.Name = "cmuContractMgr";
-            this.cmuContractMgr.Size = new System.Drawing.Size(156, 192);
-            // 
-            // menuItemCaseSelect
-            // 
-            this.menuItemCaseSelect.Name = "menuItemCaseSelect";
-            this.menuItemCaseSelect.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseSelect.Text = "选定案件";
-            this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
-            // 
-            // menuItemCaseDetail
-            // 
-            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseDetail.Text = "详细信息";
-            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(152, 6);
-            // 
-            // menuItemCaseNew
-            // 
-            this.menuItemCaseNew.Name = "menuItemCaseNew";
-            this.menuItemCaseNew.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseNew.Text = "新建案件";
-            this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
-            // 
-            // menuItemCreditCoverNegNew
-            // 
-            this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
-            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCreditCoverNegNew.Text = "新建额度申请";
-            this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
-            // 
-            // menuItemCaseDelete
-            // 
-            this.menuItemCaseDelete.Name = "menuItemCaseDelete";
-            this.menuItemCaseDelete.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseDelete.Text = "删除案件";
-            this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
-            // 
-            // menuItemLegerReport
-            // 
-            this.menuItemLegerReport.Name = "menuItemLegerReport";
-            this.menuItemLegerReport.Size = new System.Drawing.Size(155, 22);
-            this.menuItemLegerReport.Text = "导出台帐";
-            this.menuItemLegerReport.Click += new System.EventHandler(this.ReportLeger);
-            // 
-            // menuItemCaseExport
-            // 
-            this.menuItemCaseExport.Name = "menuItemCaseExport";
-            this.menuItemCaseExport.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseExport.Text = "导出案子";
-            this.menuItemCaseExport.Click += new System.EventHandler(this.ExportCases);
-            // 
-            // menuItemCaculateCurr
-            // 
-            this.menuItemCaculateCurr.Name = "menuItemCaculateCurr";
-            this.menuItemCaculateCurr.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaculateCurr.Text = "修复多币种Bug";
-            this.menuItemCaculateCurr.Click += new System.EventHandler(this.CaculateFinance);
             // 
             // CaseMgr
             // 
@@ -992,5 +980,30 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperationType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAppDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseMark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOPName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNetInterestIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMarginIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalIncome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditCoverOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
     }
 }

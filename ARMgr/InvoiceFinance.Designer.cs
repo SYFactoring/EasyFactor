@@ -31,18 +31,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchSave;
         private DevComponents.DotNetBar.ButtonX btnFinanceBatchSelect;
         private System.Windows.Forms.ContextMenuStrip cmuInvoiceFinance;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private DevComponents.DotNetBar.Validator.CompareValidator compareValidator1;
         /// <summary> 
         /// Required designer variable.
@@ -518,7 +506,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.financeTypeComboBoxEx.FormattingEnabled = true;
             this.financeTypeComboBoxEx.ItemHeight = 14;
             this.financeTypeComboBoxEx.Items.AddRange(new object[] {
-                "全部",
+            "全部",
             "保理预付款(表内)",
             "卖方代付",
             "买方代付",
@@ -743,10 +731,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvLogs.Size = new System.Drawing.Size(1257, 370);
             this.dgvLogs.TabIndex = 2;
-            this.dgvLogs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellValueChanged);
-            this.dgvLogs.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvInvoices_CellValidating);
-            this.dgvLogs.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             this.dgvLogs.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellContentClick);
+            this.dgvLogs.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvInvoices_CellValidating);
+            this.dgvLogs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellValueChanged);
+            this.dgvLogs.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvInvoices_RowHeaderMouseDoubleClick);
             // 
             // cmuInvoiceFinance
             // 
@@ -972,6 +960,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colAssignAmount
             // 
             this.colAssignAmount.DataPropertyName = "AssignAmount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Format = "N2";
             this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAssignAmount.HeaderText = "转让金额";
@@ -981,6 +970,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colAssignOutstanding
             // 
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle3.Format = "N2";
             this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAssignOutstanding.HeaderText = "转让余额";
@@ -1009,6 +999,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colInvoiceFinanceOutstanding
             // 
             this.colInvoiceFinanceOutstanding.DataPropertyName = "InvoiceFinanceOutstanding";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle4.Format = "N2";
             this.colInvoiceFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
             this.colInvoiceFinanceOutstanding.HeaderText = "融资余额";
@@ -1018,6 +1009,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colInvoiceFinanceAmount
             // 
             this.colInvoiceFinanceAmount.DataPropertyName = "InvoiceFinanceAmount";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle5.Format = "N2";
             this.colInvoiceFinanceAmount.DefaultCellStyle = dataGridViewCellStyle5;
             this.colInvoiceFinanceAmount.HeaderText = "已融资金额";
@@ -1026,6 +1018,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinanceAmount
             // 
             this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle6.Format = "N2";
             this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle6;
             this.colFinanceAmount.HeaderText = "本次融资金额";
@@ -1034,6 +1027,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colCommission
             // 
             this.colCommission.DataPropertyName = "Commission";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle7.Format = "N2";
             this.colCommission.DefaultCellStyle = dataGridViewCellStyle7;
             this.colCommission.HeaderText = "手续费";
@@ -1075,5 +1069,18 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

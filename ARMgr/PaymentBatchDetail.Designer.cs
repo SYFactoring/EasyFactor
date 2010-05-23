@@ -17,12 +17,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// Required designer variable.
         /// </summary>
         private System.Windows.Forms.ContextMenuStrip cmuLogMgr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
@@ -395,8 +389,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvPaymentLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPaymentLogs.Size = new System.Drawing.Size(404, 371);
             this.dgvPaymentLogs.TabIndex = 0;
-            this.dgvPaymentLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPaymentLogs_RowPostPaint);
             this.dgvPaymentLogs.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailInvoice);
+            this.dgvPaymentLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPaymentLogs_RowPostPaint);
             // 
             // tabItemInvoices
             // 
@@ -510,9 +504,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.checkStatusComboBox.FormattingEnabled = true;
             this.checkStatusComboBox.Items.AddRange(new object[] {
-            BATCH.UNCHECK,
-            BATCH.CHECK,
-            BATCH.REJECT});
+            "Î´¸´ºË",
+            "ÒÑ¸´ºË",
+            "¸´ºËÎ´Í¨¹ý"});
             this.checkStatusComboBox.Location = new System.Drawing.Point(116, 203);
             this.checkStatusComboBox.Name = "checkStatusComboBox";
             this.checkStatusComboBox.Size = new System.Drawing.Size(162, 21);
@@ -733,6 +727,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colAssignOutstanding
             // 
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Format = "N2";
             this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAssignOutstanding.HeaderText = "×ªÈÃÓà¶î";
@@ -742,6 +737,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colPaymentAmount
             // 
             this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle3.Format = "N2";
             this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colPaymentAmount.HeaderText = "¸¶¿î½ð¶î";
@@ -796,5 +792,12 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
     }
 }

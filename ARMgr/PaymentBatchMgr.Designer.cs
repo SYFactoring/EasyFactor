@@ -672,6 +672,7 @@ namespace CMBC.EasyFactor.ARMgr
             // colPaymentAmount
             // 
             this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Format = "N2";
             this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colPaymentAmount.HeaderText = "¸¶¿î½ð¶î";

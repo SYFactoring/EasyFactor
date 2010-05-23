@@ -27,6 +27,24 @@ namespace CMBC.EasyFactor.DB.dbml
         #region?Properties?(18)?
 
         /// <summary>
+        ///  «∑ÒΩ·«Â
+        /// </summary>
+        public bool IsClear
+        {
+            get
+            {
+                if (TypeUtil.EqualsZero(this.AssignOutstanding) && TypeUtil.EqualsZero(this.FinanceOutstanding))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets
         /// </summary>
         public DateTime AssignDate

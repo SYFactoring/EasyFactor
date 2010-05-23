@@ -12,26 +12,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
         private System.Windows.Forms.ContextMenuStrip cmuCreditCoverMgr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorCountry;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNetPaymentTerm;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPriceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -102,6 +82,8 @@ namespace CMBC.EasyFactor.CaseMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblLocation = new DevComponents.DotNetBar.LabelX();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
             this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -125,6 +107,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbSellerFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblSellerFactorCode = new DevComponents.DotNetBar.LabelX();
             this.dgvCreditCoverNegs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCreditCoverNegExport = new System.Windows.Forms.ToolStripMenuItem();
             this.colNegoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -145,13 +132,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOwnerDept = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuCreditCoverMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCreditCoverSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCreditCoverNegExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.lblLocation = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -199,6 +179,32 @@ namespace CMBC.EasyFactor.CaseMgr
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // cbLocation
+            // 
+            this.cbLocation.DisplayMember = "Text";
+            this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLocation.FormattingEnabled = true;
+            this.cbLocation.ItemHeight = 14;
+            this.cbLocation.Location = new System.Drawing.Point(65, 26);
+            this.cbLocation.Name = "cbLocation";
+            this.cbLocation.Size = new System.Drawing.Size(133, 20);
+            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbLocation.TabIndex = 25;
+            // 
+            // lblLocation
+            // 
+            this.lblLocation.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblLocation.BackgroundStyle.Class = "";
+            this.lblLocation.Location = new System.Drawing.Point(6, 28);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(56, 16);
+            this.lblLocation.TabIndex = 24;
+            this.lblLocation.Text = "业务地区";
             // 
             // tbCreateUserName
             // 
@@ -600,6 +606,40 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCreditCoverNegs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCreditCoverNegs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCreditCoverNegs_RowPostPaint);
             // 
+            // cmuCreditCoverMgr
+            // 
+            this.cmuCreditCoverMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCreditCoverSelect,
+            this.menuItemCreditCoverDetail,
+            this.toolStripSeparator1,
+            this.menuItemCreditCoverNegExport});
+            this.cmuCreditCoverMgr.Name = "cmuContractMgr";
+            this.cmuCreditCoverMgr.Size = new System.Drawing.Size(147, 76);
+            // 
+            // menuItemCreditCoverSelect
+            // 
+            this.menuItemCreditCoverSelect.Name = "menuItemCreditCoverSelect";
+            this.menuItemCreditCoverSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverSelect.Text = "选定额度申请";
+            // 
+            // menuItemCreditCoverDetail
+            // 
+            this.menuItemCreditCoverDetail.Name = "menuItemCreditCoverDetail";
+            this.menuItemCreditCoverDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverDetail.Text = "详细信息";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            // 
+            // menuItemCreditCoverNegExport
+            // 
+            this.menuItemCreditCoverNegExport.Name = "menuItemCreditCoverNegExport";
+            this.menuItemCreditCoverNegExport.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNegExport.Text = "导出额度申请";
+            this.menuItemCreditCoverNegExport.Click += new System.EventHandler(this.ExportCreditCoverNeg);
+            // 
             // colNegoID
             // 
             this.colNegoID.DataPropertyName = "NegoID";
@@ -687,6 +727,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colRequestAmount
             // 
             this.colRequestAmount.DataPropertyName = "RequestAmount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Format = "N2";
             this.colRequestAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colRequestAmount.HeaderText = "申请额度";
@@ -705,6 +746,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // colReplyAmount
             // 
             this.colReplyAmount.DataPropertyName = "ReplyAmount";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle4.Format = "N2";
             this.colReplyAmount.DefaultCellStyle = dataGridViewCellStyle4;
             this.colReplyAmount.HeaderText = "回复额度";
@@ -764,66 +806,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCreateUserName.ReadOnly = true;
             this.colCreateUserName.Width = 50;
             // 
-            // cmuCreditCoverMgr
-            // 
-            this.cmuCreditCoverMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCreditCoverSelect,
-            this.menuItemCreditCoverDetail,
-            this.toolStripSeparator1,
-            this.menuItemCreditCoverNegExport});
-            this.cmuCreditCoverMgr.Name = "cmuContractMgr";
-            this.cmuCreditCoverMgr.Size = new System.Drawing.Size(147, 76);
-            // 
-            // menuItemCreditCoverSelect
-            // 
-            this.menuItemCreditCoverSelect.Name = "menuItemCreditCoverSelect";
-            this.menuItemCreditCoverSelect.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverSelect.Text = "选定额度申请";
-            // 
-            // menuItemCreditCoverDetail
-            // 
-            this.menuItemCreditCoverDetail.Name = "menuItemCreditCoverDetail";
-            this.menuItemCreditCoverDetail.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverDetail.Text = "详细信息";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
-            // 
-            // menuItemCreditCoverNegExport
-            // 
-            this.menuItemCreditCoverNegExport.Name = "menuItemCreditCoverNegExport";
-            this.menuItemCreditCoverNegExport.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditCoverNegExport.Text = "导出额度申请";
-            this.menuItemCreditCoverNegExport.Click += new System.EventHandler(this.ExportCreditCoverNeg);
-            // 
-            // cbLocation
-            // 
-            this.cbLocation.DisplayMember = "Text";
-            this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLocation.FormattingEnabled = true;
-            this.cbLocation.ItemHeight = 14;
-            this.cbLocation.Location = new System.Drawing.Point(65, 26);
-            this.cbLocation.Name = "cbLocation";
-            this.cbLocation.Size = new System.Drawing.Size(133, 20);
-            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbLocation.TabIndex = 25;
-            // 
-            // lblLocation
-            // 
-            this.lblLocation.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblLocation.BackgroundStyle.Class = "";
-            this.lblLocation.Location = new System.Drawing.Point(6, 28);
-            this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(56, 16);
-            this.lblLocation.TabIndex = 24;
-            this.lblLocation.Text = "业务地区";
-            // 
             // CreditCoverNegMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -844,5 +826,26 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNegoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorCountry;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellerFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCaseCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNetPaymentTerm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReplyDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIFPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPriceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
     }
 }

@@ -399,11 +399,11 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     selectedBatches.Add(batch);
 
-                    if (batch.CheckStatus != BATCH.CHECK)
-                    {
-                        MessageBoxEx.Show("该批次状态不属于已审核，不能生成报表，批次号： " + batch.AssignBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return null;
-                    }
+                    //if (batch.CheckStatus != BATCH.CHECK)
+                    //{
+                    //    MessageBoxEx.Show("该批次状态不属于已审核，不能生成报表，批次号： " + batch.AssignBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //    return null;
+                    //}
                 }
             }
 
@@ -1718,5 +1718,22 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion?Methods?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportAssignBatch(object sender, EventArgs e)
+        {
+            List<InvoiceAssignBatch> selectedBatches = this.GetSelectedBatches();
+            if (selectedBatches == null)
+            {
+                return;
+            }
+
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_ASSIGN, selectedBatches);
+            form.ShowDialog(this);
+        }
     }
 }
