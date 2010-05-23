@@ -224,6 +224,17 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Location
+        {
+            get
+            {
+                return this.Case.OwnerDepartment.LocationName;
+            }
+        }
+
 		#endregion?Properties?
 
 
