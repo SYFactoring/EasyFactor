@@ -54,8 +54,7 @@ namespace CMBC.EasyFactor.Help
         /// <param name="e"></param>
         private void SaveSetting(object sender, EventArgs e)
         {
-            ConfigurationSettings.AppSettings["ReportPath"] = this.tbReportPath.Text;
-            ConfigurationSettings.AppSettings["LegerPath"] = this.tbLegerPath.Text;
+
         }
 
         /// <summary>

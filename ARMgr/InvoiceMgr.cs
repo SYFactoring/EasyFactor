@@ -174,7 +174,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 this.tbAssignOverDueDays.Text = "1";
                 this.tbFinanceOverDueDays.Text = "1";
-                this.QueryInvoices(null, null);
+            //    this.QueryInvoices(null, null);
             }
             else if (opInvoiceType == OpInvoiceType.ASSIGN_DUE)
             {

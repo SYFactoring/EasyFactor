@@ -559,7 +559,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="batchGroup"></param>
-        private void ReportCommissionImpl(IGrouping<Client, InvoiceFinanceBatch> batchGroup)
+        private static void ReportCommissionImpl(IGrouping<Client, InvoiceFinanceBatch> batchGroup)
         {
 
             ApplicationClass app = new ApplicationClass() { Visible = false };

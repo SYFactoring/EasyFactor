@@ -1982,7 +1982,9 @@ namespace CMBC.EasyFactor.Utils
                     if (invoice.AssignOverDueDays >= 0)
                     {
                         ((Range)datasheet.Cells[row + 2, column - 2]).Interior.ColorIndex = 6;
+                        datasheet.Cells[row + 2, 16] = invoice.AssignOverDueDays;
                     }
+
                     for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
                     {
                         column = 11;
@@ -1997,7 +1999,7 @@ namespace CMBC.EasyFactor.Utils
                             ((Range)datasheet.Cells[row + 2 + i, column - 1]).Interior.ColorIndex = 3;
                         }
 
-                        datasheet.Cells[row + 2, column++] = invoice.AssignOverDueDays;
+                        column++;
                         datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceOverDueDays;
                     }
 

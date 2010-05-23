@@ -567,7 +567,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="sheet"></param>
         /// <param name="batchGroup"></param>
         /// <param name="transactionType"></param>
-        private void ReportAssignSheet(Worksheet sheet, IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
+        private static void ReportAssignSheet(Worksheet sheet, IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
             sheet.PageSetup.Zoom = false;
             sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
@@ -715,7 +715,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                this.ReportAssignSheet(sheet, batchGroup, transactionType);
+                ReportAssignSheet(sheet, batchGroup, transactionType);
                 app.Visible = true;
             }
             catch (Exception e1)
@@ -775,7 +775,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="sheet"></param>
         /// <param name="batchGroup"></param>
         /// <param name="transactionType"></param>
-        private void ReportCommissionSheet(Worksheet sheet, IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
+        private static void ReportCommissionSheet(Worksheet sheet, IGrouping<Client, InvoiceAssignBatch> batchGroup)
         {
             sheet.PageSetup.Zoom = false;
             sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
@@ -911,7 +911,7 @@ namespace CMBC.EasyFactor.ARMgr
             Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
             try
             {
-                ReportCommissionSheet(sheet, batchGroup, transactionType);
+                ReportCommissionSheet(sheet, batchGroup);
                 app.Visible = true;
             }
             catch (Exception e1)
@@ -1109,7 +1109,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="batchGroup"></param>
         /// <param name="transactionType"></param>
-        private void ReportFinanceSheet(Worksheet sheet, IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
+        private static void ReportFinanceSheet(Worksheet sheet, IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
             //sheet.PageSetup.Zoom = false;
             //sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
@@ -1367,7 +1367,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                this.ReportFinanceSheet(sheet, batchGroup, transactionType);
+                ReportFinanceSheet(sheet, batchGroup, transactionType);
                 Case firstCase = batchGroup.First().Case;
                 CDA activeCDA = firstCase.ActiveCDA;
                 if (activeCDA != null && activeCDA.CommissionType == "按融资金额")
@@ -1601,7 +1601,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="batch"></param>
-        private void ReportThreeImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
+        private static void ReportThreeImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
             ApplicationClass app = new ApplicationClass() { Visible = false };
             if (app == null)
@@ -1629,22 +1629,22 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     Worksheet commissionSheet = (Worksheet)workbook.Sheets[1];
                     commissionSheet.Name = "保理费用明细表";
-                    this.ReportCommissionSheet(commissionSheet, batchGroup, transactionType);
+                    ReportCommissionSheet(commissionSheet, batchGroup);
 
                     Worksheet financeSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
                     financeSheet.Name = "可融资账款明细表";
-                    this.ReportFinanceSheet(financeSheet, batchGroup, transactionType);
+                    ReportFinanceSheet(financeSheet, batchGroup, transactionType);
                 }
                 else
                 {
                     Worksheet financeSheet = (Worksheet)workbook.Sheets[1];
                     financeSheet.Name = "可融资账款明细表";
-                    this.ReportFinanceSheet(financeSheet, batchGroup, transactionType);
+                    ReportFinanceSheet(financeSheet, batchGroup, transactionType);
                 }
 
                 Worksheet assignSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
                 assignSheet.Name = "应收账款转让明细表";
-                this.ReportAssignSheet(assignSheet, batchGroup, transactionType);
+                ReportAssignSheet(assignSheet, batchGroup, transactionType);
 
                 string filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}.xls", SystemUtil.DesktopPath, DateTime.Today, batchGroup.Key.ToString());
                 workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false, Type.Missing, Type.Missing, Type.Missing);
