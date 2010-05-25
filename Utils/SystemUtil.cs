@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.Utils
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Linq;
@@ -19,11 +20,23 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public sealed class SystemUtil
     {
+        private static readonly Dictionary<string,string> _DBDictionary = InitializeDBDictionary();
+
         /// <summary>
         /// 
         /// </summary>
-        private SystemUtil()
+        static Dictionary<string,string> InitializeDBDictionary()
         {
+            string connectionString= Properties.Settings.Default.FOSConnectionString;
+            Dictionary<string,string> result =  new Dictionary<string,string>();
+            foreach(string pair in connectionString.Split(new char[]{';'}))
+            {
+                string key = pair.Split(new char[]{'='})[0].Trim();
+                string value = pair.Split(new char[] { '=' })[1].Trim();
+                result.Add(key, value);
+            }
+
+            return result;
         }
 
         #region?Methods?(2)?
@@ -144,5 +157,49 @@ namespace CMBC.EasyFactor.Utils
         }
 
         #endregion?Methods?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string ServerName
+        {
+            get
+            {
+                return _DBDictionary["Data Source"];
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string UserName
+        {
+            get
+            {
+                return _DBDictionary["User ID"];
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string Password
+        {
+            get
+            {
+                return _DBDictionary["Password"];
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string DataBaseName
+        {
+            get
+            {
+                return _DBDictionary["Initial Catalog"];
+            }
+        }
     }
 }

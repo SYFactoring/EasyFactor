@@ -1,4 +1,5 @@
-﻿//-----------------------------------------------------------------------
+﻿using System.IO;
+//-----------------------------------------------------------------------
 // <copyright file="MainWindow.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
@@ -28,9 +29,9 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
     {
-		#region Methods (3) 
+        #region Methods (3)
 
-		// Private Methods (3) 
+        // Private Methods (3) 
 
         /// <summary>
         /// 
@@ -74,7 +75,7 @@ namespace CMBC.EasyFactor
             }
         }
 
-		#endregion Methods 
+        #endregion Methods
 
 
 
@@ -1464,6 +1465,12 @@ namespace CMBC.EasyFactor
         {
             //SystemSetting form = new SystemSetting();
             //form.ShowDialog(this);
+        }
+
+        private void BackupDatabase(object sender, EventArgs e)
+        {
+            string destinationPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + Path.DirectorySeparatorChar + SystemUtil.DataBaseName + ".bak";
+            BackupUtil.BackupDatabase(SystemUtil.DataBaseName, SystemUtil.UserName, SystemUtil.Password, SystemUtil.ServerName, destinationPath);
         }
     }
 }
