@@ -610,6 +610,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.get_Range("A4", "A4").RowHeight = 30;
 
             int row = 6;
+
             foreach (InvoiceAssignBatch selectedBatch in batchGroup)
             {
                 Factor factor = null;
@@ -663,16 +664,33 @@ namespace CMBC.EasyFactor.ARMgr
                     row++;
                 }
 
-                foreach (CreditNote creditNote in selectedBatch.CreditNotes)
-                {
-                    sheet.Cells[row, 1] = "'" + creditNote.CreditNoteNo;
-                    sheet.Cells[row, 2] = creditNote.PaymentAmount;
-                    sheet.Cells[row, 3] = creditNote.CreditNoteDate;
-                    row++;
-                }
-
                 sheet.Cells[row, 1] = "小计";
                 sheet.Cells[row, 2] = selectedBatch.AssignAmount;
+
+                if (selectedBatch.CreditNotes.Count > 0)
+                {
+                    row++;
+                    row++;
+                    sheet.Cells[row, 1] = "贷项通知号";
+                    sheet.Cells[row, 2] = "贷项通知金额";
+                    sheet.Cells[row, 3] = "贷项通知日";
+                    sheet.Cells[row, 4] = "对应发票号";
+                    row++;
+
+                    foreach (CreditNote creditNote in selectedBatch.CreditNotes)
+                    {
+                        sheet.Cells[row, 1] = "'" + creditNote.CreditNoteNo;
+                        sheet.Cells[row, 2] = creditNote.PaymentAmount;
+                        sheet.Cells[row, 3] = creditNote.CreditNoteDate;
+                        sheet.Cells[row, 4] = creditNote.InvoiceNos;
+                        row++;
+                    }
+
+                    sheet.Cells[row, 1] = "小计";
+                    sheet.Cells[row, 2] = selectedBatch.CreditNoteAmount;
+                }
+
+
 
                 int invoiceEnd = row;
                 sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";

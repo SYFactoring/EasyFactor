@@ -129,6 +129,7 @@
       <Column Name="RMName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="OldEDICode" Type="System.String" DbType="varchar(35)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Client_Case" Member="BuyerCases" ThisKey="ClientEDICode" OtherKey="BuyerCode" Type="Case" />
       <Association Name="Client_Case1" Member="SellerCases" ThisKey="ClientEDICode" OtherKey="SellerCode" Type="Case" />
       <Association Name="Client_Client" Member="GroupClients" ThisKey="ClientEDICode" OtherKey="GroupEDICode" Type="Client" />

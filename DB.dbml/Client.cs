@@ -30,6 +30,23 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public string EDICode
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(this.OldEDICode))
+                {
+                    return this.OldEDICode;
+                }
+                else
+                {
+                    return this.ClientEDICode;
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Address
         {
             get

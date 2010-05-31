@@ -57,6 +57,17 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public double? CreditNoteAmount
+        {
+            get
+            {
+                return this.CreditNotes.Sum(c => c.PaymentAmount);
+            }
+        }
+
+        /// <summary>
         /// Gets assign amount
         /// </summary>
         public double AssignAmount

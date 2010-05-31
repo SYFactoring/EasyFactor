@@ -2227,10 +2227,10 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
                     sb.Append(invoice.InvoiceAssignBatch.AssignAmount).Append(',');
                     sb.Append("0,");//CreditNote
-                    sb.Append(curCase.SellerCode).Append(',');
+                    sb.Append(curCase.SellerClient.EDICode).Append(',');
                     //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
                     sb.Append(',');
-                    sb.Append(curCase.BuyerCode).Append(',');
+                    sb.Append(curCase.BuyerClient.EDICode).Append(',');
                     //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
                     sb.Append(',');
                     sb.Append(1).Append(',');
@@ -2314,10 +2314,10 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(log.Invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
                     sb.Append(log.Invoice.InvoiceAssignBatch.AssignAmount).Append(',');
                     sb.Append(log.PaymentAmount).Append(',');//CreditNote
-                    sb.Append(curCase.SellerCode).Append(',');
+                    sb.Append(curCase.SellerClient.EDICode).Append(',');
                     //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
                     sb.Append(',');
-                    sb.Append(curCase.BuyerCode).Append(',');
+                    sb.Append(curCase.BuyerClient.EDICode).Append(',');
                     //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
                     sb.Append(',');
                     sb.Append(1).Append(',');
@@ -2399,10 +2399,10 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
                     sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
                     sb.Append(log.Invoice.InvoiceCurrency).Append(',');
-                    sb.Append(curCase.SellerCode).Append(',');
+                    sb.Append(curCase.SellerClient.EDICode).Append(',');
                     //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
                     sb.Append(',');
-                    sb.Append(curCase.BuyerCode).Append(',');
+                    sb.Append(curCase.BuyerClient.EDICode).Append(',');
                     //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
                     sb.Append(',');
                     sb.Append(1).Append(',');
@@ -2492,10 +2492,10 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
                     sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
                     sb.Append(log.Invoice.InvoiceCurrency).Append(',');
-                    sb.Append(curCase.SellerCode).Append(',');
+                    sb.Append(curCase.SellerClient.EDICode).Append(',');
                     //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
                     sb.Append(',');
-                    sb.Append(curCase.BuyerCode).Append(',');
+                    sb.Append(curCase.BuyerClient.EDICode).Append(',');
                     //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
                     sb.Append(',');
                     sb.Append(1).Append(',');

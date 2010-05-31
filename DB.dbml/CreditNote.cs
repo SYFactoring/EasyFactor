@@ -67,6 +67,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     sb.Append(log.InvoiceNo).Append(';');
                 }
 
+                sb.Remove(sb.Length - 1, 1);
                 return sb.ToString();
             }
         }

@@ -2684,6 +2684,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
+		private string _OldEDICode;
+		
 		private EntitySet<Case> _BuyerCases;
 		
 		private EntitySet<Case> _SellerCases;
@@ -2774,6 +2776,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
+    partial void OnOldEDICodeChanging(string value);
+    partial void OnOldEDICodeChanged();
     #endregion
 		
 		public Client()
@@ -3436,6 +3440,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OldEDICode", DbType="varchar(35)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string OldEDICode
+		{
+			get
+			{
+				return this._OldEDICode;
+			}
+			set
+			{
+				if ((this._OldEDICode != value))
+				{
+					this.OnOldEDICodeChanging(value);
+					this.SendPropertyChanging();
+					this._OldEDICode = value;
+					this.SendPropertyChanged("OldEDICode");
+					this.OnOldEDICodeChanged();
 				}
 			}
 		}
