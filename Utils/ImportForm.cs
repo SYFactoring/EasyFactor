@@ -3703,17 +3703,16 @@ namespace CMBC.EasyFactor.Utils
 
                             if (assignBatch.Case.TransactionType == "出口保理" || assignBatch.Case.TransactionType == "进口保理")
                             {
-                                isInInvoice = true;
-                            }
-
-                            if (isInInvoice && String.IsNullOrEmpty(invoiceNo))
-                            {
-                                throw new Exception("本案为国际保理案，发票编号不能为空，不能导入，业务编号： " + assignBatchCode);
+                                if (String.IsNullOrEmpty(invoiceNo))
+                                {
+                                    throw new Exception("本案为国际保理案，发票编号不能为空，不能导入，业务编号： " + assignBatchCode);
+                                }
                             }
                         }
 
-                        if (isInInvoice)
+                        if (!String.IsNullOrEmpty(invoiceNo))
                         {
+                            isInInvoice = true;
                             invoice = context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoiceNo && i.AssignBatchNo == assignBatchCode);
                             if (invoice == null)
                             {
