@@ -2,6 +2,7 @@
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Common;
 using System.Data.SqlClient;
+using DevComponents.DotNetBar;
 
 namespace CMBC.EasyFactor.Utils
 {
@@ -47,7 +48,25 @@ namespace CMBC.EasyFactor.Utils
             sqlBackup.Incremental = false;
             sqlBackup.LogTruncation = BackupTruncateLogType.Truncate;
             sqlBackup.FormatMedia = false;
-            sqlBackup.SqlBackup(server);
+            try
+            {
+                sqlBackup.SqlBackup(server);
+            }
+            catch (Exception ex)
+            {
+                String str = "Error for backup " + ex.Message + Environment.NewLine;
+                str += "StackTrace : " + ex.StackTrace + Environment.NewLine;
+                if (ex.InnerException != null)
+                {
+                    str += "Inner1 : " + ex.InnerException.Message + Environment.NewLine;
+                    if (ex.InnerException.InnerException != null)
+                    {
+                        str += "Inner2 : " + ex.InnerException.InnerException.Message + Environment.NewLine;
+                    }
+                }
+
+                MessageBoxEx.Show(str);
+            }
         }
 
         /// <summary>

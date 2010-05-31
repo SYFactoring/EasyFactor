@@ -56,6 +56,11 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
+        INVOICE_REPORT = 0x00008000,
+
+        /// <summary>
+        /// 
+        /// </summary>
         SYSTEM_QUERY = 0x00010000,
 
         /// <summary>
@@ -68,6 +73,10 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         SYSTEM_IMPORT = 0x00040000,
 
+        /// <summary>
+        /// 
+        /// </summary>
+        INVOICE_STAT = 0x00080000
     }
 
     /// <summary>

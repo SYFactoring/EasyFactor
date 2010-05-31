@@ -15,7 +15,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class User
     {
-		#region?Properties?(1)?
+        #region?Properties?(1)?
 
         /// <summary>
         /// 
@@ -34,18 +34,20 @@ namespace CMBC.EasyFactor.DB.dbml
                 reasonList.Add(new PermissionItem(Utils.Permissions.INVOICE_UPDATE, "发票更新权限"));
                 reasonList.Add(new PermissionItem(Utils.Permissions.INVOICE_CHECK, "发票复核权限"));
                 reasonList.Add(new PermissionItem(Utils.Permissions.INVOICE_APPROVE, "发票审核权限"));
+                reasonList.Add(new PermissionItem(Utils.Permissions.INVOICE_REPORT, "业务报表权限"));
                 reasonList.Add(new PermissionItem(Utils.Permissions.SYSTEM_IMPORT, "系统数据导入权限"));
                 reasonList.Add(new PermissionItem(Utils.Permissions.SYSTEM_UPDATE, "系统数据更新权限"));
+                reasonList.Add(new PermissionItem(Utils.Permissions.INVOICE_STAT, "数据统计权限"));
 
                 return reasonList;
             }
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Methods?(1)?
+        #region?Methods?(1)?
 
-		//?Public?Methods?(1)?
+        //?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -66,20 +68,20 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 
 
     public class PermissionItem
     {
-		#region?Fields?(2)?
+        #region?Fields?(2)?
 
         private string name;
         private Permissions perm;
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -92,9 +94,9 @@ namespace CMBC.EasyFactor.DB.dbml
             this.name = name;
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Properties?(2)?
+        #region?Properties?(2)?
 
         /// <summary>
         /// 
@@ -118,6 +120,6 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
     }
 }

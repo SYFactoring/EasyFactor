@@ -174,7 +174,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 this.tbAssignOverDueDays.Text = "1";
                 this.tbFinanceOverDueDays.Text = "1";
-            //    this.QueryInvoices(null, null);
+                //    this.QueryInvoices(null, null);
             }
             else if (opInvoiceType == OpInvoiceType.ASSIGN_DUE)
             {
@@ -719,11 +719,10 @@ namespace CMBC.EasyFactor.ARMgr
                               let buyer = curCase.BuyerClient
                               where seller.ClientNameCN.Contains(clientName) || seller.ClientNameEN.Contains(clientName) || buyer.ClientNameCN.Contains(clientName) || buyer.ClientNameEN.Contains(clientName)
                               let sellerFactor = curCase.SellerFactor
-                              where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName)
                               let buyerFactor = curCase.BuyerFactor
-                              where buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
+                              where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName) || buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
                               where (invoiceNo == string.Empty ? true : invoice.InvoiceNo.Contains(invoiceNo))
-                                && (assignBatchNo==string.Empty?true:invoice.AssignBatchNo.Contains(assignBatchNo))
+                                && (assignBatchNo == string.Empty ? true : invoice.AssignBatchNo.Contains(assignBatchNo))
                                 && (isFlaw == "A" ? true : invoice.IsFlaw == (isFlaw == "Y" ? true : false))
                                 && (isDispute == "A" ? true : invoice.IsDispute == (isDispute == "Y" ? true : false))
                                 && (tbAssignOverDueDays.Text == string.Empty ? true : (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION && invoice.DueDate <= assignOverDueDate))

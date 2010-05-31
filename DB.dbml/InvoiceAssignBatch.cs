@@ -35,6 +35,28 @@ namespace CMBC.EasyFactor.DB.dbml
 		#region?Properties?(10)?
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string FactorCode
+        {
+            get
+            {
+                return this.Case.Factor.FactorCode;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FactorName
+        {
+            get
+            {
+                return this.Case.Factor.ToString();
+            }
+        }
+
+        /// <summary>
         /// Gets assign amount
         /// </summary>
         public double AssignAmount
@@ -146,6 +168,33 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? FactorCommissionAmount
+        {
+            get
+            {
+                CDA activeCDA = this.Case.ActiveCDA;
+                if(activeCDA==null)
+                {
+                    return null;
+                }
+
+                if (this.TransactionType == "出口保理" || this.TransactionType == "国内卖方保理")
+                {
+                    return this.AssignAmount * activeCDA.IFPrice;
+                }
+                else if (this.TransactionType == "进口保理" || this.TransactionType == "国内买方保理")
+                {
+                    return this.AssignAmount * activeCDA.EFPrice;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
         /// <summary>
         /// Gets
         /// </summary>

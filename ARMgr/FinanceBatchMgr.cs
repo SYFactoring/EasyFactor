@@ -536,6 +536,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportCommission(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_REPORT))
+            {
+                return;
+            }
+
             List<InvoiceFinanceBatch> selectedBatches = this.GetSelectedBatches();
             if (selectedBatches == null)
             {

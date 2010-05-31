@@ -22,16 +22,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
     /// </summary>
     public partial class FactorMgr : UserControl
     {
-		#region?Fields?(1)?
+        #region?Fields?(1)?
 
         /// <summary>
         /// 
         /// </summary>
         private BindingSource bs;
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the FactorMgrUI class
@@ -56,9 +56,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.UpdateContextMenu();
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Properties?(3)?
+        #region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -87,11 +87,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             set;
         }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Methods?(10)?
+        #region?Methods?(10)?
 
-		//?Private?Methods?(10)?
+        //?Private?Methods?(10)?
 
         /// <summary>
         /// Event handler when cell double clicked
@@ -269,9 +269,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             var queryResult = context.Factors.Where(f =>
-                                                   ((f.FactorCode == null ? string.Empty : f.FactorCode).Contains(tbFactorCode.Text))
-                                                && ((f.CompanyNameCN == null ? string.Empty : f.CompanyNameCN).Contains(tbFactorName.Text) || (f.CompanyNameEN == null ? string.Empty : f.CompanyNameEN).Contains(tbFactorName.Text))
-                                                && (f.FactorType.Contains(factorType))
+                                                   f.FactorCode.Contains(tbFactorCode.Text)
+                                                && (f.CompanyNameCN.Contains(tbFactorName.Text) || f.CompanyNameEN.Contains(tbFactorName.Text))
+                                                && f.FactorType.Contains(factorType)
                                                 && ((f.CountryName == null ? string.Empty : f.CountryName).Contains(country)));
 
             bs.DataSource = queryResult;
@@ -331,6 +331,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }

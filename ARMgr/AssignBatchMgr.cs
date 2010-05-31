@@ -91,7 +91,12 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            REPORT
+            REPORT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            FACTOR_COMMISSION
         }
 
         #endregion?Enums?
@@ -161,6 +166,12 @@ namespace CMBC.EasyFactor.ARMgr
                 this.dateTo.Value = DateTime.Now.Date;
                 this.cbCheckStatus.Text = BATCH.CHECK;
                 this.QueryBatch(null, null);
+            }
+            else if (this.opBatchType == OpBatchType.FACTOR_COMMISSION)
+            {
+                this.colFactorCode.Visible = true;
+                this.colFactorName.Visible = true;
+                this.colFactorCommissionAmount.Visible = true;
             }
         }
 
@@ -470,6 +481,7 @@ namespace CMBC.EasyFactor.ARMgr
             string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
+            string factorName = this.tbFactorName.Text;
             string transactionType = this.cbTransactionType.Text;
             string location = (string)this.cbLocation.SelectedValue;
 
@@ -480,15 +492,22 @@ namespace CMBC.EasyFactor.ARMgr
 
             context = new DBDataContext();
 
-            IEnumerable<InvoiceAssignBatch> queryResult = context.InvoiceAssignBatches.Where(i =>
-                    (i.AssignBatchNo.Contains(this.tbAssignBatchNo.Text))
-                && (beginDate != this.dateFrom.MinDate ? i.AssignDate >= beginDate : true)
-                && (endDate != this.dateTo.MinDate ? i.AssignDate <= endDate : true)
-                && (status != string.Empty ? i.CheckStatus == status : true)
-                && (i.CreateUserName.Contains(createUserName))
-                && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
-                && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
-                && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
+            IEnumerable<InvoiceAssignBatch> queryResult = from batch in context.InvoiceAssignBatches
+                                                          let curCase = batch.Case
+                                                          where transactionType == "全部" ? true : curCase.TransactionType == transactionType
+                                                                && location == "00" ? true : curCase.OwnerDepartment.LocationCode == location
+                                                                && (curCase.SellerClient.ClientNameCN.Contains(clientName) || curCase.SellerClient.ClientNameEN.Contains(clientName) || curCase.BuyerClient.ClientNameCN.Contains(clientName) || curCase.BuyerClient.ClientNameEN.Contains(clientName))
+                                                          //&& ((curCase.TransactionType == "国内卖方保理" || curCase.TransactionType == "出口保理") && ( curCase.BuyerFactor.CompanyNameCN.Contains(factorName) ||  curCase.BuyerFactor.CompanyNameEN.Contains(factorName))
+                                                          //||  (curCase.TransactionType == "国内买方保理" || curCase.TransactionType == "进口保理") && (curCase.SellerFactor.CompanyNameCN.Contains(factorName) || curCase.SellerFactor.CompanyNameEN.Contains(factorName)))
+                                                          let sellerFactor = curCase.SellerFactor
+                                                          let buyerFactor = curCase.BuyerFactor
+                                                          where sellerFactor.CompanyNameCN.Contains(factorName) || sellerFactor.CompanyNameEN.Contains(factorName) || buyerFactor.CompanyNameCN.Contains(factorName) || buyerFactor.CompanyNameEN.Contains(factorName)
+                                                          where batch.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
+                                                                && (beginDate != this.dateFrom.MinDate ? batch.AssignDate >= beginDate : true)
+                                                                && (endDate != this.dateTo.MinDate ? batch.AssignDate <= endDate : true)
+                                                                && (status != string.Empty ? batch.CheckStatus == status : true)
+                                                                && (batch.CreateUserName.Contains(createUserName))
+                                                          select batch;
 
             this.bs.DataSource = queryResult;
             this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
@@ -551,6 +570,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportAssign(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_REPORT))
+            {
+                return;
+            }
+
             List<InvoiceAssignBatch> selectedBatches = this.GetSelectedBatches();
             if (selectedBatches == null)
             {
@@ -947,6 +971,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportFileCheckList(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_REPORT))
+            {
+                return;
+            }
+
             List<InvoiceAssignBatch> selectedBatches = this.GetSelectedBatches();
             if (selectedBatches == null)
             {
@@ -1095,6 +1124,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportFinance(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_REPORT))
+            {
+                return;
+            }
+
             List<InvoiceAssignBatch> selectedBatches = this.GetSelectedBatches();
             if (selectedBatches == null)
             {
@@ -1409,6 +1443,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportFlaw(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_REPORT))
+            {
+                return;
+            }
+
             List<InvoiceAssignBatch> selectedBatches = GetSelectedBatches();
             if (selectedBatches == null)
             {

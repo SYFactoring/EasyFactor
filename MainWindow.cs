@@ -1339,8 +1339,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportARPayment(object sender, EventArgs e)
         {
-            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
-            this.SetDetailPanel(mgr);
+            if (PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
+            {
+                AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+                this.SetDetailPanel(mgr);
+            }
         }
 
         /// <summary>
@@ -1372,8 +1375,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportFee(object sender, EventArgs e)
         {
-            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
-            this.SetDetailPanel(mgr);
+            if (PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
+            {
+                AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+                this.SetDetailPanel(mgr);
+            }
         }
 
         /// <summary>
@@ -1383,8 +1389,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportFinance(object sender, EventArgs e)
         {
-            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
-            this.SetDetailPanel(mgr);
+            if (PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
+            {
+                AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+                this.SetDetailPanel(mgr);
+            }
         }
 
         /// <summary>
@@ -1394,8 +1403,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportInvoiceFlaw(object sender, EventArgs e)
         {
-            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
-            this.SetDetailPanel(mgr);
+            if (PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
+            {
+                AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+                this.SetDetailPanel(mgr);
+            }
         }
 
         /// <summary>
@@ -1405,8 +1417,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportLeger(object sender, EventArgs e)
         {
-            CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr();
-            this.SetDetailPanel(mgr);
+            if (PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
+            {
+                CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr();
+                this.SetDetailPanel(mgr);
+            }
         }
 
         /// <summary>
@@ -1428,8 +1443,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void StatCase(object sender, EventArgs e)
         {
-            CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.STAT);
-            this.SetDetailPanel(mgr);
+            if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
+            {
+                CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.STAT);
+                this.SetDetailPanel(mgr);
+            }
         }
 
         /// <summary>
@@ -1439,8 +1457,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void StatDepartment(object sender, EventArgs e)
         {
-            DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.DEPARTMENT_STAT);
-            this.SetDetailPanel(mgr);
+            if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
+            {
+                DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.DEPARTMENT_STAT);
+                this.SetDetailPanel(mgr);
+            }
         }
 
         /// <summary>
@@ -1450,8 +1471,11 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void StatLocation(object sender, EventArgs e)
         {
-            DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.LOCATION_STAT);
-            this.SetDetailPanel(mgr);
+            if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
+            {
+                DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.LOCATION_STAT);
+                this.SetDetailPanel(mgr);
+            }
         }
 
         #endregion?Methods?
@@ -1467,10 +1491,32 @@ namespace CMBC.EasyFactor
             //form.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackupDatabase(object sender, EventArgs e)
         {
-            string destinationPath = Path.GetTempPath() + SystemUtil.DataBaseName + ".bak";
-            BackupUtil.BackupDatabase(SystemUtil.ConnectionString, SystemUtil.DataBaseName, destinationPath);
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
+            {
+                string destinationPath = Path.GetTempPath() + SystemUtil.DataBaseName + ".bak";
+                BackupUtil.BackupDatabase(SystemUtil.ConnectionString, SystemUtil.DataBaseName, destinationPath);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StatFactorCommission(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
+            {
+                AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.FACTOR_COMMISSION);
+                this.SetDetailPanel(mgr);
+            }
         }
     }
 }

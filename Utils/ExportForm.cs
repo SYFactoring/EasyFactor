@@ -268,10 +268,6 @@ namespace CMBC.EasyFactor.Utils
             }
 
             this.btnCancel.Text = "¹Ø±Õ";
-            if (e.Error == null)
-            {
-                this.Close();
-            }
         }
 
         /// <summary>

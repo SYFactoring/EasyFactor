@@ -6550,7 +6550,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyNameCN", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyNameCN", DbType="NVarChar(200)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CompanyNameCN
 		{
 			get
@@ -6570,7 +6570,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyNameEN", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyNameEN", DbType="VarChar(200)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CompanyNameEN
 		{
 			get
@@ -8422,9 +8422,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
-		private EntitySet<Invoice> _Invoices;
-		
 		private EntitySet<CreditNote> _CreditNotes;
+		
+		private EntitySet<Invoice> _Invoices;
 		
 		private EntityRef<Case> _Case;
 		
@@ -8458,8 +8458,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		public InvoiceAssignBatch()
 		{
-			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
 			this._CreditNotes = new EntitySet<CreditNote>(new Action<CreditNote>(this.attach_CreditNotes), new Action<CreditNote>(this.detach_CreditNotes));
+			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
 			this._Case = default(EntityRef<Case>);
 			OnCreated();
 		}
@@ -8688,19 +8688,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceAssignBatch_Invoice", Storage="_Invoices", ThisKey="AssignBatchNo", OtherKey="AssignBatchNo")]
-		public EntitySet<Invoice> Invoices
-		{
-			get
-			{
-				return this._Invoices;
-			}
-			set
-			{
-				this._Invoices.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceAssignBatch_CreditNote", Storage="_CreditNotes", ThisKey="AssignBatchNo", OtherKey="AssignBatchNo")]
 		public EntitySet<CreditNote> CreditNotes
 		{
@@ -8711,6 +8698,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			set
 			{
 				this._CreditNotes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceAssignBatch_Invoice", Storage="_Invoices", ThisKey="AssignBatchNo", OtherKey="AssignBatchNo")]
+		public EntitySet<Invoice> Invoices
+		{
+			get
+			{
+				return this._Invoices;
+			}
+			set
+			{
+				this._Invoices.Assign(value);
 			}
 		}
 		
@@ -8768,18 +8768,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		private void attach_Invoices(Invoice entity)
-		{
-			this.SendPropertyChanging();
-			entity.InvoiceAssignBatch = this;
-		}
-		
-		private void detach_Invoices(Invoice entity)
-		{
-			this.SendPropertyChanging();
-			entity.InvoiceAssignBatch = null;
-		}
-		
 		private void attach_CreditNotes(CreditNote entity)
 		{
 			this.SendPropertyChanging();
@@ -8787,6 +8775,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_CreditNotes(CreditNote entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceAssignBatch = null;
+		}
+		
+		private void attach_Invoices(Invoice entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceAssignBatch = this;
+		}
+		
+		private void detach_Invoices(Invoice entity)
 		{
 			this.SendPropertyChanging();
 			entity.InvoiceAssignBatch = null;
