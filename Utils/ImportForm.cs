@@ -1087,6 +1087,7 @@ namespace CMBC.EasyFactor.Utils
                                 if (creditNote == null)
                                 {
                                     creditNote = new CreditNote();
+                                    creditNote.CreditNoteNo = creditNoteNo;
                                     creditNoteList.Add(creditNote);
                                 }
                             }
