@@ -1469,8 +1469,8 @@ namespace CMBC.EasyFactor
 
         private void BackupDatabase(object sender, EventArgs e)
         {
-            string destinationPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + Path.DirectorySeparatorChar + SystemUtil.DataBaseName + ".bak";
-            BackupUtil.BackupDatabase(SystemUtil.DataBaseName, SystemUtil.UserName, SystemUtil.Password, SystemUtil.ServerName, destinationPath);
+            string destinationPath = Path.GetTempPath() + SystemUtil.DataBaseName + ".bak";
+            BackupUtil.BackupDatabase(SystemUtil.ConnectionString, SystemUtil.DataBaseName, destinationPath);
         }
     }
 }

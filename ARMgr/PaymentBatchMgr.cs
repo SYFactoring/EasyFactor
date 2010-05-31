@@ -327,15 +327,18 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
+            List<InvoicePaymentBatch> selectedBatches = this.GetSelectedBatches();
 
-            if (selectedBatch.PaymentType != Payment.CREDIT_NOTE_PAYMENT)
+            foreach (InvoicePaymentBatch selectedBatch in selectedBatches)
             {
-                MessageBoxEx.Show("只有贷项通知可以生成MSG09", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                if (selectedBatch.PaymentType != Payment.CREDIT_NOTE_PAYMENT)
+                {
+                    MessageBoxEx.Show("只有贷项通知可以生成MSG09，批次号：" + selectedBatch.PaymentBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
             }
 
-            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09_CREDITNOTE, selectedBatch.InvoicePaymentLogs);
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09_CREDITNOTE, selectedBatches);
             form.Show();
         }
 
@@ -351,15 +354,18 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            List<InvoicePaymentBatch> selectedBatches = this.GetSelectedBatches();
 
-            if (selectedBatch.PaymentType != Payment.BUYER_PAYMENT)
+            foreach (InvoicePaymentBatch selectedBatch in selectedBatches)
             {
-                MessageBoxEx.Show("只有买方付款可以生成MSG11", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                if (selectedBatch.PaymentType != Payment.BUYER_PAYMENT)
+                {
+                    MessageBoxEx.Show("只有买方付款可以生成MSG11，批次号：" + selectedBatch.PaymentBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
             }
 
-            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG11, selectedBatch.InvoicePaymentLogs);
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG11, selectedBatches);
             form.Show();
         }
 
@@ -375,15 +381,18 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            List<InvoicePaymentBatch> selectedBatches = this.GetSelectedBatches();
 
-            if (selectedBatch.PaymentType != Payment.INDIRECT_PAYMENT)
+            foreach (InvoicePaymentBatch selectedBatch in selectedBatches)
             {
-                MessageBoxEx.Show("只有买方间接付款可以生成MSG12", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                if (selectedBatch.PaymentType != Payment.INDIRECT_PAYMENT)
+                {
+                    MessageBoxEx.Show("只有买方间接付款可以生成MSG12，：批次号：" + selectedBatch.PaymentBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
             }
 
-            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG12, selectedBatch.InvoicePaymentLogs);
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG12, selectedBatches);
             form.Show();
         }
 
@@ -524,6 +533,31 @@ namespace CMBC.EasyFactor.ARMgr
                 this.menuItemCheck.Enabled = false;
                 this.menuItemReject.Enabled = false;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private List<InvoicePaymentBatch> GetSelectedBatches()
+        {
+            if (this.dgvBatches.CurrentCell == null)
+            {
+                return null;
+            }
+
+            List<InvoicePaymentBatch> selectedBatches = new List<InvoicePaymentBatch>();
+
+            foreach (DataGridViewCell cell in this.dgvBatches.SelectedCells)
+            {
+                InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[cell.RowIndex];
+                if (!selectedBatches.Contains(batch))
+                {
+                    selectedBatches.Add(batch);
+                }
+            }
+
+            return selectedBatches;
         }
 
         #endregion?Methods?

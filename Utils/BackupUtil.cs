@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Common;
+using System.Data.SqlClient;
 
 namespace CMBC.EasyFactor.Utils
 {
@@ -25,37 +26,28 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="password"></param>
         /// <param name="serverName"></param>
         /// <param name="destinationPath"></param>
-        public static void BackupDatabase(String databaseName, String userName,
-               String password, String serverName, String destinationPath)
+        public static void BackupDatabase(String connectionStr, String databaseName, String destinationPath)
         {
+            //ServerConnection connection = new ServerConnection(serverName, userName, password);
+            //Server sqlServer = new Server(connection);
+            ServerConnection sqlConnection = new ServerConnection(new SqlConnection(connectionStr));
+            Server server = new Server(sqlConnection);
+
             Backup sqlBackup = new Backup();
-
-            sqlBackup.Action = BackupActionType.Database;
-            sqlBackup.BackupSetDescription = databaseName + " : " +
-                                             DateTime.Now.ToShortDateString();
-            sqlBackup.BackupSetName = databaseName;
-
+            sqlBackup.Devices.AddDevice(destinationPath, DeviceType.File);
             sqlBackup.Database = databaseName;
-
-            BackupDeviceItem deviceItem = new BackupDeviceItem(destinationPath, DeviceType.File);
-            ServerConnection connection = new ServerConnection(serverName, userName, password);
-            Server sqlServer = new Server(connection);
-
-            Database db = sqlServer.Databases[databaseName];
-
+            sqlBackup.Action = BackupActionType.Database;
             sqlBackup.Initialize = true;
+            sqlBackup.BackupSetDescription = databaseName + " : " +
+                                             DateTime.Now.ToString();
+            //sqlBackup.BackupSetName = databaseName;
+            //Database db = sqlServer.Databases[databaseName];
             sqlBackup.Checksum = true;
             sqlBackup.ContinueAfterError = true;
-
-            sqlBackup.Devices.Add(deviceItem);
             sqlBackup.Incremental = false;
-
-            sqlBackup.ExpirationDate = DateTime.Now.AddDays(3);
             sqlBackup.LogTruncation = BackupTruncateLogType.Truncate;
-
             sqlBackup.FormatMedia = false;
-
-            sqlBackup.SqlBackup(sqlServer);
+            sqlBackup.SqlBackup(server);
         }
 
         /// <summary>

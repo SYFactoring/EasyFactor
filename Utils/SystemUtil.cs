@@ -161,6 +161,17 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
+        public static string ConnectionString
+        {
+            get
+            {
+                return Properties.Settings.Default.FOSConnectionString;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string ServerName
         {
             get

@@ -2117,7 +2117,7 @@ namespace CMBC.EasyFactor.Utils
                 return 0;
             }
 
-            string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((Invoice)exportData[0]).InvoiceAssignBatch.Case.SellerCode, DateTime.Today);
+            string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoiceAssignBatch)exportData[0]).Case.SellerCode, DateTime.Today);
             StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
@@ -2130,55 +2130,58 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                Invoice invoice = (Invoice)exportData[row];
-                StringBuilder sb = new StringBuilder();
-                Case curCase = invoice.InvoiceAssignBatch.Case;
-                sb.Append(((int)row / 1000 + 1)).Append(',');
-                sb.Append("MSG09").Append(',');
-                sb.Append(curCase.SellerFactorCode).Append(',');
-                sb.Append(curCase.BuyerFactorCode).Append(',');
-                sb.Append(User.GetEDIAccount(invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(curCase.SellerFactorCode).Append(',');
-                //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(curCase.BuyerFactorCode).Append(',');
-                //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(invoice.AssignBatchNo).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.InvoiceAssignBatch.AssignDate)).Append(',');
-                sb.Append(invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
-                sb.Append(invoice.InvoiceAssignBatch.AssignAmount).Append(',');
-                sb.Append("0,");//CreditNote
-                sb.Append(curCase.SellerCode).Append(',');
-                //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(curCase.BuyerCode).Append(',');
-                //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(1).Append(',');
-                sb.Append(invoice.InvoiceNo).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.InvoiceDate)).Append(',');
-                sb.Append(invoice.InvoiceAmount).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.DueDate)).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.ValueDate)).Append(',');
-                sb.Append(curCase.NetPaymentTerm).Append(',');
-                sb.Append(invoice.PrimaryDiscountDays).Append(',');
-                sb.Append(invoice.PrimaryDiscountRate).Append(',');
-                sb.Append(invoice.SecondaryDiscountDays).Append(',');
-                sb.Append(invoice.SecondaryDiscountRate).Append(',');
-                sb.Append(invoice.PaymentConditions).Append(',');
-                sb.Append(invoice.OrderNumberReference).Append(',');
-                sb.Append(invoice.InvoiceReferenceNumber).Append(',');
-                sb.Append(invoice.InvoiceAssignBatch.BatchCount).Append(',');
-                sb.Append(0).Append(',');//Total of CreditNote
-                sb.Append(invoice.Comment).Append(' ');
+                InvoiceAssignBatch batch = (InvoiceAssignBatch)exportData[row];
+                foreach (Invoice invoice in batch.Invoices)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    Case curCase = invoice.InvoiceAssignBatch.Case;
+                    sb.Append(((int)row / 1000 + 1)).Append(',');
+                    sb.Append("MSG09").Append(',');
+                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    sb.Append(curCase.BuyerFactorCode).Append(',');
+                    sb.Append(User.GetEDIAccount(invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.BuyerFactorCode).Append(',');
+                    //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(invoice.AssignBatchNo).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.InvoiceAssignBatch.AssignDate)).Append(',');
+                    sb.Append(invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
+                    sb.Append(invoice.InvoiceAssignBatch.AssignAmount).Append(',');
+                    sb.Append("0,");//CreditNote
+                    sb.Append(curCase.SellerCode).Append(',');
+                    //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.BuyerCode).Append(',');
+                    //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(1).Append(',');
+                    sb.Append(invoice.InvoiceNo).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.InvoiceDate)).Append(',');
+                    sb.Append(invoice.InvoiceAmount).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.DueDate)).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.ValueDate)).Append(',');
+                    sb.Append(curCase.NetPaymentTerm).Append(',');
+                    sb.Append(invoice.PrimaryDiscountDays).Append(',');
+                    sb.Append(invoice.PrimaryDiscountRate).Append(',');
+                    sb.Append(invoice.SecondaryDiscountDays).Append(',');
+                    sb.Append(invoice.SecondaryDiscountRate).Append(',');
+                    sb.Append(invoice.PaymentConditions).Append(',');
+                    sb.Append(invoice.OrderNumberReference).Append(',');
+                    sb.Append(invoice.InvoiceReferenceNumber).Append(',');
+                    sb.Append(invoice.InvoiceAssignBatch.BatchCount).Append(',');
+                    sb.Append(0).Append(',');//Total of CreditNote
+                    sb.Append(invoice.Comment).Append(' ');
 
-                fileWriter.WriteLine(sb.ToString());
+                    fileWriter.WriteLine(sb.ToString());
+                }
 
                 worker.ReportProgress((int)((float)row * 100 / (float)size));
             }
@@ -2201,7 +2204,7 @@ namespace CMBC.EasyFactor.Utils
                 return 0;
             }
 
-            string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((Invoice)exportData[0]).InvoiceAssignBatch.Case.SellerCode, DateTime.Today);
+            string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
             StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
@@ -2214,55 +2217,58 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                InvoicePaymentLog log = (InvoicePaymentLog)exportData[row];
-                StringBuilder sb = new StringBuilder();
-                Case curCase = log.Invoice.InvoiceAssignBatch.Case;
-                sb.Append(((int)row / 1000 + 1)).Append(',');
-                sb.Append("MSG09").Append(',');
-                sb.Append(curCase.SellerFactorCode).Append(',');
-                sb.Append(curCase.BuyerFactorCode).Append(',');
-                sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(curCase.SellerFactorCode).Append(',');
-                //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(curCase.BuyerFactorCode).Append(',');
-                //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(log.Invoice.AssignBatchNo).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceAssignBatch.AssignDate)).Append(',');
-                sb.Append(log.Invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
-                sb.Append(log.Invoice.InvoiceAssignBatch.AssignAmount).Append(',');
-                sb.Append(log.PaymentAmount).Append(',');//CreditNote
-                sb.Append(curCase.SellerCode).Append(',');
-                //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(curCase.BuyerCode).Append(',');
-                //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(1).Append(',');
-                sb.Append(log.InvoiceNo).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
-                sb.Append(log.Invoice.InvoiceAmount).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.DueDate)).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.ValueDate)).Append(',');
-                sb.Append(curCase.NetPaymentTerm).Append(',');
-                sb.Append(log.Invoice.PrimaryDiscountDays).Append(',');
-                sb.Append(log.Invoice.PrimaryDiscountRate).Append(',');
-                sb.Append(log.Invoice.SecondaryDiscountDays).Append(',');
-                sb.Append(log.Invoice.SecondaryDiscountRate).Append(',');
-                sb.Append(log.Invoice.PaymentConditions).Append(',');
-                sb.Append(log.Invoice.OrderNumberReference).Append(',');
-                sb.Append(log.Invoice.InvoiceReferenceNumber).Append(',');
-                sb.Append(log.Invoice.InvoiceAssignBatch.BatchCount).Append(',');
-                sb.Append(log.InvoicePaymentBatch.BatchCount).Append(',');//Total of CreditNote
-                sb.Append(log.Comment).Append(' ');
+                InvoicePaymentBatch batch = (InvoicePaymentBatch)exportData[row];
+                foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    Case curCase = log.Invoice.InvoiceAssignBatch.Case;
+                    sb.Append(((int)row / 1000 + 1)).Append(',');
+                    sb.Append("MSG09").Append(',');
+                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    sb.Append(curCase.BuyerFactorCode).Append(',');
+                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.BuyerFactorCode).Append(',');
+                    //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(log.Invoice.AssignBatchNo).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceAssignBatch.AssignDate)).Append(',');
+                    sb.Append(log.Invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
+                    sb.Append(log.Invoice.InvoiceAssignBatch.AssignAmount).Append(',');
+                    sb.Append(log.PaymentAmount).Append(',');//CreditNote
+                    sb.Append(curCase.SellerCode).Append(',');
+                    //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.BuyerCode).Append(',');
+                    //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(1).Append(',');
+                    sb.Append(log.InvoiceNo).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
+                    sb.Append(log.Invoice.InvoiceAmount).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.DueDate)).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.ValueDate)).Append(',');
+                    sb.Append(curCase.NetPaymentTerm).Append(',');
+                    sb.Append(log.Invoice.PrimaryDiscountDays).Append(',');
+                    sb.Append(log.Invoice.PrimaryDiscountRate).Append(',');
+                    sb.Append(log.Invoice.SecondaryDiscountDays).Append(',');
+                    sb.Append(log.Invoice.SecondaryDiscountRate).Append(',');
+                    sb.Append(log.Invoice.PaymentConditions).Append(',');
+                    sb.Append(log.Invoice.OrderNumberReference).Append(',');
+                    sb.Append(log.Invoice.InvoiceReferenceNumber).Append(',');
+                    sb.Append(log.Invoice.InvoiceAssignBatch.BatchCount).Append(',');
+                    sb.Append(log.InvoicePaymentBatch.BatchCount).Append(',');//Total of CreditNote
+                    sb.Append(log.Comment).Append(' ');
 
-                fileWriter.WriteLine(sb.ToString());
+                    fileWriter.WriteLine(sb.ToString());
+                }
 
                 worker.ReportProgress((int)((float)row * 100 / (float)size));
             }
@@ -2285,7 +2291,7 @@ namespace CMBC.EasyFactor.Utils
                 return 0;
             }
 
-            string fileName = String.Format("{0}\\MSG11-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoicePaymentLog)exportData[0]).InvoicePaymentBatch.Case.SellerCode, DateTime.Today);
+            string fileName = String.Format("{0}\\MSG11-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
             StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
@@ -2298,61 +2304,64 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                InvoicePaymentLog log = (InvoicePaymentLog)exportData[row];
-                StringBuilder sb = new StringBuilder();
-                Case curCase = log.Invoice.InvoiceAssignBatch.Case;
-                sb.Append(((int)row / 1000 + 1)).Append(',');
-                sb.Append("MSG11").Append(',');
-                sb.Append(curCase.SellerFactorCode).Append(',');
-                sb.Append(curCase.BuyerFactorCode).Append(',');
-                sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(curCase.SellerFactorCode).Append(',');
-                //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(curCase.BuyerFactorCode).Append(',');
-                //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
-                sb.Append(log.Invoice.InvoiceCurrency).Append(',');
-                sb.Append(curCase.SellerCode).Append(',');
-                //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(curCase.BuyerCode).Append(',');
-                //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(1).Append(',');
-                sb.Append(log.Invoice.InvoiceNo).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
-                sb.Append(log.Invoice.InvoiceAmount).Append(',');
-                sb.Append(log.PaymentAmount).Append(',');
-                sb.Append(0).Append(',');
-                sb.Append(0).Append(',');
-                if (TypeUtil.GreaterZero(log.Invoice.AssignOutstanding))
+                InvoicePaymentBatch batch = (InvoicePaymentBatch)exportData[row];
+                foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
                 {
-                    sb.Append(2).Append(',');
-                }
-                else if (TypeUtil.EqualsZero(log.Invoice.AssignOutstanding) && log.Invoice.InvoicePaymentLogs.Count > 1)
-                {
-                    sb.Append(2).Append(',');
-                }
-                else
-                {
+                    StringBuilder sb = new StringBuilder();
+                    Case curCase = log.Invoice.InvoiceAssignBatch.Case;
+                    sb.Append(((int)row / 1000 + 1)).Append(',');
+                    sb.Append("MSG11").Append(',');
+                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    sb.Append(curCase.BuyerFactorCode).Append(',');
+                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.BuyerFactorCode).Append(',');
+                    //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
+                    sb.Append(log.Invoice.InvoiceCurrency).Append(',');
+                    sb.Append(curCase.SellerCode).Append(',');
+                    //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.BuyerCode).Append(',');
+                    //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
+                    sb.Append(',');
                     sb.Append(1).Append(',');
-                }
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
-                sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
-                sb.Append(0).Append(',');
-                sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
-                sb.Append(log.InvoicePaymentBatch.Comment).Append(' ');
+                    sb.Append(log.Invoice.InvoiceNo).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
+                    sb.Append(log.Invoice.InvoiceAmount).Append(',');
+                    sb.Append(log.PaymentAmount).Append(',');
+                    sb.Append(0).Append(',');
+                    sb.Append(0).Append(',');
+                    if (TypeUtil.GreaterZero(log.Invoice.AssignOutstanding))
+                    {
+                        sb.Append(2).Append(',');
+                    }
+                    else if (TypeUtil.EqualsZero(log.Invoice.AssignOutstanding) && log.Invoice.InvoicePaymentLogs.Count > 1)
+                    {
+                        sb.Append(2).Append(',');
+                    }
+                    else
+                    {
+                        sb.Append(1).Append(',');
+                    }
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
+                    sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
+                    sb.Append(0).Append(',');
+                    sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
+                    sb.Append(log.InvoicePaymentBatch.Comment).Append(' ');
 
-                fileWriter.WriteLine(sb.ToString());
+                    fileWriter.WriteLine(sb.ToString());
+                }
 
                 worker.ReportProgress((int)((float)row * 100 / (float)size));
             }
@@ -2375,7 +2384,7 @@ namespace CMBC.EasyFactor.Utils
                 return 0;
             }
 
-            string fileName = String.Format("{0}\\MSG12-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoicePaymentLog)exportData[0]).InvoicePaymentBatch.Case.SellerCode, DateTime.Today);
+            string fileName = String.Format("{0}\\MSG12-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
             StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
@@ -2388,61 +2397,64 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                InvoicePaymentLog log = (InvoicePaymentLog)exportData[row];
-                StringBuilder sb = new StringBuilder();
-                Case curCase = log.Invoice.InvoiceAssignBatch.Case;
-                sb.Append(((int)row / 1000 + 1)).Append(',');
-                sb.Append("MSG12").Append(',');
-                sb.Append(curCase.SellerFactorCode).Append(',');
-                sb.Append(curCase.BuyerFactorCode).Append(',');
-                sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(',');
-                sb.Append(curCase.SellerFactorCode).Append(',');
-                //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(curCase.BuyerFactorCode).Append(',');
-                //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
-                sb.Append(log.Invoice.InvoiceCurrency).Append(',');
-                sb.Append(curCase.SellerCode).Append(',');
-                //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(curCase.BuyerCode).Append(',');
-                //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
-                sb.Append(',');
-                sb.Append(1).Append(',');
-                sb.Append(log.Invoice.InvoiceNo).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
-                sb.Append(log.Invoice.InvoiceAmount).Append(',');
-                sb.Append(log.PaymentAmount).Append(',');
-                sb.Append(0).Append(',');
-                sb.Append(0).Append(',');
-                if (TypeUtil.GreaterZero(log.Invoice.AssignOutstanding))
+                InvoicePaymentBatch batch = (InvoicePaymentBatch)exportData[row];
+                foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
                 {
-                    sb.Append(2).Append(',');
-                }
-                else if (TypeUtil.EqualsZero(log.Invoice.AssignOutstanding) && log.Invoice.InvoicePaymentLogs.Count > 1)
-                {
-                    sb.Append(2).Append(',');
-                }
-                else
-                {
+                    StringBuilder sb = new StringBuilder();
+                    Case curCase = log.Invoice.InvoiceAssignBatch.Case;
+                    sb.Append(((int)row / 1000 + 1)).Append(',');
+                    sb.Append("MSG12").Append(',');
+                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    sb.Append(curCase.BuyerFactorCode).Append(',');
+                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    //sb.Append(curCase.SellerFactor.CompanyNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.BuyerFactorCode).Append(',');
+                    //sb.Append(curCase.BuyerFactor.CompanyNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
+                    sb.Append(log.Invoice.InvoiceCurrency).Append(',');
+                    sb.Append(curCase.SellerCode).Append(',');
+                    //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
+                    sb.Append(',');
+                    sb.Append(curCase.BuyerCode).Append(',');
+                    //sb.Append(curCase.BuyerClient.ClientNameEN).Append(',');
+                    sb.Append(',');
                     sb.Append(1).Append(',');
-                }
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
-                sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
-                sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
-                sb.Append(0).Append(',');
-                sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
-                sb.Append(log.InvoicePaymentBatch.Comment).Append(' ');
+                    sb.Append(log.Invoice.InvoiceNo).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
+                    sb.Append(log.Invoice.InvoiceAmount).Append(',');
+                    sb.Append(log.PaymentAmount).Append(',');
+                    sb.Append(0).Append(',');
+                    sb.Append(0).Append(',');
+                    if (TypeUtil.GreaterZero(log.Invoice.AssignOutstanding))
+                    {
+                        sb.Append(2).Append(',');
+                    }
+                    else if (TypeUtil.EqualsZero(log.Invoice.AssignOutstanding) && log.Invoice.InvoicePaymentLogs.Count > 1)
+                    {
+                        sb.Append(2).Append(',');
+                    }
+                    else
+                    {
+                        sb.Append(1).Append(',');
+                    }
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
+                    sb.Append(String.Format("{0:yyyy-MM-dd}", log.InvoicePaymentBatch.PaymentDate)).Append(',');
+                    sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
+                    sb.Append(0).Append(',');
+                    sb.Append(log.InvoicePaymentBatch.PaymentAmount).Append(',');
+                    sb.Append(log.InvoicePaymentBatch.Comment).Append(' ');
 
-                fileWriter.WriteLine(sb.ToString());
+                    fileWriter.WriteLine(sb.ToString());
+                }
 
                 worker.ReportProgress((int)((float)row * 100 / (float)size));
             }

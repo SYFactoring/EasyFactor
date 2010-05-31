@@ -373,9 +373,9 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
+            List<InvoiceAssignBatch> selectedBatches = this.GetSelectedBatches();
 
-            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09_INVOICE, selectedBatch.Invoices);
+            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09_INVOICE, selectedBatches);
             form.Show();
         }
 

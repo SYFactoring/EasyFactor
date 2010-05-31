@@ -77,6 +77,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -111,6 +112,18 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemMSG11 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemMSG12 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -310,7 +323,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(715, 29);
+            this.lblCount.Location = new System.Drawing.Point(746, 29);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(71, 16);
             this.lblCount.TabIndex = 18;
@@ -354,7 +367,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateTo.BackgroundStyle.Class = "DateTimeInputBackground";
             this.dateTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateTo.ButtonDropDown.Visible = true;
-            this.dateTo.Location = new System.Drawing.Point(631, 26);
+            this.dateTo.Location = new System.Drawing.Point(650, 26);
             // 
             // 
             // 
@@ -388,7 +401,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateTo.MonthCalendar.TodayButtonVisible = true;
             this.dateTo.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateTo.Name = "dateTo";
-            this.dateTo.Size = new System.Drawing.Size(73, 20);
+            this.dateTo.Size = new System.Drawing.Size(90, 20);
             this.dateTo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dateTo.TabIndex = 16;
             // 
@@ -447,7 +460,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateFrom.MonthCalendar.TodayButtonVisible = true;
             this.dateFrom.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateFrom.Name = "dateFrom";
-            this.dateFrom.Size = new System.Drawing.Size(75, 20);
+            this.dateFrom.Size = new System.Drawing.Size(90, 20);
             this.dateFrom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dateFrom.TabIndex = 15;
             // 
@@ -455,7 +468,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(711, 3);
+            this.btnQuery.Location = new System.Drawing.Point(745, 3);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -526,7 +539,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvBatches.Location = new System.Drawing.Point(0, 49);
-            this.dgvBatches.MultiSelect = false;
             this.dgvBatches.Name = "dgvBatches";
             this.dgvBatches.ReadOnly = true;
             this.dgvBatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -550,78 +562,162 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemMSG11,
             this.menuItemMSG12});
             this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(153, 220);
+            this.cmuBatchMgr.Size = new System.Drawing.Size(142, 198);
             // 
             // menuItemBatchSelect
             // 
             this.menuItemBatchSelect.Name = "menuItemBatchSelect";
-            this.menuItemBatchSelect.Size = new System.Drawing.Size(152, 22);
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(141, 22);
             this.menuItemBatchSelect.Text = "选择批次(&S)";
             this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
             // 
             // menuItemBatchDetail
             // 
             this.menuItemBatchDetail.Name = "menuItemBatchDetail";
-            this.menuItemBatchDetail.Size = new System.Drawing.Size(152, 22);
+            this.menuItemBatchDetail.Size = new System.Drawing.Size(141, 22);
             this.menuItemBatchDetail.Text = "批次详情(&M)";
             this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(138, 6);
             // 
             // menuItemCheck
             // 
             this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(152, 22);
+            this.menuItemCheck.Size = new System.Drawing.Size(141, 22);
             this.menuItemCheck.Text = "复核通过(&P)";
             this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
             // menuItemReject
             // 
             this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(152, 22);
+            this.menuItemReject.Size = new System.Drawing.Size(141, 22);
             this.menuItemReject.Text = "复核拒绝(&R)";
             this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(138, 6);
             // 
             // menuItemBatchDelete
             // 
             this.menuItemBatchDelete.Name = "menuItemBatchDelete";
-            this.menuItemBatchDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemBatchDelete.Size = new System.Drawing.Size(141, 22);
             this.menuItemBatchDelete.Text = "删除批次(&D)";
             this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(138, 6);
             // 
             // menuItemMSG09
             // 
             this.menuItemMSG09.Name = "menuItemMSG09";
-            this.menuItemMSG09.Size = new System.Drawing.Size(152, 22);
+            this.menuItemMSG09.Size = new System.Drawing.Size(141, 22);
             this.menuItemMSG09.Text = "生成MSG09";
             this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
             // 
             // menuItemMSG11
             // 
             this.menuItemMSG11.Name = "menuItemMSG11";
-            this.menuItemMSG11.Size = new System.Drawing.Size(152, 22);
+            this.menuItemMSG11.Size = new System.Drawing.Size(141, 22);
             this.menuItemMSG11.Text = "生成MSG11";
             this.menuItemMSG11.Click += new System.EventHandler(this.ExportMSG11);
             // 
             // menuItemMSG12
             // 
             this.menuItemMSG12.Name = "menuItemMSG12";
-            this.menuItemMSG12.Size = new System.Drawing.Size(152, 22);
+            this.menuItemMSG12.Size = new System.Drawing.Size(141, 22);
             this.menuItemMSG12.Text = "生成MSG12";
             this.menuItemMSG12.Click += new System.EventHandler(this.ExportMSG12);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "SellerName";
+            this.dataGridViewTextBoxColumn1.HeaderText = "卖方名称";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "BuyerName";
+            this.dataGridViewTextBoxColumn2.HeaderText = "买方名称";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "TransactionType";
+            this.dataGridViewTextBoxColumn3.HeaderText = "业务类别";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "PaymentBatchNo";
+            this.dataGridViewTextBoxColumn4.HeaderText = "付款批号";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "PaymentType";
+            this.dataGridViewTextBoxColumn5.HeaderText = "付款类型";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "PaymentDate";
+            this.dataGridViewTextBoxColumn6.HeaderText = "付款日";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewTextBoxColumn7.HeaderText = "付款金额";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "CreateUserName";
+            this.dataGridViewTextBoxColumn8.HeaderText = "经办人";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 65;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "CheckStatus";
+            this.dataGridViewTextBoxColumn9.HeaderText = "复核结果";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.Width = 65;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "CheckUserName";
+            this.dataGridViewTextBoxColumn10.HeaderText = "复核人";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.Width = 65;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "CheckDate";
+            this.dataGridViewTextBoxColumn11.HeaderText = "复核日";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Width = 65;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "BatchCount";
+            this.dataGridViewTextBoxColumn12.HeaderText = "发票笔数";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.Width = 65;
             // 
             // colSellerName
             // 
@@ -753,5 +849,17 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
     }
 }
