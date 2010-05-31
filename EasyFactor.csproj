@@ -330,7 +330,6 @@
     <Compile Include="InfoMgr\ExchangeMgr\ExchangeMgr.Designer.cs">
       <DependentUpon>ExchangeMgr.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\BackupUtil.cs" />
     <Compile Include="Utils\ConstStr.cs" />
     <Compile Include="DB.dbml\Country.cs" />
     <Compile Include="DB.dbml\CreditCoverNegotiation.cs" />

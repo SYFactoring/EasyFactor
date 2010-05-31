@@ -10,6 +10,7 @@ namespace CMBC.EasyFactor.Utils
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data.SqlClient;
     using System.IO;
     using System.Linq;
     using System.Runtime.InteropServices;
@@ -19,6 +20,8 @@ namespace CMBC.EasyFactor.Utils
     using CMBC.EasyFactor.Utils.ConstStr;
     using DevComponents.DotNetBar;
     using Microsoft.Office.Interop.Excel;
+    using Microsoft.SqlServer.Management.Common;
+    using Microsoft.SqlServer.Management.Smo;
 
     /// <summary>
     /// 
@@ -136,7 +139,12 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            EXPORT_CDAS
+            EXPORT_CDAS,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            BACKUP_DATABASE
         }
 
         #endregion?Enums?
@@ -150,11 +158,19 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="exportType"></param>
         /// <param name="exportData"></param>
         public ExportForm(ExportType exportType, IList exportData)
+            : this(exportType)
+        {
+            this.exportData = exportData;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ExportForm class
+        /// </summary>
+        /// <param name="exportType"></param>
+        public ExportForm(ExportType exportType)
         {
             this.InitializeComponent();
             this.exportType = exportType;
-            this.exportData = exportData;
-
             if (this.exportType == ExportType.EXPORT_MSG09_INVOICE || this.exportType == ExportType.EXPORT_MSG09_CREDITNOTE || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
             {
                 this.btnFileSelect.Enabled = true;
@@ -230,6 +246,9 @@ namespace CMBC.EasyFactor.Utils
                 case ExportType.EXPORT_CDAS:
                     e.Result = this.ExportCDAs(worker, e);
                     break;
+                case ExportType.BACKUP_DATABASE:
+                    e.Result = this.BackupDatabase(worker, e);
+                    break;
                 default:
                     break;
             }
@@ -264,7 +283,24 @@ namespace CMBC.EasyFactor.Utils
             }
             else
             {
-                this.tbStatus.Text = String.Format("导出结束,共导出{0}条记录", e.Result);
+                var result = e.Result;
+
+                if (result is int)
+                {
+                    this.tbStatus.Text = String.Format("导出结束,共导出{0}条记录", e.Result);
+                }
+                else if (result is string)
+                {
+                    string path = (string)result;
+                    if (String.IsNullOrEmpty(path))
+                    {
+                        this.tbStatus.Text = String.Format("数据库备份失败");
+                    }
+                    else
+                    {
+                        this.tbStatus.Text = String.Format("数据库备份成功，保存路径：{0}", path);
+                    }
+                }
             }
 
             this.btnCancel.Text = "关闭";
@@ -284,6 +320,45 @@ namespace CMBC.EasyFactor.Utils
             else
             {
                 this.Close();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private string BackupDatabase(BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            string destinationPath = String.Format(@"C:\Program Files\Microsoft SQL Server\MSSQL.1\MSSQL\Backup\{0}_{1:yyyyMMdd}.bak", SystemUtil.DataBaseName, DateTime.Today);
+
+            ServerConnection sqlConnection = new ServerConnection(new SqlConnection(SystemUtil.ConnectionString));
+            Server server = new Server(sqlConnection);
+
+            Backup sqlBackup = new Backup();
+            sqlBackup.Devices.AddDevice(destinationPath, DeviceType.File);
+            sqlBackup.Database = SystemUtil.DataBaseName;
+            sqlBackup.Action = BackupActionType.Database;
+            sqlBackup.Initialize = true;
+            sqlBackup.BackupSetName = SystemUtil.DataBaseName + " : " + DateTime.Now.ToString(); ;
+            sqlBackup.BackupSetDescription = SystemUtil.DataBaseName + " : " + DateTime.Now.ToString();
+
+            sqlBackup.Checksum = true;
+            sqlBackup.ContinueAfterError = true;
+            sqlBackup.Incremental = false;
+            sqlBackup.LogTruncation = BackupTruncateLogType.Truncate;
+            sqlBackup.FormatMedia = false;
+
+            sqlBackup.SqlBackup(server);
+
+            if (File.Exists(destinationPath))
+            {
+                return destinationPath;
+            }
+            else
+            {
+                return string.Empty;
             }
         }
 
@@ -2135,7 +2210,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append("MSG09").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
-                    sb.Append(User.GetEDIAccount(invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(CMBC.EasyFactor.DB.dbml.User.GetEDIAccount(invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
                     sb.Append(',');
@@ -2222,7 +2297,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append("MSG09").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
-                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(CMBC.EasyFactor.DB.dbml.User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
                     sb.Append(',');
@@ -2309,7 +2384,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append("MSG11").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
-                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(CMBC.EasyFactor.DB.dbml.User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
                     sb.Append(',');
@@ -2402,7 +2477,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append("MSG12").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
-                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(CMBC.EasyFactor.DB.dbml.User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
                     sb.Append(',');

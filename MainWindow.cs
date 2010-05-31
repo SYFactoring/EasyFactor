@@ -1500,8 +1500,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
-                string destinationPath = Path.GetTempPath() + SystemUtil.DataBaseName + ".bak";
-                BackupUtil.BackupDatabase(SystemUtil.ConnectionString, SystemUtil.DataBaseName, destinationPath);
+                ExportForm form = new ExportForm(ExportForm.ExportType.BACKUP_DATABASE);
+                form.Show();
             }
         }
 
