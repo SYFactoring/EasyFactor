@@ -508,9 +508,9 @@ namespace CMBC.EasyFactor.ARMgr
             invoice.FlawReason = flawReason;
 
             string disputeReason = string.Empty;
-            foreach (string item in this.disputeReasonCheckedListBox.CheckedItems)
+            foreach (DisputeReason item in this.disputeReasonCheckedListBox.CheckedItems)
             {
-                disputeReason += (item + ";");
+                disputeReason += (item.Index + ";");
             }
 
             invoice.DisputeReason = disputeReason;
