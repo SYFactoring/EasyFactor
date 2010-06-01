@@ -52,7 +52,7 @@ namespace CMBC.EasyFactor.Help
     /// </summary>
     public class AutoUpdater : Component
     {
-		#region?Fields?(9)?
+        #region?Fields?(9)?
 
         private bool _AutoDownload;
         private bool _AutoRestart;
@@ -66,18 +66,18 @@ namespace CMBC.EasyFactor.Help
         private Uri _ProxyURL;
         private Form _RestartForm;
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Constructors?(1)?
+        #region?Constructors?(1)?
 
         public AutoUpdater()
         {
 
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Properties?(13)?
+        #region?Properties?(13)?
 
         //If true, the app will automatically download the latest version, if false the app will use the DownloadForm to prompt the user, if AutoDownload is false and DownloadForm is null, it doesn't download
         [DefaultValue(true)]
@@ -164,16 +164,16 @@ namespace CMBC.EasyFactor.Help
         public Form RestartForm
         { get { return _RestartForm; } set { _RestartForm = value; } }
 
-		#endregion?Properties?
+        #endregion?Properties?
 
-		#region?Delegates?and?Events?(6)?
+        #region?Delegates?and?Events?(6)?
 
-		//?Delegates?(3)?
+        //?Delegates?(3)?
 
         public delegate void AutoUpdateCompleteEventHandler();
         public delegate void AutoUpdateErrorEventHandler(string stMessage, Exception autoUpdateError);
         public delegate void ConfigFileDownloadedEventHandler(bool isNewVersionAvailable);
-		//?Events?(3)?
+        //?Events?(3)?
 
         public event AutoUpdateCompleteEventHandler OnAutoUpdateComplete;
 
@@ -181,11 +181,11 @@ namespace CMBC.EasyFactor.Help
 
         public event ConfigFileDownloadedEventHandler OnConfigFileDownloaded;
 
-		#endregion?Delegates?and?Events?
+        #endregion?Delegates?and?Events?
 
-		#region?Methods?(11)?
+        #region?Methods?(11)?
 
-		//?Public?Methods?(3)?
+        //?Public?Methods?(3)?
 
         /// <summary>
         /// TryUpdate: Invoke this method if you just want to load the config without autoupdating
@@ -218,7 +218,7 @@ namespace CMBC.EasyFactor.Help
             backgroundThread.IsBackground = true;
             backgroundThread.Start();
         }
-		//?Private?Methods?(8)?
+        //?Private?Methods?(8)?
 
         //restart()
         private void config_OnLoadConfigError(string stMessage, Exception e)
@@ -270,7 +270,7 @@ namespace CMBC.EasyFactor.Help
             }
             catch (Exception e)
             {
-                string stMessage = "Problem downloading and copying file from: " + url + " to: " + path;
+                string stMessage = "Problem downloading and copying file from: " + url + " to: " + path + " with: " + e.Message;
                 MessageBoxEx.Show(stMessage, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 if (File.Exists(path))
                     File.Delete(path);
@@ -396,11 +396,16 @@ namespace CMBC.EasyFactor.Help
                         //DirectoryInfo diDest = new DirectoryInfo(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
 
                         string stPath = Path.GetTempPath() + stUpdateName + ".zip";
+                        int count = 1;
+                        while (File.Exists(stPath))
+                        {
+                            stPath = Path.GetTempPath() + stUpdateName + "_" + (count++) + ".zip";
+                        }
                         //There is a new version available
                         if (this.downloadFile(this._AutoUpdateConfig.AppFileURL, stPath))
                         {
                             //MessageBox.Show("Downloaded New File");
-                            string stDest = Path.GetTempPath() + stUpdateName + System.IO.Path.DirectorySeparatorChar;
+                            string stDest = stPath.Substring(0, stPath.Length - 4) + System.IO.Path.DirectorySeparatorChar;
                             //Extract Zip File
                             this.unzip(stPath, stDest);
                             //Delete Zip File
@@ -446,11 +451,16 @@ namespace CMBC.EasyFactor.Help
                 if (this.LatestConfigVersion > AutoUpdater.CurrentAppVersion)
                 {
                     string stPath = Path.GetTempPath() + stUpdateName + ".zip";
+                    int count = 1;
+                    while (File.Exists(stPath))
+                    {
+                        stPath = Path.GetTempPath() + stUpdateName + "_" + (count++) + ".zip";
+                    }
                     //There is a new version available
                     if (this.downloadFile(this._AutoUpdateConfig.AppFileURL, stPath))
                     {
                         //MessageBox.Show("Downloaded New File");
-                        string stDest = Path.GetTempPath() + stUpdateName + System.IO.Path.DirectorySeparatorChar;
+                        string stDest = stPath.Substring(0, stPath.Length - 4) + System.IO.Path.DirectorySeparatorChar;
                         //Extract Zip File
                         this.unzip(stPath, stDest);
                         //Delete Zip File
@@ -471,6 +481,6 @@ namespace CMBC.EasyFactor.Help
             }
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }//class AutoUpdater
 }//namespace Conversive.AutoUpdater
