@@ -169,9 +169,9 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else if (this.opBatchType == OpBatchType.FACTOR_COMMISSION)
             {
-                this.colFactorCode.Visible = true;
-                this.colFactorName.Visible = true;
-                this.colFactorCommissionAmount.Visible = true;
+                this.colMsgType.Visible = true;
+                this.colMsgDate.Visible = true;
+                this.colMsgAmount.Visible = true;
             }
         }
 

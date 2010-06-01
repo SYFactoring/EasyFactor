@@ -656,6 +656,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.CommissionRemittance.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.DBDataContext.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.DisputeReason.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.Exchange.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.FlawReason.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.OperationLog.datasource" />
+    <None Include="Properties\DataSources\CMBC.EasyFactor.DB.dbml.PermissionItem.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

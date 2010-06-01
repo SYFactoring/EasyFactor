@@ -8,9 +8,8 @@ namespace CMBC.EasyFactor.DB.dbml
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Data.Linq;
+    using System.Linq;
 
     /// <summary>
     /// 
@@ -34,6 +33,74 @@ namespace CMBC.EasyFactor.DB.dbml
 
 		#region?Properties?(10)?
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public CommissionRemittance CommissionRemitteance
+        {
+            get
+            {
+                foreach (CommissionRemittance cr in this.Case.CommissionRemittances.OrderBy(r=>r.MsgDate))
+                {
+                    if (this.AssignDate <= cr.MsgDate)
+                    {
+                        return cr;
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? MsgDate
+        {
+            get
+            {
+                CommissionRemittance cr = this.CommissionRemitteance;
+                if (cr != null)
+                {
+                    return cr.MsgDate;
+                }
+
+                return null;
+            }
+        }
+         
+        /// <summary>
+        /// 
+        /// </summary>
+        public string MsgType
+        {
+            get
+            {
+                CommissionRemittance cr = this.CommissionRemitteance;
+                if (cr != null)
+                {
+                    return cr.MsgType;
+                }
+
+                return string.Empty;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? MsgAmount
+        {
+            get
+            {
+                CommissionRemittance cr = this.CommissionRemitteance;
+                if (cr != null)
+                {
+                    return cr.MsgAmount;
+                }
+
+                return null;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -192,13 +259,20 @@ namespace CMBC.EasyFactor.DB.dbml
                     return null;
                 }
 
-                if (this.TransactionType == "出口保理" || this.TransactionType == "国内卖方保理")
+                if (activeCDA.CommissionType == "按转让金额")
                 {
-                    return this.AssignAmount * activeCDA.IFPrice;
-                }
-                else if (this.TransactionType == "进口保理" || this.TransactionType == "国内买方保理")
-                {
-                    return this.AssignAmount * activeCDA.EFPrice;
+                    if (this.TransactionType == "出口保理" || this.TransactionType == "国内卖方保理")
+                    {
+                        return this.AssignAmount * activeCDA.IFPrice;
+                    }
+                    else if (this.TransactionType == "进口保理" || this.TransactionType == "国内买方保理")
+                    {
+                        return this.AssignAmount * activeCDA.EFPrice;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {

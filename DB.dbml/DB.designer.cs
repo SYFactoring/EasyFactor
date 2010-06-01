@@ -120,6 +120,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertOperationLog(OperationLog instance);
     partial void UpdateOperationLog(OperationLog instance);
     partial void DeleteOperationLog(OperationLog instance);
+    partial void InsertCommissionRemittance(CommissionRemittance instance);
+    partial void UpdateCommissionRemittance(CommissionRemittance instance);
+    partial void DeleteCommissionRemittance(CommissionRemittance instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -391,6 +394,14 @@ namespace CMBC.EasyFactor.DB.dbml
 				return this.GetTable<OperationLog>();
 			}
 		}
+		
+		public System.Data.Linq.Table<CommissionRemittance> CommissionRemittances
+		{
+			get
+			{
+				return this.GetTable<CommissionRemittance>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Case]")]
@@ -442,6 +453,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		private EntitySet<InvoicePaymentBatch> _InvoicePaymentBatches;
 		
 		private EntitySet<InvoiceRefundBatch> _InvoiceRefundBatches;
+		
+		private EntitySet<CommissionRemittance> _CommissionRemittances;
 		
 		private EntityRef<Client> _BuyerClient;
 		
@@ -499,6 +512,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
 			this._InvoicePaymentBatches = new EntitySet<InvoicePaymentBatch>(new Action<InvoicePaymentBatch>(this.attach_InvoicePaymentBatches), new Action<InvoicePaymentBatch>(this.detach_InvoicePaymentBatches));
 			this._InvoiceRefundBatches = new EntitySet<InvoiceRefundBatch>(new Action<InvoiceRefundBatch>(this.attach_InvoiceRefundBatches), new Action<InvoiceRefundBatch>(this.detach_InvoiceRefundBatches));
+			this._CommissionRemittances = new EntitySet<CommissionRemittance>(new Action<CommissionRemittance>(this.attach_CommissionRemittances), new Action<CommissionRemittance>(this.detach_CommissionRemittances));
 			this._BuyerClient = default(EntityRef<Client>);
 			this._SellerClient = default(EntityRef<Client>);
 			this._OwnerDepartment = default(EntityRef<Department>);
@@ -925,6 +939,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Case_CommissionRemittance", Storage="_CommissionRemittances", ThisKey="CaseCode", OtherKey="CaseCode")]
+		public EntitySet<CommissionRemittance> CommissionRemittances
+		{
+			get
+			{
+				return this._CommissionRemittances;
+			}
+			set
+			{
+				this._CommissionRemittances.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Case", Storage="_BuyerClient", ThisKey="BuyerCode", OtherKey="ClientEDICode", IsForeignKey=true)]
 		public Client BuyerClient
 		{
@@ -1182,6 +1209,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_InvoiceRefundBatches(InvoiceRefundBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = null;
+		}
+		
+		private void attach_CommissionRemittances(CommissionRemittance entity)
+		{
+			this.SendPropertyChanging();
+			entity.Case = this;
+		}
+		
+		private void detach_CommissionRemittances(CommissionRemittance entity)
 		{
 			this.SendPropertyChanging();
 			entity.Case = null;
@@ -14045,6 +14084,349 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._ActionDateTime = value;
 					this.SendPropertyChanged("ActionDateTime");
 					this.OnActionDateTimeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CommissionRemittance")]
+	public partial class CommissionRemittance : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _MsgID;
+		
+		private string _MsgType;
+		
+		private System.DateTime _MsgDate;
+		
+		private string _MsgCurrency;
+		
+		private double _MsgAmount;
+		
+		private System.Nullable<System.DateTime> _RemitDate;
+		
+		private string _RemitCurrency;
+		
+		private System.Nullable<double> _RemitAmount;
+		
+		private string _Comment;
+		
+		private string _CaseCode;
+		
+		private string _CreateUserName;
+		
+		private EntityRef<Case> _Case;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMsgIDChanging(int value);
+    partial void OnMsgIDChanged();
+    partial void OnMsgTypeChanging(string value);
+    partial void OnMsgTypeChanged();
+    partial void OnMsgDateChanging(System.DateTime value);
+    partial void OnMsgDateChanged();
+    partial void OnMsgCurrencyChanging(string value);
+    partial void OnMsgCurrencyChanged();
+    partial void OnMsgAmountChanging(double value);
+    partial void OnMsgAmountChanged();
+    partial void OnRemitDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnRemitDateChanged();
+    partial void OnRemitCurrencyChanging(string value);
+    partial void OnRemitCurrencyChanged();
+    partial void OnRemitAmountChanging(System.Nullable<double> value);
+    partial void OnRemitAmountChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnCaseCodeChanging(string value);
+    partial void OnCaseCodeChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
+    #endregion
+		
+		public CommissionRemittance()
+		{
+			this._Case = default(EntityRef<Case>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MsgID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MsgID
+		{
+			get
+			{
+				return this._MsgID;
+			}
+			set
+			{
+				if ((this._MsgID != value))
+				{
+					this.OnMsgIDChanging(value);
+					this.SendPropertyChanging();
+					this._MsgID = value;
+					this.SendPropertyChanged("MsgID");
+					this.OnMsgIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MsgType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string MsgType
+		{
+			get
+			{
+				return this._MsgType;
+			}
+			set
+			{
+				if ((this._MsgType != value))
+				{
+					this.OnMsgTypeChanging(value);
+					this.SendPropertyChanging();
+					this._MsgType = value;
+					this.SendPropertyChanged("MsgType");
+					this.OnMsgTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MsgDate", DbType="DateTime NOT NULL")]
+		public System.DateTime MsgDate
+		{
+			get
+			{
+				return this._MsgDate;
+			}
+			set
+			{
+				if ((this._MsgDate != value))
+				{
+					this.OnMsgDateChanging(value);
+					this.SendPropertyChanging();
+					this._MsgDate = value;
+					this.SendPropertyChanged("MsgDate");
+					this.OnMsgDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MsgCurrency", DbType="Char(3) NOT NULL", CanBeNull=false)]
+		public string MsgCurrency
+		{
+			get
+			{
+				return this._MsgCurrency;
+			}
+			set
+			{
+				if ((this._MsgCurrency != value))
+				{
+					this.OnMsgCurrencyChanging(value);
+					this.SendPropertyChanging();
+					this._MsgCurrency = value;
+					this.SendPropertyChanged("MsgCurrency");
+					this.OnMsgCurrencyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MsgAmount", DbType="Float NOT NULL")]
+		public double MsgAmount
+		{
+			get
+			{
+				return this._MsgAmount;
+			}
+			set
+			{
+				if ((this._MsgAmount != value))
+				{
+					this.OnMsgAmountChanging(value);
+					this.SendPropertyChanging();
+					this._MsgAmount = value;
+					this.SendPropertyChanged("MsgAmount");
+					this.OnMsgAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RemitDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RemitDate
+		{
+			get
+			{
+				return this._RemitDate;
+			}
+			set
+			{
+				if ((this._RemitDate != value))
+				{
+					this.OnRemitDateChanging(value);
+					this.SendPropertyChanging();
+					this._RemitDate = value;
+					this.SendPropertyChanged("RemitDate");
+					this.OnRemitDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RemitCurrency", DbType="Char(3)")]
+		public string RemitCurrency
+		{
+			get
+			{
+				return this._RemitCurrency;
+			}
+			set
+			{
+				if ((this._RemitCurrency != value))
+				{
+					this.OnRemitCurrencyChanging(value);
+					this.SendPropertyChanging();
+					this._RemitCurrency = value;
+					this.SendPropertyChanged("RemitCurrency");
+					this.OnRemitCurrencyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RemitAmount", DbType="Float")]
+		public System.Nullable<double> RemitAmount
+		{
+			get
+			{
+				return this._RemitAmount;
+			}
+			set
+			{
+				if ((this._RemitAmount != value))
+				{
+					this.OnRemitAmountChanging(value);
+					this.SendPropertyChanging();
+					this._RemitAmount = value;
+					this.SendPropertyChanged("RemitAmount");
+					this.OnRemitAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comment", DbType="NVarChar(200)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CaseCode", DbType="Char(12)")]
+		public string CaseCode
+		{
+			get
+			{
+				return this._CaseCode;
+			}
+			set
+			{
+				if ((this._CaseCode != value))
+				{
+					if (this._Case.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCaseCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CaseCode = value;
+					this.SendPropertyChanged("CaseCode");
+					this.OnCaseCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateUserName", DbType="NVarChar(50)")]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Case_CommissionRemittance", Storage="_Case", ThisKey="CaseCode", OtherKey="CaseCode", IsForeignKey=true)]
+		public Case Case
+		{
+			get
+			{
+				return this._Case.Entity;
+			}
+			set
+			{
+				Case previousValue = this._Case.Entity;
+				if (((previousValue != value) 
+							|| (this._Case.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Case.Entity = null;
+						previousValue.CommissionRemittances.Remove(this);
+					}
+					this._Case.Entity = value;
+					if ((value != null))
+					{
+						value.CommissionRemittances.Add(this);
+						this._CaseCode = value.CaseCode;
+					}
+					else
+					{
+						this._CaseCode = default(string);
+					}
+					this.SendPropertyChanged("Case");
 				}
 			}
 		}
