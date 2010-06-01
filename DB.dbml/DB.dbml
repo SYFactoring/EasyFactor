@@ -267,8 +267,8 @@
     <Type Name="Factor">
       <Column Name="FactorCode" Type="System.String" DbType="Char(7) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FactorType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="CompanyNameCN" Type="System.String" DbType="NVarChar(200)" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="CompanyNameEN" Type="System.String" DbType="VarChar(200)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="CompanyNameCN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="CompanyNameEN" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="ShortName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CountryName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Department" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="WhenChanged" />

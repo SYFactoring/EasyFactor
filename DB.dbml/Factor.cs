@@ -11,6 +11,7 @@ namespace CMBC.EasyFactor.DB.dbml
     using System.Linq;
     using System.Text;
     using CMBC.EasyFactor.Utils.ConstStr;
+    using System.Data.Linq;
 
     /// <summary>
     /// 
@@ -184,6 +185,20 @@ namespace CMBC.EasyFactor.DB.dbml
             this._dict[e.PropertyName] = String.Format("{0} : {1}\n", e.PropertyName, this.GetType().GetProperty(e.PropertyName).GetValue(this, null));
         }
 
+        partial void OnValidate(ChangeAction action)
+        {
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (String.IsNullOrEmpty(this.CompanyNameCN))
+                {
+                    this.CompanyNameCN = "";
+                }
+                if (String.IsNullOrEmpty(this.CompanyNameEN))
+                {
+                    this.CompanyNameEN = "";
+                }
+            }
+        }
 		#endregion?Methods?
     }
 }

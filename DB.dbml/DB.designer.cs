@@ -6574,7 +6574,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyNameCN", DbType="NVarChar(200)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyNameCN", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CompanyNameCN
 		{
 			get
@@ -6594,7 +6594,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyNameEN", DbType="VarChar(200)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyNameEN", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
 		public string CompanyNameEN
 		{
 			get
