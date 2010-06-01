@@ -496,7 +496,9 @@ namespace CMBC.EasyFactor.ARMgr
                                                           let curCase = batch.Case
                                                           where transactionType == "全部" ? true : curCase.TransactionType == transactionType
                                                                 && location == "00" ? true : curCase.OwnerDepartment.LocationCode == location
-                                                                && (curCase.SellerClient.ClientNameCN.Contains(clientName) || curCase.SellerClient.ClientNameEN.Contains(clientName) || curCase.BuyerClient.ClientNameCN.Contains(clientName) || curCase.BuyerClient.ClientNameEN.Contains(clientName))
+                                                          let seller = curCase.SellerClient
+                                                          let buyer = curCase.BuyerClient
+                                                          where seller.ClientNameCN.Contains(clientName) || seller.ClientNameEN.Contains(clientName) || buyer.ClientNameCN.Contains(clientName) || buyer.ClientNameEN.Contains(clientName)
                                                           //&& ((curCase.TransactionType == "国内卖方保理" || curCase.TransactionType == "出口保理") && ( curCase.BuyerFactor.CompanyNameCN.Contains(factorName) ||  curCase.BuyerFactor.CompanyNameEN.Contains(factorName))
                                                           //||  (curCase.TransactionType == "国内买方保理" || curCase.TransactionType == "进口保理") && (curCase.SellerFactor.CompanyNameCN.Contains(factorName) || curCase.SellerFactor.CompanyNameEN.Contains(factorName)))
                                                           let sellerFactor = curCase.SellerFactor
@@ -667,6 +669,18 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row, 1] = "小计";
                 sheet.Cells[row, 2] = selectedBatch.AssignAmount;
 
+                int invoiceEnd = row;
+                sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
+                sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
+                sheet.get_Range(sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy-MM-dd";
+                sheet.get_Range(sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy-MM-dd";
+                sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
+
                 if (selectedBatch.CreditNotes.Count > 0)
                 {
                     row++;
@@ -688,21 +702,31 @@ namespace CMBC.EasyFactor.ARMgr
 
                     sheet.Cells[row, 1] = "小计";
                     sheet.Cells[row, 2] = selectedBatch.CreditNoteAmount;
+
+                    invoiceEnd = row;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
+
+                    row++;
+                    row++;
+                    row++;
+                    sheet.Cells[row, 3] = "转让总计";
+                    sheet.get_Range(sheet.Cells[row, "D"], sheet.Cells[row, "E"]).MergeCells = true;
+                    sheet.Cells[row, 4] = selectedBatch.AssignAmount - selectedBatch.CreditNoteAmount;
+                    sheet.get_Range(sheet.Cells[row, "D"], sheet.Cells[row, "D"]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
+                    sheet.get_Range(sheet.Cells[row, "C"], sheet.Cells[row, "D"]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    sheet.get_Range(sheet.Cells[row, "C"], sheet.Cells[row, "E"]).Borders.LineStyle = 1;
+                    row++;
                 }
 
-
-
-                int invoiceEnd = row;
-                sheet.get_Range(sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]).NumberFormatLocal = "@";
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 5], sheet.Cells[invoiceEnd, 5]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                sheet.get_Range(sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]).Borders.LineStyle = 1;
 
                 row++;
                 row++;
@@ -1319,7 +1343,7 @@ namespace CMBC.EasyFactor.ARMgr
                 row++;
                 row++;
                 sheet.Cells[row, 1] = "发票号";
-                sheet.Cells[row, 2] = "转让金额";
+                sheet.Cells[row, 2] = "转让余额";
                 sheet.Cells[row, 3] = "发票日期";
                 sheet.Cells[row, 4] = "到期日";
                 sheet.Cells[row, 5] = "备注";
@@ -1332,11 +1356,11 @@ namespace CMBC.EasyFactor.ARMgr
                     if (invoice.IsFlaw == false)
                     {
                         sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
-                        sheet.Cells[row, 2] = invoice.AssignAmount;
+                        sheet.Cells[row, 2] = invoice.AssignOutstanding;
                         sheet.Cells[row, 3] = invoice.InvoiceDate;
                         sheet.Cells[row, 4] = invoice.DueDate;
                         sheet.Cells[row, 5] = invoice.Comment;
-                        assignAmount += invoice.AssignAmount;
+                        assignAmount += invoice.AssignOutstanding;
                         row++;
                     }
                 }

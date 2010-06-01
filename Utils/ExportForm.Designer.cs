@@ -215,7 +215,7 @@ namespace CMBC.EasyFactor.Utils
             this.Name = "ExportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据导出";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClosingForm);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -3393,7 +3393,12 @@ namespace CMBC.EasyFactor.Utils
 
         #endregion?Methods?
 
-        private void FormClosing(object sender, FormClosingEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClosingForm(object sender, FormClosingEventArgs e)
         {
             CancelExport(null, null);
         }
