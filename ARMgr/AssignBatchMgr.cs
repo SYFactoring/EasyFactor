@@ -1817,5 +1817,38 @@ namespace CMBC.EasyFactor.ARMgr
             ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_ASSIGN, selectedBatches);
             form.ShowDialog(this);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvBatches_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value == null)
+            {
+                return;
+            }
+
+            DataGridViewColumn col = this.dgvBatches.Columns[e.ColumnIndex];
+             if (col == this.colIsSendMsg)
+            {
+                object result = e.Value;
+                if (result != null)
+                {
+                    bool isSend = (bool)e.Value;
+                    if (isSend)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+
+                    e.FormattingApplied = true;
+                }
+            }
+        }
     }
 }

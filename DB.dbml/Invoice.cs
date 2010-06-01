@@ -27,6 +27,41 @@ namespace CMBC.EasyFactor.DB.dbml
         #region?Properties?(18)?
 
         /// <summary>
+        /// 是否已发转让报文
+        /// </summary>
+        public bool? IsSendAssignMsg
+        {
+            get
+            {
+                return this.InvoiceAssignBatch.IsSendMsg;
+            }
+        }
+
+        /// <summary>
+        /// 是否已发付款报文
+        /// </summary>
+        public bool? isSendPaymentMsg
+        {
+            get
+            {
+                bool? result = null;
+                foreach (InvoicePaymentBatch batch in this.InvoicePaymentBatches)
+                {
+                    if (batch.IsSendMsg.HasValue)
+                    {
+                        result = batch.IsSendMsg;
+                        if (result.Value)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
         /// 是否结清
         /// </summary>
         public bool IsClear

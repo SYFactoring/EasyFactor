@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
 using CMBC.EasyFactor.Utils;
 using CMBC.EasyFactor.CaseMgr;
+using DevComponents.DotNetBar;
+using CMBC.EasyFactor.Utils.ConstStr;
 
 namespace CMBC.EasyFactor.ARMgr
 {
@@ -223,6 +225,59 @@ namespace CMBC.EasyFactor.ARMgr
         private void UpdateContextMenu()
         {
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteCreditNote(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_UPDATE))
+            {
+                return;
+            }
+
+            if (this.dgvCreditNote.CurrentCell == null)
+            {
+                return;
+            }
+
+            CreditNote creditNote = (CreditNote)this.bs.List[this.dgvCreditNote.CurrentCell.RowIndex];
+            if (MessageBoxEx.Show("是否打算删除此贷项通知", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
+            foreach (InvoicePaymentLog log in creditNote.InvoicePaymentLogs)
+            {
+                if (log.InvoicePaymentBatch.CheckStatus == BATCH.CHECK)
+                {
+                    MessageBoxEx.Show("付款批次已复核，不能删除，发票号：" + log.PaymentBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                Invoice invoice = log.Invoice;
+                log.Invoice = null;
+                invoice.CaculatePayment();
+                context.InvoicePaymentLogs.DeleteOnSubmit(log);
+                log.InvoicePaymentBatch.CheckStatus = BATCH.UNCHECK;
+            }
+
+            context.CreditNotes.DeleteOnSubmit(creditNote);
+
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            this.dgvCreditNote.Rows.RemoveAt(this.dgvCreditNote.CurrentCell.RowIndex);
         }
     }
 }

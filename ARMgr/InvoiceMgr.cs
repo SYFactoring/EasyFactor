@@ -420,7 +420,7 @@ namespace CMBC.EasyFactor.ARMgr
         void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewColumn column = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (column == colIsFlaw || column == colIsDispute)
+            if (column == colIsFlaw || column == colIsDispute || column == colIsSendAssignMsg || column == colIsSendPaymentMsg)
             {
                 Object originalData = e.Value;
                 if (originalData != null)

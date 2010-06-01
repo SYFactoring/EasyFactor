@@ -180,12 +180,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
             {
@@ -230,12 +230,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             if (MessageBoxEx.Show("是否打算删除此" + selectedBatch.BatchCount + "条付款记录", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
@@ -266,7 +266,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.CurrentCell.RowIndex);
 
         }
 
@@ -277,7 +277,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
@@ -349,7 +349,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ExportMSG11(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
@@ -376,7 +376,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ExportMSG12(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
@@ -450,12 +450,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
             {
@@ -495,12 +495,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoicePaymentBatch selectedBatch = (InvoicePaymentBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             this.Selected = selectedBatch;
             if (this.OwnerForm != null)
             {
@@ -561,5 +561,38 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         #endregion?Methods?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvBatches_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value == null)
+            {
+                return;
+            }
+
+            DataGridViewColumn col = this.dgvBatches.Columns[e.ColumnIndex];
+            if (col == this.colIsSendMsg)
+            {
+                object result = e.Value;
+                if (result != null)
+                {
+                    bool isSend = (bool)e.Value;
+                    if (isSend)
+                    {
+                        e.Value = "Y";
+                    }
+                    else
+                    {
+                        e.Value = "N";
+                    }
+
+                    e.FormattingApplied = true;
+                }
+            }
+        }
     }
 }

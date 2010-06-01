@@ -34,6 +34,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvCreditNote = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditNoteNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditNoteDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInvoiceNos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuCreditNoteMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,15 +67,8 @@
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClient = new DevComponents.DotNetBar.LabelX();
-            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditNoteNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreditNoteDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInvoiceNos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCreditNoteDelete = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditNote)).BeginInit();
             this.cmuCreditNoteMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
@@ -117,25 +119,100 @@
             this.dgvCreditNote.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCreditNote.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCreditNote_RowPostPaint);
             // 
+            // colSellerName
+            // 
+            this.colSellerName.DataPropertyName = "SellerName";
+            this.colSellerName.HeaderText = "卖方名称";
+            this.colSellerName.Name = "colSellerName";
+            this.colSellerName.ReadOnly = true;
+            this.colSellerName.Width = 80;
+            // 
+            // colBuyerName
+            // 
+            this.colBuyerName.DataPropertyName = "BuyerName";
+            this.colBuyerName.HeaderText = "买方名称";
+            this.colBuyerName.Name = "colBuyerName";
+            this.colBuyerName.ReadOnly = true;
+            this.colBuyerName.Width = 80;
+            // 
+            // colFactorName
+            // 
+            this.colFactorName.DataPropertyName = "FactorName";
+            this.colFactorName.HeaderText = "保理商";
+            this.colFactorName.Name = "colFactorName";
+            this.colFactorName.ReadOnly = true;
+            this.colFactorName.Width = 68;
+            // 
+            // colTransactionType
+            // 
+            this.colTransactionType.DataPropertyName = "TransactionType";
+            this.colTransactionType.HeaderText = "业务类别";
+            this.colTransactionType.Name = "colTransactionType";
+            this.colTransactionType.ReadOnly = true;
+            // 
+            // colAssignBatchNo
+            // 
+            this.colAssignBatchNo.DataPropertyName = "AssignBatchNo";
+            this.colAssignBatchNo.HeaderText = "业务编号";
+            this.colAssignBatchNo.Name = "colAssignBatchNo";
+            this.colAssignBatchNo.ReadOnly = true;
+            // 
+            // colCreditNoteNo
+            // 
+            this.colCreditNoteNo.DataPropertyName = "CreditNoteNo";
+            this.colCreditNoteNo.HeaderText = "贷项通知号";
+            this.colCreditNoteNo.Name = "colCreditNoteNo";
+            this.colCreditNoteNo.ReadOnly = true;
+            // 
+            // colCreditNoteDate
+            // 
+            this.colCreditNoteDate.DataPropertyName = "CreditNoteDate";
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colCreditNoteDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colCreditNoteDate.HeaderText = "贷项通知日";
+            this.colCreditNoteDate.Name = "colCreditNoteDate";
+            this.colCreditNoteDate.ReadOnly = true;
+            // 
+            // colPaymentAmount
+            // 
+            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colPaymentAmount.HeaderText = "贷项金额";
+            this.colPaymentAmount.Name = "colPaymentAmount";
+            this.colPaymentAmount.ReadOnly = true;
+            // 
+            // colInvoiceNos
+            // 
+            this.colInvoiceNos.DataPropertyName = "InvoiceNos";
+            this.colInvoiceNos.HeaderText = "对应发票号";
+            this.colInvoiceNos.Name = "colInvoiceNos";
+            this.colInvoiceNos.ReadOnly = true;
+            this.colInvoiceNos.Width = 68;
+            // 
             // cmuCreditNoteMgr
             // 
             this.cmuCreditNoteMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemInvoiceDetail,
-            this.menuItemCaseDetail});
+            this.menuItemCaseDetail,
+            this.toolStripSeparator1,
+            this.menuItemCreditNoteDelete});
             this.cmuCreditNoteMgr.Name = "cmuContractMgr";
-            this.cmuCreditNoteMgr.Size = new System.Drawing.Size(147, 48);
+            this.cmuCreditNoteMgr.Size = new System.Drawing.Size(153, 98);
             // 
             // menuItemInvoiceDetail
             // 
             this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(152, 22);
             this.menuItemInvoiceDetail.Text = "详细信息";
             this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(152, 22);
             this.menuItemCaseDetail.Text = "案子详细信息";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
@@ -493,78 +570,17 @@
             this.lblClient.TabIndex = 0;
             this.lblClient.Text = "客户名称";
             // 
-            // colSellerName
+            // toolStripSeparator1
             // 
-            this.colSellerName.DataPropertyName = "SellerName";
-            this.colSellerName.HeaderText = "卖方名称";
-            this.colSellerName.Name = "colSellerName";
-            this.colSellerName.ReadOnly = true;
-            this.colSellerName.Width = 80;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
-            // colBuyerName
+            // menuItemCreditNoteDelete
             // 
-            this.colBuyerName.DataPropertyName = "BuyerName";
-            this.colBuyerName.HeaderText = "买方名称";
-            this.colBuyerName.Name = "colBuyerName";
-            this.colBuyerName.ReadOnly = true;
-            this.colBuyerName.Width = 80;
-            // 
-            // colFactorName
-            // 
-            this.colFactorName.DataPropertyName = "FactorName";
-            this.colFactorName.HeaderText = "保理商";
-            this.colFactorName.Name = "colFactorName";
-            this.colFactorName.ReadOnly = true;
-            this.colFactorName.Width = 68;
-            // 
-            // colTransactionType
-            // 
-            this.colTransactionType.DataPropertyName = "TransactionType";
-            this.colTransactionType.HeaderText = "业务类别";
-            this.colTransactionType.Name = "colTransactionType";
-            this.colTransactionType.ReadOnly = true;
-            // 
-            // colAssignBatchNo
-            // 
-            this.colAssignBatchNo.DataPropertyName = "AssignBatchNo";
-            this.colAssignBatchNo.HeaderText = "业务编号";
-            this.colAssignBatchNo.Name = "colAssignBatchNo";
-            this.colAssignBatchNo.ReadOnly = true;
-            // 
-            // colCreditNoteNo
-            // 
-            this.colCreditNoteNo.DataPropertyName = "CreditNoteNo";
-            this.colCreditNoteNo.HeaderText = "贷项通知号";
-            this.colCreditNoteNo.Name = "colCreditNoteNo";
-            this.colCreditNoteNo.ReadOnly = true;
-            // 
-            // colCreditNoteDate
-            // 
-            this.colCreditNoteDate.DataPropertyName = "CreditNoteDate";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colCreditNoteDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCreditNoteDate.HeaderText = "贷项通知日";
-            this.colCreditNoteDate.Name = "colCreditNoteDate";
-            this.colCreditNoteDate.ReadOnly = true;
-            // 
-            // colPaymentAmount
-            // 
-            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPaymentAmount.HeaderText = "贷项金额";
-            this.colPaymentAmount.Name = "colPaymentAmount";
-            this.colPaymentAmount.ReadOnly = true;
-            // 
-            // colInvoiceNos
-            // 
-            this.colInvoiceNos.DataPropertyName = "InvoiceNos";
-            this.colInvoiceNos.HeaderText = "对应发票号";
-            this.colInvoiceNos.Name = "colInvoiceNos";
-            this.colInvoiceNos.ReadOnly = true;
-            this.colInvoiceNos.Width = 68;
+            this.menuItemCreditNoteDelete.Name = "menuItemCreditNoteDelete";
+            this.menuItemCreditNoteDelete.Size = new System.Drawing.Size(152, 22);
+            this.menuItemCreditNoteDelete.Text = "删除(&D)";
+            this.menuItemCreditNoteDelete.Click += new System.EventHandler(this.DeleteCreditNote);
             // 
             // CreditNoteMgr
             // 
@@ -620,5 +636,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNos;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditNoteDelete;
     }
 }

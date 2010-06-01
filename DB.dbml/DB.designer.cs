@@ -117,6 +117,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertInvoicePaymentLog(InvoicePaymentLog instance);
     partial void UpdateInvoicePaymentLog(InvoicePaymentLog instance);
     partial void DeleteInvoicePaymentLog(InvoicePaymentLog instance);
+    partial void InsertOperationLog(OperationLog instance);
+    partial void UpdateOperationLog(OperationLog instance);
+    partial void DeleteOperationLog(OperationLog instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -378,6 +381,14 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<InvoicePaymentLog>();
+			}
+		}
+		
+		public System.Data.Linq.Table<OperationLog> OperationLogs
+		{
+			get
+			{
+				return this.GetTable<OperationLog>();
 			}
 		}
 	}
@@ -13852,6 +13863,188 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._PaymentBatchNo = default(string);
 					}
 					this.SendPropertyChanged("InvoicePaymentBatch");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class OperationLog : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _LogID;
+		
+		private string _TableName;
+		
+		private string _ActionKey;
+		
+		private char _ActionType;
+		
+		private string _ActionUserName;
+		
+		private System.DateTime _ActionDateTime;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLogIDChanging(int value);
+    partial void OnLogIDChanged();
+    partial void OnTableNameChanging(string value);
+    partial void OnTableNameChanged();
+    partial void OnActionKeyChanging(string value);
+    partial void OnActionKeyChanged();
+    partial void OnActionTypeChanging(char value);
+    partial void OnActionTypeChanged();
+    partial void OnActionUserNameChanging(string value);
+    partial void OnActionUserNameChanged();
+    partial void OnActionDateTimeChanging(System.DateTime value);
+    partial void OnActionDateTimeChanged();
+    #endregion
+		
+		public OperationLog()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int LogID
+		{
+			get
+			{
+				return this._LogID;
+			}
+			set
+			{
+				if ((this._LogID != value))
+				{
+					this.OnLogIDChanging(value);
+					this.SendPropertyChanging();
+					this._LogID = value;
+					this.SendPropertyChanged("LogID");
+					this.OnLogIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TableName", DbType="varchar(50)", CanBeNull=false)]
+		public string TableName
+		{
+			get
+			{
+				return this._TableName;
+			}
+			set
+			{
+				if ((this._TableName != value))
+				{
+					this.OnTableNameChanging(value);
+					this.SendPropertyChanging();
+					this._TableName = value;
+					this.SendPropertyChanged("TableName");
+					this.OnTableNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActionKey", DbType="varchar(50)", CanBeNull=false)]
+		public string ActionKey
+		{
+			get
+			{
+				return this._ActionKey;
+			}
+			set
+			{
+				if ((this._ActionKey != value))
+				{
+					this.OnActionKeyChanging(value);
+					this.SendPropertyChanging();
+					this._ActionKey = value;
+					this.SendPropertyChanged("ActionKey");
+					this.OnActionKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActionType", DbType="char(1)")]
+		public char ActionType
+		{
+			get
+			{
+				return this._ActionType;
+			}
+			set
+			{
+				if ((this._ActionType != value))
+				{
+					this.OnActionTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ActionType = value;
+					this.SendPropertyChanged("ActionType");
+					this.OnActionTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActionUserName", DbType="varchar(50)", CanBeNull=false)]
+		public string ActionUserName
+		{
+			get
+			{
+				return this._ActionUserName;
+			}
+			set
+			{
+				if ((this._ActionUserName != value))
+				{
+					this.OnActionUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._ActionUserName = value;
+					this.SendPropertyChanged("ActionUserName");
+					this.OnActionUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActionDateTime", DbType="DateTime")]
+		public System.DateTime ActionDateTime
+		{
+			get
+			{
+				return this._ActionDateTime;
+			}
+			set
+			{
+				if ((this._ActionDateTime != value))
+				{
+					this.OnActionDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._ActionDateTime = value;
+					this.SendPropertyChanged("ActionDateTime");
+					this.OnActionDateTimeChanged();
 				}
 			}
 		}

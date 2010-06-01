@@ -202,12 +202,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
             {
@@ -252,12 +252,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell==null)
             {
                 return;
             }
 
-            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             if (MessageBoxEx.Show("是否打算删除此" + selectedBatch.BatchCount + "条还款记录", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
@@ -288,7 +288,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.SelectedRows[0].Index);
+            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.CurrentCell.RowIndex);
         }
 
         /// <summary>
@@ -298,12 +298,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell==null)
             {
                 return;
             }
 
-            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             RefundBatchDetail detail = new RefundBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
@@ -409,12 +409,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell==null)
             {
                 return;
             }
 
-            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
             if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
             {
@@ -454,12 +454,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.SelectedRows.Count == 0)
+            if (this.dgvBatches.CurrentCell==null)
             {
                 return;
             }
 
-            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.SelectedRows[0].Index];
+            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
             this.Selected = selectedBatch;
             if (this.OwnerForm != null)
             {
