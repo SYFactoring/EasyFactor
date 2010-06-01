@@ -8446,6 +8446,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
+		private System.Nullable<bool> _IsSendMsg;
+		
 		private EntitySet<CreditNote> _CreditNotes;
 		
 		private EntitySet<Invoice> _Invoices;
@@ -8478,6 +8480,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
+    partial void OnIsSendMsgChanging(System.Nullable<bool> value);
+    partial void OnIsSendMsgChanged();
     #endregion
 		
 		public InvoiceAssignBatch()
@@ -8708,6 +8712,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._InputDate = value;
 					this.SendPropertyChanged("InputDate");
 					this.OnInputDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSendMsg", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<bool> IsSendMsg
+		{
+			get
+			{
+				return this._IsSendMsg;
+			}
+			set
+			{
+				if ((this._IsSendMsg != value))
+				{
+					this.OnIsSendMsgChanging(value);
+					this.SendPropertyChanging();
+					this._IsSendMsg = value;
+					this.SendPropertyChanged("IsSendMsg");
+					this.OnIsSendMsgChanged();
 				}
 			}
 		}
@@ -9544,6 +9568,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
+		private System.Nullable<bool> _IsSendMsg;
+		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
 		private EntityRef<Case> _Case;
@@ -9576,6 +9602,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckDateChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
+    partial void OnIsSendMsgChanging(System.Nullable<bool> value);
+    partial void OnIsSendMsgChanged();
     #endregion
 		
 		public InvoicePaymentBatch()
@@ -9825,6 +9853,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._InputDate = value;
 					this.SendPropertyChanged("InputDate");
 					this.OnInputDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSendMsg", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<bool> IsSendMsg
+		{
+			get
+			{
+				return this._IsSendMsg;
+			}
+			set
+			{
+				if ((this._IsSendMsg != value))
+				{
+					this.OnIsSendMsgChanging(value);
+					this.SendPropertyChanging();
+					this._IsSendMsg = value;
+					this.SendPropertyChanged("IsSendMsg");
+					this.OnIsSendMsgChanged();
 				}
 			}
 		}

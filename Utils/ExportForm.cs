@@ -2140,12 +2140,6 @@ namespace CMBC.EasyFactor.Utils
             IEnumerable<IGrouping<Client, Case>> groups = null;
             foreach (IGrouping<string, Case> caseGroup in caseGroups)
             {
-                if (worker.CancellationPending)
-                {
-                    e.Cancel = true;
-                    return -1;
-                }
-
                 string transactionType = caseGroup.Key;
                 switch (transactionType)
                 {
@@ -2165,6 +2159,12 @@ namespace CMBC.EasyFactor.Utils
                 {
                     foreach (IGrouping<Client, Case> group in groups)
                     {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return -1;
+                        }
+
                         ExportReportLegarImpl(group, transactionType);
                         result += (int)group.LongCount();
                         worker.ReportProgress((int)((float)result * 100 / (float)size));
@@ -3392,5 +3392,10 @@ namespace CMBC.EasyFactor.Utils
         }
 
         #endregion?Methods?
+
+        private void FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CancelExport(null, null);
+        }
     }
 }
