@@ -89,15 +89,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -108,6 +99,8 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblFactorName = new DevComponents.DotNetBar.LabelX();
             this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblLocation = new DevComponents.DotNetBar.LabelX();
             this.cbTransactionType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -143,8 +136,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblFactorName = new DevComponents.DotNetBar.LabelX();
             this.colFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -206,6 +197,30 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // tbFactorName
+            // 
+            // 
+            // 
+            // 
+            this.tbFactorName.Border.Class = "TextBoxBorder";
+            this.tbFactorName.Location = new System.Drawing.Point(231, 4);
+            this.tbFactorName.Name = "tbFactorName";
+            this.tbFactorName.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorName.TabIndex = 18;
+            // 
+            // lblFactorName
+            // 
+            this.lblFactorName.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblFactorName.BackgroundStyle.Class = "";
+            this.lblFactorName.Location = new System.Drawing.Point(181, 6);
+            this.lblFactorName.Name = "lblFactorName";
+            this.lblFactorName.Size = new System.Drawing.Size(44, 16);
+            this.lblFactorName.TabIndex = 17;
+            this.lblFactorName.Text = "保理商";
             // 
             // cbLocation
             // 
@@ -673,37 +688,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemBatchExport.Text = "导出选定批次";
             this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
-            // tbFactorName
-            // 
-            // 
-            // 
-            // 
-            this.tbFactorName.Border.Class = "TextBoxBorder";
-            this.tbFactorName.Location = new System.Drawing.Point(231, 4);
-            this.tbFactorName.Name = "tbFactorName";
-            this.tbFactorName.Size = new System.Drawing.Size(100, 20);
-            this.tbFactorName.TabIndex = 18;
-            // 
-            // lblFactorName
-            // 
-            this.lblFactorName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblFactorName.BackgroundStyle.Class = "";
-            this.lblFactorName.Location = new System.Drawing.Point(181, 6);
-            this.lblFactorName.Name = "lblFactorName";
-            this.lblFactorName.Size = new System.Drawing.Size(44, 16);
-            this.lblFactorName.TabIndex = 17;
-            this.lblFactorName.Text = "保理商";
-            // 
             // colFactorCode
             // 
             this.colFactorCode.DataPropertyName = "FactorCode";
             this.colFactorCode.HeaderText = "保理商代码";
             this.colFactorCode.Name = "colFactorCode";
             this.colFactorCode.ReadOnly = true;
-            this.colFactorCode.Visible = false;
             // 
             // colFactorName
             // 
@@ -711,7 +701,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFactorName.HeaderText = "保理商名称";
             this.colFactorName.Name = "colFactorName";
             this.colFactorName.ReadOnly = true;
-            this.colFactorName.Visible = false;
             // 
             // colLocation
             // 
@@ -849,7 +838,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFactorCommissionAmount.HeaderText = "合作保理商手续费";
             this.colFactorCommissionAmount.Name = "colFactorCommissionAmount";
             this.colFactorCommissionAmount.ReadOnly = true;
-            this.colFactorCommissionAmount.Visible = false;
             // 
             // colCreateUserName
             // 
