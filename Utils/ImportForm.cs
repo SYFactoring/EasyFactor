@@ -1182,6 +1182,7 @@ namespace CMBC.EasyFactor.Utils
                             paymentLog.Comment = Comment;
                             paymentLog.InvoicePaymentBatch = paymentBatch;
                             creditNote.InvoiceAssignBatch = assignBatch;
+                            toInvoice.CaculatePayment();
                         }
 
                         result++;

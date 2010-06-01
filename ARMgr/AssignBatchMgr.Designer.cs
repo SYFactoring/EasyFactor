@@ -118,24 +118,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbAssignBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAssignBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemAssignReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemThreeReports = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
             this.colFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -156,6 +138,24 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemAssignReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemThreeReports = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -207,7 +207,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbFactorName.Location = new System.Drawing.Point(231, 4);
             this.tbFactorName.Name = "tbFactorName";
             this.tbFactorName.Size = new System.Drawing.Size(100, 20);
-            this.tbFactorName.TabIndex = 18;
+            this.tbFactorName.TabIndex = 3;
             // 
             // lblFactorName
             // 
@@ -219,7 +219,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblFactorName.Location = new System.Drawing.Point(181, 6);
             this.lblFactorName.Name = "lblFactorName";
             this.lblFactorName.Size = new System.Drawing.Size(44, 16);
-            this.lblFactorName.TabIndex = 17;
+            this.lblFactorName.TabIndex = 2;
             this.lblFactorName.Text = "保理商";
             // 
             // cbLocation
@@ -233,7 +233,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(100, 20);
             this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbLocation.TabIndex = 5;
+            this.cbLocation.TabIndex = 7;
             // 
             // lblLocation
             // 
@@ -245,7 +245,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblLocation.Location = new System.Drawing.Point(504, 6);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(56, 16);
-            this.lblLocation.TabIndex = 4;
+            this.lblLocation.TabIndex = 6;
             this.lblLocation.Text = "业务地区";
             // 
             // cbTransactionType
@@ -264,7 +264,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(101, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbTransactionType.TabIndex = 3;
+            this.cbTransactionType.TabIndex = 5;
             // 
             // lblTransactionType
             // 
@@ -276,7 +276,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblTransactionType.Location = new System.Drawing.Point(343, 6);
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(56, 16);
-            this.lblTransactionType.TabIndex = 2;
+            this.lblTransactionType.TabIndex = 4;
             this.lblTransactionType.Text = "业务类别";
             // 
             // tbClientName
@@ -312,7 +312,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbCreateUserName.Location = new System.Drawing.Point(610, 27);
             this.tbCreateUserName.Name = "tbCreateUserName";
             this.tbCreateUserName.Size = new System.Drawing.Size(100, 20);
-            this.tbCreateUserName.TabIndex = 7;
+            this.tbCreateUserName.TabIndex = 15;
             this.tbCreateUserName.WatermarkText = "经办人";
             // 
             // lblCount
@@ -325,7 +325,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblCount.Location = new System.Drawing.Point(723, 30);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(71, 16);
-            this.lblCount.TabIndex = 16;
+            this.lblCount.TabIndex = 17;
             this.lblCount.Text = "获得 条记录";
             // 
             // cbCheckStatus
@@ -471,7 +471,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 15;
+            this.btnQuery.TabIndex = 16;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryBatch);
             // 
@@ -553,140 +553,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.TabIndex = 1;
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBatches_RowPostPaint);
-            // 
-            // cmuBatchMgr
-            // 
-            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemBatchSelect,
-            this.menuItemBatchDetail,
-            this.toolStripSeparator1,
-            this.menuItemCheck,
-            this.menuItemReject,
-            this.toolStripSeparator2,
-            this.menuItemBatchDelete,
-            this.toolStripSeparator3,
-            this.menuItemAssignReport,
-            this.menuItemFinanceReport,
-            this.menuItemCommissionReport,
-            this.menuItemThreeReports,
-            this.menuItemFlawReport,
-            this.menuItemFileCheckList,
-            this.toolStripSeparator4,
-            this.menuItemMSG09,
-            this.menuItemBatchExport});
-            this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(199, 314);
-            // 
-            // menuItemBatchSelect
-            // 
-            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
-            this.menuItemBatchSelect.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchSelect.Text = "选择批次(&S)";
-            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
-            // 
-            // menuItemBatchDetail
-            // 
-            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
-            this.menuItemBatchDetail.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchDetail.Text = "批次详情(&M)";
-            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
-            // 
-            // menuItemCheck
-            // 
-            this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(198, 22);
-            this.menuItemCheck.Text = "复核通过(&P)";
-            this.menuItemCheck.Click += new System.EventHandler(this.Check);
-            // 
-            // menuItemReject
-            // 
-            this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(198, 22);
-            this.menuItemReject.Text = "复核拒绝(&R)";
-            this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
-            // 
-            // menuItemBatchDelete
-            // 
-            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
-            this.menuItemBatchDelete.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchDelete.Text = "删除批次(&D)";
-            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
-            // 
-            // menuItemAssignReport
-            // 
-            this.menuItemAssignReport.Name = "menuItemAssignReport";
-            this.menuItemAssignReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemAssignReport.Text = "应收账款转让明细表(&A)";
-            this.menuItemAssignReport.Click += new System.EventHandler(this.ReportAssign);
-            // 
-            // menuItemFinanceReport
-            // 
-            this.menuItemFinanceReport.Name = "menuItemFinanceReport";
-            this.menuItemFinanceReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemFinanceReport.Text = "可融资账款明细表(&F)";
-            this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
-            // 
-            // menuItemCommissionReport
-            // 
-            this.menuItemCommissionReport.Name = "menuItemCommissionReport";
-            this.menuItemCommissionReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemCommissionReport.Text = "保理费用明细表(&C)";
-            this.menuItemCommissionReport.Click += new System.EventHandler(this.ReportCommission);
-            // 
-            // menuItemThreeReports
-            // 
-            this.menuItemThreeReports.Name = "menuItemThreeReports";
-            this.menuItemThreeReports.Size = new System.Drawing.Size(198, 22);
-            this.menuItemThreeReports.Text = "直接生成三表(&T)";
-            this.menuItemThreeReports.Click += new System.EventHandler(this.ReportThree);
-            // 
-            // menuItemFlawReport
-            // 
-            this.menuItemFlawReport.Name = "menuItemFlawReport";
-            this.menuItemFlawReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemFlawReport.Text = "瑕疵通知书";
-            this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
-            // 
-            // menuItemFileCheckList
-            // 
-            this.menuItemFileCheckList.Name = "menuItemFileCheckList";
-            this.menuItemFileCheckList.Size = new System.Drawing.Size(198, 22);
-            this.menuItemFileCheckList.Text = "文件检查单";
-            this.menuItemFileCheckList.Click += new System.EventHandler(this.ReportFileCheckList);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(195, 6);
-            // 
-            // menuItemMSG09
-            // 
-            this.menuItemMSG09.Name = "menuItemMSG09";
-            this.menuItemMSG09.Size = new System.Drawing.Size(198, 22);
-            this.menuItemMSG09.Text = "生成MSG09";
-            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
-            // 
-            // menuItemBatchExport
-            // 
-            this.menuItemBatchExport.Name = "menuItemBatchExport";
-            this.menuItemBatchExport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchExport.Text = "导出选定批次";
-            this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
             // colFactorCode
             // 
@@ -862,6 +728,140 @@ namespace CMBC.EasyFactor.ARMgr
             this.colBatchCount.Name = "colBatchCount";
             this.colBatchCount.ReadOnly = true;
             this.colBatchCount.Width = 80;
+            // 
+            // cmuBatchMgr
+            // 
+            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemBatchSelect,
+            this.menuItemBatchDetail,
+            this.toolStripSeparator1,
+            this.menuItemCheck,
+            this.menuItemReject,
+            this.toolStripSeparator2,
+            this.menuItemBatchDelete,
+            this.toolStripSeparator3,
+            this.menuItemAssignReport,
+            this.menuItemFinanceReport,
+            this.menuItemCommissionReport,
+            this.menuItemThreeReports,
+            this.menuItemFlawReport,
+            this.menuItemFileCheckList,
+            this.toolStripSeparator4,
+            this.menuItemMSG09,
+            this.menuItemBatchExport});
+            this.cmuBatchMgr.Name = "cmuBatchMgr";
+            this.cmuBatchMgr.Size = new System.Drawing.Size(199, 314);
+            // 
+            // menuItemBatchSelect
+            // 
+            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchSelect.Text = "选择批次(&S)";
+            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            // 
+            // menuItemBatchDetail
+            // 
+            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
+            this.menuItemBatchDetail.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchDetail.Text = "批次详情(&M)";
+            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
+            // 
+            // menuItemCheck
+            // 
+            this.menuItemCheck.Name = "menuItemCheck";
+            this.menuItemCheck.Size = new System.Drawing.Size(198, 22);
+            this.menuItemCheck.Text = "复核通过(&P)";
+            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            // 
+            // menuItemReject
+            // 
+            this.menuItemReject.Name = "menuItemReject";
+            this.menuItemReject.Size = new System.Drawing.Size(198, 22);
+            this.menuItemReject.Text = "复核拒绝(&R)";
+            this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
+            // 
+            // menuItemBatchDelete
+            // 
+            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
+            this.menuItemBatchDelete.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchDelete.Text = "删除批次(&D)";
+            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
+            // 
+            // menuItemAssignReport
+            // 
+            this.menuItemAssignReport.Name = "menuItemAssignReport";
+            this.menuItemAssignReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemAssignReport.Text = "应收账款转让明细表(&A)";
+            this.menuItemAssignReport.Click += new System.EventHandler(this.ReportAssign);
+            // 
+            // menuItemFinanceReport
+            // 
+            this.menuItemFinanceReport.Name = "menuItemFinanceReport";
+            this.menuItemFinanceReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemFinanceReport.Text = "可融资账款明细表(&F)";
+            this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
+            // 
+            // menuItemCommissionReport
+            // 
+            this.menuItemCommissionReport.Name = "menuItemCommissionReport";
+            this.menuItemCommissionReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemCommissionReport.Text = "保理费用明细表(&C)";
+            this.menuItemCommissionReport.Click += new System.EventHandler(this.ReportCommission);
+            // 
+            // menuItemThreeReports
+            // 
+            this.menuItemThreeReports.Name = "menuItemThreeReports";
+            this.menuItemThreeReports.Size = new System.Drawing.Size(198, 22);
+            this.menuItemThreeReports.Text = "直接生成三表(&T)";
+            this.menuItemThreeReports.Click += new System.EventHandler(this.ReportThree);
+            // 
+            // menuItemFlawReport
+            // 
+            this.menuItemFlawReport.Name = "menuItemFlawReport";
+            this.menuItemFlawReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemFlawReport.Text = "瑕疵通知书";
+            this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
+            // 
+            // menuItemFileCheckList
+            // 
+            this.menuItemFileCheckList.Name = "menuItemFileCheckList";
+            this.menuItemFileCheckList.Size = new System.Drawing.Size(198, 22);
+            this.menuItemFileCheckList.Text = "文件检查单";
+            this.menuItemFileCheckList.Click += new System.EventHandler(this.ReportFileCheckList);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(195, 6);
+            // 
+            // menuItemMSG09
+            // 
+            this.menuItemMSG09.Name = "menuItemMSG09";
+            this.menuItemMSG09.Size = new System.Drawing.Size(198, 22);
+            this.menuItemMSG09.Text = "生成MSG09";
+            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
+            // 
+            // menuItemBatchExport
+            // 
+            this.menuItemBatchExport.Name = "menuItemBatchExport";
+            this.menuItemBatchExport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchExport.Text = "导出选定批次";
+            this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
             // AssignBatchMgr
             // 

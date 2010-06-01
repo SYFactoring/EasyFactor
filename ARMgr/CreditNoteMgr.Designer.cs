@@ -63,10 +63,10 @@
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInvoiceNos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditNoteNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditNoteDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInvoiceNos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCreditNote)).BeginInit();
             this.cmuCreditNoteMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
@@ -93,10 +93,10 @@
             this.colFactorName,
             this.colTransactionType,
             this.colAssignBatchNo,
-            this.colInvoiceNos,
             this.colCreditNoteNo,
             this.colCreditNoteDate,
-            this.colPaymentAmount});
+            this.colPaymentAmount,
+            this.colInvoiceNos});
             this.dgvCreditNote.ContextMenuStrip = this.cmuCreditNoteMgr;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
@@ -531,14 +531,6 @@
             this.colAssignBatchNo.Name = "colAssignBatchNo";
             this.colAssignBatchNo.ReadOnly = true;
             // 
-            // colInvoiceNos
-            // 
-            this.colInvoiceNos.DataPropertyName = "InvoiceNos";
-            this.colInvoiceNos.HeaderText = "发票号";
-            this.colInvoiceNos.Name = "colInvoiceNos";
-            this.colInvoiceNos.ReadOnly = true;
-            this.colInvoiceNos.Width = 68;
-            // 
             // colCreditNoteNo
             // 
             this.colCreditNoteNo.DataPropertyName = "CreditNoteNo";
@@ -562,9 +554,17 @@
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle3.Format = "N2";
             this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPaymentAmount.HeaderText = "销帐金额";
+            this.colPaymentAmount.HeaderText = "贷项金额";
             this.colPaymentAmount.Name = "colPaymentAmount";
             this.colPaymentAmount.ReadOnly = true;
+            // 
+            // colInvoiceNos
+            // 
+            this.colInvoiceNos.DataPropertyName = "InvoiceNos";
+            this.colInvoiceNos.HeaderText = "对应发票号";
+            this.colInvoiceNos.Name = "colInvoiceNos";
+            this.colInvoiceNos.ReadOnly = true;
+            this.colInvoiceNos.Width = 68;
             // 
             // CreditNoteMgr
             // 
@@ -616,9 +616,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNos;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditNoteDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNos;
     }
 }
