@@ -56,7 +56,6 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnDepartMgr;
         private DevComponents.DotNetBar.ButtonItem btnDeptQuery;
         private DevComponents.DotNetBar.ButtonItem btnDispute;
-        private DevComponents.DotNetBar.ButtonItem btnExample1;
         private DevComponents.DotNetBar.ButtonItem btnExchangeQuery;
         private DevComponents.DotNetBar.ButtonItem btnExchangeRateImport;
         private DevComponents.DotNetBar.ButtonItem btnFactorCreditLine;
@@ -102,33 +101,19 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnRefundBatchQuery;
         private DevComponents.DotNetBar.ButtonItem btnRefundCheck;
         private DevComponents.DotNetBar.ButtonItem btnRefundImport;
-        private DevComponents.DotNetBar.ButtonItem btnStartClose;
-        private DevComponents.DotNetBar.ButtonItem btnStartExit;
-        private DevComponents.DotNetBar.ButtonItem btnStartNew;
-        private DevComponents.DotNetBar.ButtonItem btnStartOpen;
-        private DevComponents.DotNetBar.ButtonItem btnStartOptions;
-        private DevComponents.DotNetBar.ButtonItem btnStartPrint;
-        private DevComponents.DotNetBar.ButtonItem btnStartSave;
-        private DevComponents.DotNetBar.ButtonItem btnStartShare;
         private DevComponents.DotNetBar.ButtonItem btnUserImport;
         private DevComponents.DotNetBar.ButtonItem btnUserMgr;
         private DevComponents.DotNetBar.ButtonItem btnUserUpdate;
         private DevComponents.DotNetBar.ComboBoxItem cbStyleManager;
         private System.ComponentModel.IContainer components = null;
-        private DevComponents.DotNetBar.GalleryContainer galleryContainer;
         private DevComponents.DotNetBar.RibbonTabItem itemAccountsReceivableMgr;
         private DevComponents.DotNetBar.ItemContainer itemContainerClientQuery;
-        private DevComponents.DotNetBar.ItemContainer itemContainerInner;
-        private DevComponents.DotNetBar.ItemContainer itemContainerStartBottom;
-        private DevComponents.DotNetBar.ItemContainer itemContainerStartLeft;
-        private DevComponents.DotNetBar.ItemContainer itemContainerStartOuter;
         private DevComponents.DotNetBar.RibbonTabItem itemHelp;
         private DevComponents.DotNetBar.RibbonTabItem itemInfoMgr;
         private DevComponents.DotNetBar.RibbonTabItem itemQuery;
         private DevComponents.DotNetBar.RibbonTabItem itemReport;
         private DevComponents.DotNetBar.LabelItem lblCommandStatus;
         private DevComponents.DotNetBar.LabelItem lblCurrentUser;
-        private DevComponents.DotNetBar.LabelItem lblRecentDocs;
         private System.Windows.Forms.ToolStripMenuItem menuItemCheckAlert;
         private System.Windows.Forms.ToolStripMenuItem menuItemExit;
         private System.Windows.Forms.ToolStripMenuItem menuItemHide;
@@ -369,21 +354,6 @@ namespace CMBC.EasyFactor
             this.itemHelp = new DevComponents.DotNetBar.RibbonTabItem();
             this.menuLogo = new DevComponents.DotNetBar.LabelItem();
             this.office2007StartButton = new DevComponents.DotNetBar.Office2007StartButton();
-            this.itemContainerStartOuter = new DevComponents.DotNetBar.ItemContainer();
-            this.itemContainerInner = new DevComponents.DotNetBar.ItemContainer();
-            this.itemContainerStartLeft = new DevComponents.DotNetBar.ItemContainer();
-            this.btnStartNew = new DevComponents.DotNetBar.ButtonItem();
-            this.btnStartOpen = new DevComponents.DotNetBar.ButtonItem();
-            this.btnStartSave = new DevComponents.DotNetBar.ButtonItem();
-            this.btnStartShare = new DevComponents.DotNetBar.ButtonItem();
-            this.btnStartPrint = new DevComponents.DotNetBar.ButtonItem();
-            this.btnStartClose = new DevComponents.DotNetBar.ButtonItem();
-            this.galleryContainer = new DevComponents.DotNetBar.GalleryContainer();
-            this.lblRecentDocs = new DevComponents.DotNetBar.LabelItem();
-            this.btnExample1 = new DevComponents.DotNetBar.ButtonItem();
-            this.itemContainerStartBottom = new DevComponents.DotNetBar.ItemContainer();
-            this.btnStartOptions = new DevComponents.DotNetBar.ButtonItem();
-            this.btnStartExit = new DevComponents.DotNetBar.ButtonItem();
             this.cbStyleManager = new DevComponents.DotNetBar.ComboBoxItem();
             this.btnMainPage = new DevComponents.DotNetBar.ButtonItem();
             this.qatCustomizeItem = new DevComponents.DotNetBar.QatCustomizeItem();
@@ -424,13 +394,13 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
+            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanel2);
             this.ribbonControl.Controls.Add(this.ribbonPanelARImport);
             this.ribbonControl.Controls.Add(this.ribbonPanel3);
             this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
-            this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanel1);
             this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
@@ -492,6 +462,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanel2.StyleMouseOver.Class = "";
             this.ribbonPanel2.TabIndex = 10;
+            this.ribbonPanel2.Visible = false;
             // 
             // ribbonBarPoolCheck
             // 
@@ -1802,7 +1773,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelInfoMgr.StyleMouseOver.Class = "";
             this.ribbonPanelInfoMgr.TabIndex = 2;
-            this.ribbonPanelInfoMgr.Visible = false;
             // 
             // ribbonBarExchange
             // 
@@ -2544,6 +2514,7 @@ namespace CMBC.EasyFactor
             // 
             // itemInfoMgr
             // 
+            this.itemInfoMgr.Checked = true;
             this.itemInfoMgr.Name = "itemInfoMgr";
             this.itemInfoMgr.Panel = this.ribbonPanelInfoMgr;
             this.itemInfoMgr.Text = "信息管理";
@@ -2568,7 +2539,6 @@ namespace CMBC.EasyFactor
             // 
             // ribbonTabItemCheck
             // 
-            this.ribbonTabItemCheck.Checked = true;
             this.ribbonTabItemCheck.Name = "ribbonTabItemCheck";
             this.ribbonTabItemCheck.Panel = this.ribbonPanel2;
             this.ribbonTabItemCheck.Text = "复核";
@@ -2621,164 +2591,8 @@ namespace CMBC.EasyFactor
             this.office2007StartButton.ImagePaddingVertical = 2;
             this.office2007StartButton.Name = "office2007StartButton";
             this.office2007StartButton.ShowSubItems = false;
-            this.office2007StartButton.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainerStartOuter});
             this.office2007StartButton.Text = "&File";
             this.office2007StartButton.Click += new System.EventHandler(this.MainPage);
-            // 
-            // itemContainerStartOuter
-            // 
-            // 
-            // 
-            // 
-            this.itemContainerStartOuter.BackgroundStyle.Class = "RibbonFileMenuContainer";
-            this.itemContainerStartOuter.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            this.itemContainerStartOuter.Name = "itemContainerStartOuter";
-            this.itemContainerStartOuter.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainerInner,
-            this.itemContainerStartBottom});
-            // 
-            // itemContainerInner
-            // 
-            // 
-            // 
-            // 
-            this.itemContainerInner.BackgroundStyle.Class = "RibbonFileMenuTwoColumnContainer";
-            this.itemContainerInner.ItemSpacing = 0;
-            this.itemContainerInner.Name = "itemContainerInner";
-            this.itemContainerInner.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainerStartLeft,
-            this.galleryContainer});
-            // 
-            // itemContainerStartLeft
-            // 
-            // 
-            // 
-            // 
-            this.itemContainerStartLeft.BackgroundStyle.Class = "RibbonFileMenuColumnOneContainer";
-            this.itemContainerStartLeft.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            this.itemContainerStartLeft.MinimumSize = new System.Drawing.Size(120, 0);
-            this.itemContainerStartLeft.Name = "itemContainerStartLeft";
-            this.itemContainerStartLeft.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnStartNew,
-            this.btnStartOpen,
-            this.btnStartSave,
-            this.btnStartShare,
-            this.btnStartPrint,
-            this.btnStartClose});
-            // 
-            // btnStartNew
-            // 
-            this.btnStartNew.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnStartNew.Enabled = false;
-            this.btnStartNew.Name = "btnStartNew";
-            this.btnStartNew.SubItemsExpandWidth = 24;
-            this.btnStartNew.Text = "&New";
-            // 
-            // btnStartOpen
-            // 
-            this.btnStartOpen.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnStartOpen.Enabled = false;
-            this.btnStartOpen.Name = "btnStartOpen";
-            this.btnStartOpen.SubItemsExpandWidth = 24;
-            this.btnStartOpen.Text = "&Open...";
-            // 
-            // btnStartSave
-            // 
-            this.btnStartSave.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnStartSave.Enabled = false;
-            this.btnStartSave.Name = "btnStartSave";
-            this.btnStartSave.SubItemsExpandWidth = 24;
-            this.btnStartSave.Text = "&Save...";
-            // 
-            // btnStartShare
-            // 
-            this.btnStartShare.BeginGroup = true;
-            this.btnStartShare.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnStartShare.Enabled = false;
-            this.btnStartShare.Name = "btnStartShare";
-            this.btnStartShare.SubItemsExpandWidth = 24;
-            this.btnStartShare.Text = "S&hare...";
-            // 
-            // btnStartPrint
-            // 
-            this.btnStartPrint.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnStartPrint.Enabled = false;
-            this.btnStartPrint.Name = "btnStartPrint";
-            this.btnStartPrint.SubItemsExpandWidth = 24;
-            this.btnStartPrint.Text = "&Print...";
-            // 
-            // btnStartClose
-            // 
-            this.btnStartClose.BeginGroup = true;
-            this.btnStartClose.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnStartClose.Enabled = false;
-            this.btnStartClose.Name = "btnStartClose";
-            this.btnStartClose.SubItemsExpandWidth = 24;
-            this.btnStartClose.Text = "&Close";
-            // 
-            // galleryContainer
-            // 
-            // 
-            // 
-            // 
-            this.galleryContainer.BackgroundStyle.Class = "RibbonFileMenuColumnTwoContainer";
-            this.galleryContainer.EnableGalleryPopup = false;
-            this.galleryContainer.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            this.galleryContainer.MinimumSize = new System.Drawing.Size(180, 240);
-            this.galleryContainer.MultiLine = false;
-            this.galleryContainer.Name = "galleryContainer";
-            this.galleryContainer.PopupUsesStandardScrollbars = false;
-            this.galleryContainer.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.lblRecentDocs,
-            this.btnExample1});
-            // 
-            // lblRecentDocs
-            // 
-            this.lblRecentDocs.BorderSide = DevComponents.DotNetBar.eBorderSide.Bottom;
-            this.lblRecentDocs.BorderType = DevComponents.DotNetBar.eBorderType.Etched;
-            this.lblRecentDocs.CanCustomize = false;
-            this.lblRecentDocs.Name = "lblRecentDocs";
-            this.lblRecentDocs.PaddingBottom = 2;
-            this.lblRecentDocs.PaddingTop = 2;
-            this.lblRecentDocs.Stretch = true;
-            this.lblRecentDocs.Text = "Recent Documents";
-            // 
-            // btnExample1
-            // 
-            this.btnExample1.Enabled = false;
-            this.btnExample1.Name = "btnExample1";
-            this.btnExample1.Text = "&1. Short News 5-7.rtf";
-            // 
-            // itemContainerStartBottom
-            // 
-            // 
-            // 
-            // 
-            this.itemContainerStartBottom.BackgroundStyle.Class = "RibbonFileMenuBottomContainer";
-            this.itemContainerStartBottom.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Right;
-            this.itemContainerStartBottom.Name = "itemContainerStartBottom";
-            this.itemContainerStartBottom.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnStartOptions,
-            this.btnStartExit});
-            // 
-            // btnStartOptions
-            // 
-            this.btnStartOptions.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnStartOptions.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnStartOptions.Enabled = false;
-            this.btnStartOptions.Name = "btnStartOptions";
-            this.btnStartOptions.SubItemsExpandWidth = 24;
-            this.btnStartOptions.Text = "Opt&ions";
-            // 
-            // btnStartExit
-            // 
-            this.btnStartExit.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnStartExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnStartExit.Name = "btnStartExit";
-            this.btnStartExit.SubItemsExpandWidth = 24;
-            this.btnStartExit.Text = "E&xit";
-            this.btnStartExit.Click += new System.EventHandler(this.Exit);
             // 
             // cbStyleManager
             // 
@@ -2798,7 +2612,7 @@ namespace CMBC.EasyFactor
             // btnMainPage
             // 
             this.btnMainPage.Name = "btnMainPage";
-            this.btnMainPage.Text = "首页";
+            this.btnMainPage.Text = "工作提醒";
             this.btnMainPage.Click += new System.EventHandler(this.AlertPage);
             // 
             // qatCustomizeItem

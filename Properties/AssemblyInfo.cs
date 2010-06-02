@@ -6,10 +6,10 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("中国民生银行保理运营系统")]
-[assembly: AssemblyDescription("本系统由保理业务部提出构想，晓兰、一鸣设计、开发并维护。感谢各位领导和同事的支持，特别是Jerry、Nina、Sissi、Lele、Clara、Cindy、宋华不辞辛劳的测试和负责任的反馈。希望我们可以做的更好。")]
+[assembly: AssemblyTitle("EasyFactoring民生银行版")]
+[assembly: AssemblyDescription("本系统由中国民生银行保理业务部提出需求，晓兰、一鸣设计、开发并维护。感谢各位领导和同事的支持，特别是Jerry、Nina、Sissi、Lele、Clara、Cindy、宋华不辞辛劳的测试和负责任的反馈。希望我们可以做的更好。")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("中国民生银行贸易金融部")]
+[assembly: AssemblyCompany("Easy Product")]
 [assembly: AssemblyProduct("EasyFactoring")]
 [assembly: AssemblyCopyright("Copyright ©  2010")]
 [assembly: AssemblyTrademark("")]
