@@ -6,27 +6,17 @@
 
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class CreditCoverNegotiation
     {
-		#region?Properties?(8)?
-
         /// <summary>
         /// Gets
         /// </summary>
         public string BuyerCountry
         {
-            get
-            {
-                return this.Case.BuyerClient.CountryCode;
-            }
+            get { return Case.BuyerClient.CountryCode; }
         }
 
         /// <summary>
@@ -34,10 +24,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string BuyerFactorName
         {
-            get
-            {
-                return this.Case.BuyerFactor.ToString();
-            }
+            get { return Case.BuyerFactor.ToString(); }
         }
 
         /// <summary>
@@ -45,10 +32,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string BuyerName
         {
-            get
-            {
-                return this.Case.BuyerClient.ToString();
-            }
+            get { return Case.BuyerClient.ToString(); }
         }
 
         /// <summary>
@@ -56,10 +40,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string CaseCurrency
         {
-            get
-            {
-                return this.Case.InvoiceCurrency;
-            }
+            get { return Case.InvoiceCurrency; }
         }
 
         /// <summary>
@@ -67,10 +48,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string OwnerDept
         {
-            get
-            {
-                return this.Case.OwnerDepartment.DepartmentName;
-            }
+            get { return Case.OwnerDepartment.DepartmentName; }
         }
 
         /// <summary>
@@ -78,10 +56,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string SellerFactorName
         {
-            get
-            {
-                return this.Case.SellerFactor.ToString();
-            }
+            get { return Case.SellerFactor.ToString(); }
         }
 
         /// <summary>
@@ -89,10 +64,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string SellerName
         {
-            get
-            {
-                return this.Case.SellerClient.ToString();
-            }
+            get { return Case.SellerClient.ToString(); }
         }
 
         /// <summary>
@@ -100,12 +72,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string TransactionType
         {
-            get
-            {
-                return this.Case.TransactionType;
-            }
+            get { return Case.TransactionType; }
         }
-
-		#endregion?Properties?
     }
 }

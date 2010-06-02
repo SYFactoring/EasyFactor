@@ -43,9 +43,9 @@ namespace CMBC.EasyFactor.Help
                 components.Dispose();
             }
 
-            if (this.mail != null)
+            if (this._mail != null)
             {
-                this.mail.Dispose();
+                this._mail.Dispose();
             }
 
             base.Dispose(disposing);
@@ -288,8 +288,8 @@ namespace CMBC.EasyFactor.Help
             // 
             // backgroundWorker
             // 
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorkerDoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorkerRunWorkerCompleted);
             // 
             // ReportBug
             // 

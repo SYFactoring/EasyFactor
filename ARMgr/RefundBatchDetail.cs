@@ -4,42 +4,24 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Data.Linq;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.CaseMgr;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Data.Linq;
-    using System.Drawing;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class RefundBatchDetail : DevComponents.DotNetBar.Office2007Form
+    public partial class RefundBatchDetail : Office2007Form
     {
-        #region?Fields?(3)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bs;
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpBatchType opBatchType;
-
-        #endregion?Fields?
-
-        #region?Enums?(1)?
+        #region OpBatchType enum
 
         /// <summary>
         /// 
@@ -57,9 +39,23 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-        #endregion?Enums?
+        #endregion
 
-        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpBatchType _opBatchType;
+
 
         /// <summary>
         /// 
@@ -67,27 +63,23 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batch"></param>
         public RefundBatchDetail(InvoiceRefundBatch batch)
         {
-            this.InitializeComponent();
-            this.context = new DBDataContext();
-            this.bs = new BindingSource();
-            this.dgvRefundLogs.AutoGenerateColumns = false;
-            this.dgvRefundLogs.DataSource = bs;
-            this.opBatchType = OpBatchType.DETAIL_BATCH;
-            ControlUtil.SetDoubleBuffered(this.dgvRefundLogs);
+            InitializeComponent();
+            _context = new DBDataContext();
+            _bs = new BindingSource();
+            dgvRefundLogs.AutoGenerateColumns = false;
+            dgvRefundLogs.DataSource = _bs;
+            _opBatchType = OpBatchType.DETAIL_BATCH;
+            ControlUtil.SetDoubleBuffered(dgvRefundLogs);
 
-            batch = context.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == batch.RefundBatchNo);
-            this.batchBindingSource.DataSource = batch;
-            this.bs.DataSource = batch.InvoiceRefundLogs;
+            batch = _context.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == batch.RefundBatchNo);
+            batchBindingSource.DataSource = batch;
+            _bs.DataSource = batch.InvoiceRefundLogs;
 
-            this.UpdateBatchControlStatus();
+            UpdateBatchControlStatus();
         }
 
-        #endregion?Constructors?
-
-        #region?Methods?(8)?
 
         //?Private?Methods?(8)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -100,12 +92,12 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvRefundLogs.SelectedRows.Count == 0)
+            if (dgvRefundLogs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            InvoiceRefundLog log = (InvoiceRefundLog)this.bs.List[this.dgvRefundLogs.SelectedRows[0].Index];
+            var log = (InvoiceRefundLog) _bs.List[dgvRefundLogs.SelectedRows[0].Index];
 
             try
             {
@@ -116,17 +108,18 @@ namespace CMBC.EasyFactor.ARMgr
 
                 financeLog.Invoice.CaculateRefund();
                 batch.CaculateRefundAmount();
-                context.InvoiceRefundLogs.DeleteOnSubmit(log);
+                _context.InvoiceRefundLogs.DeleteOnSubmit(log);
                 //batch.CheckStatus = BATCH.UNCHECK;
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("É¾³ýÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("É¾³ýÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
                 return;
             }
 
-            this.dgvRefundLogs.Rows.RemoveAt(this.dgvRefundLogs.SelectedRows[0].Index);
+            dgvRefundLogs.Rows.RemoveAt(dgvRefundLogs.SelectedRows[0].Index);
         }
 
         /// <summary>
@@ -136,10 +129,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
-            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
+            var batch = (InvoiceRefundBatch) batchBindingSource.DataSource;
             if (batch.Case != null)
             {
-                CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+                var detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
                 detail.Show();
             }
         }
@@ -151,10 +144,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailFinanceBatch(object sender, EventArgs e)
         {
-            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
+            var batch = (InvoiceRefundBatch) batchBindingSource.DataSource;
             if (batch.InvoiceFinanceBatch != null)
             {
-                FinanceBatchDetail detail = new FinanceBatchDetail(batch.InvoiceFinanceBatch);
+                var detail = new FinanceBatchDetail(batch.InvoiceFinanceBatch);
                 detail.Show();
             }
         }
@@ -166,13 +159,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvRefundLogs.SelectedRows.Count == 0)
+            if (dgvRefundLogs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            InvoiceRefundLog log = (InvoiceRefundLog)this.bs.List[this.dgvRefundLogs.SelectedRows[0].Index];
-            InvoiceDetail detail = new InvoiceDetail(log.InvoiceFinanceLog.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+            var log = (InvoiceRefundLog) _bs.List[dgvRefundLogs.SelectedRows[0].Index];
+            var detail = new InvoiceDetail(log.InvoiceFinanceLog.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             detail.Show();
         }
 
@@ -181,10 +174,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvRefundLogs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DgvRefundLogsRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvRefundLogs.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvRefundLogs.RowHeadersDefaultCellStyle.Font, rectangle, dgvRefundLogs.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            var rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
+                                          dgvRefundLogs.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvRefundLogs.RowHeadersDefaultCellStyle.Font,
+                                  rectangle, dgvRefundLogs.RowHeadersDefaultCellStyle.ForeColor,
+                                  TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -199,21 +195,19 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.batchBindingSource.DataSource;
-
             bool isUpdateOK = true;
             try
             {
-                context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                _context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)
             {
-                foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                 {
                     foreach (MemberChangeConflict mc in cc.MemberConflicts)
                     {
@@ -221,7 +215,7 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -247,8 +241,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.opBatchType = OpBatchType.UPDATE_BATCH;
-            this.UpdateBatchControlStatus();
+            _opBatchType = OpBatchType.UPDATE_BATCH;
+            UpdateBatchControlStatus();
         }
 
         /// <summary>
@@ -256,27 +250,25 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateBatchControlStatus()
         {
-            if (this.opBatchType == OpBatchType.DETAIL_BATCH)
+            if (_opBatchType == OpBatchType.DETAIL_BATCH)
             {
-                foreach (Control comp in this.panelBatch.Controls)
+                foreach (Control comp in panelBatch.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (this.opBatchType == OpBatchType.UPDATE_BATCH)
+            else if (_opBatchType == OpBatchType.UPDATE_BATCH)
             {
-                foreach (Control comp in this.panelBatch.Controls)
+                foreach (Control comp in panelBatch.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
 
-            ControlUtil.SetComponetEditable(this.caseCodeTextBox, false);
-            ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
-            ControlUtil.SetComponetEditable(this.refundBatchNoTextBox, false);
-            ControlUtil.SetComponetEditable(this.diInputDate, false);
+            ControlUtil.SetComponetEditable(caseCodeTextBox, false);
+            ControlUtil.SetComponetEditable(createUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(refundBatchNoTextBox, false);
+            ControlUtil.SetComponetEditable(diInputDate, false);
         }
-
-        #endregion?Methods?
     }
 }

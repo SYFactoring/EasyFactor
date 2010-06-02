@@ -4,37 +4,23 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Data.Linq;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.CaseMgr;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Data.Linq;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class AssignBatchDetail : DevComponents.DotNetBar.Office2007Form
+    public partial class AssignBatchDetail : Office2007Form
     {
-        #region?Fields?(2)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpBatchType opBatchType;
-
-        #endregion?Fields?
-
-        #region?Enums?(1)?
+        #region OpBatchType enum
 
         /// <summary>
         /// 
@@ -52,9 +38,18 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-        #endregion?Enums?
+        #endregion
 
-        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpBatchType _opBatchType;
+
 
         /// <summary>
         /// Initializes a new instance of the AssignBatchDetail class
@@ -62,30 +57,24 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batch"></param>
         public AssignBatchDetail(InvoiceAssignBatch batch)
         {
-            this.InitializeComponent();
-            this.context = new DBDataContext();
-            batch = context.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == batch.AssignBatchNo);
-            this.batchBindingSource.DataSource = batch;
-            this.opBatchType = OpBatchType.DETAIL_BATCH;
-            this.ImeMode = ImeMode.OnHalf;
+            InitializeComponent();
+            _context = new DBDataContext();
+            batch = _context.InvoiceAssignBatches.SingleOrDefault(i => i.AssignBatchNo == batch.AssignBatchNo);
+            batchBindingSource.DataSource = batch;
+            _opBatchType = OpBatchType.DETAIL_BATCH;
+            ImeMode = ImeMode.OnHalf;
 
-            InvoiceMgr invoiceMgr = new InvoiceMgr(batch.Invoices, context);
-            invoiceMgr.Dock = DockStyle.Fill;
-            this.panelInvoices.Controls.Add(invoiceMgr);
+            var invoiceMgr = new InvoiceMgr(batch.Invoices, _context) {Dock = DockStyle.Fill};
+            panelInvoices.Controls.Add(invoiceMgr);
 
-            CreditNoteMgr creditNoteMgr = new CreditNoteMgr(batch.CreditNotes, context);
-            creditNoteMgr.Dock = DockStyle.Fill;
-            this.panelCreditNote.Controls.Add(creditNoteMgr);
+            var creditNoteMgr = new CreditNoteMgr(batch.CreditNotes, _context) {Dock = DockStyle.Fill};
+            panelCreditNote.Controls.Add(creditNoteMgr);
 
-            this.UpdateBatchControlStatus();
+            UpdateBatchControlStatus();
         }
 
-        #endregion?Constructors?
-
-        #region?Methods?(4)?
 
         //?Private?Methods?(4)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -93,8 +82,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
-            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
-            CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            var batch = (InvoiceAssignBatch) batchBindingSource.DataSource;
+            var detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             detail.Show();
         }
 
@@ -110,30 +99,25 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
-
-            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
 
             bool isUpdateOK = true;
 
             try
             {
-                context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                _context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)
             {
-                foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                foreach (MemberChangeConflict mc in _context.ChangeConflicts.SelectMany(cc => cc.MemberConflicts))
                 {
-                    foreach (MemberChangeConflict mc in cc.MemberConflicts)
-                    {
-                        mc.Resolve(RefreshMode.KeepChanges);
-                    }
+                    mc.Resolve(RefreshMode.KeepChanges);
                 }
 
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -159,8 +143,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.opBatchType = OpBatchType.UPDATE_BATCH;
-            this.UpdateBatchControlStatus();
+            _opBatchType = OpBatchType.UPDATE_BATCH;
+            UpdateBatchControlStatus();
         }
 
         /// <summary>
@@ -168,27 +152,25 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateBatchControlStatus()
         {
-            if (this.opBatchType == OpBatchType.DETAIL_BATCH)
+            if (_opBatchType == OpBatchType.DETAIL_BATCH)
             {
-                foreach (Control comp in this.panelBatch.Controls)
+                foreach (Control comp in panelBatch.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (this.opBatchType == OpBatchType.UPDATE_BATCH)
+            else if (_opBatchType == OpBatchType.UPDATE_BATCH)
             {
-                foreach (Control comp in this.panelBatch.Controls)
+                foreach (Control comp in panelBatch.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
 
-            ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
-            ControlUtil.SetComponetEditable(this.caseCodeTextBox, false);
-            ControlUtil.SetComponetEditable(this.assignBatchNoTextBox, false);
-            ControlUtil.SetComponetEditable(this.diInputDate, false);
+            ControlUtil.SetComponetEditable(createUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(caseCodeTextBox, false);
+            ControlUtil.SetComponetEditable(assignBatchNoTextBox, false);
+            ControlUtil.SetComponetEditable(diInputDate, false);
         }
-
-        #endregion?Methods?
     }
 }

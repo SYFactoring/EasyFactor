@@ -9,10 +9,8 @@ namespace CMBC.EasyFactor.Utils
     /// <summary>
     /// 
     /// </summary>
-    public partial class ImportForm
+    public sealed partial class ImportForm
     {
-		#region?Fields?(11)?
-
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -27,13 +25,7 @@ namespace CMBC.EasyFactor.Utils
         private DevComponents.DotNetBar.Controls.ProgressBarX progressBar;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFilePath;
         private DevComponents.DotNetBar.Controls.TextBoxX tbStatus;
-
-		#endregion?Fields?
-
-		#region?Methods?(1)?
-
 		//?Protected?Methods?(1)?
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -45,20 +37,13 @@ namespace CMBC.EasyFactor.Utils
                 this.components.Dispose();
             }
 
-            if (this.context != null)
+            if (this._context != null)
             {
-                this.context.Dispose();
+                this._context.Dispose();
             }
 
             base.Dispose(disposing);
         }
-
-		#endregion?Methods?
-
-
-
-        #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -221,7 +206,5 @@ namespace CMBC.EasyFactor.Utils
             this.PerformLayout();
 
         }
-
-        #endregion
     }
 }

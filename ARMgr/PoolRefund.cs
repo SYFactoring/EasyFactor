@@ -4,44 +4,22 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class PoolRefund : UserControl
     {
-        #region?Fields?(4)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private Client _client;
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        private ARPoolBasic poolBasic;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpRefundType refundType;
-
-        #endregion?Fields?
-
-        #region?Enums?(1)?
+        #region OpRefundType enum
 
         /// <summary>
         /// 
@@ -59,9 +37,28 @@ namespace CMBC.EasyFactor.ARMgr
             SELLER_REFUND,
         }
 
-        #endregion?Enums?
+        #endregion
 
-        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly OpRefundType _refundType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private Client _client;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private ARPoolBasic _poolBasic;
+
 
         /// <summary>
         /// 
@@ -72,45 +69,35 @@ namespace CMBC.EasyFactor.ARMgr
         {
             InitializeComponent();
 
-            this.poolBasic = poolBasic;
-            this.refundType = refundType;
-            this.dgvLogs.AutoGenerateColumns = false;
-            ControlUtil.SetDoubleBuffered(this.dgvLogs);
-            this.superValidator.Enabled = false;
+            _poolBasic = poolBasic;
+            _refundType = refundType;
+            dgvLogs.AutoGenerateColumns = false;
+            ControlUtil.SetDoubleBuffered(dgvLogs);
+            superValidator.Enabled = false;
 
-            this.batchCurrencyComboBoxEx.DataSource = Currency.AllCurrencies;
-            this.batchCurrencyComboBoxEx.DisplayMember = "CurrencyCode";
-            this.batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
+            batchCurrencyComboBoxEx.DataSource = Currency.AllCurrencies;
+            batchCurrencyComboBoxEx.DisplayMember = "CurrencyCode";
+            batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
 
-            this.context = new DBDataContext();
+            _context = new DBDataContext();
         }
 
-        #endregion?Constructors?
-
-        #region?Properties?(1)?
 
         /// <summary>
         /// 
         /// </summary>
         public Client Client
         {
-            get
-            {
-                return this._client;
-            }
+            get { return _client; }
             set
             {
-                this._client = this.context.Clients.SingleOrDefault(c => c.ClientEDICode == value.ClientEDICode);
-                this.NewBatch(null, null);
+                _client = _context.Clients.SingleOrDefault(c => c.ClientEDICode == value.ClientEDICode);
+                NewBatch(null, null);
             }
         }
 
-        #endregion?Properties?
-
-        #region?Methods?(2)?
 
         //?Private?Methods?(2)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -118,34 +105,27 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
-            if (this._client == null)
+            if (_client == null)
             {
                 MessageBoxEx.Show("没有选定客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            switch (refundType)
+            switch (_refundType)
             {
                 case OpRefundType.BUYER_PAYMENT:
-                    this.cbRefundType.Text = REFUND.BUYER_PAYMENT;
+                    cbRefundType.Text = REFUND.BUYER_PAYMENT;
                     break;
                 case OpRefundType.SELLER_REFUND:
-                    this.cbRefundType.Text = REFUND.SELLER_REFUND;
+                    cbRefundType.Text = REFUND.SELLER_REFUND;
                     break;
                 default:
                     break;
             }
 
-            List<InvoiceFinanceBatch> financeBatches = new List<InvoiceFinanceBatch>();
-            foreach (InvoiceFinanceBatch financeBatch in _client.InvoiceFinanceBatches)
-            {
-                if (TypeUtil.GreaterZero(financeBatch.PoolFinanceOutstanding))
-                {
-                    financeBatches.Add(financeBatch);
-                }
-            }
+            var financeBatches = _client.InvoiceFinanceBatches.Where(financeBatch => TypeUtil.GreaterZero(financeBatch.PoolFinanceOutstanding)).ToList();
 
-            this.dgvLogs.DataSource = financeBatches;
+            dgvLogs.DataSource = financeBatches;
         }
 
         /// <summary>
@@ -160,21 +140,21 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this._client == null)
+            if (_client == null)
             {
                 MessageBoxEx.Show("没有选定客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            string refundType = this.cbRefundType.Text;
-            string batchCurrency = this.batchCurrencyComboBoxEx.Text;
+            string refundType = cbRefundType.Text;
+            string batchCurrency = batchCurrencyComboBoxEx.Text;
 
-            string refundAmountStr = this.refundAmountTextBoxX.Text;
+            string refundAmountStr = refundAmountTextBoxX.Text;
             double refundAmount = 0;
             if (!String.IsNullOrEmpty(refundAmountStr))
             {
@@ -184,12 +164,12 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            DateTime refundDate = this.refundDateDateTimePicker.Value;
+            DateTime refundDate = refundDateDateTimePicker.Value;
 
-            string comment = this.commentTextBox.Text;
+            string comment = commentTextBox.Text;
 
-            List<InvoiceFinanceBatch> financeBatchList = (List<InvoiceFinanceBatch>)this.dgvLogs.DataSource;
-            List<InvoiceRefundBatch> refundBatchList = new List<InvoiceRefundBatch>();
+            var financeBatchList = (List<InvoiceFinanceBatch>) dgvLogs.DataSource;
+            var refundBatchList = new List<InvoiceRefundBatch>();
             foreach (InvoiceFinanceBatch financeBatch in financeBatchList)
             {
                 if (TypeUtil.GreaterZero(refundAmount) && TypeUtil.GreaterZero(financeBatch.PoolFinanceOutstanding))
@@ -200,9 +180,11 @@ namespace CMBC.EasyFactor.ARMgr
                         refundAmount *= rate;
                     }
 
-                    InvoiceRefundBatch refundBatch = new InvoiceRefundBatch();
-                    refundBatch.InvoiceFinanceBatch = financeBatch;
-                    refundBatch.RefundAmount = Math.Min(refundAmount, financeBatch.PoolFinanceOutstanding);
+                    var refundBatch = new InvoiceRefundBatch
+                                          {
+                                              InvoiceFinanceBatch = financeBatch,
+                                              RefundAmount = Math.Min(refundAmount, financeBatch.PoolFinanceOutstanding)
+                                          };
                     refundAmount -= refundBatch.RefundAmount.GetValueOrDefault();
                     //refundBatch.CheckStatus = BATCH.UNCHECK;
                     refundBatch.Comment = comment;
@@ -227,7 +209,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -242,7 +224,5 @@ namespace CMBC.EasyFactor.ARMgr
 
             MessageBoxEx.Show("数据保存成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        #endregion?Methods?
     }
 }

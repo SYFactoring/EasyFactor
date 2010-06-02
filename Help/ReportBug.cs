@@ -4,30 +4,25 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.ComponentModel;
+using System.Reflection;
+using System.Windows.Forms;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.Help
 {
-    using System;
-    using System.Reflection;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class ReportBug : DevComponents.DotNetBar.Office2007Form
+    public partial class ReportBug : Office2007Form
     {
-		#region?Fields?(1)?
-
         /// <summary>
         /// 
         /// </summary>
-        private SendMail mail;
+        private SendMail _mail;
 
-		#endregion?Fields?
-
-		#region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -35,30 +30,26 @@ namespace CMBC.EasyFactor.Help
         public ReportBug()
         {
             InitializeComponent();
-            this.tbSubmitPerson.Text = App.Current.CurUser.Name;
+            tbSubmitPerson.Text = App.Current.CurUser.Name;
         }
 
-		#endregion?Constructors?
 
-		#region?Methods?(4)?
-
-		//?Private?Methods?(4)?
-
+        //?Private?Methods?(4)?
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
         {
-            if (!String.IsNullOrEmpty(this.tbAttachment.Text))
+            if (!String.IsNullOrEmpty(tbAttachment.Text))
             {
-                mail.AddAttachment(this.tbAttachment.Text);
+                _mail.AddAttachment(tbAttachment.Text);
             }
 
-            if (mail != null)
+            if (_mail != null)
             {
-                mail.Send();
+                _mail.Send();
             }
         }
 
@@ -67,18 +58,20 @@ namespace CMBC.EasyFactor.Help
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void BackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Error != null)
             {
-                MessageBoxEx.Show("问题反馈失败，原因： " + e.Error.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("问题反馈失败，原因： " + e.Error.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBoxEx.Show("感谢您的反馈，我会立即处理您的意见，并将处理结果及时通知您。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("感谢您的反馈，我会立即处理您的意见，并将处理结果及时通知您。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
             }
 
-            this.btnSubmit.Enabled = true;
+            btnSubmit.Enabled = true;
         }
 
         /// <summary>
@@ -88,11 +81,11 @@ namespace CMBC.EasyFactor.Help
         /// <param name="e"></param>
         private void SelectFile(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
+            var fileDialog = new OpenFileDialog();
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                this.tbAttachment.Text = fileDialog.FileName;
+                tbAttachment.Text = fileDialog.FileName;
             }
         }
 
@@ -103,19 +96,19 @@ namespace CMBC.EasyFactor.Help
         /// <param name="e"></param>
         private void SubmitBug(object sender, EventArgs e)
         {
-            this.btnSubmit.Enabled = false;
+            btnSubmit.Enabled = false;
 
-            string title = this.tbTitle.Text;
-            string who = this.tbSubmitPerson.Text;
-            string type = this.cbBugType.Text;
+            string title = tbTitle.Text;
+            string who = tbSubmitPerson.Text;
+            string type = cbBugType.Text;
             string mailTitle = String.Format("{0}_{1}_{2}_{3:yyyy/MM/dd HH:mm:ss}", type, who, title, DateTime.Now);
-            string bug = this.tbBug.Text + "\n----------------------------------------------\n" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            string bug = tbBug.Text + "\n----------------------------------------------\n" +
+                         Assembly.GetExecutingAssembly().GetName().Version;
 
-            mail = new SendMail("liuyiming.vip@gmail.com","xiaolan.pub@gmail.com", App.Current.CurUser.Email, mailTitle, bug);
-            
-            this.backgroundWorker.RunWorkerAsync();
+            _mail = new SendMail("liuyiming.vip@gmail.com", "xiaolan.pub@gmail.com", App.Current.CurUser.Email, mailTitle,
+                                bug);
+
+            backgroundWorker.RunWorkerAsync();
         }
-
-		#endregion?Methods?
     }
 }

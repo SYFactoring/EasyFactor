@@ -645,7 +645,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCases.Size = new System.Drawing.Size(819, 308);
             this.dgvCases.TabIndex = 1;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            this.dgvCases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCases_RowPostPaint);
+            this.dgvCases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvCasesRowPostPaint);
             // 
             // cmuContractMgr
             // 

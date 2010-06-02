@@ -4,41 +4,37 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.CaseMgr;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.InfoMgr.FactorMgr;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.InfoMgr.FactorMgr;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class PoolFinance : UserControl
     {
-        #region?Fields?(3)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly ARPoolBasic _poolBasic;
 
         /// <summary>
         /// 
         /// </summary>
         private Client _client;
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        private ARPoolBasic poolBasic;
 
-        #endregion?Fields?
-
-        #region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -47,80 +43,70 @@ namespace CMBC.EasyFactor.ARMgr
         public PoolFinance(ARPoolBasic poolBasic)
         {
             InitializeComponent();
-            this.dgvCases.AutoGenerateColumns = false;
-            this.superValidator.Enabled = false;
-            ControlUtil.SetDoubleBuffered(this.dgvCases);
+            dgvCases.AutoGenerateColumns = false;
+            superValidator.Enabled = false;
+            ControlUtil.SetDoubleBuffered(dgvCases);
 
-            this.poolBasic = poolBasic;
+            _poolBasic = poolBasic;
 
-            this.context = new DBDataContext();
+            _context = new DBDataContext();
 
-            this.financeRateTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
-            this.financeRateTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+            financeRateTextBox.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
+            financeRateTextBox.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
 
-            this.costRateTextBoxX.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
-            this.costRateTextBoxX.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+            costRateTextBoxX.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
+            costRateTextBoxX.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
 
-            this.batchCurrencyComboBoxEx.DataSource = Currency.AllCurrencies;
-            this.batchCurrencyComboBoxEx.DisplayMember = "CurrencyCode";
-            this.batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
+            batchCurrencyComboBoxEx.DataSource = Currency.AllCurrencies;
+            batchCurrencyComboBoxEx.DisplayMember = "CurrencyCode";
+            batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
         }
 
-        #endregion?Constructors?
-
-        #region?Properties?(1)?
 
         /// <summary>
         /// Sets
         /// </summary>
         public Client Client
         {
-            get
-            {
-                return this._client;
-            }
+            get { return _client; }
             set
             {
-                this._client = this.context.Clients.SingleOrDefault(c => c.ClientEDICode == value.ClientEDICode);
-                this.NewBatch(null, null);
+                _client = _context.Clients.SingleOrDefault(c => c.ClientEDICode == value.ClientEDICode);
+                NewBatch(null, null);
             }
         }
 
-        #endregion?Properties?
-
-        #region?Methods?(7)?
 
         //?Public?Methods?(1)?
-
         /// <summary>
         /// 
         /// </summary>
         public void ResetControlsStatus()
         {
-            foreach (Control comp in this.panelFinanceBatch.Controls)
+            foreach (Control comp in panelFinanceBatch.Controls)
             {
                 ControlUtil.SetComponetDefault(comp);
             }
 
-            this.batchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
-            this.dgvCases.DataSource = typeof(Case);
+            batchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
+            dgvCases.DataSource = typeof(Case);
         }
-        //?Private?Methods?(6)?
 
+        //?Private?Methods?(6)?
         /// <summary>
         /// Show detail info of selected Case
         /// </summary>
-        /// <param name="sender">Event Sender</param>
+        /// <param name="sender"></param>
         /// <param name="e">Event Args</param>
-        private void DetailCase(object sender, System.EventArgs e)
+        private void DetailCase(object sender, EventArgs e)
         {
-            if (this.dgvCases.CurrentCell == null)
+            if (dgvCases.CurrentCell == null)
             {
                 return;
             }
 
-            Case selectedCase = (Case)this.casesBindingSource.List[this.dgvCases.CurrentCell.RowIndex];
-            CaseDetail caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.DETAIL_CASE);
+            var selectedCase = (Case)casesBindingSource.List[dgvCases.CurrentCell.RowIndex];
+            var caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
         }
 
@@ -129,9 +115,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvCases_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DgvCasesRowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DetailCase(null, null);
+            DetailCase(sender, e);
         }
 
         /// <summary>
@@ -141,23 +127,25 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
-            if (this._client == null)
+            if (_client == null)
             {
                 MessageBoxEx.Show("没有选定客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
-            financeBatch.CreateUserName = App.Current.CurUser.Name;
+            var financeBatch = new InvoiceFinanceBatch
+                                   {
+                                       CreateUserName = App.Current.CurUser.Name,
+                                       InputDate = DateTime.Today
+                                   };
             //financeBatch.CheckStatus = BATCH.UNCHECK;
-            financeBatch.InputDate = DateTime.Today;
-            this.batchBindingSource.DataSource = financeBatch;
+            batchBindingSource.DataSource = financeBatch;
 
-            var caseResult = from c in context.Cases
-                             where c.SellerCode == this._client.ClientEDICode && c.IsPool
-                             select c;
+            IQueryable<Case> caseResult = from c in _context.Cases
+                                          where c.SellerCode == _client.ClientEDICode && c.IsPool
+                                          select c;
 
-            this.dgvCases.DataSource = caseResult;
+            dgvCases.DataSource = caseResult;
         }
 
         /// <summary>
@@ -172,25 +160,25 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this._client == null)
+            if (_client == null)
             {
                 MessageBoxEx.Show("没有选定客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            if (!(this.batchBindingSource.DataSource is InvoiceFinanceBatch))
+            if (!(batchBindingSource.DataSource is InvoiceFinanceBatch))
             {
                 return;
             }
 
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            var batch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
             bool isSaveOK = true;
-            batch.Client = this._client;
+            batch.Client = _client;
 
             if (batch.FinanceBatchNo == null)
             {
@@ -199,7 +187,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -212,7 +200,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBoxEx.Show("数据保存成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.poolBasic.CaculateOutstanding(this._client);
+                _poolBasic.CaculateOutstanding(_client);
             }
         }
 
@@ -223,26 +211,26 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this._client == null)
+            if (_client == null)
             {
                 MessageBoxEx.Show("没有选定客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            FinanceBatchMgr batchMgr = new FinanceBatchMgr(this._client, this.context);
-            QueryForm queryUI = new QueryForm(batchMgr, "选择融资批次");
+            var batchMgr = new FinanceBatchMgr(_client, _context);
+            var queryUI = new QueryForm(batchMgr, "选择融资批次");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             InvoiceFinanceBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                this.batchBindingSource.DataSource = selectedBatch;
+                batchBindingSource.DataSource = selectedBatch;
 
-                var caseResult = from c in context.Cases
-                                 where c.SellerCode == this._client.ClientEDICode && c.IsPool
-                                 select c;
+                IQueryable<Case> caseResult = from c in _context.Cases
+                                              where c.SellerCode == _client.ClientEDICode && c.IsPool
+                                              select c;
 
-                this.dgvCases.DataSource = caseResult;
+                dgvCases.DataSource = caseResult;
             }
         }
 
@@ -253,30 +241,28 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectFactor(object sender, EventArgs e)
         {
-            if (this._client == null)
+            if (_client == null)
             {
                 MessageBoxEx.Show("没有选定客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.batchBindingSource.DataSource is InvoiceFinanceBatch))
+            if (!(batchBindingSource.DataSource is InvoiceFinanceBatch))
             {
                 return;
             }
 
-            InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            FactorMgr factorMgr = new FactorMgr();
-            QueryForm queryForm = new QueryForm(factorMgr, "选择代付行");
+            var financeBatch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
+            var factorMgr = new FactorMgr();
+            var queryForm = new QueryForm(factorMgr, "选择代付行");
             factorMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
 
             Factor factor = factorMgr.Selected;
             if (factor != null)
             {
-                financeBatch.Factor = this.context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
+                financeBatch.Factor = _context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
             }
         }
-
-        #endregion?Methods?
     }
 }

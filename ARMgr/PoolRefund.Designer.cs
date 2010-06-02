@@ -52,9 +52,9 @@ namespace CMBC.EasyFactor.ARMgr
                 components.Dispose();
             }
 
-            if (this.context != null)
+            if (this._context != null)
             {
-                this.context.Dispose();
+                this._context.Dispose();
             }
 
             base.Dispose(disposing);

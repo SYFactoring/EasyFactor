@@ -4,21 +4,15 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Data.Linq;
-    using CMBC.EasyFactor.Utils;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceRefundLog
     {
-
-
-        #region?Constructors?(1)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -26,22 +20,17 @@ namespace CMBC.EasyFactor.DB.dbml
         public InvoiceRefundLog(InvoiceFinanceLog financeLog)
             : this()
         {
-            this.AssignBatchNo2 = financeLog.Invoice.AssignBatchNo;
-            this.InvoiceNo2 = financeLog.Invoice.InvoiceNo;
-            this.FinanceLogID2 = financeLog.FinanceLogID;
-            this.FinanceAmount2 = financeLog.FinanceAmount;
-            this.FinanceOutstanding2 = financeLog.FinanceOutstanding;
-            this.FinanceDate2 = financeLog.FinanceDate;
-            this.FinanceDueDate2 = financeLog.FinanceDueDate;
-            this.InvoiceRefundAmount2 = financeLog.RefundAmount;
-            this.InvoicePaymentAmount2 = financeLog.Invoice.PaymentAmount;
-            this.RefundCurrency2 = financeLog.InvoiceFinanceBatch.BatchCurrency;
+            AssignBatchNo2 = financeLog.Invoice.AssignBatchNo;
+            InvoiceNo2 = financeLog.Invoice.InvoiceNo;
+            FinanceLogID2 = financeLog.FinanceLogID;
+            FinanceAmount2 = financeLog.FinanceAmount;
+            FinanceOutstanding2 = financeLog.FinanceOutstanding;
+            FinanceDate2 = financeLog.FinanceDate;
+            FinanceDueDate2 = financeLog.FinanceDueDate;
+            InvoiceRefundAmount2 = financeLog.RefundAmount;
+            InvoicePaymentAmount2 = financeLog.Invoice.PaymentAmount;
+            RefundCurrency2 = financeLog.InvoiceFinanceBatch.BatchCurrency;
         }
-
-        #endregion?Constructors?
-
-
-        #region?Properties?(18)?
 
         /// <summary>
         /// 
@@ -50,25 +39,18 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.InvoiceFinanceLog != null)
+                if (InvoiceFinanceLog != null)
                 {
-                    return this.InvoiceFinanceLog.FinanceAmount;
+                    return InvoiceFinanceLog.FinanceAmount;
                 }
-                else
-                {
-                    return FinanceAmount2;
-                }
+                return FinanceAmount2;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public double? FinanceAmount2
-        {
-            get;
-            set;
-        }
+        public double? FinanceAmount2 { get; set; }
 
         /// <summary>
         /// 
@@ -77,24 +59,18 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.InvoiceFinanceLog != null)
+                if (InvoiceFinanceLog != null)
                 {
-                    return this.InvoiceFinanceLog.FinanceDate;
+                    return InvoiceFinanceLog.FinanceDate;
                 }
-                else
-                {
-                    return FinanceDate2;
-                }
+                return FinanceDate2;
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? FinanceDate2
-        {
-            get;
-            set;
-        }
+        public DateTime? FinanceDate2 { get; set; }
 
         /// <summary>
         /// 
@@ -103,84 +79,55 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.InvoiceFinanceLog != null)
+                if (InvoiceFinanceLog != null)
                 {
-                    return this.InvoiceFinanceLog.FinanceDueDate;
+                    return InvoiceFinanceLog.FinanceDueDate;
                 }
-                else
-                {
-                    return this.FinanceDueDate2;
-                }
+                return FinanceDueDate2;
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? FinanceDueDate2
-        {
-            get;
-            set;
-        }
+        public DateTime? FinanceDueDate2 { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public int FinanceLogID2
-        {
-            get;
-            set;
-        }
+        public int FinanceLogID2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public double? FinanceOutstanding
         {
-            get
-            {
-                if (this.InvoiceFinanceLog != null)
-                {
-                    return this.InvoiceFinanceLog.FinanceOutstanding;
-                }
-                else
-                {
-                    return FinanceOutstanding2;
-                }
-            }
+            get { return InvoiceFinanceLog != null ? InvoiceFinanceLog.FinanceOutstanding : FinanceOutstanding2; }
         }
+
         /// <summary>
         /// 
         /// </summary>
-        public double? FinanceOutstanding2
-        {
-            get;
-            set;
-        }
+        public double? FinanceOutstanding2 { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public string InvoiceNo
         {
-            get
-            {
-                return this.InvoiceFinanceLog.Invoice.InvoiceNo;
-            }
+            get { return InvoiceFinanceLog.Invoice.InvoiceNo; }
         }
+
         /// <summary>
         /// 
         /// </summary>
-        public string AssignBatchNo2
-        {
-            get;
-            set;
-        }
+        public string AssignBatchNo2 { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public string InvoiceNo2
-        {
-            get;
-            set;
-        }
+        public string InvoiceNo2 { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -188,24 +135,18 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.InvoiceFinanceLog != null)
+                if (InvoiceFinanceLog != null)
                 {
-                    return this.InvoiceFinanceLog.Invoice.PaymentAmount;
+                    return InvoiceFinanceLog.Invoice.PaymentAmount;
                 }
-                else
-                {
-                    return this.InvoicePaymentAmount2;
-                }
+                return InvoicePaymentAmount2;
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoicePaymentAmount2
-        {
-            get;
-            set;
-        }
+        public double? InvoicePaymentAmount2 { get; set; }
 
         /// <summary>
         /// 
@@ -214,24 +155,19 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.InvoiceFinanceLog != null)
+                if (InvoiceFinanceLog != null)
                 {
-                    return this.InvoiceFinanceLog.RefundAmount;
+                    return InvoiceFinanceLog.RefundAmount;
                 }
-                else
-                {
-                    return InvoiceRefundAmount2;
-                }
+                return InvoiceRefundAmount2;
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoiceRefundAmount2
-        {
-            get;
-            set;
-        }
+        public double? InvoiceRefundAmount2 { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -239,36 +175,25 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.InvoiceFinanceLog != null)
+                if (InvoiceFinanceLog != null)
                 {
-                    return this.InvoiceFinanceLog.InvoiceFinanceBatch.BatchCurrency;
+                    return InvoiceFinanceLog.InvoiceFinanceBatch.BatchCurrency;
                 }
-                else
-                {
-                    return RefundCurrency2;
-                }
+                return RefundCurrency2;
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
-        public string RefundCurrency2
-        {
-            get;
-            set;
-        }
+        public string RefundCurrency2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public DateTime RefundDate
         {
-            get
-            {
-                return this.InvoiceRefundBatch.RefundDate;
-            }
+            get { return InvoiceRefundBatch.RefundDate; }
         }
-
-        #endregion?Properties?
     }
 }

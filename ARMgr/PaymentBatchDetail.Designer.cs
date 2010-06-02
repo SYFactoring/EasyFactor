@@ -1,5 +1,5 @@
 using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.Utils.ConstStr;
+
 namespace CMBC.EasyFactor.ARMgr
 {
     partial class PaymentBatchDetail
@@ -50,9 +50,9 @@ namespace CMBC.EasyFactor.ARMgr
                 this.components.Dispose();
             }
 
-            if (this.context != null)
+            if (this._context != null)
             {
-                this.context.Dispose();
+                this._context.Dispose();
             }
 
             base.Dispose(disposing);
@@ -558,7 +558,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvPaymentLogs.Size = new System.Drawing.Size(404, 245);
             this.dgvPaymentLogs.TabIndex = 0;
             this.dgvPaymentLogs.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailInvoice);
-            this.dgvPaymentLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPaymentLogs_RowPostPaint);
+            this.dgvPaymentLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvPaymentLogsRowPostPaint);
             // 
             // colInvoiceNo
             // 

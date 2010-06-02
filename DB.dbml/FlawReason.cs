@@ -4,23 +4,18 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System.Collections.Generic;
-
     /// <summary>
     /// 
     /// </summary>
     public class FlawReason
     {
-		#region?Fields?(2)?
+        private readonly string _index;
+        private readonly string _reason;
 
-        private string index;
-        private string reason;
-
-		#endregion?Fields?
-
-		#region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -29,13 +24,10 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <param name="reason"></param>
         public FlawReason(string index, string reason)
         {
-            this.index = index;
-            this.reason = reason;
+            _index = index;
+            _reason = reason;
         }
 
-		#endregion?Constructors?
-
-		#region?Properties?(3)?
 
         /// <summary>
         /// 
@@ -45,17 +37,19 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                List<FlawReason> reasonList = new List<FlawReason>();
-                reasonList.Add(new FlawReason("01", "01-卖方/买方基本资料不符"));
-                reasonList.Add(new FlawReason("02", "02-发票为存根联或副联复印件"));
-                reasonList.Add(new FlawReason("03", "03-发票无转让字据记载或贴错"));
-                reasonList.Add(new FlawReason("04", "04-账款到期日不符"));
-                reasonList.Add(new FlawReason("05", "05-单据内容不符"));
-                reasonList.Add(new FlawReason("06", "06-额度通知书过期或未签回"));
-                reasonList.Add(new FlawReason("07", "07-保理合同过期或未签回"));
-                reasonList.Add(new FlawReason("08", "08-交货凭证内容不完整"));
-                reasonList.Add(new FlawReason("09", "09-逾期转让"));
-                reasonList.Add(new FlawReason("10", "10-其他"));
+                var reasonList = new List<FlawReason>
+                                     {
+                                         new FlawReason("01", "01-卖方/买方基本资料不符"),
+                                         new FlawReason("02", "02-发票为存根联或副联复印件"),
+                                         new FlawReason("03", "03-发票无转让字据记载或贴错"),
+                                         new FlawReason("04", "04-账款到期日不符"),
+                                         new FlawReason("05", "05-单据内容不符"),
+                                         new FlawReason("06", "06-额度通知书过期或未签回"),
+                                         new FlawReason("07", "07-保理合同过期或未签回"),
+                                         new FlawReason("08", "08-交货凭证内容不完整"),
+                                         new FlawReason("09", "09-逾期转让"),
+                                         new FlawReason("10", "10-其他")
+                                     };
                 return reasonList;
             }
         }
@@ -65,10 +59,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string Index
         {
-            get
-            {
-                return this.index;
-            }
+            get { return _index; }
         }
 
         /// <summary>
@@ -76,12 +67,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string Reason
         {
-            get
-            {
-                return this.reason;
-            }
+            get { return _reason; }
         }
-
-		#endregion?Properties?
     }
 }

@@ -1,14 +1,16 @@
+using System;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.InfoMgr.ClientMgr;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.InfoMgr.ClientMgr;
-    using CMBC.EasyFactor.Utils;
-
+    /// <summary>
+    /// 
+    /// </summary>
     public enum OpPoolARType
     {
-
         /// <summary>
         /// 融资
         /// </summary>
@@ -20,22 +22,21 @@ namespace CMBC.EasyFactor.ARMgr
         REFUND
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ARPoolBasic : UserControl
     {
-        #region?Fields?(2)?
-
         /// <summary>
         /// 
         /// </summary>
         private Client _client;
+
         /// <summary>
         /// 
         /// </summary>
-        private OpPoolARType opARType;
+        private OpPoolARType _opArType;
 
-        #endregion?Fields?
-
-        #region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -43,62 +44,48 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="opARType"></param>
         public ARPoolBasic(OpPoolARType opARType)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.opARType = opARType;
+            _opArType = opARType;
             switch (opARType)
             {
                 case OpPoolARType.FINANCE:
-                    this.PoolControl = new PoolFinance(this);
+                    PoolControl = new PoolFinance(this);
                     break;
                 case OpPoolARType.REFUND:
-                    this.PoolControl = new PoolRefund(this, PoolRefund.OpRefundType.SELLER_REFUND);
+                    PoolControl = new PoolRefund(this, PoolRefund.OpRefundType.SELLER_REFUND);
                     break;
                 default:
-                    this.PoolControl = new UserControl();
+                    PoolControl = new UserControl();
                     break;
             }
 
 
-            this.PoolControl.Dock = DockStyle.Fill;
-            this.panelPool.Controls.Add(this.PoolControl);
+            PoolControl.Dock = DockStyle.Fill;
+            panelPool.Controls.Add(PoolControl);
         }
 
-        #endregion?Constructors?
-
-        #region?Properties?(2)?
 
         /// <summary>
         /// Gets or sets
         /// </summary>
         public Client Client
         {
-            get
-            {
-                return this._client;
-            }
+            get { return _client; }
             set
             {
-                this._client = value;
-                this.FillClientBasic();
+                _client = value;
+                FillClientBasic();
             }
         }
 
         /// <summary>
         /// Gets or sets
         /// </summary>
-        public UserControl PoolControl
-        {
-            get;
-            set;
-        }
+        public UserControl PoolControl { get; set; }
 
-        #endregion?Properties?
-
-        #region?Methods?(4)?
 
         //?Public?Methods?(1)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -107,16 +94,16 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (selectedClient == null)
             {
-                throw new ArgumentNullException("selectedClient", "selectedClient cannot be a null reference");
+                throw new ArgumentNullException("selectedClient", @"selectedClient cannot be a null reference");
             }
 
-            this.tbTotalAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolTotalAssignOutstading);
-            this.tbValuedAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolValuedAssignOutstanding);
-            this.tbCashOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolCashOutstanding);
-            this.tbFinanceOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolFinanceOutstanding);
+            tbTotalAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolTotalAssignOutstading);
+            tbValuedAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolValuedAssignOutstanding);
+            tbCashOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolCashOutstanding);
+            tbFinanceOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolFinanceOutstanding);
         }
-        //?Private?Methods?(3)?
 
+        //?Private?Methods?(3)?
         /// <summary>
         /// 
         /// </summary>
@@ -124,9 +111,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailClient(object sender, EventArgs e)
         {
-            if (this._client != null)
+            if (_client != null)
             {
-                ClientDetail clientDetail = new ClientDetail(this._client, ClientDetail.OpClientType.DETAIL_CLIENT);
+                var clientDetail = new ClientDetail(_client, ClientDetail.OpClientType.DETAIL_CLIENT);
                 clientDetail.Show();
             }
         }
@@ -136,19 +123,19 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void FillClientBasic()
         {
-            this.tbClientEDICode.Text = this.Client.ClientEDICode;
-            this.tbClientName.Text = this.Client.ToString();
+            tbClientEDICode.Text = Client.ClientEDICode;
+            tbClientName.Text = Client.ToString();
 
-            this.CaculateOutstanding(this.Client);
+            CaculateOutstanding(Client);
 
-            Control control = this.panelPool.Controls[0];
+            Control control = panelPool.Controls[0];
             if (control is PoolFinance)
             {
-                (control as PoolFinance).Client = this.Client;
+                (control as PoolFinance).Client = Client;
             }
             else if (control is PoolRefund)
             {
-                (control as PoolRefund).Client = this.Client;
+                (control as PoolRefund).Client = Client;
             }
         }
 
@@ -159,17 +146,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectClient(object sender, EventArgs e)
         {
-            ClientMgr clientMgr = new ClientMgr();
-            QueryForm queryForm = new QueryForm(clientMgr, "选择客户");
+            var clientMgr = new ClientMgr();
+            var queryForm = new QueryForm(clientMgr, "选择客户");
             clientMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
             Client curClient = clientMgr.Selected;
             if (curClient != null)
             {
-                this.Client = curClient;
+                Client = curClient;
             }
         }
-
-        #endregion?Methods?
     }
 }

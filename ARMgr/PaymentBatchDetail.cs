@@ -1,40 +1,21 @@
+using System;
+using System.Data.Linq;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.CaseMgr;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
 
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Data.Linq;
-    using System.Drawing;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class PaymentBatchDetail : DevComponents.DotNetBar.Office2007Form
+    public partial class PaymentBatchDetail : Office2007Form
     {
-        #region?Fields?(3)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bs;
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpBatchType opBatchType;
-
-        #endregion?Fields?
-
-        #region?Enums?(1)?
+        #region OpBatchType enum
 
         /// <summary>
         /// 
@@ -52,9 +33,23 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-        #endregion?Enums?
+        #endregion
 
-        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpBatchType _opBatchType;
+
 
         /// <summary>
         /// 
@@ -62,33 +57,29 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batch"></param>
         public PaymentBatchDetail(InvoicePaymentBatch batch)
         {
-            this.InitializeComponent();
-            this.context = new DBDataContext();
-            this.bs = new BindingSource();
-            this.dgvPaymentLogs.AutoGenerateColumns = false;
-            this.dgvPaymentLogs.DataSource = this.bs;
-            this.opBatchType = OpBatchType.DETAIL_BATCH;
-            ControlUtil.SetDoubleBuffered(this.dgvPaymentLogs);
+            InitializeComponent();
+            _context = new DBDataContext();
+            _bs = new BindingSource();
+            dgvPaymentLogs.AutoGenerateColumns = false;
+            dgvPaymentLogs.DataSource = _bs;
+            _opBatchType = OpBatchType.DETAIL_BATCH;
+            ControlUtil.SetDoubleBuffered(dgvPaymentLogs);
 
-            batch = context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == batch.PaymentBatchNo);
-            this.batchBindingSource.DataSource = batch;
-            this.bs.DataSource = batch.InvoicePaymentLogs;
+            batch = _context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == batch.PaymentBatchNo);
+            batchBindingSource.DataSource = batch;
+            _bs.DataSource = batch.InvoicePaymentLogs;
 
-            if (((InvoicePaymentLog)bs.List[0]).CreditNote == null)
+            if (((InvoicePaymentLog) _bs.List[0]).CreditNote == null)
             {
                 colCreditNoteDate.Visible = false;
                 colCreditNoteNo.Visible = false;
             }
 
-            this.UpdateBatchControlStatus();
+            UpdateBatchControlStatus();
         }
 
-        #endregion?Constructors?
-
-        #region?Methods?(7)?
 
         //?Private?Methods?(7)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -101,29 +92,30 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvPaymentLogs.SelectedRows.Count == 0)
+            if (dgvPaymentLogs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            InvoicePaymentLog log = (InvoicePaymentLog)this.bs.List[this.dgvPaymentLogs.SelectedRows[0].Index];
+            var log = (InvoicePaymentLog) _bs.List[dgvPaymentLogs.SelectedRows[0].Index];
 
             try
             {
                 Invoice invoice = log.Invoice;
                 log.Invoice = null;
                 invoice.CaculatePayment();
-                context.InvoicePaymentLogs.DeleteOnSubmit(log);
+                _context.InvoicePaymentLogs.DeleteOnSubmit(log);
                 //log.InvoicePaymentBatch.CheckStatus = BATCH.UNCHECK;
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("É¾³ýÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("É¾³ýÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
                 return;
             }
 
-            this.dgvPaymentLogs.Rows.RemoveAt(this.dgvPaymentLogs.SelectedRows[0].Index);
+            dgvPaymentLogs.Rows.RemoveAt(dgvPaymentLogs.SelectedRows[0].Index);
         }
 
         /// <summary>
@@ -133,8 +125,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
-            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
-            CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            var batch = (InvoicePaymentBatch) batchBindingSource.DataSource;
+            var detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             detail.Show();
         }
 
@@ -145,13 +137,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvPaymentLogs.SelectedRows.Count == 0)
+            if (dgvPaymentLogs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            InvoicePaymentLog log = (InvoicePaymentLog)this.bs.List[this.dgvPaymentLogs.SelectedRows[0].Index];
-            InvoiceDetail detail = new InvoiceDetail(log.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+            var log = (InvoicePaymentLog) _bs.List[dgvPaymentLogs.SelectedRows[0].Index];
+            var detail = new InvoiceDetail(log.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             detail.Show();
         }
 
@@ -160,10 +152,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvPaymentLogs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DgvPaymentLogsRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvPaymentLogs.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvPaymentLogs.RowHeadersDefaultCellStyle.Font, rectangle, dgvPaymentLogs.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            var rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
+                                          dgvPaymentLogs.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                                  dgvPaymentLogs.RowHeadersDefaultCellStyle.Font, rectangle,
+                                  dgvPaymentLogs.RowHeadersDefaultCellStyle.ForeColor,
+                                  TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -178,21 +174,19 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
-
             bool isUpdateOK = true;
             try
             {
-                context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                _context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)
             {
-                foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                 {
                     foreach (MemberChangeConflict mc in cc.MemberConflicts)
                     {
@@ -200,7 +194,7 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -226,8 +220,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.opBatchType = OpBatchType.UPDATE_BATCH;
-            this.UpdateBatchControlStatus();
+            _opBatchType = OpBatchType.UPDATE_BATCH;
+            UpdateBatchControlStatus();
         }
 
         /// <summary>
@@ -235,27 +229,25 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateBatchControlStatus()
         {
-            if (this.opBatchType == OpBatchType.DETAIL_BATCH)
+            if (_opBatchType == OpBatchType.DETAIL_BATCH)
             {
-                foreach (Control comp in this.panelBatch.Controls)
+                foreach (Control comp in panelBatch.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (this.opBatchType == OpBatchType.UPDATE_BATCH)
+            else if (_opBatchType == OpBatchType.UPDATE_BATCH)
             {
-                foreach (Control comp in this.panelBatch.Controls)
+                foreach (Control comp in panelBatch.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
 
-            ControlUtil.SetComponetEditable(this.caseCodeTextBox, false);
-            ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
-            ControlUtil.SetComponetEditable(this.paymentBatchNoTextBox, false);
-            ControlUtil.SetComponetEditable(this.diInputDate, false);
+            ControlUtil.SetComponetEditable(caseCodeTextBox, false);
+            ControlUtil.SetComponetEditable(createUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(paymentBatchNoTextBox, false);
+            ControlUtil.SetComponetEditable(diInputDate, false);
         }
-
-        #endregion?Methods?
     }
 }

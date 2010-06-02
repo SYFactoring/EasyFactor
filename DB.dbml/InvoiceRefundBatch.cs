@@ -4,31 +4,25 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Data.Linq;
+using System.Linq;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Data.Linq;
-    using CMBC.EasyFactor.Utils.ConstStr;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceRefundBatch
     {
-        #region?Properties?(4)?
-
         /// <summary>
         /// Gets
         /// </summary>
         public int BatchCount
         {
-            get
-            {
-                return this.InvoiceRefundLogs.Count;
-            }
+            get { return InvoiceRefundLogs.Count; }
         }
 
         /// <summary>
@@ -36,10 +30,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string BuyerName
         {
-            get
-            {
-                return this.Case.BuyerClient.ToString();
-            }
+            get { return Case.BuyerClient.ToString(); }
         }
 
         /// <summary>
@@ -49,18 +40,11 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (this.Case != null)
+                if (Case != null)
                 {
-                    return this.Case.SellerClient.ToString();
+                    return Case.SellerClient.ToString();
                 }
-                else if (this.InvoiceFinanceBatch != null)
-                {
-                    return this.InvoiceFinanceBatch.SellerName;
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                return InvoiceFinanceBatch != null ? InvoiceFinanceBatch.SellerName : string.Empty;
             }
         }
 
@@ -69,24 +53,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string TransactionType
         {
-            get
-            {
-                return this.Case.TransactionType;
-            }
+            get { return Case.TransactionType; }
         }
 
-        #endregion?Properties?
-
-        #region?Methods?(3)?
 
         //?Public?Methods?(3)?
-
         /// <summary>
         /// 
         /// </summary>
         public void CaculateRefundAmount()
         {
-            this.RefundAmount = this.InvoiceRefundLogs.Sum(log => log.RefundAmount.GetValueOrDefault());
+            RefundAmount = InvoiceRefundLogs.Sum(log => log.RefundAmount.GetValueOrDefault());
         }
 
         /// <summary>
@@ -98,12 +75,11 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             string dateStr = String.Format("{0:yyyMMdd}", date);
             int batchCount;
-            using (DBDataContext context = new DBDataContext())
+            using (var context = new DBDataContext())
             {
-
-                var queryResult = from batch in context.InvoiceRefundBatches
-                                  where batch.RefundBatchNo.Contains(dateStr)
-                                  select batch.RefundBatchNo;
+                IQueryable<string> queryResult = from batch in context.InvoiceRefundBatches
+                                                 where batch.RefundBatchNo.Contains(dateStr)
+                                                 select batch.RefundBatchNo;
 
                 if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
                 {
@@ -125,11 +101,11 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             string dateStr = String.Format("{0:yyyMMdd}", date);
             int batchCount;
-            using (DBDataContext context = new DBDataContext())
+            using (var context = new DBDataContext())
             {
-                var queryResult = from batch in context.InvoiceRefundBatches
-                                  where batch.RefundBatchNo.Contains(dateStr)
-                                  select batch.RefundBatchNo;
+                IQueryable<string> queryResult = from batch in context.InvoiceRefundBatches
+                                                 where batch.RefundBatchNo.Contains(dateStr)
+                                                 select batch.RefundBatchNo;
 
                 if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
                 {
@@ -145,29 +121,27 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="action"></param>
-        partial void OnValidate(ChangeAction action)
+        partial void OnRefundDateChanged()
         {
-            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            foreach (InvoiceRefundLog log in InvoiceRefundLogs)
             {
-                if (this.RefundType != REFUND.SELLER_REFUND && this.RefundType != REFUND.BUYER_PAYMENT)
-                {
-                    throw new Exception(String.Format("还款类型：{0}，设置无效，还款批次号{1}", this.RefundType, this.RefundBatchNo));
-                }
+                log.InvoiceFinanceLog.Invoice.CaculateRefundDate();
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        partial void OnRefundDateChanged()
+        /// <param name="action"></param>
+        partial void OnValidate(ChangeAction action)
         {
-            foreach (InvoiceRefundLog log in this.InvoiceRefundLogs)
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                log.InvoiceFinanceLog.Invoice.CaculateRefundDate();
+                if (RefundType != REFUND.SELLER_REFUND && RefundType != REFUND.BUYER_PAYMENT)
+                {
+                    throw new Exception(String.Format("还款类型：{0}，设置无效，还款批次号{1}", RefundType, RefundBatchNo));
+                }
             }
         }
-
-        #endregion?Methods?
     }
 }

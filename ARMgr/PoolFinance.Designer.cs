@@ -64,9 +64,9 @@ namespace CMBC.EasyFactor.ARMgr
                 components.Dispose();
             }
 
-            if (this.context != null)
+            if (this._context != null)
             {
-                this.context.Dispose();
+                this._context.Dispose();
             }
 
             base.Dispose(disposing);
@@ -306,7 +306,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvCases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvCases.Size = new System.Drawing.Size(1075, 269);
             this.dgvCases.TabIndex = 5;
-            this.dgvCases.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCases_RowHeaderMouseDoubleClick);
+            this.dgvCases.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvCasesRowHeaderMouseDoubleClick);
             // 
             // poolBindingNavigator
             // 

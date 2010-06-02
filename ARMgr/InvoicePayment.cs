@@ -4,48 +4,26 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.CaseMgr;
+using CMBC.EasyFactor.Controls;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.Controls;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoicePayment : UserControl
     {
-        #region?Fields?(4)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private Case _case;
-        /// <summary>
-        /// 
-        /// </summary>
-        private ARCaseBasic caseBasic;
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpPaymentType paymentType;
-
-        #endregion?Fields?
-
-        #region?Enums?(1)?
+        #region OpPaymentType enum
 
         /// <summary>
         /// 
@@ -78,9 +56,28 @@ namespace CMBC.EasyFactor.ARMgr
             CREDIT_NOTE_PAYMENT,
         }
 
-        #endregion?Enums?
+        #endregion
 
-        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly ARCaseBasic _caseBasic;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly OpPaymentType _paymentType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private Case _case;
+
 
         /// <summary>
         /// 
@@ -88,22 +85,25 @@ namespace CMBC.EasyFactor.ARMgr
         public InvoicePayment(ARCaseBasic caseBasic, OpPaymentType paymentType)
         {
             InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.dgvLogs.ImeMode = ImeMode.OnHalf;
+            ImeMode = ImeMode.OnHalf;
+            dgvLogs.ImeMode = ImeMode.OnHalf;
 
-            DataGridViewCheckboxHeaderCell checkBoxCell = new DataGridViewCheckboxHeaderCell();
-            checkBoxCell.OnCheckBoxClicked += new DataGridViewCheckboxHeaderEventHander(OnCheckBoxClicked);
-            DataGridViewCheckBoxColumn checkBoxCol = this.dgvLogs.Columns[0] as DataGridViewCheckBoxColumn;
-            checkBoxCol.HeaderCell = checkBoxCell;
-            checkBoxCol.HeaderCell.Value = string.Empty;
+            var checkBoxCell = new DataGridViewCheckboxHeaderCell();
+            checkBoxCell.OnCheckBoxClicked += OnCheckBoxClicked;
+            var checkBoxCol = dgvLogs.Columns[0] as DataGridViewCheckBoxColumn;
+            if (checkBoxCol != null)
+            {
+                checkBoxCol.HeaderCell = checkBoxCell;
+                checkBoxCol.HeaderCell.Value = string.Empty;
+            }
 
-            this.caseBasic = caseBasic;
-            this.paymentType = paymentType;
-            this.dgvLogs.AutoGenerateColumns = false;
-            this.superValidator.Enabled = false;
-            ControlUtil.SetDoubleBuffered(this.dgvLogs);
+            _caseBasic = caseBasic;
+            _paymentType = paymentType;
+            dgvLogs.AutoGenerateColumns = false;
+            superValidator.Enabled = false;
+            ControlUtil.SetDoubleBuffered(dgvLogs);
 
-            foreach (DataGridViewColumn column in this.dgvLogs.Columns)
+            foreach (DataGridViewColumn column in dgvLogs.Columns)
             {
                 column.ReadOnly = true;
             }
@@ -120,50 +120,40 @@ namespace CMBC.EasyFactor.ARMgr
 
             colCheckBox.ReadOnly = false;
 
-            this.context = new DBDataContext();
+            _context = new DBDataContext();
         }
 
-        #endregion?Constructors?
-
-        #region?Properties?(1)?
 
         /// <summary>
         /// 
         /// </summary>
         public Case Case
         {
-            get
-            {
-                return this._case;
-            }
+            get { return _case; }
             set
             {
-                this._case = this.context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
-                this.NewBatch(null, null);
+                _case = _context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
+                NewBatch(null, null);
             }
         }
 
-        #endregion?Properties?
-
-        #region?Methods?(20)?
 
         //?Public?Methods?(1)?
-
         /// <summary>
         /// 
         /// </summary>
         public void ResetControlsStatus()
         {
-            foreach (Control comp in this.panelPaymentBatch.Controls)
+            foreach (Control comp in panelPaymentBatch.Controls)
             {
                 ControlUtil.SetComponetDefault(comp);
             }
 
-            this.batchBindingSource.DataSource = typeof(InvoicePaymentBatch);
-            this.logsBindingSource.DataSource = typeof(InvoicePaymentLog);
+            batchBindingSource.DataSource = typeof (InvoicePaymentBatch);
+            logsBindingSource.DataSource = typeof (InvoicePaymentLog);
         }
-        //?Private?Methods?(19)?
 
+        //?Private?Methods?(19)?
         /// <summary>
         /// 
         /// </summary>
@@ -181,13 +171,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
-            if (this.dgvLogs.CurrentCell == null)
+            if (dgvLogs.CurrentCell == null)
             {
                 return;
             }
 
-            InvoicePaymentLog selectedLog = (InvoicePaymentLog)this.logsBindingSource.List[this.dgvLogs.CurrentCell.RowIndex];
-            CaseDetail caseDetail = new CaseDetail(selectedLog.Invoice.InvoiceAssignBatch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            var selectedLog = (InvoicePaymentLog) logsBindingSource.List[dgvLogs.CurrentCell.RowIndex];
+            var caseDetail = new CaseDetail(selectedLog.Invoice.InvoiceAssignBatch.Case,
+                                            CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
         }
 
@@ -198,13 +189,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCDA(object sender, EventArgs e)
         {
-            if (this.dgvLogs.CurrentCell == null)
+            if (dgvLogs.CurrentCell == null)
             {
                 return;
             }
 
-            InvoicePaymentLog selectedLog = (InvoicePaymentLog)this.logsBindingSource.List[this.dgvLogs.CurrentCell.RowIndex];
-            CDADetail cdaDetail = new CDADetail(selectedLog.Invoice.InvoiceAssignBatch.Case.ActiveCDA, CDADetail.OpCDAType.DETAIL_CDA);
+            var selectedLog = (InvoicePaymentLog) logsBindingSource.List[dgvLogs.CurrentCell.RowIndex];
+            var cdaDetail = new CDADetail(selectedLog.Invoice.InvoiceAssignBatch.Case.ActiveCDA,
+                                          CDADetail.OpCDAType.DETAIL_CDA);
             cdaDetail.ShowDialog(this);
         }
 
@@ -213,15 +205,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void DetailInvoice(object sender, System.EventArgs e)
+        private void DetailInvoice(object sender, EventArgs e)
         {
-            if (this.dgvLogs.CurrentCell == null)
+            if (dgvLogs.CurrentCell == null)
             {
                 return;
             }
 
-            InvoicePaymentLog selectedLog = (InvoicePaymentLog)this.logsBindingSource.List[this.dgvLogs.CurrentCell.RowIndex];
-            InvoiceDetail invoiceDetail = new InvoiceDetail(selectedLog.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+            var selectedLog = (InvoicePaymentLog) logsBindingSource.List[dgvLogs.CurrentCell.RowIndex];
+            var invoiceDetail = new InvoiceDetail(selectedLog.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             invoiceDetail.ShowDialog(this);
         }
 
@@ -230,35 +222,33 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvInvoices_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvInvoicesCellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
             {
                 return;
             }
 
-            IList logList = this.logsBindingSource.List;
-            InvoicePaymentLog log = (InvoicePaymentLog)logList[e.RowIndex];
-            this.dgvLogs.EndEdit();
+            IList logList = logsBindingSource.List;
+            var log = (InvoicePaymentLog) logList[e.RowIndex];
+            dgvLogs.EndEdit();
 
-            if (this.dgvLogs.Columns[e.ColumnIndex] == colCheckBox)
+            if (dgvLogs.Columns[e.ColumnIndex] == colCheckBox)
             {
-
-                DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)this.dgvLogs.Rows[e.RowIndex].Cells[0];
+                var checkBoxCell = (DataGridViewCheckBoxCell) dgvLogs.Rows[e.RowIndex].Cells[0];
 
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
                     ClickLog(log);
-                    this.ResetRow(e.RowIndex, true);
+                    ResetRow(e.RowIndex, true);
                 }
                 else
                 {
-                    this.ResetRow(e.RowIndex, false);
+                    ResetRow(e.RowIndex, false);
                 }
 
-                this.StatBatch();
+                StatBatch();
             }
-
         }
 
         /// <summary>
@@ -266,17 +256,17 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgvInvoicesCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value == null)
             {
                 return;
             }
 
-            DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
+            DataGridViewColumn col = dgvLogs.Columns[e.ColumnIndex];
             if (col == colAssignDate || col == colDueDate || col == colCreditNoteDate2)
             {
-                DateTime date = (DateTime)e.Value;
+                var date = (DateTime) e.Value;
                 e.Value = date.ToString("yyyyMMdd");
                 e.FormattingApplied = true;
             }
@@ -287,7 +277,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void dgvInvoices_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        private void DgvInvoicesCellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             if (e.Value == null)
             {
@@ -301,10 +291,10 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
+            DataGridViewColumn col = dgvLogs.Columns[e.ColumnIndex];
             if (col == colCreditNoteDate2)
             {
-                string str = (string)e.Value;
+                var str = (string) e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
                 e.ParsingApplied = true;
             }
@@ -315,19 +305,20 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvInvoices_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void DgvInvoicesCellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (e.FormattedValue == null || e.FormattedValue.Equals(string.Empty))
             {
                 return;
             }
 
-            DataGridViewColumn col = this.dgvLogs.Columns[e.ColumnIndex];
+            DataGridViewColumn col = dgvLogs.Columns[e.ColumnIndex];
             if (col == colCreditNoteDate2)
             {
-                string str = (string)e.FormattedValue;
+                var str = (string) e.FormattedValue;
                 DateTime result;
-                bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out result);
+                bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None,
+                                                 out result);
                 if (!ok)
                 {
                     e.Cancel = true;
@@ -335,7 +326,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else if (col == colPaymentAmount)
             {
-                string str = (string)e.FormattedValue;
+                var str = (string) e.FormattedValue;
                 double result;
                 bool ok = Double.TryParse(str, out result);
                 if (!ok)
@@ -354,16 +345,16 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvInvoices_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void DgvInvoicesCellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
             {
                 return;
             }
 
-            if (this.dgvLogs.Columns[e.ColumnIndex] == this.colPaymentAmount)
+            if (dgvLogs.Columns[e.ColumnIndex] == colPaymentAmount)
             {
-                this.StatBatch();
+                StatBatch();
             }
         }
 
@@ -372,9 +363,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DgvInvoicesRowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            this.DetailInvoice(null, null);
+            DetailInvoice(sender, e);
         }
 
         /// <summary>
@@ -384,23 +375,23 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ExportBatch(object sender, EventArgs e)
         {
-            if (this._case == null)
+            if (_case == null)
             {
                 MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
+            if (!(batchBindingSource.DataSource is InvoicePaymentBatch))
             {
                 return;
             }
 
-            if (this.logsBindingSource.List.Count == 0)
+            if (logsBindingSource.List.Count == 0)
             {
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_PAYMENT_BY_BATCH, this.logsBindingSource.List);
+            var exportForm = new ExportForm(ExportForm.ExportType.EXPORT_PAYMENT_BY_BATCH, logsBindingSource.List);
             exportForm.Show();
         }
 
@@ -411,27 +402,27 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ImportBatch(object sender, EventArgs e)
         {
-            if (this._case == null)
+            if (_case == null)
             {
                 MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
+            if (!(batchBindingSource.DataSource is InvoicePaymentBatch))
             {
                 return;
             }
 
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_PAYMENT_BY_BATCH);
+            var importForm = new ImportForm(ImportForm.ImportType.IMPORT_PAYMENT_BY_BATCH);
             importForm.ShowDialog(this);
-            List<InvoicePaymentLog> logList = (List<InvoicePaymentLog>)importForm.ImportedList;
+            var logList = (List<InvoicePaymentLog>) importForm.ImportedList;
             if (logList != null)
             {
-                for (int i = 0; i < this.logsBindingSource.List.Count; i++)
+                for (int i = 0; i < logsBindingSource.List.Count; i++)
                 {
-                    DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvLogs.Rows[i].Cells[0];
+                    var cell = (DataGridViewCheckBoxCell) dgvLogs.Rows[i].Cells[0];
                     cell.Value = 0;
-                    InvoicePaymentLog oldLog = (InvoicePaymentLog)this.logsBindingSource.List[i];
+                    var oldLog = (InvoicePaymentLog) logsBindingSource.List[i];
 
                     InvoicePaymentLog newLog = logList.SingleOrDefault(log => log.InvoiceNo2 == oldLog.InvoiceNo2);
                     if (newLog != null)
@@ -445,12 +436,12 @@ namespace CMBC.EasyFactor.ARMgr
                             cell.Value = 1;
                         }
 
-                        this.ResetRow(i, 1 == (int)cell.Value ? true : false);
+                        ResetRow(i, 1 == (int) cell.Value ? true : false);
                     }
                 }
 
-                this.dgvLogs.Refresh();
-                this.StatBatch();
+                dgvLogs.Refresh();
+                StatBatch();
             }
         }
 
@@ -461,15 +452,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
-            if (this._case == null)
+            if (_case == null)
             {
                 MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            this.tbTotalPayment.Text = string.Empty;
-            InvoicePaymentBatch batch = new InvoicePaymentBatch();
-            switch (paymentType)
+            tbTotalPayment.Text = string.Empty;
+            var batch = new InvoicePaymentBatch();
+            switch (_paymentType)
             {
                 case OpPaymentType.BUYER_PAYMENT:
                     batch.PaymentType = PAYMENT.BUYER_PAYMENT;
@@ -493,21 +484,19 @@ namespace CMBC.EasyFactor.ARMgr
             batch.PaymentDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
             //batch.CheckStatus = BATCH.UNCHECK;
-            this.batchBindingSource.DataSource = batch;
+            batchBindingSource.DataSource = batch;
 
-            var queryResult = from invoice in context.Invoices
-                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION)
-                              select invoice;
+            IQueryable<Invoice> queryResult = from invoice in _context.Invoices
+                                              where
+                                                  invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode &&
+                                                  (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount <
+                                                   -TypeUtil.PRECISION)
+                                              select invoice;
 
-            List<InvoicePaymentLog> logs = new List<InvoicePaymentLog>();
-            foreach (Invoice invoice in queryResult)
-            {
-                InvoicePaymentLog log = new InvoicePaymentLog(invoice);
-                logs.Add(log);
-            }
+            var logs = queryResult.Select(invoice => new InvoicePaymentLog(invoice)).ToList();
 
-            this.logsBindingSource.DataSource = logs;
-            this.StatBatch();
+            logsBindingSource.DataSource = logs;
+            StatBatch();
         }
 
         /// <summary>
@@ -517,25 +506,25 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void OnCheckBoxClicked(object sender, DataGridViewCheckboxHeaderEventArgs e)
         {
-            IList logList = this.logsBindingSource.List;
-            foreach (DataGridViewRow dgvRow in this.dgvLogs.Rows)
+            IList logList = logsBindingSource.List;
+            foreach (DataGridViewRow dgvRow in dgvLogs.Rows)
             {
-                InvoicePaymentLog log = (InvoicePaymentLog)logList[dgvRow.Index];
+                var log = (InvoicePaymentLog) logList[dgvRow.Index];
                 if (e.CheckedState)
                 {
                     dgvRow.Cells[0].Value = true;
                     ClickLog(log);
-                    this.ResetRow(dgvRow.Index, true);
+                    ResetRow(dgvRow.Index, true);
                 }
                 else
                 {
                     dgvRow.Cells[0].Value = false;
-                    this.ResetRow(dgvRow.Index, false);
+                    ResetRow(dgvRow.Index, false);
                 }
             }
 
-            this.dgvLogs.Refresh();
-            this.StatBatch();
+            dgvLogs.Refresh();
+            StatBatch();
         }
 
         /// <summary>
@@ -545,12 +534,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="editable"></param>
         private void ResetRow(int rowIndex, bool editable)
         {
-            this.dgvLogs.Rows[rowIndex].Cells["colPaymentAmount"].ReadOnly = !editable;
-            this.dgvLogs.Rows[rowIndex].Cells["colCreditNoteNo2"].ReadOnly = !editable;
-            this.dgvLogs.Rows[rowIndex].Cells["colCreditNoteDate2"].ReadOnly = !editable;
+            dgvLogs.Rows[rowIndex].Cells["colPaymentAmount"].ReadOnly = !editable;
+            dgvLogs.Rows[rowIndex].Cells["colCreditNoteNo2"].ReadOnly = !editable;
+            dgvLogs.Rows[rowIndex].Cells["colCreditNoteDate2"].ReadOnly = !editable;
             if (!editable)
             {
-                InvoicePaymentLog log = (InvoicePaymentLog)this.logsBindingSource.List[rowIndex];
+                var log = (InvoicePaymentLog) logsBindingSource.List[rowIndex];
                 log.PaymentAmount = 0;
                 if (log.CreditNote != null)
                 {
@@ -572,18 +561,18 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this._case == null)
+            if (_case == null)
             {
                 MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            if (!(this.batchBindingSource.DataSource is InvoicePaymentBatch))
+            if (!(batchBindingSource.DataSource is InvoicePaymentBatch))
             {
                 return;
             }
@@ -594,25 +583,25 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             bool isSaveOK = true;
-            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
-            List<InvoicePaymentLog> logList = new List<InvoicePaymentLog>();
-            List<Invoice> invoiceList = new List<Invoice>();
+            var batch = (InvoicePaymentBatch) batchBindingSource.DataSource;
+            var logList = new List<InvoicePaymentLog>();
+            var invoiceList = new List<Invoice>();
 
             try
             {
-                batch.Case = this._case;
+                batch.Case = _case;
                 if (batch.PaymentBatchNo == null)
                 {
                     batch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(batch.PaymentDate);
                     batch.InputDate = DateTime.Today;
                 }
 
-                for (int i = 0; i < this.logsBindingSource.List.Count; i++)
+                for (int i = 0; i < logsBindingSource.List.Count; i++)
                 {
-                    if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                    if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                     {
-                        InvoicePaymentLog log = (InvoicePaymentLog)this.logsBindingSource.List[i];
-                        log.Invoice = context.Invoices.SingleOrDefault(invoice => invoice.InvoiceID == log.InvoiceID2);
+                        var log = (InvoicePaymentLog) logsBindingSource.List[i];
+                        log.Invoice = _context.Invoices.SingleOrDefault(invoice => invoice.InvoiceID == log.InvoiceID2);
                         logList.Add(log);
                         log.InvoicePaymentBatch = batch;
                         log.Invoice.CaculatePayment();
@@ -624,10 +613,12 @@ namespace CMBC.EasyFactor.ARMgr
 
                         if (!String.IsNullOrEmpty(log.CreditNoteNo2))
                         {
-                            CreditNote note = new CreditNote();
-                            note.CreditNoteNo = log.CreditNoteNo2;
-                            note.CreditNoteDate = log.CreditNoteDate2.GetValueOrDefault();
-                            note.InvoiceAssignBatch = log.Invoice.InvoiceAssignBatch;
+                            var note = new CreditNote
+                                           {
+                                               CreditNoteNo = log.CreditNoteNo2,
+                                               CreditNoteDate = log.CreditNoteDate2.GetValueOrDefault(),
+                                               InvoiceAssignBatch = log.Invoice.InvoiceAssignBatch
+                                           };
                             log.CreditNote = note;
                         }
                     }
@@ -640,7 +631,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -661,7 +652,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBoxEx.Show("数据保存成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.caseBasic.CaculateOutstanding(this._case);
+                _caseBasic.CaculateOutstanding(_case);
                 if (invoiceList.Count > 0)
                 {
                     MainWindow mainWindow = App.Current.MainWindow;
@@ -669,7 +660,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 else
                 {
-                    this.NewBatch(null, null);
+                    NewBatch(null, null);
                 }
             }
         }
@@ -681,32 +672,32 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this._case == null)
+            if (_case == null)
             {
                 MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            PaymentBatchMgr batchMgr = new PaymentBatchMgr(this._case, this.context);
-            QueryForm queryUI = new QueryForm(batchMgr, "选择付款批次");
+            var batchMgr = new PaymentBatchMgr(_case, _context);
+            var queryUI = new QueryForm(batchMgr, "选择付款批次");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             InvoicePaymentBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                this.batchBindingSource.DataSource = selectedBatch;
+                batchBindingSource.DataSource = selectedBatch;
 
-                this.logsBindingSource.DataSource = selectedBatch.InvoicePaymentLogs;
-                for (int i = 0; i < this.logsBindingSource.List.Count; i++)
+                logsBindingSource.DataSource = selectedBatch.InvoicePaymentLogs;
+                for (int i = 0; i < logsBindingSource.List.Count; i++)
                 {
-                    InvoicePaymentLog log = (InvoicePaymentLog)this.logsBindingSource.List[i];
+                    var log = (InvoicePaymentLog) logsBindingSource.List[i];
                     log.InvoiceNo2 = log.Invoice.InvoiceNo;
-                    DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)this.dgvLogs.Rows[i].Cells[0];
+                    var cell = (DataGridViewCheckBoxCell) dgvLogs.Rows[i].Cells[0];
                     cell.Value = 1;
                     ResetRow(i, true);
                 }
 
-                this.StatBatch();
+                StatBatch();
             }
         }
 
@@ -715,17 +706,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void StatBatch()
         {
-            IList logList = this.logsBindingSource.List;
-            double totalPayment = 0;
-            for (int i = 0; i < logList.Count; i++)
-            {
-                if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
-                {
-                    totalPayment += ((InvoicePaymentLog)logList[i]).PaymentAmount.GetValueOrDefault();
-                }
-            }
+            IList logList = logsBindingSource.List;
+            double totalPayment = logList.Cast<object>().Where((t, i) => Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString())).Sum(t => ((InvoicePaymentLog) t).PaymentAmount.GetValueOrDefault());
 
-            this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
+            tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
         }
 
         /// <summary>
@@ -734,17 +718,17 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         private bool ValidateBatch()
         {
-            InvoicePaymentBatch batch = (InvoicePaymentBatch)this.batchBindingSource.DataSource;
-            IList logList = this.logsBindingSource.List;
+            IList logList = logsBindingSource.List;
 
             for (int i = 0; i < logList.Count; i++)
             {
-                if (Boolean.Parse(this.dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    InvoicePaymentLog log = (InvoicePaymentLog)logList[i];
+                    var log = (InvoicePaymentLog) logList[i];
                     if (TypeUtil.LessZero(log.AssignOutstanding))
                     {
-                        MessageBoxEx.Show("付款金额不能大于转让金额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("付款金额不能大于转让金额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION,
+                                          MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
 
@@ -765,7 +749,5 @@ namespace CMBC.EasyFactor.ARMgr
             }
             return true;
         }
-
-        #endregion?Methods?
     }
 }

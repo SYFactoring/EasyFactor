@@ -4,28 +4,21 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class Currency
     {
-		#region?Fields?(1)?
-
         /// <summary>
         /// 
         /// </summary>
-        private static readonly List<Currency> _currencyList = InitializeCurrency();
+        private static readonly List<Currency> CurrencyList = InitializeCurrency();
 
-		#endregion?Fields?
-
-		#region?Properties?(2)?
 
         /// <summary>
         /// 
@@ -33,10 +26,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static List<Currency> AllCurrencies
         {
-            get
-            {
-                return _currencyList.ToList();
-            }
+            get { return CurrencyList.ToList(); }
         }
 
         /// <summary>
@@ -44,33 +34,23 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string CurrencyFormat
         {
-            get
-            {
-                return _CurrencyCode + " " + _CurrencyName;
-            }
+            get { return _CurrencyCode + " " + _CurrencyName; }
         }
 
-		#endregion?Properties?
 
-		#region?Methods?(1)?
-
-		//?Private?Methods?(1)?
-
+        //?Private?Methods?(1)?
         /// <summary>
         /// Initializes static members of the Currency class
         /// </summary>
-        static List<Currency> InitializeCurrency()
+        private static List<Currency> InitializeCurrency()
         {
-            DBDataContext context = new DBDataContext();
-            context.ObjectTrackingEnabled = false;
-            List<Currency> _currencyList = context.Currencies.ToList();
-            Currency CNY = _currencyList.SingleOrDefault(c => c.CurrencyCode == "CNY");
-            Currency USD = _currencyList.SingleOrDefault(c => c.CurrencyCode == "USD");
-            _currencyList.Insert(0, CNY);
-            _currencyList.Insert(1, USD);
-            return _currencyList;
+            var context = new DBDataContext {ObjectTrackingEnabled = false};
+            List<Currency> currencyList = context.Currencies.ToList();
+            Currency CNY = currencyList.SingleOrDefault(c => c.CurrencyCode == "CNY");
+            Currency USD = currencyList.SingleOrDefault(c => c.CurrencyCode == "USD");
+            currencyList.Insert(0, CNY);
+            currencyList.Insert(1, USD);
+            return currencyList;
         }
-
-		#endregion?Methods?
     }
 }

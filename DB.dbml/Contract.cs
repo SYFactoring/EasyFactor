@@ -4,38 +4,28 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Data.Linq;
+using System.Text.RegularExpressions;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System.Data.Linq;
-    using System.Text.RegularExpressions;
-    using System;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class Contract
     {
-		#region?Fields?(1)?
-
-        private static Regex ContractCodeRegex = new Regex(@"^[^~!@#$%\\^&\\*\\+=\\?]+$");
-
-		#endregion?Fields?
-
-		#region?Methods?(1)?
-
-		//?Private?Methods?(1)?
-
-        partial void OnValidate(System.Data.Linq.ChangeAction action)
+        private static readonly Regex ContractCodeRegex = new Regex(@"^[^~!@#$%\\^&\\*\\+=\\?]+$");
+        //?Private?Methods?(1)?
+        partial void OnValidate(ChangeAction action)
         {
             if (action == ChangeAction.Insert)
             {
-                if (!ContractCodeRegex.IsMatch(this.ContractCode))
+                if (!ContractCodeRegex.IsMatch(ContractCode))
                 {
-                    throw new ArgumentException("不符合保理合同编码规则: " + this.ContractCode);
+                    throw new ArgumentException("不符合保理合同编码规则: " + ContractCode);
                 }
             }
         }
-
-		#endregion?Methods?
     }
 }

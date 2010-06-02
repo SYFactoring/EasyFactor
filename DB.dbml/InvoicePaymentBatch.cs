@@ -4,31 +4,26 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Data.Linq;
+using System.Linq;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Data.Linq;
-    using CMBC.EasyFactor.Utils.ConstStr;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoicePaymentBatch
     {
-        #region?Properties?(5)?
 
         /// <summary>
         /// Gets
         /// </summary>
         public int BatchCount
         {
-            get
-            {
-                return this.InvoicePaymentLogs.Count;
-            }
+            get { return InvoicePaymentLogs.Count; }
         }
 
         /// <summary>
@@ -36,10 +31,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string BuyerName
         {
-            get
-            {
-                return this.Case.BuyerClient.ToString();
-            }
+            get { return Case.BuyerClient.ToString(); }
         }
 
         /// <summary>
@@ -49,13 +41,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                foreach (InvoicePaymentLog paymentLog in this.InvoicePaymentLogs)
-                {
-                    result += paymentLog.PaymentAmount.GetValueOrDefault();
-                }
-
-                return result;
+                return InvoicePaymentLogs.Sum(paymentLog => paymentLog.PaymentAmount.GetValueOrDefault());
             }
         }
 
@@ -64,10 +50,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string SellerName
         {
-            get
-            {
-                return this.Case.SellerClient.ToString();
-            }
+            get { return Case.SellerClient.ToString(); }
         }
 
         /// <summary>
@@ -75,18 +58,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string TransactionType
         {
-            get
-            {
-                return this.Case.TransactionType;
-            }
+            get { return Case.TransactionType; }
         }
 
-        #endregion?Properties?
 
-        #region?Methods?(2)?
+
 
         //?Public?Methods?(2)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -97,11 +75,11 @@ namespace CMBC.EasyFactor.DB.dbml
             string prefix = String.Format("PAY{0:yyyyMMdd}", date);
             int batchCount;
 
-            using (DBDataContext context = new DBDataContext())
+            using (var context = new DBDataContext())
             {
-                var queryResult = from batch in context.InvoicePaymentBatches
-                                  where batch.PaymentBatchNo.StartsWith(prefix)
-                                  select batch.PaymentBatchNo;
+                IQueryable<string> queryResult = from batch in context.InvoicePaymentBatches
+                                                 where batch.PaymentBatchNo.StartsWith(prefix)
+                                                 select batch.PaymentBatchNo;
 
                 if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
                 {
@@ -124,11 +102,11 @@ namespace CMBC.EasyFactor.DB.dbml
             string prefix = String.Format("PAY{0:yyyyMMdd}", date);
             int batchCount;
 
-            using (DBDataContext context = new DBDataContext())
+            using (var context = new DBDataContext())
             {
-                var queryResult = from batch in context.InvoicePaymentBatches
-                                  where batch.PaymentBatchNo.StartsWith(prefix)
-                                  select batch.PaymentBatchNo;
+                IQueryable<string> queryResult = from batch in context.InvoicePaymentBatches
+                                                 where batch.PaymentBatchNo.StartsWith(prefix)
+                                                 select batch.PaymentBatchNo;
 
                 if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
                 {
@@ -144,28 +122,29 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="action"></param>
-        partial void OnValidate(ChangeAction action)
+        partial void OnPaymentDateChanged()
         {
-            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            foreach (InvoicePaymentLog log in InvoicePaymentLogs)
             {
-                if (this.PaymentType != PAYMENT.BUYER_PAYMENT && this.PaymentType != PAYMENT.CREDIT_NOTE_PAYMENT && this.PaymentType != PAYMENT.GUARANTEE_PAYMENT && this.PaymentType != PAYMENT.INDIRECT_PAYMENT && this.PaymentType != PAYMENT.SELLER_REASSIGN)
-                {
-                    throw new Exception(String.Format("付款类型：{0}，不符合规范类型，还款批次号{1}", this.PaymentType, this.PaymentBatchNo));
-                }
+                log.Invoice.CaculatePaymentDate();
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        partial void OnPaymentDateChanged()
+        /// <param name="action"></param>
+        partial void OnValidate(ChangeAction action)
         {
-            foreach (InvoicePaymentLog log in this.InvoicePaymentLogs)
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                log.Invoice.CaculatePaymentDate();
+                if (PaymentType != PAYMENT.BUYER_PAYMENT && PaymentType != PAYMENT.CREDIT_NOTE_PAYMENT &&
+                    PaymentType != PAYMENT.GUARANTEE_PAYMENT && PaymentType != PAYMENT.INDIRECT_PAYMENT &&
+                    PaymentType != PAYMENT.SELLER_REASSIGN)
+                {
+                    throw new Exception(String.Format("付款类型：{0}，不符合规范类型，还款批次号{1}", PaymentType, PaymentBatchNo));
+                }
             }
         }
-        #endregion?Methods?
     }
 }

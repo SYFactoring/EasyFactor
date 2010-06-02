@@ -14,7 +14,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
-using CMBC.EasyFactor.Utils.ConstStr;
 using DevComponents.DotNetBar;
 using Microsoft.Office.Interop.Excel;
 
@@ -25,10 +24,6 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public partial class ExportForm : Office2007Form
     {
-        #region Methods (1)
-
-        // Private Methods (1) 
-
         /// <summary>
         /// 
         /// </summary>
@@ -39,25 +34,14 @@ namespace CMBC.EasyFactor.Utils
             backgroundWorker.CancelAsync();
             e.Cancel = false;
         }
-
-        #endregion Methods
-
-        #region?Fields?(2)?
-
         /// <summary>
         /// 
         /// </summary>
-        private readonly IList exportData;
-
+        private readonly IList _exportData;
         /// <summary>
         /// 
         /// </summary>
-        private readonly ExportType exportType;
-
-        #endregion?Fields?
-
-        #region?Enums?(1)?
-
+        private readonly ExportType _exportType;
         /// <summary>
         /// 
         /// </summary>
@@ -152,17 +136,7 @@ namespace CMBC.EasyFactor.Utils
             /// 
             /// </summary>
             EXPORT_CDAS,
-
-            ///// <summary>
-            ///// 
-            ///// </summary>
-            //BACKUP_DATABASE
         }
-
-        #endregion?Enums?
-
-        #region?Constructors?(1)?
-
         /// <summary>
         /// Initializes a new instance of the ExportForm class
         /// </summary>
@@ -171,9 +145,8 @@ namespace CMBC.EasyFactor.Utils
         public ExportForm(ExportType exportType, IList exportData)
             : this(exportType)
         {
-            this.exportData = exportData;
+            _exportData = exportData;
         }
-
         /// <summary>
         /// Initializes a new instance of the ExportForm class
         /// </summary>
@@ -181,19 +154,14 @@ namespace CMBC.EasyFactor.Utils
         public ExportForm(ExportType exportType)
         {
             InitializeComponent();
-            this.exportType = exportType;
-            if (this.exportType == ExportType.EXPORT_MSG09_INVOICE ||
-                this.exportType == ExportType.EXPORT_MSG09_CREDITNOTE || this.exportType == ExportType.EXPORT_MSG11 ||
-                this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
+            _exportType = exportType;
+            if (_exportType == ExportType.EXPORT_MSG09_INVOICE ||
+                _exportType == ExportType.EXPORT_MSG09_CREDITNOTE || _exportType == ExportType.EXPORT_MSG11 ||
+                _exportType == ExportType.EXPORT_MSG12 || _exportType == ExportType.EXPORT_LEGER)
             {
                 btnFileSelect.Enabled = true;
             }
         }
-
-        #endregion?Constructors?
-
-        #region?Methods?(24)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -202,7 +170,7 @@ namespace CMBC.EasyFactor.Utils
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             var worker = sender as BackgroundWorker;
-            switch (exportType)
+            switch (_exportType)
             {
                 case ExportType.EXPORT_CREDIT_NOTES:
                     e.Result = ExportCreditNotes(worker, e);
@@ -258,14 +226,10 @@ namespace CMBC.EasyFactor.Utils
                 case ExportType.EXPORT_CDAS:
                     e.Result = ExportCDAs(worker, e);
                     break;
-                //case ExportType.BACKUP_DATABASE:
-                //    e.Result = this.BackupDatabase(worker, e);
-                //    break;
                 default:
                     break;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -276,7 +240,6 @@ namespace CMBC.EasyFactor.Utils
             progressBar.Value = e.ProgressPercentage;
             tbStatus.Text = String.Format("导出进度 {0:G}%", e.ProgressPercentage);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -304,13 +267,14 @@ namespace CMBC.EasyFactor.Utils
                 else if (result is string)
                 {
                     var path = (string)result;
-                    tbStatus.Text = String.IsNullOrEmpty(path) ? String.Format("数据库备份失败") : String.Format("数据库备份成功，保存路径：{0}", path);
+                    tbStatus.Text = String.IsNullOrEmpty(path)
+                                        ? String.Format("数据库备份失败")
+                                        : String.Format("数据库备份成功，保存路径：{0}", path);
                 }
             }
 
             btnCancel.Text = @"关闭";
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -327,7 +291,6 @@ namespace CMBC.EasyFactor.Utils
                 Close();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -368,7 +331,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "保理商手续费";
                 datasheet.Cells[1, column] = "经办人";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -391,7 +354,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    var assignBatch = (InvoiceAssignBatch)exportData[row];
+                    var assignBatch = (InvoiceAssignBatch)_exportData[row];
                     datasheet.Cells[row + 2, column++] = assignBatch.FactorCode;
                     datasheet.Cells[row + 2, column++] = assignBatch.FactorName;
                     datasheet.Cells[row + 2, column++] = assignBatch.Location;
@@ -430,7 +393,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
@@ -452,9 +415,8 @@ namespace CMBC.EasyFactor.Utils
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -484,7 +446,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "手续费";
                 datasheet.Cells[1, column] = "备注";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -507,7 +469,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    var invoice = (Invoice)exportData[row];
+                    var invoice = (Invoice)_exportData[row];
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CaseCode;
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAmount;
@@ -536,7 +498,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
@@ -558,9 +520,8 @@ namespace CMBC.EasyFactor.Utils
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -599,7 +560,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "案件状态";
                 datasheet.Cells[1, column] = "OP人员";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -622,7 +583,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    var selectedCase = (Case)exportData[row];
+                    var selectedCase = (Case)_exportData[row];
                     datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.Location.LocationName;
                     datasheet.Cells[row + 2, column++] = selectedCase.CaseCode;
                     datasheet.Cells[row + 2, column++] = selectedCase.SellerCode;
@@ -655,7 +616,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
@@ -677,9 +638,8 @@ namespace CMBC.EasyFactor.Utils
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -690,7 +650,7 @@ namespace CMBC.EasyFactor.Utils
         {
             var app = new ApplicationClass { Visible = false };
 
-            Workbook workbook = null;
+            Workbook workbook;
 
             try
             {
@@ -762,7 +722,7 @@ namespace CMBC.EasyFactor.Utils
                 sheetLocal.Cells[1, column++] = "单据处理费";
                 sheetLocal.Cells[1, column] = "备注";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 int inter = 0;
                 int local = 0;
                 for (int row = 0; row < size; row++)
@@ -786,65 +746,65 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    var cda = (CDA)exportData[row];
+                    var cda = (CDA)_exportData[row];
 
                     Worksheet sheet;
-                    int rowID = 0;
+                    int rowId;
                     if (cda.TransactionType == "进口保理" || cda.TransactionType == "出口保理")
                     {
-                        rowID = ++inter;
+                        rowId = ++inter;
                         sheet = sheetInternal;
                     }
                     else
                     {
-                        rowID = ++local;
+                        rowId = ++local;
                         sheet = sheetLocal;
                     }
 
-                    sheet.Cells[rowID + 1, column++] = cda.TransactionType;
-                    sheet.Cells[rowID + 1, column++] = TypeUtil.ConvertBoolToStr(cda.IsRecoarse);
-                    sheet.Cells[rowID + 1, column++] = cda.IsNotice;
+                    sheet.Cells[rowId + 1, column++] = cda.TransactionType;
+                    sheet.Cells[rowId + 1, column++] = TypeUtil.ConvertBoolToStr(cda.IsRecoarse);
+                    sheet.Cells[rowId + 1, column++] = cda.IsNotice;
                     Contract contract = cda.Case.SellerClient.Contract;
                     if (contract != null)
                     {
-                        sheet.Cells[rowID + 1, column++] = contract.ContractType;
-                        sheet.Cells[rowID + 1, column++] = contract.ContractCode;
-                        sheet.Cells[rowID + 1, column++] = contract.ContractValueDate;
-                        sheet.Cells[rowID + 1, column++] = contract.ContractDueDate;
+                        sheet.Cells[rowId + 1, column++] = contract.ContractType;
+                        sheet.Cells[rowId + 1, column++] = contract.ContractCode;
+                        sheet.Cells[rowId + 1, column++] = contract.ContractValueDate;
+                        sheet.Cells[rowId + 1, column++] = contract.ContractDueDate;
                     }
                     else
                     {
-                        sheet.Cells[rowID + 1, column++] = String.Empty;
-                        sheet.Cells[rowID + 1, column++] = String.Empty;
-                        sheet.Cells[rowID + 1, column++] = String.Empty;
-                        sheet.Cells[rowID + 1, column++] = String.Empty;
+                        sheet.Cells[rowId + 1, column++] = String.Empty;
+                        sheet.Cells[rowId + 1, column++] = String.Empty;
+                        sheet.Cells[rowId + 1, column++] = String.Empty;
+                        sheet.Cells[rowId + 1, column++] = String.Empty;
                     }
 
-                    sheet.Cells[rowID + 1, column++] = cda.CDACode;
-                    sheet.Cells[rowID + 1, column++] = cda.SellerName;
-                    sheet.Cells[rowID + 1, column++] = cda.BuyerName;
-                    sheet.Cells[rowID + 1, column++] = cda.Case.BuyerClient.Address;
-                    sheet.Cells[rowID + 1, column++] = cda.CDASignDate;
-                    sheet.Cells[rowID + 1, column++] = cda.PaymentTerms;
-                    sheet.Cells[rowID + 1, column++] = cda.CreditCoverCurr;
-                    sheet.Cells[rowID + 1, column++] = cda.CreditCover;
-                    sheet.Cells[rowID + 1, column++] = cda.CreditCoverPeriodBegin;
-                    sheet.Cells[rowID + 1, column++] = cda.CreditCoverPeriodEnd;
-                    sheet.Cells[rowID + 1, column++] = cda.FinanceLineCurr;
-                    sheet.Cells[rowID + 1, column++] = cda.FinanceLine;
-                    sheet.Cells[rowID + 1, column++] = cda.FinanceLinePeriodBegin;
-                    sheet.Cells[rowID + 1, column++] = cda.FinanceLinePeriodEnd;
-                    sheet.Cells[rowID + 1, column++] = cda.HighestFinanceLine;
-                    sheet.Cells[rowID + 1, column++] = cda.FinanceProportion;
-                    sheet.Cells[rowID + 1, column++] = cda.Price;
-                    sheet.Cells[rowID + 1, column++] = cda.CommissionType;
-                    sheet.Cells[rowID + 1, column++] = cda.HandFeeCurr;
-                    sheet.Cells[rowID + 1, column++] = cda.HandFee;
-                    sheet.Cells[rowID + 1, column++] = cda.Comment;
+                    sheet.Cells[rowId + 1, column++] = cda.CDACode;
+                    sheet.Cells[rowId + 1, column++] = cda.SellerName;
+                    sheet.Cells[rowId + 1, column++] = cda.BuyerName;
+                    sheet.Cells[rowId + 1, column++] = cda.Case.BuyerClient.Address;
+                    sheet.Cells[rowId + 1, column++] = cda.CDASignDate;
+                    sheet.Cells[rowId + 1, column++] = cda.PaymentTerms;
+                    sheet.Cells[rowId + 1, column++] = cda.CreditCoverCurr;
+                    sheet.Cells[rowId + 1, column++] = cda.CreditCover;
+                    sheet.Cells[rowId + 1, column++] = cda.CreditCoverPeriodBegin;
+                    sheet.Cells[rowId + 1, column++] = cda.CreditCoverPeriodEnd;
+                    sheet.Cells[rowId + 1, column++] = cda.FinanceLineCurr;
+                    sheet.Cells[rowId + 1, column++] = cda.FinanceLine;
+                    sheet.Cells[rowId + 1, column++] = cda.FinanceLinePeriodBegin;
+                    sheet.Cells[rowId + 1, column++] = cda.FinanceLinePeriodEnd;
+                    sheet.Cells[rowId + 1, column++] = cda.HighestFinanceLine;
+                    sheet.Cells[rowId + 1, column++] = cda.FinanceProportion;
+                    sheet.Cells[rowId + 1, column++] = cda.Price;
+                    sheet.Cells[rowId + 1, column++] = cda.CommissionType;
+                    sheet.Cells[rowId + 1, column++] = cda.HandFeeCurr;
+                    sheet.Cells[rowId + 1, column++] = cda.HandFee;
+                    sheet.Cells[rowId + 1, column++] = cda.Comment;
 
                     if (sheet == sheetInternal)
                     {
-                        sheet.Cells[rowID + 1, column] = cda.Case.BuyerFactor.ToString();
+                        sheet.Cells[rowId + 1, column] = cda.Case.BuyerFactor.ToString();
                     }
 
                     worker.ReportProgress((int)((float)row * 100 / size));
@@ -908,7 +868,7 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (app != null)
                 {
@@ -925,9 +885,8 @@ namespace CMBC.EasyFactor.Utils
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -938,12 +897,6 @@ namespace CMBC.EasyFactor.Utils
         {
             var app = new ApplicationClass { Visible = false };
 
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return -1;
-            }
             var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
@@ -954,8 +907,8 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 datasheet.Cells[1, 1] = "协查意见台帐";
-                datasheet.get_Range("A1", "S1").MergeCells = true;
-                datasheet.get_Range("A1", "S1").HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                datasheet.Range["A1", "S1"].MergeCells = true;
+                datasheet.Range["A1", "S1"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
                 int column = 1;
                 datasheet.Cells[2, column++] = "回复时间";
@@ -982,38 +935,31 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[2, column++] = "启用状态";
                 datasheet.Cells[2, column++] = "保理费";
                 datasheet.Cells[2, column++] = "融资期（月）";
-                datasheet.Cells[2, column++] = "备注";
+                datasheet.Cells[2, column] = "备注";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    var review = (ClientReview)exportData[row];
+                    var review = (ClientReview)_exportData[row];
                     datasheet.Cells[row + 3, column++] = review.ReviewDate;
                     datasheet.Cells[row + 3, column++] = review.ReviewNo;
                     Department dept = review.Client.Department;
@@ -1033,7 +979,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 3, column++] = review.Client.PMName;
                     datasheet.Cells[row + 3, column++] = review.Client.ToString();
                     datasheet.Cells[row + 3, column++] = review.Client.Industry;
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).
+                    datasheet.Range[datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]].
                         NumberFormatLocal = TypeUtil.GetExcelCurr(review.RequestCurrency);
                     datasheet.Cells[row + 3, column++] = review.RequestAmount;
                     datasheet.Cells[row + 3, column++] = review.IsLocal ? "国内" : "---";
@@ -1050,13 +996,13 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 3, column++] = financeTypes.Contains("银承") ? "银承" : "---";
                     datasheet.Cells[row + 3, column++] = review.RequestFinanceType2;
                     datasheet.Cells[row + 3, column++] = review.Client.Contract != null ? "已启动" : "未启动";
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).
+                    datasheet.Range[datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]].
                         NumberFormatLocal = "0.000%";
                     datasheet.Cells[row + 3, column++] = review.RequestCommissionRate;
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).
+                    datasheet.Range[datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]].
                         NumberFormatLocal = "##月";
                     datasheet.Cells[row + 3, column++] = review.RequestFinancePeriod;
-                    datasheet.Cells[row + 3, column++] = review.Comment;
+                    datasheet.Cells[row + 3, column] = review.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / size));
                 }
@@ -1072,12 +1018,11 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -1090,15 +1035,13 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1109,12 +1052,6 @@ namespace CMBC.EasyFactor.Utils
         {
             var app = new ApplicationClass { Visible = false };
 
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return -1;
-            }
             var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
@@ -1157,38 +1094,31 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "产品经理";
                 datasheet.Cells[1, column++] = "客户经理";
                 datasheet.Cells[1, column++] = "备注";
-                datasheet.Cells[1, column++] = "经办人";
+                datasheet.Cells[1, column] = "经办人";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    var client = (Client)exportData[row];
+                    var client = (Client)_exportData[row];
                     datasheet.Cells[row + 2, column++] = client.ClientCoreNo;
                     datasheet.Cells[row + 2, column++] = client.ClientEDICode;
                     datasheet.Cells[row + 2, column++] = client.ClientNameCN;
@@ -1227,7 +1157,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = client.PMName;
                     datasheet.Cells[row + 2, column++] = client.RMName;
                     datasheet.Cells[row + 2, column++] = client.Comment;
-                    datasheet.Cells[row + 2, column++] = client.CreateUserName;
+                    datasheet.Cells[row + 2, column] = client.CreateUserName;
 
                     worker.ReportProgress((int)((float)row * 100 / size));
                 }
@@ -1243,12 +1173,11 @@ namespace CMBC.EasyFactor.Utils
 
                 app.Visible = true;
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -1261,15 +1190,13 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1280,12 +1207,6 @@ namespace CMBC.EasyFactor.Utils
         {
             var app = new ApplicationClass { Visible = false };
 
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return -1;
-            }
             var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
@@ -1310,38 +1231,31 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "IF报价";
                 datasheet.Cells[1, column++] = "报价日";
                 datasheet.Cells[1, column++] = "额度期限";
-                datasheet.Cells[1, column++] = "备注";
+                datasheet.Cells[1, column] = "备注";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    var creditCoverNeg = (CreditCoverNegotiation)exportData[row];
+                    var creditCoverNeg = (CreditCoverNegotiation)_exportData[row];
                     datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.CaseCode; //1
                     datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.OwnerDepartment.Location; //2
                     datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.SellerClient.ToString(); //3
@@ -1356,7 +1270,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = creditCoverNeg.IFPrice; //12
                     datasheet.Cells[row + 2, column++] = creditCoverNeg.PriceDate; //13
                     datasheet.Cells[row + 2, column++] = creditCoverNeg.DueDate; //14
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Comment; //15
+                    datasheet.Cells[row + 2, column] = creditCoverNeg.Comment; //15
 
                     worker.ReportProgress((int)((float)row * 100 / size));
                 }
@@ -1390,7 +1304,6 @@ namespace CMBC.EasyFactor.Utils
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -1403,15 +1316,13 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1421,12 +1332,6 @@ namespace CMBC.EasyFactor.Utils
         private int ExportCreditNotes(BackgroundWorker worker, DoWorkEventArgs e)
         {
             var app = new ApplicationClass { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return -1;
-            }
             var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
@@ -1452,38 +1357,31 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "贷项通知金额";
                 datasheet.Cells[1, column++] = "贷项通知日";
                 datasheet.Cells[1, column++] = "对应发票号";
-                datasheet.Cells[1, column++] = "备注";
+                datasheet.Cells[1, column] = "备注";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    var creditNote = (CreditNote)exportData[row];
+                    var creditNote = (CreditNote)_exportData[row];
                     datasheet.Cells[row + 2, column++] =
                         creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.Case.CaseCode;
                     datasheet.Cells[row + 2, column++] =
@@ -1503,7 +1401,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].PaymentAmount;
                     datasheet.Cells[row + 2, column++] = creditNote.CreditNoteDate;
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].Invoice.InvoiceNo;
-                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].Comment;
+                    datasheet.Cells[row + 2, column] = creditNote.InvoicePaymentLogs[0].Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / size));
                 }
@@ -1528,7 +1426,6 @@ namespace CMBC.EasyFactor.Utils
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -1541,15 +1438,13 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1559,12 +1454,6 @@ namespace CMBC.EasyFactor.Utils
         private int ExportFinanceByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
             var app = new ApplicationClass { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return -1;
-            }
             var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
@@ -1580,44 +1469,37 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "转让余额";
                 datasheet.Cells[1, column++] = "融资金额";
                 datasheet.Cells[1, column++] = "手续费";
-                datasheet.Cells[1, column++] = "备注";
+                datasheet.Cells[1, column] = "备注";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    var log = (InvoiceFinanceLog)exportData[row];
+                    var log = (InvoiceFinanceLog)_exportData[row];
                     datasheet.Cells[row + 2, column++] = log.AssignBatchNo2;
                     datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = log.FinanceAmount;
                     datasheet.Cells[row + 2, column++] = log.Commission;
-                    datasheet.Cells[row + 2, column++] = log.Comment;
+                    datasheet.Cells[row + 2, column] = log.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / size));
                 }
@@ -1638,7 +1520,6 @@ namespace CMBC.EasyFactor.Utils
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -1651,15 +1532,13 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1669,12 +1548,6 @@ namespace CMBC.EasyFactor.Utils
         private int ExportInvoicesFull(BackgroundWorker worker, DoWorkEventArgs e)
         {
             var app = new ApplicationClass { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return -1;
-            }
             var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
@@ -1737,38 +1610,31 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "手续费";
                 //利息
                 datasheet.Cells[1, column++] = "利息";
-                datasheet.Cells[1, column++] = "备注";
+                datasheet.Cells[1, column] = "备注";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    var invoice = (Invoice)exportData[row];
+                    var invoice = (Invoice)_exportData[row];
                     //CDA
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.CaseCode;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
@@ -1786,20 +1652,19 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceDate;
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
-                    datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
+                    datasheet.Cells[row + 2, column] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
 
                     //融资批次
                     int recordStep = 0;
-                    for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
+                    foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
                     {
                         column = 15;
-                        InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
                         datasheet.Cells[row + recordStep + 2, column++] = financeLog.InvoiceFinanceBatch.FinanceBatchNo;
                         datasheet.Cells[row + recordStep + 2, column++] = financeLog.InvoiceFinanceBatch.FinanceType;
                         if (financeLog.InvoiceFinanceBatch.Factor != null)
                         {
                             datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.FactorCode;
-                            datasheet.Cells[row + 2 + recordStep, column++] =
+                            datasheet.Cells[row + 2 + recordStep, column] =
                                 financeLog.InvoiceFinanceBatch.Factor.ToString();
                         }
 
@@ -1812,11 +1677,11 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2 + recordStep, column++] =
                             financeLog.InvoiceFinanceBatch.FinancePeriodEnd;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.Comment;
-                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.CreateUserName;
+                        datasheet.Cells[row + 2 + recordStep, column] = financeLog.InvoiceFinanceBatch.CreateUserName;
 
                         //融资
                         column = 26;
-                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.FinanceAmount;
+                        datasheet.Cells[row + 2 + recordStep, column] = financeLog.FinanceAmount;
 
                         //还款批次
                         for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
@@ -1827,11 +1692,11 @@ namespace CMBC.EasyFactor.Utils
                             datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.RefundType;
                             datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.RefundDate;
                             datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.Comment;
-                            datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.CreateUserName;
+                            datasheet.Cells[row + 2 + j + recordStep, column] = log.InvoiceRefundBatch.CreateUserName;
 
                             //还款
                             column = 39;
-                            datasheet.Cells[row + 2 + j + recordStep, column++] = log.RefundAmount;
+                            datasheet.Cells[row + 2 + j + recordStep, column] = log.RefundAmount;
                         }
 
                         recordStep += financeLog.InvoiceRefundLogs.Count;
@@ -1849,11 +1714,11 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2 + i, column++] =
                             TypeUtil.ConvertBoolToStr(log.InvoicePaymentBatch.IsCreateMsg);
                         datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.Comment;
-                        datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.CreateUserName;
+                        datasheet.Cells[row + 2 + i, column] = log.InvoicePaymentBatch.CreateUserName;
 
                         //付款
                         column = 33;
-                        datasheet.Cells[row + 2 + i, column++] = log.PaymentAmount;
+                        datasheet.Cells[row + 2 + i, column] = log.PaymentAmount;
                     }
 
                     column = 40;
@@ -1862,7 +1727,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
                     //利息
                     datasheet.Cells[row + 2, column++] = invoice.NetInterest;
-                    datasheet.Cells[row + 2, column++] = invoice.Comment;
+                    datasheet.Cells[row + 2, column] = invoice.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / size));
                 }
@@ -1894,7 +1759,6 @@ namespace CMBC.EasyFactor.Utils
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -1907,15 +1771,13 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1925,12 +1787,6 @@ namespace CMBC.EasyFactor.Utils
         private int ExportInvoicesOverDue(BackgroundWorker worker, DoWorkEventArgs e)
         {
             var app = new ApplicationClass { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return -1;
-            }
             var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
@@ -1957,32 +1813,25 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "融资日";
                 datasheet.Cells[1, column++] = "融资到期日";
                 datasheet.Cells[1, column++] = "账款逾期天数";
-                datasheet.Cells[1, column++] = "融资逾期天数";
+                datasheet.Cells[1, column] = "融资逾期天数";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 int row = 0;
-                foreach (Invoice invoice in exportData)
+                foreach (Invoice invoice in _exportData)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
@@ -2021,7 +1870,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         column++;
-                        datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceOverDueDays;
+                        datasheet.Cells[row + 2 + i, column] = financeLog.FinanceOverDueDays;
                     }
 
                     int step = invoice.InvoiceFinanceLogs.Count > 1 ? invoice.InvoiceFinanceLogs.Count : 1;
@@ -2051,7 +1900,6 @@ namespace CMBC.EasyFactor.Utils
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -2064,15 +1912,13 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -2081,10 +1927,10 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportLegers(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            var selectedCases = (List<Case>)exportData;
+            var selectedCases = (List<Case>)_exportData;
 
             IEnumerable<IGrouping<string, Case>> caseGroups = selectedCases.GroupBy(c => c.TransactionType);
-            int size = exportData.Count;
+            int size = _exportData.Count;
             int result = 0;
             IEnumerable<IGrouping<Client, Case>> groups = null;
             foreach (var caseGroup in caseGroups)
@@ -2123,7 +1969,6 @@ namespace CMBC.EasyFactor.Utils
 
             return result;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -2132,16 +1977,16 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportMsg09Invoice(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            if (exportData.Count == 0)
+            if (_exportData.Count == 0)
             {
                 return 0;
             }
 
             string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", tbFilePath.Text,
-                                            ((InvoiceAssignBatch)exportData[0]).Case.SellerCode, DateTime.Today);
+                                            ((InvoiceAssignBatch)_exportData[0]).Case.SellerCode, DateTime.Today);
             var fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
-            int size = exportData.Count;
+            int size = _exportData.Count;
             for (int row = 0; row < size; row++)
             {
                 if (worker.CancellationPending)
@@ -2151,7 +1996,7 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                var batch = (InvoiceAssignBatch)exportData[row];
+                var batch = (InvoiceAssignBatch)_exportData[row];
                 foreach (Invoice invoice in batch.Invoices)
                 {
                     var sb = new StringBuilder();
@@ -2209,9 +2054,8 @@ namespace CMBC.EasyFactor.Utils
 
             fileWriter.Flush();
             fileWriter.Close();
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -2220,16 +2064,16 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportMsg09CreditNote(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            if (exportData.Count == 0)
+            if (_exportData.Count == 0)
             {
                 return 0;
             }
 
             string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", tbFilePath.Text,
-                                            ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
+                                            ((InvoicePaymentBatch)_exportData[0]).Case.SellerCode, DateTime.Today);
             var fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
-            int size = exportData.Count;
+            int size = _exportData.Count;
             for (int row = 0; row < size; row++)
             {
                 if (worker.CancellationPending)
@@ -2239,7 +2083,7 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                var batch = (InvoicePaymentBatch)exportData[row];
+                var batch = (InvoicePaymentBatch)_exportData[row];
                 foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
                 {
                     var sb = new StringBuilder();
@@ -2297,9 +2141,8 @@ namespace CMBC.EasyFactor.Utils
 
             fileWriter.Flush();
             fileWriter.Close();
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -2308,16 +2151,16 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportMsg11(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            if (exportData.Count == 0)
+            if (_exportData.Count == 0)
             {
                 return 0;
             }
 
             string fileName = String.Format("{0}\\MSG11-{1}-{2:yyyyMMdd}.csv", tbFilePath.Text,
-                                            ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
+                                            ((InvoicePaymentBatch)_exportData[0]).Case.SellerCode, DateTime.Today);
             var fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
-            int size = exportData.Count;
+            int size = _exportData.Count;
             for (int row = 0; row < size; row++)
             {
                 if (worker.CancellationPending)
@@ -2327,7 +2170,7 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                var batch = (InvoicePaymentBatch)exportData[row];
+                var batch = (InvoicePaymentBatch)_exportData[row];
                 foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
                 {
                     var sb = new StringBuilder();
@@ -2392,9 +2235,8 @@ namespace CMBC.EasyFactor.Utils
 
             fileWriter.Flush();
             fileWriter.Close();
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -2403,16 +2245,16 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportMsg12(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            if (exportData.Count == 0)
+            if (_exportData.Count == 0)
             {
                 return 0;
             }
 
             string fileName = String.Format("{0}\\MSG12-{1}-{2:yyyyMMdd}.csv", tbFilePath.Text,
-                                            ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
+                                            ((InvoicePaymentBatch)_exportData[0]).Case.SellerCode, DateTime.Today);
             var fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
-            int size = exportData.Count;
+            int size = _exportData.Count;
             for (int row = 0; row < size; row++)
             {
                 if (worker.CancellationPending)
@@ -2422,7 +2264,7 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                var batch = (InvoicePaymentBatch)exportData[row];
+                var batch = (InvoicePaymentBatch)_exportData[row];
                 foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
                 {
                     var sb = new StringBuilder();
@@ -2487,9 +2329,8 @@ namespace CMBC.EasyFactor.Utils
 
             fileWriter.Flush();
             fileWriter.Close();
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -2499,12 +2340,6 @@ namespace CMBC.EasyFactor.Utils
         private int ExportPaymentByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
             var app = new ApplicationClass { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return -1;
-            }
             var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
@@ -2521,38 +2356,31 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "付款金额";
                 datasheet.Cells[1, column++] = "备注";
                 datasheet.Cells[1, column++] = "贷项通知号";
-                datasheet.Cells[1, column++] = "贷项通知日";
+                datasheet.Cells[1, column] = "贷项通知日";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    var log = (InvoicePaymentLog)exportData[row];
+                    var log = (InvoicePaymentLog)_exportData[row];
                     datasheet.Cells[row + 2, column++] = log.AssignBatchNo2;
                     datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
@@ -2561,7 +2389,7 @@ namespace CMBC.EasyFactor.Utils
                     if (log.CreditNote != null)
                     {
                         datasheet.Cells[row + 2, column++] = "'" + log.CreditNoteNo;
-                        datasheet.Cells[row + 2, column++] = log.CreditNote.CreditNoteDate;
+                        datasheet.Cells[row + 2, column] = log.CreditNote.CreditNoteDate;
                     }
 
                     worker.ReportProgress((int)((float)row * 100 / size));
@@ -2587,7 +2415,6 @@ namespace CMBC.EasyFactor.Utils
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -2600,15 +2427,13 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -2618,12 +2443,6 @@ namespace CMBC.EasyFactor.Utils
         private int ExportRefundByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
             var app = new ApplicationClass { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return -1;
-            }
             var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
@@ -2639,44 +2458,38 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "融资编号";
                 datasheet.Cells[1, column++] = "融资余额";
                 datasheet.Cells[1, column++] = "还款金额";
-                datasheet.Cells[1, column++] = "备注";
+                datasheet.Cells[1, column] = "备注";
 
-                int size = exportData.Count;
+                int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    var log = (InvoiceRefundLog)exportData[row];
+                    var log = (InvoiceRefundLog)_exportData[row];
                     datasheet.Cells[row + 2, column++] = log.AssignBatchNo2;
                     datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.FinanceLogID2;
                     datasheet.Cells[row + 2, column++] = log.FinanceOutstanding;
                     datasheet.Cells[row + 2, column++] = log.RefundAmount;
-                    datasheet.Cells[row + 2, column++] = log.Comment;
+                    datasheet.Cells[row + 2, column] = log.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / size));
                 }
@@ -2697,7 +2510,6 @@ namespace CMBC.EasyFactor.Utils
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -2710,62 +2522,51 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
                 throw;
             }
 
-            return exportData.Count;
+            return _exportData.Count;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="caseGroup"></param>
+        /// <param name="transactionType"></param>
         private void ExportReportLegarImpl(IGrouping<Client, Case> caseGroup, string transactionType)
         {
             var app = new ApplicationClass { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return;
-            }
 
-            Workbook workbook = null;
+            Workbook workbook;
             try
             {
                 workbook = app.Workbooks.Add(true);
-                var totalSheet = (Worksheet)workbook.Sheets[1];
+                var totalSheet = (Worksheet) workbook.Sheets[1];
                 totalSheet.Name = "总台帐";
 
-                Client client = caseGroup.Key;
                 foreach (Case selectedCase in caseGroup)
                 {
                     CDA cda = selectedCase.ActiveCDA;
 
                     if (cda == null)
                     {
-                        if (app != null)
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
+
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
 
                         MessageBoxEx.Show("案件没有有效的额度通知书，案件编号：" + selectedCase.CaseCode);
 
                         return;
                     }
 
-                    var sheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                    var sheet = (Worksheet) workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
 
                     string name = selectedCase.TargetClient.ToString();
                     if (name.Length > 15)
@@ -2775,21 +2576,21 @@ namespace CMBC.EasyFactor.Utils
 
                     sheet.Name = String.Format("{0}-{1}", selectedCase.CaseCode, name);
 
-                    sheet.get_Range("A1", "Q1").MergeCells = true;
-                    sheet.get_Range("A1", "A1").HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                    sheet.Range["A1", "Q1"].MergeCells = true;
+                    sheet.Range["A1", "A1"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
                     sheet.Cells[1, "A"] = "销售分户账台账";
                     sheet.Cells[2, "P"] = String.Format("单位：{0}", selectedCase.InvoiceCurrency);
                     sheet.Cells[3, "A"] = "分行/分部";
                     sheet.Cells[3, "B"] = selectedCase.OwnerDepartment.DepartmentName;
 
                     sheet.Cells[4, "A"] = "Seller Name";
-                    sheet.get_Range("B4", "F4").MergeCells = true;
+                    sheet.Range["B4", "F4"].MergeCells = true;
                     sheet.Cells[4, "B"] = selectedCase.SellerClient.ToString();
                     sheet.Cells[5, "A"] = "Buyer Name";
-                    sheet.get_Range("B5", "F5").MergeCells = true;
+                    sheet.Range["B5", "F5"].MergeCells = true;
                     sheet.Cells[5, "B"] = selectedCase.BuyerClient.ToString();
 
-                    sheet.get_Range("B6", "F6").MergeCells = true;
+                    sheet.Range["B6", "F6"].MergeCells = true;
                     if (transactionType == "进口保理")
                     {
                         sheet.Cells[6, "A"] = "Export Factor";
@@ -2801,77 +2602,68 @@ namespace CMBC.EasyFactor.Utils
                         sheet.Cells[6, "B"] = selectedCase.BuyerFactor.ToString();
                     }
 
-                    sheet.get_Range("B7", "F7").MergeCells = true;
+                    sheet.Range["B7", "F7"].MergeCells = true;
                     sheet.Cells[7, "A"] = "协查意见书编号";
                     List<ClientReview> reviewList = selectedCase.ClientReviews;
                     if (reviewList != null)
                     {
-                        String reviews = string.Empty;
-                        foreach (ClientReview review in reviewList)
-                        {
-                            reviews += review.ReviewNo + ";";
-                        }
+                        String reviews = reviewList.Aggregate(string.Empty,
+                                                              (current, review) => current + (review.ReviewNo + ";"));
 
                         sheet.Cells[7, "B"] = reviews;
                     }
 
                     sheet.Cells[4, "G"] = "案件编号";
-                    sheet.get_Range(sheet.Cells[4, "H"], sheet.Cells[4, "I"]).MergeCells = true;
+                    sheet.Range[sheet.Cells[4, "H"], sheet.Cells[4, "I"]].MergeCells = true;
                     sheet.Cells[4, "H"] = selectedCase.CaseCode;
 
                     sheet.Cells[5, "G"] = "总手续费率";
-                    sheet.get_Range(sheet.Cells[5, "H"], sheet.Cells[5, "I"]).MergeCells = true;
-                    if (cda != null)
-                    {
-                        sheet.Cells[5, "H"] = String.Format("{0:P4}", cda.Price);
-                    }
+                    sheet.Range[sheet.Cells[5, "H"], sheet.Cells[5, "I"]].MergeCells = true;
+                    sheet.Cells[5, "H"] = String.Format("{0:P4}", cda.Price);
 
-                    sheet.get_Range(sheet.Cells[6, "H"], sheet.Cells[6, "I"]).MergeCells = true;
+                    sheet.Range[sheet.Cells[6, "H"], sheet.Cells[6, "I"]].MergeCells = true;
                     sheet.Cells[6, "G"] = "收费方式";
-                    if (cda != null)
-                    {
-                        sheet.Cells[6, "H"] = cda.CommissionType;
-                    }
+                    sheet.Cells[6, "H"] = cda.CommissionType;
 
 
                     sheet.Cells[7, "G"] = "单据处理费/笔";
-                    sheet.get_Range(sheet.Cells[7, "H"], sheet.Cells[7, "I"]).MergeCells = true;
+                    sheet.Range[sheet.Cells[7, "H"], sheet.Cells[7, "I"]].MergeCells = true;
                     sheet.Cells[7, "H"] = String.Format("{0} {1:N2}", cda.HandFeeCurr, cda.HandFee);
 
-                    sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
+                    sheet.Range[sheet.Cells[4, "L"], sheet.Cells[4, "M"]].MergeCells = true;
                     sheet.Cells[4, "L"] = "信用风险担保";
                     sheet.Cells[5, "L"] = "核准额度";
                     sheet.Cells[5, "M"] = cda.CreditCover;
-                    sheet.get_Range(sheet.Cells[5, "M"], sheet.Cells[5, "M"]).NumberFormatLocal =
+                    sheet.Range[sheet.Cells[5, "M"], sheet.Cells[5, "M"]].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(cda.CreditCoverCurr);
                     sheet.Cells[6, "L"] = "到期日";
                     sheet.Cells[6, "M"] = cda.CreditCoverPeriodEnd;
-                    sheet.get_Range(sheet.Cells[6, "M"], sheet.Cells[6, "M"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[6, "M"], sheet.Cells[6, "M"]].NumberFormatLocal = "yyyy-MM-dd";
                     sheet.Cells[7, "L"] = "剩余额度";
                     sheet.Cells[7, "M"] = cda.CreditCoverOutstanding;
-                    sheet.get_Range(sheet.Cells[7, "M"], sheet.Cells[7, "M"]).NumberFormatLocal =
+                    sheet.Range[sheet.Cells[7, "M"], sheet.Cells[7, "M"]].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(cda.CreditCoverCurr);
                     sheet.Cells[8, "L"] = "应收帐款余额";
                     sheet.Cells[8, "M"] = selectedCase.AssignOutstanding;
-                    sheet.get_Range(sheet.Cells[8, "M"], sheet.Cells[8, "M"]).NumberFormatLocal =
+                    sheet.Range[sheet.Cells[8, "M"], sheet.Cells[8, "M"]].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
 
-                    sheet.get_Range(sheet.Cells[4, "O"], sheet.Cells[4, "P"]).MergeCells = true;
+                    sheet.Range[sheet.Cells[4, "O"], sheet.Cells[4, "P"]].MergeCells = true;
                     sheet.Cells[4, "O"] = "融资额度";
                     sheet.Cells[5, "O"] = "核准额度";
                     sheet.Cells[5, "P"] = cda.FinanceLine;
-                    sheet.get_Range(sheet.Cells[5, "P"], sheet.Cells[5, "P"]).NumberFormatLocal =
+                    sheet.Range[sheet.Cells[5, "P"], sheet.Cells[5, "P"]].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(cda.FinanceLineCurr);
                     sheet.Cells[6, "O"] = "到期日";
                     sheet.Cells[6, "P"] = cda.FinanceLinePeriodEnd;
-                    sheet.get_Range(sheet.Cells[6, "P"], sheet.Cells[6, "P"]).NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[6, "P"], sheet.Cells[6, "P"]].NumberFormatLocal = "yyyy-MM-dd";
                     sheet.Cells[7, "O"] = "剩余额度";
                     sheet.Cells[7, "P"] = cda.FinanceLineOutstanding;
-                    sheet.get_Range(sheet.Cells[7, "P"], sheet.Cells[7, "P"]).NumberFormatLocal =
+                    sheet.Range[sheet.Cells[7, "P"], sheet.Cells[7, "P"]].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(cda.FinanceLineCurr);
                     sheet.Cells[8, "O"] = "融资余额";
                     sheet.Cells[8, "P"] = selectedCase.FinanceOutstanding;
-                    sheet.get_Range(sheet.Cells[8, "P"], sheet.Cells[8, "P"]).NumberFormatLocal =
+                    sheet.Range[sheet.Cells[8, "P"], sheet.Cells[8, "P"]].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
 
                     sheet.Cells[9, "A"] = "业务编号";
@@ -2892,9 +2684,9 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Cells[9, "P"] = "手续费";
                     sheet.Cells[9, "Q"] = "备注";
 
-                    sheet.get_Range("A4", "I7").Borders.LineStyle = 1;
-                    sheet.get_Range("L4", "M8").Borders.LineStyle = 1;
-                    sheet.get_Range("O4", "P8").Borders.LineStyle = 1;
+                    sheet.Range["A4", "I7"].Borders.LineStyle = 1;
+                    sheet.Range["L4", "M8"].Borders.LineStyle = 1;
+                    sheet.Range["O4", "P8"].Borders.LineStyle = 1;
 
                     int row = 10;
                     foreach (InvoiceAssignBatch batch in selectedCase.InvoiceAssignBatches)
@@ -2915,9 +2707,8 @@ namespace CMBC.EasyFactor.Utils
                             sheet.Cells[row, "F"] = batch.AssignDate;
 
                             int financeStep = 0;
-                            for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
+                            foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
                             {
-                                InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
                                 sheet.Cells[row + financeStep, "G"] = financeLog.FinanceAmount;
                                 sheet.Cells[row + financeStep, "H"] = financeLog.FinanceDate;
                                 sheet.Cells[row + financeStep, "I"] = financeLog.FinanceDueDate;
@@ -2954,21 +2745,21 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
-                    sheet.get_Range(sheet.Cells[9, "A"], sheet.Cells[row - 1, "Q"]).Borders.LineStyle = 1;
-                    sheet.get_Range(sheet.Cells[10, "C"], sheet.Cells[row - 1, "C"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "D"], sheet.Cells[row - 1, "D"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "E"], sheet.Cells[row - 1, "E"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "F"], sheet.Cells[row - 1, "F"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "G"], sheet.Cells[row - 1, "G"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "H"], sheet.Cells[row - 1, "H"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = currencyFormat;
-                    sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]).NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[9, "A"], sheet.Cells[row - 1, "Q"]].Borders.LineStyle = 1;
+                    sheet.Range[sheet.Cells[10, "C"], sheet.Cells[row - 1, "C"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "D"], sheet.Cells[row - 1, "D"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "E"], sheet.Cells[row - 1, "E"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "F"], sheet.Cells[row - 1, "F"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "G"], sheet.Cells[row - 1, "G"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "H"], sheet.Cells[row - 1, "H"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]].NumberFormatLocal = currencyFormat;
 
                     foreach (Range range in sheet.UsedRange.Rows)
                     {
@@ -2986,64 +2777,49 @@ namespace CMBC.EasyFactor.Utils
                 FillLegarTotalSheet(totalSheet, caseGroup);
                 totalSheet.Move(workbook.Sheets[1], Type.Missing);
 
-                if (app != null)
+                app.DisplayAlerts = false;
+                app.AlertBeforeOverwriting = false;
+                const string ext = ".xls";
+
+                string location = caseGroup.First().OwnerDepartment.Location.LocationName;
+                if (!Directory.Exists(tbFilePath.Text + "\\" + location + "\\"))
                 {
-                    app.DisplayAlerts = false;
-                    app.AlertBeforeOverwriting = false;
-                    if (workbook != null)
-                    {
-                        string ext = ".xls";
-
-                        string location = caseGroup.First().OwnerDepartment.Location.LocationName;
-                        if (!Directory.Exists(tbFilePath.Text + "\\" + location + "\\"))
-                        {
-                            Directory.CreateDirectory(tbFilePath.Text + "\\" + location + "\\");
-                        }
-
-                        string filePath = String.Format("{0}\\{1}\\{2}({3}){4:yyyyMMdd}{5}", tbFilePath.Text, location,
-                                                        caseGroup.Key, transactionType, DateTime.Today, ext);
-                        int count = 1;
-                        while (File.Exists(filePath))
-                        {
-                            filePath = String.Format("{0}\\{1}\\{2}({3})_{4}{5:yyyyMMdd}{6}", tbFilePath.Text, location,
-                                                     caseGroup.Key, transactionType, count, DateTime.Today, ext);
-                            count++;
-                        }
-
-                        workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
-                                        XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
-                                        Type.Missing, Type.Missing, Type.Missing);
-                    }
+                    Directory.CreateDirectory(tbFilePath.Text + "\\" + location + "\\");
                 }
+
+                string filePath = String.Format("{0}\\{1}\\{2}({3}){4:yyyyMMdd}{5}", tbFilePath.Text, location,
+                                                caseGroup.Key, transactionType, DateTime.Today, ext);
+                int count = 1;
+                while (File.Exists(filePath))
+                {
+                    filePath = String.Format("{0}\\{1}\\{2}({3})_{4}{5:yyyyMMdd}{6}", tbFilePath.Text, location,
+                                             caseGroup.Key, transactionType, count, DateTime.Today, ext);
+                    count++;
+                }
+
+                workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
+                                XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
+                                Type.Missing, Type.Missing, Type.Missing);
             }
             catch (Exception)
             {
-                if (app != null)
+                foreach (Workbook wb in app.Workbooks)
                 {
-                    foreach (Workbook wb in app.Workbooks)
-                    {
-                        wb.Close(false, Type.Missing, Type.Missing);
-                    }
-
-                    app.Workbooks.Close();
-                    app.Quit();
-                    Marshal.ReleaseComObject(app);
-                    app = null;
+                    wb.Close(false, Type.Missing, Type.Missing);
                 }
+
+                app.Workbooks.Close();
+                app.Quit();
+                Marshal.ReleaseComObject(app);
 
                 throw;
             }
             finally
             {
-                if (app != null)
-                {
-                    app.Quit();
-                    Marshal.ReleaseComObject(app);
-                    app = null;
-                }
+                app.Quit();
+                Marshal.ReleaseComObject(app);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -3084,8 +2860,6 @@ namespace CMBC.EasyFactor.Utils
             int row = 10;
             foreach (Case selectedCase in caseGroup)
             {
-                CDA cda = selectedCase.ActiveCDA;
-
                 string seller = selectedCase.SellerClient.ToString();
                 if (!sellerList.Contains(seller))
                 {
@@ -3150,9 +2924,8 @@ namespace CMBC.EasyFactor.Utils
                         sheet.Cells[row, "F"] = batch.AssignDate;
 
                         int financeStep = 0;
-                        for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
+                        foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
                         {
-                            InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
                             sheet.Cells[row + financeStep, "G"] = financeLog.FinanceAmount;
                             sheet.Cells[row + financeStep, "H"] = financeLog.FinanceDate;
                             sheet.Cells[row + financeStep, "I"] = financeLog.FinanceDueDate;
@@ -3208,52 +2981,52 @@ namespace CMBC.EasyFactor.Utils
                 }
 
                 string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
-                sheet.get_Range(sheet.Cells[9, "A"], sheet.Cells[row - 1, "Q"]).Borders.LineStyle = 1;
-                sheet.get_Range(sheet.Cells[10, "C"], sheet.Cells[row - 1, "C"]).NumberFormatLocal = currencyFormat;
-                sheet.get_Range(sheet.Cells[10, "D"], sheet.Cells[row - 1, "D"]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[10, "E"], sheet.Cells[row - 1, "E"]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[10, "F"], sheet.Cells[row - 1, "F"]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[10, "G"], sheet.Cells[row - 1, "G"]).NumberFormatLocal = currencyFormat;
-                sheet.get_Range(sheet.Cells[10, "H"], sheet.Cells[row - 1, "H"]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]).NumberFormatLocal = currencyFormat;
-                sheet.get_Range(sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]).NumberFormatLocal = currencyFormat;
-                sheet.get_Range(sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]).NumberFormatLocal = currencyFormat;
-                sheet.get_Range(sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]).NumberFormatLocal = currencyFormat;
-                sheet.get_Range(sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]).NumberFormatLocal = "yyyy-MM-dd";
-                sheet.get_Range(sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]).NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[9, "A"], sheet.Cells[row - 1, "Q"]].Borders.LineStyle = 1;
+                sheet.Range[sheet.Cells[10, "C"], sheet.Cells[row - 1, "C"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "D"], sheet.Cells[row - 1, "D"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "E"], sheet.Cells[row - 1, "E"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "F"], sheet.Cells[row - 1, "F"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "G"], sheet.Cells[row - 1, "G"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "H"], sheet.Cells[row - 1, "H"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]].NumberFormatLocal = currencyFormat;
             }
 
-            sheet.get_Range("A4", "I7").Borders.LineStyle = 1;
-            sheet.get_Range("L4", "M8").Borders.LineStyle = 1;
-            sheet.get_Range("O4", "P8").Borders.LineStyle = 1;
+            sheet.Range["A4", "I7"].Borders.LineStyle = 1;
+            sheet.Range["L4", "M8"].Borders.LineStyle = 1;
+            sheet.Range["O4", "P8"].Borders.LineStyle = 1;
 
-            sheet.get_Range("A1", "Q1").MergeCells = true;
-            sheet.get_Range("A1", "A1").HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            sheet.Range["A1", "Q1"].MergeCells = true;
+            sheet.Range["A1", "A1"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
             sheet.Cells[1, "A"] = "销售分户账台账";
             sheet.Cells[2, "P"] = String.Format("单位：{0}", invoiceCurrency);
             sheet.Cells[3, "A"] = "分行/分部";
             sheet.Cells[3, "B"] = caseGroup.First().OwnerDepartment.DepartmentName;
 
             sheet.Cells[4, "A"] = "Seller Name";
-            sheet.get_Range("B4", "I4").MergeCells = true;
+            sheet.Range["B4", "I4"].MergeCells = true;
             sheet.Cells[4, "B"] = sellerList.Count == 1 ? sellerList[0] : String.Join(";", sellerList.ToArray());
             sheet.Cells[5, "A"] = "Buyer Name";
-            sheet.get_Range("B5", "I5").MergeCells = true;
+            sheet.Range["B5", "I5"].MergeCells = true;
             sheet.Cells[5, "B"] = buyerList.Count == 1 ? buyerList[0] : String.Join(";", buyerList.ToArray());
 
-            sheet.get_Range("B6", "I6").MergeCells = true;
+            sheet.Range["B6", "I6"].MergeCells = true;
             sheet.Cells[6, "A"] = "Factor Name";
             sheet.Cells[6, "B"] = factorList.Count == 1 ? factorList[0] : String.Join(";", factorList.ToArray());
 
-            sheet.get_Range("B7", "I7").MergeCells = true;
+            sheet.Range["B7", "I7"].MergeCells = true;
             sheet.Cells[7, "A"] = "协查意见书编号";
             sheet.Cells[7, "B"] = clientReviewList.Count == 1
                                       ? clientReviewList[0]
                                       : String.Join(";", clientReviewList.ToArray());
 
-            sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
+            sheet.Range[sheet.Cells[4, "L"], sheet.Cells[4, "M"]].MergeCells = true;
             sheet.Cells[4, "L"] = "信用风险担保";
             sheet.Cells[5, "L"] = "核准额度";
             sheet.Cells[6, "L"] = "到期日";
@@ -3266,10 +3039,10 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Cells[5, "M"] = creditLine.CreditLine;
                     sheet.Cells[6, "M"] = creditLine.PeriodEnd;
                     sheet.Cells[7, "M"] = creditLine.CreditLine - totalAssignOutstanding;
-                    sheet.get_Range(sheet.Cells[5, "M"], sheet.Cells[5, "M"]).NumberFormatLocal =
+                    sheet.Range[sheet.Cells[5, "M"], sheet.Cells[5, "M"]].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
-                    sheet.get_Range(sheet.Cells[6, "M"], sheet.Cells[6, "M"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[7, "M"], sheet.Cells[7, "M"]).NumberFormatLocal =
+                    sheet.Range[sheet.Cells[6, "M"], sheet.Cells[6, "M"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[7, "M"], sheet.Cells[7, "M"]].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
                 }
             }
@@ -3277,10 +3050,10 @@ namespace CMBC.EasyFactor.Utils
 
             sheet.Cells[8, "L"] = "总账款余额";
             sheet.Cells[8, "M"] = totalAssignOutstanding;
-            sheet.get_Range(sheet.Cells[8, "M"], sheet.Cells[8, "M"]).NumberFormatLocal =
+            sheet.Range[sheet.Cells[8, "M"], sheet.Cells[8, "M"]].NumberFormatLocal =
                 TypeUtil.GetExcelCurr(invoiceCurrency);
 
-            sheet.get_Range(sheet.Cells[4, "O"], sheet.Cells[4, "P"]).MergeCells = true;
+            sheet.Range[sheet.Cells[4, "O"], sheet.Cells[4, "P"]].MergeCells = true;
             sheet.Cells[4, "O"] = "融资额度";
             sheet.Cells[5, "O"] = "核准总额度";
             sheet.Cells[6, "O"] = "到期日";
@@ -3293,17 +3066,17 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Cells[5, "P"] = creditLine.CreditLine;
                     sheet.Cells[6, "P"] = creditLine.PeriodEnd;
                     sheet.Cells[7, "P"] = creditLine.CreditLine - totalFinanceOutstanding;
-                    sheet.get_Range(sheet.Cells[5, "P"], sheet.Cells[5, "P"]).NumberFormatLocal =
+                    sheet.Range[sheet.Cells[5, "P"], sheet.Cells[5, "P"]].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
-                    sheet.get_Range(sheet.Cells[6, "P"], sheet.Cells[6, "P"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[7, "P"], sheet.Cells[7, "P"]).NumberFormatLocal =
+                    sheet.Range[sheet.Cells[6, "P"], sheet.Cells[6, "P"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[7, "P"], sheet.Cells[7, "P"]].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
                 }
             }
 
             sheet.Cells[8, "O"] = "总融资余额";
             sheet.Cells[8, "P"] = totalFinanceOutstanding;
-            sheet.get_Range(sheet.Cells[8, "P"], sheet.Cells[8, "P"]).NumberFormatLocal =
+            sheet.Range[sheet.Cells[8, "P"], sheet.Cells[8, "P"]].NumberFormatLocal =
                 TypeUtil.GetExcelCurr(invoiceCurrency);
 
             foreach (Range range in sheet.UsedRange.Rows)
@@ -3318,7 +3091,6 @@ namespace CMBC.EasyFactor.Utils
 
             sheet.UsedRange.Font.Name = "仿宋";
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -3329,31 +3101,30 @@ namespace CMBC.EasyFactor.Utils
             string filePath = tbFilePath.Text;
             if (String.IsNullOrEmpty(filePath.Trim()))
             {
-                if (exportType == ExportType.EXPORT_MSG09_INVOICE || exportType == ExportType.EXPORT_MSG09_CREDITNOTE ||
-                    exportType == ExportType.EXPORT_MSG11 || exportType == ExportType.EXPORT_MSG12 ||
-                    exportType == ExportType.EXPORT_LEGER)
+                if (_exportType == ExportType.EXPORT_MSG09_INVOICE || _exportType == ExportType.EXPORT_MSG09_CREDITNOTE ||
+                    _exportType == ExportType.EXPORT_MSG11 || _exportType == ExportType.EXPORT_MSG12 ||
+                    _exportType == ExportType.EXPORT_LEGER)
                 {
-                    tbStatus.Text = "请先选择保存路径";
+                    tbStatus.Text = @"请先选择保存路径";
                     return;
                 }
             }
-            else if (exportType == ExportType.EXPORT_LEGER)
+            else if (_exportType == ExportType.EXPORT_LEGER)
             {
                 var info = new DirectoryInfo(filePath);
                 if (info.Parent == null)
                 {
-                    tbStatus.Text = "不要选择硬盘根目录";
+                    tbStatus.Text = @"不要选择硬盘根目录";
                     return;
                 }
             }
 
 
-            btnCancel.Text = "取消";
+            btnCancel.Text = @"取消";
             backgroundWorker.RunWorkerAsync();
 
             btnStart.Enabled = false;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -3367,7 +3138,5 @@ namespace CMBC.EasyFactor.Utils
                 tbFilePath.Text = dirDialog.SelectedPath;
             }
         }
-
-        #endregion?Methods?
     }
 }

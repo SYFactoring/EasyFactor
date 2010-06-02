@@ -4,121 +4,97 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+
 namespace CMBC.EasyFactor.Controls
 {
-    using System;
-    using System.Drawing;
-    using System.Windows.Forms;
-
     //定义触发单击事件的委托 
-    delegate void DataGridViewCheckboxHeaderEventHander(object sender, DataGridViewCheckboxHeaderEventArgs e);
+    internal delegate void DataGridViewCheckboxHeaderEventHander(object sender, DataGridViewCheckboxHeaderEventArgs e);
 
     //定义包含列头checkbox选择状态的参数类 
-    class DataGridViewCheckboxHeaderEventArgs : EventArgs
+    internal class DataGridViewCheckboxHeaderEventArgs : EventArgs
     {
-		#region?Properties?(1)?
-
-        public bool CheckedState
-        {
-            get;
-            set;
-        }
-
-		#endregion?Properties?
+        public bool CheckedState { get; set; }
     }
 
 
     //定义继承于DataGridViewColumnHeaderCell的类，用于绘制checkbox，定义checkbox鼠标单击事件
-    class DataGridViewCheckboxHeaderCell : DataGridViewColumnHeaderCell
+    internal class DataGridViewCheckboxHeaderCell : DataGridViewColumnHeaderCell
     {
-		#region?Fields?(5)?
+        private CheckBoxState _cbState =
+            CheckBoxState.UncheckedNormal;
 
-        System.Windows.Forms.VisualStyles.CheckBoxState _cbState =
-            System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal;
-        Point _cellLocation = new Point();
-        bool _checked = false;
-        Point checkBoxLocation;
-        Size checkBoxSize;
+        private Point _cellLocation;
+        private bool _checked;
+        private Point _checkBoxLocation;
+        private Size _checkBoxSize;
 
-		#endregion?Fields?
 
-		#region?Delegates?and?Events?(1)?
-
-		//?Events?(1)?
-
+        //?Events?(1)?
         public event DataGridViewCheckboxHeaderEventHander OnCheckBoxClicked;
 
-		#endregion?Delegates?and?Events?
 
-		#region?Methods?(2)?
-
-		//?Protected?Methods?(2)?
-
+        //?Protected?Methods?(2)?
         /// <summary> 
         /// 点击列头checkbox单击事件 
         /// </summary> 
         protected override void OnMouseClick(DataGridViewCellMouseEventArgs e)
         {
-            Point p = new Point(e.X + _cellLocation.X, e.Y + _cellLocation.Y);
-            if (p.X >= checkBoxLocation.X && p.X <=
-                checkBoxLocation.X + checkBoxSize.Width
-            && p.Y >= checkBoxLocation.Y && p.Y <=
-                checkBoxLocation.Y + checkBoxSize.Height)
+            var p = new Point(e.X + _cellLocation.X, e.Y + _cellLocation.Y);
+            if (p.X >= _checkBoxLocation.X && p.X <=
+                                             _checkBoxLocation.X + _checkBoxSize.Width
+                && p.Y >= _checkBoxLocation.Y && p.Y <=
+                _checkBoxLocation.Y + _checkBoxSize.Height)
             {
                 _checked = !_checked;
 
                 //获取列头checkbox的选择状态 
-                DataGridViewCheckboxHeaderEventArgs ex = new DataGridViewCheckboxHeaderEventArgs();
-                ex.CheckedState = _checked;
+                var ex = new DataGridViewCheckboxHeaderEventArgs {CheckedState = _checked};
 
-                object sender = new object();//此处不代表选择的列头checkbox，只是作为参数传递。应该列头checkbox是绘制出来的，无法获得它的实例
+                var sender = new object(); //此处不代表选择的列头checkbox，只是作为参数传递。应该列头checkbox是绘制出来的，无法获得它的实例
 
                 if (OnCheckBoxClicked != null)
                 {
-                    OnCheckBoxClicked(sender, ex);//触发单击事件 
-                    this.DataGridView.InvalidateCell(this);
+                    OnCheckBoxClicked(sender, ex); //触发单击事件 
+                    DataGridView.InvalidateCell(this);
                 }
             }
             base.OnMouseClick(e);
         }
 
         //绘制列头checkbox 
-        protected override void Paint(System.Drawing.Graphics graphics,
-          System.Drawing.Rectangle clipBounds,
-          System.Drawing.Rectangle cellBounds,
-          int rowIndex,
-          DataGridViewElementStates dataGridViewElementState,
-          object value,
-          object formattedValue,
-          string errorText,
-          DataGridViewCellStyle cellStyle,
-          DataGridViewAdvancedBorderStyle advancedBorderStyle,
-          DataGridViewPaintParts paintParts)
+        protected override void Paint(Graphics graphics,
+                                      Rectangle clipBounds,
+                                      Rectangle cellBounds,
+                                      int rowIndex,
+                                      DataGridViewElementStates dataGridViewElementState,
+                                      object value,
+                                      object formattedValue,
+                                      string errorText,
+                                      DataGridViewCellStyle cellStyle,
+                                      DataGridViewAdvancedBorderStyle advancedBorderStyle,
+                                      DataGridViewPaintParts paintParts)
         {
             base.Paint(graphics, clipBounds, cellBounds, rowIndex,
-                dataGridViewElementState, value,
-                formattedValue, errorText, cellStyle,
-                advancedBorderStyle, paintParts);
-            Point p = new Point();
+                       dataGridViewElementState, value,
+                       formattedValue, errorText, cellStyle,
+                       advancedBorderStyle, paintParts);
+            var p = new Point();
             Size s = CheckBoxRenderer.GetGlyphSize(graphics,
-            System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal);
+                                                   CheckBoxState.UncheckedNormal);
             p.X = cellBounds.Location.X +
-                (cellBounds.Width / 2) - (s.Width / 2) - 1;//列头checkbox的X坐标 
+                  (cellBounds.Width/2) - (s.Width/2) - 1; //列头checkbox的X坐标 
             p.Y = cellBounds.Location.Y +
-                (cellBounds.Height / 2) - (s.Height / 2);//列头checkbox的Y坐标 
+                  (cellBounds.Height/2) - (s.Height/2); //列头checkbox的Y坐标 
             _cellLocation = cellBounds.Location;
-            checkBoxLocation = p;
-            checkBoxSize = s;
-            if (_checked)
-                _cbState = System.Windows.Forms.VisualStyles.
-                    CheckBoxState.CheckedNormal;
-            else
-                _cbState = System.Windows.Forms.VisualStyles.
-                    CheckBoxState.UncheckedNormal;
+            _checkBoxLocation = p;
+            _checkBoxSize = s;
+            _cbState = _checked ? CheckBoxState.CheckedNormal : CheckBoxState.UncheckedNormal;
             CheckBoxRenderer.DrawCheckBox
-            (graphics, checkBoxLocation, _cbState);
+                (graphics, _checkBoxLocation, _cbState);
         }
-
-		#endregion?Methods?
     }
 }

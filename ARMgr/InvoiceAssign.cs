@@ -4,44 +4,40 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using CMBC.EasyFactor.CaseMgr;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text.RegularExpressions;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceAssign : UserControl
     {
-        #region?Fields?(3)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly ARCaseBasic _caseBasic;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
 
         /// <summary>
         /// 
         /// </summary>
         private Case _case;
-        /// <summary>
-        /// 
-        /// </summary>
-        private ARCaseBasic caseBasic;
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
 
-        #endregion?Fields?
-
-        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the InvoiceAssign class
@@ -49,21 +45,18 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="caseBasic"></param>
         public InvoiceAssign(ARCaseBasic caseBasic)
         {
-            this.InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.dgvInvoices.ImeMode = ImeMode.OnHalf;
-            this.caseBasic = caseBasic;
-            this.dgvInvoices.AutoGenerateColumns = false;
-            this.superValidator.Enabled = false;
-            this.dgvInvoices.ReadOnly = true;
-            ControlUtil.SetDoubleBuffered(this.dgvInvoices);
+            InitializeComponent();
+            ImeMode = ImeMode.OnHalf;
+            dgvInvoices.ImeMode = ImeMode.OnHalf;
+            _caseBasic = caseBasic;
+            dgvInvoices.AutoGenerateColumns = false;
+            superValidator.Enabled = false;
+            dgvInvoices.ReadOnly = true;
+            ControlUtil.SetDoubleBuffered(dgvInvoices);
 
-            this.context = new DBDataContext();
+            _context = new DBDataContext();
         }
 
-        #endregion?Constructors?
-
-        #region?Properties?(1)?
 
         /// <summary>
         /// Gets or Sets
@@ -72,37 +65,29 @@ namespace CMBC.EasyFactor.ARMgr
         {
             set
             {
-                this._case = this.context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
-                this.NewBatch(null, null);
+                _case = _context.Cases.SingleOrDefault(c => c.CaseCode == value.CaseCode);
+                NewBatch(null, null);
             }
-            get
-            {
-                return this._case;
-            }
-
+            get { return _case; }
         }
 
-        #endregion?Properties?
-
-        #region?Methods?(18)?
 
         //?Public?Methods?(1)?
-
         /// <summary>
         /// 
         /// </summary>
         public void ResetControlsStatus()
         {
-            foreach (Control comp in this.panelAssignBatch.Controls)
+            foreach (Control comp in panelAssignBatch.Controls)
             {
                 ControlUtil.SetComponetDefault(comp);
             }
 
-            this.invoiceBindingSource.DataSource = typeof(Invoice);
-            this.batchBindingSource.DataSource = typeof(InvoiceAssignBatch);
+            invoiceBindingSource.DataSource = typeof (Invoice);
+            batchBindingSource.DataSource = typeof (InvoiceAssignBatch);
         }
-        //?Private?Methods?(17)?
 
+        //?Private?Methods?(17)?
         /// <summary>
         /// 
         /// </summary>
@@ -110,13 +95,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell == null)
+            if (dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CaseDetail caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+            var selectedInvoice = (Invoice) invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
+            var caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
         }
 
@@ -127,13 +112,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCDA(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell == null)
+            if (dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-            CDADetail cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.Case.ActiveCDA, CDADetail.OpCDAType.DETAIL_CDA);
+            var selectedInvoice = (Invoice) invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
+            var cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.Case.ActiveCDA,
+                                          CDADetail.OpCDAType.DETAIL_CDA);
             cdaDetail.ShowDialog(this);
         }
 
@@ -142,15 +128,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void DetailInvoice(object sender, System.EventArgs e)
+        private void DetailInvoice(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell == null)
+            if (dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-            InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+            var selectedInvoice = (Invoice) invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
+            var invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             invoiceDetail.ShowDialog(this);
         }
 
@@ -159,22 +145,21 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvInvoices_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvInvoicesCellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
             {
                 return;
             }
 
-            if (this.dgvInvoices.Rows[e.RowIndex].IsNewRow)
+            if (dgvInvoices.Rows[e.RowIndex].IsNewRow)
             {
-                if (!(this.batchBindingSource.DataSource is InvoiceAssignBatch))
+                if (!(batchBindingSource.DataSource is InvoiceAssignBatch))
                 {
                     return;
                 }
 
-                this.superValidator.Validate();
-                Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+                superValidator.Validate();
             }
         }
 
@@ -183,45 +168,27 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvInvoices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgvInvoicesCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value == null)
             {
                 return;
             }
 
-            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == this.colDueDate || col == this.colInvoiceDate)
+            DataGridViewColumn col = dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colDueDate || col == colInvoiceDate)
             {
-                DateTime date = (DateTime)e.Value;
-                if (date == default(DateTime))
-                {
-                    e.Value = "";
-                }
-                else
-                {
-                    e.Value = date.ToString("yyyyMMdd");
-                }
+                var date = (DateTime) e.Value;
+                e.Value = date == default(DateTime) ? "" : date.ToString("yyyyMMdd");
 
                 e.FormattingApplied = true;
             }
-            else if (col == this.colIsFlaw)
+            else if (col == colIsFlaw)
             {
-                object result = e.Value;
-                if (result != null)
-                {
-                    bool isFlaw = (bool)e.Value;
-                    if (isFlaw)
-                    {
-                        e.Value = "Y";
-                    }
-                    else
-                    {
-                        e.Value = "N";
-                    }
+                var isFlaw = (bool) e.Value;
+                e.Value = isFlaw ? "Y" : "N";
 
-                    e.FormattingApplied = true;
-                }
+                e.FormattingApplied = true;
             }
         }
 
@@ -230,15 +197,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvInvoices_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        private void DgvInvoicesCellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             if (e.Value == null)
             {
                 return;
             }
 
-            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == this.colDueDate || col == this.colInvoiceDate)
+            DataGridViewColumn col = dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colDueDate || col == colInvoiceDate)
             {
                 if (e.Value.Equals(string.Empty))
                 {
@@ -247,11 +214,11 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                string str = (string)e.Value;
+                var str = (string) e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
                 e.ParsingApplied = true;
             }
-            else if (col == this.colInvoiceAmount || col == this.colAssignAmount || col == this.colCommission)
+            else if (col == colInvoiceAmount || col == colAssignAmount || col == colCommission)
             {
                 if (e.Value.Equals(string.Empty))
                 {
@@ -260,7 +227,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
             }
-            else if (col == this.colIsFlaw)
+            else if (col == colIsFlaw)
             {
                 if (e.Value.Equals("Y"))
                 {
@@ -268,7 +235,7 @@ namespace CMBC.EasyFactor.ARMgr
                     e.ParsingApplied = true;
                     return;
                 }
-                else if (e.Value.Equals("N"))
+                if (e.Value.Equals("N"))
                 {
                     e.Value = false;
                     e.ParsingApplied = true;
@@ -282,27 +249,28 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvInvoices_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void DgvInvoicesCellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (e.FormattedValue == null || e.FormattedValue.Equals(string.Empty))
             {
                 return;
             }
 
-            DataGridViewColumn col = this.dgvInvoices.Columns[e.ColumnIndex];
-            if (col == this.colDueDate || col == this.colInvoiceDate)
+            DataGridViewColumn col = dgvInvoices.Columns[e.ColumnIndex];
+            if (col == colDueDate || col == colInvoiceDate)
             {
-                string str = (string)e.FormattedValue;
+                var str = (string) e.FormattedValue;
                 DateTime result;
-                bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out result);
+                bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None,
+                                                 out result);
                 if (!ok)
                 {
                     e.Cancel = true;
                 }
             }
-            else if (col == this.colInvoiceAmount || col == this.colAssignAmount || col == this.colCommission)
+            else if (col == colInvoiceAmount || col == colAssignAmount || col == colCommission)
             {
-                string str = (string)e.FormattedValue;
+                var str = (string) e.FormattedValue;
                 double result;
                 bool ok = Double.TryParse(str, out result);
                 if (!ok)
@@ -315,27 +283,24 @@ namespace CMBC.EasyFactor.ARMgr
                     e.Cancel = true;
                 }
             }
-            else if (col == this.colInvoiceNo)
+            else if (col == colInvoiceNo)
             {
-                string str = (string)e.FormattedValue;
-                Regex regex = Invoice.InvoiceNoRegex;
+                var str = (string) e.FormattedValue;
+                Regex regex = Invoice.INVOICE_NO_REGEX;
                 bool ok = regex.IsMatch(str);
                 if (!ok)
                 {
                     e.Cancel = true;
                 }
             }
-            else if (col == this.colIsFlaw)
+            else if (col == colIsFlaw)
             {
-                string str = (string)e.FormattedValue;
+                var str = (string) e.FormattedValue;
                 if ("Y".Equals(str) || "N".Equals(str))
                 {
                     return;
                 }
-                else
-                {
-                    e.Cancel = true;
-                }
+                e.Cancel = true;
             }
         }
 
@@ -344,29 +309,29 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvInvoices_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void DgvInvoicesCellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
             {
                 return;
             }
 
-            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
+            var selectedInvoice = (Invoice) invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
 
-            if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colInvoiceAmount)
+            if (dgvInvoices.Columns[e.ColumnIndex] == colInvoiceAmount)
             {
                 selectedInvoice.AssignAmount = selectedInvoice.InvoiceAmount;
-                this.StatBatch();
+                StatBatch();
             }
-            else if (this.dgvInvoices.Columns[e.ColumnIndex] == this.colAssignAmount)
+            else if (dgvInvoices.Columns[e.ColumnIndex] == colAssignAmount)
             {
-                CDA cda = this._case.ActiveCDA;
+                CDA cda = _case.ActiveCDA;
                 if (cda.CommissionType == "按转让金额")
                 {
-                    selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.Price;
+                    selectedInvoice.Commission = selectedInvoice.AssignAmount*cda.Price;
                 }
 
-                this.StatBatch();
+                StatBatch();
             }
         }
 
@@ -375,9 +340,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvInvoices_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DgvInvoicesRowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            this.DetailInvoice(null, null);
+            DetailInvoice(sender, e);
         }
 
         /// <summary>
@@ -387,18 +352,19 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ExportAssignBatch(object sender, EventArgs e)
         {
-            if (this._case == null)
+            if (_case == null)
             {
-                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.batchBindingSource.DataSource is InvoiceAssignBatch))
+            if (!(batchBindingSource.DataSource is InvoiceAssignBatch))
             {
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_ASSIGN_BY_BATCH, this.invoiceBindingSource.List);
+            var exportForm = new ExportForm(ExportForm.ExportType.EXPORT_ASSIGN_BY_BATCH, invoiceBindingSource.List);
             exportForm.Show();
         }
 
@@ -407,15 +373,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void Flaw(object sender, System.EventArgs e)
+        private void Flaw(object sender, EventArgs e)
         {
-            if (this.dgvInvoices.CurrentCell == null)
+            if (dgvInvoices.CurrentCell == null)
             {
                 return;
             }
 
-            Invoice selectedInvoice = (Invoice)this.invoiceBindingSource.List[this.dgvInvoices.CurrentCell.RowIndex];
-            InvoiceDetail invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.FLAW);
+            var selectedInvoice = (Invoice) invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
+            var invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.FLAW);
             invoiceDetail.ShowDialog(this);
         }
 
@@ -426,24 +392,25 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ImportAssignBatch(object sender, EventArgs e)
         {
-            if (this._case == null)
+            if (_case == null)
             {
-                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.batchBindingSource.DataSource is InvoiceAssignBatch))
+            if (!(batchBindingSource.DataSource is InvoiceAssignBatch))
             {
                 return;
             }
 
-            ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_BY_BATCH);
+            var importForm = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_BY_BATCH);
             importForm.ShowDialog(this);
 
             if (importForm.ImportedList != null)
             {
-                List<Invoice> invoiceList = (List<Invoice>)importForm.ImportedList;
-                foreach (Invoice invoice in this.invoiceBindingSource.List)
+                var invoiceList = (List<Invoice>) importForm.ImportedList;
+                foreach (Invoice invoice in invoiceBindingSource.List)
                 {
                     if (!invoiceList.Contains(invoice))
                     {
@@ -459,8 +426,8 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
-                this.invoiceBindingSource.DataSource = invoiceList;
-                this.StatBatch();
+                invoiceBindingSource.DataSource = invoiceList;
+                StatBatch();
             }
         }
 
@@ -471,29 +438,32 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
-            if (this._case == null)
+            if (_case == null)
             {
-                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (this._case.ActiveCDA.CommissionType == "按转让金额" || this._case.ActiveCDA.CommissionType == "其他")
+            if (_case.ActiveCDA.CommissionType == "按转让金额" || _case.ActiveCDA.CommissionType == "其他")
             {
-                this.colCommission.Visible = true;
+                colCommission.Visible = true;
             }
             else
             {
-                this.colCommission.Visible = false;
+                colCommission.Visible = false;
             }
 
-            InvoiceAssignBatch batch = new InvoiceAssignBatch();
-            batch.AssignDate = DateTime.Now.Date;
-            batch.CreateUserName = App.Current.CurUser.Name;
-            batch.IsCreateMsg = false;
+            var batch = new InvoiceAssignBatch
+                            {
+                                AssignDate = DateTime.Now.Date,
+                                CreateUserName = App.Current.CurUser.Name,
+                                IsCreateMsg = false
+                            };
             //batch.CheckStatus = BATCH.UNCHECK;
-            this.batchBindingSource.DataSource = batch;
-            this.invoiceBindingSource.DataSource = batch.Invoices;
-            this.dgvInvoices.ReadOnly = false;
+            batchBindingSource.DataSource = batch;
+            invoiceBindingSource.DataSource = batch.Invoices;
+            dgvInvoices.ReadOnly = false;
         }
 
         /// <summary>
@@ -508,37 +478,38 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this._case == null)
+            if (_case == null)
             {
-                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!this.superValidator.Validate())
-            {
-                return;
-            }
-
-            if (!(this.batchBindingSource.DataSource is InvoiceAssignBatch))
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            IList invoiceList = this.invoiceBindingSource.List;
-            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.batchBindingSource.DataSource;
+            if (!(batchBindingSource.DataSource is InvoiceAssignBatch))
+            {
+                return;
+            }
+
+            IList invoiceList = invoiceBindingSource.List;
+            var batch = (InvoiceAssignBatch) batchBindingSource.DataSource;
 
             if (invoiceList.Count == 0)
             {
                 return;
             }
 
-            if (!this.ValidateBatch())
+            if (!ValidateBatch())
             {
                 return;
             }
 
             double totalAssign = 0;
-            List<string> invoiceNoList = new List<string>();
+            var invoiceNoList = new List<string>();
             foreach (Invoice invoice in invoiceList)
             {
                 if (!invoiceNoList.Contains(invoice.InvoiceNo))
@@ -547,49 +518,63 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 else
                 {
-                    MessageBoxEx.Show("发票号重复: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("发票号重复: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     return;
                 }
 
-                if (batch.AssignBatchNo == null && context.Invoices.SingleOrDefault(i => i.InvoiceNo == invoice.InvoiceNo && i.InvoiceAssignBatch.CaseCode == this._case.CaseCode) != null)
+                if (batch.AssignBatchNo == null &&
+                    _context.Invoices.SingleOrDefault(
+                        i => i.InvoiceNo == invoice.InvoiceNo && i.InvoiceAssignBatch.CaseCode == _case.CaseCode) !=
+                    null)
                 {
-                    MessageBoxEx.Show("发票号已存在: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("发票号已存在: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     return;
                 }
 
                 totalAssign += invoice.AssignAmount;
             }
 
-            if (this._case.ActiveCDA.CreditCoverOutstanding.HasValue && totalAssign > this._case.ActiveCDA.CreditCoverOutstanding.Value)
+            if (_case.ActiveCDA.CreditCoverOutstanding.HasValue &&
+                totalAssign > _case.ActiveCDA.CreditCoverOutstanding.Value)
             {
-                DialogResult dr = MessageBoxEx.Show("买卖方关联额度中的买方信用风险担保额度已占满，超额度转让部分不再进行担保，是否确认转让？", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBoxEx.Show("买卖方关联额度中的买方信用风险担保额度已占满，超额度转让部分不再进行担保，是否确认转让？",
+                                                    MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     return;
                 }
             }
 
-            if (this._case.BuyerClient.AssignCreditLineOutstanding.HasValue && totalAssign > this._case.BuyerClient.AssignCreditLineOutstanding.Value)
+            if (_case.BuyerClient.AssignCreditLineOutstanding.HasValue &&
+                totalAssign > _case.BuyerClient.AssignCreditLineOutstanding.Value)
             {
-                DialogResult dr = MessageBoxEx.Show("客户额度已占满，超额度转让部分不再进行担保，是否确认转让？", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBoxEx.Show("客户额度已占满，超额度转让部分不再进行担保，是否确认转让？", MESSAGE.TITLE_INFORMATION,
+                                                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     return;
                 }
             }
 
-            if (this._case.BuyerClient.GroupAssignCreditLine != null)
+            if (_case.BuyerClient.GroupAssignCreditLine != null)
             {
-                double assignCreditLineOutstanding = this._case.BuyerClient.GroupAssignCreditLine.AssignCreditLineOutstanding;
-                if (this._case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency != this._case.BuyerClient.AssignCreditLine.CreditLineCurrency)
+                double assignCreditLineOutstanding = _case.BuyerClient.GroupAssignCreditLine.AssignCreditLineOutstanding;
+                if (_case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency !=
+                    _case.BuyerClient.AssignCreditLine.CreditLineCurrency)
                 {
-                    double exchange = Exchange.GetExchangeRate(this._case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency, this._case.BuyerClient.AssignCreditLine.CreditLineCurrency);
+                    double exchange =
+                        Exchange.GetExchangeRate(_case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency,
+                                                 _case.BuyerClient.AssignCreditLine.CreditLineCurrency);
                     assignCreditLineOutstanding *= exchange;
                 }
 
                 if (totalAssign > assignCreditLineOutstanding)
                 {
-                    DialogResult dr = MessageBoxEx.Show("集团额度已占满，超额度转让部分不再进行担保，是否确认转让？", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult dr = MessageBoxEx.Show("集团额度已占满，超额度转让部分不再进行担保，是否确认转让？", MESSAGE.TITLE_INFORMATION,
+                                                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.No)
                     {
                         return;
@@ -599,13 +584,13 @@ namespace CMBC.EasyFactor.ARMgr
 
             bool isSaveOK = true;
 
-            List<Invoice> flawList = new List<Invoice>();
+            var flawList = new List<Invoice>();
             try
             {
-                batch.Case = this._case;
+                batch.Case = _case;
                 if (batch.AssignBatchNo == null)
                 {
-                    batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(this._case.CaseCode, batch.AssignDate);
+                    batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(_case.CaseCode, batch.AssignDate);
                     batch.InputDate = DateTime.Today;
                 }
 
@@ -619,7 +604,7 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -637,12 +622,12 @@ namespace CMBC.EasyFactor.ARMgr
             if (isSaveOK)
             {
                 MessageBoxEx.Show("数据保存成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.caseBasic.CaculateOutstanding(this._case);
-                this.StatBatch();
+                _caseBasic.CaculateOutstanding(_case);
+                StatBatch();
 
                 if (flawList.Count > 0)
                 {
-                    InvoiceFlaw flawMgr = new InvoiceFlaw(flawList, true);
+                    var flawMgr = new InvoiceFlaw(flawList, true);
                     flawMgr.ShowDialog(this);
                 }
             }
@@ -655,22 +640,23 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this._case == null)
+            if (_case == null)
             {
-                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            AssignBatchMgr batchMgr = new AssignBatchMgr(this._case, this.context);
-            QueryForm queryUI = new QueryForm(batchMgr, "选择转让批次");
+            var batchMgr = new AssignBatchMgr(_case, _context);
+            var queryUI = new QueryForm(batchMgr, "选择转让批次");
             batchMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             InvoiceAssignBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
-                this.batchBindingSource.DataSource = selectedBatch;
-                this.invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
-                this.StatBatch();
+                batchBindingSource.DataSource = selectedBatch;
+                invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
+                StatBatch();
             }
         }
 
@@ -679,7 +665,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void StatBatch()
         {
-            IList invoiceList = this.invoiceBindingSource.List;
+            IList invoiceList = invoiceBindingSource.List;
             double totalAssign = 0;
             double totalCommmission = 0;
             foreach (Invoice invoice in invoiceList)
@@ -688,10 +674,10 @@ namespace CMBC.EasyFactor.ARMgr
                 totalCommmission += invoice.Commission.GetValueOrDefault();
             }
 
-            this.tbTotalAssign.Text = String.Format("{0:N2}", totalAssign);
-            this.tbAssignNumber.Text = String.Format("{0}", invoiceList.Count);
-            this.tbTotalCommission.Text = String.Format("{0:N2}", totalCommmission);
-            this.tbTotalHandfee.Text = String.Format("{0:N2}", invoiceList.Count * this._case.ActiveCDA.HandFee.GetValueOrDefault());
+            tbTotalAssign.Text = String.Format("{0:N2}", totalAssign);
+            tbAssignNumber.Text = String.Format("{0}", invoiceList.Count);
+            tbTotalCommission.Text = String.Format("{0:N2}", totalCommmission);
+            tbTotalHandfee.Text = String.Format("{0:N2}", invoiceList.Count*_case.ActiveCDA.HandFee.GetValueOrDefault());
         }
 
         /// <summary>
@@ -700,50 +686,58 @@ namespace CMBC.EasyFactor.ARMgr
         /// <returns></returns>
         private bool ValidateBatch()
         {
-            CDA cda = this._case.ActiveCDA;
+            CDA cda = _case.ActiveCDA;
             bool isCommissionAlert = true;
 
-            foreach (Invoice invoice in this.invoiceBindingSource.List)
+            foreach (Invoice invoice in invoiceBindingSource.List)
             {
                 if (invoice.InvoiceNo == null)
                 {
-                    MessageBoxEx.Show("发票号必填", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("发票号必填", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     return false;
                 }
 
                 if (TypeUtil.EqualsZero(invoice.InvoiceAmount))
                 {
-                    MessageBoxEx.Show("票面金额必填", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("票面金额必填", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     return false;
                 }
 
                 if (invoice.AssignAmount > invoice.InvoiceAmount)
                 {
-                    MessageBoxEx.Show("转让金额不能大于票面金额: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("转让金额不能大于票面金额: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION,
+                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
 
                 if (invoice.InvoiceDate != null && invoice.DueDate < invoice.InvoiceDate)
                 {
-                    MessageBoxEx.Show("到期日不可早于发票日: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("到期日不可早于发票日: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION,
+                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
 
-                DateTime assignDate = this.assignDateDateTimePicker.Value.Date;
+                DateTime assignDate = assignDateDateTimePicker.Value.Date;
                 if (invoice.InvoiceDate != null && invoice.InvoiceDate > assignDate)
                 {
-                    DialogResult dr = MessageBoxEx.Show("发票日晚于转让日，是否确定录入: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    DialogResult dr = MessageBoxEx.Show("发票日晚于转让日，是否确定录入: " + invoice.InvoiceNo,
+                                                        MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
+                                                        MessageBoxIcon.Information);
                     if (dr == DialogResult.No)
                     {
                         return false;
                     }
                 }
 
-                if (this._case.NetPaymentTerm.HasValue)
+                if (_case.NetPaymentTerm.HasValue)
                 {
-                    if (invoice.InvoiceDate != null && assignDate > invoice.InvoiceDate.Value.AddDays(this._case.NetPaymentTerm.Value))
+                    if (invoice.InvoiceDate != null &&
+                        assignDate > invoice.InvoiceDate.Value.AddDays(_case.NetPaymentTerm.Value))
                     {
-                        MessageBoxEx.Show("转让日不能晚于发票日+付款期限: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("转让日不能晚于发票日+付款期限: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION,
+                                          MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }
@@ -752,12 +746,13 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (invoice.InvoiceDate > cda.CreditCoverPeriodEnd)
                     {
-                        MessageBoxEx.Show("发票日不能晚于额度通知书融资到期日: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxEx.Show("发票日不能晚于额度通知书融资到期日: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION,
+                                          MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
                     }
                 }
 
-                if (invoice.DueDate != null && invoice.DueDate < assignDate)
+                if (invoice.DueDate < assignDate)
                 {
                     invoice.IsFlaw = true;
                     invoice.FlawReason = "09";
@@ -767,22 +762,18 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (isCommissionAlert)
                     {
-                        DialogResult dr = MessageBoxEx.Show("是否现在录入手续费: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        DialogResult dr = MessageBoxEx.Show("是否现在录入手续费: " + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION,
+                                                            MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (dr == DialogResult.Yes)
                         {
                             return false;
                         }
-                        else
-                        {
-                            isCommissionAlert = false;
-                        }
+                        isCommissionAlert = false;
                     }
                 }
             }
 
             return true;
         }
-
-        #endregion?Methods?
     }
 }

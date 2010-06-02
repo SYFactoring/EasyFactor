@@ -134,9 +134,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.components.Dispose();
             }
 
-            if (this.context != null)
+            if (this._context != null)
             {
-                this.context.Dispose();
+                this._context.Dispose();
             }
 
             base.Dispose(disposing);
@@ -1908,7 +1908,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCDAs.Size = new System.Drawing.Size(519, 358);
             this.dgvCDAs.TabIndex = 1;
             this.dgvCDAs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailCDA);
-            this.dgvCDAs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCDAs_CellFormatting);
+            this.dgvCDAs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvCDAsCellFormatting);
             // 
             // colCDACode
             // 
@@ -2227,7 +2227,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.customValidator1.ErrorMessage = "±ØÌî";
             this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
+            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator1ValidateValue);
             // 
             // requiredFieldValidator7
             // 

@@ -4,35 +4,21 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
-    using System;
-    using System.Drawing;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class ClientCreditLineMgr : UserControl
     {
-		#region?Fields?(2)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bs;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpClientCreditMgrType opType;
-
-		#endregion?Fields?
-
-		#region?Enums?(1)?
+        #region OpClientCreditMgrType enum
 
         /// <summary>
         /// 
@@ -55,19 +41,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DUE,
         }
 
-		#endregion?Enums?
+        #endregion
 
-		#region?Constructors?(2)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bs;
 
-/// <summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpClientCreditMgrType _opType;
+
+
+        /// <summary>
         /// Initializes a new instance of the ClientCreditLineMgr class.
         /// </summary>
         /// <param name="groupClient"></param>
         public ClientCreditLineMgr(Client groupClient)
             : this(OpClientCreditMgrType.QUERY_GROUP)
         {
-            this.panelQuery.Visible = false;
-            this.bs.DataSource = groupClient.ClientCreditLines;
+            panelQuery.Visible = false;
+            _bs.DataSource = groupClient.ClientCreditLines;
         }
 
         /// <summary>
@@ -76,68 +71,54 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="opType"></param>
         public ClientCreditLineMgr(OpClientCreditMgrType opType)
         {
-            this.InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.bs = new BindingSource();
-            this.opType = opType;
-            this.dgvClientCreditLines.DataSource = this.bs;
-            this.dgvClientCreditLines.AutoGenerateColumns = false;
-            ControlUtil.SetDoubleBuffered(this.dgvClientCreditLines);
-            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
+            InitializeComponent();
+            ImeMode = ImeMode.OnHalf;
+            _bs = new BindingSource();
+            _opType = opType;
+            dgvClientCreditLines.DataSource = _bs;
+            dgvClientCreditLines.AutoGenerateColumns = false;
+            ControlUtil.SetDoubleBuffered(dgvClientCreditLines);
+            ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             if (opType == OpClientCreditMgrType.QUERY_GROUP)
             {
-                this.lblClientName.Text = "集团名称";
-                this.colClientNameCN.HeaderText = "集团客户名称（中）";
-                this.colClientNameEN.HeaderText = "集团客户名称（英）";
-                this.cbClientGroupType.Text = "集团";
+                lblClientName.Text = @"集团名称";
+                colClientNameCN.HeaderText = @"集团客户名称（中）";
+                colClientNameEN.HeaderText = @"集团客户名称（英）";
+                cbClientGroupType.Text = @"集团";
             }
             else if (opType == OpClientCreditMgrType.QUERY_CLINET)
             {
-                this.cbClientGroupType.Text = "客户";
+                cbClientGroupType.Text = @"客户";
             }
             else if (opType == OpClientCreditMgrType.DUE)
             {
-                DBDataContext context = new DBDataContext();
+                var context = new DBDataContext();
 
                 DateTime overDueDate = DateTime.Now.Date;
 
-                var queryResult = context.ClientCreditLines.Where(c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.PeriodEnd < overDueDate);
+                IQueryable<ClientCreditLine> queryResult =
+                    context.ClientCreditLines.Where(
+                        c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.PeriodEnd < overDueDate);
 
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                _bs.DataSource = queryResult;
+                lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
-
         }
 
-		#endregion?Constructors?
-
-		#region?Properties?(2)?
 
         /// <summary>
         /// Gets or sets owner form
         /// </summary>
-        public Form OwnerForm
-        {
-            get;
-            set;
-        }
+        public Form OwnerForm { get; set; }
 
         /// <summary>
         /// Gets or sets selected ClientCreditLine
         /// </summary>
-        public ClientCreditLine Selected
-        {
-            get;
-            set;
-        }
+        public ClientCreditLine Selected { get; set; }
 
-		#endregion?Properties?
 
-		#region?Methods?(6)?
-
-		//?Private?Methods?(6)?
-
+        //?Private?Methods?(6)?
         /// <summary>
         /// 
         /// </summary>
@@ -145,13 +126,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.OwnerForm == null)
+            if (OwnerForm == null)
             {
-                this.DetailClientCreditLine(sender, e);
+                DetailClientCreditLine(sender, e);
             }
             else
             {
-                this.SelectClientCreditLine(sender, e);
+                SelectClientCreditLine(sender, e);
             }
         }
 
@@ -162,13 +143,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DetailClientCreditLine(object sender, EventArgs e)
         {
-            if (this.dgvClientCreditLines.CurrentCell == null)
+            if (dgvClientCreditLines.CurrentCell == null)
             {
                 return;
             }
 
-            ClientCreditLine creditLine = (ClientCreditLine)this.bs.List[this.dgvClientCreditLines.CurrentCell.RowIndex];
-            ClientDetail detail = new ClientDetail(creditLine, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
+            var creditLine = (ClientCreditLine) _bs.List[dgvClientCreditLines.CurrentCell.RowIndex];
+            var detail = new ClientDetail(creditLine, ClientDetail.OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE);
             detail.ShowDialog(this);
         }
 
@@ -177,14 +158,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvClientCreditLines_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void DgvClientCreditLinesDataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            for (int i = 0; i < this.bs.List.Count; i++)
+            for (int i = 0; i < _bs.List.Count; i++)
             {
-                ClientCreditLine creditLine = (ClientCreditLine)this.bs.List[i];
+                var creditLine = (ClientCreditLine) _bs.List[i];
                 if (creditLine.PeriodEnd < DateTime.Now.Date)
                 {
-                    this.dgvClientCreditLines["colPeriodEnd", i].Style.BackColor = Color.Red;
+                    dgvClientCreditLines["colPeriodEnd", i].Style.BackColor = Color.Red;
                 }
             }
         }
@@ -194,10 +175,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvClientCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DgvClientCreditLinesRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvClientCreditLines.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvClientCreditLines.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvClientCreditLines.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            var rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
+                                          dgvClientCreditLines.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                                  dgvClientCreditLines.RowHeadersDefaultCellStyle.Font, rectangle,
+                                  dgvClientCreditLines.RowHeadersDefaultCellStyle.ForeColor,
+                                  TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -207,24 +192,33 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
-            string clientEDICode = this.tbClientEDICode.Text;
-            string clientName = this.tbClientName.Text;
-            string clientGroupType = this.cbClientGroupType.Text;
+            string clientEDICode = tbClientEDICode.Text;
+            string clientName = tbClientName.Text;
+            string clientGroupType = cbClientGroupType.Text;
             bool isGroup = false;
             if (clientGroupType == "集团")
             {
                 isGroup = true;
             }
 
-            DBDataContext context = new DBDataContext();
+            var context = new DBDataContext();
 
-            var queryResult = context.ClientCreditLines.Where(c =>
-                c.Client.ClientEDICode.Contains(clientEDICode)
-             && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName))
-             && (isGroup == true ? c.Client.GroupClients.Count > 0 : true));
+            IQueryable<ClientCreditLine> queryResult = context.ClientCreditLines.Where(c =>
+                                                                                       c.Client.ClientEDICode.Contains(
+                                                                                           clientEDICode)
+                                                                                       &&
+                                                                                       (c.Client.ClientNameCN.Contains(
+                                                                                           clientName) ||
+                                                                                        c.Client.ClientNameEN.Contains(
+                                                                                            clientName))
+                                                                                       &&
+                                                                                       (isGroup
+                                                                                            ? c.Client.GroupClients.
+                                                                                                  Count > 0
+                                                                                            : true));
 
-            this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            _bs.DataSource = queryResult;
+            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
         /// <summary>
@@ -234,20 +228,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectClientCreditLine(object sender, EventArgs e)
         {
-            if (this.dgvClientCreditLines.CurrentCell == null)
+            if (dgvClientCreditLines.CurrentCell == null)
             {
                 return;
             }
 
-            ClientCreditLine creditLine = (ClientCreditLine)this.bs.List[this.dgvClientCreditLines.CurrentCell.RowIndex];
-            this.Selected = creditLine;
-            if (this.OwnerForm != null)
+            var creditLine = (ClientCreditLine) _bs.List[dgvClientCreditLines.CurrentCell.RowIndex];
+            Selected = creditLine;
+            if (OwnerForm != null)
             {
-                this.OwnerForm.DialogResult = DialogResult.Yes;
-                this.OwnerForm.Close();
+                OwnerForm.DialogResult = DialogResult.Yes;
+                OwnerForm.Close();
             }
         }
-
-		#endregion?Methods?
     }
 }

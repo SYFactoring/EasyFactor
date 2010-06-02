@@ -4,24 +4,20 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Data.Linq;
+using System.Linq;
+using System.Text.RegularExpressions;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Data.Linq;
-    using System.Text.RegularExpressions;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class ClientCreditLine
     {
-		#region?Fields?(1)?
+        private static readonly Regex ApproveNoRegex = new Regex(@"^[a-zA-Z0-9]+$");
 
-        private static Regex ApproveNoRegex = new Regex(@"^[a-zA-Z0-9]+$");
-
-		#endregion?Fields?
-
-		#region?Properties?(4)?
 
         /// <summary>
         /// Gets
@@ -30,13 +26,10 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = this.CreditLine - this.Client.GetAssignOutstandingAsBuyer(this.CreditLineCurrency);
-                if (this.ClientCreditLines.Count > 0)
+                double result = CreditLine - Client.GetAssignOutstandingAsBuyer(CreditLineCurrency);
+                if (ClientCreditLines.Count > 0)
                 {
-                    foreach (ClientCreditLine creditLine in this.ClientCreditLines)
-                    {
-                        result -= creditLine.Client.GetAssignOutstandingAsBuyer(this.CreditLineCurrency);
-                    }
+                    result = ClientCreditLines.Aggregate(result, (current, creditLine) => current - creditLine.Client.GetAssignOutstandingAsBuyer(CreditLineCurrency));
                 }
 
                 return result;
@@ -48,17 +41,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string ClientNameCN
         {
-            get
-            {
-                if (Client != null)
-                {
-                    return this.Client.ClientNameCN;
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
+            get { return Client != null ? Client.ClientNameCN : string.Empty; }
         }
 
         /// <summary>
@@ -66,17 +49,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string ClientNameEN
         {
-            get
-            {
-                if (Client != null)
-                {
-                    return this.Client.ClientNameEN;
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
+            get { return Client != null ? Client.ClientNameEN : string.Empty; }
         }
 
         /// <summary>
@@ -86,36 +59,27 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = this.CreditLine - this.Client.GetFinanceOutstanding(this.CreditLineCurrency).GetValueOrDefault();
-                if (this.ClientCreditLines.Count > 0)
+                double result = CreditLine - Client.GetFinanceOutstanding(CreditLineCurrency).GetValueOrDefault();
+                if (ClientCreditLines.Count > 0)
                 {
-                    foreach (ClientCreditLine creditLine in this.ClientCreditLines)
-                    {
-                        result -= creditLine.Client.GetFinanceOutstanding(this.CreditLineCurrency).GetValueOrDefault();
-                    }
+                    result = ClientCreditLines.Aggregate(result, (current, creditLine) => current - creditLine.Client.GetFinanceOutstanding(CreditLineCurrency).GetValueOrDefault());
                 }
 
                 return result;
             }
         }
 
-		#endregion?Properties?
 
-		#region?Methods?(1)?
-
-		//?Private?Methods?(1)?
-
-        partial void OnValidate(System.Data.Linq.ChangeAction action)
+        //?Private?Methods?(1)?
+        partial void OnValidate(ChangeAction action)
         {
             if (action == ChangeAction.Insert)
             {
-                if (!String.IsNullOrEmpty(this.ApproveNo) && !ApproveNoRegex.IsMatch(this.ApproveNo))
+                if (!String.IsNullOrEmpty(ApproveNo) && !ApproveNoRegex.IsMatch(ApproveNo))
                 {
-                    throw new ArgumentException("不符合授信编号规则: " + this.ApproveNo);
+                    throw new ArgumentException("不符合授信编号规则: " + ApproveNo);
                 }
             }
         }
-
-		#endregion?Methods?
     }
 }

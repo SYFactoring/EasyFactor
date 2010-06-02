@@ -1,5 +1,5 @@
 using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.Utils.ConstStr;
+
 namespace CMBC.EasyFactor.ARMgr
 {
     partial class RefundBatchDetail
@@ -51,9 +51,9 @@ namespace CMBC.EasyFactor.ARMgr
                 components.Dispose();
             }
 
-            if (this.context != null)
+            if (this._context != null)
             {
-                this.context.Dispose();
+                this._context.Dispose();
             }
 
             base.Dispose(disposing);
@@ -329,7 +329,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvRefundLogs.Size = new System.Drawing.Size(444, 231);
             this.dgvRefundLogs.TabIndex = 1;
             this.dgvRefundLogs.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailInvoice);
-            this.dgvRefundLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvRefundLogs_RowPostPaint);
+            this.dgvRefundLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvRefundLogsRowPostPaint);
             // 
             // colInvoiceNo
             // 

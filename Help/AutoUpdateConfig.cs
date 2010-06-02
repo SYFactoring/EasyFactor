@@ -34,12 +34,10 @@
  */
 
 using System;
-using System.Xml;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.Text;
+using System.Xml;
 
 namespace CMBC.EasyFactor.Help
 {
@@ -48,46 +46,28 @@ namespace CMBC.EasyFactor.Help
     /// </summary>
     public class AutoUpdateConfig
     {
-		#region?Fields?(4)?
-
-        private Uri _AppFileURL;
-        private string _AvailableVersion;
-        private Uri _ChangeLogURL;
-        private string _LatestChanges;
-
-		#endregion?Fields?
-
-		#region?Properties?(4)?
-
-        public Uri AppFileURL
-        { get { return _AppFileURL; } set { _AppFileURL = value; } }
-
-        public string AvailableVersion
-        { get { return _AvailableVersion; } set { _AvailableVersion = value; } }
-
-        public Uri ChangeLogURL
-        { get { return _ChangeLogURL; } set { _ChangeLogURL = value; } }
-
-        public string LatestChanges
-        { get { return _LatestChanges; } set { _LatestChanges = value; } }
-
-		#endregion?Properties?
-
-		#region?Delegates?and?Events?(2)?
-
-		//?Delegates?(1)?
+        #region Delegates
 
         public delegate void LoadConfigErrorEventHandler(string stMessage, Exception loadConfigError);
-		//?Events?(1)?
 
+        #endregion
+
+        public Uri AppFileURL { get; set; }
+
+        public string AvailableVersion { get; set; }
+
+        public Uri ChangeLogURL { get; set; }
+
+        public string LatestChanges { get; set; }
+
+
+        //?Delegates?(1)?
+
+        //?Events?(1)?
         public event LoadConfigErrorEventHandler OnLoadConfigError;
 
-		#endregion?Delegates?and?Events?
 
-		#region?Methods?(1)?
-
-		//?Public?Methods?(1)?
-
+        //?Public?Methods?(1)?
         /// <summary>
         /// LoadConfig: Invoke this method when you are ready to populate this object
         /// </summary>
@@ -96,68 +76,59 @@ namespace CMBC.EasyFactor.Help
             try
             {
                 //Load the xml config file
-                XmlDocument XmlDoc = new XmlDocument();
-                HttpWebResponse Response;
-                HttpWebRequest Request;
+                var xmlDoc = new XmlDocument();
                 //Retrieve the File
 
-                Request = (HttpWebRequest)HttpWebRequest.Create(url);
+                var request = (HttpWebRequest)WebRequest.Create(url);
                 //Request.Headers.Add("Translate: f"); //Commented out 11/16/2004 Matt Palmerlee, this Header is more for DAV and causes a known security issue
-                if (!String.IsNullOrEmpty(user))
-                    Request.Credentials = new NetworkCredential(user, pass);
-                else
-                    Request.Credentials = CredentialCache.DefaultCredentials;
+                request.Credentials = !String.IsNullOrEmpty(user) ? new NetworkCredential(user, pass) : CredentialCache.DefaultCredentials;
 
                 //Added 11/16/2004 For Proxy Clients, Thanks George for submitting these changes
-                if (proxyEnabled == true)
-                    Request.Proxy = new WebProxy(proxyURL, true);
+                if (proxyEnabled)
+                    request.Proxy = new WebProxy(proxyURL, true);
 
-                Response = (HttpWebResponse)Request.GetResponse();
+                var response = (HttpWebResponse)request.GetResponse();
 
-                Stream respStream = null;
-                respStream = Response.GetResponseStream();
+                Stream respStream = response.GetResponseStream();
 
                 //Load the XML from the stream
-                XmlDoc.Load(respStream);
+                xmlDoc.Load(respStream);
 
                 //Parse out the AvailableVersion
-                XmlNode AvailableVersionNode = XmlDoc.SelectSingleNode(@"//AvailableVersion");
-                this.AvailableVersion = AvailableVersionNode.InnerText;
+                XmlNode availableVersionNode = xmlDoc.SelectSingleNode(@"//AvailableVersion");
+                AvailableVersion = availableVersionNode.InnerText;
 
                 //Parse out the AppFileURL
-                XmlNode AppFileURLNode = XmlDoc.SelectSingleNode(@"//AppFileURL");
-                this.AppFileURL = new Uri(AppFileURLNode.InnerText);
+                XmlNode appFileURLNode = xmlDoc.SelectSingleNode(@"//AppFileURL");
+                AppFileURL = new Uri(appFileURLNode.InnerText);
 
                 //Parse out the LatestChanges
-                XmlNode LatestChangesNode = XmlDoc.SelectSingleNode(@"//LatestChanges");
-                if (LatestChangesNode != null)
-                    this.LatestChanges = LatestChangesNode.InnerText;
-                else
-                    this.LatestChanges = "";
+                XmlNode latestChangesNode = xmlDoc.SelectSingleNode(@"//LatestChanges");
+                LatestChanges = latestChangesNode != null ? latestChangesNode.InnerText : "";
 
                 //Parse out the ChangLogURL
-                XmlNode ChangeLogURLNode = XmlDoc.SelectSingleNode(@"//ChangeLogURL");
-                if (ChangeLogURLNode != null)
-                    this.ChangeLogURL = new Uri(ChangeLogURLNode.InnerText);
-                else
-                    this.ChangeLogURL = new Uri("");
-
+                XmlNode changeLogURLNode = xmlDoc.SelectSingleNode(@"//ChangeLogURL");
+                ChangeLogURL = changeLogURLNode != null ? new Uri(changeLogURLNode.InnerText) : new Uri("");
             }
             catch (Exception e)
             {
-                string stMessage = "Failed to read the config file at: " + url + "\r\nMake sure that the config file is present and has a valid format.";
+                string stMessage = "Failed to read the config file at: " + url +
+                                   "\r\nMake sure that the config file is present and has a valid format.";
                 Debug.WriteLine(stMessage);
                 //MessageBox.Show(stMessage); 
-                if (this.OnLoadConfigError != null)
-                    this.OnLoadConfigError(stMessage, e);
+                if (OnLoadConfigError != null)
+                    OnLoadConfigError(stMessage, e);
 
                 return false;
             }
             return true;
         }
 
-		#endregion?Methods?
 
-//LoadConfig(string url, string user, string pass)
-    }//class AutoUpdateConfig
-}//namespace Conversive.AutoUpdater
+        //LoadConfig(string url, string user, string pass)
+    }
+
+    //class AutoUpdateConfig
+}
+
+//namespace Conversive.AutoUpdater

@@ -4,22 +4,19 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Data.Linq;
+using System.Linq;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Linq;
-    using System.Linq;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceFinanceBatch
     {
-        #region?Fields?(6)?
-
         private double? _assignAmount;
         private double? _commissionAmount;
         private double? _grossInterestIncome;
@@ -27,9 +24,6 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _marginIncome;
         private double? _netInterestIncome;
 
-        #endregion?Fields?
-
-        #region?Properties?(14)?
 
         /// <summary>
         /// Gets
@@ -40,11 +34,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_assignAmount.HasValue == false)
                 {
-                    double result = 0;
-                    foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
-                    {
-                        result += log.Invoice.AssignAmount;
-                    }
+                    double result = InvoiceFinanceLogs.Sum(log => log.Invoice.AssignAmount);
 
                     _assignAmount = result;
                 }
@@ -58,10 +48,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public int AssignCount
         {
-            get
-            {
-                return GetInvoices().Count;
-            }
+            get { return GetInvoices().Count; }
         }
 
         /// <summary>
@@ -69,17 +56,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public DateTime AssignDate
         {
-            get
-            {
-                if (this.InvoiceFinanceLogs.Count > 0)
-                {
-                    return this.InvoiceFinanceLogs[0].Invoice.AssignDate;
-                }
-                else
-                {
-                    return default(DateTime);
-                }
-            }
+            get { return InvoiceFinanceLogs.Count > 0 ? InvoiceFinanceLogs[0].Invoice.AssignDate : default(DateTime); }
         }
 
         /// <summary>
@@ -87,10 +64,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public int BatchCount
         {
-            get
-            {
-                return this.InvoiceFinanceLogs.Count;
-            }
+            get { return InvoiceFinanceLogs.Count; }
         }
 
         /// <summary>
@@ -98,10 +72,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string BuyerName
         {
-            get
-            {
-                return this.Case.BuyerClient.ToString();
-            }
+            get { return Case.BuyerClient.ToString(); }
         }
 
         /// <summary>
@@ -114,7 +85,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (_commissionAmount.HasValue == false)
                 {
                     double? result = null;
-                    foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+                    foreach (InvoiceFinanceLog log in InvoiceFinanceLogs)
                     {
                         if (log.Commission.HasValue)
                         {
@@ -127,9 +98,9 @@ namespace CMBC.EasyFactor.DB.dbml
                         }
                     }
 
-                    if (this.BatchCurrency != this.Case.InvoiceCurrency)
+                    if (BatchCurrency != Case.InvoiceCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(this.BatchCurrency, this.Case.InvoiceCurrency);
+                        double rate = Exchange.GetExchangeRate(BatchCurrency, Case.InvoiceCurrency);
                         result *= rate;
                     }
 
@@ -147,13 +118,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double result = 0;
-                foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
-                {
-                    result += log.FinanceOutstanding;
-                }
-
-                return result;
+                return InvoiceFinanceLogs.Sum(log => log.FinanceOutstanding);
             }
         }
 
@@ -166,12 +131,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_grossInterestIncome.HasValue == false)
                 {
-                    double result = 0;
-                    foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
-                    {
-                        double value = log.GrossInterest;
-                        result += value;
-                    }
+                    double result = InvoiceFinanceLogs.Sum(log => log.GrossInterest);
 
                     _grossInterestIncome = result;
                 }
@@ -189,10 +149,10 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_handfeeAmount.HasValue == false)
                 {
-                    double? result = AssignCount * this.Case.ActiveCDA.HandFee;
-                    if (this.Case.ActiveCDA.HandFeeCurr != this.Case.InvoiceCurrency)
+                    double? result = AssignCount*Case.ActiveCDA.HandFee;
+                    if (Case.ActiveCDA.HandFeeCurr != Case.InvoiceCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(this.Case.ActiveCDA.HandFeeCurr, this.Case.InvoiceCurrency);
+                        double rate = Exchange.GetExchangeRate(Case.ActiveCDA.HandFeeCurr, Case.InvoiceCurrency);
                         result *= rate;
                     }
 
@@ -212,7 +172,8 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_marginIncome.HasValue == false)
                 {
-                    _marginIncome = this.FinanceAmount * (this.FinanceRate - this.CostRate) / 360 * ((this.FinancePeriodEnd - this.FinancePeriodBegin).Days);
+                    _marginIncome = FinanceAmount*(FinanceRate - CostRate)/360*
+                                    ((FinancePeriodEnd - FinancePeriodBegin).Days);
                 }
 
                 return _marginIncome;
@@ -228,12 +189,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_netInterestIncome.HasValue == false)
                 {
-                    double result = 0;
-                    foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
-                    {
-                        double value = log.NetInterest;
-                        result += value;
-                    }
+                    double result = InvoiceFinanceLogs.Sum(log => log.NetInterest);
 
                     _netInterestIncome = result;
                 }
@@ -247,10 +203,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double PoolFinanceOutstanding
         {
-            get
-            {
-                return this.FinanceAmount - PoolRefundAmount.GetValueOrDefault();
-            }
+            get { return FinanceAmount - PoolRefundAmount.GetValueOrDefault(); }
         }
 
         /// <summary>
@@ -258,17 +211,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double? PoolRefundAmount
         {
-            get
-            {
-                if (this.InvoiceRefundBatches != null)
-                {
-                    return this.InvoiceRefundBatches.Sum(batch => batch.RefundAmount);
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            get { return InvoiceRefundBatches != null ? InvoiceRefundBatches.Sum(batch => batch.RefundAmount) : null; }
         }
 
         /// <summary>
@@ -276,20 +219,10 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string SellerName
         {
-            get
-            {
-                if (this.Case != null && this.Case.SellerClient != null)
-                {
-                    return this.Case.SellerClient.ToString();
-                }
-                else if (this.Client != null)
-                {
-                    return this.Client.ToString();
-                }
-                else
-                {
-                    return string.Empty;
-                }
+            get {
+                return Case != null && Case.SellerClient != null
+                           ? Case.SellerClient.ToString()
+                           : (Client != null ? Client.ToString() : string.Empty);
             }
         }
 
@@ -298,24 +231,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string TransactionType
         {
-            get
-            {
-                return this.Case.TransactionType;
-            }
+            get { return Case.TransactionType; }
         }
 
-        #endregion?Properties?
-
-        #region?Methods?(4)?
 
         //?Public?Methods?(3)?
-
         /// <summary>
         /// 
         /// </summary>
         public void CaculateFinanceAmount()
         {
-            this.FinanceAmount = this.InvoiceFinanceLogs.Sum(log => log.FinanceAmount.GetValueOrDefault());
+            FinanceAmount = InvoiceFinanceLogs.Sum(log => log.FinanceAmount.GetValueOrDefault());
         }
 
         /// <summary>
@@ -327,11 +253,11 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             string prefix = String.Format("FIN{0:yyyMMdd}", date);
             int batchCount;
-            using (DBDataContext context = new DBDataContext())
+            using (var context = new DBDataContext())
             {
-                var queryResult = from batch in context.InvoiceFinanceBatches
-                                  where batch.FinanceBatchNo.StartsWith(prefix)
-                                  select batch.FinanceBatchNo;
+                IQueryable<string> queryResult = from batch in context.InvoiceFinanceBatches
+                                                 where batch.FinanceBatchNo.StartsWith(prefix)
+                                                 select batch.FinanceBatchNo;
 
                 if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
                 {
@@ -354,11 +280,11 @@ namespace CMBC.EasyFactor.DB.dbml
             string prefix = String.Format("FIN{0:yyyMMdd}", date);
             int batchCount;
 
-            using (DBDataContext context = new DBDataContext())
+            using (var context = new DBDataContext())
             {
-                var queryResult = from batch in context.InvoiceFinanceBatches
-                                  where batch.FinanceBatchNo.StartsWith(prefix)
-                                  select batch.FinanceBatchNo;
+                IQueryable<string> queryResult = from batch in context.InvoiceFinanceBatches
+                                                 where batch.FinanceBatchNo.StartsWith(prefix)
+                                                 select batch.FinanceBatchNo;
 
                 if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
                 {
@@ -370,16 +296,16 @@ namespace CMBC.EasyFactor.DB.dbml
             string financeNo = String.Format("{0}-{1:d2}", prefix, batchCount + 1);
             return financeNo;
         }
-        //?Private?Methods?(1)?
 
+        //?Private?Methods?(1)?
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         private List<Invoice> GetInvoices()
         {
-            List<Invoice> invoices = new List<Invoice>();
-            foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+            var invoices = new List<Invoice>();
+            foreach (InvoiceFinanceLog log in InvoiceFinanceLogs)
             {
                 if (!invoices.Contains(log.Invoice))
                 {
@@ -395,7 +321,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         partial void OnFinancePeriodBeginChanged()
         {
-            foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+            foreach (InvoiceFinanceLog log in InvoiceFinanceLogs)
             {
                 log.Invoice.CaculateFinanceDate();
             }
@@ -406,7 +332,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         partial void OnFinancePeriodEndChanged()
         {
-            foreach (InvoiceFinanceLog log in this.InvoiceFinanceLogs)
+            foreach (InvoiceFinanceLog log in InvoiceFinanceLogs)
             {
                 log.Invoice.CaculateFinanceDate();
             }
@@ -420,58 +346,70 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (this.Case != null)
+                if (Case != null)
                 {
-                    List<Invoice> invoiceList = this.GetInvoices();
+                    List<Invoice> invoiceList = GetInvoices();
                     if (invoiceList.Count > 0)
                     {
                         DateTime assignDate = invoiceList.OrderByDescending(i => i.AssignDate).First().AssignDate;
                         if (FinancePeriodBegin < assignDate)
                         {
-                            throw new Exception(String.Format("融资日{0:yyyyMMdd}不能早于转让日{1:yyyyMMdd}，融资批号：{2} ", this.FinancePeriodBegin, assignDate, this.FinanceBatchNo));
+                            throw new Exception(String.Format("融资日{0:yyyyMMdd}不能早于转让日{1:yyyyMMdd}，融资批号：{2} ",
+                                                              FinancePeriodBegin, assignDate, FinanceBatchNo));
                         }
 
                         if (FinancePeriodBegin > FinancePeriodEnd)
                         {
-                            throw new Exception(String.Format("融资到期日{0:yyyyMMdd}应该大于融资日{1:yyyyMMdd}，融资批号：{2} ", this.FinancePeriodBegin, this.FinancePeriodEnd, this.FinanceBatchNo));
+                            throw new Exception(String.Format("融资到期日{0:yyyyMMdd}应该大于融资日{1:yyyyMMdd}，融资批号：{2} ",
+                                                              FinancePeriodBegin, FinancePeriodEnd, FinanceBatchNo));
                         }
 
-                        if (this.Case.TransactionType != "国内买方保理")
+                        if (Case.TransactionType != "国内买方保理")
                         {
                             DateTime dueDate = invoiceList.OrderByDescending(i => i.DueDate).First().DueDate;
                             if (FinancePeriodEnd < dueDate)
                             {
-                                throw new Exception(String.Format("融资到期日{0:yyyyMMdd}不能早于发票到期日{1:yyyyMMdd}，融资批号：{2} ", this.FinancePeriodEnd, dueDate, this.FinanceBatchNo));
+                                throw new Exception(String.Format("融资到期日{0:yyyyMMdd}不能早于发票到期日{1:yyyyMMdd}，融资批号：{2} ",
+                                                                  FinancePeriodEnd, dueDate, FinanceBatchNo));
                             }
                         }
                     }
 
                     if (TypeUtil.LessZero(FinanceRate))
                     {
-                        throw new Exception(String.Format("融资利率{0:N2}，不能小于零，融资批号：{1} ", this.FinanceRate, this.FinanceBatchNo));
+                        throw new Exception(String.Format("融资利率{0:N2}，不能小于零，融资批号：{1} ", FinanceRate, FinanceBatchNo));
                     }
 
-                    if (this.CostRate.HasValue && TypeUtil.LessZero(CostRate))
+                    if (CostRate.HasValue && TypeUtil.LessZero(CostRate))
                     {
-                        throw new Exception(String.Format("成本利率{0:N2}，不能小于零，融资批号: {1}", this.CostRate, this.FinanceBatchNo));
+                        throw new Exception(String.Format("成本利率{0:N2}，不能小于零，融资批号: {1}", CostRate, FinanceBatchNo));
                     }
 
-                    switch (this.FinanceType)
+                    switch (FinanceType)
                     {
-                        case FINANCE.FINANCE_TYPE1: break;
-                        case FINANCE.FINANCE_TYPE2: break;
-                        case FINANCE.FINANCE_TYPE3: break;
-                        case FINANCE.FINANCE_TYPE4: break;
-                        case FINANCE.FINANCE_TYPE5: break;
-                        case FINANCE.FINANCE_TYPE6: break;
-                        case FINANCE.FINANCE_TYPE7: break;
-                        case FINANCE.FINANCE_TYPE8: break;
-                        case FINANCE.FINANCE_TYPE9: break;
-                        default: throw new Exception(String.Format("融资类型：{0}，不符合规范", this.FinanceType));
+                        case FINANCE.FINANCE_TYPE1:
+                            break;
+                        case FINANCE.FINANCE_TYPE2:
+                            break;
+                        case FINANCE.FINANCE_TYPE3:
+                            break;
+                        case FINANCE.FINANCE_TYPE4:
+                            break;
+                        case FINANCE.FINANCE_TYPE5:
+                            break;
+                        case FINANCE.FINANCE_TYPE6:
+                            break;
+                        case FINANCE.FINANCE_TYPE7:
+                            break;
+                        case FINANCE.FINANCE_TYPE8:
+                            break;
+                        case FINANCE.FINANCE_TYPE9:
+                            break;
+                        default:
+                            throw new Exception(String.Format("融资类型：{0}，不符合规范", FinanceType));
                     }
                 }
             }
         }
-        #endregion?Methods?
     }
 }

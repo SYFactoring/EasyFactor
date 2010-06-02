@@ -14,7 +14,6 @@ using CMBC.EasyFactor.InfoMgr.ExchangeMgr;
 using CMBC.EasyFactor.InfoMgr.FactorMgr;
 using CMBC.EasyFactor.InfoMgr.UserMgr;
 using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.Utils.ConstStr;
 using DevComponents.DotNetBar;
 
 //-----------------------------------------------------------------------

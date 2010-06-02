@@ -4,66 +4,35 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+
 namespace CMBC.EasyFactor.Utils
 {
-    using System;
-    using System.Text.RegularExpressions;
-    using System.Windows.Forms;
-
     /// <summary>
     /// 
     /// </summary>
-    public sealed class TypeUtil
+    public static class TypeUtil
     {
-        #region?Fields?(1)?
 
         public static readonly DateTime MIN_DATE = new DateTime(1753, 1, 1);
-
         public static readonly double PRECISION = 0.01;
 
-        #endregion?Fields?
-
-        #region?Constructors?(1)?
-
-        private TypeUtil()
-        {
-        }
-
-        #endregion?Constructors?
-
-        #region?Methods?(12)?
-
         //?Public?Methods?(12)?
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string ConvertBoolToStr(System.Nullable<bool> obj)
+        public static string ConvertBoolToStr(bool? obj)
         {
             if (obj == null)
             {
                 return string.Empty;
             }
 
-            if (!obj.HasValue)
-            {
-                return string.Empty;
-            }
-
-            if (obj.Value == true)
-            {
-                return "Y";
-            }
-            else if (obj.Value == false)
-            {
-                return "N";
-            }
-            else
-            {
-                return string.Empty;
-            }
+            return obj.Value ? "Y" : "N";
         }
 
         /// <summary>
@@ -84,24 +53,15 @@ namespace CMBC.EasyFactor.Utils
                 return false;
             }
 
-            if ("Y".Equals(str, StringComparison.OrdinalIgnoreCase) || "Yes".Equals(str, StringComparison.OrdinalIgnoreCase) || "True".Equals(str, StringComparison.OrdinalIgnoreCase))
-            {
-                return true;
-            }
-            else if ("N".Equals(str, StringComparison.OrdinalIgnoreCase) || "No".Equals(str, StringComparison.OrdinalIgnoreCase) || "False".Equals(str, StringComparison.OrdinalIgnoreCase))
-            {
-                return false;
-            }
-            else
-            {
-                return false;
-            }
+            return "Y".Equals(str, StringComparison.OrdinalIgnoreCase) ||
+                   "Yes".Equals(str, StringComparison.OrdinalIgnoreCase) ||
+                   "True".Equals(str, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="number"></param>
         /// <returns></returns>
         public static string ConvertToChineseMoney(double? number)
         {
@@ -111,7 +71,9 @@ namespace CMBC.EasyFactor.Utils
             }
 
             double input = number.Value;
-            string result = input.ToString("#¶'.'#«™#∞€# ∞#Ôˆ'.'#«™#∞€# ∞#€Ú'.'#«™#∞€# ∞#æ©'.'#«™#∞€# ∞#’◊'.'#«™#∞€# ∞#“⁄'.'#«™#∞€# ∞#ÕÚ'.'#«™#∞€# ∞#‘™.0Ω«0∑÷;∏∫#¶'.'#«™#∞€# ∞#Ôˆ'.'#«™#∞€# ∞#€Ú'.'#«™#∞€# ∞#æ©'.'#«™#∞€# ∞#’◊'.'#«™#∞€# ∞#“⁄'.'#«™#∞€# ∞#ÕÚ'.'#«™#∞€# ∞#‘™.0Ω«0∑÷;¡„‘™");
+            string result =
+                input.ToString(
+                    "#¶'.'#«™#∞€# ∞#Ôˆ'.'#«™#∞€# ∞#€Ú'.'#«™#∞€# ∞#æ©'.'#«™#∞€# ∞#’◊'.'#«™#∞€# ∞#“⁄'.'#«™#∞€# ∞#ÕÚ'.'#«™#∞€# ∞#‘™.0Ω«0∑÷;∏∫#¶'.'#«™#∞€# ∞#Ôˆ'.'#«™#∞€# ∞#€Ú'.'#«™#∞€# ∞#æ©'.'#«™#∞€# ∞#’◊'.'#«™#∞€# ∞#“⁄'.'#«™#∞€# ∞#ÕÚ'.'#«™#∞€# ∞#‘™.0Ω«0∑÷;¡„‘™");
             // ¥”◊÷∑˚¥Æ◊Û≤‡ø™ ºÃÊªª◊”◊÷∑˚¥Æ£¨”ˆµΩ∫∫◊÷°∞¡„°±ªÚ’ﬂ∞¢¿≠≤Æ ˝◊÷ 0 - 9£¨ÃÊªªæÕΩ· ¯°£
             // ÃÊªªƒ⁄»› «≤∂ªÒ◊È $1£¨∏√≤∂ªÒ◊È±Ì æ 0 ∏ˆªÚ 1 ∏ˆ‘⁄◊÷∑˚¥Æ◊Ó◊Û≤‡µƒ∫∫◊÷°∞∏∫°±
             result = Regex.Replace(result, @"^(∏∫?)[^¡„\d]*", "$1");
@@ -131,7 +93,8 @@ namespace CMBC.EasyFactor.Utils
             // »Áπ˚◊÷∑˚¥Æ◊Ó∫Û“‘°∞‘™°±Ω· ¯£¨æÕªª≥…°∞‘™’˚°±°£
             result = Regex.Replace(result, @"(‘™)$", "$1’˚");
             // ”√ƒ‰√˚∑Ω∑®◊˜¥˙¿Ì£¨Ω´√ø∏ˆ ˝◊÷ÃÊªª≥…∫∫◊÷–Œ Ω°£
-            result = Regex.Replace(result, @"\d", delegate(Match m) { return "¡„“º∑°»˛À¡ŒÈ¬Ω∆‚∞∆æ¡"[m.Value[0] - '0'].ToString(); });
+            result = Regex.Replace(result, @"\d",
+                                   m => "¡„“º∑°»˛À¡ŒÈ¬Ω∆‚∞∆æ¡"[m.Value[0] - '0'].ToString());
 
             return result;
         }
@@ -160,14 +123,14 @@ namespace CMBC.EasyFactor.Utils
         {
             if (e == null)
             {
-                throw new ArgumentNullException("e", "e cannot be a null reference");
+                throw new ArgumentNullException("e", @"e cannot be a null reference");
             }
 
             if (e.DesiredType == typeof(string) && e.Value != null && !String.IsNullOrEmpty(e.Value.ToString()))
             {
                 double result;
-                bool isOK = Double.TryParse(e.Value.ToString(), out result);
-                if (isOK)
+                bool isOk = Double.TryParse(e.Value.ToString(), out result);
+                if (isOk)
                 {
                     e.Value = (result * 100) + "%";
                 }
@@ -185,10 +148,7 @@ namespace CMBC.EasyFactor.Utils
             {
                 return "£§#,##0.00";
             }
-            else
-            {
-                return "[$" + currency + "] #,##0.00";
-            }
+            return "[$" + currency + "] #,##0.00";
         }
 
         /// <summary>
@@ -236,18 +196,20 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public static void ParsePercentToFloat(object sender, ConvertEventArgs e)
         {
             if (e == null)
             {
-                throw new ArgumentNullException("e", "e cannot be a null reference");
+                throw new ArgumentNullException("e", @"e cannot be a null reference");
             }
 
-            if ((e.DesiredType == typeof(double) || e.DesiredType == typeof(System.Nullable<double>)) && e.Value != null && !String.IsNullOrEmpty(e.Value.ToString()))
+            if ((e.DesiredType == typeof(double) || e.DesiredType == typeof(double?)) && e.Value != null &&
+                !String.IsNullOrEmpty(e.Value.ToString()))
             {
                 double result;
-                bool isOK = Double.TryParse(e.Value.ToString(), out result);
-                if (isOK)
+                bool isOk = Double.TryParse(e.Value.ToString(), out result);
+                if (isOk)
                 {
                     e.Value = result / 100;
                 }
@@ -265,10 +227,7 @@ namespace CMBC.EasyFactor.Utils
             {
                 return "RMB";
             }
-            else
-            {
-                return currency;
-            }
+            return currency;
         }
 
         /// <summary>
@@ -282,12 +241,7 @@ namespace CMBC.EasyFactor.Utils
             {
                 return "»À√Ò±“";
             }
-            else
-            {
-                return currency;
-            }
+            return currency;
         }
-
-        #endregion?Methods?
     }
 }

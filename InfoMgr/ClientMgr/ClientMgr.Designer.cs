@@ -535,7 +535,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.Size = new System.Drawing.Size(937, 539);
             this.dgvClients.TabIndex = 2;
             this.dgvClients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            this.dgvClients.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvClients_RowPostPaint);
+            this.dgvClients.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvClientsRowPostPaint);
             // 
             // clientEDICodeColumn
             // 

@@ -4,18 +4,20 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Windows.Forms;
+using CMBC.EasyFactor.CaseMgr;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.InfoMgr.ClientMgr;
+using CMBC.EasyFactor.InfoMgr.FactorMgr;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.InfoMgr.ClientMgr;
-    using CMBC.EasyFactor.InfoMgr.FactorMgr;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
+    /// <summary>
+    /// 
+    /// </summary>
     public enum OpARType
     {
         /// <summary>
@@ -69,23 +71,16 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class ARCaseBasic : UserControl
     {
-
-
-        #region?Fields?(2)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly OpARType _opARType;
 
         /// <summary>
         /// 
         /// </summary>
         private Case _case;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpARType opARType;
 
-        #endregion?Fields?
-
-
-        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the ARCaseBasic class
@@ -93,84 +88,68 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="opARType"></param>
         public ARCaseBasic(OpARType opARType)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.opARType = opARType;
+            _opARType = opARType;
             switch (opARType)
             {
                 case OpARType.ASSIGN:
-                    this.InvoiceControl = new InvoiceAssign(this);
+                    InvoiceControl = new InvoiceAssign(this);
                     break;
                 case OpARType.FINANCE:
-                    this.InvoiceControl = new InvoiceFinance(this);
+                    InvoiceControl = new InvoiceFinance(this);
                     break;
                 case OpARType.BUYER_PAYMENT:
-                    this.InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.BUYER_PAYMENT);
+                    InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.BUYER_PAYMENT);
                     break;
                 case OpARType.INDIRECT_PAYMENT:
-                    this.InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.INDIRECT_PAYMENT);
+                    InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.INDIRECT_PAYMENT);
                     break;
                 case OpARType.GUARANTEE_PAYMENT:
-                    this.InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.GUARANTEE_PAYMENT);
+                    InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.GUARANTEE_PAYMENT);
                     break;
                 case OpARType.SELLER_REASSIGN:
-                    this.InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.SELLER_REASSIGN);
+                    InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.SELLER_REASSIGN);
                     break;
                 case OpARType.CREDIT_NOTE:
-                    this.InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.CREDIT_NOTE_PAYMENT);
+                    InvoiceControl = new InvoicePayment(this, InvoicePayment.OpPaymentType.CREDIT_NOTE_PAYMENT);
                     break;
                 case OpARType.SELLER_REFUND:
-                    this.InvoiceControl = new InvoiceRefund(this, InvoiceRefund.OpRefundType.SELLER_REFUND);
+                    InvoiceControl = new InvoiceRefund(this, InvoiceRefund.OpRefundType.SELLER_REFUND);
                     break;
                 case OpARType.BUYER_REFUND:
-                    this.InvoiceControl = new InvoiceRefund(this, InvoiceRefund.OpRefundType.BUYER_PAYMENT);
+                    InvoiceControl = new InvoiceRefund(this, InvoiceRefund.OpRefundType.BUYER_PAYMENT);
                     break;
                 default:
-                    this.InvoiceControl = new UserControl();
+                    InvoiceControl = new UserControl();
                     break;
             }
 
-            this.InvoiceControl.Dock = DockStyle.Fill;
-            this.panelInvoiceMgr.Controls.Add(this.InvoiceControl);
+            InvoiceControl.Dock = DockStyle.Fill;
+            panelInvoiceMgr.Controls.Add(InvoiceControl);
         }
 
-        #endregion?Constructors?
-
-
-        #region?Properties?(2)?
 
         /// <summary>
         /// Gets or sets
         /// </summary>
         public Case Case
         {
-            get
-            {
-                return this._case;
-            }
+            get { return _case; }
             set
             {
-                this._case = value;
-                this.FillCaseBasic();
+                _case = value;
+                FillCaseBasic();
             }
         }
 
         /// <summary>
         /// Gets or sets
         /// </summary>
-        public UserControl InvoiceControl
-        {
-            get;
-            set;
-        }
+        public UserControl InvoiceControl { get; set; }
 
-        #endregion?Properties?
-
-
-        #region?Methods?(8)?
 
         //?Public?Methods?(1)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -185,21 +164,21 @@ namespace CMBC.EasyFactor.ARMgr
             CDA cda = selectedCase.ActiveCDA;
             if (cda != null)
             {
-                this.tbCreditCoverOutstanding.Text = String.Format("{0:N2}", cda.CreditCoverOutstanding);
-                this.tbAROutstanding.Text = String.Format("{0:N2}", cda.Case.AssignOutstanding);
-                this.tbFinanceCreditLineOutstanding.Text = String.Format("{0:N2}", cda.FinanceLineOutstanding);
-                this.tbFinanceOutstanding.Text = String.Format("{0:N2}", cda.Case.FinanceOutstanding);
+                tbCreditCoverOutstanding.Text = String.Format("{0:N2}", cda.CreditCoverOutstanding);
+                tbAROutstanding.Text = String.Format("{0:N2}", cda.Case.AssignOutstanding);
+                tbFinanceCreditLineOutstanding.Text = String.Format("{0:N2}", cda.FinanceLineOutstanding);
+                tbFinanceOutstanding.Text = String.Format("{0:N2}", cda.Case.FinanceOutstanding);
             }
             else
             {
-                this.tbCreditCoverOutstanding.Text = String.Empty;
-                this.tbAROutstanding.Text = String.Empty;
-                this.tbFinanceCreditLineOutstanding.Text = String.Empty;
-                this.tbFinanceOutstanding.Text = String.Empty;
+                tbCreditCoverOutstanding.Text = String.Empty;
+                tbAROutstanding.Text = String.Empty;
+                tbFinanceCreditLineOutstanding.Text = String.Empty;
+                tbFinanceOutstanding.Text = String.Empty;
             }
         }
-        //?Private?Methods?(7)?
 
+        //?Private?Methods?(7)?
         /// <summary>
         /// 
         /// </summary>
@@ -207,9 +186,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailBuyer(object sender, EventArgs e)
         {
-            if (this.Case != null)
+            if (Case != null)
             {
-                ClientDetail clientDetail = new ClientDetail(this.Case.BuyerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
+                var clientDetail = new ClientDetail(Case.BuyerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
                 clientDetail.Show();
             }
         }
@@ -221,9 +200,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
-            if (this.Case != null)
+            if (Case != null)
             {
-                CaseDetail caseDetail = new CaseDetail(this.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+                var caseDetail = new CaseDetail(Case, CaseDetail.OpCaseType.DETAIL_CASE);
                 caseDetail.Show();
             }
         }
@@ -235,12 +214,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCDA(object sender, EventArgs e)
         {
-            if (this.Case != null)
+            if (Case != null)
             {
-                CDA cda = this.Case.ActiveCDA;
+                CDA cda = Case.ActiveCDA;
                 if (cda != null)
                 {
-                    CDADetail cdaDetail = new CDADetail(cda, CDADetail.OpCDAType.DETAIL_CDA);
+                    var cdaDetail = new CDADetail(cda, CDADetail.OpCDAType.DETAIL_CDA);
                     cdaDetail.Show();
                 }
             }
@@ -253,9 +232,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailFactor(object sender, EventArgs e)
         {
-            if (this.Case != null)
+            if (Case != null)
             {
-                FactorDetail factorDetail = new FactorDetail(this.Case.Factor, FactorDetail.OpFactorType.DETAIL_FACTOR);
+                var factorDetail = new FactorDetail(Case.Factor, FactorDetail.OpFactorType.DETAIL_FACTOR);
                 factorDetail.Show();
             }
         }
@@ -267,9 +246,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailSeller(object sender, EventArgs e)
         {
-            if (this.Case != null)
+            if (Case != null)
             {
-                ClientDetail clientDetail = new ClientDetail(this.Case.SellerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
+                var clientDetail = new ClientDetail(Case.SellerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
                 clientDetail.Show();
             }
         }
@@ -279,95 +258,99 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void FillCaseBasic()
         {
-            this.tbCaseCode.Text = this.Case.CaseCode;
-            this.ownerDepartmentCodeTextBox.Text = this.Case.OwnerDepartment == null ? string.Empty : this.Case.OwnerDepartment.ToString();
-            this.transactionTypeTextBox.Text = this.Case.TransactionType;
-            this.invoiceCurrencyTextBox.Text = this.Case.InvoiceCurrency;
-            this.sellerEDICodeTextBox.Text = this.Case.SellerCode;
-            this.sellerNameTextBox.Text = this.Case.SellerClient == null ? string.Empty : this.Case.SellerClient.ToString();
-            this.buyerEDICodeTextBox.Text = this.Case.BuyerCode;
-            this.tbNetPaymentTerm.Text = String.Format("{0:G}", this.Case.NetPaymentTerm);
-            this.buyerNameTextBox.Text = this.Case.BuyerClient == null ? string.Empty : this.Case.BuyerClient.ToString();
-            this.tbTotalAssignOutstanding.Text = String.Format("{0:N2}", this.Case.TotalAssignOutstanding);
-            this.tbTotalFinanceOustanding.Text = String.Format("{0:N2}", this.Case.TotalFinanceOutstanding);
+            tbCaseCode.Text = Case.CaseCode;
+            ownerDepartmentCodeTextBox.Text = Case.OwnerDepartment == null
+                                                  ? string.Empty
+                                                  : Case.OwnerDepartment.ToString();
+            transactionTypeTextBox.Text = Case.TransactionType;
+            invoiceCurrencyTextBox.Text = Case.InvoiceCurrency;
+            sellerEDICodeTextBox.Text = Case.SellerCode;
+            sellerNameTextBox.Text = Case.SellerClient == null ? string.Empty : Case.SellerClient.ToString();
+            buyerEDICodeTextBox.Text = Case.BuyerCode;
+            tbNetPaymentTerm.Text = String.Format("{0:G}", Case.NetPaymentTerm);
+            buyerNameTextBox.Text = Case.BuyerClient == null ? string.Empty : Case.BuyerClient.ToString();
+            tbTotalAssignOutstanding.Text = String.Format("{0:N2}", Case.TotalAssignOutstanding);
+            tbTotalFinanceOustanding.Text = String.Format("{0:N2}", Case.TotalFinanceOutstanding);
 
-            switch (this.Case.TransactionType)
+            switch (Case.TransactionType)
             {
                 case "国内卖方保理":
                 case "出口保理":
-                    this.factorCodeTextBox.Text = this.Case.BuyerFactor.FactorCode;
-                    this.factorNameTextBox.Text = this.Case.BuyerFactor.ToString();
+                    factorCodeTextBox.Text = Case.BuyerFactor.FactorCode;
+                    factorNameTextBox.Text = Case.BuyerFactor.ToString();
                     break;
                 case "国内买方保理":
                 case "进口保理":
-                    this.factorCodeTextBox.Text = this.Case.SellerFactor.FactorCode;
-                    this.factorNameTextBox.Text = this.Case.SellerFactor.ToString();
+                    factorCodeTextBox.Text = Case.SellerFactor.FactorCode;
+                    factorNameTextBox.Text = Case.SellerFactor.ToString();
                     break;
-                default: break;
+                default:
+                    break;
             }
 
 
-            CDA cda = this.Case.ActiveCDA;
+            CDA cda = Case.ActiveCDA;
             if (cda != null)
             {
-                this.tbCDACode.Text = cda.CDACode;
-                this.tbIsNotice.Text = cda.IsNotice;
-                this.isRecoarseCheckBox.Checked = cda.IsRecoarse.Value;
-                this.assignTypeTextBox.Text = cda.AssignType;
-                this.tbPaymentTerms.Text = cda.PaymentTerms;
+                tbCDACode.Text = cda.CDACode;
+                tbIsNotice.Text = cda.IsNotice;
+                if (cda.IsRecoarse != null) isRecoarseCheckBox.Checked = cda.IsRecoarse.Value;
+                assignTypeTextBox.Text = cda.AssignType;
+                tbPaymentTerms.Text = cda.PaymentTerms;
 
-                this.priceTextBox.Text = String.Format("{0:P4}", cda.Price);
-                this.eFPriceTextBox.Text = String.Format("{0:P4}", cda.EFPrice);
-                this.iFPriceTextBox.Text = String.Format("{0:P4}", cda.IFPrice);
-                this.handFeeCurrTextBox.Text = cda.HandFeeCurr;
-                this.handFeeTextBox.Text = String.Format("{0:N}", cda.HandFee);
-                this.commissionTypeTextBox.Text = cda.CommissionType;
+                priceTextBox.Text = String.Format("{0:P4}", cda.Price);
+                eFPriceTextBox.Text = String.Format("{0:P4}", cda.EFPrice);
+                iFPriceTextBox.Text = String.Format("{0:P4}", cda.IFPrice);
+                handFeeCurrTextBox.Text = cda.HandFeeCurr;
+                handFeeTextBox.Text = String.Format("{0:N}", cda.HandFee);
+                commissionTypeTextBox.Text = cda.CommissionType;
 
-                this.creditCoverCurrTextBox.Text = cda.CreditCoverCurr;
-                this.creditCoverTextBox.Text = String.Format("{0:N2}", cda.CreditCover);
-                this.periodEndTextBox.Text = String.Format("{0:d}", cda.CreditCoverPeriodEnd);
+                creditCoverCurrTextBox.Text = cda.CreditCoverCurr;
+                creditCoverTextBox.Text = String.Format("{0:N2}", cda.CreditCover);
+                periodEndTextBox.Text = String.Format("{0:d}", cda.CreditCoverPeriodEnd);
 
 
-                this.financeProportionTextBox.Text = String.Format("{0:P0}", cda.FinanceProportion);
-                this.tbFinanceLineCurr.Text = cda.FinanceLineCurr;
-                this.tbFinanceLine.Text = String.Format("{0:N2}", cda.FinanceLine);
-                this.tbDueDate.Text = String.Format("{0:d}", cda.FinanceLinePeriodEnd);
+                financeProportionTextBox.Text = String.Format("{0:P0}", cda.FinanceProportion);
+                tbFinanceLineCurr.Text = cda.FinanceLineCurr;
+                tbFinanceLine.Text = String.Format("{0:N2}", cda.FinanceLine);
+                tbDueDate.Text = String.Format("{0:d}", cda.FinanceLinePeriodEnd);
                 ClientCreditLine creditLine = cda.FinanceCreditLine;
                 if (creditLine != null)
                 {
-                    this.tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
+                    tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
                 }
 
-                this.CaculateOutstanding(this.Case);
+                CaculateOutstanding(Case);
 
-                if (!cda.FinanceLine.HasValue && this.opARType == OpARType.FINANCE)
+                if (!cda.FinanceLine.HasValue && _opARType == OpARType.FINANCE)
                 {
-                    MessageBoxEx.Show("本案无预付款额度，不能融资。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("本案无预付款额度，不能融资。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     return;
                 }
             }
             else
             {
-                this.isRecoarseCheckBox.Checked = false;
-                this.assignTypeTextBox.Text = string.Empty;
+                isRecoarseCheckBox.Checked = false;
+                assignTypeTextBox.Text = string.Empty;
             }
 
-            Control control = this.panelInvoiceMgr.Controls[0];
+            Control control = panelInvoiceMgr.Controls[0];
             if (control is InvoiceAssign)
             {
-                (control as InvoiceAssign).Case = this.Case;
+                (control as InvoiceAssign).Case = Case;
             }
             else if (control is InvoiceFinance)
             {
-                (control as InvoiceFinance).Case = this.Case;
+                (control as InvoiceFinance).Case = Case;
             }
             else if (control is InvoicePayment)
             {
-                (control as InvoicePayment).Case = this.Case;
+                (control as InvoicePayment).Case = Case;
             }
             else if (control is InvoiceRefund)
             {
-                (control as InvoiceRefund).Case = this.Case;
+                (control as InvoiceRefund).Case = Case;
             }
         }
 
@@ -378,8 +361,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectCase(object sender, EventArgs e)
         {
-            CaseMgr caseMgr = new CaseMgr(CaseMgr.OpCaseType.ENABLE_CASE);
-            QueryForm queryForm = new QueryForm(caseMgr, "选择案件");
+            var caseMgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.ENABLE_CASE);
+            var queryForm = new QueryForm(caseMgr, "选择案件");
             caseMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
             Case curCase = caseMgr.Selected;
@@ -387,13 +370,12 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (curCase.ActiveCDA == null)
                 {
-                    MessageBoxEx.Show("没有有效的额度通知书，不能进行应收账款管理", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("没有有效的额度通知书，不能进行应收账款管理", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     return;
                 }
-                this.Case = curCase;
+                Case = curCase;
             }
         }
-
-        #endregion?Methods?
     }
 }

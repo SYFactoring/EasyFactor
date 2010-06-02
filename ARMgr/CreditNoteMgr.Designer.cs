@@ -117,7 +117,7 @@
             this.dgvCreditNote.Size = new System.Drawing.Size(988, 250);
             this.dgvCreditNote.TabIndex = 2;
             this.dgvCreditNote.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            this.dgvCreditNote.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCreditNote_RowPostPaint);
+            this.dgvCreditNote.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvCreditNoteRowPostPaint);
             // 
             // colSellerName
             // 

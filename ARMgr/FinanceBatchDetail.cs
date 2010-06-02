@@ -4,43 +4,25 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Data.Linq;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.CaseMgr;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.InfoMgr.ClientMgr;
+using CMBC.EasyFactor.InfoMgr.FactorMgr;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Data.Linq;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.InfoMgr.ClientMgr;
-    using CMBC.EasyFactor.InfoMgr.FactorMgr;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class FinanceBatchDetail : DevComponents.DotNetBar.Office2007Form
+    public partial class FinanceBatchDetail : Office2007Form
     {
-        #region?Fields?(3)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bs;
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpBatchType opBatchType;
-
-        #endregion?Fields?
-
-        #region?Enums?(1)?
+        #region OpBatchType enum
 
         /// <summary>
         /// 
@@ -58,9 +40,23 @@ namespace CMBC.EasyFactor.ARMgr
             UPDATE_BATCH,
         }
 
-        #endregion?Enums?
+        #endregion
 
-        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpBatchType _opBatchType;
+
 
         /// <summary>
         /// Initializes a new instance of the FinanceBatchDetail class
@@ -68,36 +64,32 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batch"></param>
         public FinanceBatchDetail(InvoiceFinanceBatch batch)
         {
-            this.InitializeComponent();
-            this.bs = new BindingSource();
-            this.dgvFinanceLogs.DataSource = this.bs;
-            this.dgvFinanceLogs.AutoGenerateColumns = false;
-            this.context = new DBDataContext();
-            batch = context.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == batch.FinanceBatchNo);
-            this.bs.DataSource = batch.InvoiceFinanceLogs;
-            this.batchBindingSource.DataSource = batch;
-            this.opBatchType = OpBatchType.DETAIL_BATCH;
-            this.ImeMode = ImeMode.OnHalf;
+            InitializeComponent();
+            _bs = new BindingSource();
+            dgvFinanceLogs.DataSource = _bs;
+            dgvFinanceLogs.AutoGenerateColumns = false;
+            _context = new DBDataContext();
+            batch = _context.InvoiceFinanceBatches.SingleOrDefault(i => i.FinanceBatchNo == batch.FinanceBatchNo);
+            _bs.DataSource = batch.InvoiceFinanceLogs;
+            batchBindingSource.DataSource = batch;
+            _opBatchType = OpBatchType.DETAIL_BATCH;
+            ImeMode = ImeMode.OnHalf;
 
-            this.batchCurrencyComboBox.DataSource = Currency.AllCurrencies;
-            this.batchCurrencyComboBox.DisplayMember = "CurrencyCode";
-            this.batchCurrencyComboBox.ValueMember = "CurrencyCode";
+            batchCurrencyComboBox.DataSource = Currency.AllCurrencies;
+            batchCurrencyComboBox.DisplayMember = "CurrencyCode";
+            batchCurrencyComboBox.ValueMember = "CurrencyCode";
 
-            this.financeRateTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
-            this.financeRateTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+            financeRateTextBox.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
+            financeRateTextBox.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
 
-            this.costRateTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
-            this.costRateTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+            costRateTextBox.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
+            costRateTextBox.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
 
-            this.UpdateBatchControlStatus();
+            UpdateBatchControlStatus();
         }
 
-        #endregion?Constructors?
-
-        #region?Methods?(8)?
 
         //?Private?Methods?(8)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -110,15 +102,16 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvFinanceLogs.SelectedRows.Count == 0)
+            if (dgvFinanceLogs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            InvoiceFinanceLog log = (InvoiceFinanceLog)this.bs.List[this.dgvFinanceLogs.SelectedRows[0].Index];
+            var log = (InvoiceFinanceLog) _bs.List[dgvFinanceLogs.SelectedRows[0].Index];
             if (log.InvoiceRefundLogs.Count > 0)
             {
-                DialogResult dr = MessageBoxEx.Show("此笔融资已还款，是否确认删除此笔融资以及关联还款记录", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBoxEx.Show("此笔融资已还款，是否确认删除此笔融资以及关联还款记录", MESSAGE.TITLE_INFORMATION,
+                                                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                 {
                     return;
@@ -137,21 +130,22 @@ namespace CMBC.EasyFactor.ARMgr
                     refundLog.InvoiceFinanceLog = null;
                 }
 
-                context.InvoiceRefundLogs.DeleteAllOnSubmit(log.InvoiceRefundLogs);
+                _context.InvoiceRefundLogs.DeleteAllOnSubmit(log.InvoiceRefundLogs);
                 invoice.CaculateRefund();
                 invoice.CaculateFinance();
                 batch.CaculateFinanceAmount();
-                context.InvoiceFinanceLogs.DeleteOnSubmit(log);
+                _context.InvoiceFinanceLogs.DeleteOnSubmit(log);
                 //batch.CheckStatus = BATCH.UNCHECK;
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
                 return;
             }
 
-            this.dgvFinanceLogs.Rows.RemoveAt(this.dgvFinanceLogs.SelectedRows[0].Index);
+            dgvFinanceLogs.Rows.RemoveAt(dgvFinanceLogs.SelectedRows[0].Index);
         }
 
         /// <summary>
@@ -161,10 +155,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            var batch = (InvoiceFinanceBatch) batchBindingSource.DataSource;
             if (batch.Case != null)
             {
-                CaseDetail detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
+                var detail = new CaseDetail(batch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
                 detail.Show();
             }
         }
@@ -176,10 +170,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailClient(object sender, EventArgs e)
         {
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
+            var batch = (InvoiceFinanceBatch) batchBindingSource.DataSource;
             if (batch.Client != null)
             {
-                ClientDetail detail = new ClientDetail(batch.Client, ClientDetail.OpClientType.DETAIL_CLIENT);
+                var detail = new ClientDetail(batch.Client, ClientDetail.OpClientType.DETAIL_CLIENT);
                 detail.Show();
             }
         }
@@ -191,13 +185,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailInvoice(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvFinanceLogs.SelectedRows.Count == 0)
+            if (dgvFinanceLogs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            InvoiceFinanceLog log = (InvoiceFinanceLog)this.bs.List[this.dgvFinanceLogs.SelectedRows[0].Index];
-            InvoiceDetail detail = new InvoiceDetail(log.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+            var log = (InvoiceFinanceLog) _bs.List[dgvFinanceLogs.SelectedRows[0].Index];
+            var detail = new InvoiceDetail(log.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             detail.Show();
         }
 
@@ -213,21 +207,19 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-
             bool isUpdateOK = true;
             try
             {
-                context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                _context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)
             {
-                foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                 {
                     foreach (MemberChangeConflict mc in cc.MemberConflicts)
                     {
@@ -235,7 +227,7 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -261,16 +253,16 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            InvoiceFinanceBatch financeBatch = (InvoiceFinanceBatch)this.batchBindingSource.DataSource;
-            FactorMgr factorMgr = new FactorMgr();
-            QueryForm queryForm = new QueryForm(factorMgr, "选择代付行");
+            var financeBatch = (InvoiceFinanceBatch) batchBindingSource.DataSource;
+            var factorMgr = new FactorMgr();
+            var queryForm = new QueryForm(factorMgr, "选择代付行");
             factorMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
 
             Factor factor = factorMgr.Selected;
             if (factor != null)
             {
-                financeBatch.Factor = context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
+                financeBatch.Factor = _context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
             }
         }
 
@@ -286,8 +278,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.opBatchType = OpBatchType.UPDATE_BATCH;
-            this.UpdateBatchControlStatus();
+            _opBatchType = OpBatchType.UPDATE_BATCH;
+            UpdateBatchControlStatus();
         }
 
         /// <summary>
@@ -295,34 +287,32 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateBatchControlStatus()
         {
-            if (this.opBatchType == OpBatchType.DETAIL_BATCH)
+            if (_opBatchType == OpBatchType.DETAIL_BATCH)
             {
-                foreach (Control comp in this.panelBatch.Controls)
+                foreach (Control comp in panelBatch.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                this.btnFactorSelect.Visible = false;
+                btnFactorSelect.Visible = false;
             }
-            else if (this.opBatchType == OpBatchType.UPDATE_BATCH)
+            else if (_opBatchType == OpBatchType.UPDATE_BATCH)
             {
-                foreach (Control comp in this.panelBatch.Controls)
+                foreach (Control comp in panelBatch.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.btnFactorSelect.Visible = true;
-                this.factorCodeTextBox.ReadOnly = true;
-                this.factorTextBox.ReadOnly = true;
+                btnFactorSelect.Visible = true;
+                factorCodeTextBox.ReadOnly = true;
+                factorTextBox.ReadOnly = true;
             }
 
-            ControlUtil.SetComponetEditable(this.createUserNameTextBox, false);
-            ControlUtil.SetComponetEditable(this.caseCodeTextBox, false);
-            ControlUtil.SetComponetEditable(this.financeBatchNoTextBox, false);
-            ControlUtil.SetComponetEditable(this.tbClientName, false);
-            ControlUtil.SetComponetEditable(this.diInputDate, false);
+            ControlUtil.SetComponetEditable(createUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(caseCodeTextBox, false);
+            ControlUtil.SetComponetEditable(financeBatchNoTextBox, false);
+            ControlUtil.SetComponetEditable(tbClientName, false);
+            ControlUtil.SetComponetEditable(diInputDate, false);
         }
-
-        #endregion?Methods?
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 
 namespace CMBC.EasyFactor.DB.dbml
@@ -13,23 +11,9 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public string SellerName
-        {
-            get
-            {
-                return this.InvoiceAssignBatch.Case.SellerClient.ToString();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public string BuyerName
         {
-            get
-            {
-                return this.InvoiceAssignBatch.Case.BuyerClient.ToString();
-            }
+            get { return InvoiceAssignBatch.Case.BuyerClient.ToString(); }
         }
 
         /// <summary>
@@ -37,21 +21,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string FactorName
         {
-            get
-            {
-                return this.InvoiceAssignBatch.Case.Factor.ToString();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string TransactionType
-        {
-            get
-            {
-                return this.InvoiceAssignBatch.Case.TransactionType;
-            }
+            get { return InvoiceAssignBatch.Case.Factor.ToString(); }
         }
 
         /// <summary>
@@ -61,8 +31,8 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                StringBuilder sb = new StringBuilder();
-                foreach (InvoicePaymentLog log in this.InvoicePaymentLogs)
+                var sb = new StringBuilder();
+                foreach (InvoicePaymentLog log in InvoicePaymentLogs)
                 {
                     sb.Append(log.InvoiceNo).Append(';');
                 }
@@ -77,10 +47,23 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double? PaymentAmount
         {
-            get
-            {
-                return this.InvoicePaymentLogs.Sum(log => log.PaymentAmount);
-            }
+            get { return InvoicePaymentLogs.Sum(log => log.PaymentAmount); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SellerName
+        {
+            get { return InvoiceAssignBatch.Case.SellerClient.ToString(); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TransactionType
+        {
+            get { return InvoiceAssignBatch.Case.TransactionType; }
         }
     }
 }

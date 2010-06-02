@@ -4,75 +4,29 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Data.Linq;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.ARMgr;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.InfoMgr.ClientMgr;
+using CMBC.EasyFactor.InfoMgr.FactorMgr;
+using CMBC.EasyFactor.Utils;
+using DevComponents.AdvTree;
+using DevComponents.DotNetBar;
+using DevComponents.DotNetBar.Validator;
+
 namespace CMBC.EasyFactor.CaseMgr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Linq;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.InfoMgr.ClientMgr;
-    using CMBC.EasyFactor.InfoMgr.FactorMgr;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-    using CMBC.EasyFactor.ARMgr;
-
     /// <summary>
     /// Case Detail
     /// </summary>
-    public partial class CaseDetail : DevComponents.DotNetBar.Office2007Form
+    public partial class CaseDetail : Office2007Form
     {
-        #region?Fields?(3)?
+        #region OpCaseType enum
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bsCreditCoverNegs;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bsCDAs;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// Operation type of Case
-        /// </summary>
-        private OpCaseType opCaseType;
-        /// <summary>
-        /// Operation type of Credit Cover Negotiation
-        /// </summary>
-        private OpCreditCoverNegType opCreditCoverNegType;
-
-        #endregion?Fields?
-
-        #region?Enums?(2)?
-
-        /// <summary>
-        /// Operation types of Credit Cover Negotiation
-        /// </summary>
-        public enum OpCreditCoverNegType
-        {
-            /// <summary>
-            /// New CreditCoverNegotiation
-            /// </summary>
-            NEW_CREDIT_COVER_NEG,
-
-            /// <summary>
-            /// Update CreditCoverNegotiation
-            /// </summary>
-            UPDATE_CREDIT_COVER_NEG,
-
-            /// <summary>
-            /// Detail CreditCoverNegotiation
-            /// </summary>
-            DETAIL_CREDIT_COVER_NEG
-        }
         /// <summary>
         /// Operation types of Case
         /// </summary>
@@ -94,9 +48,58 @@ namespace CMBC.EasyFactor.CaseMgr
             DETAIL_CASE,
         }
 
-        #endregion?Enums?
+        #endregion
 
-        #region?Constructors?(4)?
+        #region OpCreditCoverNegType enum
+
+        /// <summary>
+        /// Operation types of Credit Cover Negotiation
+        /// </summary>
+        public enum OpCreditCoverNegType
+        {
+            /// <summary>
+            /// New CreditCoverNegotiation
+            /// </summary>
+            NEW_CREDIT_COVER_NEG,
+
+            /// <summary>
+            /// Update CreditCoverNegotiation
+            /// </summary>
+            UPDATE_CREDIT_COVER_NEG,
+
+            /// <summary>
+            /// Detail CreditCoverNegotiation
+            /// </summary>
+            DETAIL_CREDIT_COVER_NEG
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bsCDAs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bsCreditCoverNegs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
+
+        /// <summary>
+        /// Operation type of Case
+        /// </summary>
+        private OpCaseType _opCaseType;
+
+        /// <summary>
+        /// Operation type of Credit Cover Negotiation
+        /// </summary>
+        private OpCreditCoverNegType _opCreditCoverNegType;
+
 
         /// <summary>
         /// Initializes a new instance of the CaseDetail class
@@ -106,86 +109,88 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="opCreditCoverNegType">operation type of CreditCoverNegotiation</param>
         private CaseDetail(Case curCase, OpCaseType opCaseType, OpCreditCoverNegType opCreditCoverNegType)
         {
-            this.InitializeComponent();
-            this.bsCDAs = new BindingSource();
-            this.bsCreditCoverNegs = new BindingSource();
-            this.ImeMode = ImeMode.OnHalf;
-            this.dgvCDAs.AutoGenerateColumns = false;
-            this.dgvCreditCoverNegs.AutoGenerateColumns = false;
-            this.dgvCDAs.DataSource = this.bsCDAs;
-            this.dgvCreditCoverNegs.DataSource = this.bsCreditCoverNegs;
-            this.context = new DBDataContext();
+            InitializeComponent();
+            _bsCDAs = new BindingSource();
+            _bsCreditCoverNegs = new BindingSource();
+            ImeMode = ImeMode.OnHalf;
+            dgvCDAs.AutoGenerateColumns = false;
+            dgvCreditCoverNegs.AutoGenerateColumns = false;
+            dgvCDAs.DataSource = _bsCDAs;
+            dgvCreditCoverNegs.DataSource = _bsCreditCoverNegs;
+            _context = new DBDataContext();
 
-            this.cbCaseInvoiceCurrency.DataSource = Currency.AllCurrencies;
-            this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
-            this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
+            cbCaseInvoiceCurrency.DataSource = Currency.AllCurrencies;
+            cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
+            cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
 
-            List<Department> allDepartments = Department.AllDepartments(this.context);
-            this.cbCaseOwnerDepts.DataSource = allDepartments;
-            this.cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
-            this.cbCaseOwnerDepts.GroupingMembers = "Domain";
-            this.cbCaseOwnerDepts.ValueMember = "DepartmentCode";
-            this.cbCaseOwnerDepts.SelectedIndex = -1;
+            List<Department> allDepartments = Department.AllDepartments(_context);
+            cbCaseOwnerDepts.DataSource = allDepartments;
+            cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
+            cbCaseOwnerDepts.GroupingMembers = "Domain";
+            cbCaseOwnerDepts.ValueMember = "DepartmentCode";
+            cbCaseOwnerDepts.SelectedIndex = -1;
 
-            this.opCaseType = opCaseType;
-            this.opCreditCoverNegType = opCreditCoverNegType;
+            _opCaseType = opCaseType;
+            _opCreditCoverNegType = opCreditCoverNegType;
 
-            this.cbReviews.DisplayMember = "ReviewNo";
-            this.cbReviews.ValueMember = "ReviewNo";
+            cbReviews.DisplayMember = "ReviewNo";
+            cbReviews.ValueMember = "ReviewNo";
 
-            this.tbIFPrice.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
-            this.tbIFPrice.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+            tbIFPrice.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
+            tbIFPrice.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
 
             if (opCaseType == OpCaseType.NEW_CASE)
             {
-                curCase = new Case();
-                curCase.CreateUserName = App.Current.CurUser.Name;
-                curCase.CaseAppDate = DateTime.Now.Date;
-                curCase.OperationType = "自营";
-                curCase.CaseMark = "申请案";
-                this.caseBindingSource.DataSource = curCase;
+                curCase = new Case
+                              {
+                                  CreateUserName = App.Current.CurUser.Name,
+                                  CaseAppDate = DateTime.Now.Date,
+                                  OperationType = "自营",
+                                  CaseMark = "申请案"
+                              };
+                caseBindingSource.DataSource = curCase;
             }
             else
             {
-                curCase = this.context.Cases.SingleOrDefault(c => c.CaseCode == curCase.CaseCode);
-                this.caseBindingSource.DataSource = curCase;
-                this.bsCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations;
-                this.bsCDAs.DataSource = curCase.CDAs;
+                curCase = _context.Cases.SingleOrDefault(c => c.CaseCode == curCase.CaseCode);
+                caseBindingSource.DataSource = curCase;
+                _bsCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations;
+                _bsCDAs.DataSource = curCase.CDAs;
 
                 switch (curCase.TransactionType)
                 {
                     case "国内卖方保理":
                     case "出口保理":
-                        this.tbCaseFactorCode.Text = curCase.BuyerFactor.FactorCode;
-                        this.tbCaseFactorNameCN.Text = curCase.BuyerFactor.CompanyNameCN;
-                        this.tbCaseFactorNameEN.Text = curCase.BuyerFactor.CompanyNameEN;
+                        tbCaseFactorCode.Text = curCase.BuyerFactor.FactorCode;
+                        tbCaseFactorNameCN.Text = curCase.BuyerFactor.CompanyNameCN;
+                        tbCaseFactorNameEN.Text = curCase.BuyerFactor.CompanyNameEN;
                         break;
                     case "国内买方保理":
                     case "进口保理":
-                        this.tbCaseFactorCode.Text = curCase.SellerFactor.FactorCode;
-                        this.tbCaseFactorNameCN.Text = curCase.SellerFactor.CompanyNameCN;
-                        this.tbCaseFactorNameEN.Text = curCase.SellerFactor.CompanyNameEN;
+                        tbCaseFactorCode.Text = curCase.SellerFactor.FactorCode;
+                        tbCaseFactorNameCN.Text = curCase.SellerFactor.CompanyNameCN;
+                        tbCaseFactorNameEN.Text = curCase.SellerFactor.CompanyNameEN;
                         break;
-                    default: break;
+                    default:
+                        break;
                 }
 
-                this.cbReviews.DataSource = curCase.ClientReviews;
+                cbReviews.DataSource = curCase.ClientReviews;
 
-                List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
-                this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
+                var deptsList = (List<Department>) cbCaseOwnerDepts.DataSource;
+                cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
             }
 
             if (opCreditCoverNegType == OpCreditCoverNegType.NEW_CREDIT_COVER_NEG)
             {
-                this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
+                tabControl.SelectedTab = tabItemCreditCoverNeg;
             }
 
-            InvoiceMgr invoiceMgr = new InvoiceMgr(curCase.GetInvoices(), context);
-            invoiceMgr.Dock = DockStyle.Fill;
-            this.tabPanelInvoice.Controls.Add(invoiceMgr);
+            var invoiceMgr = new InvoiceMgr(curCase.GetInvoices(), _context) {Dock = DockStyle.Fill};
+            tabPanelInvoice.Controls.Add(invoiceMgr);
 
-            this.UpdateCaseControlStatus();
-            this.UpdateCreditCoverNegControlStatus();
+            UpdateCaseControlStatus();
+            UpdateCreditCoverNegControlStatus();
         }
 
         /// <summary>
@@ -196,7 +201,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseDetail(Case curCase, OpCaseType opCaseType)
             : this(curCase, opCaseType, OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG)
         {
-            this.tabControl.SelectedTab = this.tabItemCase;
+            tabControl.SelectedTab = tabItemCase;
         }
 
         /// <summary>
@@ -207,7 +212,7 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseDetail(Case curCase, OpCreditCoverNegType opCreditCoverNegType)
             : this(curCase, OpCaseType.DETAIL_CASE, opCreditCoverNegType)
         {
-            this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
+            tabControl.SelectedTab = tabItemCreditCoverNeg;
         }
 
         /// <summary>
@@ -218,38 +223,31 @@ namespace CMBC.EasyFactor.CaseMgr
         public CaseDetail(CreditCoverNegotiation neg, OpCreditCoverNegType opCreditCoverNegType)
             : this(neg.Case, OpCaseType.DETAIL_CASE, opCreditCoverNegType)
         {
-            this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
-            if (neg == null)
-            {
-                return;
-            }
+            tabControl.SelectedTab = tabItemCreditCoverNeg;
 
-            if (opCreditCoverNegType == OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG || opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
+            if (opCreditCoverNegType == OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG ||
+                opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
             {
-                neg = this.context.CreditCoverNegotiations.SingleOrDefault(n => n.NegoID == neg.NegoID);
-                this.creditCoverNegBindingSource.DataSource = neg;
+                neg = _context.CreditCoverNegotiations.SingleOrDefault(n => n.NegoID == neg.NegoID);
+                creditCoverNegBindingSource.DataSource = neg;
             }
         }
 
-        #endregion?Constructors?
-
-        #region?Methods?(24)?
 
         //?Private?Methods?(24)?
-
         /// <summary>
         /// Case owner deparment changed event handler
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CaseOwnerDeptsChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
+        private void CaseOwnerDeptsChanged(object sender, AdvTreeNodeEventArgs e)
         {
-            if (this.caseBindingSource.DataSource is Case)
+            if (caseBindingSource.DataSource is Case)
             {
-                Case curCase = (Case)this.caseBindingSource.DataSource;
-                if (this.cbCaseOwnerDepts.SelectedNode != null)
+                var curCase = (Case) caseBindingSource.DataSource;
+                if (cbCaseOwnerDepts.SelectedNode != null)
                 {
-                    curCase.OwnerDepartment = (Department)this.cbCaseOwnerDepts.SelectedNode.DataKey;
+                    curCase.OwnerDepartment = (Department) cbCaseOwnerDepts.SelectedNode.DataKey;
                 }
             }
         }
@@ -261,34 +259,35 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void CaseTransactionTypeChanged(object sender, EventArgs e)
         {
-            string transactionType = this.cbCaseTransactionType.Text;
+            string transactionType = cbCaseTransactionType.Text;
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
 
-            Factor cmbc = this.context.Factors.SingleOrDefault(f => f.FactorCode == Factor.CMBC_CODE);
+            Factor cmbc = _context.Factors.SingleOrDefault(f => f.FactorCode == Factor.CMBC_CODE);
             switch (transactionType)
             {
                 case "国内卖方保理":
                 case "国内买方保理":
-                    this.btnCaseFactorSelect.Enabled = false;
+                    btnCaseFactorSelect.Enabled = false;
                     curCase.SellerFactor = cmbc;
                     curCase.BuyerFactor = cmbc;
                     curCase.InvoiceCurrency = "CNY";
-                    this.cbCaseInvoiceCurrency.Enabled = false;
+                    cbCaseInvoiceCurrency.Enabled = false;
                     break;
                 case "出口保理":
-                    this.btnCaseFactorSelect.Enabled = true;
+                    btnCaseFactorSelect.Enabled = true;
                     curCase.SellerFactor = cmbc;
                     curCase.InvoiceCurrency = "USD";
-                    this.cbCaseInvoiceCurrency.Enabled = true;
+                    cbCaseInvoiceCurrency.Enabled = true;
                     break;
                 case "进口保理":
-                    this.btnCaseFactorSelect.Enabled = true;
+                    btnCaseFactorSelect.Enabled = true;
                     curCase.BuyerFactor = cmbc;
                     curCase.InvoiceCurrency = "USD";
-                    this.cbCaseInvoiceCurrency.Enabled = true;
+                    cbCaseInvoiceCurrency.Enabled = true;
                     break;
-                default: break;
+                default:
+                    break;
             }
 
             if (!"进口保理".Equals(curCase.TransactionType) && curCase.SellerClient != null)
@@ -305,20 +304,13 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        private void CustomValidator1ValidateValue(object sender, ValidateValueEventArgs e)
         {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            string[] caseTypes = new string[] { "出口保理", "进口保理" };
+            var curCase = (Case) caseBindingSource.DataSource;
+            var caseTypes = new[] {"出口保理", "进口保理"};
             if (caseTypes.Contains(curCase.TransactionType))
             {
-                if (!String.IsNullOrEmpty(this.tbCaseFactorCode.Text))
-                {
-                    e.IsValid = true;
-                }
-                else
-                {
-                    e.IsValid = false;
-                }
+                e.IsValid = !String.IsNullOrEmpty(tbCaseFactorCode.Text);
             }
             else
             {
@@ -338,13 +330,15 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            if (this.dgvCDAs.SelectedRows.Count == 0)
+            if (dgvCDAs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            CDA selectedCDA = (CDA)this.bsCDAs.List[this.dgvCDAs.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("是否打算删除额度通知书: " + selectedCDA.CDACode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            var selectedCDA = (CDA) _bsCDAs.List[dgvCDAs.SelectedRows[0].Index];
+            if (
+                MessageBoxEx.Show("是否打算删除额度通知书: " + selectedCDA.CDACode, MESSAGE.TITLE_WARNING,
+                                  MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -353,23 +347,22 @@ namespace CMBC.EasyFactor.CaseMgr
 
             try
             {
-                this.context.CDAs.DeleteOnSubmit(selectedCDA);
-                this.context.SubmitChanges();
+                _context.CDAs.DeleteOnSubmit(selectedCDA);
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
                 isDeleteOK = false;
-                MessageBoxEx.Show("不能删除此额度通知书: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("不能删除此额度通知书: " + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
             }
 
             if (isDeleteOK)
             {
                 MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.dgvCDAs.Rows.RemoveAt(this.dgvCDAs.SelectedRows[0].Index);
+                dgvCDAs.Rows.RemoveAt(dgvCDAs.SelectedRows[0].Index);
             }
         }
-
-
 
         /// <summary>
         /// Delete current CreditCoverNegotiation
@@ -383,19 +376,20 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.creditCoverNegBindingSource.DataSource is CreditCoverNegotiation))
+            if (!(creditCoverNegBindingSource.DataSource is CreditCoverNegotiation))
             {
                 return;
             }
 
-            CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)this.creditCoverNegBindingSource.DataSource;
+            var creditCoverNeg = (CreditCoverNegotiation) creditCoverNegBindingSource.DataSource;
             if (creditCoverNeg.NegoID == 0)
             {
                 return;
@@ -404,8 +398,8 @@ namespace CMBC.EasyFactor.CaseMgr
             bool isDeleteOK = true;
             try
             {
-                this.context.CreditCoverNegotiations.DeleteOnSubmit(creditCoverNeg);
-                this.context.SubmitChanges();
+                _context.CreditCoverNegotiations.DeleteOnSubmit(creditCoverNeg);
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -416,8 +410,8 @@ namespace CMBC.EasyFactor.CaseMgr
             if (isDeleteOK)
             {
                 MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.bsCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
-                this.creditCoverNegBindingSource.DataSource = new CreditCoverNegotiation();
+                _bsCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
+                creditCoverNegBindingSource.DataSource = new CreditCoverNegotiation();
             }
         }
 
@@ -428,13 +422,13 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DetailBuyer(object sender, EventArgs e)
         {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.BuyerClient == null)
             {
                 return;
             }
 
-            ClientDetail clientDetail = new ClientDetail(curCase.BuyerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
+            var clientDetail = new ClientDetail(curCase.BuyerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
             clientDetail.ShowDialog(this);
         }
 
@@ -445,13 +439,13 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DetailCDA(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvCDAs.SelectedRows.Count == 0)
+            if (dgvCDAs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            CDA selectedCDA = (CDA)this.bsCDAs.List[this.dgvCDAs.SelectedRows[0].Index];
-            CDADetail cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);
+            var selectedCDA = (CDA) _bsCDAs.List[dgvCDAs.SelectedRows[0].Index];
+            var cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);
             cdaDetail.ShowDialog(this);
         }
 
@@ -462,7 +456,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DetailFactor(object sender, EventArgs e)
         {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.TransactionType == null)
             {
                 return;
@@ -479,12 +473,13 @@ namespace CMBC.EasyFactor.CaseMgr
                 case "进口保理":
                     factor = curCase.SellerFactor;
                     break;
-                default: break;
+                default:
+                    break;
             }
 
             if (factor != null)
             {
-                FactorDetail factorDetail = new FactorDetail(factor, FactorDetail.OpFactorType.DETAIL_FACTOR);
+                var factorDetail = new FactorDetail(factor, FactorDetail.OpFactorType.DETAIL_FACTOR);
                 factorDetail.ShowDialog(this);
             }
         }
@@ -496,13 +491,13 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DetailSeller(object sender, EventArgs e)
         {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.SellerClient == null)
             {
                 return;
             }
 
-            ClientDetail clientDetail = new ClientDetail(curCase.SellerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
+            var clientDetail = new ClientDetail(curCase.SellerClient, ClientDetail.OpClientType.DETAIL_CLIENT);
             clientDetail.ShowDialog(this);
         }
 
@@ -511,23 +506,16 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvCDAs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgvCDAsCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            DataGridViewColumn column = this.dgvCDAs.Columns[e.ColumnIndex];
+            DataGridViewColumn column = dgvCDAs.Columns[e.ColumnIndex];
             if (column == colIsRecoarse)
             {
                 Object originalData = e.Value;
                 if (originalData != null)
                 {
-                    bool result = (bool)originalData;
-                    if (result)
-                    {
-                        e.Value = "Y";
-                    }
-                    else
-                    {
-                        e.Value = "N";
-                    }
+                    var result = (bool) originalData;
+                    e.Value = result ? "Y" : "N";
                 }
             }
         }
@@ -544,17 +532,17 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            CDADetail cdaDetail = new CDADetail(curCase, CDADetail.OpCDAType.NEW_CDA);
+            var cdaDetail = new CDADetail(curCase, CDADetail.OpCDAType.NEW_CDA);
             cdaDetail.Show(this);
         }
-
 
         /// <summary>
         /// Create new CreditCoverNegotiation
@@ -568,24 +556,25 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
             if (curCase.TransactionType == "出口保理" || curCase.TransactionType == "进口保理")
             {
-                CreditCoverNegotiation creditCoverNeg = new CreditCoverNegotiation();
-                creditCoverNeg.CreateUserName = App.Current.CurUser.Name;
-                this.creditCoverNegBindingSource.DataSource = creditCoverNeg;
-                this.opCreditCoverNegType = OpCreditCoverNegType.NEW_CREDIT_COVER_NEG;
-                this.UpdateCreditCoverNegControlStatus();
+                var creditCoverNeg = new CreditCoverNegotiation {CreateUserName = App.Current.CurUser.Name};
+                creditCoverNegBindingSource.DataSource = creditCoverNeg;
+                _opCreditCoverNegType = OpCreditCoverNegType.NEW_CREDIT_COVER_NEG;
+                UpdateCreditCoverNegControlStatus();
             }
             else
             {
-                MessageBoxEx.Show("国内保理案不需要向国外保理商申请额度", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("国内保理案不需要向国外保理商申请额度", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
             }
         }
 
@@ -596,17 +585,16 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void RefreshCDAList(object sender, EventArgs e)
         {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.bsCDAs.DataSource = curCase.CDAs.ToList();
+            _bsCDAs.DataSource = curCase.CDAs.ToList();
         }
-
-
 
         /// <summary>
         /// Refresh the CreditCoverNegotiation list
@@ -615,14 +603,15 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void RefreshCreditCoverNegList(object sender, EventArgs e)
         {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.bsCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
+            _bsCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
         }
 
         /// <summary>
@@ -637,12 +626,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            if (!this.caseValidator.Validate())
+            if (!caseValidator.Validate())
             {
                 return;
             }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             curCase.CreateUserName = App.Current.CurUser.Name;
 
             if (curCase.CaseCode == null)
@@ -650,9 +639,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isAddOK = true;
                 try
                 {
-                    curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType, curCase.OwnerDepartment.LocationCode, curCase.CaseAppDate);
-                    this.context.Cases.InsertOnSubmit(curCase);
-                    this.context.SubmitChanges();
+                    curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType,
+                                                             curCase.OwnerDepartment.LocationCode, curCase.CaseAppDate);
+                    _context.Cases.InsertOnSubmit(curCase);
+                    _context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -663,25 +653,22 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.opCaseType = OpCaseType.UPDATE_CASE;
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                    _opCaseType = OpCaseType.UPDATE_CASE;
                 }
             }
             else
             {
                 bool isUpdateOK = true;
-                if (curCase.CaseCode == null)
-                {
-                    return;
-                }
 
                 try
                 {
-                    this.context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    _context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in this.context.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
@@ -689,7 +676,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         }
                     }
 
-                    this.context.SubmitChanges();
+                    _context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -708,20 +695,20 @@ namespace CMBC.EasyFactor.CaseMgr
 
                         try
                         {
-                            this.context.SubmitChanges();
+                            _context.SubmitChanges();
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                              MessageBoxIcon.Warning);
                         }
                     }
 
-                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                 }
             }
         }
-
-
 
         /// <summary>
         /// Save current CreditCoverNegotiation
@@ -735,24 +722,25 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            if (!this.creditCoverValidator.Validate())
+            if (!creditCoverValidator.Validate())
             {
                 return;
             }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.creditCoverNegBindingSource.DataSource is CreditCoverNegotiation))
+            if (!(creditCoverNegBindingSource.DataSource is CreditCoverNegotiation))
             {
                 return;
             }
 
-            CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)this.creditCoverNegBindingSource.DataSource;
+            var creditCoverNeg = (CreditCoverNegotiation) creditCoverNegBindingSource.DataSource;
             creditCoverNeg.CreateUserName = App.Current.CurUser.Name;
 
             if (creditCoverNeg.NegoID == 0)
@@ -761,8 +749,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 try
                 {
                     creditCoverNeg.Case = curCase;
-                    this.context.CreditCoverNegotiations.InsertOnSubmit(creditCoverNeg);
-                    this.context.SubmitChanges();
+                    _context.CreditCoverNegotiations.InsertOnSubmit(creditCoverNeg);
+                    _context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -773,9 +761,10 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.bsCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
-                    this.NewCreditCoverNeg(null, null);
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                    _bsCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations.ToList();
+                    NewCreditCoverNeg(null, null);
                 }
             }
             else
@@ -783,11 +772,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    this.context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    _context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in this.context.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
@@ -795,7 +784,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         }
                     }
 
-                    this.context.SubmitChanges();
+                    _context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -805,8 +794,9 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.dgvCreditCoverNegs.Refresh();
+                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                    dgvCreditCoverNegs.Refresh();
                 }
             }
         }
@@ -823,15 +813,16 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            ClientMgr clientMgr = new ClientMgr();
-            QueryForm queryUI = new QueryForm(clientMgr, "选择买方");
+            var curCase = (Case) caseBindingSource.DataSource;
+            var clientMgr = new ClientMgr();
+            var queryUI = new QueryForm(clientMgr, "选择买方");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
             {
-                curCase.BuyerClient = this.context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
-                switch (this.cbCaseTransactionType.Text)
+                curCase.BuyerClient =
+                    _context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
+                switch (cbCaseTransactionType.Text)
                 {
                     case "国内卖方保理":
                     case "出口保理":
@@ -845,13 +836,14 @@ namespace CMBC.EasyFactor.CaseMgr
                             {
                                 curCase.OperationType = "协销";
                             }
-                            List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
-                            this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
+                            var deptsList = (List<Department>) cbCaseOwnerDepts.DataSource;
+                            cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
                         }
 
-                        this.cbReviews.DataSource = curCase.ClientReviews;
+                        cbReviews.DataSource = curCase.ClientReviews;
                         break;
-                    default: break;
+                    default:
+                        break;
                 }
             }
         }
@@ -868,15 +860,16 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            ClientMgr clientMgr = new ClientMgr();
-            QueryForm queryUI = new QueryForm(clientMgr, "选择卖方");
+            var curCase = (Case) caseBindingSource.DataSource;
+            var clientMgr = new ClientMgr();
+            var queryUI = new QueryForm(clientMgr, "选择卖方");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
             {
-                curCase.SellerClient = this.context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
-                switch (this.cbCaseTransactionType.Text)
+                curCase.SellerClient =
+                    _context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
+                switch (cbCaseTransactionType.Text)
                 {
                     case "国内卖方保理":
                     case "出口保理":
@@ -888,21 +881,20 @@ namespace CMBC.EasyFactor.CaseMgr
                                 curCase.OperationType = "协销";
                             }
 
-                            List<Department> deptsList = (List<Department>)this.cbCaseOwnerDepts.DataSource;
-                            this.cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
+                            var deptsList = (List<Department>) cbCaseOwnerDepts.DataSource;
+                            cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
                         }
 
-                        this.cbReviews.DataSource = curCase.ClientReviews;
+                        cbReviews.DataSource = curCase.ClientReviews;
                         break;
                     case "国内买方保理":
                     case "进口保理":
                         break;
-                    default: break;
+                    default:
+                        break;
                 }
             }
         }
-
-
 
         /// <summary>
         /// Select CreditCoverNegotiation
@@ -911,13 +903,14 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void SelectCreditCoverNeg(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvCreditCoverNegs.SelectedRows.Count == 0)
+            if (dgvCreditCoverNegs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            CreditCoverNegotiation selectedCreditCoverNeg = (CreditCoverNegotiation)this.bsCreditCoverNegs.List[this.dgvCreditCoverNegs.SelectedRows[0].Index];
-            this.creditCoverNegBindingSource.DataSource = selectedCreditCoverNeg;
+            var selectedCreditCoverNeg =
+                (CreditCoverNegotiation) _bsCreditCoverNegs.List[dgvCreditCoverNegs.SelectedRows[0].Index];
+            creditCoverNegBindingSource.DataSource = selectedCreditCoverNeg;
         }
 
         /// <summary>
@@ -932,21 +925,21 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            FactorMgr factorMgr = new FactorMgr();
-            QueryForm queryUI = new QueryForm(factorMgr, "选择保理商");
+            var curCase = (Case) caseBindingSource.DataSource;
+            var factorMgr = new FactorMgr();
+            var queryUI = new QueryForm(factorMgr, "选择保理商");
             factorMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
 
             Factor factor = factorMgr.Selected;
             if (factor != null)
             {
-                factor = this.context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
-                this.tbCaseFactorCode.Text = factor.FactorCode;
-                this.tbCaseFactorNameCN.Text = factor.CompanyNameCN;
-                this.tbCaseFactorNameEN.Text = factor.CompanyNameEN;
+                factor = _context.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
+                tbCaseFactorCode.Text = factor.FactorCode;
+                tbCaseFactorNameCN.Text = factor.CompanyNameCN;
+                tbCaseFactorNameEN.Text = factor.CompanyNameEN;
 
-                switch (this.cbCaseTransactionType.Text)
+                switch (cbCaseTransactionType.Text)
                 {
                     case "国内卖方保理":
                     case "出口保理":
@@ -956,7 +949,8 @@ namespace CMBC.EasyFactor.CaseMgr
                     case "进口保理":
                         curCase.SellerFactor = factor;
                         break;
-                    default: break;
+                    default:
+                        break;
                 }
             }
         }
@@ -973,15 +967,16 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.opCaseType = OpCaseType.UPDATE_CASE;
-            this.UpdateCaseControlStatus();
+            _opCaseType = OpCaseType.UPDATE_CASE;
+            UpdateCaseControlStatus();
         }
 
         /// <summary>
@@ -989,56 +984,52 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private void UpdateCaseControlStatus()
         {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-
-            if (this.opCaseType == OpCaseType.NEW_CASE)
+            if (_opCaseType == OpCaseType.NEW_CASE)
             {
-                foreach (Control comp in this.groupPanelCase.Controls)
+                foreach (Control comp in groupPanelCase.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.btnCaseBuyerSelect.Visible = true;
-                this.btnCaseFactorSelect.Visible = true;
-                this.btnCaseSellerSelect.Visible = true;
+                btnCaseBuyerSelect.Visible = true;
+                btnCaseFactorSelect.Visible = true;
+                btnCaseSellerSelect.Visible = true;
             }
-            else if (this.opCaseType == OpCaseType.UPDATE_CASE)
+            else if (_opCaseType == OpCaseType.UPDATE_CASE)
             {
-                foreach (Control comp in this.groupPanelCase.Controls)
+                foreach (Control comp in groupPanelCase.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.btnCaseBuyerSelect.Visible = true;
-                this.btnCaseFactorSelect.Visible = true;
-                this.btnCaseSellerSelect.Visible = true;
+                btnCaseBuyerSelect.Visible = true;
+                btnCaseFactorSelect.Visible = true;
+                btnCaseSellerSelect.Visible = true;
             }
-            else if (this.opCaseType == OpCaseType.DETAIL_CASE)
+            else if (_opCaseType == OpCaseType.DETAIL_CASE)
             {
-                foreach (Control comp in this.groupPanelCase.Controls)
+                foreach (Control comp in groupPanelCase.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                this.btnCaseBuyerSelect.Visible = false;
-                this.btnCaseFactorSelect.Visible = false;
-                this.btnCaseSellerSelect.Visible = false;
+                btnCaseBuyerSelect.Visible = false;
+                btnCaseFactorSelect.Visible = false;
+                btnCaseSellerSelect.Visible = false;
             }
 
-            this.tbCaseCreateUser.ReadOnly = true;
-            this.tbCaseCode.ReadOnly = true;
-            this.tbCaseSellerNo.ReadOnly = true;
-            this.tbCaseSellerNameCN.ReadOnly = true;
-            this.tbCaseSellerNameEN.ReadOnly = true;
-            this.tbCaseBuyerNo.ReadOnly = true;
-            this.tbCaseBuyerNameCN.ReadOnly = true;
-            this.tbCaseBuyerNameEN.ReadOnly = true;
-            this.tbCaseFactorCode.ReadOnly = true;
-            this.tbCaseFactorNameCN.ReadOnly = true;
-            this.tbCaseFactorNameEN.ReadOnly = true;
+            tbCaseCreateUser.ReadOnly = true;
+            tbCaseCode.ReadOnly = true;
+            tbCaseSellerNo.ReadOnly = true;
+            tbCaseSellerNameCN.ReadOnly = true;
+            tbCaseSellerNameEN.ReadOnly = true;
+            tbCaseBuyerNo.ReadOnly = true;
+            tbCaseBuyerNameCN.ReadOnly = true;
+            tbCaseBuyerNameEN.ReadOnly = true;
+            tbCaseFactorCode.ReadOnly = true;
+            tbCaseFactorNameCN.ReadOnly = true;
+            tbCaseFactorNameEN.ReadOnly = true;
         }
-
-
 
         /// <summary>
         /// Turn CreditCoverNegotiation into update status
@@ -1052,55 +1043,52 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
+            var curCase = (Case) caseBindingSource.DataSource;
             if (curCase == null || curCase.CaseCode == null)
             {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.creditCoverNegBindingSource.DataSource is CreditCoverNegotiation))
+            if (!(creditCoverNegBindingSource.DataSource is CreditCoverNegotiation))
             {
                 return;
             }
 
-            this.opCreditCoverNegType = OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG;
-            this.UpdateCreditCoverNegControlStatus();
+            _opCreditCoverNegType = OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG;
+            UpdateCreditCoverNegControlStatus();
         }
-
-
 
         /// <summary>
         /// Update CreditCoverNegotiation Control Status
         /// </summary>
         private void UpdateCreditCoverNegControlStatus()
         {
-            if (this.opCreditCoverNegType == OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG)
+            if (_opCreditCoverNegType == OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG)
             {
-                foreach (Control comp in this.groupPanelCreditCoverNeg.Controls)
+                foreach (Control comp in groupPanelCreditCoverNeg.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (this.opCreditCoverNegType == OpCreditCoverNegType.NEW_CREDIT_COVER_NEG)
+            else if (_opCreditCoverNegType == OpCreditCoverNegType.NEW_CREDIT_COVER_NEG)
             {
-                foreach (Control comp in this.groupPanelCreditCoverNeg.Controls)
+                foreach (Control comp in groupPanelCreditCoverNeg.Controls)
                 {
                     ControlUtil.SetComponetDefault(comp);
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
-            else if (this.opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
+            else if (_opCreditCoverNegType == OpCreditCoverNegType.UPDATE_CREDIT_COVER_NEG)
             {
-                foreach (Control comp in this.groupPanelCreditCoverNeg.Controls)
+                foreach (Control comp in groupPanelCreditCoverNeg.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
 
-            ControlUtil.SetComponetEditable(this.tbCreditCoverCreateUserName, false);
+            ControlUtil.SetComponetEditable(tbCreditCoverCreateUserName, false);
         }
-
-        #endregion?Methods?
     }
 }

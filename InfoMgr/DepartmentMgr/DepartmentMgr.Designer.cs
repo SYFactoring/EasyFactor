@@ -425,7 +425,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.dgvDepts.Size = new System.Drawing.Size(772, 409);
             this.dgvDepts.TabIndex = 0;
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            this.dgvDepts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvDepts_RowPostPaint);
+            this.dgvDepts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvDeptsRowPostPaint);
             // 
             // cmuDeptMgr
             // 

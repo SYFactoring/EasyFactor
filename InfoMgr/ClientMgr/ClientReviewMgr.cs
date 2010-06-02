@@ -4,37 +4,23 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class ClientReviewMgr : UserControl
     {
-		#region?Fields?(2)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bs;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpClientReviewMgrType opType;
-
-		#endregion?Fields?
-
-		#region?Enums?(1)?
+        #region OpClientReviewMgrType enum
 
         /// <summary>
         /// 
@@ -45,70 +31,59 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// 
             /// </summary>
             QUERY,
-
         }
 
-		#endregion?Enums?
+        #endregion
 
-		#region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bs;
 
-/// <summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpClientReviewMgrType _opType;
+
+
+        /// <summary>
         /// Initializes a new instance of the ClientCreditLineMgr class.
         /// </summary>
         /// <param name="opType"></param>
         public ClientReviewMgr(OpClientReviewMgrType opType)
         {
-            this.InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.bs = new BindingSource();
-            this.opType = opType;
-            this.dgvClientReviews.DataSource = this.bs;
-            this.dgvClientReviews.AutoGenerateColumns = false;
-            ControlUtil.SetDoubleBuffered(this.dgvClientReviews);
-            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
+            InitializeComponent();
+            ImeMode = ImeMode.OnHalf;
+            _bs = new BindingSource();
+            _opType = opType;
+            dgvClientReviews.DataSource = _bs;
+            dgvClientReviews.AutoGenerateColumns = false;
+            ControlUtil.SetDoubleBuffered(dgvClientReviews);
+            ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<string> domainList = Department.AllDomains;
             domainList.Insert(0, "全部");
-            this.cbDomains.DataSource = domainList;
+            cbDomains.DataSource = domainList;
         }
 
-		#endregion?Constructors?
-
-		#region?Properties?(3)?
 
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context
-        {
-            get;
-            set;
-        }
+        private DBDataContext Context { get; set; }
 
         /// <summary>
         /// Gets or sets owner form
         /// </summary>
-        public Form OwnerForm
-        {
-            get;
-            set;
-        }
+        public Form OwnerForm { get; set; }
 
         /// <summary>
         /// Gets or sets selected ClientReview
         /// </summary>
-        public ClientReview Selected
-        {
-            get;
-            set;
-        }
+        public ClientReview Selected { get; set; }
 
-		#endregion?Properties?
 
-		#region?Methods?(8)?
-
-		//?Private?Methods?(8)?
-
+        //?Private?Methods?(8)?
         /// <summary>
         /// 
         /// </summary>
@@ -116,13 +91,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.OwnerForm == null)
+            if (OwnerForm == null)
             {
-                this.DetailClientReview(sender, e);
+                DetailClientReview(sender, e);
             }
             else
             {
-                this.SelectClientReview(sender, e);
+                SelectClientReview(sender, e);
             }
         }
 
@@ -133,26 +108,29 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DeleteClientReview(object sender, EventArgs e)
         {
-            if (this.dgvClientReviews.CurrentCell == null)
+            if (dgvClientReviews.CurrentCell == null)
             {
                 return;
             }
 
-            ClientReview review = (ClientReview)this.bs.List[this.dgvClientReviews.CurrentCell.RowIndex];
-            if (MessageBoxEx.Show("是否打算删除协查意见: " + review.ReviewNo, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            var review = (ClientReview) _bs.List[dgvClientReviews.CurrentCell.RowIndex];
+            if (
+                MessageBoxEx.Show("是否打算删除协查意见: " + review.ReviewNo, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo,
+                                  MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                context.ClientReviews.DeleteOnSubmit(review);
+                Context.ClientReviews.DeleteOnSubmit(review);
                 try
                 {
-                    context.SubmitChanges();
+                    Context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
-                    MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
                     return;
                 }
 
-                this.dgvClientReviews.Rows.RemoveAt(dgvClientReviews.CurrentCell.RowIndex);
+                dgvClientReviews.Rows.RemoveAt(dgvClientReviews.CurrentCell.RowIndex);
             }
         }
 
@@ -163,13 +141,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void DetailClientReview(object sender, EventArgs e)
         {
-            if (this.dgvClientReviews.CurrentCell == null)
+            if (dgvClientReviews.CurrentCell == null)
             {
                 return;
             }
 
-            ClientReview review = (ClientReview)this.bs.List[this.dgvClientReviews.CurrentCell.RowIndex];
-            ClientDetail detail = new ClientDetail(review, ClientDetail.OpReviewType.DETAIL_REVIEW);
+            var review = (ClientReview) _bs.List[dgvClientReviews.CurrentCell.RowIndex];
+            var detail = new ClientDetail(review, ClientDetail.OpReviewType.DETAIL_REVIEW);
             detail.ShowDialog(this);
         }
 
@@ -178,10 +156,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvClientCreditLines_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DgvClientCreditLinesRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvClientReviews.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvClientReviews.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvClientReviews.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            var rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
+                                          dgvClientReviews.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                                  dgvClientReviews.RowHeadersDefaultCellStyle.Font, rectangle,
+                                  dgvClientReviews.RowHeadersDefaultCellStyle.ForeColor,
+                                  TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -191,12 +173,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void ExportClientReviews(object sender, EventArgs e)
         {
-            if (this.dgvClientReviews.SelectedCells.Count == 0)
+            if (dgvClientReviews.SelectedCells.Count == 0)
             {
                 return;
             }
 
-            ExportForm exportForm = new ExportForm(ExportForm.ExportType.EXPORT_CLIENT_REVIEWS, GetSelectedReviews());
+            var exportForm = new ExportForm(ExportForm.ExportType.EXPORT_CLIENT_REVIEWS, GetSelectedReviews());
             exportForm.Show();
         }
 
@@ -206,10 +188,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <returns></returns>
         private List<ClientReview> GetSelectedReviews()
         {
-            List<ClientReview> selectedReviews = new List<ClientReview>();
-            foreach (DataGridViewCell cell in this.dgvClientReviews.SelectedCells)
+            var selectedReviews = new List<ClientReview>();
+            foreach (DataGridViewCell cell in dgvClientReviews.SelectedCells)
             {
-                ClientReview review = (ClientReview)this.bs.List[cell.RowIndex];
+                var review = (ClientReview) _bs.List[cell.RowIndex];
                 if (!selectedReviews.Contains(review))
                 {
                     selectedReviews.Add(review);
@@ -226,34 +208,53 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
-            string clientReviewNo = this.tbClientReviewNo.Text;
-            string clientName = this.tbClientName.Text;
-            string location = this.cbLocation.Text;
+            string clientReviewNo = tbClientReviewNo.Text;
+            string clientName = tbClientName.Text;
+            string location = cbLocation.Text;
             if (location == "全部")
             {
                 location = string.Empty;
             }
-            string domain = this.cbDomains.Text;
+            string domain = cbDomains.Text;
             if (domain == "全部")
             {
                 domain = string.Empty;
             }
 
-            DateTime beginDate = String.IsNullOrEmpty(this.diBegin.Text) ? this.diBegin.MinDate : this.diBegin.Value;
-            DateTime endDate = String.IsNullOrEmpty(this.diEnd.Text) ? this.diEnd.MinDate : this.diEnd.Value;
+            DateTime beginDate = String.IsNullOrEmpty(diBegin.Text) ? diBegin.MinDate : diBegin.Value;
+            DateTime endDate = String.IsNullOrEmpty(diEnd.Text) ? diEnd.MinDate : diEnd.Value;
 
-            context = new DBDataContext();
+            Context = new DBDataContext();
 
-            var queryResult = context.ClientReviews.Where(c =>
-                c.ReviewNo.Contains(clientReviewNo)
-             && (c.Client.BranchCode == null ? string.Empty : c.Client.Department.Location.LocationName).Contains(location)
-             && (c.Client.BranchCode == null ? string.Empty : c.Client.Department.Domain).Contains(domain)
-             && (beginDate != this.diBegin.MinDate ? c.ReviewDate >= beginDate : true)
-             && (endDate != this.diEnd.MinDate ? c.ReviewDate <= endDate : true)
-             && (c.Client.ClientNameCN.Contains(clientName) || c.Client.ClientNameEN.Contains(clientName)));
+            IQueryable<ClientReview> queryResult = Context.ClientReviews.Where(c =>
+                                                                               c.ReviewNo.Contains(clientReviewNo)
+                                                                               &&
+                                                                               (c.Client.BranchCode == null
+                                                                                    ? string.Empty
+                                                                                    : c.Client.Department.Location.
+                                                                                          LocationName).Contains(
+                                                                                              location)
+                                                                               &&
+                                                                               (c.Client.BranchCode == null
+                                                                                    ? string.Empty
+                                                                                    : c.Client.Department.Domain).
+                                                                                   Contains(domain)
+                                                                               &&
+                                                                               (beginDate != diBegin.MinDate
+                                                                                    ? c.ReviewDate >= beginDate
+                                                                                    : true)
+                                                                               &&
+                                                                               (endDate != diEnd.MinDate
+                                                                                    ? c.ReviewDate <= endDate
+                                                                                    : true)
+                                                                               &&
+                                                                               (c.Client.ClientNameCN.Contains(
+                                                                                   clientName) ||
+                                                                                c.Client.ClientNameEN.Contains(
+                                                                                    clientName)));
 
-            this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            _bs.DataSource = queryResult;
+            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
         /// <summary>
@@ -263,20 +264,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectClientReview(object sender, EventArgs e)
         {
-            if (this.dgvClientReviews.CurrentCell == null)
+            if (dgvClientReviews.CurrentCell == null)
             {
                 return;
             }
 
-            ClientReview review = (ClientReview)this.bs.List[this.dgvClientReviews.CurrentCell.RowIndex];
-            this.Selected = review;
-            if (this.OwnerForm != null)
+            var review = (ClientReview) _bs.List[dgvClientReviews.CurrentCell.RowIndex];
+            Selected = review;
+            if (OwnerForm != null)
             {
-                this.OwnerForm.DialogResult = DialogResult.Yes;
-                this.OwnerForm.Close();
+                OwnerForm.DialogResult = DialogResult.Yes;
+                OwnerForm.Close();
             }
         }
-
-		#endregion?Methods?
     }
 }

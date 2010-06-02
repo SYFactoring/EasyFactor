@@ -4,44 +4,38 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Linq;
+using System.Linq;
+using System.Text;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using System.Data.Linq;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class Factor 
+    public partial class Factor
     {
-		#region?Fields?(2)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private Dictionary<string, string> _dict;
         /// <summary>
         /// 
         /// </summary>
         public static readonly string CMBC_CODE = "CN01300";
 
-		#endregion?Fields?
+        /// <summary>
+        /// 
+        /// </summary>
+        private Dictionary<string, string> _dict;
 
-		#region?Properties?(4)?
 
         /// <summary>
         /// Gets
         /// </summary>
         public FactorCreditLine CreditLine
         {
-            get
-            {
-                return this.FactorCreditLines.SingleOrDefault(f => f.CreditLineStatus == FACTOR_CREDIT_LINE.AVAILABILITY);
-            }
+            get { return FactorCreditLines.SingleOrDefault(f => f.CreditLineStatus == FACTOR_CREDIT_LINE.AVAILABILITY); }
         }
 
         /// <summary>
@@ -51,13 +45,13 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                FactorCreditLine creditLine = this.CreditLine;
+                FactorCreditLine creditLine = CreditLine;
                 if (creditLine == null)
                 {
                     return 0;
                 }
 
-                return creditLine.CreditLine - this.GetAssignOutstanding(creditLine.CreditLineCurrency);
+                return creditLine.CreditLine - GetAssignOutstanding(creditLine.CreditLineCurrency);
             }
         }
 
@@ -66,17 +60,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string GroupNameCN
         {
-            get
-            {
-                if (!String.IsNullOrEmpty(_GroupNo))
-                {
-                    return FactorGroup.GroupNameCN;
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
+            get { return !String.IsNullOrEmpty(_GroupNo) ? FactorGroup.GroupNameCN : string.Empty; }
         }
 
         /// <summary>
@@ -84,32 +68,18 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string GroupNameEN
         {
-            get
-            {
-                if (!String.IsNullOrEmpty(_GroupNo))
-                {
-                    return FactorGroup.GroupNameEN;
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
+            get { return !String.IsNullOrEmpty(_GroupNo) ? FactorGroup.GroupNameEN : string.Empty; }
         }
 
-		#endregion?Properties?
 
-		#region?Methods?(5)?
-
-		//?Public?Methods?(4)?
-
+        //?Public?Methods?(4)?
         /// <summary>
         /// 
         /// </summary>
         public void BeginMonitor()
         {
-            this._dict = new Dictionary<string, string>();
-            this.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(this.Factor_PropertyChanged);
+            _dict = new Dictionary<string, string>();
+            PropertyChanged += Factor_PropertyChanged;
         }
 
         /// <summary>
@@ -118,21 +88,18 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public string EndMonitor()
         {
-            if (this._dict != null)
+            if (_dict != null)
             {
-                StringBuilder sb = new StringBuilder();
-                foreach (string value in this._dict.Values)
+                var sb = new StringBuilder();
+                foreach (string value in _dict.Values)
                 {
                     sb.Append(value).Append(Environment.NewLine);
                 }
 
-                this.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(this.Factor_PropertyChanged);
+                PropertyChanged -= Factor_PropertyChanged;
                 return sb.ToString();
             }
-            else
-            {
-                return string.Empty;
-            }
+            return string.Empty;
         }
 
         /// <summary>
@@ -143,7 +110,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public double GetAssignOutstanding(string currency)
         {
             double result = 0;
-            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == CASE.ENABLE))
+            foreach (Case curCase in BuyerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
                 double assignOutstanding = curCase.AssignOutstanding;
                 if (curCase.InvoiceCurrency != currency)
@@ -164,41 +131,38 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public override string ToString()
         {
-            if (!String.IsNullOrEmpty(_CompanyNameCN))
-            {
-                return _CompanyNameCN;
-            }
-            else
-            {
-                return _CompanyNameEN;
-            }
+            return !String.IsNullOrEmpty(_CompanyNameCN) ? _CompanyNameCN : _CompanyNameEN;
         }
-		//?Private?Methods?(1)?
 
+        //?Private?Methods?(1)?
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Factor_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Factor_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this._dict[e.PropertyName] = String.Format("{0} : {1}\n", e.PropertyName, this.GetType().GetProperty(e.PropertyName).GetValue(this, null));
+            _dict[e.PropertyName] = String.Format("{0} : {1}\n", e.PropertyName,
+                                                  GetType().GetProperty(e.PropertyName).GetValue(this, null));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
         partial void OnValidate(ChangeAction action)
         {
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (String.IsNullOrEmpty(this.CompanyNameCN))
+                if (String.IsNullOrEmpty(CompanyNameCN))
                 {
-                    this.CompanyNameCN = "";
+                    CompanyNameCN = "";
                 }
-                if (String.IsNullOrEmpty(this.CompanyNameEN))
+                if (String.IsNullOrEmpty(CompanyNameEN))
                 {
-                    this.CompanyNameEN = "";
+                    CompanyNameEN = "";
                 }
             }
         }
-		#endregion?Methods?
     }
 }

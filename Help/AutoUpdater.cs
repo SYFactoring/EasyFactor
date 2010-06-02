@@ -35,15 +35,15 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
-using ICSharpCode.SharpZipLib.Zip;
-using System.Diagnostics;
-using DevComponents.DotNetBar;
 using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.Utils.ConstStr;
+using DevComponents.DotNetBar;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace CMBC.EasyFactor.Help
 {
@@ -52,60 +52,56 @@ namespace CMBC.EasyFactor.Help
     /// </summary>
     public class AutoUpdater : Component
     {
-        #region?Fields?(9)?
+        #region Delegates
 
-        private bool _AutoDownload;
-        private bool _AutoRestart;
-        private AutoUpdateConfig _AutoUpdateConfig;
-        private Uri _ConfigURL;
-        private string _LogOnUserName;
-        private string _LogOnUserPass;
+        public delegate void AutoUpdateCompleteEventHandler();
+
+        public delegate void AutoUpdateErrorEventHandler(string stMessage, Exception autoUpdateError);
+
+        public delegate void ConfigFileDownloadedEventHandler(bool isNewVersionAvailable);
+
+        #endregion
+
+        private AutoUpdateConfig _autoUpdateConfig;
         //Added 11/16/2004 For Proxy Clients, Thanks George for submitting these changes
-        private bool _ProxyEnabled;
         //Added 11/16/2004 For Proxy Clients, Thanks George for submitting these changes
-        private Uri _ProxyURL;
-        private Form _RestartForm;
 
-        #endregion?Fields?
-
-        #region?Constructors?(1)?
-
-        public AutoUpdater()
-        {
-
-        }
-
-        #endregion?Constructors?
-
-        #region?Properties?(13)?
 
         //If true, the app will automatically download the latest version, if false the app will use the DownloadForm to prompt the user, if AutoDownload is false and DownloadForm is null, it doesn't download
         [DefaultValue(true)]
-        [Description("Set to True if you want the app to restart automatically, set to False if you want to use the DownloadForm to prompt the user, if AutoDownload is false and DownloadForm is null, the app will not download the latest version."),
-        Category("AutoUpdater Configuration")]
-        public bool AutoDownload
-        { get { return _AutoDownload; } set { _AutoDownload = value; } }
+        [Description(
+            "Set to True if you want the app to restart automatically, set to False if you want to use the DownloadForm to prompt the user, if AutoDownload is false and DownloadForm is null, the app will not download the latest version."
+            ), Category("AutoUpdater Configuration")]
+        public bool AutoDownload { get; set; }
 
         //If true, the app will restart automatically, if false the app will use the RestartForm to prompt the user, if AutoRestart is false and RestartForm is null, it doesn't restart
         [DefaultValue(false)]
-        [Description("Set to True if you want the app to restart automatically, set to False if you want to use the RestartForm to prompt the user, if AutoRestart is false and RestartForm is null, the app will not restart."),
-        Category("AutoUpdater Configuration")]
-        public bool AutoRestart
-        { get { return _AutoRestart; } set { _AutoRestart = value; } }
+        [Description(
+            "Set to True if you want the app to restart automatically, set to False if you want to use the RestartForm to prompt the user, if AutoRestart is false and RestartForm is null, the app will not restart."
+            ), Category("AutoUpdater Configuration")]
+        public bool AutoRestart { get; set; }
 
         [BrowsableAttribute(false)]
         public AutoUpdateConfig AutoUpdateConfig
-        { get { return _AutoUpdateConfig; } }
+        {
+            get { return _autoUpdateConfig; }
+        }
 
         [DefaultValue(@"http://localhost/UpdateConfig.xml")]
-        [Description("The URL Path to the configuration file."),
-        Category("AutoUpdater Configuration")]
-        public Uri ConfigURL
-        { get { return _ConfigURL; } set { _ConfigURL = value; } }
+        [Description("The URL Path to the configuration file."), Category("AutoUpdater Configuration")]
+        public Uri ConfigURL { get; set; }
 
         [BrowsableAttribute(false)]
         public static Version CurrentAppVersion
-        { get { return System.Reflection.Assembly.GetEntryAssembly().GetName().Version; } }
+        {
+            get { return Assembly.GetEntryAssembly().GetName().Version; }
+        }
+
+        [BrowsableAttribute(false)]
+        public bool IsNewVersionAvailable
+        {
+            get { return LatestConfigVersion > CurrentAppVersion; }
+        }
 
         [BrowsableAttribute(false)]
         public string LatestConfigChanges
@@ -114,8 +110,8 @@ namespace CMBC.EasyFactor.Help
             {
                 string stRet = null;
                 //Protect against NPE's
-                if (this._AutoUpdateConfig != null)
-                    stRet = _AutoUpdateConfig.LatestChanges;
+                if (_autoUpdateConfig != null)
+                    stRet = _autoUpdateConfig.LatestChanges;
                 return stRet;
             }
         }
@@ -127,73 +123,49 @@ namespace CMBC.EasyFactor.Help
             {
                 Version versionRet = null;
                 //Protect against NPE's
-                if (this._AutoUpdateConfig != null)
-                    versionRet = new Version(this._AutoUpdateConfig.AvailableVersion);
+                if (_autoUpdateConfig != null)
+                    versionRet = new Version(_autoUpdateConfig.AvailableVersion);
                 return versionRet;
             }
         }
 
         [DefaultValue(@"")]
-        [Description("The UserName to authenticate with."),
-        Category("AutoUpdater Configuration")]
-        public string LogOnUserName
-        { get { return _LogOnUserName; } set { _LogOnUserName = value; } }
+        [Description("The UserName to authenticate with."), Category("AutoUpdater Configuration")]
+        public string LogOnUserName { get; set; }
 
         [DefaultValue(@"")]
-        [Description("The Password to authenticate with."),
-        Category("AutoUpdater Configuration")]
-        public string LogOnUserPass
-        { get { return _LogOnUserPass; } set { _LogOnUserPass = value; } }
-
-        [BrowsableAttribute(false)]
-        public bool IsNewVersionAvailable
-        { get { return this.LatestConfigVersion > AutoUpdater.CurrentAppVersion; } }
+        [Description("The Password to authenticate with."), Category("AutoUpdater Configuration")]
+        public string LogOnUserPass { get; set; }
 
         [DefaultValue(false)]
-        [Description("Set to True if you want to use http proxy."),
-        Category("AutoUpdater Configuration")]
-        public bool ProxyEnabled
-        { get { return _ProxyEnabled; } set { _ProxyEnabled = value; } }
+        [Description("Set to True if you want to use http proxy."), Category("AutoUpdater Configuration")]
+        public bool ProxyEnabled { get; set; }
 
         [DefaultValue(@"http://myproxy.com:8080/")]
         [Description("The Proxy server URL.(For example:http://myproxy.com:port)"),
-        Category("AutoUpdater Configuration")]
-        public Uri ProxyURL
-        { get { return _ProxyURL; } set { _ProxyURL = value; } }
+         Category("AutoUpdater Configuration")]
+        public Uri ProxyURL { get; set; }
 
-        public Form RestartForm
-        { get { return _RestartForm; } set { _RestartForm = value; } }
+        public Form RestartForm { get; set; }
 
-        #endregion?Properties?
-
-        #region?Delegates?and?Events?(6)?
 
         //?Delegates?(3)?
 
-        public delegate void AutoUpdateCompleteEventHandler();
-        public delegate void AutoUpdateErrorEventHandler(string stMessage, Exception autoUpdateError);
-        public delegate void ConfigFileDownloadedEventHandler(bool isNewVersionAvailable);
         //?Events?(3)?
-
         public event AutoUpdateCompleteEventHandler OnAutoUpdateComplete;
 
         public event AutoUpdateErrorEventHandler OnAutoUpdateError;
 
         public event ConfigFileDownloadedEventHandler OnConfigFileDownloaded;
 
-        #endregion?Delegates?and?Events?
-
-        #region?Methods?(11)?
 
         //?Public?Methods?(3)?
-
         /// <summary>
         /// TryUpdate: Invoke this method if you just want to load the config without autoupdating
         /// </summary>
         public void LoadConfig()
         {
-            Thread backgroundLoadConfigThread = new Thread(new ThreadStart(this.loadConfigThread));
-            backgroundLoadConfigThread.IsBackground = true;
+            var backgroundLoadConfigThread = new Thread(LoadConfigThread) { IsBackground = true };
             backgroundLoadConfigThread.Start();
         }
 
@@ -202,7 +174,7 @@ namespace CMBC.EasyFactor.Help
         /// </summary>
         public void TryUpdate()
         {
-            Thread backgroundThread = new Thread(new ThreadStart(this.updateThread));
+            var backgroundThread = new Thread(UpdateThread);
             backgroundThread.SetApartmentState(ApartmentState.STA);
             backgroundThread.IsBackground = true;
             backgroundThread.Start();
@@ -213,54 +185,47 @@ namespace CMBC.EasyFactor.Help
         /// </summary>
         public void TryUpdateBackground()
         {
-            Thread backgroundThread = new Thread(new ThreadStart(this.updateThreadBackground));
+            var backgroundThread = new Thread(UpdateThreadBackground);
             backgroundThread.SetApartmentState(ApartmentState.STA);
             backgroundThread.IsBackground = true;
             backgroundThread.Start();
         }
-        //?Private?Methods?(8)?
 
+        //?Private?Methods?(8)?
         //restart()
-        private void config_OnLoadConfigError(string stMessage, Exception e)
+        private void ConfigOnLoadConfigError(string stMessage, Exception e)
         {
-            this.sendAutoUpdateError(stMessage, e);
+            SendAutoUpdateError(stMessage, e);
         }
 
         //updateThread()
         /// <summary>
         /// downloadFile: Download a file from the specified url and copy it to the specified path
         /// </summary>
-        private bool downloadFile(Uri url, string path)
+        private bool DownloadFile(Uri url, string path)
         {
             try
             {
                 //create web request/response
-                HttpWebResponse Response;
-                HttpWebRequest Request;
 
-                Request = (HttpWebRequest)HttpWebRequest.Create(url);
+                var request = (HttpWebRequest)WebRequest.Create(url);
                 //Request.Headers.Add("Translate: f"); //Commented out 11/16/2004 Matt Palmerlee, this Header is more for DAV and causes a known security issue
-                if (!String.IsNullOrEmpty(this.LogOnUserName))
-                    Request.Credentials = new NetworkCredential(this.LogOnUserName, this.LogOnUserPass);
-                else
-                    Request.Credentials = CredentialCache.DefaultCredentials;
+                request.Credentials = !String.IsNullOrEmpty(LogOnUserName) ? new NetworkCredential(LogOnUserName, LogOnUserPass) : CredentialCache.DefaultCredentials;
 
                 //Added 11/16/2004 For Proxy Clients, Thanks George for submitting these changes
-                if (this.ProxyEnabled == true)
-                    Request.Proxy = new WebProxy(this.ProxyURL);
+                if (ProxyEnabled)
+                    request.Proxy = new WebProxy(ProxyURL);
 
-                Response = (HttpWebResponse)Request.GetResponse();
+                var response = (HttpWebResponse)request.GetResponse();
 
-                Stream respStream = null;
-                respStream = Response.GetResponseStream();
+                Stream respStream = response.GetResponseStream();
 
                 //Do the Download
-                byte[] buffer = new byte[4096];
-                int length;
+                var buffer = new byte[4096];
 
                 FileStream fs = File.Open(path, FileMode.Create, FileAccess.Write);
 
-                length = respStream.Read(buffer, 0, 4096);
+                int length = respStream.Read(buffer, 0, 4096);
                 while (length > 0)
                 {
                     fs.Write(buffer, 0, length);
@@ -270,11 +235,12 @@ namespace CMBC.EasyFactor.Help
             }
             catch (Exception e)
             {
-                string stMessage = "Problem downloading and copying file from: " + url + " to: " + path + " with: " + e.Message;
+                string stMessage = "Problem downloading and copying file from: " + url + " to: " + path + " with: " +
+                                   e.Message;
                 MessageBoxEx.Show(stMessage, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 if (File.Exists(path))
                     File.Delete(path);
-                this.sendAutoUpdateError(stMessage, e);
+                SendAutoUpdateError(stMessage, e);
                 return false;
             }
             return true;
@@ -284,18 +250,18 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// loadConfig: This method just loads the config file so the app can check the versions manually
         /// </summary>
-        private void loadConfigThread()
+        private void LoadConfigThread()
         {
-            AutoUpdateConfig config = new AutoUpdateConfig();
-            config.OnLoadConfigError += new AutoUpdateConfig.LoadConfigErrorEventHandler(config_OnLoadConfigError);
+            var config = new AutoUpdateConfig();
+            config.OnLoadConfigError += ConfigOnLoadConfigError;
 
             //Do the load of the config file
-            if (config.LoadConfig(this.ConfigURL, this.LogOnUserName, this.LogOnUserPass, this.ProxyURL, this.ProxyEnabled))
+            if (config.LoadConfig(ConfigURL, LogOnUserName, LogOnUserPass, ProxyURL, ProxyEnabled))
             {
-                this._AutoUpdateConfig = config;
-                if (this.OnConfigFileDownloaded != null)
+                _autoUpdateConfig = config;
+                if (OnConfigFileDownloaded != null)
                 {
-                    this.OnConfigFileDownloaded(this.IsNewVersionAvailable);
+                    OnConfigFileDownloaded(IsNewVersionAvailable);
                 }
             }
             //else
@@ -306,42 +272,40 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// restart: Restart the app, the AppStarter will be responsible for actually restarting the main application.
         /// </summary>
-        private void restart()
+        private static void Restart()
         {
             string stUpdateName = String.Format("update{0:yyyyMMdd}", DateTime.Now);
             // DirectoryInfo diDest = new DirectoryInfo(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
-            string stDest = Path.GetTempPath() + stUpdateName + System.IO.Path.DirectorySeparatorChar;
+            string stDest = Path.GetTempPath() + stUpdateName + Path.DirectorySeparatorChar;
             string[] exeFileList = Directory.GetFiles(stDest, "*.msi");
             if (exeFileList.Length > 0)
             {
                 Environment.ExitCode = 2; //the surrounding AppStarter must look for this to restart the app.
                 Application.Exit();
-                Process ps = new Process();
-                ps.StartInfo.FileName = exeFileList[0];
+                var ps = new Process { StartInfo = { FileName = exeFileList[0] } };
                 ps.Start();
-
             }
         }
 
-        private void sendAutoUpdateError(string stMessage, Exception e)
+        private void SendAutoUpdateError(string stMessage, Exception e)
         {
-            if (this.OnAutoUpdateError != null)
-                this.OnAutoUpdateError(stMessage, e);
+            if (OnAutoUpdateError != null)
+                OnAutoUpdateError(stMessage, e);
         }
 
         //downloadFile(string url, string path)
         /// <summary>
         /// unzip: Open the zip file specified by stZipPath, into the stDestPath Directory
         /// </summary>
-        private void unzip(string stZipPath, string stDestPath)
+        private static void Unzip(string stZipPath, string stDestPath)
         {
-            ZipInputStream s = new ZipInputStream(File.OpenRead(stZipPath));
+            var s = new ZipInputStream(File.OpenRead(stZipPath));
 
             ZipEntry theEntry;
             while ((theEntry = s.GetNextEntry()) != null)
             {
-
-                string fileName = stDestPath + Path.GetDirectoryName(theEntry.Name) + System.IO.Path.DirectorySeparatorChar + Path.GetFileName(theEntry.Name);
+                string fileName = stDestPath + Path.GetDirectoryName(theEntry.Name) + Path.DirectorySeparatorChar +
+                                  Path.GetFileName(theEntry.Name);
 
                 //create directory for file (if necessary)
                 Directory.CreateDirectory(Path.GetDirectoryName(fileName));
@@ -350,13 +314,12 @@ namespace CMBC.EasyFactor.Help
                 {
                     FileStream streamWriter = File.Create(fileName);
 
-                    int size = 2048;
-                    byte[] data = new byte[2048];
+                    var data = new byte[2048];
                     try
                     {
                         while (true)
                         {
-                            size = s.Read(data, 0, data.Length);
+                            int size = s.Read(data, 0, data.Length);
                             if (size > 0)
                             {
                                 streamWriter.Write(data, 0, size);
@@ -367,7 +330,9 @@ namespace CMBC.EasyFactor.Help
                             }
                         }
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
 
                     streamWriter.Close();
                 }
@@ -379,17 +344,19 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// updateThread: This is the Thread that runs for checking updates against the config file
         /// </summary>
-        private void updateThread()
+        private void UpdateThread()
         {
             string stUpdateName = String.Format("update{0:yyyyMMdd}", DateTime.Now);
-            if (this._AutoUpdateConfig == null)//if we haven't already downloaded the config file, do so now
-                this.loadConfigThread();
-            if (this._AutoUpdateConfig != null)//make sure we were able to download it
+            if (_autoUpdateConfig == null) //if we haven't already downloaded the config file, do so now
+                LoadConfigThread();
+            if (_autoUpdateConfig != null) //make sure we were able to download it
             {
                 //Check the file for an update
-                if (this.LatestConfigVersion > AutoUpdater.CurrentAppVersion)
+                if (LatestConfigVersion > CurrentAppVersion)
                 {
-                    DialogResult dr = MessageBoxEx.Show(String.Format("存在新版本：{0}，是否下载？", LatestConfigVersion), MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult dr = MessageBoxEx.Show(String.Format("存在新版本：{0}，是否下载？", LatestConfigVersion),
+                                                        MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
+                                                        MessageBoxIcon.Question);
                     //Download file if the user requests or AutoDownload is True
                     if (dr == DialogResult.Yes)
                     {
@@ -402,53 +369,51 @@ namespace CMBC.EasyFactor.Help
                             stPath = Path.GetTempPath() + stUpdateName + "_" + (count++) + ".zip";
                         }
                         //There is a new version available
-                        if (this.downloadFile(this._AutoUpdateConfig.AppFileURL, stPath))
+                        if (DownloadFile(_autoUpdateConfig.AppFileURL, stPath))
                         {
                             //MessageBox.Show("Downloaded New File");
-                            string stDest = stPath.Substring(0, stPath.Length - 4) + System.IO.Path.DirectorySeparatorChar;
+                            string stDest = stPath.Substring(0, stPath.Length - 4) + Path.DirectorySeparatorChar;
                             //Extract Zip File
-                            this.unzip(stPath, stDest);
+                            Unzip(stPath, stDest);
                             //Delete Zip File
                             File.Delete(stPath);
-                            if (this.OnAutoUpdateComplete != null)
+                            if (OnAutoUpdateComplete != null)
                             {
-                                this.OnAutoUpdateComplete();
+                                OnAutoUpdateComplete();
                             }
                             //Restart App if Necessary
                             //If true, the app will restart automatically, if false the app will use the RestartForm to prompt the user, if RestartForm is null, it doesn't restart
-                            if (this.AutoRestart || (this.RestartForm != null && this.RestartForm.ShowDialog() == DialogResult.Yes))
-                                this.restart();
+                            if (AutoRestart || (RestartForm != null && RestartForm.ShowDialog() == DialogResult.Yes))
+                                Restart();
                             //else don't restart
                         }
                         //else
                         //	MessageBox.Show("Didn't Download File");
                     }
-
                 }
                 else
                 {
-                    MessageBoxEx.Show("当前系统已经是最新版本：" + CurrentAppVersion.ToString());
+                    MessageBoxEx.Show("当前系统已经是最新版本：" + CurrentAppVersion);
                 }
             }
             else
             {
                 MessageBoxEx.Show("检查更新失败，无法访问更新服务器");
             }
-
         }
 
         /// <summary>
         /// 
         /// </summary>
-        private void updateThreadBackground()
+        private void UpdateThreadBackground()
         {
             string stUpdateName = String.Format("update{0:yyyyMMdd}", DateTime.Now);
-            if (this._AutoUpdateConfig == null)//if we haven't already downloaded the config file, do so now
-                this.loadConfigThread();
-            if (this._AutoUpdateConfig != null)//make sure we were able to download it
+            if (_autoUpdateConfig == null) //if we haven't already downloaded the config file, do so now
+                LoadConfigThread();
+            if (_autoUpdateConfig != null) //make sure we were able to download it
             {
                 //Check the file for an update
-                if (this.LatestConfigVersion > AutoUpdater.CurrentAppVersion)
+                if (LatestConfigVersion > CurrentAppVersion)
                 {
                     string stPath = Path.GetTempPath() + stUpdateName + ".zip";
                     int count = 1;
@@ -457,22 +422,22 @@ namespace CMBC.EasyFactor.Help
                         stPath = Path.GetTempPath() + stUpdateName + "_" + (count++) + ".zip";
                     }
                     //There is a new version available
-                    if (this.downloadFile(this._AutoUpdateConfig.AppFileURL, stPath))
+                    if (DownloadFile(_autoUpdateConfig.AppFileURL, stPath))
                     {
                         //MessageBox.Show("Downloaded New File");
-                        string stDest = stPath.Substring(0, stPath.Length - 4) + System.IO.Path.DirectorySeparatorChar;
+                        string stDest = stPath.Substring(0, stPath.Length - 4) + Path.DirectorySeparatorChar;
                         //Extract Zip File
-                        this.unzip(stPath, stDest);
+                        Unzip(stPath, stDest);
                         //Delete Zip File
                         File.Delete(stPath);
-                        if (this.OnAutoUpdateComplete != null)
+                        if (OnAutoUpdateComplete != null)
                         {
-                            this.OnAutoUpdateComplete();
+                            OnAutoUpdateComplete();
                         }
                         //Restart App if Necessary
                         //If true, the app will restart automatically, if false the app will use the RestartForm to prompt the user, if RestartForm is null, it doesn't restart
-                        if (this.RestartForm != null && this.RestartForm.ShowDialog() == DialogResult.Yes)
-                            this.restart();
+                        if (RestartForm != null && RestartForm.ShowDialog() == DialogResult.Yes)
+                            Restart();
                         //else don't restart
                     }
                     //else
@@ -480,7 +445,9 @@ namespace CMBC.EasyFactor.Help
                 }
             }
         }
+    }
 
-        #endregion?Methods?
-    }//class AutoUpdater
-}//namespace Conversive.AutoUpdater
+    //class AutoUpdater
+}
+
+//namespace Conversive.AutoUpdater

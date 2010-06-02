@@ -4,38 +4,28 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class Country
     {
-		#region?Fields?(1)?
-
         /// <summary>
         /// 
         /// </summary>
-        private static readonly List<Country> _countryList = InitializeCountry();
+        private static readonly List<Country> CountryList = InitializeCountry();
 
-		#endregion?Fields?
-
-		#region?Properties?(2)?
 
         /// <summary>
         /// Gets
         /// </summary>
         public string CountryFormatCN
         {
-            get
-            {
-                return this._CountryCode + " " + this._CountryNameCN;
-            }
+            get { return _CountryCode + " " + _CountryNameCN; }
         }
 
         /// <summary>
@@ -43,37 +33,28 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string CountryFormatEN
         {
-            get
-            {
-                return this._CountryCode + " " + this._CountryNameEN;
-            }
+            get { return _CountryCode + " " + _CountryNameEN; }
         }
 
-		#endregion?Properties?
 
-		#region?Methods?(2)?
-
-		//?Public?Methods?(1)?
-
+        //?Public?Methods?(1)?
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public static List<Country> AllCountries()
         {
-            return _countryList.ToList();
+            return CountryList.ToList();
         }
-		//?Private?Methods?(1)?
 
+        //?Private?Methods?(1)?
         /// <summary>
         /// Initializes static members of the Country class
         /// </summary>
-        static List<Country> InitializeCountry()
+        private static List<Country> InitializeCountry()
         {
-            DBDataContext context = new DBDataContext();
+            var context = new DBDataContext();
             return context.Countries.ToList();
         }
-
-		#endregion?Methods?
     }
 }

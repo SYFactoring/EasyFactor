@@ -15,8 +15,6 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceAssignBatch
     {
-        #region?Fields?(4)?
-
         private double? _assignAmount;
         private double? _assignOutstanding;
         private double? _commissionAmount;
@@ -25,131 +23,6 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _paymentAmount;
         private double? _refundAmount;
 
-        #endregion?Fields?
-
-        #region?Properties?(10)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public CommissionRemittance CommissionRemitteance
-        {
-            get
-            {
-                return
-                    Case.SellerClient.CommissionRemittances.OrderBy(r => r.MsgDate).FirstOrDefault(
-                        cr => AssignDate <= cr.MsgDate);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? MsgDate
-        {
-            get
-            {
-                CommissionRemittance cr = CommissionRemitteance;
-                if (cr != null)
-                {
-                    return cr.MsgDate;
-                }
-
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string MsgType
-        {
-            get
-            {
-                CommissionRemittance cr = CommissionRemitteance;
-                if (cr != null)
-                {
-                    return cr.MsgType;
-                }
-
-                return string.Empty;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? RemitDate
-        {
-            get
-            {
-                CommissionRemittance cr = CommissionRemitteance;
-                if (cr != null)
-                {
-                    return cr.RemitDate;
-                }
-
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? RemitAmount
-        {
-            get
-            {
-                CommissionRemittance cr = CommissionRemitteance;
-                if (cr != null)
-                {
-                    return cr.RemitAmount;
-                }
-
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? MsgAmount
-        {
-            get
-            {
-                CommissionRemittance cr = CommissionRemitteance;
-                if (cr != null)
-                {
-                    return cr.MsgAmount;
-                }
-
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string FactorCode
-        {
-            get { return Case.Factor.FactorCode; }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string FactorName
-        {
-            get { return Case.Factor.ToString(); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? CreditNoteAmount
-        {
-            get { return CreditNotes.Sum(c => c.PaymentAmount); }
-        }
 
         /// <summary>
         /// Gets assign amount
@@ -164,54 +37,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return _assignAmount.Value;
-            }
-        }
-
-        /// <summary>
-        /// Gets finance amount
-        /// </summary>
-        public double FinanceAmount
-        {
-            get
-            {
-                if (_financeAmount.HasValue == false)
-                {
-                    _financeAmount = Invoices.Sum(i => i.FinanceAmount);
-                }
-
-                return _financeAmount.Value;
-            }
-        }
-
-        /// <summary>
-        /// Gets payment amount
-        /// </summary>
-        public double PaymentAmount
-        {
-            get
-            {
-                if (_paymentAmount.HasValue == false)
-                {
-                    _paymentAmount = Invoices.Sum(i => i.PaymentAmount);
-                }
-
-                return _paymentAmount.Value;
-            }
-        }
-
-        /// <summary>
-        /// Gets refund amount
-        /// </summary>
-        public double RefundAmount
-        {
-            get
-            {
-                if (_refundAmount.HasValue == false)
-                {
-                    _refundAmount = Invoices.Sum(i => i.RefundAmount);
-                }
-
-                return _refundAmount.Value;
             }
         }
 
@@ -256,6 +81,61 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// Gets
+        /// </summary>
+        public double? CommissionAmount
+        {
+            get
+            {
+                if (_commissionAmount.HasValue == false)
+                {
+                    double? result = null;
+                    foreach (Invoice invoice in Invoices.Where(invoice => invoice.Commission.HasValue))
+                    {
+                        if (result.HasValue == false)
+                        {
+                            result = 0;
+                        }
+                        result += invoice.Commission;
+                    }
+
+                    _commissionAmount = result;
+                }
+
+                return _commissionAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public CommissionRemittance CommissionRemitteance
+        {
+            get
+            {
+                return
+                    Case.SellerClient.CommissionRemittances.OrderBy(r => r.MsgDate).FirstOrDefault(
+                        cr => AssignDate <= cr.MsgDate);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? CreditNoteAmount
+        {
+            get { return CreditNotes.Sum(c => c.PaymentAmount); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FactorCode
+        {
+            get { return Case.Factor.FactorCode; }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public double? FactorCommissionAmount
@@ -285,31 +165,26 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// Gets
+        /// 
         /// </summary>
-        public double? CommissionAmount
+        public string FactorName
+        {
+            get { return Case.Factor.ToString(); }
+        }
+
+        /// <summary>
+        /// Gets finance amount
+        /// </summary>
+        public double FinanceAmount
         {
             get
             {
-                if (_commissionAmount.HasValue == false)
+                if (_financeAmount.HasValue == false)
                 {
-                    double? result = null;
-                    foreach (Invoice invoice in Invoices)
-                    {
-                        if (invoice.Commission.HasValue)
-                        {
-                            if (result.HasValue == false)
-                            {
-                                result = 0;
-                            }
-                            result += invoice.Commission;
-                        }
-                    }
-
-                    _commissionAmount = result;
+                    _financeAmount = Invoices.Sum(i => i.FinanceAmount);
                 }
 
-                return _commissionAmount;
+                return _financeAmount.Value;
             }
         }
 
@@ -338,6 +213,131 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string Location
+        {
+            get { return Case.OwnerDepartment.LocationName; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? MsgAmount
+        {
+            get
+            {
+                CommissionRemittance cr = CommissionRemitteance;
+                if (cr != null)
+                {
+                    return cr.MsgAmount;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? MsgDate
+        {
+            get
+            {
+                CommissionRemittance cr = CommissionRemitteance;
+                if (cr != null)
+                {
+                    return cr.MsgDate;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string MsgType
+        {
+            get
+            {
+                CommissionRemittance cr = CommissionRemitteance;
+                if (cr != null)
+                {
+                    return cr.MsgType;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Gets payment amount
+        /// </summary>
+        public double PaymentAmount
+        {
+            get
+            {
+                if (_paymentAmount.HasValue == false)
+                {
+                    _paymentAmount = Invoices.Sum(i => i.PaymentAmount);
+                }
+
+                return _paymentAmount.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets refund amount
+        /// </summary>
+        public double RefundAmount
+        {
+            get
+            {
+                if (_refundAmount.HasValue == false)
+                {
+                    _refundAmount = Invoices.Sum(i => i.RefundAmount);
+                }
+
+                return _refundAmount.Value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? RemitAmount
+        {
+            get
+            {
+                CommissionRemittance cr = CommissionRemitteance;
+                if (cr != null)
+                {
+                    return cr.RemitAmount;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? RemitDate
+        {
+            get
+            {
+                CommissionRemittance cr = CommissionRemitteance;
+                if (cr != null)
+                {
+                    return cr.RemitDate;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Gets
         /// </summary>
         public string SellerName
@@ -353,20 +353,8 @@ namespace CMBC.EasyFactor.DB.dbml
             get { return Case.TransactionType; }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Location
-        {
-            get { return Case.OwnerDepartment.LocationName; }
-        }
-
-        #endregion?Properties?
-
-        #region?Methods?(2)?
 
         //?Public?Methods?(2)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -425,7 +413,5 @@ namespace CMBC.EasyFactor.DB.dbml
             string assignNo = String.Format("{0}ASS{1:yy}{2:D3}", caseCode, assignDate, batchCount + 1);
             return assignNo;
         }
-
-        #endregion?Methods?
     }
 }

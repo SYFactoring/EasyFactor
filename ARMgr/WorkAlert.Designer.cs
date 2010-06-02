@@ -61,6 +61,10 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.components = new System.ComponentModel.Container();
             this.panelRight = new DevComponents.DotNetBar.PanelEx();
+            this.panelCDA = new DevComponents.DotNetBar.ExpandablePanel();
+            this.btnRejectCheckCDA = new DevComponents.DotNetBar.ButtonX();
+            this.btnWaitCheckCDA = new DevComponents.DotNetBar.ButtonX();
+            this.btnNeedCheckCDA = new DevComponents.DotNetBar.ButtonX();
             this.panelOther = new DevComponents.DotNetBar.ExpandablePanel();
             this.btnDueFactorCreditLine = new DevComponents.DotNetBar.ButtonX();
             this.btnDueContract = new DevComponents.DotNetBar.ButtonX();
@@ -79,15 +83,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.panelCDA = new DevComponents.DotNetBar.ExpandablePanel();
-            this.btnRejectCheckCDA = new DevComponents.DotNetBar.ButtonX();
-            this.btnWaitCheckCDA = new DevComponents.DotNetBar.ButtonX();
-            this.btnNeedCheckCDA = new DevComponents.DotNetBar.ButtonX();
             this.panelRight.SuspendLayout();
+            this.panelCDA.SuspendLayout();
             this.panelOther.SuspendLayout();
             this.panelFinance.SuspendLayout();
             this.panelAssign.SuspendLayout();
-            this.panelCDA.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelRight
@@ -110,6 +110,77 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelRight.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelRight.Style.GradientAngle = 90;
             this.panelRight.TabIndex = 2;
+            // 
+            // panelCDA
+            // 
+            this.panelCDA.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelCDA.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelCDA.Controls.Add(this.btnRejectCheckCDA);
+            this.panelCDA.Controls.Add(this.btnWaitCheckCDA);
+            this.panelCDA.Controls.Add(this.btnNeedCheckCDA);
+            this.panelCDA.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelCDA.ExpandOnTitleClick = true;
+            this.panelCDA.Location = new System.Drawing.Point(600, 0);
+            this.panelCDA.Name = "panelCDA";
+            this.panelCDA.Size = new System.Drawing.Size(200, 219);
+            this.panelCDA.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCDA.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCDA.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCDA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelCDA.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelCDA.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelCDA.Style.GradientAngle = 90;
+            this.panelCDA.TabIndex = 3;
+            this.panelCDA.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCDA.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCDA.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCDA.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelCDA.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelCDA.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelCDA.TitleStyle.GradientAngle = 90;
+            this.panelCDA.TitleText = "额度通知书";
+            // 
+            // btnRejectCheckCDA
+            // 
+            this.btnRejectCheckCDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRejectCheckCDA.AutoExpandOnClick = true;
+            this.btnRejectCheckCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRejectCheckCDA.Location = new System.Drawing.Point(15, 87);
+            this.btnRejectCheckCDA.Name = "btnRejectCheckCDA";
+            this.btnRejectCheckCDA.Size = new System.Drawing.Size(140, 25);
+            this.btnRejectCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnRejectCheckCDA.TabIndex = 0;
+            this.btnRejectCheckCDA.Text = "c) 拒绝放行";
+            this.btnRejectCheckCDA.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnRejectCheckCDA.Click += new System.EventHandler(this.QueryRejectCheckCDAs);
+            // 
+            // btnWaitCheckCDA
+            // 
+            this.btnWaitCheckCDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnWaitCheckCDA.AutoExpandOnClick = true;
+            this.btnWaitCheckCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnWaitCheckCDA.Location = new System.Drawing.Point(15, 58);
+            this.btnWaitCheckCDA.Name = "btnWaitCheckCDA";
+            this.btnWaitCheckCDA.Size = new System.Drawing.Size(140, 25);
+            this.btnWaitCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnWaitCheckCDA.TabIndex = 0;
+            this.btnWaitCheckCDA.Text = "b) 等待放行";
+            this.btnWaitCheckCDA.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnWaitCheckCDA.Click += new System.EventHandler(this.QueryWaitCheckCDAs);
+            // 
+            // btnNeedCheckCDA
+            // 
+            this.btnNeedCheckCDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNeedCheckCDA.AutoExpandOnClick = true;
+            this.btnNeedCheckCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnNeedCheckCDA.Location = new System.Drawing.Point(15, 29);
+            this.btnNeedCheckCDA.Name = "btnNeedCheckCDA";
+            this.btnNeedCheckCDA.Size = new System.Drawing.Size(140, 25);
+            this.btnNeedCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnNeedCheckCDA.TabIndex = 0;
+            this.btnNeedCheckCDA.Text = "a) 需要放行";
+            this.btnNeedCheckCDA.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnNeedCheckCDA.Click += new System.EventHandler(this.QueryNeedCheckCDAs);
             // 
             // panelOther
             // 
@@ -362,81 +433,13 @@ namespace CMBC.EasyFactor.ARMgr
             // backgroundWorker
             // 
             this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorkerDoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorkerProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorkerRunWorkerCompleted);
             // 
             // highlighter
             // 
             this.highlighter.ContainerControl = this;
-            // 
-            // panelCDA
-            // 
-            this.panelCDA.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelCDA.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelCDA.Controls.Add(this.btnRejectCheckCDA);
-            this.panelCDA.Controls.Add(this.btnWaitCheckCDA);
-            this.panelCDA.Controls.Add(this.btnNeedCheckCDA);
-            this.panelCDA.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelCDA.ExpandOnTitleClick = true;
-            this.panelCDA.Location = new System.Drawing.Point(600, 0);
-            this.panelCDA.Name = "panelCDA";
-            this.panelCDA.Size = new System.Drawing.Size(200, 219);
-            this.panelCDA.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelCDA.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelCDA.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelCDA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelCDA.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.panelCDA.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
-            this.panelCDA.Style.GradientAngle = 90;
-            this.panelCDA.TabIndex = 3;
-            this.panelCDA.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelCDA.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelCDA.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelCDA.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
-            this.panelCDA.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelCDA.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelCDA.TitleStyle.GradientAngle = 90;
-            this.panelCDA.TitleText = "额度通知书";
-            // 
-            // btnRejectCheckCDA
-            // 
-            this.btnRejectCheckCDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnRejectCheckCDA.AutoExpandOnClick = true;
-            this.btnRejectCheckCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnRejectCheckCDA.Location = new System.Drawing.Point(15, 87);
-            this.btnRejectCheckCDA.Name = "btnRejectCheckCDA";
-            this.btnRejectCheckCDA.Size = new System.Drawing.Size(140, 25);
-            this.btnRejectCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnRejectCheckCDA.TabIndex = 0;
-            this.btnRejectCheckCDA.Text = "c) 拒绝放行";
-            this.btnRejectCheckCDA.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
-            // 
-            // btnWaitCheckCDA
-            // 
-            this.btnWaitCheckCDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnWaitCheckCDA.AutoExpandOnClick = true;
-            this.btnWaitCheckCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnWaitCheckCDA.Location = new System.Drawing.Point(15, 58);
-            this.btnWaitCheckCDA.Name = "btnWaitCheckCDA";
-            this.btnWaitCheckCDA.Size = new System.Drawing.Size(140, 25);
-            this.btnWaitCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnWaitCheckCDA.TabIndex = 0;
-            this.btnWaitCheckCDA.Text = "b) 等待放行";
-            this.btnWaitCheckCDA.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
-            // 
-            // btnNeedCheckCDA
-            // 
-            this.btnNeedCheckCDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnNeedCheckCDA.AutoExpandOnClick = true;
-            this.btnNeedCheckCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnNeedCheckCDA.Location = new System.Drawing.Point(15, 29);
-            this.btnNeedCheckCDA.Name = "btnNeedCheckCDA";
-            this.btnNeedCheckCDA.Size = new System.Drawing.Size(140, 25);
-            this.btnNeedCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnNeedCheckCDA.TabIndex = 0;
-            this.btnNeedCheckCDA.Text = "a) 需要放行";
-            this.btnNeedCheckCDA.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
             // 
             // WorkAlert
             // 
@@ -446,10 +449,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.Name = "WorkAlert";
             this.Size = new System.Drawing.Size(801, 219);
             this.panelRight.ResumeLayout(false);
+            this.panelCDA.ResumeLayout(false);
             this.panelOther.ResumeLayout(false);
             this.panelFinance.ResumeLayout(false);
             this.panelAssign.ResumeLayout(false);
-            this.panelCDA.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

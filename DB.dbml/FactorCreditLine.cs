@@ -6,27 +6,17 @@
 
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class FactorCreditLine 
+    public partial class FactorCreditLine
     {
-		#region?Properties?(3)?
-
         /// <summary>
         /// Gets
         /// </summary>
         public double CreditLineOutstanding
         {
-            get
-            {
-                return this.CreditLine - this.Factor.GetAssignOutstanding(this.CreditLineCurrency);
-            }
+            get { return CreditLine - Factor.GetAssignOutstanding(CreditLineCurrency); }
         }
 
         /// <summary>
@@ -34,10 +24,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string FactorName
         {
-            get
-            {
-                return this.Factor.ToString();
-            }
+            get { return Factor.ToString(); }
         }
 
         /// <summary>
@@ -45,12 +32,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string FactorType
         {
-            get
-            {
-                return this.Factor.FactorType;
-            }
+            get { return Factor.FactorType; }
         }
-
-		#endregion?Properties?
     }
 }

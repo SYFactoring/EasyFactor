@@ -4,95 +4,73 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.SqlClient;
-    using System.Drawing;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// Factor Management User Interface 
     /// </summary>
     public partial class FactorMgr : UserControl
     {
-        #region?Fields?(1)?
 
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs;
+        private readonly BindingSource _bs;
 
-        #endregion?Fields?
-
-        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the FactorMgrUI class
         /// </summary>
-        /// <param name="isEditable">true if editable</param>
         public FactorMgr()
         {
-            this.InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.bs = new BindingSource();
-            this.dgvFactors.DataSource = this.bs;
-            this.dgvFactors.AutoGenerateColumns = false;
-            ControlUtil.SetDoubleBuffered(this.dgvFactors);
-            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
+            InitializeComponent();
+            ImeMode = ImeMode.OnHalf;
+            _bs = new BindingSource();
+            dgvFactors.DataSource = _bs;
+            dgvFactors.AutoGenerateColumns = false;
+            ControlUtil.SetDoubleBuffered(dgvFactors);
+            ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Country> countryList = Country.AllCountries();
-            countryList.Insert(0, new Country() { CountryCode = "AA", CountryNameCN = "全部", CountryNameEN = "All" });
-            this.cbCountry.DataSource = countryList;
-            this.cbCountry.DisplayMember = "CountryFormatEN";
-            this.cbCountry.ValueMember = "CountryNameEN";
+            countryList.Insert(0, new Country {CountryCode = "AA", CountryNameCN = "全部", CountryNameEN = "All"});
+            cbCountry.DataSource = countryList;
+            cbCountry.DisplayMember = "CountryFormatEN";
+            cbCountry.ValueMember = "CountryNameEN";
 
-            this.UpdateContextMenu();
+            UpdateContextMenu();
         }
 
-        #endregion?Constructors?
 
-        #region?Properties?(3)?
 
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context
-        {
-            get;
-            set;
-        }
+        private DBDataContext Context { get; set; }
 
         /// <summary>
         /// Gets or sets onwer form
         /// </summary>
-        public Form OwnerForm
-        {
-            get;
-            set;
-        }
+        public Form OwnerForm { get; set; }
 
         /// <summary>
         /// Gets or sets selected factor
         /// </summary>
-        public Factor Selected
-        {
-            get;
-            set;
-        }
+        public Factor Selected { get; set; }
 
-        #endregion?Properties?
 
-        #region?Methods?(10)?
+
 
         //?Private?Methods?(10)?
-
         /// <summary>
         /// Event handler when cell double clicked
         /// </summary>
@@ -100,13 +78,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.OwnerForm == null)
+            if (OwnerForm == null)
             {
-                this.DetailFactor(sender, e);
+                DetailFactor(sender, e);
             }
             else
             {
-                this.SelectFactor(sender, e);
+                SelectFactor(sender, e);
             }
         }
 
@@ -122,50 +100,57 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            if (this.dgvFactors.SelectedRows.Count == 0)
+            if (dgvFactors.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            Factor selectedFactor = (Factor)this.bs.List[this.dgvFactors.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("是否确定删除保理商: " + selectedFactor.FactorCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            var selectedFactor = (Factor) _bs.List[dgvFactors.SelectedRows[0].Index];
+            if (
+                MessageBoxEx.Show("是否确定删除保理商: " + selectedFactor.FactorCode, MESSAGE.TITLE_WARNING,
+                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (selectedFactor.FactorCreditLines.Count > 0)
                 {
-                    MessageBoxEx.Show("不能删除此机构,已存在相关额度.", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此机构,已存在相关额度.", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedFactor.SellerCases.Count > 0 || selectedFactor.BuyerCases.Count > 0)
                 {
-                    MessageBoxEx.Show("不能删除此机构,已存在相关案件信息", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此机构,已存在相关案件信息", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedFactor.FactorAccounts.Count > 0)
                 {
-                    MessageBoxEx.Show("不能删除此机构,已存在相关账户信息", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此机构,已存在相关账户信息", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (selectedFactor.GroupFactors.Count > 0)
                 {
-                    MessageBoxEx.Show("不能删除此机构,已存在相关子机构信息", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("不能删除此机构,已存在相关子机构信息", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
                     return;
                 }
 
-                context.Factors.DeleteOnSubmit(selectedFactor);
+                Context.Factors.DeleteOnSubmit(selectedFactor);
                 try
                 {
-                    context.SubmitChanges();
+                    Context.SubmitChanges();
                 }
                 catch (SqlException e1)
                 {
-                    MessageBoxEx.Show("删除失败:" + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxEx.Show("删除失败:" + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
                     return;
                 }
 
-                this.dgvFactors.Rows.RemoveAt(this.dgvFactors.SelectedRows[0].Index);
+                dgvFactors.Rows.RemoveAt(dgvFactors.SelectedRows[0].Index);
             }
         }
 
@@ -176,13 +161,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void DetailFactor(object sender, EventArgs e)
         {
-            if (this.dgvFactors.SelectedRows.Count == 0)
+            if (dgvFactors.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            Factor selectedFactor = (Factor)this.bs.List[this.dgvFactors.SelectedRows[0].Index];
-            FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.DETAIL_FACTOR);
+            var selectedFactor = (Factor) _bs.List[dgvFactors.SelectedRows[0].Index];
+            var factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorType.DETAIL_FACTOR);
             factorDetail.ShowDialog(this);
         }
 
@@ -191,10 +176,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvFactors_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DgvFactorsRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvFactors.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvFactors.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvFactors.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            var rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvFactors.RowHeadersWidth - 4,
+                                          e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvFactors.RowHeadersDefaultCellStyle.Font,
+                                  rectangle, dgvFactors.RowHeadersDefaultCellStyle.ForeColor,
+                                  TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -209,7 +197,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
+            var factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
             factorDetail.ShowDialog(this);
         }
 
@@ -218,20 +206,21 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NewFactorCreditLine(object sender, System.EventArgs e)
+        private void NewFactorCreditLine(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
                 return;
             }
 
-            if (this.dgvFactors.SelectedRows.Count == 0)
+            if (dgvFactors.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            Factor selectedFactor = (Factor)this.bs.List[this.dgvFactors.SelectedRows[0].Index];
-            FactorDetail factorDetail = new FactorDetail(selectedFactor, FactorDetail.OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE);
+            var selectedFactor = (Factor) _bs.List[dgvFactors.SelectedRows[0].Index];
+            var factorDetail = new FactorDetail(selectedFactor,
+                                                FactorDetail.OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE);
             factorDetail.ShowDialog(this);
         }
 
@@ -255,26 +244,29 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             string country = string.Empty;
             if (cbCountry.SelectedIndex >= 0)
             {
-                country = (string)cbCountry.SelectedValue;
+                country = (string) cbCountry.SelectedValue;
                 if ("All".Equals(country))
                 {
                     country = string.Empty;
                 }
             }
 
-            context = new DBDataContext();
+            Context = new DBDataContext();
             if (!PermUtil.ValidatePermission(Permissions.BASICINFO_UPDATE))
             {
-                context.ObjectTrackingEnabled = false;
+                Context.ObjectTrackingEnabled = false;
             }
 
-            var queryResult = context.Factors.Where(f =>
-                                                   f.FactorCode.Contains(tbFactorCode.Text)
-                                                && (f.CompanyNameCN.Contains(tbFactorName.Text) || f.CompanyNameEN.Contains(tbFactorName.Text))
-                                                && f.FactorType.Contains(factorType)
-                                                && ((f.CountryName == null ? string.Empty : f.CountryName).Contains(country)));
+            IQueryable<Factor> queryResult = Context.Factors.Where(f =>
+                                                                   f.FactorCode.Contains(tbFactorCode.Text)
+                                                                   &&
+                                                                   (f.CompanyNameCN.Contains(tbFactorName.Text) ||
+                                                                    f.CompanyNameEN.Contains(tbFactorName.Text))
+                                                                   && f.FactorType.Contains(factorType)
+                                                                   &&
+                                                                   ((f.CountryName ?? string.Empty).Contains(country)));
 
-            bs.DataSource = queryResult;
+            _bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -285,10 +277,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void Reset(object sender, EventArgs e)
         {
-            this.tbFactorCode.Text = string.Empty;
-            this.tbFactorName.Text = string.Empty;
-            this.cbCountry.SelectedIndex = -1;
-            this.cbFactorType.SelectedIndex = -1;
+            tbFactorCode.Text = string.Empty;
+            tbFactorName.Text = string.Empty;
+            cbCountry.SelectedIndex = -1;
+            cbFactorType.SelectedIndex = -1;
         }
 
         /// <summary>
@@ -298,17 +290,17 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e">Event Args</param>
         private void SelectFactor(object sender, EventArgs e)
         {
-            if (this.dgvFactors.SelectedRows.Count == 0)
+            if (dgvFactors.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            Factor selectedFactor = (Factor)this.bs.List[this.dgvFactors.SelectedRows[0].Index];
-            this.Selected = selectedFactor;
-            if (this.OwnerForm != null)
+            var selectedFactor = (Factor) _bs.List[dgvFactors.SelectedRows[0].Index];
+            Selected = selectedFactor;
+            if (OwnerForm != null)
             {
-                this.OwnerForm.DialogResult = DialogResult.Yes;
-                this.OwnerForm.Close();
+                OwnerForm.DialogResult = DialogResult.Yes;
+                OwnerForm.Close();
             }
         }
 
@@ -319,18 +311,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             if (PermUtil.ValidatePermission(Permissions.BASICINFO_UPDATE))
             {
-                this.menuItemFactorNew.Enabled = true;
-                this.menuItemFactorCreditLineNew.Enabled = true;
-                this.menuItemFactorDelete.Enabled = true;
+                menuItemFactorNew.Enabled = true;
+                menuItemFactorCreditLineNew.Enabled = true;
+                menuItemFactorDelete.Enabled = true;
             }
             else
             {
-                this.menuItemFactorNew.Enabled = false;
-                this.menuItemFactorCreditLineNew.Enabled = false;
-                this.menuItemFactorDelete.Enabled = false;
+                menuItemFactorNew.Enabled = false;
+                menuItemFactorCreditLineNew.Enabled = false;
+                menuItemFactorDelete.Enabled = false;
             }
         }
-
-        #endregion?Methods?
     }
 }

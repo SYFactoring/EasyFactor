@@ -4,40 +4,28 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+using Microsoft.Office.Core;
+using Microsoft.Office.Interop.Excel;
+using Rectangle = System.Drawing.Rectangle;
+using XlHAlign = Microsoft.Office.Interop.Excel.XlHAlign;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Runtime.InteropServices;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-    using Microsoft.Office.Core;
-    using Microsoft.Office.Interop.Excel;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class FinanceBatchMgr : UserControl
     {
-        #region?Fields?(2)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bs;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpBatchType opBatchType;
-
-        #endregion?Fields?
-
-        #region?Enums?(1)?
+        #region OpBatchType enum
 
         /// <summary>
         /// 
@@ -48,7 +36,6 @@ namespace CMBC.EasyFactor.ARMgr
             /// 
             /// </summary>
             //CHECK,
-
             /// <summary>
             /// 
             /// </summary>
@@ -63,16 +50,20 @@ namespace CMBC.EasyFactor.ARMgr
             /// 
             /// </summary>
             POOL_QUERY,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            //POOL_CHECK,
         }
 
-        #endregion?Enums?
+        #endregion
 
-        #region?Constructors?(4)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly OpBatchType _opBatchType;
+
 
         /// <summary>
         /// Initializes a new instance of the FinanceBatchMgr class
@@ -82,38 +73,26 @@ namespace CMBC.EasyFactor.ARMgr
         public FinanceBatchMgr(Client selectedClient, DBDataContext context)
             : this(OpBatchType.DETAIL)
         {
-            this.panelQuery.Visible = false;
-            this.colBuyerName.Visible = false;
-            this.colBatchCount.Visible = false;
-            this.colTransactionType.Visible = false;
+            panelQuery.Visible = false;
+            colBuyerName.Visible = false;
+            colBatchCount.Visible = false;
+            colTransactionType.Visible = false;
 
-            this.bs.DataSource = selectedClient.InvoiceFinanceBatches;
-            this.context = context;
+            _bs.DataSource = selectedClient.InvoiceFinanceBatches;
+            Context = context;
         }
 
         /// <summary>
         /// Initializes a new instance of the FinanceBatchMgr class
         /// </summary>
-        /// <param name="selectedCDA"></param>
+        /// <param name="selectedCase"></param>
         /// <param name="context"></param>
         public FinanceBatchMgr(Case selectedCase, DBDataContext context)
             : this(OpBatchType.DETAIL)
         {
-            this.panelQuery.Visible = false;
-            this.bs.DataSource = selectedCase.InvoiceFinanceBatches;
-            this.context = context;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the FinanceBatchMgr class
-        /// </summary>
-        /// <param name="createUserName"></param>
-        /// <param name="batchStatus"></param>
-        public FinanceBatchMgr(string createUserName, string batchStatus)
-            : this(OpBatchType.QUERY)
-        {
-            this.tbCreateUserName.Text = createUserName;
-            this.QueryBatch(null, null);
+            panelQuery.Visible = false;
+            _bs.DataSource = selectedCase.InvoiceFinanceBatches;
+            Context = context;
         }
 
         /// <summary>
@@ -122,137 +101,81 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batchType"></param>
         public FinanceBatchMgr(OpBatchType batchType)
         {
-            this.InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.dgvBatches.AutoGenerateColumns = false;
-            this.bs = new BindingSource();
-            this.dgvBatches.DataSource = this.bs;
-            this.opBatchType = batchType;
-            ControlUtil.SetDoubleBuffered(this.dgvBatches);
-            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
+            InitializeComponent();
+            ImeMode = ImeMode.OnHalf;
+            dgvBatches.AutoGenerateColumns = false;
+            _bs = new BindingSource();
+            dgvBatches.DataSource = _bs;
+            _opBatchType = batchType;
+            ControlUtil.SetDoubleBuffered(dgvBatches);
+            ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
-            this.cbLocation.DataSource = allLocations;
-            this.cbLocation.DisplayMember = "LocationName";
-            this.cbLocation.ValueMember = "LocationCode";
-            this.cbLocation.SelectedIndex = 0;
+            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            cbLocation.DataSource = allLocations;
+            cbLocation.DisplayMember = "LocationName";
+            cbLocation.ValueMember = "LocationCode";
+            cbLocation.SelectedIndex = 0;
 
-            this.UpdateContextMenu();
+            UpdateContextMenu();
 
-            //if (batchType == OpBatchType.CHECK)
-            //{
-            //    this.cbCheckStatus.Text = BATCH.UNCHECK;
-            //    context = new DBDataContext();
-            //    var queryResult = context.InvoiceFinanceBatches.Where(i=>i.CaseCode != null);
-            //    this.bs.DataSource = queryResult;
-            //    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            //}
-            //else if (batchType == OpBatchType.POOL_CHECK)
-            //{
-            //    this.colBuyerName.Visible = false;
-            //    this.colBatchCount.Visible = false;
-            //    this.colTransactionType.Visible = false;
-
-            //    this.cbCheckStatus.Text = BATCH.UNCHECK;
-            //    context = new DBDataContext();
-            //    var queryResult = context.InvoiceFinanceBatches.Where(i=>i.ClientEDICode != null);
-            //    this.bs.DataSource = queryResult;
-            //    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            //}
             if (batchType == OpBatchType.POOL_QUERY)
             {
-                this.colBuyerName.Visible = false;
-                this.colBatchCount.Visible = false;
-                this.colTransactionType.Visible = false;
+                colBuyerName.Visible = false;
+                colBatchCount.Visible = false;
+                colTransactionType.Visible = false;
             }
         }
 
-        #endregion?Constructors?
-
-        #region?Properties?(3)?
 
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context
-        {
-            get;
-            set;
-        }
+        private DBDataContext Context { get; set; }
 
         /// <summary>
         /// Gets or sets owner form
         /// </summary>
-        public Form OwnerForm
-        {
-            get;
-            set;
-        }
+        public Form OwnerForm { get; set; }
 
         /// <summary>
         /// Gets or sets selected FinanceBatch
         /// </summary>
-        public InvoiceFinanceBatch Selected
-        {
-            get;
-            set;
-        }
+        public InvoiceFinanceBatch Selected { get; set; }
 
-        #endregion?Properties?
-
-        #region?Delegates?and?Events?(1)?
 
         //?Delegates?(1)?
 
-        private delegate void MakeReport(IGrouping<Client, InvoiceFinanceBatch> batchGroup);
-
-        #endregion?Delegates?and?Events?
-
-        #region?Methods?(13)?
 
         //?Private?Methods?(13)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         //private void Check(object sender, EventArgs e)
         //{
         //    if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_CHECK))
         //    {
         //        return;
         //    }
-
         //    if (this.dgvBatches.CurrentCell == null)
         //    {
         //        return;
         //    }
-
         //    InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-
         //    if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
         //    {
         //        MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         //        return;
         //    }
-
         //    if (MessageBoxEx.Show("是否确认复核通过该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
         //    {
         //        return;
         //    }
-
         //    if (App.Current.CurUser.Name == batch.CreateUserName)
         //    {
         //        MessageBoxEx.Show("经办人和复核人相同，不可进行复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         //        return;
         //    }
-
         //    //batch.CheckStatus = BATCH.CHECK;
         //    //batch.CheckUserName = App.Current.CurUser.Name;
         //    //batch.CheckDate = DateTime.Now.Date;
-
         //    try
         //    {
         //        context.SubmitChanges();
@@ -262,7 +185,6 @@ namespace CMBC.EasyFactor.ARMgr
         //        MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         //    }
         //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -270,27 +192,23 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DeleteBatch(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_UPDATE))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 return;
             }
 
-            if (this.dgvBatches.CurrentCell == null)
+            if (dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-            if (MessageBoxEx.Show("是否打算删除此融资批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            var selectedBatch = (InvoiceFinanceBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            if (
+                MessageBoxEx.Show("是否打算删除此融资批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
+                                  MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
-
-            //if (selectedBatch.CheckStatus == BATCH.CHECK)
-            //{
-            //    MessageBoxEx.Show("不能删除已复核批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    return;
-            //}
 
             List<InvoiceFinanceLog> logList = selectedBatch.InvoiceFinanceLogs.ToList();
             foreach (InvoiceFinanceLog log in logList)
@@ -299,7 +217,7 @@ namespace CMBC.EasyFactor.ARMgr
                 log.Invoice = null;
                 invoice.Commission -= log.Commission.GetValueOrDefault();
                 invoice.CaculateFinance();
-                context.InvoiceFinanceLogs.DeleteOnSubmit(log);
+                Context.InvoiceFinanceLogs.DeleteOnSubmit(log);
             }
 
             //if (selectedBatch.Invoices.Count > 0)
@@ -308,18 +226,19 @@ namespace CMBC.EasyFactor.ARMgr
             //    return;
             //}
 
-            context.InvoiceFinanceBatches.DeleteOnSubmit(selectedBatch);
+            Context.InvoiceFinanceBatches.DeleteOnSubmit(selectedBatch);
             try
             {
-                context.SubmitChanges();
+                Context.SubmitChanges();
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
                 return;
             }
 
-            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.CurrentCell.RowIndex);
+            dgvBatches.Rows.RemoveAt(dgvBatches.CurrentCell.RowIndex);
         }
 
         /// <summary>
@@ -329,13 +248,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.CurrentCell == null)
+            if (dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-            FinanceBatchDetail detail = new FinanceBatchDetail(selectedBatch);
+            var selectedBatch = (InvoiceFinanceBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var detail = new FinanceBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
 
@@ -344,15 +263,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvBatches_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvBatchesCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.OwnerForm == null)
+            if (OwnerForm == null)
             {
-                this.DetailBatch(sender, e);
+                DetailBatch(sender, e);
             }
             else
             {
-                this.SelectBatch(sender, e);
+                SelectBatch(sender, e);
             }
         }
 
@@ -361,37 +280,34 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DgvBatchesRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvBatches.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvBatches.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvBatches.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            var rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvBatches.RowHeadersWidth - 4,
+                                          e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvBatches.RowHeadersDefaultCellStyle.Font,
+                                  rectangle, dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
+                                  TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        private List<InvoiceFinanceBatch> GetSelectedBatches()
+        private IEnumerable<InvoiceFinanceBatch> GetSelectedBatches()
         {
-            if (this.dgvBatches.CurrentCell == null)
+            if (dgvBatches.CurrentCell == null)
             {
                 return null;
             }
 
-            List<InvoiceFinanceBatch> selectedBatches = new List<InvoiceFinanceBatch>();
+            var selectedBatches = new List<InvoiceFinanceBatch>();
 
-            foreach (DataGridViewCell cell in this.dgvBatches.SelectedCells)
+            foreach (DataGridViewCell cell in dgvBatches.SelectedCells)
             {
-                InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.bs.List[cell.RowIndex];
+                var batch = (InvoiceFinanceBatch) _bs.List[cell.RowIndex];
                 if (!selectedBatches.Contains(batch))
                 {
                     selectedBatches.Add(batch);
-
-                    //if (batch.CheckStatus != BATCH.CHECK)
-                    //{
-                    //    MessageBoxEx.Show("该批次状态不属于已审核，不能生成报表，批次号： " + batch.FinanceBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //    return null;
-                    //}
                 }
             }
 
@@ -403,15 +319,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="selectedBatches"></param>
         /// <param name="makeReport"></param>
-        private static void GroupBatches(List<InvoiceFinanceBatch> selectedBatches, MakeReport makeReport)
+        private static void GroupBatches(IEnumerable<InvoiceFinanceBatch> selectedBatches, MakeReport makeReport)
         {
-            IEnumerable<IGrouping<string, InvoiceFinanceBatch>> caseGroups = selectedBatches.GroupBy(c => c.Case.TransactionType);
+            IEnumerable<IGrouping<string, InvoiceFinanceBatch>> caseGroups =
+                selectedBatches.GroupBy(c => c.Case.TransactionType);
 
-            foreach (IGrouping<string, InvoiceFinanceBatch> caseGroup in caseGroups)
+            foreach (var caseGroup in caseGroups)
             {
-                string transactionType = caseGroup.Key;
                 IEnumerable<IGrouping<Client, InvoiceFinanceBatch>> groups = caseGroup.GroupBy(c => c.Case.SellerClient);
-                foreach (IGrouping<Client, InvoiceFinanceBatch> group in groups)
+                foreach (var group in groups)
                 {
                     makeReport(group);
                 }
@@ -425,98 +341,119 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            DateTime beginDate = String.IsNullOrEmpty(this.dateFrom.Text) ? this.dateFrom.MinDate : this.dateFrom.Value.Date;
-            DateTime endDate = String.IsNullOrEmpty(this.dateTo.Text) ? this.dateTo.MinDate : this.dateTo.Value.Date;
-            string createUserName = this.tbCreateUserName.Text;
-            string clientName = this.tbClientName.Text;
-            string location = (string)this.cbLocation.SelectedValue;
-            string transactionType = this.cbTransactionType.Text;
+            DateTime beginDate = String.IsNullOrEmpty(dateFrom.Text) ? dateFrom.MinDate : dateFrom.Value.Date;
+            DateTime endDate = String.IsNullOrEmpty(dateTo.Text) ? dateTo.MinDate : dateTo.Value.Date;
+            string createUserName = tbCreateUserName.Text;
+            string clientName = tbClientName.Text;
+            var location = (string) cbLocation.SelectedValue;
+            string transactionType = cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
                 transactionType = "全部";
             }
 
-            string financeType = this.cbFinanceType.Text;
+            string financeType = cbFinanceType.Text;
             if (String.IsNullOrEmpty(financeType))
             {
                 financeType = "全部";
             }
 
-            context = new DBDataContext();
+            Context = new DBDataContext();
 
-            IEnumerable<InvoiceFinanceBatch> queryResult = null;
-            if (opBatchType != OpBatchType.POOL_QUERY)
+            IEnumerable<InvoiceFinanceBatch> queryResult;
+            if (_opBatchType != OpBatchType.POOL_QUERY)
             {
-                queryResult = context.InvoiceFinanceBatches.Where(i =>
-                    i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
-                    && (i.CaseCode != null)
-                    && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
-                    && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
-                        //&& (status != string.Empty ? i.CheckStatus == status : true)
-                    && (i.CreateUserName.Contains(createUserName))
-                    && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
-                    && (financeType == "全部" ? true : i.FinanceType == financeType)
-                    && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
-                    && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
+                queryResult = Context.InvoiceFinanceBatches.Where(i =>
+                                                                  i.FinanceBatchNo.Contains(tbFinanceBatchNo.Text)
+                                                                  && (i.CaseCode != null)
+                                                                  &&
+                                                                  (beginDate != dateFrom.MinDate
+                                                                       ? i.FinancePeriodBegin >= beginDate
+                                                                       : true)
+                                                                  &&
+                                                                  (endDate != dateTo.MinDate
+                                                                       ? i.FinancePeriodBegin <= endDate
+                                                                       : true)
+                                                                  //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                  && (i.CreateUserName.Contains(createUserName))
+                                                                  &&
+                                                                  (transactionType == "全部"
+                                                                       ? true
+                                                                       : i.Case.TransactionType == transactionType)
+                                                                  &&
+                                                                  (financeType == "全部"
+                                                                       ? true
+                                                                       : i.FinanceType == financeType)
+                                                                  &&
+                                                                  (location == "00"
+                                                                       ? true
+                                                                       : i.Case.OwnerDepartment.LocationCode == location)
+                                                                  &&
+                                                                  (i.Case.SellerClient.ClientNameCN.Contains(clientName) ||
+                                                                   i.Case.SellerClient.ClientNameEN.Contains(clientName) ||
+                                                                   i.Case.BuyerClient.ClientNameCN.Contains(clientName) ||
+                                                                   i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
             }
             else
             {
-                queryResult = context.InvoiceFinanceBatches.Where(i =>
-                    i.FinanceBatchNo.Contains(this.tbFinanceBatchNo.Text)
-                    && (i.ClientEDICode != null)
-                    && (beginDate != this.dateFrom.MinDate ? i.FinancePeriodBegin >= beginDate : true)
-                    && (endDate != this.dateTo.MinDate ? i.FinancePeriodBegin <= endDate : true)
-                        //&& (status != string.Empty ? i.CheckStatus == status : true)
-                    && (i.CreateUserName.Contains(createUserName))
-                    && (financeType == "全部" ? true : i.FinanceType == financeType)
-                    && (location == "00" ? true : i.Client.Department.LocationCode == location)
-                    && (i.Client.ClientNameCN.Contains(clientName) || i.Client.ClientNameEN.Contains(clientName)));
+                queryResult = Context.InvoiceFinanceBatches.Where(i =>
+                                                                  i.FinanceBatchNo.Contains(tbFinanceBatchNo.Text)
+                                                                  && (i.ClientEDICode != null)
+                                                                  &&
+                                                                  (beginDate != dateFrom.MinDate
+                                                                       ? i.FinancePeriodBegin >= beginDate
+                                                                       : true)
+                                                                  &&
+                                                                  (endDate != dateTo.MinDate
+                                                                       ? i.FinancePeriodBegin <= endDate
+                                                                       : true)
+                                                                  //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                  && (i.CreateUserName.Contains(createUserName))
+                                                                  &&
+                                                                  (financeType == "全部"
+                                                                       ? true
+                                                                       : i.FinanceType == financeType)
+                                                                  &&
+                                                                  (location == "00"
+                                                                       ? true
+                                                                       : i.Client.Department.LocationCode == location)
+                                                                  &&
+                                                                  (i.Client.ClientNameCN.Contains(clientName) ||
+                                                                   i.Client.ClientNameEN.Contains(clientName)));
             }
 
-            this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            _bs.DataSource = queryResult;
+            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         //private void Reject(object sender, EventArgs e)
         //{
         //    if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_CHECK))
         //    {
         //        return;
         //    }
-
         //    if (this.dgvBatches.CurrentCell == null)
         //    {
         //        return;
         //    }
-
         //    InvoiceFinanceBatch batch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-
         //    if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
         //    {
         //        MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         //        return;
         //    }
-
         //    if (MessageBoxEx.Show("是否确认复核退回该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
         //    {
         //        return;
         //    }
-
         //    if (App.Current.CurUser.Name == batch.CreateUserName)
         //    {
         //        MessageBoxEx.Show("经办人和复核人相同，不可进行复核退回", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         //        return;
         //    }
-
         //    //batch.CheckStatus = BATCH.REJECT;
         //    //batch.CheckUserName = App.Current.CurUser.Name;
         //    //batch.CheckDate = DateTime.Now.Date;
-
         //    try
         //    {
         //        context.SubmitChanges();
@@ -526,7 +463,6 @@ namespace CMBC.EasyFactor.ARMgr
         //        MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         //    }
         //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -534,12 +470,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportCommission(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_REPORT))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
             {
                 return;
             }
 
-            List<InvoiceFinanceBatch> selectedBatches = this.GetSelectedBatches();
+            IEnumerable<InvoiceFinanceBatch> selectedBatches = GetSelectedBatches();
             if (selectedBatches == null)
             {
                 return;
@@ -549,12 +485,13 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (batch.Case.ActiveCDA.CommissionType != "按融资金额")
                 {
-                    MessageBoxEx.Show("所选批次不是按照融资金额收取保理费用，批次号：" + batch.FinanceBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("所选批次不是按照融资金额收取保理费用，批次号：" + batch.FinanceBatchNo, MESSAGE.TITLE_INFORMATION,
+                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }
 
-            MakeReport makeReport = new MakeReport(ReportCommissionImpl);
+            MakeReport makeReport = ReportCommissionImpl;
             GroupBatches(selectedBatches, makeReport);
         }
 
@@ -564,15 +501,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batchGroup"></param>
         private static void ReportCommissionImpl(IGrouping<Client, InvoiceFinanceBatch> batchGroup)
         {
+            var app = new ApplicationClass {Visible = false};
 
-            ApplicationClass app = new ApplicationClass() { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel 程序无法启动!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            Worksheet sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var sheet = (Worksheet) app.Workbooks.Add(true).Sheets[1];
             try
             {
                 sheet.PageSetup.Zoom = false;
@@ -580,13 +511,13 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.PageSetup.FitToPagesWide = 1;
                 sheet.PageSetup.FitToPagesTall = false;
 
-                string logoPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+                string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
                 sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
                 Client seller = batchGroup.Key;
-                sheet.Cells[3, 1] = String.Format("卖方：{0}", seller.ToString());
-                sheet.get_Range("A5", "E5").MergeCells = true;
-                sheet.get_Range("A5", "A5").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                sheet.Cells[3, 1] = String.Format("卖方：{0}", seller);
+                sheet.Range["A5", "E5"].MergeCells = true;
+                sheet.Range["A5", "A5"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
                 sheet.Cells[5, 1] = "保理费用明细表";
 
                 int row = 7;
@@ -597,15 +528,13 @@ namespace CMBC.EasyFactor.ARMgr
                     Client buyer = selectedBatch.Case.BuyerClient;
                     Factor factor = selectedBatch.Case.Factor;
 
-                    CDA cda = selectedBatch.Case.ActiveCDA;
-
                     int beginRow = row;
                     sheet.Cells[row, 1] = "买方";
-                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 6]).MergeCells = true;
-                    sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", buyer.ToString());
+                    sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 6]].MergeCells = true;
+                    sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", buyer);
                     row++;
                     sheet.Cells[row, 1] = "保理商";
-                    sheet.get_Range(sheet.Cells[row, 2], sheet.Cells[row, 4]).MergeCells = true;
+                    sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 4]].MergeCells = true;
                     sheet.Cells[row, 2] = factor.ToString();
                     sheet.Cells[row, 5] = "币别";
                     sheet.Cells[row, 6] = selectedBatch.BatchCurrency;
@@ -618,26 +547,31 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.Cells[row, 6] = "单据处理费";
                     row++;
                     sheet.Cells[row, 1] = selectedBatch.AssignAmount;
-                    sheet.get_Range("A" + row, "A" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
+                    sheet.Range["A" + row, "A" + row].NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
                     sheet.Cells[row, 2] = selectedBatch.FinanceAmount;
-                    sheet.get_Range("B" + row, "B" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+                    sheet.Range["B" + row, "B" + row].NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
                     sheet.Cells[row, 3] = selectedBatch.AssignCount;
                     sheet.Cells[row, 4] = selectedBatch.AssignDate;
                     sheet.Cells[row, 5] = selectedBatch.Case.ActiveCDA.Price;
                     sheet.Cells[row, 6] = selectedBatch.Case.ActiveCDA.HandFee;
                     sheet.Cells[row, 4] = selectedBatch.Case.ActiveCDA.Price;
-                    sheet.get_Range("E" + row, "E" + row).NumberFormatLocal = "0.0000%";
-                    sheet.get_Range("F" + row, "F" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
+                    sheet.Range["E" + row, "E" + row].NumberFormatLocal = "0.0000%";
+                    sheet.Range["F" + row, "F" + row].NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
                     row++;
                     sheet.Cells[row, 1] = "小计";
                     sheet.Cells[row, 5] = selectedBatch.CommissionAmount;
                     sheet.Cells[row, 6] = selectedBatch.HandfeeAmount;
-                    sheet.get_Range("E" + row, "F" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+                    sheet.Range["E" + row, "F" + row].NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
 
                     int endRow = row;
 
-                    totalCommission += selectedBatch.CommissionAmount.GetValueOrDefault() + selectedBatch.HandfeeAmount.GetValueOrDefault();
-                    sheet.get_Range("A" + beginRow, "F" + endRow).Borders.LineStyle = 1;
+                    totalCommission += selectedBatch.CommissionAmount.GetValueOrDefault() +
+                                       selectedBatch.HandfeeAmount.GetValueOrDefault();
+                    sheet.Range["A" + beginRow, "F" + endRow].Borders.LineStyle = 1;
 
                     row += 3;
                 }
@@ -645,40 +579,46 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row - 1, 1] = "注：保理手续费按融资金额收取。";
                 sheet.Cells[row, 5] = "费用总计";
                 sheet.Cells[row, 6] = totalCommission;
-                sheet.get_Range("F" + row, "F" + row).NumberFormatLocal = TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
-                sheet.get_Range("E" + row, "F" + row).Borders.LineStyle = 1;
+                sheet.Range["F" + row, "F" + row].NumberFormatLocal =
+                    TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
+                sheet.Range["E" + row, "F" + row].Borders.LineStyle = 1;
 
                 row += 2;
-                sheet.get_Range(sheet.Cells[row, "A"], sheet.Cells[row, "F"]).MergeCells = true;
-                sheet.get_Range(sheet.Cells[row, "A"], sheet.Cells[row, "A"]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "F"]].MergeCells = true;
+                sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment =
+                    XlHAlign.xlHAlignRight;
                 sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）";
                 row += 2;
-                sheet.get_Range(sheet.Cells[row, "D"], sheet.Cells[row, "E"]).MergeCells = true;
-                sheet.get_Range(sheet.Cells[row, "D"], sheet.Cells[row, "D"]).HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                sheet.Range[sheet.Cells[row, "D"], sheet.Cells[row, "E"]].MergeCells = true;
+                sheet.Range[sheet.Cells[row, "D"], sheet.Cells[row, "D"]].HorizontalAlignment =
+                    XlHAlign.xlHAlignRight;
                 sheet.Cells[row, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
-                sheet.get_Range("A1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("B1", Type.Missing).ColumnWidth = 15;
-                sheet.get_Range("C1", Type.Missing).ColumnWidth = 10;
-                sheet.get_Range("D1", Type.Missing).ColumnWidth = 13;
-                sheet.get_Range("E1", Type.Missing).ColumnWidth = 12;
-                sheet.get_Range("F1", Type.Missing).ColumnWidth = 15;
+                sheet.Range["A1", Type.Missing].ColumnWidth = 15;
+                sheet.Range["B1", Type.Missing].ColumnWidth = 15;
+                sheet.Range["C1", Type.Missing].ColumnWidth = 10;
+                sheet.Range["D1", Type.Missing].ColumnWidth = 13;
+                sheet.Range["E1", Type.Missing].ColumnWidth = 12;
+                sheet.Range["F1", Type.Missing].ColumnWidth = 15;
 
                 sheet.UsedRange.Font.Name = "仿宋_GB2312";
                 sheet.UsedRange.Font.Size = 12;
                 sheet.UsedRange.Rows.RowHeight = 20;
 
-                sheet.get_Range("A5", "A5").Font.Size = 22;
-                sheet.get_Range("A1", "A4").RowHeight = 20;
-                sheet.get_Range("A5", "A5").RowHeight = 30;
+                sheet.Range["A5", "A5"].Font.Size = 22;
+                sheet.Range["A1", "A4"].RowHeight = 20;
+                sheet.Range["A5", "A5"].RowHeight = 30;
 
-                Range sealRange = ((Range)sheet.Cells[row - 3, 3]);
-                string sealPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-                sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue, Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+                var sealRange = ((Range) sheet.Cells[row - 3, 3]);
+                string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+                sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+                                        Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
                 //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
-                sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing,
+                              Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                              Type.Missing, Type.Missing);
                 sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
 
                 app.Visible = true;
@@ -688,21 +628,15 @@ namespace CMBC.EasyFactor.ARMgr
                 if (sheet != null)
                 {
                     Marshal.ReleaseComObject(sheet);
-                    sheet = null;
                 }
-
-                if (app != null)
+                foreach (Workbook wb in app.Workbooks)
                 {
-                    foreach (Workbook wb in app.Workbooks)
-                    {
-                        wb.Close(false, Type.Missing, Type.Missing);
-                    }
-
-                    app.Workbooks.Close();
-                    app.Quit();
-                    Marshal.ReleaseComObject(app);
-                    app = null;
+                    wb.Close(false, Type.Missing, Type.Missing);
                 }
+
+                app.Workbooks.Close();
+                app.Quit();
+                Marshal.ReleaseComObject(app);
 
                 MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -715,17 +649,17 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.CurrentCell == null)
+            if (dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceFinanceBatch selectedBatch = (InvoiceFinanceBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-            this.Selected = selectedBatch;
-            if (this.OwnerForm != null)
+            var selectedBatch = (InvoiceFinanceBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            Selected = selectedBatch;
+            if (OwnerForm != null)
             {
-                this.OwnerForm.DialogResult = DialogResult.Yes;
-                this.OwnerForm.Close();
+                OwnerForm.DialogResult = DialogResult.Yes;
+                OwnerForm.Close();
             }
         }
 
@@ -734,27 +668,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_UPDATE))
-            {
-                this.menuItemBatchDelete.Enabled = true;
-            }
-            else
-            {
-                this.menuItemBatchDelete.Enabled = false;
-            }
-
-            if (PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_CHECK))
-            {
-                this.menuItemCheck.Enabled = true;
-                this.menuItemReject.Enabled = true;
-            }
-            else
-            {
-                this.menuItemCheck.Enabled = false;
-                this.menuItemReject.Enabled = false;
-            }
+            menuItemBatchDelete.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE);
         }
 
-        #endregion?Methods?
+        #region Nested type: MakeReport
+
+        private delegate void MakeReport(IGrouping<Client, InvoiceFinanceBatch> batchGroup);
+
+        #endregion
     }
 }

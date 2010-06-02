@@ -59,6 +59,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -80,8 +81,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuCreditLineMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCreditLineSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditLineDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).BeginInit();
+            this.cmuCreditLineMgr.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelQuery
@@ -221,6 +226,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colPeriodBegin,
             this.colPeriodEnd,
             this.colCreditLineStatus});
+            this.dgvClientCreditLines.ContextMenuStrip = this.cmuCreditLineMgr;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -239,8 +245,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.Size = new System.Drawing.Size(935, 314);
             this.dgvClientCreditLines.TabIndex = 1;
             this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            this.dgvClientCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvClientCreditLines_DataBindingComplete);
-            this.dgvClientCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvClientCreditLines_RowPostPaint);
+            this.dgvClientCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvClientCreditLinesDataBindingComplete);
+            this.dgvClientCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvClientCreditLinesRowPostPaint);
             // 
             // colClientEDICode
             // 
@@ -311,6 +317,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colCreditLineStatus.Name = "colCreditLineStatus";
             this.colCreditLineStatus.ReadOnly = true;
             // 
+            // cmuCreditLineMgr
+            // 
+            this.cmuCreditLineMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCreditLineSelect,
+            this.menuItemCreditLineDetail});
+            this.cmuCreditLineMgr.Name = "cmuContractMgr";
+            this.cmuCreditLineMgr.Size = new System.Drawing.Size(147, 48);
+            // 
+            // menuItemCreditLineSelect
+            // 
+            this.menuItemCreditLineSelect.Name = "menuItemCreditLineSelect";
+            this.menuItemCreditLineSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditLineSelect.Text = "选定额度申请";
+            this.menuItemCreditLineSelect.Click += new System.EventHandler(this.SelectClientCreditLine);
+            // 
+            // menuItemCreditLineDetail
+            // 
+            this.menuItemCreditLineDetail.Name = "menuItemCreditLineDetail";
+            this.menuItemCreditLineDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditLineDetail.Text = "详细信息";
+            this.menuItemCreditLineDetail.Click += new System.EventHandler(this.DetailClientCreditLine);
+            // 
             // ClientCreditLineMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -322,6 +350,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).EndInit();
+            this.cmuCreditLineMgr.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -337,5 +366,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
+        private System.Windows.Forms.ContextMenuStrip cmuCreditLineMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditLineSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditLineDetail;
     }
 }

@@ -253,7 +253,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.dgvUsers.Size = new System.Drawing.Size(800, 567);
             this.dgvUsers.TabIndex = 1;
             this.dgvUsers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
-            this.dgvUsers.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvUsers_RowPostPaint);
+            this.dgvUsers.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvUsersRowPostPaint);
             // 
             // UserIDColumn
             // 

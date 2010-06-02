@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------
 
 using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.Utils.ConstStr;
+
 namespace CMBC.EasyFactor.ARMgr
 {
     /// <summary>
@@ -68,9 +68,9 @@ namespace CMBC.EasyFactor.ARMgr
                 this.components.Dispose();
             }
 
-            if (this.context != null)
+            if (this._context != null)
             {
-                this.context.Dispose();
+                this._context.Dispose();
             }
 
             base.Dispose(disposing);

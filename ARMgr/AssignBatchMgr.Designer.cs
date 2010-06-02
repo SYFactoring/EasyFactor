@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------
 
 using CMBC.EasyFactor.Utils;
-using CMBC.EasyFactor.Utils.ConstStr;
+
 namespace CMBC.EasyFactor.ARMgr
 {
     /// <summary>
@@ -36,19 +36,16 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemBatchDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemBatchDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemBatchSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCheck;
         private System.Windows.Forms.ToolStripMenuItem menuItemCommissionReport;
         private System.Windows.Forms.ToolStripMenuItem menuItemFileCheckList;
         private System.Windows.Forms.ToolStripMenuItem menuItemFinanceReport;
         private System.Windows.Forms.ToolStripMenuItem menuItemFlawReport;
         private System.Windows.Forms.ToolStripMenuItem menuItemMSG09;
-        private System.Windows.Forms.ToolStripMenuItem menuItemReject;
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbAssignBatchNo;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
         private DevComponents.DotNetBar.Controls.TextBoxX tbCreateUserName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 
@@ -117,24 +114,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbAssignBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAssignBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemAssignReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemThreeReports = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
             this.colFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -160,6 +139,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.colMsgAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemitDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemitAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemAssignReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemThreeReports = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -541,145 +535,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvBatches.Size = new System.Drawing.Size(894, 302);
             this.dgvBatches.TabIndex = 1;
-            this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBatches_CellDoubleClick);
-            this.dgvBatches.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvBatches_CellFormatting);
-            this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBatches_RowPostPaint);
-            // 
-            // cmuBatchMgr
-            // 
-            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemBatchSelect,
-            this.menuItemBatchDetail,
-            this.toolStripSeparator1,
-            this.menuItemCheck,
-            this.menuItemReject,
-            this.toolStripSeparator2,
-            this.menuItemBatchDelete,
-            this.toolStripSeparator3,
-            this.menuItemAssignReport,
-            this.menuItemFinanceReport,
-            this.menuItemCommissionReport,
-            this.menuItemThreeReports,
-            this.menuItemFlawReport,
-            this.menuItemFileCheckList,
-            this.toolStripSeparator4,
-            this.menuItemMSG09,
-            this.menuItemBatchExport});
-            this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(199, 314);
-            // 
-            // menuItemBatchSelect
-            // 
-            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
-            this.menuItemBatchSelect.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchSelect.Text = "选择批次(&S)";
-            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
-            // 
-            // menuItemBatchDetail
-            // 
-            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
-            this.menuItemBatchDetail.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchDetail.Text = "批次详情(&M)";
-            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
-            // 
-            // menuItemCheck
-            // 
-            this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(198, 22);
-            this.menuItemCheck.Text = "复核通过(&P)";
-            this.menuItemCheck.Visible = false;
-            // 
-            // menuItemReject
-            // 
-            this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(198, 22);
-            this.menuItemReject.Text = "复核拒绝(&R)";
-            this.menuItemReject.Visible = false;
-            this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
-            this.toolStripSeparator2.Visible = false;
-            // 
-            // menuItemBatchDelete
-            // 
-            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
-            this.menuItemBatchDelete.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchDelete.Text = "删除批次(&D)";
-            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
-            // 
-            // menuItemAssignReport
-            // 
-            this.menuItemAssignReport.Name = "menuItemAssignReport";
-            this.menuItemAssignReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemAssignReport.Text = "应收账款转让明细表(&A)";
-            this.menuItemAssignReport.Click += new System.EventHandler(this.ReportAssign);
-            // 
-            // menuItemFinanceReport
-            // 
-            this.menuItemFinanceReport.Name = "menuItemFinanceReport";
-            this.menuItemFinanceReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemFinanceReport.Text = "可融资账款明细表(&F)";
-            this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
-            // 
-            // menuItemCommissionReport
-            // 
-            this.menuItemCommissionReport.Name = "menuItemCommissionReport";
-            this.menuItemCommissionReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemCommissionReport.Text = "保理费用明细表(&C)";
-            this.menuItemCommissionReport.Click += new System.EventHandler(this.ReportCommission);
-            // 
-            // menuItemThreeReports
-            // 
-            this.menuItemThreeReports.Name = "menuItemThreeReports";
-            this.menuItemThreeReports.Size = new System.Drawing.Size(198, 22);
-            this.menuItemThreeReports.Text = "直接生成三表(&T)";
-            this.menuItemThreeReports.Click += new System.EventHandler(this.ReportThree);
-            // 
-            // menuItemFlawReport
-            // 
-            this.menuItemFlawReport.Name = "menuItemFlawReport";
-            this.menuItemFlawReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemFlawReport.Text = "瑕疵通知书";
-            this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
-            // 
-            // menuItemFileCheckList
-            // 
-            this.menuItemFileCheckList.Name = "menuItemFileCheckList";
-            this.menuItemFileCheckList.Size = new System.Drawing.Size(198, 22);
-            this.menuItemFileCheckList.Text = "文件检查单";
-            this.menuItemFileCheckList.Click += new System.EventHandler(this.ReportFileCheckList);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(195, 6);
-            // 
-            // menuItemMSG09
-            // 
-            this.menuItemMSG09.Name = "menuItemMSG09";
-            this.menuItemMSG09.Size = new System.Drawing.Size(198, 22);
-            this.menuItemMSG09.Text = "生成MSG09";
-            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
-            // 
-            // menuItemBatchExport
-            // 
-            this.menuItemBatchExport.Name = "menuItemBatchExport";
-            this.menuItemBatchExport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchExport.Text = "导出选定批次";
-            this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
+            this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvBatchesCellDoubleClick);
+            this.dgvBatches.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvBatchesCellFormatting);
+            this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvBatchesRowPostPaint);
             // 
             // colFactorCode
             // 
@@ -902,6 +760,118 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRemitAmount.Name = "colRemitAmount";
             this.colRemitAmount.ReadOnly = true;
             this.colRemitAmount.Visible = false;
+            // 
+            // cmuBatchMgr
+            // 
+            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemBatchSelect,
+            this.menuItemBatchDetail,
+            this.toolStripSeparator1,
+            this.menuItemBatchDelete,
+            this.toolStripSeparator3,
+            this.menuItemAssignReport,
+            this.menuItemFinanceReport,
+            this.menuItemCommissionReport,
+            this.menuItemThreeReports,
+            this.menuItemFlawReport,
+            this.menuItemFileCheckList,
+            this.toolStripSeparator4,
+            this.menuItemMSG09,
+            this.menuItemBatchExport});
+            this.cmuBatchMgr.Name = "cmuBatchMgr";
+            this.cmuBatchMgr.Size = new System.Drawing.Size(199, 286);
+            // 
+            // menuItemBatchSelect
+            // 
+            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchSelect.Text = "选择批次(&S)";
+            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            // 
+            // menuItemBatchDetail
+            // 
+            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
+            this.menuItemBatchDetail.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchDetail.Text = "批次详情(&M)";
+            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
+            // 
+            // menuItemBatchDelete
+            // 
+            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
+            this.menuItemBatchDelete.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchDelete.Text = "删除批次(&D)";
+            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
+            // 
+            // menuItemAssignReport
+            // 
+            this.menuItemAssignReport.Name = "menuItemAssignReport";
+            this.menuItemAssignReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemAssignReport.Text = "应收账款转让明细表(&A)";
+            this.menuItemAssignReport.Click += new System.EventHandler(this.ReportAssign);
+            // 
+            // menuItemFinanceReport
+            // 
+            this.menuItemFinanceReport.Name = "menuItemFinanceReport";
+            this.menuItemFinanceReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemFinanceReport.Text = "可融资账款明细表(&F)";
+            this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
+            // 
+            // menuItemCommissionReport
+            // 
+            this.menuItemCommissionReport.Name = "menuItemCommissionReport";
+            this.menuItemCommissionReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemCommissionReport.Text = "保理费用明细表(&C)";
+            this.menuItemCommissionReport.Click += new System.EventHandler(this.ReportCommission);
+            // 
+            // menuItemThreeReports
+            // 
+            this.menuItemThreeReports.Name = "menuItemThreeReports";
+            this.menuItemThreeReports.Size = new System.Drawing.Size(198, 22);
+            this.menuItemThreeReports.Text = "直接生成三表(&T)";
+            this.menuItemThreeReports.Click += new System.EventHandler(this.ReportThree);
+            // 
+            // menuItemFlawReport
+            // 
+            this.menuItemFlawReport.Name = "menuItemFlawReport";
+            this.menuItemFlawReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemFlawReport.Text = "瑕疵通知书";
+            this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
+            // 
+            // menuItemFileCheckList
+            // 
+            this.menuItemFileCheckList.Name = "menuItemFileCheckList";
+            this.menuItemFileCheckList.Size = new System.Drawing.Size(198, 22);
+            this.menuItemFileCheckList.Text = "文件检查单";
+            this.menuItemFileCheckList.Click += new System.EventHandler(this.ReportFileCheckList);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(195, 6);
+            // 
+            // menuItemMSG09
+            // 
+            this.menuItemMSG09.Name = "menuItemMSG09";
+            this.menuItemMSG09.Size = new System.Drawing.Size(198, 22);
+            this.menuItemMSG09.Text = "生成MSG09";
+            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
+            // 
+            // menuItemBatchExport
+            // 
+            this.menuItemBatchExport.Name = "menuItemBatchExport";
+            this.menuItemBatchExport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchExport.Text = "导出选定批次";
+            this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
             // AssignBatchMgr
             // 

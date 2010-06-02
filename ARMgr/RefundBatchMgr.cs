@@ -4,51 +4,27 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
     /// <summary>
     /// 
     /// </summary>
     public partial class RefundBatchMgr : UserControl
     {
-        #region?Fields?(3)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private Case _case;
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bs;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpBatchType opBatchType;
-
-        #endregion?Fields?
-
-        #region?Enums?(1)?
-
         /// <summary>
         /// 
         /// </summary>
         public enum OpBatchType
         {
-            /// <summary>
-            /// 
-            /// </summary>
-            //CHECK,
-
             /// <summary>
             /// 
             /// </summary>
@@ -63,41 +39,35 @@ namespace CMBC.EasyFactor.ARMgr
             /// 
             /// </summary>
             POOL_QUERY,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            //POOL_CHECK
-        }
-
-        #endregion?Enums?
-
-        #region?Constructors?(3)?
-
-        /// <summary>
-        /// Initializes a new instance of the RefundBatchMgr class
-        /// </summary>
-        /// <param name="createUserName"></param>
-        /// <param name="batchStatus"></param>
-        public RefundBatchMgr(string createUserName, string batchStatus)
-            : this(OpBatchType.QUERY)
-        {
-            this.tbCreateUserName.Text = createUserName;
-            this.QueryBatch(null, null);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="selectedCDA"></param>
+        private readonly BindingSource _bs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly OpBatchType _opBatchType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private Case _case;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedCase"></param>
         /// <param name="context"></param>
         public RefundBatchMgr(Case selectedCase, DBDataContext context)
             : this(OpBatchType.DETAIL)
         {
-            this._case = selectedCase;
-            this.panelQuery.Visible = false;
-            this.bs.DataSource = selectedCase.InvoiceRefundBatches;
-            this.context = context;
+            _case = selectedCase;
+            panelQuery.Visible = false;
+            _bs.DataSource = selectedCase.InvoiceRefundBatches;
+            Context = context;
         }
 
         /// <summary>
@@ -106,23 +76,23 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batchType"></param>
         public RefundBatchMgr(OpBatchType batchType)
         {
-            this.InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.dgvBatches.AutoGenerateColumns = false;
-            this.bs = new BindingSource();
-            this.dgvBatches.DataSource = bs;
-            this.opBatchType = batchType;
-            ControlUtil.SetDoubleBuffered(this.dgvBatches);
-            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
+            InitializeComponent();
+            ImeMode = ImeMode.OnHalf;
+            dgvBatches.AutoGenerateColumns = false;
+            _bs = new BindingSource();
+            dgvBatches.DataSource = _bs;
+            _opBatchType = batchType;
+            ControlUtil.SetDoubleBuffered(dgvBatches);
+            ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
-            this.cbLocation.DataSource = allLocations;
-            this.cbLocation.DisplayMember = "LocationName";
-            this.cbLocation.ValueMember = "LocationCode";
-            this.cbLocation.SelectedIndex = 0;
+            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            cbLocation.DataSource = allLocations;
+            cbLocation.DisplayMember = "LocationName";
+            cbLocation.ValueMember = "LocationCode";
+            cbLocation.SelectedIndex = 0;
 
-            this.UpdateContextMenu();
+            UpdateContextMenu();
 
             //if (batchType == OpBatchType.CHECK)
             //{
@@ -146,89 +116,56 @@ namespace CMBC.EasyFactor.ARMgr
             //}
             if (batchType == OpBatchType.POOL_QUERY)
             {
-                this.colBuyerName.Visible = false;
-                this.colBatchCount.Visible = false;
-                this.colTransactionType.Visible = false;
+                colBuyerName.Visible = false;
+                colBatchCount.Visible = false;
+                colTransactionType.Visible = false;
             }
         }
-
-        #endregion?Constructors?
-
-        #region?Properties?(3)?
 
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context
-        {
-            get;
-            set;
-        }
+        private DBDataContext Context { get; set; }
 
         /// <summary>
         /// Gets or sets owner form
         /// </summary>
-        public Form OwnerForm
-        {
-            get;
-            set;
-        }
+        public Form OwnerForm { get; set; }
 
         /// <summary>
         /// Gets or sets selected RefundBatch
         /// </summary>
-        public InvoiceRefundBatch Selected
-        {
-            get;
-            set;
-        }
-
-        #endregion?Properties?
-
-        #region?Methods?(9)?
+        public InvoiceRefundBatch Selected { get; set; }
 
         //?Private?Methods?(9)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         //private void Check(object sender, EventArgs e)
         //{
         //    if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
         //    {
         //        return;
         //    }
-
         //    if (this.dgvBatches.CurrentCell == null)
         //    {
         //        return;
         //    }
-
         //    InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-
         //    if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
         //    {
         //        MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         //        return;
         //    }
-
         //    if (MessageBoxEx.Show("是否确认复核通过该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
         //    {
         //        return;
         //    }
-
         //    if (App.Current.CurUser.Name == batch.CreateUserName)
         //    {
         //        MessageBoxEx.Show("经办人和复核人相同，不可进行复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         //        return;
         //    }
-
         //    batch.CheckStatus = BATCH.CHECK;
         //    batch.CheckUserName = App.Current.CurUser.Name;
         //    batch.CheckDate = DateTime.Now.Date;
-
         //    try
         //    {
         //        context.SubmitChanges();
@@ -238,7 +175,6 @@ namespace CMBC.EasyFactor.ARMgr
         //        MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         //    }
         //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -251,13 +187,15 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.CurrentCell == null)
+            if (dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-            if (MessageBoxEx.Show("是否打算删除此" + selectedBatch.BatchCount + "条还款记录", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            var selectedBatch = (InvoiceRefundBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            if (
+                MessageBoxEx.Show("是否打算删除此" + selectedBatch.BatchCount + "条还款记录", MESSAGE.TITLE_INFORMATION,
+                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
@@ -273,21 +211,22 @@ namespace CMBC.EasyFactor.ARMgr
                 InvoiceFinanceLog financeLog = log.InvoiceFinanceLog;
                 log.InvoiceFinanceLog = null;
                 financeLog.Invoice.CaculateRefund();
-                context.InvoiceRefundLogs.DeleteOnSubmit(log);
+                Context.InvoiceRefundLogs.DeleteOnSubmit(log);
             }
 
-            context.InvoiceRefundBatches.DeleteOnSubmit(selectedBatch);
+            Context.InvoiceRefundBatches.DeleteOnSubmit(selectedBatch);
             try
             {
-                context.SubmitChanges();
+                Context.SubmitChanges();
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
                 return;
             }
 
-            this.dgvBatches.Rows.RemoveAt(this.dgvBatches.CurrentCell.RowIndex);
+            dgvBatches.Rows.RemoveAt(dgvBatches.CurrentCell.RowIndex);
         }
 
         /// <summary>
@@ -297,13 +236,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.CurrentCell == null)
+            if (dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-            RefundBatchDetail detail = new RefundBatchDetail(selectedBatch);
+            var selectedBatch = (InvoiceRefundBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var detail = new RefundBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
 
@@ -312,15 +251,15 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvBatches_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvBatchesCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.OwnerForm == null)
+            if (OwnerForm == null)
             {
-                this.DetailBatch(sender, e);
+                DetailBatch(sender, e);
             }
             else
             {
-                this.SelectBatch(sender, e);
+                SelectBatch(sender, e);
             }
         }
 
@@ -329,10 +268,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvBatches_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DgvBatchesRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvBatches.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvBatches.RowHeadersDefaultCellStyle.Font, rectangle, dgvBatches.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            var rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvBatches.RowHeadersWidth - 4,
+                                          e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvBatches.RowHeadersDefaultCellStyle.Font,
+                                  rectangle, dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
+                                  TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -342,99 +284,121 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            DateTime beginDate = String.IsNullOrEmpty(this.dateFrom.Text) ? this.dateFrom.MinDate : this.dateFrom.Value.Date;
-            DateTime endDate = String.IsNullOrEmpty(this.dateTo.Text) ? this.dateTo.MinDate : this.dateTo.Value.Date;
-            string createUserName = this.tbCreateUserName.Text;
-            string clientName = this.tbClientName.Text;
-            string location = (string)this.cbLocation.SelectedValue;
-            string transactionType = this.cbTransactionType.Text;
+            DateTime beginDate = String.IsNullOrEmpty(dateFrom.Text) ? dateFrom.MinDate : dateFrom.Value.Date;
+            DateTime endDate = String.IsNullOrEmpty(dateTo.Text) ? dateTo.MinDate : dateTo.Value.Date;
+            string createUserName = tbCreateUserName.Text;
+            string clientName = tbClientName.Text;
+            var location = (string) cbLocation.SelectedValue;
+            string transactionType = cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
                 transactionType = "全部";
             }
 
-            string refundType = this.cbRefundType.Text;
+            string refundType = cbRefundType.Text;
             if (String.IsNullOrEmpty(refundType))
             {
                 refundType = "全部";
             }
 
-            context = new DBDataContext();
+            Context = new DBDataContext();
 
-            IEnumerable<InvoiceRefundBatch> queryResult = null;
-            if (opBatchType != OpBatchType.POOL_QUERY)
+            IEnumerable<InvoiceRefundBatch> queryResult;
+            if (_opBatchType != OpBatchType.POOL_QUERY)
             {
-                queryResult = context.InvoiceRefundBatches.Where(i =>
-                   i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text)
-                   && (i.CaseCode != null)
-                   && (beginDate != this.dateFrom.MinDate ? i.RefundDate >= beginDate : true)
-                   && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
-                       //&& (status != string.Empty ? i.CheckStatus == status : true)
-                   && (refundType == "全部" ? true : i.RefundType == refundType)
-                   && (i.CreateUserName.Contains(createUserName))
-                   && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
-                   && (location == "00" ? true : i.Case.OwnerDepartment.LocationCode == location)
-                   && (i.Case.SellerClient.ClientNameCN.Contains(clientName) || i.Case.SellerClient.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
-                   );
+                queryResult = Context.InvoiceRefundBatches.Where(i =>
+                                                                 i.RefundBatchNo.Contains(tbRefundBatchNo.Text)
+                                                                 && (i.CaseCode != null)
+                                                                 &&
+                                                                 (beginDate != dateFrom.MinDate
+                                                                      ? i.RefundDate >= beginDate
+                                                                      : true)
+                                                                 &&
+                                                                 (endDate != dateTo.MinDate
+                                                                      ? i.RefundDate <= endDate
+                                                                      : true)
+                                                                 //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                 &&
+                                                                 (refundType == "全部" ? true : i.RefundType == refundType)
+                                                                 && (i.CreateUserName.Contains(createUserName))
+                                                                 &&
+                                                                 (transactionType == "全部"
+                                                                      ? true
+                                                                      : i.Case.TransactionType == transactionType)
+                                                                 &&
+                                                                 (location == "00"
+                                                                      ? true
+                                                                      : i.Case.OwnerDepartment.LocationCode == location)
+                                                                 &&
+                                                                 (i.Case.SellerClient.ClientNameCN.Contains(clientName) ||
+                                                                  i.Case.SellerClient.ClientNameEN.Contains(clientName) ||
+                                                                  i.Case.BuyerClient.ClientNameCN.Contains(clientName) ||
+                                                                  i.Case.BuyerClient.ClientNameEN.Contains(clientName))
+                    );
             }
             else
             {
-                queryResult = context.InvoiceRefundBatches.Where(i =>
-                   i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text)
-                   && (i.FinanceBatchNo != null)
-                   && (beginDate != this.dateFrom.MinDate ? i.RefundDate >= beginDate : true)
-                   && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
-                       //&& (status != string.Empty ? i.CheckStatus == status : true)
-                   && (refundType == "全部" ? true : i.RefundType == refundType)
-                   && (i.CreateUserName.Contains(createUserName))
-                   && (location == "00" ? true : i.InvoiceFinanceBatch.Client.Department.LocationCode == location)
-                   && (i.InvoiceFinanceBatch.Client.ClientNameCN.Contains(clientName) || i.InvoiceFinanceBatch.Client.ClientNameEN.Contains(clientName) || i.Case.BuyerClient.ClientNameCN.Contains(clientName) || i.Case.BuyerClient.ClientNameEN.Contains(clientName))
-                   );
+                queryResult = Context.InvoiceRefundBatches.Where(i =>
+                                                                 i.RefundBatchNo.Contains(tbRefundBatchNo.Text)
+                                                                 && (i.FinanceBatchNo != null)
+                                                                 &&
+                                                                 (beginDate != dateFrom.MinDate
+                                                                      ? i.RefundDate >= beginDate
+                                                                      : true)
+                                                                 &&
+                                                                 (endDate != dateTo.MinDate
+                                                                      ? i.RefundDate <= endDate
+                                                                      : true)
+                                                                 //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                 &&
+                                                                 (refundType == "全部" ? true : i.RefundType == refundType)
+                                                                 && (i.CreateUserName.Contains(createUserName))
+                                                                 &&
+                                                                 (location == "00"
+                                                                      ? true
+                                                                      : i.InvoiceFinanceBatch.Client.Department.
+                                                                            LocationCode == location)
+                                                                 &&
+                                                                 (i.InvoiceFinanceBatch.Client.ClientNameCN.Contains(
+                                                                     clientName) ||
+                                                                  i.InvoiceFinanceBatch.Client.ClientNameEN.Contains(
+                                                                      clientName) ||
+                                                                  i.Case.BuyerClient.ClientNameCN.Contains(clientName) ||
+                                                                  i.Case.BuyerClient.ClientNameEN.Contains(clientName))
+                    );
             }
-            this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            _bs.DataSource = queryResult;
+            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         //private void Reject(object sender, EventArgs e)
         //{
         //    if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
         //    {
         //        return;
         //    }
-
         //    if (this.dgvBatches.CurrentCell==null)
         //    {
         //        return;
         //    }
-
         //    InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-
         //    //if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
         //    //{
         //    //    MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         //    //    return;
         //    //}
-
         //    if (MessageBoxEx.Show("是否确认复核退回该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
         //    {
         //        return;
         //    }
-
         //    if (App.Current.CurUser.Name == batch.CreateUserName)
         //    {
         //        MessageBoxEx.Show("经办人和复核人相同，不可进行复核退回", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
         //        return;
         //    }
-
         //    batch.CheckStatus = BATCH.REJECT;
         //    batch.CheckUserName = App.Current.CurUser.Name;
         //    batch.CheckDate = DateTime.Now.Date;
-
         //    try
         //    {
         //        context.SubmitChanges();
@@ -444,7 +408,6 @@ namespace CMBC.EasyFactor.ARMgr
         //        MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         //    }
         //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -452,17 +415,17 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.CurrentCell == null)
+            if (dgvBatches.CurrentCell == null)
             {
                 return;
             }
 
-            InvoiceRefundBatch selectedBatch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-            this.Selected = selectedBatch;
-            if (this.OwnerForm != null)
+            var selectedBatch = (InvoiceRefundBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            Selected = selectedBatch;
+            if (OwnerForm != null)
             {
-                this.OwnerForm.DialogResult = DialogResult.Yes;
-                this.OwnerForm.Close();
+                OwnerForm.DialogResult = DialogResult.Yes;
+                OwnerForm.Close();
             }
         }
 
@@ -471,27 +434,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateContextMenu()
         {
-            if (PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE))
-            {
-                this.menuItemBatchDelete.Enabled = true;
-            }
-            else
-            {
-                this.menuItemBatchDelete.Enabled = false;
-            }
-
-            if (PermUtil.ValidatePermission(Permissions.INVOICE_CHECK))
-            {
-                this.menuItemCheck.Enabled = true;
-                this.menuItemReject.Enabled = true;
-            }
-            else
-            {
-                this.menuItemCheck.Enabled = false;
-                this.menuItemReject.Enabled = false;
-            }
+            menuItemBatchDelete.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE);
         }
-
-        #endregion?Methods?
     }
 }

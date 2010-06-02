@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
-using CMBC.EasyFactor.Utils.ConstStr;
+using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
 
 namespace CMBC.EasyFactor

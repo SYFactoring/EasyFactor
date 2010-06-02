@@ -9,24 +9,16 @@ namespace CMBC.EasyFactor.DB.dbml
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// 
     /// </summary>
     public partial class Location
     {
-		#region?Fields?(1)?
-
         /// <summary>
         /// 
         /// </summary>
-        private static readonly List<Location> _locationList = InitializeLocation();
-
-		#endregion?Fields?
-
-		#region?Properties?(1)?
-
+        private static readonly List<Location> LocationList = InitializeLocation();
         /// <summary>
         /// 
         /// </summary>
@@ -34,26 +26,18 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return _locationList.ToList();
+                return LocationList.ToList();
             }
         }
-
-		#endregion?Properties?
-
-		#region?Methods?(1)?
-
 		//?Private?Methods?(1)?
-
         /// <summary>
         /// Initializes static members of the Country class
         /// </summary>
         static List<Location> InitializeLocation()
         {
-            DBDataContext context = new DBDataContext();
-            context.ObjectTrackingEnabled = false;
+            var context = new DBDataContext {ObjectTrackingEnabled = false};
             return context.Locations.ToList();
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -62,7 +46,6 @@ namespace CMBC.EasyFactor.DB.dbml
             get;
             set;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -71,7 +54,6 @@ namespace CMBC.EasyFactor.DB.dbml
             get;
             set;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -80,17 +62,16 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Department dept in this.Departments)
+                foreach (Department dept in Departments)
                 {
-                    dept.QueryDateFrom = this.QueryDateFrom;
-                    dept.QueryDateTo = this.QueryDateTo;
+                    dept.QueryDateFrom = QueryDateFrom;
+                    dept.QueryDateTo = QueryDateTo;
                     result += dept.AssignAmountByDate;
                 }
 
                 return result;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -99,17 +80,16 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Department dept in this.Departments)
+                foreach (Department dept in Departments)
                 {
-                    dept.QueryDateFrom = this.QueryDateFrom;
-                    dept.QueryDateTo = this.QueryDateTo;
+                    dept.QueryDateFrom = QueryDateFrom;
+                    dept.QueryDateTo = QueryDateTo;
                     result += dept.CommissionIncomeByDate;
                 }
 
                 return result;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -118,17 +98,16 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Department dept in this.Departments)
+                foreach (Department dept in Departments)
                 {
-                    dept.QueryDateFrom = this.QueryDateFrom;
-                    dept.QueryDateTo = this.QueryDateTo;
+                    dept.QueryDateFrom = QueryDateFrom;
+                    dept.QueryDateTo = QueryDateTo;
                     result += dept.FinanceAmountByDate;
                 }
 
                 return result;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -137,17 +116,16 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Department dept in this.Departments)
+                foreach (Department dept in Departments)
                 {
-                    dept.QueryDateFrom = this.QueryDateFrom;
-                    dept.QueryDateTo = this.QueryDateTo;
+                    dept.QueryDateFrom = QueryDateFrom;
+                    dept.QueryDateTo = QueryDateTo;
                     result += dept.MarginIncomeByDate.GetValueOrDefault();
                 }
 
                 return result;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -156,17 +134,16 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Department dept in this.Departments)
+                foreach (Department dept in Departments)
                 {
-                    dept.QueryDateFrom = this.QueryDateFrom;
-                    dept.QueryDateTo = this.QueryDateTo;
+                    dept.QueryDateFrom = QueryDateFrom;
+                    dept.QueryDateTo = QueryDateTo;
                     result += dept.NetInterestIncomeByDate.GetValueOrDefault();
                 }
 
                 return result;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -175,17 +152,16 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Department dept in this.Departments)
+                foreach (Department dept in Departments)
                 {
-                    dept.QueryDateFrom = this.QueryDateFrom;
-                    dept.QueryDateTo = this.QueryDateTo;
+                    dept.QueryDateFrom = QueryDateFrom;
+                    dept.QueryDateTo = QueryDateTo;
                     result += dept.PaymentAmountByDate;
                 }
 
                 return result;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -194,16 +170,15 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Department dept in this.Departments)
+                foreach (Department dept in Departments)
                 {
-                    dept.QueryDateFrom = this.QueryDateFrom;
-                    dept.QueryDateTo = this.QueryDateTo;
+                    dept.QueryDateFrom = QueryDateFrom;
+                    dept.QueryDateTo = QueryDateTo;
                     result += dept.TotalIncomeByDate;
                 }
 
                 return result;
             }
         }
-		#endregion?Methods?
     }
 }

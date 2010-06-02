@@ -4,37 +4,32 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.IO;
+using System.Reflection;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.Help
 {
-    using System;
-    using System.Reflection;
-    using System.Windows.Forms;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// About Box Dialog
     /// </summary>
-    public partial class AboutBox : DevComponents.DotNetBar.Office2007Form
+    public partial class AboutBox : Office2007Form
     {
-		#region?Constructors?(1)?
-
         /// <summary>
         /// Initializes a new instance of the AboutBox class
         /// </summary>
         public AboutBox()
         {
-            this.InitializeComponent();
-            this.Text = String.Format("关于 {0}", this.AssemblyTitle);
-            this.labelProductName.Text = this.AssemblyProduct;
-            this.labelVersion.Text = String.Format("版本 {0}", this.AssemblyVersion);
-            this.labelCopyright.Text = this.AssemblyCopyright;
-            this.labelCompanyName.Text = this.AssemblyCompany;
-            this.textBoxDescription.Text = this.AssemblyDescription;
+            InitializeComponent();
+            Text = String.Format("关于 {0}", AssemblyTitle);
+            labelProductName.Text = AssemblyProduct;
+            labelVersion.Text = String.Format("版本 {0}", AssemblyVersion);
+            labelCopyright.Text = AssemblyCopyright;
+            labelCompanyName.Text = AssemblyCompany;
+            textBoxDescription.Text = AssemblyDescription;
         }
 
-		#endregion?Constructors?
-
-		#region?Properties?(6)?
 
         /// <summary>
         /// Gets assembly company
@@ -43,13 +38,14 @@ namespace CMBC.EasyFactor.Help
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+                object[] attributes =
+                    Assembly.GetExecutingAssembly().GetCustomAttributes(typeof (AssemblyCompanyAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return string.Empty;
                 }
 
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
+                return ((AssemblyCompanyAttribute) attributes[0]).Company;
             }
         }
 
@@ -60,13 +56,14 @@ namespace CMBC.EasyFactor.Help
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+                object[] attributes =
+                    Assembly.GetExecutingAssembly().GetCustomAttributes(typeof (AssemblyCopyrightAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return string.Empty;
                 }
 
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+                return ((AssemblyCopyrightAttribute) attributes[0]).Copyright;
             }
         }
 
@@ -77,13 +74,14 @@ namespace CMBC.EasyFactor.Help
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
+                object[] attributes =
+                    Assembly.GetExecutingAssembly().GetCustomAttributes(typeof (AssemblyDescriptionAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return string.Empty;
                 }
 
-                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
+                return ((AssemblyDescriptionAttribute) attributes[0]).Description;
             }
         }
 
@@ -94,13 +92,14 @@ namespace CMBC.EasyFactor.Help
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                object[] attributes =
+                    Assembly.GetExecutingAssembly().GetCustomAttributes(typeof (AssemblyProductAttribute), false);
                 if (attributes.Length == 0)
                 {
                     return string.Empty;
                 }
 
-                return ((AssemblyProductAttribute)attributes[0]).Product;
+                return ((AssemblyProductAttribute) attributes[0]).Product;
             }
         }
 
@@ -111,17 +110,18 @@ namespace CMBC.EasyFactor.Help
         {
             get
             {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+                object[] attributes =
+                    Assembly.GetExecutingAssembly().GetCustomAttributes(typeof (AssemblyTitleAttribute), false);
                 if (attributes.Length > 0)
                 {
-                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                    var titleAttribute = (AssemblyTitleAttribute) attributes[0];
                     if (!String.IsNullOrEmpty(titleAttribute.Title))
                     {
                         return titleAttribute.Title;
                     }
                 }
 
-                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
             }
         }
 
@@ -130,18 +130,11 @@ namespace CMBC.EasyFactor.Help
         /// </summary>
         public string AssemblyVersion
         {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            }
+            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
         }
 
-		#endregion?Properties?
 
-		#region?Methods?(1)?
-
-		//?Private?Methods?(1)?
-
+        //?Private?Methods?(1)?
         /// <summary>
         /// Close the dialog
         /// </summary>
@@ -149,9 +142,7 @@ namespace CMBC.EasyFactor.Help
         /// <param name="e">Event Args</param>
         private void Close(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
-
-		#endregion?Methods?
     }
 }

@@ -4,42 +4,27 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Data.Linq;
+using System.Text.RegularExpressions;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Linq;
-    using System.Text.RegularExpressions;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class ClientReview
     {
-		#region?Fields?(1)?
+        private static readonly Regex ReviewNoRegex = new Regex(@"^[A-Z]{2}\d{8}-\d{4}[A-Z]{2,3}(-[A-Z]{2})?$");
 
-        private static Regex ReviewNoRegex = new Regex(@"^[A-Z]{2}\d{8}-\d{4}[A-Z]{2,3}(-[A-Z]{2})?$");
-
-		#endregion?Fields?
-
-		#region?Properties?(4)?
 
         /// <summary>
         /// 
         /// </summary>
         public string ClientLocation
         {
-            get
-            {
-                if (this.Client.Department != null)
-                {
-                    return this.Client.Department.Location.LocationName;
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
+            get { return Client.Department != null ? Client.Department.Location.LocationName : string.Empty; }
         }
 
         /// <summary>
@@ -49,13 +34,13 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                List<string> result = new List<string>(2);
-                if (this.IsLocal)
+                var result = new List<string>(2);
+                if (IsLocal)
                 {
                     result.Add("国内");
                 }
 
-                if (this.IsInternational)
+                if (IsInternational)
                 {
                     result.Add("国际");
                 }
@@ -71,13 +56,13 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                List<string> result = new List<string>(2);
-                if (this.IsRecoarse)
+                var result = new List<string>(2);
+                if (IsRecoarse)
                 {
                     result.Add("有追");
                 }
 
-                if (this.IsNonRecoarse)
+                if (IsNonRecoarse)
                 {
                     result.Add("无追");
                 }
@@ -93,13 +78,13 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                List<string> result = new List<string>(2);
-                if (this.IsSeller)
+                var result = new List<string>(2);
+                if (IsSeller)
                 {
                     result.Add("卖方");
                 }
 
-                if (this.IsBuyer)
+                if (IsBuyer)
                 {
                     result.Add("买方");
                 }
@@ -108,27 +93,21 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Properties?
 
-		#region?Methods?(1)?
-
-		//?Private?Methods?(1)?
-
+        //?Private?Methods?(1)?
         /// <summary>
         /// 
         /// </summary>
         /// <param name="action"></param>
-        partial void OnValidate(System.Data.Linq.ChangeAction action)
+        partial void OnValidate(ChangeAction action)
         {
             if (action == ChangeAction.Insert)
             {
-                if (!ReviewNoRegex.IsMatch(this.ReviewNo))
+                if (!ReviewNoRegex.IsMatch(ReviewNo))
                 {
-                    throw new ArgumentException("不符合协查意见编码规则: " + this.ReviewNo);
+                    throw new ArgumentException("不符合协查意见编码规则: " + ReviewNo);
                 }
             }
         }
-
-		#endregion?Methods?
     }
 }

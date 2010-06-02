@@ -122,9 +122,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactorCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvFactorCreditLines.Size = new System.Drawing.Size(935, 323);
             this.dgvFactorCreditLines.TabIndex = 3;
-            this.dgvFactorCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFactorCreditLines_CellDoubleClick);
-            this.dgvFactorCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvFactorCreditLines_DataBindingComplete);
-            this.dgvFactorCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvFactorCreditLines_RowPostPaint);
+            this.dgvFactorCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFactorCreditLinesCellDoubleClick);
+            this.dgvFactorCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvFactorCreditLinesDataBindingComplete);
+            this.dgvFactorCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvFactorCreditLinesRowPostPaint);
             // 
             // panelQuery
             // 

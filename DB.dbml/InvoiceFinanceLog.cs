@@ -4,185 +4,96 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Linq;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Linq;
-    using CMBC.EasyFactor.Utils;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class InvoiceFinanceLog
     {
-
-
-        #region?Constructors?(1)?
-
         public InvoiceFinanceLog(Invoice invoice)
             : this()
         {
-            this.AssignBatchNo2 = invoice.AssignBatchNo;
-            this.InvoiceID2 = invoice.InvoiceID;
-            this.InvoiceNo2 = invoice.InvoiceNo;
-            this.AssignAmount2 = invoice.AssignAmount;
-            this.AssignOutstanding2 = invoice.AssignOutstanding;
-            this.InvoiceDate2 = invoice.InvoiceDate;
-            this.DueDate2 = invoice.DueDate;
-            this.AssignDate2 = invoice.AssignDate;
-            this.InvoiceFinanceAmount2 = invoice.FinanceAmount;
-            this.InvoiceFinanceOutstanding2 = invoice.FinanceOutstanding;
+            AssignBatchNo2 = invoice.AssignBatchNo;
+            InvoiceID2 = invoice.InvoiceID;
+            InvoiceNo2 = invoice.InvoiceNo;
+            AssignAmount2 = invoice.AssignAmount;
+            AssignOutstanding2 = invoice.AssignOutstanding;
+            InvoiceDate2 = invoice.InvoiceDate;
+            DueDate2 = invoice.DueDate;
+            AssignDate2 = invoice.AssignDate;
+            InvoiceFinanceAmount2 = invoice.FinanceAmount;
+            InvoiceFinanceOutstanding2 = invoice.FinanceOutstanding;
         }
 
-        #endregion?Constructors?
-
-
-        #region?Properties?(23)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string InvoiceNo
-        {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.InvoiceNo;
-                }
-                else
-                {
-                    return InvoiceNo2;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string AssignBatchNo2
-        {
-            get;
-            set;
-        }
 
         /// <summary>
         /// 
         /// </summary>
         public double AssignAmount
         {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.AssignAmount;
-                }
-                else
-                {
-                    return this.AssignAmount2;
-                }
-            }
+            get { return Invoice != null ? Invoice.AssignAmount : AssignAmount2; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public double AssignAmount2
-        {
-            get;
-            set;
-        }
+        public double AssignAmount2 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string AssignBatchNo2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public DateTime AssignDate
         {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.AssignDate;
-                }
-                else
-                {
-                    return this.AssignDate2;
-                }
-            }
+            get { return Invoice != null ? Invoice.AssignDate : AssignDate2; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime AssignDate2
-        {
-            get;
-            set;
-        }
+        public DateTime AssignDate2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public double AssignOutstanding
         {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.AssignOutstanding;
-                }
-                else
-                {
-                    return this.AssignOutstanding2;
-                }
-            }
+            get { return Invoice != null ? Invoice.AssignOutstanding : AssignOutstanding2; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public double AssignOutstanding2
-        {
-            get;
-            set;
-        }
+        public double AssignOutstanding2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public DateTime? DueDate
         {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.DueDate;
-                }
-                else
-                {
-                    return this.DueDate2;
-                }
-            }
+            get { return Invoice != null ? Invoice.DueDate : DueDate2; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? DueDate2
-        {
-            get;
-            set;
-        }
+        public DateTime? DueDate2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public string FinanceCurrency
         {
-            get
-            {
-                return this.InvoiceFinanceBatch.BatchCurrency;
-            }
+            get { return InvoiceFinanceBatch.BatchCurrency; }
         }
 
         /// <summary>
@@ -190,17 +101,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public DateTime? FinanceDate
         {
-            get
-            {
-                if (this.InvoiceFinanceBatch != null)
-                {
-                    return this.InvoiceFinanceBatch.FinancePeriodBegin;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            get { return InvoiceFinanceBatch != null ? (DateTime?)InvoiceFinanceBatch.FinancePeriodBegin : null; }
         }
 
         /// <summary>
@@ -208,17 +109,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public DateTime? FinanceDueDate
         {
-            get
-            {
-                if (this.InvoiceFinanceBatch != null)
-                {
-                    return this.InvoiceFinanceBatch.FinancePeriodEnd;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            get { return InvoiceFinanceBatch != null ? (DateTime?)InvoiceFinanceBatch.FinancePeriodEnd : null; }
         }
 
         /// <summary>
@@ -226,28 +117,25 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double FinanceOutstanding
         {
-            get
-            {
-                return this.FinanceAmount.GetValueOrDefault() - RefundAmount.GetValueOrDefault();
-            }
+            get { return FinanceAmount.GetValueOrDefault() - RefundAmount.GetValueOrDefault(); }
         }
 
         /// <summary>
         /// Gets
         /// </summary>
-        public System.Nullable<int> FinanceOverDueDays
+        public int? FinanceOverDueDays
         {
             get
             {
-                if (TypeUtil.GreaterZero(this.FinanceOutstanding))
+                if (TypeUtil.GreaterZero(FinanceOutstanding))
                 {
-                    TimeSpan duedays = DateTime.Now.Date - this.FinanceDueDate.Value;
-                    return duedays.Days;
+                    if (FinanceDueDate != null)
+                    {
+                        TimeSpan duedays = DateTime.Now.Date - FinanceDueDate.Value;
+                        return duedays.Days;
+                    }
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
         }
 
@@ -264,23 +152,26 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     if (InvoiceFinanceBatch.FinanceType == "卖方代付" || InvoiceFinanceBatch.FinanceType == "买方代付")
                     {
-                        int period = (InvoiceFinanceBatch.FinancePeriodEnd - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest = this.FinanceAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * period;
+                        int period =
+                            (InvoiceFinanceBatch.FinancePeriodEnd - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                        interest = FinanceAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * period;
                     }
                     else
                     {
-                        foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
-                        {
-                            int period = (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                            int overduePeriod = refundLog.InvoiceRefundBatch.RefundDate > InvoiceFinanceBatch.FinancePeriodEnd ? (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0;
-                            interest += refundLog.RefundAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * (period + overduePeriod);
-                        }
+                        interest += (from refundLog in InvoiceRefundLogs
+                                     let period = (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodBegin).Days
+                                     let overduePeriod = refundLog.InvoiceRefundBatch.RefundDate > InvoiceFinanceBatch.FinancePeriodEnd ? (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0
+                                     select refundLog.RefundAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * (period + overduePeriod)).Sum();
 
-                        if (TypeUtil.GreaterZero(FinanceOutstanding) && DateTime.Today > InvoiceFinanceBatch.FinancePeriodBegin)
+                        if (TypeUtil.GreaterZero(FinanceOutstanding) &&
+                            DateTime.Today > InvoiceFinanceBatch.FinancePeriodBegin)
                         {
                             int period = (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                            int overduePeriod = DateTime.Today.Date > InvoiceFinanceBatch.FinancePeriodEnd ? (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0;
-                            interest += FinanceAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * (period + overduePeriod);
+                            int overduePeriod = DateTime.Today.Date > InvoiceFinanceBatch.FinancePeriodEnd
+                                                    ? (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodEnd).Days
+                                                    : 0;
+                            interest += FinanceAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 *
+                                        (period + overduePeriod);
                         }
                     }
 
@@ -300,96 +191,54 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public DateTime? InvoiceDate
         {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.InvoiceDate;
-                }
-                else
-                {
-                    return this.InvoiceDate2;
-                }
-            }
+            get { return Invoice != null ? Invoice.InvoiceDate : InvoiceDate2; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? InvoiceDate2
-        {
-            get;
-            set;
-        }
+        public DateTime? InvoiceDate2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public double? InvoiceFinanceAmount
         {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.FinanceAmount;
-                }
-                else
-                {
-                    return this.InvoiceFinanceAmount2;
-                }
-            }
+            get { return Invoice != null ? Invoice.FinanceAmount : InvoiceFinanceAmount2; }
         }
 
-        public double? InvoiceFinanceAmount2
-        {
-            get;
-            set;
-        }
+        public double? InvoiceFinanceAmount2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public double? InvoiceFinanceOutstanding
         {
-            get
-            {
-                if (this.Invoice != null)
-                {
-                    return this.Invoice.FinanceOutstanding;
-                }
-                else
-                {
-                    return this.InvoiceFinanceOutstanding2;
-                }
-            }
+            get { return Invoice != null ? Invoice.FinanceOutstanding : InvoiceFinanceOutstanding2; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoiceFinanceOutstanding2
+        public double? InvoiceFinanceOutstanding2 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int InvoiceID2 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string InvoiceNo
         {
-            get;
-            set;
+            get { return Invoice != null ? Invoice.InvoiceNo : InvoiceNo2; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public int InvoiceID2
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string InvoiceNo2
-        {
-            get;
-            set;
-        }
+        public string InvoiceNo2 { get; set; }
 
         /// <summary>
         /// 
@@ -403,23 +252,29 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     if (InvoiceFinanceBatch.FinanceType == "卖方代付" || InvoiceFinanceBatch.FinanceType == "买方代付")
                     {
-                        int period = (InvoiceFinanceBatch.FinancePeriodEnd - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest = this.FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * period;
+                        int period =
+                            (InvoiceFinanceBatch.FinancePeriodEnd - InvoiceFinanceBatch.FinancePeriodBegin).Days;
+                        interest = FinanceAmount.GetValueOrDefault() *
+                                   (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) /
+                                   360 * period;
                     }
                     else
                     {
-                        foreach (InvoiceRefundLog refundLog in InvoiceRefundLogs)
-                        {
-                            int period = (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                            int overduePeriod = refundLog.InvoiceRefundBatch.RefundDate > InvoiceFinanceBatch.FinancePeriodEnd ? (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0;
-                            interest += refundLog.RefundAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * (period + overduePeriod);
-                        }
+                        interest += (from refundLog in InvoiceRefundLogs
+                                     let period = (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodBegin).Days
+                                     let overduePeriod = refundLog.InvoiceRefundBatch.RefundDate > InvoiceFinanceBatch.FinancePeriodEnd ? (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0
+                                     select refundLog.RefundAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * (period + overduePeriod)).Sum();
 
-                        if (TypeUtil.GreaterZero(FinanceOutstanding) && DateTime.Today > InvoiceFinanceBatch.FinancePeriodBegin)
+                        if (TypeUtil.GreaterZero(FinanceOutstanding) &&
+                            DateTime.Today > InvoiceFinanceBatch.FinancePeriodBegin)
                         {
                             int period = (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                            int overduePeriod = DateTime.Today.Date > InvoiceFinanceBatch.FinancePeriodEnd ? (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0;
-                            interest += FinanceAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * (period + overduePeriod);
+                            int overduePeriod = DateTime.Today.Date > InvoiceFinanceBatch.FinancePeriodEnd
+                                                    ? (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodEnd).Days
+                                                    : 0;
+                            interest += FinanceAmount.GetValueOrDefault() *
+                                        (InvoiceFinanceBatch.FinanceRate -
+                                         InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * (period + overduePeriod);
                         }
                     }
 
@@ -439,33 +294,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double? RefundAmount
         {
-            get
-            {
-                if (this.InvoiceRefundLogs != null)
-                {
-                    return this.InvoiceRefundLogs.Sum(log => log.RefundAmount);
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            get { return InvoiceRefundLogs != null ? InvoiceRefundLogs.Sum(log => log.RefundAmount) : null; }
         }
 
-        #endregion?Properties?
-
-
-        #region?Methods?(1)?
-
         //?Public?Methods?(1)?
-
         /// <summary>
         /// 
         /// </summary>
         public void CaculateCommission()
         {
-            CDA cda = this.Invoice.InvoiceAssignBatch.Case.ActiveCDA;
-            
+            CDA cda = Invoice.InvoiceAssignBatch.Case.ActiveCDA;
+
             if (cda == null)
             {
                 return;
@@ -476,7 +315,5 @@ namespace CMBC.EasyFactor.DB.dbml
                 Commission = FinanceAmount * cda.Price;
             }
         }
-
-        #endregion?Methods?
     }
 }

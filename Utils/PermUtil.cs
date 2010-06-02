@@ -1,22 +1,20 @@
+using System;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using DevComponents.DotNetBar;
 
 namespace CMBC.EasyFactor.Utils
 {
-    using System;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using DevComponents.DotNetBar;
-    using CMBC.EasyFactor.Utils.ConstStr;
-
     /// <summary>
     /// 
     /// </summary>
-    [FlagsAttribute]
+    [Flags]
     public enum Permissions
     {
         /// <summary>
         /// 
         /// </summary>
-        NONE =0x00000000,
+        NONE = 0x00000000,
 
         /// <summary>
         /// 
@@ -46,7 +44,7 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        INVOICE_CHECK = 0x00002000,
+        //INVOICE_CHECK = 0x00002000,
 
         /// <summary>
         /// 
@@ -82,20 +80,9 @@ namespace CMBC.EasyFactor.Utils
     /// <summary>
     /// 
     /// </summary>
-    public sealed class PermUtil
+    public static class PermUtil
     {
-		#region?Constructors?(1)?
-
-        private PermUtil()
-        {
-        }
-
-		#endregion?Constructors?
-
-		#region?Methods?(3)?
-
-		//?Public?Methods?(2)?
-
+        //?Public?Methods?(2)?
         /// <summary>
         /// 
         /// </summary>
@@ -107,13 +94,10 @@ namespace CMBC.EasyFactor.Utils
             {
                 return true;
             }
-            else
-            {
-                MessageBoxEx.Show("对不起，您没有执行该操作的权限。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
+            MessageBoxEx.Show("对不起，您没有执行该操作的权限。", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                              MessageBoxIcon.Information);
+            return false;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -123,20 +107,14 @@ namespace CMBC.EasyFactor.Utils
         {
             return ValidatePermission(App.Current.CurUser, perm);
         }
-		//?Internal?Methods?(1)?
-
+        //?Internal?Methods?(1)?
         internal static bool ValidatePermission(User user, Permissions perm)
         {
             if ((user.Permission & (int)perm) == (int)perm)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
-
-		#endregion?Methods?
     }
 }

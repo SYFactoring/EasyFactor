@@ -4,105 +4,84 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using CMBC.EasyFactor.Properties;
+
 namespace CMBC.EasyFactor.Utils
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Windows.Forms;
-
     /// <summary>
     /// 
     /// </summary>
     public sealed class SystemUtil
     {
-        private static readonly Dictionary<string,string> _DBDictionary = InitializeDBDictionary();
+        private static readonly Dictionary<string, string> DbDictionary = InitializeDbDictionary();
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string ConnectionString
+        {
+            get { return Settings.Default.FOSConnectionString; }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        static Dictionary<string,string> InitializeDBDictionary()
+        public static string ServerName
         {
-            string connectionString= Properties.Settings.Default.FOSConnectionString;
-            Dictionary<string,string> result =  new Dictionary<string,string>();
-            foreach(string pair in connectionString.Split(new char[]{';'}))
+            get { return DbDictionary["Data Source"]; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string UserName
+        {
+            get { return DbDictionary["User ID"]; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string Password
+        {
+            get { return DbDictionary["Password"]; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string DataBaseName
+        {
+            get { return DbDictionary["Initial Catalog"]; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private static Dictionary<string, string> InitializeDbDictionary()
+        {
+            string connectionString = Settings.Default.FOSConnectionString;
+            var result = new Dictionary<string, string>();
+            foreach (string pair in connectionString.Split(new[] { ';' }))
             {
-                string key = pair.Split(new char[]{'='})[0].Trim();
-                string value = pair.Split(new char[] { '=' })[1].Trim();
+                string key = pair.Split(new[] { '=' })[0].Trim();
+                string value = pair.Split(new[] { '=' })[1].Trim();
                 result.Add(key, value);
             }
 
             return result;
         }
-
-        #region?Methods?(2)?
-
         //?Public?Methods?(2)?
-
-        public static string GetAllDirFilesRecurse(FileSystemInfo mainDir, string[] extensions, int level)
-        {
-            if (mainDir == null)
-            {
-                return string.Empty;
-            }
-
-            if (level < mainDir.FullName.Split(new char[] { '\\' }).Length - 1)
-            {
-                return string.Empty;
-            }
-
-            StringBuilder sb = new StringBuilder();
-            if (mainDir is DirectoryInfo)
-            {
-                try
-                {
-                    FileSystemInfo[] items = ((DirectoryInfo)mainDir).GetFileSystemInfos();
-                    foreach (FileSystemInfo item in items)
-                    {
-                        if ((item as DirectoryInfo) != null)
-                        {
-                            string result = GetAllDirFilesRecurse(item, extensions, level);
-                            if (!String.IsNullOrEmpty(result))
-                            {
-                                sb.AppendLine(result);
-                            }
-                        }
-                        else if ((item as FileInfo) != null && ((FileInfo)item).Length > 1024000 && extensions.Contains(item.Extension.ToLower(CultureInfo.CurrentCulture)))
-                        {
-                            sb.AppendLine("FILE: " + item.FullName);
-                        }
-                    }
-                }
-                catch (Exception e1)
-                {
-                    sb.AppendLine(e1.Message);
-                    return sb.ToString();
-                }
-            }
-            else if (mainDir is FileInfo && ((FileInfo)mainDir).Length > 102400 && extensions.Contains(mainDir.Extension.ToLower(CultureInfo.CurrentCulture)))
-            {
-                sb.AppendLine("FILE: " + mainDir.FullName);
-            }
-
-
-            return sb.ToString();
-        }
-
         /// <summary>
         /// 
         /// </summary>
         public static string DesktopPath
         {
-            get
-            {
-                return Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            }
+            get { return Environment.GetFolderPath(Environment.SpecialFolder.Desktop); }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -111,7 +90,7 @@ namespace CMBC.EasyFactor.Utils
         {
             get
             {
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
 
                 //获取操作系统设置
                 sb.AppendLine("获取操作系统设置");
@@ -155,62 +134,55 @@ namespace CMBC.EasyFactor.Utils
                 return sb.ToString();
             }
         }
-
-        #endregion?Methods?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public static string ConnectionString
+        public static string GetAllDirFilesRecurse(FileSystemInfo mainDir, string[] extensions, int level)
         {
-            get
+            if (mainDir == null)
             {
-                return Properties.Settings.Default.FOSConnectionString;
+                return string.Empty;
             }
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static string ServerName
-        {
-            get
+            if (level < mainDir.FullName.Split(new[] { '\\' }).Length - 1)
             {
-                return _DBDictionary["Data Source"];
+                return string.Empty;
             }
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static string UserName
-        {
-            get
+            var sb = new StringBuilder();
+            if (mainDir is DirectoryInfo)
             {
-                return _DBDictionary["User ID"];
+                try
+                {
+                    FileSystemInfo[] items = ((DirectoryInfo)mainDir).GetFileSystemInfos();
+                    foreach (FileSystemInfo item in items)
+                    {
+                        if ((item as DirectoryInfo) != null)
+                        {
+                            string result = GetAllDirFilesRecurse(item, extensions, level);
+                            if (!String.IsNullOrEmpty(result))
+                            {
+                                sb.AppendLine(result);
+                            }
+                        }
+                        else if ((item as FileInfo) != null && ((FileInfo)item).Length > 1024000 &&
+                                 extensions.Contains(item.Extension.ToLower(CultureInfo.CurrentCulture)))
+                        {
+                            sb.AppendLine("FILE: " + item.FullName);
+                        }
+                    }
+                }
+                catch (Exception e1)
+                {
+                    sb.AppendLine(e1.Message);
+                    return sb.ToString();
+                }
             }
-        }
+            else if (mainDir is FileInfo && ((FileInfo)mainDir).Length > 102400 &&
+                     extensions.Contains(mainDir.Extension.ToLower(CultureInfo.CurrentCulture)))
+            {
+                sb.AppendLine("FILE: " + mainDir.FullName);
+            }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static string Password
-        {
-            get
-            {
-                return _DBDictionary["Password"];
-            }
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static string DataBaseName
-        {
-            get
-            {
-                return _DBDictionary["Initial Catalog"];
-            }
+            return sb.ToString();
         }
     }
 }

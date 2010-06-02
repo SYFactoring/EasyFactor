@@ -4,37 +4,23 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Data.Linq;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Linq;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class InvoiceDetail : DevComponents.DotNetBar.Office2007Form
+    public partial class InvoiceDetail : Office2007Form
     {
-        #region?Fields?(2)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpInvoiceType opInvoiceType;
-
-        #endregion?Fields?
-
-        #region?Enums?(1)?
+        #region OpInvoiceType enum
 
         /// <summary>
         /// 
@@ -62,9 +48,18 @@ namespace CMBC.EasyFactor.ARMgr
             DISPUTE
         }
 
-        #endregion?Enums?
+        #endregion
 
-        #region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpInvoiceType _opInvoiceType;
+
 
         /// <summary>
         /// Initializes a new instance of the InvoiceDetail class
@@ -73,41 +68,41 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="opInvoiceType"></param>
         public InvoiceDetail(Invoice invoice, OpInvoiceType opInvoiceType)
         {
-            this.InitializeComponent();
-            this.context = new DBDataContext();
-            this.ImeMode = ImeMode.OnHalf;
-            this.opInvoiceType = opInvoiceType;
-            invoice = context.Invoices.SingleOrDefault(i => i.InvoiceID == invoice.InvoiceID);
-            this.invoiceBindingSource.DataSource = invoice;
-            this.dgvFinanceLogs.AutoGenerateColumns = false;
-            this.dgvPaymentLogs.AutoGenerateColumns = false;
-            this.dgvRefundLogs.AutoGenerateColumns = false;
+            InitializeComponent();
+            _context = new DBDataContext();
+            ImeMode = ImeMode.OnHalf;
+            _opInvoiceType = opInvoiceType;
+            invoice = _context.Invoices.SingleOrDefault(i => i.InvoiceID == invoice.InvoiceID);
+            invoiceBindingSource.DataSource = invoice;
+            dgvFinanceLogs.AutoGenerateColumns = false;
+            dgvPaymentLogs.AutoGenerateColumns = false;
+            dgvRefundLogs.AutoGenerateColumns = false;
 
-            this.invoiceCurrencyComboBox.DataSource = Currency.AllCurrencies;
-            this.invoiceCurrencyComboBox.DisplayMember = "CurrencyCode";
-            this.invoiceCurrencyComboBox.ValueMember = "CurrencyCode";
+            invoiceCurrencyComboBox.DataSource = Currency.AllCurrencies;
+            invoiceCurrencyComboBox.DisplayMember = "CurrencyCode";
+            invoiceCurrencyComboBox.ValueMember = "CurrencyCode";
 
-            this.flawReasonCheckedListBox.DataSource = FlawReason.AllFlawReasons;
-            this.flawReasonCheckedListBox.DisplayMember = "Reason";
-            this.flawReasonCheckedListBox.ValueMember = "Index";
+            flawReasonCheckedListBox.DataSource = FlawReason.AllFlawReasons;
+            flawReasonCheckedListBox.DisplayMember = "Reason";
+            flawReasonCheckedListBox.ValueMember = "Index";
 
-            this.disputeReasonCheckedListBox.DataSource = DisputeReason.AllDisputeReasons;
-            this.disputeReasonCheckedListBox.DisplayMember = "Reason";
-            this.disputeReasonCheckedListBox.ValueMember = "Index";
+            disputeReasonCheckedListBox.DataSource = DisputeReason.AllDisputeReasons;
+            disputeReasonCheckedListBox.DisplayMember = "Reason";
+            disputeReasonCheckedListBox.ValueMember = "Index";
 
-            this.dgvFinanceLogs.DataSource = invoice.InvoiceFinanceLogs;
-            this.dgvPaymentLogs.DataSource = invoice.InvoicePaymentLogs;
-            List<InvoiceRefundLog> refundLogs = new List<InvoiceRefundLog>();
+            dgvFinanceLogs.DataSource = invoice.InvoiceFinanceLogs;
+            dgvPaymentLogs.DataSource = invoice.InvoicePaymentLogs;
+            var refundLogs = new List<InvoiceRefundLog>();
             foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
             {
                 refundLogs.AddRange(financeLog.InvoiceRefundLogs);
             }
 
-            this.dgvRefundLogs.DataSource = refundLogs;
+            dgvRefundLogs.DataSource = refundLogs;
 
             if (invoice.InvoicePaymentLogs.Count > 0)
             {
-                if (((InvoicePaymentLog)invoice.InvoicePaymentLogs[0]).CreditNote != null)
+                if ((invoice.InvoicePaymentLogs[0]).CreditNote != null)
                 {
                     colCreditNoteDate.Visible = true;
                     colCreditNoteNo.Visible = true;
@@ -116,52 +111,48 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (invoice.FlawReason != null)
             {
-                List<string> reasonList = new List<string>();
+                var reasonList = new List<string>();
                 reasonList.AddRange(invoice.FlawReason.Split(';'));
-                for (int i = 0; i < this.flawReasonCheckedListBox.Items.Count; i++)
+                for (int i = 0; i < flawReasonCheckedListBox.Items.Count; i++)
                 {
-                    string item = ((FlawReason)this.flawReasonCheckedListBox.Items[i]).Index;
+                    string item = ((FlawReason) flawReasonCheckedListBox.Items[i]).Index;
                     if (reasonList.Contains(item))
                     {
-                        this.flawReasonCheckedListBox.SetItemChecked(i, true);
+                        flawReasonCheckedListBox.SetItemChecked(i, true);
                     }
                 }
             }
 
             if (invoice.DisputeReason != null)
             {
-                List<string> disputeList = new List<string>();
+                var disputeList = new List<string>();
                 disputeList.AddRange(invoice.DisputeReason.Split(';'));
-                for (int i = 0; i < this.disputeReasonCheckedListBox.Items.Count; i++)
+                for (int i = 0; i < disputeReasonCheckedListBox.Items.Count; i++)
                 {
-                    string item = ((DisputeReason)this.disputeReasonCheckedListBox.Items[i]).Index;
+                    string item = ((DisputeReason) disputeReasonCheckedListBox.Items[i]).Index;
                     if (disputeList.Contains(item))
                     {
-                        this.disputeReasonCheckedListBox.SetItemChecked(i, true);
+                        disputeReasonCheckedListBox.SetItemChecked(i, true);
                     }
                 }
             }
 
-            this.UpdateInvoiceControlStatus();
+            UpdateInvoiceControlStatus();
 
             if (opInvoiceType == OpInvoiceType.FLAW)
             {
-                this.tabControl.SelectedTab = this.tabItemFlaw;
+                tabControl.SelectedTab = tabItemFlaw;
             }
             else if (opInvoiceType == OpInvoiceType.DISPUTE)
             {
-                this.tabControl.SelectedTab = this.tabItemDispute;
+                tabControl.SelectedTab = tabItemDispute;
             }
 
-            this.UpdateContextMenu();
+            UpdateContextMenu();
         }
 
-        #endregion?Constructors?
-
-        #region?Methods?(15)?
 
         //?Private?Methods?(15)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -174,29 +165,31 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvPaymentLogs.SelectedRows.Count == 0)
+            if (dgvPaymentLogs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            InvoicePaymentLog log = (InvoicePaymentLog)((EntitySet<InvoicePaymentLog>)this.dgvPaymentLogs.DataSource)[this.dgvPaymentLogs.SelectedRows[0].Index];
+            InvoicePaymentLog log =
+                ((EntitySet<InvoicePaymentLog>) dgvPaymentLogs.DataSource)[dgvPaymentLogs.SelectedRows[0].Index];
 
             try
             {
                 Invoice invoice = log.Invoice;
                 log.Invoice = null;
                 invoice.CaculatePayment();
-                context.InvoicePaymentLogs.DeleteOnSubmit(log);
+                _context.InvoicePaymentLogs.DeleteOnSubmit(log);
                 //log.InvoicePaymentBatch.CheckStatus = BATCH.UNCHECK;
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("É¾³ýÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("É¾³ýÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
                 return;
             }
 
-            this.dgvPaymentLogs.Rows.RemoveAt(this.dgvPaymentLogs.SelectedRows[0].Index);
+            dgvPaymentLogs.Rows.RemoveAt(dgvPaymentLogs.SelectedRows[0].Index);
         }
 
         /// <summary>
@@ -211,29 +204,31 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvRefundLogs.SelectedRows.Count == 0)
+            if (dgvRefundLogs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            InvoiceRefundLog log = (InvoiceRefundLog)((EntitySet<InvoiceRefundLog>)this.dgvRefundLogs.DataSource)[this.dgvRefundLogs.SelectedRows[0].Index];
+            InvoiceRefundLog log =
+                ((EntitySet<InvoiceRefundLog>) dgvRefundLogs.DataSource)[dgvRefundLogs.SelectedRows[0].Index];
 
             try
             {
                 InvoiceFinanceLog financeLog = log.InvoiceFinanceLog;
                 financeLog.InvoiceRefundLogs.Remove(log);
                 financeLog.Invoice.CaculateRefund();
-                context.InvoiceRefundLogs.DeleteOnSubmit(log);
+                _context.InvoiceRefundLogs.DeleteOnSubmit(log);
                 //log.InvoiceRefundBatch.CheckStatus = BATCH.UNCHECK;
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
-                MessageBoxEx.Show("É¾³ýÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("É¾³ýÊ§°Ü," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
                 return;
             }
 
-            this.dgvRefundLogs.Rows.RemoveAt(this.dgvRefundLogs.SelectedRows[0].Index);
+            dgvRefundLogs.Rows.RemoveAt(dgvRefundLogs.SelectedRows[0].Index);
         }
 
         /// <summary>
@@ -243,10 +238,10 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailAssignBatch(object sender, EventArgs e)
         {
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            var invoice = (Invoice) invoiceBindingSource.DataSource;
             if (invoice.InvoiceAssignBatch != null)
             {
-                AssignBatchDetail detail = new AssignBatchDetail(invoice.InvoiceAssignBatch);
+                var detail = new AssignBatchDetail(invoice.InvoiceAssignBatch);
                 detail.ShowDialog(this);
             }
         }
@@ -258,16 +253,13 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailFinanceBatch(object sender, EventArgs e)
         {
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-            string[] batchNoes = invoice.FinanceBatchNos.Split(new char[] { ';' });
-            foreach (string batchNo in batchNoes)
+            var invoice = (Invoice) invoiceBindingSource.DataSource;
+            string[] batchNoes = invoice.FinanceBatchNos.Split(new[] {';'});
+            foreach (var detail in from batchNo in batchNoes
+                                   select _context.InvoiceFinanceBatches.Single(i => i.FinanceBatchNo == batchNo)
+                                   into batch where batch != null select new FinanceBatchDetail(batch))
             {
-                InvoiceFinanceBatch batch = context.InvoiceFinanceBatches.Single(i => i.FinanceBatchNo == batchNo);
-                if (batch != null)
-                {
-                    FinanceBatchDetail detail = new FinanceBatchDetail(batch);
-                    detail.Show();
-                }
+                detail.Show();
             }
         }
 
@@ -278,15 +270,19 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailPaymentBatch(object sender, EventArgs e)
         {
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-            string[] batchNoes = invoice.PaymentBatchNos.Split(new char[] { ';' });
+            var invoice = (Invoice) invoiceBindingSource.DataSource;
+            string[] batchNoes = invoice.PaymentBatchNos.Split(new[] {';'});
             foreach (string batchNo in batchNoes)
             {
-                InvoicePaymentBatch batch = context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == batchNo);
-                if (batch != null)
+                if (batchNo != null)
                 {
-                    PaymentBatchDetail detail = new PaymentBatchDetail(batch);
-                    detail.Show();
+                    InvoicePaymentBatch batch =
+                        _context.InvoicePaymentBatches.SingleOrDefault(i => i.PaymentBatchNo == batchNo);
+                    if (batch != null)
+                    {
+                        var detail = new PaymentBatchDetail(batch);
+                        detail.Show();
+                    }
                 }
             }
         }
@@ -298,15 +294,18 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailRefundBatch(object sender, EventArgs e)
         {
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
-            string[] batchNoes = invoice.RefundBatchNos.Split(new char[] { ';' });
+            var invoice = (Invoice) invoiceBindingSource.DataSource;
+            string[] batchNoes = invoice.RefundBatchNos.Split(new[] {';'});
             foreach (string batchNo in batchNoes)
             {
-                InvoiceRefundBatch batch = context.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == batchNo);
-                if (batch != null)
+                if (batchNo != null)
                 {
-                    RefundBatchDetail detail = new RefundBatchDetail(batch);
-                    detail.Show();
+                    InvoiceRefundBatch batch = _context.InvoiceRefundBatches.SingleOrDefault(i => i.RefundBatchNo == batchNo);
+                    if (batch != null)
+                    {
+                        var detail = new RefundBatchDetail(batch);
+                        detail.Show();
+                    }
                 }
             }
         }
@@ -323,11 +322,11 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            var invoice = (Invoice) invoiceBindingSource.DataSource;
             invoice.DisputeDate = DateTime.Now.Date;
             invoice.DisputeUserName = App.Current.CurUser.Name;
             invoice.IsDispute = true;
-            foreach (Control comp in this.groupPanelDispute.Controls)
+            foreach (Control comp in groupPanelDispute.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, true);
             }
@@ -345,22 +344,18 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            var invoice = (Invoice) invoiceBindingSource.DataSource;
             invoice.DisputeResolveDate = DateTime.Now.Date;
             invoice.DisputeResolveUserName = App.Current.CurUser.Name;
             invoice.IsDispute = false;
-            foreach (Control comp in this.groupPanelDisputeResolve.Controls)
+            foreach (Control comp in groupPanelDisputeResolve.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, true);
             }
 
-            List<string> reasonList = new List<string>();
+            var reasonList = new List<string>();
             reasonList.AddRange(invoice.DisputeReason.Split(';'));
-            string disputeResolveReason = string.Empty;
-            foreach (string reason in reasonList)
-            {
-                disputeResolveReason += (reason + " ÒÑ½â³ý" + Environment.NewLine);
-            }
+            string disputeResolveReason = reasonList.Aggregate(string.Empty, (current, reason) => current + (reason + " ÒÑ½â³ý" + Environment.NewLine));
 
             invoice.DisputeResolveReason = disputeResolveReason;
         }
@@ -377,9 +372,9 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.flawReasonCheckedListBox.Enabled = true;
-            this.tbFlawReason.ReadOnly = false;
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            flawReasonCheckedListBox.Enabled = true;
+            tbFlawReason.ReadOnly = false;
+            var invoice = (Invoice) invoiceBindingSource.DataSource;
             invoice.IsFlaw = true;
         }
 
@@ -395,22 +390,18 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            var invoice = (Invoice) invoiceBindingSource.DataSource;
             invoice.FlawResolveDate = DateTime.Now.Date;
             invoice.FlawResolveUserName = App.Current.CurUser.Name;
             invoice.IsFlaw = false;
 
-            this.flawResolveDateDateTimePicker.Enabled = true;
-            this.tbFlawResolveReason.ReadOnly = false;
-            this.flawResolveUserNameTextBox.ReadOnly = false;
+            flawResolveDateDateTimePicker.Enabled = true;
+            tbFlawResolveReason.ReadOnly = false;
+            flawResolveUserNameTextBox.ReadOnly = false;
 
-            List<string> reasonList = new List<string>();
+            var reasonList = new List<string>();
             reasonList.AddRange(invoice.FlawReason.Split(';'));
-            string flawResolveReason = string.Empty;
-            foreach (string reason in reasonList)
-            {
-                flawResolveReason += (reason + " ÒÑ½â³ý" + Environment.NewLine);
-            }
+            string flawResolveReason = reasonList.Aggregate(string.Empty, (current, reason) => current + (reason + " ÒÑ½â³ý" + Environment.NewLine));
 
             invoice.FlawResolveReason = flawResolveReason;
         }
@@ -427,26 +418,18 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            var invoice = (Invoice) invoiceBindingSource.DataSource;
 
-            string flawReason = string.Empty;
-            foreach (FlawReason item in this.flawReasonCheckedListBox.CheckedItems)
-            {
-                flawReason += (item.Index + ";");
-            }
+            string flawReason = flawReasonCheckedListBox.CheckedItems.Cast<FlawReason>().Aggregate(string.Empty, (current, item) => current + (item.Index + ";"));
 
             invoice.FlawReason = flawReason;
 
-            string disputeReason = string.Empty;
-            foreach (string item in this.disputeReasonCheckedListBox.CheckedItems)
-            {
-                disputeReason += (item + ";");
-            }
+            string disputeReason = disputeReasonCheckedListBox.CheckedItems.Cast<string>().Aggregate(string.Empty, (current, item) => current + (item + ";"));
 
             invoice.DisputeReason = disputeReason;
 
@@ -454,11 +437,11 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                _context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)
             {
-                foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                 {
                     foreach (MemberChangeConflict mc in cc.MemberConflicts)
                     {
@@ -466,7 +449,7 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -492,26 +475,18 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
+            var invoice = (Invoice) invoiceBindingSource.DataSource;
 
-            string flawReason = string.Empty;
-            foreach (FlawReason item in this.flawReasonCheckedListBox.CheckedItems)
-            {
-                flawReason += (item.Index + ";");
-            }
+            string flawReason = flawReasonCheckedListBox.CheckedItems.Cast<FlawReason>().Aggregate(string.Empty, (current, item) => current + (item.Index + ";"));
 
             invoice.FlawReason = flawReason;
 
-            string disputeReason = string.Empty;
-            foreach (DisputeReason item in this.disputeReasonCheckedListBox.CheckedItems)
-            {
-                disputeReason += (item.Index + ";");
-            }
+            string disputeReason = disputeReasonCheckedListBox.CheckedItems.Cast<DisputeReason>().Aggregate(string.Empty, (current, item) => current + (item.Index + ";"));
 
             invoice.DisputeReason = disputeReason;
 
@@ -523,11 +498,11 @@ namespace CMBC.EasyFactor.ARMgr
 
             try
             {
-                context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                _context.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
             catch (ChangeConflictException)
             {
-                foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                 {
                     foreach (MemberChangeConflict mc in cc.MemberConflicts)
                     {
@@ -535,7 +510,7 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -556,13 +531,13 @@ namespace CMBC.EasyFactor.ARMgr
         {
             if (PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE))
             {
-                this.menuItemPaymentLogDelete.Enabled = true;
-                this.menuItemRefundLogDelete.Enabled = true;
+                menuItemPaymentLogDelete.Enabled = true;
+                menuItemRefundLogDelete.Enabled = true;
             }
             else
             {
-                this.menuItemPaymentLogDelete.Enabled = false;
-                this.menuItemRefundLogDelete.Enabled = false;
+                menuItemPaymentLogDelete.Enabled = false;
+                menuItemRefundLogDelete.Enabled = false;
             }
         }
 
@@ -578,8 +553,8 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            this.opInvoiceType = OpInvoiceType.UPDATE_INVOICE;
-            this.UpdateInvoiceControlStatus();
+            _opInvoiceType = OpInvoiceType.UPDATE_INVOICE;
+            UpdateInvoiceControlStatus();
         }
 
         /// <summary>
@@ -587,36 +562,35 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private void UpdateInvoiceControlStatus()
         {
-            if (this.opInvoiceType == OpInvoiceType.DETAIL_INVOICE || this.opInvoiceType == OpInvoiceType.FLAW || this.opInvoiceType == OpInvoiceType.DISPUTE)
+            if (_opInvoiceType == OpInvoiceType.DETAIL_INVOICE || _opInvoiceType == OpInvoiceType.FLAW ||
+                _opInvoiceType == OpInvoiceType.DISPUTE)
             {
-                foreach (Control comp in this.groupPanelInvoiceBasic.Controls)
+                foreach (Control comp in groupPanelInvoiceBasic.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                foreach (Control comp in this.groupPanelInvoiceProcess.Controls)
+                foreach (Control comp in groupPanelInvoiceProcess.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                foreach (Control comp in groupPanelInvoiceAdv.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (this.opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
+            else if (_opInvoiceType == OpInvoiceType.UPDATE_INVOICE)
             {
-                foreach (Control comp in this.groupPanelInvoiceBasic.Controls)
+                foreach (Control comp in groupPanelInvoiceBasic.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                foreach (Control comp in this.groupPanelInvoiceProcess.Controls)
+                foreach (Control comp in groupPanelInvoiceProcess.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
-
-                Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
 
                 //if (invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK)
                 //{
@@ -624,50 +598,47 @@ namespace CMBC.EasyFactor.ARMgr
                 //    return;
                 //}
 
-                this.invoiceNoTextBox.ReadOnly = false;
-                this.invoiceAmountTextBox.ReadOnly = false;
-                this.invoiceDateTextBox.Enabled = true;
-                this.dueDateTextBox.Enabled = true;
-                this.commentTextBox.ReadOnly = false;
-                this.assignAmountTextBox.ReadOnly = false;
+                invoiceNoTextBox.ReadOnly = false;
+                invoiceAmountTextBox.ReadOnly = false;
+                invoiceDateTextBox.Enabled = true;
+                dueDateTextBox.Enabled = true;
+                commentTextBox.ReadOnly = false;
+                assignAmountTextBox.ReadOnly = false;
 
-                foreach (Control comp in this.groupPanelInvoiceAdv.Controls)
+                foreach (Control comp in groupPanelInvoiceAdv.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-
             }
 
-            foreach (Control comp in this.groupPanelFlaw.Controls)
+            foreach (Control comp in groupPanelFlaw.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, false);
             }
 
-            foreach (Control comp in this.groupPanelFlawResolve.Controls)
+            foreach (Control comp in groupPanelFlawResolve.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, false);
             }
 
-            foreach (Control comp in this.groupPanelDispute.Controls)
+            foreach (Control comp in groupPanelDispute.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, false);
             }
 
-            foreach (Control comp in this.groupPanelDisputeResolve.Controls)
+            foreach (Control comp in groupPanelDisputeResolve.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, false);
             }
 
-            this.btnFlaw.Enabled = true;
-            this.btnFlawResolve.Enabled = true;
-            this.isDisputeCheckBox.Enabled = true;
-            this.isFlawCheckBox.Enabled = true;
+            btnFlaw.Enabled = true;
+            btnFlawResolve.Enabled = true;
+            isDisputeCheckBox.Enabled = true;
+            isFlawCheckBox.Enabled = true;
 
-            ControlUtil.SetComponetEditable(this.flawResolveUserNameTextBox, false);
-            ControlUtil.SetComponetEditable(this.disputeResolveUserNameTextBox, false);
-            ControlUtil.SetComponetEditable(this.disputeUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(flawResolveUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(disputeResolveUserNameTextBox, false);
+            ControlUtil.SetComponetEditable(disputeUserNameTextBox, false);
         }
-
-        #endregion?Methods?
     }
 }

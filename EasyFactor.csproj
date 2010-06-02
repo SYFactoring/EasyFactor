@@ -292,12 +292,6 @@
     <Compile Include="Help\ReportBug.Designer.cs">
       <DependentUpon>ReportBug.cs</DependentUpon>
     </Compile>
-    <Compile Include="Help\SystemSetting.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Help\SystemSetting.Designer.cs">
-      <DependentUpon>SystemSetting.cs</DependentUpon>
-    </Compile>
     <Compile Include="InfoMgr\ClientMgr\ClientReviewMgr.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -554,9 +548,6 @@
     <EmbeddedResource Include="Help\ReportBug.resx">
       <DependentUpon>ReportBug.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Help\SystemSetting.resx">
-      <DependentUpon>SystemSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\ClientMgr\ClientCreditLineMgr.resx">
       <DependentUpon>ClientCreditLineMgr.cs</DependentUpon>

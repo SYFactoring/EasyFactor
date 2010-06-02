@@ -141,11 +141,9 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.RibbonBar ribbonBarFactor;
         private DevComponents.DotNetBar.RibbonBar ribbonBarFinance;
         private DevComponents.DotNetBar.RibbonBar ribbonBarHelp;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarInvoiceCheck;
         private DevComponents.DotNetBar.RibbonBar ribbonBarInvoiceImport;
         private DevComponents.DotNetBar.RibbonBar ribbonBarPayment;
         private DevComponents.DotNetBar.RibbonBar ribbonBarPool;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarPoolCheck;
         private DevComponents.DotNetBar.RibbonBar ribbonBarPoolIMport;
         private DevComponents.DotNetBar.RibbonBar ribbonBarPoolQuery;
         private DevComponents.DotNetBar.RibbonBar ribbonBarSystem;
@@ -155,7 +153,6 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.Ribbon.RibbonClientPanel ribbonDetailPanel;
         private DevComponents.DotNetBar.RibbonTabItem ribbonItemARImport;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanel1;
-        private DevComponents.DotNetBar.RibbonPanel ribbonPanel2;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanel3;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanelARImport;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanelHelp;
@@ -165,7 +162,6 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.RibbonPanel ribbonPanelQuery;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanelReport;
         private DevComponents.DotNetBar.RibbonTabItem ribbonTabItemCaseMgr;
-        private DevComponents.DotNetBar.RibbonTabItem ribbonTabItemCheck;
         private DevComponents.DotNetBar.RibbonTabItem ribbonTabItemSystem;
         private DevComponents.DotNetBar.Bar statusbar;
         private DevComponents.DotNetBar.StyleManager styleManager;
@@ -219,11 +215,8 @@ namespace CMBC.EasyFactor
             this.ribbonBarClient = new DevComponents.DotNetBar.RibbonBar();
             this.btnClientMgr = new DevComponents.DotNetBar.ButtonItem();
             this.btnClientNew = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonPanel2 = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarPoolCheck = new DevComponents.DotNetBar.RibbonBar();
             this.btnPoolFinanceCheck = new DevComponents.DotNetBar.ButtonItem();
             this.btnPoolRefundCheck = new DevComponents.DotNetBar.ButtonItem();
-            this.ribbonBarInvoiceCheck = new DevComponents.DotNetBar.RibbonBar();
             this.btnCDACheck = new DevComponents.DotNetBar.ButtonItem();
             this.btnAssignCheck = new DevComponents.DotNetBar.ButtonItem();
             this.btnFinanceCheck = new DevComponents.DotNetBar.ButtonItem();
@@ -346,7 +339,6 @@ namespace CMBC.EasyFactor
             this.ribbonTabItemCaseMgr = new DevComponents.DotNetBar.RibbonTabItem();
             this.itemAccountsReceivableMgr = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonItemARImport = new DevComponents.DotNetBar.RibbonTabItem();
-            this.ribbonTabItemCheck = new DevComponents.DotNetBar.RibbonTabItem();
             this.itemQuery = new DevComponents.DotNetBar.RibbonTabItem();
             this.itemReport = new DevComponents.DotNetBar.RibbonTabItem();
             this.tabItemMigration = new DevComponents.DotNetBar.RibbonTabItem();
@@ -374,7 +366,6 @@ namespace CMBC.EasyFactor
             this.labelItem1 = new DevComponents.DotNetBar.LabelItem();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelInfoMgr.SuspendLayout();
-            this.ribbonPanel2.SuspendLayout();
             this.ribbonPanelARImport.SuspendLayout();
             this.ribbonPanel3.SuspendLayout();
             this.ribbonPanelMigration.SuspendLayout();
@@ -395,12 +386,11 @@ namespace CMBC.EasyFactor
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
             this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanel2);
             this.ribbonControl.Controls.Add(this.ribbonPanelARImport);
+            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanel3);
             this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
-            this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
             this.ribbonControl.Controls.Add(this.ribbonPanel1);
             this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
@@ -410,7 +400,6 @@ namespace CMBC.EasyFactor
             this.ribbonTabItemCaseMgr,
             this.itemAccountsReceivableMgr,
             this.ribbonItemARImport,
-            this.ribbonTabItemCheck,
             this.itemQuery,
             this.itemReport,
             this.tabItemMigration,
@@ -641,62 +630,6 @@ namespace CMBC.EasyFactor
             this.btnClientNew.Text = "新增客户";
             this.btnClientNew.Click += new System.EventHandler(this.NewClient);
             // 
-            // ribbonPanel2
-            // 
-            this.ribbonPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanel2.Controls.Add(this.ribbonBarPoolCheck);
-            this.ribbonPanel2.Controls.Add(this.ribbonBarInvoiceCheck);
-            this.ribbonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanel2.Location = new System.Drawing.Point(0, 59);
-            this.ribbonPanel2.Name = "ribbonPanel2";
-            this.ribbonPanel2.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanel2.Size = new System.Drawing.Size(1082, 93);
-            // 
-            // 
-            // 
-            this.ribbonPanel2.Style.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanel2.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonPanel2.StyleMouseOver.Class = "";
-            this.ribbonPanel2.TabIndex = 10;
-            this.ribbonPanel2.Visible = false;
-            // 
-            // ribbonBarPoolCheck
-            // 
-            this.ribbonBarPoolCheck.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarPoolCheck.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarPoolCheck.BackgroundStyle.Class = "";
-            this.ribbonBarPoolCheck.ContainerControlProcessDialogKey = true;
-            this.ribbonBarPoolCheck.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarPoolCheck.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnPoolFinanceCheck,
-            this.btnPoolRefundCheck});
-            this.ribbonBarPoolCheck.Location = new System.Drawing.Point(363, 0);
-            this.ribbonBarPoolCheck.Name = "ribbonBarPoolCheck";
-            this.ribbonBarPoolCheck.Size = new System.Drawing.Size(154, 90);
-            this.ribbonBarPoolCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarPoolCheck.TabIndex = 1;
-            this.ribbonBarPoolCheck.Text = "池复核";
-            // 
-            // 
-            // 
-            this.ribbonBarPoolCheck.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarPoolCheck.TitleStyleMouseOver.Class = "";
-            // 
             // btnPoolFinanceCheck
             // 
             this.btnPoolFinanceCheck.Image = ((System.Drawing.Image)(resources.GetObject("btnPoolFinanceCheck.Image")));
@@ -712,40 +645,6 @@ namespace CMBC.EasyFactor
             this.btnPoolRefundCheck.Name = "btnPoolRefundCheck";
             this.btnPoolRefundCheck.SubItemsExpandWidth = 14;
             this.btnPoolRefundCheck.Text = "池还款复核";
-            // 
-            // ribbonBarInvoiceCheck
-            // 
-            this.ribbonBarInvoiceCheck.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceCheck.BackgroundMouseOverStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceCheck.BackgroundStyle.Class = "";
-            this.ribbonBarInvoiceCheck.ContainerControlProcessDialogKey = true;
-            this.ribbonBarInvoiceCheck.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarInvoiceCheck.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnCDACheck,
-            this.btnAssignCheck,
-            this.btnFinanceCheck,
-            this.btnPaymentCheck,
-            this.btnRefundCheck});
-            this.ribbonBarInvoiceCheck.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarInvoiceCheck.Name = "ribbonBarInvoiceCheck";
-            this.ribbonBarInvoiceCheck.Size = new System.Drawing.Size(360, 90);
-            this.ribbonBarInvoiceCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarInvoiceCheck.TabIndex = 0;
-            this.ribbonBarInvoiceCheck.Text = "复核";
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceCheck.TitleStyle.Class = "";
-            // 
-            // 
-            // 
-            this.ribbonBarInvoiceCheck.TitleStyleMouseOver.Class = "";
             // 
             // btnCDACheck
             // 
@@ -2537,13 +2436,6 @@ namespace CMBC.EasyFactor
             this.ribbonItemARImport.Panel = this.ribbonPanelARImport;
             this.ribbonItemARImport.Text = "表单导入";
             // 
-            // ribbonTabItemCheck
-            // 
-            this.ribbonTabItemCheck.Name = "ribbonTabItemCheck";
-            this.ribbonTabItemCheck.Panel = this.ribbonPanel2;
-            this.ribbonTabItemCheck.Text = "复核";
-            this.ribbonTabItemCheck.Visible = false;
-            // 
             // itemQuery
             // 
             this.itemQuery.Name = "itemQuery";
@@ -2760,7 +2652,6 @@ namespace CMBC.EasyFactor
             this.ribbonControl.ResumeLayout(false);
             this.ribbonControl.PerformLayout();
             this.ribbonPanelInfoMgr.ResumeLayout(false);
-            this.ribbonPanel2.ResumeLayout(false);
             this.ribbonPanelARImport.ResumeLayout(false);
             this.ribbonPanel3.ResumeLayout(false);
             this.ribbonPanelMigration.ResumeLayout(false);

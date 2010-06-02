@@ -4,35 +4,21 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 {
-    using System;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class DepartmentDetail : DevComponents.DotNetBar.Office2007Form
+    public partial class DepartmentDetail : Office2007Form
     {
-		#region?Fields?(2)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpDepartmentType opDepartmentType;
-
-		#endregion?Fields?
-
-		#region?Enums?(1)?
+        #region OpDepartmentType enum
 
         /// <summary>
         /// Operation Type
@@ -55,25 +41,34 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             DETAIL_DEPARTMENT
         }
 
-		#endregion?Enums?
+        #endregion
 
-		#region?Constructors?(1)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
 
-/// <summary>
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpDepartmentType _opDepartmentType;
+
+
+        /// <summary>
         /// Initializes a new instance of the DepartmentDetail class
         /// </summary>
         /// <param name="department"></param>
         /// <param name="opDepartmentType"></param>
         public DepartmentDetail(Department department, OpDepartmentType opDepartmentType)
         {
-            this.context = new DBDataContext();
-            this.InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.opDepartmentType = opDepartmentType;
+            _context = new DBDataContext();
+            InitializeComponent();
+            ImeMode = ImeMode.OnHalf;
+            _opDepartmentType = opDepartmentType;
 
-            this.cbLocation.DataSource = DB.dbml.Location.AllLocations;
-            this.cbLocation.DisplayMember = "LocationName";
-            this.cbLocation.ValueMember = "LocationCode";
+            cbLocation.DataSource = DB.dbml.Location.AllLocations;
+            cbLocation.DisplayMember = "LocationName";
+            cbLocation.ValueMember = "LocationCode";
 
             if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
             {
@@ -81,22 +76,18 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
             else
             {
-                department = context.Departments.SingleOrDefault(d => d.DepartmentCode == department.DepartmentCode);
-                this.tbPManager.Text = department.Location.PManager;
-                this.tbAssistant.Text = department.Location.Assistant;
+                department = _context.Departments.SingleOrDefault(d => d.DepartmentCode == department.DepartmentCode);
+                tbPManager.Text = department.Location.PManager;
+                tbAssistant.Text = department.Location.Assistant;
             }
 
-            this.departmentBindingSource.DataSource = department;
+            departmentBindingSource.DataSource = department;
 
-            this.UpdateDepartmentControlStatus();
+            UpdateDepartmentControlStatus();
         }
 
-		#endregion?Constructors?
 
-		#region?Methods?(3)?
-
-		//?Private?Methods?(3)?
-
+        //?Private?Methods?(3)?
         /// <summary>
         /// 
         /// </summary>
@@ -109,20 +100,20 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 return;
             }
 
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            Department dept = (Department)this.departmentBindingSource.DataSource;
+            var dept = (Department) departmentBindingSource.DataSource;
 
-            if (opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
+            if (_opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
             {
                 bool isAddOK = true;
                 try
                 {
-                    context.Departments.InsertOnSubmit(dept);
-                    context.SubmitChanges();
+                    _context.Departments.InsertOnSubmit(dept);
+                    _context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -132,8 +123,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    opDepartmentType = OpDepartmentType.UPDATE_DEPARTMENT;
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                    _opDepartmentType = OpDepartmentType.UPDATE_DEPARTMENT;
                 }
             }
             else
@@ -141,7 +133,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    context.SubmitChanges();
+                    _context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -151,7 +143,8 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                 }
             }
         }
@@ -163,7 +156,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e"></param>
         private void UpdateDepartment(object sender, EventArgs e)
         {
-            opDepartmentType = OpDepartmentType.UPDATE_DEPARTMENT;
+            _opDepartmentType = OpDepartmentType.UPDATE_DEPARTMENT;
             UpdateDepartmentControlStatus();
         }
 
@@ -172,34 +165,32 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// </summary>
         private void UpdateDepartmentControlStatus()
         {
-            if (this.opDepartmentType == OpDepartmentType.DETAIL_DEPARTMENT)
+            if (_opDepartmentType == OpDepartmentType.DETAIL_DEPARTMENT)
             {
-                foreach (Control comp in this.groupPanelDepartment.Controls)
+                foreach (Control comp in groupPanelDepartment.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (this.opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
+            else if (_opDepartmentType == OpDepartmentType.NEW_DEPARTMENT)
             {
-                foreach (Control comp in this.groupPanelDepartment.Controls)
+                foreach (Control comp in groupPanelDepartment.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
-            else if (this.opDepartmentType == OpDepartmentType.UPDATE_DEPARTMENT)
+            else if (_opDepartmentType == OpDepartmentType.UPDATE_DEPARTMENT)
             {
-                foreach (Control comp in this.groupPanelDepartment.Controls)
+                foreach (Control comp in groupPanelDepartment.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.departmentCodeTextBox.ReadOnly = true;
+                departmentCodeTextBox.ReadOnly = true;
             }
 
-            ControlUtil.SetComponetEditable(this.tbPManager, false);
-            ControlUtil.SetComponetEditable(this.tbAssistant, false);
+            ControlUtil.SetComponetEditable(tbPManager, false);
+            ControlUtil.SetComponetEditable(tbAssistant, false);
         }
-
-		#endregion?Methods?
     }
 }

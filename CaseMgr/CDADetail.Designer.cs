@@ -106,9 +106,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 components.Dispose();
             }
 
-            if (this.context != null)
+            if (this._context != null)
             {
-                this.context.Dispose();
+                this._context.Dispose();
             }
 
             base.Dispose(disposing);
@@ -1221,7 +1221,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbIsRecoarse.Size = new System.Drawing.Size(101, 16);
             this.cbIsRecoarse.TabIndex = 6;
             this.cbIsRecoarse.Text = "是否有追索权";
-            this.cbIsRecoarse.CheckedChanged += new System.EventHandler(this.cbIsRecoarse_CheckedChanged);
+            this.cbIsRecoarse.CheckedChanged += new System.EventHandler(this.CbIsRecoarseCheckedChanged);
             // 
             // assignTypeComboBox
             // 
@@ -1288,7 +1288,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbIsCreditCoverRevolving.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsCreditCoverRevolving.TabIndex = 13;
             this.cbIsCreditCoverRevolving.Text = "是否循环额度";
-            this.cbIsCreditCoverRevolving.CheckedChanged += new System.EventHandler(this.cbIsCreditCoverRevolving_CheckedChanged);
+            this.cbIsCreditCoverRevolving.CheckedChanged += new System.EventHandler(this.CbIsCreditCoverRevolvingCheckedChanged);
             // 
             // handFeeTextBox
             // 
@@ -1933,19 +1933,19 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.customValidator8.ErrorMessage = "最低损失门槛不能大于买方信用风险额度";
             this.customValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator8.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator8_ValidateValue);
+            this.customValidator8.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator8ValidateValue);
             // 
             // customValidator1
             // 
             this.customValidator1.ErrorMessage = "必填";
             this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
+            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator1ValidateValue);
             // 
             // customValidator7
             // 
             this.customValidator7.ErrorMessage = "自负额不能大于买方信用风险额度";
             this.customValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator7.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator7_ValidateValue);
+            this.customValidator7.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator7ValidateValue);
             // 
             // requiredFieldValidator2
             // 
@@ -1961,13 +1961,13 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.customValidator10.ErrorMessage = "必填";
             this.customValidator10.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator10.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator10_ValidateValue);
+            this.customValidator10.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator10ValidateValue);
             // 
             // customValidator9
             // 
             this.customValidator9.ErrorMessage = "必填";
             this.customValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator9.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator9_ValidateValue);
+            this.customValidator9.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator9ValidateValue);
             // 
             // compareValidator2
             // 
@@ -1980,19 +1980,19 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.customValidator6.ErrorMessage = "预付款额度有效期限不能超出客户融资额度的有效期限";
             this.customValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator6.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator6_ValidateValue);
+            this.customValidator6.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator6ValidateValue);
             // 
             // customValidator4
             // 
             this.customValidator4.ErrorMessage = "预付款额度不能大于客户的融资额度上限";
             this.customValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator4.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator4_ValidateValue);
+            this.customValidator4.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator4ValidateValue);
             // 
             // customValidator5
             // 
             this.customValidator5.ErrorMessage = "预付款额度不能大于买方风险担保额度";
             this.customValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator5.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator5_ValidateValue);
+            this.customValidator5.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator5ValidateValue);
             // 
             // compareValidator1
             // 
@@ -2005,13 +2005,13 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.customValidator3.ErrorMessage = "买方信用风险额度的有效期限不能超出客户买方信用风险额度的有效期限";
             this.customValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator3.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator3_ValidateValue);
+            this.customValidator3.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator3ValidateValue);
             // 
             // customValidator2
             // 
             this.customValidator2.ErrorMessage = "额度通知书中买方信用风险额度不能大于案子中买方信用风险额度";
             this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator2_ValidateValue);
+            this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator2ValidateValue);
             // 
             // requiredFieldValidator3
             // 

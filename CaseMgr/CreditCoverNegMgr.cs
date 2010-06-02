@@ -4,29 +4,23 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.CaseMgr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-
     public partial class CreditCoverNegMgr : UserControl
     {
-		#region?Fields?(1)?
-
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs;
+        private readonly BindingSource _bs;
 
-		#endregion?Fields?
-
-		#region?Constructors?(1)?
 
         /// <summary>
         /// 
@@ -34,58 +28,43 @@ namespace CMBC.EasyFactor.CaseMgr
         public CreditCoverNegMgr()
         {
             InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.dgvCreditCoverNegs.AutoGenerateColumns = false;
-            this.bs = new BindingSource();
-            this.dgvCreditCoverNegs.DataSource = this.bs;
-            ControlUtil.SetDoubleBuffered(this.dgvCreditCoverNegs);
-            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
+            ImeMode = ImeMode.OnHalf;
+            dgvCreditCoverNegs.AutoGenerateColumns = false;
+            _bs = new BindingSource();
+            dgvCreditCoverNegs.DataSource = _bs;
+            ControlUtil.SetDoubleBuffered(dgvCreditCoverNegs);
+            ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
-            this.cbTransactionType.Items.Insert(0, "全部");
-            this.cbTransactionType.Text = "全部";
+            cbTransactionType.Items.Insert(0, "全部");
+            cbTransactionType.Text = @"全部";
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location() { LocationCode = "00", LocationName = "全部" });
-            this.cbLocation.DataSource = allLocations;
-            this.cbLocation.DisplayMember = "LocationName";
-            this.cbLocation.ValueMember = "LocationCode";
-            this.cbLocation.SelectedIndex = 0;
+            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            cbLocation.DataSource = allLocations;
+            cbLocation.DisplayMember = "LocationName";
+            cbLocation.ValueMember = "LocationCode";
+            cbLocation.SelectedIndex = 0;
 
             List<Currency> currencyList = Currency.AllCurrencies;
-            currencyList.Insert(0, new Currency() { CurrencyCode = "AAA", CurrencyName = "All" });
-            this.cbCurrency.DataSource = currencyList;
-            this.cbCurrency.DisplayMember = "CurrencyFormat";
-            this.cbCurrency.ValueMember = "CurrencyCode";
+            currencyList.Insert(0, new Currency {CurrencyCode = "AAA", CurrencyName = "All"});
+            cbCurrency.DataSource = currencyList;
+            cbCurrency.DisplayMember = "CurrencyFormat";
+            cbCurrency.ValueMember = "CurrencyCode";
         }
 
-		#endregion?Constructors?
-
-		#region?Properties?(2)?
 
         /// <summary>
         /// Gets or sets owner form
         /// </summary>
-        public Form OwnerForm
-        {
-            get;
-            set;
-        }
+        public Form OwnerForm { get; set; }
 
         /// <summary>
         /// Gets or sets selected Client
         /// </summary>
-        public CreditCoverNegotiation Selected
-        {
-            get;
-            set;
-        }
+        public CreditCoverNegotiation Selected { get; set; }
 
-		#endregion?Properties?
 
-		#region?Methods?(8)?
-
-		//?Private?Methods?(8)?
-
+        //?Private?Methods?(8)?
         /// <summary>
         /// Event handler when cell double clicked
         /// </summary>
@@ -93,13 +72,13 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e">Event Args</param>
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.OwnerForm == null)
+            if (OwnerForm == null)
             {
-                this.DetailCreditCoverNeg(sender, e);
+                DetailCreditCoverNeg(sender, e);
             }
             else
             {
-                this.SelectCreditCoverNeg(sender, e);
+                SelectCreditCoverNeg(sender, e);
             }
         }
 
@@ -108,15 +87,16 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DetailCreditCoverNeg(object sender, DataGridViewCellEventArgs e)
+        private void DetailCreditCoverNeg(object sender, EventArgs e)
         {
-            if (this.dgvCreditCoverNegs.CurrentCell == null)
+            if (dgvCreditCoverNegs.CurrentCell == null)
             {
                 return;
             }
 
-            CreditCoverNegotiation selectedCreditCoverNeg = (CreditCoverNegotiation)this.bs.List[this.dgvCreditCoverNegs.CurrentCell.RowIndex];
-            CaseDetail caseDetail = new CaseDetail(selectedCreditCoverNeg, CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
+            var selectedCreditCoverNeg = (CreditCoverNegotiation) _bs.List[dgvCreditCoverNegs.CurrentCell.RowIndex];
+            var caseDetail = new CaseDetail(selectedCreditCoverNeg,
+                                            CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
             caseDetail.ShowDialog(this);
         }
 
@@ -125,10 +105,14 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvCreditCoverNegs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DgvCreditCoverNegsRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvCreditCoverNegs.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvCreditCoverNegs.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvCreditCoverNegs.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            var rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
+                                          dgvCreditCoverNegs.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                                  dgvCreditCoverNegs.RowHeadersDefaultCellStyle.Font, rectangle,
+                                  dgvCreditCoverNegs.RowHeadersDefaultCellStyle.ForeColor,
+                                  TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -138,12 +122,12 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void ExportCreditCoverNeg(object sender, EventArgs e)
         {
-            if (this.dgvCreditCoverNegs.SelectedCells.Count == 0)
+            if (dgvCreditCoverNegs.SelectedCells.Count == 0)
             {
                 return;
             }
 
-            ExportForm form = new ExportForm(ExportForm.ExportType.EXPORT_CREDIT_COVER_NEG, GetSelectedCreditCoverNegs());
+            var form = new ExportForm(ExportForm.ExportType.EXPORT_CREDIT_COVER_NEG, GetSelectedCreditCoverNegs());
             form.Show();
         }
 
@@ -153,10 +137,10 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <returns></returns>
         private List<CreditCoverNegotiation> GetSelectedCreditCoverNegs()
         {
-            List<CreditCoverNegotiation> selectedCreditCoverNegs = new List<CreditCoverNegotiation>();
-            foreach (DataGridViewCell cell in this.dgvCreditCoverNegs.SelectedCells)
+            var selectedCreditCoverNegs = new List<CreditCoverNegotiation>();
+            foreach (DataGridViewCell cell in dgvCreditCoverNegs.SelectedCells)
             {
-                CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)this.bs.List[cell.RowIndex];
+                var creditCoverNeg = (CreditCoverNegotiation) _bs.List[cell.RowIndex];
                 if (!selectedCreditCoverNegs.Contains(creditCoverNeg))
                 {
                     selectedCreditCoverNegs.Add(creditCoverNeg);
@@ -173,34 +157,64 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Query(object sender, EventArgs e)
         {
-            DateTime beginDate = String.IsNullOrEmpty(this.diBegin.Text) ? this.diBegin.MinDate : this.diBegin.Value;
-            DateTime endDate = String.IsNullOrEmpty(this.diEnd.Text) ? this.diEnd.MinDate : this.diEnd.Value;
-            string sellerFactorCode = this.tbSellerFactorCode.Text;
-            string buyerFactorCode = this.tbBuyerFactorCode.Text;
-            string createUserName = this.tbCreateUserName.Text;
-            string location = this.cbLocation.Text;
+            DateTime beginDate = String.IsNullOrEmpty(diBegin.Text) ? diBegin.MinDate : diBegin.Value;
+            DateTime endDate = String.IsNullOrEmpty(diEnd.Text) ? diEnd.MinDate : diEnd.Value;
+            string sellerFactorCode = tbSellerFactorCode.Text;
+            string buyerFactorCode = tbBuyerFactorCode.Text;
+            string createUserName = tbCreateUserName.Text;
+            string location = cbLocation.Text;
 
-            DBDataContext context = new DBDataContext();
+            var context = new DBDataContext();
 
-            var queryResult = from neg in context.CreditCoverNegotiations
-                              let c = neg.Case
-                              where
-                               (location == "全部" ? true : c.OwnerDepartment.LocationCode == location)
-                               && (this.cbTransactionType.Text == "全部" ? true : c.TransactionType == (this.cbTransactionType.Text))
-                               && ((string)this.cbCurrency.SelectedValue == "AAA" ? true : c.InvoiceCurrency == (string)this.cbCurrency.SelectedValue)
-                               && (beginDate != this.diBegin.MinDate ? c.CaseAppDate >= beginDate : true)
-                               && (endDate != this.diEnd.MinDate ? c.CaseAppDate <= endDate : true)
-                               && c.CaseCode.Contains(this.tbCaseCode.Text)
-                               && (this.cbIsCDA.Checked == false ? true : c.CDAs.Any(cda => cda.CDAStatus == CDAStr.CHECKED))
-                               && (this.cbIsContractSigned.Checked == false ? true : c.SellerClient.Contracts.Any(con => con.ContractStatus == CONTRACT.AVAILABILITY))
-                               && (c.BuyerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.BuyerClient.ClientNameEN.Contains(this.tbClientName.Text)
-                                || c.SellerClient.ClientNameCN.Contains(this.tbClientName.Text) || c.SellerClient.ClientNameEN.Contains(this.tbClientName.Text)
-                               && neg.Case.SellerFactorCode.Contains(sellerFactorCode) && neg.Case.BuyerFactorCode.Contains(buyerFactorCode))
-                               && neg.CreateUserName.Contains(createUserName)
-                              select neg;
+            IQueryable<CreditCoverNegotiation> queryResult = from neg in context.CreditCoverNegotiations
+                                                             let c = neg.Case
+                                                             where
+                                                                 (location == "全部"
+                                                                      ? true
+                                                                      : c.OwnerDepartment.LocationCode == location)
+                                                                 &&
+                                                                 (cbTransactionType.Text == @"全部"
+                                                                      ? true
+                                                                      : c.TransactionType == (cbTransactionType.Text))
+                                                                 &&
+                                                                 ((string) cbCurrency.SelectedValue == "AAA"
+                                                                      ? true
+                                                                      : c.InvoiceCurrency ==
+                                                                        (string) cbCurrency.SelectedValue)
+                                                                 &&
+                                                                 (beginDate != diBegin.MinDate
+                                                                      ? c.CaseAppDate >= beginDate
+                                                                      : true)
+                                                                 &&
+                                                                 (endDate != diEnd.MinDate
+                                                                      ? c.CaseAppDate <= endDate
+                                                                      : true)
+                                                                 && c.CaseCode.Contains(tbCaseCode.Text)
+                                                                 &&
+                                                                 (cbIsCDA.Checked == false
+                                                                      ? true
+                                                                      : c.CDAs.Any(
+                                                                          cda => cda.CDAStatus == CDAStr.CHECKED))
+                                                                 &&
+                                                                 (cbIsContractSigned.Checked == false
+                                                                      ? true
+                                                                      : c.SellerClient.Contracts.Any(
+                                                                          con =>
+                                                                          con.ContractStatus == CONTRACT.AVAILABILITY))
+                                                                 &&
+                                                                 (c.BuyerClient.ClientNameCN.Contains(tbClientName.Text) ||
+                                                                  c.BuyerClient.ClientNameEN.Contains(tbClientName.Text)
+                                                                  ||
+                                                                  c.SellerClient.ClientNameCN.Contains(tbClientName.Text) ||
+                                                                  c.SellerClient.ClientNameEN.Contains(tbClientName.Text)
+                                                                  &&
+                                                                  neg.Case.SellerFactorCode.Contains(sellerFactorCode) &&
+                                                                  neg.Case.BuyerFactorCode.Contains(buyerFactorCode))
+                                                                 && neg.CreateUserName.Contains(createUserName)
+                                                             select neg;
 
-            this.bs.DataSource = queryResult;
-            this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            _bs.DataSource = queryResult;
+            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
         /// <summary>
@@ -210,17 +224,17 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Reset(object sender, EventArgs e)
         {
-            this.cbTransactionType.SelectedIndex = 0;
-            this.cbCurrency.SelectedIndex = 0;
-            this.tbCaseCode.Text = string.Empty;
-            this.tbClientName.Text = string.Empty;
-            this.diBegin.Value = default(DateTime);
-            this.diEnd.Value = default(DateTime);
-            this.cbIsContractSigned.Checked = true;
-            this.cbIsCDA.Checked = true;
-            this.tbBuyerFactorCode.Text = string.Empty;
-            this.tbSellerFactorCode.Text = string.Empty;
-            this.tbCreateUserName.Text = string.Empty;
+            cbTransactionType.SelectedIndex = 0;
+            cbCurrency.SelectedIndex = 0;
+            tbCaseCode.Text = string.Empty;
+            tbClientName.Text = string.Empty;
+            diBegin.Value = default(DateTime);
+            diEnd.Value = default(DateTime);
+            cbIsContractSigned.Checked = true;
+            cbIsCDA.Checked = true;
+            tbBuyerFactorCode.Text = string.Empty;
+            tbSellerFactorCode.Text = string.Empty;
+            tbCreateUserName.Text = string.Empty;
         }
 
         /// <summary>
@@ -228,23 +242,20 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectCreditCoverNeg(object sender, DataGridViewCellEventArgs e)
+        private void SelectCreditCoverNeg(object sender, EventArgs e)
         {
-            if (this.dgvCreditCoverNegs.CurrentCell == null)
+            if (dgvCreditCoverNegs.CurrentCell == null)
             {
                 return;
             }
 
-            CreditCoverNegotiation selectedCreditCoverNeg = (CreditCoverNegotiation)this.bs.List[this.dgvCreditCoverNegs.CurrentCell.RowIndex];
-            this.Selected = selectedCreditCoverNeg;
-            if (this.OwnerForm != null)
+            var selectedCreditCoverNeg = (CreditCoverNegotiation) _bs.List[dgvCreditCoverNegs.CurrentCell.RowIndex];
+            Selected = selectedCreditCoverNeg;
+            if (OwnerForm != null)
             {
-                this.OwnerForm.DialogResult = DialogResult.Yes;
-                this.OwnerForm.Close();
+                OwnerForm.DialogResult = DialogResult.Yes;
+                OwnerForm.Close();
             }
-
         }
-
-		#endregion?Methods?
     }
 }

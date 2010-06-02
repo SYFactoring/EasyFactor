@@ -4,22 +4,19 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
     public partial class Case
     {
-		#region?Fields?(11)?
-
         private CDA _activeCDA;
         private double? _assginOutstanding;
         private double? _assignAmountByDate;
@@ -32,9 +29,6 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _totalAssignOutstanding;
         private double? _valuedAssignOutstanding;
 
-		#endregion?Fields?
-
-		#region?Properties?(22)?
 
         /// <summary>
         /// Gets 
@@ -45,13 +39,13 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_activeCDA == null)
                 {
-                    IList<CDA> cdaList = this.CDAs.Where(c => c.CDAStatus == CDAStr.CHECKED).ToList();
+                    IList<CDA> cdaList = CDAs.Where(c => c.CDAStatus == CDAStr.CHECKED).ToList();
                     if (cdaList.Count > 1)
                     {
-                        MessageBoxEx.Show("包含多个有效的CDA，案件编号: " + this.CaseCode, MESSAGE.TITLE_WARNING);
+                        MessageBoxEx.Show("包含多个有效的CDA，案件编号: " + CaseCode, MESSAGE.TITLE_WARNING);
                         return null;
                     }
-                    else if (cdaList.Count == 1)
+                    if (cdaList.Count == 1)
                     {
                         _activeCDA = cdaList[0];
                     }
@@ -74,14 +68,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_assignAmountByDate.HasValue == false)
                 {
-                    double result = 0;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceAssignBatch> batches = this.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate );
-                    foreach (InvoiceAssignBatch batch in batches)
-                    {
-                        result += batch.AssignAmount;
-                    }
+                    IEnumerable<InvoiceAssignBatch> batches =
+                        InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
+                    double result = batches.Sum(batch => batch.AssignAmount);
 
                     _assignAmountByDate = result;
                 }
@@ -99,17 +90,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_assginOutstanding.HasValue == false)
                 {
-                    double total = 0;
-                    foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
-                    {
-                        //if (assignBatch.CheckStatus == BATCH.CHECK)
-                        //{
-                            foreach (Invoice invoice in assignBatch.Invoices)
-                            {
-                                total += invoice.AssignOutstanding;
-                            }
-                        //}
-                    }
+                    double total = InvoiceAssignBatches.SelectMany(assignBatch => assignBatch.Invoices).Sum(invoice => invoice.AssignOutstanding);
 
                     _assginOutstanding = total;
                 }
@@ -125,15 +106,13 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                CDA activeCDA = this.ActiveCDA;
+                CDA activeCDA = ActiveCDA;
                 if (activeCDA == null)
                 {
-                    return this.ValuedAssignOutstanding * 0.8;
+                    return ValuedAssignOutstanding*0.8;
                 }
-                else
-                {
-                    return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(), this.ValuedAssignOutstanding * activeCDA.FinanceProportion ?? 0.8);
-                }
+                return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(),
+                                ValuedAssignOutstanding*activeCDA.FinanceProportion ?? 0.8);
             }
         }
 
@@ -155,7 +134,6 @@ namespace CMBC.EasyFactor.DB.dbml
                     default:
                         return null;
                 }
-
             }
         }
 
@@ -172,22 +150,20 @@ namespace CMBC.EasyFactor.DB.dbml
                     int count = 0;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceAssignBatch> batches = this.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate );
+                    IEnumerable<InvoiceAssignBatch> batches =
+                        InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
 
                     foreach (InvoiceAssignBatch batch in batches)
                     {
                         count += batch.BatchCount;
-                        foreach (Invoice invoice in batch.Invoices)
-                        {
-                            result += invoice.Commission.GetValueOrDefault();
-                        }
+                        result = batch.Invoices.Sum(invoice => invoice.Commission.GetValueOrDefault());
                     }
 
-                    CDA cda = this.ActiveCDA;
+                    CDA cda = ActiveCDA;
                     double handFreeIncome = 0;
                     if (cda != null)
                     {
-                        handFreeIncome = count * cda.HandFee.GetValueOrDefault();
+                        handFreeIncome = count*cda.HandFee.GetValueOrDefault();
                     }
 
                     _commissionIncomeByDate = result + handFreeIncome;
@@ -204,15 +180,8 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                CDA cda = this.ActiveCDA;
-                if (cda != null)
-                {
-                    return cda.CreditCoverOutstanding;
-                }
-                else
-                {
-                    return null;
-                }
+                CDA cda = ActiveCDA;
+                return cda != null ? cda.CreditCoverOutstanding : null;
             }
         }
 
@@ -221,17 +190,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public Factor Factor
         {
-            get
-            {
-                if ("国内卖方保理".Equals(this.TransactionType) || "出口保理".Equals(this.TransactionType))
-                {
-                    return this.BuyerFactor;
-                }
-                else
-                {
-                    return this.SellerFactor;
-                }
-            }
+            get { return "国内卖方保理".Equals(TransactionType) || "出口保理".Equals(TransactionType) ? BuyerFactor : SellerFactor; }
         }
 
         /// <summary>
@@ -246,13 +205,15 @@ namespace CMBC.EasyFactor.DB.dbml
                     double result = 0;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate );
+                    IEnumerable<InvoiceFinanceBatch> batches =
+                        InvoiceFinanceBatches.Where(
+                            i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
                     foreach (InvoiceFinanceBatch batch in batches)
                     {
                         double finance = batch.FinanceAmount;
-                        if (batch.BatchCurrency != this.InvoiceCurrency)
+                        if (batch.BatchCurrency != InvoiceCurrency)
                         {
-                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, this.InvoiceCurrency);
+                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, InvoiceCurrency);
                             finance *= rate;
                         }
                         result += finance;
@@ -272,15 +233,8 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                CDA cda = this.ActiveCDA;
-                if (cda != null)
-                {
-                    return cda.FinanceLineOutstanding;
-                }
-                else
-                {
-                    return null;
-                }
+                CDA cda = ActiveCDA;
+                return cda != null ? cda.FinanceLineOutstanding : null;
             }
         }
 
@@ -294,23 +248,23 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (_financeOutstanding.HasValue == false)
                 {
                     double? total = null;
-                    foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
+                    foreach (InvoiceAssignBatch assignBatch in InvoiceAssignBatches)
                     {
                         //if (assignBatch.CheckStatus == BATCH.CHECK)
                         //{
-                            foreach (Invoice invoice in assignBatch.Invoices)
+                        foreach (Invoice invoice in assignBatch.Invoices)
+                        {
+                            if (invoice.FinanceOutstanding.HasValue)
                             {
-                                if (invoice.FinanceOutstanding.HasValue)
+                                if (total == null)
                                 {
-                                    if (total == null)
-                                    {
-                                        total = 0;
-                                    }
-
-                                    double financeOutstanding = invoice.FinanceOutstanding.Value;
-                                    total += financeOutstanding;
+                                    total = 0;
                                 }
+
+                                double financeOutstanding = invoice.FinanceOutstanding.Value;
+                                total += financeOutstanding;
                             }
+                        }
                         //}
                     }
 
@@ -325,14 +279,28 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                CDA cda = this.ActiveCDA;
-                if (cda != null)
+                CDA cda = ActiveCDA;
+                return cda != null ? cda.FinanceProportion : null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Client GuaranteeDepositClient
+        {
+            get
+            {
+                switch (TransactionType)
                 {
-                    return cda.FinanceProportion;
-                }
-                else
-                {
-                    return null;
+                    case "国内卖方保理":
+                    case "出口保理":
+                        return SellerClient;
+                    case "国内买方保理":
+                    case "进口保理":
+                        return BuyerClient;
+                    default:
+                        return null;
                 }
             }
         }
@@ -349,7 +317,9 @@ namespace CMBC.EasyFactor.DB.dbml
                     double? result = null;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate );
+                    IEnumerable<InvoiceFinanceBatch> batches =
+                        InvoiceFinanceBatches.Where(
+                            i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
                     foreach (InvoiceFinanceBatch batch in batches)
                     {
                         if (batch.FinanceType == "卖方代付" || batch.FinanceType == "买方代付")
@@ -379,7 +349,9 @@ namespace CMBC.EasyFactor.DB.dbml
                     double? result = null;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceFinanceBatch> batches = this.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate) ;
+                    IEnumerable<InvoiceFinanceBatch> batches =
+                        InvoiceFinanceBatches.Where(
+                            i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
                     foreach (InvoiceFinanceBatch batch in batches)
                     {
                         if (batch.FinanceType != "卖方代付" && batch.FinanceType != "买方代付")
@@ -409,14 +381,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_paymentAmountByDate.HasValue == false)
                 {
-                    double result = 0;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoicePaymentBatch> batches = this.InvoicePaymentBatches.Where(i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate);
-                    foreach (InvoicePaymentBatch batch in batches)
-                    {
-                        result += batch.PaymentAmount;
-                    }
+                    IEnumerable<InvoicePaymentBatch> batches =
+                        InvoicePaymentBatches.Where(i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate);
+                    double result = batches.Sum(batch => batch.PaymentAmount);
 
                     _paymentAmountByDate = result;
                 }
@@ -428,20 +397,12 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public DateTime QueryDateFrom
-        {
-            get;
-            set;
-        }
+        public DateTime QueryDateFrom { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime QueryDateTo
-        {
-            get;
-            set;
-        }
+        public DateTime QueryDateTo { get; set; }
 
         /// <summary>
         /// 
@@ -454,31 +415,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     case "国内卖方保理":
                     case "出口保理":
-                        return this.BuyerClient;
+                        return BuyerClient;
                     case "国内买方保理":
                     case "进口保理":
-                        return this.SellerClient;
-                    default:
-                        return null;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Client GuaranteeDepositClient
-        {
-            get
-            {
-                switch (TransactionType)
-                {
-                    case "国内卖方保理":
-                    case "出口保理":
-                        return this.SellerClient;
-                    case "国内买方保理":
-                    case "进口保理":
-                        return this.BuyerClient;
+                        return SellerClient;
                     default:
                         return null;
                 }
@@ -494,7 +434,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_totalAssignOutstanding.HasValue == false)
                 {
-                    _totalAssignOutstanding = this.SellerClient.GetAssignOutstandingAsSeller(this.TransactionType, this.InvoiceCurrency);
+                    _totalAssignOutstanding = SellerClient.GetAssignOutstandingAsSeller(TransactionType, InvoiceCurrency);
                 }
 
                 return _totalAssignOutstanding.Value;
@@ -508,14 +448,14 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                switch (this.TransactionType)
+                switch (TransactionType)
                 {
                     case "国内卖方保理":
                     case "出口保理":
-                        return this.SellerClient.GetFinanceOutstanding(this.InvoiceCurrency).GetValueOrDefault();
+                        return SellerClient.GetFinanceOutstanding(InvoiceCurrency).GetValueOrDefault();
                     case "国内买方保理":
                     case "进口保理":
-                        return this.BuyerClient.GetFinanceOutstanding(this.InvoiceCurrency).GetValueOrDefault();
+                        return BuyerClient.GetFinanceOutstanding(InvoiceCurrency).GetValueOrDefault();
                     default:
                         return 0;
                 }
@@ -529,7 +469,8 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return this.CommissionIncomeByDate + this.NetInterestIncomeByDate.GetValueOrDefault() + this.MarginIncomeByDate.GetValueOrDefault();
+                return CommissionIncomeByDate + NetInterestIncomeByDate.GetValueOrDefault() +
+                       MarginIncomeByDate.GetValueOrDefault();
             }
         }
 
@@ -542,22 +483,10 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_valuedAssignOutstanding.HasValue == false)
                 {
-                    double total = 0;
-                    foreach (InvoiceAssignBatch assignBatch in this.InvoiceAssignBatches)
-                    {
-                        //if (assignBatch.CheckStatus == BATCH.CHECK)
-                        //{
-                            foreach (Invoice invoice in assignBatch.Invoices)
-                            {
-                                if (invoice.IsDispute.GetValueOrDefault() || invoice.IsFlaw || DateTime.Today > invoice.DueDate)
-                                {
-                                    continue;
-                                }
-
-                                total += invoice.AssignOutstanding;
-                            }
-                        //}
-                    }
+                    double total = (from assignBatch in InvoiceAssignBatches
+                                    from invoice in assignBatch.Invoices
+                                    where (!invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw) && DateTime.Today <= invoice.DueDate
+                                    select invoice.AssignOutstanding).Sum();
 
                     _valuedAssignOutstanding = total;
                 }
@@ -566,51 +495,40 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-		#endregion?Properties?
-
-		#region?Methods?(2)?
-
-		//?Public?Methods?(2)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public List<Invoice> GetInvoices()
-        {
-            List<Invoice> result = new List<Invoice>();
-            foreach (InvoiceAssignBatch batch in this.InvoiceAssignBatches)
-            {
-                result.AddRange(batch.Invoices);
-            }
-
-            return result;
-        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="transactionType"></param>
+        /// <param name="locationCode"></param>
         /// <param name="appDate"></param>
         /// <returns></returns>
         public static string GenerateCaseCode(string transactionType, string locationCode, DateTime appDate)
         {
-            DBDataContext context = new DBDataContext();
+            var context = new DBDataContext();
             string year = String.Format("{0:yy}", appDate);
-            string typeCode = null;
+            string typeCode;
             switch (transactionType)
             {
-                case "出口保理": typeCode = "EX"; break;
-                case "进口保理": typeCode = "IM"; break;
-                case "国内卖方保理": typeCode = "SE"; break;
-                case "国内买方保理": typeCode = "BY"; break;
+                case "出口保理":
+                    typeCode = "EX";
+                    break;
+                case "进口保理":
+                    typeCode = "IM";
+                    break;
+                case "国内卖方保理":
+                    typeCode = "SE";
+                    break;
+                case "国内买方保理":
+                    typeCode = "BY";
+                    break;
                 default:
                     typeCode = "  ";
                     break;
             }
 
             string prefix = String.Format("69{0}{1}{2}", locationCode, typeCode, year);
-            int count = 0;
+            int count;
             IEnumerable<string> queryResult = from c in context.Cases
                                               where c.CaseCode.StartsWith(prefix)
                                               select c.CaseCode;
@@ -626,27 +544,37 @@ namespace CMBC.EasyFactor.DB.dbml
         /// 
         /// </summary>
         /// <param name="transactionType"></param>
+        /// <param name="locationCode"></param>
         /// <param name="appDate"></param>
         /// <param name="casesInMemory"></param>
         /// <returns></returns>
-        public static string GenerateCaseCode(string transactionType, string locationCode, DateTime appDate, List<Case> casesInMemory)
+        public static string GenerateCaseCode(string transactionType, string locationCode, DateTime appDate,
+                                              List<Case> casesInMemory)
         {
-            DBDataContext context = new DBDataContext();
+            var context = new DBDataContext();
             string year = String.Format("{0:yy}", appDate);
-            string typeCode = null;
+            string typeCode;
             switch (transactionType)
             {
-                case "出口保理": typeCode = "EX"; break;
-                case "进口保理": typeCode = "IM"; break;
-                case "国内卖方保理": typeCode = "SE"; break;
-                case "国内买方保理": typeCode = "BY"; break;
+                case "出口保理":
+                    typeCode = "EX";
+                    break;
+                case "进口保理":
+                    typeCode = "IM";
+                    break;
+                case "国内卖方保理":
+                    typeCode = "SE";
+                    break;
+                case "国内买方保理":
+                    typeCode = "BY";
+                    break;
                 default:
                     typeCode = "  ";
                     break;
             }
 
             string prefix = String.Format("69{0}{1}{2}", locationCode, typeCode, year);
-            int count = 0;
+            int count;
             IEnumerable<string> queryResult = from c in context.Cases
                                               where c.CaseCode.StartsWith(prefix)
                                               select c.CaseCode;
@@ -660,6 +588,20 @@ namespace CMBC.EasyFactor.DB.dbml
             return caseCode;
         }
 
-		#endregion?Methods?
+        //?Public?Methods?(2)?
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<Invoice> GetInvoices()
+        {
+            var result = new List<Invoice>();
+            foreach (InvoiceAssignBatch batch in InvoiceAssignBatches)
+            {
+                result.AddRange(batch.Invoices);
+            }
+
+            return result;
+        }
     }
 }

@@ -4,17 +4,17 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Windows.Forms;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.Utils
 {
-    using System.Windows.Forms;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class QueryForm : DevComponents.DotNetBar.Office2007Form
+    public sealed partial class QueryForm : Office2007Form
     {
-		#region?Constructors?(1)?
-
         /// <summary>
         /// Initializes a new instance of the QueryForm class.
         /// </summary>
@@ -27,14 +27,12 @@ namespace CMBC.EasyFactor.Utils
                 return;
             }
 
-            this.InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.Text = title;
+            InitializeComponent();
+            ImeMode = ImeMode.OnHalf;
+            Text = title;
             userControl.Dock = DockStyle.Fill;
-            this.panelRoot.Controls.Clear();
-            this.panelRoot.Controls.Add(userControl);
+            panelRoot.Controls.Clear();
+            panelRoot.Controls.Add(userControl);
         }
-
-		#endregion?Constructors?
     }
 }

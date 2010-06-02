@@ -64,9 +64,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             }
 
 
-            if (this.context != null)
+            if (this._context != null)
             {
-                this.context.Dispose();
+                this._context.Dispose();
             }
 
             base.Dispose(disposing);

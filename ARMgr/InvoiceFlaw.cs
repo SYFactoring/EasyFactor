@@ -1,72 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
 
 namespace CMBC.EasyFactor.ARMgr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class InvoiceFlaw : DevComponents.DotNetBar.Office2007Form
+    public partial class InvoiceFlaw : Office2007Form
     {
-        #region?Fields?(2)?
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bs;
 
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs;
+        private readonly DBDataContext _context;
+
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context;
-
-        #endregion?Fields?
-
-        #region?Constructors?(2)?
-
-        public InvoiceFlaw(List<Invoice> invoiceList, bool isFlaw)
+        /// <param name="invoiceList"></param>
+        /// <param name="isFlaw"></param>
+        public InvoiceFlaw(IEnumerable<Invoice> invoiceList, bool isFlaw)
             : this(invoiceList)
         {
-            this.isFlawCheckBox.Checked = isFlaw;
+            isFlawCheckBox.Checked = isFlaw;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="invoiceList"></param>
-        public InvoiceFlaw(List<Invoice> invoiceList)
+        public InvoiceFlaw(IEnumerable<Invoice> invoiceList)
         {
-            this.InitializeComponent();
-            this.context = new DBDataContext();
-            this.ImeMode = ImeMode.OnHalf;
-            this.dgvInvoices.AutoGenerateColumns = false;
-            this.bs = new BindingSource();
-            this.dgvInvoices.DataSource = bs;
+            InitializeComponent();
+            _context = new DBDataContext();
+            ImeMode = ImeMode.OnHalf;
+            dgvInvoices.AutoGenerateColumns = false;
+            _bs = new BindingSource();
+            dgvInvoices.DataSource = _bs;
 
-            this.flawReasonCheckedListBox.DataSource = FlawReason.AllFlawReasons;
-            this.flawReasonCheckedListBox.DisplayMember = "Reason";
-            this.flawReasonCheckedListBox.ValueMember = "Index";
+            flawReasonCheckedListBox.DataSource = FlawReason.AllFlawReasons;
+            flawReasonCheckedListBox.DisplayMember = "Reason";
+            flawReasonCheckedListBox.ValueMember = "Index";
 
-            List<Invoice> list = new List<Invoice>();
-            foreach (Invoice invoice in invoiceList)
-            {
-                list.Add(context.Invoices.SingleOrDefault(i => i.InvoiceID == invoice.InvoiceID));
-            }
+            var list = invoiceList.Select(invoice => _context.Invoices.SingleOrDefault(i => i.InvoiceID == invoice.InvoiceID)).ToList();
 
-            bs.DataSource = list;
+            _bs.DataSource = list;
         }
 
-        #endregion?Constructors?
-
-        #region?Methods?(3)?
 
         //?Private?Methods?(3)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -74,7 +65,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void CloseFlaw(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -84,14 +75,14 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ResolveFlaw(object sender, EventArgs e)
         {
-            this.flawResolveDateDateTimePicker.Value = DateTime.Now.Date;
-            this.flawResolveUserNameTextBox.Text = App.Current.CurUser.Name;
-            this.tbFlawResolveReason.Enabled = true;
-            this.flawResolveDateDateTimePicker.Enabled = true;
-            this.flawResolveUserNameTextBox.Enabled = true;
-            this.isFlawCheckBox.Checked = false;
+            flawResolveDateDateTimePicker.Value = DateTime.Now.Date;
+            flawResolveUserNameTextBox.Text = App.Current.CurUser.Name;
+            tbFlawResolveReason.Enabled = true;
+            flawResolveDateDateTimePicker.Enabled = true;
+            flawResolveUserNameTextBox.Enabled = true;
+            isFlawCheckBox.Checked = false;
 
-            this.tbFlawResolveReason.Text = "全部已解除";
+            tbFlawResolveReason.Text = @"全部已解除";
         }
 
         /// <summary>
@@ -101,35 +92,31 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SaveFlaw(object sender, EventArgs e)
         {
-            string flawReason = string.Empty;
-            foreach (FlawReason item in this.flawReasonCheckedListBox.CheckedItems)
-            {
-                flawReason += (item.Index + ";");
-            }
+            string flawReason = flawReasonCheckedListBox.CheckedItems.Cast<FlawReason>().Aggregate(string.Empty, (current, item) => current + (item.Index + ";"));
 
-            if (this.isFlawCheckBox.Checked && String.IsNullOrEmpty(flawReason))
+            if (isFlawCheckBox.Checked && String.IsNullOrEmpty(flawReason))
             {
                 MessageBoxEx.Show("请选择瑕疵原因", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            foreach (Invoice invoice in this.bs.List)
+            foreach (Invoice invoice in _bs.List)
             {
-                invoice.IsFlaw = this.isFlawCheckBox.Checked;
+                invoice.IsFlaw = isFlawCheckBox.Checked;
                 invoice.FlawReason = flawReason;
-                invoice.FlawOtherReason = this.tbOtherFlawReason.Text;
-                if (this.flawResolveDateDateTimePicker.Value != default(DateTime))
+                invoice.FlawOtherReason = tbOtherFlawReason.Text;
+                if (flawResolveDateDateTimePicker.Value != default(DateTime))
                 {
-                    invoice.FlawResolveReason = this.tbFlawResolveReason.Text;
-                    invoice.FlawResolveDate = this.flawResolveDateDateTimePicker.Value;
-                    invoice.FlawResolveUserName = this.flawResolveUserNameTextBox.Text;
+                    invoice.FlawResolveReason = tbFlawResolveReason.Text;
+                    invoice.FlawResolveDate = flawResolveDateDateTimePicker.Value;
+                    invoice.FlawResolveUserName = flawResolveUserNameTextBox.Text;
                 }
             }
 
             bool isUpdateOK = true;
             try
             {
-                context.SubmitChanges();
+                _context.SubmitChanges();
             }
             catch (Exception e2)
             {
@@ -142,7 +129,5 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
-        #endregion?Methods?
     }
 }

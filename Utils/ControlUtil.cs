@@ -18,14 +18,9 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public static class ControlUtil
     {
-        #region?Constructors?(1)?
 
-        #endregion?Constructors?
-
-        #region?Methods?(4)?
 
         //?Public?Methods?(4)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -175,11 +170,9 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="control"></param>
         public static void SetDoubleBuffered(Control control)
         {
-            typeof(Control).InvokeMember("DoubleBuffered",
+            typeof (Control).InvokeMember("DoubleBuffered",
                                           BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-                                          null, control, new object[] { true }, CultureInfo.CurrentCulture);
+                                          null, control, new object[] {true}, CultureInfo.CurrentCulture);
         }
-
-        #endregion?Methods?
     }
 }

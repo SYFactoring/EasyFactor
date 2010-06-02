@@ -4,84 +4,58 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor.InfoMgr.UserMgr
 {
-    using System;
-    using System.Drawing;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// User Management User Interface
     /// </summary>
     public partial class UserMgr : UserControl
     {
-		#region?Fields?(1)?
-
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bs;
+        private readonly BindingSource _bs;
 
-		#endregion?Fields?
-
-		#region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the UserMgrUI class
         /// </summary>
-        /// <param name="isEditable">true if editable</param>
         public UserMgr()
         {
-            this.InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.bs = new BindingSource();
-            this.dgvUsers.AutoGenerateColumns = false;
-            this.dgvUsers.DataSource = this.bs;
-            ControlUtil.SetDoubleBuffered(this.dgvUsers);
-            ControlUtil.AddEnterListenersForQuery(this.panelQuery.Controls, this.btnQuery);
+            InitializeComponent();
+            ImeMode = ImeMode.OnHalf;
+            _bs = new BindingSource();
+            dgvUsers.AutoGenerateColumns = false;
+            dgvUsers.DataSource = _bs;
+            ControlUtil.SetDoubleBuffered(dgvUsers);
+            ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
-            this.UpdateContextMenu();
+            UpdateContextMenu();
         }
 
-		#endregion?Constructors?
-
-		#region?Properties?(3)?
 
         /// <summary>
         /// 
         /// </summary>
-        private DBDataContext context
-        {
-            get;
-            set;
-        }
+        private DBDataContext Context { get; set; }
 
-        public Form OwnerForm
-        {
-            get;
-            set;
-        }
+        public Form OwnerForm { get; set; }
 
         /// <summary>
         /// Gets or sets selected user
         /// </summary>
-        public User Selected
-        {
-            get;
-            set;
-        }
+        public User Selected { get; set; }
 
-		#endregion?Properties?
 
-		#region?Methods?(8)?
-
-		//?Private?Methods?(8)?
-
+        //?Private?Methods?(8)?
         /// <summary>
         /// Event handler when cell double clicked
         /// </summary>
@@ -89,13 +63,13 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.OwnerForm == null)
+            if (OwnerForm == null)
             {
-                this.DetailUser(sender, e);
+                DetailUser(sender, e);
             }
             else
             {
-                this.SelectUser(sender, e);
+                SelectUser(sender, e);
             }
         }
 
@@ -111,31 +85,28 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 return;
             }
 
-            if (this.dgvUsers.SelectedRows.Count == 0)
+            if (dgvUsers.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            User selectedUser = (User)this.bs.List[this.dgvUsers.SelectedRows[0].Index];
-            if (MessageBoxEx.Show("是否确定删除帐号: " + selectedUser.UserID, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            var selectedUser = (User) _bs.List[dgvUsers.SelectedRows[0].Index];
+            if (
+                MessageBoxEx.Show("是否确定删除帐号: " + selectedUser.UserID, MESSAGE.TITLE_WARNING, MessageBoxButtons.YesNo,
+                                  MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                context.Users.DeleteOnSubmit(selectedUser);
-                bool isDeleteOK = true;
+                Context.Users.DeleteOnSubmit(selectedUser);
                 try
                 {
-                    context.SubmitChanges();
+                    Context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
-                    isDeleteOK = false;
-                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     return;
                 }
-
-                if (isDeleteOK)
-                {
-                    this.dgvUsers.Rows.RemoveAt(this.dgvUsers.SelectedRows[0].Index);
-                }
+                dgvUsers.Rows.RemoveAt(dgvUsers.SelectedRows[0].Index);
             }
         }
 
@@ -151,8 +122,8 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 return;
             }
 
-            User selectedUser = (User)this.bs.List[this.dgvUsers.SelectedRows[0].Index];
-            UserDetail detail = new UserDetail(selectedUser, UserDetail.OpUserType.DETAIL_USER);
+            var selectedUser = (User) _bs.List[dgvUsers.SelectedRows[0].Index];
+            var detail = new UserDetail(selectedUser, UserDetail.OpUserType.DETAIL_USER);
             detail.ShowDialog(this);
         }
 
@@ -161,10 +132,13 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvUsers_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void DgvUsersRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, this.dgvUsers.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), this.dgvUsers.RowHeadersDefaultCellStyle.Font, rectangle, this.dgvUsers.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            var rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgvUsers.RowHeadersWidth - 4,
+                                          e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvUsers.RowHeadersDefaultCellStyle.Font,
+                                  rectangle, dgvUsers.RowHeadersDefaultCellStyle.ForeColor,
+                                  TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         /// <summary>
@@ -179,7 +153,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
                 return;
             }
 
-            UserDetail detail = new UserDetail(null, UserDetail.OpUserType.NEW_USER);
+            var detail = new UserDetail(null, UserDetail.OpUserType.NEW_USER);
             detail.ShowDialog(this);
         }
 
@@ -188,16 +162,16 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// </summary>
         /// <param name="sender">Event Sender</param>
         /// <param name="e">Event Args</param>
-        private void QueryUsers(object sender, System.EventArgs e)
+        private void QueryUsers(object sender, EventArgs e)
         {
-            context = new DBDataContext();
+            Context = new DBDataContext();
             if (!PermUtil.ValidatePermission(Permissions.SYSTEM_UPDATE))
             {
-                context.ObjectTrackingEnabled = false;
+                Context.ObjectTrackingEnabled = false;
             }
 
-            var queryResult = context.Users.Where(u => u.UserID.Contains(tbUserID.Text));
-            bs.DataSource = queryResult;
+            IQueryable<User> queryResult = Context.Users.Where(u => u.UserID.Contains(tbUserID.Text));
+            _bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
@@ -208,17 +182,17 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         /// <param name="e">Event Args</param>
         private void SelectUser(object sender, EventArgs e)
         {
-            if (this.dgvUsers.SelectedRows.Count == 0)
+            if (dgvUsers.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            User selectedUser = (User)this.bs.List[this.dgvUsers.SelectedRows[0].Index];
-            this.Selected = selectedUser;
-            if (this.OwnerForm != null)
+            var selectedUser = (User) _bs.List[dgvUsers.SelectedRows[0].Index];
+            Selected = selectedUser;
+            if (OwnerForm != null)
             {
-                this.OwnerForm.DialogResult = DialogResult.Yes;
-                this.OwnerForm.Close();
+                OwnerForm.DialogResult = DialogResult.Yes;
+                OwnerForm.Close();
             }
         }
 
@@ -229,16 +203,14 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
         {
             if (PermUtil.ValidatePermission(Permissions.SYSTEM_UPDATE))
             {
-                this.menuItemDeleteUser.Enabled = true;
-                this.menuItemNewUser.Enabled = true;
+                menuItemDeleteUser.Enabled = true;
+                menuItemNewUser.Enabled = true;
             }
             else
             {
-                this.menuItemDeleteUser.Enabled = false;
-                this.menuItemNewUser.Enabled = false;
+                menuItemDeleteUser.Enabled = false;
+                menuItemNewUser.Enabled = false;
             }
         }
-
-		#endregion?Methods?
     }
 }
