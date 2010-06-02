@@ -87,6 +87,7 @@ namespace CMBC.EasyFactor
         public MainWindow()
         {
             this.InitializeComponent();
+            
             this.ImeMode = ImeMode.OnHalf;
 
             this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -252,14 +253,14 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckAssignBatch(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-            {
-                AssignBatchMgr batchMgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.CHECK);
-                this.SetDetailPanel(batchMgr);
-            }
-        }
+        //private void CheckAssignBatch(object sender, EventArgs e)
+        //{
+        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+        //    {
+        //        AssignBatchMgr batchMgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.CHECK);
+        //        this.SetDetailPanel(batchMgr);
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -280,70 +281,70 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckFinanceBatch(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-            {
-                FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.CHECK);
-                this.SetDetailPanel(batchMgr);
-            }
-        }
+        //private void CheckFinanceBatch(object sender, EventArgs e)
+        //{
+        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+        //    {
+        //        FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.CHECK);
+        //        this.SetDetailPanel(batchMgr);
+        //    }
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckPaymentBatch(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-            {
-                PaymentBatchMgr batchMgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.CHECK);
-                this.SetDetailPanel(batchMgr);
-            }
-        }
+        //private void CheckPaymentBatch(object sender, EventArgs e)
+        //{
+        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+        //    {
+        //        PaymentBatchMgr batchMgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.CHECK);
+        //        this.SetDetailPanel(batchMgr);
+        //    }
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckPoolFinance(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-            {
-                FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.POOL_CHECK);
-                this.SetDetailPanel(batchMgr);
-            }
-        }
+        //private void CheckPoolFinance(object sender, EventArgs e)
+        //{
+        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+        //    {
+        //        FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.POOL_CHECK);
+        //        this.SetDetailPanel(batchMgr);
+        //    }
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckPoolRefund(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-            {
-                RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_CHECK);
-                this.SetDetailPanel(batchMgr);
-            }
-        }
+        //private void CheckPoolRefund(object sender, EventArgs e)
+        //{
+        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+        //    {
+        //        RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_CHECK);
+        //        this.SetDetailPanel(batchMgr);
+        //    }
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckRefundBatch(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-            {
-                RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
-                this.SetDetailPanel(batchMgr);
-            }
-        }
+        //private void CheckRefundBatch(object sender, EventArgs e)
+        //{
+        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+        //    {
+        //        RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
+        //        this.SetDetailPanel(batchMgr);
+        //    }
+        //}
 
         /// <summary>
         /// 

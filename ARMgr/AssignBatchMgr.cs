@@ -77,7 +77,7 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            CHECK,
+            //CHECK,
 
             /// <summary>
             /// 
@@ -156,12 +156,12 @@ namespace CMBC.EasyFactor.ARMgr
 
             this.UpdateContextMenu();
 
-            if (this.opBatchType == OpBatchType.CHECK)
-            {
-                this.cbCheckStatus.Text = BATCH.UNCHECK;
-                this.QueryBatch(null, null);
-            }
-            else if (this.opBatchType == OpBatchType.REPORT)
+            //if (this.opBatchType == OpBatchType.CHECK)
+            //{
+            //    this.cbCheckStatus.Text = BATCH.UNCHECK;
+            //    this.QueryBatch(null, null);
+            //}
+            if (this.opBatchType == OpBatchType.REPORT)
             {
                 this.dateFrom.Value = DateTime.Now.Date;
                 this.dateTo.Value = DateTime.Now.Date;
@@ -243,51 +243,51 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Check(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_CHECK))
-            {
-                return;
-            }
+        //private void Check(object sender, EventArgs e)
+        //{
+        //    if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_CHECK))
+        //    {
+        //        return;
+        //    }
 
-            if (this.dgvBatches.CurrentCell == null)
-            {
-                return;
-            }
+        //    if (this.dgvBatches.CurrentCell == null)
+        //    {
+        //        return;
+        //    }
 
-            InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
+        //    InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
-            if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
-            {
-                MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+        //    //if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
+        //    //{
+        //    //    MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    //    return;
+        //    //}
 
-            if (MessageBoxEx.Show("是否确认复核通过该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-            {
-                return;
-            }
+        //    if (MessageBoxEx.Show("是否确认复核通过该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+        //    {
+        //        return;
+        //    }
 
-            if (App.Current.CurUser.Name == batch.CreateUserName)
-            {
-                MessageBoxEx.Show("经办人和复核人相同，不可进行复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+        //    if (App.Current.CurUser.Name == batch.CreateUserName)
+        //    {
+        //        MessageBoxEx.Show("经办人和复核人相同，不可进行复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        return;
+        //    }
 
-            batch.CheckStatus = BATCH.CHECK;
-            batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
+        //    //batch.CheckStatus = BATCH.CHECK;
+        //    //batch.CheckUserName = App.Current.CurUser.Name;
+        //    //batch.CheckDate = DateTime.Now.Date;
 
-            try
-            {
-                context.SubmitChanges();
-            }
-            catch (Exception e1)
-            {
-                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-        }
+        //    try
+        //    {
+        //        context.SubmitChanges();
+        //    }
+        //    catch (Exception e1)
+        //    {
+        //        MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -312,11 +312,11 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (selectedBatch.CheckStatus == BATCH.CHECK)
-            {
-                MessageBoxEx.Show("不能删除已复核批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            //if (selectedBatch.CheckStatus == BATCH.CHECK)
+            //{
+            //    MessageBoxEx.Show("不能删除已复核批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return;
+            //}
 
             if (selectedBatch.Invoices.Count > 0)
             {
@@ -535,7 +535,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                           where batch.AssignBatchNo.Contains(this.tbAssignBatchNo.Text)
                                                                 && (beginDate != this.dateFrom.MinDate ? batch.AssignDate >= beginDate : true)
                                                                 && (endDate != this.dateTo.MinDate ? batch.AssignDate <= endDate : true)
-                                                                && (status != string.Empty ? batch.CheckStatus == status : true)
+                                                                //&& (status != string.Empty ? batch.CheckStatus == status : true)
                                                                 && (batch.CreateUserName.Contains(createUserName))
                                                           select batch;
 
@@ -562,11 +562,11 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceAssignBatch batch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
-            if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
-            {
-                MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            //if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
+            //{
+            //    MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return;
+            //}
 
             if (MessageBoxEx.Show("是否确认复核退回该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
@@ -579,9 +579,9 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            batch.CheckStatus = BATCH.REJECT;
-            batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
+            //batch.CheckStatus = BATCH.REJECT;
+            //batch.CheckUserName = App.Current.CurUser.Name;
+            //batch.CheckDate = DateTime.Now.Date;
 
             try
             {
@@ -1148,7 +1148,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row++, 1] = "Discrepancies  □ Yes   □ No";
 
                 sheet.get_Range(sheet.Cells[row, 1], sheet.Cells[row, 4]).MergeCells = true;
-                sheet.Cells[row, 1] = String.Format("运营组： 经办 {0}               复核 {1}              主管{2}", batchGroup.First().CreateUserName, batchGroup.First().CheckUserName, "");
+                sheet.Cells[row, 1] = String.Format("运营组： 经办 {0}               复核 {1}              主管{2}", batchGroup.First().CreateUserName, "", "");
                 sheet.Cells[row + 1, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
                 sheet.get_Range("A1", "A2").RowHeight = 20;

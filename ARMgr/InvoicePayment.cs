@@ -492,11 +492,11 @@ namespace CMBC.EasyFactor.ARMgr
 
             batch.PaymentDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
-            batch.CheckStatus = BATCH.UNCHECK;
+            //batch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from invoice in context.Invoices
-                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.InvoiceAssignBatch.CheckStatus == "ÒÑ¸´ºË" && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION)
+                              where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION)
                               select invoice;
 
             List<InvoicePaymentLog> logs = new List<InvoicePaymentLog>();

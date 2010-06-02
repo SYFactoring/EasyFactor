@@ -8480,14 +8480,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.DateTime _AssignDate;
 		
-		private string _CheckStatus;
-		
-		private string _RejectReason;
-		
-		private string _CheckUserName;
-		
-		private System.Nullable<System.DateTime> _CheckDate;
-		
 		private System.Nullable<bool> _IsCreateMsg;
 		
 		private string _Comment;
@@ -8514,14 +8506,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCaseCodeChanged();
     partial void OnAssignDateChanging(System.DateTime value);
     partial void OnAssignDateChanged();
-    partial void OnCheckStatusChanging(string value);
-    partial void OnCheckStatusChanged();
-    partial void OnRejectReasonChanging(string value);
-    partial void OnRejectReasonChanged();
-    partial void OnCheckUserNameChanging(string value);
-    partial void OnCheckUserNameChanged();
-    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCheckDateChanged();
     partial void OnIsCreateMsgChanging(System.Nullable<bool> value);
     partial void OnIsCreateMsgChanged();
     partial void OnCommentChanging(string value);
@@ -8602,86 +8586,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._AssignDate = value;
 					this.SendPropertyChanged("AssignDate");
 					this.OnAssignDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CheckStatus
-		{
-			get
-			{
-				return this._CheckStatus;
-			}
-			set
-			{
-				if ((this._CheckStatus != value))
-				{
-					this.OnCheckStatusChanging(value);
-					this.SendPropertyChanging();
-					this._CheckStatus = value;
-					this.SendPropertyChanged("CheckStatus");
-					this.OnCheckStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RejectReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string RejectReason
-		{
-			get
-			{
-				return this._RejectReason;
-			}
-			set
-			{
-				if ((this._RejectReason != value))
-				{
-					this.OnRejectReasonChanging(value);
-					this.SendPropertyChanging();
-					this._RejectReason = value;
-					this.SendPropertyChanged("RejectReason");
-					this.OnRejectReasonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CheckUserName
-		{
-			get
-			{
-				return this._CheckUserName;
-			}
-			set
-			{
-				if ((this._CheckUserName != value))
-				{
-					this.OnCheckUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CheckUserName = value;
-					this.SendPropertyChanged("CheckUserName");
-					this.OnCheckUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<System.DateTime> CheckDate
-		{
-			get
-			{
-				return this._CheckDate;
-			}
-			set
-			{
-				if ((this._CheckDate != value))
-				{
-					this.OnCheckDateChanging(value);
-					this.SendPropertyChanging();
-					this._CheckDate = value;
-					this.SendPropertyChanged("CheckDate");
-					this.OnCheckDateChanged();
 				}
 			}
 		}
@@ -8921,14 +8825,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
-		private System.Nullable<System.DateTime> _CheckDate;
-		
-		private string _CheckStatus;
-		
-		private string _RejectReason;
-		
-		private string _CheckUserName;
-		
 		private System.Nullable<double> _OtherIncome;
 		
 		private string _LoanNo;
@@ -8975,14 +8871,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
-    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCheckDateChanged();
-    partial void OnCheckStatusChanging(string value);
-    partial void OnCheckStatusChanged();
-    partial void OnRejectReasonChanging(string value);
-    partial void OnRejectReasonChanged();
-    partial void OnCheckUserNameChanging(string value);
-    partial void OnCheckUserNameChanged();
     partial void OnOtherIncomeChanging(System.Nullable<double> value);
     partial void OnOtherIncomeChanged();
     partial void OnLoanNoChanging(string value);
@@ -9247,86 +9135,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<System.DateTime> CheckDate
-		{
-			get
-			{
-				return this._CheckDate;
-			}
-			set
-			{
-				if ((this._CheckDate != value))
-				{
-					this.OnCheckDateChanging(value);
-					this.SendPropertyChanging();
-					this._CheckDate = value;
-					this.SendPropertyChanged("CheckDate");
-					this.OnCheckDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CheckStatus
-		{
-			get
-			{
-				return this._CheckStatus;
-			}
-			set
-			{
-				if ((this._CheckStatus != value))
-				{
-					this.OnCheckStatusChanging(value);
-					this.SendPropertyChanging();
-					this._CheckStatus = value;
-					this.SendPropertyChanged("CheckStatus");
-					this.OnCheckStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RejectReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string RejectReason
-		{
-			get
-			{
-				return this._RejectReason;
-			}
-			set
-			{
-				if ((this._RejectReason != value))
-				{
-					this.OnRejectReasonChanging(value);
-					this.SendPropertyChanging();
-					this._RejectReason = value;
-					this.SendPropertyChanged("RejectReason");
-					this.OnRejectReasonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CheckUserName
-		{
-			get
-			{
-				return this._CheckUserName;
-			}
-			set
-			{
-				if ((this._CheckUserName != value))
-				{
-					this.OnCheckUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CheckUserName = value;
-					this.SendPropertyChanged("CheckUserName");
-					this.OnCheckUserNameChanged();
 				}
 			}
 		}
@@ -9608,14 +9416,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
-		private string _CheckStatus;
-		
-		private string _RejectReason;
-		
-		private string _CheckUserName;
-		
-		private System.Nullable<System.DateTime> _CheckDate;
-		
 		private System.Nullable<System.DateTime> _InputDate;
 		
 		private System.Nullable<bool> _IsSendMsg;
@@ -9642,14 +9442,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
-    partial void OnCheckStatusChanging(string value);
-    partial void OnCheckStatusChanged();
-    partial void OnRejectReasonChanging(string value);
-    partial void OnRejectReasonChanged();
-    partial void OnCheckUserNameChanging(string value);
-    partial void OnCheckUserNameChanged();
-    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCheckDateChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
     partial void OnIsSendMsgChanging(System.Nullable<bool> value);
@@ -9803,86 +9595,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CheckStatus
-		{
-			get
-			{
-				return this._CheckStatus;
-			}
-			set
-			{
-				if ((this._CheckStatus != value))
-				{
-					this.OnCheckStatusChanging(value);
-					this.SendPropertyChanging();
-					this._CheckStatus = value;
-					this.SendPropertyChanged("CheckStatus");
-					this.OnCheckStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RejectReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string RejectReason
-		{
-			get
-			{
-				return this._RejectReason;
-			}
-			set
-			{
-				if ((this._RejectReason != value))
-				{
-					this.OnRejectReasonChanging(value);
-					this.SendPropertyChanging();
-					this._RejectReason = value;
-					this.SendPropertyChanged("RejectReason");
-					this.OnRejectReasonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CheckUserName
-		{
-			get
-			{
-				return this._CheckUserName;
-			}
-			set
-			{
-				if ((this._CheckUserName != value))
-				{
-					this.OnCheckUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CheckUserName = value;
-					this.SendPropertyChanged("CheckUserName");
-					this.OnCheckUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<System.DateTime> CheckDate
-		{
-			get
-			{
-				return this._CheckDate;
-			}
-			set
-			{
-				if ((this._CheckDate != value))
-				{
-					this.OnCheckDateChanging(value);
-					this.SendPropertyChanging();
-					this._CheckDate = value;
-					this.SendPropertyChanged("CheckDate");
-					this.OnCheckDateChanged();
 				}
 			}
 		}
@@ -10204,14 +9916,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
-		private string _CheckStatus;
-		
-		private string _RejectReason;
-		
-		private string _CheckUserName;
-		
-		private System.Nullable<System.DateTime> _CheckDate;
-		
 		private System.Nullable<System.DateTime> _InputDate;
 		
 		private System.Nullable<double> _RefundAmount;
@@ -10240,14 +9944,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
-    partial void OnCheckStatusChanging(string value);
-    partial void OnCheckStatusChanged();
-    partial void OnRejectReasonChanging(string value);
-    partial void OnRejectReasonChanged();
-    partial void OnCheckUserNameChanging(string value);
-    partial void OnCheckUserNameChanged();
-    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCheckDateChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
     partial void OnRefundAmountChanging(System.Nullable<double> value);
@@ -10384,86 +10080,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CreateUserName = value;
 					this.SendPropertyChanged("CreateUserName");
 					this.OnCreateUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckStatus", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CheckStatus
-		{
-			get
-			{
-				return this._CheckStatus;
-			}
-			set
-			{
-				if ((this._CheckStatus != value))
-				{
-					this.OnCheckStatusChanging(value);
-					this.SendPropertyChanging();
-					this._CheckStatus = value;
-					this.SendPropertyChanged("CheckStatus");
-					this.OnCheckStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RejectReason", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string RejectReason
-		{
-			get
-			{
-				return this._RejectReason;
-			}
-			set
-			{
-				if ((this._RejectReason != value))
-				{
-					this.OnRejectReasonChanging(value);
-					this.SendPropertyChanging();
-					this._RejectReason = value;
-					this.SendPropertyChanged("RejectReason");
-					this.OnRejectReasonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CheckUserName
-		{
-			get
-			{
-				return this._CheckUserName;
-			}
-			set
-			{
-				if ((this._CheckUserName != value))
-				{
-					this.OnCheckUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._CheckUserName = value;
-					this.SendPropertyChanged("CheckUserName");
-					this.OnCheckUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<System.DateTime> CheckDate
-		{
-			get
-			{
-				return this._CheckDate;
-			}
-			set
-			{
-				if ((this._CheckDate != value))
-				{
-					this.OnCheckDateChanging(value);
-					this.SendPropertyChanging();
-					this._CheckDate = value;
-					this.SendPropertyChanged("CheckDate");
-					this.OnCheckDateChanged();
 				}
 			}
 		}

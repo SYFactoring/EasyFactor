@@ -97,60 +97,60 @@ namespace CMBC.EasyFactor.ARMgr
             worker.ReportProgress(result, this.btnNeedCheckCDA);
 
             //QueryNeedCheckAssign
-            result = context.InvoiceAssignBatches.Count(i => i.CheckStatus == BATCH.UNCHECK);
-            worker.ReportProgress(result, this.btnNeedCheckAssign);
+            //result = context.InvoiceAssignBatches.Count(i => i.CheckStatus == BATCH.UNCHECK);
+            //worker.ReportProgress(result, this.btnNeedCheckAssign);
 
-            //QueryNeedCheckFinance
-            result = context.InvoiceFinanceBatches.Count(i => i.CheckStatus == BATCH.UNCHECK);
-            worker.ReportProgress(result, this.btnNeedCheckFinance);
+            ////QueryNeedCheckFinance
+            //result = context.InvoiceFinanceBatches.Count(i => i.CheckStatus == BATCH.UNCHECK);
+            //worker.ReportProgress(result, this.btnNeedCheckFinance);
 
-            //QueryNeedCheckPayment
-            result = context.InvoicePaymentBatches.Count(i => i.CheckStatus == BATCH.UNCHECK);
-            worker.ReportProgress(result, this.btnNeedCheckPayment);
+            ////QueryNeedCheckPayment
+            //result = context.InvoicePaymentBatches.Count(i => i.CheckStatus == BATCH.UNCHECK);
+            //worker.ReportProgress(result, this.btnNeedCheckPayment);
 
-            //QueryNeedCheckRefund
-            result = context.InvoiceRefundBatches.Count(i => i.CheckStatus == BATCH.UNCHECK);
-            worker.ReportProgress(result, this.btnNeedCheckRefund);
+            ////QueryNeedCheckRefund
+            //result = context.InvoiceRefundBatches.Count(i => i.CheckStatus == BATCH.UNCHECK);
+            //worker.ReportProgress(result, this.btnNeedCheckRefund);
 
             //QueryWaitCheckCDA
             result = context.CDAs.Count(c => c.CDAStatus == CDAStr.UNCHECK && c.CreateUserName == App.Current.CurUser.Name);
             worker.ReportProgress(result, this.btnWaitCheckCDA);
 
             //QueryWaitCheckAssign
-            result = context.InvoiceAssignBatches.Count(i => i.CheckStatus == BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
-            worker.ReportProgress(result, this.btnWaitCheckAssign);
+            //result = context.InvoiceAssignBatches.Count(i => i.CheckStatus == BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
+            //worker.ReportProgress(result, this.btnWaitCheckAssign);
 
-            //QueryWaitCheckFinance
-            result = context.InvoiceFinanceBatches.Count(i => i.CheckStatus == BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
-            worker.ReportProgress(result, this.btnWaitCheckFinance);
+            ////QueryWaitCheckFinance
+            //result = context.InvoiceFinanceBatches.Count(i => i.CheckStatus == BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
+            //worker.ReportProgress(result, this.btnWaitCheckFinance);
 
-            //QueryWaitCheckPayment
-            result = context.InvoicePaymentBatches.Count(i => i.CheckStatus == BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
-            worker.ReportProgress(result, this.btnWaitCheckPayment);
+            ////QueryWaitCheckPayment
+            //result = context.InvoicePaymentBatches.Count(i => i.CheckStatus == BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
+            //worker.ReportProgress(result, this.btnWaitCheckPayment);
 
-            //QueryWaitCheckRefund
-            result = context.InvoiceRefundBatches.Count(i => i.CheckStatus == BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
-            worker.ReportProgress(result, this.btnWaitCheckRefund);
+            ////QueryWaitCheckRefund
+            //result = context.InvoiceRefundBatches.Count(i => i.CheckStatus == BATCH.UNCHECK && i.CheckUserName == App.Current.CurUser.Name);
+            //worker.ReportProgress(result, this.btnWaitCheckRefund);
 
             //QueryRejectCheckCDA
             result = context.CDAs.Count(c => c.CDAStatus == CDAStr.REJECT && c.CreateUserName == App.Current.CurUser.Name);
             worker.ReportProgress(result, this.btnRejectCheckCDA);
 
             //QueryRejectCheckAssign
-            result = context.InvoiceAssignBatches.Count(i => i.CheckStatus == BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
-            worker.ReportProgress(result, this.btnRejectCheckAssign);
+            //result = context.InvoiceAssignBatches.Count(i => i.CheckStatus == BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
+            //worker.ReportProgress(result, this.btnRejectCheckAssign);
 
-            //QueryRejectCheckFinance
-            result = context.InvoiceFinanceBatches.Count(i => i.CheckStatus == BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
-            worker.ReportProgress(result, this.btnRejectCheckFinance);
+            ////QueryRejectCheckFinance
+            //result = context.InvoiceFinanceBatches.Count(i => i.CheckStatus == BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
+            //worker.ReportProgress(result, this.btnRejectCheckFinance);
 
-            //QueryRejectCheckPayment
-            result = context.InvoicePaymentBatches.Count(i => i.CheckStatus == BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
-            worker.ReportProgress(result, this.btnRejectCheckPayment);
+            ////QueryRejectCheckPayment
+            //result = context.InvoicePaymentBatches.Count(i => i.CheckStatus == BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
+            //worker.ReportProgress(result, this.btnRejectCheckPayment);
 
-            //QueryRejectCheckRefund
-            result = context.InvoiceRefundBatches.Count(i => i.CheckStatus == BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
-            worker.ReportProgress(result, this.btnRejectCheckRefund);
+            ////QueryRejectCheckRefund
+            //result = context.InvoiceRefundBatches.Count(i => i.CheckStatus == BATCH.REJECT && i.CheckUserName == App.Current.CurUser.Name);
+            //worker.ReportProgress(result, this.btnRejectCheckRefund);
 
             //DueAssign7
             result = context.Invoices.Count(invoice => invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION && invoice.DueDate <= DateTime.Now.Date.AddDays(7) && invoice.DueDate >= DateTime.Now.Date);
@@ -356,11 +356,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void QueryNeedCheckAssigns(object sender, EventArgs e)
-        {
-            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.CHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
-        }
+        //private void QueryNeedCheckAssigns(object sender, EventArgs e)
+        //{
+        //    AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.CHECK);
+        //    App.Current.MainWindow.SetDetailPanel(mgr);
+        //}
 
         /// <summary>
         /// 
@@ -377,34 +377,34 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryNeedCheckFinances(object sender, EventArgs e)
-        {
-            FinanceBatchMgr mgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.CHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
-        }
+        ///// <param name="e"></param>
+        //private void QueryNeedCheckFinances(object sender, EventArgs e)
+        //{
+        //    FinanceBatchMgr mgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.CHECK);
+        //    App.Current.MainWindow.SetDetailPanel(mgr);
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void QueryNeedCheckPayments(object sender, EventArgs e)
-        {
-            PaymentBatchMgr mgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.CHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
-        }
+        //private void QueryNeedCheckPayments(object sender, EventArgs e)
+        //{
+        //    PaymentBatchMgr mgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.CHECK);
+        //    App.Current.MainWindow.SetDetailPanel(mgr);
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void QueryNeedCheckRefunds(object sender, EventArgs e)
-        {
-            RefundBatchMgr mgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
-        }
+        //private void QueryNeedCheckRefunds(object sender, EventArgs e)
+        //{
+        //    RefundBatchMgr mgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
+        //    App.Current.MainWindow.SetDetailPanel(mgr);
+        //}
 
         /// <summary>
         /// 

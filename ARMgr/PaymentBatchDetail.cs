@@ -114,7 +114,7 @@ namespace CMBC.EasyFactor.ARMgr
                 log.Invoice = null;
                 invoice.CaculatePayment();
                 context.InvoicePaymentLogs.DeleteOnSubmit(log);
-                log.InvoicePaymentBatch.CheckStatus = BATCH.UNCHECK;
+                //log.InvoicePaymentBatch.CheckStatus = BATCH.UNCHECK;
                 context.SubmitChanges();
             }
             catch (Exception e1)

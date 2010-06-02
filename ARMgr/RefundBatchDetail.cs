@@ -117,7 +117,7 @@ namespace CMBC.EasyFactor.ARMgr
                 financeLog.Invoice.CaculateRefund();
                 batch.CaculateRefundAmount();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
-                batch.CheckStatus = BATCH.UNCHECK;
+                //batch.CheckStatus = BATCH.UNCHECK;
                 context.SubmitChanges();
             }
             catch (Exception e1)

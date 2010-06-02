@@ -318,38 +318,38 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     foreach (Invoice invoice in selectedInvoices)
                     {
-                        if (invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK)
-                        {
-                            MessageBoxEx.Show("转让批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return;
-                        }
+                        //if (invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK)
+                        //{
+                        //    MessageBoxEx.Show("转让批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //    return;
+                        //}
 
-                        foreach (InvoiceFinanceBatch batch in invoice.InvoiceFinanceBatches)
-                        {
-                            if (batch.CheckStatus == BATCH.CHECK)
-                            {
-                                MessageBoxEx.Show("融资批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                return;
-                            }
-                        }
+                        //foreach (InvoiceFinanceBatch batch in invoice.InvoiceFinanceBatches)
+                        //{
+                        //    if (batch.CheckStatus == BATCH.CHECK)
+                        //    {
+                        //        MessageBoxEx.Show("融资批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //        return;
+                        //    }
+                        //}
 
-                        foreach (InvoicePaymentBatch batch in invoice.InvoicePaymentBatches)
-                        {
-                            if (batch.CheckStatus == BATCH.CHECK)
-                            {
-                                MessageBoxEx.Show("付款批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                return;
-                            }
-                        }
+                        //foreach (InvoicePaymentBatch batch in invoice.InvoicePaymentBatches)
+                        //{
+                        //    if (batch.CheckStatus == BATCH.CHECK)
+                        //    {
+                        //        MessageBoxEx.Show("付款批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //        return;
+                        //    }
+                        //}
 
-                        foreach (InvoiceRefundBatch batch in invoice.InvoiceRefundBatches)
-                        {
-                            if (batch.CheckStatus == BATCH.CHECK)
-                            {
-                                MessageBoxEx.Show("还款批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                return;
-                            }
-                        }
+                        //foreach (InvoiceRefundBatch batch in invoice.InvoiceRefundBatches)
+                        //{
+                        //    if (batch.CheckStatus == BATCH.CHECK)
+                        //    {
+                        //        MessageBoxEx.Show("还款批次已复核，不能删除，发票号：" + invoice.InvoiceNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //        return;
+                        //    }
+                        //}
 
                         foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
                         {

@@ -616,7 +616,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemCheck.Name = "menuItemCheck";
             this.menuItemCheck.Size = new System.Drawing.Size(198, 22);
             this.menuItemCheck.Text = "¸´ºËÍ¨¹ý(&P)";
-            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            //this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
             // menuItemReject
             // 

@@ -204,7 +204,7 @@ namespace CMBC.EasyFactor.ARMgr
                     refundBatch.InvoiceFinanceBatch = financeBatch;
                     refundBatch.RefundAmount = Math.Min(refundAmount, financeBatch.PoolFinanceOutstanding);
                     refundAmount -= refundBatch.RefundAmount.GetValueOrDefault();
-                    refundBatch.CheckStatus = BATCH.UNCHECK;
+                    //refundBatch.CheckStatus = BATCH.UNCHECK;
                     refundBatch.Comment = comment;
                     refundBatch.InputDate = DateTime.Now;
                     refundBatch.RefundDate = refundDate;

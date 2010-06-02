@@ -651,13 +651,13 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.BatchCurrency = this._case.InvoiceCurrency;
             financeBatch.CreateUserName = App.Current.CurUser.Name;
-            financeBatch.CheckStatus = BATCH.UNCHECK;
+            //financeBatch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = financeBatch;
 
             double financeProp = this._case.ActiveCDA.FinanceProportion.GetValueOrDefault();
 
             var invoiceResult = from invoice in context.Invoices
-                                where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.IsFlaw == false && invoice.InvoiceAssignBatch.CheckStatus == "ÒÑ¸´ºË" && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp < -TypeUtil.PRECISION)
+                                where invoice.InvoiceAssignBatch.CaseCode == this._case.CaseCode && invoice.IsFlaw == false && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp < -TypeUtil.PRECISION)
                                 select invoice;
 
             List<InvoiceFinanceLog> logs = new List<InvoiceFinanceLog>();

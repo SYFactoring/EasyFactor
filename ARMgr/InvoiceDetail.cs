@@ -187,7 +187,7 @@ namespace CMBC.EasyFactor.ARMgr
                 log.Invoice = null;
                 invoice.CaculatePayment();
                 context.InvoicePaymentLogs.DeleteOnSubmit(log);
-                log.InvoicePaymentBatch.CheckStatus = BATCH.UNCHECK;
+                //log.InvoicePaymentBatch.CheckStatus = BATCH.UNCHECK;
                 context.SubmitChanges();
             }
             catch (Exception e1)
@@ -224,7 +224,7 @@ namespace CMBC.EasyFactor.ARMgr
                 financeLog.InvoiceRefundLogs.Remove(log);
                 financeLog.Invoice.CaculateRefund();
                 context.InvoiceRefundLogs.DeleteOnSubmit(log);
-                log.InvoiceRefundBatch.CheckStatus = BATCH.UNCHECK;
+                //log.InvoiceRefundBatch.CheckStatus = BATCH.UNCHECK;
                 context.SubmitChanges();
             }
             catch (Exception e1)
@@ -516,10 +516,10 @@ namespace CMBC.EasyFactor.ARMgr
             invoice.DisputeReason = disputeReason;
 
             bool isUpdateOK = true;
-            if (invoice.InvoiceAssignBatch.CheckStatus != BATCH.CHECK)
-            {
-                invoice.InvoiceAssignBatch.CheckStatus = BATCH.UNCHECK;
-            }
+            //if (invoice.InvoiceAssignBatch.CheckStatus != BATCH.CHECK)
+            //{
+            //    invoice.InvoiceAssignBatch.CheckStatus = BATCH.UNCHECK;
+            //}
 
             try
             {
@@ -618,11 +618,11 @@ namespace CMBC.EasyFactor.ARMgr
 
                 Invoice invoice = (Invoice)this.invoiceBindingSource.DataSource;
 
-                if (invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK)
-                {
-                    MessageBoxEx.Show("此发票已复核，不能修改", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
+                //if (invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK)
+                //{
+                //    MessageBoxEx.Show("此发票已复核，不能修改", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return;
+                //}
 
                 this.invoiceNoTextBox.ReadOnly = false;
                 this.invoiceAmountTextBox.ReadOnly = false;

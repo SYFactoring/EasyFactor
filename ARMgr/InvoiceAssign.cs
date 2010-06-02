@@ -490,7 +490,7 @@ namespace CMBC.EasyFactor.ARMgr
             batch.AssignDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
             batch.IsCreateMsg = false;
-            batch.CheckStatus = BATCH.UNCHECK;
+            //batch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
             this.invoiceBindingSource.DataSource = batch.Invoices;
             this.dgvInvoices.ReadOnly = false;

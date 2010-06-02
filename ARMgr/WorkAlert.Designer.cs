@@ -381,7 +381,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnNeedCheckRefund.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckRefund.TabIndex = 4;
             this.btnNeedCheckRefund.Text = "e) 还款";
-            this.btnNeedCheckRefund.Click += new System.EventHandler(this.QueryNeedCheckRefunds);
+            //this.btnNeedCheckRefund.Click += new System.EventHandler(this.QueryNeedCheckRefunds);
             // 
             // btnNeedCheckPayment
             // 
@@ -394,7 +394,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnNeedCheckPayment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckPayment.TabIndex = 3;
             this.btnNeedCheckPayment.Text = "d) 付款";
-            this.btnNeedCheckPayment.Click += new System.EventHandler(this.QueryNeedCheckPayments);
+            //this.btnNeedCheckPayment.Click += new System.EventHandler(this.QueryNeedCheckPayments);
             // 
             // btnNeedCheckFinance
             // 
@@ -407,7 +407,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnNeedCheckFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckFinance.TabIndex = 2;
             this.btnNeedCheckFinance.Text = "c) 融资";
-            this.btnNeedCheckFinance.Click += new System.EventHandler(this.QueryNeedCheckFinances);
+            //this.btnNeedCheckFinance.Click += new System.EventHandler(this.QueryNeedCheckFinances);
             // 
             // btnNeedCheckAssign
             // 
@@ -420,7 +420,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnNeedCheckAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckAssign.TabIndex = 1;
             this.btnNeedCheckAssign.Text = "b) 转让";
-            this.btnNeedCheckAssign.Click += new System.EventHandler(this.QueryNeedCheckAssigns);
+            //this.btnNeedCheckAssign.Click += new System.EventHandler(this.QueryNeedCheckAssigns);
             // 
             // btnNeedCheckCDA
             // 

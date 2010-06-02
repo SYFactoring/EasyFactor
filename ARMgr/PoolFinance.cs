@@ -149,7 +149,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             InvoiceFinanceBatch financeBatch = new InvoiceFinanceBatch();
             financeBatch.CreateUserName = App.Current.CurUser.Name;
-            financeBatch.CheckStatus = BATCH.UNCHECK;
+            //financeBatch.CheckStatus = BATCH.UNCHECK;
             financeBatch.InputDate = DateTime.Today;
             this.batchBindingSource.DataSource = financeBatch;
 

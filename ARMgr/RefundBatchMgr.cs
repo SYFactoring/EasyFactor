@@ -47,7 +47,7 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            CHECK,
+            //CHECK,
 
             /// <summary>
             /// 
@@ -67,7 +67,7 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            POOL_CHECK
+            //POOL_CHECK
         }
 
         #endregion?Enums?
@@ -125,27 +125,27 @@ namespace CMBC.EasyFactor.ARMgr
 
             this.UpdateContextMenu();
 
-            if (batchType == OpBatchType.CHECK)
-            {
-                this.cbCheckStatus.Text = BATCH.UNCHECK;
-                context = new DBDataContext();
-                var queryResult = context.InvoiceRefundBatches.Where(i => i.CheckStatus == BATCH.UNCHECK && i.Case != null);
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            }
-            else if (batchType == OpBatchType.POOL_CHECK)
-            {
-                this.colBuyerName.Visible = false;
-                this.colBatchCount.Visible = false;
-                this.colTransactionType.Visible = false;
+            //if (batchType == OpBatchType.CHECK)
+            //{
+            //    this.cbCheckStatus.Text = BATCH.UNCHECK;
+            //    context = new DBDataContext();
+            //    var queryResult = context.InvoiceRefundBatches.Where(i => i.Case != null);
+            //    this.bs.DataSource = queryResult;
+            //    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            //}
+            //else if (batchType == OpBatchType.POOL_CHECK)
+            //{
+            //    this.colBuyerName.Visible = false;
+            //    this.colBatchCount.Visible = false;
+            //    this.colTransactionType.Visible = false;
 
-                this.cbCheckStatus.Text = BATCH.UNCHECK;
-                context = new DBDataContext();
-                var queryResult = context.InvoiceRefundBatches.Where(i => i.CheckStatus == BATCH.UNCHECK && i.InvoiceFinanceBatch != null);
-                this.bs.DataSource = queryResult;
-                this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            }
-            else if (batchType == OpBatchType.POOL_QUERY)
+            //    this.cbCheckStatus.Text = BATCH.UNCHECK;
+            //    context = new DBDataContext();
+            //    var queryResult = context.InvoiceRefundBatches.Where(i => i.InvoiceFinanceBatch != null);
+            //    this.bs.DataSource = queryResult;
+            //    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            //}
+            if (batchType == OpBatchType.POOL_QUERY)
             {
                 this.colBuyerName.Visible = false;
                 this.colBatchCount.Visible = false;
@@ -195,50 +195,50 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Check(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-            {
-                return;
-            }
+        //private void Check(object sender, EventArgs e)
+        //{
+        //    if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+        //    {
+        //        return;
+        //    }
 
-            if (this.dgvBatches.CurrentCell == null)
-            {
-                return;
-            }
+        //    if (this.dgvBatches.CurrentCell == null)
+        //    {
+        //        return;
+        //    }
 
-            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
+        //    InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
-            if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
-            {
-                MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+        //    if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
+        //    {
+        //        MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        return;
+        //    }
 
-            if (MessageBoxEx.Show("是否确认复核通过该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-            {
-                return;
-            }
+        //    if (MessageBoxEx.Show("是否确认复核通过该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+        //    {
+        //        return;
+        //    }
 
-            if (App.Current.CurUser.Name == batch.CreateUserName)
-            {
-                MessageBoxEx.Show("经办人和复核人相同，不可进行复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+        //    if (App.Current.CurUser.Name == batch.CreateUserName)
+        //    {
+        //        MessageBoxEx.Show("经办人和复核人相同，不可进行复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        return;
+        //    }
 
-            batch.CheckStatus = BATCH.CHECK;
-            batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
+        //    batch.CheckStatus = BATCH.CHECK;
+        //    batch.CheckUserName = App.Current.CurUser.Name;
+        //    batch.CheckDate = DateTime.Now.Date;
 
-            try
-            {
-                context.SubmitChanges();
-            }
-            catch (Exception e1)
-            {
-                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+        //    try
+        //    {
+        //        context.SubmitChanges();
+        //    }
+        //    catch (Exception e1)
+        //    {
+        //        MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -252,7 +252,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (this.dgvBatches.CurrentCell==null)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
@@ -263,11 +263,11 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            if (selectedBatch.CheckStatus == BATCH.CHECK)
-            {
-                MessageBoxEx.Show("不能删除已复核批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            //if (selectedBatch.CheckStatus == BATCH.CHECK)
+            //{
+            //    MessageBoxEx.Show("不能删除已复核批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return;
+            //}
 
             foreach (InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
             {
@@ -298,7 +298,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void DetailBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.CurrentCell==null)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }
@@ -364,14 +364,14 @@ namespace CMBC.EasyFactor.ARMgr
             context = new DBDataContext();
 
             IEnumerable<InvoiceRefundBatch> queryResult = null;
-            if (opBatchType != OpBatchType.POOL_QUERY && opBatchType != OpBatchType.POOL_CHECK)
+            if (opBatchType != OpBatchType.POOL_QUERY)
             {
                 queryResult = context.InvoiceRefundBatches.Where(i =>
                    i.RefundBatchNo.Contains(this.tbRefundBatchNo.Text)
                    && (i.CaseCode != null)
                    && (beginDate != this.dateFrom.MinDate ? i.RefundDate >= beginDate : true)
                    && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
-                   && (status != string.Empty ? i.CheckStatus == status : true)
+                       //&& (status != string.Empty ? i.CheckStatus == status : true)
                    && (refundType == "全部" ? true : i.RefundType == refundType)
                    && (i.CreateUserName.Contains(createUserName))
                    && (transactionType == "全部" ? true : i.Case.TransactionType == transactionType)
@@ -386,7 +386,7 @@ namespace CMBC.EasyFactor.ARMgr
                    && (i.FinanceBatchNo != null)
                    && (beginDate != this.dateFrom.MinDate ? i.RefundDate >= beginDate : true)
                    && (endDate != this.dateTo.MinDate ? i.RefundDate <= endDate : true)
-                   && (status != string.Empty ? i.CheckStatus == status : true)
+                       //&& (status != string.Empty ? i.CheckStatus == status : true)
                    && (refundType == "全部" ? true : i.RefundType == refundType)
                    && (i.CreateUserName.Contains(createUserName))
                    && (location == "00" ? true : i.InvoiceFinanceBatch.Client.Department.LocationCode == location)
@@ -402,50 +402,50 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Reject(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-            {
-                return;
-            }
+        //private void Reject(object sender, EventArgs e)
+        //{
+        //    if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+        //    {
+        //        return;
+        //    }
 
-            if (this.dgvBatches.CurrentCell==null)
-            {
-                return;
-            }
+        //    if (this.dgvBatches.CurrentCell==null)
+        //    {
+        //        return;
+        //    }
 
-            InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
+        //    InvoiceRefundBatch batch = (InvoiceRefundBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
 
-            if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
-            {
-                MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+        //    //if (batch.CheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(Permissions.INVOICE_APPROVE))
+        //    //{
+        //    //    MessageBoxEx.Show("此批次已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    //    return;
+        //    //}
 
-            if (MessageBoxEx.Show("是否确认复核退回该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-            {
-                return;
-            }
+        //    if (MessageBoxEx.Show("是否确认复核退回该批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+        //    {
+        //        return;
+        //    }
 
-            if (App.Current.CurUser.Name == batch.CreateUserName)
-            {
-                MessageBoxEx.Show("经办人和复核人相同，不可进行复核退回", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+        //    if (App.Current.CurUser.Name == batch.CreateUserName)
+        //    {
+        //        MessageBoxEx.Show("经办人和复核人相同，不可进行复核退回", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        return;
+        //    }
 
-            batch.CheckStatus = BATCH.REJECT;
-            batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
+        //    batch.CheckStatus = BATCH.REJECT;
+        //    batch.CheckUserName = App.Current.CurUser.Name;
+        //    batch.CheckDate = DateTime.Now.Date;
 
-            try
-            {
-                context.SubmitChanges();
-            }
-            catch (Exception e1)
-            {
-                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+        //    try
+        //    {
+        //        context.SubmitChanges();
+        //    }
+        //    catch (Exception e1)
+        //    {
+        //        MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -454,7 +454,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
         {
-            if (this.dgvBatches.CurrentCell==null)
+            if (this.dgvBatches.CurrentCell == null)
             {
                 return;
             }

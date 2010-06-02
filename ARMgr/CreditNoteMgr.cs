@@ -252,17 +252,17 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (InvoicePaymentLog log in creditNote.InvoicePaymentLogs)
             {
-                if (log.InvoicePaymentBatch.CheckStatus == BATCH.CHECK)
-                {
-                    MessageBoxEx.Show("付款批次已复核，不能删除，发票号：" + log.PaymentBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
+                //if (log.InvoicePaymentBatch.CheckStatus == BATCH.CHECK)
+                //{
+                //    MessageBoxEx.Show("付款批次已复核，不能删除，发票号：" + log.PaymentBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return;
+                //}
 
                 Invoice invoice = log.Invoice;
                 log.Invoice = null;
                 invoice.CaculatePayment();
                 context.InvoicePaymentLogs.DeleteOnSubmit(log);
-                log.InvoicePaymentBatch.CheckStatus = BATCH.UNCHECK;
+                //log.InvoicePaymentBatch.CheckStatus = BATCH.UNCHECK;
             }
 
             context.CreditNotes.DeleteOnSubmit(creditNote);

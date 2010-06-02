@@ -681,14 +681,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemCheck.Name = "menuItemCheck";
             this.menuItemCheck.Size = new System.Drawing.Size(141, 22);
             this.menuItemCheck.Text = "¸´ºËÍ¨¹ý(&P)";
-            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            //this.menuItemCheck.Click += new System.EventHandler(this.Check);
             // 
             // menuItemReject
             // 
             this.menuItemReject.Name = "menuItemReject";
             this.menuItemReject.Size = new System.Drawing.Size(141, 22);
             this.menuItemReject.Text = "¸´ºË¾Ü¾ø(&R)";
-            this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            //this.menuItemReject.Click += new System.EventHandler(this.Reject);
             // 
             // toolStripSeparator2
             // 

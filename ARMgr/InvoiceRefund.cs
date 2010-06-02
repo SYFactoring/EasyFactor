@@ -167,7 +167,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             batch.RefundDate = paymentBatch.PaymentDate;
             batch.CreateUserName = App.Current.CurUser.Name;
-            batch.CheckStatus = BATCH.UNCHECK;
+            //batch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
             this.logsBindingSource.DataSource = refundList;
 
@@ -515,7 +515,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             batch.RefundDate = DateTime.Now.Date;
             batch.CreateUserName = App.Current.CurUser.Name;
-            batch.CheckStatus = BATCH.UNCHECK;
+            //batch.CheckStatus = BATCH.UNCHECK;
             this.batchBindingSource.DataSource = batch;
 
             var queryResult = from log in context.InvoiceFinanceLogs
@@ -526,11 +526,11 @@ namespace CMBC.EasyFactor.ARMgr
             List<InvoiceRefundLog> result = new List<InvoiceRefundLog>();
             foreach (InvoiceFinanceLog financeLog in queryResult)
             {
-                if (financeLog.InvoiceFinanceBatch.CheckStatus == BATCH.CHECK)
-                {
+                //if (financeLog.InvoiceFinanceBatch.CheckStatus == BATCH.CHECK)
+                //{
                     InvoiceRefundLog refundLog = new InvoiceRefundLog(financeLog);
                     result.Add(refundLog);
-                }
+                //}
             }
 
             this.logsBindingSource.DataSource = result;
