@@ -19,7 +19,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// Required designer variable.
         /// </summary>
         private DevComponents.DotNetBar.ButtonX btnQuery;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCheckStatus;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbFinanceType;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
@@ -28,7 +27,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvBatches;
-        private DevComponents.DotNetBar.LabelX lblCheckStatus;
         private DevComponents.DotNetBar.LabelX lblClientName;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.LabelX lblCreateUserName;
@@ -103,8 +101,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
-            this.cbCheckStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.lblCheckStatus = new DevComponents.DotNetBar.LabelX();
             this.dateTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblDatePicker = new DevComponents.DotNetBar.LabelX();
             this.dateFrom = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -136,9 +132,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCostRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             financeTypeLabel = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
@@ -176,8 +169,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Controls.Add(this.tbCreateUserName);
             this.panelQuery.Controls.Add(this.lblCreateUserName);
             this.panelQuery.Controls.Add(this.lblCount);
-            this.panelQuery.Controls.Add(this.cbCheckStatus);
-            this.panelQuery.Controls.Add(this.lblCheckStatus);
             this.panelQuery.Controls.Add(this.dateTo);
             this.panelQuery.Controls.Add(this.lblDatePicker);
             this.panelQuery.Controls.Add(this.dateFrom);
@@ -331,41 +322,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(723, 30);
+            this.lblCount.Location = new System.Drawing.Point(639, 29);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(71, 16);
             this.lblCount.TabIndex = 18;
             this.lblCount.Text = "获得 条记录";
-            // 
-            // cbCheckStatus
-            // 
-            this.cbCheckStatus.DisplayMember = "Text";
-            this.cbCheckStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCheckStatus.FormattingEnabled = true;
-            this.cbCheckStatus.ItemHeight = 14;
-            this.cbCheckStatus.Items.AddRange(new object[] {
-            "",
-            "未复核",
-            "已复核",
-            "复核未通过"});
-            this.cbCheckStatus.Location = new System.Drawing.Point(376, 26);
-            this.cbCheckStatus.Name = "cbCheckStatus";
-            this.cbCheckStatus.Size = new System.Drawing.Size(101, 20);
-            this.cbCheckStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCheckStatus.TabIndex = 13;
-            // 
-            // lblCheckStatus
-            // 
-            this.lblCheckStatus.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCheckStatus.BackgroundStyle.Class = "";
-            this.lblCheckStatus.Location = new System.Drawing.Point(323, 28);
-            this.lblCheckStatus.Name = "lblCheckStatus";
-            this.lblCheckStatus.Size = new System.Drawing.Size(56, 16);
-            this.lblCheckStatus.TabIndex = 12;
-            this.lblCheckStatus.Text = "复核结果";
             // 
             // dateTo
             // 
@@ -375,7 +336,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateTo.BackgroundStyle.Class = "DateTimeInputBackground";
             this.dateTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateTo.ButtonDropDown.Visible = true;
-            this.dateTo.Location = new System.Drawing.Point(624, 26);
+            this.dateTo.Location = new System.Drawing.Point(483, 26);
             // 
             // 
             // 
@@ -409,7 +370,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateTo.MonthCalendar.TodayButtonVisible = true;
             this.dateTo.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateTo.Name = "dateTo";
-            this.dateTo.Size = new System.Drawing.Size(80, 20);
+            this.dateTo.Size = new System.Drawing.Size(100, 20);
             this.dateTo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dateTo.TabIndex = 16;
             // 
@@ -420,7 +381,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblDatePicker.BackgroundStyle.Class = "";
-            this.lblDatePicker.Location = new System.Drawing.Point(483, 28);
+            this.lblDatePicker.Location = new System.Drawing.Point(329, 28);
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(44, 16);
             this.lblDatePicker.TabIndex = 14;
@@ -434,7 +395,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateFrom.BackgroundStyle.Class = "DateTimeInputBackground";
             this.dateFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateFrom.ButtonDropDown.Visible = true;
-            this.dateFrom.Location = new System.Drawing.Point(533, 26);
+            this.dateFrom.Location = new System.Drawing.Point(379, 26);
             // 
             // 
             // 
@@ -468,7 +429,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateFrom.MonthCalendar.TodayButtonVisible = true;
             this.dateFrom.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.dateFrom.Name = "dateFrom";
-            this.dateFrom.Size = new System.Drawing.Size(85, 20);
+            this.dateFrom.Size = new System.Drawing.Size(100, 20);
             this.dateFrom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dateFrom.TabIndex = 15;
             // 
@@ -476,7 +437,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(723, 4);
+            this.btnQuery.Location = new System.Drawing.Point(639, 3);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -537,9 +498,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFactor,
             this.colCostRate,
             this.colCreateUserName,
-            this.colCheckStatus,
-            this.colCheckUserName,
-            this.colCheckDate,
             this.colBatchCount});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -574,7 +532,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.toolStripSeparator3,
             this.menuItemCommissionReport});
             this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(159, 154);
+            this.cmuBatchMgr.Size = new System.Drawing.Size(159, 176);
             // 
             // menuItemBatchSelect
             // 
@@ -600,19 +558,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemCheck.Name = "menuItemCheck";
             this.menuItemCheck.Size = new System.Drawing.Size(158, 22);
             this.menuItemCheck.Text = "复核通过(&P)";
-            //this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            this.menuItemCheck.Visible = false;
             // 
             // menuItemReject
             // 
             this.menuItemReject.Name = "menuItemReject";
             this.menuItemReject.Size = new System.Drawing.Size(158, 22);
             this.menuItemReject.Text = "复核拒绝(&R)";
-            //this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            this.menuItemReject.Visible = false;
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(155, 6);
+            this.toolStripSeparator2.Visible = false;
             // 
             // menuItemBatchDelete
             // 
@@ -760,30 +719,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCreateUserName.ReadOnly = true;
             this.colCreateUserName.Width = 50;
             // 
-            // colCheckStatus
-            // 
-            this.colCheckStatus.DataPropertyName = "CheckStatus";
-            this.colCheckStatus.HeaderText = "复核结果";
-            this.colCheckStatus.Name = "colCheckStatus";
-            this.colCheckStatus.ReadOnly = true;
-            this.colCheckStatus.Width = 51;
-            // 
-            // colCheckUserName
-            // 
-            this.colCheckUserName.DataPropertyName = "CheckUserName";
-            this.colCheckUserName.HeaderText = "复核人";
-            this.colCheckUserName.Name = "colCheckUserName";
-            this.colCheckUserName.ReadOnly = true;
-            this.colCheckUserName.Width = 51;
-            // 
-            // colCheckDate
-            // 
-            this.colCheckDate.DataPropertyName = "CheckDate";
-            this.colCheckDate.HeaderText = "复核日";
-            this.colCheckDate.Name = "colCheckDate";
-            this.colCheckDate.ReadOnly = true;
-            this.colCheckDate.Width = 50;
-            // 
             // colBatchCount
             // 
             this.colBatchCount.DataPropertyName = "BatchCount";
@@ -827,10 +762,8 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactor;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
+
 
 
 

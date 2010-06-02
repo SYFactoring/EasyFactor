@@ -114,7 +114,6 @@ namespace CMBC.EasyFactor.ARMgr
             : this(OpBatchType.QUERY)
         {
             this.tbCreateUserName.Text = createUserName;
-            this.cbCheckStatus.Text = batchStatus;
             this.QueryBatch(null, null);
         }
 
@@ -165,8 +164,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 this.dateFrom.Value = DateTime.Now.Date;
                 this.dateTo.Value = DateTime.Now.Date;
-                this.cbCheckStatus.Text = BATCH.CHECK;
-                this.QueryBatch(null, null);
+                 this.QueryBatch(null, null);
             }
             else if (this.opBatchType == OpBatchType.FACTOR_COMMISSION)
             {
@@ -182,7 +180,6 @@ namespace CMBC.EasyFactor.ARMgr
                 this.colPaymentAmount.Visible = false;
                 this.colRefundAmount.Visible = false;
                 this.colCreateUserName.Visible = false;
-                this.colCheckStatus.Visible = false;
             }
         }
 
@@ -506,7 +503,6 @@ namespace CMBC.EasyFactor.ARMgr
         {
             DateTime beginDate = String.IsNullOrEmpty(this.dateFrom.Text) ? this.dateFrom.MinDate : this.dateFrom.Value.Date;
             DateTime endDate = String.IsNullOrEmpty(this.dateTo.Text) ? this.dateTo.MinDate : this.dateTo.Value.Date;
-            string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
             string factorName = this.tbFactorName.Text;

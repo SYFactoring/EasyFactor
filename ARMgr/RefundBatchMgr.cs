@@ -83,7 +83,6 @@ namespace CMBC.EasyFactor.ARMgr
             : this(OpBatchType.QUERY)
         {
             this.tbCreateUserName.Text = createUserName;
-            this.cbCheckStatus.Text = batchStatus;
             this.QueryBatch(null, null);
         }
 
@@ -345,7 +344,6 @@ namespace CMBC.EasyFactor.ARMgr
         {
             DateTime beginDate = String.IsNullOrEmpty(this.dateFrom.Text) ? this.dateFrom.MinDate : this.dateFrom.Value.Date;
             DateTime endDate = String.IsNullOrEmpty(this.dateTo.Text) ? this.dateTo.MinDate : this.dateTo.Value.Date;
-            string status = this.cbCheckStatus.Text;
             string createUserName = this.tbCreateUserName.Text;
             string clientName = this.tbClientName.Text;
             string location = (string)this.cbLocation.SelectedValue;

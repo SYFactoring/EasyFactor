@@ -24,9 +24,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ButtonX btnSave;
         private DevComponents.DotNetBar.ButtonX btnUpdate;
         private DevComponents.DotNetBar.Controls.TextBoxX caseCodeTextBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput checkDateDateTimePicker;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx checkStatusComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX checkUserNameTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX commentTextBox;
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX createUserNameTextBox;
@@ -36,7 +33,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.CheckBoxX isCreateMsgCheckBox;
         private DevComponents.DotNetBar.TabControlPanel panelBatch;
         private DevComponents.DotNetBar.TabControlPanel panelInvoices;
-        private DevComponents.DotNetBar.Controls.TextBoxX rejectReasonTextBox;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private DevComponents.DotNetBar.TabControl tabControl;
         private DevComponents.DotNetBar.TabItem tabItemBatch;
@@ -84,24 +80,17 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX assignBatchNoLabel;
             DevComponents.DotNetBar.LabelX assignDateLabel;
             DevComponents.DotNetBar.LabelX createUserNameLabel;
-            DevComponents.DotNetBar.LabelX checkStatusLabel;
-            DevComponents.DotNetBar.LabelX rejectReasonLabel;
-            DevComponents.DotNetBar.LabelX checkDateLabel;
-            DevComponents.DotNetBar.LabelX checkUserNameLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
             DevComponents.DotNetBar.LabelX lblInputDate;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssignBatchDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
-            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.isSendMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.checkStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.checkUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.checkDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.rejectReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.createUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.isCreateMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.assignDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -115,23 +104,17 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.isSendMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             caseCodeLabel = new DevComponents.DotNetBar.LabelX();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             assignDateLabel = new DevComponents.DotNetBar.LabelX();
             createUserNameLabel = new DevComponents.DotNetBar.LabelX();
-            checkStatusLabel = new DevComponents.DotNetBar.LabelX();
-            rejectReasonLabel = new DevComponents.DotNetBar.LabelX();
-            checkDateLabel = new DevComponents.DotNetBar.LabelX();
-            checkUserNameLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
             lblInputDate = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.panelBatch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -192,62 +175,6 @@ namespace CMBC.EasyFactor.ARMgr
             createUserNameLabel.TabIndex = 8;
             createUserNameLabel.Text = "经办人:";
             // 
-            // checkStatusLabel
-            // 
-            checkStatusLabel.AutoSize = true;
-            checkStatusLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            checkStatusLabel.BackgroundStyle.Class = "";
-            checkStatusLabel.Location = new System.Drawing.Point(50, 193);
-            checkStatusLabel.Name = "checkStatusLabel";
-            checkStatusLabel.Size = new System.Drawing.Size(59, 16);
-            checkStatusLabel.TabIndex = 10;
-            checkStatusLabel.Text = "复核状态:";
-            // 
-            // rejectReasonLabel
-            // 
-            rejectReasonLabel.AutoSize = true;
-            rejectReasonLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            rejectReasonLabel.BackgroundStyle.Class = "";
-            rejectReasonLabel.Location = new System.Drawing.Point(50, 226);
-            rejectReasonLabel.Name = "rejectReasonLabel";
-            rejectReasonLabel.Size = new System.Drawing.Size(59, 16);
-            rejectReasonLabel.TabIndex = 12;
-            rejectReasonLabel.Text = "退回原因:";
-            // 
-            // checkDateLabel
-            // 
-            checkDateLabel.AutoSize = true;
-            checkDateLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            checkDateLabel.BackgroundStyle.Class = "";
-            checkDateLabel.Location = new System.Drawing.Point(62, 272);
-            checkDateLabel.Name = "checkDateLabel";
-            checkDateLabel.Size = new System.Drawing.Size(47, 16);
-            checkDateLabel.TabIndex = 14;
-            checkDateLabel.Text = "复核日:";
-            // 
-            // checkUserNameLabel
-            // 
-            checkUserNameLabel.AutoSize = true;
-            checkUserNameLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            checkUserNameLabel.BackgroundStyle.Class = "";
-            checkUserNameLabel.Location = new System.Drawing.Point(62, 296);
-            checkUserNameLabel.Name = "checkUserNameLabel";
-            checkUserNameLabel.Size = new System.Drawing.Size(47, 16);
-            checkUserNameLabel.TabIndex = 16;
-            checkUserNameLabel.Text = "复核人:";
-            // 
             // commentLabel
             // 
             commentLabel.AutoSize = true;
@@ -288,7 +215,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(394, 385);
+            this.tabControl.Size = new System.Drawing.Size(394, 266);
             this.tabControl.TabIndex = 0;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemBatch);
@@ -301,18 +228,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Controls.Add(this.isSendMsgCheckBox);
             this.panelBatch.Controls.Add(lblInputDate);
             this.panelBatch.Controls.Add(this.diInputDate);
-            this.panelBatch.Controls.Add(this.checkStatusComboBox);
             this.panelBatch.Controls.Add(this.btnSave);
             this.panelBatch.Controls.Add(this.btnUpdate);
             this.panelBatch.Controls.Add(commentLabel);
             this.panelBatch.Controls.Add(this.commentTextBox);
-            this.panelBatch.Controls.Add(checkUserNameLabel);
-            this.panelBatch.Controls.Add(this.checkUserNameTextBox);
-            this.panelBatch.Controls.Add(checkDateLabel);
-            this.panelBatch.Controls.Add(this.checkDateDateTimePicker);
-            this.panelBatch.Controls.Add(rejectReasonLabel);
-            this.panelBatch.Controls.Add(this.rejectReasonTextBox);
-            this.panelBatch.Controls.Add(checkStatusLabel);
             this.panelBatch.Controls.Add(createUserNameLabel);
             this.panelBatch.Controls.Add(this.createUserNameTextBox);
             this.panelBatch.Controls.Add(this.isCreateMsgCheckBox);
@@ -326,7 +245,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Location = new System.Drawing.Point(0, 26);
             this.panelBatch.Name = "panelBatch";
             this.panelBatch.Padding = new System.Windows.Forms.Padding(1);
-            this.panelBatch.Size = new System.Drawing.Size(394, 359);
+            this.panelBatch.Size = new System.Drawing.Size(394, 240);
             this.panelBatch.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.panelBatch.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.panelBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -336,6 +255,25 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Style.GradientAngle = 90;
             this.panelBatch.TabIndex = 1;
             this.panelBatch.TabItem = this.tabItemBatch;
+            // 
+            // isSendMsgCheckBox
+            // 
+            this.isSendMsgCheckBox.AutoSize = true;
+            this.isSendMsgCheckBox.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.isSendMsgCheckBox.BackgroundStyle.Class = "";
+            this.isSendMsgCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.batchBindingSource, "IsSendMsg", true));
+            this.isSendMsgCheckBox.Location = new System.Drawing.Point(270, 149);
+            this.isSendMsgCheckBox.Name = "isSendMsgCheckBox";
+            this.isSendMsgCheckBox.Size = new System.Drawing.Size(101, 16);
+            this.isSendMsgCheckBox.TabIndex = 25;
+            this.isSendMsgCheckBox.Text = "是否已发报文";
+            // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch);
             // 
             // diInputDate
             // 
@@ -373,30 +311,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.diInputDate.Size = new System.Drawing.Size(100, 20);
             this.diInputDate.TabIndex = 24;
             // 
-            // batchBindingSource
-            // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch);
-            // 
-            // checkStatusComboBox
-            // 
-            this.checkStatusComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CheckStatus", true));
-            this.checkStatusComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.checkStatusComboBox.FormattingEnabled = true;
-            this.checkStatusComboBox.Items.AddRange(new object[] {
-            "未复核",
-            "已复核",
-            "复核未通过"});
-            this.checkStatusComboBox.Location = new System.Drawing.Point(115, 191);
-            this.checkStatusComboBox.Name = "checkStatusComboBox";
-            this.checkStatusComboBox.Size = new System.Drawing.Size(162, 21);
-            this.checkStatusComboBox.TabIndex = 22;
-            // 
             // btnSave
             // 
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(202, 326);
+            this.btnSave.Location = new System.Drawing.Point(202, 203);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -408,7 +327,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUpdate.Location = new System.Drawing.Point(115, 326);
+            this.btnUpdate.Location = new System.Drawing.Point(115, 203);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -429,68 +348,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.commentTextBox.Size = new System.Drawing.Size(256, 65);
             this.commentTextBox.TabIndex = 19;
-            // 
-            // checkUserNameTextBox
-            // 
-            // 
-            // 
-            // 
-            this.checkUserNameTextBox.Border.Class = "TextBoxBorder";
-            this.checkUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CheckUserName", true));
-            this.checkUserNameTextBox.Location = new System.Drawing.Point(115, 295);
-            this.checkUserNameTextBox.Name = "checkUserNameTextBox";
-            this.checkUserNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.checkUserNameTextBox.TabIndex = 17;
-            // 
-            // checkDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.checkDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.checkDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.checkDateDateTimePicker.ButtonFreeText.Checked = true;
-            this.checkDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "CheckDate", true));
-            this.checkDateDateTimePicker.FreeTextEntryMode = true;
-            this.checkDateDateTimePicker.Location = new System.Drawing.Point(115, 270);
-            // 
-            // 
-            // 
-            this.checkDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.checkDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.checkDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.checkDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.checkDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.checkDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.checkDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.checkDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.checkDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.checkDateDateTimePicker.Name = "checkDateDateTimePicker";
-            this.checkDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
-            this.checkDateDateTimePicker.TabIndex = 15;
-            // 
-            // rejectReasonTextBox
-            // 
-            // 
-            // 
-            // 
-            this.rejectReasonTextBox.Border.Class = "TextBoxBorder";
-            this.rejectReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RejectReason", true));
-            this.rejectReasonTextBox.Location = new System.Drawing.Point(115, 216);
-            this.rejectReasonTextBox.Multiline = true;
-            this.rejectReasonTextBox.Name = "rejectReasonTextBox";
-            this.rejectReasonTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.rejectReasonTextBox.Size = new System.Drawing.Size(256, 48);
-            this.rejectReasonTextBox.TabIndex = 13;
             // 
             // createUserNameTextBox
             // 
@@ -593,7 +450,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelInvoices.Location = new System.Drawing.Point(0, 26);
             this.panelInvoices.Name = "panelInvoices";
             this.panelInvoices.Padding = new System.Windows.Forms.Padding(1);
-            this.panelInvoices.Size = new System.Drawing.Size(394, 359);
+            this.panelInvoices.Size = new System.Drawing.Size(394, 240);
             this.panelInvoices.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.panelInvoices.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.panelInvoices.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -616,7 +473,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCreditNote.Location = new System.Drawing.Point(0, 26);
             this.panelCreditNote.Name = "panelCreditNote";
             this.panelCreditNote.Padding = new System.Windows.Forms.Padding(1);
-            this.panelCreditNote.Size = new System.Drawing.Size(394, 359);
+            this.panelCreditNote.Size = new System.Drawing.Size(394, 240);
             this.panelCreditNote.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.panelCreditNote.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.panelCreditNote.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -648,26 +505,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // isSendMsgCheckBox
-            // 
-            this.isSendMsgCheckBox.AutoSize = true;
-            this.isSendMsgCheckBox.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.isSendMsgCheckBox.BackgroundStyle.Class = "";
-            this.isSendMsgCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.batchBindingSource, "IsSendMsg", true));
-            this.isSendMsgCheckBox.Location = new System.Drawing.Point(270, 149);
-            this.isSendMsgCheckBox.Name = "isSendMsgCheckBox";
-            this.isSendMsgCheckBox.Size = new System.Drawing.Size(101, 16);
-            this.isSendMsgCheckBox.TabIndex = 25;
-            this.isSendMsgCheckBox.Text = "是否已发报文";
-            // 
             // AssignBatchDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 385);
+            this.ClientSize = new System.Drawing.Size(394, 266);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.Name = "AssignBatchDetail";
@@ -677,9 +519,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl.ResumeLayout(false);
             this.panelBatch.ResumeLayout(false);
             this.panelBatch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

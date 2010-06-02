@@ -10,9 +10,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ButtonX btnSave;
         private DevComponents.DotNetBar.ButtonX btnUpdate;
         private DevComponents.DotNetBar.Controls.TextBoxX caseCodeTextBox;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput checkDateDateTimePicker;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx checkStatusComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX checkUserNameTextBox;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -31,7 +28,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.TextBoxX paymentBatchNoTextBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput paymentDateDateTimePicker;
         private DevComponents.DotNetBar.Controls.ComboBoxEx paymentTypeComboBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX rejectReasonTextBox;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
         private DevComponents.DotNetBar.TabControl tabControl;
         private DevComponents.DotNetBar.TabItem tabItemBatch;
@@ -76,10 +72,6 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.components = new System.ComponentModel.Container();
             DevComponents.DotNetBar.LabelX commentLabel;
-            DevComponents.DotNetBar.LabelX checkUserNameLabel;
-            DevComponents.DotNetBar.LabelX checkDateLabel;
-            DevComponents.DotNetBar.LabelX rejectReasonLabel;
-            DevComponents.DotNetBar.LabelX checkStatusLabel;
             DevComponents.DotNetBar.LabelX createUserNameLabel;
             DevComponents.DotNetBar.LabelX paymentDateLabel;
             DevComponents.DotNetBar.LabelX paymentBatchNoLabel;
@@ -94,6 +86,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.cmuLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
+            this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
+            this.isSendMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.paymentTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.btnSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.createUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.isCreateMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.paymentDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.paymentBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tabItemBatch = new DevComponents.DotNetBar.TabItem(this.components);
             this.panelInvoices = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvPaymentLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -103,32 +109,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCreditNoteDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabItemInvoices = new DevComponents.DotNetBar.TabItem(this.components);
-            this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
-            this.diInputDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.paymentTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.checkStatusComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.btnSave = new DevComponents.DotNetBar.ButtonX();
-            this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.checkUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.checkDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.rejectReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.createUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.isCreateMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.paymentDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.paymentBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tabItemBatch = new DevComponents.DotNetBar.TabItem(this.components);
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.isSendMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
-            checkUserNameLabel = new DevComponents.DotNetBar.LabelX();
-            checkDateLabel = new DevComponents.DotNetBar.LabelX();
-            rejectReasonLabel = new DevComponents.DotNetBar.LabelX();
-            checkStatusLabel = new DevComponents.DotNetBar.LabelX();
             createUserNameLabel = new DevComponents.DotNetBar.LabelX();
             paymentDateLabel = new DevComponents.DotNetBar.LabelX();
             paymentBatchNoLabel = new DevComponents.DotNetBar.LabelX();
@@ -138,13 +122,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.cmuLogMgr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
+            this.panelBatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paymentDateDateTimePicker)).BeginInit();
             this.panelInvoices.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).BeginInit();
-            this.panelBatch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -161,62 +144,6 @@ namespace CMBC.EasyFactor.ARMgr
             commentLabel.Size = new System.Drawing.Size(34, 16);
             commentLabel.TabIndex = 8;
             commentLabel.Text = "备注:";
-            // 
-            // checkUserNameLabel
-            // 
-            checkUserNameLabel.AutoSize = true;
-            checkUserNameLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            checkUserNameLabel.BackgroundStyle.Class = "";
-            checkUserNameLabel.Location = new System.Drawing.Point(63, 312);
-            checkUserNameLabel.Name = "checkUserNameLabel";
-            checkUserNameLabel.Size = new System.Drawing.Size(47, 16);
-            checkUserNameLabel.TabIndex = 19;
-            checkUserNameLabel.Text = "复核人:";
-            // 
-            // checkDateLabel
-            // 
-            checkDateLabel.AutoSize = true;
-            checkDateLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            checkDateLabel.BackgroundStyle.Class = "";
-            checkDateLabel.Location = new System.Drawing.Point(63, 288);
-            checkDateLabel.Name = "checkDateLabel";
-            checkDateLabel.Size = new System.Drawing.Size(47, 16);
-            checkDateLabel.TabIndex = 17;
-            checkDateLabel.Text = "复核日:";
-            // 
-            // rejectReasonLabel
-            // 
-            rejectReasonLabel.AutoSize = true;
-            rejectReasonLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            rejectReasonLabel.BackgroundStyle.Class = "";
-            rejectReasonLabel.Location = new System.Drawing.Point(51, 239);
-            rejectReasonLabel.Name = "rejectReasonLabel";
-            rejectReasonLabel.Size = new System.Drawing.Size(59, 16);
-            rejectReasonLabel.TabIndex = 15;
-            rejectReasonLabel.Text = "退回原因:";
-            // 
-            // checkStatusLabel
-            // 
-            checkStatusLabel.AutoSize = true;
-            checkStatusLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            checkStatusLabel.BackgroundStyle.Class = "";
-            checkStatusLabel.Location = new System.Drawing.Point(51, 212);
-            checkStatusLabel.Name = "checkStatusLabel";
-            checkStatusLabel.Size = new System.Drawing.Size(59, 16);
-            checkStatusLabel.TabIndex = 13;
-            checkStatusLabel.Text = "复核状态:";
             // 
             // createUserNameLabel
             // 
@@ -327,125 +254,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl.SelectedTabIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(406, 402);
+            this.tabControl.Size = new System.Drawing.Size(406, 273);
             this.tabControl.TabIndex = 1;
             this.tabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl.Tabs.Add(this.tabItemBatch);
             this.tabControl.Tabs.Add(this.tabItemInvoices);
-            // 
-            // panelInvoices
-            // 
-            this.panelInvoices.Controls.Add(this.dgvPaymentLogs);
-            this.panelInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelInvoices.Location = new System.Drawing.Point(0, 26);
-            this.panelInvoices.Name = "panelInvoices";
-            this.panelInvoices.Padding = new System.Windows.Forms.Padding(1);
-            this.panelInvoices.Size = new System.Drawing.Size(406, 376);
-            this.panelInvoices.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.panelInvoices.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.panelInvoices.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelInvoices.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.panelInvoices.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.panelInvoices.Style.GradientAngle = 90;
-            this.panelInvoices.TabIndex = 2;
-            this.panelInvoices.TabItem = this.tabItemInvoices;
-            // 
-            // dgvPaymentLogs
-            // 
-            this.dgvPaymentLogs.AllowUserToAddRows = false;
-            this.dgvPaymentLogs.AllowUserToDeleteRows = false;
-            this.dgvPaymentLogs.AllowUserToOrderColumns = true;
-            this.dgvPaymentLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPaymentLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvPaymentLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPaymentLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colInvoiceNo,
-            this.colAssignOutstanding,
-            this.colPaymentAmount,
-            this.colCreditNoteNo,
-            this.colCreditNoteDate,
-            this.colComment});
-            this.dgvPaymentLogs.ContextMenuStrip = this.cmuLogMgr;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPaymentLogs.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvPaymentLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPaymentLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvPaymentLogs.Location = new System.Drawing.Point(1, 1);
-            this.dgvPaymentLogs.Name = "dgvPaymentLogs";
-            this.dgvPaymentLogs.ReadOnly = true;
-            this.dgvPaymentLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPaymentLogs.Size = new System.Drawing.Size(404, 374);
-            this.dgvPaymentLogs.TabIndex = 0;
-            this.dgvPaymentLogs.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailInvoice);
-            this.dgvPaymentLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPaymentLogs_RowPostPaint);
-            // 
-            // colInvoiceNo
-            // 
-            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
-            this.colInvoiceNo.HeaderText = "发票号";
-            this.colInvoiceNo.Name = "colInvoiceNo";
-            this.colInvoiceNo.ReadOnly = true;
-            // 
-            // colAssignOutstanding
-            // 
-            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignOutstanding.HeaderText = "转让余额";
-            this.colAssignOutstanding.Name = "colAssignOutstanding";
-            this.colAssignOutstanding.ReadOnly = true;
-            // 
-            // colPaymentAmount
-            // 
-            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPaymentAmount.HeaderText = "付款金额";
-            this.colPaymentAmount.Name = "colPaymentAmount";
-            this.colPaymentAmount.ReadOnly = true;
-            // 
-            // colCreditNoteNo
-            // 
-            this.colCreditNoteNo.DataPropertyName = "CreditNoteNo";
-            this.colCreditNoteNo.HeaderText = "贷项通知编号";
-            this.colCreditNoteNo.Name = "colCreditNoteNo";
-            this.colCreditNoteNo.ReadOnly = true;
-            // 
-            // colCreditNoteDate
-            // 
-            this.colCreditNoteDate.DataPropertyName = "CreditNoteDate";
-            this.colCreditNoteDate.HeaderText = "贷项通知日";
-            this.colCreditNoteDate.Name = "colCreditNoteDate";
-            this.colCreditNoteDate.ReadOnly = true;
-            // 
-            // colComment
-            // 
-            this.colComment.DataPropertyName = "Comment";
-            this.colComment.HeaderText = "备注";
-            this.colComment.Name = "colComment";
-            this.colComment.ReadOnly = true;
-            // 
-            // tabItemInvoices
-            // 
-            this.tabItemInvoices.AttachedControl = this.panelInvoices;
-            this.tabItemInvoices.Name = "tabItemInvoices";
-            this.tabItemInvoices.Text = "发票";
             // 
             // panelBatch
             // 
@@ -454,18 +267,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Controls.Add(this.diInputDate);
             this.panelBatch.Controls.Add(paymentTypeLabel);
             this.panelBatch.Controls.Add(this.paymentTypeComboBox);
-            this.panelBatch.Controls.Add(this.checkStatusComboBox);
             this.panelBatch.Controls.Add(this.btnSave);
             this.panelBatch.Controls.Add(this.btnUpdate);
             this.panelBatch.Controls.Add(commentLabel);
             this.panelBatch.Controls.Add(this.commentTextBox);
-            this.panelBatch.Controls.Add(checkUserNameLabel);
-            this.panelBatch.Controls.Add(this.checkUserNameTextBox);
-            this.panelBatch.Controls.Add(checkDateLabel);
-            this.panelBatch.Controls.Add(this.checkDateDateTimePicker);
-            this.panelBatch.Controls.Add(rejectReasonLabel);
-            this.panelBatch.Controls.Add(this.rejectReasonTextBox);
-            this.panelBatch.Controls.Add(checkStatusLabel);
             this.panelBatch.Controls.Add(createUserNameLabel);
             this.panelBatch.Controls.Add(this.createUserNameTextBox);
             this.panelBatch.Controls.Add(this.isCreateMsgCheckBox);
@@ -479,7 +284,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Location = new System.Drawing.Point(0, 26);
             this.panelBatch.Name = "panelBatch";
             this.panelBatch.Padding = new System.Windows.Forms.Padding(1);
-            this.panelBatch.Size = new System.Drawing.Size(406, 376);
+            this.panelBatch.Size = new System.Drawing.Size(406, 247);
             this.panelBatch.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
             this.panelBatch.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
             this.panelBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -489,6 +294,25 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Style.GradientAngle = 90;
             this.panelBatch.TabIndex = 1;
             this.panelBatch.TabItem = this.tabItemBatch;
+            // 
+            // isSendMsgCheckBox
+            // 
+            this.isSendMsgCheckBox.AutoSize = true;
+            this.isSendMsgCheckBox.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.isSendMsgCheckBox.BackgroundStyle.Class = "";
+            this.isSendMsgCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.batchBindingSource, "IsSendMsg", true));
+            this.isSendMsgCheckBox.Location = new System.Drawing.Point(283, 168);
+            this.isSendMsgCheckBox.Name = "isSendMsgCheckBox";
+            this.isSendMsgCheckBox.Size = new System.Drawing.Size(101, 16);
+            this.isSendMsgCheckBox.TabIndex = 25;
+            this.isSendMsgCheckBox.Text = "是否已发报文";
+            // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoicePaymentBatch);
             // 
             // diInputDate
             // 
@@ -526,10 +350,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.diInputDate.Size = new System.Drawing.Size(100, 20);
             this.diInputDate.TabIndex = 24;
             // 
-            // batchBindingSource
-            // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoicePaymentBatch);
-            // 
             // paymentTypeComboBox
             // 
             this.paymentTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "PaymentType", true));
@@ -547,26 +367,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.paymentTypeComboBox.Size = new System.Drawing.Size(162, 21);
             this.paymentTypeComboBox.TabIndex = 5;
             // 
-            // checkStatusComboBox
-            // 
-            this.checkStatusComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CheckStatus", true));
-            this.checkStatusComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.checkStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.checkStatusComboBox.FormattingEnabled = true;
-            this.checkStatusComboBox.Items.AddRange(new object[] {
-            "未复核",
-            "已复核",
-            "复核未通过"});
-            this.checkStatusComboBox.Location = new System.Drawing.Point(116, 210);
-            this.checkStatusComboBox.Name = "checkStatusComboBox";
-            this.checkStatusComboBox.Size = new System.Drawing.Size(162, 21);
-            this.checkStatusComboBox.TabIndex = 14;
-            // 
             // btnSave
             // 
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(203, 344);
+            this.btnSave.Location = new System.Drawing.Point(228, 213);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -578,7 +383,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUpdate.Location = new System.Drawing.Point(116, 344);
+            this.btnUpdate.Location = new System.Drawing.Point(141, 213);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -599,68 +404,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.commentTextBox.Size = new System.Drawing.Size(268, 65);
             this.commentTextBox.TabIndex = 9;
-            // 
-            // checkUserNameTextBox
-            // 
-            // 
-            // 
-            // 
-            this.checkUserNameTextBox.Border.Class = "TextBoxBorder";
-            this.checkUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CheckUserName", true));
-            this.checkUserNameTextBox.Location = new System.Drawing.Point(116, 311);
-            this.checkUserNameTextBox.Name = "checkUserNameTextBox";
-            this.checkUserNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.checkUserNameTextBox.TabIndex = 20;
-            // 
-            // checkDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.checkDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.checkDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.checkDateDateTimePicker.ButtonFreeText.Checked = true;
-            this.checkDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "CheckDate", true));
-            this.checkDateDateTimePicker.FreeTextEntryMode = true;
-            this.checkDateDateTimePicker.Location = new System.Drawing.Point(116, 286);
-            // 
-            // 
-            // 
-            this.checkDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.checkDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.checkDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.checkDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.checkDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.checkDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.checkDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.checkDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.checkDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.checkDateDateTimePicker.Name = "checkDateDateTimePicker";
-            this.checkDateDateTimePicker.Size = new System.Drawing.Size(100, 20);
-            this.checkDateDateTimePicker.TabIndex = 18;
-            // 
-            // rejectReasonTextBox
-            // 
-            // 
-            // 
-            // 
-            this.rejectReasonTextBox.Border.Class = "TextBoxBorder";
-            this.rejectReasonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RejectReason", true));
-            this.rejectReasonTextBox.Location = new System.Drawing.Point(116, 237);
-            this.rejectReasonTextBox.Multiline = true;
-            this.rejectReasonTextBox.Name = "rejectReasonTextBox";
-            this.rejectReasonTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.rejectReasonTextBox.Size = new System.Drawing.Size(268, 45);
-            this.rejectReasonTextBox.TabIndex = 16;
             // 
             // createUserNameTextBox
             // 
@@ -757,6 +500,120 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabItemBatch.Name = "tabItemBatch";
             this.tabItemBatch.Text = "批次";
             // 
+            // panelInvoices
+            // 
+            this.panelInvoices.Controls.Add(this.dgvPaymentLogs);
+            this.panelInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelInvoices.Location = new System.Drawing.Point(0, 26);
+            this.panelInvoices.Name = "panelInvoices";
+            this.panelInvoices.Padding = new System.Windows.Forms.Padding(1);
+            this.panelInvoices.Size = new System.Drawing.Size(406, 247);
+            this.panelInvoices.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.panelInvoices.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.panelInvoices.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelInvoices.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.panelInvoices.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.panelInvoices.Style.GradientAngle = 90;
+            this.panelInvoices.TabIndex = 2;
+            this.panelInvoices.TabItem = this.tabItemInvoices;
+            // 
+            // dgvPaymentLogs
+            // 
+            this.dgvPaymentLogs.AllowUserToAddRows = false;
+            this.dgvPaymentLogs.AllowUserToDeleteRows = false;
+            this.dgvPaymentLogs.AllowUserToOrderColumns = true;
+            this.dgvPaymentLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPaymentLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvPaymentLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPaymentLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colInvoiceNo,
+            this.colAssignOutstanding,
+            this.colPaymentAmount,
+            this.colCreditNoteNo,
+            this.colCreditNoteDate,
+            this.colComment});
+            this.dgvPaymentLogs.ContextMenuStrip = this.cmuLogMgr;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPaymentLogs.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvPaymentLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPaymentLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvPaymentLogs.Location = new System.Drawing.Point(1, 1);
+            this.dgvPaymentLogs.Name = "dgvPaymentLogs";
+            this.dgvPaymentLogs.ReadOnly = true;
+            this.dgvPaymentLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPaymentLogs.Size = new System.Drawing.Size(404, 245);
+            this.dgvPaymentLogs.TabIndex = 0;
+            this.dgvPaymentLogs.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailInvoice);
+            this.dgvPaymentLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPaymentLogs_RowPostPaint);
+            // 
+            // colInvoiceNo
+            // 
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.HeaderText = "发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
+            this.colInvoiceNo.ReadOnly = true;
+            // 
+            // colAssignOutstanding
+            // 
+            this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAssignOutstanding.HeaderText = "转让余额";
+            this.colAssignOutstanding.Name = "colAssignOutstanding";
+            this.colAssignOutstanding.ReadOnly = true;
+            // 
+            // colPaymentAmount
+            // 
+            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colPaymentAmount.HeaderText = "付款金额";
+            this.colPaymentAmount.Name = "colPaymentAmount";
+            this.colPaymentAmount.ReadOnly = true;
+            // 
+            // colCreditNoteNo
+            // 
+            this.colCreditNoteNo.DataPropertyName = "CreditNoteNo";
+            this.colCreditNoteNo.HeaderText = "贷项通知编号";
+            this.colCreditNoteNo.Name = "colCreditNoteNo";
+            this.colCreditNoteNo.ReadOnly = true;
+            // 
+            // colCreditNoteDate
+            // 
+            this.colCreditNoteDate.DataPropertyName = "CreditNoteDate";
+            this.colCreditNoteDate.HeaderText = "贷项通知日";
+            this.colCreditNoteDate.Name = "colCreditNoteDate";
+            this.colCreditNoteDate.ReadOnly = true;
+            // 
+            // colComment
+            // 
+            this.colComment.DataPropertyName = "Comment";
+            this.colComment.HeaderText = "备注";
+            this.colComment.Name = "colComment";
+            this.colComment.ReadOnly = true;
+            // 
+            // tabItemInvoices
+            // 
+            this.tabItemInvoices.AttachedControl = this.panelInvoices;
+            this.tabItemInvoices.Name = "tabItemInvoices";
+            this.tabItemInvoices.Text = "发票";
+            // 
             // superValidator
             // 
             this.superValidator.ErrorProvider = this.errorProvider;
@@ -767,26 +624,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 
-            // isSendMsgCheckBox
-            // 
-            this.isSendMsgCheckBox.AutoSize = true;
-            this.isSendMsgCheckBox.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.isSendMsgCheckBox.BackgroundStyle.Class = "";
-            this.isSendMsgCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.batchBindingSource, "IsSendMsg", true));
-            this.isSendMsgCheckBox.Location = new System.Drawing.Point(283, 168);
-            this.isSendMsgCheckBox.Name = "isSendMsgCheckBox";
-            this.isSendMsgCheckBox.Size = new System.Drawing.Size(101, 16);
-            this.isSendMsgCheckBox.TabIndex = 25;
-            this.isSendMsgCheckBox.Text = "是否已发报文";
-            // 
             // PaymentBatchDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 402);
+            this.ClientSize = new System.Drawing.Size(406, 273);
             this.Controls.Add(this.tabControl);
             this.DoubleBuffered = true;
             this.Name = "PaymentBatchDetail";
@@ -795,14 +637,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.cmuLogMgr.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
-            this.panelInvoices.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).EndInit();
             this.panelBatch.ResumeLayout(false);
             this.panelBatch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkDateDateTimePicker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentDateDateTimePicker)).EndInit();
+            this.panelInvoices.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentLogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
