@@ -88,17 +88,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -109,6 +99,7 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFactorName = new DevComponents.DotNetBar.LabelX();
@@ -147,9 +138,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.colMsgType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -171,6 +159,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMsgType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMsgDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMsgAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemitDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemitAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -529,9 +522,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBatches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colMsgType,
-            this.colMsgDate,
-            this.colMsgAmount,
             this.colFactorCode,
             this.colFactorName,
             this.colLocation,
@@ -552,16 +542,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFactorCommissionAmount,
             this.colCreateUserName,
             this.colCheckStatus,
-            this.colBatchCount});
+            this.colBatchCount,
+            this.colMsgType,
+            this.colMsgDate,
+            this.colMsgAmount,
+            this.colRemitDate,
+            this.colRemitAmount});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvBatches.Location = new System.Drawing.Point(0, 55);
@@ -708,34 +703,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemBatchExport.Text = "导出选定批次";
             this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
-            // colMsgType
-            // 
-            this.colMsgType.DataPropertyName = "MsgType";
-            this.colMsgType.HeaderText = "消息类型";
-            this.colMsgType.Name = "colMsgType";
-            this.colMsgType.ReadOnly = true;
-            this.colMsgType.Visible = false;
-            // 
-            // colMsgDate
-            // 
-            this.colMsgDate.DataPropertyName = "MsgDate";
-            this.colMsgDate.HeaderText = "消息日期";
-            this.colMsgDate.Name = "colMsgDate";
-            this.colMsgDate.ReadOnly = true;
-            this.colMsgDate.Visible = false;
-            // 
-            // colMsgAmount
-            // 
-            this.colMsgAmount.DataPropertyName = "MsgAmount";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colMsgAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colMsgAmount.HeaderText = "消息金额";
-            this.colMsgAmount.Name = "colMsgAmount";
-            this.colMsgAmount.ReadOnly = true;
-            this.colMsgAmount.Visible = false;
-            // 
             // colFactorCode
             // 
             this.colFactorCode.DataPropertyName = "FactorCode";
@@ -792,8 +759,8 @@ namespace CMBC.EasyFactor.ARMgr
             // colAssignDate
             // 
             this.colAssignDate.DataPropertyName = "AssignDate";
-            dataGridViewCellStyle3.Format = "d";
-            this.colAssignDate.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Format = "d";
+            this.colAssignDate.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAssignDate.HeaderText = "转让日";
             this.colAssignDate.Name = "colAssignDate";
             this.colAssignDate.ReadOnly = true;
@@ -817,9 +784,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colAssignAmount
             // 
             this.colAssignAmount.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAssignAmount.HeaderText = "转让金额";
             this.colAssignAmount.Name = "colAssignAmount";
             this.colAssignAmount.ReadOnly = true;
@@ -827,9 +794,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colAssignOutstanding
             // 
             this.colAssignOutstanding.DataPropertyName = "AssignOutstanding";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.colAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
             this.colAssignOutstanding.HeaderText = "转让余额";
             this.colAssignOutstanding.Name = "colAssignOutstanding";
             this.colAssignOutstanding.ReadOnly = true;
@@ -837,9 +804,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinanceAmount
             // 
             this.colFinanceAmount.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle5;
             this.colFinanceAmount.HeaderText = "融资金额";
             this.colFinanceAmount.Name = "colFinanceAmount";
             this.colFinanceAmount.ReadOnly = true;
@@ -847,9 +814,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colFinanceOutstanding
             // 
             this.colFinanceOutstanding.DataPropertyName = "FinanceOutstanding";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
-            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.colFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle6;
             this.colFinanceOutstanding.HeaderText = "融资余额";
             this.colFinanceOutstanding.Name = "colFinanceOutstanding";
             this.colFinanceOutstanding.ReadOnly = true;
@@ -857,9 +824,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colPaymentAmount
             // 
             this.colPaymentAmount.DataPropertyName = "PaymentAmount";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle7;
             this.colPaymentAmount.HeaderText = "付款金额";
             this.colPaymentAmount.Name = "colPaymentAmount";
             this.colPaymentAmount.ReadOnly = true;
@@ -867,9 +834,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colRefundAmount
             // 
             this.colRefundAmount.DataPropertyName = "RefundAmount";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle8;
             this.colRefundAmount.HeaderText = "还款金额";
             this.colRefundAmount.Name = "colRefundAmount";
             this.colRefundAmount.ReadOnly = true;
@@ -877,9 +844,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colCommissionAmount
             // 
             this.colCommissionAmount.DataPropertyName = "CommissionAmount";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            this.colCommissionAmount.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            this.colCommissionAmount.DefaultCellStyle = dataGridViewCellStyle9;
             this.colCommissionAmount.HeaderText = "总手续费";
             this.colCommissionAmount.Name = "colCommissionAmount";
             this.colCommissionAmount.ReadOnly = true;
@@ -887,9 +854,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colFactorCommissionAmount
             // 
             this.colFactorCommissionAmount.DataPropertyName = "FactorCommissionAmount";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N2";
-            this.colFactorCommissionAmount.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N2";
+            this.colFactorCommissionAmount.DefaultCellStyle = dataGridViewCellStyle10;
             this.colFactorCommissionAmount.HeaderText = "合作保理商手续费";
             this.colFactorCommissionAmount.Name = "colFactorCommissionAmount";
             this.colFactorCommissionAmount.ReadOnly = true;
@@ -918,6 +885,54 @@ namespace CMBC.EasyFactor.ARMgr
             this.colBatchCount.ReadOnly = true;
             this.colBatchCount.Width = 80;
             // 
+            // colMsgType
+            // 
+            this.colMsgType.DataPropertyName = "MsgType";
+            this.colMsgType.HeaderText = "消息类型";
+            this.colMsgType.Name = "colMsgType";
+            this.colMsgType.ReadOnly = true;
+            this.colMsgType.Visible = false;
+            // 
+            // colMsgDate
+            // 
+            this.colMsgDate.DataPropertyName = "MsgDate";
+            this.colMsgDate.HeaderText = "消息日期";
+            this.colMsgDate.Name = "colMsgDate";
+            this.colMsgDate.ReadOnly = true;
+            this.colMsgDate.Visible = false;
+            // 
+            // colMsgAmount
+            // 
+            this.colMsgAmount.DataPropertyName = "MsgAmount";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.colMsgAmount.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colMsgAmount.HeaderText = "消息金额";
+            this.colMsgAmount.Name = "colMsgAmount";
+            this.colMsgAmount.ReadOnly = true;
+            this.colMsgAmount.Visible = false;
+            // 
+            // colRemitDate
+            // 
+            this.colRemitDate.DataPropertyName = "RemitDate";
+            this.colRemitDate.HeaderText = "汇款日期";
+            this.colRemitDate.Name = "colRemitDate";
+            this.colRemitDate.ReadOnly = true;
+            this.colRemitDate.Visible = false;
+            // 
+            // colRemitAmount
+            // 
+            this.colRemitAmount.DataPropertyName = "RemitAmount";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.colRemitAmount.DefaultCellStyle = dataGridViewCellStyle12;
+            this.colRemitAmount.HeaderText = "汇款金额";
+            this.colRemitAmount.Name = "colRemitAmount";
+            this.colRemitAmount.ReadOnly = true;
+            this.colRemitAmount.Visible = false;
+            // 
             // AssignBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -943,9 +958,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemBatchExport;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
         private DevComponents.DotNetBar.LabelX lblFactorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
@@ -967,5 +979,10 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRemitDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRemitAmount;
     }
 }

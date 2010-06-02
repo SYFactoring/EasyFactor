@@ -286,7 +286,6 @@ namespace CMBC.EasyFactor
             this.btnDepartmentImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnFactorImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnExchangeRateImport = new DevComponents.DotNetBar.ButtonItem();
-            this.btnDBBackup = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelMigration = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarInvoiceImport = new DevComponents.DotNetBar.RibbonBar();
             this.btnInvoicesImport = new DevComponents.DotNetBar.ButtonItem();
@@ -393,7 +392,6 @@ namespace CMBC.EasyFactor
             this.lblCommandStatus = new DevComponents.DotNetBar.LabelItem();
             this.lblCurrentUser = new DevComponents.DotNetBar.LabelItem();
             this.ribbonDetailPanel = new DevComponents.DotNetBar.Ribbon.RibbonClientPanel();
-            this.logoLabel = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.notifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -416,7 +414,6 @@ namespace CMBC.EasyFactor
             this.ribbonPanel1.SuspendLayout();
             this.ribbonPanelHelp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).BeginInit();
-            this.ribbonDetailPanel.SuspendLayout();
             this.notifyMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -427,11 +424,11 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonControl.BackgroundStyle.Class = "";
             this.ribbonControl.CaptionVisible = true;
+            this.ribbonControl.Controls.Add(this.ribbonPanel3);
+            this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanelReport);
             this.ribbonControl.Controls.Add(this.ribbonPanelQuery);
             this.ribbonControl.Controls.Add(this.ribbonPanelInfoMgr);
-            this.ribbonControl.Controls.Add(this.ribbonPanel3);
-            this.ribbonControl.Controls.Add(this.ribbonPanelMigration);
             this.ribbonControl.Controls.Add(this.ribbonPanel2);
             this.ribbonControl.Controls.Add(this.ribbonPanelARImport);
             this.ribbonControl.Controls.Add(this.ribbonPanelInvoiceMgr);
@@ -495,6 +492,7 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanelReport.StyleMouseOver.Class = "";
             this.ribbonPanelReport.TabIndex = 3;
+            this.ribbonPanelReport.Visible = false;
             // 
             // ribbonBarAnalysisReport
             // 
@@ -1302,7 +1300,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonPanel3.StyleMouseOver.Class = "";
             this.ribbonPanel3.TabIndex = 11;
-            this.ribbonPanel3.Visible = false;
             // 
             // ribbonBarUserMgr
             // 
@@ -1319,7 +1316,7 @@ namespace CMBC.EasyFactor
             this.ribbonBarUserMgr.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBarUserMgr.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnUserMgr});
-            this.ribbonBarUserMgr.Location = new System.Drawing.Point(450, 0);
+            this.ribbonBarUserMgr.Location = new System.Drawing.Point(375, 0);
             this.ribbonBarUserMgr.Name = "ribbonBarUserMgr";
             this.ribbonBarUserMgr.Size = new System.Drawing.Size(71, 90);
             this.ribbonBarUserMgr.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1360,11 +1357,10 @@ namespace CMBC.EasyFactor
             this.btnUserImport,
             this.btnDepartmentImport,
             this.btnFactorImport,
-            this.btnExchangeRateImport,
-            this.btnDBBackup});
+            this.btnExchangeRateImport});
             this.ribbonBarSystem.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarSystem.Name = "ribbonBarSystem";
-            this.ribbonBarSystem.Size = new System.Drawing.Size(447, 90);
+            this.ribbonBarSystem.Size = new System.Drawing.Size(372, 90);
             this.ribbonBarSystem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonBarSystem.TabIndex = 0;
             this.ribbonBarSystem.Text = "管理";
@@ -1416,15 +1412,6 @@ namespace CMBC.EasyFactor
             this.btnExchangeRateImport.SubItemsExpandWidth = 14;
             this.btnExchangeRateImport.Text = "导入汇率信息";
             this.btnExchangeRateImport.Click += new System.EventHandler(this.ImportExchangeRate);
-            // 
-            // btnDBBackup
-            // 
-            this.btnDBBackup.Image = ((System.Drawing.Image)(resources.GetObject("btnDBBackup.Image")));
-            this.btnDBBackup.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-            this.btnDBBackup.Name = "btnDBBackup";
-            this.btnDBBackup.SubItemsExpandWidth = 14;
-            this.btnDBBackup.Text = "备份数据库";
-            this.btnDBBackup.Click += new System.EventHandler(this.BackupDatabase);
             // 
             // ribbonPanelMigration
             // 
@@ -2599,7 +2586,6 @@ namespace CMBC.EasyFactor
             // 
             // itemReport
             // 
-            this.itemReport.Checked = true;
             this.itemReport.Name = "itemReport";
             this.itemReport.Panel = this.ribbonPanelReport;
             this.itemReport.Text = "报表";
@@ -2612,6 +2598,7 @@ namespace CMBC.EasyFactor
             // 
             // ribbonTabItemSystem
             // 
+            this.ribbonTabItemSystem.Checked = true;
             this.ribbonTabItemSystem.Name = "ribbonTabItemSystem";
             this.ribbonTabItemSystem.Panel = this.ribbonPanel3;
             this.ribbonTabItemSystem.Text = "系统管理";
@@ -2855,7 +2842,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonDetailPanel.AutoSize = true;
             this.ribbonDetailPanel.CanvasColor = System.Drawing.SystemColors.Control;
-            this.ribbonDetailPanel.Controls.Add(this.logoLabel);
             this.ribbonDetailPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ribbonDetailPanel.Location = new System.Drawing.Point(4, 155);
             this.ribbonDetailPanel.Name = "ribbonDetailPanel";
@@ -2873,15 +2859,6 @@ namespace CMBC.EasyFactor
             // 
             this.ribbonDetailPanel.StyleMouseOver.Class = "";
             this.ribbonDetailPanel.TabIndex = 2;
-            // 
-            // logoLabel
-            // 
-            this.logoLabel.BackColor = System.Drawing.Color.Transparent;
-            this.logoLabel.Image = ((System.Drawing.Image)(resources.GetObject("logoLabel.Image")));
-            this.logoLabel.Location = new System.Drawing.Point(3, 3);
-            this.logoLabel.Name = "logoLabel";
-            this.logoLabel.Size = new System.Drawing.Size(348, 112);
-            this.logoLabel.TabIndex = 1;
             // 
             // notifyIcon
             // 
@@ -2981,7 +2958,6 @@ namespace CMBC.EasyFactor
             this.ribbonPanel1.ResumeLayout(false);
             this.ribbonPanelHelp.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.statusbar)).EndInit();
-            this.ribbonDetailPanel.ResumeLayout(false);
             this.notifyMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2997,9 +2973,7 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnSendLeger;
         private DevComponents.DotNetBar.ButtonItem btnAssignImportNew;
         private DevComponents.DotNetBar.ButtonItem btnCreditNoteQuery;
-        private DevComponents.DotNetBar.ButtonItem btnDBBackup;
         private DevComponents.DotNetBar.ButtonItem btnFactorCommissionStat;
-        private System.Windows.Forms.Label logoLabel;
         private DevComponents.DotNetBar.LabelItem labelItem1;
         private DevComponents.DotNetBar.LabelItem menuLogo;
     }

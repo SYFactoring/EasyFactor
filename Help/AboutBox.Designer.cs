@@ -99,8 +99,8 @@ namespace CMBC.EasyFactor.Help
             this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
             this.logoPictureBox.Name = "logoPictureBox";
             this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 7);
-            this.logoPictureBox.Size = new System.Drawing.Size(131, 259);
-            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.logoPictureBox.Size = new System.Drawing.Size(66, 259);
+            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logoPictureBox.TabIndex = 12;
             this.logoPictureBox.TabStop = false;
             // 
@@ -111,11 +111,11 @@ namespace CMBC.EasyFactor.Help
             // 
             this.labelProductName.BackgroundStyle.Class = "";
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelProductName.Location = new System.Drawing.Point(143, 0);
+            this.labelProductName.Location = new System.Drawing.Point(78, 0);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(271, 17);
+            this.labelProductName.Size = new System.Drawing.Size(336, 17);
             this.labelProductName.TabIndex = 19;
             this.labelProductName.Text = "产品名称";
             // 
@@ -126,11 +126,11 @@ namespace CMBC.EasyFactor.Help
             // 
             this.labelVersion.BackgroundStyle.Class = "";
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelVersion.Location = new System.Drawing.Point(143, 23);
+            this.labelVersion.Location = new System.Drawing.Point(78, 23);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelVersion.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(271, 17);
+            this.labelVersion.Size = new System.Drawing.Size(336, 17);
             this.labelVersion.TabIndex = 0;
             this.labelVersion.Text = "版本";
             // 
@@ -141,11 +141,11 @@ namespace CMBC.EasyFactor.Help
             // 
             this.labelCopyright.BackgroundStyle.Class = "";
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(143, 46);
+            this.labelCopyright.Location = new System.Drawing.Point(78, 46);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(271, 17);
+            this.labelCopyright.Size = new System.Drawing.Size(336, 17);
             this.labelCopyright.TabIndex = 21;
             this.labelCopyright.Text = "版权";
             // 
@@ -156,24 +156,24 @@ namespace CMBC.EasyFactor.Help
             // 
             this.labelCompanyName.BackgroundStyle.Class = "";
             this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCompanyName.Location = new System.Drawing.Point(143, 69);
+            this.labelCompanyName.Location = new System.Drawing.Point(78, 69);
             this.labelCompanyName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelCompanyName.Name = "labelCompanyName";
-            this.labelCompanyName.Size = new System.Drawing.Size(271, 17);
+            this.labelCompanyName.Size = new System.Drawing.Size(336, 17);
             this.labelCompanyName.TabIndex = 22;
             this.labelCompanyName.Text = "公司名称";
             // 
             // textBoxDescription
             // 
             this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDescription.Location = new System.Drawing.Point(143, 95);
+            this.textBoxDescription.Location = new System.Drawing.Point(78, 95);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ReadOnly = true;
             this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDescription.Size = new System.Drawing.Size(271, 115);
+            this.textBoxDescription.Size = new System.Drawing.Size(336, 115);
             this.textBoxDescription.TabIndex = 23;
             this.textBoxDescription.TabStop = false;
             this.textBoxDescription.Text = "说明";

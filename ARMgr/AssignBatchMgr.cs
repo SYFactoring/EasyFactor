@@ -18,6 +18,7 @@ namespace CMBC.EasyFactor.ARMgr
     using DevComponents.DotNetBar;
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
+    using CMBC.EasyFactor.CaseMgr;
 
     /// <summary>
     /// 
@@ -172,6 +173,16 @@ namespace CMBC.EasyFactor.ARMgr
                 this.colMsgType.Visible = true;
                 this.colMsgDate.Visible = true;
                 this.colMsgAmount.Visible = true;
+                this.colRemitDate.Visible = true;
+                this.colRemitAmount.Visible = true;
+                this.colIsSendMsg.Visible = false;
+                this.colAssignOutstanding.Visible = false;
+                this.colFinanceAmount.Visible = false;
+                this.colFinanceOutstanding.Visible = false;
+                this.colPaymentAmount.Visible = false;
+                this.colRefundAmount.Visible = false;
+                this.colCreateUserName.Visible = false;
+                this.colCheckStatus.Visible = false;
             }
         }
 
@@ -340,8 +351,25 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceAssignBatch selectedBatch = (InvoiceAssignBatch)this.bs.List[this.dgvBatches.CurrentCell.RowIndex];
-            AssignBatchDetail detail = new AssignBatchDetail(selectedBatch);
-            detail.ShowDialog(this);
+            DataGridViewColumn column = this.dgvBatches.CurrentCell.OwningColumn;
+            if (column == colMsgAmount || column == colMsgDate || column == colMsgType || column == colRemitAmount || column == colRemitDate)
+            {
+                if (selectedBatch.CommissionRemitteance != null)
+                {
+                    CaseDetail detail = new CaseDetail(selectedBatch.CommissionRemitteance, CaseDetail.OpCommissionRemitType.DETAIL_COMMISSION_REMIT);
+                    detail.ShowDialog(this);
+                }
+                else
+                {
+                    AssignBatchDetail detail = new AssignBatchDetail(selectedBatch);
+                    detail.ShowDialog(this);
+                }
+            }
+            else
+            {
+                AssignBatchDetail detail = new AssignBatchDetail(selectedBatch);
+                detail.ShowDialog(this);
+            }
         }
 
         /// <summary>

@@ -85,7 +85,7 @@ namespace CMBC.EasyFactor
             // 
             this.panelHeader.BackColor = System.Drawing.Color.White;
             this.panelHeader.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelHeader.BackgroundImage")));
-            this.panelHeader.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelHeader.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
@@ -204,7 +204,7 @@ namespace CMBC.EasyFactor
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // LoginWindow
+            // LogOnWindow
             // 
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,7 +216,7 @@ namespace CMBC.EasyFactor
             this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "LoginWindow";
+            this.Name = "LogOnWindow";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "µÇÂ¼";

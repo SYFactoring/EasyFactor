@@ -20,8 +20,6 @@ namespace CMBC.EasyFactor.Utils
     using CMBC.EasyFactor.Utils.ConstStr;
     using DevComponents.DotNetBar;
     using Microsoft.Office.Interop.Excel;
-    using Microsoft.SqlServer.Management.Common;
-    using Microsoft.SqlServer.Management.Smo;
 
     /// <summary>
     /// 
@@ -141,10 +139,10 @@ namespace CMBC.EasyFactor.Utils
             /// </summary>
             EXPORT_CDAS,
 
-            /// <summary>
-            /// 
-            /// </summary>
-            BACKUP_DATABASE
+            ///// <summary>
+            ///// 
+            ///// </summary>
+            //BACKUP_DATABASE
         }
 
         #endregion?Enums?
@@ -246,9 +244,9 @@ namespace CMBC.EasyFactor.Utils
                 case ExportType.EXPORT_CDAS:
                     e.Result = this.ExportCDAs(worker, e);
                     break;
-                case ExportType.BACKUP_DATABASE:
-                    e.Result = this.BackupDatabase(worker, e);
-                    break;
+                //case ExportType.BACKUP_DATABASE:
+                //    e.Result = this.BackupDatabase(worker, e);
+                //    break;
                 default:
                     break;
             }
@@ -329,38 +327,38 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private string BackupDatabase(BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            string destinationPath = String.Format(@"C:\Program Files\Microsoft SQL Server\MSSQL.1\MSSQL\Backup\{0}_{1:yyyyMMdd}.bak", SystemUtil.DataBaseName, DateTime.Today);
+        //private string BackupDatabase(BackgroundWorker worker, DoWorkEventArgs e)
+        //{
+        //    string destinationPath = String.Format(@"C:\Program Files\Microsoft SQL Server\MSSQL.1\MSSQL\Backup\{0}_{1:yyyyMMdd}.bak", SystemUtil.DataBaseName, DateTime.Today);
 
-            ServerConnection sqlConnection = new ServerConnection(new SqlConnection(SystemUtil.ConnectionString));
-            Server server = new Server(sqlConnection);
+        //    ServerConnection sqlConnection = new ServerConnection(new SqlConnection(SystemUtil.ConnectionString));
+        //    Server server = new Server(sqlConnection);
 
-            Backup sqlBackup = new Backup();
-            sqlBackup.Devices.AddDevice(destinationPath, DeviceType.File);
-            sqlBackup.Database = SystemUtil.DataBaseName;
-            sqlBackup.Action = BackupActionType.Database;
-            sqlBackup.Initialize = true;
-            sqlBackup.BackupSetName = SystemUtil.DataBaseName + " : " + DateTime.Now.ToString(); ;
-            sqlBackup.BackupSetDescription = SystemUtil.DataBaseName + " : " + DateTime.Now.ToString();
+        //    Backup sqlBackup = new Backup();
+        //    sqlBackup.Devices.AddDevice(destinationPath, DeviceType.File);
+        //    sqlBackup.Database = SystemUtil.DataBaseName;
+        //    sqlBackup.Action = BackupActionType.Database;
+        //    sqlBackup.Initialize = true;
+        //    sqlBackup.BackupSetName = SystemUtil.DataBaseName + " : " + DateTime.Now.ToString(); ;
+        //    sqlBackup.BackupSetDescription = SystemUtil.DataBaseName + " : " + DateTime.Now.ToString();
 
-            sqlBackup.Checksum = true;
-            sqlBackup.ContinueAfterError = true;
-            sqlBackup.Incremental = false;
-            sqlBackup.LogTruncation = BackupTruncateLogType.Truncate;
-            sqlBackup.FormatMedia = false;
+        //    sqlBackup.Checksum = true;
+        //    sqlBackup.ContinueAfterError = true;
+        //    sqlBackup.Incremental = false;
+        //    sqlBackup.LogTruncation = BackupTruncateLogType.Truncate;
+        //    sqlBackup.FormatMedia = false;
 
-            sqlBackup.SqlBackup(server);
+        //    sqlBackup.SqlBackup(server);
 
-            if (File.Exists(destinationPath))
-            {
-                return destinationPath;
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
+        //    if (File.Exists(destinationPath))
+        //    {
+        //        return destinationPath;
+        //    }
+        //    else
+        //    {
+        //        return string.Empty;
+        //    }
+        //}
 
         /// <summary>
         /// 

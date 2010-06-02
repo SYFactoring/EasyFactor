@@ -85,6 +85,40 @@ namespace CMBC.EasyFactor.DB.dbml
                 return string.Empty;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? RemitDate
+        {
+            get
+            {
+                CommissionRemittance cr = this.CommissionRemitteance;
+                if (cr != null)
+                {
+                    return cr.RemitDate;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? RemitAmount
+        {
+            get
+            {
+                CommissionRemittance cr = this.CommissionRemitteance;
+                if (cr != null)
+                {
+                    return cr.RemitAmount;
+                }
+
+                return null;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>

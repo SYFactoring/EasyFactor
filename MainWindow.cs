@@ -921,7 +921,6 @@ namespace CMBC.EasyFactor
             this.notifyIcon.Visible = false;
 
             this.ribbonDetailPanel.Controls.Clear();
-            this.ribbonDetailPanel.Controls.Add(this.logoLabel);
         }
 
         private void MainWindow_Deactivate(object sender, EventArgs e)
@@ -1496,14 +1495,14 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BackupDatabase(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
-            {
-                ExportForm form = new ExportForm(ExportForm.ExportType.BACKUP_DATABASE);
-                form.Show();
-            }
-        }
+        //private void BackupDatabase(object sender, EventArgs e)
+        //{
+        //    if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
+        //    {
+        //        ExportForm form = new ExportForm(ExportForm.ExportType.BACKUP_DATABASE);
+        //        form.Show();
+        //    }
+        //}
 
         /// <summary>
         /// 
