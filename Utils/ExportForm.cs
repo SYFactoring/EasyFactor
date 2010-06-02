@@ -385,12 +385,15 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
+                datasheet.Cells[1, column++] = "保理商代码";
+                datasheet.Cells[1, column++] = "保理商名称";
                 datasheet.Cells[1, column++] = "业务地区";
                 datasheet.Cells[1, column++] = "卖方名称";
                 datasheet.Cells[1, column++] = "买方名称";
                 datasheet.Cells[1, column++] = "业务类别";
                 datasheet.Cells[1, column++] = "业务编号";
                 datasheet.Cells[1, column++] = "转让日";
+                datasheet.Cells[1, column++] = "发票笔数";
                 datasheet.Cells[1, column++] = "币别";
                 datasheet.Cells[1, column++] = "转让金额";
                 datasheet.Cells[1, column++] = "转让余额";
@@ -398,8 +401,9 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "融资余额";
                 datasheet.Cells[1, column++] = "付款金额";
                 datasheet.Cells[1, column++] = "还款金额";
-                datasheet.Cells[1, column++] = "手续费";
-                datasheet.Cells[1, column++] = "发票笔数";
+                datasheet.Cells[1, column++] = "总手续费";
+                datasheet.Cells[1, column++] = "保理商手续费";
+                datasheet.Cells[1, column++] = "经办人";
 
                 int size = this.exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -431,12 +435,15 @@ namespace CMBC.EasyFactor.Utils
 
                     column = 1;
                     InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)exportData[row];
+                    datasheet.Cells[row + 2, column++] = assignBatch.FactorCode;
+                    datasheet.Cells[row + 2, column++] = assignBatch.FactorName;
                     datasheet.Cells[row + 2, column++] = assignBatch.Location;
                     datasheet.Cells[row + 2, column++] = assignBatch.SellerName;
                     datasheet.Cells[row + 2, column++] = assignBatch.BuyerName;
                     datasheet.Cells[row + 2, column++] = assignBatch.TransactionType;
                     datasheet.Cells[row + 2, column++] = assignBatch.AssignBatchNo;
                     datasheet.Cells[row + 2, column++] = assignBatch.AssignDate;
+                    datasheet.Cells[row + 2, column++] = assignBatch.BatchCount;
                     datasheet.Cells[row + 2, column++] = assignBatch.BatchCurrency;
                     datasheet.Cells[row + 2, column++] = assignBatch.AssignAmount;
                     datasheet.Cells[row + 2, column++] = assignBatch.AssignOutstanding;
@@ -445,7 +452,8 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = assignBatch.PaymentAmount;
                     datasheet.Cells[row + 2, column++] = assignBatch.RefundAmount;
                     datasheet.Cells[row + 2, column++] = assignBatch.CommissionAmount;
-                    datasheet.Cells[row + 2, column++] = assignBatch.BatchCount;
+                    datasheet.Cells[row + 2, column++] = assignBatch.FactorCommissionAmount;
+                    datasheet.Cells[row + 2, column++] = assignBatch.CreateUserName;
 
                     worker.ReportProgress((int)((float)row * 100 / (float)size));
                 }
@@ -453,11 +461,11 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 6)
+                    if (range.Column == 8)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
-                    else if (range.Column == 8 || range.Column == 9 || range.Column == 10 || range.Column == 11 || range.Column == 12 || range.Column == 13 || range.Column == 14)
+                    else if (range.Column > 10 && range.Column < 19)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }

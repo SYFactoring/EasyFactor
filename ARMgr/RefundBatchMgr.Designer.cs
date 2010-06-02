@@ -106,9 +106,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRefundBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRefundType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRefundDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -459,9 +459,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRefundBatchNo,
             this.colRefundType,
             this.colRefundDate,
+            this.colBatchCount,
             this.colRefundAmount,
-            this.colCreateUserName,
-            this.colBatchCount});
+            this.colCreateUserName});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
@@ -588,6 +588,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRefundDate.ReadOnly = true;
             this.colRefundDate.Width = 80;
             // 
+            // colBatchCount
+            // 
+            this.colBatchCount.DataPropertyName = "BatchCount";
+            this.colBatchCount.HeaderText = "发票笔数";
+            this.colBatchCount.Name = "colBatchCount";
+            this.colBatchCount.ReadOnly = true;
+            this.colBatchCount.Width = 70;
+            // 
             // colRefundAmount
             // 
             this.colRefundAmount.DataPropertyName = "RefundAmount";
@@ -605,14 +613,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCreateUserName.Name = "colCreateUserName";
             this.colCreateUserName.ReadOnly = true;
             this.colCreateUserName.Width = 70;
-            // 
-            // colBatchCount
-            // 
-            this.colBatchCount.DataPropertyName = "BatchCount";
-            this.colBatchCount.HeaderText = "发票笔数";
-            this.colBatchCount.Name = "colBatchCount";
-            this.colBatchCount.ReadOnly = true;
-            this.colBatchCount.Width = 70;
             // 
             // RefundBatchMgr
             // 
@@ -641,9 +641,10 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundBatchNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
+
 
 
     }

@@ -189,6 +189,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnRejectCheckRefund.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRejectCheckRefund.TabIndex = 4;
             this.btnRejectCheckRefund.Text = "e) 还款";
+            this.btnRejectCheckRefund.Visible = false;
             this.btnRejectCheckRefund.Click += new System.EventHandler(this.QueryRejectCheckRefunds);
             // 
             // btnRejectCheckPayment
@@ -202,6 +203,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnRejectCheckPayment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRejectCheckPayment.TabIndex = 3;
             this.btnRejectCheckPayment.Text = "d) 付款";
+            this.btnRejectCheckPayment.Visible = false;
             this.btnRejectCheckPayment.Click += new System.EventHandler(this.QueryRejectCheckPayments);
             // 
             // btnRejectCheckFinance
@@ -215,6 +217,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnRejectCheckFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRejectCheckFinance.TabIndex = 2;
             this.btnRejectCheckFinance.Text = "c) 融资";
+            this.btnRejectCheckFinance.Visible = false;
             this.btnRejectCheckFinance.Click += new System.EventHandler(this.QueryRejectCheckFinances);
             // 
             // btnRejectCheckAssign
@@ -228,6 +231,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnRejectCheckAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRejectCheckAssign.TabIndex = 1;
             this.btnRejectCheckAssign.Text = "b) 转让";
+            this.btnRejectCheckAssign.Visible = false;
             this.btnRejectCheckAssign.Click += new System.EventHandler(this.QueryRejectCheckAssigns);
             // 
             // btnRejectCheckCDA
@@ -285,6 +289,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnWaitCheckRefund.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnWaitCheckRefund.TabIndex = 4;
             this.btnWaitCheckRefund.Text = "e) 还款";
+            this.btnWaitCheckRefund.Visible = false;
             this.btnWaitCheckRefund.Click += new System.EventHandler(this.QueryWaitCheckRefunds);
             // 
             // btnWaitCheckPayment
@@ -298,6 +303,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnWaitCheckPayment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnWaitCheckPayment.TabIndex = 3;
             this.btnWaitCheckPayment.Text = "d) 付款";
+            this.btnWaitCheckPayment.Visible = false;
             this.btnWaitCheckPayment.Click += new System.EventHandler(this.QueryWaitCheckPayments);
             // 
             // btnWaitCheckFinance
@@ -311,6 +317,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnWaitCheckFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnWaitCheckFinance.TabIndex = 2;
             this.btnWaitCheckFinance.Text = "c) 融资";
+            this.btnWaitCheckFinance.Visible = false;
             this.btnWaitCheckFinance.Click += new System.EventHandler(this.QueryWaitCheckFinances);
             // 
             // btnWaitCheckAssign
@@ -324,6 +331,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnWaitCheckAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnWaitCheckAssign.TabIndex = 1;
             this.btnWaitCheckAssign.Text = "b) 转让";
+            this.btnWaitCheckAssign.Visible = false;
             this.btnWaitCheckAssign.Click += new System.EventHandler(this.QueryWaitCheckAssigns);
             // 
             // btnWaitCheckCDA
@@ -381,7 +389,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnNeedCheckRefund.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckRefund.TabIndex = 4;
             this.btnNeedCheckRefund.Text = "e) 还款";
-            //this.btnNeedCheckRefund.Click += new System.EventHandler(this.QueryNeedCheckRefunds);
+            this.btnNeedCheckRefund.Visible = false;
             // 
             // btnNeedCheckPayment
             // 
@@ -394,7 +402,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnNeedCheckPayment.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckPayment.TabIndex = 3;
             this.btnNeedCheckPayment.Text = "d) 付款";
-            //this.btnNeedCheckPayment.Click += new System.EventHandler(this.QueryNeedCheckPayments);
+            this.btnNeedCheckPayment.Visible = false;
             // 
             // btnNeedCheckFinance
             // 
@@ -407,7 +415,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnNeedCheckFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckFinance.TabIndex = 2;
             this.btnNeedCheckFinance.Text = "c) 融资";
-            //this.btnNeedCheckFinance.Click += new System.EventHandler(this.QueryNeedCheckFinances);
+            this.btnNeedCheckFinance.Visible = false;
             // 
             // btnNeedCheckAssign
             // 
@@ -420,7 +428,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnNeedCheckAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNeedCheckAssign.TabIndex = 1;
             this.btnNeedCheckAssign.Text = "b) 转让";
-            //this.btnNeedCheckAssign.Click += new System.EventHandler(this.QueryNeedCheckAssigns);
+            this.btnNeedCheckAssign.Visible = false;
             // 
             // btnNeedCheckCDA
             // 
@@ -696,8 +704,8 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.backgroundWorker.WorkerReportsProgress = true;
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // highlighter
             // 
