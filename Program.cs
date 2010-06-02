@@ -4,12 +4,11 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Windows.Forms;
+
 namespace CMBC.EasyFactor
 {
-    using System;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-
     /// <summary>
     /// Applicatoin entry class
     /// </summary>
@@ -27,7 +26,7 @@ namespace CMBC.EasyFactor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LogOnWindow loginWindow = new LogOnWindow();
+            var loginWindow = new LogOnWindow();
             if (!LogOnWindow.PreLogOn())
             {
                 return;
@@ -38,7 +37,7 @@ namespace CMBC.EasyFactor
 
             if (App.Current.CurUser != null)
             {
-                MainWindow mainWindow = new MainWindow();
+                var mainWindow = new MainWindow();
                 App.Current.MainWindow = mainWindow;
                 Application.Run(mainWindow);
             }

@@ -4,19 +4,19 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils.ConstStr;
+using DevComponents.DotNetBar;
+
 namespace CMBC.EasyFactor
 {
-    using System;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// Login Window
     /// </summary>
-    public partial class LogOnWindow : DevComponents.DotNetBar.Office2007Form
+    public partial class LogOnWindow : Office2007Form
     {
         #region?Constructors?(1)?
 
@@ -25,7 +25,7 @@ namespace CMBC.EasyFactor
         /// </summary>
         public LogOnWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         #endregion?Constructors?
@@ -40,7 +40,7 @@ namespace CMBC.EasyFactor
         /// <returns></returns>
         public static bool PreLogOn()
         {
-            DBDataContext context = new DBDataContext();
+            var context = new DBDataContext();
             try
             {
                 if (context.DatabaseExists())
@@ -52,12 +52,14 @@ namespace CMBC.EasyFactor
             }
             catch (Exception e)
             {
-                MessageBoxEx.Show("数据库连接失败: " + e.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxEx.Show("数据库连接失败: " + e.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
                 return false;
             }
 
             return false;
         }
+
         //?Private?Methods?(2)?
 
         /// <summary>
@@ -67,7 +69,7 @@ namespace CMBC.EasyFactor
         /// <param name="e">Event Args</param>
         private void Cancel(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
             Close();
         }
 
@@ -78,32 +80,32 @@ namespace CMBC.EasyFactor
         /// <param name="e">Event Args</param>
         private void LogOn(object sender, EventArgs e)
         {
-            if (!this.superValidator.Validate())
+            if (!superValidator.Validate())
             {
                 return;
             }
 
-            string uid = this.tbUserId.Text.Trim();
-            string pass = this.tbPassword.Text.Trim();
-            DBDataContext context = new DBDataContext();
+            string uid = tbUserId.Text.Trim();
+            string pass = tbPassword.Text.Trim();
+            var context = new DBDataContext();
             User curUser = context.Users.SingleOrDefault(u => u.UserID == uid);
 
             if (curUser != null)
             {
                 if (!curUser.Password.Equals(pass))
                 {
-                    this.errorProvider.SetError(this.tbPassword, "密码不正确");
+                    errorProvider.SetError(tbPassword, "密码不正确");
                     return;
                 }
 
                 curUser.LoginDate = DateTime.Now;
                 context.SubmitChanges();
                 App.Current.CurUser = curUser;
-                this.DialogResult = DialogResult.OK;
+                DialogResult = DialogResult.OK;
             }
             else
             {
-                this.errorProvider.SetError(this.tbUserId, "用户名不存在");
+                errorProvider.SetError(tbUserId, "用户名不存在");
             }
         }
 

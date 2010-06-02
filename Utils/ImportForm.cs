@@ -1160,7 +1160,7 @@ namespace CMBC.EasyFactor.Utils
 
                             string Comment = String.Format("{0:G}", valueArray[row, column++]);
 
-                            paymentBatch = paymentBatchList.SingleOrDefault(batch => batch.CaseCode == caseCode && batch.PaymentType == Payment.CREDIT_NOTE_PAYMENT);
+                            paymentBatch = paymentBatchList.SingleOrDefault(batch => batch.CaseCode == caseCode && batch.PaymentType == PAYMENT.CREDIT_NOTE_PAYMENT);
                             if (paymentBatch == null)
                             {
                                 paymentBatch = new InvoicePaymentBatch();
@@ -1169,7 +1169,7 @@ namespace CMBC.EasyFactor.Utils
                                 paymentBatch.InputDate = DateTime.Today;
                                 paymentBatch.IsCreateMsg = false;
                                 paymentBatch.PaymentDate = DateTime.Today;
-                                paymentBatch.PaymentType = Payment.CREDIT_NOTE_PAYMENT;
+                                paymentBatch.PaymentType = PAYMENT.CREDIT_NOTE_PAYMENT;
                                 paymentBatch.CreateUserName = App.Current.CurUser.Name;
                                 paymentBatch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(DateTime.Today, paymentBatchList);
                                 paymentBatchList.Add(paymentBatch);
@@ -3101,7 +3101,7 @@ namespace CMBC.EasyFactor.Utils
                             }
 
                             InvoicePaymentBatch paymentBatch = new InvoicePaymentBatch();
-                            paymentBatch.PaymentType = Payment.BUYER_PAYMENT;
+                            paymentBatch.PaymentType = PAYMENT.BUYER_PAYMENT;
                             paymentBatch.PaymentDate = financeBatch.FinancePeriodBegin;
                             //paymentBatch.CheckStatus = BATCH.UNCHECK;
                             paymentBatch.CreateUserName = App.Current.CurUser.Name;
@@ -3403,7 +3403,7 @@ namespace CMBC.EasyFactor.Utils
 
                             //付款批次信息
                             column = 18;
-                            string paymentType = Payment.BUYER_PAYMENT;
+                            string paymentType = PAYMENT.BUYER_PAYMENT;
                             column = 19;
                             DateTime? paymentDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             if (paymentDate != null)
@@ -3441,7 +3441,7 @@ namespace CMBC.EasyFactor.Utils
 
                             //还款批次信息
                             column = 21;
-                            string refundType = Refund.BUYER_PAYMENT;
+                            string refundType = REFUND.BUYER_PAYMENT;
 
                             DateTime? refundDate = (System.Nullable<DateTime>)valueArray[row, column++];
                             if (refundDate != null)

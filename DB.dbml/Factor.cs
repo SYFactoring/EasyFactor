@@ -143,7 +143,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public double GetAssignOutstanding(string currency)
         {
             double result = 0;
-            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
+            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
                 double assignOutstanding = curCase.AssignOutstanding;
                 if (curCase.InvoiceCurrency != currency)

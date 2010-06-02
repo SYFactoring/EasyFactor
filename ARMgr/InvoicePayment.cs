@@ -472,19 +472,19 @@ namespace CMBC.EasyFactor.ARMgr
             switch (paymentType)
             {
                 case OpPaymentType.BUYER_PAYMENT:
-                    batch.PaymentType = Payment.BUYER_PAYMENT;
+                    batch.PaymentType = PAYMENT.BUYER_PAYMENT;
                     break;
                 case OpPaymentType.INDIRECT_PAYMENT:
-                    batch.PaymentType = Payment.INDIRECT_PAYMENT;
+                    batch.PaymentType = PAYMENT.INDIRECT_PAYMENT;
                     break;
                 case OpPaymentType.GUARANTEE_PAYMENT:
-                    batch.PaymentType = Payment.GUARANTEE_PAYMENT;
+                    batch.PaymentType = PAYMENT.GUARANTEE_PAYMENT;
                     break;
                 case OpPaymentType.SELLER_REASSIGN:
-                    batch.PaymentType = Payment.SELLER_REASSIGN;
+                    batch.PaymentType = PAYMENT.SELLER_REASSIGN;
                     break;
                 case OpPaymentType.CREDIT_NOTE_PAYMENT:
-                    batch.PaymentType = Payment.CREDIT_NOTE_PAYMENT;
+                    batch.PaymentType = PAYMENT.CREDIT_NOTE_PAYMENT;
                     break;
                 default:
                     break;

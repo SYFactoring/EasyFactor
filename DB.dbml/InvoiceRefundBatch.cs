@@ -150,7 +150,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (this.RefundType != Refund.SELLER_REFUND && this.RefundType != Refund.BUYER_PAYMENT)
+                if (this.RefundType != REFUND.SELLER_REFUND && this.RefundType != REFUND.BUYER_PAYMENT)
                 {
                     throw new Exception(String.Format("还款类型：{0}，设置无效，还款批次号{1}", this.RefundType, this.RefundBatchNo));
                 }

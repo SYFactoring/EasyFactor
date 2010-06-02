@@ -330,7 +330,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (InvoicePaymentBatch selectedBatch in selectedBatches)
             {
-                if (selectedBatch.PaymentType != Payment.CREDIT_NOTE_PAYMENT)
+                if (selectedBatch.PaymentType != PAYMENT.CREDIT_NOTE_PAYMENT)
                 {
                     MessageBoxEx.Show("只有贷项通知可以生成MSG09，批次号：" + selectedBatch.PaymentBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -357,7 +357,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (InvoicePaymentBatch selectedBatch in selectedBatches)
             {
-                if (selectedBatch.PaymentType != Payment.BUYER_PAYMENT)
+                if (selectedBatch.PaymentType != PAYMENT.BUYER_PAYMENT)
                 {
                     MessageBoxEx.Show("只有买方付款可以生成MSG11，批次号：" + selectedBatch.PaymentBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -384,7 +384,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (InvoicePaymentBatch selectedBatch in selectedBatches)
             {
-                if (selectedBatch.PaymentType != Payment.INDIRECT_PAYMENT)
+                if (selectedBatch.PaymentType != PAYMENT.INDIRECT_PAYMENT)
                 {
                     MessageBoxEx.Show("只有买方间接付款可以生成MSG12，：批次号：" + selectedBatch.PaymentBatchNo, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;

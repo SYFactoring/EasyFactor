@@ -214,9 +214,9 @@ namespace CMBC.EasyFactor.CaseMgr
             cda.CheckUserName = App.Current.CurUser.Name;
             cda.CheckDate = DateTime.Now.Date;
 
-            if (cda.Case.CaseMark == CASEStr.APPLICATION)
+            if (cda.Case.CaseMark == CASE.APPLICATION)
             {
-                cda.Case.CaseMark = CASEStr.ENABLE;
+                cda.Case.CaseMark = CASE.ENABLE;
             }
 
             if (cda.CDAStatus == CDAStr.CHECKED)

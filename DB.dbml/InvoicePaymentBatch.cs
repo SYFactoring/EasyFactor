@@ -149,7 +149,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (this.PaymentType != Payment.BUYER_PAYMENT && this.PaymentType != Payment.CREDIT_NOTE_PAYMENT && this.PaymentType != Payment.GUARANTEE_PAYMENT && this.PaymentType != Payment.INDIRECT_PAYMENT && this.PaymentType != Payment.SELLER_REASSIGN)
+                if (this.PaymentType != PAYMENT.BUYER_PAYMENT && this.PaymentType != PAYMENT.CREDIT_NOTE_PAYMENT && this.PaymentType != PAYMENT.GUARANTEE_PAYMENT && this.PaymentType != PAYMENT.INDIRECT_PAYMENT && this.PaymentType != PAYMENT.SELLER_REASSIGN)
                 {
                     throw new Exception(String.Format("付款类型：{0}，不符合规范类型，还款批次号{1}", this.PaymentType, this.PaymentBatchNo));
                 }

@@ -39,10 +39,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bsCommissionRemit;
-        /// <summary>
-        /// 
-        /// </summary>
         private DBDataContext context;
         /// <summary>
         /// Operation type of Case
@@ -53,35 +49,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private OpCreditCoverNegType opCreditCoverNegType;
 
-        /// <summary>
-        /// Operation type of Commission Remit
-        /// </summary>
-        private OpCommissionRemitType opCommissionRemitType;
-
         #endregion?Fields?
 
         #region?Enums?(2)?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public enum OpCommissionRemitType
-        {
-            /// <summary>
-            /// 
-            /// </summary>
-            NEW_COMMISSION_REMIT,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            UPDATE_COMMISSION_REMIT,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            DETAIL_COMMISSION_REMIT
-        }
 
         /// <summary>
         /// Operation types of Credit Cover Negotiation
@@ -134,33 +104,21 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="curCase">Selected case</param>
         /// <param name="opCaseType">operation type of Case</param>
         /// <param name="opCreditCoverNegType">operation type of CreditCoverNegotiation</param>
-        /// <param name="opCommissionRemit">operation type of CommisionRemit</param>
-        private CaseDetail(Case curCase, OpCaseType opCaseType, OpCreditCoverNegType opCreditCoverNegType, OpCommissionRemitType opCommissionRemitType)
+        private CaseDetail(Case curCase, OpCaseType opCaseType, OpCreditCoverNegType opCreditCoverNegType)
         {
             this.InitializeComponent();
             this.bsCDAs = new BindingSource();
             this.bsCreditCoverNegs = new BindingSource();
-            this.bsCommissionRemit = new BindingSource();
             this.ImeMode = ImeMode.OnHalf;
             this.dgvCDAs.AutoGenerateColumns = false;
             this.dgvCreditCoverNegs.AutoGenerateColumns = false;
-            this.dgvCommissionRemit.AutoGenerateColumns = false;
             this.dgvCDAs.DataSource = this.bsCDAs;
             this.dgvCreditCoverNegs.DataSource = this.bsCreditCoverNegs;
-            this.dgvCommissionRemit.DataSource = this.bsCommissionRemit;
             this.context = new DBDataContext();
 
             this.cbCaseInvoiceCurrency.DataSource = Currency.AllCurrencies;
             this.cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
             this.cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
-
-            this.cbMsgCurrency.DataSource = Currency.AllCurrencies;
-            this.cbMsgCurrency.DisplayMember = "CurrencyFormat";
-            this.cbMsgCurrency.ValueMember = "CurrencyCode";
-
-            this.cbRemitCurrency.DataSource = Currency.AllCurrencies;
-            this.cbRemitCurrency.DisplayMember = "CurrencyFormat";
-            this.cbRemitCurrency.ValueMember = "CurrencyCode";
 
             List<Department> allDepartments = Department.AllDepartments(this.context);
             this.cbCaseOwnerDepts.DataSource = allDepartments;
@@ -171,7 +129,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
             this.opCaseType = opCaseType;
             this.opCreditCoverNegType = opCreditCoverNegType;
-            this.opCommissionRemitType = opCommissionRemitType;
 
             this.cbReviews.DisplayMember = "ReviewNo";
             this.cbReviews.ValueMember = "ReviewNo";
@@ -194,7 +151,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.caseBindingSource.DataSource = curCase;
                 this.bsCreditCoverNegs.DataSource = curCase.CreditCoverNegotiations;
                 this.bsCDAs.DataSource = curCase.CDAs;
-                this.bsCommissionRemit.DataSource = curCase.InvoiceAssignBatches;
 
                 switch (curCase.TransactionType)
                 {
@@ -224,18 +180,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
             }
 
-            if (opCommissionRemitType == OpCommissionRemitType.NEW_COMMISSION_REMIT)
-            {
-                this.tabControl.SelectedTab = this.tabItemCommissionRemit;
-            }
-
             InvoiceMgr invoiceMgr = new InvoiceMgr(curCase.GetInvoices(), context);
             invoiceMgr.Dock = DockStyle.Fill;
             this.tabPanelInvoice.Controls.Add(invoiceMgr);
 
             this.UpdateCaseControlStatus();
             this.UpdateCreditCoverNegControlStatus();
-            this.UpdateCommissionRemitControlStatus();
         }
 
         /// <summary>
@@ -244,7 +194,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="curCase">Selected case</param>
         /// <param name="opCaseType">Operation type of Case</param>
         public CaseDetail(Case curCase, OpCaseType opCaseType)
-            : this(curCase, opCaseType, OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
+            : this(curCase, opCaseType, OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG)
         {
             this.tabControl.SelectedTab = this.tabItemCase;
         }
@@ -255,7 +205,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="curCase">Selected case</param>
         /// <param name="opCreditCoverNegType">Operation type of CreditCoverNegotiation</param>
         public CaseDetail(Case curCase, OpCreditCoverNegType opCreditCoverNegType)
-            : this(curCase, OpCaseType.DETAIL_CASE, opCreditCoverNegType, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
+            : this(curCase, OpCaseType.DETAIL_CASE, opCreditCoverNegType)
         {
             this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
         }
@@ -266,7 +216,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="neg"></param>
         /// <param name="opCreditCoverNegType"></param>
         public CaseDetail(CreditCoverNegotiation neg, OpCreditCoverNegType opCreditCoverNegType)
-            : this(neg.Case, OpCaseType.DETAIL_CASE, opCreditCoverNegType, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
+            : this(neg.Case, OpCaseType.DETAIL_CASE, opCreditCoverNegType)
         {
             this.tabControl.SelectedTab = this.tabItemCreditCoverNeg;
             if (neg == null)
@@ -281,21 +231,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        public CaseDetail(CommissionRemittance commissionRemit, OpCommissionRemitType opCommissionRemitType)
-            : this(commissionRemit.Case, OpCaseType.DETAIL_CASE, OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG, opCommissionRemitType)
-        {
-            this.tabControl.SelectedTab = this.tabItemCommissionRemit;
-            if (commissionRemit == null)
-            {
-                return;
-            }
-
-            if (opCommissionRemitType == OpCommissionRemitType.DETAIL_COMMISSION_REMIT || opCommissionRemitType == OpCommissionRemitType.UPDATE_COMMISSION_REMIT)
-            {
-                commissionRemit = this.context.CommissionRemittances.SingleOrDefault(c => c.MsgID == commissionRemit.MsgID);
-                this.commissionRemitBindingSource.DataSource = commissionRemit;
-            }
-        }
         #endregion?Constructors?
 
         #region?Methods?(24)?
@@ -434,55 +369,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DeleteCommissionRemit(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
-            {
-                return;
-            }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            if (curCase == null || curCase.CaseCode == null)
-            {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (!(this.commissionRemitBindingSource.DataSource is CommissionRemittance))
-            {
-                return;
-            }
-
-            CommissionRemittance commissionRemit = (CommissionRemittance)this.commissionRemitBindingSource.DataSource;
-            if (commissionRemit.MsgID == 0)
-            {
-                return;
-            }
-
-            bool isDeleteOK = true;
-            try
-            {
-                this.context.CommissionRemittances.DeleteOnSubmit(commissionRemit);
-                this.context.SubmitChanges();
-            }
-            catch (Exception e1)
-            {
-                isDeleteOK = false;
-                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            if (isDeleteOK)
-            {
-                MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.bsCommissionRemit.DataSource = curCase.InvoiceAssignBatches.ToList();
-                this.commissionRemitBindingSource.DataSource = new CommissionRemittance();
-            }
-        }
 
         /// <summary>
         /// Delete current CreditCoverNegotiation
@@ -668,38 +555,6 @@ namespace CMBC.EasyFactor.CaseMgr
             cdaDetail.Show(this);
         }
 
-        /// <summary>
-        /// Create new CommissionRemittance
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NewCommissionRemit(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
-            {
-                return;
-            }
-
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            if (curCase == null || curCase.CaseCode == null)
-            {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (curCase.TransactionType == "出口保理" || curCase.TransactionType == "进口保理")
-            {
-                CommissionRemittance commissionRemit = new CommissionRemittance();
-                commissionRemit.CreateUserName = App.Current.CurUser.Name;
-                this.commissionRemitBindingSource.DataSource = commissionRemit;
-                this.opCommissionRemitType = OpCommissionRemitType.NEW_COMMISSION_REMIT;
-                this.UpdateCommissionRemitControlStatus();
-            }
-            else
-            {
-                MessageBoxEx.Show("国内保理案不需要保理费收付", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
 
         /// <summary>
         /// Create new CreditCoverNegotiation
@@ -751,22 +606,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.bsCDAs.DataSource = curCase.CDAs.ToList();
         }
 
-        /// <summary>
-        /// Refresh the CommissionRemit list
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RefreshCommissionRemitList(object sender, EventArgs e)
-        {
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            if (curCase == null || curCase.CaseCode == null)
-            {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
 
-            this.bsCommissionRemit.DataSource = curCase.InvoiceAssignBatches.ToList();
-        }
 
         /// <summary>
         /// Refresh the CreditCoverNegotiation list
@@ -881,93 +721,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        /// <summary>
-        /// Save current CommissionRemit
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SaveCommissionRemit(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
-            {
-                return;
-            }
 
-            if (!this.commissionRemitValidator.Validate())
-            {
-                return;
-            }
-
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            if (curCase == null || curCase.CaseCode == null)
-            {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (!(this.commissionRemitBindingSource.DataSource is CommissionRemittance))
-            {
-                return;
-            }
-
-            CommissionRemittance commissionRemit = (CommissionRemittance)this.commissionRemitBindingSource.DataSource;
-            commissionRemit.CreateUserName = App.Current.CurUser.Name;
-
-            if (commissionRemit.MsgID == 0)
-            {
-                bool isAddOK = true;
-                try
-                {
-                    commissionRemit.Case = curCase;
-                    this.context.CommissionRemittances.InsertOnSubmit(commissionRemit);
-                    this.context.SubmitChanges();
-                }
-                catch (Exception e1)
-                {
-                    commissionRemit.Case = null;
-                    isAddOK = false;
-                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
-                if (isAddOK)
-                {
-                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.bsCommissionRemit.DataSource = curCase.InvoiceAssignBatches.ToList();
-                    this.NewCommissionRemit(null, null);
-                }
-            }
-            else
-            {
-                bool isUpdateOK = true;
-                try
-                {
-                    this.context.SubmitChanges(ConflictMode.ContinueOnConflict);
-                }
-                catch (ChangeConflictException)
-                {
-                    foreach (ObjectChangeConflict cc in this.context.ChangeConflicts)
-                    {
-                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
-                        {
-                            mc.Resolve(RefreshMode.KeepChanges);
-                        }
-                    }
-
-                    this.context.SubmitChanges();
-                }
-                catch (Exception e2)
-                {
-                    isUpdateOK = false;
-                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
-                if (isUpdateOK)
-                {
-                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.dgvCommissionRemit.Refresh();
-                }
-            }
-        }
 
         /// <summary>
         /// Save current CreditCoverNegotiation
@@ -1148,25 +902,7 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-        /// <summary>
-        /// Select CommissionRemit
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SelectCommissionRemit(object sender, DataGridViewCellEventArgs e)
-        {
-            if (this.dgvCommissionRemit.SelectedRows.Count == 0)
-            {
-                return;
-            }
 
-            InvoiceAssignBatch invoiceAssignBatch = (InvoiceAssignBatch)this.bsCommissionRemit.List[this.dgvCommissionRemit.SelectedRows[0].Index];
-            CommissionRemittance commissionRemit = invoiceAssignBatch.CommissionRemitteance;
-            if (commissionRemit != null)
-            {
-                this.commissionRemitBindingSource.DataSource = commissionRemit;
-            }
-        }
 
         /// <summary>
         /// Select CreditCoverNegotiation
@@ -1302,33 +1038,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbCaseFactorNameEN.ReadOnly = true;
         }
 
-        /// <summary>
-        /// Turn CommissionRemit into update status
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateCommissionRemit(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
-            {
-                return;
-            }
 
-            Case curCase = (Case)this.caseBindingSource.DataSource;
-            if (curCase == null || curCase.CaseCode == null)
-            {
-                MessageBoxEx.Show("请首先选择一个案子", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (!(this.commissionRemitBindingSource.DataSource is CommissionRemittance))
-            {
-                return;
-            }
-
-            this.opCommissionRemitType = OpCommissionRemitType.UPDATE_COMMISSION_REMIT;
-            this.UpdateCommissionRemitControlStatus();
-        }
 
         /// <summary>
         /// Turn CreditCoverNegotiation into update status
@@ -1358,36 +1068,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.UpdateCreditCoverNegControlStatus();
         }
 
-        /// <summary>
-        /// Update CommissionRemit Control Status
-        /// </summary>
-        private void UpdateCommissionRemitControlStatus()
-        {
-            if (this.opCommissionRemitType == OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
-            {
-                foreach (Control comp in this.groupPanelCommissionRemit.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, false);
-                }
-            }
-            else if (this.opCommissionRemitType == OpCommissionRemitType.NEW_COMMISSION_REMIT)
-            {
-                foreach (Control comp in this.groupPanelCommissionRemit.Controls)
-                {
-                    ControlUtil.SetComponetDefault(comp);
-                    ControlUtil.SetComponetEditable(comp, true);
-                }
-            }
-            else if (this.opCommissionRemitType == OpCommissionRemitType.UPDATE_COMMISSION_REMIT)
-            {
-                foreach (Control comp in this.groupPanelCommissionRemit.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, true);
-                }
-            }
 
-            ControlUtil.SetComponetEditable(this.tbCreditCoverCreateUserName, false);
-        }
 
         /// <summary>
         /// Update CreditCoverNegotiation Control Status

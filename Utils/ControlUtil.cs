@@ -4,31 +4,23 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Globalization;
+using System.Reflection;
+using System.Windows.Forms;
+using DevComponents.DotNetBar.Controls;
+using DevComponents.Editors.DateTimeAdv;
+
 namespace CMBC.EasyFactor.Utils
 {
-    using System;
-    using System.Globalization;
-    using System.Reflection;
-    using System.Windows.Forms;
-    using DevComponents.DotNetBar.Controls;
-    using DevComponents.Editors.DateTimeAdv;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// 
     /// </summary>
-    public sealed class ControlUtil
+    public static class ControlUtil
     {
-
-
         #region?Constructors?(1)?
 
-        private ControlUtil()
-        {
-        }
-
         #endregion?Constructors?
-
 
         #region?Methods?(4)?
 
@@ -48,15 +40,15 @@ namespace CMBC.EasyFactor.Utils
 
             foreach (Control control in controls)
             {
-                if (control is TextBox || control is TextBoxX)
+                if (control is TextBox)
                 {
-                    control.KeyDown += new KeyEventHandler(delegate(object sender, KeyEventArgs e)
-                    {
-                        if (e.KeyCode == Keys.Enter)
-                        {
-                            btn.PerformClick();
-                        }
-                    });
+                    control.KeyDown += delegate(object sender, KeyEventArgs e)
+                                           {
+                                               if (e.KeyCode == Keys.Enter)
+                                               {
+                                                   btn.PerformClick();
+                                               }
+                                           };
                 }
             }
         }
@@ -67,42 +59,42 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="comp"></param>
         public static void SetComponetDefault(Control comp)
         {
-            TextBoxBase textControl = comp as TextBoxBase;
+            var textControl = comp as TextBoxBase;
             if (textControl != null)
             {
                 textControl.Text = string.Empty;
                 return;
             }
 
-            ComboBox comboControl = comp as ComboBox;
+            var comboControl = comp as ComboBox;
             if (comboControl != null)
             {
                 comboControl.SelectedIndex = -1;
                 return;
             }
 
-            ComboTree treeControl = comp as ComboTree;
+            var treeControl = comp as ComboTree;
             if (treeControl != null)
             {
                 treeControl.SelectedIndex = -1;
                 return;
             }
 
-            DateTimePicker timePickerControl = comp as DateTimePicker;
+            var timePickerControl = comp as DateTimePicker;
             if (timePickerControl != null)
             {
                 timePickerControl.Value = default(DateTime);
                 return;
             }
 
-            DateTimeInput timeInputControl = comp as DateTimeInput;
+            var timeInputControl = comp as DateTimeInput;
             if (timeInputControl != null)
             {
                 timeInputControl.Value = default(DateTime);
                 return;
             }
 
-            CheckedListBox listBoxControl = comp as CheckedListBox;
+            var listBoxControl = comp as CheckedListBox;
             if (listBoxControl != null)
             {
                 listBoxControl.ClearSelected();
@@ -127,49 +119,49 @@ namespace CMBC.EasyFactor.Utils
                 return;
             }
 
-            TextBoxBase textControl = comp as TextBoxBase;
+            var textControl = comp as TextBoxBase;
             if (textControl != null)
             {
                 textControl.ReadOnly = !isEditable;
                 return;
             }
 
-            ComboBox comboControl = comp as ComboBox;
+            var comboControl = comp as ComboBox;
             if (comboControl != null)
             {
-                comboControl.Enabled = isEditable; 
+                comboControl.Enabled = isEditable;
                 return;
             }
 
-            ComboTree treeControl = comp as ComboTree;
+            var treeControl = comp as ComboTree;
             if (treeControl != null)
             {
                 treeControl.Enabled = isEditable;
                 return;
             }
 
-            DateTimePicker timePickerControl = comp as DateTimePicker;
+            var timePickerControl = comp as DateTimePicker;
             if (timePickerControl != null)
             {
-                timePickerControl.Enabled = isEditable; 
+                timePickerControl.Enabled = isEditable;
                 return;
             }
 
-            DateTimeInput timeInputControl = comp as DateTimeInput;
+            var timeInputControl = comp as DateTimeInput;
             if (timeInputControl != null)
             {
-                timeInputControl.Enabled = isEditable; 
+                timeInputControl.Enabled = isEditable;
                 return;
             }
 
-            CheckedListBox listBoxControl = comp as CheckedListBox;
+            var listBoxControl = comp as CheckedListBox;
             if (listBoxControl != null)
             {
-                listBoxControl.Enabled = isEditable; 
+                listBoxControl.Enabled = isEditable;
                 return;
             }
 
-            CheckBoxX checkBoxControl = comp as CheckBoxX;
+            var checkBoxControl = comp as CheckBoxX;
             if (checkBoxControl != null)
             {
                 checkBoxControl.Enabled = isEditable;
@@ -183,7 +175,9 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="control"></param>
         public static void SetDoubleBuffered(Control control)
         {
-            typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, control, new object[] { true }, CultureInfo.CurrentCulture);
+            typeof(Control).InvokeMember("DoubleBuffered",
+                                          BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                                          null, control, new object[] { true }, CultureInfo.CurrentCulture);
         }
 
         #endregion?Methods?

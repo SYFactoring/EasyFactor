@@ -458,15 +458,15 @@ namespace CMBC.EasyFactor.DB.dbml
 
                     switch (this.FinanceType)
                     {
-                        case Finance.FINANCE_TYPE1: break;
-                        case Finance.FINANCE_TYPE2: break;
-                        case Finance.FINANCE_TYPE3: break;
-                        case Finance.FINANCE_TYPE4: break;
-                        case Finance.FINANCE_TYPE5: break;
-                        case Finance.FINANCE_TYPE6: break;
-                        case Finance.FINANCE_TYPE7: break;
-                        case Finance.FINANCE_TYPE8: break;
-                        case Finance.FINANCE_TYPE9: break;
+                        case FINANCE.FINANCE_TYPE1: break;
+                        case FINANCE.FINANCE_TYPE2: break;
+                        case FINANCE.FINANCE_TYPE3: break;
+                        case FINANCE.FINANCE_TYPE4: break;
+                        case FINANCE.FINANCE_TYPE5: break;
+                        case FINANCE.FINANCE_TYPE6: break;
+                        case FINANCE.FINANCE_TYPE7: break;
+                        case FINANCE.FINANCE_TYPE8: break;
+                        case FINANCE.FINANCE_TYPE9: break;
                         default: throw new Exception(String.Format("融资类型：{0}，不符合规范", this.FinanceType));
                     }
                 }

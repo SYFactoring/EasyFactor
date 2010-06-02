@@ -214,6 +214,7 @@ namespace CMBC.EasyFactor
             this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.panelHeader);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LogOnWindow";

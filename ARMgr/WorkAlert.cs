@@ -48,22 +48,10 @@ namespace CMBC.EasyFactor.ARMgr
         {
             eTooltipColor color = eTooltipColor.Apple;
             this.superTooltip.SetSuperTooltip(this.btnNeedCheckCDA, new SuperTooltipInfo("需要放行的额度通知书", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckAssign, new SuperTooltipInfo("需要放行的转让批次", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckFinance, new SuperTooltipInfo("需要放行的融资批次", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckPayment, new SuperTooltipInfo("需要放行的付款批次", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnNeedCheckRefund, new SuperTooltipInfo("需要放行的还款批次", "", "", null, null, color));
 
             this.superTooltip.SetSuperTooltip(this.btnWaitCheckCDA, new SuperTooltipInfo("等待放行的额度通知书", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnWaitCheckAssign, new SuperTooltipInfo("等待放行的转让批次", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnWaitCheckFinance, new SuperTooltipInfo("等待放行的融资批次", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnWaitCheckPayment, new SuperTooltipInfo("等待放行的付款批次", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnWaitCheckRefund, new SuperTooltipInfo("等待放行的还款批次", "", "", null, null, color));
 
             this.superTooltip.SetSuperTooltip(this.btnRejectCheckCDA, new SuperTooltipInfo("拒绝放行的额度通知书", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnRejectCheckAssign, new SuperTooltipInfo("拒绝放行的转让批次", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnRejectCheckFinance, new SuperTooltipInfo("拒绝放行的融资批次", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnRejectCheckPayment, new SuperTooltipInfo("拒绝放行的付款批次", "", "", null, null, color));
-            this.superTooltip.SetSuperTooltip(this.btnRejectCheckRefund, new SuperTooltipInfo("拒绝放行的还款批次", "", "", null, null, color));
 
             this.superTooltip.SetSuperTooltip(this.btnDueAssign7, new SuperTooltipInfo("7日内到期的应收账款", "", "", null, null, color));
             this.superTooltip.SetSuperTooltip(this.btnDueAssign0, new SuperTooltipInfo("今日到期的应收账款", "", "", null, null, color));

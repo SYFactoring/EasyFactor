@@ -51,6 +51,7 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QueryForm));
             this.panelRoot = new DevComponents.DotNetBar.PanelEx();
             this.SuspendLayout();
             // 
@@ -79,6 +80,7 @@ namespace CMBC.EasyFactor.Utils
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.panelRoot);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "QueryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "≤È—Ø";

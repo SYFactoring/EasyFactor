@@ -259,7 +259,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double? total = null;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE && c.IsPool))
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
                 {
                     double? financeOutstanding = curCase.FinanceOutstanding;
                     if (financeOutstanding.HasValue)
@@ -291,7 +291,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE && c.IsPool))
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
                 {
                     double assignOutstanding = curCase.AssignOutstanding;
                     if (curCase.InvoiceCurrency != "CNY")
@@ -315,7 +315,7 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double result = 0;
-                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE && c.IsPool))
+                foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
                 {
                     double assignOutstanding = curCase.ValuedAssignOutstanding;
                     if (curCase.InvoiceCurrency != "CNY")
@@ -346,7 +346,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public double CanBeFinanceAmount(string transactionType, string currency)
         {
             double result = 0;
-            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE && c.TransactionType == transactionType))
+            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.TransactionType == transactionType))
             {
                 double canbeFinanceAmount = curCase.CanBeFinanceAmount;
                 if (curCase.InvoiceCurrency != currency)
@@ -381,7 +381,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public double GetAssignOutstandingAsBuyer(string currency)
         {
             double result = 0;
-            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
+            foreach (Case curCase in this.BuyerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
                 double assignOutstanding = curCase.AssignOutstanding;
                 if (curCase.InvoiceCurrency != currency)
@@ -405,7 +405,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public double GetAssignOutstandingAsSeller(string transactionType, string currency)
         {
             double result = 0;
-            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE && c.TransactionType == transactionType))
+            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.TransactionType == transactionType))
             {
                 double assignOutstanding = curCase.AssignOutstanding;
                 if (curCase.InvoiceCurrency != currency)
@@ -428,7 +428,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public System.Nullable<double> GetFinanceOutstanding(string currency)
         {
             double? total = null;
-            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
+            foreach (Case curCase in this.SellerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
                 double? financeOutstanding = curCase.FinanceOutstanding;
                 if (financeOutstanding.HasValue)

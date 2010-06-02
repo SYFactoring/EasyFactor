@@ -1,46 +1,60 @@
-//-----------------------------------------------------------------------
+ï»¿//-----------------------------------------------------------------------
 // <copyright file="ExportForm.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils.ConstStr;
+using DevComponents.DotNetBar;
+using Microsoft.Office.Interop.Excel;
+
 namespace CMBC.EasyFactor.Utils
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data.SqlClient;
-    using System.IO;
-    using System.Linq;
-    using System.Runtime.InteropServices;
-    using System.Text;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-    using Microsoft.Office.Interop.Excel;
-
     /// <summary>
     /// 
     /// </summary>
-    public partial class ExportForm : DevComponents.DotNetBar.Office2007Form
+    public partial class ExportForm : Office2007Form
     {
+        #regionÂ MethodsÂ (1)
 
+        //Â PrivateÂ MethodsÂ (1)Â 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClosingForm(object sender, FormClosingEventArgs e)
+        {
+            backgroundWorker.CancelAsync();
+            e.Cancel = false;
+        }
+
+        #endregionÂ Methods
 
         #region?Fields?(2)?
 
         /// <summary>
         /// 
         /// </summary>
-        private IList exportData;
+        private readonly IList exportData;
+
         /// <summary>
         /// 
         /// </summary>
-        private ExportType exportType;
+        private readonly ExportType exportType;
 
         #endregion?Fields?
-
 
         #region?Enums?(1)?
 
@@ -147,7 +161,6 @@ namespace CMBC.EasyFactor.Utils
 
         #endregion?Enums?
 
-
         #region?Constructors?(1)?
 
         /// <summary>
@@ -167,16 +180,17 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="exportType"></param>
         public ExportForm(ExportType exportType)
         {
-            this.InitializeComponent();
+            InitializeComponent();
             this.exportType = exportType;
-            if (this.exportType == ExportType.EXPORT_MSG09_INVOICE || this.exportType == ExportType.EXPORT_MSG09_CREDITNOTE || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
+            if (this.exportType == ExportType.EXPORT_MSG09_INVOICE ||
+                this.exportType == ExportType.EXPORT_MSG09_CREDITNOTE || this.exportType == ExportType.EXPORT_MSG11 ||
+                this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
             {
-                this.btnFileSelect.Enabled = true;
+                btnFileSelect.Enabled = true;
             }
         }
 
         #endregion?Constructors?
-
 
         #region?Methods?(24)?
 
@@ -187,62 +201,62 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            BackgroundWorker worker = sender as BackgroundWorker;
-            switch (this.exportType)
+            var worker = sender as BackgroundWorker;
+            switch (exportType)
             {
                 case ExportType.EXPORT_CREDIT_NOTES:
-                    e.Result = this.ExportCreditNotes(worker, e);
+                    e.Result = ExportCreditNotes(worker, e);
                     break;
                 case ExportType.EXPORT_ASSIGN_BY_BATCH:
-                    e.Result = this.ExportAssignByBatch(worker, e);
+                    e.Result = ExportAssignByBatch(worker, e);
                     break;
                 case ExportType.EXPORT_ASSIGN:
-                    e.Result = this.ExportAssign(worker, e);
+                    e.Result = ExportAssign(worker, e);
                     break;
                 case ExportType.EXPORT_FINANCE_BY_BATCH:
-                    e.Result = this.ExportFinanceByBatch(worker, e);
+                    e.Result = ExportFinanceByBatch(worker, e);
                     break;
                 case ExportType.EXPORT_PAYMENT_BY_BATCH:
-                    e.Result = this.ExportPaymentByBatch(worker, e);
+                    e.Result = ExportPaymentByBatch(worker, e);
                     break;
                 case ExportType.EXPORT_REFUND_BY_BATCH:
-                    e.Result = this.ExportRefundByBatch(worker, e);
+                    e.Result = ExportRefundByBatch(worker, e);
                     break;
                 case ExportType.EXPORT_INVOICES_FULL:
-                    e.Result = this.ExportInvoicesFull(worker, e);
+                    e.Result = ExportInvoicesFull(worker, e);
                     break;
                 case ExportType.EXPORT_INVOICES_OVERDUE:
-                    e.Result = this.ExportInvoicesOverDue(worker, e);
+                    e.Result = ExportInvoicesOverDue(worker, e);
                     break;
                 case ExportType.EXPORT_MSG09_INVOICE:
-                    e.Result = this.ExportMsg09Invoice(worker, e);
+                    e.Result = ExportMsg09Invoice(worker, e);
                     break;
                 case ExportType.EXPORT_MSG09_CREDITNOTE:
-                    e.Result = this.ExportMsg09CreditNote(worker, e);
+                    e.Result = ExportMsg09CreditNote(worker, e);
                     break;
                 case ExportType.EXPORT_MSG11:
-                    e.Result = this.ExportMsg11(worker, e);
+                    e.Result = ExportMsg11(worker, e);
                     break;
                 case ExportType.EXPORT_MSG12:
-                    e.Result = this.ExportMsg12(worker, e);
+                    e.Result = ExportMsg12(worker, e);
                     break;
                 case ExportType.EXPORT_CLIENT_REVIEWS:
-                    e.Result = this.ExportClientReviews(worker, e);
+                    e.Result = ExportClientReviews(worker, e);
                     break;
                 case ExportType.EXPORT_CLIENT:
-                    e.Result = this.ExportClients(worker, e);
+                    e.Result = ExportClients(worker, e);
                     break;
                 case ExportType.EXPORT_CREDIT_COVER_NEG:
-                    e.Result = this.ExportCreditCoverNegs(worker, e);
+                    e.Result = ExportCreditCoverNegs(worker, e);
                     break;
                 case ExportType.EXPORT_LEGER:
-                    e.Result = this.ExportLegers(worker, e);
+                    e.Result = ExportLegers(worker, e);
                     break;
                 case ExportType.EXPORT_CASES:
-                    e.Result = this.ExportCases(worker, e);
+                    e.Result = ExportCases(worker, e);
                     break;
                 case ExportType.EXPORT_CDAS:
-                    e.Result = this.ExportCDAs(worker, e);
+                    e.Result = ExportCDAs(worker, e);
                     break;
                 //case ExportType.BACKUP_DATABASE:
                 //    e.Result = this.BackupDatabase(worker, e);
@@ -259,8 +273,8 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            this.progressBar.Value = e.ProgressPercentage;
-            this.tbStatus.Text = String.Format("µ¼³ö½ø¶È {0:G}%", e.ProgressPercentage);
+            progressBar.Value = e.ProgressPercentage;
+            tbStatus.Text = String.Format("å¯¼å‡ºè¿›åº¦ {0:G}%", e.ProgressPercentage);
         }
 
         /// <summary>
@@ -272,36 +286,29 @@ namespace CMBC.EasyFactor.Utils
         {
             if (e.Error != null)
             {
-                this.tbStatus.Text = "·¢ÉúÒì³£: " + e.Error.Message;
+                tbStatus.Text = @"å‘ç”Ÿå¼‚å¸¸: " + e.Error.Message;
             }
             else if (e.Cancelled)
             {
-                this.tbStatus.Text = "µ¼³ö±»È¡Ïû";
-                this.progressBar.Value = 0;
+                tbStatus.Text = @"å¯¼å‡ºè¢«å–æ¶ˆ";
+                progressBar.Value = 0;
             }
             else
             {
-                var result = e.Result;
+                object result = e.Result;
 
                 if (result is int)
                 {
-                    this.tbStatus.Text = String.Format("µ¼³ö½áÊø,¹²µ¼³ö{0}Ìõ¼ÇÂ¼", e.Result);
+                    tbStatus.Text = String.Format("å¯¼å‡ºç»“æŸ,å…±å¯¼å‡º{0}æ¡è®°å½•", e.Result);
                 }
                 else if (result is string)
                 {
-                    string path = (string)result;
-                    if (String.IsNullOrEmpty(path))
-                    {
-                        this.tbStatus.Text = String.Format("Êı¾İ¿â±¸·İÊ§°Ü");
-                    }
-                    else
-                    {
-                        this.tbStatus.Text = String.Format("Êı¾İ¿â±¸·İ³É¹¦£¬±£´æÂ·¾¶£º{0}", path);
-                    }
+                    var path = (string)result;
+                    tbStatus.Text = String.IsNullOrEmpty(path) ? String.Format("æ•°æ®åº“å¤‡ä»½å¤±è´¥") : String.Format("æ•°æ®åº“å¤‡ä»½æˆåŠŸï¼Œä¿å­˜è·¯å¾„ï¼š{0}", path);
                 }
             }
 
-            this.btnCancel.Text = "¹Ø±Õ";
+            btnCancel.Text = @"å…³é—­";
         }
 
         /// <summary>
@@ -311,13 +318,13 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         private void CancelExport(object sender, EventArgs e)
         {
-            if (this.backgroundWorker.IsBusy)
+            if (backgroundWorker.IsBusy)
             {
-                this.backgroundWorker.CancelAsync();
+                backgroundWorker.CancelAsync();
             }
             else
             {
-                this.Close();
+                Close();
             }
         }
 
@@ -327,55 +334,11 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        //private string BackupDatabase(BackgroundWorker worker, DoWorkEventArgs e)
-        //{
-        //    string destinationPath = String.Format(@"C:\Program Files\Microsoft SQL Server\MSSQL.1\MSSQL\Backup\{0}_{1:yyyyMMdd}.bak", SystemUtil.DataBaseName, DateTime.Today);
-
-        //    ServerConnection sqlConnection = new ServerConnection(new SqlConnection(SystemUtil.ConnectionString));
-        //    Server server = new Server(sqlConnection);
-
-        //    Backup sqlBackup = new Backup();
-        //    sqlBackup.Devices.AddDevice(destinationPath, DeviceType.File);
-        //    sqlBackup.Database = SystemUtil.DataBaseName;
-        //    sqlBackup.Action = BackupActionType.Database;
-        //    sqlBackup.Initialize = true;
-        //    sqlBackup.BackupSetName = SystemUtil.DataBaseName + " : " + DateTime.Now.ToString(); ;
-        //    sqlBackup.BackupSetDescription = SystemUtil.DataBaseName + " : " + DateTime.Now.ToString();
-
-        //    sqlBackup.Checksum = true;
-        //    sqlBackup.ContinueAfterError = true;
-        //    sqlBackup.Incremental = false;
-        //    sqlBackup.LogTruncation = BackupTruncateLogType.Truncate;
-        //    sqlBackup.FormatMedia = false;
-
-        //    sqlBackup.SqlBackup(server);
-
-        //    if (File.Exists(destinationPath))
-        //    {
-        //        return destinationPath;
-        //    }
-        //    else
-        //    {
-        //        return string.Empty;
-        //    }
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="worker"></param>
-        /// <param name="e"></param>
-        /// <returns></returns>
         private int ExportAssign(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
 
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return -1;
-            }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -385,56 +348,50 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "±£ÀíÉÌ´úÂë";
-                datasheet.Cells[1, column++] = "±£ÀíÉÌÃû³Æ";
-                datasheet.Cells[1, column++] = "ÒµÎñµØÇø";
-                datasheet.Cells[1, column++] = "Âô·½Ãû³Æ";
-                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
-                datasheet.Cells[1, column++] = "ÒµÎñÀà±ğ";
-                datasheet.Cells[1, column++] = "ÒµÎñ±àºÅ";
-                datasheet.Cells[1, column++] = "×ªÈÃÈÕ";
-                datasheet.Cells[1, column++] = "·¢Æ±±ÊÊı";
-                datasheet.Cells[1, column++] = "±Ò±ğ";
-                datasheet.Cells[1, column++] = "×ªÈÃ½ğ¶î";
-                datasheet.Cells[1, column++] = "×ªÈÃÓà¶î";
-                datasheet.Cells[1, column++] = "ÈÚ×Ê½ğ¶î";
-                datasheet.Cells[1, column++] = "ÈÚ×ÊÓà¶î";
-                datasheet.Cells[1, column++] = "¸¶¿î½ğ¶î";
-                datasheet.Cells[1, column++] = "»¹¿î½ğ¶î";
-                datasheet.Cells[1, column++] = "×ÜÊÖĞø·Ñ";
-                datasheet.Cells[1, column++] = "±£ÀíÉÌÊÖĞø·Ñ";
-                datasheet.Cells[1, column++] = "¾­°ìÈË";
+                datasheet.Cells[1, column++] = "ä¿ç†å•†ä»£ç ";
+                datasheet.Cells[1, column++] = "ä¿ç†å•†åç§°";
+                datasheet.Cells[1, column++] = "ä¸šåŠ¡åœ°åŒº";
+                datasheet.Cells[1, column++] = "å–æ–¹åç§°";
+                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
+                datasheet.Cells[1, column++] = "ä¸šåŠ¡ç±»åˆ«";
+                datasheet.Cells[1, column++] = "ä¸šåŠ¡ç¼–å·";
+                datasheet.Cells[1, column++] = "è½¬è®©æ—¥";
+                datasheet.Cells[1, column++] = "å‘ç¥¨ç¬”æ•°";
+                datasheet.Cells[1, column++] = "å¸åˆ«";
+                datasheet.Cells[1, column++] = "è½¬è®©é‡‘é¢";
+                datasheet.Cells[1, column++] = "è½¬è®©ä½™é¢";
+                datasheet.Cells[1, column++] = "èèµ„é‡‘é¢";
+                datasheet.Cells[1, column++] = "èèµ„ä½™é¢";
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾é‡‘é¢";
+                datasheet.Cells[1, column++] = "è¿˜æ¬¾é‡‘é¢";
+                datasheet.Cells[1, column++] = "æ€»æ‰‹ç»­è´¹";
+                datasheet.Cells[1, column++] = "ä¿ç†å•†æ‰‹ç»­è´¹";
+                datasheet.Cells[1, column] = "ç»åŠäºº";
 
-                int size = this.exportData.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    InvoiceAssignBatch assignBatch = (InvoiceAssignBatch)exportData[row];
+                    var assignBatch = (InvoiceAssignBatch)exportData[row];
                     datasheet.Cells[row + 2, column++] = assignBatch.FactorCode;
                     datasheet.Cells[row + 2, column++] = assignBatch.FactorName;
                     datasheet.Cells[row + 2, column++] = assignBatch.Location;
@@ -453,9 +410,9 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = assignBatch.RefundAmount;
                     datasheet.Cells[row + 2, column++] = assignBatch.CommissionAmount;
                     datasheet.Cells[row + 2, column++] = assignBatch.FactorCommissionAmount;
-                    datasheet.Cells[row + 2, column++] = assignBatch.CreateUserName;
+                    datasheet.Cells[row + 2, column] = assignBatch.CreateUserName;
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -478,7 +435,6 @@ namespace CMBC.EasyFactor.Utils
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -491,10 +447,9 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -508,13 +463,8 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportAssignByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return -1;
-            }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var app = new ApplicationClass { Visible = false };
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -524,46 +474,40 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "°¸¼ş±àºÅ";
-                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
-                datasheet.Cells[1, column++] = "Æ±Ãæ½ğ¶î";
-                datasheet.Cells[1, column++] = "×ªÈÃ½ğ¶î";
-                datasheet.Cells[1, column++] = "·¢Æ±ÈÕ";
-                datasheet.Cells[1, column++] = "µ½ÆÚÈÕ";
-                datasheet.Cells[1, column++] = "ÊÇ·ñè¦´Ã";
-                datasheet.Cells[1, column++] = "ÊÖĞø·Ñ";
-                datasheet.Cells[1, column++] = "±¸×¢";
+                datasheet.Cells[1, column++] = "æ¡ˆä»¶ç¼–å·";
+                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
+                datasheet.Cells[1, column++] = "ç¥¨é¢é‡‘é¢";
+                datasheet.Cells[1, column++] = "è½¬è®©é‡‘é¢";
+                datasheet.Cells[1, column++] = "å‘ç¥¨æ—¥";
+                datasheet.Cells[1, column++] = "åˆ°æœŸæ—¥";
+                datasheet.Cells[1, column++] = "æ˜¯å¦ç‘•ç–µ";
+                datasheet.Cells[1, column++] = "æ‰‹ç»­è´¹";
+                datasheet.Cells[1, column] = "å¤‡æ³¨";
 
-                int size = this.exportData.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)exportData[row];
+                    var invoice = (Invoice)exportData[row];
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CaseCode;
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAmount;
@@ -572,9 +516,9 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
-                    datasheet.Cells[row + 2, column++] = invoice.Comment;
+                    datasheet.Cells[row + 2, column] = invoice.Comment;
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -597,7 +541,6 @@ namespace CMBC.EasyFactor.Utils
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -610,10 +553,9 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -627,14 +569,9 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private object ExportCases(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
 
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return -1;
-            }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -644,54 +581,48 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "ÒµÎñµØÇø";
-                datasheet.Cells[1, column++] = "°¸¼ş±àºÅ";
-                datasheet.Cells[1, column++] = "Âô·½±£Àí´úÂë";
-                datasheet.Cells[1, column++] = "Âô·½Ãû³Æ";
-                datasheet.Cells[1, column++] = "Âô·½±£ÀíÉÌ´úÂë";
-                datasheet.Cells[1, column++] = "Âô·½±£ÀíÉÌ";
-                datasheet.Cells[1, column++] = "Âò·½±£Àí´úÂë";
-                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
-                datasheet.Cells[1, column++] = "Âò·½±£ÀíÉÌ´úÂë";
-                datasheet.Cells[1, column++] = "Âò·½±£ÀíÉÌ";
-                datasheet.Cells[1, column++] = "·¢Æ±±Ò±ğ";
-                datasheet.Cells[1, column++] = "ÒµÎñÀàĞÍ";
-                datasheet.Cells[1, column++] = "²Ù×÷ÀàĞÍ";
-                datasheet.Cells[1, column++] = "ÒµÎñ¹éÊô»ú¹¹";
-                datasheet.Cells[1, column++] = "ÉêÇëÈÕÆÚ";
-                datasheet.Cells[1, column++] = "°¸¼ş×´Ì¬";
-                datasheet.Cells[1, column++] = "OPÈËÔ±";
+                datasheet.Cells[1, column++] = "ä¸šåŠ¡åœ°åŒº";
+                datasheet.Cells[1, column++] = "æ¡ˆä»¶ç¼–å·";
+                datasheet.Cells[1, column++] = "å–æ–¹ä¿ç†ä»£ç ";
+                datasheet.Cells[1, column++] = "å–æ–¹åç§°";
+                datasheet.Cells[1, column++] = "å–æ–¹ä¿ç†å•†ä»£ç ";
+                datasheet.Cells[1, column++] = "å–æ–¹ä¿ç†å•†";
+                datasheet.Cells[1, column++] = "ä¹°æ–¹ä¿ç†ä»£ç ";
+                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
+                datasheet.Cells[1, column++] = "ä¹°æ–¹ä¿ç†å•†ä»£ç ";
+                datasheet.Cells[1, column++] = "ä¹°æ–¹ä¿ç†å•†";
+                datasheet.Cells[1, column++] = "å‘ç¥¨å¸åˆ«";
+                datasheet.Cells[1, column++] = "ä¸šåŠ¡ç±»å‹";
+                datasheet.Cells[1, column++] = "æ“ä½œç±»å‹";
+                datasheet.Cells[1, column++] = "ä¸šåŠ¡å½’å±æœºæ„";
+                datasheet.Cells[1, column++] = "ç”³è¯·æ—¥æœŸ";
+                datasheet.Cells[1, column++] = "æ¡ˆä»¶çŠ¶æ€";
+                datasheet.Cells[1, column] = "OPäººå‘˜";
 
-                int size = this.exportData.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (datasheet != null)
+                        Marshal.ReleaseComObject(datasheet);
+                        datasheet = null;
+
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(datasheet);
-                            datasheet = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    Case selectedCase = (Case)exportData[row];
+                    var selectedCase = (Case)exportData[row];
                     datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.Location.LocationName;
                     datasheet.Cells[row + 2, column++] = selectedCase.CaseCode;
                     datasheet.Cells[row + 2, column++] = selectedCase.SellerCode;
@@ -708,9 +639,9 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.DepartmentName;
                     datasheet.Cells[row + 2, column++] = selectedCase.CaseAppDate;
                     datasheet.Cells[row + 2, column++] = selectedCase.CaseMark;
-                    datasheet.Cells[row + 2, column++] = selectedCase.OPName;
+                    datasheet.Cells[row + 2, column] = selectedCase.OPName;
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -729,7 +660,6 @@ namespace CMBC.EasyFactor.Utils
                 if (datasheet != null)
                 {
                     Marshal.ReleaseComObject(datasheet);
-                    datasheet = null;
                 }
 
                 if (app != null)
@@ -742,10 +672,9 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -759,127 +688,109 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private object ExportCDAs(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
-
-            if (app == null)
-            {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return -1;
-            }
+            var app = new ApplicationClass { Visible = false };
 
             Workbook workbook = null;
 
             try
             {
                 workbook = app.Workbooks.Add(true);
-                Worksheet sheetLocal = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-                sheetLocal.Name = "¹úÄÚ";
+                var sheetLocal = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                sheetLocal.Name = "å›½å†…";
 
-                Worksheet sheetInternal = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-                sheetInternal.Name = "¹ú¼Ê";
-
-                if (sheetInternal == null || sheetLocal == null)
-                {
-                    return -1;
-                }
+                var sheetInternal = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                sheetInternal.Name = "å›½é™…";
 
                 int column = 1;
-                sheetInternal.Cells[1, column++] = "ÒµÎñÀàĞÍ";
-                sheetInternal.Cells[1, column++] = "ÊÇ·ñÓĞ×·Ë÷È¨";
-                sheetInternal.Cells[1, column++] = "Ã÷/°µ±£Àí";
-                sheetInternal.Cells[1, column++] = "ĞÂ¾ÉºÏÍ¬";
-                sheetInternal.Cells[1, column++] = "ºÏÍ¬±àºÅ";
-                sheetInternal.Cells[1, column++] = "Ö÷ºÏÍ¬ÉúĞ§ÈÕ";
-                sheetInternal.Cells[1, column++] = "Ö÷ºÏÍ¬µ½ÆÚÈÕ";
-                sheetInternal.Cells[1, column++] = "CDA±àºÅ";
-                sheetInternal.Cells[1, column++] = "Âô·½Ãû³Æ";
-                sheetInternal.Cells[1, column++] = "Âò·½Ãû³Æ";
-                sheetInternal.Cells[1, column++] = "Âò·½µØÖ·";
-                sheetInternal.Cells[1, column++] = "Ç©·¢ÈÕÆÚ";
-                sheetInternal.Cells[1, column++] = "¸¶¿î·½Ê½";
-                sheetInternal.Cells[1, column++] = "Âò·½ĞÅÓÃ·çÏÕ¶î¶È±Ò±ğ";
-                sheetInternal.Cells[1, column++] = "ĞÅÓÃ·çÏÕ¶î¶È";
-                sheetInternal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ(Ê¼)";
-                sheetInternal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ(ÖÕ)";
-                sheetInternal.Cells[1, column++] = "Ô¤¸¶¿î¶î¶È±Ò±ğ";
-                sheetInternal.Cells[1, column++] = "±£ÀíÔ¤¸¶¿î¶î¶È";
-                sheetInternal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ£¨Ê¼£©";
-                sheetInternal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ£¨ÖÕ£©";
-                sheetInternal.Cells[1, column++] = "×î¸ß±£ÀíÔ¤¸¶¿î¶î¶È";
-                sheetInternal.Cells[1, column++] = "Ô¤¸¶±ÈÀı";
-                sheetInternal.Cells[1, column++] = "±£Àí·ÑÂÊ";
-                sheetInternal.Cells[1, column++] = "¼Æ·Ñ·½Ê½";
-                sheetInternal.Cells[1, column++] = "µ¥¾İ´¦Àí·Ñ±Ò±ğ";
-                sheetInternal.Cells[1, column++] = "µ¥¾İ´¦Àí·Ñ";
-                sheetInternal.Cells[1, column++] = "±¸×¢";
-                sheetInternal.Cells[1, column++] = "½ø¿Ú±£ÀíÉÌ";
+                sheetInternal.Cells[1, column++] = "ä¸šåŠ¡ç±»å‹";
+                sheetInternal.Cells[1, column++] = "æ˜¯å¦æœ‰è¿½ç´¢æƒ";
+                sheetInternal.Cells[1, column++] = "æ˜/æš—ä¿ç†";
+                sheetInternal.Cells[1, column++] = "æ–°æ—§åˆåŒ";
+                sheetInternal.Cells[1, column++] = "åˆåŒç¼–å·";
+                sheetInternal.Cells[1, column++] = "ä¸»åˆåŒç”Ÿæ•ˆæ—¥";
+                sheetInternal.Cells[1, column++] = "ä¸»åˆåŒåˆ°æœŸæ—¥";
+                sheetInternal.Cells[1, column++] = "CDAç¼–å·";
+                sheetInternal.Cells[1, column++] = "å–æ–¹åç§°";
+                sheetInternal.Cells[1, column++] = "ä¹°æ–¹åç§°";
+                sheetInternal.Cells[1, column++] = "ä¹°æ–¹åœ°å€";
+                sheetInternal.Cells[1, column++] = "ç­¾å‘æ—¥æœŸ";
+                sheetInternal.Cells[1, column++] = "ä»˜æ¬¾æ–¹å¼";
+                sheetInternal.Cells[1, column++] = "ä¹°æ–¹ä¿¡ç”¨é£é™©é¢åº¦å¸åˆ«";
+                sheetInternal.Cells[1, column++] = "ä¿¡ç”¨é£é™©é¢åº¦";
+                sheetInternal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™(å§‹)";
+                sheetInternal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™(ç»ˆ)";
+                sheetInternal.Cells[1, column++] = "é¢„ä»˜æ¬¾é¢åº¦å¸åˆ«";
+                sheetInternal.Cells[1, column++] = "ä¿ç†é¢„ä»˜æ¬¾é¢åº¦";
+                sheetInternal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™ï¼ˆå§‹ï¼‰";
+                sheetInternal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™ï¼ˆç»ˆï¼‰";
+                sheetInternal.Cells[1, column++] = "æœ€é«˜ä¿ç†é¢„ä»˜æ¬¾é¢åº¦";
+                sheetInternal.Cells[1, column++] = "é¢„ä»˜æ¯”ä¾‹";
+                sheetInternal.Cells[1, column++] = "ä¿ç†è´¹ç‡";
+                sheetInternal.Cells[1, column++] = "è®¡è´¹æ–¹å¼";
+                sheetInternal.Cells[1, column++] = "å•æ®å¤„ç†è´¹å¸åˆ«";
+                sheetInternal.Cells[1, column++] = "å•æ®å¤„ç†è´¹";
+                sheetInternal.Cells[1, column++] = "å¤‡æ³¨";
+                sheetInternal.Cells[1, column] = "è¿›å£ä¿ç†å•†";
 
                 column = 1;
-                sheetLocal.Cells[1, column++] = "ÒµÎñÀàĞÍ";
-                sheetLocal.Cells[1, column++] = "ÊÇ·ñÓĞ×·Ë÷È¨";
-                sheetLocal.Cells[1, column++] = "Ã÷/°µ±£Àí";
-                sheetLocal.Cells[1, column++] = "ĞÂ¾ÉºÏÍ¬";
-                sheetLocal.Cells[1, column++] = "ºÏÍ¬±àºÅ";
-                sheetLocal.Cells[1, column++] = "Ö÷ºÏÍ¬ÉúĞ§ÈÕ";
-                sheetLocal.Cells[1, column++] = "Ö÷ºÏÍ¬µ½ÆÚÈÕ";
-                sheetLocal.Cells[1, column++] = "CDA±àºÅ";
-                sheetLocal.Cells[1, column++] = "Âô·½Ãû³Æ";
-                sheetLocal.Cells[1, column++] = "Âò·½Ãû³Æ";
-                sheetLocal.Cells[1, column++] = "Âò·½µØÖ·";
-                sheetLocal.Cells[1, column++] = "Ç©·¢ÈÕÆÚ";
-                sheetLocal.Cells[1, column++] = "¸¶¿î·½Ê½";
-                sheetLocal.Cells[1, column++] = "Âò·½ĞÅÓÃ·çÏÕ¶î¶È±Ò±ğ";
-                sheetLocal.Cells[1, column++] = "ĞÅÓÃ·çÏÕ¶î¶È";
-                sheetLocal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ(Ê¼)";
-                sheetLocal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ(ÖÕ)";
-                sheetLocal.Cells[1, column++] = "Ô¤¸¶¿î¶î¶È±Ò±ğ";
-                sheetLocal.Cells[1, column++] = "±£ÀíÔ¤¸¶¿î¶î¶È";
-                sheetLocal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ£¨Ê¼£©";
-                sheetLocal.Cells[1, column++] = "ÓĞĞ§ÆÚÏŞ£¨ÖÕ£©";
-                sheetLocal.Cells[1, column++] = "×î¸ß±£ÀíÔ¤¸¶¿î¶î¶È";
-                sheetLocal.Cells[1, column++] = "Ô¤¸¶±ÈÀı";
-                sheetLocal.Cells[1, column++] = "±£Àí·ÑÂÊ";
-                sheetLocal.Cells[1, column++] = "¼Æ·Ñ·½Ê½";
-                sheetLocal.Cells[1, column++] = "µ¥¾İ´¦Àí·Ñ±Ò±ğ";
-                sheetLocal.Cells[1, column++] = "µ¥¾İ´¦Àí·Ñ";
-                sheetLocal.Cells[1, column++] = "±¸×¢";
+                sheetLocal.Cells[1, column++] = "ä¸šåŠ¡ç±»å‹";
+                sheetLocal.Cells[1, column++] = "æ˜¯å¦æœ‰è¿½ç´¢æƒ";
+                sheetLocal.Cells[1, column++] = "æ˜/æš—ä¿ç†";
+                sheetLocal.Cells[1, column++] = "æ–°æ—§åˆåŒ";
+                sheetLocal.Cells[1, column++] = "åˆåŒç¼–å·";
+                sheetLocal.Cells[1, column++] = "ä¸»åˆåŒç”Ÿæ•ˆæ—¥";
+                sheetLocal.Cells[1, column++] = "ä¸»åˆåŒåˆ°æœŸæ—¥";
+                sheetLocal.Cells[1, column++] = "CDAç¼–å·";
+                sheetLocal.Cells[1, column++] = "å–æ–¹åç§°";
+                sheetLocal.Cells[1, column++] = "ä¹°æ–¹åç§°";
+                sheetLocal.Cells[1, column++] = "ä¹°æ–¹åœ°å€";
+                sheetLocal.Cells[1, column++] = "ç­¾å‘æ—¥æœŸ";
+                sheetLocal.Cells[1, column++] = "ä»˜æ¬¾æ–¹å¼";
+                sheetLocal.Cells[1, column++] = "ä¹°æ–¹ä¿¡ç”¨é£é™©é¢åº¦å¸åˆ«";
+                sheetLocal.Cells[1, column++] = "ä¿¡ç”¨é£é™©é¢åº¦";
+                sheetLocal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™(å§‹)";
+                sheetLocal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™(ç»ˆ)";
+                sheetLocal.Cells[1, column++] = "é¢„ä»˜æ¬¾é¢åº¦å¸åˆ«";
+                sheetLocal.Cells[1, column++] = "ä¿ç†é¢„ä»˜æ¬¾é¢åº¦";
+                sheetLocal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™ï¼ˆå§‹ï¼‰";
+                sheetLocal.Cells[1, column++] = "æœ‰æ•ˆæœŸé™ï¼ˆç»ˆï¼‰";
+                sheetLocal.Cells[1, column++] = "æœ€é«˜ä¿ç†é¢„ä»˜æ¬¾é¢åº¦";
+                sheetLocal.Cells[1, column++] = "é¢„ä»˜æ¯”ä¾‹";
+                sheetLocal.Cells[1, column++] = "ä¿ç†è´¹ç‡";
+                sheetLocal.Cells[1, column++] = "è®¡è´¹æ–¹å¼";
+                sheetLocal.Cells[1, column++] = "å•æ®å¤„ç†è´¹å¸åˆ«";
+                sheetLocal.Cells[1, column++] = "å•æ®å¤„ç†è´¹";
+                sheetLocal.Cells[1, column] = "å¤‡æ³¨";
 
-                int size = this.exportData.Count;
+                int size = exportData.Count;
                 int inter = 0;
                 int local = 0;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
                     {
-                        if (sheetInternal != null)
+                        Marshal.ReleaseComObject(sheetInternal);
+
+                        foreach (Workbook wb in app.Workbooks)
                         {
-                            Marshal.ReleaseComObject(sheetInternal);
-                            sheetInternal = null;
+                            wb.Close(false, Type.Missing, Type.Missing);
                         }
 
-                        if (app != null)
-                        {
-                            foreach (Workbook wb in app.Workbooks)
-                            {
-                                wb.Close(false, Type.Missing, Type.Missing);
-                            }
-
-                            app.Workbooks.Close();
-                            app.Quit();
-                            Marshal.ReleaseComObject(app);
-                            app = null;
-                        }
+                        app.Workbooks.Close();
+                        app.Quit();
+                        Marshal.ReleaseComObject(app);
+                        app = null;
 
                         e.Cancel = true;
                         return -1;
                     }
 
                     column = 1;
-                    CDA cda = (CDA)exportData[row];
+                    var cda = (CDA)exportData[row];
 
-                    Worksheet sheet = null;
+                    Worksheet sheet;
                     int rowID = 0;
-                    if (cda.TransactionType == "½ø¿Ú±£Àí" || cda.TransactionType == "³ö¿Ú±£Àí")
+                    if (cda.TransactionType == "è¿›å£ä¿ç†" || cda.TransactionType == "å‡ºå£ä¿ç†")
                     {
                         rowID = ++inter;
                         sheet = sheetInternal;
@@ -933,15 +844,16 @@ namespace CMBC.EasyFactor.Utils
 
                     if (sheet == sheetInternal)
                     {
-                        sheet.Cells[rowID + 1, column++] = cda.Case.BuyerFactor.ToString();
+                        sheet.Cells[rowID + 1, column] = cda.Case.BuyerFactor.ToString();
                     }
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in sheetInternal.UsedRange.Columns)
                 {
-                    if (range.Column == 6 || range.Column == 7 || range.Column == 12 || range.Column == 16 || range.Column == 17 || range.Column == 20 || range.Column == 21)
+                    if (range.Column == 6 || range.Column == 7 || range.Column == 12 || range.Column == 16 ||
+                        range.Column == 17 || range.Column == 20 || range.Column == 21)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -959,12 +871,12 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     range.EntireColumn.AutoFit();
-
                 }
 
                 foreach (Range range in sheetLocal.UsedRange.Columns)
                 {
-                    if (range.Column == 6 || range.Column == 7 || range.Column == 12 || range.Column == 16 || range.Column == 17 || range.Column == 20 || range.Column == 21)
+                    if (range.Column == 6 || range.Column == 7 || range.Column == 12 || range.Column == 16 ||
+                        range.Column == 17 || range.Column == 20 || range.Column == 21)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -1008,10 +920,9 @@ namespace CMBC.EasyFactor.Utils
                     app.Workbooks.Close();
                     app.Quit();
                     Marshal.ReleaseComObject(app);
-                    app = null;
                 }
 
-                throw e1;
+                throw;
             }
 
             return exportData.Count;
@@ -1025,14 +936,15 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private object ExportClientReviews(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
 
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return -1;
             }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -1041,38 +953,38 @@ namespace CMBC.EasyFactor.Utils
 
             try
             {
-                datasheet.Cells[1, 1] = "Ğ­²éÒâ¼ûÌ¨ÕÊ";
+                datasheet.Cells[1, 1] = "åæŸ¥æ„è§å°å¸";
                 datasheet.get_Range("A1", "S1").MergeCells = true;
-                datasheet.get_Range("A1", "S1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                datasheet.get_Range("A1", "S1").HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
                 int column = 1;
-                datasheet.Cells[2, column++] = "»Ø¸´Ê±¼ä";
-                datasheet.Cells[2, column++] = "Ğ­²éÒâ¼û±àÂë";
-                datasheet.Cells[2, column++] = "ÇøÓò¸ºÔğÈË";
-                datasheet.Cells[2, column++] = "¹éÊôÊÂÒµ²¿/·ÖĞĞ";
-                datasheet.Cells[2, column++] = "¹éÊô·Ö²¿";
-                datasheet.Cells[2, column++] = "²úÆ·¾­Àí";
-                datasheet.Cells[2, column++] = "¿Í»§Ãû³Æ";
-                datasheet.Cells[2, column++] = "ËùÊôĞĞÒµ";
-                datasheet.Cells[2, column++] = "ÊÚĞÅ½ğ¶î£¨Íò£©";
-                datasheet.Cells[2, column++] = "¹úÄÚ";
-                datasheet.Cells[2, column++] = "¹ú¼Ê";
-                datasheet.Cells[2, column++] = "Âô·½";
-                datasheet.Cells[2, column++] = "Âò·½";
-                datasheet.Cells[2, column++] = "ÓĞ×·";
-                datasheet.Cells[2, column++] = "ÎŞ×·";
-                datasheet.Cells[2, column++] = "Ã÷±£/°µ±£";
-                datasheet.Cells[2, column++] = "Ô¤¸¶¿î";
-                datasheet.Cells[2, column++] = "´ú¸¶";
-                datasheet.Cells[2, column++] = "ĞÅÓÃÖ¤";
-                datasheet.Cells[2, column++] = "Òø³Ğ";
-                datasheet.Cells[2, column++] = "ÈÚ×Ê¹ÜÀí";
-                datasheet.Cells[2, column++] = "ÆôÓÃ×´Ì¬";
-                datasheet.Cells[2, column++] = "±£Àí·Ñ";
-                datasheet.Cells[2, column++] = "ÈÚ×ÊÆÚ£¨ÔÂ£©";
-                datasheet.Cells[2, column++] = "±¸×¢";
+                datasheet.Cells[2, column++] = "å›å¤æ—¶é—´";
+                datasheet.Cells[2, column++] = "åæŸ¥æ„è§ç¼–ç ";
+                datasheet.Cells[2, column++] = "åŒºåŸŸè´Ÿè´£äºº";
+                datasheet.Cells[2, column++] = "å½’å±äº‹ä¸šéƒ¨/åˆ†è¡Œ";
+                datasheet.Cells[2, column++] = "å½’å±åˆ†éƒ¨";
+                datasheet.Cells[2, column++] = "äº§å“ç»ç†";
+                datasheet.Cells[2, column++] = "å®¢æˆ·åç§°";
+                datasheet.Cells[2, column++] = "æ‰€å±è¡Œä¸š";
+                datasheet.Cells[2, column++] = "æˆä¿¡é‡‘é¢ï¼ˆä¸‡ï¼‰";
+                datasheet.Cells[2, column++] = "å›½å†…";
+                datasheet.Cells[2, column++] = "å›½é™…";
+                datasheet.Cells[2, column++] = "å–æ–¹";
+                datasheet.Cells[2, column++] = "ä¹°æ–¹";
+                datasheet.Cells[2, column++] = "æœ‰è¿½";
+                datasheet.Cells[2, column++] = "æ— è¿½";
+                datasheet.Cells[2, column++] = "æ˜ä¿/æš—ä¿";
+                datasheet.Cells[2, column++] = "é¢„ä»˜æ¬¾";
+                datasheet.Cells[2, column++] = "ä»£ä»˜";
+                datasheet.Cells[2, column++] = "ä¿¡ç”¨è¯";
+                datasheet.Cells[2, column++] = "é“¶æ‰¿";
+                datasheet.Cells[2, column++] = "èèµ„ç®¡ç†";
+                datasheet.Cells[2, column++] = "å¯ç”¨çŠ¶æ€";
+                datasheet.Cells[2, column++] = "ä¿ç†è´¹";
+                datasheet.Cells[2, column++] = "èèµ„æœŸï¼ˆæœˆï¼‰";
+                datasheet.Cells[2, column++] = "å¤‡æ³¨";
 
-                int size = this.exportData.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -1101,7 +1013,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    ClientReview review = (ClientReview)exportData[row];
+                    var review = (ClientReview)exportData[row];
                     datasheet.Cells[row + 3, column++] = review.ReviewDate;
                     datasheet.Cells[row + 3, column++] = review.ReviewNo;
                     Department dept = review.Client.Department;
@@ -1121,29 +1033,32 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 3, column++] = review.Client.PMName;
                     datasheet.Cells[row + 3, column++] = review.Client.ToString();
                     datasheet.Cells[row + 3, column++] = review.Client.Industry;
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = TypeUtil.GetExcelCurr(review.RequestCurrency);
+                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).
+                        NumberFormatLocal = TypeUtil.GetExcelCurr(review.RequestCurrency);
                     datasheet.Cells[row + 3, column++] = review.RequestAmount;
-                    datasheet.Cells[row + 3, column++] = review.IsLocal ? "¹úÄÚ" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsInternational ? "¹ú¼Ê" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsSeller ? "Âô·½" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsBuyer ? "Âò·½" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsRecoarse ? "ÓĞ×·" : "---";
-                    datasheet.Cells[row + 3, column++] = review.IsNonRecoarse ? "ÎŞ×·" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsLocal ? "å›½å†…" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsInternational ? "å›½é™…" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsSeller ? "å–æ–¹" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsBuyer ? "ä¹°æ–¹" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsRecoarse ? "æœ‰è¿½" : "---";
+                    datasheet.Cells[row + 3, column++] = review.IsNonRecoarse ? "æ— è¿½" : "---";
                     datasheet.Cells[row + 3, column++] = review.IsNotice;
-                    string[] financeTypes = review.RequestFinanceType.Split(new char[] { ';' });
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("Ô¤¸¶¿î") ? "Ô¤¸¶¿î" : "---";
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("´ú¸¶") ? "´ú¸¶" : "---";
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("ĞÅÓÃÖ¤") ? "ĞÅÓÃÖ¤" : "---";
-                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("Òø³Ğ") ? "Òø³Ğ" : "---";
+                    string[] financeTypes = review.RequestFinanceType.Split(new[] { ';' });
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("é¢„ä»˜æ¬¾") ? "é¢„ä»˜æ¬¾" : "---";
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("ä»£ä»˜") ? "ä»£ä»˜" : "---";
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("ä¿¡ç”¨è¯") ? "ä¿¡ç”¨è¯" : "---";
+                    datasheet.Cells[row + 3, column++] = financeTypes.Contains("é“¶æ‰¿") ? "é“¶æ‰¿" : "---";
                     datasheet.Cells[row + 3, column++] = review.RequestFinanceType2;
-                    datasheet.Cells[row + 3, column++] = review.Client.Contract != null ? "ÒÑÆô¶¯" : "Î´Æô¶¯";
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "0.000%";
+                    datasheet.Cells[row + 3, column++] = review.Client.Contract != null ? "å·²å¯åŠ¨" : "æœªå¯åŠ¨";
+                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).
+                        NumberFormatLocal = "0.000%";
                     datasheet.Cells[row + 3, column++] = review.RequestCommissionRate;
-                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).NumberFormatLocal = "##ÔÂ";
+                    datasheet.get_Range(datasheet.Cells[row + 3, column], datasheet.Cells[row + 3, column]).
+                        NumberFormatLocal = "##æœˆ";
                     datasheet.Cells[row + 3, column++] = review.RequestFinancePeriod;
                     datasheet.Cells[row + 3, column++] = review.Comment;
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -1192,14 +1107,15 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private object ExportClients(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
 
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return -1;
             }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -1209,41 +1125,41 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "¿Í»§ºÅ";
-                datasheet.Cells[1, column++] = "±£Àí´úÂë";
-                datasheet.Cells[1, column++] = "¿Í»§Ãû³Æ(ÖĞ)";
-                datasheet.Cells[1, column++] = "¿Í»§Ãû³Æ(Ó¢)";
-                datasheet.Cells[1, column++] = "µØÖ·(ÖĞ)";
-                datasheet.Cells[1, column++] = "µØÖ·(Ó¢)";
-                datasheet.Cells[1, column++] = "ËùÔÚ³ÇÊĞ(ÖĞ)";
-                datasheet.Cells[1, column++] = "ËùÔÚ³ÇÊĞ(Ó¢)";
-                datasheet.Cells[1, column++] = "ËùÔÚÊ¡/Öİ(ÖĞ)";
-                datasheet.Cells[1, column++] = "ËùÔÚÊ¡/Öİ(Ó¢)";
-                datasheet.Cells[1, column++] = "ÓÊ±à";
-                datasheet.Cells[1, column++] = "ËùÔÚ¹ú";
-                datasheet.Cells[1, column++] = "¹«Ë¾·¨ÈË/ÔğÈÎÈË";
-                datasheet.Cells[1, column++] = "¹«Ë¾ÍøÖ·";
-                datasheet.Cells[1, column++] = "ÁªÏµÈË";
-                datasheet.Cells[1, column++] = "ÁªÏµµç»°";
+                datasheet.Cells[1, column++] = "å®¢æˆ·å·";
+                datasheet.Cells[1, column++] = "ä¿ç†ä»£ç ";
+                datasheet.Cells[1, column++] = "å®¢æˆ·åç§°(ä¸­)";
+                datasheet.Cells[1, column++] = "å®¢æˆ·åç§°(è‹±)";
+                datasheet.Cells[1, column++] = "åœ°å€(ä¸­)";
+                datasheet.Cells[1, column++] = "åœ°å€(è‹±)";
+                datasheet.Cells[1, column++] = "æ‰€åœ¨åŸå¸‚(ä¸­)";
+                datasheet.Cells[1, column++] = "æ‰€åœ¨åŸå¸‚(è‹±)";
+                datasheet.Cells[1, column++] = "æ‰€åœ¨çœ/å·(ä¸­)";
+                datasheet.Cells[1, column++] = "æ‰€åœ¨çœ/å·(è‹±)";
+                datasheet.Cells[1, column++] = "é‚®ç¼–";
+                datasheet.Cells[1, column++] = "æ‰€åœ¨å›½";
+                datasheet.Cells[1, column++] = "å…¬å¸æ³•äºº/è´£ä»»äºº";
+                datasheet.Cells[1, column++] = "å…¬å¸ç½‘å€";
+                datasheet.Cells[1, column++] = "è”ç³»äºº";
+                datasheet.Cells[1, column++] = "è”ç³»ç”µè¯";
                 datasheet.Cells[1, column++] = "E-MAIL";
-                datasheet.Cells[1, column++] = "´«ÕæºÅÂë";
-                datasheet.Cells[1, column++] = "ÊÖ»úºÅÂë";
-                datasheet.Cells[1, column++] = "¿Í»§ÀàĞÍ";
-                datasheet.Cells[1, column++] = "ĞĞÒµÀà±ğ";
-                datasheet.Cells[1, column++] = "¾­Óª·¶Î§(ÖĞ)";
-                datasheet.Cells[1, column++] = "¾­Óª·¶Î§(Ó¢)";
-                datasheet.Cells[1, column++] = "¿Í»§¼¶±ğ";
-                datasheet.Cells[1, column++] = "ËùÊô¼¯ÍÅ¿Í»§±£Àí´úÂë";
-                datasheet.Cells[1, column++] = "ËùÊô¼¯ÍÅ¿Í»§Ãû³Æ";
-                datasheet.Cells[1, column++] = "ÓªÒµÖ´ÕÕºÅÂë";
-                datasheet.Cells[1, column++] = "×éÖ¯»ú¹¹´úÂë";
-                datasheet.Cells[1, column++] = "ËùÊô»ú¹¹";
-                datasheet.Cells[1, column++] = "²úÆ·¾­Àí";
-                datasheet.Cells[1, column++] = "¿Í»§¾­Àí";
-                datasheet.Cells[1, column++] = "±¸×¢";
-                datasheet.Cells[1, column++] = "¾­°ìÈË";
+                datasheet.Cells[1, column++] = "ä¼ çœŸå·ç ";
+                datasheet.Cells[1, column++] = "æ‰‹æœºå·ç ";
+                datasheet.Cells[1, column++] = "å®¢æˆ·ç±»å‹";
+                datasheet.Cells[1, column++] = "è¡Œä¸šç±»åˆ«";
+                datasheet.Cells[1, column++] = "ç»è¥èŒƒå›´(ä¸­)";
+                datasheet.Cells[1, column++] = "ç»è¥èŒƒå›´(è‹±)";
+                datasheet.Cells[1, column++] = "å®¢æˆ·çº§åˆ«";
+                datasheet.Cells[1, column++] = "æ‰€å±é›†å›¢å®¢æˆ·ä¿ç†ä»£ç ";
+                datasheet.Cells[1, column++] = "æ‰€å±é›†å›¢å®¢æˆ·åç§°";
+                datasheet.Cells[1, column++] = "è¥ä¸šæ‰§ç…§å·ç ";
+                datasheet.Cells[1, column++] = "ç»„ç»‡æœºæ„ä»£ç ";
+                datasheet.Cells[1, column++] = "æ‰€å±æœºæ„";
+                datasheet.Cells[1, column++] = "äº§å“ç»ç†";
+                datasheet.Cells[1, column++] = "å®¢æˆ·ç»ç†";
+                datasheet.Cells[1, column++] = "å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "ç»åŠäºº";
 
-                int size = this.exportData.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -1272,7 +1188,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Client client = (Client)exportData[row];
+                    var client = (Client)exportData[row];
                     datasheet.Cells[row + 2, column++] = client.ClientCoreNo;
                     datasheet.Cells[row + 2, column++] = client.ClientEDICode;
                     datasheet.Cells[row + 2, column++] = client.ClientNameCN;
@@ -1297,17 +1213,23 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = client.ProductCN;
                     datasheet.Cells[row + 2, column++] = client.ProductEN;
                     datasheet.Cells[row + 2, column++] = client.ClientLevel;
-                    datasheet.Cells[row + 2, column++] = client.ClientGroup == null ? string.Empty : client.ClientGroup.ClientEDICode;
-                    datasheet.Cells[row + 2, column++] = client.ClientGroup == null ? string.Empty : client.ClientGroup.ClientNameCN;
+                    datasheet.Cells[row + 2, column++] = client.ClientGroup == null
+                                                             ? string.Empty
+                                                             : client.ClientGroup.ClientEDICode;
+                    datasheet.Cells[row + 2, column++] = client.ClientGroup == null
+                                                             ? string.Empty
+                                                             : client.ClientGroup.ClientNameCN;
                     datasheet.Cells[row + 2, column++] = client.RegistrationNumber;
                     datasheet.Cells[row + 2, column++] = client.CompanyCode;
-                    datasheet.Cells[row + 2, column++] = client.Department == null ? string.Empty : client.Department.DepartmentName;
+                    datasheet.Cells[row + 2, column++] = client.Department == null
+                                                             ? string.Empty
+                                                             : client.Department.DepartmentName;
                     datasheet.Cells[row + 2, column++] = client.PMName;
                     datasheet.Cells[row + 2, column++] = client.RMName;
                     datasheet.Cells[row + 2, column++] = client.Comment;
                     datasheet.Cells[row + 2, column++] = client.CreateUserName;
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -1356,14 +1278,15 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private object ExportCreditCoverNegs(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
 
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return -1;
             }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -1373,23 +1296,23 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "°¸¼ş±àºÅ";
-                datasheet.Cells[1, column++] = "ËùÊôµØÇø";
-                datasheet.Cells[1, column++] = "Âô·½Ãû³Æ";
-                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
-                datasheet.Cells[1, column++] = "ºÏ×÷±£ÀíÉÌ";
-                datasheet.Cells[1, column++] = "P/C±êÖ¾";
-                datasheet.Cells[1, column++] = "ÉêÇë¶î¶È";
-                datasheet.Cells[1, column++] = "¸¶¿îÌõ¼ş";
-                datasheet.Cells[1, column++] = "ÉêÇëÈÕÆÚ";
-                datasheet.Cells[1, column++] = "»Ø¸´¶î¶È";
-                datasheet.Cells[1, column++] = "»Ø¸´ÈÕÆÚ";
-                datasheet.Cells[1, column++] = "IF±¨¼Û";
-                datasheet.Cells[1, column++] = "±¨¼ÛÈÕ";
-                datasheet.Cells[1, column++] = "¶î¶ÈÆÚÏŞ";
-                datasheet.Cells[1, column++] = "±¸×¢";
+                datasheet.Cells[1, column++] = "æ¡ˆä»¶ç¼–å·";
+                datasheet.Cells[1, column++] = "æ‰€å±åœ°åŒº";
+                datasheet.Cells[1, column++] = "å–æ–¹åç§°";
+                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
+                datasheet.Cells[1, column++] = "åˆä½œä¿ç†å•†";
+                datasheet.Cells[1, column++] = "P/Cæ ‡å¿—";
+                datasheet.Cells[1, column++] = "ç”³è¯·é¢åº¦";
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾æ¡ä»¶";
+                datasheet.Cells[1, column++] = "ç”³è¯·æ—¥æœŸ";
+                datasheet.Cells[1, column++] = "å›å¤é¢åº¦";
+                datasheet.Cells[1, column++] = "å›å¤æ—¥æœŸ";
+                datasheet.Cells[1, column++] = "IFæŠ¥ä»·";
+                datasheet.Cells[1, column++] = "æŠ¥ä»·æ—¥";
+                datasheet.Cells[1, column++] = "é¢åº¦æœŸé™";
+                datasheet.Cells[1, column++] = "å¤‡æ³¨";
 
-                int size = this.exportData.Count;
+                int size = exportData.Count;
                 for (int row = 0; row < size; row++)
                 {
                     if (worker.CancellationPending)
@@ -1418,24 +1341,24 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    CreditCoverNegotiation creditCoverNeg = (CreditCoverNegotiation)exportData[row];
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.CaseCode;//1
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.OwnerDepartment.Location;//2
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.SellerClient.ToString();//3
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.BuyerClient.ToString();//4
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.Factor.ToString();//5
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestType;//6
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestAmount;//7
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.NetPaymentTerm;//8
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestDate;//9
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.ReplyAmount;//10
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.ReplyDate;//11
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.IFPrice;//12
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.PriceDate;//13
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.DueDate;//14
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Comment;//15
+                    var creditCoverNeg = (CreditCoverNegotiation)exportData[row];
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.CaseCode; //1
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.OwnerDepartment.Location; //2
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.SellerClient.ToString(); //3
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.BuyerClient.ToString(); //4
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.Factor.ToString(); //5
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestType; //6
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestAmount; //7
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.NetPaymentTerm; //8
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.RequestDate; //9
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.ReplyAmount; //10
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.ReplyDate; //11
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.IFPrice; //12
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.PriceDate; //13
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.DueDate; //14
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Comment; //15
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -1457,7 +1380,7 @@ namespace CMBC.EasyFactor.Utils
 
                 datasheet.UsedRange.WrapText = false;
                 datasheet.UsedRange.Borders.LineStyle = 1;
-                datasheet.UsedRange.Font.Name = "·ÂËÎ_GB2312";
+                datasheet.UsedRange.Font.Name = "ä»¿å®‹_GB2312";
                 datasheet.UsedRange.Font.Size = 12;
 
                 app.Visible = true;
@@ -1497,13 +1420,14 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportCreditNotes(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return -1;
             }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -1514,21 +1438,21 @@ namespace CMBC.EasyFactor.Utils
             {
                 int column = 1;
                 //Case
-                datasheet.Cells[1, column++] = "°¸¼ş±àºÅ";
-                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
-                //¸¶¿îÅú´Î
-                datasheet.Cells[1, column++] = "¸¶¿îÅú´ÎºÅ";
-                datasheet.Cells[1, column++] = "¸¶¿îÀàĞÍ";
-                datasheet.Cells[1, column++] = "¸¶¿îÅú´ÎÈÕ";
-                datasheet.Cells[1, column++] = "ÊÇ·ñÉú³É±¨ÎÄ";
-                datasheet.Cells[1, column++] = "±¾´Î¸¶¿î±¸×¢";
-                datasheet.Cells[1, column++] = "¸¶¿î¾­°ìÈË";
-                //´ûÏîÍ¨Öª
-                datasheet.Cells[1, column++] = "´ûÏîÍ¨ÖªºÅ";
-                datasheet.Cells[1, column++] = "´ûÏîÍ¨Öª½ğ¶î";
-                datasheet.Cells[1, column++] = "´ûÏîÍ¨ÖªÈÕ";
-                datasheet.Cells[1, column++] = "¶ÔÓ¦·¢Æ±ºÅ";
-                datasheet.Cells[1, column++] = "±¸×¢";
+                datasheet.Cells[1, column++] = "æ¡ˆä»¶ç¼–å·";
+                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
+                //ä»˜æ¬¾æ‰¹æ¬¡
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾æ‰¹æ¬¡å·";
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾ç±»å‹";
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾æ‰¹æ¬¡æ—¥";
+                datasheet.Cells[1, column++] = "æ˜¯å¦ç”ŸæˆæŠ¥æ–‡";
+                datasheet.Cells[1, column++] = "æœ¬æ¬¡ä»˜æ¬¾å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾ç»åŠäºº";
+                //è´·é¡¹é€šçŸ¥
+                datasheet.Cells[1, column++] = "è´·é¡¹é€šçŸ¥å·";
+                datasheet.Cells[1, column++] = "è´·é¡¹é€šçŸ¥é‡‘é¢";
+                datasheet.Cells[1, column++] = "è´·é¡¹é€šçŸ¥æ—¥";
+                datasheet.Cells[1, column++] = "å¯¹åº”å‘ç¥¨å·";
+                datasheet.Cells[1, column++] = "å¤‡æ³¨";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -1559,22 +1483,29 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    CreditNote creditNote = (CreditNote)exportData[row];
-                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.Case.CaseCode;
-                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.Case.BuyerClient.ToString();
-                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.PaymentBatchNo;
-                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.PaymentType;
-                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.PaymentDate;
-                    datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.IsCreateMsg);
+                    var creditNote = (CreditNote)exportData[row];
+                    datasheet.Cells[row + 2, column++] =
+                        creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.Case.CaseCode;
+                    datasheet.Cells[row + 2, column++] =
+                        creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.Case.BuyerClient.ToString();
+                    datasheet.Cells[row + 2, column++] =
+                        creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.PaymentBatchNo;
+                    datasheet.Cells[row + 2, column++] =
+                        creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.PaymentType;
+                    datasheet.Cells[row + 2, column++] =
+                        creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.PaymentDate;
+                    datasheet.Cells[row + 2, column++] =
+                        TypeUtil.ConvertBoolToStr(creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.IsCreateMsg);
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.Comment;
-                    datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.CreateUserName;
+                    datasheet.Cells[row + 2, column++] =
+                        creditNote.InvoicePaymentLogs[0].InvoicePaymentBatch.CreateUserName;
                     datasheet.Cells[row + 2, column++] = creditNote.CreditNoteNo;
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].PaymentAmount;
                     datasheet.Cells[row + 2, column++] = creditNote.CreditNoteDate;
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].Invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = creditNote.InvoicePaymentLogs[0].Comment;
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -1627,13 +1558,14 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportFinanceByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return -1;
             }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -1643,12 +1575,12 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "ÒµÎñ±àºÅ";
-                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
-                datasheet.Cells[1, column++] = "×ªÈÃÓà¶î";
-                datasheet.Cells[1, column++] = "ÈÚ×Ê½ğ¶î";
-                datasheet.Cells[1, column++] = "ÊÖĞø·Ñ";
-                datasheet.Cells[1, column++] = "±¸×¢";
+                datasheet.Cells[1, column++] = "ä¸šåŠ¡ç¼–å·";
+                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
+                datasheet.Cells[1, column++] = "è½¬è®©ä½™é¢";
+                datasheet.Cells[1, column++] = "èèµ„é‡‘é¢";
+                datasheet.Cells[1, column++] = "æ‰‹ç»­è´¹";
+                datasheet.Cells[1, column++] = "å¤‡æ³¨";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -1679,7 +1611,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    InvoiceFinanceLog log = (InvoiceFinanceLog)exportData[row];
+                    var log = (InvoiceFinanceLog)exportData[row];
                     datasheet.Cells[row + 2, column++] = log.AssignBatchNo2;
                     datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
@@ -1687,7 +1619,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = log.Commission;
                     datasheet.Cells[row + 2, column++] = log.Comment;
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -1736,13 +1668,14 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportInvoicesFull(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return -1;
             }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -1753,58 +1686,58 @@ namespace CMBC.EasyFactor.Utils
             {
                 int column = 1;
                 //Case
-                datasheet.Cells[1, column++] = "°¸¼ş±àºÅ";
-                datasheet.Cells[1, column++] = "Âô·½Ãû³Æ";
-                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
-                //×ªÈÃÅú´Î
-                datasheet.Cells[1, column++] = "×ªÈÃÅú´ÎºÅ";
-                datasheet.Cells[1, column++] = "×ªÈÃÅú´ÎÈÕ";
-                datasheet.Cells[1, column++] = "ÊÇ·ñÉú³É±¨ÎÄ";
-                datasheet.Cells[1, column++] = "±¾´Î×ªÈÃ±¸×¢";
-                datasheet.Cells[1, column++] = "×ªÈÃ¾­°ìÈË";
-                //×ªÈÃ
-                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
-                datasheet.Cells[1, column++] = "Æ±Ãæ½ğ¶î";
-                datasheet.Cells[1, column++] = "×ªÈÃ½ğ¶î";
-                datasheet.Cells[1, column++] = "·¢Æ±ÈÕ";
-                datasheet.Cells[1, column++] = "µ½ÆÚÈÕ";
-                datasheet.Cells[1, column++] = "ÊÇ·ñè¦´Ã";
-                //ÈÚ×ÊÅúºÅ
-                datasheet.Cells[1, column++] = "ÈÚ×Ê±àºÅ";
-                datasheet.Cells[1, column++] = "ÈÚ×ÊÀàĞÍ";
-                datasheet.Cells[1, column++] = "´ú¸¶ĞĞ±àÂë";
-                datasheet.Cells[1, column++] = "´ú¸¶ĞĞÃû³Æ";
-                datasheet.Cells[1, column++] = "ÈÚ×Ê±Ò±ğ";
-                datasheet.Cells[1, column++] = "ÈÚ×ÊÀûÂÊ";
-                datasheet.Cells[1, column++] = "³É±¾ÀûÂÊ";
-                datasheet.Cells[1, column++] = "±¾´ÎÈÚ×ÊÆğÊ¼ÈÕ";
-                datasheet.Cells[1, column++] = "±¾´ÎÈÚ×Êµ½ÆÚÈÕ";
-                datasheet.Cells[1, column++] = "±¾´ÎÈÚ×Ê±¸×¢";
-                datasheet.Cells[1, column++] = "±¾´ÎÈÚ×Ê¾­°ìÈË";
-                //ÈÚ×Ê
-                datasheet.Cells[1, column++] = "ÈÚ×Ê½ğ¶î";
-                //¸¶¿îÅú´Î
-                datasheet.Cells[1, column++] = "¸¶¿îÅú´ÎºÅ";
-                datasheet.Cells[1, column++] = "¸¶¿îÀàĞÍ";
-                datasheet.Cells[1, column++] = "¸¶¿îÅú´ÎÈÕ";
-                datasheet.Cells[1, column++] = "ÊÇ·ñÉú³É±¨ÎÄ";
-                datasheet.Cells[1, column++] = "±¾´Î¸¶¿î±¸×¢";
-                datasheet.Cells[1, column++] = "¸¶¿î¾­°ìÈË";
-                //¸¶¿î
-                datasheet.Cells[1, column++] = "¸¶¿î½ğ¶î";
-                //»¹¿îÅú´Î
-                datasheet.Cells[1, column++] = "»¹¿îÅú´Î±àºÅ";
-                datasheet.Cells[1, column++] = "»¹¿îÀàĞÍ";
-                datasheet.Cells[1, column++] = "»¹¿îÅú´ÎÈÕ";
-                datasheet.Cells[1, column++] = "±¾´Î»¹¿î±¸×¢";
-                datasheet.Cells[1, column++] = "»¹¿î¾­°ìÈË";
-                //»¹¿î
-                datasheet.Cells[1, column++] = "»¹¿î½ğ¶î";
-                //ÊÖĞø·Ñ
-                datasheet.Cells[1, column++] = "ÊÖĞø·Ñ";
-                //ÀûÏ¢
-                datasheet.Cells[1, column++] = "ÀûÏ¢";
-                datasheet.Cells[1, column++] = "±¸×¢";
+                datasheet.Cells[1, column++] = "æ¡ˆä»¶ç¼–å·";
+                datasheet.Cells[1, column++] = "å–æ–¹åç§°";
+                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
+                //è½¬è®©æ‰¹æ¬¡
+                datasheet.Cells[1, column++] = "è½¬è®©æ‰¹æ¬¡å·";
+                datasheet.Cells[1, column++] = "è½¬è®©æ‰¹æ¬¡æ—¥";
+                datasheet.Cells[1, column++] = "æ˜¯å¦ç”ŸæˆæŠ¥æ–‡";
+                datasheet.Cells[1, column++] = "æœ¬æ¬¡è½¬è®©å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "è½¬è®©ç»åŠäºº";
+                //è½¬è®©
+                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
+                datasheet.Cells[1, column++] = "ç¥¨é¢é‡‘é¢";
+                datasheet.Cells[1, column++] = "è½¬è®©é‡‘é¢";
+                datasheet.Cells[1, column++] = "å‘ç¥¨æ—¥";
+                datasheet.Cells[1, column++] = "åˆ°æœŸæ—¥";
+                datasheet.Cells[1, column++] = "æ˜¯å¦ç‘•ç–µ";
+                //èèµ„æ‰¹å·
+                datasheet.Cells[1, column++] = "èèµ„ç¼–å·";
+                datasheet.Cells[1, column++] = "èèµ„ç±»å‹";
+                datasheet.Cells[1, column++] = "ä»£ä»˜è¡Œç¼–ç ";
+                datasheet.Cells[1, column++] = "ä»£ä»˜è¡Œåç§°";
+                datasheet.Cells[1, column++] = "èèµ„å¸åˆ«";
+                datasheet.Cells[1, column++] = "èèµ„åˆ©ç‡";
+                datasheet.Cells[1, column++] = "æˆæœ¬åˆ©ç‡";
+                datasheet.Cells[1, column++] = "æœ¬æ¬¡èèµ„èµ·å§‹æ—¥";
+                datasheet.Cells[1, column++] = "æœ¬æ¬¡èèµ„åˆ°æœŸæ—¥";
+                datasheet.Cells[1, column++] = "æœ¬æ¬¡èèµ„å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "æœ¬æ¬¡èèµ„ç»åŠäºº";
+                //èèµ„
+                datasheet.Cells[1, column++] = "èèµ„é‡‘é¢";
+                //ä»˜æ¬¾æ‰¹æ¬¡
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾æ‰¹æ¬¡å·";
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾ç±»å‹";
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾æ‰¹æ¬¡æ—¥";
+                datasheet.Cells[1, column++] = "æ˜¯å¦ç”ŸæˆæŠ¥æ–‡";
+                datasheet.Cells[1, column++] = "æœ¬æ¬¡ä»˜æ¬¾å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾ç»åŠäºº";
+                //ä»˜æ¬¾
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾é‡‘é¢";
+                //è¿˜æ¬¾æ‰¹æ¬¡
+                datasheet.Cells[1, column++] = "è¿˜æ¬¾æ‰¹æ¬¡ç¼–å·";
+                datasheet.Cells[1, column++] = "è¿˜æ¬¾ç±»å‹";
+                datasheet.Cells[1, column++] = "è¿˜æ¬¾æ‰¹æ¬¡æ—¥";
+                datasheet.Cells[1, column++] = "æœ¬æ¬¡è¿˜æ¬¾å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "è¿˜æ¬¾ç»åŠäºº";
+                //è¿˜æ¬¾
+                datasheet.Cells[1, column++] = "è¿˜æ¬¾é‡‘é¢";
+                //æ‰‹ç»­è´¹
+                datasheet.Cells[1, column++] = "æ‰‹ç»­è´¹";
+                //åˆ©æ¯
+                datasheet.Cells[1, column++] = "åˆ©æ¯";
+                datasheet.Cells[1, column++] = "å¤‡æ³¨";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -1835,18 +1768,19 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    Invoice invoice = (Invoice)exportData[row];
+                    var invoice = (Invoice)exportData[row];
                     //CDA
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.CaseCode;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
-                    //×ªÈÃÅú´Î
+                    //è½¬è®©æ‰¹æ¬¡
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignBatchNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignDate;
-                    datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.InvoiceAssignBatch.IsCreateMsg);
+                    datasheet.Cells[row + 2, column++] =
+                        TypeUtil.ConvertBoolToStr(invoice.InvoiceAssignBatch.IsCreateMsg);
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Comment;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CreateUserName;
-                    //×ªÈÃ
+                    //è½¬è®©
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAmount;
                     datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
@@ -1854,7 +1788,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
 
-                    //ÈÚ×ÊÅú´Î
+                    //èèµ„æ‰¹æ¬¡
                     int recordStep = 0;
                     for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
                     {
@@ -1865,23 +1799,26 @@ namespace CMBC.EasyFactor.Utils
                         if (financeLog.InvoiceFinanceBatch.Factor != null)
                         {
                             datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.FactorCode;
-                            datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.Factor.ToString();
+                            datasheet.Cells[row + 2 + recordStep, column++] =
+                                financeLog.InvoiceFinanceBatch.Factor.ToString();
                         }
 
                         column = 19;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.BatchCurrency;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.FinanceRate;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.CostRate;
-                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.FinancePeriodBegin;
-                        datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.FinancePeriodEnd;
+                        datasheet.Cells[row + 2 + recordStep, column++] =
+                            financeLog.InvoiceFinanceBatch.FinancePeriodBegin;
+                        datasheet.Cells[row + 2 + recordStep, column++] =
+                            financeLog.InvoiceFinanceBatch.FinancePeriodEnd;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.Comment;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.CreateUserName;
 
-                        //ÈÚ×Ê
+                        //èèµ„
                         column = 26;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.FinanceAmount;
 
-                        //»¹¿îÅú´Î
+                        //è¿˜æ¬¾æ‰¹æ¬¡
                         for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
                         {
                             column = 34;
@@ -1892,7 +1829,7 @@ namespace CMBC.EasyFactor.Utils
                             datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.Comment;
                             datasheet.Cells[row + 2 + j + recordStep, column++] = log.InvoiceRefundBatch.CreateUserName;
 
-                            //»¹¿î
+                            //è¿˜æ¬¾
                             column = 39;
                             datasheet.Cells[row + 2 + j + recordStep, column++] = log.RefundAmount;
                         }
@@ -1901,7 +1838,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
 
-                    //¸¶¿îÅú´Î
+                    //ä»˜æ¬¾æ‰¹æ¬¡
                     for (int i = 0; i < invoice.InvoicePaymentLogs.Count; i++)
                     {
                         column = 27;
@@ -1909,33 +1846,36 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.PaymentBatchNo;
                         datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.PaymentType;
                         datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.PaymentDate;
-                        datasheet.Cells[row + 2 + i, column++] = TypeUtil.ConvertBoolToStr(log.InvoicePaymentBatch.IsCreateMsg);
+                        datasheet.Cells[row + 2 + i, column++] =
+                            TypeUtil.ConvertBoolToStr(log.InvoicePaymentBatch.IsCreateMsg);
                         datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.Comment;
                         datasheet.Cells[row + 2 + i, column++] = log.InvoicePaymentBatch.CreateUserName;
 
-                        //¸¶¿î
+                        //ä»˜æ¬¾
                         column = 33;
                         datasheet.Cells[row + 2 + i, column++] = log.PaymentAmount;
                     }
 
                     column = 40;
 
-                    //ÊÖĞø·Ñ
+                    //æ‰‹ç»­è´¹
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
-                    //ÀûÏ¢
+                    //åˆ©æ¯
                     datasheet.Cells[row + 2, column++] = invoice.NetInterest;
                     datasheet.Cells[row + 2, column++] = invoice.Comment;
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
-                    if (range.Column == 10 || range.Column == 11 || range.Column == 26 || range.Column == 33 || range.Column == 39 || range.Column == 40 || range.Column == 41)
+                    if (range.Column == 10 || range.Column == 11 || range.Column == 26 || range.Column == 33 ||
+                        range.Column == 39 || range.Column == 40 || range.Column == 41)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
-                    else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 22 || range.Column == 23 || range.Column == 29 || range.Column == 36)
+                    else if (range.Column == 5 || range.Column == 12 || range.Column == 13 || range.Column == 22 ||
+                             range.Column == 23 || range.Column == 29 || range.Column == 36)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -1984,13 +1924,14 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportInvoicesOverDue(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return -1;
             }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -2000,23 +1941,23 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "ËùÊôµØÇø";
-                datasheet.Cells[1, column++] = "Âô·½Ãû³Æ";
-                datasheet.Cells[1, column++] = "Âò·½Ãû³Æ";
-                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
-                datasheet.Cells[1, column++] = "·¢Æ±±Ò±ğ";
-                datasheet.Cells[1, column++] = "×ªÈÃ½ğ¶î";
-                datasheet.Cells[1, column++] = "×ªÈÃÓà¶î";
-                datasheet.Cells[1, column++] = "·¢Æ±ÈÕ";
-                datasheet.Cells[1, column++] = "µ½ÆÚÈÕ";
-                datasheet.Cells[1, column++] = "×ªÈÃÈÕ";
-                datasheet.Cells[1, column++] = "ÈÚ×Ê±Ò±ğ";
-                datasheet.Cells[1, column++] = "ÈÚ×Ê½ğ¶î";
-                datasheet.Cells[1, column++] = "ÈÚ×ÊÓà¶î";
-                datasheet.Cells[1, column++] = "ÈÚ×ÊÈÕ";
-                datasheet.Cells[1, column++] = "ÈÚ×Êµ½ÆÚÈÕ";
-                datasheet.Cells[1, column++] = "ÕË¿îÓâÆÚÌìÊı";
-                datasheet.Cells[1, column++] = "ÈÚ×ÊÓâÆÚÌìÊı";
+                datasheet.Cells[1, column++] = "æ‰€å±åœ°åŒº";
+                datasheet.Cells[1, column++] = "å–æ–¹åç§°";
+                datasheet.Cells[1, column++] = "ä¹°æ–¹åç§°";
+                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
+                datasheet.Cells[1, column++] = "å‘ç¥¨å¸åˆ«";
+                datasheet.Cells[1, column++] = "è½¬è®©é‡‘é¢";
+                datasheet.Cells[1, column++] = "è½¬è®©ä½™é¢";
+                datasheet.Cells[1, column++] = "å‘ç¥¨æ—¥";
+                datasheet.Cells[1, column++] = "åˆ°æœŸæ—¥";
+                datasheet.Cells[1, column++] = "è½¬è®©æ—¥";
+                datasheet.Cells[1, column++] = "èèµ„å¸åˆ«";
+                datasheet.Cells[1, column++] = "èèµ„é‡‘é¢";
+                datasheet.Cells[1, column++] = "èèµ„ä½™é¢";
+                datasheet.Cells[1, column++] = "èèµ„æ—¥";
+                datasheet.Cells[1, column++] = "èèµ„åˆ°æœŸæ—¥";
+                datasheet.Cells[1, column++] = "è´¦æ¬¾é€¾æœŸå¤©æ•°";
+                datasheet.Cells[1, column++] = "èèµ„é€¾æœŸå¤©æ•°";
 
                 int size = exportData.Count;
                 int row = 0;
@@ -2048,7 +1989,8 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.OwnerDepartment.Location.LocationName;
+                    datasheet.Cells[row + 2, column++] =
+                        invoice.InvoiceAssignBatch.Case.OwnerDepartment.Location.LocationName;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
@@ -2085,7 +2027,7 @@ namespace CMBC.EasyFactor.Utils
                     int step = invoice.InvoiceFinanceLogs.Count > 1 ? invoice.InvoiceFinanceLogs.Count : 1;
                     row += step;
                     size += (step - 1);
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -2095,7 +2037,8 @@ namespace CMBC.EasyFactor.Utils
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
-                    else if (range.Column == 8 || range.Column == 9 || range.Column == 10 || range.Column == 14 || range.Column == 15)
+                    else if (range.Column == 8 || range.Column == 9 || range.Column == 10 || range.Column == 14 ||
+                             range.Column == 15)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
@@ -2138,23 +2081,23 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportLegers(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            List<Case> selectedCases = (List<Case>)exportData;
+            var selectedCases = (List<Case>)exportData;
 
             IEnumerable<IGrouping<string, Case>> caseGroups = selectedCases.GroupBy(c => c.TransactionType);
-            int size = this.exportData.Count;
+            int size = exportData.Count;
             int result = 0;
             IEnumerable<IGrouping<Client, Case>> groups = null;
-            foreach (IGrouping<string, Case> caseGroup in caseGroups)
+            foreach (var caseGroup in caseGroups)
             {
                 string transactionType = caseGroup.Key;
                 switch (transactionType)
                 {
-                    case "¹úÄÚÂô·½±£Àí":
-                    case "³ö¿Ú±£Àí":
+                    case "å›½å†…å–æ–¹ä¿ç†":
+                    case "å‡ºå£ä¿ç†":
                         groups = caseGroup.GroupBy(c => c.SellerClient);
                         break;
-                    case "¹úÄÚÂò·½±£Àí":
-                    case "½ø¿Ú±£Àí":
+                    case "å›½å†…ä¹°æ–¹ä¿ç†":
+                    case "è¿›å£ä¿ç†":
                         groups = caseGroup.GroupBy(c => c.BuyerClient);
                         break;
                     default:
@@ -2163,7 +2106,7 @@ namespace CMBC.EasyFactor.Utils
 
                 if (groups != null)
                 {
-                    foreach (IGrouping<Client, Case> group in groups)
+                    foreach (var group in groups)
                     {
                         if (worker.CancellationPending)
                         {
@@ -2173,7 +2116,7 @@ namespace CMBC.EasyFactor.Utils
 
                         ExportReportLegarImpl(group, transactionType);
                         result += (int)group.LongCount();
-                        worker.ReportProgress((int)((float)result * 100 / (float)size));
+                        worker.ReportProgress((int)((float)result * 100 / size));
                     }
                 }
             }
@@ -2194,8 +2137,9 @@ namespace CMBC.EasyFactor.Utils
                 return 0;
             }
 
-            string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoiceAssignBatch)exportData[0]).Case.SellerCode, DateTime.Today);
-            StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
+            string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", tbFilePath.Text,
+                                            ((InvoiceAssignBatch)exportData[0]).Case.SellerCode, DateTime.Today);
+            var fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
             for (int row = 0; row < size; row++)
@@ -2207,16 +2151,16 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                InvoiceAssignBatch batch = (InvoiceAssignBatch)exportData[row];
+                var batch = (InvoiceAssignBatch)exportData[row];
                 foreach (Invoice invoice in batch.Invoices)
                 {
-                    StringBuilder sb = new StringBuilder();
+                    var sb = new StringBuilder();
                     Case curCase = invoice.InvoiceAssignBatch.Case;
-                    sb.Append(((int)row / 1000 + 1)).Append(',');
+                    sb.Append((row / 1000 + 1)).Append(',');
                     sb.Append("MSG09").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
-                    sb.Append(CMBC.EasyFactor.DB.dbml.User.GetEDIAccount(invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(User.GetEDIAccount(invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
                     sb.Append(',');
@@ -2232,7 +2176,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.InvoiceAssignBatch.AssignDate)).Append(',');
                     sb.Append(invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
                     sb.Append(invoice.InvoiceAssignBatch.AssignAmount).Append(',');
-                    sb.Append("0,");//CreditNote
+                    sb.Append("0,"); //CreditNote
                     sb.Append(curCase.SellerClient.EDICode).Append(',');
                     //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
                     sb.Append(',');
@@ -2254,18 +2198,18 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(invoice.OrderNumberReference).Append(',');
                     sb.Append(invoice.InvoiceReferenceNumber).Append(',');
                     sb.Append(invoice.InvoiceAssignBatch.BatchCount).Append(',');
-                    sb.Append(0).Append(',');//Total of CreditNote
+                    sb.Append(0).Append(','); //Total of CreditNote
                     sb.Append(invoice.Comment).Append(' ');
 
                     fileWriter.WriteLine(sb.ToString());
                 }
 
-                worker.ReportProgress((int)((float)row * 100 / (float)size));
+                worker.ReportProgress((int)((float)row * 100 / size));
             }
 
             fileWriter.Flush();
             fileWriter.Close();
-            return this.exportData.Count;
+            return exportData.Count;
         }
 
         /// <summary>
@@ -2281,8 +2225,9 @@ namespace CMBC.EasyFactor.Utils
                 return 0;
             }
 
-            string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
-            StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
+            string fileName = String.Format("{0}\\MSG09-{1}-{2:yyyyMMdd}.csv", tbFilePath.Text,
+                                            ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
+            var fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
             for (int row = 0; row < size; row++)
@@ -2294,16 +2239,16 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                InvoicePaymentBatch batch = (InvoicePaymentBatch)exportData[row];
+                var batch = (InvoicePaymentBatch)exportData[row];
                 foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
                 {
-                    StringBuilder sb = new StringBuilder();
+                    var sb = new StringBuilder();
                     Case curCase = log.Invoice.InvoiceAssignBatch.Case;
-                    sb.Append(((int)row / 1000 + 1)).Append(',');
+                    sb.Append((row / 1000 + 1)).Append(',');
                     sb.Append("MSG09").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
-                    sb.Append(CMBC.EasyFactor.DB.dbml.User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
                     sb.Append(',');
@@ -2319,7 +2264,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceAssignBatch.AssignDate)).Append(',');
                     sb.Append(log.Invoice.InvoiceAssignBatch.BatchCurrency).Append(',');
                     sb.Append(log.Invoice.InvoiceAssignBatch.AssignAmount).Append(',');
-                    sb.Append(log.PaymentAmount).Append(',');//CreditNote
+                    sb.Append(log.PaymentAmount).Append(','); //CreditNote
                     sb.Append(curCase.SellerClient.EDICode).Append(',');
                     //sb.Append(curCase.SellerClient.ClientNameEN).Append(',');
                     sb.Append(',');
@@ -2341,18 +2286,18 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(log.Invoice.OrderNumberReference).Append(',');
                     sb.Append(log.Invoice.InvoiceReferenceNumber).Append(',');
                     sb.Append(log.Invoice.InvoiceAssignBatch.BatchCount).Append(',');
-                    sb.Append(log.InvoicePaymentBatch.BatchCount).Append(',');//Total of CreditNote
+                    sb.Append(log.InvoicePaymentBatch.BatchCount).Append(','); //Total of CreditNote
                     sb.Append(log.Comment).Append(' ');
 
                     fileWriter.WriteLine(sb.ToString());
                 }
 
-                worker.ReportProgress((int)((float)row * 100 / (float)size));
+                worker.ReportProgress((int)((float)row * 100 / size));
             }
 
             fileWriter.Flush();
             fileWriter.Close();
-            return this.exportData.Count;
+            return exportData.Count;
         }
 
         /// <summary>
@@ -2368,8 +2313,9 @@ namespace CMBC.EasyFactor.Utils
                 return 0;
             }
 
-            string fileName = String.Format("{0}\\MSG11-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
-            StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
+            string fileName = String.Format("{0}\\MSG11-{1}-{2:yyyyMMdd}.csv", tbFilePath.Text,
+                                            ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
+            var fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
             for (int row = 0; row < size; row++)
@@ -2381,16 +2327,16 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                InvoicePaymentBatch batch = (InvoicePaymentBatch)exportData[row];
+                var batch = (InvoicePaymentBatch)exportData[row];
                 foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
                 {
-                    StringBuilder sb = new StringBuilder();
+                    var sb = new StringBuilder();
                     Case curCase = log.Invoice.InvoiceAssignBatch.Case;
-                    sb.Append(((int)row / 1000 + 1)).Append(',');
+                    sb.Append((row / 1000 + 1)).Append(',');
                     sb.Append("MSG11").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
-                    sb.Append(CMBC.EasyFactor.DB.dbml.User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
                     sb.Append(',');
@@ -2422,7 +2368,8 @@ namespace CMBC.EasyFactor.Utils
                     {
                         sb.Append(2).Append(',');
                     }
-                    else if (TypeUtil.EqualsZero(log.Invoice.AssignOutstanding) && log.Invoice.InvoicePaymentLogs.Count > 1)
+                    else if (TypeUtil.EqualsZero(log.Invoice.AssignOutstanding) &&
+                             log.Invoice.InvoicePaymentLogs.Count > 1)
                     {
                         sb.Append(2).Append(',');
                     }
@@ -2440,12 +2387,12 @@ namespace CMBC.EasyFactor.Utils
                     fileWriter.WriteLine(sb.ToString());
                 }
 
-                worker.ReportProgress((int)((float)row * 100 / (float)size));
+                worker.ReportProgress((int)((float)row * 100 / size));
             }
 
             fileWriter.Flush();
             fileWriter.Close();
-            return this.exportData.Count;
+            return exportData.Count;
         }
 
         /// <summary>
@@ -2461,8 +2408,9 @@ namespace CMBC.EasyFactor.Utils
                 return 0;
             }
 
-            string fileName = String.Format("{0}\\MSG12-{1}-{2:yyyyMMdd}.csv", this.tbFilePath.Text, ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
-            StreamWriter fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
+            string fileName = String.Format("{0}\\MSG12-{1}-{2:yyyyMMdd}.csv", tbFilePath.Text,
+                                            ((InvoicePaymentBatch)exportData[0]).Case.SellerCode, DateTime.Today);
+            var fileWriter = new StreamWriter(fileName, false, Encoding.ASCII);
 
             int size = exportData.Count;
             for (int row = 0; row < size; row++)
@@ -2474,16 +2422,16 @@ namespace CMBC.EasyFactor.Utils
                     return -1;
                 }
 
-                InvoicePaymentBatch batch = (InvoicePaymentBatch)exportData[row];
+                var batch = (InvoicePaymentBatch)exportData[row];
                 foreach (InvoicePaymentLog log in batch.InvoicePaymentLogs)
                 {
-                    StringBuilder sb = new StringBuilder();
+                    var sb = new StringBuilder();
                     Case curCase = log.Invoice.InvoiceAssignBatch.Case;
-                    sb.Append(((int)row / 1000 + 1)).Append(',');
+                    sb.Append((row / 1000 + 1)).Append(',');
                     sb.Append("MSG12").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
-                    sb.Append(CMBC.EasyFactor.DB.dbml.User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
                     sb.Append(',');
@@ -2515,7 +2463,8 @@ namespace CMBC.EasyFactor.Utils
                     {
                         sb.Append(2).Append(',');
                     }
-                    else if (TypeUtil.EqualsZero(log.Invoice.AssignOutstanding) && log.Invoice.InvoicePaymentLogs.Count > 1)
+                    else if (TypeUtil.EqualsZero(log.Invoice.AssignOutstanding) &&
+                             log.Invoice.InvoicePaymentLogs.Count > 1)
                     {
                         sb.Append(2).Append(',');
                     }
@@ -2533,12 +2482,12 @@ namespace CMBC.EasyFactor.Utils
                     fileWriter.WriteLine(sb.ToString());
                 }
 
-                worker.ReportProgress((int)((float)row * 100 / (float)size));
+                worker.ReportProgress((int)((float)row * 100 / size));
             }
 
             fileWriter.Flush();
             fileWriter.Close();
-            return this.exportData.Count;
+            return exportData.Count;
         }
 
         /// <summary>
@@ -2549,13 +2498,14 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportPaymentByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return -1;
             }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -2565,13 +2515,13 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "ÒµÎñ±àºÅ";
-                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
-                datasheet.Cells[1, column++] = "×ªÈÃÓà¶î";
-                datasheet.Cells[1, column++] = "¸¶¿î½ğ¶î";
-                datasheet.Cells[1, column++] = "±¸×¢";
-                datasheet.Cells[1, column++] = "´ûÏîÍ¨ÖªºÅ";
-                datasheet.Cells[1, column++] = "´ûÏîÍ¨ÖªÈÕ";
+                datasheet.Cells[1, column++] = "ä¸šåŠ¡ç¼–å·";
+                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
+                datasheet.Cells[1, column++] = "è½¬è®©ä½™é¢";
+                datasheet.Cells[1, column++] = "ä»˜æ¬¾é‡‘é¢";
+                datasheet.Cells[1, column++] = "å¤‡æ³¨";
+                datasheet.Cells[1, column++] = "è´·é¡¹é€šçŸ¥å·";
+                datasheet.Cells[1, column++] = "è´·é¡¹é€šçŸ¥æ—¥";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -2602,7 +2552,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    InvoicePaymentLog log = (InvoicePaymentLog)exportData[row];
+                    var log = (InvoicePaymentLog)exportData[row];
                     datasheet.Cells[row + 2, column++] = log.AssignBatchNo2;
                     datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
@@ -2614,7 +2564,7 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2, column++] = log.CreditNote.CreditNoteDate;
                     }
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -2667,13 +2617,14 @@ namespace CMBC.EasyFactor.Utils
         /// <returns></returns>
         private int ExportRefundByBatch(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return -1;
             }
-            Worksheet datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var datasheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             if (datasheet == null)
             {
@@ -2683,12 +2634,12 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 int column = 1;
-                datasheet.Cells[1, column++] = "ÒµÎñ±àºÅ";
-                datasheet.Cells[1, column++] = "·¢Æ±ºÅ";
-                datasheet.Cells[1, column++] = "ÈÚ×Ê±àºÅ";
-                datasheet.Cells[1, column++] = "ÈÚ×ÊÓà¶î";
-                datasheet.Cells[1, column++] = "»¹¿î½ğ¶î";
-                datasheet.Cells[1, column++] = "±¸×¢";
+                datasheet.Cells[1, column++] = "ä¸šåŠ¡ç¼–å·";
+                datasheet.Cells[1, column++] = "å‘ç¥¨å·";
+                datasheet.Cells[1, column++] = "èèµ„ç¼–å·";
+                datasheet.Cells[1, column++] = "èèµ„ä½™é¢";
+                datasheet.Cells[1, column++] = "è¿˜æ¬¾é‡‘é¢";
+                datasheet.Cells[1, column++] = "å¤‡æ³¨";
 
                 int size = exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -2719,7 +2670,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     column = 1;
-                    InvoiceRefundLog log = (InvoiceRefundLog)exportData[row];
+                    var log = (InvoiceRefundLog)exportData[row];
                     datasheet.Cells[row + 2, column++] = log.AssignBatchNo2;
                     datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.FinanceLogID2;
@@ -2727,7 +2678,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = log.RefundAmount;
                     datasheet.Cells[row + 2, column++] = log.Comment;
 
-                    worker.ReportProgress((int)((float)row * 100 / (float)size));
+                    worker.ReportProgress((int)((float)row * 100 / size));
                 }
 
                 foreach (Range range in datasheet.UsedRange.Columns)
@@ -2774,10 +2725,11 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="caseGroup"></param>
         private void ExportReportLegarImpl(IGrouping<Client, Case> caseGroup, string transactionType)
         {
-            ApplicationClass app = new ApplicationClass() { Visible = false };
+            var app = new ApplicationClass { Visible = false };
             if (app == null)
             {
-                MessageBoxEx.Show("Excel ³ÌĞòÎŞ·¨Æô¶¯!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("Excel ç¨‹åºæ— æ³•å¯åŠ¨!", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
@@ -2785,8 +2737,8 @@ namespace CMBC.EasyFactor.Utils
             try
             {
                 workbook = app.Workbooks.Add(true);
-                Worksheet totalSheet = (Worksheet)workbook.Sheets[1];
-                totalSheet.Name = "×ÜÌ¨ÕÊ";
+                var totalSheet = (Worksheet)workbook.Sheets[1];
+                totalSheet.Name = "æ€»å°å¸";
 
                 Client client = caseGroup.Key;
                 foreach (Case selectedCase in caseGroup)
@@ -2808,12 +2760,12 @@ namespace CMBC.EasyFactor.Utils
                             app = null;
                         }
 
-                        MessageBoxEx.Show("°¸¼şÃ»ÓĞÓĞĞ§µÄ¶î¶ÈÍ¨ÖªÊé£¬°¸¼ş±àºÅ£º" + selectedCase.CaseCode);
+                        MessageBoxEx.Show("æ¡ˆä»¶æ²¡æœ‰æœ‰æ•ˆçš„é¢åº¦é€šçŸ¥ä¹¦ï¼Œæ¡ˆä»¶ç¼–å·ï¼š" + selectedCase.CaseCode);
 
                         return;
                     }
 
-                    Worksheet sheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                    var sheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
 
                     string name = selectedCase.TargetClient.ToString();
                     if (name.Length > 15)
@@ -2824,10 +2776,10 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Name = String.Format("{0}-{1}", selectedCase.CaseCode, name);
 
                     sheet.get_Range("A1", "Q1").MergeCells = true;
-                    sheet.get_Range("A1", "A1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-                    sheet.Cells[1, "A"] = "ÏúÊÛ·Ö»§ÕËÌ¨ÕË";
-                    sheet.Cells[2, "P"] = String.Format("µ¥Î»£º{0}", selectedCase.InvoiceCurrency);
-                    sheet.Cells[3, "A"] = "·ÖĞĞ/·Ö²¿";
+                    sheet.get_Range("A1", "A1").HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                    sheet.Cells[1, "A"] = "é”€å”®åˆ†æˆ·è´¦å°è´¦";
+                    sheet.Cells[2, "P"] = String.Format("å•ä½ï¼š{0}", selectedCase.InvoiceCurrency);
+                    sheet.Cells[3, "A"] = "åˆ†è¡Œ/åˆ†éƒ¨";
                     sheet.Cells[3, "B"] = selectedCase.OwnerDepartment.DepartmentName;
 
                     sheet.Cells[4, "A"] = "Seller Name";
@@ -2838,7 +2790,7 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Cells[5, "B"] = selectedCase.BuyerClient.ToString();
 
                     sheet.get_Range("B6", "F6").MergeCells = true;
-                    if (transactionType == "½ø¿Ú±£Àí")
+                    if (transactionType == "è¿›å£ä¿ç†")
                     {
                         sheet.Cells[6, "A"] = "Export Factor";
                         sheet.Cells[6, "B"] = selectedCase.SellerFactor.ToString();
@@ -2850,7 +2802,7 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     sheet.get_Range("B7", "F7").MergeCells = true;
-                    sheet.Cells[7, "A"] = "Ğ­²éÒâ¼ûÊé±àºÅ";
+                    sheet.Cells[7, "A"] = "åæŸ¥æ„è§ä¹¦ç¼–å·";
                     List<ClientReview> reviewList = selectedCase.ClientReviews;
                     if (reviewList != null)
                     {
@@ -2863,11 +2815,11 @@ namespace CMBC.EasyFactor.Utils
                         sheet.Cells[7, "B"] = reviews;
                     }
 
-                    sheet.Cells[4, "G"] = "°¸¼ş±àºÅ";
+                    sheet.Cells[4, "G"] = "æ¡ˆä»¶ç¼–å·";
                     sheet.get_Range(sheet.Cells[4, "H"], sheet.Cells[4, "I"]).MergeCells = true;
                     sheet.Cells[4, "H"] = selectedCase.CaseCode;
 
-                    sheet.Cells[5, "G"] = "×ÜÊÖĞø·ÑÂÊ";
+                    sheet.Cells[5, "G"] = "æ€»æ‰‹ç»­è´¹ç‡";
                     sheet.get_Range(sheet.Cells[5, "H"], sheet.Cells[5, "I"]).MergeCells = true;
                     if (cda != null)
                     {
@@ -2875,64 +2827,70 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     sheet.get_Range(sheet.Cells[6, "H"], sheet.Cells[6, "I"]).MergeCells = true;
-                    sheet.Cells[6, "G"] = "ÊÕ·Ñ·½Ê½";
+                    sheet.Cells[6, "G"] = "æ”¶è´¹æ–¹å¼";
                     if (cda != null)
                     {
                         sheet.Cells[6, "H"] = cda.CommissionType;
                     }
 
 
-                    sheet.Cells[7, "G"] = "µ¥¾İ´¦Àí·Ñ/±Ê";
+                    sheet.Cells[7, "G"] = "å•æ®å¤„ç†è´¹/ç¬”";
                     sheet.get_Range(sheet.Cells[7, "H"], sheet.Cells[7, "I"]).MergeCells = true;
                     sheet.Cells[7, "H"] = String.Format("{0} {1:N2}", cda.HandFeeCurr, cda.HandFee);
 
                     sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
-                    sheet.Cells[4, "L"] = "ĞÅÓÃ·çÏÕµ£±£";
-                    sheet.Cells[5, "L"] = "ºË×¼¶î¶È";
+                    sheet.Cells[4, "L"] = "ä¿¡ç”¨é£é™©æ‹…ä¿";
+                    sheet.Cells[5, "L"] = "æ ¸å‡†é¢åº¦";
                     sheet.Cells[5, "M"] = cda.CreditCover;
-                    sheet.get_Range(sheet.Cells[5, "M"], sheet.Cells[5, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.CreditCoverCurr);
-                    sheet.Cells[6, "L"] = "µ½ÆÚÈÕ";
+                    sheet.get_Range(sheet.Cells[5, "M"], sheet.Cells[5, "M"]).NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(cda.CreditCoverCurr);
+                    sheet.Cells[6, "L"] = "åˆ°æœŸæ—¥";
                     sheet.Cells[6, "M"] = cda.CreditCoverPeriodEnd;
                     sheet.get_Range(sheet.Cells[6, "M"], sheet.Cells[6, "M"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.Cells[7, "L"] = "Ê£Óà¶î¶È";
+                    sheet.Cells[7, "L"] = "å‰©ä½™é¢åº¦";
                     sheet.Cells[7, "M"] = cda.CreditCoverOutstanding;
-                    sheet.get_Range(sheet.Cells[7, "M"], sheet.Cells[7, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.CreditCoverCurr);
-                    sheet.Cells[8, "L"] = "Ó¦ÊÕÕÊ¿îÓà¶î";
+                    sheet.get_Range(sheet.Cells[7, "M"], sheet.Cells[7, "M"]).NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(cda.CreditCoverCurr);
+                    sheet.Cells[8, "L"] = "åº”æ”¶å¸æ¬¾ä½™é¢";
                     sheet.Cells[8, "M"] = selectedCase.AssignOutstanding;
-                    sheet.get_Range(sheet.Cells[8, "M"], sheet.Cells[8, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
+                    sheet.get_Range(sheet.Cells[8, "M"], sheet.Cells[8, "M"]).NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
 
                     sheet.get_Range(sheet.Cells[4, "O"], sheet.Cells[4, "P"]).MergeCells = true;
-                    sheet.Cells[4, "O"] = "ÈÚ×Ê¶î¶È";
-                    sheet.Cells[5, "O"] = "ºË×¼¶î¶È";
+                    sheet.Cells[4, "O"] = "èèµ„é¢åº¦";
+                    sheet.Cells[5, "O"] = "æ ¸å‡†é¢åº¦";
                     sheet.Cells[5, "P"] = cda.FinanceLine;
-                    sheet.get_Range(sheet.Cells[5, "P"], sheet.Cells[5, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.FinanceLineCurr);
-                    sheet.Cells[6, "O"] = "µ½ÆÚÈÕ";
+                    sheet.get_Range(sheet.Cells[5, "P"], sheet.Cells[5, "P"]).NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(cda.FinanceLineCurr);
+                    sheet.Cells[6, "O"] = "åˆ°æœŸæ—¥";
                     sheet.Cells[6, "P"] = cda.FinanceLinePeriodEnd;
                     sheet.get_Range(sheet.Cells[6, "P"], sheet.Cells[6, "P"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.Cells[7, "O"] = "Ê£Óà¶î¶È";
+                    sheet.Cells[7, "O"] = "å‰©ä½™é¢åº¦";
                     sheet.Cells[7, "P"] = cda.FinanceLineOutstanding;
-                    sheet.get_Range(sheet.Cells[7, "P"], sheet.Cells[7, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(cda.FinanceLineCurr);
-                    sheet.Cells[8, "O"] = "ÈÚ×ÊÓà¶î";
+                    sheet.get_Range(sheet.Cells[7, "P"], sheet.Cells[7, "P"]).NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(cda.FinanceLineCurr);
+                    sheet.Cells[8, "O"] = "èèµ„ä½™é¢";
                     sheet.Cells[8, "P"] = selectedCase.FinanceOutstanding;
-                    sheet.get_Range(sheet.Cells[8, "P"], sheet.Cells[8, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
+                    sheet.get_Range(sheet.Cells[8, "P"], sheet.Cells[8, "P"]).NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
 
-                    sheet.Cells[9, "A"] = "ÒµÎñ±àºÅ";
-                    sheet.Cells[9, "B"] = "·¢Æ±ºÅ";
-                    sheet.Cells[9, "C"] = "×ªÈÃ½ğ¶î";
-                    sheet.Cells[9, "D"] = "·¢Æ±ÈÕ";
-                    sheet.Cells[9, "E"] = "µ½ÆÚÈÕ";
-                    sheet.Cells[9, "F"] = "×ªÈÃÈÕ";
-                    sheet.Cells[9, "G"] = "ÈÚ×Ê½ğ¶î";
-                    sheet.Cells[9, "H"] = "ÈÚ×ÊÈÕ";
-                    sheet.Cells[9, "I"] = "ÈÚ×Êµ½ÆÚÈÕ";
-                    sheet.Cells[9, "J"] = "¸¶¿î½ğ¶î";
-                    sheet.Cells[9, "K"] = "ÕË¿îÓà¶î";
-                    sheet.Cells[9, "L"] = "¸¶¿îÈÕ";
-                    sheet.Cells[9, "M"] = "»¹¿î½ğ¶î";
-                    sheet.Cells[9, "N"] = "ÈÚ×ÊÓà¶î";
-                    sheet.Cells[9, "O"] = "»¹¿îÈÕ";
-                    sheet.Cells[9, "P"] = "ÊÖĞø·Ñ";
-                    sheet.Cells[9, "Q"] = "±¸×¢";
+                    sheet.Cells[9, "A"] = "ä¸šåŠ¡ç¼–å·";
+                    sheet.Cells[9, "B"] = "å‘ç¥¨å·";
+                    sheet.Cells[9, "C"] = "è½¬è®©é‡‘é¢";
+                    sheet.Cells[9, "D"] = "å‘ç¥¨æ—¥";
+                    sheet.Cells[9, "E"] = "åˆ°æœŸæ—¥";
+                    sheet.Cells[9, "F"] = "è½¬è®©æ—¥";
+                    sheet.Cells[9, "G"] = "èèµ„é‡‘é¢";
+                    sheet.Cells[9, "H"] = "èèµ„æ—¥";
+                    sheet.Cells[9, "I"] = "èèµ„åˆ°æœŸæ—¥";
+                    sheet.Cells[9, "J"] = "ä»˜æ¬¾é‡‘é¢";
+                    sheet.Cells[9, "K"] = "è´¦æ¬¾ä½™é¢";
+                    sheet.Cells[9, "L"] = "ä»˜æ¬¾æ—¥";
+                    sheet.Cells[9, "M"] = "è¿˜æ¬¾é‡‘é¢";
+                    sheet.Cells[9, "N"] = "èèµ„ä½™é¢";
+                    sheet.Cells[9, "O"] = "è¿˜æ¬¾æ—¥";
+                    sheet.Cells[9, "P"] = "æ‰‹ç»­è´¹";
+                    sheet.Cells[9, "Q"] = "å¤‡æ³¨";
 
                     sheet.get_Range("A4", "I7").Borders.LineStyle = 1;
                     sheet.get_Range("L4", "M8").Borders.LineStyle = 1;
@@ -3022,10 +2980,10 @@ namespace CMBC.EasyFactor.Utils
                         range.EntireColumn.AutoFit();
                     }
 
-                    sheet.UsedRange.Font.Name = "·ÂËÎ";
+                    sheet.UsedRange.Font.Name = "ä»¿å®‹";
                 }
 
-                ExportForm.FillLegarTotalSheet(totalSheet, caseGroup);
+                FillLegarTotalSheet(totalSheet, caseGroup);
                 totalSheet.Move(workbook.Sheets[1], Type.Missing);
 
                 if (app != null)
@@ -3037,20 +2995,24 @@ namespace CMBC.EasyFactor.Utils
                         string ext = ".xls";
 
                         string location = caseGroup.First().OwnerDepartment.Location.LocationName;
-                        if (!System.IO.Directory.Exists(this.tbFilePath.Text + "\\" + location + "\\"))
+                        if (!Directory.Exists(tbFilePath.Text + "\\" + location + "\\"))
                         {
-                            System.IO.Directory.CreateDirectory(this.tbFilePath.Text + "\\" + location + "\\");
+                            Directory.CreateDirectory(tbFilePath.Text + "\\" + location + "\\");
                         }
 
-                        string filePath = String.Format("{0}\\{1}\\{2}({3}){4:yyyyMMdd}{5}", this.tbFilePath.Text, location, caseGroup.Key.ToString(), transactionType, DateTime.Today, ext);
+                        string filePath = String.Format("{0}\\{1}\\{2}({3}){4:yyyyMMdd}{5}", tbFilePath.Text, location,
+                                                        caseGroup.Key, transactionType, DateTime.Today, ext);
                         int count = 1;
-                        while (System.IO.File.Exists(filePath))
+                        while (File.Exists(filePath))
                         {
-                            filePath = String.Format("{0}\\{1}\\{2}({3})_{4}{5:yyyyMMdd}{6}", this.tbFilePath.Text, location, caseGroup.Key.ToString(), transactionType, count, DateTime.Today, ext);
+                            filePath = String.Format("{0}\\{1}\\{2}({3})_{4}{5:yyyyMMdd}{6}", tbFilePath.Text, location,
+                                                     caseGroup.Key, transactionType, count, DateTime.Today, ext);
                             count++;
                         }
 
-                        workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false, Type.Missing, Type.Missing, Type.Missing);
+                        workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
+                                        XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
+                                        Type.Missing, Type.Missing, Type.Missing);
                     }
                 }
             }
@@ -3089,31 +3051,31 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="caseGroup"></param>
         private static void FillLegarTotalSheet(Worksheet sheet, IGrouping<Client, Case> caseGroup)
         {
-            sheet.Cells[9, "A"] = "ÒµÎñ±àºÅ";
-            sheet.Cells[9, "B"] = "·¢Æ±ºÅ";
-            sheet.Cells[9, "C"] = "×ªÈÃ½ğ¶î";
-            sheet.Cells[9, "D"] = "·¢Æ±ÈÕ";
-            sheet.Cells[9, "E"] = "µ½ÆÚÈÕ";
-            sheet.Cells[9, "F"] = "×ªÈÃÈÕ";
-            sheet.Cells[9, "G"] = "ÈÚ×Ê½ğ¶î";
-            sheet.Cells[9, "H"] = "ÈÚ×ÊÈÕ";
-            sheet.Cells[9, "I"] = "ÈÚ×Êµ½ÆÚÈÕ";
-            sheet.Cells[9, "J"] = "¸¶¿î½ğ¶î";
-            sheet.Cells[9, "K"] = "ÕË¿îÓà¶î";
-            sheet.Cells[9, "L"] = "¸¶¿îÈÕ";
-            sheet.Cells[9, "M"] = "»¹¿î½ğ¶î";
-            sheet.Cells[9, "N"] = "ÈÚ×ÊÓà¶î";
-            sheet.Cells[9, "O"] = "»¹¿îÈÕ";
-            sheet.Cells[9, "P"] = "ÊÖĞø·Ñ";
-            sheet.Cells[9, "Q"] = "±¸×¢";
+            sheet.Cells[9, "A"] = "ä¸šåŠ¡ç¼–å·";
+            sheet.Cells[9, "B"] = "å‘ç¥¨å·";
+            sheet.Cells[9, "C"] = "è½¬è®©é‡‘é¢";
+            sheet.Cells[9, "D"] = "å‘ç¥¨æ—¥";
+            sheet.Cells[9, "E"] = "åˆ°æœŸæ—¥";
+            sheet.Cells[9, "F"] = "è½¬è®©æ—¥";
+            sheet.Cells[9, "G"] = "èèµ„é‡‘é¢";
+            sheet.Cells[9, "H"] = "èèµ„æ—¥";
+            sheet.Cells[9, "I"] = "èèµ„åˆ°æœŸæ—¥";
+            sheet.Cells[9, "J"] = "ä»˜æ¬¾é‡‘é¢";
+            sheet.Cells[9, "K"] = "è´¦æ¬¾ä½™é¢";
+            sheet.Cells[9, "L"] = "ä»˜æ¬¾æ—¥";
+            sheet.Cells[9, "M"] = "è¿˜æ¬¾é‡‘é¢";
+            sheet.Cells[9, "N"] = "èèµ„ä½™é¢";
+            sheet.Cells[9, "O"] = "è¿˜æ¬¾æ—¥";
+            sheet.Cells[9, "P"] = "æ‰‹ç»­è´¹";
+            sheet.Cells[9, "Q"] = "å¤‡æ³¨";
 
             Client client = caseGroup.Key;
             string transactionType = caseGroup.First().TransactionType;
 
-            List<string> sellerList = new List<string>();
-            List<string> buyerList = new List<string>();
-            List<string> factorList = new List<string>();
-            List<string> clientReviewList = new List<string>();
+            var sellerList = new List<string>();
+            var buyerList = new List<string>();
+            var factorList = new List<string>();
+            var clientReviewList = new List<string>();
 
             string invoiceCurrency = null;
             double totalAssignOutstanding = 0;
@@ -3268,10 +3230,10 @@ namespace CMBC.EasyFactor.Utils
             sheet.get_Range("O4", "P8").Borders.LineStyle = 1;
 
             sheet.get_Range("A1", "Q1").MergeCells = true;
-            sheet.get_Range("A1", "A1").HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-            sheet.Cells[1, "A"] = "ÏúÊÛ·Ö»§ÕËÌ¨ÕË";
-            sheet.Cells[2, "P"] = String.Format("µ¥Î»£º{0}", invoiceCurrency);
-            sheet.Cells[3, "A"] = "·ÖĞĞ/·Ö²¿";
+            sheet.get_Range("A1", "A1").HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            sheet.Cells[1, "A"] = "é”€å”®åˆ†æˆ·è´¦å°è´¦";
+            sheet.Cells[2, "P"] = String.Format("å•ä½ï¼š{0}", invoiceCurrency);
+            sheet.Cells[3, "A"] = "åˆ†è¡Œ/åˆ†éƒ¨";
             sheet.Cells[3, "B"] = caseGroup.First().OwnerDepartment.DepartmentName;
 
             sheet.Cells[4, "A"] = "Seller Name";
@@ -3286,15 +3248,17 @@ namespace CMBC.EasyFactor.Utils
             sheet.Cells[6, "B"] = factorList.Count == 1 ? factorList[0] : String.Join(";", factorList.ToArray());
 
             sheet.get_Range("B7", "I7").MergeCells = true;
-            sheet.Cells[7, "A"] = "Ğ­²éÒâ¼ûÊé±àºÅ";
-            sheet.Cells[7, "B"] = clientReviewList.Count == 1 ? clientReviewList[0] : String.Join(";", clientReviewList.ToArray());
+            sheet.Cells[7, "A"] = "åæŸ¥æ„è§ä¹¦ç¼–å·";
+            sheet.Cells[7, "B"] = clientReviewList.Count == 1
+                                      ? clientReviewList[0]
+                                      : String.Join(";", clientReviewList.ToArray());
 
             sheet.get_Range(sheet.Cells[4, "L"], sheet.Cells[4, "M"]).MergeCells = true;
-            sheet.Cells[4, "L"] = "ĞÅÓÃ·çÏÕµ£±£";
-            sheet.Cells[5, "L"] = "ºË×¼¶î¶È";
-            sheet.Cells[6, "L"] = "µ½ÆÚÈÕ";
-            sheet.Cells[7, "L"] = "×ÜÊ£Óà¶î¶È";
-            if (transactionType == "½ø¿Ú±£Àí")
+            sheet.Cells[4, "L"] = "ä¿¡ç”¨é£é™©æ‹…ä¿";
+            sheet.Cells[5, "L"] = "æ ¸å‡†é¢åº¦";
+            sheet.Cells[6, "L"] = "åˆ°æœŸæ—¥";
+            sheet.Cells[7, "L"] = "æ€»å‰©ä½™é¢åº¦";
+            if (transactionType == "è¿›å£ä¿ç†")
             {
                 ClientCreditLine creditLine = client.AssignCreditLine;
                 if (creditLine != null)
@@ -3302,22 +3266,25 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Cells[5, "M"] = creditLine.CreditLine;
                     sheet.Cells[6, "M"] = creditLine.PeriodEnd;
                     sheet.Cells[7, "M"] = creditLine.CreditLine - totalAssignOutstanding;
-                    sheet.get_Range(sheet.Cells[5, "M"], sheet.Cells[5, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
+                    sheet.get_Range(sheet.Cells[5, "M"], sheet.Cells[5, "M"]).NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
                     sheet.get_Range(sheet.Cells[6, "M"], sheet.Cells[6, "M"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[7, "M"], sheet.Cells[7, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
+                    sheet.get_Range(sheet.Cells[7, "M"], sheet.Cells[7, "M"]).NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
                 }
             }
 
 
-            sheet.Cells[8, "L"] = "×ÜÕË¿îÓà¶î";
+            sheet.Cells[8, "L"] = "æ€»è´¦æ¬¾ä½™é¢";
             sheet.Cells[8, "M"] = totalAssignOutstanding;
-            sheet.get_Range(sheet.Cells[8, "M"], sheet.Cells[8, "M"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoiceCurrency);
+            sheet.get_Range(sheet.Cells[8, "M"], sheet.Cells[8, "M"]).NumberFormatLocal =
+                TypeUtil.GetExcelCurr(invoiceCurrency);
 
             sheet.get_Range(sheet.Cells[4, "O"], sheet.Cells[4, "P"]).MergeCells = true;
-            sheet.Cells[4, "O"] = "ÈÚ×Ê¶î¶È";
-            sheet.Cells[5, "O"] = "ºË×¼×Ü¶î¶È";
-            sheet.Cells[6, "O"] = "µ½ÆÚÈÕ";
-            sheet.Cells[7, "O"] = "×ÜÊ£Óà¶î¶È";
+            sheet.Cells[4, "O"] = "èèµ„é¢åº¦";
+            sheet.Cells[5, "O"] = "æ ¸å‡†æ€»é¢åº¦";
+            sheet.Cells[6, "O"] = "åˆ°æœŸæ—¥";
+            sheet.Cells[7, "O"] = "æ€»å‰©ä½™é¢åº¦";
 
             {
                 ClientCreditLine creditLine = client.FinanceCreditLine;
@@ -3326,15 +3293,18 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Cells[5, "P"] = creditLine.CreditLine;
                     sheet.Cells[6, "P"] = creditLine.PeriodEnd;
                     sheet.Cells[7, "P"] = creditLine.CreditLine - totalFinanceOutstanding;
-                    sheet.get_Range(sheet.Cells[5, "P"], sheet.Cells[5, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
+                    sheet.get_Range(sheet.Cells[5, "P"], sheet.Cells[5, "P"]).NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
                     sheet.get_Range(sheet.Cells[6, "P"], sheet.Cells[6, "P"]).NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.get_Range(sheet.Cells[7, "P"], sheet.Cells[7, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
+                    sheet.get_Range(sheet.Cells[7, "P"], sheet.Cells[7, "P"]).NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(creditLine.CreditLineCurrency);
                 }
             }
 
-            sheet.Cells[8, "O"] = "×ÜÈÚ×ÊÓà¶î";
+            sheet.Cells[8, "O"] = "æ€»èèµ„ä½™é¢";
             sheet.Cells[8, "P"] = totalFinanceOutstanding;
-            sheet.get_Range(sheet.Cells[8, "P"], sheet.Cells[8, "P"]).NumberFormatLocal = TypeUtil.GetExcelCurr(invoiceCurrency);
+            sheet.get_Range(sheet.Cells[8, "P"], sheet.Cells[8, "P"]).NumberFormatLocal =
+                TypeUtil.GetExcelCurr(invoiceCurrency);
 
             foreach (Range range in sheet.UsedRange.Rows)
             {
@@ -3346,8 +3316,7 @@ namespace CMBC.EasyFactor.Utils
                 range.EntireColumn.AutoFit();
             }
 
-            sheet.UsedRange.Font.Name = "·ÂËÎ";
-
+            sheet.UsedRange.Font.Name = "ä»¿å®‹";
         }
 
         /// <summary>
@@ -3357,30 +3326,32 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         private void StartExport(object sender, EventArgs e)
         {
-            string filePath = this.tbFilePath.Text;
+            string filePath = tbFilePath.Text;
             if (String.IsNullOrEmpty(filePath.Trim()))
             {
-                if (this.exportType == ExportType.EXPORT_MSG09_INVOICE || this.exportType == ExportType.EXPORT_MSG09_CREDITNOTE || this.exportType == ExportType.EXPORT_MSG11 || this.exportType == ExportType.EXPORT_MSG12 || this.exportType == ExportType.EXPORT_LEGER)
+                if (exportType == ExportType.EXPORT_MSG09_INVOICE || exportType == ExportType.EXPORT_MSG09_CREDITNOTE ||
+                    exportType == ExportType.EXPORT_MSG11 || exportType == ExportType.EXPORT_MSG12 ||
+                    exportType == ExportType.EXPORT_LEGER)
                 {
-                    this.tbStatus.Text = "ÇëÏÈÑ¡Ôñ±£´æÂ·¾¶";
+                    tbStatus.Text = "è¯·å…ˆé€‰æ‹©ä¿å­˜è·¯å¾„";
                     return;
                 }
             }
-            else if (this.exportType == ExportType.EXPORT_LEGER)
+            else if (exportType == ExportType.EXPORT_LEGER)
             {
-                DirectoryInfo info = new DirectoryInfo(filePath);
+                var info = new DirectoryInfo(filePath);
                 if (info.Parent == null)
                 {
-                    this.tbStatus.Text = "²»ÒªÑ¡ÔñÓ²ÅÌ¸ùÄ¿Â¼";
+                    tbStatus.Text = "ä¸è¦é€‰æ‹©ç¡¬ç›˜æ ¹ç›®å½•";
                     return;
                 }
             }
 
 
-            this.btnCancel.Text = "È¡Ïû";
-            this.backgroundWorker.RunWorkerAsync();
+            btnCancel.Text = "å–æ¶ˆ";
+            backgroundWorker.RunWorkerAsync();
 
-            this.btnStart.Enabled = false;
+            btnStart.Enabled = false;
         }
 
         /// <summary>
@@ -3390,23 +3361,13 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="e"></param>
         private void SelectFile(object sender, EventArgs e)
         {
-            FolderBrowserDialog dirDialog = new FolderBrowserDialog();
+            var dirDialog = new FolderBrowserDialog();
             if (dirDialog.ShowDialog() == DialogResult.OK)
             {
-                this.tbFilePath.Text = dirDialog.SelectedPath;
+                tbFilePath.Text = dirDialog.SelectedPath;
             }
         }
 
         #endregion?Methods?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ClosingForm(object sender, FormClosingEventArgs e)
-        {
-            CancelExport(null, null);
-        }
     }
 }

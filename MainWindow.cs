@@ -1,4 +1,22 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Reflection;
+using System.Windows.Forms;
+using CMBC.EasyFactor.ARMgr;
+using CMBC.EasyFactor.CaseMgr;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Help;
+using CMBC.EasyFactor.InfoMgr.ClientMgr;
+using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
+using CMBC.EasyFactor.InfoMgr.ExchangeMgr;
+using CMBC.EasyFactor.InfoMgr.FactorMgr;
+using CMBC.EasyFactor.InfoMgr.UserMgr;
+using CMBC.EasyFactor.Utils;
+using CMBC.EasyFactor.Utils.ConstStr;
+using DevComponents.DotNetBar;
+
 //-----------------------------------------------------------------------
 // <copyright file="MainWindow.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
@@ -7,31 +25,31 @@
 
 namespace CMBC.EasyFactor
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.ARMgr;
-    using CMBC.EasyFactor.CaseMgr;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Help;
-    using CMBC.EasyFactor.InfoMgr.ClientMgr;
-    using CMBC.EasyFactor.InfoMgr.DepartmentMgr;
-    using CMBC.EasyFactor.InfoMgr.ExchangeMgr;
-    using CMBC.EasyFactor.InfoMgr.FactorMgr;
-    using CMBC.EasyFactor.InfoMgr.UserMgr;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// Main Window Form
     /// </summary>
-    public partial class MainWindow : DevComponents.DotNetBar.Office2007RibbonForm
+    public partial class MainWindow : Office2007RibbonForm
     {
-        #region Methods (3)
+        #region Methods (6)
 
-        // Private Methods (3) 
+        // Private Methods (6) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickLogo(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/index.html");
+            }
+            catch (Exception)
+            {
+                MessageBoxEx.Show("打开浏览器失败");
+            }
+        }
 
         /// <summary>
         /// 
@@ -42,7 +60,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.SEND_LEGERS);
+                var form = new ImportForm(ImportForm.ImportType.SEND_LEGERS);
                 form.Show();
             }
         }
@@ -56,7 +74,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_II);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_II);
                 form.Show();
             }
         }
@@ -70,14 +88,26 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
             {
-                CreditNoteMgr mgr = new CreditNoteMgr(CreditNoteMgr.OpCreditNoteType.CREDIT_NOTE_QUERY);
-                this.SetDetailPanel(mgr);
+                var mgr = new CreditNoteMgr(CreditNoteMgr.OpCreditNoteType.CREDIT_NOTE_QUERY);
+                SetDetailPanel(mgr);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StatFactorCommission(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
+            {
+                var mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.FACTOR_COMMISSION);
+                SetDetailPanel(mgr);
             }
         }
 
         #endregion Methods
-
-
 
         #region?Constructors?(1)?
 
@@ -86,22 +116,30 @@ namespace CMBC.EasyFactor
         /// </summary>
         public MainWindow()
         {
-            this.InitializeComponent();
-            
-            this.ImeMode = ImeMode.OnHalf;
+            InitializeComponent();
 
-            this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
-            this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-            this.CommandStatus = MESSAGE.MAIN_DEFAULT;
+            ImeMode = ImeMode.OnHalf;
 
-            this.notifyIcon.Visible = false;
+            Text =
+                ((AssemblyTitleAttribute)
+                 Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title +
+                @"  " + Assembly.GetExecutingAssembly().GetName().Version;
+            ribbonControl.SelectedRibbonTabItem = itemInfoMgr;
+            UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
+            CommandStatus = MESSAGE.MAIN_DEFAULT;
 
-            this.backgroundWorker.RunWorkerAsync();
+            notifyIcon.Visible = false;
+
+            backgroundWorker.RunWorkerAsync();
+        }
+
+        public override sealed string Text
+        {
+            get { return base.Text; }
+            set { base.Text = value; }
         }
 
         #endregion?Constructors?
-
 
         #region?Properties?(2)?
 
@@ -110,14 +148,8 @@ namespace CMBC.EasyFactor
         /// </summary>
         public string CommandStatus
         {
-            get
-            {
-                return this.lblCommandStatus.Text;
-            }
-            set
-            {
-                this.lblCommandStatus.Text = value;
-            }
+            get { return lblCommandStatus.Text; }
+            set { lblCommandStatus.Text = value; }
         }
 
         /// <summary>
@@ -125,18 +157,11 @@ namespace CMBC.EasyFactor
         /// </summary>
         public string UserStatus
         {
-            get
-            {
-                return this.lblCurrentUser.Text;
-            }
-            set
-            {
-                this.lblCurrentUser.Text = value;
-            }
+            get { return lblCurrentUser.Text; }
+            set { lblCurrentUser.Text = value; }
         }
 
         #endregion?Properties?
-
 
         #region?Methods?(94)?
 
@@ -146,26 +171,28 @@ namespace CMBC.EasyFactor
         /// Fill detail panel with user control
         /// </summary>
         /// <param name="uc">user control</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void SetDetailPanel(UserControl uc)
         {
             if (uc == null)
             {
-                throw new ArgumentNullException("uc", "uc cannot be a null reference");
+                throw new ArgumentNullException("uc", @"uc cannot be a null reference");
             }
 
             if (uc is CaseMgr.CaseMgr)
             {
-                this.CommandStatus = "手续费收入的币别与发票币别相同；利息收入的币别为人民币";
+                CommandStatus = "手续费收入的币别与发票币别相同；利息收入的币别为人民币";
             }
             else
             {
-                this.CommandStatus = MESSAGE.MAIN_DEFAULT;
+                CommandStatus = MESSAGE.MAIN_DEFAULT;
             }
 
             uc.Dock = DockStyle.Fill;
-            this.ribbonDetailPanel.Controls.Clear();
-            this.ribbonDetailPanel.Controls.Add(uc);
+            ribbonDetailPanel.Controls.Clear();
+            ribbonDetailPanel.Controls.Add(uc);
         }
+
         //?Private?Methods?(92)?
 
         /// <summary>
@@ -175,11 +202,16 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void About(object sender, EventArgs e)
         {
-            AboutBox aboutBox = new AboutBox();
+            var aboutBox = new AboutBox();
             aboutBox.ShowDialog(this);
         }
 
-        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
         {
             //string[] drivers = Environment.GetLogicalDrives();
 
@@ -205,11 +237,14 @@ namespace CMBC.EasyFactor
             //{
             //    return;
             //}
-
-
         }
 
-        private void backgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             CheckUpdateBackground();
         }
@@ -221,46 +256,32 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ChangeStyle(object sender, EventArgs e)
         {
-            string style = this.cbStyleManager.Text;
+            string style = cbStyleManager.Text;
             if ("Office2007Blue".Equals(style))
             {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
+                styleManager.ManagerStyle = eStyle.Office2007Blue;
             }
             else if ("Office2007Silver".Equals(style))
             {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Silver;
+                styleManager.ManagerStyle = eStyle.Office2007Silver;
             }
             else if ("Office2007Black".Equals(style))
             {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Black;
+                styleManager.ManagerStyle = eStyle.Office2007Black;
             }
             else if ("Office2007VistaGlass".Equals(style))
             {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007VistaGlass;
+                styleManager.ManagerStyle = eStyle.Office2007VistaGlass;
             }
             else if ("Office2010Silver".Equals(style))
             {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Silver;
+                styleManager.ManagerStyle = eStyle.Office2010Silver;
             }
             else if ("Windows7Blue".Equals(style))
             {
-                this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Windows7Blue;
+                styleManager.ManagerStyle = eStyle.Windows7Blue;
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void CheckAssignBatch(object sender, EventArgs e)
-        //{
-        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-        //    {
-        //        AssignBatchMgr batchMgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.CHECK);
-        //        this.SetDetailPanel(batchMgr);
-        //    }
-        //}
 
         /// <summary>
         /// 
@@ -271,8 +292,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.CDA_APPROVE))
             {
-                CDAMgr cdaMgr = new CDAMgr(CDAMgr.OpCDAType.CHECK);
-                this.SetDetailPanel(cdaMgr);
+                var cdaMgr = new CDAMgr(CDAMgr.OpCDAType.CHECK);
+                SetDetailPanel(cdaMgr);
             }
         }
 
@@ -281,80 +302,14 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        //private void CheckFinanceBatch(object sender, EventArgs e)
-        //{
-        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-        //    {
-        //        FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.CHECK);
-        //        this.SetDetailPanel(batchMgr);
-        //    }
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void CheckPaymentBatch(object sender, EventArgs e)
-        //{
-        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-        //    {
-        //        PaymentBatchMgr batchMgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.CHECK);
-        //        this.SetDetailPanel(batchMgr);
-        //    }
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void CheckPoolFinance(object sender, EventArgs e)
-        //{
-        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-        //    {
-        //        FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.POOL_CHECK);
-        //        this.SetDetailPanel(batchMgr);
-        //    }
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void CheckPoolRefund(object sender, EventArgs e)
-        //{
-        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-        //    {
-        //        RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_CHECK);
-        //        this.SetDetailPanel(batchMgr);
-        //    }
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void CheckRefundBatch(object sender, EventArgs e)
-        //{
-        //    if (PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
-        //    {
-        //        RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.CHECK);
-        //        this.SetDetailPanel(batchMgr);
-        //    }
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CheckUpdate(object sender, EventArgs e)
         {
-            AutoUpdater autoUpdater = new AutoUpdater();
-            autoUpdater.ConfigURL = new Uri("http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml");
+            var autoUpdater = new AutoUpdater
+                                  {
+                                      ConfigURL =
+                                          new Uri(
+                                          "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml")
+                                  };
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdate();
         }
@@ -364,9 +319,13 @@ namespace CMBC.EasyFactor
         /// </summary>
         private static void CheckUpdateBackground()
         {
-            AutoUpdater autoUpdater = new AutoUpdater();
-            autoUpdater.ConfigURL = new Uri("http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml");
-            autoUpdater.AutoDownload = true;
+            var autoUpdater = new AutoUpdater
+                                  {
+                                      ConfigURL =
+                                          new Uri(
+                                          "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml"),
+                                      AutoDownload = true
+                                  };
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdateBackground();
         }
@@ -380,8 +339,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ARCaseBasic creditNotePayment = new ARCaseBasic(OpARType.CREDIT_NOTE);
-                this.SetDetailPanel(creditNotePayment);
+                var creditNotePayment = new ARCaseBasic(OpARType.CREDIT_NOTE);
+                SetDetailPanel(creditNotePayment);
             }
         }
 
@@ -393,7 +352,7 @@ namespace CMBC.EasyFactor
         private void DetailUser(object sender, EventArgs e)
         {
             User user = App.Current.CurUser;
-            UserDetail detail = new UserDetail(user, UserDetail.OpUserType.DETAIL_USER);
+            var detail = new UserDetail(user, UserDetail.OpUserType.DETAIL_USER);
             detail.ShowDialog(this);
         }
 
@@ -406,8 +365,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DISPUTE_RESOLVE);
-                this.SetDetailPanel(invoiceMgr);
+                var invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DISPUTE_RESOLVE);
+                SetDetailPanel(invoiceMgr);
             }
         }
 
@@ -418,17 +377,18 @@ namespace CMBC.EasyFactor
         /// <param name="args"></param>
         private void Exit(object sender, EventArgs args)
         {
-            DialogResult dr = MessageBoxEx.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBoxEx.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel,
+                                                MessageBoxIcon.Question);
 
             if (dr == DialogResult.Yes)
             {
-                this.notifyIcon.Visible = false;
+                notifyIcon.Visible = false;
                 Application.ExitThread();
             }
             else if (dr == DialogResult.Cancel)
             {
                 App.Current.CurUser = null;
-                LogOnWindow loginWindow = new LogOnWindow();
+                var loginWindow = new LogOnWindow();
                 loginWindow.ShowDialog(this);
 
                 if (App.Current.CurUser == null)
@@ -437,11 +397,14 @@ namespace CMBC.EasyFactor
                 }
                 else
                 {
-                    this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
-                    this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-                    this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
-                    this.AlertPage(null, null);
+                    Text =
+                        ((AssemblyTitleAttribute)
+                         Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0])
+                            .Title + @"  " + Assembly.GetExecutingAssembly().GetName().Version;
+                    ribbonControl.SelectedRibbonTabItem = itemInfoMgr;
+                    UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
+                    CommandStatus = "欢迎使用中国民生银行保理运营系统";
+                    AlertPage(null, null);
                 }
             }
             else if (dr == DialogResult.No)
@@ -459,8 +422,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
-                this.SetDetailPanel(invoiceMgr);
+                var invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE);
+                SetDetailPanel(invoiceMgr);
             }
         }
 
@@ -471,9 +434,9 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void HideInTray(object sender, EventArgs e)
         {
-            this.notifyIcon.Visible = true;
-            this.ShowInTaskbar = false;
-            this.WindowState = FormWindowState.Minimized;
+            notifyIcon.Visible = true;
+            ShowInTaskbar = false;
+            WindowState = FormWindowState.Minimized;
         }
 
         /// <summary>
@@ -485,7 +448,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
                 form.ShowDialog(this);
             }
         }
@@ -499,7 +462,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CASE);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_CASE);
                 form.Show();
             }
         }
@@ -513,7 +476,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CDA);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_CDA);
                 form.Show();
             }
         }
@@ -527,7 +490,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_CREDITLINE);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_CREDITLINE);
                 form.Show();
             }
         }
@@ -541,7 +504,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENT);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENT);
                 form.Show();
             }
         }
@@ -555,7 +518,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_OVERWRITE);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_OVERWRITE);
                 form.Show();
             }
         }
@@ -569,7 +532,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_REVIEW);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_CLIENTS_REVIEW);
                 form.Show();
             }
         }
@@ -583,7 +546,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_CONTRACT);
                 form.Show();
             }
         }
@@ -597,10 +560,9 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CREDIT_COVER_NEG);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_CREDIT_COVER_NEG);
                 form.Show();
             }
-
         }
 
         /// <summary>
@@ -612,7 +574,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_CREDIT_NOTE);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_CREDIT_NOTE);
                 form.ShowDialog(this);
             }
         }
@@ -626,7 +588,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENT);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_DEPARTMENT);
                 form.Show();
             }
         }
@@ -640,7 +602,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_RATE);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_RATE);
                 form.Show();
             }
         }
@@ -654,7 +616,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS_CREDITLINE);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_FACTORS_CREDITLINE);
                 form.Show();
             }
         }
@@ -668,7 +630,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_FACTOR);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_FACTOR);
                 form.Show();
             }
         }
@@ -682,7 +644,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_FINANCE);
                 form.ShowDialog(this);
             }
         }
@@ -696,7 +658,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_INVOICE);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_INVOICE);
                 form.Show();
             }
         }
@@ -710,7 +672,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_PAYMENT);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_PAYMENT);
                 form.Show();
             }
         }
@@ -724,7 +686,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_POOL_FINANCE);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_POOL_FINANCE);
                 form.Show();
             }
         }
@@ -738,7 +700,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_POOL_REFUND);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_POOL_REFUND);
                 form.Show();
             }
         }
@@ -752,7 +714,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ImportForm form = new ImportForm(ImportForm.ImportType.IMPORT_REFUND);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_REFUND);
                 form.Show();
             }
         }
@@ -766,7 +728,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.SYSTEM_IMPORT))
             {
-                ImportForm importForm = new ImportForm(ImportForm.ImportType.IMPORT_USER);
+                var importForm = new ImportForm(ImportForm.ImportType.IMPORT_USER);
                 importForm.Show();
             }
         }
@@ -780,8 +742,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ARCaseBasic invoiceAssign = new ARCaseBasic(OpARType.ASSIGN);
-                this.SetDetailPanel(invoiceAssign);
+                var invoiceAssign = new ARCaseBasic(OpARType.ASSIGN);
+                SetDetailPanel(invoiceAssign);
             }
         }
 
@@ -794,8 +756,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.BUYER_PAYMENT);
-                this.SetDetailPanel(invoicePayment);
+                var invoicePayment = new ARCaseBasic(OpARType.BUYER_PAYMENT);
+                SetDetailPanel(invoicePayment);
             }
         }
 
@@ -808,8 +770,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ARCaseBasic invoiceFinance = new ARCaseBasic(OpARType.FINANCE);
-                this.SetDetailPanel(invoiceFinance);
+                var invoiceFinance = new ARCaseBasic(OpARType.FINANCE);
+                SetDetailPanel(invoiceFinance);
             }
         }
 
@@ -822,8 +784,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.GUARANTEE_PAYMENT);
-                this.SetDetailPanel(invoicePayment);
+                var invoicePayment = new ARCaseBasic(OpARType.GUARANTEE_PAYMENT);
+                SetDetailPanel(invoicePayment);
             }
         }
 
@@ -836,8 +798,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.INDIRECT_PAYMENT);
-                this.SetDetailPanel(invoicePayment);
+                var invoicePayment = new ARCaseBasic(OpARType.INDIRECT_PAYMENT);
+                SetDetailPanel(invoicePayment);
             }
         }
 
@@ -850,8 +812,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ARCaseBasic invoicePayment = new ARCaseBasic(OpARType.SELLER_REASSIGN);
-                this.SetDetailPanel(invoicePayment);
+                var invoicePayment = new ARCaseBasic(OpARType.SELLER_REASSIGN);
+                SetDetailPanel(invoicePayment);
             }
         }
 
@@ -864,8 +826,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ARCaseBasic invoiceRefund = new ARCaseBasic(OpARType.SELLER_REFUND);
-                this.SetDetailPanel(invoiceRefund);
+                var invoiceRefund = new ARCaseBasic(OpARType.SELLER_REFUND);
+                SetDetailPanel(invoiceRefund);
             }
         }
 
@@ -878,8 +840,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ARCaseBasic invoiceRefund = new ARCaseBasic(OpARType.BUYER_REFUND);
-                this.SetDetailPanel(invoiceRefund);
+                var invoiceRefund = new ARCaseBasic(OpARType.BUYER_REFUND);
+                SetDetailPanel(invoiceRefund);
             }
         }
 
@@ -887,13 +849,14 @@ namespace CMBC.EasyFactor
         /// 
         /// </summary>
         /// <param name="invoiceList"></param>
+        /// <param name="batch"></param>
         public void InvoiceRefundFromPayment(List<Invoice> invoiceList, InvoicePaymentBatch batch)
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                ARCaseBasic invoiceRefund = new ARCaseBasic(OpARType.SELLER_REFUND);
-                this.SetDetailPanel(invoiceRefund);
-                InvoiceRefund uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
+                var invoiceRefund = new ARCaseBasic(OpARType.SELLER_REFUND);
+                SetDetailPanel(invoiceRefund);
+                var uc = (InvoiceRefund)invoiceRefund.InvoiceControl;
                 uc.NewBatchFromPayment(invoiceList, batch);
             }
         }
@@ -905,8 +868,9 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void AlertPage(object sender, EventArgs e)
         {
-            WorkAlert alert = new WorkAlert();
-            this.SetDetailPanel(alert);
+            var alert = new WorkAlert();
+            SetDetailPanel(alert);
+            alert.Dock = DockStyle.None;
         }
 
         /// <summary>
@@ -916,20 +880,20 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void MainPage(object sender, EventArgs e)
         {
-            this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
-            this.CommandStatus = MESSAGE.MAIN_DEFAULT;
+            ribbonControl.SelectedRibbonTabItem = itemInfoMgr;
+            CommandStatus = MESSAGE.MAIN_DEFAULT;
 
-            this.notifyIcon.Visible = false;
+            notifyIcon.Visible = false;
 
-            this.ribbonDetailPanel.Controls.Clear();
+            ribbonDetailPanel.Controls.Clear();
         }
 
         private void MainWindow_Deactivate(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized)
             {
-                this.notifyIcon.Visible = true;
-                this.ShowInTaskbar = false;
+                notifyIcon.Visible = true;
+                ShowInTaskbar = false;
             }
         }
 
@@ -946,16 +910,17 @@ namespace CMBC.EasyFactor
                 return;
             }
 
-            DialogResult dr = MessageBoxEx.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBoxEx.Show("点击“Yes”退出系统，点击“Cancel”更换用户", "", MessageBoxButtons.YesNoCancel,
+                                                MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
-                this.notifyIcon.Visible = false;
+                notifyIcon.Visible = false;
                 e.Cancel = false;
             }
             else if (dr == DialogResult.Cancel)
             {
                 App.Current.CurUser = null;
-                LogOnWindow loginWindow = new LogOnWindow();
+                var loginWindow = new LogOnWindow();
                 loginWindow.ShowDialog(this);
 
                 if (App.Current.CurUser == null)
@@ -965,11 +930,14 @@ namespace CMBC.EasyFactor
                 else
                 {
                     e.Cancel = true;
-                    this.Text = ((AssemblyTitleAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title + "  " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    this.ribbonControl.SelectedRibbonTabItem = this.itemInfoMgr;
-                    this.UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-                    this.CommandStatus = "欢迎使用中国民生银行保理运营系统";
-                    this.AlertPage(null, null);
+                    Text =
+                        ((AssemblyTitleAttribute)
+                         Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0])
+                            .Title + @"  " + Assembly.GetExecutingAssembly().GetName().Version;
+                    ribbonControl.SelectedRibbonTabItem = itemInfoMgr;
+                    UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
+                    CommandStatus = "欢迎使用中国民生银行保理运营系统";
+                    AlertPage(null, null);
                 }
             }
             else if (dr == DialogResult.No)
@@ -988,7 +956,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.CASE_UPDATE))
             {
-                CaseDetail caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE);
+                var caseDetail = new CaseDetail(null, CaseDetail.OpCaseType.NEW_CASE);
                 caseDetail.ShowDialog(this);
             }
         }
@@ -1002,7 +970,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.CDA_UPDATE))
             {
-                CDADetail cdaDetail = new CDADetail(CDADetail.OpCDAType.NEW_CDA);
+                var cdaDetail = new CDADetail(CDADetail.OpCDAType.NEW_CDA);
                 cdaDetail.ShowDialog(this);
             }
         }
@@ -1016,7 +984,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
-                ClientDetail clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
+                var clientDetail = new ClientDetail(null, ClientDetail.OpClientType.NEW_CLIENT);
                 clientDetail.ShowDialog(this);
             }
         }
@@ -1030,7 +998,7 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
             {
-                FactorDetail factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
+                var factorDetail = new FactorDetail(null, FactorDetail.OpFactorType.NEW_FACTOR);
                 factorDetail.ShowDialog(this);
             }
         }
@@ -1042,8 +1010,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void PoolFinance(object sender, EventArgs e)
         {
-            ARPoolBasic poolFinance = new ARPoolBasic(OpPoolARType.FINANCE);
-            this.SetDetailPanel(poolFinance);
+            var poolFinance = new ARPoolBasic(OpPoolARType.FINANCE);
+            SetDetailPanel(poolFinance);
         }
 
         /// <summary>
@@ -1053,8 +1021,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void PoolRefund(object sender, EventArgs e)
         {
-            ARPoolBasic poolRefund = new ARPoolBasic(OpPoolARType.REFUND);
-            this.SetDetailPanel(poolRefund);
+            var poolRefund = new ARPoolBasic(OpPoolARType.REFUND);
+            SetDetailPanel(poolRefund);
         }
 
         /// <summary>
@@ -1064,8 +1032,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryApplicationCase(object sender, EventArgs e)
         {
-            CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.APPLICATION_CASE);
-            this.SetDetailPanel(mgr);
+            var mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.APPLICATION_CASE);
+            SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -1075,8 +1043,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryAssignBatch(object sender, EventArgs e)
         {
-            AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.QUERY);
-            this.SetDetailPanel(mgr);
+            var mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.QUERY);
+            SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -1086,8 +1054,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryCase(object sender, EventArgs e)
         {
-            CaseMgr.CaseMgr caseQuery = new CaseMgr.CaseMgr();
-            this.SetDetailPanel(caseQuery);
+            var caseQuery = new CaseMgr.CaseMgr();
+            SetDetailPanel(caseQuery);
         }
 
         /// <summary>
@@ -1097,8 +1065,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryCDA(object sender, EventArgs e)
         {
-            CDAMgr mgr = new CDAMgr(CDAMgr.OpCDAType.QUERY);
-            this.SetDetailPanel(mgr);
+            var mgr = new CDAMgr(CDAMgr.OpCDAType.QUERY);
+            SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -1108,8 +1076,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryClientCreditLine(object sender, EventArgs e)
         {
-            ClientCreditLineMgr query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_CLINET);
-            this.SetDetailPanel(query);
+            var query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_CLINET);
+            SetDetailPanel(query);
         }
 
         /// <summary>
@@ -1119,8 +1087,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryClientDominate(object sender, EventArgs e)
         {
-            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.DOMINATE_CLIENT);
-            this.SetDetailPanel(query);
+            var query = new ClientMgr(ClientMgr.OpClientMgrType.DOMINATE_CLIENT);
+            SetDetailPanel(query);
         }
 
         /// <summary>
@@ -1130,8 +1098,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryClientExport(object sender, EventArgs e)
         {
-            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.EXPORT_CLIENT);
-            this.SetDetailPanel(query);
+            var query = new ClientMgr(ClientMgr.OpClientMgrType.EXPORT_CLIENT);
+            SetDetailPanel(query);
         }
 
         /// <summary>
@@ -1141,8 +1109,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryClientGroupCreditLine(object sender, EventArgs e)
         {
-            ClientCreditLineMgr query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_GROUP);
-            this.SetDetailPanel(query);
+            var query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_GROUP);
+            SetDetailPanel(query);
         }
 
         /// <summary>
@@ -1152,8 +1120,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryClientImport(object sender, EventArgs e)
         {
-            ClientMgr query = new ClientMgr(ClientMgr.OpClientMgrType.IMPORT_CLIENT);
-            this.SetDetailPanel(query);
+            var query = new ClientMgr(ClientMgr.OpClientMgrType.IMPORT_CLIENT);
+            SetDetailPanel(query);
         }
 
         /// <summary>
@@ -1163,8 +1131,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryClientReviews(object sender, EventArgs e)
         {
-            ClientReviewMgr query = new ClientReviewMgr(ClientReviewMgr.OpClientReviewMgrType.QUERY);
-            this.SetDetailPanel(query);
+            var query = new ClientReviewMgr(ClientReviewMgr.OpClientReviewMgrType.QUERY);
+            SetDetailPanel(query);
         }
 
         /// <summary>
@@ -1174,8 +1142,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryClients(object sender, EventArgs e)
         {
-            ClientMgr query = new ClientMgr();
-            this.SetDetailPanel(query);
+            var query = new ClientMgr();
+            SetDetailPanel(query);
         }
 
         /// <summary>
@@ -1185,8 +1153,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryContract(object sender, EventArgs e)
         {
-            ContractMgr contractMgr = new ContractMgr();
-            this.SetDetailPanel(contractMgr);
+            var contractMgr = new ContractMgr();
+            SetDetailPanel(contractMgr);
         }
 
         /// <summary>
@@ -1196,8 +1164,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryCreditCoverNegs(object sender, EventArgs e)
         {
-            CreditCoverNegMgr creditCoverNegMgr = new CreditCoverNegMgr();
-            this.SetDetailPanel(creditCoverNegMgr);
+            var creditCoverNegMgr = new CreditCoverNegMgr();
+            SetDetailPanel(creditCoverNegMgr);
         }
 
         /// <summary>
@@ -1207,8 +1175,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryDepartments(object sender, EventArgs e)
         {
-            DepartmentMgr departmentMgrUI = new DepartmentMgr();
-            this.SetDetailPanel(departmentMgrUI);
+            var departmentMgrUI = new DepartmentMgr();
+            SetDetailPanel(departmentMgrUI);
         }
 
         /// <summary>
@@ -1218,8 +1186,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryExchanges(object sender, EventArgs e)
         {
-            ExchangeMgr mgr = new ExchangeMgr();
-            this.SetDetailPanel(mgr);
+            var mgr = new ExchangeMgr();
+            SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -1229,8 +1197,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryFactorCreditLine(object sender, EventArgs e)
         {
-            FactorCreditLineMgr query = new FactorCreditLineMgr();
-            this.SetDetailPanel(query);
+            var query = new FactorCreditLineMgr();
+            SetDetailPanel(query);
         }
 
         /// <summary>
@@ -1240,8 +1208,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryFactors(object sender, EventArgs e)
         {
-            FactorMgr fatcorQuery = new FactorMgr();
-            this.SetDetailPanel(fatcorQuery);
+            var fatcorQuery = new FactorMgr();
+            SetDetailPanel(fatcorQuery);
         }
 
         /// <summary>
@@ -1251,8 +1219,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryFinanceBatch(object sender, EventArgs e)
         {
-            FinanceBatchMgr mgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.QUERY);
-            this.SetDetailPanel(mgr);
+            var mgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.QUERY);
+            SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -1262,8 +1230,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryInvoice(object sender, EventArgs e)
         {
-            InvoiceMgr invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.INVOICE_QUERY);
-            this.SetDetailPanel(invoiceMgr);
+            var invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.INVOICE_QUERY);
+            SetDetailPanel(invoiceMgr);
         }
 
         /// <summary>
@@ -1273,8 +1241,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryOverDue(object sender, EventArgs e)
         {
-            InvoiceMgr mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.OVER_DUE);
-            this.SetDetailPanel(mgr);
+            var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.OVER_DUE);
+            SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -1284,8 +1252,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryPaymentBatch(object sender, EventArgs e)
         {
-            PaymentBatchMgr mgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.QUERY);
-            this.SetDetailPanel(mgr);
+            var mgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.QUERY);
+            SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -1295,8 +1263,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryPoolFinanceBatch(object sender, EventArgs e)
         {
-            FinanceBatchMgr batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.POOL_QUERY);
-            this.SetDetailPanel(batchMgr);
+            var batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.POOL_QUERY);
+            SetDetailPanel(batchMgr);
         }
 
         /// <summary>
@@ -1306,8 +1274,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryPoolRefundBatch(object sender, EventArgs e)
         {
-            RefundBatchMgr batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_QUERY);
-            this.SetDetailPanel(batchMgr);
+            var batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_QUERY);
+            SetDetailPanel(batchMgr);
         }
 
         /// <summary>
@@ -1317,8 +1285,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryRefundBatch(object sender, EventArgs e)
         {
-            RefundBatchMgr mgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.QUERY);
-            this.SetDetailPanel(mgr);
+            var mgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.QUERY);
+            SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -1328,8 +1296,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryUsers(object sender, EventArgs e)
         {
-            UserMgr userMgrUI = new UserMgr();
-            this.SetDetailPanel(userMgrUI);
+            var userMgrUI = new UserMgr();
+            SetDetailPanel(userMgrUI);
         }
 
         /// <summary>
@@ -1341,8 +1309,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
             {
-                AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
-                this.SetDetailPanel(mgr);
+                var mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+                SetDetailPanel(mgr);
             }
         }
 
@@ -1353,7 +1321,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportBug(object sender, EventArgs e)
         {
-            ReportBug form = new ReportBug();
+            var form = new ReportBug();
             form.ShowDialog(this);
         }
 
@@ -1364,8 +1332,8 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ReportCDA(object sender, EventArgs e)
         {
-            CDAMgr mgr = new CDAMgr(CDAMgr.OpCDAType.REPORT);
-            this.SetDetailPanel(mgr);
+            var mgr = new CDAMgr(CDAMgr.OpCDAType.REPORT);
+            SetDetailPanel(mgr);
         }
 
         /// <summary>
@@ -1377,8 +1345,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
             {
-                AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
-                this.SetDetailPanel(mgr);
+                var mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+                SetDetailPanel(mgr);
             }
         }
 
@@ -1391,8 +1359,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
             {
-                AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
-                this.SetDetailPanel(mgr);
+                var mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+                SetDetailPanel(mgr);
             }
         }
 
@@ -1405,8 +1373,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
             {
-                AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
-                this.SetDetailPanel(mgr);
+                var mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.REPORT);
+                SetDetailPanel(mgr);
             }
         }
 
@@ -1419,8 +1387,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
             {
-                CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr();
-                this.SetDetailPanel(mgr);
+                var mgr = new CaseMgr.CaseMgr();
+                SetDetailPanel(mgr);
             }
         }
 
@@ -1431,9 +1399,9 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void ShowFromTray(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
-            this.ShowInTaskbar = true;
-            this.notifyIcon.Visible = false;
+            WindowState = FormWindowState.Maximized;
+            ShowInTaskbar = true;
+            notifyIcon.Visible = false;
         }
 
         /// <summary>
@@ -1445,8 +1413,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
             {
-                CaseMgr.CaseMgr mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.STAT);
-                this.SetDetailPanel(mgr);
+                var mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.STAT);
+                SetDetailPanel(mgr);
             }
         }
 
@@ -1459,8 +1427,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
             {
-                DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.DEPARTMENT_STAT);
-                this.SetDetailPanel(mgr);
+                var mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.DEPARTMENT_STAT);
+                SetDetailPanel(mgr);
             }
         }
 
@@ -1473,50 +1441,11 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
             {
-                DepartmentMgr mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.LOCATION_STAT);
-                this.SetDetailPanel(mgr);
+                var mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.LOCATION_STAT);
+                SetDetailPanel(mgr);
             }
         }
 
         #endregion?Methods?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SystemSetting(object sender, EventArgs e)
-        {
-            //SystemSetting form = new SystemSetting();
-            //form.ShowDialog(this);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void BackupDatabase(object sender, EventArgs e)
-        //{
-        //    if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
-        //    {
-        //        ExportForm form = new ExportForm(ExportForm.ExportType.BACKUP_DATABASE);
-        //        form.Show();
-        //    }
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StatFactorCommission(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
-            {
-                AssignBatchMgr mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.FACTOR_COMMISSION);
-                this.SetDetailPanel(mgr);
-            }
-        }
     }
 }

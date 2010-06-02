@@ -127,10 +127,10 @@ namespace CMBC.EasyFactor.ARMgr
             switch (refundType)
             {
                 case OpRefundType.BUYER_PAYMENT:
-                    this.cbRefundType.Text = Refund.BUYER_PAYMENT;
+                    this.cbRefundType.Text = REFUND.BUYER_PAYMENT;
                     break;
                 case OpRefundType.SELLER_REFUND:
-                    this.cbRefundType.Text = Refund.SELLER_REFUND;
+                    this.cbRefundType.Text = REFUND.SELLER_REFUND;
                     break;
                 default:
                     break;

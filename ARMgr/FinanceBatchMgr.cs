@@ -678,7 +678,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
-                sheet.Protect(Report.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                 sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
 
                 app.Visible = true;

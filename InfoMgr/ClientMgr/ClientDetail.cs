@@ -1,72 +1,371 @@
-//-----------------------------------------------------------------------
+Ôªø//-----------------------------------------------------------------------
 // <copyright file="ClientDetail.cs" company="Yiming Liu@Fudan">
 //     Copyright (c) CMBC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Data.Linq;
+using System.Linq;
+using System.Windows.Forms;
+using CMBC.EasyFactor.DB.dbml;
+using CMBC.EasyFactor.Utils;
+using CMBC.EasyFactor.Utils.ConstStr;
+using DevComponents.AdvTree;
+using DevComponents.DotNetBar;
+using DevComponents.DotNetBar.Validator;
+
 namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Linq;
-    using System.Linq;
-    using System.Windows.Forms;
-    using CMBC.EasyFactor.DB.dbml;
-    using CMBC.EasyFactor.Utils;
-    using CMBC.EasyFactor.Utils.ConstStr;
-    using DevComponents.DotNetBar;
-
     /// <summary>
     /// Client Detail
     /// </summary>
-    public partial class ClientDetail : DevComponents.DotNetBar.Office2007Form
+    public partial class ClientDetail : Office2007Form
     {
-		#region?Fields?(10)?
+        #region¬†Methods¬†(7)
+
+        //¬†Private¬†Methods¬†(7)¬†
 
         /// <summary>
         /// 
         /// </summary>
-        private BindingSource bsContracts;
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bsCreditLines;
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bsGDs;
-        /// <summary>
-        /// 
-        /// </summary>
-        private BindingSource bsReviews;
-        /// <summary>
-        /// 
-        /// </summary>
-        private DBDataContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpClientCreditLineType opClientCreditLineType;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpClientType opClientType;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpContractType opContractType;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpGDType opGDType;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpReviewType opReviewType;
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteCommissionRemit(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
+            {
+                return;
+            }
 
-		#endregion?Fields?
+            var client = (Client)clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                return;
+            }
 
-		#region?Enums?(5)?
+            if (!(commissionRemitBindingSource.DataSource is CommissionRemittance))
+            {
+                return;
+            }
+
+            var commissionRemit = (CommissionRemittance)commissionRemitBindingSource.DataSource;
+            if (commissionRemit.MsgID == 0)
+            {
+                return;
+            }
+
+            bool isDeleteOK = true;
+            try
+            {
+                _context.CommissionRemittances.DeleteOnSubmit(commissionRemit);
+                _context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                isDeleteOK = false;
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (isDeleteOK)
+            {
+                MessageBoxEx.Show("Êï∞ÊçÆÂà†Èô§ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //this.bsCommissionRemit.DataSource = curCase.InvoiceAssignBatches.ToList();
+                commissionRemitBindingSource.DataSource = new CommissionRemittance();
+            }
+        }
+
+        /// <summary>
+        /// Create new CommissionRemittance
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewCommissionRemit(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
+            {
+                return;
+            }
+
+            var client = (Client)clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                return;
+            }
+
+            var commissionRemit = new CommissionRemittance { CreateUserName = App.Current.CurUser.Name };
+            commissionRemitBindingSource.DataSource = commissionRemit;
+            _opCommissionRemitType = OpCommissionRemitType.NEW_COMMISSION_REMIT;
+            UpdateCommissionRemitControlStatus();
+        }
+
+        /// <summary>
+        /// Refresh the CommissionRemit list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefreshCommissionRemitList(object sender, EventArgs e)
+        {
+            var client = (Client)clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                return;
+            }
+
+            // this.bsCommissionRemit.DataSource = curCase.InvoiceAssignBatches.ToList();
+        }
+
+        /// <summary>
+        /// Save current CommissionRemit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveCommissionRemit(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
+            {
+                return;
+            }
+
+            if (!commissionRemitValidator.Validate())
+            {
+                return;
+            }
+
+            var client = (Client)clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(commissionRemitBindingSource.DataSource is CommissionRemittance))
+            {
+                return;
+            }
+
+            var commissionRemit = (CommissionRemittance)commissionRemitBindingSource.DataSource;
+            commissionRemit.CreateUserName = App.Current.CurUser.Name;
+
+            if (commissionRemit.MsgID == 0)
+            {
+                bool isAddOK = true;
+                try
+                {
+                    //commissionRemit.Case = curCase;
+                    _context.CommissionRemittances.InsertOnSubmit(commissionRemit);
+                    _context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    //commissionRemit.Case = null;
+                    isAddOK = false;
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isAddOK)
+                {
+                    MessageBoxEx.Show("Êï∞ÊçÆÊñ∞Âª∫ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                    // this.bsCommissionRemit.DataSource = curCase.InvoiceAssignBatches.ToList();
+                    NewCommissionRemit(null, null);
+                }
+            }
+            else
+            {
+                bool isUpdateOK = true;
+                try
+                {
+                    _context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
+
+                    _context.SubmitChanges();
+                }
+                catch (Exception e2)
+                {
+                    isUpdateOK = false;
+                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isUpdateOK)
+                {
+                    MessageBoxEx.Show("Êï∞ÊçÆÊõ¥Êñ∞ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                    dgvCommissionRemit.Refresh();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Select CommissionRemit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectCommissionRemit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvCommissionRemit.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            var invoiceAssignBatch =
+                (InvoiceAssignBatch)_bsCommissionRemit.List[dgvCommissionRemit.SelectedRows[0].Index];
+            CommissionRemittance commissionRemit = invoiceAssignBatch.CommissionRemitteance;
+            if (commissionRemit != null)
+            {
+                commissionRemitBindingSource.DataSource = commissionRemit;
+            }
+        }
+
+        /// <summary>
+        /// Turn CommissionRemit into update status
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateCommissionRemit(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
+            {
+                return;
+            }
+
+            var client = (Client)clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(commissionRemitBindingSource.DataSource is CommissionRemittance))
+            {
+                return;
+            }
+
+            _opCommissionRemitType = OpCommissionRemitType.UPDATE_COMMISSION_REMIT;
+            UpdateCommissionRemitControlStatus();
+        }
+
+        /// <summary>
+        /// Update CommissionRemit Control Status
+        /// </summary>
+        private void UpdateCommissionRemitControlStatus()
+        {
+            if (_opCommissionRemitType == OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
+            {
+                foreach (Control comp in groupPanelCommissionRemit.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (_opCommissionRemitType == OpCommissionRemitType.NEW_COMMISSION_REMIT)
+            {
+                foreach (Control comp in groupPanelCommissionRemit.Controls)
+                {
+                    ControlUtil.SetComponetDefault(comp);
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            else if (_opCommissionRemitType == OpCommissionRemitType.UPDATE_COMMISSION_REMIT)
+            {
+                foreach (Control comp in groupPanelCommissionRemit.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+
+            ControlUtil.SetComponetEditable(tbCommissionCreateUserName, false);
+        }
+
+        #endregion¬†Methods
+
+
+
+        #region?Fields?(10)?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bsCommissionRemit;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bsContracts;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bsCreditLines;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bsGDs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bsReviews;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly DBDataContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpClientCreditLineType _opClientCreditLineType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpClientType _opClientType;
+
+        /// <summary>
+        /// Operation type of Commission Remit
+        /// </summary>
+        private OpCommissionRemitType _opCommissionRemitType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpContractType _opContractType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpGDType _opGdType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpReviewType _opReviewType;
+
+        #endregion?Fields?
+
+
+        #region?Enums?(5)?
+
+        #region OpClientCreditLineType enum
 
         /// <summary>
         /// 
@@ -88,27 +387,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-/// <summary>
-        /// 
-        /// </summary>
-        public enum OpContractType
-        {
-            /// <summary>
-            /// 
-            /// </summary>
-            NEW_CONTRACT,
 
-            /// <summary>
-            /// 
-            /// </summary>
-            UPDATE_CONTRACT,
+        #endregion
+        #region OpClientType enum
 
-            /// <summary>
-            /// 
-            /// </summary>
-            DETAIL_CONTRACT
-        }
-/// <summary>
+        /// <summary>
         /// Operation Type 
         /// </summary>
         public enum OpClientType
@@ -128,7 +411,57 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
-/// <summary>
+
+        #endregion
+        #region OpContractType enum
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpContractType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            NEW_CONTRACT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            UPDATE_CONTRACT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL_CONTRACT
+        }
+
+        #endregion
+        #region OpGDType enum
+
+        /// <summary>
+        /// Guarantee Deposite Type
+        /// </summary>
+        public enum OpGDType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            NEW_GD,
+            /// <summary>
+            /// 
+            /// </summary>
+            UPDATE_GD,
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL_GD
+        }
+
+        #endregion
+        #region OpReviewType enum
+
+        /// <summary>
         /// Review Type
         /// </summary>
         public enum OpReviewType
@@ -148,30 +481,39 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_REVIEW
         }
-/// <summary>
-        /// Guarantee Deposite Type
+
+        #endregion
+        #endregion?Enums?
+
+
+        #region OpCommissionRemitType enum
+
+        /// <summary>
+        /// 
         /// </summary>
-        public enum OpGDType
+        public enum OpCommissionRemitType
         {
             /// <summary>
             /// 
             /// </summary>
-            NEW_GD,
+            NEW_COMMISSION_REMIT,
+
             /// <summary>
             /// 
             /// </summary>
-            UPDATE_GD,
+            UPDATE_COMMISSION_REMIT,
+
             /// <summary>
             /// 
             /// </summary>
-            DETAIL_GD
+            DETAIL_COMMISSION_REMIT
         }
 
-		#endregion?Enums?
+        #endregion
 
-		#region?Constructors?(7)?
+        #region?Constructors?(7)?
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
@@ -179,108 +521,132 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="opClientCreditLineType">client credit line operation type</param>
         /// <param name="opContractType">client contract opertion type</param>
         /// <param name="opReviewType">client review operation type</param>
-        private ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType, OpContractType opContractType, OpReviewType opReviewType)
+        /// <param name="opCommissionRemitType"></param>
+        private ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType,
+                             OpContractType opContractType, OpReviewType opReviewType,
+                             OpCommissionRemitType opCommissionRemitType)
         {
-            this.InitializeComponent();
-            this.ImeMode = ImeMode.OnHalf;
-            this.bsCreditLines = new BindingSource();
-            this.bsContracts = new BindingSource();
-            this.bsReviews = new BindingSource();
-            this.bsGDs = new BindingSource();
-            this.dgvClientCreditLines.AutoGenerateColumns = false;
-            this.dgvContracts.AutoGenerateColumns = false;
-            this.dgvReviews.AutoGenerateColumns = false;
-            this.dgvGDs.AutoGenerateColumns = false;
-            this.dgvClientCreditLines.DataSource = this.bsCreditLines;
-            this.dgvContracts.DataSource = this.bsContracts;
-            this.dgvReviews.DataSource = this.bsReviews;
-            this.dgvGDs.DataSource = this.bsGDs;
-            this.context = new DBDataContext();
+            InitializeComponent();
+            ImeMode = ImeMode.OnHalf;
+            _bsCreditLines = new BindingSource();
+            _bsContracts = new BindingSource();
+            _bsReviews = new BindingSource();
+            _bsGDs = new BindingSource();
+            _bsCommissionRemit = new BindingSource();
+            dgvClientCreditLines.AutoGenerateColumns = false;
+            dgvContracts.AutoGenerateColumns = false;
+            dgvReviews.AutoGenerateColumns = false;
+            dgvGDs.AutoGenerateColumns = false;
+            dgvCommissionRemit.AutoGenerateColumns = false;
+            dgvClientCreditLines.DataSource = _bsCreditLines;
+            dgvContracts.DataSource = _bsContracts;
+            dgvReviews.DataSource = _bsReviews;
+            dgvGDs.DataSource = _bsGDs;
+            dgvCommissionRemit.DataSource = _bsCommissionRemit;
+            _context = new DBDataContext();
 
-            this.cbCountryCode.DataSource = Country.AllCountries();
-            this.cbCountryCode.DisplayMember = "CountryFormatCN";
-            this.cbCountryCode.ValueMember = "CountryCode";
+            cbCountryCode.DataSource = Country.AllCountries();
+            cbCountryCode.DisplayMember = "CountryFormatCN";
+            cbCountryCode.ValueMember = "CountryCode";
 
-            List<Department> allDepartments = Department.AllDepartments(context);
-            this.cbDepartments.DataSource = allDepartments;
-            this.cbDepartments.DisplayMembers = "DepartmentName";
-            this.cbDepartments.GroupingMembers = "Domain";
-            this.cbDepartments.ValueMember = "DepartmentCode";
-            this.cbDepartments.SelectedIndex = -1;
+            List<Department> allDepartments = Department.AllDepartments(_context);
+            cbDepartments.DataSource = allDepartments;
+            cbDepartments.DisplayMembers = "DepartmentName";
+            cbDepartments.GroupingMembers = "Domain";
+            cbDepartments.ValueMember = "DepartmentCode";
+            cbDepartments.SelectedIndex = -1;
 
-            this.creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies;
-            this.creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
-            this.creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
-            this.creditLineCurrencyComboBox.SelectedIndex = -1;
+            creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies;
+            creditLineCurrencyComboBox.DisplayMember = "CurrencyFormat";
+            creditLineCurrencyComboBox.ValueMember = "CurrencyCode";
+            creditLineCurrencyComboBox.SelectedIndex = -1;
 
-            this.requestCurrencyComboBox.DataSource = Currency.AllCurrencies;
-            this.requestCurrencyComboBox.DisplayMember = "CurrencyCode";
-            this.requestCurrencyComboBox.ValueMember = "CurrencyCode";
-            this.requestCurrencyComboBox.SelectedIndex = -1;
+            requestCurrencyComboBox.DataSource = Currency.AllCurrencies;
+            requestCurrencyComboBox.DisplayMember = "CurrencyCode";
+            requestCurrencyComboBox.ValueMember = "CurrencyCode";
+            requestCurrencyComboBox.SelectedIndex = -1;
 
-            this.cbGDCurr.DataSource = Currency.AllCurrencies;
-            this.cbGDCurr.DisplayMember = "CurrencyCode";
-            this.cbGDCurr.ValueMember = "CurrencyCode";
-            this.cbGDCurr.SelectedIndex = -1;
+            cbGDCurr.DataSource = Currency.AllCurrencies;
+            cbGDCurr.DisplayMember = "CurrencyCode";
+            cbGDCurr.ValueMember = "CurrencyCode";
+            cbGDCurr.SelectedIndex = -1;
 
-            this.opClientType = opClientType;
-            this.opClientCreditLineType = opClientCreditLineType;
-            this.opContractType = opContractType;
-            this.opReviewType = opReviewType;
-            this.opGDType = OpGDType.DETAIL_GD;
+            cbMsgCurrency.DataSource = Currency.AllCurrencies;
+            cbMsgCurrency.DisplayMember = "CurrencyFormat";
+            cbMsgCurrency.ValueMember = "CurrencyCode";
+
+            cbRemitCurrency.DataSource = Currency.AllCurrencies;
+            cbRemitCurrency.DisplayMember = "CurrencyFormat";
+            cbRemitCurrency.ValueMember = "CurrencyCode";
+
+            _opClientType = opClientType;
+            _opClientCreditLineType = opClientCreditLineType;
+            _opContractType = opContractType;
+            _opReviewType = opReviewType;
+            _opCommissionRemitType = opCommissionRemitType;
+            _opGdType = OpGDType.DETAIL_GD;
 
             if (opClientType == OpClientType.NEW_CLIENT)
             {
                 client = new Client();
-                this.clientBindingSource.DataSource = client;
+                clientBindingSource.DataSource = client;
             }
             else
             {
-                client = context.Clients.SingleOrDefault(c => c.ClientEDICode == client.ClientEDICode);
+                if (client != null)
+                    client = _context.Clients.SingleOrDefault(c => c.ClientEDICode == client.ClientEDICode);
             }
 
-            this.clientBindingSource.DataSource = client;
-            this.bsCreditLines.DataSource = client.ClientCreditLines;
-            this.bsContracts.DataSource = client.Contracts;
-            this.bsReviews.DataSource = client.ClientReviews;
-            this.bsGDs.DataSource = client.GuaranteeDeposits;
+            clientBindingSource.DataSource = client;
+            _bsCreditLines.DataSource = client.ClientCreditLines;
+            _bsContracts.DataSource = client.Contracts;
+            _bsReviews.DataSource = client.ClientReviews;
+            _bsGDs.DataSource = client.GuaranteeDeposits;
+            //this.bsCommissionRemit.DataSource = client.InvoiceAssignBatches;
 
-            List<Department> deptsList = (List<Department>)this.cbDepartments.DataSource;
-            this.cbDepartments.SelectedIndex = deptsList.IndexOf(client.Department);
+            var deptsList = (List<Department>)cbDepartments.DataSource;
+            cbDepartments.SelectedIndex = deptsList.IndexOf(client.Department);
             if (client.ClientGroup != null)
             {
-                this.tbGroupNameCN.Text = client.ClientGroup.ClientNameCN;
-                this.tbGroupNameEN.Text = client.ClientGroup.ClientNameEN;
-                this.btnGroupCreditLineSelect.Enabled = true;
+                tbGroupNameCN.Text = client.ClientGroup.ClientNameCN;
+                tbGroupNameEN.Text = client.ClientGroup.ClientNameEN;
+                btnGroupCreditLineSelect.Enabled = true;
             }
 
-            if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
+            if (_opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
-                this.clientCreditLineBindingSource.DataSource = new ClientCreditLine();
-                this.tabControl.SelectedTab = this.tabItemClientCreditLine;
+                clientCreditLineBindingSource.DataSource = new ClientCreditLine();
+                tabControl.SelectedTab = tabItemClientCreditLine;
             }
 
-            if (this.opContractType == OpContractType.NEW_CONTRACT)
+            if (_opContractType == OpContractType.NEW_CONTRACT)
             {
-                this.contractBindingSource.DataSource = new Contract();
-                this.tabControl.SelectedTab = this.tabItemContract;
+                contractBindingSource.DataSource = new Contract();
+                tabControl.SelectedTab = tabItemContract;
             }
 
-            if (this.opReviewType == OpReviewType.NEW_REVIEW)
+            if (_opReviewType == OpReviewType.NEW_REVIEW)
             {
-                this.reviewBindingSource.DataSource = new ClientReview();
-                this.tabControl.SelectedTab = this.tabItemReview;
+                reviewBindingSource.DataSource = new ClientReview();
+                tabControl.SelectedTab = tabItemReview;
             }
 
-            this.UpdateClientControlStatus();
-            this.UpdateClientCreditLineControlStatus();
-            this.UpdateContractControlStatus();
-            this.UpdateReviewControlStatus();
-            this.UpdateGDControlStatus();
+            if (opCommissionRemitType == OpCommissionRemitType.NEW_COMMISSION_REMIT)
+            {
+                tabControl.SelectedTab = tabItemCommissionRemit;
+            }
 
-            this.requestCommissionRateTextBox.DataBindings[0].Format += new ConvertEventHandler(TypeUtil.FormatFloatToPercent);
-            this.requestCommissionRateTextBox.DataBindings[0].Parse += new ConvertEventHandler(TypeUtil.ParsePercentToFloat);
+            UpdateClientControlStatus();
+            UpdateClientCreditLineControlStatus();
+            UpdateContractControlStatus();
+            UpdateReviewControlStatus();
+            UpdateGDControlStatus();
+            UpdateCommissionRemitControlStatus();
 
+            requestCommissionRateTextBox.DataBindings[0].Format +=
+                TypeUtil.FormatFloatToPercent;
+            requestCommissionRateTextBox.DataBindings[0].Parse +=
+                TypeUtil.ParsePercentToFloat;
         }
 
         /// <summary>
@@ -289,9 +655,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="client"></param>
         /// <param name="opClientType"></param>
         public ClientDetail(Client client, OpClientType opClientType)
-            : this(client, opClientType, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT, OpReviewType.DETAIL_REVIEW)
+            : this(
+                client, opClientType, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT,
+                OpReviewType.DETAIL_REVIEW, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
         {
-            this.tabControl.SelectedTab = this.tabItemClient;
+            tabControl.SelectedTab = tabItemClient;
         }
 
         /// <summary>
@@ -300,7 +668,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="client"></param>
         /// <param name="opContractType"></param>
         public ClientDetail(Client client, OpContractType opContractType)
-            : this(client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType, OpReviewType.DETAIL_REVIEW)
+            : this(
+                client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType,
+                OpReviewType.DETAIL_REVIEW, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
         {
         }
 
@@ -310,7 +680,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="client"></param>
         /// <param name="opClientCreditLineType"></param>
         public ClientDetail(Client client, OpClientCreditLineType opClientCreditLineType)
-            : this(client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT, OpReviewType.DETAIL_REVIEW)
+            : this(
+                client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT,
+                OpReviewType.DETAIL_REVIEW, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
         {
         }
 
@@ -320,13 +692,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="contract"></param>
         /// <param name="opContractType"></param>
         public ClientDetail(Contract contract, OpContractType opContractType)
-            : this(contract.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType, OpReviewType.DETAIL_REVIEW)
+            : this(
+                contract.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE,
+                opContractType, OpReviewType.DETAIL_REVIEW, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
         {
-            this.tabControl.SelectedTab = this.tabItemContract;
-            if (this.opContractType == OpContractType.DETAIL_CONTRACT || this.opContractType == OpContractType.UPDATE_CONTRACT)
+            tabControl.SelectedTab = tabItemContract;
+            if (this._opContractType == OpContractType.DETAIL_CONTRACT ||
+                this._opContractType == OpContractType.UPDATE_CONTRACT)
             {
-                contract = context.Contracts.SingleOrDefault(c => c.ContractCode == contract.ContractCode);
-                this.contractBindingSource.DataSource = contract;
+                contract = _context.Contracts.SingleOrDefault(c => c.ContractCode == contract.ContractCode);
+                contractBindingSource.DataSource = contract;
             }
         }
 
@@ -336,13 +711,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="creditLine"></param>
         /// <param name="opClientCreditLineType"></param>
         public ClientDetail(ClientCreditLine creditLine, OpClientCreditLineType opClientCreditLineType)
-            : this(creditLine.Client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT, OpReviewType.DETAIL_REVIEW)
+            : this(
+                creditLine.Client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT,
+                OpReviewType.DETAIL_REVIEW, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
         {
-            this.tabControl.SelectedTab = this.tabItemClientCreditLine;
-            if (this.opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE || this.opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
+            tabControl.SelectedTab = tabItemClientCreditLine;
+            if (this._opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE ||
+                this._opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
             {
-                creditLine = context.ClientCreditLines.SingleOrDefault(c => c.CreditLineID == creditLine.CreditLineID);
-                this.clientCreditLineBindingSource.DataSource = creditLine;
+                creditLine = _context.ClientCreditLines.SingleOrDefault(c => c.CreditLineID == creditLine.CreditLineID);
+                clientCreditLineBindingSource.DataSource = creditLine;
             }
         }
 
@@ -352,48 +730,50 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="review"></param>
         /// <param name="opReviewType"></param>
         public ClientDetail(ClientReview review, OpReviewType opReviewType)
-            : this(review.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT, opReviewType)
+            : this(
+                review.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE,
+                OpContractType.DETAIL_CONTRACT, opReviewType, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
         {
-            this.tabControl.SelectedTab = this.tabItemReview;
-            if (this.opReviewType == OpReviewType.DETAIL_REVIEW || this.opReviewType == OpReviewType.UPDATE_REVIEW)
+            tabControl.SelectedTab = tabItemReview;
+            if (this._opReviewType != OpReviewType.DETAIL_REVIEW && this._opReviewType != OpReviewType.UPDATE_REVIEW)
+                return;
+            review = _context.ClientReviews.SingleOrDefault(r => r.ReviewNo == review.ReviewNo);
+            reviewBindingSource.DataSource = review;
+            if (review.RequestFinanceType != null)
             {
-                review = context.ClientReviews.SingleOrDefault(r => r.ReviewNo == review.ReviewNo);
-                this.reviewBindingSource.DataSource = review;
-                if (review.RequestFinanceType != null)
+                var financeList = new List<string>();
+                financeList.AddRange(review.RequestFinanceType.Split(';'));
+                for (int i = 0; i < requestFinanceTypeCheckedListBox.Items.Count; i++)
                 {
-                    List<string> financeList = new List<string>();
-                    financeList.AddRange(review.RequestFinanceType.Split(';'));
-                    for (int i = 0; i < this.requestFinanceTypeCheckedListBox.Items.Count; i++)
+                    var item = requestFinanceTypeCheckedListBox.Items[i] as string;
+                    if (financeList.Contains(item))
                     {
-                        string item = this.requestFinanceTypeCheckedListBox.Items[i] as string;
-                        if (financeList.Contains(item))
-                        {
-                            this.requestFinanceTypeCheckedListBox.SetItemChecked(i, true);
-                        }
+                        requestFinanceTypeCheckedListBox.SetItemChecked(i, true);
                     }
                 }
             }
         }
 
-		#endregion?Constructors?
+        #endregion?Constructors?
 
-		#region?Methods?(45)?
 
-		//?Private?Methods?(45)?
+        #region?Methods?(45)?
+
+        //?Private?Methods?(45)?
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cbDepartments_SelectionChanged(object sender, DevComponents.AdvTree.AdvTreeNodeEventArgs e)
+        private void CbDepartmentsSelectionChanged(object sender, AdvTreeNodeEventArgs e)
         {
-            if (this.clientBindingSource.DataSource is Client)
+            if (clientBindingSource.DataSource is Client)
             {
-                Client client = (Client)this.clientBindingSource.DataSource;
-                if (this.cbDepartments.SelectedNode != null)
+                var client = (Client)clientBindingSource.DataSource;
+                if (cbDepartments.SelectedNode != null)
                 {
-                    client.Department = (Department)this.cbDepartments.SelectedNode.DataKey;
+                    client.Department = (Department)cbDepartments.SelectedNode.DataKey;
                 }
             }
         }
@@ -403,12 +783,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        private void CustomValidator1ValidateValue(object sender,
+                                                    ValidateValueEventArgs e)
         {
-            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
-            if (!TypeUtil.GreaterZero(creditLine.CreditLine))
+            var creditLine = (ClientCreditLine)clientCreditLineBindingSource.DataSource;
+            e.IsValid = TypeUtil.GreaterZero(creditLine.CreditLine);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CustomValidator4ValidateValue(object sender,
+                                                    ValidateValueEventArgs e)
+        {
+            if (freezeDateDateTimePicker.Enabled)
             {
-                e.IsValid = false;
+                e.IsValid = !String.IsNullOrEmpty(e.ControlToValidate.Text);
             }
             else
             {
@@ -421,42 +813,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void customValidator4_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        private void CustomValidator5ValidateValue(object sender,
+                                                    ValidateValueEventArgs e)
         {
-            if (this.freezeDateDateTimePicker.Enabled)
+            if (unfreezeDateDateTimePicker.Enabled)
             {
-                if (String.IsNullOrEmpty(e.ControlToValidate.Text))
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
-            }
-            else
-            {
-                e.IsValid = true;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void customValidator5_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if (this.unfreezeDateDateTimePicker.Enabled)
-            {
-                if (String.IsNullOrEmpty(e.ControlToValidate.Text))
-                {
-                    e.IsValid = false;
-                }
-                else
-                {
-                    e.IsValid = true;
-                }
+                e.IsValid = !String.IsNullOrEmpty(e.ControlToValidate.Text);
             }
             else
             {
@@ -476,25 +838,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.clientCreditLineBindingSource.DataSource is ClientCreditLine))
+            if (!(clientCreditLineBindingSource.DataSource is ClientCreditLine))
             {
                 return;
             }
 
-            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            var creditLine = (ClientCreditLine)clientCreditLineBindingSource.DataSource;
             if (creditLine.CreditLineID == 0)
             {
                 return;
             }
 
-            if (MessageBoxEx.Show(" «∑Ò¥ÚÀ„…æ≥˝¥À∂Ó∂»–≈œ¢", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (
+                MessageBoxEx.Show("ÊòØÂê¶ÊâìÁÆóÂà†Èô§Ê≠§È¢ùÂ∫¶‰ø°ÊÅØ", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel,
+                                  MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -502,8 +867,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             bool isDeleteOK = true;
             try
             {
-                context.ClientCreditLines.DeleteOnSubmit(creditLine);
-                context.SubmitChanges();
+                _context.ClientCreditLines.DeleteOnSubmit(creditLine);
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -513,11 +878,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show(" ˝æ›…æ≥˝≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.clientCreditLineBindingSource.DataSource = typeof(ClientCreditLine);
-                this.SetClientCreditLineEditable(false);
-                this.bsCreditLines.DataSource = typeof(ClientCreditLine);
-                this.bsCreditLines.DataSource = client.ClientCreditLines;
+                MessageBoxEx.Show("Êï∞ÊçÆÂà†Èô§ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                clientCreditLineBindingSource.DataSource = typeof(ClientCreditLine);
+                SetClientCreditLineEditable(false);
+                _bsCreditLines.DataSource = typeof(ClientCreditLine);
+                _bsCreditLines.DataSource = client.ClientCreditLines;
             }
         }
 
@@ -533,25 +898,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.contractBindingSource.DataSource is Contract))
+            if (!(contractBindingSource.DataSource is Contract))
             {
                 return;
             }
 
-            Contract contract = (Contract)this.contractBindingSource.DataSource;
+            var contract = (Contract)contractBindingSource.DataSource;
             if (contract.ContractCode == null)
             {
                 return;
             }
 
-            if (MessageBoxEx.Show(" «∑Ò¥ÚÀ„…æ≥˝±£¿Ì∫œÕ¨: " + contract.ContractCode, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (
+                MessageBoxEx.Show("ÊòØÂê¶ÊâìÁÆóÂà†Èô§‰øùÁêÜÂêàÂêå: " + contract.ContractCode, MESSAGE.TITLE_WARNING,
+                                  MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -559,8 +927,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             bool isDeleteOK = true;
             try
             {
-                context.Contracts.DeleteOnSubmit(contract);
-                context.SubmitChanges();
+                _context.Contracts.DeleteOnSubmit(contract);
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -570,11 +938,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show(" ˝æ›…æ≥˝≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.contractBindingSource.DataSource = typeof(Contract);
-                this.SetContractEditable(false);
-                this.bsContracts.DataSource = typeof(Contract);
-                this.bsContracts.DataSource = client.Contracts;
+                MessageBoxEx.Show("Êï∞ÊçÆÂà†Èô§ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                contractBindingSource.DataSource = typeof(Contract);
+                SetContractEditable(false);
+                _bsContracts.DataSource = typeof(Contract);
+                _bsContracts.DataSource = client.Contracts;
             }
         }
 
@@ -590,25 +958,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.gdBindingSource.DataSource is GuaranteeDeposit))
+            if (!(gdBindingSource.DataSource is GuaranteeDeposit))
             {
                 return;
             }
 
-            GuaranteeDeposit gd = (GuaranteeDeposit)this.gdBindingSource.DataSource;
+            var gd = (GuaranteeDeposit)gdBindingSource.DataSource;
             if (gd.GuaranteeDepositID == 0)
             {
                 return;
             }
 
-            if (MessageBoxEx.Show(" «∑Ò¥ÚÀ„…æ≥˝±£÷§Ω: " + gd.GuaranteeDepositAmount, MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (
+                MessageBoxEx.Show("ÊòØÂê¶ÊâìÁÆóÂà†Èô§‰øùËØÅÈáë: " + gd.GuaranteeDepositAmount, MESSAGE.TITLE_WARNING,
+                                  MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -616,8 +987,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             bool isDeleteOK = true;
             try
             {
-                context.GuaranteeDeposits.DeleteOnSubmit(gd);
-                context.SubmitChanges();
+                _context.GuaranteeDeposits.DeleteOnSubmit(gd);
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -627,11 +998,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show(" ˝æ›…æ≥˝≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.gdBindingSource.DataSource = typeof(GuaranteeDeposit);
-                this.SetGDEditable(false);
-                this.bsGDs.DataSource = typeof(GuaranteeDeposit);
-                this.bsGDs.DataSource = client.GuaranteeDeposits;
+                MessageBoxEx.Show("Êï∞ÊçÆÂà†Èô§ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                gdBindingSource.DataSource = typeof(GuaranteeDeposit);
+                SetGDEditable(false);
+                _bsGDs.DataSource = typeof(GuaranteeDeposit);
+                _bsGDs.DataSource = client.GuaranteeDeposits;
             }
         }
 
@@ -647,25 +1018,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.reviewBindingSource.DataSource is ClientReview))
+            if (!(reviewBindingSource.DataSource is ClientReview))
             {
                 return;
             }
 
-            ClientReview review = (ClientReview)this.reviewBindingSource.DataSource;
+            var review = (ClientReview)reviewBindingSource.DataSource;
             if (review.ReviewNo == null)
             {
                 return;
             }
 
-            if (MessageBoxEx.Show(" «∑Ò¥ÚÀ„…æ≥˝¥À–≠≤È“‚º˚–≈œ¢", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (
+                MessageBoxEx.Show("ÊòØÂê¶ÊâìÁÆóÂà†Èô§Ê≠§ÂçèÊü•ÊÑèËßÅ‰ø°ÊÅØ", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel,
+                                  MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
@@ -673,8 +1047,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             bool isDeleteOK = true;
             try
             {
-                context.ClientReviews.DeleteOnSubmit(review);
-                context.SubmitChanges();
+                _context.ClientReviews.DeleteOnSubmit(review);
+                _context.SubmitChanges();
             }
             catch (Exception e1)
             {
@@ -684,11 +1058,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (isDeleteOK)
             {
-                MessageBoxEx.Show(" ˝æ›…æ≥˝≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.reviewBindingSource.DataSource = typeof(ClientReview);
-                this.SetReviewEditable(false);
-                this.bsReviews.DataSource = typeof(ClientReview);
-                this.bsReviews.DataSource = client.ClientReviews;
+                MessageBoxEx.Show("Êï∞ÊçÆÂà†Èô§ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                reviewBindingSource.DataSource = typeof(ClientReview);
+                SetReviewEditable(false);
+                _bsReviews.DataSource = typeof(ClientReview);
+                _bsReviews.DataSource = client.ClientReviews;
             }
         }
 
@@ -697,13 +1071,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void diContractValueDate_ValueChanged(object sender, EventArgs e)
+        private void DiContractValueDateValueChanged(object sender, EventArgs e)
         {
-            if (this.opContractType == OpContractType.NEW_CONTRACT)
+            if (_opContractType == OpContractType.NEW_CONTRACT)
             {
-                Contract contract = this.contractBindingSource.DataSource as Contract;
-                contract.ContractValueDate = this.diContractValueDate.Value.Date;
-                contract.ContractDueDate = this.diContractValueDate.Value.Date.AddYears(2);
+                var contract = contractBindingSource.DataSource as Contract;
+                if (contract != null)
+                {
+                    contract.ContractValueDate = diContractValueDate.Value.Date;
+                    contract.ContractDueDate = diContractValueDate.Value.Date.AddYears(2);
+                }
             }
         }
 
@@ -719,19 +1096,20 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.clientCreditLineBindingSource.DataSource is ClientCreditLine))
+            if (!(clientCreditLineBindingSource.DataSource is ClientCreditLine))
             {
                 return;
             }
 
-            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            var creditLine = (ClientCreditLine)clientCreditLineBindingSource.DataSource;
             if (creditLine.CreditLineID == 0)
             {
                 return;
@@ -739,10 +1117,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             if (creditLine.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY)
             {
-                this.freezeReasonTextBox.ReadOnly = false;
-                this.freezeDateDateTimePicker.Enabled = true;
+                freezeReasonTextBox.ReadOnly = false;
+                freezeDateDateTimePicker.Enabled = true;
                 creditLine.Freezer = App.Current.CurUser.Name;
-                creditLine.FreezeDate = System.DateTime.Now.Date;
+                creditLine.FreezeDate = DateTime.Now.Date;
             }
         }
 
@@ -758,17 +1136,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.clientCreditLineBindingSource.DataSource = typeof(ClientCreditLine);
-            this.clientCreditLineBindingSource.DataSource = new ClientCreditLine();
-            this.opClientCreditLineType = OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE;
-            this.UpdateClientCreditLineControlStatus();
+            clientCreditLineBindingSource.DataSource = typeof(ClientCreditLine);
+            clientCreditLineBindingSource.DataSource = new ClientCreditLine();
+            _opClientCreditLineType = OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE;
+            UpdateClientCreditLineControlStatus();
         }
 
         /// <summary>
@@ -783,17 +1162,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.contractBindingSource.DataSource = typeof(Contract);
-            this.contractBindingSource.DataSource = new Contract();
-            this.opContractType = OpContractType.NEW_CONTRACT;
-            this.UpdateContractControlStatus();
+            contractBindingSource.DataSource = typeof(Contract);
+            contractBindingSource.DataSource = new Contract();
+            _opContractType = OpContractType.NEW_CONTRACT;
+            UpdateContractControlStatus();
         }
 
         /// <summary>
@@ -808,17 +1188,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.gdBindingSource.DataSource = typeof(GuaranteeDeposit);
-            this.gdBindingSource.DataSource = new GuaranteeDeposit();
-            this.opGDType = OpGDType.NEW_GD;
-            this.UpdateGDControlStatus();
+            gdBindingSource.DataSource = typeof(GuaranteeDeposit);
+            gdBindingSource.DataSource = new GuaranteeDeposit();
+            _opGdType = OpGDType.NEW_GD;
+            UpdateGDControlStatus();
         }
 
         /// <summary>
@@ -833,17 +1214,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.reviewBindingSource.DataSource = typeof(ClientReview);
-            this.reviewBindingSource.DataSource = new ClientReview();
-            this.opReviewType = OpReviewType.NEW_REVIEW;
-            this.UpdateReviewControlStatus();
+            reviewBindingSource.DataSource = typeof(ClientReview);
+            reviewBindingSource.DataSource = new ClientReview();
+            _opReviewType = OpReviewType.NEW_REVIEW;
+            UpdateReviewControlStatus();
         }
 
         /// <summary>
@@ -851,13 +1233,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void periodBeginDateTimePicker_ValueChanged(object sender, EventArgs e)
+        private void PeriodBeginDateTimePickerValueChanged(object sender, EventArgs e)
         {
-            if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
+            if (_opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
-                ClientCreditLine creditLine = this.clientCreditLineBindingSource.DataSource as ClientCreditLine;
-                creditLine.PeriodBegin = this.periodBeginDateTimePicker.Value.Date;
-                creditLine.PeriodEnd = this.periodBeginDateTimePicker.Value.AddYears(1);
+                var creditLine = clientCreditLineBindingSource.DataSource as ClientCreditLine;
+                if (creditLine != null)
+                {
+                    creditLine.PeriodBegin = periodBeginDateTimePicker.Value.Date;
+                    creditLine.PeriodEnd = periodBeginDateTimePicker.Value.AddYears(1);
+                }
             }
         }
 
@@ -868,15 +1253,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void RefreshClientCreditLine(object sender, EventArgs e)
         {
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.bsCreditLines.DataSource = typeof(ClientCreditLine);
-            this.bsCreditLines.DataSource = client.ClientCreditLines;
+            _bsCreditLines.DataSource = typeof(ClientCreditLine);
+            _bsCreditLines.DataSource = client.ClientCreditLines;
         }
 
         /// <summary>
@@ -886,15 +1272,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void RefreshContracts(object sender, EventArgs e)
         {
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.bsContracts.DataSource = typeof(Contract);
-            this.bsContracts.DataSource = client.Contracts;
+            _bsContracts.DataSource = typeof(Contract);
+            _bsContracts.DataSource = client.Contracts;
         }
 
         /// <summary>
@@ -904,15 +1291,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void RefreshGDs(object sender, EventArgs e)
         {
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.bsGDs.DataSource = typeof(GuaranteeDeposit);
-            this.bsGDs.DataSource = client.GuaranteeDeposits;
+            _bsGDs.DataSource = typeof(GuaranteeDeposit);
+            _bsGDs.DataSource = client.GuaranteeDeposits;
         }
 
         /// <summary>
@@ -922,15 +1310,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void RefreshReviews(object sender, EventArgs e)
         {
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.bsReviews.DataSource = typeof(ClientReview);
-            this.bsReviews.DataSource = client.ClientReviews;
+            _bsReviews.DataSource = typeof(ClientReview);
+            _bsReviews.DataSource = client.ClientReviews;
         }
 
         /// <summary>
@@ -945,21 +1334,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (!this.clientValidator.Validate())
+            if (!clientValidator.Validate())
             {
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             client.CreateUserName = App.Current.CurUser.Name;
 
-            if (this.opClientType == OpClientType.NEW_CLIENT)
+            if (_opClientType == OpClientType.NEW_CLIENT)
             {
                 bool isAddOK = true;
                 try
                 {
-                    context.Clients.InsertOnSubmit(client);
-                    context.SubmitChanges();
+                    _context.Clients.InsertOnSubmit(client);
+                    _context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -969,8 +1358,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show(" ˝æ›–¬Ω®≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.opClientType = OpClientType.UPDATE_CLIENT;
+                    MessageBoxEx.Show("Êï∞ÊçÆÊñ∞Âª∫ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                    _opClientType = OpClientType.UPDATE_CLIENT;
                 }
             }
             else
@@ -983,11 +1373,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 try
                 {
-                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    _context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
@@ -995,7 +1385,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                     }
 
-                    context.SubmitChanges();
+                    _context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -1005,7 +1395,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show(" ˝æ›∏¸–¬≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êï∞ÊçÆÊõ¥Êñ∞ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                 }
             }
         }
@@ -1022,61 +1413,48 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (!this.creditLineValidator.Validate())
+            if (!creditLineValidator.Validate())
             {
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.clientCreditLineBindingSource.DataSource is ClientCreditLine))
+            if (!(clientCreditLineBindingSource.DataSource is ClientCreditLine))
             {
                 return;
             }
 
-            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            var creditLine = (ClientCreditLine)clientCreditLineBindingSource.DataSource;
             creditLine.CreateUserName = App.Current.CurUser.Name;
 
             DateTime today = DateTime.Now.Date;
-            if (creditLine.PeriodEnd < today)
-            {
-                creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.EXPIRY;
-            }
-            else
-            {
-                creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.AVAILABILITY;
-            }
+            creditLine.CreditLineStatus = creditLine.PeriodEnd < today ? CLIENT_CREDIT_LINE.EXPIRY : CLIENT_CREDIT_LINE.AVAILABILITY;
 
-            if (this.freezeDateDateTimePicker.Enabled)
+            if (freezeDateDateTimePicker.Enabled)
             {
                 creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.FREEZE;
             }
 
-            if (this.unfreezeDateDateTimePicker.Enabled)
+            if (unfreezeDateDateTimePicker.Enabled)
             {
-                if (creditLine.PeriodEnd < today)
-                {
-                    creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.EXPIRY;
-                }
-                else
-                {
-                    creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.AVAILABILITY;
-                }
+                creditLine.CreditLineStatus = creditLine.PeriodEnd < today ? CLIENT_CREDIT_LINE.EXPIRY : CLIENT_CREDIT_LINE.AVAILABILITY;
             }
 
             if (creditLine.CreditLineID == 0)
             {
-                bool isAddOK = true;
+                var isAddOK = true;
                 try
                 {
                     creditLine.Client = client;
 
-                    context.SubmitChanges();
+                    _context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -1087,12 +1465,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show(" ˝æ›–¬Ω®≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êï∞ÊçÆÊñ∞Âª∫ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     if (creditLine.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (ClientCreditLine ccl in client.ClientCreditLines)
                         {
-                            if (ccl != creditLine && ccl.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && ccl.CreditLineType == creditLine.CreditLineType)
+                            if (ccl != creditLine && ccl.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY &&
+                                ccl.CreditLineType == creditLine.CreditLineType)
                             {
                                 ccl.CreditLineStatus = CLIENT_CREDIT_LINE.EXPIRY;
                             }
@@ -1100,17 +1480,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                         try
                         {
-                            context.SubmitChanges();
+                            _context.SubmitChanges();
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                              MessageBoxIcon.Warning);
                         }
                     }
 
-                    this.bsCreditLines.DataSource = typeof(ClientCreditLine);
-                    this.bsCreditLines.DataSource = client.ClientCreditLines;
-                    this.NewClientCreditLine(null, null);
+                    _bsCreditLines.DataSource = typeof(ClientCreditLine);
+                    _bsCreditLines.DataSource = client.ClientCreditLines;
+                    NewClientCreditLine(null, null);
                 }
             }
             else
@@ -1119,11 +1500,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 try
                 {
-                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    _context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
@@ -1131,7 +1512,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                     }
 
-                    context.SubmitChanges();
+                    _context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -1141,12 +1522,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show(" ˝æ›∏¸–¬≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êï∞ÊçÆÊõ¥Êñ∞ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     if (creditLine.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY)
                     {
                         foreach (ClientCreditLine ccl in client.ClientCreditLines)
                         {
-                            if (ccl != creditLine && ccl.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && ccl.CreditLineType == creditLine.CreditLineType && ccl.CreditLineCurrency == creditLine.CreditLineCurrency)
+                            if (ccl != creditLine && ccl.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY &&
+                                ccl.CreditLineType == creditLine.CreditLineType &&
+                                ccl.CreditLineCurrency == creditLine.CreditLineCurrency)
                             {
                                 ccl.CreditLineStatus = CLIENT_CREDIT_LINE.EXPIRY;
                             }
@@ -1154,11 +1538,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                         try
                         {
-                            context.SubmitChanges();
+                            _context.SubmitChanges();
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                              MessageBoxIcon.Warning);
                         }
                     }
                 }
@@ -1177,34 +1562,37 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (!this.contractValidator.Validate())
+            if (!contractValidator.Validate())
             {
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.contractBindingSource.DataSource is Contract))
+            if (!(contractBindingSource.DataSource is Contract))
             {
                 return;
             }
 
-            Contract contract = (Contract)this.contractBindingSource.DataSource;
+            var contract = (Contract)contractBindingSource.DataSource;
             contract.CreateUserName = App.Current.CurUser.Name;
 
-            if (this.opContractType == OpContractType.NEW_CONTRACT)
+            if (_opContractType == OpContractType.NEW_CONTRACT)
             {
                 bool isAddOK = true;
 
-                Contract oldContract = this.context.Contracts.SingleOrDefault(c => c.ContractCode == contract.ContractCode);
+                Contract oldContract =
+                    _context.Contracts.SingleOrDefault(c => c.ContractCode == contract.ContractCode);
                 if (oldContract != null)
                 {
-                    MessageBoxEx.Show("∏√∫œÕ¨±‡∫≈“—¥Ê‘⁄£¨«Î÷ÿ–¬±‡¬Î", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("ËØ•ÂêàÂêåÁºñÂè∑Â∑≤Â≠òÂú®ÔºåËØ∑ÈáçÊñ∞ÁºñÁ†Å", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     return;
                 }
 
@@ -1213,17 +1601,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     contract.Client = client;
 
                     DateTime today = DateTime.Now.Date;
-                    if (contract.ContractDueDate < today)
-                    {
-                        contract.ContractStatus = CONTRACT.EXPIRY;
-                    }
-                    else
-                    {
-                        contract.ContractStatus = CONTRACT.AVAILABILITY;
-                    }
+                    contract.ContractStatus = contract.ContractDueDate < today ? CONTRACT.EXPIRY : CONTRACT.AVAILABILITY;
 
-                    context.Contracts.InsertOnSubmit(contract);
-                    context.SubmitChanges();
+                    _context.Contracts.InsertOnSubmit(contract);
+                    _context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -1234,7 +1615,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show(" ˝æ›–¬Ω®≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("Êï∞ÊçÆÊñ∞Âª∫ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     if (contract.ContractStatus == CONTRACT.AVAILABILITY)
                     {
                         foreach (Contract c in client.Contracts)
@@ -1247,39 +1629,33 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                         try
                         {
-                            context.SubmitChanges();
+                            _context.SubmitChanges();
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                              MessageBoxIcon.Warning);
                         }
                     }
 
-                    this.bsContracts.DataSource = typeof(Contract);
-                    this.bsContracts.DataSource = client.Contracts;
-                    this.NewContract(null, null);
+                    _bsContracts.DataSource = typeof(Contract);
+                    _bsContracts.DataSource = client.Contracts;
+                    NewContract(null, null);
                 }
             }
             else
             {
                 bool isUpdateOK = true;
                 DateTime today = DateTime.Now.Date;
-                if (contract.ContractDueDate < today)
-                {
-                    contract.ContractStatus = CONTRACT.EXPIRY;
-                }
-                else
-                {
-                    contract.ContractStatus = CONTRACT.AVAILABILITY;
-                }
+                contract.ContractStatus = contract.ContractDueDate < today ? CONTRACT.EXPIRY : CONTRACT.AVAILABILITY;
 
                 try
                 {
-                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    _context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
@@ -1287,7 +1663,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                     }
 
-                    context.SubmitChanges();
+                    _context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -1297,7 +1673,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     if (contract.ContractStatus == CONTRACT.AVAILABILITY)
                     {
                         foreach (Contract c in client.Contracts)
@@ -1310,11 +1687,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                         try
                         {
-                            context.SubmitChanges();
+                            _context.SubmitChanges();
                         }
                         catch (Exception e1)
                         {
-                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                              MessageBoxIcon.Warning);
                         }
                     }
                 }
@@ -1333,30 +1711,31 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.gdBindingSource.DataSource is GuaranteeDeposit))
+            if (!(gdBindingSource.DataSource is GuaranteeDeposit))
             {
                 return;
             }
 
-            GuaranteeDeposit gd = (GuaranteeDeposit)this.gdBindingSource.DataSource;
+            var gd = (GuaranteeDeposit)gdBindingSource.DataSource;
             gd.CreateUserName = App.Current.CurUser.Name;
 
-            if (this.opGDType == OpGDType.NEW_GD)
+            if (_opGdType == OpGDType.NEW_GD)
             {
                 bool isAddOK = true;
                 try
                 {
                     client.GuaranteeDeposits.Add(gd);
 
-                    context.GuaranteeDeposits.InsertOnSubmit(gd);
-                    context.SubmitChanges();
+                    _context.GuaranteeDeposits.InsertOnSubmit(gd);
+                    _context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -1367,10 +1746,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show(" ˝æ›–¬Ω®≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.bsGDs.DataSource = typeof(GuaranteeDeposit);
-                    this.bsGDs.DataSource = client.GuaranteeDeposits;
-                    this.NewGD(null, null);
+                    MessageBoxEx.Show("Êï∞ÊçÆÊñ∞Âª∫ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                    _bsGDs.DataSource = typeof(GuaranteeDeposit);
+                    _bsGDs.DataSource = client.GuaranteeDeposits;
+                    NewGD(null, null);
                 }
             }
             else
@@ -1378,11 +1758,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    _context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
@@ -1390,7 +1770,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                     }
 
-                    context.SubmitChanges();
+                    _context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -1400,7 +1780,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                 }
             }
         }
@@ -1417,43 +1798,40 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (!this.reviewValidator.Validate())
+            if (!reviewValidator.Validate())
             {
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.reviewBindingSource.DataSource is ClientReview))
+            if (!(reviewBindingSource.DataSource is ClientReview))
             {
                 return;
             }
 
-            ClientReview review = (ClientReview)this.reviewBindingSource.DataSource;
+            var review = (ClientReview)reviewBindingSource.DataSource;
             review.CreateUserName = App.Current.CurUser.Name;
 
-            string financeType = string.Empty;
-            foreach (string item in this.requestFinanceTypeCheckedListBox.CheckedItems)
-            {
-                financeType += (item + ";");
-            }
+            var financeType = requestFinanceTypeCheckedListBox.CheckedItems.Cast<string>().Aggregate(string.Empty, (current, item) => current + (item + ";"));
 
             review.RequestFinanceType = financeType;
 
-            if (this.opReviewType == OpReviewType.NEW_REVIEW)
+            if (_opReviewType == OpReviewType.NEW_REVIEW)
             {
                 bool isAddOK = true;
                 try
                 {
                     client.ClientReviews.Add(review);
 
-                    context.ClientReviews.InsertOnSubmit(review);
-                    context.SubmitChanges();
+                    _context.ClientReviews.InsertOnSubmit(review);
+                    _context.SubmitChanges();
                 }
                 catch (Exception e1)
                 {
@@ -1464,10 +1842,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isAddOK)
                 {
-                    MessageBoxEx.Show(" ˝æ›–¬Ω®≥…π¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.bsReviews.DataSource = typeof(ClientReview);
-                    this.bsReviews.DataSource = client.ClientReviews;
-                    this.NewReview(null, null);
+                    MessageBoxEx.Show("Êï∞ÊçÆÊñ∞Âª∫ÊàêÂäü", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                    _bsReviews.DataSource = typeof(ClientReview);
+                    _bsReviews.DataSource = client.ClientReviews;
+                    NewReview(null, null);
                 }
             }
             else
@@ -1475,11 +1854,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isUpdateOK = true;
                 try
                 {
-                    context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                    _context.SubmitChanges(ConflictMode.ContinueOnConflict);
                 }
                 catch (ChangeConflictException)
                 {
-                    foreach (ObjectChangeConflict cc in context.ChangeConflicts)
+                    foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
                     {
                         foreach (MemberChangeConflict mc in cc.MemberConflicts)
                         {
@@ -1487,7 +1866,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                     }
 
-                    context.SubmitChanges();
+                    _context.SubmitChanges();
                 }
                 catch (Exception e2)
                 {
@@ -1497,7 +1876,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
                 if (isUpdateOK)
                 {
-                    MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                 }
             }
         }
@@ -1509,16 +1889,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectClientCreditLine(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvClientCreditLines.SelectedRows.Count == 0)
+            if (dgvClientCreditLines.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            ClientCreditLine selectedClientCreditLine = (ClientCreditLine)this.bsCreditLines.List[this.dgvClientCreditLines.SelectedRows[0].Index];
-            this.SetClientCreditLineEditable(false);
-            this.clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
-            this.btnClientCreditLineFreeze.Enabled = true;
-            this.btnClientCreditLineUnfreeze.Enabled = true;
+            var selectedClientCreditLine =
+                (ClientCreditLine)_bsCreditLines.List[dgvClientCreditLines.SelectedRows[0].Index];
+            SetClientCreditLineEditable(false);
+            clientCreditLineBindingSource.DataSource = selectedClientCreditLine;
+            btnClientCreditLineFreeze.Enabled = true;
+            btnClientCreditLineUnfreeze.Enabled = true;
         }
 
         /// <summary>
@@ -1528,14 +1909,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectContract(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvContracts.SelectedRows.Count == 0)
+            if (dgvContracts.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            Contract selectedContract = (Contract)this.bsContracts.List[this.dgvContracts.SelectedRows[0].Index];
-            this.SetContractEditable(false);
-            this.contractBindingSource.DataSource = selectedContract;
+            var selectedContract = (Contract)_bsContracts.List[dgvContracts.SelectedRows[0].Index];
+            SetContractEditable(false);
+            contractBindingSource.DataSource = selectedContract;
         }
 
         /// <summary>
@@ -1545,14 +1926,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectGD(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvGDs.SelectedRows.Count == 0)
+            if (dgvGDs.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            GuaranteeDeposit selectedGD = (GuaranteeDeposit)this.bsGDs.List[this.dgvGDs.SelectedRows[0].Index];
-            this.SetGDEditable(false);
-            this.gdBindingSource.DataSource = selectedGD;
+            var selectedGD = (GuaranteeDeposit)_bsGDs.List[dgvGDs.SelectedRows[0].Index];
+            SetGDEditable(false);
+            gdBindingSource.DataSource = selectedGD;
         }
 
         /// <summary>
@@ -1567,14 +1948,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
-            ClientMgr clientMgr = new ClientMgr();
-            QueryForm queryUI = new QueryForm(clientMgr, "—°‘ÒºØÕ≈");
+            var client = (Client)clientBindingSource.DataSource;
+            var clientMgr = new ClientMgr();
+            var queryUI = new QueryForm(clientMgr, "ÈÄâÊã©ÈõÜÂõ¢");
             clientMgr.OwnerForm = queryUI;
             queryUI.ShowDialog(this);
             if (clientMgr.Selected != null)
             {
-                client.ClientGroup = context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
+                client.ClientGroup =
+                    _context.Clients.SingleOrDefault(c => c.ClientEDICode == clientMgr.Selected.ClientEDICode);
             }
         }
 
@@ -1590,29 +1972,31 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client.ClientGroup == null)
             {
                 return;
             }
 
-            ClientCreditLineMgr mgr = new ClientCreditLineMgr(client.ClientGroup);
-            QueryForm queryFrom = new QueryForm(mgr, "—°‘ÒºØÕ≈∂Ó∂»");
+            var mgr = new ClientCreditLineMgr(client.ClientGroup);
+            var queryFrom = new QueryForm(mgr, "ÈÄâÊã©ÈõÜÂõ¢È¢ùÂ∫¶");
             mgr.OwnerForm = queryFrom;
             queryFrom.ShowDialog(this);
             ClientCreditLine selected = mgr.Selected;
             if (selected != null)
             {
-                ClientCreditLine clientCreditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+                var clientCreditLine = (ClientCreditLine)clientCreditLineBindingSource.DataSource;
                 if (clientCreditLine.CreditLineType != selected.CreditLineType)
                 {
-                    MessageBoxEx.Show("À˘—°ºØÕ≈µƒ∂Ó∂»¿‡–Õ”ÎøÕªßµƒ∂Ó∂»¿‡–Õ≤ªœ‡Õ¨", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("ÊâÄÈÄâÈõÜÂõ¢ÁöÑÈ¢ùÂ∫¶Á±ªÂûã‰∏éÂÆ¢Êà∑ÁöÑÈ¢ùÂ∫¶Á±ªÂûã‰∏çÁõ∏Âêå", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     return;
                 }
 
                 if (clientCreditLine.CreditLine > selected.CreditLine)
                 {
-                    MessageBoxEx.Show("À˘—°ºØÕ≈µƒ±£¿Ì‘§∏∂øÓ»⁄◊ ∂Ó∂»±ÿ–Î¥Û”⁄øÕªßµƒ±£¿Ì‘§∏∂øÓ»⁄◊ ∂Ó∂»", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxEx.Show("ÊâÄÈÄâÈõÜÂõ¢ÁöÑ‰øùÁêÜÈ¢Ñ‰ªòÊ¨æËûçËµÑÈ¢ùÂ∫¶ÂøÖÈ°ªÂ§ß‰∫éÂÆ¢Êà∑ÁöÑ‰øùÁêÜÈ¢Ñ‰ªòÊ¨æËûçËµÑÈ¢ùÂ∫¶", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
                     return;
                 }
 
@@ -1627,24 +2011,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void SelectReview(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvReviews.SelectedRows.Count == 0)
+            if (dgvReviews.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            ClientReview selectedReview = (ClientReview)this.bsReviews.List[this.dgvReviews.SelectedRows[0].Index];
-            this.SetReviewEditable(false);
-            this.reviewBindingSource.DataSource = selectedReview;
+            var selectedReview = (ClientReview)_bsReviews.List[dgvReviews.SelectedRows[0].Index];
+            SetReviewEditable(false);
+            reviewBindingSource.DataSource = selectedReview;
             if (selectedReview.RequestFinanceType != null)
             {
-                List<string> financeList = new List<string>();
+                var financeList = new List<string>();
                 financeList.AddRange(selectedReview.RequestFinanceType.Split(';'));
-                for (int i = 0; i < this.requestFinanceTypeCheckedListBox.Items.Count; i++)
+                for (int i = 0; i < requestFinanceTypeCheckedListBox.Items.Count; i++)
                 {
-                    string item = this.requestFinanceTypeCheckedListBox.Items[i] as string;
+                    var item = requestFinanceTypeCheckedListBox.Items[i] as string;
                     if (financeList.Contains(item))
                     {
-                        this.requestFinanceTypeCheckedListBox.SetItemChecked(i, true);
+                        requestFinanceTypeCheckedListBox.SetItemChecked(i, true);
                     }
                 }
             }
@@ -1656,7 +2040,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="editable"></param>
         private void SetClientCreditLineEditable(bool editable)
         {
-            foreach (Control comp in this.groupPanelClientCreditLine.Controls)
+            foreach (Control comp in groupPanelClientCreditLine.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, editable);
             }
@@ -1668,7 +2052,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="editable"></param>
         private void SetContractEditable(bool editable)
         {
-            foreach (Control comp in this.groupPanelContract.Controls)
+            foreach (Control comp in groupPanelContract.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, editable);
             }
@@ -1680,7 +2064,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="editable"></param>
         private void SetGDEditable(bool editable)
         {
-            foreach (Control comp in this.groupPanelGuaranteePanel.Controls)
+            foreach (Control comp in groupPanelGuaranteePanel.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, editable);
             }
@@ -1692,7 +2076,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="editable"></param>
         private void SetReviewEditable(bool editable)
         {
-            foreach (Control comp in this.groupPanelReview.Controls)
+            foreach (Control comp in groupPanelReview.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, editable);
             }
@@ -1710,30 +2094,31 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.clientCreditLineBindingSource.DataSource is ClientCreditLine))
+            if (!(clientCreditLineBindingSource.DataSource is ClientCreditLine))
             {
                 return;
             }
 
-            ClientCreditLine creditLine = (ClientCreditLine)this.clientCreditLineBindingSource.DataSource;
+            var creditLine = (ClientCreditLine)clientCreditLineBindingSource.DataSource;
             if (creditLine.CreditLineID == 0)
             {
                 return;
             }
 
-            if (creditLine.CreditLineStatus == "“—∂≥Ω·")
+            if (creditLine.CreditLineStatus == "Â∑≤ÂÜªÁªì")
             {
-                this.unfreezeReasonTextBox.ReadOnly = false;
-                this.unfreezeDateDateTimePicker.Enabled = true;
+                unfreezeReasonTextBox.ReadOnly = false;
+                unfreezeDateDateTimePicker.Enabled = true;
                 creditLine.Unfreezer = App.Current.CurUser.Name;
-                creditLine.UnfreezeDate = System.DateTime.Now.Date;
+                creditLine.UnfreezeDate = DateTime.Now.Date;
             }
         }
 
@@ -1749,15 +2134,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            this.opClientType = OpClientType.UPDATE_CLIENT;
-            this.UpdateClientControlStatus();
+            _opClientType = OpClientType.UPDATE_CLIENT;
+            UpdateClientControlStatus();
         }
 
         /// <summary>
@@ -1765,81 +2151,81 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private void UpdateClientControlStatus()
         {
-            if (this.opClientType == OpClientType.DETAIL_CLIENT)
+            if (_opClientType == OpClientType.DETAIL_CLIENT)
             {
-                foreach (Control comp in this.groupPanelClientBasic.Controls)
+                foreach (Control comp in groupPanelClientBasic.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                foreach (Control comp in this.groupPanelClientContact.Controls)
+                foreach (Control comp in groupPanelClientContact.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                foreach (Control comp in this.groupPanelClientGroup.Controls)
+                foreach (Control comp in groupPanelClientGroup.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                foreach (Control comp in this.groupPanelClientStat.Controls)
+                foreach (Control comp in groupPanelClientStat.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                this.btnGroupSelect.Visible = false;
+                btnGroupSelect.Visible = false;
             }
-            else if (this.opClientType == OpClientType.NEW_CLIENT)
+            else if (_opClientType == OpClientType.NEW_CLIENT)
             {
-                foreach (Control comp in this.groupPanelClientBasic.Controls)
+                foreach (Control comp in groupPanelClientBasic.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                foreach (Control comp in this.groupPanelClientContact.Controls)
+                foreach (Control comp in groupPanelClientContact.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                foreach (Control comp in this.groupPanelClientGroup.Controls)
+                foreach (Control comp in groupPanelClientGroup.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                foreach (Control comp in this.groupPanelClientStat.Controls)
+                foreach (Control comp in groupPanelClientStat.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.btnGroupSelect.Visible = true;
+                btnGroupSelect.Visible = true;
             }
-            else if (this.opClientType == OpClientType.UPDATE_CLIENT)
+            else if (_opClientType == OpClientType.UPDATE_CLIENT)
             {
-                foreach (Control comp in this.groupPanelClientBasic.Controls)
+                foreach (Control comp in groupPanelClientBasic.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                foreach (Control comp in this.groupPanelClientContact.Controls)
+                foreach (Control comp in groupPanelClientContact.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                foreach (Control comp in this.groupPanelClientGroup.Controls)
+                foreach (Control comp in groupPanelClientGroup.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                foreach (Control comp in this.groupPanelClientStat.Controls)
+                foreach (Control comp in groupPanelClientStat.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.btnGroupSelect.Visible = true;
-                this.clientEDICodeTextBox.ReadOnly = true;
+                btnGroupSelect.Visible = true;
+                clientEDICodeTextBox.ReadOnly = true;
             }
 
-            ControlUtil.SetComponetEditable(this.tbCreateUserName, false);
+            ControlUtil.SetComponetEditable(tbCreateUserName, false);
         }
 
         /// <summary>
@@ -1854,20 +2240,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            Client client = (Client)this.clientBindingSource.DataSource;
+            var client = (Client)clientBindingSource.DataSource;
             if (client == null || client.ClientEDICode == null)
             {
-                MessageBoxEx.Show("«Î ◊œ»—°∂®“ª∏ˆøÕªß", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxEx.Show("ËØ∑È¶ñÂÖàÈÄâÂÆö‰∏Ä‰∏™ÂÆ¢Êà∑", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
                 return;
             }
 
-            if (!(this.clientCreditLineBindingSource.DataSource is ClientCreditLine))
+            if (!(clientCreditLineBindingSource.DataSource is ClientCreditLine))
             {
                 return;
             }
 
-            this.opClientCreditLineType = OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE;
-            this.UpdateClientCreditLineControlStatus();
+            _opClientCreditLineType = OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE;
+            UpdateClientCreditLineControlStatus();
         }
 
         /// <summary>
@@ -1875,47 +2262,47 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private void UpdateClientCreditLineControlStatus()
         {
-            if (this.opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE)
+            if (_opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE)
             {
-                foreach (Control comp in this.groupPanelClientCreditLine.Controls)
+                foreach (Control comp in groupPanelClientCreditLine.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (this.opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
+            else if (_opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
             {
-                foreach (Control comp in this.groupPanelClientCreditLine.Controls)
+                foreach (Control comp in groupPanelClientCreditLine.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.creditLineStatusTextBox.ReadOnly = true;
-                this.freezeReasonTextBox.ReadOnly = true;
-                this.freezerTextBox.ReadOnly = true;
-                this.freezeDateDateTimePicker.Enabled = false;
-                this.unfreezeReasonTextBox.ReadOnly = true;
-                this.unfreezerTextBox.ReadOnly = true;
-                this.unfreezeDateDateTimePicker.Enabled = false;
+                creditLineStatusTextBox.ReadOnly = true;
+                freezeReasonTextBox.ReadOnly = true;
+                freezerTextBox.ReadOnly = true;
+                freezeDateDateTimePicker.Enabled = false;
+                unfreezeReasonTextBox.ReadOnly = true;
+                unfreezerTextBox.ReadOnly = true;
+                unfreezeDateDateTimePicker.Enabled = false;
             }
-            else if (this.opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
+            else if (_opClientCreditLineType == OpClientCreditLineType.UPDATE_CLIENT_CREDIT_LINE)
             {
-                foreach (Control comp in this.groupPanelClientCreditLine.Controls)
+                foreach (Control comp in groupPanelClientCreditLine.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.creditLineStatusTextBox.ReadOnly = true;
-                this.freezeReasonTextBox.ReadOnly = true;
-                this.freezerTextBox.ReadOnly = true;
-                this.freezeDateDateTimePicker.Enabled = false;
-                this.unfreezeReasonTextBox.ReadOnly = true;
-                this.unfreezerTextBox.ReadOnly = true;
-                this.unfreezeDateDateTimePicker.Enabled = false;
+                creditLineStatusTextBox.ReadOnly = true;
+                freezeReasonTextBox.ReadOnly = true;
+                freezerTextBox.ReadOnly = true;
+                freezeDateDateTimePicker.Enabled = false;
+                unfreezeReasonTextBox.ReadOnly = true;
+                unfreezerTextBox.ReadOnly = true;
+                unfreezeDateDateTimePicker.Enabled = false;
             }
 
-            this.tbGroupCreditLine.ReadOnly = true;
-            this.tbGroupCreditLineCurr.ReadOnly = true;
-            ControlUtil.SetComponetEditable(this.tbCreditLineCreateUserName, false);
+            tbGroupCreditLine.ReadOnly = true;
+            tbGroupCreditLineCurr.ReadOnly = true;
+            ControlUtil.SetComponetEditable(tbCreditLineCreateUserName, false);
         }
 
         /// <summary>
@@ -1930,8 +2317,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            this.opContractType = OpContractType.UPDATE_CONTRACT;
-            this.UpdateContractControlStatus();
+            _opContractType = OpContractType.UPDATE_CONTRACT;
+            UpdateContractControlStatus();
         }
 
         /// <summary>
@@ -1939,33 +2326,33 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private void UpdateContractControlStatus()
         {
-            if (this.opContractType == OpContractType.DETAIL_CONTRACT)
+            if (_opContractType == OpContractType.DETAIL_CONTRACT)
             {
-                foreach (Control comp in this.groupPanelContract.Controls)
+                foreach (Control comp in groupPanelContract.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (this.opContractType == OpContractType.NEW_CONTRACT)
+            else if (_opContractType == OpContractType.NEW_CONTRACT)
             {
-                foreach (Control comp in this.groupPanelContract.Controls)
+                foreach (Control comp in groupPanelContract.Controls)
                 {
                     ControlUtil.SetComponetDefault(comp);
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
-            else if (this.opContractType == OpContractType.UPDATE_CONTRACT)
+            else if (_opContractType == OpContractType.UPDATE_CONTRACT)
             {
-                foreach (Control comp in this.groupPanelContract.Controls)
+                foreach (Control comp in groupPanelContract.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.tbContractCode.ReadOnly = true;
+                tbContractCode.ReadOnly = true;
             }
 
             //ControlUtil.SetComponetEditable(this.tbContractStatus, false);
-            ControlUtil.SetComponetEditable(this.tbContractCreateUserName, false);
+            ControlUtil.SetComponetEditable(tbContractCreateUserName, false);
         }
 
         /// <summary>
@@ -1980,8 +2367,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            this.opGDType = OpGDType.UPDATE_GD;
-            this.UpdateGDControlStatus();
+            _opGdType = OpGDType.UPDATE_GD;
+            UpdateGDControlStatus();
         }
 
         /// <summary>
@@ -1989,30 +2376,30 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private void UpdateGDControlStatus()
         {
-            if (this.opGDType == OpGDType.DETAIL_GD)
+            if (_opGdType == OpGDType.DETAIL_GD)
             {
-                foreach (Control comp in this.groupPanelGuaranteePanel.Controls)
+                foreach (Control comp in groupPanelGuaranteePanel.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (this.opGDType == OpGDType.NEW_GD)
+            else if (_opGdType == OpGDType.NEW_GD)
             {
-                foreach (Control comp in this.groupPanelGuaranteePanel.Controls)
+                foreach (Control comp in groupPanelGuaranteePanel.Controls)
                 {
                     ControlUtil.SetComponetDefault(comp);
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
-            else if (this.opGDType == OpGDType.UPDATE_GD)
+            else if (_opGdType == OpGDType.UPDATE_GD)
             {
-                foreach (Control comp in this.groupPanelGuaranteePanel.Controls)
+                foreach (Control comp in groupPanelGuaranteePanel.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
 
-            ControlUtil.SetComponetEditable(this.tbGDCreateUserName, false);
+            ControlUtil.SetComponetEditable(tbGDCreateUserName, false);
         }
 
         /// <summary>
@@ -2027,8 +2414,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            this.opReviewType = OpReviewType.UPDATE_REVIEW;
-            this.UpdateReviewControlStatus();
+            _opReviewType = OpReviewType.UPDATE_REVIEW;
+            UpdateReviewControlStatus();
         }
 
         /// <summary>
@@ -2036,34 +2423,34 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         private void UpdateReviewControlStatus()
         {
-            if (this.opReviewType == OpReviewType.DETAIL_REVIEW)
+            if (_opReviewType == OpReviewType.DETAIL_REVIEW)
             {
-                foreach (Control comp in this.groupPanelReview.Controls)
+                foreach (Control comp in groupPanelReview.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
             }
-            else if (this.opReviewType == OpReviewType.NEW_REVIEW)
+            else if (_opReviewType == OpReviewType.NEW_REVIEW)
             {
-                foreach (Control comp in this.groupPanelReview.Controls)
+                foreach (Control comp in groupPanelReview.Controls)
                 {
                     ControlUtil.SetComponetDefault(comp);
                     ControlUtil.SetComponetEditable(comp, true);
                 }
             }
-            else if (this.opReviewType == OpReviewType.UPDATE_REVIEW)
+            else if (_opReviewType == OpReviewType.UPDATE_REVIEW)
             {
-                foreach (Control comp in this.groupPanelReview.Controls)
+                foreach (Control comp in groupPanelReview.Controls)
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
 
-                this.reviewNoTextBox.ReadOnly = true;
+                reviewNoTextBox.ReadOnly = true;
             }
 
-            ControlUtil.SetComponetEditable(this.tbReviewCreateUserName, false);
+            ControlUtil.SetComponetEditable(tbReviewCreateUserName, false);
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
     }
 }

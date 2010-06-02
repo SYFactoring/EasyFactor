@@ -157,13 +157,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
             this.tbTotalRefund.Text = string.Empty;
             InvoiceRefundBatch batch = new InvoiceRefundBatch();
-            if (paymentBatch.PaymentType == Payment.BUYER_PAYMENT)
+            if (paymentBatch.PaymentType == PAYMENT.BUYER_PAYMENT)
             {
-                batch.RefundType = Refund.BUYER_PAYMENT;
+                batch.RefundType = REFUND.BUYER_PAYMENT;
             }
-            else if (paymentBatch.PaymentType == Payment.INDIRECT_PAYMENT || paymentBatch.PaymentType == Payment.SELLER_REASSIGN || paymentBatch.PaymentType == Payment.CREDIT_NOTE_PAYMENT)
+            else if (paymentBatch.PaymentType == PAYMENT.INDIRECT_PAYMENT || paymentBatch.PaymentType == PAYMENT.SELLER_REASSIGN || paymentBatch.PaymentType == PAYMENT.CREDIT_NOTE_PAYMENT)
             {
-                batch.RefundType = Refund.SELLER_REFUND;
+                batch.RefundType = REFUND.SELLER_REFUND;
             }
             batch.RefundDate = paymentBatch.PaymentDate;
             batch.CreateUserName = App.Current.CurUser.Name;
@@ -504,10 +504,10 @@ namespace CMBC.EasyFactor.ARMgr
             switch (refundType)
             {
                 case OpRefundType.BUYER_PAYMENT:
-                    batch.RefundType = Refund.BUYER_PAYMENT;
+                    batch.RefundType = REFUND.BUYER_PAYMENT;
                     break;
                 case OpRefundType.SELLER_REFUND:
-                    batch.RefundType = Refund.SELLER_REFUND;
+                    batch.RefundType = REFUND.SELLER_REFUND;
                     break;
                 default:
                     break;

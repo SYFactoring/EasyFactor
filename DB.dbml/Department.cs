@@ -52,7 +52,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 double result = 0;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
                 {
                     IEnumerable<InvoiceAssignBatch> batches = selectedCase.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
                     foreach (InvoiceAssignBatch batch in batches)
@@ -92,7 +92,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 double result = 0;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
                 {
                     selectedCase.QueryDateFrom = fromDate;
                     selectedCase.QueryDateTo = toDate;
@@ -120,7 +120,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 double result = 0;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
                 {
                     IEnumerable<InvoiceFinanceBatch> batches = selectedCase.InvoiceFinanceBatches.Where(i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
                     foreach (InvoiceFinanceBatch batch in batches)
@@ -150,7 +150,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 double? result = null;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
                 {
                     selectedCase.QueryDateFrom = fromDate;
                     selectedCase.QueryDateTo = toDate;
@@ -183,7 +183,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 double? result = null;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
                 {
                     selectedCase.QueryDateFrom = fromDate;
                     selectedCase.QueryDateTo = toDate;
@@ -217,7 +217,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
 
-                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASEStr.ENABLE))
+                foreach (Case selectedCase in this.OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
                 {
                     IEnumerable<InvoicePaymentBatch> batches = selectedCase.InvoicePaymentBatches.Where(i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate);
                     foreach (InvoicePaymentBatch batch in batches)

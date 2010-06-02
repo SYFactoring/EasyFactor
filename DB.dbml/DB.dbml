@@ -24,7 +24,6 @@
       <Association Name="Case_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" ThisKey="CaseCode" OtherKey="CaseCode" Type="InvoiceFinanceBatch" />
       <Association Name="Case_InvoicePaymentBatch" Member="InvoicePaymentBatches" ThisKey="CaseCode" OtherKey="CaseCode" Type="InvoicePaymentBatch" />
       <Association Name="Case_InvoiceRefundBatch" Member="InvoiceRefundBatches" ThisKey="CaseCode" OtherKey="CaseCode" Type="InvoiceRefundBatch" />
-      <Association Name="Case_CommissionRemittance" Member="CommissionRemittances" ThisKey="CaseCode" OtherKey="CaseCode" Type="CommissionRemittance" />
       <Association Name="Client_Case" Member="BuyerClient" ThisKey="BuyerCode" OtherKey="ClientEDICode" Type="Client" IsForeignKey="true" />
       <Association Name="Client_Case1" Member="SellerClient" ThisKey="SellerCode" OtherKey="ClientEDICode" Type="Client" IsForeignKey="true" />
       <Association Name="Department_Case" Member="OwnerDepartment" ThisKey="OwnerDepartmentCode" OtherKey="DepartmentCode" Type="Department" IsForeignKey="true" />
@@ -140,6 +139,7 @@
       <Association Name="Client_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="InvoiceFinanceBatch" />
       <Association Name="Client_ClientReview" Member="ClientReviews" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="ClientReview" />
       <Association Name="Client_GuaranteeDeposit" Member="GuaranteeDeposits" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="GuaranteeDeposit" />
+      <Association Name="Client_CommissionRemittance" Member="CommissionRemittances" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="CommissionRemittance" />
       <Association Name="Department_Client" Member="Department" ThisKey="BranchCode" OtherKey="DepartmentCode" Type="Department" IsForeignKey="true" />
       <Association Name="Client_Client" Member="ClientGroup" ThisKey="GroupEDICode" OtherKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
@@ -606,9 +606,9 @@
       <Column Name="RemitCurrency" Type="System.String" DbType="Char(3)" CanBeNull="true" />
       <Column Name="RemitAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="CaseCode" Type="System.String" DbType="Char(12)" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Case_CommissionRemittance" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
+      <Column Name="ClientEDICode" Type="System.String" DbType="Varchar(35)" CanBeNull="false" />
+      <Association Name="Client_CommissionRemittance" Member="Client" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
