@@ -20,45 +20,16 @@ namespace CMBC.EasyFactor.CaseMgr
     /// </summary>
     public partial class CaseMgr : UserControl
     {
-        #region OpCaseType enum
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public enum OpCaseType
-        {
-            /// <summary>
-            /// 
-            /// </summary>
-            QUERY,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            ENABLE_CASE,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            APPLICATION_CASE,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            STAT
-        }
-
-        #endregion
 
         /// <summary>
         /// 
         /// </summary>
         private readonly BindingSource _bs;
-
         /// <summary>
         /// 
         /// </summary>
         private readonly OpCaseType _opCaseType;
+
 
 
         /// <summary>
@@ -132,6 +103,7 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -146,6 +118,8 @@ namespace CMBC.EasyFactor.CaseMgr
         /// Gets or sets selected Case
         /// </summary>
         public Case Selected { get; set; }
+
+
 
 
         //?Private?Methods?(14)?
@@ -463,7 +437,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ReportLeger(object sender, EventArgs e)
+        private void ReportLegerAll(object sender, EventArgs e)
         {
             if (dgvCases.CurrentCell == null)
             {
@@ -473,7 +447,27 @@ namespace CMBC.EasyFactor.CaseMgr
             List<Case> selectedCases = GetSelectedCases();
             if (selectedCases.Count > 0)
             {
-                var form = new ExportForm(ExportForm.ExportType.EXPORT_LEGER, selectedCases);
+                var form = new ExportForm(ExportForm.ExportType.EXPORT_LEGER_ALL, selectedCases);
+                form.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportLegerLeft(object sender, EventArgs e)
+        {
+            if (dgvCases.CurrentCell == null)
+            {
+                return;
+            }
+
+            List<Case> selectedCases = GetSelectedCases();
+            if (selectedCases.Count > 0)
+            {
+                var form = new ExportForm(ExportForm.ExportType.EXPORT_LEGER_LEFT, selectedCases);
                 form.Show();
             }
         }
@@ -536,5 +530,38 @@ namespace CMBC.EasyFactor.CaseMgr
                 menuItemCreditCoverNegNew.Enabled = false;
             }
         }
+
+
+
+
+        #region OpCaseType enum
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum OpCaseType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            QUERY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            ENABLE_CASE,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            APPLICATION_CASE,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            STAT
+        }
+
+        #endregion
     }
 }

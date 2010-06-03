@@ -188,6 +188,23 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public List<CreditNote> CreditNotes
+        {
+            get
+            {
+                var result = new List<CreditNote>();
+                foreach (InvoiceAssignBatch batch in InvoiceAssignBatches)
+                {
+                    result.AddRange(batch.CreditNotes);
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
         /// Gets Factor
         /// </summary>
         public Factor Factor

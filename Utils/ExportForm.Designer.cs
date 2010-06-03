@@ -213,6 +213,7 @@ namespace CMBC.EasyFactor.Utils
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ExportForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据导出";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClosingForm);
