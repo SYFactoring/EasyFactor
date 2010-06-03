@@ -186,7 +186,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 tabControl.SelectedTab = tabItemCreditCoverNeg;
             }
 
-            var invoiceMgr = new InvoiceMgr(curCase.GetInvoices(), _context) {Dock = DockStyle.Fill};
+            var invoiceMgr = new InvoiceMgr(curCase.Invoices, _context) {Dock = DockStyle.Fill};
             tabPanelInvoice.Controls.Add(invoiceMgr);
 
             UpdateCaseControlStatus();

@@ -766,6 +766,7 @@ namespace CMBC.EasyFactor.ARMgr
                                               orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;
 
+            _bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 

@@ -146,11 +146,11 @@ namespace CMBC.EasyFactor.Help
 
         //?Delegates?(3)?
         //?Events?(3)?
-        public event AutoUpdateCompleteEventHandler OnAutoUpdateComplete;
+        event AutoUpdateCompleteEventHandler OnAutoUpdateComplete;
 
-        public event AutoUpdateErrorEventHandler OnAutoUpdateError;
+        event AutoUpdateErrorEventHandler OnAutoUpdateError;
 
-        public event ConfigFileDownloadedEventHandler OnConfigFileDownloaded;
+        event ConfigFileDownloadedEventHandler OnConfigFileDownloaded;
 
 
 

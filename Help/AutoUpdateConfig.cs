@@ -48,7 +48,7 @@ namespace CMBC.EasyFactor.Help
     {
         #region Delegates
 
-        delegate void LoadConfigErrorEventHandler(string stMessage, Exception loadConfigError);
+        public delegate void LoadConfigErrorEventHandler(string stMessage, Exception loadConfigError);
 
         #endregion
 

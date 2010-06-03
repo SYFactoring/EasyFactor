@@ -62,18 +62,6 @@ namespace CMBC.EasyFactor.Utils
             _mailMessage.Priority = MailPriority.Normal;
         }
 
-        /// <summary>  
-        /// 
-        /// </summary>  
-        /// <param name="to">收件人地址</param>  
-        /// <param name="from">发件人地址</param>  
-        /// <param name="body">邮件正文</param>  
-        /// <param name="title">邮件的主题</param>  
-        public SendMail(string to, string from, string title, string body)
-            : this(to, null, from, title, body)
-        {
-        }
-
         //?Private?Methods?(1)?
         /// <summary>  
         /// 添加附件  
