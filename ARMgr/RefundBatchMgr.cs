@@ -94,26 +94,6 @@ namespace CMBC.EasyFactor.ARMgr
 
             UpdateContextMenu();
 
-            //if (batchType == OpBatchType.CHECK)
-            //{
-            //    this.cbCheckStatus.Text = BATCH.UNCHECK;
-            //    context = new DBDataContext();
-            //    var queryResult = context.InvoiceRefundBatches.Where(i => i.Case != null);
-            //    this.bs.DataSource = queryResult;
-            //    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            //}
-            //else if (batchType == OpBatchType.POOL_CHECK)
-            //{
-            //    this.colBuyerName.Visible = false;
-            //    this.colBatchCount.Visible = false;
-            //    this.colTransactionType.Visible = false;
-
-            //    this.cbCheckStatus.Text = BATCH.UNCHECK;
-            //    context = new DBDataContext();
-            //    var queryResult = context.InvoiceRefundBatches.Where(i => i.InvoiceFinanceBatch != null);
-            //    this.bs.DataSource = queryResult;
-            //    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            //}
             if (batchType == OpBatchType.POOL_QUERY)
             {
                 colBuyerName.Visible = false;
@@ -199,12 +179,6 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-
-            //if (selectedBatch.CheckStatus == BATCH.CHECK)
-            //{
-            //    MessageBoxEx.Show("不能删除已复核批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    return;
-            //}
 
             foreach (InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
             {

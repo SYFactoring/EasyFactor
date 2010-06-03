@@ -220,12 +220,6 @@ namespace CMBC.EasyFactor.ARMgr
                 Context.InvoiceFinanceLogs.DeleteOnSubmit(log);
             }
 
-            //if (selectedBatch.Invoices.Count > 0)
-            //{
-            //    MessageBoxEx.Show("不能删除此批次，它包含相关发票信息", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    return;
-            //}
-
             Context.InvoiceFinanceBatches.DeleteOnSubmit(selectedBatch);
             try
             {

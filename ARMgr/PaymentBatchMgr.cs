@@ -87,15 +87,6 @@ namespace CMBC.EasyFactor.ARMgr
             cbLocation.SelectedIndex = 0;
 
             UpdateContextMenu();
-
-            //if (batchType == OpBatchType.CHECK)
-            //{
-            //    this.cbCheckStatus.Text = BATCH.UNCHECK;
-            //    context = new DBDataContext();
-            //    var queryResult = context.InvoicePaymentBatches.Where(i => i.CheckStatus == BATCH.UNCHECK);
-            //    this.bs.DataSource = queryResult;
-            //    this.lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
-            //}
         }
 
 
@@ -180,12 +171,6 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 return;
             }
-
-            //if (selectedBatch.CheckStatus == BATCH.CHECK)
-            //{
-            //    MessageBoxEx.Show("不能删除已复核批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    return;
-            //}
 
             foreach (InvoicePaymentLog log in selectedBatch.InvoicePaymentLogs)
             {
