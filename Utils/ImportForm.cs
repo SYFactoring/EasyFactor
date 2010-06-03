@@ -3375,7 +3375,7 @@ namespace CMBC.EasyFactor.Utils
 
                             //付款批次信息
                             column = 18;
-                            string paymentType = PAYMENT.BUYER_PAYMENT;
+                            const string paymentType = PAYMENT.BUYER_PAYMENT;
                             column = 19;
                             var paymentDate = (DateTime?)valueArray[row, column++];
                             if (paymentDate != null)
@@ -3423,7 +3423,7 @@ namespace CMBC.EasyFactor.Utils
 
                             //还款批次信息
                             column = 21;
-                            string refundType = REFUND.BUYER_PAYMENT;
+                            const string refundType = REFUND.BUYER_PAYMENT;
 
                             var refundDate = (DateTime?)valueArray[row, column++];
                             if (refundDate != null)
@@ -3435,10 +3435,12 @@ namespace CMBC.EasyFactor.Utils
                                         i.RefundType == refundType);
                                 if (refundBatch == null)
                                 {
-                                    refundBatch = new InvoiceRefundBatch();
-                                    refundBatch.RefundType = refundType;
-                                    refundBatch.RefundDate = refundDate.Value;
-                                    refundBatch.CreateUserName = createUserName;
+                                    refundBatch = new InvoiceRefundBatch
+                                                      {
+                                                          RefundType = refundType,
+                                                          RefundDate = refundDate.Value,
+                                                          CreateUserName = createUserName
+                                                      };
                                     //refundBatch.CheckStatus = BATCH.CHECK;
                                     refundBatch.RefundBatchNo =
                                         InvoiceRefundBatch.GenerateRefundBatchNo(refundBatch.RefundDate, refundBatches);

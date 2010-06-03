@@ -349,13 +349,13 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         Commission = AssignAmount * cda.Price.GetValueOrDefault();
                     }
-                    if(!TypeUtil.GreaterZero(FactorCommission)||isOverwrite)
+                    if (!TypeUtil.GreaterZero(FactorCommission) || isOverwrite)
                     {
-                        if (TransactionType == "出口保理" || TransactionType == "国内卖方保理")
+                        if (TransactionType == "出口保理")
                         {
                             FactorCommission = AssignAmount * cda.IFPrice;
                         }
-                        if (TransactionType == "进口保理" || TransactionType == "国内买方保理")
+                        else if (TransactionType == "进口保理")
                         {
                             FactorCommission = AssignAmount * cda.EFPrice;
                         }
