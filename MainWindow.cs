@@ -1446,5 +1446,19 @@ namespace CMBC.EasyFactor
         }
 
         #endregion?Methods?
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryOperationLog(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
+            {
+                var mgr = new OperationLogMgr();
+                SetDetailPanel(mgr);
+            }
+        }
     }
 }

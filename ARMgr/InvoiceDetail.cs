@@ -592,18 +592,14 @@ namespace CMBC.EasyFactor.ARMgr
                     ControlUtil.SetComponetEditable(comp, false);
                 }
 
-                //if (invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK)
-                //{
-                //    MessageBoxEx.Show("此发票已复核，不能修改", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //    return;
-                //}
-
                 invoiceNoTextBox.ReadOnly = false;
                 invoiceAmountTextBox.ReadOnly = false;
                 invoiceDateTextBox.Enabled = true;
                 dueDateTextBox.Enabled = true;
                 commentTextBox.ReadOnly = false;
                 assignAmountTextBox.ReadOnly = false;
+                commissionTextBox.ReadOnly = false;
+                tbFactorCommission.ReadOnly = false;
 
                 foreach (Control comp in groupPanelInvoiceAdv.Controls)
                 {
