@@ -155,7 +155,7 @@ namespace CMBC.EasyFactor.ARMgr
             cbCaseMark.Text = @"启动案";
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -234,7 +234,7 @@ namespace CMBC.EasyFactor.ARMgr
                 var selectedInvoices = new List<Invoice>();
                 foreach (DataGridViewCell cell in dgvInvoices.SelectedCells)
                 {
-                    var invoice = (Invoice) _bs.List[cell.RowIndex];
+                    var invoice = (Invoice)_bs.List[cell.RowIndex];
                     if (!selectedInvoices.Contains(invoice))
                     {
                         selectedInvoices.Add(invoice);
@@ -287,7 +287,7 @@ namespace CMBC.EasyFactor.ARMgr
                 var selectedInvoices = new List<Invoice>();
                 foreach (DataGridViewCell cell in dgvInvoices.SelectedCells)
                 {
-                    var invoice = (Invoice) _bs.List[cell.RowIndex];
+                    var invoice = (Invoice)_bs.List[cell.RowIndex];
                     if (!selectedInvoices.Contains(invoice))
                     {
                         selectedInvoices.Add(invoice);
@@ -331,7 +331,7 @@ namespace CMBC.EasyFactor.ARMgr
             var rowIndexes = new List<int>();
             foreach (DataGridViewCell cell in dgvInvoices.SelectedCells)
             {
-                var invoice = (Invoice) _bs.List[cell.RowIndex];
+                var invoice = (Invoice)_bs.List[cell.RowIndex];
                 if (!selectedInvoices.Contains(invoice))
                 {
                     rowIndexes.Add(cell.RowIndex);
@@ -420,7 +420,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedInvoice = (Invoice) _bs.List[dgvInvoices.CurrentCell.RowIndex];
+            var selectedInvoice = (Invoice)_bs.List[dgvInvoices.CurrentCell.RowIndex];
             var caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
         }
@@ -437,7 +437,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedInvoice = (Invoice) _bs.List[dgvInvoices.CurrentCell.RowIndex];
+            var selectedInvoice = (Invoice)_bs.List[dgvInvoices.CurrentCell.RowIndex];
             var invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             invoiceDetail.ShowDialog(this);
         }
@@ -456,7 +456,7 @@ namespace CMBC.EasyFactor.ARMgr
                 Object originalData = e.Value;
                 if (originalData != null)
                 {
-                    var result = (bool) originalData;
+                    var result = (bool)originalData;
                     e.Value = result ? "Y" : "N";
                 }
             }
@@ -471,7 +471,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             for (int i = 0; i < _bs.List.Count; i++)
             {
-                var invoice = (Invoice) _bs.List[i];
+                var invoice = (Invoice)_bs.List[i];
                 if (invoice.AssignOverDueDays >= 0)
                 {
                     dgvInvoices["colDueDate", i].Style.BackColor = Color.Yellow;
@@ -570,7 +570,7 @@ namespace CMBC.EasyFactor.ARMgr
             var selectedInvoices = new List<Invoice>();
             foreach (DataGridViewCell cell in dgvInvoices.SelectedCells)
             {
-                var invoice = (Invoice) _bs.List[cell.RowIndex];
+                var invoice = (Invoice)_bs.List[cell.RowIndex];
                 if (!selectedInvoices.Contains(invoice))
                 {
                     selectedInvoices.Add(invoice);
@@ -597,7 +597,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedInvoice = (Invoice) _bs.List[dgvInvoices.CurrentCell.RowIndex];
+            var selectedInvoice = (Invoice)_bs.List[dgvInvoices.CurrentCell.RowIndex];
             var invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DISPUTE);
             invoiceDetail.ShowDialog(this);
         }
@@ -622,7 +622,7 @@ namespace CMBC.EasyFactor.ARMgr
             var selectedInvoices = new List<Invoice>();
             foreach (DataGridViewCell cell in dgvInvoices.SelectedCells)
             {
-                var invoice = (Invoice) _bs.List[cell.RowIndex];
+                var invoice = (Invoice)_bs.List[cell.RowIndex];
                 if (!selectedInvoices.Contains(invoice))
                 {
                     selectedInvoices.Add(invoice);
@@ -766,7 +766,6 @@ namespace CMBC.EasyFactor.ARMgr
                                               orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;
 
-            _bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
 
