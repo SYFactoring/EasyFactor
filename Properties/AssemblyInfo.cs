@@ -6,7 +6,7 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EasyFactoring民生银行版")]
+[assembly: AssemblyTitle("EasyFactoring@CMBC")]
 [assembly: AssemblyDescription("本系统由中国民生银行保理业务部提出需求，晓兰、一鸣设计、开发并维护。感谢各位领导和同事的支持，特别是Jerry、Nina、Sissi、Lele、Clara、Cindy、宋华不辞辛劳的测试和负责任的反馈。希望我们可以做的更好。")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Easy Product")]
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.6.2.1")]
-[assembly: AssemblyFileVersion("1.6.2.1")]
+[assembly: AssemblyVersion("1.6.4.1")]
+[assembly: AssemblyFileVersion("1.6.4.1")]
 [assembly: NeutralResourcesLanguageAttribute("zh-CN")]
