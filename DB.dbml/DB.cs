@@ -47,8 +47,14 @@ namespace CMBC.EasyFactor.DB.dbml
             base.SubmitChanges(failureMode);
         }
 
-        protected static bool AttrIsPrimaryKey(PropertyInfo pi)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pi"></param>
+        /// <returns></returns>
+        protected static bool AttrIsPrimaryKey(MemberInfo pi)
         {
+            if (pi == null) throw new ArgumentNullException("pi");
             IEnumerable<object> attrs =
                 from attr in pi.GetCustomAttributes(typeof(ColumnAttribute), true)
                 where ((ColumnAttribute)attr).IsPrimaryKey

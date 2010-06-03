@@ -19,7 +19,7 @@ namespace CMBC.EasyFactor.Utils
     /// <summary>
     /// 
     /// </summary>
-    public sealed class SystemUtil
+    public static class SystemUtil
     {
         private static readonly Dictionary<string, string> DbDictionary = InitializeDbDictionary();
         /// <summary>

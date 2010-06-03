@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using DevComponents.DotNetBar;
+using System.Diagnostics;
 
 namespace CMBC.EasyFactor.Help
 {
@@ -34,7 +35,7 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// Gets assembly company
         /// </summary>
-        public string AssemblyCompany
+        public static string AssemblyCompany
         {
             get
             {
@@ -52,7 +53,7 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// Gets assembly copyright
         /// </summary>
-        public string AssemblyCopyright
+        public static string AssemblyCopyright
         {
             get
             {
@@ -70,7 +71,7 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// Gets assembly description
         /// </summary>
-        public string AssemblyDescription
+        public static string AssemblyDescription
         {
             get
             {
@@ -88,7 +89,7 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// Gets assembly product
         /// </summary>
-        public string AssemblyProduct
+        public static string AssemblyProduct
         {
             get
             {
@@ -106,7 +107,7 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// Gets assembly title
         /// </summary>
-        public string AssemblyTitle
+        public static string AssemblyTitle
         {
             get
             {
@@ -128,7 +129,7 @@ namespace CMBC.EasyFactor.Help
         /// <summary>
         /// Gets assembly version
         /// </summary>
-        public string AssemblyVersion
+        public static string AssemblyVersion
         {
             get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
         }
@@ -143,6 +144,23 @@ namespace CMBC.EasyFactor.Help
         private void Close(object sender, EventArgs e)
         {
             Close();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickLogo(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/index.html");
+            }
+            catch (Exception)
+            {
+                MessageBoxEx.Show("´ò¿ªä¯ÀÀÆ÷Ê§°Ü");
+            }
         }
     }
 }

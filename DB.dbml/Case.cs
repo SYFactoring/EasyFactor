@@ -17,6 +17,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Case
     {
+
         private CDA _activeCDA;
         private double? _assginOutstanding;
         private double? _assignAmountByDate;
@@ -28,6 +29,7 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _paymentAmountByDate;
         private double? _totalAssignOutstanding;
         private double? _valuedAssignOutstanding;
+
 
 
         /// <summary>
@@ -109,10 +111,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 CDA activeCDA = ActiveCDA;
                 if (activeCDA == null)
                 {
-                    return ValuedAssignOutstanding*0.8;
+                    return ValuedAssignOutstanding * 0.8;
                 }
                 return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(),
-                                ValuedAssignOutstanding*activeCDA.FinanceProportion ?? 0.8);
+                                ValuedAssignOutstanding * activeCDA.FinanceProportion ?? 0.8);
             }
         }
 
@@ -163,7 +165,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     double handFreeIncome = 0;
                     if (cda != null)
                     {
-                        handFreeIncome = count*cda.HandFee.GetValueOrDefault();
+                        handFreeIncome = count * cda.HandFee.GetValueOrDefault();
                     }
 
                     _commissionIncomeByDate = result + handFreeIncome;
@@ -302,6 +304,25 @@ namespace CMBC.EasyFactor.DB.dbml
                     default:
                         return null;
                 }
+            }
+        }
+
+        //?Public?Methods?(2)?
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<Invoice> Invoices
+        {
+            get
+            {
+                var result = new List<Invoice>();
+                foreach (InvoiceAssignBatch batch in InvoiceAssignBatches)
+                {
+                    result.AddRange(batch.Invoices);
+                }
+
+                return result;
             }
         }
 
@@ -496,6 +517,8 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
 
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -586,22 +609,6 @@ namespace CMBC.EasyFactor.DB.dbml
             count += casesInMemory.Count(c => c.CaseCode.StartsWith(prefix));
             string caseCode = String.Format("{0}{1:D4}", prefix, count + 1);
             return caseCode;
-        }
-
-        //?Public?Methods?(2)?
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public List<Invoice> GetInvoices()
-        {
-            var result = new List<Invoice>();
-            foreach (InvoiceAssignBatch batch in InvoiceAssignBatches)
-            {
-                result.AddRange(batch.Invoices);
-            }
-
-            return result;
         }
     }
 }

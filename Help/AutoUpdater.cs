@@ -52,21 +52,10 @@ namespace CMBC.EasyFactor.Help
     /// </summary>
     public class AutoUpdater : Component
     {
-        #region Delegates
-
-        public delegate void AutoUpdateCompleteEventHandler();
-
-        public delegate void AutoUpdateErrorEventHandler(string stMessage, Exception autoUpdateError);
-
-        public delegate void ConfigFileDownloadedEventHandler(bool isNewVersionAvailable);
-
-        #endregion
 
         private AutoUpdateConfig _autoUpdateConfig;
-        //Added 11/16/2004 For Proxy Clients, Thanks George for submitting these changes
-        //Added 11/16/2004 For Proxy Clients, Thanks George for submitting these changes
 
-
+        //Added 11/16/2004 For Proxy Clients, Thanks George for submitting these changes
         //If true, the app will automatically download the latest version, if false the app will use the DownloadForm to prompt the user, if AutoDownload is false and DownloadForm is null, it doesn't download
         [DefaultValue(true)]
         [Description(
@@ -149,14 +138,21 @@ namespace CMBC.EasyFactor.Help
         public Form RestartForm { get; set; }
 
 
-        //?Delegates?(3)?
 
+
+        delegate void AutoUpdateCompleteEventHandler();
+        delegate void AutoUpdateErrorEventHandler(string stMessage, Exception autoUpdateError);
+        delegate void ConfigFileDownloadedEventHandler(bool isNewVersionAvailable);
+
+        //?Delegates?(3)?
         //?Events?(3)?
         public event AutoUpdateCompleteEventHandler OnAutoUpdateComplete;
 
         public event AutoUpdateErrorEventHandler OnAutoUpdateError;
 
         public event ConfigFileDownloadedEventHandler OnConfigFileDownloaded;
+
+
 
 
         //?Public?Methods?(3)?

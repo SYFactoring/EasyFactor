@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.Help
                 Object originalData = e.Value;
                 if (originalData != null)
                 {
-                    var result = (char) originalData;
+                    var result = (char)originalData;
                     if (result == 'I')
                         e.Value = "新建";
                     else if (result == 'U')
@@ -89,7 +89,7 @@ namespace CMBC.EasyFactor.Help
         /// <param name="e">Event Args</param>
         private void QueryLogs(object sender, EventArgs e)
         {
-            Context = new DBDataContext {ObjectTrackingEnabled = false};
+            Context = new DBDataContext { ObjectTrackingEnabled = false };
 
             DateTime beginDate = String.IsNullOrEmpty(diBegin.Text) ? diBegin.MinDate : diBegin.Value;
             DateTime endDate = String.IsNullOrEmpty(diEnd.Text) ? diEnd.MinDate : diEnd.Value;
@@ -105,14 +105,15 @@ namespace CMBC.EasyFactor.Help
                                                         ? log.ActionDateTime <= endDate.AddDays(1)
                                                         : true));
 
+            DialogResult dr = DialogResult.Yes;
             if (queryResult.Count() > 5000)
             {
-                DialogResult dr = MessageBoxEx.Show("查询结果超过5000条，全部显示可能速度较慢，是否继续？", MESSAGE.TITLE_INFORMATION,
+                dr = MessageBoxEx.Show("查询结果超过5000条，全部显示可能速度较慢，是否继续？", MESSAGE.TITLE_INFORMATION,
                                                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                _bs.DataSource = dr == DialogResult.Yes ? queryResult : queryResult.Take(5000);
             }
 
-            lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+            _bs.DataSource = dr == DialogResult.Yes ? queryResult : queryResult.Take(5000);
+            lblCount.Text = String.Format("获得{0}条记录", dr == DialogResult.Yes ? queryResult.Count() : 5000);
         }
     }
 }
