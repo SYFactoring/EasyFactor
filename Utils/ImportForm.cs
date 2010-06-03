@@ -3491,7 +3491,7 @@ namespace CMBC.EasyFactor.Utils
                         else if ("贷项通知".Equals(type))
                         {
                             paymentBatch = null;
-                            string paymentType = "贷项通知";
+                            const string paymentType = "贷项通知";
                             var paymentDate = (DateTime?)valueArray[row, 11];
                             if (paymentDate != null)
                             {
@@ -3801,12 +3801,12 @@ namespace CMBC.EasyFactor.Utils
                                     throw new Exception("冲销账款金额不能大于转让余额，不能导入：" + invoiceNo);
                                 }
 
-                                var log = new InvoicePaymentLog
-                                              {
-                                                  Invoice = invoice,
-                                                  PaymentAmount = paymentAmount,
-                                                  InvoicePaymentBatch = paymentBatch
-                                              };
+                                new InvoicePaymentLog
+                                    {
+                                        Invoice = invoice,
+                                        PaymentAmount = paymentAmount,
+                                        InvoicePaymentBatch = paymentBatch
+                                    };
                                 invoice.CaculatePayment();
                             }
                             else

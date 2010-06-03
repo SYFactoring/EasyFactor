@@ -473,6 +473,9 @@ namespace CMBC.EasyFactor.ARMgr
                                                                       ? true
                                                                       : curCase.OwnerDepartment.LocationCode ==
                                                                         location)
+                                                          && ((curCase.TransactionType == "国内卖方保理" || curCase.TransactionType == "出口保理") && ( curCase.BuyerFactor.CompanyNameCN.Contains(factorName) ||  curCase.BuyerFactor.CompanyNameEN.Contains(factorName))
+                                                          ||  ((curCase.TransactionType == "国内买方保理" || curCase.TransactionType == "进口保理") && (curCase.SellerFactor.CompanyNameCN.Contains(factorName) || curCase.SellerFactor.CompanyNameEN.Contains(factorName))))
+
                                                           let seller = curCase.SellerClient
                                                           let buyer = curCase.BuyerClient
                                                           where
@@ -480,15 +483,6 @@ namespace CMBC.EasyFactor.ARMgr
                                                               seller.ClientNameEN.Contains(clientName) ||
                                                               buyer.ClientNameCN.Contains(clientName) ||
                                                               buyer.ClientNameEN.Contains(clientName)
-                                                          //&& ((curCase.TransactionType == "国内卖方保理" || curCase.TransactionType == "出口保理") && ( curCase.BuyerFactor.CompanyNameCN.Contains(factorName) ||  curCase.BuyerFactor.CompanyNameEN.Contains(factorName))
-                                                          //||  (curCase.TransactionType == "国内买方保理" || curCase.TransactionType == "进口保理") && (curCase.SellerFactor.CompanyNameCN.Contains(factorName) || curCase.SellerFactor.CompanyNameEN.Contains(factorName)))
-                                                          let sellerFactor = curCase.SellerFactor
-                                                          let buyerFactor = curCase.BuyerFactor
-                                                          where
-                                                              sellerFactor.CompanyNameCN.Contains(factorName) ||
-                                                              sellerFactor.CompanyNameEN.Contains(factorName) ||
-                                                              buyerFactor.CompanyNameCN.Contains(factorName) ||
-                                                              buyerFactor.CompanyNameEN.Contains(factorName)
                                                           where batch.AssignBatchNo.Contains(tbAssignBatchNo.Text)
                                                                 &&
                                                                 (beginDate != dateFrom.MinDate

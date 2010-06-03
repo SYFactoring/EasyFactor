@@ -554,6 +554,7 @@
       <Column Name="DisputeResolveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="DisputeResolveUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="FactorCommission" Type="System.Double" DbType="float" CanBeNull="true" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="InvoiceFinanceLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoiceFinanceLog" />
       <Association Name="Invoice_InvoicePaymentLog" Member="InvoicePaymentLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoicePaymentLog" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="InvoiceAssignBatch" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="InvoiceAssignBatch" IsForeignKey="true" />

@@ -18,6 +18,7 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _assignAmount;
         private double? _assignOutstanding;
         private double? _commissionAmount;
+        private double? _factorCommissionAmount;
         private double? _financeAmount;
         private double? _financeOutstanding;
         private double? _paymentAmount;
@@ -142,25 +143,22 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                CDA activeCDA = Case.ActiveCDA;
-                if (activeCDA == null)
+                if (_factorCommissionAmount.HasValue == false)
                 {
-                    return null;
+                    double? result = null;
+                    foreach (Invoice invoice in Invoices.Where(invoice => invoice.FactorCommission.HasValue))
+                    {
+                        if (result.HasValue == false)
+                        {
+                            result = 0;
+                        }
+                        result += invoice.FactorCommission;
+                    }
+
+                    _factorCommissionAmount = result;
                 }
 
-                if (activeCDA.CommissionType == "按转让金额")
-                {
-                    if (TransactionType == "出口保理" || TransactionType == "国内卖方保理")
-                    {
-                        return AssignAmount*activeCDA.IFPrice;
-                    }
-                    if (TransactionType == "进口保理" || TransactionType == "国内买方保理")
-                    {
-                        return AssignAmount*activeCDA.EFPrice;
-                    }
-                    return null;
-                }
-                return null;
+                return _factorCommissionAmount;
             }
         }
 
@@ -209,7 +207,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double? HandfeeAmount
         {
-            get { return Invoices.Count*Case.ActiveCDA.HandFee; }
+            get { return Invoices.Count * Case.ActiveCDA.HandFee; }
         }
 
         /// <summary>

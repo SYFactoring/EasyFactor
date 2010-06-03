@@ -11915,6 +11915,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private System.Nullable<double> _FactorCommission;
+		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
@@ -12007,6 +12009,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnDisputeResolveUserNameChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnFactorCommissionChanging(System.Nullable<double> value);
+    partial void OnFactorCommissionChanged();
     #endregion
 		
 		public Invoice()
@@ -12837,6 +12841,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactorCommission", DbType="float")]
+		public System.Nullable<double> FactorCommission
+		{
+			get
+			{
+				return this._FactorCommission;
+			}
+			set
+			{
+				if ((this._FactorCommission != value))
+				{
+					this.OnFactorCommissionChanging(value);
+					this.SendPropertyChanging();
+					this._FactorCommission = value;
+					this.SendPropertyChanged("FactorCommission");
+					this.OnFactorCommissionChanged();
 				}
 			}
 		}
