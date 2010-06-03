@@ -128,7 +128,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CaculateFinance(object sender, EventArgs e)
+        private void CaculateInvoices(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
             {
@@ -151,6 +151,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         {
                             i.CaculateRefund();
                             i.CaculateFinance();
+                            i.CaculatePayment();
                         }
                     }
                 }

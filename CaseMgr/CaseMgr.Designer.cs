@@ -31,7 +31,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.LabelX lblOnwerDept;
         private DevComponents.DotNetBar.LabelX lblOPName;
         private DevComponents.DotNetBar.LabelX lblTransactionType;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCaculateCurr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCaculateInvoices;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemCaseExport;
@@ -152,10 +152,10 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemCaseDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemLegerReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaculateCurr = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemLegerExportAll = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemLegerExportLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaculateInvoices = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -892,54 +892,54 @@ namespace CMBC.EasyFactor.CaseMgr
             this.toolStripSeparator1,
             this.menuItemLegerReport,
             this.menuItemCaseExport,
-            this.menuItemCaculateCurr});
+            this.menuItemCaculateInvoices});
             this.cmuContractMgr.Name = "cmuContractMgr";
-            this.cmuContractMgr.Size = new System.Drawing.Size(156, 214);
+            this.cmuContractMgr.Size = new System.Drawing.Size(147, 192);
             // 
             // menuItemCaseSelect
             // 
             this.menuItemCaseSelect.Name = "menuItemCaseSelect";
-            this.menuItemCaseSelect.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
             this.menuItemCaseSelect.Text = "选定案件";
             this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
             this.menuItemCaseDetail.Text = "详细信息";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
             // 
             // menuItemCaseNew
             // 
             this.menuItemCaseNew.Name = "menuItemCaseNew";
-            this.menuItemCaseNew.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemCaseNew.Text = "新建案件";
             this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
             // 
             // menuItemCreditCoverNegNew
             // 
             this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
-            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
             this.menuItemCreditCoverNegNew.Text = "新建额度申请";
             this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
             // 
             // menuItemCaseDelete
             // 
             this.menuItemCaseDelete.Name = "menuItemCaseDelete";
-            this.menuItemCaseDelete.Size = new System.Drawing.Size(155, 22);
+            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
             this.menuItemCaseDelete.Text = "删除案件";
             this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
             // 
             // menuItemLegerReport
             // 
@@ -947,36 +947,36 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemLegerExportAll,
             this.menuItemLegerExportLeft});
             this.menuItemLegerReport.Name = "menuItemLegerReport";
-            this.menuItemLegerReport.Size = new System.Drawing.Size(155, 22);
+            this.menuItemLegerReport.Size = new System.Drawing.Size(146, 22);
             this.menuItemLegerReport.Text = "导出台帐";
-            // 
-            // menuItemCaseExport
-            // 
-            this.menuItemCaseExport.Name = "menuItemCaseExport";
-            this.menuItemCaseExport.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaseExport.Text = "导出案子";
-            this.menuItemCaseExport.Click += new System.EventHandler(this.ExportCases);
-            // 
-            // menuItemCaculateCurr
-            // 
-            this.menuItemCaculateCurr.Name = "menuItemCaculateCurr";
-            this.menuItemCaculateCurr.Size = new System.Drawing.Size(155, 22);
-            this.menuItemCaculateCurr.Text = "修复多币种Bug";
-            this.menuItemCaculateCurr.Click += new System.EventHandler(this.CaculateFinance);
             // 
             // menuItemLegerExportAll
             // 
             this.menuItemLegerExportAll.Name = "menuItemLegerExportAll";
-            this.menuItemLegerExportAll.Size = new System.Drawing.Size(152, 22);
+            this.menuItemLegerExportAll.Size = new System.Drawing.Size(110, 22);
             this.menuItemLegerExportAll.Text = "全部";
             this.menuItemLegerExportAll.Click += new System.EventHandler(this.ReportLegerAll);
             // 
             // menuItemLegerExportLeft
             // 
             this.menuItemLegerExportLeft.Name = "menuItemLegerExportLeft";
-            this.menuItemLegerExportLeft.Size = new System.Drawing.Size(152, 22);
+            this.menuItemLegerExportLeft.Size = new System.Drawing.Size(110, 22);
             this.menuItemLegerExportLeft.Text = "未结清";
             this.menuItemLegerExportLeft.Click += new System.EventHandler(this.ReportLegerLeft);
+            // 
+            // menuItemCaseExport
+            // 
+            this.menuItemCaseExport.Name = "menuItemCaseExport";
+            this.menuItemCaseExport.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseExport.Text = "导出案子";
+            this.menuItemCaseExport.Click += new System.EventHandler(this.ExportCases);
+            // 
+            // menuItemCaculateInvoices
+            // 
+            this.menuItemCaculateInvoices.Name = "menuItemCaculateInvoices";
+            this.menuItemCaculateInvoices.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaculateInvoices.Text = "重新计算数值";
+            this.menuItemCaculateInvoices.Click += new System.EventHandler(this.CaculateInvoices);
             // 
             // CaseMgr
             // 

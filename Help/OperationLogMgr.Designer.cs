@@ -14,7 +14,6 @@ namespace CMBC.EasyFactor.Help
 		#region?Fields?(21)?
 
         private DevComponents.DotNetBar.ButtonX btnQuery;
-        private System.Windows.Forms.ContextMenuStrip cmuUserMgr;
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -22,13 +21,8 @@ namespace CMBC.EasyFactor.Help
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvLogs;
         private DevComponents.DotNetBar.LabelX lblCount;
         private DevComponents.DotNetBar.LabelX lblUserID;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDeleteUser;
-        private System.Windows.Forms.ToolStripMenuItem menuItemDetailUser;
-        private System.Windows.Forms.ToolStripMenuItem menuItemNewUser;
-        private System.Windows.Forms.ToolStripMenuItem menuItemSelectUser;
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbUserID;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
 
 		#endregion?Fields?
 
@@ -62,16 +56,12 @@ namespace CMBC.EasyFactor.Help
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.cmuUserMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemSelectUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDetailUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemNewUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDeleteUser = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.lblDate = new DevComponents.DotNetBar.LabelX();
+            this.diEnd = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.diBegin = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbUserID = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -83,55 +73,11 @@ namespace CMBC.EasyFactor.Help
             this.colActionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colActionUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colActionDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblDate = new DevComponents.DotNetBar.LabelX();
-            this.diEnd = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.diBegin = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.cmuUserMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cmuUserMgr
-            // 
-            this.cmuUserMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemSelectUser,
-            this.menuItemDetailUser,
-            this.toolStripSeparator,
-            this.menuItemNewUser,
-            this.menuItemDeleteUser});
-            this.cmuUserMgr.Name = "contextMenuUserMgr";
-            this.cmuUserMgr.Size = new System.Drawing.Size(153, 120);
-            // 
-            // menuItemSelectUser
-            // 
-            this.menuItemSelectUser.Name = "menuItemSelectUser";
-            this.menuItemSelectUser.Size = new System.Drawing.Size(152, 22);
-            this.menuItemSelectUser.Text = "选定用户";
-            // 
-            // menuItemDetailUser
-            // 
-            this.menuItemDetailUser.Name = "menuItemDetailUser";
-            this.menuItemDetailUser.Size = new System.Drawing.Size(152, 22);
-            this.menuItemDetailUser.Text = "详细信息";
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
-            // 
-            // menuItemNewUser
-            // 
-            this.menuItemNewUser.Name = "menuItemNewUser";
-            this.menuItemNewUser.Size = new System.Drawing.Size(152, 22);
-            this.menuItemNewUser.Text = "新建用户";
-            // 
-            // menuItemDeleteUser
-            // 
-            this.menuItemDeleteUser.Name = "menuItemDeleteUser";
-            this.menuItemDeleteUser.Size = new System.Drawing.Size(152, 22);
-            this.menuItemDeleteUser.Text = "删除用户";
             // 
             // panelQuery
             // 
@@ -156,140 +102,6 @@ namespace CMBC.EasyFactor.Help
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
-            // 
-            // lblCount
-            // 
-            this.lblCount.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(510, 7);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(71, 16);
-            this.lblCount.TabIndex = 3;
-            this.lblCount.Text = "获得 条记录";
-            // 
-            // btnQuery
-            // 
-            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(429, 4);
-            this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 2;
-            this.btnQuery.Text = "查询";
-            this.btnQuery.Click += new System.EventHandler(this.QueryLogs);
-            // 
-            // tbUserID
-            // 
-            // 
-            // 
-            // 
-            this.tbUserID.Border.Class = "TextBoxBorder";
-            this.tbUserID.Location = new System.Drawing.Point(55, 5);
-            this.tbUserID.Name = "tbUserID";
-            this.tbUserID.Size = new System.Drawing.Size(100, 20);
-            this.tbUserID.TabIndex = 1;
-            // 
-            // lblUserID
-            // 
-            // 
-            // 
-            // 
-            this.lblUserID.BackgroundStyle.Class = "";
-            this.lblUserID.Location = new System.Drawing.Point(4, 3);
-            this.lblUserID.Name = "lblUserID";
-            this.lblUserID.Size = new System.Drawing.Size(44, 23);
-            this.lblUserID.TabIndex = 0;
-            this.lblUserID.Text = "操作人";
-            // 
-            // dgvLogs
-            // 
-            this.dgvLogs.AllowUserToAddRows = false;
-            this.dgvLogs.AllowUserToDeleteRows = false;
-            this.dgvLogs.AllowUserToOrderColumns = true;
-            this.dgvLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colOperationLogID,
-            this.colTableName,
-            this.colActionKey,
-            this.colActionType,
-            this.colActionUserName,
-            this.colActionDateTime});
-            this.dgvLogs.ContextMenuStrip = this.cmuUserMgr;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLogs.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvLogs.Location = new System.Drawing.Point(0, 33);
-            this.dgvLogs.MultiSelect = false;
-            this.dgvLogs.Name = "dgvLogs";
-            this.dgvLogs.ReadOnly = true;
-            this.dgvLogs.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLogs.Size = new System.Drawing.Size(800, 567);
-            this.dgvLogs.TabIndex = 1;
-            this.dgvLogs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvLogsCellFormatting);
-            this.dgvLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvLogsRowPostPaint);
-            // 
-            // colOperationLogID
-            // 
-            this.colOperationLogID.DataPropertyName = "LogID";
-            this.colOperationLogID.HeaderText = "日志ID";
-            this.colOperationLogID.Name = "colOperationLogID";
-            this.colOperationLogID.ReadOnly = true;
-            // 
-            // colTableName
-            // 
-            this.colTableName.DataPropertyName = "TableName";
-            this.colTableName.HeaderText = "对象名";
-            this.colTableName.Name = "colTableName";
-            this.colTableName.ReadOnly = true;
-            // 
-            // colActionKey
-            // 
-            this.colActionKey.DataPropertyName = "ActionKey";
-            this.colActionKey.HeaderText = "主键";
-            this.colActionKey.Name = "colActionKey";
-            this.colActionKey.ReadOnly = true;
-            // 
-            // colActionType
-            // 
-            this.colActionType.DataPropertyName = "ActionType";
-            this.colActionType.HeaderText = "操作类型";
-            this.colActionType.Name = "colActionType";
-            this.colActionType.ReadOnly = true;
-            // 
-            // colActionUserName
-            // 
-            this.colActionUserName.DataPropertyName = "ActionUserName";
-            this.colActionUserName.HeaderText = "操作人";
-            this.colActionUserName.Name = "colActionUserName";
-            this.colActionUserName.ReadOnly = true;
-            // 
-            // colActionDateTime
-            // 
-            this.colActionDateTime.DataPropertyName = "ActionDateTime";
-            this.colActionDateTime.HeaderText = "操作时间";
-            this.colActionDateTime.Name = "colActionDateTime";
-            this.colActionDateTime.ReadOnly = true;
             // 
             // lblDate
             // 
@@ -400,23 +212,154 @@ namespace CMBC.EasyFactor.Help
             this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.diBegin.TabIndex = 18;
             // 
+            // lblCount
+            // 
+            this.lblCount.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCount.BackgroundStyle.Class = "";
+            this.lblCount.Location = new System.Drawing.Point(510, 7);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(71, 16);
+            this.lblCount.TabIndex = 3;
+            this.lblCount.Text = "获得 条记录";
+            // 
+            // btnQuery
+            // 
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(429, 4);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 2;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.QueryLogs);
+            // 
+            // tbUserID
+            // 
+            // 
+            // 
+            // 
+            this.tbUserID.Border.Class = "TextBoxBorder";
+            this.tbUserID.Location = new System.Drawing.Point(55, 5);
+            this.tbUserID.Name = "tbUserID";
+            this.tbUserID.Size = new System.Drawing.Size(100, 20);
+            this.tbUserID.TabIndex = 1;
+            // 
+            // lblUserID
+            // 
+            // 
+            // 
+            // 
+            this.lblUserID.BackgroundStyle.Class = "";
+            this.lblUserID.Location = new System.Drawing.Point(4, 3);
+            this.lblUserID.Name = "lblUserID";
+            this.lblUserID.Size = new System.Drawing.Size(44, 23);
+            this.lblUserID.TabIndex = 0;
+            this.lblUserID.Text = "操作人";
+            // 
+            // dgvLogs
+            // 
+            this.dgvLogs.AllowUserToAddRows = false;
+            this.dgvLogs.AllowUserToDeleteRows = false;
+            this.dgvLogs.AllowUserToOrderColumns = true;
+            this.dgvLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colOperationLogID,
+            this.colTableName,
+            this.colActionKey,
+            this.colActionType,
+            this.colActionUserName,
+            this.colActionDateTime});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLogs.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvLogs.Location = new System.Drawing.Point(0, 33);
+            this.dgvLogs.MultiSelect = false;
+            this.dgvLogs.Name = "dgvLogs";
+            this.dgvLogs.ReadOnly = true;
+            this.dgvLogs.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLogs.Size = new System.Drawing.Size(800, 567);
+            this.dgvLogs.TabIndex = 1;
+            this.dgvLogs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvLogsCellFormatting);
+            this.dgvLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvLogsRowPostPaint);
+            // 
+            // colOperationLogID
+            // 
+            this.colOperationLogID.DataPropertyName = "LogID";
+            this.colOperationLogID.HeaderText = "日志ID";
+            this.colOperationLogID.Name = "colOperationLogID";
+            this.colOperationLogID.ReadOnly = true;
+            // 
+            // colTableName
+            // 
+            this.colTableName.DataPropertyName = "TableName";
+            this.colTableName.HeaderText = "对象名";
+            this.colTableName.Name = "colTableName";
+            this.colTableName.ReadOnly = true;
+            // 
+            // colActionKey
+            // 
+            this.colActionKey.DataPropertyName = "ActionKey";
+            this.colActionKey.HeaderText = "主键";
+            this.colActionKey.Name = "colActionKey";
+            this.colActionKey.ReadOnly = true;
+            // 
+            // colActionType
+            // 
+            this.colActionType.DataPropertyName = "ActionType";
+            this.colActionType.HeaderText = "操作类型";
+            this.colActionType.Name = "colActionType";
+            this.colActionType.ReadOnly = true;
+            // 
+            // colActionUserName
+            // 
+            this.colActionUserName.DataPropertyName = "ActionUserName";
+            this.colActionUserName.HeaderText = "操作人";
+            this.colActionUserName.Name = "colActionUserName";
+            this.colActionUserName.ReadOnly = true;
+            // 
+            // colActionDateTime
+            // 
+            this.colActionDateTime.DataPropertyName = "ActionDateTime";
+            this.colActionDateTime.HeaderText = "操作时间";
+            this.colActionDateTime.Name = "colActionDateTime";
+            this.colActionDateTime.ReadOnly = true;
+            // 
             // OperationLogMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ContextMenuStrip = this.cmuUserMgr;
             this.Controls.Add(this.dgvLogs);
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "OperationLogMgr";
             this.Size = new System.Drawing.Size(800, 600);
-            this.cmuUserMgr.ResumeLayout(false);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).EndInit();
             this.ResumeLayout(false);
 
         }
