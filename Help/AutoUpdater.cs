@@ -37,6 +37,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading;
@@ -54,6 +55,8 @@ namespace CMBC.EasyFactor.Help
     {
 
         private AutoUpdateConfig _autoUpdateConfig;
+
+
 
         //Added 11/16/2004 For Proxy Clients, Thanks George for submitting these changes
         //If true, the app will automatically download the latest version, if false the app will use the DownloadForm to prompt the user, if AutoDownload is false and DownloadForm is null, it doesn't download
@@ -192,6 +195,27 @@ namespace CMBC.EasyFactor.Help
         private void ConfigOnLoadConfigError(string stMessage, Exception e)
         {
             SendAutoUpdateError(stMessage, e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private static void DeletePastUpdateDir()
+        {
+            string currentUpdate = String.Format("update{0:yyyyMMdd}", DateTime.Today);
+            var tempRoot = new DirectoryInfo(Path.GetTempPath());
+            try
+            {
+                foreach (DirectoryInfo dir in
+                    tempRoot.GetDirectories().Where(dir => dir.Name.StartsWith("update") && dir.Name != currentUpdate))
+                {
+                    dir.Delete(true);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBoxEx.Show("清除过去更新程序失败");
+            }
         }
 
         //updateThread()
@@ -377,6 +401,8 @@ namespace CMBC.EasyFactor.Help
                             {
                                 OnAutoUpdateComplete();
                             }
+
+                            DeletePastUpdateDir();
                             //Restart App if Necessary
                             //If true, the app will restart automatically, if false the app will use the RestartForm to prompt the user, if RestartForm is null, it doesn't restart
                             if (AutoRestart || (RestartForm != null && RestartForm.ShowDialog() == DialogResult.Yes))
@@ -430,6 +456,8 @@ namespace CMBC.EasyFactor.Help
                         {
                             OnAutoUpdateComplete();
                         }
+
+                        DeletePastUpdateDir();
                         //Restart App if Necessary
                         //If true, the app will restart automatically, if false the app will use the RestartForm to prompt the user, if RestartForm is null, it doesn't restart
                         if (RestartForm != null && RestartForm.ShowDialog() == DialogResult.Yes)

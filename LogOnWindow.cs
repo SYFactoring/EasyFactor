@@ -18,7 +18,6 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class LogOnWindow : Office2007Form
     {
-        #region?Constructors?(1)?
 
         /// <summary>
         /// Initializes a new instance of the LoginWindow class
@@ -27,12 +26,6 @@ namespace CMBC.EasyFactor
         {
             InitializeComponent();
         }
-
-        #endregion?Constructors?
-
-        #region?Methods?(3)?
-
-        //?Public?Methods?(1)?
 
         /// <summary>
         /// 
@@ -59,8 +52,6 @@ namespace CMBC.EasyFactor
 
             return false;
         }
-
-        //?Private?Methods?(2)?
 
         /// <summary>
         /// Event handler when cancel button clicked
@@ -108,7 +99,5 @@ namespace CMBC.EasyFactor
                 errorProvider.SetError(tbUserId, "用户名不存在");
             }
         }
-
-        #endregion?Methods?
     }
 }

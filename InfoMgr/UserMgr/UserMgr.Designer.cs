@@ -214,7 +214,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.dgvUsers.AllowUserToAddRows = false;
             this.dgvUsers.AllowUserToDeleteRows = false;
             this.dgvUsers.AllowUserToOrderColumns = true;
-            this.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -223,7 +222,6 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserIDColumn,
             this.NameColumn,
@@ -261,6 +259,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.UserIDColumn.HeaderText = "用户ID";
             this.UserIDColumn.Name = "UserIDColumn";
             this.UserIDColumn.ReadOnly = true;
+            this.UserIDColumn.Width = 97;
             // 
             // NameColumn
             // 
@@ -268,6 +267,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.NameColumn.HeaderText = "姓名";
             this.NameColumn.Name = "NameColumn";
             this.NameColumn.ReadOnly = true;
+            this.NameColumn.Width = 97;
             // 
             // EDIAccountColumn
             // 
@@ -275,6 +275,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.EDIAccountColumn.HeaderText = "EDI帐号";
             this.EDIAccountColumn.Name = "EDIAccountColumn";
             this.EDIAccountColumn.ReadOnly = true;
+            this.EDIAccountColumn.Width = 97;
             // 
             // RoleColumn
             // 
@@ -282,6 +283,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.RoleColumn.HeaderText = "角色";
             this.RoleColumn.Name = "RoleColumn";
             this.RoleColumn.ReadOnly = true;
+            this.RoleColumn.Width = 98;
             // 
             // PhoneColumn
             // 
@@ -289,6 +291,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.PhoneColumn.HeaderText = "电话";
             this.PhoneColumn.Name = "PhoneColumn";
             this.PhoneColumn.ReadOnly = true;
+            this.PhoneColumn.Width = 97;
             // 
             // TelphoneColumn
             // 
@@ -296,6 +299,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.TelphoneColumn.HeaderText = "手机";
             this.TelphoneColumn.Name = "TelphoneColumn";
             this.TelphoneColumn.ReadOnly = true;
+            this.TelphoneColumn.Width = 97;
             // 
             // EmailColumn
             // 
@@ -303,6 +307,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.EmailColumn.HeaderText = "Email";
             this.EmailColumn.Name = "EmailColumn";
             this.EmailColumn.ReadOnly = true;
+            this.EmailColumn.Width = 97;
             // 
             // LoginDateColumn
             // 
@@ -310,6 +315,7 @@ namespace CMBC.EasyFactor.InfoMgr.UserMgr
             this.LoginDateColumn.HeaderText = "最后登录日期";
             this.LoginDateColumn.Name = "LoginDateColumn";
             this.LoginDateColumn.ReadOnly = true;
+            this.LoginDateColumn.Width = 97;
             // 
             // UserMgr
             // 

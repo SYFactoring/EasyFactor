@@ -95,7 +95,7 @@ namespace CMBC.EasyFactor.Help
             DateTime endDate = String.IsNullOrEmpty(diEnd.Text) ? diEnd.MinDate : diEnd.Value;
 
             IQueryable<OperationLog> queryResult =
-                Context.OperationLogs.Where(log => log.ActionUserName.Contains(tbUserID.Text)
+                Context.OperationLogs.Where(log => (tbUserID.Text != "" ? log.ActionUserName.Contains(tbUserID.Text) : true)
                                                    &&
                                                    (beginDate != diBegin.MinDate
                                                         ? log.ActionDateTime >= beginDate

@@ -67,7 +67,7 @@ namespace CMBC.EasyFactor.Help
             this.tbUserID = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblUserID = new DevComponents.DotNetBar.LabelX();
             this.dgvLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colOperationLogID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLogID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colActionKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colActionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -113,7 +113,7 @@ namespace CMBC.EasyFactor.Help
             this.lblDate.Location = new System.Drawing.Point(161, 7);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
-            this.lblDate.TabIndex = 17;
+            this.lblDate.TabIndex = 2;
             this.lblDate.Text = "查询期限";
             // 
             // diEnd
@@ -162,7 +162,7 @@ namespace CMBC.EasyFactor.Help
             this.diEnd.Name = "diEnd";
             this.diEnd.Size = new System.Drawing.Size(100, 20);
             this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diEnd.TabIndex = 19;
+            this.diEnd.TabIndex = 4;
             // 
             // diBegin
             // 
@@ -210,7 +210,7 @@ namespace CMBC.EasyFactor.Help
             this.diBegin.Name = "diBegin";
             this.diBegin.Size = new System.Drawing.Size(100, 20);
             this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diBegin.TabIndex = 18;
+            this.diBegin.TabIndex = 3;
             // 
             // lblCount
             // 
@@ -222,7 +222,7 @@ namespace CMBC.EasyFactor.Help
             this.lblCount.Location = new System.Drawing.Point(510, 7);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(71, 16);
-            this.lblCount.TabIndex = 3;
+            this.lblCount.TabIndex = 6;
             this.lblCount.Text = "获得 条记录";
             // 
             // btnQuery
@@ -233,7 +233,7 @@ namespace CMBC.EasyFactor.Help
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 2;
+            this.btnQuery.TabIndex = 5;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryLogs);
             // 
@@ -265,7 +265,6 @@ namespace CMBC.EasyFactor.Help
             this.dgvLogs.AllowUserToAddRows = false;
             this.dgvLogs.AllowUserToDeleteRows = false;
             this.dgvLogs.AllowUserToOrderColumns = true;
-            this.dgvLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -274,9 +273,8 @@ namespace CMBC.EasyFactor.Help
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colOperationLogID,
+            this.colLogID,
             this.colTableName,
             this.colActionKey,
             this.colActionType,
@@ -296,19 +294,19 @@ namespace CMBC.EasyFactor.Help
             this.dgvLogs.MultiSelect = false;
             this.dgvLogs.Name = "dgvLogs";
             this.dgvLogs.ReadOnly = true;
-            this.dgvLogs.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLogs.Size = new System.Drawing.Size(800, 567);
-            this.dgvLogs.TabIndex = 1;
+            this.dgvLogs.TabIndex = 0;
             this.dgvLogs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvLogsCellFormatting);
             this.dgvLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvLogsRowPostPaint);
             // 
-            // colOperationLogID
+            // colLogID
             // 
-            this.colOperationLogID.DataPropertyName = "LogID";
-            this.colOperationLogID.HeaderText = "日志ID";
-            this.colOperationLogID.Name = "colOperationLogID";
-            this.colOperationLogID.ReadOnly = true;
+            this.colLogID.DataPropertyName = "LogID";
+            this.colLogID.HeaderText = "日志ID";
+            this.colLogID.Name = "colLogID";
+            this.colLogID.ReadOnly = true;
+            this.colLogID.Width = 126;
             // 
             // colTableName
             // 
@@ -316,6 +314,7 @@ namespace CMBC.EasyFactor.Help
             this.colTableName.HeaderText = "对象名";
             this.colTableName.Name = "colTableName";
             this.colTableName.ReadOnly = true;
+            this.colTableName.Width = 125;
             // 
             // colActionKey
             // 
@@ -323,6 +322,7 @@ namespace CMBC.EasyFactor.Help
             this.colActionKey.HeaderText = "主键";
             this.colActionKey.Name = "colActionKey";
             this.colActionKey.ReadOnly = true;
+            this.colActionKey.Width = 126;
             // 
             // colActionType
             // 
@@ -330,6 +330,7 @@ namespace CMBC.EasyFactor.Help
             this.colActionType.HeaderText = "操作类型";
             this.colActionType.Name = "colActionType";
             this.colActionType.ReadOnly = true;
+            this.colActionType.Width = 127;
             // 
             // colActionUserName
             // 
@@ -337,6 +338,7 @@ namespace CMBC.EasyFactor.Help
             this.colActionUserName.HeaderText = "操作人";
             this.colActionUserName.Name = "colActionUserName";
             this.colActionUserName.ReadOnly = true;
+            this.colActionUserName.Width = 126;
             // 
             // colActionDateTime
             // 
@@ -344,6 +346,7 @@ namespace CMBC.EasyFactor.Help
             this.colActionDateTime.HeaderText = "操作时间";
             this.colActionDateTime.Name = "colActionDateTime";
             this.colActionDateTime.ReadOnly = true;
+            this.colActionDateTime.Width = 127;
             // 
             // OperationLogMgr
             // 
@@ -366,15 +369,15 @@ namespace CMBC.EasyFactor.Help
 
         #endregion
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperationLogID;
+        private DevComponents.DotNetBar.LabelX lblDate;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLogID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTableName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colActionKey;
         private System.Windows.Forms.DataGridViewTextBoxColumn colActionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colActionUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colActionDateTime;
-        private DevComponents.DotNetBar.LabelX lblDate;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diEnd;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diBegin;
 
     }
 }
