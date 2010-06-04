@@ -568,15 +568,18 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             string prefix = String.Format("69{0}{1}{2}", locationCode, typeCode, year);
-            int count;
-            IEnumerable<string> queryResult = from c in context.Cases
+            int caseCount=0;
+            IEnumerable<string> queryStr = from c in context.Cases
                                               where c.CaseCode.StartsWith(prefix)
-                                              select c.CaseCode;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                                              select c.CaseCode.Substring(8);
+            foreach (string value in queryStr)
             {
-                count = 0;
+                if (caseCount < Convert.ToInt32(value))
+                {
+                    caseCount = Convert.ToInt32(value);
+                }
             }
-            string caseCode = String.Format("{0}{1:D4}", prefix, count + 1);
+            string caseCode = String.Format("{0}{1:D4}", prefix, caseCount + 1);
             return caseCode;
         }
 
@@ -614,17 +617,21 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             string prefix = String.Format("69{0}{1}{2}", locationCode, typeCode, year);
-            int count;
-            IEnumerable<string> queryResult = from c in context.Cases
+            int caseCount = 0;
+            IEnumerable<string> queryStr = from c in context.Cases
                                               where c.CaseCode.StartsWith(prefix)
-                                              select c.CaseCode;
-            if (!Int32.TryParse(queryResult.Max(no => no.Substring(8)), out count))
+                                              select c.CaseCode.Substring(8);
+
+            foreach (string value in queryStr)
             {
-                count = 0;
+                if (caseCount < Convert.ToInt32(value))
+                {
+                    caseCount = Convert.ToInt32(value);
+                }
             }
 
-            count += casesInMemory.Count(c => c.CaseCode.StartsWith(prefix));
-            string caseCode = String.Format("{0}{1:D4}", prefix, count + 1);
+            caseCount += casesInMemory.Count(c => c.CaseCode.StartsWith(prefix));
+            string caseCode = String.Format("{0}{1:D4}", prefix, caseCount + 1);
             return caseCode;
         }
     }

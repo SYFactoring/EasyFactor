@@ -493,7 +493,12 @@ namespace CMBC.EasyFactor.ARMgr
                                                    -TypeUtil.PRECISION)
                                               select invoice;
 
-            var logs = queryResult.Select(invoice => new InvoicePaymentLog(invoice)).ToList();
+            var logs = new List<InvoicePaymentLog>();
+            foreach (Invoice invoice in queryResult)
+            {
+                InvoicePaymentLog log = new InvoicePaymentLog(invoice);
+                logs.Add(log);
+            }
 
             logsBindingSource.DataSource = logs;
             StatBatch();

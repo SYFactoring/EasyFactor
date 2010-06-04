@@ -73,13 +73,13 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GeneratePaymentBatchNo(DateTime date)
         {
             string prefix = String.Format("PAY{0:yyyyMMdd}", date);
-            int batchCount=0;
+            int batchCount = 0;
 
             using (var context = new DBDataContext())
             {
                 IQueryable<string> queryStr = from batch in context.InvoicePaymentBatches
-                                                 where batch.PaymentBatchNo.StartsWith(prefix)
-                                                 select batch.PaymentBatchNo.Substring(12);
+                                              where batch.PaymentBatchNo.StartsWith(prefix)
+                                              select batch.PaymentBatchNo.Substring(12);
 
                 foreach (string value in queryStr)
                 {
@@ -103,13 +103,13 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GeneratePaymentBatchNo(DateTime date, List<InvoicePaymentBatch> batchesInMemory)
         {
             string prefix = String.Format("PAY{0:yyyyMMdd}", date);
-            int batchCount=0;
+            int batchCount = 0;
 
             using (var context = new DBDataContext())
             {
                 IQueryable<string> queryStr = from batch in context.InvoicePaymentBatches
-                                                 where batch.PaymentBatchNo.StartsWith(prefix)
-                                                 select batch.PaymentBatchNo.Substring(12);
+                                              where batch.PaymentBatchNo.StartsWith(prefix)
+                                              select batch.PaymentBatchNo.Substring(12);
 
                 foreach (string value in queryStr)
                 {

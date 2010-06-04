@@ -17,12 +17,14 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceFinanceBatch
     {
+
         private double? _assignAmount;
         private double? _commissionAmount;
         private double? _grossInterestIncome;
         private double? _handfeeAmount;
         private double? _marginIncome;
         private double? _netInterestIncome;
+
 
 
         /// <summary>
@@ -149,7 +151,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_handfeeAmount.HasValue == false)
                 {
-                    double? result = AssignCount*Case.ActiveCDA.HandFee;
+                    double? result = AssignCount * Case.ActiveCDA.HandFee;
                     if (Case.ActiveCDA.HandFeeCurr != Case.InvoiceCurrency)
                     {
                         double rate = Exchange.GetExchangeRate(Case.ActiveCDA.HandFeeCurr, Case.InvoiceCurrency);
@@ -172,7 +174,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_marginIncome.HasValue == false)
                 {
-                    _marginIncome = FinanceAmount*(FinanceRate - CostRate)/360*
+                    _marginIncome = FinanceAmount * (FinanceRate - CostRate) / 360 *
                                     ((FinancePeriodEnd - FinancePeriodBegin).Days);
                 }
 
@@ -219,7 +221,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string SellerName
         {
-            get {
+            get
+            {
                 return Case != null && Case.SellerClient != null
                            ? Case.SellerClient.ToString()
                            : (Client != null ? Client.ToString() : string.Empty);
@@ -233,6 +236,8 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get { return Case.TransactionType; }
         }
+
+
 
 
         //?Public?Methods?(3)?
@@ -252,12 +257,12 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GenerateFinanceBatchNo(DateTime date)
         {
             string prefix = String.Format("FIN{0:yyyMMdd}", date);
-            int batchCount=0;
+            int batchCount = 0;
             using (var context = new DBDataContext())
             {
                 IQueryable<string> queryStr = from batch in context.InvoiceFinanceBatches
-                                                 where batch.FinanceBatchNo.StartsWith(prefix)
-                                                 select batch.FinanceBatchNo.Substring(12);
+                                              where batch.FinanceBatchNo.StartsWith(prefix)
+                                              select batch.FinanceBatchNo.Substring(12);
 
                 foreach (string value in queryStr)
                 {
@@ -281,13 +286,13 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GenerateFinanceBatchNo(DateTime date, List<InvoiceFinanceBatch> batchesInMemory)
         {
             string prefix = String.Format("FIN{0:yyyMMdd}", date);
-            int batchCount=0;
+            int batchCount = 0;
 
             using (var context = new DBDataContext())
             {
                 IQueryable<string> queryStr = from batch in context.InvoiceFinanceBatches
-                                                 where batch.FinanceBatchNo.StartsWith(prefix)
-                                                 select batch.FinanceBatchNo.Substring(12);
+                                              where batch.FinanceBatchNo.StartsWith(prefix)
+                                              select batch.FinanceBatchNo.Substring(12);
 
                 foreach (string value in queryStr)
                 {

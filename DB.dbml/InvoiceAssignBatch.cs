@@ -15,6 +15,7 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceAssignBatch
     {
+
         private double? _assignAmount;
         private double? _assignOutstanding;
         private double? _commissionAmount;
@@ -23,6 +24,7 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _financeOutstanding;
         private double? _paymentAmount;
         private double? _refundAmount;
+
 
 
         /// <summary>
@@ -82,18 +84,6 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        public double? CommissionPrice
-        {
-            get
-            {
-                CDA cda = this.Case.ActiveCDA;
-                return cda != null ? cda.Price : null;
-            }
-        }
-
-        /// <summary>
         /// Gets
         /// </summary>
         public double? CommissionAmount
@@ -116,6 +106,18 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return _commissionAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? CommissionPrice
+        {
+            get
+            {
+                CDA cda = Case.ActiveCDA;
+                return cda != null ? cda.Price : null;
             }
         }
 
@@ -151,29 +153,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? FactorCommissionPrice
-        {
-            get
-            {
-                CDA cda = Case.ActiveCDA;
-                if (cda != null)
-                {
-                    if (TransactionType == "出口保理")
-                    {
-                        return cda.IFPrice;
-                    }
-                    if (TransactionType == "进口保理")
-                    {
-                        return cda.EFPrice;
-                    }
-                }
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public double? FactorCommissionAmount
         {
             get
@@ -194,6 +173,29 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return _factorCommissionAmount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? FactorCommissionPrice
+        {
+            get
+            {
+                CDA cda = Case.ActiveCDA;
+                if (cda != null)
+                {
+                    if (TransactionType == "出口保理")
+                    {
+                        return cda.IFPrice;
+                    }
+                    if (TransactionType == "进口保理")
+                    {
+                        return cda.EFPrice;
+                    }
+                }
+                return null;
             }
         }
 
@@ -385,6 +387,8 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get { return Case.TransactionType; }
         }
+
+
 
 
         //?Public?Methods?(2)?
