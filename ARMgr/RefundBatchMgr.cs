@@ -86,7 +86,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -172,25 +172,29 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceRefundBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var batches = GetSelectedBatches();
             if (
-                MessageBoxEx.Show("是否打算删除此" + selectedBatch.BatchCount + "条还款记录", MESSAGE.TITLE_INFORMATION,
-                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            MessageBoxEx.Show("是否打算删除此" + batches.Count() + "条还款批次记录", MESSAGE.TITLE_INFORMATION,
+                      MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
-            foreach (InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
-            {
-                InvoiceFinanceLog financeLog = log.InvoiceFinanceLog;
-                log.InvoiceFinanceLog = null;
-                financeLog.Invoice.CaculateRefund();
-                Context.InvoiceRefundLogs.DeleteOnSubmit(log);
-            }
-
-            Context.InvoiceRefundBatches.DeleteOnSubmit(selectedBatch);
             try
             {
+                foreach (InvoiceRefundBatch selectedBatch in batches)
+                {
+                    foreach (InvoiceRefundLog log in selectedBatch.InvoiceRefundLogs)
+                    {
+                        InvoiceFinanceLog financeLog = log.InvoiceFinanceLog;
+                        log.InvoiceFinanceLog = null;
+                        financeLog.Invoice.CaculateRefund();
+                        Context.InvoiceRefundLogs.DeleteOnSubmit(log);
+                    }
+
+                    _bs.Remove(selectedBatch);
+                }
+
                 Context.SubmitChanges();
             }
             catch (Exception e1)
@@ -199,8 +203,6 @@ namespace CMBC.EasyFactor.ARMgr
                                   MessageBoxIcon.Warning);
                 return;
             }
-
-            dgvBatches.Rows.RemoveAt(dgvBatches.CurrentCell.RowIndex);
         }
 
         /// <summary>
@@ -215,7 +217,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceRefundBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceRefundBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             var detail = new RefundBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
@@ -262,7 +264,7 @@ namespace CMBC.EasyFactor.ARMgr
             DateTime endDate = String.IsNullOrEmpty(dateTo.Text) ? dateTo.MinDate : dateTo.Value.Date;
             string createUserName = tbCreateUserName.Text;
             string clientName = tbClientName.Text;
-            var location = (string) cbLocation.SelectedValue;
+            var location = (string)cbLocation.SelectedValue;
             string transactionType = cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
@@ -291,7 +293,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                  (endDate != dateTo.MinDate
                                                                       ? i.RefundDate <= endDate
                                                                       : true)
-                                                                 //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                     //&& (status != string.Empty ? i.CheckStatus == status : true)
                                                                  &&
                                                                  (refundType == "全部" ? true : i.RefundType == refundType)
                                                                  && (i.CreateUserName.Contains(createUserName))
@@ -323,7 +325,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                  (endDate != dateTo.MinDate
                                                                       ? i.RefundDate <= endDate
                                                                       : true)
-                                                                 //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                     //&& (status != string.Empty ? i.CheckStatus == status : true)
                                                                  &&
                                                                  (refundType == "全部" ? true : i.RefundType == refundType)
                                                                  && (i.CreateUserName.Contains(createUserName))
@@ -394,13 +396,38 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceRefundBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceRefundBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             Selected = selectedBatch;
             if (OwnerForm != null)
             {
                 OwnerForm.DialogResult = DialogResult.Yes;
                 OwnerForm.Close();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private List<InvoiceRefundBatch> GetSelectedBatches()
+        {
+            if (dgvBatches.CurrentCell == null)
+            {
+                return null;
+            }
+
+            var selectedBatches = new List<InvoiceRefundBatch>();
+
+            foreach (DataGridViewCell cell in dgvBatches.SelectedCells)
+            {
+                var batch = (InvoiceRefundBatch)_bs.List[cell.RowIndex];
+                if (!selectedBatches.Contains(batch))
+                {
+                    selectedBatches.Add(batch);
+                }
+            }
+
+            return selectedBatches;
         }
 
         /// <summary>

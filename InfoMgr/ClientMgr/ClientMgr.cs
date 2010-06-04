@@ -453,13 +453,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 menuItemClientDelete.Enabled = true;
                 menuItemClientCreditLineNew.Enabled = true;
                 menuItemContractNew.Enabled = true;
+                menuItemClientExport.Enabled = true;
             }
             else
             {
                 menuItemClientNew.Enabled = false;
                 menuItemClientDelete.Enabled = false;
                 menuItemClientCreditLineNew.Enabled = false;
-                menuItemContractNew.Enabled = false;
+                menuItemContractNew.Enabled = false; 
+                menuItemClientExport.Enabled = false;
             }
         }
     }

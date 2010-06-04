@@ -33,7 +33,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         private OpBatchType _opBatchType;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -164,25 +164,29 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoicePaymentBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
+            List<InvoicePaymentBatch> batches = GetSelectedBatches();
             if (
-                MessageBoxEx.Show("是否打算删除此" + selectedBatch.BatchCount + "条付款记录", MESSAGE.TITLE_INFORMATION,
+                MessageBoxEx.Show("是否打算删除此" + batches.Count() + "条付款批次记录", MESSAGE.TITLE_INFORMATION,
                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
-            foreach (InvoicePaymentLog log in selectedBatch.InvoicePaymentLogs)
-            {
-                Invoice invoice = log.Invoice;
-                log.Invoice = null;
-                invoice.CaculatePayment();
-                Context.InvoicePaymentLogs.DeleteOnSubmit(log);
-            }
-
-            Context.InvoicePaymentBatches.DeleteOnSubmit(selectedBatch);
             try
             {
+                foreach (InvoicePaymentBatch selectedBatch in batches)
+                {
+                    foreach (InvoicePaymentLog log in selectedBatch.InvoicePaymentLogs)
+                    {
+                        Invoice invoice = log.Invoice;
+                        log.Invoice = null;
+                        invoice.CaculatePayment();
+                        Context.InvoicePaymentLogs.DeleteOnSubmit(log);
+                    }
+
+                    _bs.Remove(selectedBatch);
+                }
+
                 Context.SubmitChanges();
             }
             catch (Exception e1)
@@ -191,8 +195,6 @@ namespace CMBC.EasyFactor.ARMgr
                                   MessageBoxIcon.Warning);
                 return;
             }
-
-            dgvBatches.Rows.RemoveAt(dgvBatches.CurrentCell.RowIndex);
         }
 
         /// <summary>
@@ -518,6 +520,9 @@ namespace CMBC.EasyFactor.ARMgr
         private void UpdateContextMenu()
         {
             menuItemBatchDelete.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE);
+            menuItemMSG09.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
+            menuItemMSG11.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
+            menuItemMSG12.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.ToolStripMenuItem menuItemClientDetail;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientNew;
         private System.Windows.Forms.ToolStripMenuItem menuItemClientSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemClientsExport;
+        private System.Windows.Forms.ToolStripMenuItem menuItemClientExport;
         private System.Windows.Forms.ToolStripMenuItem menuItemContractNew;
         private DevComponents.DotNetBar.PanelEx pnlQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
@@ -91,7 +91,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemContractNew = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemClientDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemClientsExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemClientExport = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblLocation = new DevComponents.DotNetBar.LabelX();
@@ -226,7 +226,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemContractNew,
             this.menuItemClientDelete,
             this.toolStripSeparator1,
-            this.menuItemClientsExport});
+            this.menuItemClientExport});
             this.cmuClientMgr.Name = "contextMenuClientMgr";
             this.cmuClientMgr.Size = new System.Drawing.Size(147, 170);
             // 
@@ -284,10 +284,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // menuItemClientsExport
             // 
-            this.menuItemClientsExport.Name = "menuItemClientsExport";
-            this.menuItemClientsExport.Size = new System.Drawing.Size(146, 22);
-            this.menuItemClientsExport.Text = "导出所有客户";
-            this.menuItemClientsExport.Click += new System.EventHandler(this.ExportClients);
+            this.menuItemClientExport.Name = "menuItemClientsExport";
+            this.menuItemClientExport.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientExport.Text = "导出所有客户";
+            this.menuItemClientExport.Click += new System.EventHandler(this.ExportClients);
             // 
             // pnlQuery
             // 

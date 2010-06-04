@@ -50,6 +50,8 @@ namespace CMBC.EasyFactor.CaseMgr
             cbCurrency.DataSource = currencyList;
             cbCurrency.DisplayMember = "CurrencyFormat";
             cbCurrency.ValueMember = "CurrencyCode";
+
+            UpdateContextMenu();
         }
 
 
@@ -256,6 +258,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 OwnerForm.DialogResult = DialogResult.Yes;
                 OwnerForm.Close();
             }
+        }
+
+        /// <summary>
+        /// Update editable status
+        /// </summary>
+        private void UpdateContextMenu()
+        {
+            menuItemCreditCoverNegExport.Enabled = PermUtil.ValidatePermission(Permissions.BASICINFO_UPDATE);
         }
     }
 }

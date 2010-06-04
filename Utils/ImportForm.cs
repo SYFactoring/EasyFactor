@@ -3535,7 +3535,7 @@ namespace CMBC.EasyFactor.Utils
                                     creditNote = new CreditNote
                                                      {
                                                          CreditNoteNo = creditNoteNo,
-                                                         CreditNoteDate = (DateTime) valueArray[row, 9]
+                                                         CreditNoteDate = (DateTime)valueArray[row, 9]
                                                      };
                                     creditNoteList.Add(creditNote);
                                 }
@@ -3544,7 +3544,7 @@ namespace CMBC.EasyFactor.Utils
                             paymentLog = new InvoicePaymentLog
                                              {
                                                  CreditNote = creditNote,
-                                                 PaymentAmount = (double) valueArray[row, 8]
+                                                 PaymentAmount = (double)valueArray[row, 8]
                                              };
                             string invoiceNo = String.Format("{0:G}", valueArray[row, 6]);
                             if (String.IsNullOrEmpty(invoiceNo))
@@ -3737,35 +3737,26 @@ namespace CMBC.EasyFactor.Utils
                         {
                             if (!Double.TryParse(paymentAmountStr, out paymentAmount))
                             {
-                                if (isInInvoice)
-                                {
-                                    throw new Exception("冲销账款金额类型异常，不能导入：" + invoiceNo);
-                                }
-                                throw new Exception("冲销账款金额类型异常，不能导入：" + assignBatchCode);
+                                throw isInInvoice
+                                          ? new Exception("冲销账款金额类型异常，不能导入：" + invoiceNo)
+                                          : new Exception("冲销账款金额类型异常，不能导入：" + assignBatchCode);
                             }
                         }
 
                         string paymentDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(paymentDateStr))
                         {
-                            if (isInInvoice)
-                            {
-                                throw new Exception("销帐日不能为空，不能导入：" + invoiceNo);
-                            }
-                            throw new Exception("销帐日不能为空，不能导入：" + assignBatchCode);
+                            throw isInInvoice
+                                      ? new Exception("销帐日不能为空，不能导入：" + invoiceNo)
+                                      : new Exception("销帐日不能为空，不能导入：" + assignBatchCode);
                         }
 
                         DateTime paymentDate;
                         if (!DateTime.TryParse(paymentDateStr, out paymentDate))
                         {
-                            if (isInInvoice)
-                            {
-                                throw new Exception("销帐日类型异常，不能导入：" + invoiceNo);
-                            }
-                            else
-                            {
-                                throw new Exception("销帐日类型异常，不能导入：" + assignBatchCode);
-                            }
+                            throw isInInvoice
+                                      ? new Exception("销帐日类型异常，不能导入：" + invoiceNo)
+                                      : new Exception("销帐日类型异常，不能导入：" + assignBatchCode);
                         }
 
                         string comment = String.Format("{0:G}", valueArray[row, column]);

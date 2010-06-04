@@ -809,12 +809,27 @@ namespace CMBC.EasyFactor.ARMgr
                 menuItemInvoiceDelete.Enabled = true;
                 menuItemInvoiceDispute.Enabled = true;
                 menuItemInvoiceFlaw.Enabled = true;
+                menuItemCaculate.Enabled = true;
+                menuItemCommission.Enabled = true;
             }
             else
             {
                 menuItemInvoiceDelete.Enabled = false;
                 menuItemInvoiceDispute.Enabled = false;
                 menuItemInvoiceFlaw.Enabled = false;
+                menuItemCaculate.Enabled = false;
+                menuItemCommission.Enabled = false;
+            }
+
+            if(PermUtil.ValidatePermission(Permissions.INVOICE_REPORT))
+            {
+                menuItemExportAllInvoices.Enabled = true;
+                menuItemExportSelectedInvoices.Enabled = true;
+            }
+            else
+            {
+                menuItemExportAllInvoices.Enabled = false;
+                menuItemExportSelectedInvoices.Enabled = false;
             }
         }
     }

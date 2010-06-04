@@ -111,7 +111,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -202,27 +202,36 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceFinanceBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            List<InvoiceFinanceBatch> batches = GetSelectedBatches();
+
             if (
-                MessageBoxEx.Show("是否打算删除此融资批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
+                MessageBoxEx.Show("是否打算删除此" + batches.Count() + "条融资批次信息", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
                                   MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
-
-            List<InvoiceFinanceLog> logList = selectedBatch.InvoiceFinanceLogs.ToList();
-            foreach (InvoiceFinanceLog log in logList)
-            {
-                Invoice invoice = log.Invoice;
-                log.Invoice = null;
-                invoice.Commission -= log.Commission.GetValueOrDefault();
-                invoice.CaculateFinance();
-                Context.InvoiceFinanceLogs.DeleteOnSubmit(log);
-            }
-
-            Context.InvoiceFinanceBatches.DeleteOnSubmit(selectedBatch);
             try
             {
+                foreach (InvoiceFinanceBatch selectedBatch in batches)
+                {
+                    foreach (InvoiceFinanceLog log in selectedBatch.InvoiceFinanceLogs.ToList())
+                    {
+                        foreach(InvoiceRefundLog refundLog in log.InvoiceRefundLogs.ToList())
+                        {
+                            Context.InvoiceRefundLogs.DeleteOnSubmit(refundLog);  
+                        }
+
+                        Invoice invoice = log.Invoice;
+                        log.Invoice = null;
+                        invoice.Commission -= log.Commission.GetValueOrDefault();
+                        invoice.CaculateFinance();
+                        invoice.CaculateRefund();
+                        Context.InvoiceFinanceLogs.DeleteOnSubmit(log);
+                    }
+
+                    _bs.Remove(selectedBatch);
+                }
+
                 Context.SubmitChanges();
             }
             catch (Exception e1)
@@ -231,8 +240,6 @@ namespace CMBC.EasyFactor.ARMgr
                                   MessageBoxIcon.Warning);
                 return;
             }
-
-            dgvBatches.Rows.RemoveAt(dgvBatches.CurrentCell.RowIndex);
         }
 
         /// <summary>
@@ -247,7 +254,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceFinanceBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceFinanceBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             var detail = new FinanceBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
@@ -287,7 +294,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<InvoiceFinanceBatch> GetSelectedBatches()
+        private List<InvoiceFinanceBatch> GetSelectedBatches()
         {
             if (dgvBatches.CurrentCell == null)
             {
@@ -298,7 +305,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (DataGridViewCell cell in dgvBatches.SelectedCells)
             {
-                var batch = (InvoiceFinanceBatch) _bs.List[cell.RowIndex];
+                var batch = (InvoiceFinanceBatch)_bs.List[cell.RowIndex];
                 if (!selectedBatches.Contains(batch))
                 {
                     selectedBatches.Add(batch);
@@ -339,7 +346,7 @@ namespace CMBC.EasyFactor.ARMgr
             DateTime endDate = String.IsNullOrEmpty(dateTo.Text) ? dateTo.MinDate : dateTo.Value.Date;
             string createUserName = tbCreateUserName.Text;
             string clientName = tbClientName.Text;
-            var location = (string) cbLocation.SelectedValue;
+            var location = (string)cbLocation.SelectedValue;
             string transactionType = cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
@@ -368,7 +375,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                   (endDate != dateTo.MinDate
                                                                        ? i.FinancePeriodBegin <= endDate
                                                                        : true)
-                                                                  //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                      //&& (status != string.Empty ? i.CheckStatus == status : true)
                                                                   && (i.CreateUserName.Contains(createUserName))
                                                                   &&
                                                                   (transactionType == "全部"
@@ -401,7 +408,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                   (endDate != dateTo.MinDate
                                                                        ? i.FinancePeriodBegin <= endDate
                                                                        : true)
-                                                                  //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                      //&& (status != string.Empty ? i.CheckStatus == status : true)
                                                                   && (i.CreateUserName.Contains(createUserName))
                                                                   &&
                                                                   (financeType == "全部"
@@ -469,7 +476,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            IEnumerable<InvoiceFinanceBatch> selectedBatches = GetSelectedBatches();
+            List<InvoiceFinanceBatch> selectedBatches = GetSelectedBatches();
             if (selectedBatches == null)
             {
                 return;
@@ -495,9 +502,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batchGroup"></param>
         private static void ReportCommissionImpl(IGrouping<Client, InvoiceFinanceBatch> batchGroup)
         {
-            var app = new ApplicationClass {Visible = false};
+            var app = new ApplicationClass { Visible = false };
 
-            var sheet = (Worksheet) app.Workbooks.Add(true).Sheets[1];
+            var sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
             try
             {
                 sheet.PageSetup.Zoom = false;
@@ -603,7 +610,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Range["A1", "A4"].RowHeight = 20;
                 sheet.Range["A5", "A5"].RowHeight = 30;
 
-                var sealRange = ((Range) sheet.Cells[row - 3, 3]);
+                var sealRange = ((Range)sheet.Cells[row - 3, 3]);
                 string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
                 sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
                                         Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
@@ -648,7 +655,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceFinanceBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceFinanceBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             Selected = selectedBatch;
             if (OwnerForm != null)
             {
@@ -663,6 +670,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void UpdateContextMenu()
         {
             menuItemBatchDelete.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE);
+            menuItemCommissionReport.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
         }
 
         #region Nested type: MakeReport

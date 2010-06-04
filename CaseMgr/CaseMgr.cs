@@ -530,6 +530,19 @@ namespace CMBC.EasyFactor.CaseMgr
                 menuItemCaseDelete.Enabled = false;
                 menuItemCreditCoverNegNew.Enabled = false;
             }
+
+            if(PermUtil.ValidatePermission(Permissions.INVOICE_REPORT))
+            {
+                menuItemCaseExport.Enabled = true;
+                menuItemLegerReport.Enabled = true;
+            }
+            else
+            {
+                menuItemCaseExport.Enabled = false;
+                menuItemLegerReport.Enabled = false;
+            }
+
+            menuItemCaculateInvoices.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE);
         }
 
 

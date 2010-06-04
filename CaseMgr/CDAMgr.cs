@@ -95,7 +95,7 @@ namespace CMBC.EasyFactor.CaseMgr
             cbTransactionType.Text = @"全部";
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -182,7 +182,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var cda = (CDA) _bs.List[dgvCDAs.CurrentCell.RowIndex];
+            var cda = (CDA)_bs.List[dgvCDAs.CurrentCell.RowIndex];
 
             if (
                 MessageBoxEx.Show("是否确认复核通过该额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
@@ -247,7 +247,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var cda = (CDA) _bs.List[dgvCDAs.CurrentCell.RowIndex];
+            var cda = (CDA)_bs.List[dgvCDAs.CurrentCell.RowIndex];
 
             if (cda.CDAStatus == CDAStr.CHECKED)
             {
@@ -296,7 +296,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var selectedCDA = (CDA) _bs.List[dgvCDAs.CurrentCell.RowIndex];
+            var selectedCDA = (CDA)_bs.List[dgvCDAs.CurrentCell.RowIndex];
             var cdaDetail = new CDADetail(selectedCDA, CDADetail.OpCDAType.DETAIL_CDA);
             cdaDetail.ShowDialog(this);
         }
@@ -314,7 +314,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 Object originalData = e.Value;
                 if (originalData != null)
                 {
-                    var result = (bool) originalData;
+                    var result = (bool)originalData;
                     e.Value = result ? "Y" : "N";
                 }
             }
@@ -329,7 +329,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             for (int i = 0; i < _bs.List.Count; i++)
             {
-                var cda = (CDA) _bs.List[i];
+                var cda = (CDA)_bs.List[i];
                 if (cda.CreditCoverPeriodEnd < DateTime.Now.Date)
                 {
                     dgvCDAs["colCreditCoverPeriodEnd", i].Style.BackColor = Color.Red;
@@ -384,7 +384,7 @@ namespace CMBC.EasyFactor.CaseMgr
             var selectedCDAs = new List<CDA>();
             foreach (DataGridViewCell cell in dgvCDAs.SelectedCells)
             {
-                var selectedCDA = (CDA) _bs.List[cell.RowIndex];
+                var selectedCDA = (CDA)_bs.List[cell.RowIndex];
                 if (!selectedCDAs.Contains(selectedCDA))
                 {
                     selectedCDAs.Add(selectedCDA);
@@ -422,7 +422,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string contractCode = tbContractCode.Text;
             string status = cbCheckStatus.Text;
             string transactionType = cbTransactionType.Text;
-            var location = (string) cbLocation.SelectedValue;
+            var location = (string)cbLocation.SelectedValue;
             string createUserName = tbCreateUserName.Text;
             bool isCDAChecked = cbIsCDA.CheckState == CheckState.Checked;
             DateTime beginDate = String.IsNullOrEmpty(diBegin.Text) ? diBegin.MinDate : diBegin.Value;
@@ -477,7 +477,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var cda = (CDA) _bs.List[dgvCDAs.CurrentCell.RowIndex];
+            var cda = (CDA)_bs.List[dgvCDAs.CurrentCell.RowIndex];
 
             if (
                 MessageBoxEx.Show("是否确认复核退回该额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
@@ -512,10 +512,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var selectedCDA = (CDA) _bs.List[dgvCDAs.CurrentCell.RowIndex];
+            var selectedCDA = (CDA)_bs.List[dgvCDAs.CurrentCell.RowIndex];
 
-            var app = new ApplicationClass {Visible = false};
-            var sheet = (Worksheet) app.Workbooks.Add(true).Sheets[1];
+            var app = new ApplicationClass { Visible = false };
+            var sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             try
             {
@@ -794,11 +794,11 @@ namespace CMBC.EasyFactor.CaseMgr
                         break;
                 }
 
-                string line2 =
+                const string line2 =
                     "（2）如应收账款债务人(以下简称买方)于到应收账款期日后  日内（最长不超过  天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
-                string line3 = "（3）核准应收账款的销售合同有禁止转让的约定时，民生银行就该应收账款不须负任何责任。";
-                string line4 = "（4）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
-                string line5 = "（5）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
+                const string line3 = "（3）核准应收账款的销售合同有禁止转让的约定时，民生银行就该应收账款不须负任何责任。";
+                const string line4 = "（4）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
+                const string line5 = "（5）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
 
                 sheet.Range[sheet.Cells[24, 1], sheet.Cells[24, 1]].WrapText = true;
                 sheet.Range[sheet.Cells[26, 1], sheet.Cells[26, 1]].WrapText = true;
@@ -871,7 +871,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 app.Visible = true;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 if (sheet != null)
                 {
@@ -905,7 +905,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            Selected = (CDA) _bs.List[dgvCDAs.CurrentCell.RowIndex];
+            Selected = (CDA)_bs.List[dgvCDAs.CurrentCell.RowIndex];
 
             if (OwnerForm != null)
             {
@@ -931,7 +931,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var cda = (CDA) _bs.List[dgvCDAs.CurrentCell.RowIndex];
+            var cda = (CDA)_bs.List[dgvCDAs.CurrentCell.RowIndex];
             cda.AdjustCDAStatus();
 
             try
@@ -957,11 +957,17 @@ namespace CMBC.EasyFactor.CaseMgr
             {
                 menuItemCDANew.Enabled = true;
                 menuItemCDADelete.Enabled = true;
+                menuItemCDAUpdate.Enabled = true;
+                menuItemCDAReport.Enabled = true;
+                menuItemCDAExport.Enabled = true;
             }
             else
             {
                 menuItemCDANew.Enabled = false;
                 menuItemCDADelete.Enabled = false;
+                menuItemCDAUpdate.Enabled = false;
+                menuItemCDAReport.Enabled = false;
+                menuItemCDAExport.Enabled = false;
             }
 
             if (PermUtil.ValidatePermission(Permissions.CDA_APPROVE))

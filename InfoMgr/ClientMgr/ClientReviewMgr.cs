@@ -64,6 +64,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             List<string> domainList = Department.AllDomains;
             domainList.Insert(0, "È«²¿");
             cbDomains.DataSource = domainList;
+
+            UpdateContextMenu();
         }
 
 
@@ -275,6 +277,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 OwnerForm.DialogResult = DialogResult.Yes;
                 OwnerForm.Close();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateContextMenu()
+        {
+            if (PermUtil.ValidatePermission(Permissions.BASICINFO_UPDATE))
+            {
+                menuItemClientReviewDelete.Enabled = true;
+                menuItemClientReviewExport.Enabled = true;
+            }
+            else
+            {
+                menuItemClientReviewDelete.Enabled = false;
+                menuItemClientReviewExport.Enabled = false;
             }
         }
     }

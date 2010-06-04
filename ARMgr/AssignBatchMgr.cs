@@ -473,8 +473,8 @@ namespace CMBC.EasyFactor.ARMgr
                                                                       ? true
                                                                       : curCase.OwnerDepartment.LocationCode ==
                                                                         location)
-                                                          && ((curCase.TransactionType == "国内卖方保理" || curCase.TransactionType == "出口保理") && ( curCase.BuyerFactor.CompanyNameCN.Contains(factorName) ||  curCase.BuyerFactor.CompanyNameEN.Contains(factorName))
-                                                          ||  ((curCase.TransactionType == "国内买方保理" || curCase.TransactionType == "进口保理") && (curCase.SellerFactor.CompanyNameCN.Contains(factorName) || curCase.SellerFactor.CompanyNameEN.Contains(factorName))))
+                                                          && ((curCase.TransactionType == "国内卖方保理" || curCase.TransactionType == "出口保理") && (curCase.BuyerFactor.CompanyNameCN.Contains(factorName) || curCase.BuyerFactor.CompanyNameEN.Contains(factorName))
+                                                          || ((curCase.TransactionType == "国内买方保理" || curCase.TransactionType == "进口保理") && (curCase.SellerFactor.CompanyNameCN.Contains(factorName) || curCase.SellerFactor.CompanyNameEN.Contains(factorName))))
 
                                                           let seller = curCase.SellerClient
                                                           let buyer = curCase.BuyerClient
@@ -1798,6 +1798,14 @@ namespace CMBC.EasyFactor.ARMgr
         private void UpdateContextMenu()
         {
             menuItemBatchDelete.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE);
+            menuItemAssignReport.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
+            menuItemFinanceReport.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
+            menuItemCommissionReport.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
+            menuItemFileCheckList.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
+            menuItemFlawReport.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
+            menuItemThreeReports.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
+            menuItemMSG09.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
+            menuItemBatchExport.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
         }
 
         #region Nested type: MakeReport
