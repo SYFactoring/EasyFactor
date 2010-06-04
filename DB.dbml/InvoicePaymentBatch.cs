@@ -73,17 +73,20 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GeneratePaymentBatchNo(DateTime date)
         {
             string prefix = String.Format("PAY{0:yyyyMMdd}", date);
-            int batchCount;
+            int batchCount=0;
 
             using (var context = new DBDataContext())
             {
-                IQueryable<string> queryResult = from batch in context.InvoicePaymentBatches
+                IQueryable<string> queryStr = from batch in context.InvoicePaymentBatches
                                                  where batch.PaymentBatchNo.StartsWith(prefix)
-                                                 select batch.PaymentBatchNo;
+                                                 select batch.PaymentBatchNo.Substring(12);
 
-                if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+                foreach (string value in queryStr)
                 {
-                    batchCount = 0;
+                    if (batchCount < Convert.ToInt32(value))
+                    {
+                        batchCount = Convert.ToInt32(value);
+                    }
                 }
             }
 
@@ -100,17 +103,20 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GeneratePaymentBatchNo(DateTime date, List<InvoicePaymentBatch> batchesInMemory)
         {
             string prefix = String.Format("PAY{0:yyyyMMdd}", date);
-            int batchCount;
+            int batchCount=0;
 
             using (var context = new DBDataContext())
             {
-                IQueryable<string> queryResult = from batch in context.InvoicePaymentBatches
+                IQueryable<string> queryStr = from batch in context.InvoicePaymentBatches
                                                  where batch.PaymentBatchNo.StartsWith(prefix)
-                                                 select batch.PaymentBatchNo;
+                                                 select batch.PaymentBatchNo.Substring(12);
 
-                if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+                foreach (string value in queryStr)
                 {
-                    batchCount = 0;
+                    if (batchCount < Convert.ToInt32(value))
+                    {
+                        batchCount = Convert.ToInt32(value);
+                    }
                 }
             }
 

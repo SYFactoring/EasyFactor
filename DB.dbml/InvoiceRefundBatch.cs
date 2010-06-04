@@ -74,16 +74,19 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GenerateRefundBatchNo(DateTime date)
         {
             string dateStr = String.Format("{0:yyyMMdd}", date);
-            int batchCount;
+            int batchCount = 0;
             using (var context = new DBDataContext())
             {
-                IQueryable<string> queryResult = from batch in context.InvoiceRefundBatches
-                                                 where batch.RefundBatchNo.Contains(dateStr)
-                                                 select batch.RefundBatchNo;
+                IQueryable<string> queryStr = from batch in context.InvoiceRefundBatches
+                                              where batch.RefundBatchNo.Contains(dateStr)
+                                              select batch.RefundBatchNo.Substring(12);
 
-                if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+                foreach (string value in queryStr)
                 {
-                    batchCount = 0;
+                    if (batchCount < Convert.ToInt32(value))
+                    {
+                        batchCount = Convert.ToInt32(value);
+                    }
                 }
             }
 
@@ -100,16 +103,19 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GenerateRefundBatchNo(DateTime date, List<InvoiceRefundBatch> batchesInMemory)
         {
             string dateStr = String.Format("{0:yyyMMdd}", date);
-            int batchCount;
+            int batchCount = 0;
             using (var context = new DBDataContext())
             {
-                IQueryable<string> queryResult = from batch in context.InvoiceRefundBatches
-                                                 where batch.RefundBatchNo.Contains(dateStr)
-                                                 select batch.RefundBatchNo;
+                IQueryable<string> queryStr = from batch in context.InvoiceRefundBatches
+                                              where batch.RefundBatchNo.Contains(dateStr)
+                                              select batch.RefundBatchNo.Substring(12);
 
-                if (!Int32.TryParse(queryResult.Max(no => no.Substring(12)), out batchCount))
+                foreach (string value in queryStr)
                 {
-                    batchCount = 0;
+                    if (batchCount < Convert.ToInt32(value))
+                    {
+                        batchCount = Convert.ToInt32(value);
+                    }
                 }
             }
 

@@ -156,13 +156,13 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 CDA cda = Case.ActiveCDA;
-                if(cda!=null)
+                if (cda != null)
                 {
-                    if(TransactionType=="出口保理")
+                    if (TransactionType == "出口保理")
                     {
                         return cda.IFPrice;
                     }
-                    if(TransactionType=="进口保理")
+                    if (TransactionType == "进口保理")
                     {
                         return cda.EFPrice;
                     }
@@ -396,18 +396,21 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <returns></returns>
         public static string GenerateAssignBatchNo(string caseCode, DateTime assignDate)
         {
-            int batchCount;
+            int batchCount = 0;
             using (var context = new DBDataContext())
             {
-                IQueryable<string> queryResult = from batch in context.InvoiceAssignBatches
-                                                 where
-                                                     batch.CaseCode == caseCode &&
-                                                     batch.AssignDate.Year == assignDate.Year
-                                                 select batch.AssignBatchNo;
+                IQueryable<string> queryStr = from batch in context.InvoiceAssignBatches
+                                              where
+                                                  batch.CaseCode == caseCode &&
+                                                  batch.AssignDate.Year == assignDate.Year
+                                              select batch.AssignBatchNo.Substring(17);
 
-                if (!Int32.TryParse(queryResult.Max(no => no.Substring(17)), out batchCount))
+                foreach (string value in queryStr)
                 {
-                    batchCount = 0;
+                    if (batchCount < Convert.ToInt32(value))
+                    {
+                        batchCount = Convert.ToInt32(value);
+                    }
                 }
             }
 
@@ -425,18 +428,21 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GenerateAssignBatchNo(string caseCode, DateTime assignDate,
                                                    List<InvoiceAssignBatch> batchesInMemory)
         {
-            int batchCount;
+            int batchCount = 0;
             using (var context = new DBDataContext())
             {
-                IQueryable<string> queryResult = from batch in context.InvoiceAssignBatches
-                                                 where
-                                                     batch.CaseCode == caseCode &&
-                                                     batch.AssignDate.Year == assignDate.Year
-                                                 select batch.AssignBatchNo;
+                IQueryable<string> queryStr = from batch in context.InvoiceAssignBatches
+                                              where
+                                                  batch.CaseCode == caseCode &&
+                                                  batch.AssignDate.Year == assignDate.Year
+                                              select batch.AssignBatchNo.Substring(17);
 
-                if (!Int32.TryParse(queryResult.Max(no => no.Substring(17)), out batchCount))
+                foreach (string value in queryStr)
                 {
-                    batchCount = 0;
+                    if (batchCount < Convert.ToInt32(value))
+                    {
+                        batchCount = Convert.ToInt32(value);
+                    }
                 }
             }
 
