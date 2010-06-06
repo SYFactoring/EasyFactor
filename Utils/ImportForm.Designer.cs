@@ -199,10 +199,13 @@ namespace CMBC.EasyFactor.Utils
             this.Controls.Add(this.lblFilePath);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ImportForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据导入";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

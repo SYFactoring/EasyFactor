@@ -80,20 +80,20 @@ namespace CMBC.EasyFactor.CaseMgr
             cbCaseMark.Text = @"启动案";
 
             List<Department> deptsList = Department.AllDepartments(new DBDataContext());
-            deptsList.Insert(0, new Department {DepartmentCode = "CN01300", DepartmentName = "全部"});
+            deptsList.Insert(0, new Department { DepartmentCode = "CN01300", DepartmentName = "全部" });
             cbOwnerDepts.DataSource = deptsList;
             cbOwnerDepts.DisplayMembers = "DepartmentName";
             cbOwnerDepts.ValueMember = "DepartmentCode";
             cbOwnerDepts.GroupingMembers = "Domain";
 
             List<Currency> currencyList = Currency.AllCurrencies;
-            currencyList.Insert(0, new Currency {CurrencyCode = "AAA", CurrencyName = "All"});
+            currencyList.Insert(0, new Currency { CurrencyCode = "AAA", CurrencyName = "All" });
             cbCurrency.DataSource = currencyList;
             cbCurrency.DisplayMember = "CurrencyFormat";
             cbCurrency.ValueMember = "CurrencyCode";
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -201,7 +201,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var selectedCase = (Case) _bs.List[dgvCases.CurrentCell.RowIndex];
+            var selectedCase = (Case)_bs.List[dgvCases.CurrentCell.RowIndex];
             if (
                 MessageBoxEx.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", MESSAGE.TITLE_WARNING,
                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -258,7 +258,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var selectedCase = (Case) _bs.List[dgvCases.CurrentCell.RowIndex];
+            var selectedCase = (Case)_bs.List[dgvCases.CurrentCell.RowIndex];
             var caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
         }
@@ -306,7 +306,7 @@ namespace CMBC.EasyFactor.CaseMgr
             var selectedCases = new List<Case>();
             foreach (DataGridViewCell cell in dgvCases.SelectedCells)
             {
-                var selectedCase = (Case) _bs.List[cell.RowIndex];
+                var selectedCase = (Case)_bs.List[cell.RowIndex];
                 if (!selectedCases.Contains(selectedCase))
                 {
                     selectedCases.Add(selectedCase);
@@ -349,7 +349,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var selectedCase = (Case) _bs.List[dgvCases.CurrentCell.RowIndex];
+            var selectedCase = (Case)_bs.List[dgvCases.CurrentCell.RowIndex];
             var caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCreditCoverNegType.NEW_CREDIT_COVER_NEG);
             caseDetail.ShowDialog(this);
         }
@@ -364,25 +364,25 @@ namespace CMBC.EasyFactor.CaseMgr
             DateTime beginDate = String.IsNullOrEmpty(diBegin.Text) ? diBegin.MinDate : diBegin.Value;
             DateTime endDate = String.IsNullOrEmpty(diEnd.Text) ? diEnd.MinDate : diEnd.Value;
             string opName = tbOPName.Text;
-            var location = (string) cbLocation.SelectedValue;
+            var location = (string)cbLocation.SelectedValue;
             string caseMark = cbCaseMark.Text;
 
             Context = new DBDataContext();
 
             IQueryable<Case> queryResult = Context.Cases.Where(c =>
-                                                               ((string) cbOwnerDepts.SelectedValue == "CN01300"
+                                                               ((string)cbOwnerDepts.SelectedValue == "CN01300"
                                                                     ? true
                                                                     : c.OwnerDepartmentCode.Equals(
-                                                                        (string) cbOwnerDepts.SelectedValue))
+                                                                        (string)cbOwnerDepts.SelectedValue))
                                                                &&
                                                                (cbTransactionType.Text == @"全部"
                                                                     ? true
                                                                     : c.TransactionType == cbTransactionType.Text)
                                                                &&
-                                                               ((string) cbCurrency.SelectedValue == "AAA"
+                                                               ((string)cbCurrency.SelectedValue == "AAA"
                                                                     ? true
                                                                     : c.InvoiceCurrency ==
-                                                                      (string) cbCurrency.SelectedValue)
+                                                                      (string)cbCurrency.SelectedValue)
                                                                &&
                                                                (location == "00"
                                                                     ? true
@@ -402,9 +402,9 @@ namespace CMBC.EasyFactor.CaseMgr
                                                                     ? c.CaseAppDate <= endDate
                                                                     : true)
                                                                &&
-                                                               (cbIsCDA.Checked == false
+                                                               (cbIsCDAChecked.Checked == false
                                                                     ? true
-                                                                    : c.CDAs.Any(cda => cda.IsSigned))
+                                                                    : c.CDAs.Any(cda => cda.CDAStatus == CDAStr.CHECKED))
                                                                &&
                                                                (cbIsContractSigned.Checked == false
                                                                     ? true
@@ -488,7 +488,7 @@ namespace CMBC.EasyFactor.CaseMgr
             diBegin.Value = default(DateTime);
             diEnd.Value = default(DateTime);
             cbIsContractSigned.Checked = true;
-            cbIsCDA.Checked = true;
+            cbIsCDAChecked.Checked = true;
             tbOPName.Text = string.Empty;
         }
 
@@ -504,7 +504,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var selectedCase = (Case) _bs.List[dgvCases.CurrentCell.RowIndex];
+            var selectedCase = (Case)_bs.List[dgvCases.CurrentCell.RowIndex];
             Selected = selectedCase;
             if (OwnerForm != null)
             {
@@ -531,7 +531,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 menuItemCreditCoverNegNew.Enabled = false;
             }
 
-            if(PermUtil.ValidatePermission(Permissions.INVOICE_REPORT))
+            if (PermUtil.ValidatePermission(Permissions.INVOICE_REPORT))
             {
                 menuItemCaseExport.Enabled = true;
                 menuItemLegerReport.Enabled = true;

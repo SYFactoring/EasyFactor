@@ -8,7 +8,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.ButtonX btnQueryReset;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseMark;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCurrency;
-        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCDA;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsCDAChecked;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsContractSigned;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
         private DevComponents.DotNetBar.Controls.ComboTree cbOwnerDepts;
@@ -102,7 +102,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCaseMark = new DevComponents.DotNetBar.LabelX();
             this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.btnQueryReset = new DevComponents.DotNetBar.ButtonX();
-            this.cbIsCDA = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.cbIsCDAChecked = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -175,7 +175,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.panelQuery.Controls.Add(this.lblCaseMark);
             this.panelQuery.Controls.Add(this.cbIsContractSigned);
             this.panelQuery.Controls.Add(this.btnQueryReset);
-            this.panelQuery.Controls.Add(this.cbIsCDA);
+            this.panelQuery.Controls.Add(this.cbIsCDAChecked);
             this.panelQuery.Controls.Add(this.tbClientName);
             this.panelQuery.Controls.Add(this.lblClientName);
             this.panelQuery.Controls.Add(this.tbCaseCode);
@@ -311,19 +311,19 @@ namespace CMBC.EasyFactor.CaseMgr
             this.btnQueryReset.Text = "重置";
             this.btnQueryReset.Click += new System.EventHandler(this.Reset);
             // 
-            // cbIsCDA
+            // cbIsCDAChecked
             // 
-            this.cbIsCDA.AutoSize = true;
+            this.cbIsCDAChecked.AutoSize = true;
             // 
             // 
             // 
-            this.cbIsCDA.BackgroundStyle.Class = "";
-            this.cbIsCDA.Location = new System.Drawing.Point(599, 29);
-            this.cbIsCDA.Name = "cbIsCDA";
-            this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
-            this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsCDA.TabIndex = 11;
-            this.cbIsCDA.Text = "CDA是否签回";
+            this.cbIsCDAChecked.BackgroundStyle.Class = "";
+            this.cbIsCDAChecked.Location = new System.Drawing.Point(599, 29);
+            this.cbIsCDAChecked.Name = "cbIsCDAChecked";
+            this.cbIsCDAChecked.Size = new System.Drawing.Size(100, 16);
+            this.cbIsCDAChecked.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsCDAChecked.TabIndex = 11;
+            this.cbIsCDAChecked.Text = "CDA是否审核";
             // 
             // tbClientName
             // 

@@ -216,6 +216,7 @@ namespace CMBC.EasyFactor.Utils
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据导出";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClosingForm);
             this.ResumeLayout(false);
             this.PerformLayout();
