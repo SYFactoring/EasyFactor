@@ -1394,7 +1394,7 @@ namespace CMBC.EasyFactor.ARMgr
                 double assignAmount = 0;
                 foreach (Invoice invoice in selectedBatch.Invoices)
                 {
-                    if (invoice.IsFlaw == false && invoice.DueDate >= DateTime.Now.Date.AddDays(3))
+                    if (invoice.IsFlaw == false)
                     {
                         sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
                         sheet.Cells[row, 2] = invoice.AssignOutstanding;
@@ -1446,26 +1446,11 @@ namespace CMBC.EasyFactor.ARMgr
                 row++;
             }
 
-            sheet.Cells[row, 1] = "备注";
-            row++;
-            row++;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
-            sheet.Cells[row, 1] = @"1、本表中的卖方下的“最高可融资金额”及买方下的“此买方最高可融资金额”均指相应的最大可放款金额。";
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
-            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].RowHeight = 35;
-            row++;
-            row++;
-            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
-            sheet.Cells[row, 1] = @"2、由于目前为分部每周向保理部报送放款及还款信息，因此可融资余额会由于时效性问题不够精准。请放款岗核对保理业务明细台账与日常放款额度台账，最终确定可精确的可融资金额。";
-            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
-            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].RowHeight = 35;
-            row++;
-            row++;
-            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
-            sheet.Cells[row, 1] = @"3、本表三天内放款有效，过期请重新向保理部申请出具表单。";
-            row++;
+            sheet.Cells[row, 1] = @"备注：本表当日放款有效，过期请重新向保理部申请出具表单。";
 
-            row += 2;
+            row += 3;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
             sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";

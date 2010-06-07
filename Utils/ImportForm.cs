@@ -14,6 +14,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
 using DevComponents.DotNetBar;
+using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Office.Interop.Excel;
 
 namespace CMBC.EasyFactor.Utils
@@ -416,16 +417,20 @@ namespace CMBC.EasyFactor.Utils
                         throw new Exception(String.Format("台帐第一接收人不能为空，分部：{0}", dir.Name));
                     }
 
-                    var mail = new SendMail(location.LegerContactEmail1, location.LegerContactEmail2,
-                                            App.Current.CurUser.Email,
-                                            String.Format("{0}保理台帐{1:yyyyMMdd}", dir.Name, DateTime.Today),
-                                            "本邮件由中国民生银行保理运营系统自动生成。");
-                    foreach (FileInfo file in dir.GetFiles())
+                    string zipName = String.Format("{0}{1:yyyyMMdd}.zip", dir.Name, DateTime.Today);
+                    if (SystemUtil.ZipDirectory(dir.FullName, zipName))
                     {
-                        mail.AddAttachment(file.FullName);
+                        var mail = new SendMail(location.LegerContactEmail1, location.LegerContactEmail2,
+                                                App.Current.CurUser.Email,
+                                                String.Format("{0}保理台帐{1:yyyyMMdd}", dir.Name, DateTime.Today),
+                                                "本邮件由中国民生银行保理运营系统自动生成并发送。");
+                        //foreach (FileInfo file in dir.GetFiles())
+                        //{
+                        //    mail.AddAttachment(file.FullName);
+                        //}
+                        mail.AddAttachment(zipName);
+                        mail.Send();
                     }
-
-                    mail.Send();
                 }
 
                 worker.ReportProgress(100);

@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CMBC.EasyFactor.Properties;
+using ICSharpCode.SharpZipLib.Zip;
+using ICSharpCode.SharpZipLib.Checksums;
 
 namespace CMBC.EasyFactor.Utils
 {
@@ -183,6 +185,93 @@ namespace CMBC.EasyFactor.Utils
 
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="folderToZip"></param>
+        /// <param name="s"></param>
+        /// <param name="parentFolderName"></param>
+        /// <returns></returns>
+        private static bool ZipFileDictory(string folderToZip, ZipOutputStream s, string parentFolderName)
+        {
+            bool res = true;
+            ZipEntry entry = null;
+            FileStream fs = null;
+            Crc32 crc = new Crc32();
+
+            try
+            {
+
+                entry = new ZipEntry(Path.Combine(parentFolderName, Path.GetFileName(folderToZip) + "/"));
+                s.PutNextEntry(entry);
+                s.Flush();
+
+
+                string[] filenames = Directory.GetFiles(folderToZip);
+                foreach (string file in filenames)
+                {
+                    fs = File.OpenRead(file);
+
+                    byte[] buffer = new byte[fs.Length];
+                    fs.Read(buffer, 0, buffer.Length);
+                    entry = new ZipEntry(Path.Combine(parentFolderName, Path.GetFileName(folderToZip) + "/" + Path.GetFileName(file)));
+
+                    entry.DateTime = DateTime.Now;
+                    entry.Size = fs.Length;
+                    fs.Close();
+
+                    crc.Reset();
+                    crc.Update(buffer);
+
+                    entry.Crc = crc.Value;
+
+                    s.PutNextEntry(entry);
+
+                    s.Write(buffer, 0, buffer.Length);
+                }
+            }
+            catch
+            {
+                res = false;
+            }
+            finally
+            {
+                if (fs != null)
+                {
+                    fs.Close();
+                }
+            }
+
+
+            string[] folders = Directory.GetDirectories(folderToZip);
+            if (folders.Any(folder => !ZipFileDictory(folder, s, Path.Combine(parentFolderName, Path.GetFileName(folderToZip)))))
+            {
+                return false;
+            }
+
+            return res;
+        }
+
+
+        public static bool ZipDirectory(string folderToZip, string zipedFile)
+        {
+            bool res;
+            if (!Directory.Exists(folderToZip))
+            {
+                return false;
+            }
+
+            ZipOutputStream s = new ZipOutputStream(File.Create(zipedFile));
+            s.SetLevel(6);
+
+            res = ZipFileDictory(folderToZip, s, "");
+
+            s.Finish();
+            s.Close();
+
+            return res;
         }
     }
 }

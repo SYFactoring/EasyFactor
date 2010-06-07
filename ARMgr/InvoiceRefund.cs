@@ -503,9 +503,14 @@ namespace CMBC.EasyFactor.ARMgr
                                                                -TypeUtil.PRECISION)
                                                         select log;
 
-            var result = queryResult.Select(financeLog => new InvoiceRefundLog(financeLog)).ToList();
+            var logs = new List<InvoiceRefundLog>();
+            foreach (InvoiceFinanceLog financeLog in queryResult)
+            {
+                InvoiceRefundLog log = new InvoiceRefundLog(financeLog);
+                logs.Add(log);
+            }
 
-            logsBindingSource.DataSource = result;
+            logsBindingSource.DataSource = logs;
             StatBatch();
         }
 
