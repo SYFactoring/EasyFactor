@@ -313,6 +313,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(financeBatchNoTextBox, false);
             ControlUtil.SetComponetEditable(tbClientName, false);
             ControlUtil.SetComponetEditable(diInputDate, false);
+            ControlUtil.SetComponetEditable(financeAmountTextBox,false);
         }
     }
 }

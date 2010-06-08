@@ -2192,7 +2192,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append("MSG11").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
-                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(User.GetEDIAccount(log.InvoicePaymentBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
                     sb.Append(',');
@@ -2286,7 +2286,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append("MSG12").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
-                    sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
+                    sb.Append(User.GetEDIAccount(log.InvoicePaymentBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
                     sb.Append(',');
