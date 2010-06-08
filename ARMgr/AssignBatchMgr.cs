@@ -1691,6 +1691,15 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            foreach (InvoiceAssignBatch batch in selectedBatches)
+            {
+                if (batch.TransactionType == "国内买方保理" || batch.TransactionType == "进口保理")
+                {
+                    MessageBoxEx.Show(String.Format("批次：{0}，案件类型为{1}，不能使用直接生成三表功能", batch.AssignBatchNo, batch.TransactionType), MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
+
             MakeReport makeReport = ReportThreeImpl;
             GroupBatchesByTransactionType(selectedBatches, makeReport);
         }
