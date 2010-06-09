@@ -17,7 +17,6 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class Case
     {
-
         private CDA _activeCDA;
         private double? _assginOutstanding;
         private double? _assignAmountByDate;
@@ -29,7 +28,6 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _paymentAmountByDate;
         private double? _totalAssignOutstanding;
         private double? _valuedAssignOutstanding;
-
 
 
         /// <summary>
@@ -92,7 +90,9 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_assginOutstanding.HasValue == false)
                 {
-                    double total = InvoiceAssignBatches.SelectMany(assignBatch => assignBatch.Invoices).Sum(invoice => invoice.AssignOutstanding);
+                    double total =
+                        InvoiceAssignBatches.SelectMany(assignBatch => assignBatch.Invoices).Sum(
+                            invoice => invoice.AssignOutstanding);
 
                     _assginOutstanding = total;
                 }
@@ -111,10 +111,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 CDA activeCDA = ActiveCDA;
                 if (activeCDA == null)
                 {
-                    return ValuedAssignOutstanding * 0.8;
+                    return 0;
                 }
                 return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(),
-                                ValuedAssignOutstanding * activeCDA.FinanceProportion ?? 0.8);
+                                ValuedAssignOutstanding*activeCDA.FinanceProportion.GetValueOrDefault());
             }
         }
 
@@ -165,7 +165,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     double handFreeIncome = 0;
                     if (cda != null)
                     {
-                        handFreeIncome = count * cda.HandFee.GetValueOrDefault();
+                        handFreeIncome = count*cda.HandFee.GetValueOrDefault();
                     }
 
                     _commissionIncomeByDate = result + handFreeIncome;
@@ -521,9 +521,16 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_valuedAssignOutstanding.HasValue == false)
                 {
+                    double financeProp = ActiveCDA.FinanceProportion.GetValueOrDefault();
                     double total = (from assignBatch in InvoiceAssignBatches
                                     from invoice in assignBatch.Invoices
-                                    where (!invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw) && DateTime.Today <= invoice.DueDate
+                                    where
+                                        !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw &&
+                                        DateTime.Today < invoice.DueDate
+                                        && (invoice.FinanceAmount.HasValue == false ||
+                                            invoice.FinanceAmount.GetValueOrDefault() -
+                                            (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault())*
+                                            financeProp < -TypeUtil.PRECISION)
                                     select invoice.AssignOutstanding).Sum();
 
                     _valuedAssignOutstanding = total;
@@ -532,8 +539,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 return _valuedAssignOutstanding.Value;
             }
         }
-
-
 
 
         /// <summary>
@@ -568,10 +573,10 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             string prefix = String.Format("69{0}{1}{2}", locationCode, typeCode, year);
-            int caseCount=0;
+            int caseCount = 0;
             IEnumerable<string> queryStr = from c in context.Cases
-                                              where c.CaseCode.StartsWith(prefix)
-                                              select c.CaseCode.Substring(8);
+                                           where c.CaseCode.StartsWith(prefix)
+                                           select c.CaseCode.Substring(8);
             foreach (string value in queryStr)
             {
                 if (caseCount < Convert.ToInt32(value))
@@ -619,8 +624,8 @@ namespace CMBC.EasyFactor.DB.dbml
             string prefix = String.Format("69{0}{1}{2}", locationCode, typeCode, year);
             int caseCount = 0;
             IEnumerable<string> queryStr = from c in context.Cases
-                                              where c.CaseCode.StartsWith(prefix)
-                                              select c.CaseCode.Substring(8);
+                                           where c.CaseCode.StartsWith(prefix)
+                                           select c.CaseCode.Substring(8);
 
             foreach (string value in queryStr)
             {

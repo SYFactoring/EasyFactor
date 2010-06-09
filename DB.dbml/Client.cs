@@ -322,9 +322,12 @@ namespace CMBC.EasyFactor.DB.dbml
         public double CanBeFinanceAmount(string transactionType, string currency)
         {
             double result = 0;
+            EntitySet<Case> cases = (transactionType == "国内卖方保理" || transactionType == "出口保理")
+                                        ? SellerCases
+                                        : BuyerCases;
             foreach (
                 Case curCase in
-                    SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.TransactionType == transactionType))
+                    cases.Where(c => c.CaseMark == CASE.ENABLE && c.TransactionType == transactionType))
             {
                 double canbeFinanceAmount = curCase.CanBeFinanceAmount;
                 if (curCase.InvoiceCurrency != currency)

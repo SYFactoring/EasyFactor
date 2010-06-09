@@ -119,7 +119,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInputDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -131,6 +130,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCostRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInputDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             financeTypeLabel = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
@@ -597,7 +597,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colBuyerName,
             this.colTransactionType,
             this.colFinanceBatchNo,
-            this.colInputDate,
             this.colFinanceType,
             this.colBatchCount,
             this.colAssignDate,
@@ -609,6 +608,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceRate,
             this.colFactor,
             this.colCostRate,
+            this.colInputDate,
             this.colCreateUserName});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -712,13 +712,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceBatchNo.ReadOnly = true;
             this.colFinanceBatchNo.Width = 120;
             // 
-            // colInputDate
-            // 
-            this.colInputDate.DataPropertyName = "InputDate";
-            this.colInputDate.HeaderText = "录入日";
-            this.colInputDate.Name = "colInputDate";
-            this.colInputDate.ReadOnly = true;
-            // 
             // colFinanceType
             // 
             this.colFinanceType.DataPropertyName = "FinanceType";
@@ -821,6 +814,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCostRate.ReadOnly = true;
             this.colCostRate.Width = 51;
             // 
+            // colInputDate
+            // 
+            this.colInputDate.DataPropertyName = "InputDate";
+            this.colInputDate.HeaderText = "录入日";
+            this.colInputDate.Name = "colInputDate";
+            this.colInputDate.ReadOnly = true;
+            // 
             // colCreateUserName
             // 
             this.colCreateUserName.DataPropertyName = "CreateUserName";
@@ -859,7 +859,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInputDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
@@ -871,6 +870,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactor;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInputDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
     }
 }

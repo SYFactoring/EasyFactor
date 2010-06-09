@@ -1419,7 +1419,10 @@ namespace CMBC.EasyFactor.ARMgr
                 double assignAmount = 0;
                 foreach (Invoice invoice in selectedBatch.Invoices)
                 {
-                    if (invoice.IsFlaw == false)
+                    if (invoice.IsFlaw == false && invoice.IsDispute.GetValueOrDefault() == false &&
+                        TypeUtil.GreaterZero(invoice.AssignOutstanding) &&
+                        (TypeUtil.GreaterZero(invoice.AssignOutstanding*cda.FinanceProportion.GetValueOrDefault() -
+                                              invoice.FinanceOutstanding)) && invoice.DueDate > DateTime.Today)
                     {
                         sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
                         sheet.Cells[row, 2] = invoice.AssignOutstanding;

@@ -73,7 +73,6 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.dateInputTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblInputDate = new DevComponents.DotNetBar.LabelX();
@@ -96,17 +95,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbPaymentBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblPaymentBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInputDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsSendMsg = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,6 +104,17 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemMSG11 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemMSG12 = new System.Windows.Forms.ToolStripMenuItem();
+            this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsSendMsg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInputDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateInputTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateInputFrom)).BeginInit();
@@ -577,12 +576,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.colBuyerName,
             this.colTransactionType,
             this.colPaymentBatchNo,
-            this.colInputDate,
             this.colPaymentType,
             this.colPaymentDate,
             this.colBatchCount,
             this.colPaymentAmount,
             this.colIsSendMsg,
+            this.colInputDate,
             this.colCreateUserName});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -604,92 +603,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvBatchesCellDoubleClick);
             this.dgvBatches.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvBatchesCellFormatting);
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvBatchesRowPostPaint);
-            // 
-            // colSellerName
-            // 
-            this.colSellerName.DataPropertyName = "SellerName";
-            this.colSellerName.HeaderText = "卖方名称";
-            this.colSellerName.Name = "colSellerName";
-            this.colSellerName.ReadOnly = true;
-            this.colSellerName.Width = 120;
-            // 
-            // colBuyerName
-            // 
-            this.colBuyerName.DataPropertyName = "BuyerName";
-            this.colBuyerName.HeaderText = "买方名称";
-            this.colBuyerName.Name = "colBuyerName";
-            this.colBuyerName.ReadOnly = true;
-            this.colBuyerName.Width = 120;
-            // 
-            // colTransactionType
-            // 
-            this.colTransactionType.DataPropertyName = "TransactionType";
-            this.colTransactionType.HeaderText = "业务类别";
-            this.colTransactionType.Name = "colTransactionType";
-            this.colTransactionType.ReadOnly = true;
-            this.colTransactionType.Width = 80;
-            // 
-            // colPaymentBatchNo
-            // 
-            this.colPaymentBatchNo.DataPropertyName = "PaymentBatchNo";
-            this.colPaymentBatchNo.HeaderText = "付款批号";
-            this.colPaymentBatchNo.Name = "colPaymentBatchNo";
-            this.colPaymentBatchNo.ReadOnly = true;
-            // 
-            // colInputDate
-            // 
-            this.colInputDate.DataPropertyName = "InputDate";
-            this.colInputDate.HeaderText = "录入日";
-            this.colInputDate.Name = "colInputDate";
-            this.colInputDate.ReadOnly = true;
-            // 
-            // colPaymentType
-            // 
-            this.colPaymentType.DataPropertyName = "PaymentType";
-            this.colPaymentType.HeaderText = "付款类型";
-            this.colPaymentType.Name = "colPaymentType";
-            this.colPaymentType.ReadOnly = true;
-            // 
-            // colPaymentDate
-            // 
-            this.colPaymentDate.DataPropertyName = "PaymentDate";
-            this.colPaymentDate.HeaderText = "付款日";
-            this.colPaymentDate.Name = "colPaymentDate";
-            this.colPaymentDate.ReadOnly = true;
-            this.colPaymentDate.Width = 80;
-            // 
-            // colBatchCount
-            // 
-            this.colBatchCount.DataPropertyName = "BatchCount";
-            this.colBatchCount.HeaderText = "发票笔数";
-            this.colBatchCount.Name = "colBatchCount";
-            this.colBatchCount.ReadOnly = true;
-            this.colBatchCount.Width = 65;
-            // 
-            // colPaymentAmount
-            // 
-            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colPaymentAmount.HeaderText = "付款金额";
-            this.colPaymentAmount.Name = "colPaymentAmount";
-            this.colPaymentAmount.ReadOnly = true;
-            // 
-            // colIsSendMsg
-            // 
-            this.colIsSendMsg.DataPropertyName = "IsSendMsg";
-            this.colIsSendMsg.HeaderText = "付款报文";
-            this.colIsSendMsg.Name = "colIsSendMsg";
-            this.colIsSendMsg.ReadOnly = true;
-            // 
-            // colCreateUserName
-            // 
-            this.colCreateUserName.DataPropertyName = "CreateUserName";
-            this.colCreateUserName.HeaderText = "经办人";
-            this.colCreateUserName.Name = "colCreateUserName";
-            this.colCreateUserName.ReadOnly = true;
-            this.colCreateUserName.Width = 65;
             // 
             // cmuBatchMgr
             // 
@@ -757,6 +670,92 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemMSG12.Text = "生成MSG12";
             this.menuItemMSG12.Click += new System.EventHandler(this.ExportMSG12);
             // 
+            // colSellerName
+            // 
+            this.colSellerName.DataPropertyName = "SellerName";
+            this.colSellerName.HeaderText = "卖方名称";
+            this.colSellerName.Name = "colSellerName";
+            this.colSellerName.ReadOnly = true;
+            this.colSellerName.Width = 120;
+            // 
+            // colBuyerName
+            // 
+            this.colBuyerName.DataPropertyName = "BuyerName";
+            this.colBuyerName.HeaderText = "买方名称";
+            this.colBuyerName.Name = "colBuyerName";
+            this.colBuyerName.ReadOnly = true;
+            this.colBuyerName.Width = 120;
+            // 
+            // colTransactionType
+            // 
+            this.colTransactionType.DataPropertyName = "TransactionType";
+            this.colTransactionType.HeaderText = "业务类别";
+            this.colTransactionType.Name = "colTransactionType";
+            this.colTransactionType.ReadOnly = true;
+            this.colTransactionType.Width = 80;
+            // 
+            // colPaymentBatchNo
+            // 
+            this.colPaymentBatchNo.DataPropertyName = "PaymentBatchNo";
+            this.colPaymentBatchNo.HeaderText = "付款批号";
+            this.colPaymentBatchNo.Name = "colPaymentBatchNo";
+            this.colPaymentBatchNo.ReadOnly = true;
+            // 
+            // colPaymentType
+            // 
+            this.colPaymentType.DataPropertyName = "PaymentType";
+            this.colPaymentType.HeaderText = "付款类型";
+            this.colPaymentType.Name = "colPaymentType";
+            this.colPaymentType.ReadOnly = true;
+            // 
+            // colPaymentDate
+            // 
+            this.colPaymentDate.DataPropertyName = "PaymentDate";
+            this.colPaymentDate.HeaderText = "付款日";
+            this.colPaymentDate.Name = "colPaymentDate";
+            this.colPaymentDate.ReadOnly = true;
+            this.colPaymentDate.Width = 80;
+            // 
+            // colBatchCount
+            // 
+            this.colBatchCount.DataPropertyName = "BatchCount";
+            this.colBatchCount.HeaderText = "发票笔数";
+            this.colBatchCount.Name = "colBatchCount";
+            this.colBatchCount.ReadOnly = true;
+            this.colBatchCount.Width = 65;
+            // 
+            // colPaymentAmount
+            // 
+            this.colPaymentAmount.DataPropertyName = "PaymentAmount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colPaymentAmount.HeaderText = "付款金额";
+            this.colPaymentAmount.Name = "colPaymentAmount";
+            this.colPaymentAmount.ReadOnly = true;
+            // 
+            // colIsSendMsg
+            // 
+            this.colIsSendMsg.DataPropertyName = "IsSendMsg";
+            this.colIsSendMsg.HeaderText = "付款报文";
+            this.colIsSendMsg.Name = "colIsSendMsg";
+            this.colIsSendMsg.ReadOnly = true;
+            // 
+            // colInputDate
+            // 
+            this.colInputDate.DataPropertyName = "InputDate";
+            this.colInputDate.HeaderText = "录入日";
+            this.colInputDate.Name = "colInputDate";
+            this.colInputDate.ReadOnly = true;
+            // 
+            // colCreateUserName
+            // 
+            this.colCreateUserName.DataPropertyName = "CreateUserName";
+            this.colCreateUserName.HeaderText = "经办人";
+            this.colCreateUserName.Name = "colCreateUserName";
+            this.colCreateUserName.ReadOnly = true;
+            this.colCreateUserName.Width = 65;
+            // 
             // PaymentBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -788,12 +787,12 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInputDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsSendMsg;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInputDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
     }
 }
