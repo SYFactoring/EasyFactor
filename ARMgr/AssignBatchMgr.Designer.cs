@@ -23,8 +23,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateBatchFrom;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateBatchTo;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvBatches;
         private DevComponents.DotNetBar.LabelX lblAssignBatchNo;
         private DevComponents.DotNetBar.LabelX lblClientName;
@@ -84,6 +84,19 @@ namespace CMBC.EasyFactor.ARMgr
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -109,9 +122,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.tbCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
-            this.dateTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.dateBatchTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblDatePicker = new DevComponents.DotNetBar.LabelX();
-            this.dateFrom = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.dateBatchFrom = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbAssignBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAssignBatchNo = new DevComponents.DotNetBar.LabelX();
@@ -131,6 +144,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.dateInputTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.lblInputDate = new DevComponents.DotNetBar.LabelX();
+            this.dateInputFrom = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.colFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -138,6 +154,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInputDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsSendMsg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -159,16 +176,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRemitDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemitAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateBatchTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateBatchFrom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBatches)).BeginInit();
             this.cmuBatchMgr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dateInputTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateInputFrom)).BeginInit();
             this.SuspendLayout();
             // 
             // panelQuery
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.dateInputTo);
+            this.panelQuery.Controls.Add(this.lblInputDate);
+            this.panelQuery.Controls.Add(this.dateInputFrom);
             this.panelQuery.Controls.Add(this.lblCreateUserName);
             this.panelQuery.Controls.Add(this.tbFactorName);
             this.panelQuery.Controls.Add(this.lblFactorName);
@@ -180,9 +202,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Controls.Add(this.lblClientName);
             this.panelQuery.Controls.Add(this.tbCreateUserName);
             this.panelQuery.Controls.Add(this.lblCount);
-            this.panelQuery.Controls.Add(this.dateTo);
+            this.panelQuery.Controls.Add(this.dateBatchTo);
             this.panelQuery.Controls.Add(this.lblDatePicker);
-            this.panelQuery.Controls.Add(this.dateFrom);
+            this.panelQuery.Controls.Add(this.dateBatchFrom);
             this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Controls.Add(this.tbAssignBatchNo);
             this.panelQuery.Controls.Add(this.lblAssignBatchNo);
@@ -206,10 +228,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCreateUserName.BackgroundStyle.Class = "";
-            this.lblCreateUserName.Location = new System.Drawing.Point(515, 31);
+            this.lblCreateUserName.Location = new System.Drawing.Point(671, 6);
             this.lblCreateUserName.Name = "lblCreateUserName";
             this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
-            this.lblCreateUserName.TabIndex = 18;
+            this.lblCreateUserName.TabIndex = 8;
             this.lblCreateUserName.Text = "经办人";
             // 
             // tbFactorName
@@ -323,10 +345,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreateUserName.Location = new System.Drawing.Point(565, 28);
+            this.tbCreateUserName.Location = new System.Drawing.Point(721, 3);
             this.tbCreateUserName.Name = "tbCreateUserName";
             this.tbCreateUserName.Size = new System.Drawing.Size(100, 20);
-            this.tbCreateUserName.TabIndex = 15;
+            this.tbCreateUserName.TabIndex = 9;
             // 
             // lblCount
             // 
@@ -335,57 +357,57 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(682, 30);
+            this.lblCount.Location = new System.Drawing.Point(830, 30);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(71, 16);
-            this.lblCount.TabIndex = 17;
+            this.lblCount.TabIndex = 19;
             this.lblCount.Text = "获得 条记录";
             // 
-            // dateTo
+            // dateBatchTo
             // 
             // 
             // 
             // 
-            this.dateTo.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.dateTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.dateTo.ButtonDropDown.Visible = true;
-            this.dateTo.Location = new System.Drawing.Point(335, 27);
+            this.dateBatchTo.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dateBatchTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.dateBatchTo.ButtonDropDown.Visible = true;
+            this.dateBatchTo.Location = new System.Drawing.Point(335, 27);
             // 
             // 
             // 
-            this.dateTo.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            this.dateBatchTo.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
-            this.dateTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.dateTo.MonthCalendar.BackgroundStyle.Class = "";
-            this.dateTo.MonthCalendar.ClearButtonVisible = true;
+            this.dateBatchTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dateBatchTo.MonthCalendar.BackgroundStyle.Class = "";
+            this.dateBatchTo.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
-            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.dateTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.dateTo.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.dateTo.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.dateTo.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.dateTo.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            this.dateBatchTo.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.dateBatchTo.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateBatchTo.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.dateBatchTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.dateBatchTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.dateBatchTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dateBatchTo.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.dateBatchTo.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.dateBatchTo.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.dateBatchTo.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
-            this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.dateTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.dateTo.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.dateTo.MonthCalendar.TodayButtonVisible = true;
-            this.dateTo.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.dateTo.Name = "dateTo";
-            this.dateTo.Size = new System.Drawing.Size(100, 20);
-            this.dateTo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dateTo.TabIndex = 14;
+            this.dateBatchTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.dateBatchTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateBatchTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dateBatchTo.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.dateBatchTo.MonthCalendar.TodayButtonVisible = true;
+            this.dateBatchTo.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.dateBatchTo.Name = "dateBatchTo";
+            this.dateBatchTo.Size = new System.Drawing.Size(100, 20);
+            this.dateBatchTo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.dateBatchTo.TabIndex = 14;
             // 
             // lblDatePicker
             // 
@@ -400,61 +422,61 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblDatePicker.TabIndex = 12;
             this.lblDatePicker.Text = "转让日";
             // 
-            // dateFrom
+            // dateBatchFrom
             // 
             // 
             // 
             // 
-            this.dateFrom.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.dateFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.dateFrom.ButtonDropDown.Visible = true;
-            this.dateFrom.Location = new System.Drawing.Point(229, 27);
+            this.dateBatchFrom.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dateBatchFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.dateBatchFrom.ButtonDropDown.Visible = true;
+            this.dateBatchFrom.Location = new System.Drawing.Point(229, 27);
             // 
             // 
             // 
-            this.dateFrom.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            this.dateBatchFrom.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
-            this.dateFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.dateFrom.MonthCalendar.BackgroundStyle.Class = "";
-            this.dateFrom.MonthCalendar.ClearButtonVisible = true;
+            this.dateBatchFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dateBatchFrom.MonthCalendar.BackgroundStyle.Class = "";
+            this.dateBatchFrom.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
-            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.dateFrom.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.dateFrom.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.dateFrom.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.dateFrom.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            this.dateBatchFrom.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.dateBatchFrom.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateBatchFrom.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.dateBatchFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.dateBatchFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.dateBatchFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dateBatchFrom.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.dateBatchFrom.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.dateBatchFrom.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.dateBatchFrom.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
             // 
             // 
             // 
-            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.dateFrom.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.dateFrom.MonthCalendar.TodayButtonVisible = true;
-            this.dateFrom.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.dateFrom.Name = "dateFrom";
-            this.dateFrom.Size = new System.Drawing.Size(100, 20);
-            this.dateFrom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dateFrom.TabIndex = 13;
+            this.dateBatchFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.dateBatchFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateBatchFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dateBatchFrom.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.dateBatchFrom.MonthCalendar.TodayButtonVisible = true;
+            this.dateBatchFrom.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.dateBatchFrom.Name = "dateBatchFrom";
+            this.dateBatchFrom.Size = new System.Drawing.Size(100, 20);
+            this.dateBatchFrom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.dateBatchFrom.TabIndex = 13;
             // 
             // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(678, 4);
+            this.btnQuery.Location = new System.Drawing.Point(831, 4);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 16;
+            this.btnQuery.TabIndex = 18;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryBatch);
             // 
@@ -467,7 +489,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbAssignBatchNo.Location = new System.Drawing.Point(65, 27);
             this.tbAssignBatchNo.Name = "tbAssignBatchNo";
             this.tbAssignBatchNo.Size = new System.Drawing.Size(100, 20);
-            this.tbAssignBatchNo.TabIndex = 9;
+            this.tbAssignBatchNo.TabIndex = 11;
             // 
             // lblAssignBatchNo
             // 
@@ -479,7 +501,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblAssignBatchNo.Location = new System.Drawing.Point(3, 28);
             this.lblAssignBatchNo.Name = "lblAssignBatchNo";
             this.lblAssignBatchNo.Size = new System.Drawing.Size(56, 16);
-            this.lblAssignBatchNo.TabIndex = 8;
+            this.lblAssignBatchNo.TabIndex = 10;
             this.lblAssignBatchNo.Text = "转让批号";
             // 
             // dgvBatches
@@ -504,6 +526,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colBuyerName,
             this.colTransactionType,
             this.colAssignBatchNo,
+            this.colInputDate,
             this.colAssignDate,
             this.colIsSendMsg,
             this.colBatchCount,
@@ -563,7 +586,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemMSG09,
             this.menuItemBatchExport});
             this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(199, 286);
+            this.cmuBatchMgr.Size = new System.Drawing.Size(199, 264);
             // 
             // menuItemBatchSelect
             // 
@@ -657,6 +680,111 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemBatchExport.Text = "导出选定批次";
             this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
+            // dateInputTo
+            // 
+            // 
+            // 
+            // 
+            this.dateInputTo.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dateInputTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.dateInputTo.ButtonDropDown.Visible = true;
+            this.dateInputTo.Location = new System.Drawing.Point(671, 27);
+            // 
+            // 
+            // 
+            this.dateInputTo.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dateInputTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dateInputTo.MonthCalendar.BackgroundStyle.Class = "";
+            this.dateInputTo.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.dateInputTo.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.dateInputTo.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateInputTo.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.dateInputTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.dateInputTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.dateInputTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dateInputTo.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.dateInputTo.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.dateInputTo.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.dateInputTo.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dateInputTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.dateInputTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateInputTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dateInputTo.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.dateInputTo.MonthCalendar.TodayButtonVisible = true;
+            this.dateInputTo.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.dateInputTo.Name = "dateInputTo";
+            this.dateInputTo.Size = new System.Drawing.Size(100, 20);
+            this.dateInputTo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.dateInputTo.TabIndex = 17;
+            // 
+            // lblInputDate
+            // 
+            this.lblInputDate.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblInputDate.BackgroundStyle.Class = "";
+            this.lblInputDate.Location = new System.Drawing.Point(516, 28);
+            this.lblInputDate.Name = "lblInputDate";
+            this.lblInputDate.Size = new System.Drawing.Size(44, 16);
+            this.lblInputDate.TabIndex = 15;
+            this.lblInputDate.Text = "录入日";
+            // 
+            // dateInputFrom
+            // 
+            // 
+            // 
+            // 
+            this.dateInputFrom.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dateInputFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.dateInputFrom.ButtonDropDown.Visible = true;
+            this.dateInputFrom.Location = new System.Drawing.Point(565, 27);
+            // 
+            // 
+            // 
+            this.dateInputFrom.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dateInputFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dateInputFrom.MonthCalendar.BackgroundStyle.Class = "";
+            this.dateInputFrom.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.dateInputFrom.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.dateInputFrom.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateInputFrom.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.dateInputFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.dateInputFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.dateInputFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dateInputFrom.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.dateInputFrom.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.dateInputFrom.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.dateInputFrom.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dateInputFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.dateInputFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.dateInputFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dateInputFrom.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.dateInputFrom.MonthCalendar.TodayButtonVisible = true;
+            this.dateInputFrom.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.dateInputFrom.Name = "dateInputFrom";
+            this.dateInputFrom.Size = new System.Drawing.Size(100, 20);
+            this.dateInputFrom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.dateInputFrom.TabIndex = 16;
+            // 
             // colFactorCode
             // 
             this.colFactorCode.DataPropertyName = "FactorCode";
@@ -709,6 +837,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignBatchNo.Name = "colAssignBatchNo";
             this.colAssignBatchNo.ReadOnly = true;
             this.colAssignBatchNo.Width = 120;
+            // 
+            // colInputDate
+            // 
+            this.colInputDate.DataPropertyName = "InputDate";
+            this.colInputDate.HeaderText = "录入日";
+            this.colInputDate.Name = "colInputDate";
+            this.colInputDate.ReadOnly = true;
             // 
             // colAssignDate
             // 
@@ -908,10 +1043,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.Size = new System.Drawing.Size(894, 357);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dateTo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateBatchTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateBatchFrom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBatches)).EndInit();
             this.cmuBatchMgr.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dateInputTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateInputFrom)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -930,6 +1067,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInputDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsSendMsg;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
@@ -950,5 +1088,8 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colMsgAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemitDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemitAmount;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateInputTo;
+        private DevComponents.DotNetBar.LabelX lblInputDate;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateInputFrom;
     }
 }

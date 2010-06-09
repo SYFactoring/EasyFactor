@@ -111,7 +111,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
+            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -205,7 +205,8 @@ namespace CMBC.EasyFactor.ARMgr
             List<InvoiceFinanceBatch> batches = GetSelectedBatches();
 
             if (
-                MessageBoxEx.Show("是否打算删除此" + batches.Count() + "条融资批次信息", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
+                MessageBoxEx.Show("是否打算删除此" + batches.Count() + "条融资批次信息", MESSAGE.TITLE_INFORMATION,
+                                  MessageBoxButtons.YesNo,
                                   MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
@@ -216,9 +217,9 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     foreach (InvoiceFinanceLog log in selectedBatch.InvoiceFinanceLogs.ToList())
                     {
-                        foreach(InvoiceRefundLog refundLog in log.InvoiceRefundLogs.ToList())
+                        foreach (InvoiceRefundLog refundLog in log.InvoiceRefundLogs.ToList())
                         {
-                            Context.InvoiceRefundLogs.DeleteOnSubmit(refundLog);  
+                            Context.InvoiceRefundLogs.DeleteOnSubmit(refundLog);
                         }
 
                         Invoice invoice = log.Invoice;
@@ -254,7 +255,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceFinanceBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceFinanceBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
             var detail = new FinanceBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
@@ -305,7 +306,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (DataGridViewCell cell in dgvBatches.SelectedCells)
             {
-                var batch = (InvoiceFinanceBatch)_bs.List[cell.RowIndex];
+                var batch = (InvoiceFinanceBatch) _bs.List[cell.RowIndex];
                 if (!selectedBatches.Contains(batch))
                 {
                     selectedBatches.Add(batch);
@@ -342,11 +343,21 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            DateTime beginDate = String.IsNullOrEmpty(dateFrom.Text) ? dateFrom.MinDate : dateFrom.Value.Date;
-            DateTime endDate = String.IsNullOrEmpty(dateTo.Text) ? dateTo.MinDate : dateTo.Value.Date;
+            DateTime beginBatchDate = String.IsNullOrEmpty(dateBatchFrom.Text)
+                                          ? dateBatchFrom.MinDate
+                                          : dateBatchFrom.Value.Date;
+            DateTime endBatchDate = String.IsNullOrEmpty(dateBatchTo.Text)
+                                        ? dateBatchTo.MinDate
+                                        : dateBatchTo.Value.Date;
+            DateTime beginInputDate = String.IsNullOrEmpty(dateInputFrom.Text)
+                                          ? dateInputFrom.MinDate
+                                          : dateInputFrom.Value.Date;
+            DateTime endInputDate = String.IsNullOrEmpty(dateInputTo.Text)
+                                        ? dateInputTo.MinDate
+                                        : dateInputTo.Value.Date;
             string createUserName = tbCreateUserName.Text;
             string clientName = tbClientName.Text;
-            var location = (string)cbLocation.SelectedValue;
+            var location = (string) cbLocation.SelectedValue;
             string transactionType = cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
@@ -364,63 +375,85 @@ namespace CMBC.EasyFactor.ARMgr
             IEnumerable<InvoiceFinanceBatch> queryResult;
             if (_opBatchType != OpBatchType.POOL_QUERY)
             {
-                queryResult = Context.InvoiceFinanceBatches.Where(i =>
-                                                                  i.FinanceBatchNo.Contains(tbFinanceBatchNo.Text)
-                                                                  && (i.CaseCode != null)
+                queryResult = Context.InvoiceFinanceBatches.Where(batch =>
+                                                                  batch.FinanceBatchNo.Contains(tbFinanceBatchNo.Text)
+                                                                  && (batch.CaseCode != null)
                                                                   &&
-                                                                  (beginDate != dateFrom.MinDate
-                                                                       ? i.FinancePeriodBegin >= beginDate
+                                                                  (beginBatchDate != dateBatchFrom.MinDate
+                                                                       ? batch.FinancePeriodBegin >= beginBatchDate
                                                                        : true)
                                                                   &&
-                                                                  (endDate != dateTo.MinDate
-                                                                       ? i.FinancePeriodBegin <= endDate
+                                                                  (endBatchDate != dateBatchTo.MinDate
+                                                                       ? batch.FinancePeriodBegin <= endBatchDate
                                                                        : true)
-                                                                      //&& (status != string.Empty ? i.CheckStatus == status : true)
-                                                                  && (i.CreateUserName.Contains(createUserName))
+                                                                  &&
+                                                                  (beginInputDate != dateInputFrom.MinDate
+                                                                       ? batch.InputDate >= beginInputDate
+                                                                       : true)
+                                                                  &&
+                                                                  (endInputDate != dateInputTo.MinDate
+                                                                       ? batch.InputDate <= endInputDate
+                                                                       : true)
+                                                                  //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                  && (batch.CreateUserName.Contains(createUserName))
                                                                   &&
                                                                   (transactionType == "全部"
                                                                        ? true
-                                                                       : i.Case.TransactionType == transactionType)
+                                                                       : batch.Case.TransactionType == transactionType)
                                                                   &&
                                                                   (financeType == "全部"
                                                                        ? true
-                                                                       : i.FinanceType == financeType)
+                                                                       : batch.FinanceType == financeType)
                                                                   &&
                                                                   (location == "00"
                                                                        ? true
-                                                                       : i.Case.OwnerDepartment.LocationCode == location)
+                                                                       : batch.Case.OwnerDepartment.LocationCode ==
+                                                                         location)
                                                                   &&
-                                                                  (i.Case.SellerClient.ClientNameCN.Contains(clientName) ||
-                                                                   i.Case.SellerClient.ClientNameEN.Contains(clientName) ||
-                                                                   i.Case.BuyerClient.ClientNameCN.Contains(clientName) ||
-                                                                   i.Case.BuyerClient.ClientNameEN.Contains(clientName)));
+                                                                  (batch.Case.SellerClient.ClientNameCN.Contains(
+                                                                      clientName) ||
+                                                                   batch.Case.SellerClient.ClientNameEN.Contains(
+                                                                       clientName) ||
+                                                                   batch.Case.BuyerClient.ClientNameCN.Contains(
+                                                                       clientName) ||
+                                                                   batch.Case.BuyerClient.ClientNameEN.Contains(
+                                                                       clientName)));
             }
             else
             {
-                queryResult = Context.InvoiceFinanceBatches.Where(i =>
-                                                                  i.FinanceBatchNo.Contains(tbFinanceBatchNo.Text)
-                                                                  && (i.ClientEDICode != null)
+                queryResult = Context.InvoiceFinanceBatches.Where(batch =>
+                                                                  batch.FinanceBatchNo.Contains(tbFinanceBatchNo.Text)
+                                                                  && (batch.ClientEDICode != null)
                                                                   &&
-                                                                  (beginDate != dateFrom.MinDate
-                                                                       ? i.FinancePeriodBegin >= beginDate
+                                                                  (beginBatchDate != dateBatchFrom.MinDate
+                                                                       ? batch.FinancePeriodBegin >= beginBatchDate
                                                                        : true)
                                                                   &&
-                                                                  (endDate != dateTo.MinDate
-                                                                       ? i.FinancePeriodBegin <= endDate
+                                                                  (endBatchDate != dateBatchTo.MinDate
+                                                                       ? batch.FinancePeriodBegin <= endBatchDate
                                                                        : true)
-                                                                      //&& (status != string.Empty ? i.CheckStatus == status : true)
-                                                                  && (i.CreateUserName.Contains(createUserName))
+                                                                  &&
+                                                                  (beginInputDate != dateInputFrom.MinDate
+                                                                       ? batch.InputDate >= beginInputDate
+                                                                       : true)
+                                                                  &&
+                                                                  (endInputDate != dateInputTo.MinDate
+                                                                       ? batch.InputDate <= endInputDate
+                                                                       : true)
+                                                                  //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                  && (batch.CreateUserName.Contains(createUserName))
                                                                   &&
                                                                   (financeType == "全部"
                                                                        ? true
-                                                                       : i.FinanceType == financeType)
+                                                                       : batch.FinanceType == financeType)
                                                                   &&
                                                                   (location == "00"
                                                                        ? true
-                                                                       : i.Client.Department.LocationCode == location)
+                                                                       : batch.Client.Department.LocationCode ==
+                                                                         location)
                                                                   &&
-                                                                  (i.Client.ClientNameCN.Contains(clientName) ||
-                                                                   i.Client.ClientNameEN.Contains(clientName)));
+                                                                  (batch.Client.ClientNameCN.Contains(clientName) ||
+                                                                   batch.Client.ClientNameEN.Contains(clientName)));
             }
 
             _bs.DataSource = queryResult;
@@ -502,9 +535,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batchGroup"></param>
         private static void ReportCommissionImpl(IGrouping<Client, InvoiceFinanceBatch> batchGroup)
         {
-            var app = new ApplicationClass { Visible = false };
+            var app = new ApplicationClass {Visible = false};
 
-            var sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+            var sheet = (Worksheet) app.Workbooks.Add(true).Sheets[1];
             try
             {
                 sheet.PageSetup.Zoom = false;
@@ -610,7 +643,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Range["A1", "A4"].RowHeight = 20;
                 sheet.Range["A5", "A5"].RowHeight = 30;
 
-                var sealRange = ((Range)sheet.Cells[row - 3, 3]);
+                var sealRange = ((Range) sheet.Cells[row - 3, 3]);
                 string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
                 sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
                                         Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
@@ -655,7 +688,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceFinanceBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceFinanceBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
             Selected = selectedBatch;
             if (OwnerForm != null)
             {

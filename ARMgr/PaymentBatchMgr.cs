@@ -20,19 +20,7 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class PaymentBatchMgr : UserControl
     {
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly BindingSource _bs;
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly Case _case;
-        /// <summary>
-        /// 
-        /// </summary>
-        private OpBatchType _opBatchType;
+        #region OpBatchType enum
 
         /// <summary>
         /// 
@@ -49,6 +37,23 @@ namespace CMBC.EasyFactor.ARMgr
             /// </summary>
             QUERY,
         }
+
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly Case _case;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpBatchType _opBatchType;
 
         /// <summary>
         /// 
@@ -80,7 +85,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
+            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -88,7 +93,6 @@ namespace CMBC.EasyFactor.ARMgr
 
             UpdateContextMenu();
         }
-
 
 
         /// <summary>
@@ -105,8 +109,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// Gets or sets selected PaymentBatch
         /// </summary>
         public InvoicePaymentBatch Selected { get; set; }
-
-
 
 
         //?Private?Methods?(12)?
@@ -209,7 +211,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoicePaymentBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoicePaymentBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
             var detail = new PaymentBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
@@ -246,7 +248,7 @@ namespace CMBC.EasyFactor.ARMgr
             DataGridViewColumn col = dgvBatches.Columns[e.ColumnIndex];
             if (col == colIsSendMsg)
             {
-                var isSend = (bool)e.Value;
+                var isSend = (bool) e.Value;
                 e.Value = isSend ? "Y" : "N";
 
                 e.FormattingApplied = true;
@@ -366,7 +368,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (DataGridViewCell cell in dgvBatches.SelectedCells)
             {
-                var batch = (InvoicePaymentBatch)_bs.List[cell.RowIndex];
+                var batch = (InvoicePaymentBatch) _bs.List[cell.RowIndex];
                 if (!selectedBatches.Contains(batch))
                 {
                     selectedBatches.Add(batch);
@@ -383,11 +385,21 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            DateTime beginDate = String.IsNullOrEmpty(dateFrom.Text) ? dateFrom.MinDate : dateFrom.Value.Date;
-            DateTime endDate = String.IsNullOrEmpty(dateTo.Text) ? dateTo.MinDate : dateTo.Value.Date;
+            DateTime beginBatchDate = String.IsNullOrEmpty(dateBatchFrom.Text)
+                                          ? dateBatchFrom.MinDate
+                                          : dateBatchFrom.Value.Date;
+            DateTime endBatchDate = String.IsNullOrEmpty(dateBatchTo.Text)
+                                        ? dateBatchTo.MinDate
+                                        : dateBatchTo.Value.Date;
+            DateTime beginInputDate = String.IsNullOrEmpty(dateInputFrom.Text)
+                                          ? dateInputFrom.MinDate
+                                          : dateInputFrom.Value.Date;
+            DateTime endInputDate = String.IsNullOrEmpty(dateInputTo.Text)
+                                        ? dateInputTo.MinDate
+                                        : dateInputTo.Value.Date;
             string createUserName = tbCreateUserName.Text;
             string clientName = tbClientName.Text;
-            var location = (string)cbLocation.SelectedValue;
+            var location = (string) cbLocation.SelectedValue;
             string transactionType = cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
@@ -401,53 +413,69 @@ namespace CMBC.EasyFactor.ARMgr
             }
             Context = new DBDataContext();
 
-            IQueryable<InvoicePaymentBatch> queryResult = Context.InvoicePaymentBatches.Where(i =>
-                                                                                              i.PaymentBatchNo.Contains(
-                                                                                                  tbPaymentBatchNo.Text)
+            IQueryable<InvoicePaymentBatch> queryResult = Context.InvoicePaymentBatches.Where(batch =>
+                                                                                              batch.PaymentBatchNo.
+                                                                                                  Contains(
+                                                                                                      tbPaymentBatchNo.
+                                                                                                          Text)
                                                                                               &&
-                                                                                              (beginDate !=
-                                                                                               dateFrom.MinDate
-                                                                                                   ? i.PaymentDate >=
-                                                                                                     beginDate
+                                                                                              (beginBatchDate !=
+                                                                                               dateBatchFrom.MinDate
+                                                                                                   ? batch.PaymentDate >=
+                                                                                                     beginBatchDate
                                                                                                    : true)
                                                                                               &&
-                                                                                              (endDate != dateTo.MinDate
-                                                                                                   ? i.PaymentDate <=
-                                                                                                     endDate
+                                                                                              (endBatchDate !=
+                                                                                               dateBatchTo.MinDate
+                                                                                                   ? batch.PaymentDate <=
+                                                                                                     endBatchDate
                                                                                                    : true)
-                                                                                                  //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                                              &&
+                                                                                              (beginInputDate !=
+                                                                                               dateInputFrom.MinDate
+                                                                                                   ? batch.InputDate >=
+                                                                                                     beginInputDate
+                                                                                                   : true)
+                                                                                              &&
+                                                                                              (endInputDate !=
+                                                                                               dateInputTo.MinDate
+                                                                                                   ? batch.InputDate <=
+                                                                                                     endInputDate
+                                                                                                   : true)
+                                                                                              //&& (status != string.Empty ? i.CheckStatus == status : true)
                                                                                               &&
                                                                                               (paymentType == "全部"
                                                                                                    ? true
-                                                                                                   : i.PaymentType ==
+                                                                                                   : batch.PaymentType ==
                                                                                                      paymentType)
                                                                                               &&
-                                                                                              (i.CreateUserName.Contains
+                                                                                              (batch.CreateUserName.
+                                                                                                  Contains
                                                                                                   (createUserName))
                                                                                               &&
                                                                                               (transactionType == "全部"
                                                                                                    ? true
-                                                                                                   : i.Case.
+                                                                                                   : batch.Case.
                                                                                                          TransactionType ==
                                                                                                      transactionType)
                                                                                               &&
                                                                                               (location == "00"
                                                                                                    ? true
-                                                                                                   : i.Case.
+                                                                                                   : batch.Case.
                                                                                                          OwnerDepartment
                                                                                                          .LocationCode ==
                                                                                                      location)
                                                                                               &&
-                                                                                              (i.Case.SellerClient.
+                                                                                              (batch.Case.SellerClient.
                                                                                                    ClientNameCN.Contains
                                                                                                    (clientName) ||
-                                                                                               i.Case.SellerClient.
+                                                                                               batch.Case.SellerClient.
                                                                                                    ClientNameEN.Contains
                                                                                                    (clientName) ||
-                                                                                               i.Case.BuyerClient.
+                                                                                               batch.Case.BuyerClient.
                                                                                                    ClientNameCN.Contains
                                                                                                    (clientName) ||
-                                                                                               i.Case.BuyerClient.
+                                                                                               batch.Case.BuyerClient.
                                                                                                    ClientNameEN.Contains
                                                                                                    (clientName))
                 );
@@ -505,7 +533,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoicePaymentBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoicePaymentBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
             Selected = selectedBatch;
             if (OwnerForm != null)
             {

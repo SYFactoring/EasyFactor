@@ -260,12 +260,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            if (!(factorAgreementBindingSource.DataSource is Agreement))
+            if (!(agreementBindingSource.DataSource is Agreement))
             {
                 return;
             }
 
-            var agreement = (Agreement) factorAgreementBindingSource.DataSource;
+            var agreement = (Agreement) agreementBindingSource.DataSource;
             if (agreement.AgreementID == 0)
             {
                 return;
@@ -288,7 +288,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _bsAgreements.DataSource = typeof (Agreement);
                 _bsAgreements.DataSource = factor.Agreements;
-                factorAgreementBindingSource.DataSource = typeof (Agreement);
+                agreementBindingSource.DataSource = typeof (Agreement);
             }
         }
 
@@ -405,7 +405,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             var agreement = new Agreement();
-            factorAgreementBindingSource.DataSource = agreement;
+            agreementBindingSource.DataSource = agreement;
             _opAgreementType = OpAgreementType.NEW_AGREEMENT;
             UpdateAgreementControlStatus();
         }
@@ -486,6 +486,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
+            if (!agreementValidator.Validate())
+            {
+                return;
+            }
+
             var factor = (Factor) factorBindingSource.DataSource;
             if (factor == null)
             {
@@ -494,12 +499,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            if (!(factorAgreementBindingSource.DataSource is Agreement))
+            if (!(agreementBindingSource.DataSource is Agreement))
             {
                 return;
             }
 
-            var agreement = (Agreement) factorAgreementBindingSource.DataSource;
+            var agreement = (Agreement) agreementBindingSource.DataSource;
             agreement.CreateUserName = App.Current.CurUser.Name;
 
             if (agreement.AgreementID == 0)
@@ -674,7 +679,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             creditLine.CreateUserName = App.Current.CurUser.Name;
 
             DateTime today = DateTime.Now.Date;
-            creditLine.CreditLineStatus = creditLine.PeriodBegin < today
+            creditLine.CreditLineStatus = creditLine.PeriodEnd < today
                                               ? FACTOR_CREDIT_LINE.EXPIRY
                                               : FACTOR_CREDIT_LINE.AVAILABILITY;
 
@@ -683,12 +688,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 creditLine.CreditLineStatus = FACTOR_CREDIT_LINE.FREEZE;
             }
 
-            if (unfreezeDateDateTimePicker.Enabled)
-            {
-                creditLine.CreditLineStatus = creditLine.PeriodBegin < today
-                                                  ? FACTOR_CREDIT_LINE.EXPIRY
-                                                  : FACTOR_CREDIT_LINE.AVAILABILITY;
-            }
             if (creditLine.CreditLineID == 0)
             {
                 bool isAddOK = true;
@@ -801,7 +800,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             var selectedAgreement = (Agreement) _bsAgreements.List[dgvAgreements.SelectedRows[0].Index];
             SetAgreementEditable(false);
-            factorAgreementBindingSource.DataSource = selectedAgreement;
+            agreementBindingSource.DataSource = selectedAgreement;
         }
 
         /// <summary>
@@ -932,7 +931,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            if (!(factorAgreementBindingSource.DataSource is Agreement))
+            if (!(agreementBindingSource.DataSource is Agreement))
             {
                 return;
             }

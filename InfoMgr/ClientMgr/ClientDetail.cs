@@ -1237,13 +1237,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 creditLine.CreditLineStatus = CLIENT_CREDIT_LINE.FREEZE;
             }
 
-            if (unfreezeDateDateTimePicker.Enabled)
-            {
-                creditLine.CreditLineStatus = creditLine.PeriodEnd < today
-                                                  ? CLIENT_CREDIT_LINE.EXPIRY
-                                                  : CLIENT_CREDIT_LINE.AVAILABILITY;
-            }
-
             if (creditLine.CreditLineID == 0)
             {
                 bool isAddOK = true;

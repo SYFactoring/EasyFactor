@@ -20,6 +20,8 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class RefundBatchMgr : UserControl
     {
+        #region OpBatchType enum
+
         /// <summary>
         /// 
         /// </summary>
@@ -40,6 +42,8 @@ namespace CMBC.EasyFactor.ARMgr
             /// </summary>
             POOL_QUERY,
         }
+
+        #endregion
 
         /// <summary>
         /// 
@@ -86,7 +90,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
+            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -172,10 +176,10 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var batches = GetSelectedBatches();
+            List<InvoiceRefundBatch> batches = GetSelectedBatches();
             if (
-            MessageBoxEx.Show("是否打算删除此" + batches.Count() + "条还款批次记录", MESSAGE.TITLE_INFORMATION,
-                      MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                MessageBoxEx.Show("是否打算删除此" + batches.Count() + "条还款批次记录", MESSAGE.TITLE_INFORMATION,
+                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
@@ -217,7 +221,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceRefundBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceRefundBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
             var detail = new RefundBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
@@ -260,11 +264,21 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void QueryBatch(object sender, EventArgs e)
         {
-            DateTime beginDate = String.IsNullOrEmpty(dateFrom.Text) ? dateFrom.MinDate : dateFrom.Value.Date;
-            DateTime endDate = String.IsNullOrEmpty(dateTo.Text) ? dateTo.MinDate : dateTo.Value.Date;
+            DateTime beginBatchDate = String.IsNullOrEmpty(dateBatchFrom.Text)
+                                          ? dateBatchFrom.MinDate
+                                          : dateBatchFrom.Value.Date;
+            DateTime endBatchDate = String.IsNullOrEmpty(dateBatchTo.Text)
+                                        ? dateBatchTo.MinDate
+                                        : dateBatchTo.Value.Date;
+            DateTime beginInputDate = String.IsNullOrEmpty(dateInputFrom.Text)
+                                          ? dateInputFrom.MinDate
+                                          : dateInputFrom.Value.Date;
+            DateTime endInputDate = String.IsNullOrEmpty(dateInputTo.Text)
+                                        ? dateInputTo.MinDate
+                                        : dateInputTo.Value.Date;
             string createUserName = tbCreateUserName.Text;
             string clientName = tbClientName.Text;
-            var location = (string)cbLocation.SelectedValue;
+            var location = (string) cbLocation.SelectedValue;
             string transactionType = cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
@@ -282,65 +296,94 @@ namespace CMBC.EasyFactor.ARMgr
             IEnumerable<InvoiceRefundBatch> queryResult;
             if (_opBatchType != OpBatchType.POOL_QUERY)
             {
-                queryResult = Context.InvoiceRefundBatches.Where(i =>
-                                                                 i.RefundBatchNo.Contains(tbRefundBatchNo.Text)
-                                                                 && (i.CaseCode != null)
+                queryResult = Context.InvoiceRefundBatches.Where(batch =>
+                                                                 batch.RefundBatchNo.Contains(tbRefundBatchNo.Text)
+                                                                 && (batch.CaseCode != null)
                                                                  &&
-                                                                 (beginDate != dateFrom.MinDate
-                                                                      ? i.RefundDate >= beginDate
+                                                                 (beginBatchDate != dateBatchFrom.MinDate
+                                                                      ? batch.RefundDate >= beginBatchDate
                                                                       : true)
                                                                  &&
-                                                                 (endDate != dateTo.MinDate
-                                                                      ? i.RefundDate <= endDate
+                                                                 (endBatchDate != dateBatchTo.MinDate
+                                                                      ? batch.RefundDate <= endBatchDate
                                                                       : true)
-                                                                     //&& (status != string.Empty ? i.CheckStatus == status : true)
                                                                  &&
-                                                                 (refundType == "全部" ? true : i.RefundType == refundType)
-                                                                 && (i.CreateUserName.Contains(createUserName))
+                                                                 (beginInputDate != dateInputFrom.MinDate
+                                                                      ? batch.InputDate >= beginInputDate
+                                                                      : true)
+                                                                 &&
+                                                                 (endInputDate != dateInputTo.MinDate
+                                                                      ? batch.InputDate <= endInputDate
+                                                                      : true)
+                                                                 //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                 &&
+                                                                 (refundType == "全部"
+                                                                      ? true
+                                                                      : batch.RefundType == refundType)
+                                                                 && (batch.CreateUserName.Contains(createUserName))
                                                                  &&
                                                                  (transactionType == "全部"
                                                                       ? true
-                                                                      : i.Case.TransactionType == transactionType)
+                                                                      : batch.Case.TransactionType == transactionType)
                                                                  &&
                                                                  (location == "00"
                                                                       ? true
-                                                                      : i.Case.OwnerDepartment.LocationCode == location)
+                                                                      : batch.Case.OwnerDepartment.LocationCode ==
+                                                                        location)
                                                                  &&
-                                                                 (i.Case.SellerClient.ClientNameCN.Contains(clientName) ||
-                                                                  i.Case.SellerClient.ClientNameEN.Contains(clientName) ||
-                                                                  i.Case.BuyerClient.ClientNameCN.Contains(clientName) ||
-                                                                  i.Case.BuyerClient.ClientNameEN.Contains(clientName))
+                                                                 (batch.Case.SellerClient.ClientNameCN.Contains(
+                                                                     clientName) ||
+                                                                  batch.Case.SellerClient.ClientNameEN.Contains(
+                                                                      clientName) ||
+                                                                  batch.Case.BuyerClient.ClientNameCN.Contains(
+                                                                      clientName) ||
+                                                                  batch.Case.BuyerClient.ClientNameEN.Contains(
+                                                                      clientName))
                     );
             }
             else
             {
-                queryResult = Context.InvoiceRefundBatches.Where(i =>
-                                                                 i.RefundBatchNo.Contains(tbRefundBatchNo.Text)
-                                                                 && (i.FinanceBatchNo != null)
+                queryResult = Context.InvoiceRefundBatches.Where(batch =>
+                                                                 batch.RefundBatchNo.Contains(tbRefundBatchNo.Text)
+                                                                 && (batch.FinanceBatchNo != null)
                                                                  &&
-                                                                 (beginDate != dateFrom.MinDate
-                                                                      ? i.RefundDate >= beginDate
+                                                                 (beginBatchDate != dateBatchFrom.MinDate
+                                                                      ? batch.RefundDate >= beginBatchDate
                                                                       : true)
                                                                  &&
-                                                                 (endDate != dateTo.MinDate
-                                                                      ? i.RefundDate <= endDate
+                                                                 (endBatchDate != dateBatchTo.MinDate
+                                                                      ? batch.RefundDate <= endBatchDate
                                                                       : true)
-                                                                     //&& (status != string.Empty ? i.CheckStatus == status : true)
                                                                  &&
-                                                                 (refundType == "全部" ? true : i.RefundType == refundType)
-                                                                 && (i.CreateUserName.Contains(createUserName))
+                                                                 (beginInputDate != dateInputFrom.MinDate
+                                                                      ? batch.InputDate >= beginInputDate
+                                                                      : true)
+                                                                 &&
+                                                                 (endInputDate != dateInputTo.MinDate
+                                                                      ? batch.InputDate <= endInputDate
+                                                                      : true)
+                                                                 //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                 &&
+                                                                 (refundType == "全部"
+                                                                      ? true
+                                                                      : batch.RefundType == refundType)
+                                                                 && (batch.CreateUserName.Contains(createUserName))
                                                                  &&
                                                                  (location == "00"
                                                                       ? true
-                                                                      : i.InvoiceFinanceBatch.Client.Department.
+                                                                      : batch.InvoiceFinanceBatch.Client.Department.
                                                                             LocationCode == location)
                                                                  &&
-                                                                 (i.InvoiceFinanceBatch.Client.ClientNameCN.Contains(
-                                                                     clientName) ||
-                                                                  i.InvoiceFinanceBatch.Client.ClientNameEN.Contains(
+                                                                 (batch.InvoiceFinanceBatch.Client.ClientNameCN.Contains
+                                                                      (
+                                                                          clientName) ||
+                                                                  batch.InvoiceFinanceBatch.Client.ClientNameEN.Contains
+                                                                      (
+                                                                          clientName) ||
+                                                                  batch.Case.BuyerClient.ClientNameCN.Contains(
                                                                       clientName) ||
-                                                                  i.Case.BuyerClient.ClientNameCN.Contains(clientName) ||
-                                                                  i.Case.BuyerClient.ClientNameEN.Contains(clientName))
+                                                                  batch.Case.BuyerClient.ClientNameEN.Contains(
+                                                                      clientName))
                     );
             }
             _bs.DataSource = queryResult;
@@ -396,7 +439,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceRefundBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceRefundBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
             Selected = selectedBatch;
             if (OwnerForm != null)
             {
@@ -420,7 +463,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (DataGridViewCell cell in dgvBatches.SelectedCells)
             {
-                var batch = (InvoiceRefundBatch)_bs.List[cell.RowIndex];
+                var batch = (InvoiceRefundBatch) _bs.List[cell.RowIndex];
                 if (!selectedBatches.Contains(batch))
                 {
                     selectedBatches.Add(batch);
