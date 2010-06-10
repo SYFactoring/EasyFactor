@@ -590,7 +590,6 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.Cells[row, 4] = selectedBatch.AssignDate;
                     sheet.Cells[row, 5] = selectedBatch.Case.ActiveCDA.Price;
                     sheet.Cells[row, 6] = selectedBatch.Case.ActiveCDA.HandFee;
-                    sheet.Cells[row, 4] = selectedBatch.Case.ActiveCDA.Price;
                     sheet.Range["E" + row, "E" + row].NumberFormatLocal = "0.0000%";
                     sheet.Range["F" + row, "F" + row].NumberFormatLocal =
                         TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
