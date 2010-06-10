@@ -59,8 +59,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvFactorCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
@@ -74,6 +76,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLineAssignOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -102,17 +106,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colFactorName,
             this.colCreditLineCurrency,
             this.colCreditLine,
+            this.colCreditLineOutstanding,
+            this.colCreditLineAssignOutstanding,
             this.colPeriodBegin,
             this.colPeriodEnd,
             this.colCreditLineStatus});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvFactorCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactorCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvFactorCreditLines.Location = new System.Drawing.Point(0, 33);
@@ -261,6 +267,24 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
             // 
+            // colCreditLineOutstanding
+            // 
+            this.colCreditLineOutstanding.DataPropertyName = "CreditLineOutstanding";
+            dataGridViewCellStyle3.Format = "N2";
+            this.colCreditLineOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colCreditLineOutstanding.HeaderText = " £”‡∂Ó∂»";
+            this.colCreditLineOutstanding.Name = "colCreditLineOutstanding";
+            this.colCreditLineOutstanding.ReadOnly = true;
+            // 
+            // colCreditLineAssignOutstanding
+            // 
+            this.colCreditLineAssignOutstanding.DataPropertyName = "CreditLineAssignOutstanding";
+            dataGridViewCellStyle4.Format = "N2";
+            this.colCreditLineAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colCreditLineAssignOutstanding.HeaderText = "’ÀøÓ”‡∂Ó";
+            this.colCreditLineAssignOutstanding.Name = "colCreditLineAssignOutstanding";
+            this.colCreditLineAssignOutstanding.ReadOnly = true;
+            // 
             // colPeriodBegin
             // 
             this.colPeriodBegin.DataPropertyName = "PeriodBegin";
@@ -304,8 +328,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineAssignOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
+
+
+
     }
 }

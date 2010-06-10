@@ -128,6 +128,33 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public double GetTotalCreditCover(string currency)
+        {
+            double result = 0;
+            foreach(Case curCase in BuyerCases.Where(c=>c.CaseMark==CASE.ENABLE))
+            {
+                CDA cda = curCase.ActiveCDA;
+                if(cda!=null&&cda.CreditCover.HasValue)
+                {
+                    double creditCover = cda.CreditCover.Value;
+                    if(cda.CreditCoverCurr!=currency)
+                    {
+                        double exchange = Exchange.GetExchangeRate(cda.CreditCoverCurr, currency);
+                        creditCover *= exchange;
+                    }
+
+                    result += creditCover;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public override string ToString()
         {

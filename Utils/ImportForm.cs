@@ -2726,7 +2726,6 @@ namespace CMBC.EasyFactor.Utils
                                                  PeriodBegin = (DateTime)valueArray[row, column++],
                                                  PeriodEnd = (DateTime)valueArray[row, column++],
                                                  ApproveNo = String.Format("{0:G}", valueArray[row, column++]),
-                                                 ApproveType = String.Format("{0:G}", valueArray[row, column++]),
                                                  CreditLineStatus = String.Format("{0:G}", valueArray[row, column++]),
                                                  FreezeReason = String.Format("{0:G}", valueArray[row, column++]),
                                                  Freezer = String.Format("{0:G}", valueArray[row, column++]),

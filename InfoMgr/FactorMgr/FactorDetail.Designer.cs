@@ -17,7 +17,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// Required designer variable.
         /// </summary>
         private DevComponents.DotNetBar.Controls.TextBoxX approveNoTextBox;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx approveTypeComboBox;
         private DevComponents.DotNetBar.ButtonX btnAgreementDelete;
         private DevComponents.DotNetBar.ButtonX btnAgreementNew;
         private DevComponents.DotNetBar.ButtonX btnAgreementRefresh;
@@ -185,7 +184,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DevComponents.DotNetBar.LabelX periodBeginLabel;
             DevComponents.DotNetBar.LabelX creditLineStatusLabel;
             DevComponents.DotNetBar.LabelX approveNoLabel;
-            DevComponents.DotNetBar.LabelX approveTypeLabel;
             DevComponents.DotNetBar.LabelX commentLabel;
             DevComponents.DotNetBar.LabelX freezeReasonLabel;
             DevComponents.DotNetBar.LabelX freezerLabel;
@@ -199,16 +197,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DevComponents.DotNetBar.LabelX lblAgreementComment;
             DevComponents.DotNetBar.LabelX lblSignDate;
             DevComponents.DotNetBar.LabelX labelX1;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FactorDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelAgreement = new DevComponents.DotNetBar.TabControlPanel();
@@ -260,7 +258,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.freezerTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.freezeReasonTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.approveTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.approveNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.creditLineStatusTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.periodEndDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -358,7 +355,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             periodBeginLabel = new DevComponents.DotNetBar.LabelX();
             creditLineStatusLabel = new DevComponents.DotNetBar.LabelX();
             approveNoLabel = new DevComponents.DotNetBar.LabelX();
-            approveTypeLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
             freezeReasonLabel = new DevComponents.DotNetBar.LabelX();
             freezerLabel = new DevComponents.DotNetBar.LabelX();
@@ -829,22 +825,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             approveNoLabel.TabIndex = 7;
             approveNoLabel.Text = "<font color=\'red\'>*</font>授信编号:";
             // 
-            // approveTypeLabel
-            // 
-            approveTypeLabel.AutoSize = true;
-            approveTypeLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            approveTypeLabel.BackgroundStyle.Class = "";
-            approveTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            approveTypeLabel.Location = new System.Drawing.Point(232, 53);
-            approveTypeLabel.Name = "approveTypeLabel";
-            approveTypeLabel.Size = new System.Drawing.Size(57, 15);
-            approveTypeLabel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            approveTypeLabel.TabIndex = 11;
-            approveTypeLabel.Text = "<font color=\'red\'>*</font>授信类型:";
-            // 
             // commentLabel
             // 
             commentLabel.AutoSize = true;
@@ -1045,8 +1025,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelAgreement);
             this.tabControl.Controls.Add(this.tabPanelCreditLine);
+            this.tabControl.Controls.Add(this.tabPanelAgreement);
             this.tabControl.Controls.Add(this.tabPanelFactor);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -1087,27 +1067,27 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvAgreements.AllowUserToOrderColumns = true;
             this.dgvAgreements.AutoGenerateColumns = false;
             this.dgvAgreements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAgreements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAgreements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvAgreements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAgreements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colAgreementSignDate,
             this.colAgreementComment});
             this.dgvAgreements.DataSource = this.factorCreditLineBindingSource;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAgreements.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAgreements.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvAgreements.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAgreements.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvAgreements.Location = new System.Drawing.Point(1, 320);
@@ -1121,9 +1101,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colAgreementSignDate
             // 
             this.colAgreementSignDate.DataPropertyName = "SignDate";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colAgreementSignDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Format = "d";
+            dataGridViewCellStyle9.NullValue = null;
+            this.colAgreementSignDate.DefaultCellStyle = dataGridViewCellStyle9;
             this.colAgreementSignDate.HeaderText = "签订日";
             this.colAgreementSignDate.Name = "colAgreementSignDate";
             this.colAgreementSignDate.ReadOnly = true;
@@ -1350,14 +1330,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactorCreditLines.AllowUserToDeleteRows = false;
             this.dgvFactorCreditLines.AllowUserToOrderColumns = true;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactorCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvFactorCreditLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFactorCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCreditLineID,
@@ -1376,14 +1356,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colUnfreezeDate,
             this.colComment});
             this.dgvFactorCreditLines.DataSource = this.factorCreditLineBindingSource;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvFactorCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactorCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvFactorCreditLines.Location = new System.Drawing.Point(1, 320);
@@ -1413,9 +1393,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colCreditLine
             // 
             this.colCreditLine.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
             this.colCreditLine.HeaderText = "额度上限";
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
@@ -1424,8 +1404,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colPeriodBegin
             // 
             this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle6.Format = "d";
-            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Format = "d";
+            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
             this.colPeriodBegin.HeaderText = "有效期(始)";
             this.colPeriodBegin.Name = "colPeriodBegin";
             this.colPeriodBegin.ReadOnly = true;
@@ -1434,8 +1414,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colPeriodEnd
             // 
             this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle7.Format = "d";
-            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Format = "d";
+            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
             this.colPeriodEnd.HeaderText = "有效期(终)";
             this.colPeriodEnd.Name = "colPeriodEnd";
             this.colPeriodEnd.ReadOnly = true;
@@ -1484,8 +1464,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colFreezeDate
             // 
             this.colFreezeDate.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle8.Format = "d";
-            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Format = "d";
+            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle5;
             this.colFreezeDate.HeaderText = "冻结日期";
             this.colFreezeDate.Name = "colFreezeDate";
             this.colFreezeDate.ReadOnly = true;
@@ -1510,8 +1490,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colUnfreezeDate
             // 
             this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle9.Format = "d";
-            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.Format = "d";
+            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle6;
             this.colUnfreezeDate.HeaderText = "解冻日期";
             this.colUnfreezeDate.Name = "colUnfreezeDate";
             this.colUnfreezeDate.ReadOnly = true;
@@ -1552,8 +1532,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.groupPanelCreditLineDetail.Controls.Add(this.freezeReasonTextBox);
             this.groupPanelCreditLineDetail.Controls.Add(commentLabel);
             this.groupPanelCreditLineDetail.Controls.Add(this.commentTextBox);
-            this.groupPanelCreditLineDetail.Controls.Add(approveTypeLabel);
-            this.groupPanelCreditLineDetail.Controls.Add(this.approveTypeComboBox);
             this.groupPanelCreditLineDetail.Controls.Add(approveNoLabel);
             this.groupPanelCreditLineDetail.Controls.Add(this.approveNoTextBox);
             this.groupPanelCreditLineDetail.Controls.Add(creditLineStatusLabel);
@@ -1840,21 +1818,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.commentTextBox.Size = new System.Drawing.Size(458, 38);
             this.commentTextBox.TabIndex = 14;
-            // 
-            // approveTypeComboBox
-            // 
-            this.approveTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.factorCreditLineBindingSource, "ApproveType", true));
-            this.approveTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.approveTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.approveTypeComboBox.FormattingEnabled = true;
-            this.approveTypeComboBox.Items.AddRange(new object[] {
-            "综合授信",
-            "第三方额度"});
-            this.approveTypeComboBox.Location = new System.Drawing.Point(297, 50);
-            this.approveTypeComboBox.Name = "approveTypeComboBox";
-            this.approveTypeComboBox.Size = new System.Drawing.Size(124, 21);
-            this.approveTypeComboBox.TabIndex = 12;
-            this.creditLineValidator.SetValidator1(this.approveTypeComboBox, this.requiredFieldValidator9);
             // 
             // approveNoTextBox
             // 

@@ -12,11 +12,19 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class FactorCreditLine
     {
         /// <summary>
-        /// Gets
+        /// Gets ’ÀøÓ”‡∂Ó
         /// </summary>
-        public double CreditLineOutstanding
+        public double CreditLineAssignOutstanding
         {
             get { return CreditLine - Factor.GetAssignOutstanding(CreditLineCurrency); }
+        }
+
+        /// <summary>
+        /// Gets  £”‡∂Ó∂»
+        /// </summary>
+        public double CreditLineOustanding
+        {
+            get { return CreditLine - Factor.GetTotalCreditCover(CreditLineCurrency); }
         }
 
         /// <summary>

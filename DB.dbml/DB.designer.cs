@@ -8001,8 +8001,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _ApproveNo;
 		
-		private string _ApproveType;
-		
 		private string _CreditLineStatus;
 		
 		private string _FreezeReason;
@@ -8041,8 +8039,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPeriodEndChanged();
     partial void OnApproveNoChanging(string value);
     partial void OnApproveNoChanged();
-    partial void OnApproveTypeChanging(string value);
-    partial void OnApproveTypeChanged();
     partial void OnCreditLineStatusChanging(string value);
     partial void OnCreditLineStatusChanged();
     partial void OnFreezeReasonChanging(string value);
@@ -8209,26 +8205,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._ApproveNo = value;
 					this.SendPropertyChanged("ApproveNo");
 					this.OnApproveNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApproveType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string ApproveType
-		{
-			get
-			{
-				return this._ApproveType;
-			}
-			set
-			{
-				if ((this._ApproveType != value))
-				{
-					this.OnApproveTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ApproveType = value;
-					this.SendPropertyChanged("ApproveType");
-					this.OnApproveTypeChanged();
 				}
 			}
 		}
