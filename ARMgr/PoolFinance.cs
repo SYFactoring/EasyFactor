@@ -88,8 +88,8 @@ namespace CMBC.EasyFactor.ARMgr
                 ControlUtil.SetComponetDefault(comp);
             }
 
-            batchBindingSource.DataSource = typeof(InvoiceFinanceBatch);
-            dgvCases.DataSource = typeof(Case);
+            batchBindingSource.DataSource = typeof (InvoiceFinanceBatch);
+            dgvCases.DataSource = typeof (Case);
         }
 
         //?Private?Methods?(6)?
@@ -105,7 +105,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedCase = (Case)casesBindingSource.List[dgvCases.CurrentCell.RowIndex];
+            var selectedCase = (Case) casesBindingSource.List[dgvCases.CurrentCell.RowIndex];
             var caseDetail = new CaseDetail(selectedCase, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
         }
@@ -176,7 +176,23 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var batch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
+            var batch = (InvoiceFinanceBatch) batchBindingSource.DataSource;
+
+            double financeAmount = batch.FinanceAmount;
+            if (batch.BatchCurrency != "CNY")
+            {
+                double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                financeAmount *= rate;
+            }
+            if (TypeUtil.GreaterZero(financeAmount - _client.PoolValuedAssignOutstanding))
+            {
+                MessageBoxEx.Show(
+                    String.Format("本次融资币别{0}，额度{1:N2}，大于当前应收账款余额{2:N2}，不能融资。", batch.BatchCurrency, batch.FinanceAmount,
+                                  _client.PoolValuedAssignOutstanding), MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             bool isSaveOK = true;
             batch.Client = _client;
 
@@ -252,7 +268,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var financeBatch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
+            var financeBatch = (InvoiceFinanceBatch) batchBindingSource.DataSource;
             var factorMgr = new FactorMgr();
             var queryForm = new QueryForm(factorMgr, "选择代付行");
             factorMgr.OwnerForm = queryForm;

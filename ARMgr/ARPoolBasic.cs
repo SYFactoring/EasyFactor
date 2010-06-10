@@ -60,7 +60,6 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
             }
 
-
             PoolControl.Dock = DockStyle.Fill;
             panelPool.Controls.Add(PoolControl);
         }

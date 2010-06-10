@@ -124,6 +124,7 @@ namespace CMBC.EasyFactor.ARMgr
                 colBuyerName.Visible = false;
                 colBatchCount.Visible = false;
                 colTransactionType.Visible = false;
+                colAssignDate.Visible = false;
             }
         }
 

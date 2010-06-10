@@ -140,6 +140,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsPool = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsSendMsg = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -617,6 +618,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colSellerName,
             this.colBuyerName,
             this.colTransactionType,
+            this.colIsPool,
             this.colAssignBatchNo,
             this.colAssignDate,
             this.colIsSendMsg,
@@ -816,6 +818,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.colTransactionType.HeaderText = "业务类别";
             this.colTransactionType.Name = "colTransactionType";
             this.colTransactionType.ReadOnly = true;
+            // 
+            // colIsPool
+            // 
+            this.colIsPool.DataPropertyName = "IsPool";
+            this.colIsPool.HeaderText = "池融资";
+            this.colIsPool.Name = "colIsPool";
+            this.colIsPool.ReadOnly = true;
+            this.colIsPool.Width = 50;
             // 
             // colAssignBatchNo
             // 
@@ -1056,6 +1066,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsPool;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsSendMsg;

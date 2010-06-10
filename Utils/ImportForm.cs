@@ -3040,7 +3040,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (TypeUtil.GreaterZero(financeBatch.FinanceAmount - currentFinanceAmount))
                         {
-                            throw new Exception(String.Format("本次申请融资金额{0:N2}，大于实际融资金额{1:N2}，业务编号：{2}",
+                            throw new Exception(String.Format("本次申请融资金额{0:N2}，大于实际可融资金额{1:N2}，业务编号：{2}",
                                                               financeBatch.FinanceAmount, currentFinanceAmount,
                                                               assignBatchCode));
                         }

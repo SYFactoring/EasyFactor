@@ -631,7 +631,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             double financeProp = _case.ActiveCDA.FinanceProportion.GetValueOrDefault();
 
-            IQueryable<Invoice> invoiceResult = from invoice in _context.Invoices
+            IQueryable<Invoice> queryResult = from invoice in _context.Invoices
                                                 where
                                                     invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode &&
                                                     invoice.IsFlaw == false &&
@@ -641,7 +641,12 @@ namespace CMBC.EasyFactor.ARMgr
                                                      financeProp < -TypeUtil.PRECISION)
                                                 select invoice;
 
-            var logs = invoiceResult.Select(invoice => new InvoiceFinanceLog(invoice)).ToList();
+            var logs = new List<InvoiceFinanceLog>();
+            foreach (Invoice invoice in queryResult)
+            {
+                InvoiceFinanceLog log = new InvoiceFinanceLog(invoice);
+                logs.Add(log);
+            }
 
             logsBindingSource.DataSource = logs;
             StatBatch();

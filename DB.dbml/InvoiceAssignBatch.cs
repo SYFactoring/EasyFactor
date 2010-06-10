@@ -248,6 +248,14 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// ÊÇ·ñ³ØÈÚ×Ê
+        /// </summary>
+        public bool IsPool
+        {
+            get { return Case.IsPool; }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public string Location
