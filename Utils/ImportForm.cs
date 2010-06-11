@@ -14,7 +14,6 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
 using DevComponents.DotNetBar;
-using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Office.Interop.Excel;
 
 namespace CMBC.EasyFactor.Utils
@@ -2637,7 +2636,7 @@ namespace CMBC.EasyFactor.Utils
                             else
                             {
                                 var contextNew = new DBDataContext();
-                                factor = contextNew.Factors.SingleOrDefault(f => f.FactorCode == factor.FactorCode);
+                                factor = contextNew.Factors.SingleOrDefault(f => f.FactorCode == factorCode);
                             }
                         }
 
@@ -2808,6 +2807,11 @@ namespace CMBC.EasyFactor.Utils
                         if (assignBatch == null)
                         {
                             throw new Exception("业务编号错误：" + assignBatchCode);
+                        }
+
+                        if (assignBatch.Case.IsPool)
+                        {
+                            throw new Exception("无法导入放款信息，本案为池融资，请在放款明细表（池融资）模块进行操作：" + assignBatchCode);
                         }
 
                         //if (assignBatch.CheckStatus != BATCH.CHECK)
@@ -4353,6 +4357,11 @@ namespace CMBC.EasyFactor.Utils
                         if (assignBatch == null)
                         {
                             throw new Exception("业务编号错误，不能导入：" + assignBatchCode);
+                        }
+
+                        if(assignBatch.Case.IsPool)
+                        {
+                            throw new Exception("无法导入销账信息，本案为池融资，请在冲销融资明细表（池融资）模块进行操作：" + assignBatchCode);
                         }
 
                         CDA cda = assignBatch.Case.ActiveCDA;

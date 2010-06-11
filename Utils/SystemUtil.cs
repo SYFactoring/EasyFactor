@@ -23,7 +23,9 @@ namespace CMBC.EasyFactor.Utils
     /// </summary>
     public static class SystemUtil
     {
+
         private static readonly Dictionary<string, string> DbDictionary = InitializeDbDictionary();
+
         /// <summary>
         /// 
         /// </summary>
@@ -35,47 +37,11 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        public static string ServerName
-        {
-            get { return DbDictionary["Data Source"]; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public static string UserName
-        {
-            get { return DbDictionary["User ID"]; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public static string Password
-        {
-            get { return DbDictionary["Password"]; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
         public static string DataBaseName
         {
             get { return DbDictionary["Initial Catalog"]; }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        private static Dictionary<string, string> InitializeDbDictionary()
-        {
-            string connectionString = Settings.Default.FOSConnectionString;
-            var result = new Dictionary<string, string>();
-            foreach (string pair in connectionString.Split(new[] { ';' }))
-            {
-                string key = pair.Split(new[] { '=' })[0].Trim();
-                string value = pair.Split(new[] { '=' })[1].Trim();
-                result.Add(key, value);
-            }
 
-            return result;
-        }
         //?Public?Methods?(2)?
         /// <summary>
         /// 
@@ -84,6 +50,23 @@ namespace CMBC.EasyFactor.Utils
         {
             get { return Environment.GetFolderPath(Environment.SpecialFolder.Desktop); }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string Password
+        {
+            get { return DbDictionary["Password"]; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string ServerName
+        {
+            get { return DbDictionary["Data Source"]; }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -136,6 +119,25 @@ namespace CMBC.EasyFactor.Utils
                 return sb.ToString();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string UserName
+        {
+            get { return DbDictionary["User ID"]; }
+        }
+
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mainDir"></param>
+        /// <param name="extensions"></param>
+        /// <param name="level"></param>
+        /// <returns></returns>
         public static string GetAllDirFilesRecurse(FileSystemInfo mainDir, string[] extensions, int level)
         {
             if (mainDir == null)
@@ -191,15 +193,56 @@ namespace CMBC.EasyFactor.Utils
         /// 
         /// </summary>
         /// <param name="folderToZip"></param>
+        /// <param name="zipedFile"></param>
+        /// <returns></returns>
+        public static bool ZipDirectory(string folderToZip, string zipedFile)
+        {
+            if (!Directory.Exists(folderToZip))
+            {
+                return false;
+            }
+
+            var s = new ZipOutputStream(File.Create(zipedFile));
+            s.SetLevel(6);
+
+            bool res = ZipFileDictory(folderToZip, s, "");
+
+            s.Finish();
+            s.Close();
+
+            return res;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private static Dictionary<string, string> InitializeDbDictionary()
+        {
+            string connectionString = Settings.Default.FOSConnectionString;
+            var result = new Dictionary<string, string>();
+            foreach (string pair in connectionString.Split(new[] { ';' }))
+            {
+                string key = pair.Split(new[] { '=' })[0].Trim();
+                string value = pair.Split(new[] { '=' })[1].Trim();
+                result.Add(key, value);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="folderToZip"></param>
         /// <param name="s"></param>
         /// <param name="parentFolderName"></param>
         /// <returns></returns>
         private static bool ZipFileDictory(string folderToZip, ZipOutputStream s, string parentFolderName)
         {
             bool res = true;
-            ZipEntry entry = null;
+            ZipEntry entry;
             FileStream fs = null;
-            Crc32 crc = new Crc32();
+            var crc = new Crc32();
 
             try
             {
@@ -214,12 +257,14 @@ namespace CMBC.EasyFactor.Utils
                 {
                     fs = File.OpenRead(file);
 
-                    byte[] buffer = new byte[fs.Length];
+                    var buffer = new byte[fs.Length];
                     fs.Read(buffer, 0, buffer.Length);
-                    entry = new ZipEntry(Path.Combine(parentFolderName, Path.GetFileName(folderToZip) + "/" + Path.GetFileName(file)));
+                    entry = new ZipEntry(Path.Combine(parentFolderName, Path.GetFileName(folderToZip) + "/" + Path.GetFileName(file)))
+                                {
+                                    DateTime = DateTime.Now,
+                                    Size = fs.Length
+                                };
 
-                    entry.DateTime = DateTime.Now;
-                    entry.Size = fs.Length;
                     fs.Close();
 
                     crc.Reset();
@@ -244,32 +289,11 @@ namespace CMBC.EasyFactor.Utils
                 }
             }
 
-
             string[] folders = Directory.GetDirectories(folderToZip);
             if (folders.Any(folder => !ZipFileDictory(folder, s, Path.Combine(parentFolderName, Path.GetFileName(folderToZip)))))
             {
                 return false;
             }
-
-            return res;
-        }
-
-
-        public static bool ZipDirectory(string folderToZip, string zipedFile)
-        {
-            bool res;
-            if (!Directory.Exists(folderToZip))
-            {
-                return false;
-            }
-
-            ZipOutputStream s = new ZipOutputStream(File.Create(zipedFile));
-            s.SetLevel(6);
-
-            res = ZipFileDictory(folderToZip, s, "");
-
-            s.Finish();
-            s.Close();
 
             return res;
         }

@@ -366,8 +366,16 @@ namespace CMBC.EasyFactor.ARMgr
             caseMgr.OwnerForm = queryForm;
             queryForm.ShowDialog(this);
             Case curCase = caseMgr.Selected;
+
             if (curCase != null)
             {
+                if (curCase.IsPool)
+                {
+                    MessageBoxEx.Show("本案为池融资模式，请在池融资模块进行操作", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                      MessageBoxIcon.Information);
+                    return;
+                }
+
                 if (curCase.ActiveCDA == null)
                 {
                     MessageBoxEx.Show("没有有效的额度通知书，不能进行应收账款管理", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
