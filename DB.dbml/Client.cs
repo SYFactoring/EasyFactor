@@ -239,25 +239,25 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 double? total = null;
-                foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
-                {
-                    double? financeOutstanding = curCase.FinanceOutstanding;
-                    if (financeOutstanding.HasValue)
-                    {
-                        if (total == null)
-                        {
-                            total = 0;
-                        }
+                //foreach (InvoiceFinanceBatch curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
+                //{
+                //    double? financeOutstanding = curCase.FinanceOutstanding;
+                //    if (financeOutstanding.HasValue)
+                //    {
+                //        if (total == null)
+                //        {
+                //            total = 0;
+                //        }
 
-                        if (curCase.InvoiceCurrency != "CNY")
-                        {
-                            double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
-                            financeOutstanding *= exchange;
-                        }
+                //        if (curCase.InvoiceCurrency != "CNY")
+                //        {
+                //            double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
+                //            financeOutstanding *= exchange;
+                //        }
 
-                        total += financeOutstanding.Value;
-                    }
-                }
+                //        total += financeOutstanding.Value;
+                //    }
+                //}
 
                 return total;
             }
