@@ -2565,18 +2565,7 @@ namespace CMBC.EasyFactor.Utils
 
                     if (cda == null)
                     {
-                        foreach (Workbook wb in app.Workbooks)
-                        {
-                            wb.Close(false, Type.Missing, Type.Missing);
-                        }
-
-                        app.Workbooks.Close();
-                        app.Quit();
-                        Marshal.ReleaseComObject(app);
-
-                        MessageBoxEx.Show("案件没有有效的额度通知书，案件编号：" + selectedCase.CaseCode);
-
-                        return;
+                        throw new Exception("案件没有有效的额度通知书，案件编号：" + selectedCase.CaseCode);
                     }
 
                     var sheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
@@ -2861,11 +2850,6 @@ namespace CMBC.EasyFactor.Utils
                 Marshal.ReleaseComObject(app);
 
                 throw;
-            }
-            finally
-            {
-                app.Quit();
-                Marshal.ReleaseComObject(app);
             }
         }
         /// <summary>
