@@ -2845,11 +2845,16 @@ namespace CMBC.EasyFactor.Utils
                     wb.Close(false, Type.Missing, Type.Missing);
                 }
 
-                app.Workbooks.Close();
-                app.Quit();
-                Marshal.ReleaseComObject(app);
-
                 throw;
+            }
+            finally
+            {
+                if (app != null)
+                {
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                }
             }
         }
         /// <summary>
