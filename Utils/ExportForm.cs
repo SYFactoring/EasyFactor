@@ -1578,7 +1578,7 @@ namespace CMBC.EasyFactor.Utils
                 //转让批次
                 datasheet.Cells[1, column++] = "转让批次号";
                 datasheet.Cells[1, column++] = "转让批次日";
-                datasheet.Cells[1, column++] = "是否生成报文";
+                datasheet.Cells[1, column++] = "可否多次融资";
                 datasheet.Cells[1, column++] = "本次转让备注";
                 datasheet.Cells[1, column++] = "转让经办人";
                 //转让
@@ -1656,7 +1656,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignBatchNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.AssignDate;
                     datasheet.Cells[row + 2, column++] =
-                        TypeUtil.ConvertBoolToStr(invoice.InvoiceAssignBatch.IsCreateMsg);
+                        TypeUtil.ConvertBoolToStr(invoice.InvoiceAssignBatch.IsRefinance);
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Comment;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CreateUserName;
                     //转让

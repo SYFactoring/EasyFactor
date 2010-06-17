@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CMBC.EasyFactor.Utils;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
@@ -253,6 +254,14 @@ namespace CMBC.EasyFactor.DB.dbml
         public bool IsPool
         {
             get { return Case.IsPool; }
+        }
+        
+        /// <summary>
+        /// 是否已发生融资
+        /// </summary>
+        public bool IsRefinanced
+        {
+            get { return Invoices.Any(i => i.FinanceAmount > TypeUtil.PRECISION); }
         }
 
         /// <summary>

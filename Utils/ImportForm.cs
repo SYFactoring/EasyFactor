@@ -621,7 +621,7 @@ namespace CMBC.EasyFactor.Utils
                                                                                                batch.AssignDate,
                                                                                                batchList);
                                 //batch.CheckStatus = BATCH.UNCHECK;
-                                batch.IsCreateMsg = false;
+                                batch.IsRefinance = false;
                                 batchList.Add(batch);
                             }
                         }
@@ -895,7 +895,7 @@ namespace CMBC.EasyFactor.Utils
                                                                                                          AssignDate,
                                                                                                      assignBatchList);
                                 //assignBatch.CheckStatus = BATCH.UNCHECK;
-                                assignBatch.IsCreateMsg = false;
+                                assignBatch.IsRefinance = false;
                                 assignBatchList.Add(assignBatch);
                             }
                         }
@@ -2809,6 +2809,11 @@ namespace CMBC.EasyFactor.Utils
                         if (assignBatch.Case.IsPool)
                         {
                             throw new Exception("无法导入放款信息，本案为池融资，请在放款明细表（池融资）模块进行操作：" + assignBatchCode);
+                        }
+
+                        if(assignBatch.IsRefinance.GetValueOrDefault()==false&&assignBatch.IsRefinanced)
+                        {
+                            throw new Exception("该业务批次不能进行重复融资："+assignBatchCode);
                         }
 
                         //if (assignBatch.CheckStatus != BATCH.CHECK)

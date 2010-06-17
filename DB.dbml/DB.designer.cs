@@ -8456,8 +8456,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.DateTime _AssignDate;
 		
-		private System.Nullable<bool> _IsCreateMsg;
-		
 		private string _Comment;
 		
 		private string _CreateUserName;
@@ -8465,6 +8463,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		private System.Nullable<System.DateTime> _InputDate;
 		
 		private System.Nullable<bool> _IsSendMsg;
+		
+		private System.Nullable<bool> _IsRefinance;
 		
 		private EntitySet<CreditNote> _CreditNotes;
 		
@@ -8482,8 +8482,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCaseCodeChanged();
     partial void OnAssignDateChanging(System.DateTime value);
     partial void OnAssignDateChanged();
-    partial void OnIsCreateMsgChanging(System.Nullable<bool> value);
-    partial void OnIsCreateMsgChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
@@ -8492,6 +8490,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnInputDateChanged();
     partial void OnIsSendMsgChanging(System.Nullable<bool> value);
     partial void OnIsSendMsgChanged();
+    partial void OnIsRefinanceChanging(System.Nullable<bool> value);
+    partial void OnIsRefinanceChanged();
     #endregion
 		
 		public InvoiceAssignBatch()
@@ -8562,26 +8562,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._AssignDate = value;
 					this.SendPropertyChanged("AssignDate");
 					this.OnAssignDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsCreateMsg", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<bool> IsCreateMsg
-		{
-			get
-			{
-				return this._IsCreateMsg;
-			}
-			set
-			{
-				if ((this._IsCreateMsg != value))
-				{
-					this.OnIsCreateMsgChanging(value);
-					this.SendPropertyChanging();
-					this._IsCreateMsg = value;
-					this.SendPropertyChanged("IsCreateMsg");
-					this.OnIsCreateMsgChanged();
 				}
 			}
 		}
@@ -8662,6 +8642,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._IsSendMsg = value;
 					this.SendPropertyChanged("IsSendMsg");
 					this.OnIsSendMsgChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsRefinance", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<bool> IsRefinance
+		{
+			get
+			{
+				return this._IsRefinance;
+			}
+			set
+			{
+				if ((this._IsRefinance != value))
+				{
+					this.OnIsRefinanceChanging(value);
+					this.SendPropertyChanging();
+					this._IsRefinance = value;
+					this.SendPropertyChanged("IsRefinance");
+					this.OnIsRefinanceChanged();
 				}
 			}
 		}

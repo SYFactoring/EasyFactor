@@ -359,11 +359,11 @@
       <Column Name="AssignBatchNo" Type="System.String" DbType="char(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CaseCode" Storage="_CDACode" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="AssignDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="IsCreateMsg" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="InputDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="IsSendMsg" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="IsRefinance" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceAssignBatch_CreditNote" Member="CreditNotes" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="CreditNote" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="Invoice" />
       <Association Name="Case_InvoiceAssignBatch" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />

@@ -30,7 +30,7 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.Editors.DateTimeAdv.DateTimeInput diInputDate;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isCreateMsgCheckBox;
+        private DevComponents.DotNetBar.Controls.CheckBoxX isRefinanceCheckBox;
         private DevComponents.DotNetBar.TabControlPanel panelBatch;
         private DevComponents.DotNetBar.TabControlPanel panelInvoices;
         private DevComponents.DotNetBar.Validator.SuperValidator superValidator;
@@ -92,7 +92,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnUpdate = new DevComponents.DotNetBar.ButtonX();
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.createUserNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.isCreateMsgCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.isRefinanceCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.assignDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.assignBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -234,7 +234,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBatch.Controls.Add(this.commentTextBox);
             this.panelBatch.Controls.Add(createUserNameLabel);
             this.panelBatch.Controls.Add(this.createUserNameTextBox);
-            this.panelBatch.Controls.Add(this.isCreateMsgCheckBox);
+            this.panelBatch.Controls.Add(this.isRefinanceCheckBox);
             this.panelBatch.Controls.Add(assignDateLabel);
             this.panelBatch.Controls.Add(this.assignDateDateTimePicker);
             this.panelBatch.Controls.Add(assignBatchNoLabel);
@@ -362,20 +362,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.createUserNameTextBox.Size = new System.Drawing.Size(162, 20);
             this.createUserNameTextBox.TabIndex = 9;
             // 
-            // isCreateMsgCheckBox
+            // isRefinanceCheckBox
             // 
-            this.isCreateMsgCheckBox.AutoSize = true;
-            this.isCreateMsgCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.isRefinanceCheckBox.AutoSize = true;
+            this.isRefinanceCheckBox.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.isCreateMsgCheckBox.BackgroundStyle.Class = "";
-            this.isCreateMsgCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.batchBindingSource, "IsCreateMsg", true));
-            this.isCreateMsgCheckBox.Location = new System.Drawing.Point(114, 148);
-            this.isCreateMsgCheckBox.Name = "isCreateMsgCheckBox";
-            this.isCreateMsgCheckBox.Size = new System.Drawing.Size(101, 16);
-            this.isCreateMsgCheckBox.TabIndex = 7;
-            this.isCreateMsgCheckBox.Text = "是否生成报文";
+            this.isRefinanceCheckBox.BackgroundStyle.Class = "";
+            this.isRefinanceCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.batchBindingSource, "IsRefinance", true));
+            this.isRefinanceCheckBox.Location = new System.Drawing.Point(114, 148);
+            this.isRefinanceCheckBox.Name = "isRefinanceCheckBox";
+            this.isRefinanceCheckBox.Size = new System.Drawing.Size(101, 16);
+            this.isRefinanceCheckBox.TabIndex = 7;
+            this.isRefinanceCheckBox.Text = "可否多次融资";
             // 
             // assignDateDateTimePicker
             // 

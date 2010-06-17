@@ -458,7 +458,7 @@ namespace CMBC.EasyFactor.ARMgr
                             {
                                 AssignDate = DateTime.Now.Date,
                                 CreateUserName = App.Current.CurUser.Name,
-                                IsCreateMsg = false
+                                IsRefinance = false
                             };
             //batch.CheckStatus = BATCH.UNCHECK;
             batchBindingSource.DataSource = batch;
