@@ -150,7 +150,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 context.FactorCreditLines.Where(
                     f =>
                     f.Factor.FactorCode.Contains(factorCode) &&
-                    (f.Factor.CompanyNameCN.Contains(factorName) || f.Factor.CompanyNameEN.Contains(factorName)));
+                    ((f.Factor.CompanyNameCN ?? string.Empty).Contains(factorName) || (f.Factor.CompanyNameEN??string.Empty).Contains(factorName)));
             _bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }

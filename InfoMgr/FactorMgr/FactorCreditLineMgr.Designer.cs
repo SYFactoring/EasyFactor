@@ -64,13 +64,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvFactorCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.panelQuery = new DevComponents.DotNetBar.PanelEx();
-            this.lblCount = new DevComponents.DotNetBar.LabelX();
-            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
-            this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblFactorName = new DevComponents.DotNetBar.LabelX();
-            this.tbFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblFactorCode = new DevComponents.DotNetBar.LabelX();
             this.colFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,6 +74,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.lblCount = new DevComponents.DotNetBar.LabelX();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
+            this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblFactorName = new DevComponents.DotNetBar.LabelX();
+            this.tbFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblFactorCode = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactorCreditLines)).BeginInit();
             this.panelQuery.SuspendLayout();
             this.SuspendLayout();
@@ -121,111 +121,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvFactorCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactorCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvFactorCreditLines.Location = new System.Drawing.Point(0, 33);
+            this.dgvFactorCreditLines.Location = new System.Drawing.Point(0, 27);
             this.dgvFactorCreditLines.MultiSelect = false;
             this.dgvFactorCreditLines.Name = "dgvFactorCreditLines";
             this.dgvFactorCreditLines.ReadOnly = true;
             this.dgvFactorCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvFactorCreditLines.Size = new System.Drawing.Size(935, 323);
+            this.dgvFactorCreditLines.Size = new System.Drawing.Size(935, 329);
             this.dgvFactorCreditLines.TabIndex = 3;
             this.dgvFactorCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFactorCreditLinesCellDoubleClick);
             this.dgvFactorCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvFactorCreditLinesDataBindingComplete);
             this.dgvFactorCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvFactorCreditLinesRowPostPaint);
-            // 
-            // panelQuery
-            // 
-            this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelQuery.Controls.Add(this.lblCount);
-            this.panelQuery.Controls.Add(this.btnQuery);
-            this.panelQuery.Controls.Add(this.tbFactorName);
-            this.panelQuery.Controls.Add(this.lblFactorName);
-            this.panelQuery.Controls.Add(this.tbFactorCode);
-            this.panelQuery.Controls.Add(this.lblFactorCode);
-            this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelQuery.Location = new System.Drawing.Point(0, 0);
-            this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(935, 33);
-            this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelQuery.Style.GradientAngle = 90;
-            this.panelQuery.TabIndex = 2;
-            // 
-            // lblCount
-            // 
-            this.lblCount.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(482, 4);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
-            this.lblCount.TabIndex = 10;
-            // 
-            // btnQuery
-            // 
-            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(391, 4);
-            this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 9;
-            this.btnQuery.Text = "查询";
-            this.btnQuery.Click += new System.EventHandler(this.Query);
-            // 
-            // tbFactorName
-            // 
-            // 
-            // 
-            // 
-            this.tbFactorName.Border.Class = "TextBoxBorder";
-            this.tbFactorName.Location = new System.Drawing.Point(281, 4);
-            this.tbFactorName.Name = "tbFactorName";
-            this.tbFactorName.Size = new System.Drawing.Size(100, 20);
-            this.tbFactorName.TabIndex = 8;
-            // 
-            // lblFactorName
-            // 
-            this.lblFactorName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblFactorName.BackgroundStyle.Class = "";
-            this.lblFactorName.Location = new System.Drawing.Point(198, 6);
-            this.lblFactorName.Name = "lblFactorName";
-            this.lblFactorName.Size = new System.Drawing.Size(81, 16);
-            this.lblFactorName.TabIndex = 7;
-            this.lblFactorName.Text = "合作机构名称";
-            // 
-            // tbFactorCode
-            // 
-            // 
-            // 
-            // 
-            this.tbFactorCode.Border.Class = "TextBoxBorder";
-            this.tbFactorCode.Location = new System.Drawing.Point(89, 4);
-            this.tbFactorCode.Name = "tbFactorCode";
-            this.tbFactorCode.Size = new System.Drawing.Size(100, 20);
-            this.tbFactorCode.TabIndex = 6;
-            // 
-            // lblFactorCode
-            // 
-            this.lblFactorCode.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblFactorCode.BackgroundStyle.Class = "";
-            this.lblFactorCode.Location = new System.Drawing.Point(8, 6);
-            this.lblFactorCode.Name = "lblFactorCode";
-            this.lblFactorCode.Size = new System.Drawing.Size(81, 16);
-            this.lblFactorCode.TabIndex = 5;
-            this.lblFactorCode.Text = "合作机构代码";
             // 
             // colFactorCode
             // 
@@ -305,6 +210,102 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colCreditLineStatus.HeaderText = "额度状态";
             this.colCreditLineStatus.Name = "colCreditLineStatus";
             this.colCreditLineStatus.ReadOnly = true;
+            // 
+            // panelQuery
+            // 
+            this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.lblCount);
+            this.panelQuery.Controls.Add(this.btnQuery);
+            this.panelQuery.Controls.Add(this.tbFactorName);
+            this.panelQuery.Controls.Add(this.lblFactorName);
+            this.panelQuery.Controls.Add(this.tbFactorCode);
+            this.panelQuery.Controls.Add(this.lblFactorCode);
+            this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelQuery.Location = new System.Drawing.Point(0, 0);
+            this.panelQuery.Name = "panelQuery";
+            this.panelQuery.Size = new System.Drawing.Size(935, 27);
+            this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelQuery.Style.GradientAngle = 90;
+            this.panelQuery.TabIndex = 2;
+            // 
+            // lblCount
+            // 
+            this.lblCount.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCount.BackgroundStyle.Class = "";
+            this.lblCount.Location = new System.Drawing.Point(468, 5);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(71, 16);
+            this.lblCount.TabIndex = 10;
+            this.lblCount.Text = "获得 条记录";
+            // 
+            // btnQuery
+            // 
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(387, 1);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 9;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.Query);
+            // 
+            // tbFactorName
+            // 
+            // 
+            // 
+            // 
+            this.tbFactorName.Border.Class = "TextBoxBorder";
+            this.tbFactorName.Location = new System.Drawing.Point(281, 4);
+            this.tbFactorName.Name = "tbFactorName";
+            this.tbFactorName.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorName.TabIndex = 8;
+            // 
+            // lblFactorName
+            // 
+            this.lblFactorName.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblFactorName.BackgroundStyle.Class = "";
+            this.lblFactorName.Location = new System.Drawing.Point(198, 6);
+            this.lblFactorName.Name = "lblFactorName";
+            this.lblFactorName.Size = new System.Drawing.Size(81, 16);
+            this.lblFactorName.TabIndex = 7;
+            this.lblFactorName.Text = "合作机构名称";
+            // 
+            // tbFactorCode
+            // 
+            // 
+            // 
+            // 
+            this.tbFactorCode.Border.Class = "TextBoxBorder";
+            this.tbFactorCode.Location = new System.Drawing.Point(89, 4);
+            this.tbFactorCode.Name = "tbFactorCode";
+            this.tbFactorCode.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorCode.TabIndex = 6;
+            // 
+            // lblFactorCode
+            // 
+            this.lblFactorCode.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblFactorCode.BackgroundStyle.Class = "";
+            this.lblFactorCode.Location = new System.Drawing.Point(8, 6);
+            this.lblFactorCode.Name = "lblFactorCode";
+            this.lblFactorCode.Size = new System.Drawing.Size(81, 16);
+            this.lblFactorCode.TabIndex = 5;
+            this.lblFactorCode.Text = "合作机构代码";
             // 
             // FactorCreditLineMgr
             // 
