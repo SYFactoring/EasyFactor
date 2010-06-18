@@ -604,7 +604,14 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                if (TypeUtil.LessZero(activeCDA.HighestFinanceLine - _case.TotalFinanceOutstanding))
+                double highestFinanceLine = activeCDA.HighestFinanceLine.Value;
+                if(activeCDA.FinanceLineCurr!=_case.InvoiceCurrency)
+                {
+                    double rate = Exchange.GetExchangeRate(activeCDA.FinanceLineCurr, _case.InvoiceCurrency);
+                    highestFinanceLine *= rate;
+                }
+
+                if (TypeUtil.LessZero(highestFinanceLine - _case.TotalFinanceOutstanding))
                 {
                     MessageBoxEx.Show("该案件的最高预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);

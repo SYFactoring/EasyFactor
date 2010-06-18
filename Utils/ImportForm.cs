@@ -2960,13 +2960,20 @@ namespace CMBC.EasyFactor.Utils
                                                               (activeCDA.FinanceLineOutstanding + guaranteeDeposit),
                                                               financeAmount, assignBatchCode));
                         }
+                        
+                        double highestFinanceLine = activeCDA.HighestFinanceLine.Value;
+                        if (activeCDA.FinanceLineCurr != assignBatch.Case.InvoiceCurrency)
+                        {
+                            double rate = Exchange.GetExchangeRate(activeCDA.FinanceLineCurr, assignBatch.Case.InvoiceCurrency);
+                            highestFinanceLine *= rate;
+                        }
 
                         if (
-                            TypeUtil.LessZero(activeCDA.HighestFinanceLine - assignBatch.Case.TotalFinanceOutstanding -
+                            TypeUtil.LessZero(highestFinanceLine - assignBatch.Case.TotalFinanceOutstanding -
                                               financeAmount + guaranteeDeposit))
                         {
                             throw new Exception(String.Format("该案件的最高预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}",
-                                                              (activeCDA.HighestFinanceLine -
+                                                              (highestFinanceLine -
                                                                assignBatch.Case.TotalFinanceOutstanding +
                                                                guaranteeDeposit), financeAmount, assignBatchCode));
                         }
