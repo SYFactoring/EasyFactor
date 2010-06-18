@@ -313,6 +313,12 @@
     <Compile Include="InfoMgr\ExchangeMgr\ExchangeMgr.Designer.cs">
       <DependentUpon>ExchangeMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="InfoMgr\FactorMgr\AgreementMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\AgreementMgr.Designer.cs">
+      <DependentUpon>AgreementMgr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ConstStr.cs" />
     <Compile Include="DB.dbml\Country.cs" />
     <Compile Include="DB.dbml\CreditCoverNegotiation.cs" />
@@ -589,6 +595,9 @@
     <EmbeddedResource Include="InfoMgr\ExchangeMgr\ExchangeMgr.resx">
       <DependentUpon>ExchangeMgr.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\FactorMgr\AgreementMgr.resx">
+      <DependentUpon>AgreementMgr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\FactorCreditLineMgr.resx">
       <DependentUpon>FactorCreditLineMgr.cs</DependentUpon>

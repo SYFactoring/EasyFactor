@@ -1460,5 +1460,19 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryAgreements(object sender, EventArgs e)
+        {
+            if(PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
+            {
+                var mgr = new AgreementMgr();
+                SetDetailPanel(mgr);
+            }
+        }
     }
 }
