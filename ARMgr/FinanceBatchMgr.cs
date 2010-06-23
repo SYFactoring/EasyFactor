@@ -111,7 +111,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -256,7 +256,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceFinanceBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceFinanceBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             var detail = new FinanceBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
@@ -307,7 +307,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (DataGridViewCell cell in dgvBatches.SelectedCells)
             {
-                var batch = (InvoiceFinanceBatch) _bs.List[cell.RowIndex];
+                var batch = (InvoiceFinanceBatch)_bs.List[cell.RowIndex];
                 if (!selectedBatches.Contains(batch))
                 {
                     selectedBatches.Add(batch);
@@ -358,7 +358,7 @@ namespace CMBC.EasyFactor.ARMgr
                                         : dateInputTo.Value.Date;
             string createUserName = tbCreateUserName.Text;
             string clientName = tbClientName.Text;
-            var location = (string) cbLocation.SelectedValue;
+            var location = (string)cbLocation.SelectedValue;
             string transactionType = cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
@@ -395,7 +395,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                   (endInputDate != dateInputTo.MinDate
                                                                        ? batch.InputDate <= endInputDate
                                                                        : true)
-                                                                  //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                      //&& (status != string.Empty ? i.CheckStatus == status : true)
                                                                   && (batch.CreateUserName.Contains(createUserName))
                                                                   &&
                                                                   (transactionType == "全部"
@@ -441,7 +441,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                   (endInputDate != dateInputTo.MinDate
                                                                        ? batch.InputDate <= endInputDate
                                                                        : true)
-                                                                  //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                      //&& (status != string.Empty ? i.CheckStatus == status : true)
                                                                   && (batch.CreateUserName.Contains(createUserName))
                                                                   &&
                                                                   (financeType == "全部"
@@ -526,7 +526,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            MakeReport makeReport = ReportCommissionImpl;
+            MakeReport makeReport = ReportCommissionApplication;
             GroupBatches(selectedBatches, makeReport);
         }
 
@@ -534,135 +534,28 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         /// <param name="batchGroup"></param>
-        private static void ReportCommissionImpl(IGrouping<Client, InvoiceFinanceBatch> batchGroup)
+        private static void ReportCommissionApplication(IGrouping<Client, InvoiceFinanceBatch> batchGroup)
         {
-            var app = new ApplicationClass {Visible = false};
+            var app = new ApplicationClass { Visible = false };
 
-            var sheet = (Worksheet) app.Workbooks.Add(true).Sheets[1];
+            var workbook = app.Workbooks.Add(true);
+            var sheet = (Worksheet)workbook.Sheets[1];
+            sheet.Name = "保理费用明细表";
             try
             {
-                sheet.PageSetup.Zoom = false;
-                sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
-                sheet.PageSetup.FitToPagesWide = 1;
-                sheet.PageSetup.FitToPagesTall = false;
+                ReportCommissionSheet(sheet, batchGroup);
 
-                string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
-
-                Client seller = batchGroup.Key;
-                sheet.Cells[3, 1] = String.Format("卖方：{0}", seller);
-                sheet.Range["A5", "E5"].MergeCells = true;
-                sheet.Range["A5", "A5"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-                sheet.Cells[5, 1] = "保理费用明细表";
-
-                int row = 7;
-                double totalCommission = 0;
-
-                foreach (InvoiceFinanceBatch selectedBatch in batchGroup)
-                {
-                    Client buyer = selectedBatch.Case.BuyerClient;
-                    Factor factor = selectedBatch.Case.Factor;
-
-                    int beginRow = row;
-                    sheet.Cells[row, 1] = "买方";
-                    sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 6]].MergeCells = true;
-                    sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", buyer);
-                    row++;
-                    sheet.Cells[row, 1] = "保理商";
-                    sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 4]].MergeCells = true;
-                    sheet.Cells[row, 2] = factor.ToString();
-                    sheet.Cells[row, 5] = "币别";
-                    sheet.Cells[row, 6] = selectedBatch.BatchCurrency;
-                    row++;
-                    sheet.Cells[row, 1] = "本次转让金额";
-                    sheet.Cells[row, 2] = "本次融资金额";
-                    sheet.Cells[row, 3] = "本次转让笔数";
-                    sheet.Cells[row, 4] = "转让日";
-                    sheet.Cells[row, 5] = "保理费率";
-                    sheet.Cells[row, 6] = "单据处理费";
-                    row++;
-                    sheet.Cells[row, 1] = selectedBatch.AssignAmount;
-                    sheet.Range["A" + row, "A" + row].NumberFormatLocal =
-                        TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
-                    sheet.Cells[row, 2] = selectedBatch.FinanceAmount;
-                    sheet.Range["B" + row, "B" + row].NumberFormatLocal =
-                        TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-                    sheet.Cells[row, 3] = selectedBatch.AssignCount;
-                    sheet.Cells[row, 4] = selectedBatch.AssignDate;
-                    sheet.Cells[row, 5] = selectedBatch.Case.ActiveCDA.Price;
-                    sheet.Cells[row, 6] = selectedBatch.Case.ActiveCDA.HandFee;
-                    sheet.Range["E" + row, "E" + row].NumberFormatLocal = "0.0000%";
-                    sheet.Range["F" + row, "F" + row].NumberFormatLocal =
-                        TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
-                    row++;
-                    sheet.Cells[row, 1] = "小计";
-                    sheet.Cells[row, 5] = selectedBatch.CommissionAmount;
-                    sheet.Cells[row, 6] = selectedBatch.HandfeeAmount;
-                    sheet.Range["E" + row, "F" + row].NumberFormatLocal =
-                        TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
-
-                    int endRow = row;
-
-                    totalCommission += selectedBatch.CommissionAmount.GetValueOrDefault() +
-                                       selectedBatch.HandfeeAmount.GetValueOrDefault();
-                    sheet.Range["A" + beginRow, "F" + endRow].Borders.LineStyle = 1;
-
-                    row += 3;
-                }
-
-                sheet.Cells[row - 1, 1] = "注：保理手续费按融资金额收取。";
-                sheet.Cells[row, 5] = "费用总计";
-                sheet.Cells[row, 6] = totalCommission;
-                sheet.Range["F" + row, "F" + row].NumberFormatLocal =
-                    TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
-                sheet.Range["E" + row, "F" + row].Borders.LineStyle = 1;
-
-                row += 2;
-                sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "F"]].MergeCells = true;
-                sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment =
-                    XlHAlign.xlHAlignRight;
-                sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）";
-                row += 2;
-                sheet.Range[sheet.Cells[row, "D"], sheet.Cells[row, "E"]].MergeCells = true;
-                sheet.Range[sheet.Cells[row, "D"], sheet.Cells[row, "D"]].HorizontalAlignment =
-                    XlHAlign.xlHAlignRight;
-                sheet.Cells[row, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
-
-                sheet.Range["A1", Type.Missing].ColumnWidth = 15;
-                sheet.Range["B1", Type.Missing].ColumnWidth = 15;
-                sheet.Range["C1", Type.Missing].ColumnWidth = 10;
-                sheet.Range["D1", Type.Missing].ColumnWidth = 13;
-                sheet.Range["E1", Type.Missing].ColumnWidth = 12;
-                sheet.Range["F1", Type.Missing].ColumnWidth = 15;
-
-                sheet.UsedRange.Font.Name = "仿宋_GB2312";
-                sheet.UsedRange.Font.Size = 12;
-                sheet.UsedRange.Rows.RowHeight = 20;
-
-                sheet.Range["A5", "A5"].Font.Size = 22;
-                sheet.Range["A1", "A4"].RowHeight = 20;
-                sheet.Range["A5", "A5"].RowHeight = 30;
-
-                var sealRange = ((Range) sheet.Cells[row - 3, 3]);
-                string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-                sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
-                                        Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
-
-                //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
-
-                sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing,
-                              Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                              Type.Missing, Type.Missing);
-                sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
+                string filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-保理费用明细表.xls", SystemUtil.DesktopPath, DateTime.Today,
+                batchGroup.Key);
+                workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
+                                XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
+                                Type.Missing, Type.Missing, Type.Missing);
 
                 app.Visible = true;
             }
             catch (Exception e1)
             {
-                if (sheet != null)
-                {
-                    Marshal.ReleaseComObject(sheet);
-                }
+                Marshal.ReleaseComObject(sheet);
                 foreach (Workbook wb in app.Workbooks)
                 {
                     wb.Close(false, Type.Missing, Type.Missing);
@@ -679,6 +572,128 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="batchGroup"></param>
+        private static void ReportCommissionSheet(Worksheet sheet, IGrouping<Client, InvoiceFinanceBatch> batchGroup)
+        {
+            sheet.PageSetup.Zoom = false;
+            sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+            sheet.PageSetup.FitToPagesWide = 1;
+            sheet.PageSetup.FitToPagesTall = false;
+
+            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+
+            Client seller = batchGroup.Key;
+            sheet.Cells[3, 1] = String.Format("卖方：{0}", seller);
+            sheet.Range["A5", "E5"].MergeCells = true;
+            sheet.Range["A5", "A5"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            sheet.Cells[5, 1] = "保理费用明细表";
+
+            int row = 7;
+            double totalCommission = 0;
+
+            foreach (InvoiceFinanceBatch selectedBatch in batchGroup)
+            {
+                Client buyer = selectedBatch.Case.BuyerClient;
+                Factor factor = selectedBatch.Case.Factor;
+
+                int beginRow = row;
+                sheet.Cells[row, 1] = "买方";
+                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 6]].MergeCells = true;
+                sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", buyer);
+                row++;
+                sheet.Cells[row, 1] = "保理商";
+                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 4]].MergeCells = true;
+                sheet.Cells[row, 2] = factor.ToString();
+                sheet.Cells[row, 5] = "币别";
+                sheet.Cells[row, 6] = selectedBatch.BatchCurrency;
+                row++;
+                sheet.Cells[row, 1] = "本次转让金额";
+                sheet.Cells[row, 2] = "本次融资金额";
+                sheet.Cells[row, 3] = "本次转让笔数";
+                sheet.Cells[row, 4] = "转让日";
+                sheet.Cells[row, 5] = "保理费率";
+                sheet.Cells[row, 6] = "单据处理费";
+                row++;
+                sheet.Cells[row, 1] = selectedBatch.AssignAmount;
+                sheet.Range["A" + row, "A" + row].NumberFormatLocal =
+                    TypeUtil.GetExcelCurr(selectedBatch.Case.InvoiceCurrency);
+                sheet.Cells[row, 2] = selectedBatch.FinanceAmount;
+                sheet.Range["B" + row, "B" + row].NumberFormatLocal =
+                    TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+                sheet.Cells[row, 3] = selectedBatch.AssignCount;
+                sheet.Cells[row, 4] = selectedBatch.AssignDate;
+                sheet.Cells[row, 5] = selectedBatch.Case.ActiveCDA.Price;
+                sheet.Cells[row, 6] = selectedBatch.Case.ActiveCDA.HandFee;
+                sheet.Range["E" + row, "E" + row].NumberFormatLocal = "0.0000%";
+                sheet.Range["F" + row, "F" + row].NumberFormatLocal =
+                    TypeUtil.GetExcelCurr(selectedBatch.Case.ActiveCDA.HandFeeCurr);
+                row++;
+                sheet.Cells[row, 1] = "小计";
+                sheet.Cells[row, 5] = selectedBatch.CommissionAmount;
+                sheet.Cells[row, 6] = selectedBatch.HandfeeAmount;
+                sheet.Range["E" + row, "F" + row].NumberFormatLocal =
+                    TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+
+                int endRow = row;
+
+                totalCommission += selectedBatch.CommissionAmount.GetValueOrDefault() +
+                                   selectedBatch.HandfeeAmount.GetValueOrDefault();
+                sheet.Range["A" + beginRow, "F" + endRow].Borders.LineStyle = 1;
+
+                row += 3;
+            }
+
+            sheet.Cells[row - 1, 1] = "注：保理手续费按融资金额收取。";
+            sheet.Cells[row, 5] = "费用总计";
+            sheet.Cells[row, 6] = totalCommission;
+            sheet.Range["F" + row, "F" + row].NumberFormatLocal =
+                TypeUtil.GetExcelCurr(batchGroup.First().BatchCurrency);
+            sheet.Range["E" + row, "F" + row].Borders.LineStyle = 1;
+
+            row += 2;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "F"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment =
+                XlHAlign.xlHAlignRight;
+            sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）";
+            row += 2;
+            sheet.Range[sheet.Cells[row, "D"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "D"], sheet.Cells[row, "D"]].HorizontalAlignment =
+                XlHAlign.xlHAlignRight;
+            sheet.Cells[row, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+
+            sheet.Range["A1", Type.Missing].ColumnWidth = 15;
+            sheet.Range["B1", Type.Missing].ColumnWidth = 15;
+            sheet.Range["C1", Type.Missing].ColumnWidth = 10;
+            sheet.Range["D1", Type.Missing].ColumnWidth = 13;
+            sheet.Range["E1", Type.Missing].ColumnWidth = 12;
+            sheet.Range["F1", Type.Missing].ColumnWidth = 15;
+
+            sheet.UsedRange.Font.Name = "仿宋_GB2312";
+            sheet.UsedRange.Font.Size = 12;
+            sheet.UsedRange.Rows.RowHeight = 20;
+
+            sheet.Range["A5", "A5"].Font.Size = 22;
+            sheet.Range["A1", "A4"].RowHeight = 20;
+            sheet.Range["A5", "A5"].RowHeight = 30;
+
+            var sealRange = ((Range)sheet.Cells[row - 3, 3]);
+            string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+                                    Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+
+            //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
+
+            sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing,
+                          Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                          Type.Missing, Type.Missing);
+            sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SelectBatch(object sender, EventArgs e)
@@ -688,7 +703,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceFinanceBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceFinanceBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             Selected = selectedBatch;
             if (OwnerForm != null)
             {

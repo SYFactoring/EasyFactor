@@ -34,7 +34,7 @@ namespace CMBC.EasyFactor.Utils
             _mailMessage = new MailMessage();
             if (!String.IsNullOrEmpty(to))
             {
-                foreach (string t in to.Split(new[] {';'}))
+                foreach (string t in to.Split(new[] { ';' }))
                 {
                     _mailMessage.To.Add(t);
                 }
@@ -42,7 +42,7 @@ namespace CMBC.EasyFactor.Utils
 
             if (!String.IsNullOrEmpty(cc))
             {
-                foreach (string c in cc.Split(new[] {';'}))
+                foreach (string c in cc.Split(new[] { ';' }))
                 {
                     _mailMessage.CC.Add(c);
                 }
@@ -50,7 +50,7 @@ namespace CMBC.EasyFactor.Utils
 
             if (String.IsNullOrEmpty(from))
             {
-                from = "factoring@cmbc.com.cn";
+                from = "easyfactoring@gmail.com";
             }
 
             _mailMessage.From = new MailAddress(from);
@@ -97,7 +97,7 @@ namespace CMBC.EasyFactor.Utils
             {
                 var smtpClient = new SmtpClient("smtp.gmail.com", 587)
                                      {
-                                         Credentials = new NetworkCredential("xiaolan.pub@gmail.com", "lan830215"),
+                                         Credentials = new NetworkCredential("easyfactoring@gmail.com", "p0o9i8u7y6"),
                                          EnableSsl = true,
                                          DeliveryMethod = SmtpDeliveryMethod.Network
                                      };

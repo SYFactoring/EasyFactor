@@ -204,6 +204,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             tabControl.SelectedTab = tabItemFactorCreditLine;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="factor"></param>
+        /// <param name="opAgreementType"></param>
+        public FactorDetail(Factor factor, OpAgreementType opAgreementType)
+            : this(factor, OpFactorType.DETAIL_FACTOR, OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE, opAgreementType)
+        {
+            tabControl.SelectedTab = tabItemAgreement;
+        }
 
         //?Private?Methods?(24)?
         /// <summary>
@@ -252,7 +262,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -265,7 +275,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var agreement = (Agreement) agreementBindingSource.DataSource;
+            var agreement = (Agreement)agreementBindingSource.DataSource;
             if (agreement.AgreementID == 0)
             {
                 return;
@@ -286,9 +296,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             if (isDeleteOK)
             {
                 MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _bsAgreements.DataSource = typeof (Agreement);
+                _bsAgreements.DataSource = typeof(Agreement);
                 _bsAgreements.DataSource = factor.Agreements;
-                agreementBindingSource.DataSource = typeof (Agreement);
+                agreementBindingSource.DataSource = typeof(Agreement);
             }
         }
 
@@ -304,7 +314,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -317,7 +327,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var creditLine = (FactorCreditLine) factorCreditLineBindingSource.DataSource;
+            var creditLine = (FactorCreditLine)factorCreditLineBindingSource.DataSource;
             if (creditLine.CreditLineID == 0)
             {
                 return;
@@ -338,9 +348,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             if (isDeleteOK)
             {
                 MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _bsCreditLines.DataSource = typeof (FactorCreditLine);
+                _bsCreditLines.DataSource = typeof(FactorCreditLine);
                 _bsCreditLines.DataSource = factor.FactorCreditLines;
-                factorCreditLineBindingSource.DataSource = typeof (FactorCreditLine);
+                factorCreditLineBindingSource.DataSource = typeof(FactorCreditLine);
             }
         }
 
@@ -356,7 +366,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -369,7 +379,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var creditLine = (FactorCreditLine) factorCreditLineBindingSource.DataSource;
+            var creditLine = (FactorCreditLine)factorCreditLineBindingSource.DataSource;
             if (creditLine.CreditLineID == 0)
             {
                 return;
@@ -396,7 +406,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -422,7 +432,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -430,7 +440,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var creditLine = new FactorCreditLine {CreateUserName = App.Current.CurUser.Name};
+            var creditLine = new FactorCreditLine { CreateUserName = App.Current.CurUser.Name };
             factorCreditLineBindingSource.DataSource = creditLine;
             _opFactorCreditLineType = OpFactorCreditLineType.NEW_FACTOR_CREDIT_LINE;
             UpdateFactorCreditLineControlStatus();
@@ -443,7 +453,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void RefreshAgreements(object sender, EventArgs e)
         {
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -451,7 +461,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            _bsAgreements.DataSource = typeof (Agreement);
+            _bsAgreements.DataSource = typeof(Agreement);
             _bsAgreements.DataSource = factor.Agreements;
         }
 
@@ -462,7 +472,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="e"></param>
         private void RefreshFactorCreditLine(object sender, EventArgs e)
         {
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -470,7 +480,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            _bsCreditLines.DataSource = typeof (FactorCreditLine);
+            _bsCreditLines.DataSource = typeof(FactorCreditLine);
             _bsCreditLines.DataSource = factor.FactorCreditLines;
         }
 
@@ -491,7 +501,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -504,7 +514,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var agreement = (Agreement) agreementBindingSource.DataSource;
+            var agreement = (Agreement)agreementBindingSource.DataSource;
             agreement.CreateUserName = App.Current.CurUser.Name;
 
             if (agreement.AgreementID == 0)
@@ -527,7 +537,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
 
-                    _bsAgreements.DataSource = typeof (Agreement);
+                    _bsAgreements.DataSource = typeof(Agreement);
                     _bsAgreements.DataSource = factor.Agreements;
                     NewAgreement(null, null);
                 }
@@ -582,7 +592,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             factor.CreateUserName = App.Current.CurUser.Name;
 
             if (_opFactorType == OpFactorType.NEW_FACTOR)
@@ -662,7 +672,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -675,7 +685,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var creditLine = (FactorCreditLine) factorCreditLineBindingSource.DataSource;
+            var creditLine = (FactorCreditLine)factorCreditLineBindingSource.DataSource;
             creditLine.CreateUserName = App.Current.CurUser.Name;
 
             DateTime today = DateTime.Now.Date;
@@ -728,7 +738,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                         }
                     }
 
-                    _bsCreditLines.DataSource = typeof (FactorCreditLine);
+                    _bsCreditLines.DataSource = typeof(FactorCreditLine);
                     _bsCreditLines.DataSource = factor.FactorCreditLines;
                     NewFactorCreditLine(null, null);
                 }
@@ -798,7 +808,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var selectedAgreement = (Agreement) _bsAgreements.List[dgvAgreements.SelectedRows[0].Index];
+            var selectedAgreement = (Agreement)_bsAgreements.List[dgvAgreements.SelectedRows[0].Index];
             SetAgreementEditable(false);
             agreementBindingSource.DataSource = selectedAgreement;
         }
@@ -816,7 +826,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             var selectedFactorCreditLine =
-                (FactorCreditLine) _bsCreditLines.List[dgvFactorCreditLines.SelectedRows[0].Index];
+                (FactorCreditLine)_bsCreditLines.List[dgvFactorCreditLines.SelectedRows[0].Index];
             SetFactorCreditLineEditable(false);
             factorCreditLineBindingSource.DataSource = selectedFactorCreditLine;
             btnFactorCreditLineFreeze.Enabled = true;
@@ -835,7 +845,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             var factorMgr = new FactorMgr();
             var queryUI = new QueryForm(factorMgr, "选择集团");
             factorMgr.OwnerForm = queryUI;
@@ -883,7 +893,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -896,7 +906,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var creditLine = (FactorCreditLine) factorCreditLineBindingSource.DataSource;
+            var creditLine = (FactorCreditLine)factorCreditLineBindingSource.DataSource;
             if (creditLine.CreditLineID == 0)
             {
                 return;
@@ -923,7 +933,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -982,7 +992,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -1086,7 +1096,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 return;
             }
 
-            var factor = (Factor) factorBindingSource.DataSource;
+            var factor = (Factor)factorBindingSource.DataSource;
             if (factor == null || factor.FactorCode == null)
             {
                 MessageBoxEx.Show("请首先选定一个机构", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,

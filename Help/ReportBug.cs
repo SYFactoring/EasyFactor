@@ -42,13 +42,13 @@ namespace CMBC.EasyFactor.Help
         /// <param name="e"></param>
         private void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
         {
-            if (!String.IsNullOrEmpty(tbAttachment.Text))
-            {
-                _mail.AddAttachment(tbAttachment.Text);
-            }
-
             if (_mail != null)
             {
+                if (!String.IsNullOrEmpty(tbAttachment.Text))
+                {
+                    _mail.AddAttachment(tbAttachment.Text);
+                }
+
                 _mail.Send();
             }
         }
@@ -105,7 +105,7 @@ namespace CMBC.EasyFactor.Help
             string bug = tbBug.Text + "\n----------------------------------------------\n" +
                          Assembly.GetExecutingAssembly().GetName().Version;
 
-            _mail = new SendMail("liuyiming.vip@gmail.com", "xiaolan.pub@gmail.com", App.Current.CurUser.Email, mailTitle,
+            _mail = new SendMail("liuyiming.vip@gmail.com", App.Current.CurUser.Email + ";xiaolan.pub@gmail.com", null, mailTitle,
                                 bug);
 
             backgroundWorker.RunWorkerAsync();

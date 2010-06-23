@@ -107,7 +107,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -211,7 +211,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceAssignBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceAssignBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             if (
                 MessageBoxEx.Show("是否打算删除此转让批次", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
                                   MessageBoxIcon.Question) == DialogResult.No)
@@ -253,7 +253,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceAssignBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceAssignBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             DataGridViewColumn column = dgvBatches.CurrentCell.OwningColumn;
             if (column == colMsgAmount || column == colMsgDate || column == colMsgType || column == colRemitAmount ||
                 column == colRemitDate)
@@ -309,7 +309,7 @@ namespace CMBC.EasyFactor.ARMgr
             DataGridViewColumn col = dgvBatches.Columns[e.ColumnIndex];
             if (col == colIsSendMsg || col == colIsPool)
             {
-                var isSend = (bool) e.Value;
+                var isSend = (bool)e.Value;
                 e.Value = isSend ? "Y" : "N";
 
                 e.FormattingApplied = true;
@@ -380,7 +380,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (DataGridViewCell cell in dgvBatches.SelectedCells)
             {
-                var batch = (InvoiceAssignBatch) _bs.List[cell.RowIndex];
+                var batch = (InvoiceAssignBatch)_bs.List[cell.RowIndex];
                 if (!selectedBatches.Contains(batch))
                 {
                     selectedBatches.Add(batch);
@@ -464,7 +464,7 @@ namespace CMBC.EasyFactor.ARMgr
             string clientName = tbClientName.Text;
             string factorName = tbFactorName.Text;
             string transactionType = cbTransactionType.Text;
-            var location = (string) cbLocation.SelectedValue;
+            var location = (string)cbLocation.SelectedValue;
 
             if (String.IsNullOrEmpty(transactionType))
             {
@@ -517,7 +517,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                 (endInputDate != dateInputTo.MinDate
                                                                      ? batch.InputDate <= endInputDate
                                                                      : true)
-                                                                //&& (status != string.Empty ? batch.CheckStatus == status : true)
+                                                              //&& (status != string.Empty ? batch.CheckStatus == status : true)
                                                                 && (batch.CreateUserName.Contains(createUserName))
                                                           select batch;
 
@@ -599,21 +599,26 @@ namespace CMBC.EasyFactor.ARMgr
         private static void ReportAssignApplication(IGrouping<Client, InvoiceAssignBatch> batchGroup,
                                                     string transactionType)
         {
-            var app = new ApplicationClass {Visible = false};
+            var app = new ApplicationClass { Visible = false };
 
-            var sheet = (Worksheet) app.Workbooks.Add(true).Sheets[1];
-
+            var workbook = app.Workbooks.Add(true);
+            var sheet = (Worksheet)workbook.Sheets[1];
+            sheet.Name = "应收账款转让明细表";
             try
             {
                 ReportAssignSheet(sheet, batchGroup, transactionType);
+
+                string filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-应收账款转让明细表.xls", SystemUtil.DesktopPath, DateTime.Today,
+                batchGroup.Key);
+                workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
+                                XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
+                                Type.Missing, Type.Missing, Type.Missing);
+
                 app.Visible = true;
             }
             catch (Exception e1)
             {
-                if (sheet != null)
-                {
-                    Marshal.ReleaseComObject(sheet);
-                }
+                Marshal.ReleaseComObject(sheet);
                 foreach (Workbook wb in app.Workbooks)
                 {
                     wb.Close(false, Type.Missing, Type.Missing);
@@ -815,7 +820,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range["D1", Type.Missing].ColumnWidth = 15;
             sheet.Range["E1", Type.Missing].ColumnWidth = 10;
 
-            var sealRange = ((Range) sheet.Cells[row - 4, 3]);
+            var sealRange = ((Range)sheet.Cells[row - 4, 3]);
             string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
             sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
                                     Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
@@ -835,6 +840,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportCommission(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
+            {
+                return;
+            }
+
             List<InvoiceAssignBatch> selectedBatches = GetSelectedBatches();
             if (selectedBatches == null)
             {
@@ -863,20 +873,26 @@ namespace CMBC.EasyFactor.ARMgr
         private static void ReportCommissionApplication(IGrouping<Client, InvoiceAssignBatch> batchGroup,
                                                         string transactionType)
         {
-            var app = new ApplicationClass {Visible = false};
+            var app = new ApplicationClass { Visible = false };
 
-            var sheet = (Worksheet) app.Workbooks.Add(true).Sheets[1];
+            var workbook = app.Workbooks.Add(true);
+            var sheet = (Worksheet)workbook.Sheets[1];
+            sheet.Name = "保理费用明细表";
             try
             {
                 ReportCommissionSheet(sheet, batchGroup);
+
+                string filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-保理费用明细表.xls", SystemUtil.DesktopPath, DateTime.Today,
+                batchGroup.Key);
+                workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
+                                XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
+                                Type.Missing, Type.Missing, Type.Missing);
+
                 app.Visible = true;
             }
             catch (Exception e1)
             {
-                if (sheet != null)
-                {
-                    Marshal.ReleaseComObject(sheet);
-                }
+                Marshal.ReleaseComObject(sheet);
                 foreach (Workbook wb in app.Workbooks)
                 {
                     wb.Close(false, Type.Missing, Type.Missing);
@@ -1011,7 +1027,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range["A1", "A4"].RowHeight = 20;
             sheet.Range["A5", "A5"].RowHeight = 30;
 
-            var sealRange = ((Range) sheet.Cells[row - 3, 3]);
+            var sealRange = ((Range)sheet.Cells[row - 3, 3]);
             string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
             sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
                                     Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
@@ -1054,9 +1070,9 @@ namespace CMBC.EasyFactor.ARMgr
         private static void ReportFileCheckListImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup,
                                                     string transactionType)
         {
-            var app = new ApplicationClass {Visible = false};
+            var app = new ApplicationClass { Visible = false };
 
-            var sheet = (Worksheet) app.Workbooks.Add(true).Sheets[1];
+            var sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             try
             {
@@ -1094,12 +1110,12 @@ namespace CMBC.EasyFactor.ARMgr
                     DateTime dueDate = DateTime.MaxValue;
                     for (int i = 0; i < selectedBatch.Invoices.Count; i++)
                     {
-                        if (i != 0 && i%4 == 0)
+                        if (i != 0 && i % 4 == 0)
                         {
                             row++;
                         }
                         Invoice invoice = selectedBatch.Invoices[i];
-                        sheet.Cells[row, i%4 + 1] = "'" + invoice.InvoiceNo;
+                        sheet.Cells[row, i % 4 + 1] = "'" + invoice.InvoiceNo;
                         if (invoice.DueDate < dueDate)
                         {
                             dueDate = invoice.DueDate;
@@ -1201,10 +1217,11 @@ namespace CMBC.EasyFactor.ARMgr
         private static void ReportFinanceApplication(IGrouping<Client, InvoiceAssignBatch> batchGroup,
                                                      string transactionType)
         {
-            var app = new ApplicationClass {Visible = false};
+            var app = new ApplicationClass { Visible = false };
 
-            var sheet = (Worksheet) app.Workbooks.Add(true).Sheets[1];
-
+            var workbook = app.Workbooks.Add(true);
+            var sheet = (Worksheet)workbook.Sheets[1];
+            sheet.Name = "可融资账款明细表";
             try
             {
                 ReportFinanceSheet(sheet, batchGroup, transactionType);
@@ -1214,14 +1231,18 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     MessageBoxEx.Show(String.Format("此业务{0}按照融资金额收取费用，请及时导出《保理费用明细表》", firstCase.CaseCode));
                 }
+
+                string filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-可融资账款明细表.xls", SystemUtil.DesktopPath, DateTime.Today,
+                                batchGroup.Key);
+                workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
+                                XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
+                                Type.Missing, Type.Missing, Type.Missing);
+
                 app.Visible = true;
             }
             catch (Exception e1)
             {
-                if (sheet != null)
-                {
-                    Marshal.ReleaseComObject(sheet);
-                }
+                Marshal.ReleaseComObject(sheet);
                 foreach (Workbook wb in app.Workbooks)
                 {
                     wb.Close(false, Type.Missing, Type.Missing);
@@ -1504,7 +1525,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range["D1", Type.Missing].ColumnWidth = 15;
             sheet.Range["E1", Type.Missing].ColumnWidth = 8;
 
-            var sealRange = ((Range) sheet.Cells[row - 4, 3]);
+            var sealRange = ((Range)sheet.Cells[row - 4, 3]);
             string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
             sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
                                     Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
@@ -1546,9 +1567,9 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="transactionType"></param>
         private static void ReportFlawImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
-            var app = new ApplicationClass {Visible = false};
+            var app = new ApplicationClass { Visible = false };
 
-            var sheet = (Worksheet) app.Workbooks.Add(true).Sheets[1];
+            var sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
             try
             {
@@ -1744,7 +1765,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private static void ReportThreeImpl(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType)
         {
-            var app = new ApplicationClass {Visible = false};
+            var app = new ApplicationClass { Visible = false };
 
             try
             {
@@ -1758,22 +1779,22 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (hasCommission)
                 {
-                    var commissionSheet = (Worksheet) workbook.Sheets[1];
+                    var commissionSheet = (Worksheet)workbook.Sheets[1];
                     commissionSheet.Name = "保理费用明细表";
                     ReportCommissionSheet(commissionSheet, batchGroup);
 
-                    var financeSheet = (Worksheet) workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                    var financeSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
                     financeSheet.Name = "可融资账款明细表";
                     ReportFinanceSheet(financeSheet, batchGroup, transactionType);
                 }
                 else
                 {
-                    var financeSheet = (Worksheet) workbook.Sheets[1];
+                    var financeSheet = (Worksheet)workbook.Sheets[1];
                     financeSheet.Name = "可融资账款明细表";
                     ReportFinanceSheet(financeSheet, batchGroup, transactionType);
                 }
 
-                var assignSheet = (Worksheet) workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                var assignSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
                 assignSheet.Name = "应收账款转让明细表";
                 ReportAssignSheet(assignSheet, batchGroup, transactionType);
 
@@ -1812,7 +1833,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceAssignBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceAssignBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             Selected = selectedBatch;
             if (OwnerForm != null)
             {

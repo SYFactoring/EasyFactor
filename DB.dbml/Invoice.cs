@@ -563,7 +563,7 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (AssignAmount > InvoiceAmount)
+                if (TypeUtil.GreaterZero(AssignAmount - InvoiceAmount))
                 {
                     throw new Exception(String.Format("转让金额{0:N2}不能大于票面金额{1:N2}: {2}", AssignAmount, InvoiceAmount,
                                                       InvoiceNo));
