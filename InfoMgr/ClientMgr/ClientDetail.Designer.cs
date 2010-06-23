@@ -306,38 +306,29 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DevComponents.DotNetBar.LabelX lblGDComment;
             DevComponents.DotNetBar.LabelX lblDepositDate;
             DevComponents.DotNetBar.LabelX lblOldEDICode;
-            DevComponents.DotNetBar.LabelX lblRemitCurrency;
-            DevComponents.DotNetBar.LabelX lbcRemitAmount;
-            DevComponents.DotNetBar.LabelX lblMsgCurrency;
-            DevComponents.DotNetBar.LabelX lblMsgType;
-            DevComponents.DotNetBar.LabelX lblCommmissionCreateUserName;
-            DevComponents.DotNetBar.LabelX lblCommissionComment;
-            DevComponents.DotNetBar.LabelX lblMsgDate;
-            DevComponents.DotNetBar.LabelX lblRemitDate;
-            DevComponents.DotNetBar.LabelX lblMsgAmount;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientDetail));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -347,35 +338,25 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new DevComponents.DotNetBar.TabControl();
-            this.tabPanelCommissionRemit = new DevComponents.DotNetBar.TabControlPanel();
-            this.dgvCommissionRemit = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colMsgType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCommissionAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupPanelCommissionRemit = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.cbRemitCurrency = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.commissionRemitBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbRemitAmount = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cbMsgCurrency = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.tbMsgType = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnCommissionRemitDelete = new DevComponents.DotNetBar.ButtonX();
-            this.btnCommissionRemitSave = new DevComponents.DotNetBar.ButtonX();
-            this.btnCommissionRemitUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.btnCommissionRemitNew = new DevComponents.DotNetBar.ButtonX();
-            this.btnCommissionRemitRefresh = new DevComponents.DotNetBar.ButtonX();
-            this.tbCommissionCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbCommissionComment = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.diMsgDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.diRemitDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.tbMsgAmount = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tabItemCommissionRemit = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabPanelGD = new DevComponents.DotNetBar.TabControlPanel();
+            this.dgvGDs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colGDCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGDAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDepositDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupPanelGuaranteePanel = new DevComponents.DotNetBar.PanelEx();
+            this.diDepositDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.gdBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbGDComment = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbGDCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.btnGDUpdate = new DevComponents.DotNetBar.ButtonX();
+            this.btnGDRefresh = new DevComponents.DotNetBar.ButtonX();
+            this.btnGDDelete = new DevComponents.DotNetBar.ButtonX();
+            this.btnGDSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnGDNew = new DevComponents.DotNetBar.ButtonX();
+            this.tbGDAmount = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cbGDCurr = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.itemGuaranteeDeposit = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelClient = new DevComponents.DotNetBar.TabControlPanel();
             this.btnClientUpdate = new DevComponents.DotNetBar.ButtonX();
             this.groupPanelClientContact = new DevComponents.DotNetBar.Controls.GroupPanel();
@@ -421,24 +402,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.clientNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.clientNameCNTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemClient = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabPanelGD = new DevComponents.DotNetBar.TabControlPanel();
-            this.dgvGDs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colGDCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGDAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDepositDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupPanelGuaranteePanel = new DevComponents.DotNetBar.PanelEx();
-            this.diDepositDate = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.gdBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbGDComment = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbGDCreateUserName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnGDUpdate = new DevComponents.DotNetBar.ButtonX();
-            this.btnGDRefresh = new DevComponents.DotNetBar.ButtonX();
-            this.btnGDDelete = new DevComponents.DotNetBar.ButtonX();
-            this.btnGDSave = new DevComponents.DotNetBar.ButtonX();
-            this.btnGDNew = new DevComponents.DotNetBar.ButtonX();
-            this.tbGDAmount = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cbGDCurr = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.itemGuaranteeDeposit = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabPanelReview = new DevComponents.DotNetBar.TabControlPanel();
             this.dgvReviews = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colReviewNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -542,6 +505,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.creditLineTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.creditLineCurrencyComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabItemClientCreditLine = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabItemCommissionRemit = new DevComponents.DotNetBar.TabItem(this.components);
             this.clientValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
@@ -585,7 +549,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.requiredFieldValidator21 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator20 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.commissionRemitValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.requiredFieldValidator24 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator22 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator23 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
@@ -692,34 +655,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblGDComment = new DevComponents.DotNetBar.LabelX();
             lblDepositDate = new DevComponents.DotNetBar.LabelX();
             lblOldEDICode = new DevComponents.DotNetBar.LabelX();
-            lblRemitCurrency = new DevComponents.DotNetBar.LabelX();
-            lbcRemitAmount = new DevComponents.DotNetBar.LabelX();
-            lblMsgCurrency = new DevComponents.DotNetBar.LabelX();
-            lblMsgType = new DevComponents.DotNetBar.LabelX();
-            lblCommmissionCreateUserName = new DevComponents.DotNetBar.LabelX();
-            lblCommissionComment = new DevComponents.DotNetBar.LabelX();
-            lblMsgDate = new DevComponents.DotNetBar.LabelX();
-            lblRemitDate = new DevComponents.DotNetBar.LabelX();
-            lblMsgAmount = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
-            this.tabPanelCommissionRemit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCommissionRemit)).BeginInit();
-            this.groupPanelCommissionRemit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.commissionRemitBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diMsgDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diRemitDate)).BeginInit();
+            this.tabPanelGD.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGDs)).BeginInit();
+            this.groupPanelGuaranteePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diDepositDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdBindingSource)).BeginInit();
             this.tabPanelClient.SuspendLayout();
             this.groupPanelClientContact.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
             this.groupPanelClientGroup.SuspendLayout();
             this.groupPanelClientStat.SuspendLayout();
             this.groupPanelClientBasic.SuspendLayout();
-            this.tabPanelGD.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvGDs)).BeginInit();
-            this.groupPanelGuaranteePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.diDepositDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gdBindingSource)).BeginInit();
             this.tabPanelReview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReviews)).BeginInit();
             this.groupPanelReview.SuspendLayout();
@@ -1726,144 +1674,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             lblOldEDICode.TabIndex = 26;
             lblOldEDICode.Text = "曾用保理代码:";
             // 
-            // lblRemitCurrency
-            // 
-            lblRemitCurrency.AutoSize = true;
-            lblRemitCurrency.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblRemitCurrency.BackgroundStyle.Class = "";
-            lblRemitCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblRemitCurrency.Location = new System.Drawing.Point(200, 52);
-            lblRemitCurrency.Name = "lblRemitCurrency";
-            lblRemitCurrency.Size = new System.Drawing.Size(59, 16);
-            lblRemitCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblRemitCurrency.TabIndex = 31;
-            lblRemitCurrency.Text = "汇款币别:";
-            // 
-            // lbcRemitAmount
-            // 
-            lbcRemitAmount.AutoSize = true;
-            lbcRemitAmount.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lbcRemitAmount.BackgroundStyle.Class = "";
-            lbcRemitAmount.Location = new System.Drawing.Point(356, 51);
-            lbcRemitAmount.Name = "lbcRemitAmount";
-            lbcRemitAmount.Size = new System.Drawing.Size(59, 16);
-            lbcRemitAmount.TabIndex = 29;
-            lbcRemitAmount.Text = "汇款金额:";
-            // 
-            // lblMsgCurrency
-            // 
-            lblMsgCurrency.AutoSize = true;
-            lblMsgCurrency.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblMsgCurrency.BackgroundStyle.Class = "";
-            lblMsgCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblMsgCurrency.Location = new System.Drawing.Point(200, 28);
-            lblMsgCurrency.Name = "lblMsgCurrency";
-            lblMsgCurrency.Size = new System.Drawing.Size(57, 15);
-            lblMsgCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            lblMsgCurrency.TabIndex = 27;
-            lblMsgCurrency.Text = "<font color=\'red\'>*</font>消息币别:";
-            // 
-            // lblMsgType
-            // 
-            lblMsgType.AutoSize = true;
-            lblMsgType.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblMsgType.BackgroundStyle.Class = "";
-            lblMsgType.Location = new System.Drawing.Point(21, 5);
-            lblMsgType.Name = "lblMsgType";
-            lblMsgType.Size = new System.Drawing.Size(57, 15);
-            lblMsgType.TabIndex = 4;
-            lblMsgType.Text = "<font color=\'red\'>*</font>消息类型:";
-            // 
-            // lblCommmissionCreateUserName
-            // 
-            lblCommmissionCreateUserName.AutoSize = true;
-            lblCommmissionCreateUserName.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblCommmissionCreateUserName.BackgroundStyle.Class = "";
-            lblCommmissionCreateUserName.Location = new System.Drawing.Point(34, 138);
-            lblCommmissionCreateUserName.Name = "lblCommmissionCreateUserName";
-            lblCommmissionCreateUserName.Size = new System.Drawing.Size(47, 16);
-            lblCommmissionCreateUserName.TabIndex = 20;
-            lblCommmissionCreateUserName.Text = "经办人:";
-            // 
-            // lblCommissionComment
-            // 
-            lblCommissionComment.AutoSize = true;
-            lblCommissionComment.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblCommissionComment.BackgroundStyle.Class = "";
-            lblCommissionComment.Location = new System.Drawing.Point(46, 74);
-            lblCommissionComment.Name = "lblCommissionComment";
-            lblCommissionComment.Size = new System.Drawing.Size(34, 16);
-            lblCommissionComment.TabIndex = 18;
-            lblCommissionComment.Text = "备注:";
-            // 
-            // lblMsgDate
-            // 
-            lblMsgDate.AutoSize = true;
-            lblMsgDate.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblMsgDate.BackgroundStyle.Class = "";
-            lblMsgDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            lblMsgDate.Location = new System.Drawing.Point(21, 28);
-            lblMsgDate.Name = "lblMsgDate";
-            lblMsgDate.Size = new System.Drawing.Size(57, 15);
-            lblMsgDate.TabIndex = 6;
-            lblMsgDate.Text = "<font color=\'red\'>*</font>消息日期:";
-            // 
-            // lblRemitDate
-            // 
-            lblRemitDate.AutoSize = true;
-            lblRemitDate.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblRemitDate.BackgroundStyle.Class = "";
-            lblRemitDate.Location = new System.Drawing.Point(22, 51);
-            lblRemitDate.Name = "lblRemitDate";
-            lblRemitDate.Size = new System.Drawing.Size(59, 16);
-            lblRemitDate.TabIndex = 10;
-            lblRemitDate.Text = "汇款日期:";
-            // 
-            // lblMsgAmount
-            // 
-            lblMsgAmount.AutoSize = true;
-            lblMsgAmount.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblMsgAmount.BackgroundStyle.Class = "";
-            lblMsgAmount.Location = new System.Drawing.Point(354, 28);
-            lblMsgAmount.Name = "lblMsgAmount";
-            lblMsgAmount.Size = new System.Drawing.Size(57, 15);
-            lblMsgAmount.TabIndex = 8;
-            lblMsgAmount.Text = "<font color=\'red\'>*</font>消息金额:";
-            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
-            this.tabControl.Controls.Add(this.tabPanelClient);
-            this.tabControl.Controls.Add(this.tabPanelCommissionRemit);
             this.tabControl.Controls.Add(this.tabPanelGD);
+            this.tabControl.Controls.Add(this.tabPanelClient);
             this.tabControl.Controls.Add(this.tabPanelReview);
             this.tabControl.Controls.Add(this.tabPanelContract);
             this.tabControl.Controls.Add(this.tabPanelClientCreditLine);
@@ -1880,41 +1696,38 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.Tabs.Add(this.tabItemContract);
             this.tabControl.Tabs.Add(this.tabItemReview);
             this.tabControl.Tabs.Add(this.itemGuaranteeDeposit);
-            this.tabControl.Tabs.Add(this.tabItemCommissionRemit);
             this.tabControl.Text = "tabControl1";
             // 
-            // tabPanelCommissionRemit
+            // tabPanelGD
             // 
-            this.tabPanelCommissionRemit.Controls.Add(this.dgvCommissionRemit);
-            this.tabPanelCommissionRemit.Controls.Add(this.groupPanelCommissionRemit);
-            this.tabPanelCommissionRemit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelCommissionRemit.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelCommissionRemit.Name = "tabPanelCommissionRemit";
-            this.tabPanelCommissionRemit.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelCommissionRemit.Size = new System.Drawing.Size(586, 588);
-            this.tabPanelCommissionRemit.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelCommissionRemit.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelCommissionRemit.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelCommissionRemit.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelCommissionRemit.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+            this.tabPanelGD.Controls.Add(this.dgvGDs);
+            this.tabPanelGD.Controls.Add(this.groupPanelGuaranteePanel);
+            this.tabPanelGD.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPanelGD.Location = new System.Drawing.Point(0, 26);
+            this.tabPanelGD.Name = "tabPanelGD";
+            this.tabPanelGD.Padding = new System.Windows.Forms.Padding(1);
+            this.tabPanelGD.Size = new System.Drawing.Size(586, 588);
+            this.tabPanelGD.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabPanelGD.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabPanelGD.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabPanelGD.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabPanelGD.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
                         | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelCommissionRemit.Style.GradientAngle = 90;
-            this.tabPanelCommissionRemit.TabIndex = 7;
-            this.tabPanelCommissionRemit.TabItem = this.tabItemCommissionRemit;
+            this.tabPanelGD.Style.GradientAngle = 90;
+            this.tabPanelGD.TabIndex = 6;
+            this.tabPanelGD.TabItem = this.itemGuaranteeDeposit;
             // 
-            // dgvCommissionRemit
+            // dgvGDs
             // 
-            this.dgvCommissionRemit.AllowUserToAddRows = false;
-            this.dgvCommissionRemit.AllowUserToDeleteRows = false;
-            this.dgvCommissionRemit.AllowUserToOrderColumns = true;
-            this.dgvCommissionRemit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCommissionRemit.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colMsgType,
-            this.colMsgDate,
-            this.colMsgAmount,
-            this.colAssignBatchNo,
-            this.colAssignDate,
-            this.colCommissionAmount});
+            this.dgvGDs.AllowUserToAddRows = false;
+            this.dgvGDs.AllowUserToDeleteRows = false;
+            this.dgvGDs.AllowUserToOrderColumns = true;
+            this.dgvGDs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvGDs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGDs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colGDCurrency,
+            this.colGDAmount,
+            this.colDepositDate});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1922,366 +1735,236 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCommissionRemit.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvCommissionRemit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCommissionRemit.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCommissionRemit.Location = new System.Drawing.Point(1, 199);
-            this.dgvCommissionRemit.Name = "dgvCommissionRemit";
-            this.dgvCommissionRemit.ReadOnly = true;
-            this.dgvCommissionRemit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCommissionRemit.Size = new System.Drawing.Size(584, 388);
-            this.dgvCommissionRemit.TabIndex = 4;
-            this.dgvCommissionRemit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectCommissionRemit);
+            this.dgvGDs.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvGDs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvGDs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvGDs.Location = new System.Drawing.Point(1, 233);
+            this.dgvGDs.MultiSelect = false;
+            this.dgvGDs.Name = "dgvGDs";
+            this.dgvGDs.ReadOnly = true;
+            this.dgvGDs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGDs.Size = new System.Drawing.Size(584, 354);
+            this.dgvGDs.TabIndex = 1;
+            this.dgvGDs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectGD);
             // 
-            // colMsgType
+            // colGDCurrency
             // 
-            this.colMsgType.DataPropertyName = "MsgType";
-            this.colMsgType.HeaderText = "消息类型";
-            this.colMsgType.Name = "colMsgType";
-            this.colMsgType.ReadOnly = true;
+            this.colGDCurrency.DataPropertyName = "GuaranteeDepositCurrency";
+            this.colGDCurrency.HeaderText = "币别";
+            this.colGDCurrency.Name = "colGDCurrency";
+            this.colGDCurrency.ReadOnly = true;
             // 
-            // colMsgDate
+            // colGDAmount
             // 
-            this.colMsgDate.DataPropertyName = "MsgDate";
-            this.colMsgDate.HeaderText = "消息日期";
-            this.colMsgDate.Name = "colMsgDate";
-            this.colMsgDate.ReadOnly = true;
-            // 
-            // colMsgAmount
-            // 
-            this.colMsgAmount.DataPropertyName = "MsgAmount";
+            this.colGDAmount.DataPropertyName = "GuaranteeDepositAmount";
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colMsgAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colMsgAmount.HeaderText = "消息金额";
-            this.colMsgAmount.Name = "colMsgAmount";
-            this.colMsgAmount.ReadOnly = true;
-            // 
-            // colAssignBatchNo
-            // 
-            this.colAssignBatchNo.DataPropertyName = "AssignBatchNo";
-            this.colAssignBatchNo.HeaderText = "业务编号";
-            this.colAssignBatchNo.Name = "colAssignBatchNo";
-            this.colAssignBatchNo.ReadOnly = true;
-            // 
-            // colAssignDate
-            // 
-            this.colAssignDate.DataPropertyName = "AssignDate";
-            this.colAssignDate.HeaderText = "转让日";
-            this.colAssignDate.Name = "colAssignDate";
-            this.colAssignDate.ReadOnly = true;
-            // 
-            // colCommissionAmount
-            // 
-            this.colCommissionAmount.DataPropertyName = "CommissionAmount";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colCommissionAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCommissionAmount.HeaderText = "手续费";
-            this.colCommissionAmount.Name = "colCommissionAmount";
-            this.colCommissionAmount.ReadOnly = true;
-            // 
-            // groupPanelCommissionRemit
-            // 
-            this.groupPanelCommissionRemit.AutoScroll = true;
-            this.groupPanelCommissionRemit.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelCommissionRemit.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelCommissionRemit.Controls.Add(this.cbRemitCurrency);
-            this.groupPanelCommissionRemit.Controls.Add(lblRemitCurrency);
-            this.groupPanelCommissionRemit.Controls.Add(lbcRemitAmount);
-            this.groupPanelCommissionRemit.Controls.Add(this.tbRemitAmount);
-            this.groupPanelCommissionRemit.Controls.Add(this.cbMsgCurrency);
-            this.groupPanelCommissionRemit.Controls.Add(lblMsgCurrency);
-            this.groupPanelCommissionRemit.Controls.Add(lblMsgType);
-            this.groupPanelCommissionRemit.Controls.Add(this.tbMsgType);
-            this.groupPanelCommissionRemit.Controls.Add(this.btnCommissionRemitDelete);
-            this.groupPanelCommissionRemit.Controls.Add(this.btnCommissionRemitSave);
-            this.groupPanelCommissionRemit.Controls.Add(this.btnCommissionRemitUpdate);
-            this.groupPanelCommissionRemit.Controls.Add(this.btnCommissionRemitNew);
-            this.groupPanelCommissionRemit.Controls.Add(this.btnCommissionRemitRefresh);
-            this.groupPanelCommissionRemit.Controls.Add(lblCommmissionCreateUserName);
-            this.groupPanelCommissionRemit.Controls.Add(this.tbCommissionCreateUserName);
-            this.groupPanelCommissionRemit.Controls.Add(lblCommissionComment);
-            this.groupPanelCommissionRemit.Controls.Add(this.tbCommissionComment);
-            this.groupPanelCommissionRemit.Controls.Add(lblMsgDate);
-            this.groupPanelCommissionRemit.Controls.Add(this.diMsgDate);
-            this.groupPanelCommissionRemit.Controls.Add(lblRemitDate);
-            this.groupPanelCommissionRemit.Controls.Add(this.diRemitDate);
-            this.groupPanelCommissionRemit.Controls.Add(lblMsgAmount);
-            this.groupPanelCommissionRemit.Controls.Add(this.tbMsgAmount);
-            this.groupPanelCommissionRemit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelCommissionRemit.Location = new System.Drawing.Point(1, 1);
-            this.groupPanelCommissionRemit.Name = "groupPanelCommissionRemit";
-            this.groupPanelCommissionRemit.Size = new System.Drawing.Size(584, 198);
-            // 
-            // 
-            // 
-            this.groupPanelCommissionRemit.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelCommissionRemit.Style.BackColorGradientAngle = 90;
-            this.groupPanelCommissionRemit.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelCommissionRemit.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCommissionRemit.Style.BorderBottomWidth = 1;
-            this.groupPanelCommissionRemit.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelCommissionRemit.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCommissionRemit.Style.BorderLeftWidth = 1;
-            this.groupPanelCommissionRemit.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCommissionRemit.Style.BorderRightWidth = 1;
-            this.groupPanelCommissionRemit.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.groupPanelCommissionRemit.Style.BorderTopWidth = 1;
-            this.groupPanelCommissionRemit.Style.Class = "";
-            this.groupPanelCommissionRemit.Style.CornerDiameter = 4;
-            this.groupPanelCommissionRemit.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.groupPanelCommissionRemit.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.groupPanelCommissionRemit.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelCommissionRemit.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.groupPanelCommissionRemit.StyleMouseDown.Class = "";
-            // 
-            // 
-            // 
-            this.groupPanelCommissionRemit.StyleMouseOver.Class = "";
-            this.groupPanelCommissionRemit.TabIndex = 5;
-            // 
-            // cbRemitCurrency
-            // 
-            this.cbRemitCurrency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbRemitCurrency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbRemitCurrency.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.commissionRemitBindingSource, "RemitCurrency", true));
-            this.cbRemitCurrency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbRemitCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbRemitCurrency.ItemHeight = 14;
-            this.cbRemitCurrency.Location = new System.Drawing.Point(263, 49);
-            this.cbRemitCurrency.Name = "cbRemitCurrency";
-            this.cbRemitCurrency.Size = new System.Drawing.Size(85, 20);
-            this.cbRemitCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbRemitCurrency.TabIndex = 32;
-            // 
-            // commissionRemitBindingSource
-            // 
-            this.commissionRemitBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CommissionRemittance);
-            // 
-            // tbRemitAmount
-            // 
-            // 
-            // 
-            // 
-            this.tbRemitAmount.Border.Class = "TextBoxBorder";
-            this.tbRemitAmount.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.commissionRemitBindingSource, "RemitAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.tbRemitAmount.Location = new System.Drawing.Point(424, 49);
-            this.tbRemitAmount.Name = "tbRemitAmount";
-            this.tbRemitAmount.Size = new System.Drawing.Size(100, 20);
-            this.tbRemitAmount.TabIndex = 30;
-            // 
-            // cbMsgCurrency
-            // 
-            this.cbMsgCurrency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbMsgCurrency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbMsgCurrency.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.commissionRemitBindingSource, "MsgCurrency", true));
-            this.cbMsgCurrency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbMsgCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMsgCurrency.ItemHeight = 14;
-            this.cbMsgCurrency.Location = new System.Drawing.Point(263, 26);
-            this.cbMsgCurrency.Name = "cbMsgCurrency";
-            this.cbMsgCurrency.Size = new System.Drawing.Size(85, 20);
-            this.cbMsgCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbMsgCurrency.TabIndex = 28;
-            this.commissionRemitValidator.SetValidator1(this.cbMsgCurrency, this.requiredFieldValidator24);
-            // 
-            // tbMsgType
+            this.colGDAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colGDAmount.HeaderText = "保证金";
+            this.colGDAmount.Name = "colGDAmount";
+            this.colGDAmount.ReadOnly = true;
             // 
+            // colDepositDate
             // 
+            this.colDepositDate.DataPropertyName = "DepositDate";
+            dataGridViewCellStyle2.Format = "d";
+            this.colDepositDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDepositDate.HeaderText = "保证金日";
+            this.colDepositDate.Name = "colDepositDate";
+            this.colDepositDate.ReadOnly = true;
             // 
+            // groupPanelGuaranteePanel
             // 
-            this.tbMsgType.Border.Class = "TextBoxBorder";
-            this.tbMsgType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.commissionRemitBindingSource, "MsgType", true));
-            this.tbMsgType.Location = new System.Drawing.Point(82, 3);
-            this.tbMsgType.Name = "tbMsgType";
-            this.tbMsgType.Size = new System.Drawing.Size(100, 20);
-            this.tbMsgType.TabIndex = 5;
-            this.commissionRemitValidator.SetValidator1(this.tbMsgType, this.requiredFieldValidator22);
+            this.groupPanelGuaranteePanel.CanvasColor = System.Drawing.SystemColors.Control;
+            this.groupPanelGuaranteePanel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.groupPanelGuaranteePanel.Controls.Add(lblDepositDate);
+            this.groupPanelGuaranteePanel.Controls.Add(this.diDepositDate);
+            this.groupPanelGuaranteePanel.Controls.Add(lblGDComment);
+            this.groupPanelGuaranteePanel.Controls.Add(this.tbGDComment);
+            this.groupPanelGuaranteePanel.Controls.Add(lblGDCreateUserName);
+            this.groupPanelGuaranteePanel.Controls.Add(this.tbGDCreateUserName);
+            this.groupPanelGuaranteePanel.Controls.Add(this.btnGDUpdate);
+            this.groupPanelGuaranteePanel.Controls.Add(this.btnGDRefresh);
+            this.groupPanelGuaranteePanel.Controls.Add(this.btnGDDelete);
+            this.groupPanelGuaranteePanel.Controls.Add(this.btnGDSave);
+            this.groupPanelGuaranteePanel.Controls.Add(this.btnGDNew);
+            this.groupPanelGuaranteePanel.Controls.Add(lblGuaranteeDeposit);
+            this.groupPanelGuaranteePanel.Controls.Add(this.tbGDAmount);
+            this.groupPanelGuaranteePanel.Controls.Add(this.cbGDCurr);
+            this.groupPanelGuaranteePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupPanelGuaranteePanel.Location = new System.Drawing.Point(1, 1);
+            this.groupPanelGuaranteePanel.Name = "groupPanelGuaranteePanel";
+            this.groupPanelGuaranteePanel.Size = new System.Drawing.Size(584, 232);
+            this.groupPanelGuaranteePanel.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.groupPanelGuaranteePanel.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.groupPanelGuaranteePanel.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.groupPanelGuaranteePanel.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.groupPanelGuaranteePanel.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.groupPanelGuaranteePanel.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.groupPanelGuaranteePanel.Style.GradientAngle = 90;
+            this.groupPanelGuaranteePanel.TabIndex = 0;
             // 
-            // btnCommissionRemitDelete
+            // diDepositDate
             // 
-            this.btnCommissionRemitDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCommissionRemitDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCommissionRemitDelete.Location = new System.Drawing.Point(419, 162);
-            this.btnCommissionRemitDelete.Name = "btnCommissionRemitDelete";
-            this.btnCommissionRemitDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnCommissionRemitDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCommissionRemitDelete.TabIndex = 26;
-            this.btnCommissionRemitDelete.Text = "删除";
-            this.btnCommissionRemitDelete.Click += new System.EventHandler(this.DeleteCommissionRemit);
             // 
-            // btnCommissionRemitSave
             // 
-            this.btnCommissionRemitSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCommissionRemitSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCommissionRemitSave.Location = new System.Drawing.Point(338, 162);
-            this.btnCommissionRemitSave.Name = "btnCommissionRemitSave";
-            this.btnCommissionRemitSave.Size = new System.Drawing.Size(75, 23);
-            this.btnCommissionRemitSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCommissionRemitSave.TabIndex = 25;
-            this.btnCommissionRemitSave.Text = "保存";
-            this.btnCommissionRemitSave.Click += new System.EventHandler(this.SaveCommissionRemit);
             // 
-            // btnCommissionRemitUpdate
+            this.diDepositDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diDepositDate.ButtonDropDown.Visible = true;
+            this.diDepositDate.ButtonFreeText.Checked = true;
+            this.diDepositDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.gdBindingSource, "DepositDate", true));
+            this.diDepositDate.FreeTextEntryMode = true;
+            this.diDepositDate.Location = new System.Drawing.Point(398, 12);
             // 
-            this.btnCommissionRemitUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCommissionRemitUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCommissionRemitUpdate.Location = new System.Drawing.Point(257, 162);
-            this.btnCommissionRemitUpdate.Name = "btnCommissionRemitUpdate";
-            this.btnCommissionRemitUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnCommissionRemitUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCommissionRemitUpdate.TabIndex = 24;
-            this.btnCommissionRemitUpdate.Text = "编辑";
-            this.btnCommissionRemitUpdate.Click += new System.EventHandler(this.UpdateCommissionRemit);
             // 
-            // btnCommissionRemitNew
             // 
-            this.btnCommissionRemitNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCommissionRemitNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCommissionRemitNew.Location = new System.Drawing.Point(176, 162);
-            this.btnCommissionRemitNew.Name = "btnCommissionRemitNew";
-            this.btnCommissionRemitNew.Size = new System.Drawing.Size(75, 23);
-            this.btnCommissionRemitNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCommissionRemitNew.TabIndex = 23;
-            this.btnCommissionRemitNew.Text = "新建";
-            this.btnCommissionRemitNew.Click += new System.EventHandler(this.NewCommissionRemit);
+            this.diDepositDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
             // 
-            // btnCommissionRemitRefresh
             // 
-            this.btnCommissionRemitRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCommissionRemitRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCommissionRemitRefresh.Location = new System.Drawing.Point(95, 162);
-            this.btnCommissionRemitRefresh.Name = "btnCommissionRemitRefresh";
-            this.btnCommissionRemitRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnCommissionRemitRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCommissionRemitRefresh.TabIndex = 22;
-            this.btnCommissionRemitRefresh.Text = "刷新";
-            this.btnCommissionRemitRefresh.Click += new System.EventHandler(this.RefreshCommissionRemitList);
             // 
-            // tbCommissionCreateUserName
+            this.diDepositDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diDepositDate.MonthCalendar.BackgroundStyle.Class = "";
+            this.diDepositDate.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
+            this.diDepositDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diDepositDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.diDepositDate.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diDepositDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
             // 
-            this.tbCommissionCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCommissionCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.commissionRemitBindingSource, "CreateUserName", true));
-            this.tbCommissionCreateUserName.Location = new System.Drawing.Point(82, 136);
-            this.tbCommissionCreateUserName.Name = "tbCommissionCreateUserName";
-            this.tbCommissionCreateUserName.ReadOnly = true;
-            this.tbCommissionCreateUserName.Size = new System.Drawing.Size(100, 20);
-            this.tbCommissionCreateUserName.TabIndex = 21;
+            this.diDepositDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diDepositDate.MonthCalendar.TodayButtonVisible = true;
+            this.diDepositDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diDepositDate.Name = "diDepositDate";
+            this.diDepositDate.Size = new System.Drawing.Size(121, 20);
+            this.diDepositDate.TabIndex = 32;
+            this.gdValidator.SetValidator1(this.diDepositDate, this.requiredFieldValidator21);
             // 
-            // tbCommissionComment
+            // gdBindingSource
             // 
+            this.gdBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.GuaranteeDeposit);
             // 
+            // tbGDComment
             // 
             // 
-            this.tbCommissionComment.Border.Class = "";
-            this.tbCommissionComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.commissionRemitBindingSource, "Comment", true));
-            this.tbCommissionComment.Location = new System.Drawing.Point(82, 73);
-            this.tbCommissionComment.Multiline = true;
-            this.tbCommissionComment.Name = "tbCommissionComment";
-            this.tbCommissionComment.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbCommissionComment.Size = new System.Drawing.Size(442, 57);
-            this.tbCommissionComment.TabIndex = 19;
             // 
-            // diMsgDate
             // 
-            // 
-            // 
-            // 
-            this.diMsgDate.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diMsgDate.ButtonDropDown.Visible = true;
-            this.diMsgDate.ButtonFreeText.Checked = true;
-            this.diMsgDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.commissionRemitBindingSource, "MsgDate", true));
-            this.diMsgDate.FreeTextEntryMode = true;
-            this.diMsgDate.Location = new System.Drawing.Point(82, 26);
-            // 
-            // 
-            // 
-            this.diMsgDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diMsgDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diMsgDate.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.diMsgDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diMsgDate.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.diMsgDate.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diMsgDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diMsgDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diMsgDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diMsgDate.Name = "diMsgDate";
-            this.diMsgDate.Size = new System.Drawing.Size(103, 20);
-            this.diMsgDate.TabIndex = 7;
-            this.commissionRemitValidator.SetValidator1(this.diMsgDate, this.requiredFieldValidator23);
-            // 
-            // diRemitDate
-            // 
-            // 
-            // 
-            // 
-            this.diRemitDate.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diRemitDate.ButtonDropDown.Visible = true;
-            this.diRemitDate.ButtonFreeText.Checked = true;
-            this.diRemitDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.commissionRemitBindingSource, "RemitDate", true));
-            this.diRemitDate.FreeTextEntryMode = true;
-            this.diRemitDate.Location = new System.Drawing.Point(81, 49);
-            // 
-            // 
-            // 
-            this.diRemitDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diRemitDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diRemitDate.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.diRemitDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diRemitDate.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.diRemitDate.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diRemitDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diRemitDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diRemitDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diRemitDate.Name = "diRemitDate";
-            this.diRemitDate.Size = new System.Drawing.Size(103, 20);
-            this.diRemitDate.TabIndex = 11;
-            // 
-            // tbMsgAmount
-            // 
-            // 
-            // 
-            // 
-            this.tbMsgAmount.Border.Class = "TextBoxBorder";
-            this.tbMsgAmount.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.commissionRemitBindingSource, "MsgAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.tbMsgAmount.Location = new System.Drawing.Point(424, 26);
-            this.tbMsgAmount.Name = "tbMsgAmount";
-            this.tbMsgAmount.Size = new System.Drawing.Size(100, 20);
-            this.tbMsgAmount.TabIndex = 9;
-            this.commissionRemitValidator.SetValidator1(this.tbMsgAmount, this.requiredFieldValidator25);
-            // 
-            // tabItemCommissionRemit
-            // 
-            this.tabItemCommissionRemit.AttachedControl = this.tabPanelCommissionRemit;
-            this.tabItemCommissionRemit.Name = "tabItemCommissionRemit";
-            this.tabItemCommissionRemit.Text = "保理费收付";
+            this.tbGDComment.Border.Class = "TextBoxBorder";
+            this.tbGDComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.gdBindingSource, "Comment", true));
+            this.tbGDComment.Location = new System.Drawing.Point(86, 74);
+            this.tbGDComment.Multiline = true;
+            this.tbGDComment.Name = "tbGDComment";
+            this.tbGDComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbGDComment.Size = new System.Drawing.Size(433, 102);
+            this.tbGDComment.TabIndex = 30;
+            // 
+            // tbGDCreateUserName
+            // 
+            // 
+            // 
+            // 
+            this.tbGDCreateUserName.Border.Class = "TextBoxBorder";
+            this.tbGDCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.gdBindingSource, "CreateUserName", true));
+            this.tbGDCreateUserName.Location = new System.Drawing.Point(86, 46);
+            this.tbGDCreateUserName.Name = "tbGDCreateUserName";
+            this.tbGDCreateUserName.ReadOnly = true;
+            this.tbGDCreateUserName.Size = new System.Drawing.Size(121, 20);
+            this.tbGDCreateUserName.TabIndex = 18;
+            // 
+            // btnGDUpdate
+            // 
+            this.btnGDUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGDUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGDUpdate.Location = new System.Drawing.Point(259, 183);
+            this.btnGDUpdate.Name = "btnGDUpdate";
+            this.btnGDUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnGDUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGDUpdate.TabIndex = 5;
+            this.btnGDUpdate.Text = "编辑";
+            this.btnGDUpdate.Click += new System.EventHandler(this.UpdateGD);
+            // 
+            // btnGDRefresh
+            // 
+            this.btnGDRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGDRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGDRefresh.Location = new System.Drawing.Point(99, 183);
+            this.btnGDRefresh.Name = "btnGDRefresh";
+            this.btnGDRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnGDRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGDRefresh.TabIndex = 3;
+            this.btnGDRefresh.Text = "刷新";
+            this.btnGDRefresh.Click += new System.EventHandler(this.RefreshGDs);
+            // 
+            // btnGDDelete
+            // 
+            this.btnGDDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGDDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGDDelete.Location = new System.Drawing.Point(421, 183);
+            this.btnGDDelete.Name = "btnGDDelete";
+            this.btnGDDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnGDDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGDDelete.TabIndex = 7;
+            this.btnGDDelete.Text = "删除";
+            this.btnGDDelete.Click += new System.EventHandler(this.DeleteGD);
+            // 
+            // btnGDSave
+            // 
+            this.btnGDSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGDSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGDSave.Location = new System.Drawing.Point(340, 183);
+            this.btnGDSave.Name = "btnGDSave";
+            this.btnGDSave.Size = new System.Drawing.Size(75, 23);
+            this.btnGDSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGDSave.TabIndex = 6;
+            this.btnGDSave.Text = "保存";
+            this.btnGDSave.Click += new System.EventHandler(this.SaveGD);
+            // 
+            // btnGDNew
+            // 
+            this.btnGDNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGDNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGDNew.Location = new System.Drawing.Point(178, 183);
+            this.btnGDNew.Name = "btnGDNew";
+            this.btnGDNew.Size = new System.Drawing.Size(75, 23);
+            this.btnGDNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGDNew.TabIndex = 4;
+            this.btnGDNew.Text = "新建";
+            this.btnGDNew.Click += new System.EventHandler(this.NewGD);
+            // 
+            // tbGDAmount
+            // 
+            // 
+            // 
+            // 
+            this.tbGDAmount.Border.Class = "TextBoxBorder";
+            this.tbGDAmount.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.gdBindingSource, "GuaranteeDepositAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
+            this.tbGDAmount.Location = new System.Drawing.Point(145, 14);
+            this.tbGDAmount.Name = "tbGDAmount";
+            this.tbGDAmount.Size = new System.Drawing.Size(100, 20);
+            this.tbGDAmount.TabIndex = 2;
+            this.gdValidator.SetValidator1(this.tbGDAmount, this.requiredFieldValidator20);
+            // 
+            // cbGDCurr
+            // 
+            this.cbGDCurr.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbGDCurr.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbGDCurr.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.gdBindingSource, "GuaranteeDepositCurrency", true));
+            this.cbGDCurr.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbGDCurr.FormattingEnabled = true;
+            this.cbGDCurr.Location = new System.Drawing.Point(86, 14);
+            this.cbGDCurr.Name = "cbGDCurr";
+            this.cbGDCurr.Size = new System.Drawing.Size(53, 21);
+            this.cbGDCurr.TabIndex = 1;
+            this.gdValidator.SetValidator1(this.cbGDCurr, this.requiredFieldValidator9);
+            // 
+            // itemGuaranteeDeposit
+            // 
+            this.itemGuaranteeDeposit.AttachedControl = this.tabPanelGD;
+            this.itemGuaranteeDeposit.Name = "itemGuaranteeDeposit";
+            this.itemGuaranteeDeposit.Text = "保证金";
             // 
             // tabPanelClient
             // 
@@ -3060,274 +2743,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClient.Name = "tabItemClient";
             this.tabItemClient.Text = "基本信息";
             // 
-            // tabPanelGD
-            // 
-            this.tabPanelGD.Controls.Add(this.dgvGDs);
-            this.tabPanelGD.Controls.Add(this.groupPanelGuaranteePanel);
-            this.tabPanelGD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabPanelGD.Location = new System.Drawing.Point(0, 26);
-            this.tabPanelGD.Name = "tabPanelGD";
-            this.tabPanelGD.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPanelGD.Size = new System.Drawing.Size(586, 588);
-            this.tabPanelGD.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabPanelGD.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabPanelGD.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabPanelGD.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabPanelGD.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabPanelGD.Style.GradientAngle = 90;
-            this.tabPanelGD.TabIndex = 6;
-            this.tabPanelGD.TabItem = this.itemGuaranteeDeposit;
-            // 
-            // dgvGDs
-            // 
-            this.dgvGDs.AllowUserToAddRows = false;
-            this.dgvGDs.AllowUserToDeleteRows = false;
-            this.dgvGDs.AllowUserToOrderColumns = true;
-            this.dgvGDs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvGDs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvGDs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colGDCurrency,
-            this.colGDAmount,
-            this.colDepositDate});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvGDs.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvGDs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvGDs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvGDs.Location = new System.Drawing.Point(1, 233);
-            this.dgvGDs.MultiSelect = false;
-            this.dgvGDs.Name = "dgvGDs";
-            this.dgvGDs.ReadOnly = true;
-            this.dgvGDs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGDs.Size = new System.Drawing.Size(584, 354);
-            this.dgvGDs.TabIndex = 1;
-            this.dgvGDs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectGD);
-            // 
-            // colGDCurrency
-            // 
-            this.colGDCurrency.DataPropertyName = "GuaranteeDepositCurrency";
-            this.colGDCurrency.HeaderText = "币别";
-            this.colGDCurrency.Name = "colGDCurrency";
-            this.colGDCurrency.ReadOnly = true;
-            // 
-            // colGDAmount
-            // 
-            this.colGDAmount.DataPropertyName = "GuaranteeDepositAmount";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.colGDAmount.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colGDAmount.HeaderText = "保证金";
-            this.colGDAmount.Name = "colGDAmount";
-            this.colGDAmount.ReadOnly = true;
-            // 
-            // colDepositDate
-            // 
-            this.colDepositDate.DataPropertyName = "DepositDate";
-            dataGridViewCellStyle5.Format = "d";
-            this.colDepositDate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colDepositDate.HeaderText = "保证金日";
-            this.colDepositDate.Name = "colDepositDate";
-            this.colDepositDate.ReadOnly = true;
-            // 
-            // groupPanelGuaranteePanel
-            // 
-            this.groupPanelGuaranteePanel.CanvasColor = System.Drawing.SystemColors.Control;
-            this.groupPanelGuaranteePanel.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.groupPanelGuaranteePanel.Controls.Add(lblDepositDate);
-            this.groupPanelGuaranteePanel.Controls.Add(this.diDepositDate);
-            this.groupPanelGuaranteePanel.Controls.Add(lblGDComment);
-            this.groupPanelGuaranteePanel.Controls.Add(this.tbGDComment);
-            this.groupPanelGuaranteePanel.Controls.Add(lblGDCreateUserName);
-            this.groupPanelGuaranteePanel.Controls.Add(this.tbGDCreateUserName);
-            this.groupPanelGuaranteePanel.Controls.Add(this.btnGDUpdate);
-            this.groupPanelGuaranteePanel.Controls.Add(this.btnGDRefresh);
-            this.groupPanelGuaranteePanel.Controls.Add(this.btnGDDelete);
-            this.groupPanelGuaranteePanel.Controls.Add(this.btnGDSave);
-            this.groupPanelGuaranteePanel.Controls.Add(this.btnGDNew);
-            this.groupPanelGuaranteePanel.Controls.Add(lblGuaranteeDeposit);
-            this.groupPanelGuaranteePanel.Controls.Add(this.tbGDAmount);
-            this.groupPanelGuaranteePanel.Controls.Add(this.cbGDCurr);
-            this.groupPanelGuaranteePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelGuaranteePanel.Location = new System.Drawing.Point(1, 1);
-            this.groupPanelGuaranteePanel.Name = "groupPanelGuaranteePanel";
-            this.groupPanelGuaranteePanel.Size = new System.Drawing.Size(584, 232);
-            this.groupPanelGuaranteePanel.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.groupPanelGuaranteePanel.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.groupPanelGuaranteePanel.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.groupPanelGuaranteePanel.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.groupPanelGuaranteePanel.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.groupPanelGuaranteePanel.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.groupPanelGuaranteePanel.Style.GradientAngle = 90;
-            this.groupPanelGuaranteePanel.TabIndex = 0;
-            // 
-            // diDepositDate
-            // 
-            // 
-            // 
-            // 
-            this.diDepositDate.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diDepositDate.ButtonDropDown.Visible = true;
-            this.diDepositDate.ButtonFreeText.Checked = true;
-            this.diDepositDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.gdBindingSource, "DepositDate", true));
-            this.diDepositDate.FreeTextEntryMode = true;
-            this.diDepositDate.Location = new System.Drawing.Point(398, 12);
-            // 
-            // 
-            // 
-            this.diDepositDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diDepositDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diDepositDate.MonthCalendar.BackgroundStyle.Class = "";
-            this.diDepositDate.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.diDepositDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diDepositDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.diDepositDate.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diDepositDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diDepositDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diDepositDate.MonthCalendar.TodayButtonVisible = true;
-            this.diDepositDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diDepositDate.Name = "diDepositDate";
-            this.diDepositDate.Size = new System.Drawing.Size(121, 20);
-            this.diDepositDate.TabIndex = 32;
-            this.gdValidator.SetValidator1(this.diDepositDate, this.requiredFieldValidator21);
-            // 
-            // gdBindingSource
-            // 
-            this.gdBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.GuaranteeDeposit);
-            // 
-            // tbGDComment
-            // 
-            // 
-            // 
-            // 
-            this.tbGDComment.Border.Class = "TextBoxBorder";
-            this.tbGDComment.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.gdBindingSource, "Comment", true));
-            this.tbGDComment.Location = new System.Drawing.Point(86, 74);
-            this.tbGDComment.Multiline = true;
-            this.tbGDComment.Name = "tbGDComment";
-            this.tbGDComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbGDComment.Size = new System.Drawing.Size(433, 102);
-            this.tbGDComment.TabIndex = 30;
-            // 
-            // tbGDCreateUserName
-            // 
-            // 
-            // 
-            // 
-            this.tbGDCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbGDCreateUserName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.gdBindingSource, "CreateUserName", true));
-            this.tbGDCreateUserName.Location = new System.Drawing.Point(86, 46);
-            this.tbGDCreateUserName.Name = "tbGDCreateUserName";
-            this.tbGDCreateUserName.ReadOnly = true;
-            this.tbGDCreateUserName.Size = new System.Drawing.Size(121, 20);
-            this.tbGDCreateUserName.TabIndex = 18;
-            // 
-            // btnGDUpdate
-            // 
-            this.btnGDUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnGDUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGDUpdate.Location = new System.Drawing.Point(259, 183);
-            this.btnGDUpdate.Name = "btnGDUpdate";
-            this.btnGDUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnGDUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnGDUpdate.TabIndex = 5;
-            this.btnGDUpdate.Text = "编辑";
-            this.btnGDUpdate.Click += new System.EventHandler(this.UpdateGD);
-            // 
-            // btnGDRefresh
-            // 
-            this.btnGDRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnGDRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGDRefresh.Location = new System.Drawing.Point(99, 183);
-            this.btnGDRefresh.Name = "btnGDRefresh";
-            this.btnGDRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnGDRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnGDRefresh.TabIndex = 3;
-            this.btnGDRefresh.Text = "刷新";
-            this.btnGDRefresh.Click += new System.EventHandler(this.RefreshGDs);
-            // 
-            // btnGDDelete
-            // 
-            this.btnGDDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnGDDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGDDelete.Location = new System.Drawing.Point(421, 183);
-            this.btnGDDelete.Name = "btnGDDelete";
-            this.btnGDDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnGDDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnGDDelete.TabIndex = 7;
-            this.btnGDDelete.Text = "删除";
-            this.btnGDDelete.Click += new System.EventHandler(this.DeleteGD);
-            // 
-            // btnGDSave
-            // 
-            this.btnGDSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnGDSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGDSave.Location = new System.Drawing.Point(340, 183);
-            this.btnGDSave.Name = "btnGDSave";
-            this.btnGDSave.Size = new System.Drawing.Size(75, 23);
-            this.btnGDSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnGDSave.TabIndex = 6;
-            this.btnGDSave.Text = "保存";
-            this.btnGDSave.Click += new System.EventHandler(this.SaveGD);
-            // 
-            // btnGDNew
-            // 
-            this.btnGDNew.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnGDNew.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGDNew.Location = new System.Drawing.Point(178, 183);
-            this.btnGDNew.Name = "btnGDNew";
-            this.btnGDNew.Size = new System.Drawing.Size(75, 23);
-            this.btnGDNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnGDNew.TabIndex = 4;
-            this.btnGDNew.Text = "新建";
-            this.btnGDNew.Click += new System.EventHandler(this.NewGD);
-            // 
-            // tbGDAmount
-            // 
-            // 
-            // 
-            // 
-            this.tbGDAmount.Border.Class = "TextBoxBorder";
-            this.tbGDAmount.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.gdBindingSource, "GuaranteeDepositAmount", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.tbGDAmount.Location = new System.Drawing.Point(145, 14);
-            this.tbGDAmount.Name = "tbGDAmount";
-            this.tbGDAmount.Size = new System.Drawing.Size(100, 20);
-            this.tbGDAmount.TabIndex = 2;
-            this.gdValidator.SetValidator1(this.tbGDAmount, this.requiredFieldValidator20);
-            // 
-            // cbGDCurr
-            // 
-            this.cbGDCurr.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbGDCurr.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbGDCurr.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.gdBindingSource, "GuaranteeDepositCurrency", true));
-            this.cbGDCurr.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbGDCurr.FormattingEnabled = true;
-            this.cbGDCurr.Location = new System.Drawing.Point(86, 14);
-            this.cbGDCurr.Name = "cbGDCurr";
-            this.cbGDCurr.Size = new System.Drawing.Size(53, 21);
-            this.cbGDCurr.TabIndex = 1;
-            this.gdValidator.SetValidator1(this.cbGDCurr, this.requiredFieldValidator9);
-            // 
-            // itemGuaranteeDeposit
-            // 
-            this.itemGuaranteeDeposit.AttachedControl = this.tabPanelGD;
-            this.itemGuaranteeDeposit.Name = "itemGuaranteeDeposit";
-            this.itemGuaranteeDeposit.Text = "保证金";
-            // 
             // tabPanelReview
             // 
             this.tabPanelReview.Controls.Add(this.dgvReviews);
@@ -3353,14 +2768,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvReviews.AllowUserToDeleteRows = false;
             this.dgvReviews.AllowUserToOrderColumns = true;
             this.dgvReviews.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReviews.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReviews.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvReviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReviews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colReviewNo,
@@ -3368,14 +2783,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colReviewUser,
             this.colReviewDate,
             this.colReviewComment});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReviews.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReviews.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvReviews.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvReviews.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvReviews.Location = new System.Drawing.Point(1, 368);
@@ -3411,9 +2826,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colReviewDate
             // 
             this.colReviewDate.DataPropertyName = "ReviewDate";
-            dataGridViewCellStyle8.Format = "d";
-            dataGridViewCellStyle8.NullValue = null;
-            this.colReviewDate.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colReviewDate.DefaultCellStyle = dataGridViewCellStyle5;
             this.colReviewDate.HeaderText = "协查日";
             this.colReviewDate.Name = "colReviewDate";
             this.colReviewDate.ReadOnly = true;
@@ -3868,14 +3283,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvContracts.AllowUserToDeleteRows = false;
             this.dgvContracts.AllowUserToOrderColumns = true;
             this.dgvContracts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvContracts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvContracts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvContracts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvContracts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colContractCode,
@@ -3884,27 +3299,27 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colContractDueDate,
             this.colContractStatus,
             this.colCreateUserName});
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvContracts.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvContracts.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvContracts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvContracts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvContracts.Location = new System.Drawing.Point(1, 236);
             this.dgvContracts.Name = "dgvContracts";
             this.dgvContracts.ReadOnly = true;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvContracts.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvContracts.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvContracts.RowTemplate.Height = 23;
             this.dgvContracts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvContracts.Size = new System.Drawing.Size(584, 351);
@@ -3928,9 +3343,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colContractValueDate
             // 
             this.colContractValueDate.DataPropertyName = "ContractValueDate";
-            dataGridViewCellStyle11.Format = "d";
-            dataGridViewCellStyle11.NullValue = null;
-            this.colContractValueDate.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle8.Format = "d";
+            dataGridViewCellStyle8.NullValue = null;
+            this.colContractValueDate.DefaultCellStyle = dataGridViewCellStyle8;
             this.colContractValueDate.HeaderText = "生效日";
             this.colContractValueDate.Name = "colContractValueDate";
             this.colContractValueDate.ReadOnly = true;
@@ -3938,8 +3353,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colContractDueDate
             // 
             this.colContractDueDate.DataPropertyName = "ContractDueDate";
-            dataGridViewCellStyle12.Format = "d";
-            this.colContractDueDate.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle9.Format = "d";
+            this.colContractDueDate.DefaultCellStyle = dataGridViewCellStyle9;
             this.colContractDueDate.HeaderText = "到期日";
             this.colContractDueDate.Name = "colContractDueDate";
             this.colContractDueDate.ReadOnly = true;
@@ -4273,14 +3688,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.AllowUserToAddRows = false;
             this.dgvClientCreditLines.AllowUserToDeleteRows = false;
             this.dgvClientCreditLines.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvClientCreditLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCreditLineType,
@@ -4298,28 +3713,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colUnfreezer,
             this.colUnfreezeDate,
             this.colComment});
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvClientCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClientCreditLines.Location = new System.Drawing.Point(1, 362);
             this.dgvClientCreditLines.MultiSelect = false;
             this.dgvClientCreditLines.Name = "dgvClientCreditLines";
             this.dgvClientCreditLines.ReadOnly = true;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClientCreditLines.RowHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvClientCreditLines.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dgvClientCreditLines.RowTemplate.Height = 23;
             this.dgvClientCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClientCreditLines.Size = new System.Drawing.Size(584, 225);
@@ -4343,10 +3758,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colCreditLine
             // 
             this.colCreditLine.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Format = "C2";
-            dataGridViewCellStyle16.NullValue = null;
-            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "C2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle13;
             this.colCreditLine.HeaderText = "额度上限";
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
@@ -4354,9 +3769,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colPeriodBegin
             // 
             this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle17.Format = "d";
-            dataGridViewCellStyle17.NullValue = null;
-            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle14.Format = "d";
+            dataGridViewCellStyle14.NullValue = null;
+            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle14;
             this.colPeriodBegin.HeaderText = "有效期(始)";
             this.colPeriodBegin.Name = "colPeriodBegin";
             this.colPeriodBegin.ReadOnly = true;
@@ -4364,9 +3779,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colPeriodEnd
             // 
             this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle18.Format = "d";
-            dataGridViewCellStyle18.NullValue = null;
-            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle15.Format = "d";
+            dataGridViewCellStyle15.NullValue = null;
+            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle15;
             this.colPeriodEnd.HeaderText = "有效期(终)";
             this.colPeriodEnd.Name = "colPeriodEnd";
             this.colPeriodEnd.ReadOnly = true;
@@ -4409,9 +3824,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colFreezeDate
             // 
             this.colFreezeDate.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle19.Format = "d";
-            dataGridViewCellStyle19.NullValue = null;
-            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle16.Format = "d";
+            dataGridViewCellStyle16.NullValue = null;
+            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle16;
             this.colFreezeDate.HeaderText = "冻结日期";
             this.colFreezeDate.Name = "colFreezeDate";
             this.colFreezeDate.ReadOnly = true;
@@ -4433,9 +3848,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // colUnfreezeDate
             // 
             this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle20.Format = "d";
-            dataGridViewCellStyle20.NullValue = null;
-            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle17.Format = "d";
+            dataGridViewCellStyle17.NullValue = null;
+            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle17;
             this.colUnfreezeDate.HeaderText = "解冻日期";
             this.colUnfreezeDate.Name = "colUnfreezeDate";
             this.colUnfreezeDate.ReadOnly = true;
@@ -4979,6 +4394,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabItemClientCreditLine.Name = "tabItemClientCreditLine";
             this.tabItemClientCreditLine.Text = "额度信息";
             // 
+            // tabItemCommissionRemit
+            // 
+            this.tabItemCommissionRemit.Name = "tabItemCommissionRemit";
+            this.tabItemCommissionRemit.Text = "保理费收付";
+            // 
             // clientValidator
             // 
             this.clientValidator.ContainerControl = this;
@@ -5225,11 +4645,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.requiredFieldValidator9.ErrorMessage = "必填";
             this.requiredFieldValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // commissionRemitValidator
-            // 
-            this.commissionRemitValidator.ErrorProvider = this.errorProvider;
-            this.commissionRemitValidator.Highlighter = this.highlighter;
-            // 
             // requiredFieldValidator24
             // 
             this.requiredFieldValidator24.ErrorMessage = "必填";
@@ -5265,10 +4680,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "MsgAmount";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle23.Format = "N2";
-            dataGridViewCellStyle23.NullValue = null;
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle20.Format = "N2";
+            dataGridViewCellStyle20.NullValue = null;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridViewTextBoxColumn3.HeaderText = "消息金额";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
@@ -5287,10 +4702,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "CommissionAmount";
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle24.Format = "N2";
-            dataGridViewCellStyle24.NullValue = null;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.Format = "N2";
+            dataGridViewCellStyle21.NullValue = null;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridViewTextBoxColumn6.HeaderText = "手续费";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
@@ -5304,9 +4719,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.DataPropertyName = "GuaranteeDepositAmount";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle25.Format = "N2";
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle22.Format = "N2";
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridViewTextBoxColumn8.HeaderText = "保证金";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.Width = 181;
@@ -5314,8 +4729,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn9
             // 
             this.dataGridViewTextBoxColumn9.DataPropertyName = "DepositDate";
-            dataGridViewCellStyle26.Format = "d";
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle23.Format = "d";
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle23;
             this.dataGridViewTextBoxColumn9.HeaderText = "保证金日";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.Width = 180;
@@ -5344,9 +4759,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn13
             // 
             this.dataGridViewTextBoxColumn13.DataPropertyName = "ReviewDate";
-            dataGridViewCellStyle27.Format = "d";
-            dataGridViewCellStyle27.NullValue = null;
-            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle24.Format = "d";
+            dataGridViewCellStyle24.NullValue = null;
+            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle24;
             this.dataGridViewTextBoxColumn13.HeaderText = "协查日";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.Width = 108;
@@ -5375,9 +4790,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn17
             // 
             this.dataGridViewTextBoxColumn17.DataPropertyName = "ContractValueDate";
-            dataGridViewCellStyle28.Format = "d";
-            dataGridViewCellStyle28.NullValue = null;
-            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle25.Format = "d";
+            dataGridViewCellStyle25.NullValue = null;
+            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle25;
             this.dataGridViewTextBoxColumn17.HeaderText = "生效日";
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             this.dataGridViewTextBoxColumn17.Width = 90;
@@ -5385,8 +4800,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn18
             // 
             this.dataGridViewTextBoxColumn18.DataPropertyName = "ContractDueDate";
-            dataGridViewCellStyle29.Format = "d";
-            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle26.Format = "d";
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle26;
             this.dataGridViewTextBoxColumn18.HeaderText = "到期日";
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             this.dataGridViewTextBoxColumn18.Width = 91;
@@ -5420,28 +4835,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn23
             // 
             this.dataGridViewTextBoxColumn23.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle30.Format = "C2";
-            dataGridViewCellStyle30.NullValue = null;
-            this.dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle27.Format = "C2";
+            dataGridViewCellStyle27.NullValue = null;
+            this.dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle27;
             this.dataGridViewTextBoxColumn23.HeaderText = "额度上限";
             this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
             // 
             // dataGridViewTextBoxColumn24
             // 
             this.dataGridViewTextBoxColumn24.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle31.Format = "d";
-            dataGridViewCellStyle31.NullValue = null;
-            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle28.Format = "d";
+            dataGridViewCellStyle28.NullValue = null;
+            this.dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle28;
             this.dataGridViewTextBoxColumn24.HeaderText = "有效期(始)";
             this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
             // 
             // dataGridViewTextBoxColumn25
             // 
             this.dataGridViewTextBoxColumn25.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle32.Format = "d";
-            dataGridViewCellStyle32.NullValue = null;
-            this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle29.Format = "d";
+            dataGridViewCellStyle29.NullValue = null;
+            this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle29;
             this.dataGridViewTextBoxColumn25.HeaderText = "有效期(终)";
             this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
             // 
@@ -5478,9 +4893,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn31
             // 
             this.dataGridViewTextBoxColumn31.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle33.Format = "d";
-            dataGridViewCellStyle33.NullValue = null;
-            this.dataGridViewTextBoxColumn31.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle30.Format = "d";
+            dataGridViewCellStyle30.NullValue = null;
+            this.dataGridViewTextBoxColumn31.DefaultCellStyle = dataGridViewCellStyle30;
             this.dataGridViewTextBoxColumn31.HeaderText = "冻结日期";
             this.dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
             // 
@@ -5499,9 +4914,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // dataGridViewTextBoxColumn34
             // 
             this.dataGridViewTextBoxColumn34.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle34.Format = "d";
-            dataGridViewCellStyle34.NullValue = null;
-            this.dataGridViewTextBoxColumn34.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle31.Format = "d";
+            dataGridViewCellStyle31.NullValue = null;
+            this.dataGridViewTextBoxColumn34.DefaultCellStyle = dataGridViewCellStyle31;
             this.dataGridViewTextBoxColumn34.HeaderText = "解冻日期";
             this.dataGridViewTextBoxColumn34.Name = "dataGridViewTextBoxColumn34";
             // 
@@ -5525,13 +4940,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabControl.PerformLayout();
-            this.tabPanelCommissionRemit.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCommissionRemit)).EndInit();
-            this.groupPanelCommissionRemit.ResumeLayout(false);
-            this.groupPanelCommissionRemit.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.commissionRemitBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diMsgDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diRemitDate)).EndInit();
+            this.tabPanelGD.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGDs)).EndInit();
+            this.groupPanelGuaranteePanel.ResumeLayout(false);
+            this.groupPanelGuaranteePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.diDepositDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdBindingSource)).EndInit();
             this.tabPanelClient.ResumeLayout(false);
             this.groupPanelClientContact.ResumeLayout(false);
             this.groupPanelClientContact.PerformLayout();
@@ -5542,12 +4956,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.groupPanelClientStat.PerformLayout();
             this.groupPanelClientBasic.ResumeLayout(false);
             this.groupPanelClientBasic.PerformLayout();
-            this.tabPanelGD.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvGDs)).EndInit();
-            this.groupPanelGuaranteePanel.ResumeLayout(false);
-            this.groupPanelGuaranteePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.diDepositDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gdBindingSource)).EndInit();
             this.tabPanelReview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReviews)).EndInit();
             this.groupPanelReview.ResumeLayout(false);
@@ -5603,32 +5011,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbOldEDICode;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
-        private DevComponents.DotNetBar.TabControlPanel tabPanelCommissionRemit;
         private DevComponents.DotNetBar.TabItem tabItemCommissionRemit;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgvCommissionRemit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionAmount;
-        private DevComponents.DotNetBar.Controls.GroupPanel groupPanelCommissionRemit;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbRemitCurrency;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbRemitAmount;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbMsgCurrency;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbMsgType;
-        private DevComponents.DotNetBar.ButtonX btnCommissionRemitDelete;
-        private DevComponents.DotNetBar.ButtonX btnCommissionRemitSave;
-        private DevComponents.DotNetBar.ButtonX btnCommissionRemitUpdate;
-        private DevComponents.DotNetBar.ButtonX btnCommissionRemitNew;
-        private DevComponents.DotNetBar.ButtonX btnCommissionRemitRefresh;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCommissionCreateUserName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCommissionComment;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diMsgDate;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diRemitDate;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbMsgAmount;
-        private DevComponents.DotNetBar.Validator.SuperValidator commissionRemitValidator;
-        private System.Windows.Forms.BindingSource commissionRemitBindingSource;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator24;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator22;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator23;

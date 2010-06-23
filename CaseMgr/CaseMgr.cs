@@ -79,7 +79,7 @@ namespace CMBC.EasyFactor.CaseMgr
             cbTransactionType.Text = @"全部";
             cbCaseMark.Text = @"启动案";
 
-            List<Department> deptsList = Department.AllDepartments(new DBDataContext());
+            List<Department> deptsList = Department.AllDepartments;
             deptsList.Insert(0, new Department { DepartmentCode = "CN01300", DepartmentName = "全部" });
             cbOwnerDepts.DataSource = deptsList;
             cbOwnerDepts.DisplayMembers = "DepartmentName";

@@ -114,7 +114,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     return 0;
                 }
                 return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(),
-                                ValuedAssignOutstanding*activeCDA.FinanceProportion.GetValueOrDefault());
+                                ValuedAssignOutstanding * activeCDA.FinanceProportion.GetValueOrDefault());
             }
         }
 
@@ -165,7 +165,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     double handFreeIncome = 0;
                     if (cda != null)
                     {
-                        handFreeIncome = count*cda.HandFee.GetValueOrDefault();
+                        handFreeIncome = count * cda.HandFee.GetValueOrDefault();
                     }
 
                     _commissionIncomeByDate = result + handFreeIncome;
@@ -522,16 +522,21 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (_valuedAssignOutstanding.HasValue == false)
                 {
                     double financeProp = ActiveCDA.FinanceProportion.GetValueOrDefault();
-                    double total = (from assignBatch in InvoiceAssignBatches
-                                    from invoice in assignBatch.Invoices
-                                    where
-                                        !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw &&
-                                        DateTime.Today < invoice.DueDate
-                                        && (invoice.FinanceAmount.HasValue == false ||
-                                            invoice.FinanceAmount.GetValueOrDefault() -
-                                            (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault())*
-                                            financeProp < -TypeUtil.PRECISION)
-                                    select invoice.AssignOutstanding).Sum();
+                    double total = 0;
+                    foreach (InvoiceAssignBatch batch in InvoiceAssignBatches)
+                    {
+                        if (batch.IsRefinance)
+                        {
+                            total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && DateTime.Today < invoice.DueDate && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp < -TypeUtil.PRECISION)).Sum(invoice => invoice.AssignOutstanding);
+                        }
+                        else
+                        {
+                            if (!batch.IsRefinanced)
+                            {
+                                total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && DateTime.Today < invoice.DueDate).Sum(invoice => invoice.AssignOutstanding);
+                            }
+                        }
+                    }
 
                     _valuedAssignOutstanding = total;
                 }

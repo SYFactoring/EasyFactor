@@ -39,14 +39,14 @@ namespace CMBC.EasyFactor.CaseMgr
             cbTransactionType.Text = @"全部";
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
             cbLocation.SelectedIndex = 0;
 
             List<Currency> currencyList = Currency.AllCurrencies;
-            currencyList.Insert(0, new Currency {CurrencyCode = "AAA", CurrencyName = "All"});
+            currencyList.Insert(0, new Currency { CurrencyCode = "AAA", CurrencyName = "All" });
             cbCurrency.DataSource = currencyList;
             cbCurrency.DisplayMember = "CurrencyFormat";
             cbCurrency.ValueMember = "CurrencyCode";
@@ -96,7 +96,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var selectedCreditCoverNeg = (CreditCoverNegotiation) _bs.List[dgvCreditCoverNegs.CurrentCell.RowIndex];
+            var selectedCreditCoverNeg = (CreditCoverNegotiation)_bs.List[dgvCreditCoverNegs.CurrentCell.RowIndex];
             var caseDetail = new CaseDetail(selectedCreditCoverNeg,
                                             CaseDetail.OpCreditCoverNegType.DETAIL_CREDIT_COVER_NEG);
             caseDetail.ShowDialog(this);
@@ -142,7 +142,7 @@ namespace CMBC.EasyFactor.CaseMgr
             var selectedCreditCoverNegs = new List<CreditCoverNegotiation>();
             foreach (DataGridViewCell cell in dgvCreditCoverNegs.SelectedCells)
             {
-                var creditCoverNeg = (CreditCoverNegotiation) _bs.List[cell.RowIndex];
+                var creditCoverNeg = (CreditCoverNegotiation)_bs.List[cell.RowIndex];
                 if (!selectedCreditCoverNegs.Contains(creditCoverNeg))
                 {
                     selectedCreditCoverNegs.Add(creditCoverNeg);
@@ -169,6 +169,14 @@ namespace CMBC.EasyFactor.CaseMgr
             var context = new DBDataContext();
 
             IQueryable<CreditCoverNegotiation> queryResult = from neg in context.CreditCoverNegotiations
+                                                             where
+                                                                 (beginDate != diBegin.MinDate
+                                                                      ? neg.RequestDate >= beginDate
+                                                                      : true)
+                                                                 &&
+                                                                 (endDate != diEnd.MinDate
+                                                                      ? neg.RequestDate <= endDate
+                                                                      : true)
                                                              let c = neg.Case
                                                              where
                                                                  (location == "全部"
@@ -179,18 +187,10 @@ namespace CMBC.EasyFactor.CaseMgr
                                                                       ? true
                                                                       : c.TransactionType == (cbTransactionType.Text))
                                                                  &&
-                                                                 ((string) cbCurrency.SelectedValue == "AAA"
+                                                                 ((string)cbCurrency.SelectedValue == "AAA"
                                                                       ? true
                                                                       : c.InvoiceCurrency ==
-                                                                        (string) cbCurrency.SelectedValue)
-                                                                 &&
-                                                                 (beginDate != diBegin.MinDate
-                                                                      ? c.CaseAppDate >= beginDate
-                                                                      : true)
-                                                                 &&
-                                                                 (endDate != diEnd.MinDate
-                                                                      ? c.CaseAppDate <= endDate
-                                                                      : true)
+                                                                        (string)cbCurrency.SelectedValue)
                                                                  && c.CaseCode.Contains(tbCaseCode.Text)
                                                                  &&
                                                                  (cbIsCDA.Checked == false
@@ -251,7 +251,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var selectedCreditCoverNeg = (CreditCoverNegotiation) _bs.List[dgvCreditCoverNegs.CurrentCell.RowIndex];
+            var selectedCreditCoverNeg = (CreditCoverNegotiation)_bs.List[dgvCreditCoverNegs.CurrentCell.RowIndex];
             Selected = selectedCreditCoverNeg;
             if (OwnerForm != null)
             {

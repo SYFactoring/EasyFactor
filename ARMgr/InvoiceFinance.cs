@@ -651,10 +651,11 @@ namespace CMBC.EasyFactor.ARMgr
             var logs = new List<InvoiceFinanceLog>();
             foreach (Invoice invoice in queryResult)
             {
-                if(invoice.InvoiceAssignBatch.IsRefinance.GetValueOrDefault()==false&&invoice.InvoiceAssignBatch.IsRefinanced)
+                if(invoice.InvoiceAssignBatch.IsRefinance==false&&invoice.InvoiceAssignBatch.IsRefinanced)
                 {
                     continue;
                 }
+
                 var log = new InvoiceFinanceLog(invoice);
                 logs.Add(log);
             }

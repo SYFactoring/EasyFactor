@@ -39,7 +39,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             var agreement = (Agreement)_bs.List[dgvAgreements.CurrentCell.RowIndex];
-            var detail = new FactorDetail(agreement.Factor,
+            var detail = new FactorDetail(agreement,
                                           FactorDetail.OpAgreementType.DETAIL_AGREEMENT);
             detail.ShowDialog(this);
         }

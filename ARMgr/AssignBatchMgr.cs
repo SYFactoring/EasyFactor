@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
 using CMBC.EasyFactor.InfoMgr.ClientMgr;
+using CMBC.EasyFactor.InfoMgr.FactorMgr;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
 using Microsoft.Office.Core;
@@ -258,10 +259,10 @@ namespace CMBC.EasyFactor.ARMgr
             if (column == colMsgAmount || column == colMsgDate || column == colMsgType || column == colRemitAmount ||
                 column == colRemitDate)
             {
-                if (selectedBatch.CommissionRemitteance != null)
+                if (selectedBatch.CommissionRemittance != null)
                 {
-                    var detail = new ClientDetail(selectedBatch.CommissionRemitteance,
-                                                  ClientDetail.OpCommissionRemitType.DETAIL_COMMISSION_REMIT);
+                    var detail = new FactorDetail(selectedBatch.CommissionRemittance,
+                                                  FactorDetail.OpCommissionRemitType.DETAIL_COMMISSION_REMIT);
                     detail.ShowDialog(this);
                 }
                 else

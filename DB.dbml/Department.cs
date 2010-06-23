@@ -274,37 +274,33 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        private static readonly List<Department> _allDepartments = InitializeDepartments();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static List<Department> AllDepartments
+        {
+            get
+            {
+                return _allDepartments.ToList();
+            }
+        }
 
         //?Public?Methods?(3)?
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public static List<Department> AllDepartments(DBDataContext context)
+        private static List<Department> InitializeDepartments()
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-
+            var context = new DBDataContext { ObjectTrackingEnabled = false };
             var allDepartment = new List<Department>();
             allDepartment.AddRange(context.Departments.Where(d => d.Domain == "贸易金融事业部"));
             allDepartment.AddRange(context.Departments.Where(d => d.Domain == "分行营业部"));
             allDepartment.AddRange(context.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行事业部"));
 
             return allDepartment;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="domainName"></param>
-        /// <returns></returns>
-        public static List<Department> AllDepartments(DBDataContext context, string domainName)
-        {
-            List<Department> allDepartment = AllDepartments(context);
-            return allDepartment.Where(d => d._Domain == domainName).ToList();
         }
 
         /// <summary>

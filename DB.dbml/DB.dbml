@@ -139,7 +139,6 @@
       <Association Name="Client_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="InvoiceFinanceBatch" />
       <Association Name="Client_ClientReview" Member="ClientReviews" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="ClientReview" />
       <Association Name="Client_GuaranteeDeposit" Member="GuaranteeDeposits" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="GuaranteeDeposit" />
-      <Association Name="Client_CommissionRemittance" Member="CommissionRemittances" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="CommissionRemittance" />
       <Association Name="Department_Client" Member="Department" ThisKey="BranchCode" OtherKey="DepartmentCode" Type="Department" IsForeignKey="true" />
       <Association Name="Client_Client" Member="ClientGroup" ThisKey="GroupEDICode" OtherKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
@@ -314,6 +313,7 @@
       <Association Name="Factor_FactorCreditLine" Member="FactorCreditLines" ThisKey="FactorCode" OtherKey="FactorCode" Type="FactorCreditLine" />
       <Association Name="Factor_InvoiceFinanceBatch" Member="InvoiceFinanceBatches" ThisKey="FactorCode" OtherKey="FactorCode" Type="InvoiceFinanceBatch" />
       <Association Name="Factor_Agreement" Member="Agreements" ThisKey="FactorCode" OtherKey="FactorCode" Type="Agreement" />
+      <Association Name="Factor_CommissionRemittance" Member="CommissionRemittances" ThisKey="FactorCode" OtherKey="FactorCode" Type="CommissionRemittance" />
       <Association Name="Factor_Factor" Member="FactorGroup" ThisKey="GroupFactorCode" OtherKey="FactorCode" Type="Factor" IsForeignKey="true" />
     </Type>
   </Table>
@@ -363,10 +363,12 @@
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="InputDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="IsSendMsg" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="IsRefinance" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="IsRefinance" Type="System.Boolean" DbType="Bit" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="MsgID" Type="System.Int32" DbType="int" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceAssignBatch_CreditNote" Member="CreditNotes" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="CreditNote" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="Invoice" />
       <Association Name="Case_InvoiceAssignBatch" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
+      <Association Name="CommissionRemittance_InvoiceAssignBatch" Member="CommissionRemittance" ThisKey="MsgID" OtherKey="MsgID" Type="CommissionRemittance" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.InvoiceFinanceBatch" Member="InvoiceFinanceBatches">
@@ -607,8 +609,9 @@
       <Column Name="RemitAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ClientEDICode" Type="System.String" DbType="Varchar(35)" CanBeNull="false" />
-      <Association Name="Client_CommissionRemittance" Member="Client" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="Client" IsForeignKey="true" />
+      <Column Name="FactorCode" Type="System.String" DbType="Char(7)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Association Name="CommissionRemittance_InvoiceAssignBatch" Member="InvoiceAssignBatches" ThisKey="MsgID" OtherKey="MsgID" Type="InvoiceAssignBatch" />
+      <Association Name="Factor_CommissionRemittance" Member="Factor" ThisKey="FactorCode" OtherKey="FactorCode" Type="Factor" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

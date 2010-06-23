@@ -2811,9 +2811,9 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("无法导入放款信息，本案为池融资，请在放款明细表（池融资）模块进行操作：" + assignBatchCode);
                         }
 
-                        if(assignBatch.IsRefinance.GetValueOrDefault()==false&&assignBatch.IsRefinanced)
+                        if (assignBatch.IsRefinance == false && assignBatch.IsRefinanced)
                         {
-                            throw new Exception("该业务批次不能进行重复融资："+assignBatchCode);
+                            throw new Exception("该业务批次不能进行重复融资：" + assignBatchCode);
                         }
 
                         //if (assignBatch.CheckStatus != BATCH.CHECK)
@@ -2960,7 +2960,7 @@ namespace CMBC.EasyFactor.Utils
                                                               (activeCDA.FinanceLineOutstanding + guaranteeDeposit),
                                                               financeAmount, assignBatchCode));
                         }
-                        
+
                         double highestFinanceLine = activeCDA.HighestFinanceLine.Value;
                         if (activeCDA.FinanceLineCurr != assignBatch.Case.InvoiceCurrency)
                         {
@@ -4368,7 +4368,7 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("业务编号错误，不能导入：" + assignBatchCode);
                         }
 
-                        if(assignBatch.Case.IsPool)
+                        if (assignBatch.Case.IsPool)
                         {
                             throw new Exception("无法导入销账信息，本案为池融资，请在冲销融资明细表（池融资）模块进行操作：" + assignBatchCode);
                         }

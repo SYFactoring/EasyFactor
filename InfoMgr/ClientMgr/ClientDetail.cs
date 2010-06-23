@@ -26,10 +26,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// 
         /// </summary>
-        private readonly BindingSource _bsCommissionRemit;
-        /// <summary>
-        /// 
-        /// </summary>
         private readonly BindingSource _bsContracts;
         /// <summary>
         /// 
@@ -55,10 +51,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// 
         /// </summary>
         private OpClientType _opClientType;
-        /// <summary>
-        /// Operation type of Commission Remit
-        /// </summary>
-        private OpCommissionRemitType _opCommissionRemitType;
         /// <summary>
         /// 
         /// </summary>
@@ -94,7 +86,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-        /// <summary>
+/// <summary>
         /// Operation Type 
         /// </summary>
         public enum OpClientType
@@ -114,27 +106,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        public enum OpCommissionRemitType
-        {
-            /// <summary>
-            /// 
-            /// </summary>
-            NEW_COMMISSION_REMIT,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            UPDATE_COMMISSION_REMIT,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            DETAIL_COMMISSION_REMIT
-        }
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         public enum OpContractType
@@ -154,7 +126,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CONTRACT
         }
-        /// <summary>
+/// <summary>
         /// Guarantee Deposite Type
         /// </summary>
         public enum OpGDType
@@ -172,7 +144,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_GD
         }
-        /// <summary>
+/// <summary>
         /// Review Type
         /// </summary>
         public enum OpReviewType
@@ -195,7 +167,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
 
 
-        /// <summary>
+/// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
@@ -203,10 +175,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="opClientCreditLineType">client credit line operation type</param>
         /// <param name="opContractType">client contract opertion type</param>
         /// <param name="opReviewType">client review operation type</param>
-        /// <param name="opCommissionRemitType"></param>
         private ClientDetail(Client client, OpClientType opClientType, OpClientCreditLineType opClientCreditLineType,
-                             OpContractType opContractType, OpReviewType opReviewType,
-                             OpCommissionRemitType opCommissionRemitType)
+                             OpContractType opContractType, OpReviewType opReviewType)
         {
             InitializeComponent();
             ImeMode = ImeMode.OnHalf;
@@ -214,24 +184,21 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             _bsContracts = new BindingSource();
             _bsReviews = new BindingSource();
             _bsGDs = new BindingSource();
-            _bsCommissionRemit = new BindingSource();
             dgvClientCreditLines.AutoGenerateColumns = false;
             dgvContracts.AutoGenerateColumns = false;
             dgvReviews.AutoGenerateColumns = false;
             dgvGDs.AutoGenerateColumns = false;
-            dgvCommissionRemit.AutoGenerateColumns = false;
             dgvClientCreditLines.DataSource = _bsCreditLines;
             dgvContracts.DataSource = _bsContracts;
             dgvReviews.DataSource = _bsReviews;
             dgvGDs.DataSource = _bsGDs;
-            dgvCommissionRemit.DataSource = _bsCommissionRemit;
             _context = new DBDataContext();
 
             cbCountryCode.DataSource = Country.AllCountries();
             cbCountryCode.DisplayMember = "CountryFormatCN";
             cbCountryCode.ValueMember = "CountryCode";
 
-            List<Department> allDepartments = Department.AllDepartments(_context);
+            List<Department> allDepartments = Department.AllDepartments;
             cbDepartments.DataSource = allDepartments;
             cbDepartments.DisplayMembers = "DepartmentName";
             cbDepartments.GroupingMembers = "Domain";
@@ -253,19 +220,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             cbGDCurr.ValueMember = "CurrencyCode";
             cbGDCurr.SelectedIndex = -1;
 
-            cbMsgCurrency.DataSource = Currency.AllCurrencies;
-            cbMsgCurrency.DisplayMember = "CurrencyFormat";
-            cbMsgCurrency.ValueMember = "CurrencyCode";
-
-            cbRemitCurrency.DataSource = Currency.AllCurrencies;
-            cbRemitCurrency.DisplayMember = "CurrencyFormat";
-            cbRemitCurrency.ValueMember = "CurrencyCode";
-
             _opClientType = opClientType;
             _opClientCreditLineType = opClientCreditLineType;
             _opContractType = opContractType;
             _opReviewType = opReviewType;
-            _opCommissionRemitType = opCommissionRemitType;
             _opGdType = OpGDType.DETAIL_GD;
 
             if (opClientType == OpClientType.NEW_CLIENT)
@@ -284,7 +242,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             _bsContracts.DataSource = client.Contracts;
             _bsReviews.DataSource = client.ClientReviews;
             _bsGDs.DataSource = client.GuaranteeDeposits;
-            _bsCommissionRemit.DataSource = client.SellerInvoiceAssignBatches;
 
             var deptsList = (List<Department>)cbDepartments.DataSource;
             cbDepartments.SelectedIndex = deptsList.IndexOf(client.Department);
@@ -313,17 +270,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 tabControl.SelectedTab = tabItemReview;
             }
 
-            if (opCommissionRemitType == OpCommissionRemitType.NEW_COMMISSION_REMIT)
-            {
-                tabControl.SelectedTab = tabItemCommissionRemit;
-            }
-
             UpdateClientControlStatus();
             UpdateClientCreditLineControlStatus();
             UpdateContractControlStatus();
             UpdateReviewControlStatus();
             UpdateGDControlStatus();
-            UpdateCommissionRemitControlStatus();
 
             requestCommissionRateTextBox.DataBindings[0].Format +=
                 TypeUtil.FormatFloatToPercent;
@@ -339,7 +290,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(Client client, OpClientType opClientType)
             : this(
                 client, opClientType, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT,
-                OpReviewType.DETAIL_REVIEW, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
+                OpReviewType.DETAIL_REVIEW)
         {
             tabControl.SelectedTab = tabItemClient;
         }
@@ -352,8 +303,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(Client client, OpContractType opContractType)
             : this(
                 client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, opContractType,
-                OpReviewType.DETAIL_REVIEW, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
+                OpReviewType.DETAIL_REVIEW)
         {
+            tabControl.SelectedTab = tabItemContract;
         }
 
         /// <summary>
@@ -364,8 +316,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(Client client, OpClientCreditLineType opClientCreditLineType)
             : this(
                 client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT,
-                OpReviewType.DETAIL_REVIEW, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
+                OpReviewType.DETAIL_REVIEW)
         {
+            tabControl.SelectedTab = tabItemClientCreditLine;
         }
 
         /// <summary>
@@ -376,7 +329,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(Contract contract, OpContractType opContractType)
             : this(
                 contract.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE,
-                opContractType, OpReviewType.DETAIL_REVIEW, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
+                opContractType, OpReviewType.DETAIL_REVIEW)
         {
             tabControl.SelectedTab = tabItemContract;
             if (_opContractType == OpContractType.DETAIL_CONTRACT ||
@@ -388,22 +341,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="commissionRemit"></param>
-        /// <param name="opCommissionRemitType"></param>
-        public ClientDetail(CommissionRemittance commissionRemit, OpCommissionRemitType opCommissionRemitType)
-            : this(commissionRemit.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE, OpContractType.DETAIL_CONTRACT, OpReviewType.DETAIL_REVIEW, opCommissionRemitType)
-        {
-            tabControl.SelectedTab = tabItemCommissionRemit;
-            if (_opCommissionRemitType == OpCommissionRemitType.DETAIL_COMMISSION_REMIT || _opCommissionRemitType == OpCommissionRemitType.UPDATE_COMMISSION_REMIT)
-            {
-                commissionRemit = _context.CommissionRemittances.SingleOrDefault(c => c.MsgID == commissionRemit.MsgID);
-                commissionRemitBindingSource.DataSource = commissionRemit;
-            }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="creditLine"></param>
@@ -411,7 +348,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(ClientCreditLine creditLine, OpClientCreditLineType opClientCreditLineType)
             : this(
                 creditLine.Client, OpClientType.DETAIL_CLIENT, opClientCreditLineType, OpContractType.DETAIL_CONTRACT,
-                OpReviewType.DETAIL_REVIEW, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
+                OpReviewType.DETAIL_REVIEW)
         {
             tabControl.SelectedTab = tabItemClientCreditLine;
             if (_opClientCreditLineType == OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE ||
@@ -430,7 +367,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         public ClientDetail(ClientReview review, OpReviewType opReviewType)
             : this(
                 review.Client, OpClientType.DETAIL_CLIENT, OpClientCreditLineType.DETAIL_CLIENT_CREDIT_LINE,
-                OpContractType.DETAIL_CONTRACT, opReviewType, OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
+                OpContractType.DETAIL_CONTRACT, opReviewType)
         {
             tabControl.SelectedTab = tabItemReview;
             if (_opReviewType != OpReviewType.DETAIL_REVIEW && _opReviewType != OpReviewType.UPDATE_REVIEW)
@@ -578,59 +515,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 SetClientCreditLineEditable(false);
                 _bsCreditLines.DataSource = typeof(ClientCreditLine);
                 _bsCreditLines.DataSource = client.ClientCreditLines;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DeleteCommissionRemit(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
-            {
-                return;
-            }
-
-            var client = (Client)clientBindingSource.DataSource;
-            if (client == null || client.ClientEDICode == null)
-            {
-                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return;
-            }
-
-            if (!(commissionRemitBindingSource.DataSource is CommissionRemittance))
-            {
-                return;
-            }
-
-            var commissionRemit = (CommissionRemittance)commissionRemitBindingSource.DataSource;
-            if (commissionRemit.MsgID == 0)
-            {
-                return;
-            }
-
-            bool isDeleteOK = true;
-            try
-            {
-                _context.CommissionRemittances.DeleteOnSubmit(commissionRemit);
-                _context.SubmitChanges();
-            }
-            catch (Exception e1)
-            {
-                isDeleteOK = false;
-                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            if (isDeleteOK)
-            {
-                MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                commissionRemitBindingSource.DataSource = typeof(CommissionRemittance);
-                SetCommissionRemitEditable(false);
-                _bsCommissionRemit.DataSource = typeof(CommissionRemittance);
-                _bsCommissionRemit.DataSource = client.SellerInvoiceAssignBatches;
             }
         }
 
@@ -899,32 +783,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// Create new CommissionRemittance
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NewCommissionRemit(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
-            {
-                return;
-            }
-
-            var client = (Client)clientBindingSource.DataSource;
-            if (client == null || client.ClientEDICode == null)
-            {
-                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return;
-            }
-
-            commissionRemitBindingSource.DataSource = typeof(CommissionRemittance);
-            commissionRemitBindingSource.DataSource = new CommissionRemittance();
-            _opCommissionRemitType = OpCommissionRemitType.NEW_COMMISSION_REMIT;
-            UpdateCommissionRemitControlStatus();
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
@@ -1037,25 +895,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             _bsCreditLines.DataSource = typeof(ClientCreditLine);
             _bsCreditLines.DataSource = client.ClientCreditLines;
-        }
-
-        /// <summary>
-        /// Refresh the CommissionRemit list
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RefreshCommissionRemitList(object sender, EventArgs e)
-        {
-            var client = (Client)clientBindingSource.DataSource;
-            if (client == null || client.ClientEDICode == null)
-            {
-                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return;
-            }
-
-            _bsCommissionRemit.DataSource = typeof(CommissionRemittance);
-            _bsCommissionRemit.DataSource = client.SellerInvoiceAssignBatches;
         }
 
         /// <summary>
@@ -1336,98 +1175,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                               MessageBoxIcon.Warning);
                         }
                     }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Save current CommissionRemit
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SaveCommissionRemit(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
-            {
-                return;
-            }
-
-            if (!commissionRemitValidator.Validate())
-            {
-                return;
-            }
-
-            var client = (Client)clientBindingSource.DataSource;
-            if (client == null || client.ClientEDICode == null)
-            {
-                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return;
-            }
-
-            if (!(commissionRemitBindingSource.DataSource is CommissionRemittance))
-            {
-                return;
-            }
-
-            var commissionRemit = (CommissionRemittance)commissionRemitBindingSource.DataSource;
-            commissionRemit.CreateUserName = App.Current.CurUser.Name;
-
-            if (commissionRemit.MsgID == 0)
-            {
-                bool isAddOK = true;
-                try
-                {
-                    commissionRemit.Client = client;
-                    _context.CommissionRemittances.InsertOnSubmit(commissionRemit);
-                    _context.SubmitChanges();
-                }
-                catch (Exception e1)
-                {
-                    commissionRemit.Client = null;
-                    isAddOK = false;
-                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
-                if (isAddOK)
-                {
-                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                      MessageBoxIcon.Information);
-                    _bsCommissionRemit.DataSource = typeof(CommissionRemittance);
-                    _bsCommissionRemit.DataSource = client.SellerInvoiceAssignBatches;
-                    NewCommissionRemit(null, null);
-                }
-            }
-            else
-            {
-                bool isUpdateOK = true;
-                try
-                {
-                    _context.SubmitChanges(ConflictMode.ContinueOnConflict);
-                }
-                catch (ChangeConflictException)
-                {
-                    foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
-                    {
-                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
-                        {
-                            mc.Resolve(RefreshMode.KeepChanges);
-                        }
-                    }
-
-                    _context.SubmitChanges();
-                }
-                catch (Exception e2)
-                {
-                    isUpdateOK = false;
-                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
-                if (isUpdateOK)
-                {
-                    MessageBoxEx.Show("数据更新成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                      MessageBoxIcon.Information);
-                    dgvCommissionRemit.Refresh();
                 }
             }
         }
@@ -1789,27 +1536,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         }
 
         /// <summary>
-        /// Select CommissionRemit
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SelectCommissionRemit(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvCommissionRemit.SelectedRows.Count == 0)
-            {
-                return;
-            }
-
-            var invoiceAssignBatch =
-                (InvoiceAssignBatch)_bsCommissionRemit.List[dgvCommissionRemit.SelectedRows[0].Index];
-            CommissionRemittance commissionRemit = invoiceAssignBatch.CommissionRemitteance;
-            if (commissionRemit != null)
-            {
-                commissionRemitBindingSource.DataSource = commissionRemit;
-            }
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
@@ -1948,18 +1674,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void SetClientCreditLineEditable(bool editable)
         {
             foreach (Control comp in groupPanelClientCreditLine.Controls)
-            {
-                ControlUtil.SetComponetEditable(comp, editable);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="editable"></param>
-        private void SetCommissionRemitEditable(bool editable)
-        {
-            foreach (Control comp in groupPanelCommissionRemit.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, editable);
             }
@@ -2222,66 +1936,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             tbGroupCreditLine.ReadOnly = true;
             tbGroupCreditLineCurr.ReadOnly = true;
             ControlUtil.SetComponetEditable(tbCreditLineCreateUserName, false);
-        }
-
-        /// <summary>
-        /// Turn CommissionRemit into update status
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateCommissionRemit(object sender, EventArgs e)
-        {
-            if (!PermUtil.CheckPermission(Permissions.CASE_UPDATE))
-            {
-                return;
-            }
-
-            var client = (Client)clientBindingSource.DataSource;
-            if (client == null || client.ClientEDICode == null)
-            {
-                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
-                return;
-            }
-
-            if (!(commissionRemitBindingSource.DataSource is CommissionRemittance))
-            {
-                return;
-            }
-
-            _opCommissionRemitType = OpCommissionRemitType.UPDATE_COMMISSION_REMIT;
-            UpdateCommissionRemitControlStatus();
-        }
-
-        /// <summary>
-        /// Update CommissionRemit Control Status
-        /// </summary>
-        private void UpdateCommissionRemitControlStatus()
-        {
-            if (_opCommissionRemitType == OpCommissionRemitType.DETAIL_COMMISSION_REMIT)
-            {
-                foreach (Control comp in groupPanelCommissionRemit.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, false);
-                }
-            }
-            else if (_opCommissionRemitType == OpCommissionRemitType.NEW_COMMISSION_REMIT)
-            {
-                foreach (Control comp in groupPanelCommissionRemit.Controls)
-                {
-                    ControlUtil.SetComponetDefault(comp);
-                    ControlUtil.SetComponetEditable(comp, true);
-                }
-            }
-            else if (_opCommissionRemitType == OpCommissionRemitType.UPDATE_COMMISSION_REMIT)
-            {
-                foreach (Control comp in groupPanelCommissionRemit.Controls)
-                {
-                    ControlUtil.SetComponetEditable(comp, true);
-                }
-            }
-
-            ControlUtil.SetComponetEditable(tbCommissionCreateUserName, false);
         }
 
         /// <summary>

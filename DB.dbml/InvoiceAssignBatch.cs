@@ -125,19 +125,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public CommissionRemittance CommissionRemitteance
-        {
-            get
-            {
-                return
-                    Case.SellerClient.CommissionRemittances.OrderBy(r => r.MsgDate).FirstOrDefault(
-                        cr => AssignDate <= cr.MsgDate);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public double? CreditNoteAmount
         {
             get { return CreditNotes.Sum(c => c.PaymentAmount); }
@@ -279,7 +266,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                CommissionRemittance cr = CommissionRemitteance;
+                CommissionRemittance cr = CommissionRemittance;
                 if (cr != null)
                 {
                     return cr.MsgAmount;
@@ -294,16 +281,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public DateTime? MsgDate
         {
-            get
-            {
-                CommissionRemittance cr = CommissionRemitteance;
-                if (cr != null)
-                {
-                    return cr.MsgDate;
-                }
-
-                return null;
-            }
+            get { return CommissionRemittance != null ? (DateTime?) CommissionRemittance.MsgDate : null; }
         }
 
         /// <summary>
@@ -311,16 +289,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public string MsgType
         {
-            get
-            {
-                CommissionRemittance cr = CommissionRemitteance;
-                if (cr != null)
-                {
-                    return cr.MsgType;
-                }
-
-                return string.Empty;
-            }
+            get { return CommissionRemittance != null ? CommissionRemittance.MsgType : string.Empty; }
         }
 
         /// <summary>
@@ -360,16 +329,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double? RemitAmount
         {
-            get
-            {
-                CommissionRemittance cr = CommissionRemitteance;
-                if (cr != null)
-                {
-                    return cr.RemitAmount;
-                }
-
-                return null;
-            }
+            get { return CommissionRemittance != null ? CommissionRemittance.RemitAmount : null; }
         }
 
         /// <summary>
@@ -377,16 +337,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public DateTime? RemitDate
         {
-            get
-            {
-                CommissionRemittance cr = CommissionRemitteance;
-                if (cr != null)
-                {
-                    return cr.RemitDate;
-                }
-
-                return null;
-            }
+            get { return CommissionRemittance != null ? CommissionRemittance.RemitDate : null; }
         }
 
         /// <summary>

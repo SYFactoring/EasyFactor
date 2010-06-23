@@ -2726,8 +2726,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<GuaranteeDeposit> _GuaranteeDeposits;
 		
-		private EntitySet<CommissionRemittance> _CommissionRemittances;
-		
 		private EntityRef<Department> _Department;
 		
 		private EntityRef<Client> _ClientGroup;
@@ -2815,7 +2813,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
 			this._ClientReviews = new EntitySet<ClientReview>(new Action<ClientReview>(this.attach_ClientReviews), new Action<ClientReview>(this.detach_ClientReviews));
 			this._GuaranteeDeposits = new EntitySet<GuaranteeDeposit>(new Action<GuaranteeDeposit>(this.attach_GuaranteeDeposits), new Action<GuaranteeDeposit>(this.detach_GuaranteeDeposits));
-			this._CommissionRemittances = new EntitySet<CommissionRemittance>(new Action<CommissionRemittance>(this.attach_CommissionRemittances), new Action<CommissionRemittance>(this.detach_CommissionRemittances));
 			this._Department = default(EntityRef<Department>);
 			this._ClientGroup = default(EntityRef<Client>);
 			OnCreated();
@@ -3606,19 +3603,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_CommissionRemittance", Storage="_CommissionRemittances", ThisKey="ClientEDICode", OtherKey="ClientEDICode")]
-		public EntitySet<CommissionRemittance> CommissionRemittances
-		{
-			get
-			{
-				return this._CommissionRemittances;
-			}
-			set
-			{
-				this._CommissionRemittances.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_Client", Storage="_Department", ThisKey="BranchCode", OtherKey="DepartmentCode", IsForeignKey=true)]
 		public Department Department
 		{
@@ -3810,18 +3794,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_GuaranteeDeposits(GuaranteeDeposit entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
-		}
-		
-		private void attach_CommissionRemittances(CommissionRemittance entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_CommissionRemittances(CommissionRemittance entity)
 		{
 			this.SendPropertyChanging();
 			entity.Client = null;
@@ -6481,6 +6453,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<Agreement> _Agreements;
 		
+		private EntitySet<CommissionRemittance> _CommissionRemittances;
+		
 		private EntityRef<Factor> _FactorGroup;
 		
     #region Extensibility Method Definitions
@@ -6580,6 +6554,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._FactorCreditLines = new EntitySet<FactorCreditLine>(new Action<FactorCreditLine>(this.attach_FactorCreditLines), new Action<FactorCreditLine>(this.detach_FactorCreditLines));
 			this._InvoiceFinanceBatches = new EntitySet<InvoiceFinanceBatch>(new Action<InvoiceFinanceBatch>(this.attach_InvoiceFinanceBatches), new Action<InvoiceFinanceBatch>(this.detach_InvoiceFinanceBatches));
 			this._Agreements = new EntitySet<Agreement>(new Action<Agreement>(this.attach_Agreements), new Action<Agreement>(this.detach_Agreements));
+			this._CommissionRemittances = new EntitySet<CommissionRemittance>(new Action<CommissionRemittance>(this.attach_CommissionRemittances), new Action<CommissionRemittance>(this.detach_CommissionRemittances));
 			this._FactorGroup = default(EntityRef<Factor>);
 			OnCreated();
 		}
@@ -7499,6 +7474,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Factor_CommissionRemittance", Storage="_CommissionRemittances", ThisKey="FactorCode", OtherKey="FactorCode")]
+		public EntitySet<CommissionRemittance> CommissionRemittances
+		{
+			get
+			{
+				return this._CommissionRemittances;
+			}
+			set
+			{
+				this._CommissionRemittances.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Factor_Factor", Storage="_FactorGroup", ThisKey="GroupFactorCode", OtherKey="FactorCode", IsForeignKey=true)]
 		public Factor FactorGroup
 		{
@@ -7632,6 +7620,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_Agreements(Agreement entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factor = null;
+		}
+		
+		private void attach_CommissionRemittances(CommissionRemittance entity)
+		{
+			this.SendPropertyChanging();
+			entity.Factor = this;
+		}
+		
+		private void detach_CommissionRemittances(CommissionRemittance entity)
 		{
 			this.SendPropertyChanging();
 			entity.Factor = null;
@@ -8464,13 +8464,17 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<bool> _IsSendMsg;
 		
-		private System.Nullable<bool> _IsRefinance;
+		private bool _IsRefinance;
+		
+		private System.Nullable<int> _MsgID;
 		
 		private EntitySet<CreditNote> _CreditNotes;
 		
 		private EntitySet<Invoice> _Invoices;
 		
 		private EntityRef<Case> _Case;
+		
+		private EntityRef<CommissionRemittance> _CommissionRemittance;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -8490,8 +8494,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnInputDateChanged();
     partial void OnIsSendMsgChanging(System.Nullable<bool> value);
     partial void OnIsSendMsgChanged();
-    partial void OnIsRefinanceChanging(System.Nullable<bool> value);
+    partial void OnIsRefinanceChanging(bool value);
     partial void OnIsRefinanceChanged();
+    partial void OnMsgIDChanging(System.Nullable<int> value);
+    partial void OnMsgIDChanged();
     #endregion
 		
 		public InvoiceAssignBatch()
@@ -8499,6 +8505,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			this._CreditNotes = new EntitySet<CreditNote>(new Action<CreditNote>(this.attach_CreditNotes), new Action<CreditNote>(this.detach_CreditNotes));
 			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
 			this._Case = default(EntityRef<Case>);
+			this._CommissionRemittance = default(EntityRef<CommissionRemittance>);
 			OnCreated();
 		}
 		
@@ -8647,7 +8654,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsRefinance", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<bool> IsRefinance
+		public bool IsRefinance
 		{
 			get
 			{
@@ -8662,6 +8669,30 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._IsRefinance = value;
 					this.SendPropertyChanged("IsRefinance");
 					this.OnIsRefinanceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MsgID", DbType="int", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<int> MsgID
+		{
+			get
+			{
+				return this._MsgID;
+			}
+			set
+			{
+				if ((this._MsgID != value))
+				{
+					if (this._CommissionRemittance.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMsgIDChanging(value);
+					this.SendPropertyChanging();
+					this._MsgID = value;
+					this.SendPropertyChanged("MsgID");
+					this.OnMsgIDChanged();
 				}
 			}
 		}
@@ -8722,6 +8753,40 @@ namespace CMBC.EasyFactor.DB.dbml
 						this._CDACode = default(string);
 					}
 					this.SendPropertyChanged("Case");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CommissionRemittance_InvoiceAssignBatch", Storage="_CommissionRemittance", ThisKey="MsgID", OtherKey="MsgID", IsForeignKey=true)]
+		public CommissionRemittance CommissionRemittance
+		{
+			get
+			{
+				return this._CommissionRemittance.Entity;
+			}
+			set
+			{
+				CommissionRemittance previousValue = this._CommissionRemittance.Entity;
+				if (((previousValue != value) 
+							|| (this._CommissionRemittance.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CommissionRemittance.Entity = null;
+						previousValue.InvoiceAssignBatches.Remove(this);
+					}
+					this._CommissionRemittance.Entity = value;
+					if ((value != null))
+					{
+						value.InvoiceAssignBatches.Add(this);
+						this._MsgID = value.MsgID;
+					}
+					else
+					{
+						this._MsgID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("CommissionRemittance");
 				}
 			}
 		}
@@ -13751,9 +13816,11 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
-		private string _ClientEDICode;
+		private string _FactorCode;
 		
-		private EntityRef<Client> _Client;
+		private EntitySet<InvoiceAssignBatch> _InvoiceAssignBatches;
+		
+		private EntityRef<Factor> _Factor;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -13779,13 +13846,14 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
-    partial void OnClientEDICodeChanging(string value);
-    partial void OnClientEDICodeChanged();
+    partial void OnFactorCodeChanging(string value);
+    partial void OnFactorCodeChanged();
     #endregion
 		
 		public CommissionRemittance()
 		{
-			this._Client = default(EntityRef<Client>);
+			this._InvoiceAssignBatches = new EntitySet<InvoiceAssignBatch>(new Action<InvoiceAssignBatch>(this.attach_InvoiceAssignBatches), new Action<InvoiceAssignBatch>(this.detach_InvoiceAssignBatches));
+			this._Factor = default(EntityRef<Factor>);
 			OnCreated();
 		}
 		
@@ -13989,60 +14057,73 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientEDICode", DbType="Varchar(35)", CanBeNull=false)]
-		public string ClientEDICode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactorCode", DbType="Char(7)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string FactorCode
 		{
 			get
 			{
-				return this._ClientEDICode;
+				return this._FactorCode;
 			}
 			set
 			{
-				if ((this._ClientEDICode != value))
+				if ((this._FactorCode != value))
 				{
-					if (this._Client.HasLoadedOrAssignedValue)
+					if (this._Factor.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnClientEDICodeChanging(value);
+					this.OnFactorCodeChanging(value);
 					this.SendPropertyChanging();
-					this._ClientEDICode = value;
-					this.SendPropertyChanged("ClientEDICode");
-					this.OnClientEDICodeChanged();
+					this._FactorCode = value;
+					this.SendPropertyChanged("FactorCode");
+					this.OnFactorCodeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_CommissionRemittance", Storage="_Client", ThisKey="ClientEDICode", OtherKey="ClientEDICode", IsForeignKey=true)]
-		public Client Client
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CommissionRemittance_InvoiceAssignBatch", Storage="_InvoiceAssignBatches", ThisKey="MsgID", OtherKey="MsgID")]
+		public EntitySet<InvoiceAssignBatch> InvoiceAssignBatches
 		{
 			get
 			{
-				return this._Client.Entity;
+				return this._InvoiceAssignBatches;
 			}
 			set
 			{
-				Client previousValue = this._Client.Entity;
+				this._InvoiceAssignBatches.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Factor_CommissionRemittance", Storage="_Factor", ThisKey="FactorCode", OtherKey="FactorCode", IsForeignKey=true)]
+		public Factor Factor
+		{
+			get
+			{
+				return this._Factor.Entity;
+			}
+			set
+			{
+				Factor previousValue = this._Factor.Entity;
 				if (((previousValue != value) 
-							|| (this._Client.HasLoadedOrAssignedValue == false)))
+							|| (this._Factor.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Client.Entity = null;
+						this._Factor.Entity = null;
 						previousValue.CommissionRemittances.Remove(this);
 					}
-					this._Client.Entity = value;
+					this._Factor.Entity = value;
 					if ((value != null))
 					{
 						value.CommissionRemittances.Add(this);
-						this._ClientEDICode = value.ClientEDICode;
+						this._FactorCode = value.FactorCode;
 					}
 					else
 					{
-						this._ClientEDICode = default(string);
+						this._FactorCode = default(string);
 					}
-					this.SendPropertyChanged("Client");
+					this.SendPropertyChanged("Factor");
 				}
 			}
 		}
@@ -14065,6 +14146,18 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_InvoiceAssignBatches(InvoiceAssignBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.CommissionRemittance = this;
+		}
+		
+		private void detach_InvoiceAssignBatches(InvoiceAssignBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.CommissionRemittance = null;
 		}
 	}
 }

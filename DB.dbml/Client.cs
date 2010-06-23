@@ -22,19 +22,6 @@ namespace CMBC.EasyFactor.DB.dbml
         private static readonly Regex ClientEDICodeRegex =
             new Regex(@"^[a-zA-Z0-9]{2}[a-zA-Z0-9\\-]{1}[a-zA-Z0-9]{4}\d{2}$");
 
-        public EntitySet<InvoiceAssignBatch> SellerInvoiceAssignBatches
-        {
-            get
-            {
-                var result = new EntitySet<InvoiceAssignBatch>();
-                foreach (var c in SellerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
-                {
-                    result.AddRange(c.InvoiceAssignBatches);
-                }
-                return result;
-            }
-        }
-
         /// <summary>
         /// 
         /// </summary>

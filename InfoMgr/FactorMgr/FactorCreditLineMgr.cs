@@ -97,7 +97,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             var creditLine = (FactorCreditLine) _bs.List[dgvFactorCreditLines.CurrentCell.RowIndex];
-            var detail = new FactorDetail(creditLine.Factor,
+            var detail = new FactorDetail(creditLine,
                                           FactorDetail.OpFactorCreditLineType.DETAIL_FACTOR_CREDIT_LINE);
             detail.ShowDialog(this);
         }
