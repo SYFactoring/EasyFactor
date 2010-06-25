@@ -38,6 +38,7 @@
             this.tbFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFactorCode = new DevComponents.DotNetBar.LabelX();
             this.dgvAgreements = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colCountryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCompanyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -160,6 +161,7 @@
             this.dgvAgreements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAgreements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAgreements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCountryName,
             this.colFactorCode,
             this.colFactorType,
             this.colCompanyName,
@@ -187,6 +189,13 @@
             this.dgvAgreements.TabIndex = 3;
             this.dgvAgreements.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvAgreementsCellDoubleClick);
             this.dgvAgreements.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvAgreementsRowPostPaint);
+            // 
+            // colCountryName
+            // 
+            this.colCountryName.DataPropertyName = "CountryName";
+            this.colCountryName.HeaderText = "国家";
+            this.colCountryName.Name = "colCountryName";
+            this.colCountryName.ReadOnly = true;
             // 
             // colFactorCode
             // 
@@ -255,6 +264,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorCode;
         private DevComponents.DotNetBar.LabelX lblFactorCode;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvAgreements;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCountryName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCompanyName;

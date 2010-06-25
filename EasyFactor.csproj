@@ -265,6 +265,7 @@
       <DependentUpon>CreditCoverNegMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DataGridViewCheckboxHeaderCell.cs" />
+    <Compile Include="DB.dbml\Agreement.cs" />
     <Compile Include="DB.dbml\Case.cs" />
     <Compile Include="DB.dbml\CDA.cs" />
     <Compile Include="DB.dbml\Client.cs" />
