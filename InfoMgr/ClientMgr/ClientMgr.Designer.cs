@@ -106,6 +106,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbRM = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbPM = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.dgvClients = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientEDICodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientCoreNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientNameCNColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -228,65 +241,65 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.toolStripSeparator1,
             this.menuItemClientExport});
             this.cmuClientMgr.Name = "contextMenuClientMgr";
-            this.cmuClientMgr.Size = new System.Drawing.Size(147, 170);
+            this.cmuClientMgr.Size = new System.Drawing.Size(153, 192);
             // 
             // menuItemClientSelect
             // 
             this.menuItemClientSelect.Name = "menuItemClientSelect";
-            this.menuItemClientSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientSelect.Size = new System.Drawing.Size(152, 22);
             this.menuItemClientSelect.Text = "选定客户";
             this.menuItemClientSelect.Click += new System.EventHandler(this.SelectClient);
             // 
             // menuItemClientDetail
             // 
             this.menuItemClientDetail.Name = "menuItemClientDetail";
-            this.menuItemClientDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientDetail.Size = new System.Drawing.Size(152, 22);
             this.menuItemClientDetail.Text = "详细信息";
             this.menuItemClientDetail.Click += new System.EventHandler(this.DetailClient);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // menuItemClientNew
             // 
             this.menuItemClientNew.Name = "menuItemClientNew";
-            this.menuItemClientNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientNew.Size = new System.Drawing.Size(152, 22);
             this.menuItemClientNew.Text = "新建客户";
             this.menuItemClientNew.Click += new System.EventHandler(this.NewClient);
             // 
             // menuItemClientCreditLineNew
             // 
             this.menuItemClientCreditLineNew.Name = "menuItemClientCreditLineNew";
-            this.menuItemClientCreditLineNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientCreditLineNew.Size = new System.Drawing.Size(152, 22);
             this.menuItemClientCreditLineNew.Text = "新建额度信息";
             this.menuItemClientCreditLineNew.Click += new System.EventHandler(this.NewClientCreditLine);
             // 
             // menuItemContractNew
             // 
             this.menuItemContractNew.Name = "menuItemContractNew";
-            this.menuItemContractNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemContractNew.Size = new System.Drawing.Size(152, 22);
             this.menuItemContractNew.Text = "新建保理合同";
             this.menuItemContractNew.Click += new System.EventHandler(this.NewContract);
             // 
             // menuItemClientDelete
             // 
             this.menuItemClientDelete.Name = "menuItemClientDelete";
-            this.menuItemClientDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemClientDelete.Size = new System.Drawing.Size(152, 22);
             this.menuItemClientDelete.Text = "删除客户";
             this.menuItemClientDelete.Click += new System.EventHandler(this.DeleteClient);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
-            // menuItemClientsExport
+            // menuItemClientExport
             // 
-            this.menuItemClientExport.Name = "menuItemClientsExport";
-            this.menuItemClientExport.Size = new System.Drawing.Size(146, 22);
-            this.menuItemClientExport.Text = "导出所有客户";
+            this.menuItemClientExport.Name = "menuItemClientExport";
+            this.menuItemClientExport.Size = new System.Drawing.Size(152, 22);
+            this.menuItemClientExport.Text = "导出所选客户";
             this.menuItemClientExport.Click += new System.EventHandler(this.ExportClients);
             // 
             // pnlQuery
@@ -516,7 +529,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClients.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClients.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClients.Location = new System.Drawing.Point(0, 61);
-            this.dgvClients.MultiSelect = false;
             this.dgvClients.Name = "dgvClients";
             this.dgvClients.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -531,11 +543,114 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.dgvClients.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvClients.RowTemplate.Height = 23;
-            this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvClients.Size = new System.Drawing.Size(937, 539);
             this.dgvClients.TabIndex = 2;
             this.dgvClients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvClients.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvClientsRowPostPaint);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "ClientEDICode";
+            this.dataGridViewTextBoxColumn1.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "保理代码";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "ClientCoreNo";
+            this.dataGridViewTextBoxColumn2.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "客户号";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "ClientNameCN";
+            this.dataGridViewTextBoxColumn3.FillWeight = 304.5686F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "客户名称(中)";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 232;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "ClientNameEN";
+            this.dataGridViewTextBoxColumn4.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "客户名称(英)";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "AddressCN";
+            this.dataGridViewTextBoxColumn5.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn5.HeaderText = "地址(中)";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "AddressEN";
+            this.dataGridViewTextBoxColumn6.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "地址(英)";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "CountryCode";
+            this.dataGridViewTextBoxColumn7.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "国家";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "ClientType";
+            this.dataGridViewTextBoxColumn8.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn8.HeaderText = "客户类型";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "GroupEDICode";
+            this.dataGridViewTextBoxColumn9.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn9.HeaderText = "所属集团客户号";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "Industry";
+            this.dataGridViewTextBoxColumn10.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn10.HeaderText = "所属行业";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "BranchCode";
+            this.dataGridViewTextBoxColumn11.HeaderText = "所属机构代码";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "Department";
+            this.dataGridViewTextBoxColumn12.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn12.HeaderText = "所属机构";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.Width = 62;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "PMName";
+            this.dataGridViewTextBoxColumn13.FillWeight = 81.40282F;
+            this.dataGridViewTextBoxColumn13.HeaderText = "产品经理";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.Width = 62;
             // 
             // clientEDICodeColumn
             // 
@@ -674,5 +789,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
     }
 }

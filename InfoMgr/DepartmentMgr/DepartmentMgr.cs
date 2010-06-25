@@ -19,8 +19,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
     /// </summary>
     public partial class DepartmentMgr : UserControl
     {
-        #region OpDepartmentType enum
-
         /// <summary>
         /// 
         /// </summary>
@@ -41,17 +39,11 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             /// </summary>
             LOCATION_STAT,
         }
-
-        #endregion
-
-        /// <summary>
+/// <summary>
         /// 
         /// </summary>
         private readonly BindingSource _bs;
-
         private readonly OpDepartmentType _opDepatmentType;
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -95,7 +87,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 diEnd.Visible = false;
             }
         }
-
         /// <summary>
         /// Initializes a new instance of the DepartmentMgr class
         /// </summary>
@@ -111,24 +102,18 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
 
             UpdateContextMenu();
         }
-
-
         /// <summary>
         /// 
         /// </summary>
         private DBDataContext Context { get; set; }
-
         /// <summary>
         /// Gets or sets Owner Form
         /// </summary>
         public Form OwnerForm { get; set; }
-
         /// <summary>
         /// Gets or sets Selected Department
         /// </summary>
         public Department Selected { get; set; }
-
-
         //?Private?Methods?(9)?
         /// <summary>
         /// Event handler when cell double clicked
@@ -146,7 +131,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 Select(sender, e);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -159,12 +143,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 return;
             }
 
-            if (dgvDepts.SelectedRows.Count == 0)
+            if (dgvDepts.CurrentCell==null)
             {
                 return;
             }
 
-            var selectedDepartment = (Department) _bs.List[dgvDepts.SelectedRows[0].Index];
+            var selectedDepartment = (Department)_bs.List[dgvDepts.CurrentCell.RowIndex];
             if (
                 MessageBoxEx.Show("是否确定删除分部: " + selectedDepartment.DepartmentName, MESSAGE.TITLE_WARNING,
                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -180,10 +164,9 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                                       MessageBoxIcon.Information);
                     return;
                 }
-                dgvDepts.Rows.RemoveAt(dgvDepts.SelectedRows[0].Index);
+                dgvDepts.Rows.RemoveAt(dgvDepts.CurrentCell.RowIndex);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -191,16 +174,15 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e"></param>
         private void Detail(object sender, EventArgs e)
         {
-            if (dgvDepts.SelectedRows.Count == 0)
+            if (dgvDepts.CurrentCell==null)
             {
                 return;
             }
 
-            var selectedDepartment = (Department) _bs.List[dgvDepts.SelectedRows[0].Index];
+            var selectedDepartment = (Department)_bs.List[dgvDepts.CurrentCell.RowIndex];
             var detail = new DepartmentDetail(selectedDepartment, DepartmentDetail.OpDepartmentType.DETAIL_DEPARTMENT);
             detail.ShowDialog(this);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -214,7 +196,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                                   rectangle, dgvDepts.RowHeadersDefaultCellStyle.ForeColor,
                                   TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -230,7 +211,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             var detail = new DepartmentDetail(null, DepartmentDetail.OpDepartmentType.NEW_DEPARTMENT);
             detail.ShowDialog(this);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -286,7 +266,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -298,7 +277,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             tbDepartmentName.Text = string.Empty;
             tbPManager.Text = string.Empty;
         }
-
         /// <summary>
         /// Select department and close the query form
         /// </summary>
@@ -306,12 +284,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e">Event Args</param>
         private void Select(object sender, EventArgs e)
         {
-            if (dgvDepts.SelectedRows.Count == 0)
+            if (dgvDepts.CurrentCell==null)
             {
                 return;
             }
 
-            var selectedDepartment = (Department) _bs.List[dgvDepts.SelectedRows[0].Index];
+            var selectedDepartment = (Department) _bs.List[dgvDepts.CurrentCell.RowIndex];
             Selected = selectedDepartment;
             if (OwnerForm != null)
             {
@@ -319,7 +297,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 OwnerForm.Close();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>

@@ -20,7 +20,15 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
     /// </summary>
     public partial class ClientMgr : UserControl
     {
-        #region OpClientMgrType enum
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly BindingSource _bs;
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly OpClientMgrType _opClientMgrType;
 
         /// <summary>
         /// 
@@ -43,17 +51,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             DOMINATE_CLIENT
         }
 
-        #endregion
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly BindingSource _bs;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly OpClientMgrType _opClientMgrType;
 
 
         /// <summary>
@@ -107,7 +104,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             ControlUtil.AddEnterListenersForQuery(pnlQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -115,6 +112,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             UpdateContextMenu();
         }
+
 
 
         /// <summary>
@@ -131,6 +129,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// Gets or sets selected Client
         /// </summary>
         public Client Selected { get; set; }
+
+
 
 
         //?Private?Methods?(12)?
@@ -163,12 +163,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (dgvClients.SelectedRows.Count == 0)
+            if (dgvClients.CurrentCell == null)
             {
                 return;
             }
 
-            var selectedClient = (Client) _bs.List[dgvClients.SelectedRows[0].Index];
+            var selectedClient = (Client)_bs.List[dgvClients.CurrentCell.RowIndex];
             if (
                 MessageBoxEx.Show("是否打算删除客户: " + selectedClient.ClientNameCN, MESSAGE.TITLE_WARNING,
                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -227,7 +227,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     return;
                 }
 
-                dgvClients.Rows.RemoveAt(dgvClients.SelectedRows[0].Index);
+                dgvClients.Rows.RemoveAt(dgvClients.CurrentCell.RowIndex);
             }
         }
 
@@ -238,12 +238,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void DetailClient(object sender, EventArgs e)
         {
-            if (dgvClients.SelectedRows.Count == 0)
+            if (dgvClients.CurrentCell == null)
             {
                 return;
             }
 
-            var selectedClient = (Client) _bs.List[dgvClients.SelectedRows[0].Index];
+            var selectedClient = (Client)_bs.List[dgvClients.CurrentCell.RowIndex];
             var clientDetail = new ClientDetail(selectedClient, ClientDetail.OpClientType.DETAIL_CLIENT);
             clientDetail.ShowDialog(this);
         }
@@ -269,8 +269,34 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e"></param>
         private void ExportClients(object sender, EventArgs e)
         {
-            var form = new ExportForm(ExportForm.ExportType.EXPORT_CLIENT, _bs.List);
+            List<Client> selectedClients = GetSelectedClients();
+            var form = new ExportForm(ExportForm.ExportType.EXPORT_CLIENT, selectedClients);
             form.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private List<Client> GetSelectedClients()
+        {
+            if (dgvClients.CurrentCell == null)
+            {
+                return null;
+            }
+
+            var selectedClients = new List<Client>();
+
+            foreach (DataGridViewCell cell in dgvClients.SelectedCells)
+            {
+                var batch = (Client)_bs.List[cell.RowIndex];
+                if (!selectedClients.Contains(batch))
+                {
+                    selectedClients.Add(batch);
+                }
+            }
+
+            return selectedClients;
         }
 
         /// <summary>
@@ -301,12 +327,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (dgvClients.SelectedRows.Count == 0)
+            if (dgvClients.CurrentCell == null)
             {
                 return;
             }
 
-            var selectedClient = (Client) _bs.List[dgvClients.SelectedRows[0].Index];
+            var selectedClient = (Client)_bs.List[dgvClients.CurrentCell.RowIndex];
             var clientDetail = new ClientDetail(selectedClient,
                                                 ClientDetail.OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE);
             clientDetail.ShowDialog(this);
@@ -324,12 +350,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 return;
             }
 
-            if (dgvClients.SelectedRows.Count == 0)
+            if (dgvClients.CurrentCell == null)
             {
                 return;
             }
 
-            var selectedClient = (Client) _bs.List[dgvClients.SelectedRows[0].Index];
+            var selectedClient = (Client)_bs.List[dgvClients.CurrentCell.RowIndex];
             var clientDetail = new ClientDetail(selectedClient, ClientDetail.OpContractType.NEW_CONTRACT);
             clientDetail.ShowDialog(this);
         }
@@ -347,7 +373,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 clientType = string.Empty;
             }
 
-            var location = (string) cbLocation.SelectedValue;
+            var location = (string)cbLocation.SelectedValue;
 
             string caseType = cbCaseType.Text;
 
@@ -428,12 +454,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <param name="e">Event Args</param>
         private void SelectClient(object sender, EventArgs e)
         {
-            if (dgvClients.SelectedRows.Count == 0)
+            if (dgvClients.CurrentCell == null)
             {
                 return;
             }
 
-            var selectedClient = (Client) _bs.List[dgvClients.SelectedRows[0].Index];
+            var selectedClient = (Client)_bs.List[dgvClients.CurrentCell.RowIndex];
             Selected = selectedClient;
             if (OwnerForm != null)
             {
@@ -460,7 +486,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 menuItemClientNew.Enabled = false;
                 menuItemClientDelete.Enabled = false;
                 menuItemClientCreditLineNew.Enabled = false;
-                menuItemContractNew.Enabled = false; 
+                menuItemContractNew.Enabled = false;
                 menuItemClientExport.Enabled = false;
             }
         }

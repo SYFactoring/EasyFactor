@@ -93,12 +93,6 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.tbDepartmentName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDepartmentName = new DevComponents.DotNetBar.LabelX();
             this.dgvDepts = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemDepartmentNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDepartmentDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.colLocationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -113,6 +107,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colNetInterestIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMarginIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuDeptMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemDepartmentNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDepartmentDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -412,58 +412,13 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.dgvDepts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDepts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvDepts.Location = new System.Drawing.Point(0, 51);
-            this.dgvDepts.MultiSelect = false;
             this.dgvDepts.Name = "dgvDepts";
             this.dgvDepts.ReadOnly = true;
-            this.dgvDepts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDepts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvDepts.Size = new System.Drawing.Size(772, 409);
             this.dgvDepts.TabIndex = 0;
             this.dgvDepts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvDepts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvDeptsRowPostPaint);
-            // 
-            // cmuDeptMgr
-            // 
-            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDetail,
-            this.menuItemSelect,
-            this.toolStripSeparator1,
-            this.menuItemDepartmentNew,
-            this.menuItemDepartmentDelete});
-            this.cmuDeptMgr.Name = "cmuDeptMgr";
-            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 98);
-            // 
-            // menuItemDetail
-            // 
-            this.menuItemDetail.Name = "menuItemDetail";
-            this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDetail.Text = "详细信息";
-            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
-            // 
-            // menuItemSelect
-            // 
-            this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
-            this.menuItemSelect.Text = "选定分部";
-            this.menuItemSelect.Click += new System.EventHandler(this.Select);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
-            // 
-            // menuItemDepartmentNew
-            // 
-            this.menuItemDepartmentNew.Name = "menuItemDepartmentNew";
-            this.menuItemDepartmentNew.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDepartmentNew.Text = "新建分部";
-            this.menuItemDepartmentNew.Click += new System.EventHandler(this.NewDepartment);
-            // 
-            // menuItemDepartmentDelete
-            // 
-            this.menuItemDepartmentDelete.Name = "menuItemDepartmentDelete";
-            this.menuItemDepartmentDelete.Size = new System.Drawing.Size(122, 22);
-            this.menuItemDepartmentDelete.Text = "删除分部";
-            this.menuItemDepartmentDelete.Click += new System.EventHandler(this.DeleteDepartment);
             // 
             // colLocationName
             // 
@@ -587,6 +542,50 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             this.colTotalIncome.Name = "colTotalIncome";
             this.colTotalIncome.ReadOnly = true;
             this.colTotalIncome.Visible = false;
+            // 
+            // cmuDeptMgr
+            // 
+            this.cmuDeptMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemDetail,
+            this.menuItemSelect,
+            this.toolStripSeparator1,
+            this.menuItemDepartmentNew,
+            this.menuItemDepartmentDelete});
+            this.cmuDeptMgr.Name = "cmuDeptMgr";
+            this.cmuDeptMgr.Size = new System.Drawing.Size(123, 98);
+            // 
+            // menuItemDetail
+            // 
+            this.menuItemDetail.Name = "menuItemDetail";
+            this.menuItemDetail.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDetail.Text = "详细信息";
+            this.menuItemDetail.Click += new System.EventHandler(this.Detail);
+            // 
+            // menuItemSelect
+            // 
+            this.menuItemSelect.Name = "menuItemSelect";
+            this.menuItemSelect.Size = new System.Drawing.Size(122, 22);
+            this.menuItemSelect.Text = "选定分部";
+            this.menuItemSelect.Click += new System.EventHandler(this.Select);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
+            // 
+            // menuItemDepartmentNew
+            // 
+            this.menuItemDepartmentNew.Name = "menuItemDepartmentNew";
+            this.menuItemDepartmentNew.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDepartmentNew.Text = "新建分部";
+            this.menuItemDepartmentNew.Click += new System.EventHandler(this.NewDepartment);
+            // 
+            // menuItemDepartmentDelete
+            // 
+            this.menuItemDepartmentDelete.Name = "menuItemDepartmentDelete";
+            this.menuItemDepartmentDelete.Size = new System.Drawing.Size(122, 22);
+            this.menuItemDepartmentDelete.Text = "删除分部";
+            this.menuItemDepartmentDelete.Click += new System.EventHandler(this.DeleteDepartment);
             // 
             // DepartmentMgr
             // 
