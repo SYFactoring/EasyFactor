@@ -271,6 +271,7 @@
     <Compile Include="DB.dbml\Client.cs" />
     <Compile Include="DB.dbml\ClientCreditLine.cs" />
     <Compile Include="DB.dbml\ClientReview.cs" />
+    <Compile Include="DB.dbml\CommissionRemittance.cs" />
     <Compile Include="DB.dbml\Contract.cs" />
     <Compile Include="DB.dbml\CreditNote.cs" />
     <Compile Include="DB.dbml\Location.cs" />
@@ -319,6 +320,24 @@
     </Compile>
     <Compile Include="InfoMgr\FactorMgr\AgreementMgr.Designer.cs">
       <DependentUpon>AgreementMgr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\CommissionRemit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\CommissionRemit.Designer.cs">
+      <DependentUpon>CommissionRemit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\CommissionRemitDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\CommissionRemitDetail.Designer.cs">
+      <DependentUpon>CommissionRemitDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\CommissionRemitMgr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\CommissionRemitMgr.Designer.cs">
+      <DependentUpon>CommissionRemitMgr.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ConstStr.cs" />
     <Compile Include="DB.dbml\Country.cs" />
@@ -599,6 +618,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\AgreementMgr.resx">
       <DependentUpon>AgreementMgr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\FactorMgr\CommissionRemit.resx">
+      <DependentUpon>CommissionRemit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\FactorMgr\CommissionRemitDetail.resx">
+      <DependentUpon>CommissionRemitDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\FactorMgr\CommissionRemitMgr.resx">
+      <DependentUpon>CommissionRemitMgr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\FactorCreditLineMgr.resx">
       <DependentUpon>FactorCreditLineMgr.cs</DependentUpon>

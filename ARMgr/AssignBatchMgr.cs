@@ -11,7 +11,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
-using CMBC.EasyFactor.InfoMgr.ClientMgr;
 using CMBC.EasyFactor.InfoMgr.FactorMgr;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
@@ -28,56 +27,30 @@ namespace CMBC.EasyFactor.ARMgr
     /// </summary>
     public partial class AssignBatchMgr : UserControl
     {
-        #region OpBatchType enum
-
-        /// <summary>
-        ///
-        /// </summary>
-        public enum OpBatchType
-        {
-            /// <summary>
-            /// 
-            /// </summary>
-            //CHECK,
-            /// <summary>
-            /// 
-            /// </summary>
-            DETAIL,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            QUERY,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            REPORT,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            FACTOR_COMMISSION
-        }
-
-        #endregion
-
         /// <summary>
         /// 
         /// </summary>
         private readonly BindingSource _bs;
-
         /// <summary>
         /// 
         /// </summary>
         private readonly Case _case;
-
         /// <summary>
         /// 
         /// </summary>
         private readonly OpBatchType _opBatchType;
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="commissionRemit"></param>
+        /// <param name="context"></param>
+        public AssignBatchMgr(CommissionRemittance commissionRemit, DBDataContext context)
+            : this(OpBatchType.COMMISSION)
+        {
+            panelQuery.Visible = false;
+            _bs.DataSource = commissionRemit.InvoiceAssignBatches;
+            Context = context;
+        }
         /// <summary>
         /// Initializes a new instance of the AssignBatchMgr class
         /// </summary>
@@ -91,7 +64,6 @@ namespace CMBC.EasyFactor.ARMgr
             _bs.DataSource = _case.InvoiceAssignBatches;
             Context = context;
         }
-
         /// <summary>
         /// Initializes a new instance of the AssignBatchMgr class
         /// </summary>
@@ -138,24 +110,18 @@ namespace CMBC.EasyFactor.ARMgr
                 colCreateUserName.Visible = false;
             }
         }
-
-
         /// <summary>
         /// 
         /// </summary>
         private DBDataContext Context { get; set; }
-
         /// <summary>
         /// Gets or sets owner form
         /// </summary>
         public Form OwnerForm { get; set; }
-
         /// <summary>
         /// Gets or sets selected AssignBatch
         /// </summary>
         public InvoiceAssignBatch Selected { get; set; }
-
-
         //?Private?Methods?(25)?
         //private void Check(object sender, EventArgs e)
         //{
@@ -247,6 +213,49 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void DeleteCommissionRemit(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
+            {
+                return;
+            }
+
+            if (dgvBatches.CurrentCell == null)
+            {
+                return;
+            }
+
+            var selectedBatch = (InvoiceAssignBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            if (
+                MessageBoxEx.Show("是否打算删除此转让批次的保理费收付记录", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
+                                  MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
+            selectedBatch.CommissionRemittance = null;
+            try
+            {
+                Context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show("删除失败," + e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (_opBatchType == OpBatchType.COMMISSION)
+            {
+                dgvBatches.Rows.RemoveAt(dgvBatches.CurrentCell.RowIndex);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailBatch(object sender, EventArgs e)
         {
             if (dgvBatches.CurrentCell == null)
@@ -261,8 +270,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (selectedBatch.CommissionRemittance != null)
                 {
-                    var detail = new FactorDetail(selectedBatch.CommissionRemittance,
-                                                  FactorDetail.OpCommissionRemitType.DETAIL_COMMISSION_REMIT);
+                    var detail = new CommissionRemitDetail(selectedBatch.CommissionRemittance);
                     detail.ShowDialog(this);
                 }
                 else
@@ -277,7 +285,6 @@ namespace CMBC.EasyFactor.ARMgr
                 detail.ShowDialog(this);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -294,7 +301,6 @@ namespace CMBC.EasyFactor.ARMgr
                 SelectBatch(sender, e);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -316,7 +322,6 @@ namespace CMBC.EasyFactor.ARMgr
                 e.FormattingApplied = true;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -330,7 +335,6 @@ namespace CMBC.EasyFactor.ARMgr
                                   rectangle, dgvBatches.RowHeadersDefaultCellStyle.ForeColor,
                                   TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -347,7 +351,6 @@ namespace CMBC.EasyFactor.ARMgr
             var form = new ExportForm(ExportForm.ExportType.EXPORT_ASSIGN, selectedBatches);
             form.ShowDialog(this);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -365,7 +368,6 @@ namespace CMBC.EasyFactor.ARMgr
             var form = new ExportForm(ExportForm.ExportType.EXPORT_MSG09_INVOICE, selectedBatches);
             form.Show();
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -390,7 +392,6 @@ namespace CMBC.EasyFactor.ARMgr
 
             return selectedBatches;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -441,7 +442,6 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -525,7 +525,6 @@ namespace CMBC.EasyFactor.ARMgr
             _bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
-
         //private void Reject(object sender, EventArgs e)
         //{
         //    if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_CHECK))
@@ -591,7 +590,6 @@ namespace CMBC.EasyFactor.ARMgr
             MakeReport makeReport = ReportAssignApplication;
             GroupBatchesByTransactionType(selectedBatches, makeReport);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -632,7 +630,6 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -833,7 +830,6 @@ namespace CMBC.EasyFactor.ARMgr
                           Type.Missing);
             sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -865,7 +861,6 @@ namespace CMBC.EasyFactor.ARMgr
             MakeReport makeReport = ReportCommissionApplication;
             GroupBatchesByTransactionType(selectedBatches, makeReport);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -906,7 +901,6 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1040,7 +1034,6 @@ namespace CMBC.EasyFactor.ARMgr
                           Type.Missing);
             sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1062,7 +1055,6 @@ namespace CMBC.EasyFactor.ARMgr
             MakeReport makeReport = ReportFileCheckListImpl;
             GroupBatchesByTransactionType(selectedBatches, makeReport);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1186,7 +1178,6 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1208,7 +1199,6 @@ namespace CMBC.EasyFactor.ARMgr
             MakeReport makeReport = ReportFinanceApplication;
             GroupBatchesByTransactionType(selectedBatches, makeReport);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1256,7 +1246,6 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1538,7 +1527,6 @@ namespace CMBC.EasyFactor.ARMgr
                           Type.Missing);
             sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1560,7 +1548,6 @@ namespace CMBC.EasyFactor.ARMgr
             MakeReport makeReport = ReportFlawImpl;
             GroupBatchesByTransactionType(selectedBatches, makeReport);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1732,7 +1719,6 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1760,7 +1746,6 @@ namespace CMBC.EasyFactor.ARMgr
             MakeReport makeReport = ReportThreeImpl;
             GroupBatchesByTransactionType(selectedBatches, makeReport);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1821,7 +1806,6 @@ namespace CMBC.EasyFactor.ARMgr
                 MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1842,7 +1826,6 @@ namespace CMBC.EasyFactor.ARMgr
                 OwnerForm.Close();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1858,9 +1841,40 @@ namespace CMBC.EasyFactor.ARMgr
             menuItemMSG09.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
             menuItemBatchExport.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_REPORT);
         }
+        /// <summary>
+        ///
+        /// </summary>
+        public enum OpBatchType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            //CHECK,
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL,
 
-        #region Nested type: MakeReport
+            /// <summary>
+            /// 
+            /// </summary>
+            QUERY,
 
+            /// <summary>
+            /// 
+            /// </summary>
+            REPORT,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            FACTOR_COMMISSION,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            COMMISSION,
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -1868,6 +1882,6 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="transactionType"></param>
         private delegate void MakeReport(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType);
 
-        #endregion
+
     }
 }

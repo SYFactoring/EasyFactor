@@ -105,6 +105,52 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="isBuyer"></param>
+        /// <param name="isAll"></param>
+        /// <returns></returns>
+        public List<InvoiceAssignBatch> GetInvoiceAssignBatches(bool isBuyer, bool isAll)
+        {
+            var result = new List<InvoiceAssignBatch>();
+            if (isBuyer)
+            {
+                if (isAll)
+                {
+                    foreach (Case c in BuyerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
+                    {
+                        result.AddRange(c.InvoiceAssignBatches);
+                    }
+                }
+                else
+                {
+                    foreach (Case c in BuyerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
+                    {
+                        result.AddRange(c.InvoiceAssignBatches.Where(b => b.CommissionRemittance == null));
+                    }
+                }
+            }else
+            {
+                if (isAll)
+                {
+                    foreach (Case c in SellerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
+                    {
+                        result.AddRange(c.InvoiceAssignBatches);
+                    }
+                }
+                else
+                {
+                    foreach (Case c in SellerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
+                    {
+                        result.AddRange(c.InvoiceAssignBatches.Where(b => b.CommissionRemittance == null));
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
         public double GetAssignOutstanding(string currency)
@@ -133,13 +179,13 @@ namespace CMBC.EasyFactor.DB.dbml
         public double GetTotalCreditCover(string currency)
         {
             double result = 0;
-            foreach(Case curCase in BuyerCases.Where(c=>c.CaseMark==CASE.ENABLE))
+            foreach (Case curCase in BuyerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
                 CDA cda = curCase.ActiveCDA;
-                if(cda!=null&&cda.CreditCover.HasValue)
+                if (cda != null && cda.CreditCover.HasValue)
                 {
                     double creditCover = cda.CreditCover.Value;
-                    if(cda.CreditCoverCurr!=currency)
+                    if (cda.CreditCoverCurr != currency)
                     {
                         double exchange = Exchange.GetExchangeRate(cda.CreditCoverCurr, currency);
                         creditCover *= exchange;

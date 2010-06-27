@@ -1,4 +1,10 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="MainWindow.cs" company="Yiming Liu@Fudan">
+//     Copyright (c) CMBC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -16,12 +22,6 @@ using CMBC.EasyFactor.InfoMgr.UserMgr;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
 
-//-----------------------------------------------------------------------
-// <copyright file="MainWindow.cs" company="Yiming Liu@Fudan">
-//     Copyright (c) CMBC. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-
 namespace CMBC.EasyFactor
 {
     /// <summary>
@@ -29,10 +29,6 @@ namespace CMBC.EasyFactor
     /// </summary>
     public partial class MainWindow : Office2007RibbonForm
     {
-        #region Methods (6)
-
-        // Private Methods (6) 
-
         /// <summary>
         /// 
         /// </summary>
@@ -49,7 +45,19 @@ namespace CMBC.EasyFactor
                 MessageBoxEx.Show("打开浏览器失败");
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CommissionRemit(object sender, EventArgs e)
+        {
+            if(PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
+            {
+                var mgr = new CommissionRemit();
+                SetDetailPanel(mgr);
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -63,7 +71,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -77,7 +84,32 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryAgreements(object sender, EventArgs e)
+        {
+            if(PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
+            {
+                var mgr = new AgreementMgr();
+                SetDetailPanel(mgr);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryCommissionRemit(object sender, EventArgs e)
+        {
+            if(PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
+            {
+                var mgr = new CommissionRemitMgr();
+                SetDetailPanel(mgr);
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -91,7 +123,19 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryOperationLog(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
+            {
+                var mgr = new OperationLogMgr();
+                SetDetailPanel(mgr);
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -105,11 +149,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-
-        #endregion Methods
-
-        #region?Constructors?(1)?
-
         /// <summary>
         /// Initializes a new instance of the MainWindow class
         /// </summary>
@@ -131,17 +170,11 @@ namespace CMBC.EasyFactor
 
             backgroundWorker.RunWorkerAsync();
         }
-
         public override sealed string Text
         {
             get { return base.Text; }
             set { base.Text = value; }
         }
-
-        #endregion?Constructors?
-
-        #region?Properties?(2)?
-
         /// <summary>
         /// Sets command status
         /// </summary>
@@ -150,7 +183,6 @@ namespace CMBC.EasyFactor
             get { return lblCommandStatus.Text; }
             set { lblCommandStatus.Text = value; }
         }
-
         /// <summary>
         /// Sets user status
         /// </summary>
@@ -159,13 +191,7 @@ namespace CMBC.EasyFactor
             get { return lblCurrentUser.Text; }
             set { lblCurrentUser.Text = value; }
         }
-
-        #endregion?Properties?
-
-        #region?Methods?(94)?
-
         //?Public?Methods?(2)?
-
         /// <summary>
         /// Fill detail panel with user control
         /// </summary>
@@ -191,9 +217,7 @@ namespace CMBC.EasyFactor
             ribbonDetailPanel.Controls.Clear();
             ribbonDetailPanel.Controls.Add(uc);
         }
-
         //?Private?Methods?(92)?
-
         /// <summary>
         /// 
         /// </summary>
@@ -204,7 +228,6 @@ namespace CMBC.EasyFactor
             var aboutBox = new AboutBox();
             aboutBox.ShowDialog(this);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -237,7 +260,6 @@ namespace CMBC.EasyFactor
             //    return;
             //}
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -247,7 +269,6 @@ namespace CMBC.EasyFactor
         {
             CheckUpdateBackground();
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -281,7 +302,6 @@ namespace CMBC.EasyFactor
                 styleManager.ManagerStyle = eStyle.Windows7Blue;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -295,7 +315,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(cdaMgr);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -312,7 +331,6 @@ namespace CMBC.EasyFactor
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdate();
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -328,7 +346,6 @@ namespace CMBC.EasyFactor
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdateBackground();
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -342,7 +359,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(creditNotePayment);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -354,7 +370,6 @@ namespace CMBC.EasyFactor
             var detail = new UserDetail(user, UserDetail.OpUserType.DETAIL_USER);
             detail.ShowDialog(this);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -368,7 +383,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(invoiceMgr);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -411,7 +425,6 @@ namespace CMBC.EasyFactor
                 return;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -425,7 +438,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(invoiceMgr);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -437,7 +449,6 @@ namespace CMBC.EasyFactor
             ShowInTaskbar = false;
             WindowState = FormWindowState.Minimized;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -451,7 +462,6 @@ namespace CMBC.EasyFactor
                 form.ShowDialog(this);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -465,7 +475,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -479,7 +488,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -493,7 +501,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -507,7 +514,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -521,7 +527,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -535,7 +540,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -549,7 +553,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -563,7 +566,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -577,7 +579,6 @@ namespace CMBC.EasyFactor
                 form.ShowDialog(this);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -591,7 +592,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -605,7 +605,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -619,7 +618,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -633,7 +631,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -647,7 +644,6 @@ namespace CMBC.EasyFactor
                 form.ShowDialog(this);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -661,7 +657,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -675,7 +670,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -689,7 +683,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -703,7 +696,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -717,7 +709,6 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -731,7 +722,6 @@ namespace CMBC.EasyFactor
                 importForm.Show();
             }
         }
-
         /// <summary>
         /// Invoice Assign
         /// </summary>
@@ -745,7 +735,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(invoiceAssign);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -759,7 +748,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(invoicePayment);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -773,7 +761,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(invoiceFinance);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -787,7 +774,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(invoicePayment);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -801,7 +787,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(invoicePayment);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -815,7 +800,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(invoicePayment);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -829,7 +813,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(invoiceRefund);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -843,7 +826,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(invoiceRefund);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -859,7 +841,6 @@ namespace CMBC.EasyFactor
                 uc.NewBatchFromPayment(invoiceList, batch);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -871,7 +852,6 @@ namespace CMBC.EasyFactor
             SetDetailPanel(alert);
             alert.Dock = DockStyle.None;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -886,7 +866,6 @@ namespace CMBC.EasyFactor
 
             ribbonDetailPanel.Controls.Clear();
         }
-
         private void MainWindow_Deactivate(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
@@ -895,7 +874,6 @@ namespace CMBC.EasyFactor
                 ShowInTaskbar = false;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -945,7 +923,6 @@ namespace CMBC.EasyFactor
                 return;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -959,7 +936,6 @@ namespace CMBC.EasyFactor
                 caseDetail.ShowDialog(this);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -973,7 +949,6 @@ namespace CMBC.EasyFactor
                 cdaDetail.ShowDialog(this);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -987,7 +962,6 @@ namespace CMBC.EasyFactor
                 clientDetail.ShowDialog(this);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1001,7 +975,6 @@ namespace CMBC.EasyFactor
                 factorDetail.ShowDialog(this);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1012,7 +985,6 @@ namespace CMBC.EasyFactor
             var poolFinance = new ARPoolBasic(OpPoolARType.FINANCE);
             SetDetailPanel(poolFinance);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1023,7 +995,6 @@ namespace CMBC.EasyFactor
             var poolRefund = new ARPoolBasic(OpPoolARType.REFUND);
             SetDetailPanel(poolRefund);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1034,7 +1005,6 @@ namespace CMBC.EasyFactor
             var mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.APPLICATION_CASE);
             SetDetailPanel(mgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1045,7 +1015,6 @@ namespace CMBC.EasyFactor
             var mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.QUERY);
             SetDetailPanel(mgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1056,7 +1025,6 @@ namespace CMBC.EasyFactor
             var caseQuery = new CaseMgr.CaseMgr();
             SetDetailPanel(caseQuery);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1067,7 +1035,6 @@ namespace CMBC.EasyFactor
             var mgr = new CDAMgr(CDAMgr.OpCDAType.QUERY);
             SetDetailPanel(mgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1078,7 +1045,6 @@ namespace CMBC.EasyFactor
             var query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_CLINET);
             SetDetailPanel(query);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1089,7 +1055,6 @@ namespace CMBC.EasyFactor
             var query = new ClientMgr(ClientMgr.OpClientMgrType.DOMINATE_CLIENT);
             SetDetailPanel(query);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1100,7 +1065,6 @@ namespace CMBC.EasyFactor
             var query = new ClientMgr(ClientMgr.OpClientMgrType.EXPORT_CLIENT);
             SetDetailPanel(query);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1111,7 +1075,6 @@ namespace CMBC.EasyFactor
             var query = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.QUERY_GROUP);
             SetDetailPanel(query);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1122,7 +1085,6 @@ namespace CMBC.EasyFactor
             var query = new ClientMgr(ClientMgr.OpClientMgrType.IMPORT_CLIENT);
             SetDetailPanel(query);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1133,7 +1095,6 @@ namespace CMBC.EasyFactor
             var query = new ClientReviewMgr(ClientReviewMgr.OpClientReviewMgrType.QUERY);
             SetDetailPanel(query);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1144,7 +1105,6 @@ namespace CMBC.EasyFactor
             var query = new ClientMgr();
             SetDetailPanel(query);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1155,7 +1115,6 @@ namespace CMBC.EasyFactor
             var contractMgr = new ContractMgr();
             SetDetailPanel(contractMgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1166,7 +1125,6 @@ namespace CMBC.EasyFactor
             var creditCoverNegMgr = new CreditCoverNegMgr();
             SetDetailPanel(creditCoverNegMgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1177,7 +1135,6 @@ namespace CMBC.EasyFactor
             var departmentMgrUI = new DepartmentMgr();
             SetDetailPanel(departmentMgrUI);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1188,7 +1145,6 @@ namespace CMBC.EasyFactor
             var mgr = new ExchangeMgr();
             SetDetailPanel(mgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1199,7 +1155,6 @@ namespace CMBC.EasyFactor
             var query = new FactorCreditLineMgr();
             SetDetailPanel(query);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1210,7 +1165,6 @@ namespace CMBC.EasyFactor
             var fatcorQuery = new FactorMgr();
             SetDetailPanel(fatcorQuery);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1221,7 +1175,6 @@ namespace CMBC.EasyFactor
             var mgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.QUERY);
             SetDetailPanel(mgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1232,7 +1185,6 @@ namespace CMBC.EasyFactor
             var invoiceMgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.INVOICE_QUERY);
             SetDetailPanel(invoiceMgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1243,7 +1195,6 @@ namespace CMBC.EasyFactor
             var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.OVER_DUE);
             SetDetailPanel(mgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1254,7 +1205,6 @@ namespace CMBC.EasyFactor
             var mgr = new PaymentBatchMgr(PaymentBatchMgr.OpBatchType.QUERY);
             SetDetailPanel(mgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1265,7 +1215,6 @@ namespace CMBC.EasyFactor
             var batchMgr = new FinanceBatchMgr(FinanceBatchMgr.OpBatchType.POOL_QUERY);
             SetDetailPanel(batchMgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1276,7 +1225,6 @@ namespace CMBC.EasyFactor
             var batchMgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.POOL_QUERY);
             SetDetailPanel(batchMgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1287,7 +1235,6 @@ namespace CMBC.EasyFactor
             var mgr = new RefundBatchMgr(RefundBatchMgr.OpBatchType.QUERY);
             SetDetailPanel(mgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1298,7 +1245,6 @@ namespace CMBC.EasyFactor
             var userMgrUI = new UserMgr();
             SetDetailPanel(userMgrUI);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1312,7 +1258,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1323,7 +1268,6 @@ namespace CMBC.EasyFactor
             var form = new ReportBug();
             form.ShowDialog(this);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1334,7 +1278,6 @@ namespace CMBC.EasyFactor
             var mgr = new CDAMgr(CDAMgr.OpCDAType.REPORT);
             SetDetailPanel(mgr);
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1348,7 +1291,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1362,7 +1304,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1376,7 +1317,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1390,7 +1330,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1402,7 +1341,6 @@ namespace CMBC.EasyFactor
             ShowInTaskbar = true;
             notifyIcon.Visible = false;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1416,7 +1354,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1430,7 +1367,6 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -1441,36 +1377,6 @@ namespace CMBC.EasyFactor
             if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
             {
                 var mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.LOCATION_STAT);
-                SetDetailPanel(mgr);
-            }
-        }
-
-        #endregion?Methods?
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryOperationLog(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.SYSTEM_UPDATE))
-            {
-                var mgr = new OperationLogMgr();
-                SetDetailPanel(mgr);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryAgreements(object sender, EventArgs e)
-        {
-            if(PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
-            {
-                var mgr = new AgreementMgr();
                 SetDetailPanel(mgr);
             }
         }
