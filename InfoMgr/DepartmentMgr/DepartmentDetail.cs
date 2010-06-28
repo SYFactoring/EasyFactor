@@ -61,12 +61,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="opDepartmentType"></param>
         public DepartmentDetail(Department department, OpDepartmentType opDepartmentType)
         {
-            _context = new DBDataContext();
             InitializeComponent();
             ImeMode = ImeMode.OnHalf;
             _opDepartmentType = opDepartmentType;
+            _context = new DBDataContext();
 
-            cbLocation.DataSource = DB.dbml.Location.AllLocations;
+            cbLocation.DataSource = DB.dbml.Location.GetAllLocations(_context);
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
 

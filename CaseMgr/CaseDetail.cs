@@ -123,7 +123,7 @@ namespace CMBC.EasyFactor.CaseMgr
             cbCaseInvoiceCurrency.DisplayMember = "CurrencyFormat";
             cbCaseInvoiceCurrency.ValueMember = "CurrencyCode";
 
-            List<Department> allDepartments = Department.AllDepartments;
+            List<Department> allDepartments = Department.GetAllDepartments(_context);
             cbCaseOwnerDepts.DataSource = allDepartments;
             cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
             cbCaseOwnerDepts.GroupingMembers = "Domain";

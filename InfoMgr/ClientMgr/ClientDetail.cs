@@ -86,7 +86,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT_CREDIT_LINE
         }
-/// <summary>
+        /// <summary>
         /// Operation Type 
         /// </summary>
         public enum OpClientType
@@ -106,7 +106,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CLIENT
         }
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         public enum OpContractType
@@ -126,7 +126,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_CONTRACT
         }
-/// <summary>
+        /// <summary>
         /// Guarantee Deposite Type
         /// </summary>
         public enum OpGDType
@@ -144,7 +144,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_GD
         }
-/// <summary>
+        /// <summary>
         /// Review Type
         /// </summary>
         public enum OpReviewType
@@ -167,7 +167,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
 
 
-/// <summary>
+        /// <summary>
         /// Initializes a new instance of the ClientDetail class
         /// </summary>
         /// <param name="client">selected client</param>
@@ -198,7 +198,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             cbCountryCode.DisplayMember = "CountryFormatCN";
             cbCountryCode.ValueMember = "CountryCode";
 
-            List<Department> allDepartments = Department.AllDepartments;
+            List<Department> allDepartments = Department.GetAllDepartments(_context);
             cbDepartments.DataSource = allDepartments;
             cbDepartments.DisplayMembers = "DepartmentName";
             cbDepartments.GroupingMembers = "Domain";

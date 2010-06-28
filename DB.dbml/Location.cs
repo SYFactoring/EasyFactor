@@ -29,6 +29,12 @@ namespace CMBC.EasyFactor.DB.dbml
                 return LocationList.ToList();
             }
         }
+
+        public static List<Location> GetAllLocations(DBDataContext context)
+        {
+            return context.Locations.ToList();
+        }
+
 		//?Private?Methods?(1)?
         /// <summary>
         /// Initializes static members of the Country class
