@@ -35,6 +35,15 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool HasCreditNotes
+        {
+            get
+            { return InvoicePaymentLogs.Any(log => log.CreditNote != null); }
+        }
+
+        /// <summary>
         /// Gets
         /// </summary>
         public double PaymentAmount
@@ -61,10 +70,6 @@ namespace CMBC.EasyFactor.DB.dbml
             get { return Case.TransactionType; }
         }
 
-
-
-
-        //?Public?Methods?(2)?
         /// <summary>
         /// 
         /// </summary>

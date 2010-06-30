@@ -85,7 +85,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.AddEnterListenersForQuery(panelQuery.Controls, btnQuery);
 
             List<Location> allLocations = DB.dbml.Location.AllLocations;
-            allLocations.Insert(0, new Location {LocationCode = "00", LocationName = "全部"});
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
             cbLocation.DataSource = allLocations;
             cbLocation.DisplayMember = "LocationName";
             cbLocation.ValueMember = "LocationCode";
@@ -174,6 +174,16 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            foreach (InvoicePaymentBatch batch in batches)
+            {
+                if (batch.PaymentType == PAYMENT.CREDIT_NOTE_PAYMENT && batch.HasCreditNotes)
+                {
+                    MessageBoxEx.Show("付款批次记录：" + batch.PaymentBatchNo + "含有贷项通知信息，需要先删除贷项通知才能删除批次", MESSAGE.TITLE_INFORMATION,
+                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
+
             try
             {
                 foreach (InvoicePaymentBatch selectedBatch in batches)
@@ -211,7 +221,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoicePaymentBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoicePaymentBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             var detail = new PaymentBatchDetail(selectedBatch);
             detail.ShowDialog(this);
         }
@@ -248,7 +258,7 @@ namespace CMBC.EasyFactor.ARMgr
             DataGridViewColumn col = dgvBatches.Columns[e.ColumnIndex];
             if (col == colIsSendMsg)
             {
-                var isSend = (bool) e.Value;
+                var isSend = (bool)e.Value;
                 e.Value = isSend ? "Y" : "N";
 
                 e.FormattingApplied = true;
@@ -368,7 +378,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (DataGridViewCell cell in dgvBatches.SelectedCells)
             {
-                var batch = (InvoicePaymentBatch) _bs.List[cell.RowIndex];
+                var batch = (InvoicePaymentBatch)_bs.List[cell.RowIndex];
                 if (!selectedBatches.Contains(batch))
                 {
                     selectedBatches.Add(batch);
@@ -399,7 +409,7 @@ namespace CMBC.EasyFactor.ARMgr
                                         : dateInputTo.Value.Date;
             string createUserName = tbCreateUserName.Text;
             string clientName = tbClientName.Text;
-            var location = (string) cbLocation.SelectedValue;
+            var location = (string)cbLocation.SelectedValue;
             string transactionType = cbTransactionType.Text;
             if (String.IsNullOrEmpty(transactionType))
             {
@@ -442,7 +452,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                                                    ? batch.InputDate <=
                                                                                                      endInputDate
                                                                                                    : true)
-                                                                                              //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                                                  //&& (status != string.Empty ? i.CheckStatus == status : true)
                                                                                               &&
                                                                                               (paymentType == "全部"
                                                                                                    ? true
@@ -533,7 +543,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoicePaymentBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoicePaymentBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             Selected = selectedBatch;
             if (OwnerForm != null)
             {
