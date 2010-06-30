@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Text.RegularExpressions;
+using CMBC.EasyFactor.Utils;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
@@ -106,6 +107,15 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (!ReviewNoRegex.IsMatch(ReviewNo))
                 {
                     throw new ArgumentException("不符合协查意见编码规则: " + ReviewNo);
+                }
+            }
+
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (TypeUtil.LessZero(RequestAmount))
+                {
+                    throw new Exception(String.Format("授信金额{0:N2}不能为负: {1}", RequestAmount,
+                                 ReviewNo));
                 }
             }
         }

@@ -4,6 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Data.Linq;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
     /// <summary>
@@ -41,6 +45,18 @@ namespace CMBC.EasyFactor.DB.dbml
         public string FactorType
         {
             get { return Factor.FactorType; }
+        }
+
+        partial void OnValidate(ChangeAction action)
+        {
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (TypeUtil.LessZero(CreditLine))
+                {
+                    throw new Exception(String.Format("额度金额{0:N2}不能为负: {1}", CreditLine,
+                                 ApproveNo));
+                }
+            }
         }
     }
 }

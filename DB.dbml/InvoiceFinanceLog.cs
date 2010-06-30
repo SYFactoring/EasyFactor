@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 
 using System;
+using System.Data.Linq;
 using System.Linq;
 using CMBC.EasyFactor.Utils;
 
@@ -313,6 +314,22 @@ namespace CMBC.EasyFactor.DB.dbml
             if (cda.CommissionType == "按融资金额")
             {
                 Commission = FinanceAmount * cda.Price;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        partial void OnValidate(ChangeAction action)
+        {
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (TypeUtil.LessZero(FinanceAmount))
+                {
+                    throw new Exception(String.Format("融资金额{0:N2}不能为负: {1}", FinanceAmount,
+                                 FinanceLogID));
+                }
             }
         }
     }

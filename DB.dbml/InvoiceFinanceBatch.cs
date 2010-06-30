@@ -386,6 +386,11 @@ namespace CMBC.EasyFactor.DB.dbml
                         }
                     }
 
+                    if(TypeUtil.LessZero(FinanceAmount))
+                    {
+                        throw new Exception(String.Format("融资金额{0:N2}，不能小于零，融资批号：{1} ", FinanceAmount, FinanceBatchNo));
+                    }
+
                     if (TypeUtil.LessZero(FinanceRate))
                     {
                         throw new Exception(String.Format("融资利率{0:N2}，不能小于零，融资批号：{1} ", FinanceRate, FinanceBatchNo));

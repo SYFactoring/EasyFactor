@@ -4,6 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Data.Linq;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
     partial class CommissionRemittance
@@ -16,6 +20,26 @@ namespace CMBC.EasyFactor.DB.dbml
             get
             {
                 return Factor.ToString();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        partial void OnValidate(ChangeAction action)
+        {
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (TypeUtil.LessZero(MsgAmount))
+                {
+                    throw new Exception(String.Format("消息金额{0:N2}不能为负: {1}", MsgAmount, MsgType));
+                }
+
+                if(TypeUtil.LessZero(RemitAmount))
+                {
+                    throw new Exception(String.Format("回复金额{0:N2}不能为负: {1}", MsgAmount, MsgType));
+                }
             }
         }
     }

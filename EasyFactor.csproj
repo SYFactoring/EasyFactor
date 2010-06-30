@@ -274,6 +274,7 @@
     <Compile Include="DB.dbml\CommissionRemittance.cs" />
     <Compile Include="DB.dbml\Contract.cs" />
     <Compile Include="DB.dbml\CreditNote.cs" />
+    <Compile Include="DB.dbml\GuaranteeDeposit.cs" />
     <Compile Include="DB.dbml\Location.cs" />
     <Compile Include="DB.dbml\InvoiceFinanceLog.cs" />
     <Compile Include="DB.dbml\DisputeReason.cs" />

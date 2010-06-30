@@ -569,9 +569,39 @@ namespace CMBC.EasyFactor.DB.dbml
                                                       InvoiceNo));
                 }
 
-                if(TypeUtil.LessZero(AssignAmount))
+                if (TypeUtil.LessZero(AssignAmount))
                 {
                     throw new Exception(String.Format("转让金额{0:N2}不能为负: {1}", AssignAmount,
+                                                      InvoiceNo));
+                }
+
+                if (TypeUtil.LessZero(FinanceAmount))
+                {
+                    throw new Exception(String.Format("融资金额{0:N2}不能为负: {1}", FinanceAmount,
+                                                     InvoiceNo));
+                }
+
+                if (TypeUtil.LessZero(PaymentAmount))
+                {
+                    throw new Exception(String.Format("付款金额{0:N2}不能为负: {1}", PaymentAmount,
+                                                     InvoiceNo));
+                }
+
+                if (TypeUtil.LessZero(RefundAmount))
+                {
+                    throw new Exception(String.Format("还款金额{0:N2}不能为负: {1}", RefundAmount,
+                                                     InvoiceNo));
+                }
+
+                if (TypeUtil.LessZero(Commission))
+                {
+                    throw new Exception(String.Format("手续费金额{0:N2}不能为负: {1}", Commission,
+                                                     InvoiceNo));
+                }
+
+                if (TypeUtil.LessZero(FactorCommission))
+                {
+                    throw new Exception(String.Format("保理商手续费金额{0:N2}不能为负: {1}", FactorCommission,
                                                      InvoiceNo));
                 }
 

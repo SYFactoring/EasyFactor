@@ -8,6 +8,7 @@ using System;
 using System.Data.Linq;
 using System.Linq;
 using System.Text.RegularExpressions;
+using CMBC.EasyFactor.Utils;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
@@ -77,7 +78,16 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (!String.IsNullOrEmpty(ApproveNo) && !ApproveNoRegex.IsMatch(ApproveNo))
                 {
-                    throw new ArgumentException("不符合授信编号规则: " + ApproveNo);
+                    throw new Exception("不符合授信编号规则: " + ApproveNo);
+                }
+            }
+
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (TypeUtil.LessZero(CreditLine))
+                {
+                    throw new Exception(String.Format("额度金额{0:N2}不能为负: {1}", CreditLine,
+                                 ApproveNo));
                 }
             }
         }

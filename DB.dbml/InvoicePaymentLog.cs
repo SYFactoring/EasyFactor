@@ -5,6 +5,8 @@
 //-----------------------------------------------------------------------
 
 using System;
+using System.Data.Linq;
+using CMBC.EasyFactor.Utils;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
@@ -146,6 +148,22 @@ namespace CMBC.EasyFactor.DB.dbml
         public DateTime PaymentDate
         {
             get { return InvoicePaymentBatch.PaymentDate; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        partial void OnValidate(ChangeAction action)
+        {
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (TypeUtil.LessZero(PaymentAmount))
+                {
+                    throw new Exception(String.Format("付款金额{0:N2}不能为负: {1}", PaymentAmount,
+                                 PaymentLogID));
+                }
+            }
         }
     }
 }

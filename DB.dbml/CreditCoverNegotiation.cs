@@ -4,6 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Data.Linq;
+using CMBC.EasyFactor.Utils;
+
 namespace CMBC.EasyFactor.DB.dbml
 {
     /// <summary>
@@ -73,6 +77,26 @@ namespace CMBC.EasyFactor.DB.dbml
         public string TransactionType
         {
             get { return Case.TransactionType; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        partial void OnValidate(ChangeAction action)
+        {
+            if (action == ChangeAction.Insert || action == ChangeAction.Update)
+            {
+                if (TypeUtil.LessZero(RequestAmount))
+                {
+                    throw new Exception(String.Format("申请金额{0:N2}不能为负: {1}", RequestAmount, NegoID));
+                }
+
+                if (TypeUtil.LessZero(ReplyAmount))
+                {
+                    throw new Exception(String.Format("回复金额{0:N2}不能为负: {1}", ReplyAmount, NegoID));
+                }
+            }
         }
     }
 }
