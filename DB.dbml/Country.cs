@@ -53,8 +53,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         private static List<Country> InitializeCountry()
         {
-            var context = new DBDataContext();
-            return context.Countries.ToList();
+            var context = new DBDataContext { ObjectTrackingEnabled = false };
+            List<Country> countryList = context.Countries.ToList();
+            Country CN = countryList.SingleOrDefault(c => c.CountryCode == "CN");
+            Country US = countryList.SingleOrDefault(c => c.CountryCode == "US");
+            countryList.Insert(0, CN);
+            countryList.Insert(1, US);
+            return countryList;
         }
     }
 }

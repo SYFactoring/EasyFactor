@@ -2014,7 +2014,7 @@ namespace CMBC.EasyFactor.Utils
                 {
                     var sb = new StringBuilder();
                     Case curCase = invoice.InvoiceAssignBatch.Case;
-                    sb.Append((row / 1000 + 1)).Append(',');
+                    sb.Append(invoice.AssignBatchNo).Append(',');
                     sb.Append("MSG09").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
@@ -2101,7 +2101,7 @@ namespace CMBC.EasyFactor.Utils
                 {
                     var sb = new StringBuilder();
                     Case curCase = log.Invoice.InvoiceAssignBatch.Case;
-                    sb.Append((row / 1000 + 1)).Append(',');
+                    sb.Append(log.CreditNote.AssignBatchNo).Append(',');
                     sb.Append("MSG09").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');

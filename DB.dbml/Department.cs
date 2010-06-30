@@ -292,7 +292,7 @@ namespace CMBC.EasyFactor.DB.dbml
             var allDepartment = new List<Department>();
             allDepartment.AddRange(context.Departments.Where(d => d.Domain == "贸易金融事业部"));
             allDepartment.AddRange(context.Departments.Where(d => d.Domain == "分行营业部"));
-            allDepartment.AddRange(context.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行事业部"));
+            allDepartment.AddRange(context.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行营业部"));
 
             return allDepartment;
         }
@@ -308,7 +308,7 @@ namespace CMBC.EasyFactor.DB.dbml
             var allDepartment = new List<Department>();
             allDepartment.AddRange(context.Departments.Where(d => d.Domain == "贸易金融事业部"));
             allDepartment.AddRange(context.Departments.Where(d => d.Domain == "分行营业部"));
-            allDepartment.AddRange(context.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行事业部"));
+            allDepartment.AddRange(context.Departments.Where(d => d.Domain != "贸易金融事业部" && d.Domain != "分行营业部"));
 
             return allDepartment;
         }

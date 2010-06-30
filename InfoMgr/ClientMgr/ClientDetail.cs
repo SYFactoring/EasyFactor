@@ -230,11 +230,14 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 client = new Client();
                 clientBindingSource.DataSource = client;
+                client.CountryCode = "CN";
             }
             else
             {
                 if (client != null)
+                {
                     client = _context.Clients.SingleOrDefault(c => c.ClientEDICode == client.ClientEDICode);
+                }
             }
 
             clientBindingSource.DataSource = client;
@@ -979,6 +982,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isAddOK = true;
                 try
                 {
+                    if (_context.Clients.Any(c => c.ClientEDICode == client.ClientEDICode))
+                    {
+                        MessageBoxEx.Show("保理代码重复，不能保存", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     _context.Clients.InsertOnSubmit(client);
                     _context.SubmitChanges();
                 }
@@ -1118,8 +1127,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                     }
 
-                    _bsCreditLines.DataSource = typeof(ClientCreditLine);
-                    _bsCreditLines.DataSource = client.ClientCreditLines;
+                    _bsCreditLines.DataSource = client.ClientCreditLines.ToList();
                     NewClientCreditLine(null, null);
                 }
             }
@@ -1175,6 +1183,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                               MessageBoxIcon.Warning);
                         }
                     }
+
+                    dgvClientCreditLines.Refresh();
                 }
             }
         }
@@ -1267,8 +1277,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                         }
                     }
 
-                    _bsContracts.DataSource = typeof(Contract);
-                    _bsContracts.DataSource = client.Contracts;
+                    _bsContracts.DataSource = client.Contracts.ToList();
                     NewContract(null, null);
                 }
             }
@@ -1324,6 +1333,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                               MessageBoxIcon.Warning);
                         }
                     }
+
+                    dgvContracts.Refresh();
                 }
             }
         }
@@ -1377,8 +1388,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
-                    _bsGDs.DataSource = typeof(GuaranteeDeposit);
-                    _bsGDs.DataSource = client.GuaranteeDeposits;
+
+                    _bsGDs.DataSource = client.GuaranteeDeposits.ToList();
                     NewGD(null, null);
                 }
             }
@@ -1411,6 +1422,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
+                    dgvContracts.Refresh();
                 }
             }
         }
@@ -1477,8 +1489,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
-                    _bsReviews.DataSource = typeof(ClientReview);
-                    _bsReviews.DataSource = client.ClientReviews;
+
+                    _bsReviews.DataSource = client.ClientReviews.ToList();
                     NewReview(null, null);
                 }
             }
@@ -1511,6 +1523,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
+                    dgvGDs.Refresh();
                 }
             }
         }
