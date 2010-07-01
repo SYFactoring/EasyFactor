@@ -15,6 +15,16 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public int BatchCount
+        {
+            get
+            {
+                return InvoiceAssignBatches.Count;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         public string CompanyName
         {
             get

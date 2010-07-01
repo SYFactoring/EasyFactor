@@ -35,22 +35,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvCommissionRemit = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.factorCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CompanyNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemitDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemitCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemitAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuCommissionRemitMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemCommissionRemitSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCommissionRemitDetail = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +57,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorName = new DevComponents.DotNetBar.LabelX();
             this.tbFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFactorCode = new DevComponents.DotNetBar.LabelX();
+            this.factorCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CompanyNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMsgType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMsgDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMsgCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMsgAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemitDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemitCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemitAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCommissionRemit)).BeginInit();
             this.contextMenuCommissionRemitMgr.SuspendLayout();
             this.panelQuery.SuspendLayout();
@@ -79,18 +80,19 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvCommissionRemit.AllowUserToDeleteRows = false;
             this.dgvCommissionRemit.AllowUserToOrderColumns = true;
             this.dgvCommissionRemit.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCommissionRemit.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCommissionRemit.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCommissionRemit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCommissionRemit.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.factorCodeColumn,
             this.CompanyNameColumn,
+            this.colBatchCount,
             this.colMsgType,
             this.colMsgDate,
             this.colMsgCurrency,
@@ -100,14 +102,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colRemitAmount});
             this.dgvCommissionRemit.ContextMenuStrip = this.contextMenuCommissionRemitMgr;
             this.dgvCommissionRemit.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCommissionRemit.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCommissionRemit.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCommissionRemit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCommissionRemit.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvCommissionRemit.Location = new System.Drawing.Point(0, 30);
@@ -120,80 +122,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvCommissionRemit.TabIndex = 2;
             this.dgvCommissionRemit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCommissionRemitCellDoubleClick);
             this.dgvCommissionRemit.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvCommissionRemitRowPostPaint);
-            // 
-            // factorCodeColumn
-            // 
-            this.factorCodeColumn.DataPropertyName = "FactorCode";
-            this.factorCodeColumn.HeaderText = "机构代码";
-            this.factorCodeColumn.Name = "factorCodeColumn";
-            this.factorCodeColumn.ReadOnly = true;
-            // 
-            // CompanyNameColumn
-            // 
-            this.CompanyNameColumn.DataPropertyName = "CompanyName";
-            this.CompanyNameColumn.HeaderText = "公司名称";
-            this.CompanyNameColumn.Name = "CompanyNameColumn";
-            this.CompanyNameColumn.ReadOnly = true;
-            // 
-            // colMsgType
-            // 
-            this.colMsgType.DataPropertyName = "MsgType";
-            this.colMsgType.HeaderText = "消息类型";
-            this.colMsgType.Name = "colMsgType";
-            this.colMsgType.ReadOnly = true;
-            // 
-            // colMsgDate
-            // 
-            this.colMsgDate.DataPropertyName = "MsgDate";
-            dataGridViewCellStyle8.Format = "d";
-            this.colMsgDate.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colMsgDate.HeaderText = "消息日期";
-            this.colMsgDate.Name = "colMsgDate";
-            this.colMsgDate.ReadOnly = true;
-            // 
-            // colMsgCurrency
-            // 
-            this.colMsgCurrency.DataPropertyName = "MsgCurrency";
-            this.colMsgCurrency.HeaderText = "消息币别";
-            this.colMsgCurrency.Name = "colMsgCurrency";
-            this.colMsgCurrency.ReadOnly = true;
-            // 
-            // colMsgAmount
-            // 
-            this.colMsgAmount.DataPropertyName = "MsgAmount";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            this.colMsgAmount.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colMsgAmount.HeaderText = "消息金额";
-            this.colMsgAmount.Name = "colMsgAmount";
-            this.colMsgAmount.ReadOnly = true;
-            // 
-            // colRemitDate
-            // 
-            this.colRemitDate.DataPropertyName = "RemitDate";
-            dataGridViewCellStyle10.Format = "d";
-            dataGridViewCellStyle10.NullValue = null;
-            this.colRemitDate.DefaultCellStyle = dataGridViewCellStyle10;
-            this.colRemitDate.HeaderText = "汇款日期";
-            this.colRemitDate.Name = "colRemitDate";
-            this.colRemitDate.ReadOnly = true;
-            // 
-            // colRemitCurrency
-            // 
-            this.colRemitCurrency.DataPropertyName = "RemitCurrency";
-            this.colRemitCurrency.HeaderText = "汇款币别";
-            this.colRemitCurrency.Name = "colRemitCurrency";
-            this.colRemitCurrency.ReadOnly = true;
-            // 
-            // colRemitAmount
-            // 
-            this.colRemitAmount.DataPropertyName = "RemitAmount";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N2";
-            this.colRemitAmount.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colRemitAmount.HeaderText = "汇款金额";
-            this.colRemitAmount.Name = "colRemitAmount";
-            this.colRemitAmount.ReadOnly = true;
             // 
             // contextMenuCommissionRemitMgr
             // 
@@ -435,6 +363,87 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorCode.TabIndex = 4;
             this.lblFactorCode.Text = "机构编号";
             // 
+            // factorCodeColumn
+            // 
+            this.factorCodeColumn.DataPropertyName = "FactorCode";
+            this.factorCodeColumn.HeaderText = "机构代码";
+            this.factorCodeColumn.Name = "factorCodeColumn";
+            this.factorCodeColumn.ReadOnly = true;
+            // 
+            // CompanyNameColumn
+            // 
+            this.CompanyNameColumn.DataPropertyName = "CompanyName";
+            this.CompanyNameColumn.HeaderText = "公司名称";
+            this.CompanyNameColumn.Name = "CompanyNameColumn";
+            this.CompanyNameColumn.ReadOnly = true;
+            // 
+            // colBatchCount
+            // 
+            this.colBatchCount.DataPropertyName = "BatchCount";
+            this.colBatchCount.HeaderText = "批次数";
+            this.colBatchCount.Name = "colBatchCount";
+            this.colBatchCount.ReadOnly = true;
+            // 
+            // colMsgType
+            // 
+            this.colMsgType.DataPropertyName = "MsgType";
+            this.colMsgType.HeaderText = "消息类型";
+            this.colMsgType.Name = "colMsgType";
+            this.colMsgType.ReadOnly = true;
+            // 
+            // colMsgDate
+            // 
+            this.colMsgDate.DataPropertyName = "MsgDate";
+            dataGridViewCellStyle2.Format = "d";
+            this.colMsgDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colMsgDate.HeaderText = "消息日期";
+            this.colMsgDate.Name = "colMsgDate";
+            this.colMsgDate.ReadOnly = true;
+            // 
+            // colMsgCurrency
+            // 
+            this.colMsgCurrency.DataPropertyName = "MsgCurrency";
+            this.colMsgCurrency.HeaderText = "消息币别";
+            this.colMsgCurrency.Name = "colMsgCurrency";
+            this.colMsgCurrency.ReadOnly = true;
+            // 
+            // colMsgAmount
+            // 
+            this.colMsgAmount.DataPropertyName = "MsgAmount";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.colMsgAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colMsgAmount.HeaderText = "消息金额";
+            this.colMsgAmount.Name = "colMsgAmount";
+            this.colMsgAmount.ReadOnly = true;
+            // 
+            // colRemitDate
+            // 
+            this.colRemitDate.DataPropertyName = "RemitDate";
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colRemitDate.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colRemitDate.HeaderText = "汇款日期";
+            this.colRemitDate.Name = "colRemitDate";
+            this.colRemitDate.ReadOnly = true;
+            // 
+            // colRemitCurrency
+            // 
+            this.colRemitCurrency.DataPropertyName = "RemitCurrency";
+            this.colRemitCurrency.HeaderText = "汇款币别";
+            this.colRemitCurrency.Name = "colRemitCurrency";
+            this.colRemitCurrency.ReadOnly = true;
+            // 
+            // colRemitAmount
+            // 
+            this.colRemitAmount.DataPropertyName = "RemitAmount";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.colRemitAmount.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colRemitAmount.HeaderText = "汇款金额";
+            this.colRemitAmount.Name = "colRemitAmount";
+            this.colRemitAmount.ReadOnly = true;
+            // 
             // CommissionRemitMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -466,8 +475,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
         private DevComponents.DotNetBar.LabelX lblDatePicker;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
+        private System.Windows.Forms.ContextMenuStrip contextMenuCommissionRemitMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCommissionRemitSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCommissionRemitDetail;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCommissionRemitDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn factorCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CompanyNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMsgType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMsgDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMsgCurrency;
@@ -475,10 +490,5 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemitDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemitCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemitAmount;
-        private System.Windows.Forms.ContextMenuStrip contextMenuCommissionRemitMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCommissionRemitSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCommissionRemitDetail;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCommissionRemitDelete;
     }
 }
