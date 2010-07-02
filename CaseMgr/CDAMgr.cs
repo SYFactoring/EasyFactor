@@ -840,8 +840,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Range[sheet.Cells[26, 1], sheet.Cells[26, 2]].RowHeight = 40;
                 sheet.Range[sheet.Cells[28, 1], sheet.Cells[28, 2]].RowHeight = 40;
 
-                sheet.Cells[30, 2] = String.Format("中国民生银行股份有限公司{0}分行",
-                                                   selectedCDA.Case.OwnerDepartment.Location.LocationName);
+                sheet.Cells[30, 2] = selectedCDA.Case.OwnerDepartment.Location.LocationName == "北京"
+                                         ? String.Format("中国民生银行股份有限公司总行营业部")
+                                         : String.Format("中国民生银行股份有限公司{0}分行",
+                                                         selectedCDA.Case.OwnerDepartment.Location.LocationName);
+
                 sheet.Cells[31, 2] = String.Format("日期：{0:yyyy}年 {0:MM}月 {0:dd}日", selectedCDA.CDASignDate);
                 sheet.Range[sheet.Cells[30, 2], sheet.Cells[31, 2]].HorizontalAlignment = XlHAlign.xlHAlignRight;
 

@@ -11,6 +11,7 @@ using System.Data.Linq;
 using CMBC.EasyFactor.DB.dbml;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
+using System.Collections.Generic;
 
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
@@ -257,9 +258,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             if (selected != null)
             {
                 commissionRemitBindingSource.DataSource = selected;
-                _bs.DataSource = selected.InvoiceAssignBatches;
+                List<InvoiceAssignBatch> batches = selected.InvoiceAssignBatches.ToList();
+                batches.AddRange(_factor.GetInvoiceAssignBatches(true, false));
+                _bs.DataSource = batches;
 
-                for (int i = 0; i < _bs.List.Count; i++)
+                for (int i = 0; i < selected.InvoiceAssignBatches.Count; i++)
                 {
                     var cell = (DataGridViewCheckBoxCell)dgvBatches.Rows[i].Cells[0];
                     cell.Value = 1;
