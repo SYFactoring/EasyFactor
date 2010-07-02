@@ -693,6 +693,11 @@ namespace CMBC.EasyFactor.Utils
                             DateTime invoiceDate;
                             if (DateTime.TryParse(invoiceDateStr, out invoiceDate))
                             {
+                                if (invoiceDate > DateTime.Today)
+                                {
+                                    throw new Exception("发票日不能晚于今日，不能导入：" + invoiceNo);
+                                }
+
                                 invoice.InvoiceDate = invoiceDate;
                             }
                             else
@@ -969,6 +974,11 @@ namespace CMBC.EasyFactor.Utils
                                 DateTime invoiceDate;
                                 if (DateTime.TryParse(invoiceDateStr, out invoiceDate))
                                 {
+                                    if (invoiceDate > DateTime.Today)
+                                    {
+                                        throw new Exception("发票日不能晚于今日，不能导入：" + invoiceNo);
+                                    }
+
                                     invoice.InvoiceDate = invoiceDate;
                                 }
                                 else
