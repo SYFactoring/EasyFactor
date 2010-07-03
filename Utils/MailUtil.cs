@@ -54,6 +54,7 @@ namespace CMBC.EasyFactor.Utils
             }
 
             _mailMessage.From = new MailAddress(from);
+            _mailMessage.ReplyTo = new MailAddress(from);
             _mailMessage.Subject = title;
             _mailMessage.SubjectEncoding = Encoding.UTF8;
             _mailMessage.Body = body;
