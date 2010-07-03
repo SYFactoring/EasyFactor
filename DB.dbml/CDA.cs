@@ -66,25 +66,6 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        public ClientCreditLine FinanceCreditLine
-        {
-            get
-            {
-                if (Case.IsPool)
-                {
-                    return Case.SellerClient.PoolFinanceCreditLine;
-                }
-                if (Case.TransactionType == "国内买方保理" || Case.TransactionType == "进口保理")
-                {
-                    return Case.BuyerClient.FinanceCreditLine;
-                }
-                return Case.SellerClient.FinanceCreditLine;
-            }
-        }
-
-        /// <summary>
         /// Gets 关联额度中预付款融资额度余额
         /// </summary>
         public double? FinanceLineOutstanding

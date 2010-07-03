@@ -314,11 +314,7 @@ namespace CMBC.EasyFactor.ARMgr
                 tbFinanceLineCurr.Text = cda.FinanceLineCurr;
                 tbFinanceLine.Text = String.Format("{0:N2}", cda.FinanceLine);
                 tbDueDate.Text = String.Format("{0:d}", cda.FinanceLinePeriodEnd);
-                ClientCreditLine creditLine = cda.FinanceCreditLine;
-                if (creditLine != null)
-                {
-                    tbHighestFinance.Text = String.Format("{0:N2}", creditLine.CreditLine);
-                }
+                tbHighestFinance.Text = String.Format("{0:N2}", Case.HighestFinanceLineAmount);
 
                 CaculateOutstanding(Case);
 

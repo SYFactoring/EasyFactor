@@ -314,7 +314,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     return;
                 }
 
-                ClientCreditLine creditLine = cda.FinanceCreditLine;
+                ClientCreditLine creditLine = cda.Case.HighestFinanceLine;
 
                 if (creditLine != null)
                 {
@@ -375,7 +375,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     return;
                 }
 
-                ClientCreditLine creditLine = cda.FinanceCreditLine;
+                ClientCreditLine creditLine = cda.Case.HighestFinanceLine;
 
                 if (creditLine != null && cda.FinanceLinePeriodEnd > creditLine.PeriodEnd)
                 {
@@ -645,7 +645,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            ClientCreditLine creditLine = cda.FinanceCreditLine;
+            ClientCreditLine creditLine = cda.Case.HighestFinanceLine;
 
             if (creditLine != null)
             {
@@ -963,7 +963,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     creditCoverTextBox.Enabled = false;
                 }
 
-                ClientCreditLine financeLine = cda.FinanceCreditLine;
+                ClientCreditLine financeLine = cda.Case.HighestFinanceLine;
 
                 if (financeLine == null)
                 {

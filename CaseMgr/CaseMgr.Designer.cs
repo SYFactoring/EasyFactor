@@ -80,6 +80,20 @@ namespace CMBC.EasyFactor.CaseMgr
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -157,7 +171,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHighestFinanceLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHighestFinanceLineAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -631,7 +645,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colFinanceOutstanding,
             this.colTotalFinanceOutstanding,
             this.colFinanceLineOutstanding,
-            this.colHighestFinanceLine});
+            this.colHighestFinanceLineAmount});
             this.dgvCases.ContextMenuStrip = this.cmuContractMgr;
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
@@ -977,19 +991,19 @@ namespace CMBC.EasyFactor.CaseMgr
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle14.Format = "N2";
             this.colFinanceLineOutstanding.DefaultCellStyle = dataGridViewCellStyle14;
-            this.colFinanceLineOutstanding.HeaderText = "剩余融资额度";
+            this.colFinanceLineOutstanding.HeaderText = "剩余关联融资额度";
             this.colFinanceLineOutstanding.Name = "colFinanceLineOutstanding";
             this.colFinanceLineOutstanding.ReadOnly = true;
             // 
-            // colHighestFinanceLine
+            // colHighestFinanceLineAmount
             // 
-            this.colHighestFinanceLine.DataPropertyName = "HighestFinanceLine";
+            this.colHighestFinanceLineAmount.DataPropertyName = "HighestFinanceLineAmount";
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle15.Format = "N2";
-            this.colHighestFinanceLine.DefaultCellStyle = dataGridViewCellStyle15;
-            this.colHighestFinanceLine.HeaderText = "最高融资额度";
-            this.colHighestFinanceLine.Name = "colHighestFinanceLine";
-            this.colHighestFinanceLine.ReadOnly = true;
+            this.colHighestFinanceLineAmount.DefaultCellStyle = dataGridViewCellStyle15;
+            this.colHighestFinanceLineAmount.HeaderText = "最高融资额度";
+            this.colHighestFinanceLineAmount.Name = "colHighestFinanceLineAmount";
+            this.colHighestFinanceLineAmount.ReadOnly = true;
             // 
             // CaseMgr
             // 
@@ -1038,6 +1052,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHighestFinanceLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHighestFinanceLineAmount;
     }
 }

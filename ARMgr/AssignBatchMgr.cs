@@ -1289,7 +1289,7 @@ namespace CMBC.EasyFactor.ARMgr
             ClientCreditLine creditLine = null;
             if (activeCDA != null)
             {
-                creditLine = activeCDA.FinanceCreditLine;
+                creditLine = firstCase.HighestFinanceLine;
                 if (creditLine != null)
                 {
                     sheet.Cells[row, 2] = creditLine.CreditLine;

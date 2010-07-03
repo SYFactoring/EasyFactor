@@ -2954,15 +2954,15 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("该案件的最高预付款融资额度余额不足，不能融资：" + assignBatchCode);
                         }
 
-                        if (activeCDA.FinanceCreditLine == null)
+                        if (assignBatch.Case.HighestFinanceLine == null)
                         {
-                            throw new Exception("该案件额度通知书融资额度为空，不能融资：" + assignBatchCode);
+                            throw new Exception("该客户融资额度为空，不能融资：" + assignBatchCode);
                         }
 
-                        if (activeCDA.FinanceCreditLine.PeriodEnd < DateTime.Today)
+                        if (assignBatch.Case.HighestFinanceLine.PeriodEnd < DateTime.Today)
                         {
-                            throw new Exception(String.Format("融资额度已到期{0:d}，不能融资：{1}",
-                                                              activeCDA.FinanceCreditLine.PeriodEnd, assignBatchCode));
+                            throw new Exception(String.Format("客户融资额度已到期{0:d}，不能融资：{1}",
+                                                              assignBatch.Case.HighestFinanceLine.PeriodEnd, assignBatchCode));
                         }
                         if (TypeUtil.LessZero(activeCDA.FinanceLineOutstanding - financeAmount + guaranteeDeposit))
                         {
@@ -2971,19 +2971,27 @@ namespace CMBC.EasyFactor.Utils
                                                               financeAmount, assignBatchCode));
                         }
 
-                        double highestFinanceLine = activeCDA.HighestFinanceLine.Value;
-                        if (activeCDA.FinanceLineCurr != assignBatch.Case.InvoiceCurrency)
+                        //double highestFinanceLine = activeCDA.HighestFinanceLine.Value;
+                        //if (activeCDA.FinanceLineCurr != assignBatch.Case.InvoiceCurrency)
+                        //{
+                        //    double rate = Exchange.GetExchangeRate(activeCDA.FinanceLineCurr, assignBatch.Case.InvoiceCurrency);
+                        //    highestFinanceLine *= rate;
+                        //}
+
+                        ClientCreditLine highestFinanceLine = assignBatch.Case.HighestFinanceLine;
+                        double highestFinanceLineAmount = highestFinanceLine.CreditLine;
+                        if (highestFinanceLine.CreditLineCurrency != assignBatch.Case.InvoiceCurrency)
                         {
-                            double rate = Exchange.GetExchangeRate(activeCDA.FinanceLineCurr, assignBatch.Case.InvoiceCurrency);
-                            highestFinanceLine *= rate;
+                            double rate = Exchange.GetExchangeRate(highestFinanceLine.CreditLineCurrency, assignBatch.Case.InvoiceCurrency);
+                            highestFinanceLineAmount *= rate;
                         }
 
                         if (
-                            TypeUtil.LessZero(highestFinanceLine - assignBatch.Case.TotalFinanceOutstanding -
+                            TypeUtil.LessZero(highestFinanceLineAmount - assignBatch.Case.TotalFinanceOutstanding -
                                               financeAmount + guaranteeDeposit))
                         {
-                            throw new Exception(String.Format("该案件的最高预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}",
-                                                              (highestFinanceLine -
+                            throw new Exception(String.Format("该客户的最高预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}",
+                                                              (highestFinanceLineAmount -
                                                                assignBatch.Case.TotalFinanceOutstanding +
                                                                guaranteeDeposit), financeAmount, assignBatchCode));
                         }

@@ -327,19 +327,35 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? HighestFinanceLine
+        public ClientCreditLine HighestFinanceLine
         {
             get
             {
-                CDA cda = ActiveCDA;
-                if (cda != null)
+                if (IsPool)
                 {
-                    return cda.HighestFinanceLine;
+                    return SellerClient.PoolFinanceCreditLine;
                 }
-                else
+                if (TransactionType == "国内买方保理" || TransactionType == "进口保理")
                 {
-                    return null;
+                    return BuyerClient.FinanceCreditLine;
                 }
+                return SellerClient.FinanceCreditLine;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? HighestFinanceLineAmount
+        {
+            get
+            {
+                if (HighestFinanceLine != null)
+                {
+                    return HighestFinanceLine.CreditLine;
+                }
+
+                return null;
             }
         }
 
