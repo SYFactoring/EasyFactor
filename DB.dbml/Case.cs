@@ -324,6 +324,25 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? HighestFinanceLine
+        {
+            get
+            {
+                CDA cda = ActiveCDA;
+                if (cda != null)
+                {
+                    return cda.HighestFinanceLine;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         //?Public?Methods?(2)?
         /// <summary>
         /// 
