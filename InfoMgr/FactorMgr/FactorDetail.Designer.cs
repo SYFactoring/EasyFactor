@@ -197,16 +197,16 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DevComponents.DotNetBar.LabelX lblAgreementComment;
             DevComponents.DotNetBar.LabelX lblSignDate;
             DevComponents.DotNetBar.LabelX labelX1;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FactorDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.tabPanelCommissionRemit = new DevComponents.DotNetBar.TabControlPanel();
@@ -1031,9 +1031,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
             this.tabControl.Controls.Add(this.tabPanelCommissionRemit);
-            this.tabControl.Controls.Add(this.tabPanelFactor);
-            this.tabControl.Controls.Add(this.tabPanelCreditLine);
             this.tabControl.Controls.Add(this.tabPanelAgreement);
+            this.tabControl.Controls.Add(this.tabPanelCreditLine);
+            this.tabControl.Controls.Add(this.tabPanelFactor);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -1823,14 +1823,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactorCreditLines.AllowUserToDeleteRows = false;
             this.dgvFactorCreditLines.AllowUserToOrderColumns = true;
             this.dgvFactorCreditLines.AutoGenerateColumns = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactorCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvFactorCreditLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFactorCreditLines.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCreditLineID,
@@ -1848,14 +1848,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colUnfreezeDate,
             this.colComment});
             this.dgvFactorCreditLines.DataSource = this.factorCreditLineBindingSource;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvFactorCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactorCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvFactorCreditLines.Location = new System.Drawing.Point(1, 320);
@@ -1885,9 +1885,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colCreditLine
             // 
             this.colCreditLine.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle5;
             this.colCreditLine.HeaderText = "额度上限";
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
@@ -1896,8 +1896,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colPeriodBegin
             // 
             this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            dataGridViewCellStyle3.Format = "d";
-            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "d";
+            this.colPeriodBegin.DefaultCellStyle = dataGridViewCellStyle6;
             this.colPeriodBegin.HeaderText = "有效期(始)";
             this.colPeriodBegin.Name = "colPeriodBegin";
             this.colPeriodBegin.ReadOnly = true;
@@ -1906,8 +1906,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colPeriodEnd
             // 
             this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            dataGridViewCellStyle4.Format = "d";
-            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Format = "d";
+            this.colPeriodEnd.DefaultCellStyle = dataGridViewCellStyle7;
             this.colPeriodEnd.HeaderText = "有效期(终)";
             this.colPeriodEnd.Name = "colPeriodEnd";
             this.colPeriodEnd.ReadOnly = true;
@@ -1948,8 +1948,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colFreezeDate
             // 
             this.colFreezeDate.DataPropertyName = "FreezeDate";
-            dataGridViewCellStyle5.Format = "d";
-            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Format = "d";
+            this.colFreezeDate.DefaultCellStyle = dataGridViewCellStyle8;
             this.colFreezeDate.HeaderText = "冻结日期";
             this.colFreezeDate.Name = "colFreezeDate";
             this.colFreezeDate.ReadOnly = true;
@@ -1974,8 +1974,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colUnfreezeDate
             // 
             this.colUnfreezeDate.DataPropertyName = "UnfreezeDate";
-            dataGridViewCellStyle6.Format = "d";
-            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Format = "d";
+            this.colUnfreezeDate.DefaultCellStyle = dataGridViewCellStyle9;
             this.colUnfreezeDate.HeaderText = "解冻日期";
             this.colUnfreezeDate.Name = "colUnfreezeDate";
             this.colUnfreezeDate.ReadOnly = true;
@@ -2183,6 +2183,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.unfreezeDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.unfreezeDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.unfreezeDateDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -2194,6 +2195,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.unfreezeDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.unfreezeDateDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.unfreezeDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.unfreezeDateDateTimePicker.Name = "unfreezeDateDateTimePicker";
             this.unfreezeDateDateTimePicker.Size = new System.Drawing.Size(124, 20);
@@ -2248,6 +2250,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.freezeDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.freezeDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.freezeDateDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -2259,6 +2262,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.freezeDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.freezeDateDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.freezeDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.freezeDateDateTimePicker.Name = "freezeDateDateTimePicker";
             this.freezeDateDateTimePicker.Size = new System.Drawing.Size(124, 20);
@@ -2353,6 +2357,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.periodEndDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.periodEndDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.periodEndDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -2364,6 +2369,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.periodEndDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.periodEndDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.periodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.periodEndDateTimePicker.Name = "periodEndDateTimePicker";
             this.periodEndDateTimePicker.Size = new System.Drawing.Size(121, 20);
@@ -2391,6 +2397,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.periodBeginDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.periodBeginDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.periodBeginDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -2402,6 +2409,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.periodBeginDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.periodBeginDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.periodBeginDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.periodBeginDateTimePicker.Name = "periodBeginDateTimePicker";
             this.periodBeginDateTimePicker.Size = new System.Drawing.Size(124, 20);
@@ -2466,27 +2474,27 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvAgreements.AllowUserToOrderColumns = true;
             this.dgvAgreements.AutoGenerateColumns = false;
             this.dgvAgreements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAgreements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAgreements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAgreements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAgreements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colAgreementSignDate,
             this.colAgreementComment});
             this.dgvAgreements.DataSource = this.factorCreditLineBindingSource;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAgreements.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAgreements.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvAgreements.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAgreements.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvAgreements.Location = new System.Drawing.Point(1, 320);
@@ -2500,9 +2508,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // colAgreementSignDate
             // 
             this.colAgreementSignDate.DataPropertyName = "SignDate";
-            dataGridViewCellStyle9.Format = "d";
-            dataGridViewCellStyle9.NullValue = null;
-            this.colAgreementSignDate.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colAgreementSignDate.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAgreementSignDate.HeaderText = "签订日";
             this.colAgreementSignDate.Name = "colAgreementSignDate";
             this.colAgreementSignDate.ReadOnly = true;
@@ -2676,6 +2684,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.diSignDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.diSignDate.MonthCalendar.BackgroundStyle.Class = "";
+            this.diSignDate.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -2687,6 +2696,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.diSignDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diSignDate.MonthCalendar.TodayButtonVisible = true;
             this.diSignDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diSignDate.Name = "diSignDate";
             this.diSignDate.Size = new System.Drawing.Size(121, 20);

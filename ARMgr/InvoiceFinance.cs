@@ -777,6 +777,11 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
+            if (_case.HighestFinanceLine.PeriodEnd < batch.FinancePeriodBegin)
+            {
+                throw new Exception(String.Format("客户融资额度已到期，不能融资"));
+            }
+
             GuaranteeDeposit gd = _case.GuaranteeDepositClient.GetGuaranteeDeposit(batch.BatchCurrency);
             double guaranteeDeposit = 0;
             CDA activeCDA = _case.ActiveCDA;

@@ -208,8 +208,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
             this.tabControl.CanReorderTabs = true;
             this.tabControl.Controls.Add(this.panelBatch);
-            this.tabControl.Controls.Add(this.panelInvoices);
             this.tabControl.Controls.Add(this.panelCreditNote);
+            this.tabControl.Controls.Add(this.panelInvoices);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -295,6 +295,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.diInputDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.diInputDate.MonthCalendar.BackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -306,6 +307,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.diInputDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.TodayButtonVisible = true;
             this.diInputDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diInputDate.Name = "diInputDate";
             this.diInputDate.Size = new System.Drawing.Size(100, 20);
@@ -397,6 +399,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.assignDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.assignDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.assignDateDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -408,6 +411,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.assignDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.assignDateDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.assignDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.assignDateDateTimePicker.Name = "assignDateDateTimePicker";
             this.assignDateDateTimePicker.Size = new System.Drawing.Size(100, 20);

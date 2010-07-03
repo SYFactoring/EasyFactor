@@ -1451,6 +1451,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.financeLinePeriodEndDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -1462,6 +1463,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.financeLinePeriodEndDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.financeLinePeriodEndDateTimePicker.Name = "financeLinePeriodEndDateTimePicker";
             this.financeLinePeriodEndDateTimePicker.Size = new System.Drawing.Size(108, 20);
@@ -1489,6 +1491,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.financeLinePeriodBeginDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -1500,6 +1503,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.financeLinePeriodBeginDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.financeLinePeriodBeginDateTimePicker.Name = "financeLinePeriodBeginDateTimePicker";
             this.financeLinePeriodBeginDateTimePicker.Size = new System.Drawing.Size(104, 20);
@@ -1576,6 +1580,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.creditCoverPeriodEndDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -1587,6 +1592,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.creditCoverPeriodEndDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.creditCoverPeriodEndDateTimePicker.Name = "creditCoverPeriodEndDateTimePicker";
             this.creditCoverPeriodEndDateTimePicker.Size = new System.Drawing.Size(108, 20);
@@ -1614,6 +1620,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -1625,6 +1632,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.creditCoverPeriodBeginDateTimePicker.Name = "creditCoverPeriodBeginDateTimePicker";
             this.creditCoverPeriodBeginDateTimePicker.Size = new System.Drawing.Size(107, 20);
@@ -1747,6 +1755,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.diCDASignDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.diCDASignDate.MonthCalendar.BackgroundStyle.Class = "";
+            this.diCDASignDate.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -1758,6 +1767,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.diCDASignDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diCDASignDate.MonthCalendar.TodayButtonVisible = true;
             this.diCDASignDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diCDASignDate.Name = "diCDASignDate";
             this.diCDASignDate.Size = new System.Drawing.Size(108, 20);

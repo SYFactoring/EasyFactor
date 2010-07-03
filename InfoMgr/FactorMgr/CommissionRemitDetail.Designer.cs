@@ -44,10 +44,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             DevComponents.DotNetBar.LabelX lblMsgDate;
             DevComponents.DotNetBar.LabelX lblRemitDate;
             DevComponents.DotNetBar.LabelX lblMsgAmount;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommissionRemitDetail));
             DevComponents.DotNetBar.LabelX lblFactor;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommissionRemitDetail));
             this.tabControl = new DevComponents.DotNetBar.TabControl();
             this.panelCommission = new DevComponents.DotNetBar.TabControlPanel();
+            this.tbFactor = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.commissionRemitBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cbRemitCurrency = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tbRemitAmount = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cbMsgCurrency = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -64,9 +66,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tabItemBatches = new DevComponents.DotNetBar.TabItem(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.commissionRemitBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.commissionRemitValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.tbFactor = new DevComponents.DotNetBar.Controls.TextBoxX();
             lblRemitCurrency = new DevComponents.DotNetBar.LabelX();
             lbcRemitAmount = new DevComponents.DotNetBar.LabelX();
             lblMsgCurrency = new DevComponents.DotNetBar.LabelX();
@@ -80,10 +80,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.panelCommission.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.commissionRemitBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diMsgDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diRemitDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commissionRemitBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lblRemitCurrency
@@ -217,6 +217,20 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             lblMsgAmount.TabIndex = 44;
             lblMsgAmount.Text = "<font color=\'red\'>*</font>消息金额:";
             // 
+            // lblFactor
+            // 
+            lblFactor.AutoSize = true;
+            lblFactor.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            lblFactor.BackgroundStyle.Class = "";
+            lblFactor.Location = new System.Drawing.Point(213, 9);
+            lblFactor.Name = "lblFactor";
+            lblFactor.Size = new System.Drawing.Size(47, 16);
+            lblFactor.TabIndex = 66;
+            lblFactor.Text = "保理商:";
+            // 
             // tabControl
             // 
             this.tabControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(217)))), ((int)(((byte)(247)))));
@@ -273,6 +287,22 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.panelCommission.Style.GradientAngle = 90;
             this.panelCommission.TabIndex = 1;
             this.panelCommission.TabItem = this.tabItemCommission;
+            // 
+            // tbFactor
+            // 
+            // 
+            // 
+            // 
+            this.tbFactor.Border.Class = "TextBoxBorder";
+            this.tbFactor.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.commissionRemitBindingSource, "MsgType", true));
+            this.tbFactor.Location = new System.Drawing.Point(264, 6);
+            this.tbFactor.Name = "tbFactor";
+            this.tbFactor.Size = new System.Drawing.Size(103, 20);
+            this.tbFactor.TabIndex = 67;
+            // 
+            // commissionRemitBindingSource
+            // 
+            this.commissionRemitBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CommissionRemittance);
             // 
             // cbRemitCurrency
             // 
@@ -373,6 +403,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.diMsgDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.diMsgDate.MonthCalendar.BackgroundStyle.Class = "";
+            this.diMsgDate.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -384,6 +415,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.diMsgDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diMsgDate.MonthCalendar.TodayButtonVisible = true;
             this.diMsgDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diMsgDate.Name = "diMsgDate";
             this.diMsgDate.Size = new System.Drawing.Size(103, 20);
@@ -409,6 +441,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             this.diRemitDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.diRemitDate.MonthCalendar.BackgroundStyle.Class = "";
+            this.diRemitDate.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -420,6 +453,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.diRemitDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diRemitDate.MonthCalendar.TodayButtonVisible = true;
             this.diRemitDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diRemitDate.Name = "diRemitDate";
             this.diRemitDate.Size = new System.Drawing.Size(103, 20);
@@ -495,40 +529,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 
-            // commissionRemitBindingSource
-            // 
-            this.commissionRemitBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CommissionRemittance);
-            // 
             // commissionRemitValidator
             // 
             this.commissionRemitValidator.ErrorProvider = this.errorProvider;
             this.commissionRemitValidator.Highlighter = this.highlighter;
-            // 
-            // lblFactor
-            // 
-            lblFactor.AutoSize = true;
-            lblFactor.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            lblFactor.BackgroundStyle.Class = "";
-            lblFactor.Location = new System.Drawing.Point(213, 9);
-            lblFactor.Name = "lblFactor";
-            lblFactor.Size = new System.Drawing.Size(47, 16);
-            lblFactor.TabIndex = 66;
-            lblFactor.Text = "保理商:";
-            // 
-            // tbFactor
-            // 
-            // 
-            // 
-            // 
-            this.tbFactor.Border.Class = "TextBoxBorder";
-            this.tbFactor.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.commissionRemitBindingSource, "MsgType", true));
-            this.tbFactor.Location = new System.Drawing.Point(264, 6);
-            this.tbFactor.Name = "tbFactor";
-            this.tbFactor.Size = new System.Drawing.Size(103, 20);
-            this.tbFactor.TabIndex = 67;
             // 
             // CommissionRemitDetail
             // 
@@ -542,10 +546,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.tabControl.ResumeLayout(false);
             this.panelCommission.ResumeLayout(false);
             this.panelCommission.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.commissionRemitBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diMsgDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diRemitDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commissionRemitBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

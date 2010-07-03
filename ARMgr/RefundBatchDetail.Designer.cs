@@ -88,13 +88,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.cmuLogMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemLogDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
-            this.panelInvoices = new DevComponents.DotNetBar.TabControlPanel();
-            this.dgvRefundLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabItemInvoices = new DevComponents.DotNetBar.TabItem(this.components);
             this.panelBatch = new DevComponents.DotNetBar.TabControlPanel();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -108,6 +101,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.refundBatchNoTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabItemBatch = new DevComponents.DotNetBar.TabItem(this.components);
+            this.panelInvoices = new DevComponents.DotNetBar.TabControlPanel();
+            this.dgvRefundLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabItemInvoices = new DevComponents.DotNetBar.TabItem(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
@@ -121,12 +121,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.cmuLogMgr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.panelInvoices.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).BeginInit();
             this.panelBatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.refundDateDateTimePicker)).BeginInit();
+            this.panelInvoices.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -273,6 +273,231 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabControl1.Tabs.Add(this.tabItemBatch);
             this.tabControl1.Tabs.Add(this.tabItemInvoices);
             // 
+            // panelBatch
+            // 
+            this.panelBatch.Controls.Add(lblClient);
+            this.panelBatch.Controls.Add(this.tbClientName);
+            this.panelBatch.Controls.Add(lblInputDate);
+            this.panelBatch.Controls.Add(this.diInputDate);
+            this.panelBatch.Controls.Add(this.refundTypeLabel);
+            this.panelBatch.Controls.Add(this.refundTypeComboBox);
+            this.panelBatch.Controls.Add(this.btnSave);
+            this.panelBatch.Controls.Add(this.btnUpdate);
+            this.panelBatch.Controls.Add(commentLabel);
+            this.panelBatch.Controls.Add(this.commentTextBox);
+            this.panelBatch.Controls.Add(createUserNameLabel);
+            this.panelBatch.Controls.Add(this.createUserNameTextBox);
+            this.panelBatch.Controls.Add(refundDateLabel);
+            this.panelBatch.Controls.Add(this.refundDateDateTimePicker);
+            this.panelBatch.Controls.Add(refundBatchNoLabel);
+            this.panelBatch.Controls.Add(this.refundBatchNoTextBox);
+            this.panelBatch.Controls.Add(CaseLabel);
+            this.panelBatch.Controls.Add(this.caseCodeTextBox);
+            this.panelBatch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelBatch.Location = new System.Drawing.Point(0, 26);
+            this.panelBatch.Name = "panelBatch";
+            this.panelBatch.Padding = new System.Windows.Forms.Padding(1);
+            this.panelBatch.Size = new System.Drawing.Size(446, 233);
+            this.panelBatch.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.panelBatch.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.panelBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelBatch.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.panelBatch.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.panelBatch.Style.GradientAngle = 90;
+            this.panelBatch.TabIndex = 1;
+            this.panelBatch.TabItem = this.tabItemBatch;
+            // 
+            // tbClientName
+            // 
+            // 
+            // 
+            // 
+            this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceBatchNo", true));
+            this.tbClientName.Location = new System.Drawing.Point(300, 2);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.ReadOnly = true;
+            this.tbClientName.Size = new System.Drawing.Size(121, 20);
+            this.tbClientName.TabIndex = 49;
+            this.tbClientName.DoubleClick += new System.EventHandler(this.DetailFinanceBatch);
+            // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceRefundBatch);
+            // 
+            // diInputDate
+            // 
+            // 
+            // 
+            // 
+            this.diInputDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diInputDate.ButtonDropDown.Visible = true;
+            this.diInputDate.ButtonFreeText.Checked = true;
+            this.diInputDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "InputDate", true));
+            this.diInputDate.FreeTextEntryMode = true;
+            this.diInputDate.Location = new System.Drawing.Point(300, 71);
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diInputDate.MonthCalendar.BackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.diInputDate.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diInputDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diInputDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diInputDate.MonthCalendar.TodayButtonVisible = true;
+            this.diInputDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diInputDate.Name = "diInputDate";
+            this.diInputDate.Size = new System.Drawing.Size(121, 20);
+            this.diInputDate.TabIndex = 47;
+            // 
+            // refundTypeComboBox
+            // 
+            this.refundTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RefundType", true));
+            this.refundTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.refundTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.refundTypeComboBox.FormattingEnabled = true;
+            this.refundTypeComboBox.Items.AddRange(new object[] {
+            "买方直接付款",
+            "卖方还款"});
+            this.refundTypeComboBox.Location = new System.Drawing.Point(95, 49);
+            this.refundTypeComboBox.Name = "refundTypeComboBox";
+            this.refundTypeComboBox.Size = new System.Drawing.Size(134, 21);
+            this.refundTypeComboBox.TabIndex = 28;
+            // 
+            // btnSave
+            // 
+            this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnSave.Location = new System.Drawing.Point(241, 190);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSave.TabIndex = 45;
+            this.btnSave.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.SaveBatch);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnUpdate.Location = new System.Drawing.Point(154, 190);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnUpdate.TabIndex = 44;
+            this.btnUpdate.Text = "编辑";
+            this.btnUpdate.Click += new System.EventHandler(this.UpdateBatch);
+            // 
+            // commentTextBox
+            // 
+            // 
+            // 
+            // 
+            this.commentTextBox.Border.Class = "TextBoxBorder";
+            this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "Comment", true));
+            this.commentTextBox.Location = new System.Drawing.Point(95, 97);
+            this.commentTextBox.Multiline = true;
+            this.commentTextBox.Name = "commentTextBox";
+            this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.commentTextBox.Size = new System.Drawing.Size(326, 66);
+            this.commentTextBox.TabIndex = 32;
+            // 
+            // createUserNameTextBox
+            // 
+            // 
+            // 
+            // 
+            this.createUserNameTextBox.Border.Class = "TextBoxBorder";
+            this.createUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CreateUserName", true));
+            this.createUserNameTextBox.Location = new System.Drawing.Point(95, 164);
+            this.createUserNameTextBox.Name = "createUserNameTextBox";
+            this.createUserNameTextBox.ReadOnly = true;
+            this.createUserNameTextBox.Size = new System.Drawing.Size(134, 20);
+            this.createUserNameTextBox.TabIndex = 35;
+            // 
+            // refundDateDateTimePicker
+            // 
+            // 
+            // 
+            // 
+            this.refundDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.refundDateDateTimePicker.ButtonDropDown.Visible = true;
+            this.refundDateDateTimePicker.ButtonFreeText.Checked = true;
+            this.refundDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "RefundDate", true));
+            this.refundDateDateTimePicker.FreeTextEntryMode = true;
+            this.refundDateDateTimePicker.Location = new System.Drawing.Point(95, 73);
+            // 
+            // 
+            // 
+            this.refundDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.refundDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.refundDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.refundDateDateTimePicker.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.refundDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.refundDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+            this.refundDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.refundDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.refundDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.refundDateDateTimePicker.MonthCalendar.TodayButtonVisible = true;
+            this.refundDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.refundDateDateTimePicker.Name = "refundDateDateTimePicker";
+            this.refundDateDateTimePicker.Size = new System.Drawing.Size(134, 20);
+            this.refundDateDateTimePicker.TabIndex = 30;
+            // 
+            // refundBatchNoTextBox
+            // 
+            // 
+            // 
+            // 
+            this.refundBatchNoTextBox.Border.Class = "TextBoxBorder";
+            this.refundBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RefundBatchNo", true));
+            this.refundBatchNoTextBox.Location = new System.Drawing.Point(95, 26);
+            this.refundBatchNoTextBox.Name = "refundBatchNoTextBox";
+            this.refundBatchNoTextBox.Size = new System.Drawing.Size(134, 20);
+            this.refundBatchNoTextBox.TabIndex = 26;
+            // 
+            // caseCodeTextBox
+            // 
+            // 
+            // 
+            // 
+            this.caseCodeTextBox.Border.Class = "TextBoxBorder";
+            this.caseCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CaseCode", true));
+            this.caseCodeTextBox.Location = new System.Drawing.Point(95, 2);
+            this.caseCodeTextBox.Name = "caseCodeTextBox";
+            this.caseCodeTextBox.Size = new System.Drawing.Size(134, 20);
+            this.caseCodeTextBox.TabIndex = 24;
+            this.caseCodeTextBox.DoubleClick += new System.EventHandler(this.DetailCase);
+            // 
+            // tabItemBatch
+            // 
+            this.tabItemBatch.AttachedControl = this.panelBatch;
+            this.tabItemBatch.Name = "tabItemBatch";
+            this.tabItemBatch.Text = "批次";
+            // 
             // panelInvoices
             // 
             this.panelInvoices.Controls.Add(this.dgvRefundLogs);
@@ -371,227 +596,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tabItemInvoices.Name = "tabItemInvoices";
             this.tabItemInvoices.Text = "发票";
             // 
-            // panelBatch
-            // 
-            this.panelBatch.Controls.Add(lblClient);
-            this.panelBatch.Controls.Add(this.tbClientName);
-            this.panelBatch.Controls.Add(lblInputDate);
-            this.panelBatch.Controls.Add(this.diInputDate);
-            this.panelBatch.Controls.Add(this.refundTypeLabel);
-            this.panelBatch.Controls.Add(this.refundTypeComboBox);
-            this.panelBatch.Controls.Add(this.btnSave);
-            this.panelBatch.Controls.Add(this.btnUpdate);
-            this.panelBatch.Controls.Add(commentLabel);
-            this.panelBatch.Controls.Add(this.commentTextBox);
-            this.panelBatch.Controls.Add(createUserNameLabel);
-            this.panelBatch.Controls.Add(this.createUserNameTextBox);
-            this.panelBatch.Controls.Add(refundDateLabel);
-            this.panelBatch.Controls.Add(this.refundDateDateTimePicker);
-            this.panelBatch.Controls.Add(refundBatchNoLabel);
-            this.panelBatch.Controls.Add(this.refundBatchNoTextBox);
-            this.panelBatch.Controls.Add(CaseLabel);
-            this.panelBatch.Controls.Add(this.caseCodeTextBox);
-            this.panelBatch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBatch.Location = new System.Drawing.Point(0, 26);
-            this.panelBatch.Name = "panelBatch";
-            this.panelBatch.Padding = new System.Windows.Forms.Padding(1);
-            this.panelBatch.Size = new System.Drawing.Size(446, 233);
-            this.panelBatch.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.panelBatch.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.panelBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelBatch.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.panelBatch.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.panelBatch.Style.GradientAngle = 90;
-            this.panelBatch.TabIndex = 1;
-            this.panelBatch.TabItem = this.tabItemBatch;
-            // 
-            // tbClientName
-            // 
-            // 
-            // 
-            // 
-            this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "FinanceBatchNo", true));
-            this.tbClientName.Location = new System.Drawing.Point(300, 2);
-            this.tbClientName.Name = "tbClientName";
-            this.tbClientName.ReadOnly = true;
-            this.tbClientName.Size = new System.Drawing.Size(121, 20);
-            this.tbClientName.TabIndex = 49;
-            this.tbClientName.DoubleClick += new System.EventHandler(this.DetailFinanceBatch);
-            // 
-            // batchBindingSource
-            // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceRefundBatch);
-            // 
-            // diInputDate
-            // 
-            // 
-            // 
-            // 
-            this.diInputDate.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diInputDate.ButtonDropDown.Visible = true;
-            this.diInputDate.ButtonFreeText.Checked = true;
-            this.diInputDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "InputDate", true));
-            this.diInputDate.FreeTextEntryMode = true;
-            this.diInputDate.Location = new System.Drawing.Point(300, 71);
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diInputDate.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diInputDate.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.diInputDate.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diInputDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diInputDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diInputDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diInputDate.Name = "diInputDate";
-            this.diInputDate.Size = new System.Drawing.Size(121, 20);
-            this.diInputDate.TabIndex = 47;
-            // 
-            // refundTypeComboBox
-            // 
-            this.refundTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RefundType", true));
-            this.refundTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.refundTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.refundTypeComboBox.FormattingEnabled = true;
-            this.refundTypeComboBox.Items.AddRange(new object[] {
-            "买方直接付款",
-            "卖方还款"});
-            this.refundTypeComboBox.Location = new System.Drawing.Point(95, 49);
-            this.refundTypeComboBox.Name = "refundTypeComboBox";
-            this.refundTypeComboBox.Size = new System.Drawing.Size(134, 21);
-            this.refundTypeComboBox.TabIndex = 28;
-            // 
-            // btnSave
-            // 
-            this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(241, 190);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSave.TabIndex = 45;
-            this.btnSave.Text = "保存";
-            this.btnSave.Click += new System.EventHandler(this.SaveBatch);
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnUpdate.Location = new System.Drawing.Point(154, 190);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnUpdate.TabIndex = 44;
-            this.btnUpdate.Text = "编辑";
-            this.btnUpdate.Click += new System.EventHandler(this.UpdateBatch);
-            // 
-            // commentTextBox
-            // 
-            // 
-            // 
-            // 
-            this.commentTextBox.Border.Class = "TextBoxBorder";
-            this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "Comment", true));
-            this.commentTextBox.Location = new System.Drawing.Point(95, 97);
-            this.commentTextBox.Multiline = true;
-            this.commentTextBox.Name = "commentTextBox";
-            this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.commentTextBox.Size = new System.Drawing.Size(326, 66);
-            this.commentTextBox.TabIndex = 32;
-            // 
-            // createUserNameTextBox
-            // 
-            // 
-            // 
-            // 
-            this.createUserNameTextBox.Border.Class = "TextBoxBorder";
-            this.createUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CreateUserName", true));
-            this.createUserNameTextBox.Location = new System.Drawing.Point(95, 164);
-            this.createUserNameTextBox.Name = "createUserNameTextBox";
-            this.createUserNameTextBox.ReadOnly = true;
-            this.createUserNameTextBox.Size = new System.Drawing.Size(134, 20);
-            this.createUserNameTextBox.TabIndex = 35;
-            // 
-            // refundDateDateTimePicker
-            // 
-            // 
-            // 
-            // 
-            this.refundDateDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.refundDateDateTimePicker.ButtonDropDown.Visible = true;
-            this.refundDateDateTimePicker.ButtonFreeText.Checked = true;
-            this.refundDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "RefundDate", true));
-            this.refundDateDateTimePicker.FreeTextEntryMode = true;
-            this.refundDateDateTimePicker.Location = new System.Drawing.Point(95, 73);
-            // 
-            // 
-            // 
-            this.refundDateDateTimePicker.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.refundDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.refundDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
-            // 
-            // 
-            // 
-            this.refundDateDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.refundDateDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.refundDateDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.refundDateDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.refundDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.refundDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.refundDateDateTimePicker.Name = "refundDateDateTimePicker";
-            this.refundDateDateTimePicker.Size = new System.Drawing.Size(134, 20);
-            this.refundDateDateTimePicker.TabIndex = 30;
-            // 
-            // refundBatchNoTextBox
-            // 
-            // 
-            // 
-            // 
-            this.refundBatchNoTextBox.Border.Class = "TextBoxBorder";
-            this.refundBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RefundBatchNo", true));
-            this.refundBatchNoTextBox.Location = new System.Drawing.Point(95, 26);
-            this.refundBatchNoTextBox.Name = "refundBatchNoTextBox";
-            this.refundBatchNoTextBox.Size = new System.Drawing.Size(134, 20);
-            this.refundBatchNoTextBox.TabIndex = 26;
-            // 
-            // caseCodeTextBox
-            // 
-            // 
-            // 
-            // 
-            this.caseCodeTextBox.Border.Class = "TextBoxBorder";
-            this.caseCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "CaseCode", true));
-            this.caseCodeTextBox.Location = new System.Drawing.Point(95, 2);
-            this.caseCodeTextBox.Name = "caseCodeTextBox";
-            this.caseCodeTextBox.Size = new System.Drawing.Size(134, 20);
-            this.caseCodeTextBox.TabIndex = 24;
-            this.caseCodeTextBox.DoubleClick += new System.EventHandler(this.DetailCase);
-            // 
-            // tabItemBatch
-            // 
-            this.tabItemBatch.AttachedControl = this.panelBatch;
-            this.tabItemBatch.Name = "tabItemBatch";
-            this.tabItemBatch.Text = "批次";
-            // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
@@ -615,13 +619,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.cmuLogMgr.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.panelInvoices.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).EndInit();
             this.panelBatch.ResumeLayout(false);
             this.panelBatch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diInputDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.refundDateDateTimePicker)).EndInit();
+            this.panelInvoices.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRefundLogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 

@@ -77,14 +77,16 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX commentLabel;
             DevComponents.DotNetBar.LabelX refundDateLabel;
             DevComponents.DotNetBar.LabelX refundAmountLabel;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PoolRefund));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvLogs = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colFinanceBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPoolFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.poolBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -104,16 +106,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.commentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.refundDateDateTimePicker = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.colFinanceBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPoolFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             lblRefundType = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
             refundDateLabel = new DevComponents.DotNetBar.LabelX();
@@ -172,7 +170,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             refundAmountLabel.BackgroundStyle.Class = "";
-            refundAmountLabel.Location = new System.Drawing.Point(25, 30);
+            refundAmountLabel.Location = new System.Drawing.Point(25, 31);
             refundAmountLabel.Name = "refundAmountLabel";
             refundAmountLabel.Size = new System.Drawing.Size(56, 16);
             refundAmountLabel.TabIndex = 16;
@@ -183,28 +181,28 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvLogs.AllowUserToAddRows = false;
             this.dgvLogs.AllowUserToDeleteRows = false;
             this.dgvLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colFinanceBatchNo,
             this.colBatchCurrency,
             this.colFinanceAmount,
             this.colPoolFinanceOutstanding});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLogs.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLogs.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLogs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
@@ -214,6 +212,40 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvLogs.Size = new System.Drawing.Size(949, 221);
             this.dgvLogs.TabIndex = 5;
+            // 
+            // colFinanceBatchNo
+            // 
+            this.colFinanceBatchNo.DataPropertyName = "FinanceBatchNo";
+            this.colFinanceBatchNo.HeaderText = "案子编号";
+            this.colFinanceBatchNo.Name = "colFinanceBatchNo";
+            this.colFinanceBatchNo.ReadOnly = true;
+            // 
+            // colBatchCurrency
+            // 
+            this.colBatchCurrency.DataPropertyName = "BatchCurrency";
+            this.colBatchCurrency.HeaderText = "融资币别";
+            this.colBatchCurrency.Name = "colBatchCurrency";
+            this.colBatchCurrency.ReadOnly = true;
+            // 
+            // colFinanceAmount
+            // 
+            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N2";
+            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle10;
+            this.colFinanceAmount.HeaderText = "融资金额";
+            this.colFinanceAmount.Name = "colFinanceAmount";
+            this.colFinanceAmount.ReadOnly = true;
+            // 
+            // colPoolFinanceOutstanding
+            // 
+            this.colPoolFinanceOutstanding.DataPropertyName = "PoolFinanceOutstanding";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            this.colPoolFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colPoolFinanceOutstanding.HeaderText = "融资余额";
+            this.colPoolFinanceOutstanding.Name = "colPoolFinanceOutstanding";
+            this.colPoolFinanceOutstanding.ReadOnly = true;
             // 
             // poolBindingNavigator
             // 
@@ -342,7 +374,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.refundAmountTextBoxX.Border.Class = "TextBoxBorder";
-            this.refundAmountTextBoxX.Location = new System.Drawing.Point(147, 29);
+            this.refundAmountTextBoxX.Location = new System.Drawing.Point(147, 30);
             this.refundAmountTextBoxX.Name = "refundAmountTextBoxX";
             this.refundAmountTextBoxX.Size = new System.Drawing.Size(100, 20);
             this.refundAmountTextBoxX.TabIndex = 18;
@@ -356,7 +388,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.batchCurrencyComboBoxEx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.batchCurrencyComboBoxEx.FormattingEnabled = true;
             this.batchCurrencyComboBoxEx.ItemHeight = 14;
-            this.batchCurrencyComboBoxEx.Location = new System.Drawing.Point(90, 28);
+            this.batchCurrencyComboBoxEx.Location = new System.Drawing.Point(90, 30);
             this.batchCurrencyComboBoxEx.Name = "batchCurrencyComboBoxEx";
             this.batchCurrencyComboBoxEx.Size = new System.Drawing.Size(51, 20);
             this.batchCurrencyComboBoxEx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -407,11 +439,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.commentTextBox.Border.Class = "TextBoxBorder";
-            this.commentTextBox.Location = new System.Drawing.Point(295, 33);
+            this.commentTextBox.Location = new System.Drawing.Point(295, 29);
             this.commentTextBox.Multiline = true;
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.commentTextBox.Size = new System.Drawing.Size(307, 36);
+            this.commentTextBox.Size = new System.Drawing.Size(307, 40);
             this.commentTextBox.TabIndex = 10;
             // 
             // refundDateDateTimePicker
@@ -423,7 +455,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.refundDateDateTimePicker.ButtonDropDown.Visible = true;
             this.refundDateDateTimePicker.ButtonFreeText.Checked = true;
             this.refundDateDateTimePicker.FreeTextEntryMode = true;
-            this.refundDateDateTimePicker.Location = new System.Drawing.Point(90, 3);
+            this.refundDateDateTimePicker.Location = new System.Drawing.Point(90, 5);
             // 
             // 
             // 
@@ -457,16 +489,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator.ErrorProvider = this.errorProvider;
             this.superValidator.Highlighter = this.highlighter;
             // 
-            // requiredFieldValidator4
-            // 
-            this.requiredFieldValidator4.ErrorMessage = "必填";
-            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "必填";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // requiredFieldValidator3
             // 
             this.requiredFieldValidator3.ErrorMessage = "必填";
@@ -477,44 +499,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.requiredFieldValidator2.ErrorMessage = "必填";
             this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
+            // requiredFieldValidator4
+            // 
+            this.requiredFieldValidator4.ErrorMessage = "必填";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "必填";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // colFinanceBatchNo
-            // 
-            this.colFinanceBatchNo.DataPropertyName = "FinanceBatchNo";
-            this.colFinanceBatchNo.HeaderText = "案子编号";
-            this.colFinanceBatchNo.Name = "colFinanceBatchNo";
-            this.colFinanceBatchNo.ReadOnly = true;
-            // 
-            // colBatchCurrency
-            // 
-            this.colBatchCurrency.DataPropertyName = "BatchCurrency";
-            this.colBatchCurrency.HeaderText = "融资币别";
-            this.colBatchCurrency.Name = "colBatchCurrency";
-            this.colBatchCurrency.ReadOnly = true;
-            // 
-            // colFinanceAmount
-            // 
-            this.colFinanceAmount.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.colFinanceAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colFinanceAmount.HeaderText = "融资金额";
-            this.colFinanceAmount.Name = "colFinanceAmount";
-            this.colFinanceAmount.ReadOnly = true;
-            // 
-            // colPoolFinanceOutstanding
-            // 
-            this.colPoolFinanceOutstanding.DataPropertyName = "PoolFinanceOutstanding";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.colPoolFinanceOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPoolFinanceOutstanding.HeaderText = "融资余额";
-            this.colPoolFinanceOutstanding.Name = "colPoolFinanceOutstanding";
-            this.colPoolFinanceOutstanding.ReadOnly = true;
             // 
             // PoolRefund
             // 

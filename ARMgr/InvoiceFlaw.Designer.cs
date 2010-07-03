@@ -268,6 +268,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.flawResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.flawResolveDateDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.flawResolveDateDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
@@ -279,6 +280,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.flawResolveDateDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.flawResolveDateDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.flawResolveDateDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.flawResolveDateDateTimePicker.Name = "flawResolveDateDateTimePicker";
             this.flawResolveDateDateTimePicker.Size = new System.Drawing.Size(100, 20);

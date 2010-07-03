@@ -2959,11 +2959,12 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("该客户融资额度为空，不能融资：" + assignBatchCode);
                         }
 
-                        if (assignBatch.Case.HighestFinanceLine.PeriodEnd < DateTime.Today)
+                        if (assignBatch.Case.HighestFinanceLine.PeriodEnd < financeBatch.FinancePeriodBegin)
                         {
                             throw new Exception(String.Format("客户融资额度已到期{0:d}，不能融资：{1}",
                                                               assignBatch.Case.HighestFinanceLine.PeriodEnd, assignBatchCode));
                         }
+
                         if (TypeUtil.LessZero(activeCDA.FinanceLineOutstanding - financeAmount + guaranteeDeposit))
                         {
                             throw new Exception(String.Format("该案件的预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}",
