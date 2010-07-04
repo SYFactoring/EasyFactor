@@ -384,9 +384,6 @@ namespace CMBC.EasyFactor.DB.dbml
 
                     FinanceAmount += finance;
                 }
-
-                FinanceDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodBegin);
-                FinanceDueDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodEnd);
             }
             else
             {
@@ -408,8 +405,12 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (InvoiceFinanceLogs.Count > 0)
             {
-                FinanceDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodBegin);
-                FinanceDueDate = InvoiceFinanceLogs.Min(log => log.InvoiceFinanceBatch.FinancePeriodEnd);
+                FinanceDate = (from log in InvoiceFinanceLogs
+                               where TypeUtil.GreaterZero(log.FinanceOutstanding)
+                               select log.InvoiceFinanceBatch.FinancePeriodBegin).Min();
+                FinanceDueDate = (from log in InvoiceFinanceLogs
+                                  where TypeUtil.GreaterZero(log.FinanceOutstanding)
+                                  select log.InvoiceFinanceBatch.FinancePeriodEnd).Min();
             }
             else
             {
@@ -515,6 +516,8 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 RefundDate = null;
             }
+
+            CaculateFinanceDate();
         }
 
         /// <summary>

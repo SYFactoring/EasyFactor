@@ -135,7 +135,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             var refundList = (from invoice in invoiceList
                               select _context.Invoices.SingleOrDefault(i => i.InvoiceID == invoice.InvoiceID)
-                              into newInvoice from financeLog in newInvoice.InvoiceFinanceLogs select new InvoiceRefundLog(financeLog)).ToList();
+                                  into newInvoice
+                                  from financeLog in newInvoice.InvoiceFinanceLogs
+                                  select new InvoiceRefundLog(financeLog)).ToList();
 
             _totalPayment = paymentBatch.InvoicePaymentLogs.Sum(log => log.PaymentAmount).GetValueOrDefault();
             tbTotalPayment.Text = String.Format("{0:N2}", _totalPayment);
@@ -159,7 +161,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             for (int i = 0; i < logsBindingSource.List.Count; i++)
             {
-                var cell = (DataGridViewCheckBoxCell) dgvLogs.Rows[i].Cells[0];
+                var cell = (DataGridViewCheckBoxCell)dgvLogs.Rows[i].Cells[0];
                 cell.Value = 0;
             }
 
@@ -176,8 +178,8 @@ namespace CMBC.EasyFactor.ARMgr
                 ControlUtil.SetComponetDefault(comp);
             }
 
-            batchBindingSource.DataSource = typeof (InvoiceRefundBatch);
-            logsBindingSource.DataSource = typeof (InvoiceRefundLog);
+            batchBindingSource.DataSource = typeof(InvoiceRefundBatch);
+            logsBindingSource.DataSource = typeof(InvoiceRefundLog);
         }
 
         //?Private?Methods?(19)?
@@ -212,7 +214,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedLog = (InvoiceRefundLog) logsBindingSource.List[dgvLogs.CurrentCell.RowIndex];
+            var selectedLog = (InvoiceRefundLog)logsBindingSource.List[dgvLogs.CurrentCell.RowIndex];
             var caseDetail = new CaseDetail(selectedLog.InvoiceFinanceLog.Invoice.InvoiceAssignBatch.Case,
                                             CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
@@ -230,7 +232,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedLog = (InvoiceRefundLog) logsBindingSource.List[dgvLogs.CurrentCell.RowIndex];
+            var selectedLog = (InvoiceRefundLog)logsBindingSource.List[dgvLogs.CurrentCell.RowIndex];
             var cdaDetail = new CDADetail(selectedLog.InvoiceFinanceLog.Invoice.InvoiceAssignBatch.Case.ActiveCDA,
                                           CDADetail.OpCDAType.DETAIL_CDA);
             cdaDetail.ShowDialog(this);
@@ -248,7 +250,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedLog = (InvoiceRefundLog) logsBindingSource.List[dgvLogs.CurrentCell.RowIndex];
+            var selectedLog = (InvoiceRefundLog)logsBindingSource.List[dgvLogs.CurrentCell.RowIndex];
             var invoiceDetail = new InvoiceDetail(selectedLog.InvoiceFinanceLog.Invoice,
                                                   InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             invoiceDetail.ShowDialog(this);
@@ -267,11 +269,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             IList invoiceRefundList = logsBindingSource.List;
-            var log = (InvoiceRefundLog) invoiceRefundList[e.RowIndex];
+            var log = (InvoiceRefundLog)invoiceRefundList[e.RowIndex];
             dgvLogs.EndEdit();
             if (dgvLogs.Columns[e.ColumnIndex] == colCheckBox)
             {
-                var checkBoxCell = (DataGridViewCheckBoxCell) dgvLogs.Rows[e.RowIndex].Cells[0];
+                var checkBoxCell = (DataGridViewCheckBoxCell)dgvLogs.Rows[e.RowIndex].Cells[0];
 
                 if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
                 {
@@ -302,7 +304,7 @@ namespace CMBC.EasyFactor.ARMgr
             DataGridViewColumn col = dgvLogs.Columns[e.ColumnIndex];
             if (col == colFinanceDate || col == colFinanceDueDate)
             {
-                var date = (DateTime) e.Value;
+                var date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
                 e.FormattingApplied = true;
             }
@@ -343,7 +345,7 @@ namespace CMBC.EasyFactor.ARMgr
             DataGridViewColumn col = dgvLogs.Columns[e.ColumnIndex];
             if (col == colRefundAmount)
             {
-                var str = (string) e.FormattedValue;
+                var str = (string)e.FormattedValue;
                 double result;
                 bool ok = Double.TryParse(str, out result);
                 if (!ok)
@@ -433,14 +435,14 @@ namespace CMBC.EasyFactor.ARMgr
 
             var importForm = new ImportForm(ImportForm.ImportType.IMPORT_REFUND_BY_BATCH);
             importForm.ShowDialog(this);
-            var logList = (List<InvoiceRefundLog>) importForm.ImportedList;
+            var logList = (List<InvoiceRefundLog>)importForm.ImportedList;
             if (logList != null)
             {
                 for (int i = 0; i < logsBindingSource.List.Count; i++)
                 {
-                    var cell = (DataGridViewCheckBoxCell) dgvLogs.Rows[i].Cells[0];
+                    var cell = (DataGridViewCheckBoxCell)dgvLogs.Rows[i].Cells[0];
                     cell.Value = 0;
-                    var oldLog = (InvoiceRefundLog) logsBindingSource.List[i];
+                    var oldLog = (InvoiceRefundLog)logsBindingSource.List[i];
 
                     InvoiceRefundLog newLog = logList.SingleOrDefault(log => log.InvoiceNo2 == oldLog.InvoiceNo2);
                     if (newLog != null)
@@ -454,7 +456,7 @@ namespace CMBC.EasyFactor.ARMgr
                             cell.Value = 1;
                         }
 
-                        ResetRow(i, 1 == (int) cell.Value ? true : false);
+                        ResetRow(i, 1 == (int)cell.Value ? true : false);
                     }
                 }
 
@@ -498,9 +500,10 @@ namespace CMBC.EasyFactor.ARMgr
             IQueryable<InvoiceFinanceLog> queryResult = from log in _context.InvoiceFinanceLogs
                                                         where log.Invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode
                                                               &&
-                                                              (log.Invoice.RefundAmount.GetValueOrDefault() -
-                                                               log.Invoice.FinanceAmount.GetValueOrDefault() <
+                                                              ((from refundLog in log.InvoiceRefundLogs select refundLog.RefundAmount).Sum().GetValueOrDefault() -
+                                                               log.FinanceAmount.GetValueOrDefault() <
                                                                -TypeUtil.PRECISION)
+                                                        orderby log.InvoiceFinanceBatch.FinancePeriodEnd
                                                         select log;
 
             var logs = new List<InvoiceRefundLog>();
@@ -524,7 +527,7 @@ namespace CMBC.EasyFactor.ARMgr
             IList logList = logsBindingSource.List;
             foreach (DataGridViewRow dgvRow in dgvLogs.Rows)
             {
-                var log = (InvoiceRefundLog) logList[dgvRow.Index];
+                var log = (InvoiceRefundLog)logList[dgvRow.Index];
                 if (e.CheckedState)
                 {
                     dgvRow.Cells[0].Value = true;
@@ -554,7 +557,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (!editable)
             {
                 IList logList = logsBindingSource.List;
-                var log = (InvoiceRefundLog) logList[rowIndex];
+                var log = (InvoiceRefundLog)logList[rowIndex];
                 log.RefundAmount = 0;
             }
         }
@@ -593,7 +596,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             bool isSaveOK = true;
-            var batch = (InvoiceRefundBatch) batchBindingSource.DataSource;
+            var batch = (InvoiceRefundBatch)batchBindingSource.DataSource;
             var logList = new List<InvoiceRefundLog>();
 
             try
@@ -608,7 +611,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                     {
-                        var log = (InvoiceRefundLog) logsBindingSource.List[i];
+                        var log = (InvoiceRefundLog)logsBindingSource.List[i];
                         logList.Add(log);
                         log.InvoiceFinanceLog =
                             _context.InvoiceFinanceLogs.SingleOrDefault(fl => fl.FinanceLogID == log.FinanceLogID2);
@@ -671,10 +674,10 @@ namespace CMBC.EasyFactor.ARMgr
 
                 for (int i = 0; i < logsBindingSource.List.Count; i++)
                 {
-                    var log = (InvoiceRefundLog) logsBindingSource.List[i];
+                    var log = (InvoiceRefundLog)logsBindingSource.List[i];
                     log.InvoiceNo2 = log.InvoiceNo;
 
-                    var cell = (DataGridViewCheckBoxCell) dgvLogs.Rows[i].Cells[0];
+                    var cell = (DataGridViewCheckBoxCell)dgvLogs.Rows[i].Cells[0];
                     cell.Value = 1;
                     ResetRow(i, true);
                 }
@@ -694,7 +697,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    var refundLog = (InvoiceRefundLog) refundLogList[i];
+                    var refundLog = (InvoiceRefundLog)refundLogList[i];
                     double refundAmount = refundLog.RefundAmount.GetValueOrDefault();
                     if (refundLog.RefundCurrency != _case.InvoiceCurrency)
                     {
@@ -722,7 +725,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
-                    var log = (InvoiceRefundLog) logList[i];
+                    var log = (InvoiceRefundLog)logList[i];
                     if (TypeUtil.LessZero(log.FinanceAmount - log.RefundAmount))
                     {
                         MessageBoxEx.Show("还款金额不能大于融资余额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION,
