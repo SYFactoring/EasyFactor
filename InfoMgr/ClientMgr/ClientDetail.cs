@@ -1473,6 +1473,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 bool isAddOK = true;
                 try
                 {
+                    if (_context.ClientReviews.Any(c => c.ReviewNo == review.ReviewNo))
+                    {
+                        MessageBoxEx.Show("协查意见编号重复，不能保存", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     client.ClientReviews.Add(review);
 
                     _context.ClientReviews.InsertOnSubmit(review);

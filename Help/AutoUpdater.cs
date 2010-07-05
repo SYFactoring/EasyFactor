@@ -297,13 +297,12 @@ namespace CMBC.EasyFactor.Help
             string stUpdateName = String.Format("update{0:yyyyMMdd}", DateTime.Now);
             // DirectoryInfo diDest = new DirectoryInfo(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
             string stDest = Path.GetTempPath() + stUpdateName + Path.DirectorySeparatorChar;
-            string[] exeFileList = Directory.GetFiles(stDest, "*.msi");
+            string[] exeFileList = Directory.GetFiles(stDest, "*.*");
             if (exeFileList.Length > 0)
             {
                 Environment.ExitCode = 2; //the surrounding AppStarter must look for this to restart the app.
                 Application.Exit();
-                var ps = new Process { StartInfo = { FileName = exeFileList[0] } };
-                ps.Start();
+                Process.Start(exeFileList[0]);
             }
         }
 
