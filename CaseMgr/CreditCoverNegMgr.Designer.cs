@@ -2,7 +2,7 @@ namespace CMBC.EasyFactor.CaseMgr
 {
     partial class CreditCoverNegMgr
     {
-		#region?Fields?(52)?
+        #region?Fields?(52)?
 
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.ButtonX btnQueryReset;
@@ -40,11 +40,11 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.Controls.TextBoxX tbSellerFactorCode;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
-		#endregion?Fields?
+        #endregion?Fields?
 
-		#region?Methods?(1)?
+        #region?Methods?(1)?
 
-		//?Protected?Methods?(1)?
+        //?Protected?Methods?(1)?
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -59,7 +59,7 @@ namespace CMBC.EasyFactor.CaseMgr
             base.Dispose(disposing);
         }
 
-		#endregion?Methods?
+        #endregion?Methods?
 
 
 
@@ -132,6 +132,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemCreditCoverDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemCreditCoverNegExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbRequestType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblRequestType = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -143,6 +145,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbRequestType);
+            this.panelQuery.Controls.Add(this.lblRequestType);
             this.panelQuery.Controls.Add(this.cbLocation);
             this.panelQuery.Controls.Add(this.lblLocation);
             this.panelQuery.Controls.Add(this.tbCreateUserName);
@@ -170,7 +174,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(753, 75);
+            this.panelQuery.Size = new System.Drawing.Size(920, 75);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -212,9 +216,9 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbCreateUserName.Border.Class = "TextBoxBorder";
-            this.tbCreateUserName.Location = new System.Drawing.Point(526, 49);
+            this.tbCreateUserName.Location = new System.Drawing.Point(676, 52);
             this.tbCreateUserName.Name = "tbCreateUserName";
-            this.tbCreateUserName.Size = new System.Drawing.Size(100, 20);
+            this.tbCreateUserName.Size = new System.Drawing.Size(90, 20);
             this.tbCreateUserName.TabIndex = 18;
             // 
             // lblCreateUserName
@@ -224,7 +228,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblCreateUserName.BackgroundStyle.Class = "";
-            this.lblCreateUserName.Location = new System.Drawing.Point(478, 53);
+            this.lblCreateUserName.Location = new System.Drawing.Point(630, 54);
             this.lblCreateUserName.Name = "lblCreateUserName";
             this.lblCreateUserName.Size = new System.Drawing.Size(44, 16);
             this.lblCreateUserName.TabIndex = 17;
@@ -237,7 +241,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cbIsContractSigned.BackgroundStyle.Class = "";
-            this.cbIsContractSigned.Location = new System.Drawing.Point(528, 7);
+            this.cbIsContractSigned.Location = new System.Drawing.Point(590, 7);
             this.cbIsContractSigned.Name = "cbIsContractSigned";
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -248,7 +252,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQueryReset.Location = new System.Drawing.Point(654, 27);
+            this.btnQueryReset.Location = new System.Drawing.Point(716, 27);
             this.btnQueryReset.Name = "btnQueryReset";
             this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -263,7 +267,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cbIsCDA.BackgroundStyle.Class = "";
-            this.cbIsCDA.Location = new System.Drawing.Point(528, 31);
+            this.cbIsCDA.Location = new System.Drawing.Point(590, 31);
             this.cbIsCDA.Name = "cbIsCDA";
             this.cbIsCDA.Size = new System.Drawing.Size(100, 16);
             this.cbIsCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -335,7 +339,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(655, 4);
+            this.btnQuery.Location = new System.Drawing.Point(717, 4);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(48, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -498,10 +502,11 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(650, 50);
+            this.lblCount.Location = new System.Drawing.Point(771, 9);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
+            this.lblCount.Size = new System.Drawing.Size(71, 16);
             this.lblCount.TabIndex = 23;
+            this.lblCount.Text = "获得 条记录";
             // 
             // tbBuyerFactorCode
             // 
@@ -509,9 +514,9 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbBuyerFactorCode.Border.Class = "TextBoxBorder";
-            this.tbBuyerFactorCode.Location = new System.Drawing.Point(456, 27);
+            this.tbBuyerFactorCode.Location = new System.Drawing.Point(463, 27);
             this.tbBuyerFactorCode.Name = "tbBuyerFactorCode";
-            this.tbBuyerFactorCode.Size = new System.Drawing.Size(66, 20);
+            this.tbBuyerFactorCode.Size = new System.Drawing.Size(100, 20);
             this.tbBuyerFactorCode.TabIndex = 11;
             // 
             // lblBuyerFactorCode
@@ -521,7 +526,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblBuyerFactorCode.BackgroundStyle.Class = "";
-            this.lblBuyerFactorCode.Location = new System.Drawing.Point(364, 28);
+            this.lblBuyerFactorCode.Location = new System.Drawing.Point(371, 28);
             this.lblBuyerFactorCode.Name = "lblBuyerFactorCode";
             this.lblBuyerFactorCode.Size = new System.Drawing.Size(93, 16);
             this.lblBuyerFactorCode.TabIndex = 10;
@@ -533,9 +538,9 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbSellerFactorCode.Border.Class = "TextBoxBorder";
-            this.tbSellerFactorCode.Location = new System.Drawing.Point(456, 4);
+            this.tbSellerFactorCode.Location = new System.Drawing.Point(463, 4);
             this.tbSellerFactorCode.Name = "tbSellerFactorCode";
-            this.tbSellerFactorCode.Size = new System.Drawing.Size(66, 20);
+            this.tbSellerFactorCode.Size = new System.Drawing.Size(100, 20);
             this.tbSellerFactorCode.TabIndex = 5;
             // 
             // lblSellerFactorCode
@@ -545,7 +550,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblSellerFactorCode.BackgroundStyle.Class = "";
-            this.lblSellerFactorCode.Location = new System.Drawing.Point(364, 6);
+            this.lblSellerFactorCode.Location = new System.Drawing.Point(371, 6);
             this.lblSellerFactorCode.Name = "lblSellerFactorCode";
             this.lblSellerFactorCode.Size = new System.Drawing.Size(93, 16);
             this.lblSellerFactorCode.TabIndex = 4;
@@ -601,7 +606,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCreditCoverNegs.Name = "dgvCreditCoverNegs";
             this.dgvCreditCoverNegs.ReadOnly = true;
             this.dgvCreditCoverNegs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(753, 270);
+            this.dgvCreditCoverNegs.Size = new System.Drawing.Size(920, 270);
             this.dgvCreditCoverNegs.TabIndex = 1;
             this.dgvCreditCoverNegs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCreditCoverNegs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvCreditCoverNegsRowPostPaint);
@@ -808,6 +813,33 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemCreditCoverNegExport.Text = "导出额度申请";
             this.menuItemCreditCoverNegExport.Click += new System.EventHandler(this.ExportCreditCoverNeg);
             // 
+            // cbRequestType
+            // 
+            this.cbRequestType.DisplayMember = "Text";
+            this.cbRequestType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbRequestType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRequestType.FormattingEnabled = true;
+            this.cbRequestType.ItemHeight = 14;
+            this.cbRequestType.Location = new System.Drawing.Point(523, 51);
+            this.cbRequestType.Name = "cbRequestType";
+            this.cbRequestType.Size = new System.Drawing.Size(85, 20);
+            this.cbRequestType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbRequestType.TabIndex = 27;
+            this.cbRequestType.Items.AddRange(new object[] { "", "P-预额度", "C-正式额度" });
+            // 
+            // lblRequestType
+            // 
+            this.lblRequestType.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblRequestType.BackgroundStyle.Class = "";
+            this.lblRequestType.Location = new System.Drawing.Point(467, 52);
+            this.lblRequestType.Name = "lblRequestType";
+            this.lblRequestType.Size = new System.Drawing.Size(50, 16);
+            this.lblRequestType.TabIndex = 26;
+            this.lblRequestType.Text = "P/C标志";
+            // 
             // CreditCoverNegMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -816,7 +848,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "CreditCoverNegMgr";
-            this.Size = new System.Drawing.Size(753, 345);
+            this.Size = new System.Drawing.Size(920, 345);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();
@@ -849,5 +881,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbRequestType;
+        private DevComponents.DotNetBar.LabelX lblRequestType;
     }
 }

@@ -165,6 +165,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string buyerFactorCode = tbBuyerFactorCode.Text;
             string createUserName = tbCreateUserName.Text;
             string location = cbLocation.Text;
+            string requestType = cbRequestType.Text;
 
             var context = new DBDataContext();
 
@@ -177,6 +178,8 @@ namespace CMBC.EasyFactor.CaseMgr
                                                                  (endDate != diEnd.MinDate
                                                                       ? neg.RequestDate <= endDate
                                                                       : true)
+                                                                 &&
+                                                                 (requestType != "" ? neg.RequestType == requestType : true)
                                                              let c = neg.Case
                                                              where
                                                                  (location == "È«²¿"
