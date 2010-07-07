@@ -83,7 +83,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -95,8 +95,6 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.dateInputTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblInputDate = new DevComponents.DotNetBar.LabelX();
@@ -119,6 +117,22 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbAssignBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAssignBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCommissionRemitDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemAssignReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemThreeReports = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
             this.colFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,27 +157,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFactorCommissionAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInputDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsgAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemitDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemitAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemAssignReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemThreeReports = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCommissionRemitDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateInputTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateInputFrom)).BeginInit();
@@ -636,21 +629,16 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFactorCommissionPrice,
             this.colFactorCommissionAmount,
             this.colInputDate,
-            this.colCreateUserName,
-            this.colMsgType,
-            this.colMsgDate,
-            this.colMsgAmount,
-            this.colRemitDate,
-            this.colRemitAmount});
+            this.colCreateUserName});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvBatches.Location = new System.Drawing.Point(0, 55);
@@ -662,6 +650,126 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvBatchesCellDoubleClick);
             this.dgvBatches.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvBatchesCellFormatting);
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvBatchesRowPostPaint);
+            // 
+            // cmuBatchMgr
+            // 
+            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemBatchSelect,
+            this.menuItemBatchDetail,
+            this.toolStripSeparator1,
+            this.menuItemBatchDelete,
+            this.menuItemCommissionRemitDelete,
+            this.toolStripSeparator3,
+            this.menuItemAssignReport,
+            this.menuItemFinanceReport,
+            this.menuItemCommissionReport,
+            this.menuItemThreeReports,
+            this.menuItemFlawReport,
+            this.menuItemFileCheckList,
+            this.toolStripSeparator4,
+            this.menuItemMSG09,
+            this.menuItemBatchExport});
+            this.cmuBatchMgr.Name = "cmuBatchMgr";
+            this.cmuBatchMgr.Size = new System.Drawing.Size(199, 308);
+            // 
+            // menuItemBatchSelect
+            // 
+            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchSelect.Text = "选择批次(&S)";
+            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            // 
+            // menuItemBatchDetail
+            // 
+            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
+            this.menuItemBatchDetail.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchDetail.Text = "批次详情(&M)";
+            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
+            // 
+            // menuItemBatchDelete
+            // 
+            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
+            this.menuItemBatchDelete.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchDelete.Text = "删除批次(&D)";
+            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
+            // 
+            // menuItemCommissionRemitDelete
+            // 
+            this.menuItemCommissionRemitDelete.Name = "menuItemCommissionRemitDelete";
+            this.menuItemCommissionRemitDelete.Size = new System.Drawing.Size(198, 22);
+            this.menuItemCommissionRemitDelete.Text = "删除手续费收付记录";
+            this.menuItemCommissionRemitDelete.Click += new System.EventHandler(this.DeleteCommissionRemit);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
+            // 
+            // menuItemAssignReport
+            // 
+            this.menuItemAssignReport.Name = "menuItemAssignReport";
+            this.menuItemAssignReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemAssignReport.Text = "应收账款转让明细表(&A)";
+            this.menuItemAssignReport.Click += new System.EventHandler(this.ReportAssign);
+            // 
+            // menuItemFinanceReport
+            // 
+            this.menuItemFinanceReport.Name = "menuItemFinanceReport";
+            this.menuItemFinanceReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemFinanceReport.Text = "可融资账款明细表(&F)";
+            this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
+            // 
+            // menuItemCommissionReport
+            // 
+            this.menuItemCommissionReport.Name = "menuItemCommissionReport";
+            this.menuItemCommissionReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemCommissionReport.Text = "保理费用明细表(&C)";
+            this.menuItemCommissionReport.Click += new System.EventHandler(this.ReportCommission);
+            // 
+            // menuItemThreeReports
+            // 
+            this.menuItemThreeReports.Name = "menuItemThreeReports";
+            this.menuItemThreeReports.Size = new System.Drawing.Size(198, 22);
+            this.menuItemThreeReports.Text = "直接生成三表(&T)";
+            this.menuItemThreeReports.Click += new System.EventHandler(this.ReportThree);
+            // 
+            // menuItemFlawReport
+            // 
+            this.menuItemFlawReport.Name = "menuItemFlawReport";
+            this.menuItemFlawReport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemFlawReport.Text = "瑕疵通知书";
+            this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
+            // 
+            // menuItemFileCheckList
+            // 
+            this.menuItemFileCheckList.Name = "menuItemFileCheckList";
+            this.menuItemFileCheckList.Size = new System.Drawing.Size(198, 22);
+            this.menuItemFileCheckList.Text = "文件检查单";
+            this.menuItemFileCheckList.Click += new System.EventHandler(this.ReportFileCheckList);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(195, 6);
+            // 
+            // menuItemMSG09
+            // 
+            this.menuItemMSG09.Name = "menuItemMSG09";
+            this.menuItemMSG09.Size = new System.Drawing.Size(198, 22);
+            this.menuItemMSG09.Text = "生成MSG09";
+            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
+            // 
+            // menuItemBatchExport
+            // 
+            this.menuItemBatchExport.Name = "menuItemBatchExport";
+            this.menuItemBatchExport.Size = new System.Drawing.Size(198, 22);
+            this.menuItemBatchExport.Text = "导出选定批次";
+            this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
             // 
             // colFactorCode
             // 
@@ -870,174 +978,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCreateUserName.ReadOnly = true;
             this.colCreateUserName.Width = 80;
             // 
-            // colMsgType
-            // 
-            this.colMsgType.DataPropertyName = "MsgType";
-            this.colMsgType.HeaderText = "消息类型";
-            this.colMsgType.Name = "colMsgType";
-            this.colMsgType.ReadOnly = true;
-            this.colMsgType.Visible = false;
-            // 
-            // colMsgDate
-            // 
-            this.colMsgDate.DataPropertyName = "MsgDate";
-            this.colMsgDate.HeaderText = "消息日期";
-            this.colMsgDate.Name = "colMsgDate";
-            this.colMsgDate.ReadOnly = true;
-            this.colMsgDate.Visible = false;
-            // 
-            // colMsgAmount
-            // 
-            this.colMsgAmount.DataPropertyName = "MsgAmount";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.Format = "N2";
-            dataGridViewCellStyle13.NullValue = null;
-            this.colMsgAmount.DefaultCellStyle = dataGridViewCellStyle13;
-            this.colMsgAmount.HeaderText = "消息金额";
-            this.colMsgAmount.Name = "colMsgAmount";
-            this.colMsgAmount.ReadOnly = true;
-            this.colMsgAmount.Visible = false;
-            // 
-            // colRemitDate
-            // 
-            this.colRemitDate.DataPropertyName = "RemitDate";
-            this.colRemitDate.HeaderText = "汇款日期";
-            this.colRemitDate.Name = "colRemitDate";
-            this.colRemitDate.ReadOnly = true;
-            this.colRemitDate.Visible = false;
-            // 
-            // colRemitAmount
-            // 
-            this.colRemitAmount.DataPropertyName = "RemitAmount";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle14.Format = "N2";
-            dataGridViewCellStyle14.NullValue = null;
-            this.colRemitAmount.DefaultCellStyle = dataGridViewCellStyle14;
-            this.colRemitAmount.HeaderText = "汇款金额";
-            this.colRemitAmount.Name = "colRemitAmount";
-            this.colRemitAmount.ReadOnly = true;
-            this.colRemitAmount.Visible = false;
-            // 
-            // cmuBatchMgr
-            // 
-            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemBatchSelect,
-            this.menuItemBatchDetail,
-            this.toolStripSeparator1,
-            this.menuItemBatchDelete,
-            this.menuItemCommissionRemitDelete,
-            this.toolStripSeparator3,
-            this.menuItemAssignReport,
-            this.menuItemFinanceReport,
-            this.menuItemCommissionReport,
-            this.menuItemThreeReports,
-            this.menuItemFlawReport,
-            this.menuItemFileCheckList,
-            this.toolStripSeparator4,
-            this.menuItemMSG09,
-            this.menuItemBatchExport});
-            this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(199, 308);
-            // 
-            // menuItemBatchSelect
-            // 
-            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
-            this.menuItemBatchSelect.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchSelect.Text = "选择批次(&S)";
-            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
-            // 
-            // menuItemBatchDetail
-            // 
-            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
-            this.menuItemBatchDetail.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchDetail.Text = "批次详情(&M)";
-            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
-            // 
-            // menuItemBatchDelete
-            // 
-            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
-            this.menuItemBatchDelete.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchDelete.Text = "删除批次(&D)";
-            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
-            // 
-            // menuItemAssignReport
-            // 
-            this.menuItemAssignReport.Name = "menuItemAssignReport";
-            this.menuItemAssignReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemAssignReport.Text = "应收账款转让明细表(&A)";
-            this.menuItemAssignReport.Click += new System.EventHandler(this.ReportAssign);
-            // 
-            // menuItemFinanceReport
-            // 
-            this.menuItemFinanceReport.Name = "menuItemFinanceReport";
-            this.menuItemFinanceReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemFinanceReport.Text = "可融资账款明细表(&F)";
-            this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
-            // 
-            // menuItemCommissionReport
-            // 
-            this.menuItemCommissionReport.Name = "menuItemCommissionReport";
-            this.menuItemCommissionReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemCommissionReport.Text = "保理费用明细表(&C)";
-            this.menuItemCommissionReport.Click += new System.EventHandler(this.ReportCommission);
-            // 
-            // menuItemThreeReports
-            // 
-            this.menuItemThreeReports.Name = "menuItemThreeReports";
-            this.menuItemThreeReports.Size = new System.Drawing.Size(198, 22);
-            this.menuItemThreeReports.Text = "直接生成三表(&T)";
-            this.menuItemThreeReports.Click += new System.EventHandler(this.ReportThree);
-            // 
-            // menuItemFlawReport
-            // 
-            this.menuItemFlawReport.Name = "menuItemFlawReport";
-            this.menuItemFlawReport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemFlawReport.Text = "瑕疵通知书";
-            this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
-            // 
-            // menuItemFileCheckList
-            // 
-            this.menuItemFileCheckList.Name = "menuItemFileCheckList";
-            this.menuItemFileCheckList.Size = new System.Drawing.Size(198, 22);
-            this.menuItemFileCheckList.Text = "文件检查单";
-            this.menuItemFileCheckList.Click += new System.EventHandler(this.ReportFileCheckList);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(195, 6);
-            // 
-            // menuItemMSG09
-            // 
-            this.menuItemMSG09.Name = "menuItemMSG09";
-            this.menuItemMSG09.Size = new System.Drawing.Size(198, 22);
-            this.menuItemMSG09.Text = "生成MSG09";
-            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
-            // 
-            // menuItemBatchExport
-            // 
-            this.menuItemBatchExport.Name = "menuItemBatchExport";
-            this.menuItemBatchExport.Size = new System.Drawing.Size(198, 22);
-            this.menuItemBatchExport.Text = "导出选定批次";
-            this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
-            // 
-            // menuItemCommissionRemitDelete
-            // 
-            this.menuItemCommissionRemitDelete.Name = "menuItemCommissionRemitDelete";
-            this.menuItemCommissionRemitDelete.Size = new System.Drawing.Size(198, 22);
-            this.menuItemCommissionRemitDelete.Text = "删除手续费收付记录";
-            this.menuItemCommissionRemitDelete.Click += new System.EventHandler(this.DeleteCommissionRemit);
-            // 
             // AssignBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1069,6 +1009,7 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateInputTo;
         private DevComponents.DotNetBar.LabelX lblInputDate;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateInputFrom;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCommissionRemitDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
@@ -1093,11 +1034,5 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorCommissionAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInputDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMsgAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRemitDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRemitAmount;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCommissionRemitDelete;
     }
 }

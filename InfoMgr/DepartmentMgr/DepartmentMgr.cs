@@ -39,7 +39,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
             /// </summary>
             LOCATION_STAT,
         }
-/// <summary>
+        /// <summary>
         /// 
         /// </summary>
         private readonly BindingSource _bs;
@@ -143,7 +143,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
                 return;
             }
 
-            if (dgvDepts.CurrentCell==null)
+            if (dgvDepts.CurrentCell == null)
             {
                 return;
             }
@@ -174,7 +174,7 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e"></param>
         private void Detail(object sender, EventArgs e)
         {
-            if (dgvDepts.CurrentCell==null)
+            if (dgvDepts.CurrentCell == null)
             {
                 return;
             }
@@ -284,12 +284,12 @@ namespace CMBC.EasyFactor.InfoMgr.DepartmentMgr
         /// <param name="e">Event Args</param>
         private void Select(object sender, EventArgs e)
         {
-            if (dgvDepts.CurrentCell==null)
+            if (dgvDepts.CurrentCell == null)
             {
                 return;
             }
 
-            var selectedDepartment = (Department) _bs.List[dgvDepts.CurrentCell.RowIndex];
+            var selectedDepartment = (Department)_bs.List[dgvDepts.CurrentCell.RowIndex];
             Selected = selectedDepartment;
             if (OwnerForm != null)
             {

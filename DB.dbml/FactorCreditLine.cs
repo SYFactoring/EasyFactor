@@ -20,13 +20,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public double CreditLineAssignOutstanding
         {
-            get { return CreditLine - Factor.GetAssignOutstanding(CreditLineCurrency); }
+            get { return Factor.GetAssignOutstanding(CreditLineCurrency); }
         }
 
         /// <summary>
         /// Gets  £”‡∂Ó∂»
         /// </summary>
-        public double CreditLineOustanding
+        public double CreditLineOutstanding
         {
             get { return CreditLine - Factor.GetTotalCreditCover(CreditLineCurrency); }
         }

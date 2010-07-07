@@ -60,10 +60,20 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvFactorCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.lblCount = new DevComponents.DotNetBar.LabelX();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
+            this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblFactorName = new DevComponents.DotNetBar.LabelX();
+            this.tbFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblFactorCode = new DevComponents.DotNetBar.LabelX();
             this.colFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,13 +84,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelQuery = new DevComponents.DotNetBar.PanelEx();
-            this.lblCount = new DevComponents.DotNetBar.LabelX();
-            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
-            this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblFactorName = new DevComponents.DotNetBar.LabelX();
-            this.tbFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblFactorCode = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactorCreditLines)).BeginInit();
             this.panelQuery.SuspendLayout();
             this.SuspendLayout();
@@ -131,85 +134,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactorCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFactorCreditLinesCellDoubleClick);
             this.dgvFactorCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvFactorCreditLinesDataBindingComplete);
             this.dgvFactorCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvFactorCreditLinesRowPostPaint);
-            // 
-            // colFactorCode
-            // 
-            this.colFactorCode.DataPropertyName = "FactorCode";
-            this.colFactorCode.HeaderText = "合作机构代码";
-            this.colFactorCode.Name = "colFactorCode";
-            this.colFactorCode.ReadOnly = true;
-            // 
-            // colFactorType
-            // 
-            this.colFactorType.DataPropertyName = "FactorType";
-            this.colFactorType.HeaderText = "合作机构类型";
-            this.colFactorType.Name = "colFactorType";
-            this.colFactorType.ReadOnly = true;
-            // 
-            // colFactorName
-            // 
-            this.colFactorName.DataPropertyName = "FactorName";
-            this.colFactorName.HeaderText = "合作机构名称";
-            this.colFactorName.Name = "colFactorName";
-            this.colFactorName.ReadOnly = true;
-            // 
-            // colCreditLineCurrency
-            // 
-            this.colCreditLineCurrency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
-            this.colCreditLineCurrency.HeaderText = "额度币种";
-            this.colCreditLineCurrency.Name = "colCreditLineCurrency";
-            this.colCreditLineCurrency.ReadOnly = true;
-            this.colCreditLineCurrency.Width = 80;
-            // 
-            // colCreditLine
-            // 
-            this.colCreditLine.DataPropertyName = "CreditLine";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCreditLine.HeaderText = "额度上限";
-            this.colCreditLine.Name = "colCreditLine";
-            this.colCreditLine.ReadOnly = true;
-            // 
-            // colCreditLineOutstanding
-            // 
-            this.colCreditLineOutstanding.DataPropertyName = "CreditLineOutstanding";
-            dataGridViewCellStyle3.Format = "N2";
-            this.colCreditLineOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colCreditLineOutstanding.HeaderText = "剩余额度";
-            this.colCreditLineOutstanding.Name = "colCreditLineOutstanding";
-            this.colCreditLineOutstanding.ReadOnly = true;
-            // 
-            // colCreditLineAssignOutstanding
-            // 
-            this.colCreditLineAssignOutstanding.DataPropertyName = "CreditLineAssignOutstanding";
-            dataGridViewCellStyle4.Format = "N2";
-            this.colCreditLineAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colCreditLineAssignOutstanding.HeaderText = "账款余额";
-            this.colCreditLineAssignOutstanding.Name = "colCreditLineAssignOutstanding";
-            this.colCreditLineAssignOutstanding.ReadOnly = true;
-            // 
-            // colPeriodBegin
-            // 
-            this.colPeriodBegin.DataPropertyName = "PeriodBegin";
-            this.colPeriodBegin.HeaderText = "有效期（始）";
-            this.colPeriodBegin.Name = "colPeriodBegin";
-            this.colPeriodBegin.ReadOnly = true;
-            // 
-            // colPeriodEnd
-            // 
-            this.colPeriodEnd.DataPropertyName = "PeriodEnd";
-            this.colPeriodEnd.HeaderText = "有效期（终）";
-            this.colPeriodEnd.Name = "colPeriodEnd";
-            this.colPeriodEnd.ReadOnly = true;
-            // 
-            // colCreditLineStatus
-            // 
-            this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
-            this.colCreditLineStatus.HeaderText = "额度状态";
-            this.colCreditLineStatus.Name = "colCreditLineStatus";
-            this.colCreditLineStatus.ReadOnly = true;
             // 
             // panelQuery
             // 
@@ -307,6 +231,87 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.lblFactorCode.TabIndex = 5;
             this.lblFactorCode.Text = "合作机构代码";
             // 
+            // colFactorCode
+            // 
+            this.colFactorCode.DataPropertyName = "FactorCode";
+            this.colFactorCode.HeaderText = "合作机构代码";
+            this.colFactorCode.Name = "colFactorCode";
+            this.colFactorCode.ReadOnly = true;
+            // 
+            // colFactorType
+            // 
+            this.colFactorType.DataPropertyName = "FactorType";
+            this.colFactorType.HeaderText = "合作机构类型";
+            this.colFactorType.Name = "colFactorType";
+            this.colFactorType.ReadOnly = true;
+            // 
+            // colFactorName
+            // 
+            this.colFactorName.DataPropertyName = "FactorName";
+            this.colFactorName.HeaderText = "合作机构名称";
+            this.colFactorName.Name = "colFactorName";
+            this.colFactorName.ReadOnly = true;
+            // 
+            // colCreditLineCurrency
+            // 
+            this.colCreditLineCurrency.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colCreditLineCurrency.DataPropertyName = "CreditLineCurrency";
+            this.colCreditLineCurrency.HeaderText = "额度币种";
+            this.colCreditLineCurrency.Name = "colCreditLineCurrency";
+            this.colCreditLineCurrency.ReadOnly = true;
+            this.colCreditLineCurrency.Width = 80;
+            // 
+            // colCreditLine
+            // 
+            this.colCreditLine.DataPropertyName = "CreditLine";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colCreditLine.HeaderText = "额度上限";
+            this.colCreditLine.Name = "colCreditLine";
+            this.colCreditLine.ReadOnly = true;
+            // 
+            // colCreditLineOutstanding
+            // 
+            this.colCreditLineOutstanding.DataPropertyName = "CreditLineOutstanding";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.colCreditLineOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colCreditLineOutstanding.HeaderText = "剩余额度";
+            this.colCreditLineOutstanding.Name = "colCreditLineOutstanding";
+            this.colCreditLineOutstanding.ReadOnly = true;
+            // 
+            // colCreditLineAssignOutstanding
+            // 
+            this.colCreditLineAssignOutstanding.DataPropertyName = "CreditLineAssignOutstanding";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.colCreditLineAssignOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colCreditLineAssignOutstanding.HeaderText = "账款余额";
+            this.colCreditLineAssignOutstanding.Name = "colCreditLineAssignOutstanding";
+            this.colCreditLineAssignOutstanding.ReadOnly = true;
+            // 
+            // colPeriodBegin
+            // 
+            this.colPeriodBegin.DataPropertyName = "PeriodBegin";
+            this.colPeriodBegin.HeaderText = "有效期（始）";
+            this.colPeriodBegin.Name = "colPeriodBegin";
+            this.colPeriodBegin.ReadOnly = true;
+            // 
+            // colPeriodEnd
+            // 
+            this.colPeriodEnd.DataPropertyName = "PeriodEnd";
+            this.colPeriodEnd.HeaderText = "有效期（终）";
+            this.colPeriodEnd.Name = "colPeriodEnd";
+            this.colPeriodEnd.ReadOnly = true;
+            // 
+            // colCreditLineStatus
+            // 
+            this.colCreditLineStatus.DataPropertyName = "CreditLineStatus";
+            this.colCreditLineStatus.HeaderText = "额度状态";
+            this.colCreditLineStatus.Name = "colCreditLineStatus";
+            this.colCreditLineStatus.ReadOnly = true;
+            // 
             // FactorCreditLineMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -334,8 +339,5 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
-
-
-
     }
 }

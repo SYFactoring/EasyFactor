@@ -94,21 +94,6 @@ namespace CMBC.EasyFactor.ARMgr
                 dateBatchTo.Value = DateTime.Now.Date;
                 QueryBatch(null, null);
             }
-            else if (_opBatchType == OpBatchType.FACTOR_COMMISSION)
-            {
-                colMsgType.Visible = true;
-                colMsgDate.Visible = true;
-                colMsgAmount.Visible = true;
-                colRemitDate.Visible = true;
-                colRemitAmount.Visible = true;
-                colIsSendMsg.Visible = false;
-                colAssignOutstanding.Visible = false;
-                colFinanceAmount.Visible = false;
-                colFinanceOutstanding.Visible = false;
-                colPaymentAmount.Visible = false;
-                colRefundAmount.Visible = false;
-                colCreateUserName.Visible = false;
-            }
         }
         /// <summary>
         /// 
@@ -225,7 +210,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedBatch = (InvoiceAssignBatch) _bs.List[dgvBatches.CurrentCell.RowIndex];
+            var selectedBatch = (InvoiceAssignBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
             if (
                 MessageBoxEx.Show("是否打算删除此转让批次的保理费收付记录", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
                                   MessageBoxIcon.Question) == DialogResult.No)
@@ -264,26 +249,8 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             var selectedBatch = (InvoiceAssignBatch)_bs.List[dgvBatches.CurrentCell.RowIndex];
-            DataGridViewColumn column = dgvBatches.CurrentCell.OwningColumn;
-            if (column == colMsgAmount || column == colMsgDate || column == colMsgType || column == colRemitAmount ||
-                column == colRemitDate)
-            {
-                if (selectedBatch.CommissionRemittance != null)
-                {
-                    var detail = new CommissionRemitDetail(selectedBatch.CommissionRemittance);
-                    detail.ShowDialog(this);
-                }
-                else
-                {
-                    var detail = new AssignBatchDetail(selectedBatch);
-                    detail.ShowDialog(this);
-                }
-            }
-            else
-            {
-                var detail = new AssignBatchDetail(selectedBatch);
-                detail.ShowDialog(this);
-            }
+            var detail = new AssignBatchDetail(selectedBatch);
+            detail.ShowDialog(this);
         }
         /// <summary>
         /// 
@@ -1726,6 +1693,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ReportThree(object sender, EventArgs e)
         {
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_REPORT))
+            {
+                return;
+            }
+
             List<InvoiceAssignBatch> selectedBatches = GetSelectedBatches();
             if (selectedBatches == null)
             {
@@ -1868,11 +1840,6 @@ namespace CMBC.EasyFactor.ARMgr
             /// <summary>
             /// 
             /// </summary>
-            FACTOR_COMMISSION,
-
-            /// <summary>
-            /// 
-            /// </summary>
             COMMISSION,
         }
         /// <summary>
@@ -1881,7 +1848,5 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="batchGroup"></param>
         /// <param name="transactionType"></param>
         private delegate void MakeReport(IGrouping<Client, InvoiceAssignBatch> batchGroup, string transactionType);
-
-
     }
 }

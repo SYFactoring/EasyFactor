@@ -136,19 +136,7 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StatFactorCommission(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
-            {
-                var mgr = new AssignBatchMgr(AssignBatchMgr.OpBatchType.FACTOR_COMMISSION);
-                SetDetailPanel(mgr);
-            }
-        }
+
         /// <summary>
         /// Initializes a new instance of the MainWindow class
         /// </summary>
@@ -1377,6 +1365,20 @@ namespace CMBC.EasyFactor
             if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
             {
                 var mgr = new DepartmentMgr(DepartmentMgr.OpDepartmentType.LOCATION_STAT);
+                SetDetailPanel(mgr);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StatCommissionReport(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.INVOICE_STAT))
+            {
+                var mgr = new CommissionReport();
                 SetDetailPanel(mgr);
             }
         }

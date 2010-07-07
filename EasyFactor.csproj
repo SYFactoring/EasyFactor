@@ -340,6 +340,12 @@
     <Compile Include="InfoMgr\FactorMgr\CommissionRemitMgr.Designer.cs">
       <DependentUpon>CommissionRemitMgr.cs</DependentUpon>
     </Compile>
+    <Compile Include="InfoMgr\FactorMgr\CommissionReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InfoMgr\FactorMgr\CommissionReport.Designer.cs">
+      <DependentUpon>CommissionReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ConstStr.cs" />
     <Compile Include="DB.dbml\Country.cs" />
     <Compile Include="DB.dbml\CreditCoverNegotiation.cs" />
@@ -629,6 +635,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\CommissionRemitMgr.resx">
       <DependentUpon>CommissionRemitMgr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoMgr\FactorMgr\CommissionReport.resx">
+      <DependentUpon>CommissionReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoMgr\FactorMgr\FactorCreditLineMgr.resx">
       <DependentUpon>FactorCreditLineMgr.cs</DependentUpon>
