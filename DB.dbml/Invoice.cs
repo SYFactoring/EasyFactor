@@ -405,12 +405,21 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (InvoiceFinanceLogs.Count > 0)
             {
-                FinanceDate = (from log in InvoiceFinanceLogs
-                               where TypeUtil.GreaterZero(log.FinanceOutstanding)
-                               select log.InvoiceFinanceBatch.FinancePeriodBegin).Min();
-                FinanceDueDate = (from log in InvoiceFinanceLogs
+                var financeDates = from log in InvoiceFinanceLogs
+                                   where TypeUtil.GreaterZero(log.FinanceOutstanding)
+                                   select log.InvoiceFinanceBatch.FinancePeriodBegin;
+                if (financeDates.Count() > 0)
+                {
+                    FinanceDate = financeDates.Min();
+                }
+
+                var financeDueDates = from log in InvoiceFinanceLogs
                                   where TypeUtil.GreaterZero(log.FinanceOutstanding)
-                                  select log.InvoiceFinanceBatch.FinancePeriodEnd).Min();
+                                  select log.InvoiceFinanceBatch.FinancePeriodEnd;
+                if(financeDueDates.Count()>0)
+                {
+                    FinanceDueDate = financeDueDates.Min();
+                }
             }
             else
             {

@@ -491,7 +491,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                   invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode &&
                                                   (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount <
                                                    -TypeUtil.PRECISION)
-                                              orderby invoice.AssignDate
+                                              orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;
 
             var logs = new List<InvoicePaymentLog>();
