@@ -6,18 +6,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+using System.Globalization;
 using System.Linq;
-using System.Text;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
-using Microsoft.Office.Interop.Excel;
-using System.Runtime.InteropServices;
-using DevComponents.DotNetBar;
 using CMBC.EasyFactor.Utils;
-using System.Globalization;
+using DevComponents.DotNetBar;
+using Microsoft.Office.Interop.Excel;
 
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
@@ -178,6 +174,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     handfeeTotal += batch.HandfeeAmount.GetValueOrDefault();
                     row++;
                 }
+                
                 sheet.Cells[row, 1] = "Seller Totals";
                 sheet.Cells[row, 4] = assignTotal;
                 sheet.Range[sheet.Cells[row, 4], sheet.Cells[row, 4]].NumberFormatLocal = "#,##0.00";
