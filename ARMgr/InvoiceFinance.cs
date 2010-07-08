@@ -654,7 +654,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                   && invoice.DueDate > DateTime.Today
                                                   && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
                                                   && ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp - invoice.FinanceAmount.GetValueOrDefault() > TypeUtil.PRECISION)
-                                              orderby invoice.AssignDate
+                                              orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;
 
             var logs = new List<InvoiceFinanceLog>();
