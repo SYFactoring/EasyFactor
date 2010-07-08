@@ -153,7 +153,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
                 row++;
                 double assignTotal = 0;
-                double factorCommissionTotal = 0;
+                double commissionTotal = 0;
                 double handfeeTotal = 0;
                 foreach (InvoiceAssignBatch batch in clientGroup.OrderBy(b => b.AssignDate))
                 {
@@ -164,32 +164,30 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     sheet.Range[sheet.Cells[row, 4], sheet.Cells[row, 4]].NumberFormatLocal = "#,##0.00";
                     sheet.Cells[row, 5] = batch.IFCommissionPrice;
                     sheet.Range[sheet.Cells[row, 5], sheet.Cells[row, 5]].NumberFormatLocal = "0.000%";
-                    sheet.Cells[row, 6] = batch.FactorCommissionAmount;
+                    sheet.Cells[row, 6] = batch.CommissionAmount;
                     sheet.Range[sheet.Cells[row, 6], sheet.Cells[row, 6]].NumberFormatLocal = "#,##0.00";
                     sheet.Cells[row, 7] = batch.BatchCount;
                     sheet.Cells[row, 8] = batch.HandFee;
-                    sheet.Range[sheet.Cells[row, 8], sheet.Cells[row, 8]].NumberFormatLocal = "0.000%";
                     sheet.Cells[row, 9] = batch.HandfeeAmount;
                     sheet.Range[sheet.Cells[row, 9], sheet.Cells[row, 9]].NumberFormatLocal = "#,##0.00";
-                    sheet.Cells[row, 10] = batch.FactorCommissionAmount + batch.HandfeeAmount;
+                    sheet.Cells[row, 10] = batch.CommissionAmount.GetValueOrDefault() + batch.HandfeeAmount.GetValueOrDefault();
                     sheet.Range[sheet.Cells[row, 10], sheet.Cells[row, 10]].NumberFormatLocal = "#,##0.00";
                     sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 10]].HorizontalAlignment = XlHAlign.xlHAlignRight;
                     assignTotal += batch.AssignAmount;
-                    factorCommissionTotal += batch.FactorCommissionAmount.GetValueOrDefault();
+                    commissionTotal += batch.CommissionAmount.GetValueOrDefault();
                     handfeeTotal += batch.HandfeeAmount.GetValueOrDefault();
                     row++;
                 }
                 sheet.Cells[row, 1] = "Seller Totals";
                 sheet.Cells[row, 4] = assignTotal;
                 sheet.Range[sheet.Cells[row, 4], sheet.Cells[row, 4]].NumberFormatLocal = "#,##0.00";
-                sheet.Cells[row, 6] = factorCommissionTotal;
+                sheet.Cells[row, 6] = commissionTotal;
                 sheet.Range[sheet.Cells[row, 6], sheet.Cells[row, 6]].NumberFormatLocal = "#,##0.00";
                 sheet.Cells[row, 9] = handfeeTotal;
-                sheet.Range[sheet.Cells[row, 9], sheet.Cells[row, 9]].NumberFormatLocal = "#,##0.00";
-                sheet.Cells[row, 10] = factorCommissionTotal + handfeeTotal;
+                sheet.Cells[row, 10] = commissionTotal + handfeeTotal;
                 sheet.Range[sheet.Cells[row, 10], sheet.Cells[row, 10]].NumberFormatLocal = "#,##0.00";
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 10]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                sellerTotal += (factorCommissionTotal + handfeeTotal);
+                sellerTotal += (commissionTotal + handfeeTotal);
                 row++;
                 row++;
             }
