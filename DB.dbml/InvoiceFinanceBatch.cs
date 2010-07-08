@@ -78,6 +78,23 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string CommissionType
+        {
+            get
+            {
+                CDA cda = Case.ActiveCDA;
+                if (cda != null)
+                {
+                    return cda.CommissionType;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
         /// Gets
         /// </summary>
         public double? CommissionAmount

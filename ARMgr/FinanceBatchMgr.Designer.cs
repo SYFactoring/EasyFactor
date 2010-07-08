@@ -118,6 +118,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCommissionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -596,6 +597,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colSellerName,
             this.colBuyerName,
             this.colTransactionType,
+            this.colCommissionType,
             this.colFinanceBatchNo,
             this.colFinanceType,
             this.colBatchCount,
@@ -703,6 +705,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.colTransactionType.Name = "colTransactionType";
             this.colTransactionType.ReadOnly = true;
             this.colTransactionType.Width = 80;
+            // 
+            // colCommissionType
+            // 
+            this.colCommissionType.DataPropertyName = "CommissionType";
+            this.colCommissionType.HeaderText = "收费方式";
+            this.colCommissionType.Name = "colCommissionType";
+            this.colCommissionType.ReadOnly = true;
             // 
             // colFinanceBatchNo
             // 
@@ -858,6 +867,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceBatchNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;

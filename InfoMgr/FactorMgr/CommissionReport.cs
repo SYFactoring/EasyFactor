@@ -114,11 +114,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             sheet.PageSetup.FitToPagesWide = 1;
             sheet.PageSetup.FitToPagesTall = false;
 
-            sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 10]].MergeCells = true;
+            sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 11]].MergeCells = true;
             sheet.Cells[2, 1] = "Commission Sales Report For " + month.ToString("MMMM yyyy", new CultureInfo("en-US")) + " - CHINA MINSHENG BANKING CORP.";
             sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 1]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
             sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 1]].Font.Size = 14;
-            sheet.Cells[3, 10] = String.Format("{0:yyyy/MM/dd}", DateTime.Today);
+            sheet.Cells[3, 11] = String.Format("{0:yyyy/MM/dd}", DateTime.Today);
 
             sheet.Range["A5", "I5"].MergeCells = true;
             Factor factor = factorGroup.Key;
@@ -131,59 +131,61 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             foreach (var clientGroup in clientGroups)
             {
                 Client client = clientGroup.Key;
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 9]].MergeCells = true;
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 11]].MergeCells = true;
                 sheet.Cells[row, 1] = String.Format("Seller: {0} {1}", client.ClientEDICode, client.ClientNameEN);
                 row++;
-                sheet.Cells[row, 1] = "Day";
-                sheet.Cells[row, 2] = "Batch";
-                sheet.Cells[row, 3] = "Currency";
-                sheet.Cells[row, 4] = "Sales";
-                sheet.Cells[row, 5] = "Comm Fee";
-                sheet.Cells[row, 6] = "Comm Charge";
-                sheet.Cells[row, 7] = "Invoices";
-                sheet.Cells[row, 8] = "Handling Fee";
-                sheet.Cells[row, 9] = "Handling Charge";
-                sheet.Cells[row, 10] = "Total Charge";
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 10]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 10]].Font.Underline = XlUnderlineStyle.xlUnderlineStyleSingle;
+                sheet.Cells[row, 1] = "Buyer";
+                sheet.Cells[row, 2] = "Day";
+                sheet.Cells[row, 3] = "Batch";
+                sheet.Cells[row, 4] = "Currency";
+                sheet.Cells[row, 5] = "Sales";
+                sheet.Cells[row, 6] = "Comm Fee";
+                sheet.Cells[row, 7] = "Comm Charge";
+                sheet.Cells[row, 8] = "Invoices";
+                sheet.Cells[row, 9] = "Handling Fee";
+                sheet.Cells[row, 10] = "Handling Charge";
+                sheet.Cells[row, 11] = "Total Charge";
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 11]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 11]].Font.Underline = XlUnderlineStyle.xlUnderlineStyleSingle;
 
                 row++;
                 double assignTotal = 0;
                 double commissionTotal = 0;
                 double handfeeTotal = 0;
-                foreach (InvoiceAssignBatch batch in clientGroup.OrderBy(b => b.AssignDate))
+                foreach (InvoiceAssignBatch batch in clientGroup.OrderBy(b => b.Case.BuyerCode))
                 {
-                    sheet.Cells[row, 1] = String.Format("{0:dd}", batch.AssignDate);
-                    sheet.Cells[row, 2] = batch.AssignBatchNo;
-                    sheet.Cells[row, 3] = batch.BatchCurrency;
-                    sheet.Cells[row, 4] = batch.AssignAmount;
-                    sheet.Range[sheet.Cells[row, 4], sheet.Cells[row, 4]].NumberFormatLocal = "#,##0.00";
-                    sheet.Cells[row, 5] = batch.IFCommissionPrice;
-                    sheet.Range[sheet.Cells[row, 5], sheet.Cells[row, 5]].NumberFormatLocal = "0.000%";
-                    sheet.Cells[row, 6] = batch.CommissionAmount;
-                    sheet.Range[sheet.Cells[row, 6], sheet.Cells[row, 6]].NumberFormatLocal = "#,##0.00";
-                    sheet.Cells[row, 7] = batch.BatchCount;
-                    sheet.Cells[row, 8] = batch.HandFee;
-                    sheet.Cells[row, 9] = batch.HandfeeAmount;
-                    sheet.Range[sheet.Cells[row, 9], sheet.Cells[row, 9]].NumberFormatLocal = "#,##0.00";
-                    sheet.Cells[row, 10] = batch.CommissionAmount.GetValueOrDefault() + batch.HandfeeAmount.GetValueOrDefault();
+                    sheet.Cells[row, 1] = batch.Case.BuyerClient.ClientNameEN;
+                    sheet.Cells[row, 2] = String.Format("{0:dd}", batch.AssignDate);
+                    sheet.Cells[row, 3] = batch.AssignBatchNo;
+                    sheet.Cells[row, 4] = batch.BatchCurrency;
+                    sheet.Cells[row, 5] = batch.AssignAmount;
+                    sheet.Range[sheet.Cells[row, 5], sheet.Cells[row, 5]].NumberFormatLocal = "#,##0.00";
+                    sheet.Cells[row, 6] = batch.IFCommissionPrice;
+                    sheet.Range[sheet.Cells[row, 6], sheet.Cells[row, 6]].NumberFormatLocal = "0.000%";
+                    sheet.Cells[row, 7] = batch.CommissionAmount;
+                    sheet.Range[sheet.Cells[row, 7], sheet.Cells[row, 7]].NumberFormatLocal = "#,##0.00";
+                    sheet.Cells[row, 8] = batch.BatchCount;
+                    sheet.Cells[row, 9] = batch.HandFee;
+                    sheet.Cells[row, 10] = batch.HandfeeAmount;
                     sheet.Range[sheet.Cells[row, 10], sheet.Cells[row, 10]].NumberFormatLocal = "#,##0.00";
-                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 10]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                    sheet.Cells[row, 11] = batch.CommissionAmount.GetValueOrDefault() + batch.HandfeeAmount.GetValueOrDefault();
+                    sheet.Range[sheet.Cells[row, 11], sheet.Cells[row, 11]].NumberFormatLocal = "#,##0.00";
+                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 11]].HorizontalAlignment = XlHAlign.xlHAlignRight;
                     assignTotal += batch.AssignAmount;
                     commissionTotal += batch.CommissionAmount.GetValueOrDefault();
                     handfeeTotal += batch.HandfeeAmount.GetValueOrDefault();
                     row++;
                 }
-                
-                sheet.Cells[row, 1] = "Seller Totals";
-                sheet.Cells[row, 4] = assignTotal;
-                sheet.Range[sheet.Cells[row, 4], sheet.Cells[row, 4]].NumberFormatLocal = "#,##0.00";
-                sheet.Cells[row, 6] = commissionTotal;
-                sheet.Range[sheet.Cells[row, 6], sheet.Cells[row, 6]].NumberFormatLocal = "#,##0.00";
-                sheet.Cells[row, 9] = handfeeTotal;
-                sheet.Cells[row, 10] = commissionTotal + handfeeTotal;
-                sheet.Range[sheet.Cells[row, 10], sheet.Cells[row, 10]].NumberFormatLocal = "#,##0.00";
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 10]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+
+                sheet.Cells[row, 2] = "Seller Totals";
+                sheet.Cells[row, 5] = assignTotal;
+                sheet.Range[sheet.Cells[row, 5], sheet.Cells[row, 5]].NumberFormatLocal = "#,##0.00";
+                sheet.Cells[row, 7] = commissionTotal;
+                sheet.Range[sheet.Cells[row, 7], sheet.Cells[row, 7]].NumberFormatLocal = "#,##0.00";
+                sheet.Cells[row, 10] = handfeeTotal;
+                sheet.Cells[row, 11] = commissionTotal + handfeeTotal;
+                sheet.Range[sheet.Cells[row, 11], sheet.Cells[row, 11]].NumberFormatLocal = "#,##0.00";
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 11]].HorizontalAlignment = XlHAlign.xlHAlignRight;
                 sellerTotal += (commissionTotal + handfeeTotal);
                 row++;
                 row++;

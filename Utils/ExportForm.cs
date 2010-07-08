@@ -2016,7 +2016,7 @@ namespace CMBC.EasyFactor.Utils
                     Case curCase = invoice.InvoiceAssignBatch.Case;
                     sb.Append(invoice.AssignBatchNo).Append(',');
                     sb.Append("MSG09").Append(',');
-                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    sb.Append("CN01300").Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
                     sb.Append(User.GetEDIAccount(invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
@@ -2103,7 +2103,7 @@ namespace CMBC.EasyFactor.Utils
                     Case curCase = log.Invoice.InvoiceAssignBatch.Case;
                     sb.Append(log.CreditNote.AssignBatchNo).Append(',');
                     sb.Append("MSG09").Append(',');
-                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    sb.Append("CN01300").Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
                     sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
@@ -2188,10 +2188,10 @@ namespace CMBC.EasyFactor.Utils
                 {
                     var sb = new StringBuilder();
                     Case curCase = log.Invoice.InvoiceAssignBatch.Case;
-                    sb.Append((row / 1000 + 1)).Append(',');
+                    sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
                     sb.Append("MSG11").Append(',');
+                    sb.Append("CN01300").Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
-                    sb.Append(curCase.BuyerFactorCode).Append(',');
                     sb.Append(User.GetEDIAccount(log.InvoicePaymentBatch.CreateUserName)).Append(',');
                     sb.Append(',');
                     sb.Append(',');
@@ -2282,9 +2282,9 @@ namespace CMBC.EasyFactor.Utils
                 {
                     var sb = new StringBuilder();
                     Case curCase = log.Invoice.InvoiceAssignBatch.Case;
-                    sb.Append((row / 1000 + 1)).Append(',');
+                    sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
                     sb.Append("MSG12").Append(',');
-                    sb.Append(curCase.SellerFactorCode).Append(',');
+                    sb.Append("CN01300").Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
                     sb.Append(User.GetEDIAccount(log.InvoicePaymentBatch.CreateUserName)).Append(',');
                     sb.Append(',');
