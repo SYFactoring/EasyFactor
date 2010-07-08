@@ -190,6 +190,23 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public double? IFCommissionPrice
+        {
+            get
+            {
+                CDA cda = Case.ActiveCDA;
+                if (cda != null)
+                {
+                    return cda.IFPrice;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string FactorName
         {
             get { return Case.Factor.ToString(); }
@@ -228,11 +245,34 @@ namespace CMBC.EasyFactor.DB.dbml
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public double? HandFee
+        {
+            get
+            {
+                CDA cda = Case.ActiveCDA;
+                if (cda != null)
+                {
+                    double? handfee = cda.HandFee;
+                    if (cda.HandFeeCurr != Case.InvoiceCurrency)
+                    {
+                        double rate = Exchange.GetExchangeRate(cda.HandFeeCurr, Case.InvoiceCurrency);
+                        handfee *= rate;
+                    }
+                    return handfee;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Gets
         /// </summary>
         public double? HandfeeAmount
         {
-            get { return Invoices.Count * Case.ActiveCDA.HandFee; }
+            get { return Invoices.Count * HandFee; }
         }
 
         /// <summary>
@@ -242,7 +282,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get { return Case.IsPool; }
         }
-        
+
         /// <summary>
         /// 是否已发生融资
         /// </summary>
@@ -281,7 +321,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public DateTime? MsgDate
         {
-            get { return CommissionRemittance != null ? (DateTime?) CommissionRemittance.MsgDate : null; }
+            get { return CommissionRemittance != null ? (DateTime?)CommissionRemittance.MsgDate : null; }
         }
 
         /// <summary>

@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
-            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
+            this.cbMonth = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbYear = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblDate = new DevComponents.DotNetBar.LabelX();
-            this.diMonth = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.panelQuery.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.diMonth)).BeginInit();
             this.SuspendLayout();
             // 
             // panelQuery
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbMonth);
+            this.panelQuery.Controls.Add(this.cbYear);
             this.panelQuery.Controls.Add(this.lblDate);
-            this.panelQuery.Controls.Add(this.diMonth);
             this.panelQuery.Controls.Add(this.btnQuery);
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
@@ -56,17 +57,44 @@
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 3;
             // 
-            // btnQuery
+            // cbMonth
             // 
-            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(171, 3);
-            this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(67, 23);
-            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 8;
-            this.btnQuery.Text = "生成报表";
-            this.btnQuery.Click += new System.EventHandler(this.StatCommissionReport);
+            this.cbMonth.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMonth.FormattingEnabled = true;
+            this.cbMonth.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"});
+            this.cbMonth.Location = new System.Drawing.Point(141, 4);
+            this.cbMonth.Name = "cbMonth";
+            this.cbMonth.Size = new System.Drawing.Size(47, 21);
+            this.cbMonth.TabIndex = 12;
+            // 
+            // cbYear
+            // 
+            this.cbYear.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbYear.FormattingEnabled = true;
+            this.cbYear.Items.AddRange(new object[] {
+            "2011",
+            "2010",
+            "2009",
+            "2008",
+            "2007"});
+            this.cbYear.Location = new System.Drawing.Point(65, 4);
+            this.cbYear.Name = "cbYear";
+            this.cbYear.Size = new System.Drawing.Size(70, 21);
+            this.cbYear.TabIndex = 11;
             // 
             // lblDate
             // 
@@ -75,57 +103,23 @@
             // 
             // 
             this.lblDate.BackgroundStyle.Class = "";
-            this.lblDate.Location = new System.Drawing.Point(3, 4);
+            this.lblDate.Location = new System.Drawing.Point(3, 7);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
             this.lblDate.TabIndex = 9;
             this.lblDate.Text = "查询月份";
             // 
-            // diMonth
+            // btnQuery
             // 
-            // 
-            // 
-            // 
-            this.diMonth.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diMonth.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.diMonth.ButtonDropDown.Visible = true;
-            this.diMonth.Location = new System.Drawing.Point(65, 3);
-            // 
-            // 
-            // 
-            this.diMonth.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diMonth.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diMonth.MonthCalendar.BackgroundStyle.Class = "";
-            this.diMonth.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.diMonth.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.diMonth.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.diMonth.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.diMonth.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.diMonth.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.diMonth.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.diMonth.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diMonth.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.diMonth.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diMonth.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diMonth.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.diMonth.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.diMonth.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.diMonth.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diMonth.MonthCalendar.TodayButtonVisible = true;
-            this.diMonth.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diMonth.Name = "diMonth";
-            this.diMonth.Size = new System.Drawing.Size(100, 20);
-            this.diMonth.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diMonth.TabIndex = 10;
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(194, 2);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(67, 23);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 8;
+            this.btnQuery.Text = "生成报表";
+            this.btnQuery.Click += new System.EventHandler(this.StatCommissionReport);
             // 
             // CommissionReport
             // 
@@ -136,7 +130,6 @@
             this.Size = new System.Drawing.Size(652, 268);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.diMonth)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -146,6 +139,7 @@
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.LabelX lblDate;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput diMonth;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbMonth;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbYear;
     }
 }
