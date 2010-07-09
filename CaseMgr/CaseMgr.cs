@@ -52,7 +52,6 @@ namespace CMBC.EasyFactor.CaseMgr
             else if (opCaseType == OpCaseType.STAT)
             {
                 colAppDate.Visible = false;
-                colOPName.Visible = false;
                 colAssignAmount.Visible = true;
                 colFinanceAmount.Visible = true;
                 colCommissionIncome.Visible = true;
@@ -401,7 +400,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                                                 endDate != diEnd.MinDate
                                                                     ? c.CaseAppDate <= endDate
                                                                     : true)
-                                                               &&
+                                                                &&
                                                                (cbIsCDAChecked.Checked == false
                                                                     ? true
                                                                     : c.CDAs.Any(cda => cda.CDAStatus == CDAStr.CHECKED))
@@ -412,6 +411,9 @@ namespace CMBC.EasyFactor.CaseMgr
                                                                         con =>
                                                                         con.ContractStatus ==
                                                                         CLIENT_CREDIT_LINE.AVAILABILITY))
+                                                               &&
+                                                               (cbIsPool.Checked == true ? c.IsPool == true : true
+                                                               )
                                                                &&
                                                                (c.BuyerClient.ClientNameCN.Contains(tbClientName.Text) ||
                                                                 c.BuyerClient.ClientNameEN.Contains(tbClientName.Text)
@@ -545,9 +547,6 @@ namespace CMBC.EasyFactor.CaseMgr
             menuItemCaculateInvoices.Enabled = PermUtil.ValidatePermission(Permissions.INVOICE_UPDATE);
         }
 
-
-
-
         #region OpCaseType enum
 
         /// <summary>
@@ -577,5 +576,24 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DgvCaseCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewColumn column = dgvCases.Columns[e.ColumnIndex];
+            if (column == colIsPool)
+            {
+                Object originalData = e.Value;
+                if (originalData != null)
+                {
+                    var result = (bool)originalData;
+                    e.Value = result ? "Y" : "N";
+                }
+            }
+        }
     }
 }

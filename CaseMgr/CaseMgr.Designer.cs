@@ -147,6 +147,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemLegerExportLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaseExport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCaculateInvoices = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbIsPool = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.colCaseCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -154,11 +155,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colBuyerFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsPool = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperationType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOwnerDept = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAppDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOPName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCommissionIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -183,6 +184,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.Controls.Add(this.cbIsPool);
             this.panelQuery.Controls.Add(this.cbLocation);
             this.panelQuery.Controls.Add(this.lblLocation);
             this.panelQuery.Controls.Add(this.tbOPName);
@@ -231,7 +233,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(133, 20);
             this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbLocation.TabIndex = 23;
+            this.cbLocation.TabIndex = 7;
             // 
             // lblLocation
             // 
@@ -243,7 +245,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblLocation.Location = new System.Drawing.Point(3, 30);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(56, 16);
-            this.lblLocation.TabIndex = 22;
+            this.lblLocation.TabIndex = 6;
             this.lblLocation.Text = "业务地区";
             // 
             // tbOPName
@@ -264,7 +266,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblOPName.BackgroundStyle.Class = "";
-            this.lblOPName.Location = new System.Drawing.Point(404, 9);
+            this.lblOPName.Location = new System.Drawing.Point(404, 7);
             this.lblOPName.Name = "lblOPName";
             this.lblOPName.Size = new System.Drawing.Size(47, 16);
             this.lblOPName.TabIndex = 4;
@@ -284,9 +286,9 @@ namespace CMBC.EasyFactor.CaseMgr
             "已结案"});
             this.cbCaseMark.Location = new System.Drawing.Point(460, 28);
             this.cbCaseMark.Name = "cbCaseMark";
-            this.cbCaseMark.Size = new System.Drawing.Size(100, 20);
+            this.cbCaseMark.Size = new System.Drawing.Size(133, 20);
             this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseMark.TabIndex = 9;
+            this.cbCaseMark.TabIndex = 11;
             // 
             // lblCaseMark
             // 
@@ -295,10 +297,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblCaseMark.BackgroundStyle.Class = "";
-            this.lblCaseMark.Location = new System.Drawing.Point(397, 30);
+            this.lblCaseMark.Location = new System.Drawing.Point(398, 29);
             this.lblCaseMark.Name = "lblCaseMark";
             this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
-            this.lblCaseMark.TabIndex = 8;
+            this.lblCaseMark.TabIndex = 10;
             this.lblCaseMark.Text = "案件状态";
             // 
             // cbIsContractSigned
@@ -312,7 +314,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbIsContractSigned.Name = "cbIsContractSigned";
             this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
             this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsContractSigned.TabIndex = 10;
+            this.cbIsContractSigned.TabIndex = 19;
             this.cbIsContractSigned.Text = "是否签订保理合同";
             // 
             // btnQueryReset
@@ -323,7 +325,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.btnQueryReset.Name = "btnQueryReset";
             this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
             this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQueryReset.TabIndex = 20;
+            this.btnQueryReset.TabIndex = 23;
             this.btnQueryReset.Text = "重置";
             this.btnQueryReset.Click += new System.EventHandler(this.Reset);
             // 
@@ -334,11 +336,11 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cbIsCDAChecked.BackgroundStyle.Class = "";
-            this.cbIsCDAChecked.Location = new System.Drawing.Point(599, 29);
+            this.cbIsCDAChecked.Location = new System.Drawing.Point(599, 30);
             this.cbIsCDAChecked.Name = "cbIsCDAChecked";
             this.cbIsCDAChecked.Size = new System.Drawing.Size(100, 16);
             this.cbIsCDAChecked.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsCDAChecked.TabIndex = 11;
+            this.cbIsCDAChecked.TabIndex = 20;
             this.cbIsCDAChecked.Text = "CDA是否审核";
             // 
             // tbClientName
@@ -383,7 +385,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblCaseCode.BackgroundStyle.Class = "";
-            this.lblCaseCode.Location = new System.Drawing.Point(198, 8);
+            this.lblCaseCode.Location = new System.Drawing.Point(198, 6);
             this.lblCaseCode.Name = "lblCaseCode";
             this.lblCaseCode.Size = new System.Drawing.Size(56, 16);
             this.lblCaseCode.TabIndex = 2;
@@ -399,7 +401,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCount.Location = new System.Drawing.Point(731, 56);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(71, 16);
-            this.lblCount.TabIndex = 21;
+            this.lblCount.TabIndex = 24;
             this.lblCount.Text = "获得 条记录";
             // 
             // lblDate
@@ -409,7 +411,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblDate.BackgroundStyle.Class = "";
-            this.lblDate.Location = new System.Drawing.Point(198, 54);
+            this.lblDate.Location = new System.Drawing.Point(198, 53);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(56, 16);
             this.lblDate.TabIndex = 14;
@@ -423,7 +425,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(48, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 19;
+            this.btnQuery.TabIndex = 22;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryCase);
             // 
@@ -493,7 +495,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diEnd.ButtonDropDown.Visible = true;
             this.diEnd.ButtonFreeText.Checked = true;
             this.diEnd.FreeTextEntryMode = true;
-            this.diEnd.Location = new System.Drawing.Point(360, 52);
+            this.diEnd.Location = new System.Drawing.Point(360, 51);
             // 
             // 
             // 
@@ -541,7 +543,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diBegin.ButtonDropDown.Visible = true;
             this.diBegin.ButtonFreeText.Checked = true;
             this.diBegin.FreeTextEntryMode = true;
-            this.diBegin.Location = new System.Drawing.Point(254, 52);
+            this.diBegin.Location = new System.Drawing.Point(254, 51);
             // 
             // 
             // 
@@ -587,11 +589,11 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.cbOwnerDepts.BackgroundStyle.Class = "TextBoxBorder";
             this.cbOwnerDepts.ButtonDropDown.Visible = true;
-            this.cbOwnerDepts.Location = new System.Drawing.Point(254, 28);
+            this.cbOwnerDepts.Location = new System.Drawing.Point(254, 27);
             this.cbOwnerDepts.Name = "cbOwnerDepts";
             this.cbOwnerDepts.Size = new System.Drawing.Size(133, 22);
             this.cbOwnerDepts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbOwnerDepts.TabIndex = 7;
+            this.cbOwnerDepts.TabIndex = 9;
             // 
             // lblOnwerDept
             // 
@@ -600,10 +602,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblOnwerDept.BackgroundStyle.Class = "";
-            this.lblOnwerDept.Location = new System.Drawing.Point(198, 31);
+            this.lblOnwerDept.Location = new System.Drawing.Point(198, 29);
             this.lblOnwerDept.Name = "lblOnwerDept";
             this.lblOnwerDept.Size = new System.Drawing.Size(56, 16);
-            this.lblOnwerDept.TabIndex = 6;
+            this.lblOnwerDept.TabIndex = 8;
             this.lblOnwerDept.Text = "业务归属";
             // 
             // dgvCases
@@ -628,11 +630,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colBuyerFactor,
             this.colInvoiceCurrency,
             this.colTransactionType,
+            this.colIsPool,
             this.colOperationType,
             this.colOwnerDept,
             this.colAppDate,
             this.colCaseMark,
-            this.colOPName,
             this.colAssignAmount,
             this.colFinanceAmount,
             this.colCommissionIncome,
@@ -664,6 +666,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCases.Size = new System.Drawing.Size(819, 308);
             this.dgvCases.TabIndex = 1;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
+            this.dgvCases.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvCaseCellFormatting);
             this.dgvCases.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvCasesRowPostPaint);
             // 
             // cmuContractMgr
@@ -764,6 +767,20 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemCaculateInvoices.Text = "重新计算数值";
             this.menuItemCaculateInvoices.Click += new System.EventHandler(this.CaculateInvoices);
             // 
+            // cbIsPool
+            // 
+            this.cbIsPool.AutoSize = true;
+            // 
+            // 
+            // 
+            this.cbIsPool.BackgroundStyle.Class = "";
+            this.cbIsPool.Location = new System.Drawing.Point(599, 53);
+            this.cbIsPool.Name = "cbIsPool";
+            this.cbIsPool.Size = new System.Drawing.Size(88, 16);
+            this.cbIsPool.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsPool.TabIndex = 21;
+            this.cbIsPool.Text = "是否池融资";
+            // 
             // colCaseCode
             // 
             this.colCaseCode.DataPropertyName = "CaseCode";
@@ -822,6 +839,13 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colTransactionType.ReadOnly = true;
             this.colTransactionType.Width = 80;
             // 
+            // colIsPool
+            // 
+            this.colIsPool.DataPropertyName = "IsPool";
+            this.colIsPool.HeaderText = "池融资";
+            this.colIsPool.Name = "colIsPool";
+            this.colIsPool.ReadOnly = true;
+            // 
             // colOperationType
             // 
             this.colOperationType.DataPropertyName = "OperationType";
@@ -855,14 +879,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colCaseMark.Name = "colCaseMark";
             this.colCaseMark.ReadOnly = true;
             this.colCaseMark.Width = 80;
-            // 
-            // colOPName
-            // 
-            this.colOPName.DataPropertyName = "OPName";
-            this.colOPName.HeaderText = "OP人员";
-            this.colOPName.Name = "colOPName";
-            this.colOPName.ReadOnly = true;
-            this.colOPName.Width = 68;
             // 
             // colAssignAmount
             // 
@@ -1035,11 +1051,11 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerFactor;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsPool;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperationType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAppDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseMark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOPName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionIncome;
@@ -1053,5 +1069,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceLineOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHighestFinanceLineAmount;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsPool;
     }
 }
