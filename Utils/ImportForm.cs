@@ -171,16 +171,6 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_POOL_FINANCE,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            IMPORT_POOL_REFUND,
-
-            /// <summary>
-            /// 
-            /// </summary>
             SEND_LEGERS
         }
         /// <summary>
@@ -264,12 +254,6 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_CREDIT_NOTE:
                     Text = @"贷项冲销账款明细表导入";
-                    break;
-                case ImportType.IMPORT_POOL_FINANCE:
-                    Text = @"放款明细表（池融资）导入";
-                    break;
-                case ImportType.IMPORT_POOL_REFUND:
-                    Text = @"冲销融资明细表（池融资）导入";
                     break;
                 case ImportType.SEND_LEGERS:
                     Text = @"给分部/分行发送台帐";
@@ -364,12 +348,6 @@ namespace CMBC.EasyFactor.Utils
                     break;
                 case ImportType.IMPORT_CREDIT_NOTE:
                     e.Result = ImportCreditNote((string)e.Argument, worker, e);
-                    break;
-                case ImportType.IMPORT_POOL_FINANCE:
-                    e.Result = ImportPoolFinance((string)e.Argument, worker, e);
-                    break;
-                case ImportType.IMPORT_POOL_REFUND:
-                    e.Result = ImportPoolRefund((string)e.Argument, worker, e);
                     break;
                 case ImportType.SEND_LEGERS:
                     e.Result = SendLegers((string)e.Argument, worker, e);
@@ -2771,13 +2749,12 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="valueArray"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportFinance(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportFinanceImpl(object[,] valueArray, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = GetValueArray(fileName, 1);
             int result = 0;
 
             var financeBatchList = new List<InvoiceFinanceBatch>();
@@ -3141,8 +3118,6 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            _workbook.Close(false, fileName, null);
-            ReleaseResource();
             return result;
         }
         /// <summary>
@@ -3999,6 +3974,7 @@ namespace CMBC.EasyFactor.Utils
             ReleaseResource();
             return result;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -4006,9 +3982,43 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportPoolFinance(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportFinance(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = GetValueArray(fileName, 1);
+            int result = 0;
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                string IdCode = String.Format("{0:G}", valueArray[3, 1]).Trim();
+                if (String.IsNullOrEmpty(IdCode))
+                {
+                    result = -1;
+                }
+                else if (IdCode.Length > 15)
+                {
+                    result = ImportFinanceImpl(valueArray, worker, e);
+                }
+                else
+                {
+                    result = ImportPoolFinanceImpl(valueArray, worker, e);
+                }
+            }
+
+            _workbook.Close(false, fileName, null);
+            ReleaseResource();
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueArray"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ImportPoolFinanceImpl(object[,] valueArray, BackgroundWorker worker, DoWorkEventArgs e)
+        {
             int result = 0;
 
             var batchList = new List<InvoiceFinanceBatch>();
@@ -4179,20 +4189,17 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            _workbook.Close(false, fileName, null);
-            ReleaseResource();
             return result;
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="valueArray"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int ImportPoolRefund(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
+        private int ImportPoolRefundImpl(object[,] valueArray, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            object[,] valueArray = GetValueArray(fileName, 1);
             int result = 0;
 
             var refundBatchList = new List<InvoiceRefundBatch>();
@@ -4331,10 +4338,9 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            _workbook.Close(false, fileName, null);
-            ReleaseResource();
             return result;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -4346,9 +4352,41 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = GetValueArray(fileName, 1);
             int result = 0;
+            if (valueArray != null)
+            {
+                int size = valueArray.GetUpperBound(0);
+                string IdCode = String.Format("{0:G}", valueArray[3, 1]).Trim();
+                if (String.IsNullOrEmpty(IdCode))
+                {
+                    result = -1;
+                }
+                else if (IdCode.Length > 15)
+                {
+                    result = ImportRefundImpl(valueArray, worker, e);
+                }
+                else
+                {
+                    result = ImportPoolRefundImpl(valueArray, worker, e);
+                }
+            }
+            
+            _workbook.Close(false, fileName, null);
+            ReleaseResource();
 
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueArray"></param>
+        /// <param name="worker"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private int ImportRefundImpl(object[,] valueArray, BackgroundWorker worker, DoWorkEventArgs e)
+        {
             var refundBatchList = new List<InvoiceRefundBatch>();
-
+            int result = 0;
             _context = new DBDataContext();
 
             if (valueArray != null)
@@ -4518,8 +4556,6 @@ namespace CMBC.EasyFactor.Utils
             }
 
             worker.ReportProgress(100);
-            _workbook.Close(false, fileName, null);
-            ReleaseResource();
             return result;
         }
         /// <summary>
@@ -4584,7 +4620,7 @@ namespace CMBC.EasyFactor.Utils
                             log.Comment = String.Format("{0:G}", valueArray[row, column]);
                             logList.Add(log);
                         }
-                       
+
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / size));
                     }

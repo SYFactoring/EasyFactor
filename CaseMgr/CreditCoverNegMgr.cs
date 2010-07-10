@@ -211,10 +211,10 @@ namespace CMBC.EasyFactor.CaseMgr
                                                                   c.BuyerClient.ClientNameEN.Contains(tbClientName.Text)
                                                                   ||
                                                                   c.SellerClient.ClientNameCN.Contains(tbClientName.Text) ||
-                                                                  c.SellerClient.ClientNameEN.Contains(tbClientName.Text)
+                                                                  c.SellerClient.ClientNameEN.Contains(tbClientName.Text))
                                                                   &&
                                                                   neg.Case.SellerFactorCode.Contains(sellerFactorCode) &&
-                                                                  neg.Case.BuyerFactorCode.Contains(buyerFactorCode))
+                                                                  neg.Case.BuyerFactorCode.Contains(buyerFactorCode)
                                                                  && neg.CreateUserName.Contains(createUserName)
                                                              select neg;
 

@@ -658,32 +658,7 @@ namespace CMBC.EasyFactor
                 form.Show();
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImportPoolFinance(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
-            {
-                var form = new ImportForm(ImportForm.ImportType.IMPORT_POOL_FINANCE);
-                form.Show();
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImportPoolRefund(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
-            {
-                var form = new ImportForm(ImportForm.ImportType.IMPORT_POOL_REFUND);
-                form.Show();
-            }
-        }
+
         /// <summary>
         /// 
         /// </summary>
