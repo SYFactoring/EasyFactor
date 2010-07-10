@@ -4569,12 +4569,22 @@ namespace CMBC.EasyFactor.Utils
                         int financeLogId = Convert.ToInt32(String.Format("{0:G}", valueArray[row, column++]));
                         InvoiceFinanceLog financeLog =
                             _context.InvoiceFinanceLogs.SingleOrDefault(i => i.FinanceLogID == financeLogId);
-                        var log = new InvoiceRefundLog(financeLog);
                         column++;
-                        log.RefundAmount = (double)valueArray[row, column++];
-                        log.Comment = String.Format("{0:G}", valueArray[row, column]);
+                        string refundAmountStr = String.Format("{0:G}", valueArray[row, column++]);
+                        double refundAmount = 0;
+                        if (!String.IsNullOrEmpty(refundAmountStr))
+                        {
+                            if (!Double.TryParse(refundAmountStr, out refundAmount))
+                            {
+                                throw new Exception("冲销融资金额类型异常，不能导入：" + invoiceNo);
+                            }
 
-                        logList.Add(log);
+                            var log = new InvoiceRefundLog(financeLog);
+                            log.RefundAmount = refundAmount;
+                            log.Comment = String.Format("{0:G}", valueArray[row, column]);
+                            logList.Add(log);
+                        }
+                       
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / size));
                     }

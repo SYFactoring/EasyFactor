@@ -444,7 +444,7 @@ namespace CMBC.EasyFactor.ARMgr
                     cell.Value = 0;
                     var oldLog = (InvoiceRefundLog)logsBindingSource.List[i];
 
-                    InvoiceRefundLog newLog = logList.SingleOrDefault(log => log.InvoiceNo2 == oldLog.InvoiceNo2);
+                    InvoiceRefundLog newLog = logList.SingleOrDefault(log => log.FinanceLogID2 == oldLog.FinanceLogID2);
                     if (newLog != null)
                     {
                         oldLog.RefundAmount = newLog.RefundAmount;
