@@ -518,7 +518,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             foreach (InvoiceFinanceBatch batch in selectedBatches)
             {
-                if (batch.Case.ActiveCDA.CommissionType != "按融资金额")
+                if (batch.Case != null && batch.Case.ActiveCDA.CommissionType != "按融资金额")
                 {
                     MessageBoxEx.Show("所选批次不是按照融资金额收取保理费用，批次号：" + batch.FinanceBatchNo, MESSAGE.TITLE_INFORMATION,
                                       MessageBoxButtons.OK, MessageBoxIcon.Information);

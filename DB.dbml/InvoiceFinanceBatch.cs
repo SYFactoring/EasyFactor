@@ -84,10 +84,13 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                CDA cda = Case.ActiveCDA;
-                if (cda != null)
+                if (Case != null)
                 {
-                    return cda.CommissionType;
+                    CDA cda = Case.ActiveCDA;
+                    if (cda != null)
+                    {
+                        return cda.CommissionType;
+                    }
                 }
 
                 return string.Empty;

@@ -105,43 +105,33 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="isBuyer"></param>
         /// <param name="isAll"></param>
         /// <returns></returns>
-        public List<InvoiceAssignBatch> GetInvoiceAssignBatches(bool isBuyer, bool isAll)
+        public List<InvoiceAssignBatch> GetInvoiceAssignBatches(bool isAll)
         {
             var result = new List<InvoiceAssignBatch>();
-            if (isBuyer)
+            if (isAll)
             {
-                if (isAll)
+                foreach (Case c in BuyerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
                 {
-                    foreach (Case c in BuyerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
-                    {
-                        result.AddRange(c.InvoiceAssignBatches);
-                    }
+                    result.AddRange(c.InvoiceAssignBatches);
                 }
-                else
+
+                foreach (Case c in SellerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
                 {
-                    foreach (Case c in BuyerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
-                    {
-                        result.AddRange(c.InvoiceAssignBatches.Where(b => b.CommissionRemittance == null));
-                    }
+                    result.AddRange(c.InvoiceAssignBatches);
                 }
-            }else
+            }
+            else
             {
-                if (isAll)
+                foreach (Case c in BuyerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
                 {
-                    foreach (Case c in SellerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
-                    {
-                        result.AddRange(c.InvoiceAssignBatches);
-                    }
+                    result.AddRange(c.InvoiceAssignBatches.Where(b => b.CommissionRemittance == null));
                 }
-                else
+
+                foreach (Case c in SellerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
                 {
-                    foreach (Case c in SellerCases.Where(ca => ca.CaseMark == CASE.ENABLE))
-                    {
-                        result.AddRange(c.InvoiceAssignBatches.Where(b => b.CommissionRemittance == null));
-                    }
+                    result.AddRange(c.InvoiceAssignBatches.Where(b => b.CommissionRemittance == null));
                 }
             }
 

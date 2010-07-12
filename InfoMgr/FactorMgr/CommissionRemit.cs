@@ -92,7 +92,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 tbCompanyNameCN.Text = _factor.CompanyNameCN;
                 tbCompanyNameEN.Text = _factor.CompanyNameEN;
 
-                _bs.DataSource = _factor.GetInvoiceAssignBatches(true, false);
+                _bs.DataSource = _factor.GetInvoiceAssignBatches(false);
             }
         }
 
@@ -138,7 +138,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             commissionRemitBindingSource.DataSource = typeof(CommissionRemittance);
             var commissionRemit = new CommissionRemittance { CreateUserName = App.Current.CurUser.Name };
             commissionRemitBindingSource.DataSource = commissionRemit;
-            _bs.DataSource = _factor.GetInvoiceAssignBatches(true, false);
+            _bs.DataSource = _factor.GetInvoiceAssignBatches(false);
             
             foreach (Control comp in panelCommissionRemit.Controls)
             {
@@ -259,7 +259,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             {
                 commissionRemitBindingSource.DataSource = selected;
                 List<InvoiceAssignBatch> batches = selected.InvoiceAssignBatches.ToList();
-                batches.AddRange(_factor.GetInvoiceAssignBatches(true, false));
+                batches.AddRange(_factor.GetInvoiceAssignBatches(false));
                 _bs.DataSource = batches;
 
                 for (int i = 0; i < selected.InvoiceAssignBatches.Count; i++)

@@ -110,6 +110,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignBatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBatchCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -402,6 +403,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colCheckBox,
             this.colSellerName,
             this.colBuyerName,
+            this.colTransactionType,
             this.colAssignBatchNo,
             this.colBatchCount,
             this.colAssignAmount,
@@ -822,6 +824,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.colBuyerName.Name = "colBuyerName";
             this.colBuyerName.ReadOnly = true;
             // 
+            // colTransactionType
+            // 
+            this.colTransactionType.DataPropertyName = "TransactionType";
+            this.colTransactionType.HeaderText = "业务类型";
+            this.colTransactionType.Name = "colTransactionType";
+            // 
             // colAssignBatchNo
             // 
             this.colAssignBatchNo.DataPropertyName = "AssignBatchNo";
@@ -969,6 +977,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSellerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignBatchNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBatchCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
