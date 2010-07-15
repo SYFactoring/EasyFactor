@@ -683,18 +683,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 sheet.Cells[row, 1] = "保理费率";
-                if (isZero)
-                {
-                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:p4}，由买方承担",
-                                                          selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额",
-                                                          selectedCDA.Price.GetValueOrDefault());
-                }
-                else
-                {
-                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:p4}",
-                                                          selectedCDA.CommissionType == "按转让金额" ? "按发票金额" : "按融资金额",
-                                                          selectedCDA.Price.GetValueOrDefault());
-                }
+                sheet.Cells[row++, 2] = String.Format("{0}的 {1:p4} {2}",
+                                                          selectedCDA.CommissionType,
+                                                          selectedCDA.Price.GetValueOrDefault(), isZero ? "，由买方承担" : string.Empty);
 
                 sheet.Cells[row, 1] = "单据处理费";
                 if (selectedCDA.HandFee.HasValue)
@@ -795,7 +786,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 const string line2 =
-                    "（2）如应收账款债务人(以下简称买方)于到应收账款期日后  日内（最长不超过  天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
+                    "（2）如应收账款债务人(以下简称买方)于到应收账款期日后 60 日内（最长不超过 60 天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
                 const string line3 = "（3）核准应收账款的销售合同有禁止转让的约定时，民生银行就该应收账款不须负任何责任。";
                 const string line4 = "（4）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
                 const string line5 = "（5）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";

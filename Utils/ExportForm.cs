@@ -2044,7 +2044,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(1).Append(',');
                     sb.Append(invoice.InvoiceNo).Append(',');
                     sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.InvoiceDate)).Append(',');
-                    sb.Append(invoice.InvoiceAmount).Append(',');
+                    sb.Append(invoice.AssignAmount).Append(',');
                     sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.DueDate)).Append(',');
                     sb.Append(String.Format("{0:yyyy-MM-dd}", invoice.ValueDate)).Append(',');
                     sb.Append(curCase.NetPaymentTerm).Append(',');
@@ -2131,7 +2131,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(1).Append(',');
                     sb.Append(log.InvoiceNo).Append(',');
                     sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
-                    sb.Append(log.Invoice.InvoiceAmount).Append(',');
+                    sb.Append(log.Invoice.AssignAmount).Append(',');
                     sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.DueDate)).Append(',');
                     sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.ValueDate)).Append(',');
                     sb.Append(curCase.NetPaymentTerm).Append(',');
