@@ -683,9 +683,16 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 sheet.Cells[row, 1] = "保理费率";
-                sheet.Cells[row++, 2] = String.Format("{0}的 {1:p4} {2}",
-                                                          selectedCDA.CommissionType,
-                                                          selectedCDA.Price.GetValueOrDefault(), isZero ? "，由买方承担" : string.Empty);
+                if (selectedCDA.CommissionType == "其他")
+                {
+                    sheet.Cells[row++, 2] = selectedCDA.CommissionTypeComment;
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:p4} {2}",
+                                                                selectedCDA.CommissionType,
+                                                                selectedCDA.Price.GetValueOrDefault(), isZero ? "，由买方承担" : string.Empty);
+                }
 
                 sheet.Cells[row, 1] = "单据处理费";
                 if (selectedCDA.HandFee.HasValue)
