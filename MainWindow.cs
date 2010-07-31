@@ -958,16 +958,7 @@ namespace CMBC.EasyFactor
             var poolRefund = new ARPoolBasic(OpPoolARType.REFUND);
             SetDetailPanel(poolRefund);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QueryApplicationCase(object sender, EventArgs e)
-        {
-            var mgr = new CaseMgr.CaseMgr(CaseMgr.CaseMgr.OpCaseType.APPLICATION_CASE);
-            SetDetailPanel(mgr);
-        }
+
         /// <summary>
         /// 
         /// </summary>

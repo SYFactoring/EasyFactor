@@ -1270,7 +1270,7 @@ namespace CMBC.EasyFactor.Utils
                     column = 1;
                     var creditCoverNeg = (CreditCoverNegotiation)_exportData[row];
                     datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.CaseCode; //1
-                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.OwnerDepartment.Location; //2
+                    datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.OwnerDepartment.Location.LocationName; //2
                     datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.SellerClient.ToString(); //3
                     datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.BuyerClient.ToString(); //4
                     datasheet.Cells[row + 2, column++] = creditCoverNeg.Case.Factor.ToString(); //5

@@ -65,6 +65,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             domainList.Insert(0, "全部");
             cbDomains.DataSource = domainList;
 
+            List<Location> allLocations = DB.dbml.Location.AllLocations;
+            allLocations.Insert(0, new Location { LocationCode = "00", LocationName = "全部" });
+            cbLocation.DataSource = allLocations;
+            cbLocation.DisplayMember = "LocationName";
+            cbLocation.ValueMember = "LocationCode";
+            cbLocation.SelectedIndex = 0;
+
             UpdateContextMenu();
         }
 
@@ -212,16 +219,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             string clientReviewNo = tbClientReviewNo.Text;
             string clientName = tbClientName.Text;
-            string location = cbLocation.Text;
-            if (location == "全部")
-            {
-                location = string.Empty;
-            }
+            var location = (string)cbLocation.SelectedValue;
             string domain = cbDomains.Text;
-            if (domain == "全部")
-            {
-                domain = string.Empty;
-            }
 
             DateTime beginDate = String.IsNullOrEmpty(diBegin.Text) ? diBegin.MinDate : diBegin.Value;
             DateTime endDate = String.IsNullOrEmpty(diEnd.Text) ? diEnd.MinDate : diEnd.Value;
@@ -231,16 +230,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             IQueryable<ClientReview> queryResult = Context.ClientReviews.Where(c =>
                                                                                c.ReviewNo.Contains(clientReviewNo)
                                                                                &&
-                                                                               (c.Client.BranchCode == null
-                                                                                    ? string.Empty
-                                                                                    : c.Client.Department.Location.
-                                                                                          LocationName).Contains(
-                                                                                              location)
+                                                                               (location == "00"
+                                                                                    ? true
+                                                                                    : c.Client.Department.LocationCode == location)
                                                                                &&
-                                                                               (c.Client.BranchCode == null
-                                                                                    ? string.Empty
-                                                                                    : c.Client.Department.Domain).
-                                                                                   Contains(domain)
+                                                                               (domain == "全部"
+                                                                                    ? true
+                                                                                    : c.Client.Department.Domain==domain)
                                                                                &&
                                                                                (beginDate != diBegin.MinDate
                                                                                     ? c.ReviewDate >= beginDate

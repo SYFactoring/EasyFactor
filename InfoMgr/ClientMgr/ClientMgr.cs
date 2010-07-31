@@ -382,7 +382,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             IQueryable<Client> queryResult = Context.Clients.Where(c =>
                                                                    (location == "00"
                                                                         ? true
-                                                                        : c.Department.Location.LocationCode == location)
+                                                                        : c.Department.LocationCode == location)
                                                                    &&
                                                                    ((c.PMName ?? string.Empty).
                                                                        Contains(tbPM.Text))

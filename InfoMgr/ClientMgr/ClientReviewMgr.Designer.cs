@@ -110,12 +110,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colReviewDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuClientReviewMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemReviewSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemClientReviewDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemClientReviewDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemClientReviewExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemReviewSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diBegin)).BeginInit();
@@ -217,37 +217,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 14;
-            this.cbLocation.Items.AddRange(new object[] {
-            "全部",
-            "北京",
-            "广州",
-            "上海",
-            "深圳",
-            "武汉",
-            "太原",
-            "石家庄",
-            "大连",
-            "杭州",
-            "南京",
-            "重庆",
-            "西安",
-            "福州",
-            "济南",
-            "宁波",
-            "成都",
-            "天津",
-            "苏州",
-            "青岛",
-            "厦门",
-            "郑州",
-            "昆明",
-            "温州",
-            "泉州",
-            "长沙",
-            "长春",
-            "汕头",
-            "南昌",
-            "香港"});
             this.cbLocation.Location = new System.Drawing.Point(96, 29);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(100, 20);
@@ -649,6 +618,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cmuClientReviewMgr.Name = "contextMenuClientMgr";
             this.cmuClientReviewMgr.Size = new System.Drawing.Size(171, 126);
             // 
+            // menuItemReviewSelect
+            // 
+            this.menuItemReviewSelect.Name = "menuItemReviewSelect";
+            this.menuItemReviewSelect.Size = new System.Drawing.Size(170, 22);
+            this.menuItemReviewSelect.Text = "选定协查意见(&S)";
+            this.menuItemReviewSelect.Click += new System.EventHandler(this.SelectClientReview);
+            // 
             // menuItemClientReviewDetail
             // 
             this.menuItemClientReviewDetail.Name = "menuItemClientReviewDetail";
@@ -679,13 +655,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.menuItemClientReviewExport.Size = new System.Drawing.Size(170, 22);
             this.menuItemClientReviewExport.Text = "导出选定协查意见";
             this.menuItemClientReviewExport.Click += new System.EventHandler(this.ExportClientReviews);
-            // 
-            // menuItemReviewSelect
-            // 
-            this.menuItemReviewSelect.Name = "menuItemReviewSelect";
-            this.menuItemReviewSelect.Size = new System.Drawing.Size(170, 22);
-            this.menuItemReviewSelect.Text = "选定协查意见(&S)";
-            this.menuItemReviewSelect.Click += new System.EventHandler(this.SelectClientReview);
             // 
             // ClientReviewMgr
             // 

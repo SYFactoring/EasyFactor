@@ -40,16 +40,7 @@ namespace CMBC.EasyFactor.CaseMgr
             : this()
         {
             _opCaseType = opCaseType;
-            if (opCaseType == OpCaseType.ENABLE_CASE)
-            {
-                cbCaseMark.Text = @"启动案";
-            }
-            else if (opCaseType == OpCaseType.APPLICATION_CASE)
-            {
-                cbCaseMark.Text = @"申请案";
-                QueryCase(null, null);
-            }
-            else if (opCaseType == OpCaseType.STAT)
+            if (opCaseType == OpCaseType.STAT)
             {
                 colAppDate.Visible = false;
                 colAssignAmount.Visible = true;
@@ -76,7 +67,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             cbTransactionType.Items.Insert(0, "全部");
             cbTransactionType.Text = @"全部";
-            cbCaseMark.Text = @"启动案";
+            cbCaseMark.Text = @"全部";
 
             List<Department> deptsList = Department.AllDepartments;
             deptsList.Insert(0, new Department { DepartmentCode = "CN01300", DepartmentName = "全部" });
@@ -563,11 +554,6 @@ namespace CMBC.EasyFactor.CaseMgr
             /// 
             /// </summary>
             ENABLE_CASE,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            APPLICATION_CASE,
 
             /// <summary>
             /// 

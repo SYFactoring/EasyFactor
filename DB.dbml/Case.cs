@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
+using System.Data.Linq;
 
 namespace CMBC.EasyFactor.DB.dbml
 {
@@ -26,6 +27,7 @@ namespace CMBC.EasyFactor.DB.dbml
         private double? _marginIncomeByDate;
         private double? _netInterestIncomeByDate;
         private double? _paymentAmountByDate;
+        private double? _refundAmountByDate;
         private double? _totalAssignOutstanding;
         private double? _valuedAssignOutstanding;
 
@@ -454,8 +456,8 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (_paymentAmountByDate.HasValue == false)
                 {
-                    DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
-                    DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+                    DateTime fromDate = QueryDateFrom < TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                    DateTime toDate = QueryDateTo < TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                     IEnumerable<InvoicePaymentBatch> batches =
                         InvoicePaymentBatches.Where(i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate);
                     double result = batches.Sum(batch => batch.PaymentAmount);
@@ -464,6 +466,28 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return _paymentAmountByDate.Value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double RefundAmountByDate
+        {
+            get
+            {
+                if (_refundAmountByDate.HasValue == false)
+                {
+                    DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+                    DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+
+                    IEnumerable<InvoiceRefundBatch> batches = InvoiceRefundBatches.Where(i => i.RefundDate >= fromDate && i.RefundDate <= toDate);
+                    double result = batches.Sum(batch => batch.RefundAmount.GetValueOrDefault());
+
+                    _refundAmountByDate = result;
+                }
+
+                return _refundAmountByDate.Value;
             }
         }
 

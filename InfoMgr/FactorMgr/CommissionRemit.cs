@@ -12,6 +12,7 @@ using CMBC.EasyFactor.DB.dbml;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
@@ -139,7 +140,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             var commissionRemit = new CommissionRemittance { CreateUserName = App.Current.CurUser.Name };
             commissionRemitBindingSource.DataSource = commissionRemit;
             _bs.DataSource = _factor.GetInvoiceAssignBatches(false);
-            
+
             foreach (Control comp in panelCommissionRemit.Controls)
             {
                 ControlUtil.SetComponetDefault(comp);
@@ -201,7 +202,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
-                    NewCommissionRemit(null,null);
+                    NewCommissionRemit(null, null);
                 }
             }
             else
@@ -269,6 +270,46 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 }
 
                 colCheckBox.ReadOnly = false;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void StatCommissinRemit()
+        {
+            IList batchList = _bs.List;
+
+            double totalCommission = 0;
+            double totalIFCommission = 0;
+            for (int i = 0; i < batchList.Count; i++)
+            {
+                if (Boolean.Parse(dgvBatches.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                {
+                    totalCommission += ((InvoiceAssignBatch)batchList[i]).CommissionAmount.GetValueOrDefault();
+                    totalIFCommission += ((InvoiceAssignBatch)batchList[i]).FactorCommissionAmount.GetValueOrDefault();
+                }
+            }
+
+            tbTotalCommission.Text = String.Format("{0:N2}", totalCommission);
+            tbIFCommission.Text = String.Format("{0:N2}", totalIFCommission);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DgvBatchesCellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
+
+            if (dgvBatches.Columns[e.ColumnIndex] == colCheckBox)
+            {
+                StatCommissinRemit();
             }
         }
     }

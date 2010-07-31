@@ -182,6 +182,36 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
+                double cashTotal = 0;
+                double totalPayment = 0;
+                foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
+                {
+                    double paymentAmount = curCase.PaymentAmountByDate;
+                    if (curCase.InvoiceCurrency != "CNY")
+                    {
+                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
+                        paymentAmount *= exchange;
+                    }
+
+                    totalPayment += paymentAmount;
+                }
+
+                double totalRefund = 0;
+                foreach (InvoiceFinanceBatch financeBatch in InvoiceFinanceBatches)
+                {
+                    double refundAmount = financeBatch.PoolRefundAmount.GetValueOrDefault();
+
+                    if (financeBatch.BatchCurrency != "CNY")
+                    {
+                        double exchange = Exchange.GetExchangeRate(financeBatch.BatchCurrency, "CNY");
+                        refundAmount *= exchange;
+                    }
+
+                    totalRefund += refundAmount;
+                }
+
+                cashTotal = totalPayment - totalRefund;
+
                 if (GuaranteeDeposits.Count > 0)
                 {
                     double gd = GuaranteeDeposits[0].GuaranteeDepositAmount;
@@ -191,10 +221,10 @@ namespace CMBC.EasyFactor.DB.dbml
                         gd *= exchange;
                     }
 
-                    return gd;
+                    cashTotal += gd;
                 }
 
-                return null;
+                return cashTotal;
             }
         }
 
@@ -225,26 +255,19 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                double? total = null;
-                //foreach (InvoiceFinanceBatch curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
-                //{
-                //    double? financeOutstanding = curCase.FinanceOutstanding;
-                //    if (financeOutstanding.HasValue)
-                //    {
-                //        if (total == null)
-                //        {
-                //            total = 0;
-                //        }
+                double total = 0;
+                foreach (InvoiceFinanceBatch financeBatch in InvoiceFinanceBatches)
+                {
+                    double financeOutstanding = financeBatch.PoolFinanceOutstanding;
 
-                //        if (curCase.InvoiceCurrency != "CNY")
-                //        {
-                //            double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
-                //            financeOutstanding *= exchange;
-                //        }
+                    if (financeBatch.BatchCurrency != "CNY")
+                    {
+                        double exchange = Exchange.GetExchangeRate(financeBatch.BatchCurrency, "CNY");
+                        financeOutstanding *= exchange;
+                    }
 
-                //        total += financeOutstanding.Value;
-                //    }
-                //}
+                    total += financeOutstanding;
+                }
 
                 return total;
             }

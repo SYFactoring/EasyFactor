@@ -17,12 +17,12 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.PanelEx panelPool;
         private DevComponents.DotNetBar.ExpandablePanel panelPoolBasic;
         private DevComponents.DotNetBar.ExpandablePanel panelPoolOutstanding;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbCashOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPoolCashOutstanding;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceOutstanding;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbTotalAssignOutstanding;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbValuedAssignOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPoolFinanceOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPoolTotalAssignOutstanding;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPoolValuedAssignOutstanding;
 
 		#endregion?Fields?
 
@@ -58,14 +58,14 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblClient;
             this.panelPoolBasic = new DevComponents.DotNetBar.ExpandablePanel();
             this.panelPoolOutstanding = new DevComponents.DotNetBar.ExpandablePanel();
-            this.tbTotalAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbPoolTotalAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblTotalAssignOutstanding = new DevComponents.DotNetBar.LabelX();
             this.lblValuedAssignOutstanding = new DevComponents.DotNetBar.LabelX();
-            this.tbValuedAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbFinanceOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbPoolValuedAssignOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbPoolFinanceOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCashOutstanding = new DevComponents.DotNetBar.LabelX();
             this.lblFinanceOustanding = new DevComponents.DotNetBar.LabelX();
-            this.tbCashOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbPoolCashOutstanding = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelClient = new DevComponents.DotNetBar.ExpandablePanel();
             this.btnClientQuery = new DevComponents.DotNetBar.ButtonX();
             this.tbClientEDICode = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -116,26 +116,25 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelPoolBasic.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelPoolBasic.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelPoolBasic.TitleStyle.GradientAngle = 90;
-            this.panelPoolBasic.TitleText = "Title Bar";
             // 
             // panelPoolOutstanding
             // 
             this.panelPoolOutstanding.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelPoolOutstanding.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
             this.panelPoolOutstanding.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelPoolOutstanding.Controls.Add(this.tbTotalAssignOutstanding);
+            this.panelPoolOutstanding.Controls.Add(this.tbPoolTotalAssignOutstanding);
             this.panelPoolOutstanding.Controls.Add(this.lblTotalAssignOutstanding);
             this.panelPoolOutstanding.Controls.Add(this.lblValuedAssignOutstanding);
-            this.panelPoolOutstanding.Controls.Add(this.tbValuedAssignOutstanding);
-            this.panelPoolOutstanding.Controls.Add(this.tbFinanceOutstanding);
+            this.panelPoolOutstanding.Controls.Add(this.tbPoolValuedAssignOutstanding);
+            this.panelPoolOutstanding.Controls.Add(this.tbPoolFinanceOutstanding);
             this.panelPoolOutstanding.Controls.Add(this.lblCashOutstanding);
             this.panelPoolOutstanding.Controls.Add(this.lblFinanceOustanding);
-            this.panelPoolOutstanding.Controls.Add(this.tbCashOutstanding);
+            this.panelPoolOutstanding.Controls.Add(this.tbPoolCashOutstanding);
             this.panelPoolOutstanding.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelPoolOutstanding.ExpandOnTitleClick = true;
             this.panelPoolOutstanding.Location = new System.Drawing.Point(225, 5);
             this.panelPoolOutstanding.Name = "panelPoolOutstanding";
-            this.panelPoolOutstanding.Size = new System.Drawing.Size(431, 81);
+            this.panelPoolOutstanding.Size = new System.Drawing.Size(382, 81);
             this.panelPoolOutstanding.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelPoolOutstanding.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelPoolOutstanding.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -154,17 +153,17 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelPoolOutstanding.TitleStyle.GradientAngle = 90;
             this.panelPoolOutstanding.TitleText = "”‡∂Ó–≈œ¢";
             // 
-            // tbTotalAssignOutstanding
+            // tbPoolTotalAssignOutstanding
             // 
             // 
             // 
             // 
-            this.tbTotalAssignOutstanding.Border.Class = "TextBoxBorder";
-            this.tbTotalAssignOutstanding.Location = new System.Drawing.Point(87, 25);
-            this.tbTotalAssignOutstanding.Name = "tbTotalAssignOutstanding";
-            this.tbTotalAssignOutstanding.ReadOnly = true;
-            this.tbTotalAssignOutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbTotalAssignOutstanding.TabIndex = 7;
+            this.tbPoolTotalAssignOutstanding.Border.Class = "TextBoxBorder";
+            this.tbPoolTotalAssignOutstanding.Location = new System.Drawing.Point(87, 24);
+            this.tbPoolTotalAssignOutstanding.Name = "tbPoolTotalAssignOutstanding";
+            this.tbPoolTotalAssignOutstanding.ReadOnly = true;
+            this.tbPoolTotalAssignOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbPoolTotalAssignOutstanding.TabIndex = 7;
             // 
             // lblTotalAssignOutstanding
             // 
@@ -186,35 +185,35 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblValuedAssignOutstanding.BackgroundStyle.Class = "";
-            this.lblValuedAssignOutstanding.Location = new System.Drawing.Point(218, 26);
+            this.lblValuedAssignOutstanding.Location = new System.Drawing.Point(193, 25);
             this.lblValuedAssignOutstanding.Name = "lblValuedAssignOutstanding";
-            this.lblValuedAssignOutstanding.Size = new System.Drawing.Size(93, 16);
+            this.lblValuedAssignOutstanding.Size = new System.Drawing.Size(68, 16);
             this.lblValuedAssignOutstanding.TabIndex = 0;
-            this.lblValuedAssignOutstanding.Text = "”¶ ’’ÀøÓ≥ÿ”‡∂Ó";
+            this.lblValuedAssignOutstanding.Text = "’ÀøÓ≥ÿ”‡∂Ó";
             // 
-            // tbValuedAssignOutstanding
-            // 
-            // 
-            // 
-            // 
-            this.tbValuedAssignOutstanding.Border.Class = "TextBoxBorder";
-            this.tbValuedAssignOutstanding.Location = new System.Drawing.Point(317, 25);
-            this.tbValuedAssignOutstanding.Name = "tbValuedAssignOutstanding";
-            this.tbValuedAssignOutstanding.ReadOnly = true;
-            this.tbValuedAssignOutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbValuedAssignOutstanding.TabIndex = 1;
-            // 
-            // tbFinanceOutstanding
+            // tbPoolValuedAssignOutstanding
             // 
             // 
             // 
             // 
-            this.tbFinanceOutstanding.Border.Class = "TextBoxBorder";
-            this.tbFinanceOutstanding.Location = new System.Drawing.Point(317, 50);
-            this.tbFinanceOutstanding.Name = "tbFinanceOutstanding";
-            this.tbFinanceOutstanding.ReadOnly = true;
-            this.tbFinanceOutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbFinanceOutstanding.TabIndex = 5;
+            this.tbPoolValuedAssignOutstanding.Border.Class = "TextBoxBorder";
+            this.tbPoolValuedAssignOutstanding.Location = new System.Drawing.Point(267, 24);
+            this.tbPoolValuedAssignOutstanding.Name = "tbPoolValuedAssignOutstanding";
+            this.tbPoolValuedAssignOutstanding.ReadOnly = true;
+            this.tbPoolValuedAssignOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbPoolValuedAssignOutstanding.TabIndex = 1;
+            // 
+            // tbPoolFinanceOutstanding
+            // 
+            // 
+            // 
+            // 
+            this.tbPoolFinanceOutstanding.Border.Class = "TextBoxBorder";
+            this.tbPoolFinanceOutstanding.Location = new System.Drawing.Point(267, 46);
+            this.tbPoolFinanceOutstanding.Name = "tbPoolFinanceOutstanding";
+            this.tbPoolFinanceOutstanding.ReadOnly = true;
+            this.tbPoolFinanceOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbPoolFinanceOutstanding.TabIndex = 5;
             // 
             // lblCashOutstanding
             // 
@@ -223,7 +222,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCashOutstanding.BackgroundStyle.Class = "";
-            this.lblCashOutstanding.Location = new System.Drawing.Point(13, 50);
+            this.lblCashOutstanding.Location = new System.Drawing.Point(13, 48);
             this.lblCashOutstanding.Name = "lblCashOutstanding";
             this.lblCashOutstanding.Size = new System.Drawing.Size(68, 16);
             this.lblCashOutstanding.TabIndex = 2;
@@ -236,23 +235,23 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblFinanceOustanding.BackgroundStyle.Class = "";
-            this.lblFinanceOustanding.Location = new System.Drawing.Point(218, 50);
+            this.lblFinanceOustanding.Location = new System.Drawing.Point(193, 48);
             this.lblFinanceOustanding.Name = "lblFinanceOustanding";
             this.lblFinanceOustanding.Size = new System.Drawing.Size(68, 16);
             this.lblFinanceOustanding.TabIndex = 4;
             this.lblFinanceOustanding.Text = "»⁄◊ ≥ÿ”‡∂Ó";
             // 
-            // tbCashOutstanding
+            // tbPoolCashOutstanding
             // 
             // 
             // 
             // 
-            this.tbCashOutstanding.Border.Class = "TextBoxBorder";
-            this.tbCashOutstanding.Location = new System.Drawing.Point(87, 49);
-            this.tbCashOutstanding.Name = "tbCashOutstanding";
-            this.tbCashOutstanding.ReadOnly = true;
-            this.tbCashOutstanding.Size = new System.Drawing.Size(100, 20);
-            this.tbCashOutstanding.TabIndex = 3;
+            this.tbPoolCashOutstanding.Border.Class = "TextBoxBorder";
+            this.tbPoolCashOutstanding.Location = new System.Drawing.Point(87, 46);
+            this.tbPoolCashOutstanding.Name = "tbPoolCashOutstanding";
+            this.tbPoolCashOutstanding.ReadOnly = true;
+            this.tbPoolCashOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbPoolCashOutstanding.TabIndex = 3;
             // 
             // panelClient
             // 
