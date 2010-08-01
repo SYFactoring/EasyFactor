@@ -121,6 +121,8 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (batchType == OpBatchType.POOL_QUERY)
             {
+                toolStripSeparator3.Visible = false;
+                menuItemCommissionReport.Visible = false;
                 colBuyerName.Visible = false;
                 colBatchCount.Visible = false;
                 colTransactionType.Visible = false;

@@ -146,6 +146,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 ControlUtil.SetComponetDefault(comp);
                 ControlUtil.SetComponetEditable(comp, true);
             }
+
+            tbTotalCommission.ReadOnly = true;
+            tbIFCommission.ReadOnly = true;
         }
 
         /// <summary>
