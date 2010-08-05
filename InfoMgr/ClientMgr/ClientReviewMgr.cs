@@ -232,7 +232,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                                                                &&
                                                                                (location == "00"
                                                                                     ? true
-                                                                                    : c.Client.Department.LocationCode == location)
+                                                                                    : c.Client.BranchCode.EndsWith(location))
                                                                                &&
                                                                                (domain == "È«²¿"
                                                                                     ? true
