@@ -652,6 +652,15 @@ namespace CMBC.EasyFactor.DB.dbml
             return caseCode;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsClear
+        {
+            get { return !InvoiceAssignBatches.Any(i => i.IsClear == false); }
+        }
+
         /// <summary>
         /// 
         /// </summary>

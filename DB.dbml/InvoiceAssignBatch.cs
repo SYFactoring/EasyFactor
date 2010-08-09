@@ -396,8 +396,13 @@ namespace CMBC.EasyFactor.DB.dbml
             get { return Case.TransactionType; }
         }
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsClear
+        {
+            get { return !Invoices.Any(i => i.IsClear == false); }
+        }
 
         //?Public?Methods?(2)?
         /// <summary>

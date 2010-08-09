@@ -2561,6 +2561,8 @@ namespace CMBC.EasyFactor.Utils
 
                 foreach (Case selectedCase in caseGroup)
                 {
+                    hasExport = true;
+
                     CDA cda = selectedCase.ActiveCDA;
 
                     if (cda == null)

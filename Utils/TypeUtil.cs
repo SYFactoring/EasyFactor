@@ -108,7 +108,7 @@ namespace CMBC.EasyFactor.Utils
         {
             if (double1 == null)
             {
-                return false;
+                return true;
             }
 
             return Math.Abs(double1.Value) < PRECISION;
