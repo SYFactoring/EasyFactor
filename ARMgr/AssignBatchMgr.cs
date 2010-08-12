@@ -1889,42 +1889,42 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 Workbook workbook = app.Workbooks.Add(true);
 
-                Boolean hasCommission =
-                    batchGroup.Any(
-                        selectedBatch =>
-                        selectedBatch.Case.ActiveCDA.CommissionType == "按转让金额" ||
-                        selectedBatch.Case.ActiveCDA.CommissionType == "其他");
+                //Boolean hasCommission =
+                //    batchGroup.Any(
+                //        selectedBatch =>
+                //        selectedBatch.Case.ActiveCDA.CommissionType == "按转让金额" ||
+                //        selectedBatch.Case.ActiveCDA.CommissionType == "其他");
 
-                if (hasCommission)
-                {
-                    var commissionSheet = (Worksheet)workbook.Sheets[1];
-                    commissionSheet.Name = "保理费用明细表";
-                    ReportCommissionSheet(commissionSheet, batchGroup);
+                //if (hasCommission)
+                //{
+                //    var commissionSheet = (Worksheet)workbook.Sheets[1];
+                //    commissionSheet.Name = "保理费用明细表";
+                //    ReportCommissionSheet(commissionSheet, batchGroup);
 
-                    var financeSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-                    financeSheet.Name = "可融资账款明细表";
-                    Worksheet poolsheet = null;
+                //    var financeSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                //    financeSheet.Name = "可融资账款明细表";
+                //    Worksheet poolsheet = null;
 
-                    if (batchGroup.Any(b => b.Case.IsPool == false))
-                    {
-                        ReportFinanceSheet(financeSheet, batchGroup, transactionType);
-                    }
-                    else
-                    {
-                        poolsheet = financeSheet;
-                    }
-                    if (batchGroup.Any(b => b.Case.IsPool))
-                    {
-                        if (poolsheet == null)
-                        {
-                            poolsheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-                        }
-                        poolsheet.Name = "可融资账款明细表(池融资)";
-                        ReportPoolFinanceSheet(poolsheet, batchGroup.Key);
-                    }
-                }
-                else
-                {
+                //    if (batchGroup.Any(b => b.Case.IsPool == false))
+                //    {
+                //        ReportFinanceSheet(financeSheet, batchGroup, transactionType);
+                //    }
+                //    else
+                //    {
+                //        poolsheet = financeSheet;
+                //    }
+                //    if (batchGroup.Any(b => b.Case.IsPool))
+                //    {
+                //        if (poolsheet == null)
+                //        {
+                //            poolsheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                //        }
+                //        poolsheet.Name = "可融资账款明细表(池融资)";
+                //        ReportPoolFinanceSheet(poolsheet, batchGroup.Key);
+                //    }
+                //}
+                //else
+                //{
                     var financeSheet = (Worksheet)workbook.Sheets[1];
                     financeSheet.Name = "可融资账款明细表";
                     Worksheet poolsheet = null;
@@ -1946,7 +1946,7 @@ namespace CMBC.EasyFactor.ARMgr
                         poolsheet.Name = "可融资账款明细表(池融资)";
                         ReportPoolFinanceSheet(poolsheet, batchGroup.Key);
                     }
-                }
+                //}
 
                 var assignSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
                 assignSheet.Name = "应收账款转让明细表";
