@@ -1942,6 +1942,14 @@ namespace CMBC.EasyFactor.Utils
         {
             var selectedCases = (List<Case>)_exportData;
 
+            foreach (var c in selectedCases)
+            {
+                if (c.ActiveCDA == null)
+                {
+                    throw new Exception("案件没有有效的额度通知书，案件编号：" + c.CaseCode);
+                }
+            }
+
             IEnumerable<IGrouping<string, Case>> caseGroups = selectedCases.GroupBy(c => c.TransactionType);
             int size = _exportData.Count;
             int result = 0;
@@ -2561,8 +2569,6 @@ namespace CMBC.EasyFactor.Utils
 
                 foreach (Case selectedCase in caseGroup)
                 {
-                    hasExport = true;
-
                     CDA cda = selectedCase.ActiveCDA;
 
                     if (cda == null)
@@ -2675,6 +2681,7 @@ namespace CMBC.EasyFactor.Utils
                     sheet.Cells[9, column++] = "单据类型";
                     sheet.Cells[9, column++] = "发票号/贷项通知号";
                     sheet.Cells[9, column++] = "对应发票号";
+                    sheet.Cells[9, column++] = "票面金额";
                     sheet.Cells[9, column++] = "转让金额";
                     sheet.Cells[9, column++] = "发票日";
                     sheet.Cells[9, column++] = "到期日";
@@ -2709,24 +2716,25 @@ namespace CMBC.EasyFactor.Utils
                             sheet.Cells[row, "A"] = invoice.AssignBatchNo;
                             sheet.Cells[row, "B"] = "发票";
                             sheet.Cells[row, "C"] = "'" + invoice.InvoiceNo;
-                            sheet.Cells[row, "E"] = invoice.AssignAmount;
-                            sheet.Cells[row, "F"] = invoice.InvoiceDate;
-                            sheet.Cells[row, "G"] = invoice.DueDate;
-                            sheet.Cells[row, "H"] = invoice.AssignDate;
+                            sheet.Cells[row, "E"] = invoice.InvoiceAmount;
+                            sheet.Cells[row, "F"] = invoice.AssignAmount;
+                            sheet.Cells[row, "G"] = invoice.InvoiceDate;
+                            sheet.Cells[row, "H"] = invoice.DueDate;
+                            sheet.Cells[row, "I"] = invoice.AssignDate;
 
                             int financeStep = 0;
                             foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
                             {
-                                sheet.Cells[row + financeStep, "I"] = financeLog.FinanceAmount;
-                                sheet.Cells[row + financeStep, "J"] = financeLog.FinanceDate;
-                                sheet.Cells[row + financeStep, "K"] = financeLog.FinanceDueDate;
-                                sheet.Cells[row + financeStep, "P"] = financeLog.FinanceOutstanding;
+                                sheet.Cells[row + financeStep, "J"] = financeLog.FinanceAmount;
+                                sheet.Cells[row + financeStep, "K"] = financeLog.FinanceDate;
+                                sheet.Cells[row + financeStep, "L"] = financeLog.FinanceDueDate;
+                                sheet.Cells[row + financeStep, "Q"] = financeLog.FinanceOutstanding;
 
                                 for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
                                 {
                                     InvoiceRefundLog refundLog = financeLog.InvoiceRefundLogs[j];
-                                    sheet.Cells[row + financeStep + j, "O"] = refundLog.RefundAmount;
-                                    sheet.Cells[row + financeStep + j, "Q"] = refundLog.RefundDate;
+                                    sheet.Cells[row + financeStep + j, "P"] = refundLog.RefundAmount;
+                                    sheet.Cells[row + financeStep + j, "R"] = refundLog.RefundDate;
                                 }
 
                                 financeStep += financeLog.InvoiceRefundLogs.Count;
@@ -2743,8 +2751,8 @@ namespace CMBC.EasyFactor.Utils
                                     continue;
                                 }
 
-                                sheet.Cells[row + normalPaymentNumber, "L"] = paymentLog.PaymentAmount;
-                                sheet.Cells[row + normalPaymentNumber, "N"] = paymentLog.PaymentDate;
+                                sheet.Cells[row + normalPaymentNumber, "M"] = paymentLog.PaymentAmount;
+                                sheet.Cells[row + normalPaymentNumber, "O"] = paymentLog.PaymentDate;
                                 normalPaymentNumber++;
                             }
 
@@ -2764,41 +2772,42 @@ namespace CMBC.EasyFactor.Utils
                                 sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "C"] = "'" +
                                                                                                  creditNote.CreditNoteNo;
                                 sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "D"] = "'" + invoice.InvoiceNo;
-                                sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "H"] =
+                                sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "I"] =
                                     creditNote.CreditNoteDate;
-                                sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "L"] =
+                                sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "M"] =
                                     paymentLog.PaymentAmount;
-                                sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "N"] = paymentLog.PaymentDate;
+                                sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "O"] = paymentLog.PaymentDate;
                                 creditNoteNumber++;
                             }
 
                             step = step < (normalPaymentNumber + creditNoteNumber) ? (normalPaymentNumber + creditNoteNumber) : step;
 
-                            sheet.Cells[row, "M"] = invoice.AssignOutstanding;
+                            sheet.Cells[row, "N"] = invoice.AssignOutstanding;
 
-                            sheet.Cells[row, "R"] = invoice.Commission;
-                            sheet.Cells[row, "S"] = invoice.Comment;
+                            sheet.Cells[row, "S"] = invoice.Commission;
+                            sheet.Cells[row, "T"] = invoice.Comment;
 
                             row += step;
                         }
                     }
 
                     string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
-                    sheet.Range[sheet.Cells[9, "A"], sheet.Cells[row - 1, "S"]].Borders.LineStyle = 1;
+                    sheet.Range[sheet.Cells[9, "A"], sheet.Cells[row - 1, "T"]].Borders.LineStyle = 1;
                     sheet.Range[sheet.Cells[10, "E"], sheet.Cells[row - 1, "E"]].NumberFormatLocal = currencyFormat;
-                    sheet.Range[sheet.Cells[10, "F"], sheet.Cells[row - 1, "F"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "F"], sheet.Cells[row - 1, "F"]].NumberFormatLocal = currencyFormat;
                     sheet.Range[sheet.Cells[10, "G"], sheet.Cells[row - 1, "G"]].NumberFormatLocal = "yyyy-MM-dd";
                     sheet.Range[sheet.Cells[10, "H"], sheet.Cells[row - 1, "H"]].NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.Range[sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]].NumberFormatLocal = currencyFormat;
-                    sheet.Range[sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]].NumberFormatLocal = currencyFormat;
                     sheet.Range[sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]].NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.Range[sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]].NumberFormatLocal = "yyyy-MM-dd";
                     sheet.Range[sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]].NumberFormatLocal = currencyFormat;
-                    sheet.Range[sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]].NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.Range[sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]].NumberFormatLocal = "yyyy-MM-dd";
                     sheet.Range[sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]].NumberFormatLocal = currencyFormat;
-                    sheet.Range[sheet.Cells[10, "Q"], sheet.Cells[row - 1, "Q"]].NumberFormatLocal = "yyyy-MM-dd";
-                    sheet.Range[sheet.Cells[10, "R"], sheet.Cells[row - 1, "R"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "Q"], sheet.Cells[row - 1, "Q"]].NumberFormatLocal = currencyFormat;
+                    sheet.Range[sheet.Cells[10, "R"], sheet.Cells[row - 1, "R"]].NumberFormatLocal = "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[10, "S"], sheet.Cells[row - 1, "S"]].NumberFormatLocal = currencyFormat;
 
                     foreach (Range range in sheet.UsedRange.Rows)
                     {
@@ -2871,6 +2880,7 @@ namespace CMBC.EasyFactor.Utils
             sheet.Cells[9, column++] = "单据类型";
             sheet.Cells[9, column++] = "发票号/贷项通知号";
             sheet.Cells[9, column++] = "对应发票号";
+            sheet.Cells[9, column++] = "票面金额";
             sheet.Cells[9, column++] = "转让金额";
             sheet.Cells[9, column++] = "发票日";
             sheet.Cells[9, column++] = "到期日";
@@ -2961,24 +2971,25 @@ namespace CMBC.EasyFactor.Utils
                         sheet.Cells[row, "A"] = invoice.AssignBatchNo;
                         sheet.Cells[row, "B"] = "发票";
                         sheet.Cells[row, "C"] = "'" + invoice.InvoiceNo;
-                        sheet.Cells[row, "E"] = invoice.AssignAmount;
-                        sheet.Cells[row, "F"] = invoice.InvoiceDate;
-                        sheet.Cells[row, "G"] = invoice.DueDate;
-                        sheet.Cells[row, "H"] = invoice.AssignDate;
+                        sheet.Cells[row, "E"] = invoice.InvoiceAmount;
+                        sheet.Cells[row, "F"] = invoice.AssignAmount;
+                        sheet.Cells[row, "G"] = invoice.InvoiceDate;
+                        sheet.Cells[row, "H"] = invoice.DueDate;
+                        sheet.Cells[row, "I"] = invoice.AssignDate;
 
                         int financeStep = 0;
                         foreach (InvoiceFinanceLog financeLog in invoice.InvoiceFinanceLogs)
                         {
-                            sheet.Cells[row + financeStep, "I"] = financeLog.FinanceAmount;
-                            sheet.Cells[row + financeStep, "J"] = financeLog.FinanceDate;
-                            sheet.Cells[row + financeStep, "K"] = financeLog.FinanceDueDate;
-                            sheet.Cells[row + financeStep, "P"] = financeLog.FinanceOutstanding;
+                            sheet.Cells[row + financeStep, "J"] = financeLog.FinanceAmount;
+                            sheet.Cells[row + financeStep, "K"] = financeLog.FinanceDate;
+                            sheet.Cells[row + financeStep, "L"] = financeLog.FinanceDueDate;
+                            sheet.Cells[row + financeStep, "Q"] = financeLog.FinanceOutstanding;
 
                             for (int j = 0; j < financeLog.InvoiceRefundLogs.Count; j++)
                             {
                                 InvoiceRefundLog refundLog = financeLog.InvoiceRefundLogs[j];
-                                sheet.Cells[row + financeStep + j, "O"] = refundLog.RefundAmount;
-                                sheet.Cells[row + financeStep + j, "Q"] = refundLog.RefundDate;
+                                sheet.Cells[row + financeStep + j, "P"] = refundLog.RefundAmount;
+                                sheet.Cells[row + financeStep + j, "R"] = refundLog.RefundDate;
                             }
 
                             financeStep += financeLog.InvoiceRefundLogs.Count;
@@ -2995,8 +3006,8 @@ namespace CMBC.EasyFactor.Utils
                                 continue;
                             }
 
-                            sheet.Cells[row + normalPaymentNumber, "L"] = paymentLog.PaymentAmount;
-                            sheet.Cells[row + normalPaymentNumber, "N"] = paymentLog.PaymentDate;
+                            sheet.Cells[row + normalPaymentNumber, "M"] = paymentLog.PaymentAmount;
+                            sheet.Cells[row + normalPaymentNumber, "O"] = paymentLog.PaymentDate;
                             normalPaymentNumber++;
                         }
 
@@ -3016,41 +3027,42 @@ namespace CMBC.EasyFactor.Utils
                             sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "C"] = "'" +
                                                                                              creditNote.CreditNoteNo;
                             sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "D"] = "'" + invoice.InvoiceNo;
-                            sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "H"] =
+                            sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "I"] =
                                 creditNote.CreditNoteDate;
-                            sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "L"] =
+                            sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "M"] =
                                 paymentLog.PaymentAmount;
-                            sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "N"] = paymentLog.PaymentDate;
+                            sheet.Cells[row + normalPaymentNumber + creditNoteNumber, "O"] = paymentLog.PaymentDate;
                             creditNoteNumber++;
                         }
 
                         step = step < (normalPaymentNumber + creditNoteNumber) ? (normalPaymentNumber + creditNoteNumber) : step;
 
-                        sheet.Cells[row, "M"] = invoice.AssignOutstanding;
+                        sheet.Cells[row, "N"] = invoice.AssignOutstanding;
 
-                        sheet.Cells[row, "R"] = invoice.Commission;
-                        sheet.Cells[row, "S"] = invoice.Comment;
+                        sheet.Cells[row, "S"] = invoice.Commission;
+                        sheet.Cells[row, "T"] = invoice.Comment;
 
                         row += step;
                     }
                 }
 
                 string currencyFormat = TypeUtil.GetExcelCurr(selectedCase.InvoiceCurrency);
-                sheet.Range[sheet.Cells[9, "A"], sheet.Cells[row - 1, "S"]].Borders.LineStyle = 1;
+                sheet.Range[sheet.Cells[9, "A"], sheet.Cells[row - 1, "T"]].Borders.LineStyle = 1;
                 sheet.Range[sheet.Cells[10, "E"], sheet.Cells[row - 1, "E"]].NumberFormatLocal = currencyFormat;
-                sheet.Range[sheet.Cells[10, "F"], sheet.Cells[row - 1, "F"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "F"], sheet.Cells[row - 1, "F"]].NumberFormatLocal = currencyFormat;
                 sheet.Range[sheet.Cells[10, "G"], sheet.Cells[row - 1, "G"]].NumberFormatLocal = "yyyy-MM-dd";
                 sheet.Range[sheet.Cells[10, "H"], sheet.Cells[row - 1, "H"]].NumberFormatLocal = "yyyy-MM-dd";
-                sheet.Range[sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]].NumberFormatLocal = currencyFormat;
-                sheet.Range[sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "I"], sheet.Cells[row - 1, "I"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "J"], sheet.Cells[row - 1, "J"]].NumberFormatLocal = currencyFormat;
                 sheet.Range[sheet.Cells[10, "K"], sheet.Cells[row - 1, "K"]].NumberFormatLocal = "yyyy-MM-dd";
-                sheet.Range[sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "L"], sheet.Cells[row - 1, "L"]].NumberFormatLocal = "yyyy-MM-dd";
                 sheet.Range[sheet.Cells[10, "M"], sheet.Cells[row - 1, "M"]].NumberFormatLocal = currencyFormat;
-                sheet.Range[sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]].NumberFormatLocal = "yyyy-MM-dd";
-                sheet.Range[sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "N"], sheet.Cells[row - 1, "N"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "O"], sheet.Cells[row - 1, "O"]].NumberFormatLocal = "yyyy-MM-dd";
                 sheet.Range[sheet.Cells[10, "P"], sheet.Cells[row - 1, "P"]].NumberFormatLocal = currencyFormat;
-                sheet.Range[sheet.Cells[10, "Q"], sheet.Cells[row - 1, "Q"]].NumberFormatLocal = "yyyy-MM-dd";
-                sheet.Range[sheet.Cells[10, "R"], sheet.Cells[row - 1, "R"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "Q"], sheet.Cells[row - 1, "Q"]].NumberFormatLocal = currencyFormat;
+                sheet.Range[sheet.Cells[10, "R"], sheet.Cells[row - 1, "R"]].NumberFormatLocal = "yyyy-MM-dd";
+                sheet.Range[sheet.Cells[10, "S"], sheet.Cells[row - 1, "S"]].NumberFormatLocal = currencyFormat;
             }
 
             sheet.Range["A4", "I7"].Borders.LineStyle = 1;

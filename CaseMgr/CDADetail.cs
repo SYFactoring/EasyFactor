@@ -254,6 +254,12 @@ namespace CMBC.EasyFactor.CaseMgr
                     return;
                 }
 
+                if (cda.IsCreditCoverRevolving.GetValueOrDefault())
+                {
+                    e.IsValid = true;
+                    return;
+                }
+
                 ClientCreditLine creditLine = cda.Case.BuyerClient.AssignCreditLine;
                 if (creditLine != null)
                 {
