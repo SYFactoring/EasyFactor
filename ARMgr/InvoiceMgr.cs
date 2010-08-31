@@ -294,13 +294,13 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
-                foreach (Invoice invoice in selectedInvoices)
-                {
-                    invoice.CaculateCommission(true);
-                }
-
                 try
                 {
+                    foreach (Invoice invoice in selectedInvoices)
+                    {
+                        invoice.CaculateCommission(true);
+                    }
+
                     Context.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -656,7 +656,7 @@ namespace CMBC.EasyFactor.ARMgr
             var isFlaw = cbIsFlaw.CheckValue as string;
             var isDispute = cbIsDispute.CheckValue as string;
             string caseMark = cbCaseMark.Text;
-            var location = (string) cbLocation.SelectedValue;
+            var location = (string)cbLocation.SelectedValue;
             string transactionType = cbTransactionType.Text;
             string caseCode = tbCaseCode.Text;
             string assignBatchNo = tbAssignBatchNo.Text;
@@ -821,7 +821,7 @@ namespace CMBC.EasyFactor.ARMgr
                 menuItemCommission.Enabled = false;
             }
 
-            if(PermUtil.ValidatePermission(Permissions.INVOICE_REPORT))
+            if (PermUtil.ValidatePermission(Permissions.INVOICE_REPORT))
             {
                 menuItemExportAllInvoices.Enabled = true;
                 menuItemExportSelectedInvoices.Enabled = true;

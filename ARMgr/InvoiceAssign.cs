@@ -83,8 +83,8 @@ namespace CMBC.EasyFactor.ARMgr
                 ControlUtil.SetComponetDefault(comp);
             }
 
-            invoiceBindingSource.DataSource = typeof (Invoice);
-            batchBindingSource.DataSource = typeof (InvoiceAssignBatch);
+            invoiceBindingSource.DataSource = typeof(Invoice);
+            batchBindingSource.DataSource = typeof(InvoiceAssignBatch);
         }
 
         //?Private?Methods?(17)?
@@ -100,7 +100,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedInvoice = (Invoice) invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
+            var selectedInvoice = (Invoice)invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
             var caseDetail = new CaseDetail(selectedInvoice.InvoiceAssignBatch.Case, CaseDetail.OpCaseType.DETAIL_CASE);
             caseDetail.ShowDialog(this);
         }
@@ -117,7 +117,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedInvoice = (Invoice) invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
+            var selectedInvoice = (Invoice)invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
             var cdaDetail = new CDADetail(selectedInvoice.InvoiceAssignBatch.Case.ActiveCDA,
                                           CDADetail.OpCDAType.DETAIL_CDA);
             cdaDetail.ShowDialog(this);
@@ -135,7 +135,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedInvoice = (Invoice) invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
+            var selectedInvoice = (Invoice)invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
             var invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             invoiceDetail.ShowDialog(this);
         }
@@ -178,14 +178,14 @@ namespace CMBC.EasyFactor.ARMgr
             DataGridViewColumn col = dgvInvoices.Columns[e.ColumnIndex];
             if (col == colDueDate || col == colInvoiceDate)
             {
-                var date = (DateTime) e.Value;
+                var date = (DateTime)e.Value;
                 e.Value = date == default(DateTime) ? "" : date.ToString("yyyyMMdd");
 
                 e.FormattingApplied = true;
             }
             else if (col == colIsFlaw)
             {
-                var isFlaw = (bool) e.Value;
+                var isFlaw = (bool)e.Value;
                 e.Value = isFlaw ? "Y" : "N";
 
                 e.FormattingApplied = true;
@@ -214,7 +214,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
-                var str = (string) e.Value;
+                var str = (string)e.Value;
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
                 e.ParsingApplied = true;
             }
@@ -259,7 +259,7 @@ namespace CMBC.EasyFactor.ARMgr
             DataGridViewColumn col = dgvInvoices.Columns[e.ColumnIndex];
             if (col == colDueDate || col == colInvoiceDate)
             {
-                var str = (string) e.FormattedValue;
+                var str = (string)e.FormattedValue;
                 DateTime result;
                 bool ok = DateTime.TryParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None,
                                                  out result);
@@ -270,7 +270,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else if (col == colInvoiceAmount || col == colAssignAmount || col == colCommission)
             {
-                var str = (string) e.FormattedValue;
+                var str = (string)e.FormattedValue;
                 double result;
                 bool ok = Double.TryParse(str, out result);
                 if (!ok)
@@ -285,7 +285,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else if (col == colInvoiceNo)
             {
-                var str = (string) e.FormattedValue;
+                var str = (string)e.FormattedValue;
                 Regex regex = Invoice.INVOICE_NO_REGEX;
                 bool ok = regex.IsMatch(str);
                 if (!ok)
@@ -295,7 +295,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else if (col == colIsFlaw)
             {
-                var str = (string) e.FormattedValue;
+                var str = (string)e.FormattedValue;
                 if ("Y".Equals(str) || "N".Equals(str))
                 {
                     return;
@@ -316,7 +316,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedInvoice = (Invoice) invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
+            var selectedInvoice = (Invoice)invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
 
             if (dgvInvoices.Columns[e.ColumnIndex] == colInvoiceAmount)
             {
@@ -328,7 +328,7 @@ namespace CMBC.EasyFactor.ARMgr
                 CDA cda = _case.ActiveCDA;
                 if (cda.CommissionType == "°´×ªÈÃ½ð¶î")
                 {
-                    selectedInvoice.Commission = selectedInvoice.AssignAmount*cda.Price;
+                    selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.Price;
                 }
 
                 StatBatch();
@@ -380,7 +380,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            var selectedInvoice = (Invoice) invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
+            var selectedInvoice = (Invoice)invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
             var invoiceDetail = new InvoiceDetail(selectedInvoice, InvoiceDetail.OpInvoiceType.FLAW);
             invoiceDetail.ShowDialog(this);
         }
@@ -409,7 +409,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (importForm.ImportedList != null)
             {
-                var invoiceList = (List<Invoice>) importForm.ImportedList;
+                var invoiceList = (List<Invoice>)importForm.ImportedList;
                 foreach (Invoice invoice in invoiceBindingSource.List)
                 {
                     if (!invoiceList.Contains(invoice))
@@ -418,12 +418,19 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
-                foreach (Invoice invoice in invoiceList)
+                try
                 {
-                    if (invoice.Commission.HasValue == false)
+                    foreach (Invoice invoice in invoiceList)
                     {
-                        invoice.CaculateCommission(false);
+                        if (invoice.Commission.HasValue == false)
+                        {
+                            invoice.CaculateCommission(false);
+                        }
                     }
+                }
+                catch (Exception e1)
+                {
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 invoiceBindingSource.DataSource = invoiceList;
@@ -496,7 +503,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             IList invoiceList = invoiceBindingSource.List;
-            var batch = (InvoiceAssignBatch) batchBindingSource.DataSource;
+            var batch = (InvoiceAssignBatch)batchBindingSource.DataSource;
 
             if (invoiceList.Count == 0)
             {
@@ -677,7 +684,7 @@ namespace CMBC.EasyFactor.ARMgr
             tbTotalAssign.Text = String.Format("{0:N2}", totalAssign);
             tbAssignNumber.Text = String.Format("{0}", invoiceList.Count);
             tbTotalCommission.Text = String.Format("{0:N2}", totalCommmission);
-            tbTotalHandfee.Text = String.Format("{0:N2}", invoiceList.Count*_case.ActiveCDA.HandFee.GetValueOrDefault());
+            tbTotalHandfee.Text = String.Format("{0:N2}", invoiceList.Count * _case.ActiveCDA.HandFee.GetValueOrDefault());
         }
 
         /// <summary>

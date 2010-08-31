@@ -1555,11 +1555,12 @@ namespace CMBC.EasyFactor.ARMgr
                 row++;
                 int invoiceStart = row;
                 double assignAmount = 0;
+                bool isDueOK = transactionType == "国内买方保理";
                 foreach (Invoice invoice in selectedBatch.Invoices)
                 {
                     if (invoice.IsFlaw == false
                         && invoice.IsDispute.GetValueOrDefault() == false
-                        && invoice.DueDate > DateTime.Today
+                        && (isDueOK ? true : invoice.DueDate > DateTime.Today)
                         && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
                         &&
                         ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) *
@@ -1925,27 +1926,27 @@ namespace CMBC.EasyFactor.ARMgr
                 //}
                 //else
                 //{
-                    var financeSheet = (Worksheet)workbook.Sheets[1];
-                    financeSheet.Name = "可融资账款明细表";
-                    Worksheet poolsheet = null;
+                var financeSheet = (Worksheet)workbook.Sheets[1];
+                financeSheet.Name = "可融资账款明细表";
+                Worksheet poolsheet = null;
 
-                    if (batchGroup.Any(b => b.Case.IsPool == false))
+                if (batchGroup.Any(b => b.Case.IsPool == false))
+                {
+                    ReportFinanceSheet(financeSheet, batchGroup, transactionType);
+                }
+                else
+                {
+                    poolsheet = financeSheet;
+                }
+                if (batchGroup.Any(b => b.Case.IsPool))
+                {
+                    if (poolsheet == null)
                     {
-                        ReportFinanceSheet(financeSheet, batchGroup, transactionType);
+                        poolsheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
                     }
-                    else
-                    {
-                        poolsheet = financeSheet;
-                    }
-                    if (batchGroup.Any(b => b.Case.IsPool))
-                    {
-                        if (poolsheet == null)
-                        {
-                            poolsheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-                        }
-                        poolsheet.Name = "可融资账款明细表(池融资)";
-                        ReportPoolFinanceSheet(poolsheet, batchGroup.Key);
-                    }
+                    poolsheet.Name = "可融资账款明细表(池融资)";
+                    ReportPoolFinanceSheet(poolsheet, batchGroup.Key);
+                }
                 //}
 
                 var assignSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);

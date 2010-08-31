@@ -331,6 +331,11 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 CDA cda = InvoiceAssignBatch.Case.ActiveCDA;
 
+                if (cda == null)
+                {
+                    throw new Exception("发票:" + this.InvoiceNo + "没有有效的额度通知书");
+                }
+
                 if (cda.CommissionType == "按融资金额")
                 {
                     if (isOverwrite)
