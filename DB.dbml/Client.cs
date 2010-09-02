@@ -300,21 +300,21 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 池融资有效的账款余额，即应收账款池余额
         /// </summary>
-        public double PoolValuedAssignOutstanding
+        public double PoolCanBeFinance
         {
             get
             {
                 double result = 0;
                 foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
                 {
-                    double assignOutstanding = curCase.ValuedAssignOutstanding;
+                    double canBeFinance = curCase.CanBeFinanceAmount;
                     if (curCase.InvoiceCurrency != "CNY")
                     {
                         double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
-                        assignOutstanding *= exchange;
+                        canBeFinance *= exchange;
                     }
 
-                    result += assignOutstanding;
+                    result += canBeFinance;
                 }
 
                 return result;

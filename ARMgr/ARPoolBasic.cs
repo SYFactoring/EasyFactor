@@ -97,7 +97,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             tbPoolTotalAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolTotalAssignOutstading);
-            tbPoolValuedAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolValuedAssignOutstanding);
+            tbPoolValuedAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolCanBeFinance);
             tbPoolCashOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolCashOutstanding);
             tbPoolFinanceOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolFinanceOutstanding);
         }

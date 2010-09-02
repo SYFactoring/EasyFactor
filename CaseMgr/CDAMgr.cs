@@ -679,7 +679,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = String.Format("单笔融资不超过发票金额的 {0:p0}", selectedCDA.FinanceProportion);
+                    sheet.Cells[row++, 2] = String.Format("单笔融资不超过合格应收账款金额的 {0:p0}", selectedCDA.FinanceProportion);
                 }
 
                 sheet.Cells[row, 1] = "保理费率";

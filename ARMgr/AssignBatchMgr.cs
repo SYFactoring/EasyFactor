@@ -1198,7 +1198,7 @@ namespace CMBC.EasyFactor.ARMgr
                     {
                         poolsheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
                     }
-                    poolsheet.Name = "可融资账款明细表(池融资)";
+                    poolsheet.Name = "可融资账款明细表(保理池)";
                     ReportPoolFinanceSheet(poolsheet, batchGroup.Key);
                 }
 
@@ -1240,6 +1240,146 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="keyClient"></param>
         private static void ReportPoolFinanceSheet(Worksheet sheet, Client keyClient)
         {
+            //sheet.PageSetup.Zoom = false;
+            //sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+            //sheet.PageSetup.FitToPagesWide = 1;
+            //sheet.PageSetup.FitToPagesTall = false;
+
+            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+
+            sheet.Range["A3", "E3"].MergeCells = true;
+            sheet.Range["A3", "A3"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            sheet.Cells[3, 1] = "可融资账款明细表(保理池)";
+
+            int row = 5;
+            sheet.Cells[row, 1] = "卖方：";
+
+            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].Font.Underline = true;
+            sheet.Cells[row, 2] = String.Format("{0}", keyClient);
+            row++;
+
+            sheet.Cells[row, 1] = "账款池余额：";
+            sheet.Range[sheet.Cells[row, "B"], sheet.Cells[row, "C"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "B"], sheet.Cells[row, "C"]].HorizontalAlignment =
+                XlHAlign.xlHAlignLeft;
+            sheet.Cells[row, 2] = keyClient.PoolCanBeFinance;
+            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
+                TypeUtil.GetExcelCurrency("CNY");
+
+            row++;
+            row++;
+            sheet.Cells[row, 1] = "买方";
+            sheet.Cells[row, 2] = "账款余额";
+            sheet.Cells[row, 3] = "有效账款余额";
+            sheet.Cells[row, 4] = "融资比例";
+            sheet.Cells[row, 5] = "可融资金额(账款池)";
+
+            row++;
+            DBDataContext context = new DBDataContext();
+            IQueryable<Case> caseResult = from c in context.Cases
+                                          where c.SellerCode == keyClient.ClientEDICode && c.IsPool
+                                          select c;
+            int invoiceStart = row;
+            double totalAssignOutstanding = 0;
+            double totalValuedAssignOutstanding = 0;
+            double totalCanBeFinanceAmount = 0;
+            foreach (Case c in caseResult)
+            {
+                sheet.Cells[row, 1] = c.BuyerClient.ToString();
+                sheet.Cells[row, 2] = c.AssignOutstanding;
+                sheet.Cells[row, 3] = c.ValuedAssignOutstanding;
+                sheet.Cells[row, 4] = c.FinanceProportion;
+                sheet.Cells[row, 5] = c.CanBeFinanceAmount;
+                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 3]].NumberFormatLocal =
+                    TypeUtil.GetExcelCurr(c.InvoiceCurrency);
+                sheet.Range[sheet.Cells[row, 4], sheet.Cells[row, 4]].NumberFormatLocal =
+    "0%";
+                sheet.Range[sheet.Cells[row, 5], sheet.Cells[row, 5]].NumberFormatLocal =
+    TypeUtil.GetExcelCurr(c.InvoiceCurrency);
+                row++;
+                totalAssignOutstanding += c.AssignOutstanding;
+                totalValuedAssignOutstanding += c.ValuedAssignOutstanding;
+                totalCanBeFinanceAmount += c.CanBeFinanceAmount;
+            }
+
+            sheet.Cells[row, 1] = "小计";
+            sheet.Cells[row, 2] = totalAssignOutstanding;
+            sheet.Cells[row, 3] = totalValuedAssignOutstanding;
+            sheet.Cells[row, 5] = totalCanBeFinanceAmount;
+            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 5]].NumberFormatLocal = TypeUtil.GetExcelCurr("CNY");
+
+            int invoiceEnd = row ;
+
+            sheet.Range[sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 5]].HorizontalAlignment =
+                XlHAlign.xlHAlignCenter;
+            sheet.Range[sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]].Borders.LineStyle = 1;
+
+            row++;
+            row++;
+            sheet.Cells[row, 1] = "以下内容由分部/行负责核定";
+            sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].Font.Underline = true;
+            row++;
+            sheet.Cells[row, 1] = "可用保理池融资额度：";
+            row++;
+            sheet.Cells[row, 1] = "保理融资池余额：";
+            row++;
+            sheet.Cells[row, 1] = "现金池余额：";
+            row += 2;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
+            sheet.Cells[row, 1] = @"备注：";
+            row++;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
+            sheet.Cells[row, 1] = @"（1）本表当日放款有效，过期请重新向保理部申请出具表单。";
+            row++;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
+            sheet.Cells[row, 1] = @"（2）账款池余额 + 现金池余额 >= 融资池余额。";
+            row++;
+
+            row += 2;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+            sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
+            row++;
+            row++;
+            sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+
+            sheet.UsedRange.Font.Name = "仿宋_GB2312";
+            sheet.UsedRange.Font.Size = 12;
+            sheet.Range[sheet.Cells[3, 1], sheet.Cells[3, 1]].Font.Size = 24;
+            sheet.Range[sheet.Cells[3, 1], sheet.Cells[3, 5]].RowHeight = 30;
+
+            sheet.Range["A1", Type.Missing].ColumnWidth = 18;
+            sheet.Range["B1", Type.Missing].ColumnWidth = 18;
+            sheet.Range["C1", Type.Missing].ColumnWidth = 18;
+            sheet.Range["D1", Type.Missing].ColumnWidth = 8;
+            sheet.Range["E1", Type.Missing].ColumnWidth = 18;
+
+            var sealRange = ((Range)sheet.Cells[row - 4, 3]);
+            string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+                                    Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+
+            //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
+
+            sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
+                          Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                          Type.Missing);
+            sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="keyClient"></param>
+        private static void ReportPoolFinanceSheetOld(Worksheet sheet, Client keyClient)
+        {
             string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
             sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
@@ -1272,7 +1412,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             row++;
             sheet.Cells[row, 1] = "账款池余额：";
-            sheet.Cells[row, 2] = keyClient.PoolValuedAssignOutstanding;
+            sheet.Cells[row, 2] = keyClient.PoolCanBeFinance;
             sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
                 TypeUtil.GetExcelCurrency("CNY");
 
@@ -1387,6 +1527,227 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[3, 1] = "可融资账款明细表";
 
             Client keyClient = batchGroup.Key;
+            string clientSide;
+            int row = 5;
+            if (transactionType == "国内卖方保理" || transactionType == "出口保理")
+            {
+                sheet.Cells[row, 1] = "卖方：";
+                clientSide = "买方";
+            }
+            else
+            {
+                sheet.Cells[row, 1] = "买方：";
+                clientSide = "卖方";
+            }
+
+            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].Font.Underline = true;
+            sheet.Cells[row, 2] = String.Format("{0}", keyClient);
+
+            //row++;
+            //sheet.Cells[row, 1] = "有效账款余额总额：";
+
+            row++;
+            row++;
+            sheet.Cells[row, 1] = "以下信息由分部/行负责核定";
+            sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].Font.Underline = true;
+
+            row++;
+            sheet.Cells[row, 1] = "可用保理融资额度：";
+
+            row++;
+            sheet.Cells[row, 1] = "保理融资余额：";
+
+            row++;
+            sheet.Cells[row, 1] = "本次可融资金额：";
+
+            row += 2;
+
+            IEnumerable<IGrouping<Client, InvoiceAssignBatch>> groups;
+
+            if (transactionType == "国内卖方保理" || transactionType == "出口保理")
+            {
+                groups = batchGroup.GroupBy(c => c.Case.BuyerClient);
+            }
+            else
+            {
+                groups = batchGroup.GroupBy(c => c.Case.SellerClient);
+            }
+
+            foreach (IGrouping<Client, InvoiceAssignBatch> group in groups)
+            {
+                Client valueClient = group.Key;
+                sheet.Cells[row, 1] = clientSide + "：";
+
+                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].Font.Underline = true;
+                if (transactionType == "国内卖方保理" || transactionType == "出口保理")
+                {
+                    sheet.Cells[row, 2] = String.Format("{0} （应收账款债务人）", valueClient);
+                }
+                else
+                {
+                    sheet.Cells[row, 2] = String.Format("{0} ", valueClient);
+                }
+                row++;
+
+                sheet.Cells[row, 1] = "对此" + clientSide + "的有效账款余额：";
+                sheet.Cells[row, 2] = group.First().Case.ValuedAssignOutstanding;
+                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
+                    TypeUtil.GetExcelCurrency(group.First().Case.InvoiceCurrency);
+
+                row++;
+                row++;
+                sheet.Cells[row, 1] = "以下信息由分部/行负责核定";
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].Font.Underline = true;
+                row++;
+                sheet.Cells[row, 1] = "此" + clientSide + "可用保理融资额度：";
+                row++;
+                sheet.Cells[row, 1] = "对此" + clientSide + "保理融资余额：";
+                row++;
+                sheet.Cells[row, 1] = "对此" + clientSide + "本次可融资金额：";
+
+                row++;
+                foreach (InvoiceAssignBatch selectedBatch in group)
+                {
+                    sheet.Range[sheet.Cells[row, 3], sheet.Cells[row, 5]].MergeCells = true;
+                    sheet.Cells[row, 3] = "业务编号：" + selectedBatch.AssignBatchNo;
+                    row++;
+                    sheet.Cells[row, 1] = "发票号";
+                    sheet.Cells[row, 2] = "转让余额";
+                    sheet.Cells[row, 3] = "发票日期";
+                    sheet.Cells[row, 4] = "到期日";
+                    sheet.Cells[row, 5] = "备注";
+
+                    row++;
+                    int invoiceStart = row;
+                    double assignAmount = 0;
+                    bool isDueOK = transactionType == "国内买方保理";
+                    CDA cda = selectedBatch.Case.ActiveCDA;
+                    foreach (Invoice invoice in selectedBatch.Invoices)
+                    {
+                        if (invoice.IsFlaw == false
+                            && invoice.IsDispute.GetValueOrDefault() == false
+                            && (isDueOK ? true : invoice.DueDate > DateTime.Today)
+                            && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
+                            &&
+                            ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) *
+                             cda.FinanceProportion.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() >
+                             TypeUtil.PRECISION)
+                            )
+                        {
+                            sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
+                            sheet.Cells[row, 2] = invoice.AssignOutstanding;
+                            sheet.Cells[row, 3] = invoice.InvoiceDate;
+                            sheet.Cells[row, 4] = invoice.DueDate;
+                            sheet.Cells[row, 5] = invoice.Comment;
+                            assignAmount += invoice.AssignOutstanding;
+                            row++;
+                        }
+                    }
+
+                    sheet.Cells[row, 1] = "小计";
+                    sheet.Cells[row, 2] = assignAmount;
+
+                    int invoiceEnd = row;
+
+                    sheet.Range[sheet.Cells[invoiceStart, 1], sheet.Cells[invoiceEnd, 1]].NumberFormatLocal = "@";
+                    sheet.Range[sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 1]].HorizontalAlignment =
+                        XlHAlign.xlHAlignCenter;
+                    sheet.Range[sheet.Cells[invoiceStart, 2], sheet.Cells[invoiceEnd, 2]].NumberFormatLocal =
+                        TypeUtil.GetExcelCurr(selectedBatch.BatchCurrency);
+                    sheet.Range[sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 2]].HorizontalAlignment =
+                        XlHAlign.xlHAlignCenter;
+                    sheet.Range[sheet.Cells[invoiceStart, 3], sheet.Cells[invoiceEnd, 3]].NumberFormatLocal =
+                        "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[invoiceStart - 1, 3], sheet.Cells[invoiceEnd, 3]].HorizontalAlignment =
+                        XlHAlign.xlHAlignCenter;
+                    sheet.Range[sheet.Cells[invoiceStart, 4], sheet.Cells[invoiceEnd, 4]].NumberFormatLocal =
+                        "yyyy-MM-dd";
+                    sheet.Range[sheet.Cells[invoiceStart - 1, 4], sheet.Cells[invoiceEnd, 4]].HorizontalAlignment =
+                        XlHAlign.xlHAlignCenter;
+                    sheet.Range[sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]].Borders.LineStyle = 1;
+
+                    row += 2;
+                }
+                row += 2;
+            }
+
+            row -= 2;
+
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
+            sheet.Cells[row, 1] = @"备注：";
+            row++;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
+            sheet.Cells[row, 1] = @"（1）可用保理融资额度，是指剩余的保理融资额度。";
+            row++;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
+            sheet.Cells[row, 1] = @"（2）可融资金额的参考计算公式：对此" + clientSide + "本次可融资金额=Min{此" + clientSide + "可用保理融资额度，对此" + clientSide + "的有效账款余额×预付比例}。本次可融资金额=Min{可用保理融资额度，所有对此" + clientSide + "可融资金额加总值，客户剩余综合授信额度}。";
+            sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 45;
+            row++;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
+            sheet.Cells[row, 1] = @"（3）若非出表当日放款，请贸易融资审核岗于放款当日审核上述发票的到期日，逾期发票不予融资。";
+            sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 30;
+            row++;
+
+            row += 2;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+            sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
+            row++;
+            row++;
+            sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+
+            sheet.UsedRange.Font.Name = "仿宋_GB2312";
+            sheet.UsedRange.Font.Size = 12;
+            sheet.Range[sheet.Cells[3, 1], sheet.Cells[3, 1]].Font.Size = 24;
+            sheet.Range[sheet.Cells[3, 1], sheet.Cells[3, 5]].RowHeight = 30;
+
+            sheet.Range["A1", Type.Missing].ColumnWidth = 20;
+            sheet.Range["B1", Type.Missing].ColumnWidth = 22;
+            sheet.Range["C1", Type.Missing].ColumnWidth = 15;
+            sheet.Range["D1", Type.Missing].ColumnWidth = 15;
+            sheet.Range["E1", Type.Missing].ColumnWidth = 8;
+
+            var sealRange = ((Range)sheet.Cells[row - 4, 3]);
+            string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+                                    Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+
+            //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
+
+            sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
+                          Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                          Type.Missing);
+            sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="batchGroup"></param>
+        /// <param name="transactionType"></param>
+        private static void ReportFinanceSheetOld(Worksheet sheet, IGrouping<Client, InvoiceAssignBatch> batchGroup,
+                                               string transactionType)
+        {
+            //sheet.PageSetup.Zoom = false;
+            //sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+            //sheet.PageSetup.FitToPagesWide = 1;
+            //sheet.PageSetup.FitToPagesTall = false;
+
+            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+
+            sheet.Range["A3", "E3"].MergeCells = true;
+            sheet.Range["A3", "A3"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            sheet.Cells[3, 1] = "可融资账款明细表";
+
+            Client keyClient = batchGroup.Key;
             int row = 5;
             if (transactionType == "国内卖方保理" || transactionType == "出口保理")
             {
@@ -1399,13 +1760,14 @@ namespace CMBC.EasyFactor.ARMgr
 
             sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].Font.Underline = true;
             sheet.Cells[row, 2] = String.Format("{0}", keyClient);
+            ClientCreditLine creditLine = null;
 
             row++;
             sheet.Cells[row, 1] = "最高保理融资额度：";
 
             Case firstCase = batchGroup.First().Case;
             CDA activeCDA = firstCase.ActiveCDA;
-            ClientCreditLine creditLine = null;
+
             if (activeCDA != null)
             {
                 creditLine = firstCase.HighestFinanceLine;
@@ -1455,21 +1817,23 @@ namespace CMBC.EasyFactor.ARMgr
                     TypeUtil.GetExcelCurrency(firstCase.InvoiceCurrency);
             }
 
-            row += 3;
+            row += 2;
 
             foreach (InvoiceAssignBatch selectedBatch in batchGroup)
             {
                 Client valueClient;
+                string clientSide;
                 if (transactionType == "国内卖方保理" || transactionType == "出口保理")
                 {
                     valueClient = selectedBatch.Case.BuyerClient;
-                    sheet.Cells[row, 1] = "买方：";
+                    clientSide = "买方";
                 }
                 else
                 {
                     valueClient = selectedBatch.Case.SellerClient;
-                    sheet.Cells[row, 1] = "卖方：";
+                    clientSide = "卖方";
                 }
+                sheet.Cells[row, 1] = clientSide + "：";
 
                 CDA cda = selectedBatch.Case.ActiveCDA;
 
@@ -1655,6 +2019,8 @@ namespace CMBC.EasyFactor.ARMgr
                           Type.Missing);
             sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
         }
+
+
         /// <summary>
         /// 
         /// </summary>

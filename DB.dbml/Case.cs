@@ -115,8 +115,9 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return 0;
                 }
-                return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(),
-                                ValuedAssignOutstanding * activeCDA.FinanceProportion.GetValueOrDefault());
+                //return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(),
+                //                ValuedAssignOutstanding * activeCDA.FinanceProportion.GetValueOrDefault());
+                return ValuedAssignOutstanding * activeCDA.FinanceProportion.GetValueOrDefault();
             }
         }
 
