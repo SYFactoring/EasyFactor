@@ -2737,7 +2737,7 @@ namespace CMBC.EasyFactor.Utils
                                     sheet.Cells[row + financeStep + j, "R"] = refundLog.RefundDate;
                                 }
 
-                                financeStep += financeLog.InvoiceRefundLogs.Count;
+                                financeStep += financeLog.InvoiceRefundLogs.Count > 0 ? financeLog.InvoiceRefundLogs.Count : 1;
                             }
 
                             step = step < financeStep ? financeStep : step;
@@ -2992,7 +2992,7 @@ namespace CMBC.EasyFactor.Utils
                                 sheet.Cells[row + financeStep + j, "R"] = refundLog.RefundDate;
                             }
 
-                            financeStep += financeLog.InvoiceRefundLogs.Count;
+                            financeStep += financeLog.InvoiceRefundLogs.Count > 0 ? financeLog.InvoiceRefundLogs.Count : 1;
                         }
 
                         step = step < financeStep ? financeStep : step;

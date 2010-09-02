@@ -25,6 +25,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         public CommissionReport()
         {
             InitializeComponent();
+            List<Location> allLocations = DB.dbml.Location.AllLocations;
+            cbLocation.DataSource = allLocations;
+            cbLocation.DisplayMember = "LocationName";
+            cbLocation.ValueMember = "LocationCode";
+            cbLocation.SelectedIndex = 0;
+            cbTransactionType.SelectedIndex = 0;
             cbYear.Text = DateTime.Today.Year.ToString();
             cbMonth.Text = DateTime.Today.Month.ToString();
         }
@@ -38,6 +44,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             string yearStr = cbYear.Text;
             string monthStr = cbMonth.Text;
+            string transactionType = cbTransactionType.Text;
+            string location = (string)cbLocation.SelectedValue;
             if (String.IsNullOrEmpty(yearStr) || String.IsNullOrEmpty(monthStr))
             {
                 MessageBoxEx.Show("请首先选择查询年度/月份", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -49,10 +57,32 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             DBDataContext context = new DBDataContext();
 
-            List<InvoiceAssignBatch> batches = context.InvoiceAssignBatches.Where(batch => batch.Case.TransactionType == "进口保理" && batch.AssignDate > beginDate && batch.AssignDate < endDate).ToList();
+            if ("进口保理" == transactionType)
+            {
+                List<InvoiceAssignBatch> batches = context.InvoiceAssignBatches.Where(batch =>
+                    batch.Case.TransactionType == "进口保理"
+                    && batch.AssignDate > beginDate
+                    && batch.AssignDate < endDate).ToList();
 
-            ReportCommissionApplication(batches, beginDate);
+                if (batches.Count == 0)
+                {
+                    MessageBoxEx.Show("没有符合条件的业务，无需生成报表。");
+                    return;
+                }
 
+                ReportImportCommissionApplication(batches, beginDate);
+            }
+            else if ("出口保理" == transactionType)
+            {
+                //List<InvoiceAssignBatch> batches = context.InvoiceAssignBatches.Where(
+                //    batch => batch.Case.TransactionType == "出口保理"
+                //    && batch.AssignDate > beginDate
+                //    && batch.AssignDate < endDate
+                //    && batch.Case.OwnerDepartment.LocationName == location).ToList();
+                //ReportExportCommissionApplication(batches, beginDate, location);
+                MessageBoxEx.Show("领导说不需要这个功能了。");
+                return;
+            }
         }
 
         /// <summary>
@@ -60,7 +90,52 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// </summary>
         /// <param name="batches"></param>
         /// <param name="month"></param>
-        private static void ReportCommissionApplication(List<InvoiceAssignBatch> batches, DateTime month)
+        /// <param name="location"></param>
+        private static void ReportExportCommissionApplication(List<InvoiceAssignBatch> batches, DateTime month,string location)
+        {
+            IEnumerable<IGrouping<Factor, InvoiceAssignBatch>> factorGroups = batches.GroupBy(b => b.Case.Factor);
+
+            var app = new ApplicationClass { Visible = false };
+            var workbook = app.Workbooks.Add(true);
+
+            try
+            {
+                foreach (var factorGroup in factorGroups)
+                {
+                    Factor factor = factorGroup.Key;
+                    var commissionSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
+                    commissionSheet.Name = factor.CompanyNameEN.Substring(0, 15);
+                    ReportImportCommissionSheet(commissionSheet, factorGroup, month);
+                }
+
+                string filePath = String.Format("{0}\\{1:yyyyMM}-保理费月报表(出口保理).xls", SystemUtil.DesktopPath, month);
+                workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
+                                XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
+                                Type.Missing, Type.Missing, Type.Missing);
+
+                app.Visible = true;
+            }
+            catch (Exception e1)
+            {
+                foreach (Workbook wb in app.Workbooks)
+                {
+                    wb.Close(false, Type.Missing, Type.Missing);
+                }
+
+                app.Workbooks.Close();
+                app.Quit();
+                Marshal.ReleaseComObject(app);
+
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batches"></param>
+        /// <param name="month"></param>
+        private static void ReportImportCommissionApplication(List<InvoiceAssignBatch> batches, DateTime month)
         {
 
             IEnumerable<IGrouping<Factor, InvoiceAssignBatch>> factorGroups =
@@ -76,10 +151,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                     Factor factor = factorGroup.Key;
                     var commissionSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
                     commissionSheet.Name = factor.CompanyNameEN.Substring(0, 15);
-                    ReportCommissionSheet(commissionSheet, factorGroup, month);
+                    ReportImportCommissionSheet(commissionSheet, factorGroup, month);
                 }
 
-                string filePath = String.Format("{0}\\{1:yyyyMM}-保理费月份报表.xls", SystemUtil.DesktopPath, month);
+                string filePath = String.Format("{0}\\{1:yyyyMM}-保理费月报表(进口保理).xls", SystemUtil.DesktopPath, month);
                 workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
                                 XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
                                 Type.Missing, Type.Missing, Type.Missing);
@@ -107,12 +182,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         /// <param name="sheet"></param>
         /// <param name="factorGroup"></param>
         /// <param name="month"></param>
-        private static void ReportCommissionSheet(Worksheet sheet, IGrouping<Factor, InvoiceAssignBatch> factorGroup, DateTime month)
+        private static void ReportImportCommissionSheet(Worksheet sheet, IGrouping<Factor, InvoiceAssignBatch> factorGroup, DateTime month)
         {
-            sheet.PageSetup.Zoom = false;
-            sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
-            sheet.PageSetup.FitToPagesWide = 1;
-            sheet.PageSetup.FitToPagesTall = false;
+            //sheet.PageSetup.Zoom = false;
+            //sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+            //sheet.PageSetup.FitToPagesWide = 1;
+            //sheet.PageSetup.FitToPagesTall = false;
 
             sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 11]].MergeCells = true;
             sheet.Cells[2, 1] = "Commission Sales Report For " + month.ToString("MMMM yyyy", new CultureInfo("en-US")) + " - CHINA MINSHENG BANKING CORP.";

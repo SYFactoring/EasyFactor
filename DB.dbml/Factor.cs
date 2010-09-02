@@ -172,7 +172,7 @@ namespace CMBC.EasyFactor.DB.dbml
             foreach (Case curCase in BuyerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
                 CDA cda = curCase.ActiveCDA;
-                if (cda != null && cda.CreditCover.HasValue)
+                if (cda != null && cda.CreditCover.HasValue && cda.CreditCoverPeriodEnd > DateTime.Today)
                 {
                     double creditCover = cda.CreditCover.Value;
                     if (cda.CreditCoverCurr != currency)
