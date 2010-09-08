@@ -1336,10 +1336,11 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
-            sheet.Cells[row, 1] = @"（2）账款池余额 + 现金池余额 >= 融资池余额。";
+            sheet.Cells[row, 1] = @"（2）进行保理池放款时，分部贸易融资审查岗须审核确认新增融资款满足以下两项条件：①保理项下账款池余额+现金池余额 >= 保理融资池余额；②保理融资池余额+新增融资<=保理池融资额度+现金池余额。";
+            sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 45;
             row++;
 
-            row += 2;
+            row += 3;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
             sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
@@ -1360,7 +1361,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range["D1", Type.Missing].ColumnWidth = 8;
             sheet.Range["E1", Type.Missing].ColumnWidth = 18;
 
-            var sealRange = ((Range)sheet.Cells[row - 4, 3]);
+            var sealRange = ((Range)sheet.Cells[row - 5, 3]);
             string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
             sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
                                     Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
