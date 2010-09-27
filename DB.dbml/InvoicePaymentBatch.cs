@@ -37,10 +37,26 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
+        public string FactorName
+        {
+            get { return Case.Factor.ToString(); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public bool HasCreditNotes
         {
             get
             { return InvoicePaymentLogs.Any(log => log.CreditNote != null); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string InvoiceCurrency
+        {
+            get { return Case.InvoiceCurrency; }
         }
 
         /// <summary>
