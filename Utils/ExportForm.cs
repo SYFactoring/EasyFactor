@@ -329,6 +329,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "业务地区";
                 datasheet.Cells[1, column++] = "卖方名称";
                 datasheet.Cells[1, column++] = "买方名称";
+                datasheet.Cells[1, column++] = "自营/协销";
                 datasheet.Cells[1, column++] = "业务类别";
                 datasheet.Cells[1, column++] = "业务编号";
                 datasheet.Cells[1, column++] = "转让日";
@@ -373,6 +374,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = assignBatch.Location;
                     datasheet.Cells[row + 2, column++] = assignBatch.SellerName;
                     datasheet.Cells[row + 2, column++] = assignBatch.BuyerName;
+                    datasheet.Cells[row + 2, column++] = assignBatch.Case.OperationType;
                     datasheet.Cells[row + 2, column++] = assignBatch.TransactionType;
                     datasheet.Cells[row + 2, column++] = assignBatch.AssignBatchNo;
                     datasheet.Cells[row + 2, column++] = assignBatch.AssignDate;
@@ -394,11 +396,11 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 8)
+                    if (range.Column == 9)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
-                    else if (range.Column > 10 && range.Column < 19)
+                    else if (range.Column > 11 && range.Column < 20)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
@@ -2224,7 +2226,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(1).Append(',');
                     sb.Append(log.Invoice.InvoiceNo).Append(',');
                     sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
-                    sb.Append(log.Invoice.InvoiceAmount).Append(',');
+                    sb.Append(log.Invoice.AssignAmount).Append(',');
                     sb.Append(log.PaymentAmount).Append(',');
                     sb.Append(0).Append(',');
                     sb.Append(0).Append(',');
@@ -2318,7 +2320,7 @@ namespace CMBC.EasyFactor.Utils
                     sb.Append(1).Append(',');
                     sb.Append(log.Invoice.InvoiceNo).Append(',');
                     sb.Append(String.Format("{0:yyyy-MM-dd}", log.Invoice.InvoiceDate)).Append(',');
-                    sb.Append(log.Invoice.InvoiceAmount).Append(',');
+                    sb.Append(log.Invoice.AssignAmount).Append(',');
                     sb.Append(log.PaymentAmount).Append(',');
                     sb.Append(0).Append(',');
                     sb.Append(0).Append(',');

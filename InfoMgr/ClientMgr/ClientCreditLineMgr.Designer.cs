@@ -103,7 +103,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(935, 33);
+            this.panelQuery.Size = new System.Drawing.Size(935, 30);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -120,7 +120,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(529, 7);
+            this.lblCount.Location = new System.Drawing.Point(529, 6);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 8;
@@ -147,7 +147,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnQuery.Location = new System.Drawing.Point(448, 3);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Size = new System.Drawing.Size(75, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 4;
             this.btnQuery.Text = "查询";
@@ -161,7 +161,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbClientName.Border.Class = "TextBoxBorder";
             this.tbClientName.Location = new System.Drawing.Point(236, 3);
             this.tbClientName.Name = "tbClientName";
-            this.tbClientName.Size = new System.Drawing.Size(100, 20);
+            this.tbClientName.Size = new System.Drawing.Size(100, 21);
             this.tbClientName.TabIndex = 3;
             // 
             // lblClientName
@@ -173,7 +173,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblClientName.BackgroundStyle.Class = "";
             this.lblClientName.Location = new System.Drawing.Point(174, 5);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(56, 16);
+            this.lblClientName.Size = new System.Drawing.Size(56, 18);
             this.lblClientName.TabIndex = 2;
             this.lblClientName.Text = "客户名称";
             // 
@@ -185,7 +185,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbClientEDICode.Border.Class = "TextBoxBorder";
             this.tbClientEDICode.Location = new System.Drawing.Point(68, 3);
             this.tbClientEDICode.Name = "tbClientEDICode";
-            this.tbClientEDICode.Size = new System.Drawing.Size(100, 20);
+            this.tbClientEDICode.Size = new System.Drawing.Size(100, 21);
             this.tbClientEDICode.TabIndex = 1;
             // 
             // lblClientEDICode
@@ -197,7 +197,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblClientEDICode.BackgroundStyle.Class = "";
             this.lblClientEDICode.Location = new System.Drawing.Point(6, 5);
             this.lblClientEDICode.Name = "lblClientEDICode";
-            this.lblClientEDICode.Size = new System.Drawing.Size(56, 16);
+            this.lblClientEDICode.Size = new System.Drawing.Size(56, 18);
             this.lblClientEDICode.TabIndex = 0;
             this.lblClientEDICode.Text = "保理代码";
             // 
@@ -237,12 +237,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvClientCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvClientCreditLines.Location = new System.Drawing.Point(0, 33);
-            this.dgvClientCreditLines.MultiSelect = false;
+            this.dgvClientCreditLines.Location = new System.Drawing.Point(0, 30);
             this.dgvClientCreditLines.Name = "dgvClientCreditLines";
             this.dgvClientCreditLines.ReadOnly = true;
+            this.dgvClientCreditLines.RowTemplate.Height = 23;
             this.dgvClientCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvClientCreditLines.Size = new System.Drawing.Size(935, 314);
+            this.dgvClientCreditLines.Size = new System.Drawing.Size(935, 290);
             this.dgvClientCreditLines.TabIndex = 1;
             this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvClientCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvClientCreditLinesDataBindingComplete);
@@ -341,12 +341,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // ClientCreditLineMgr
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvClientCreditLines);
             this.Controls.Add(this.panelQuery);
             this.Name = "ClientCreditLineMgr";
-            this.Size = new System.Drawing.Size(935, 347);
+            this.Size = new System.Drawing.Size(935, 320);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).EndInit();
