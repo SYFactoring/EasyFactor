@@ -1858,7 +1858,7 @@ namespace CMBC.EasyFactor.Utils
                         invoice.InvoiceAssignBatch.Case.OwnerDepartment.Location.LocationName;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
-                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.CaseCode;
+                    datasheet.Cells[row + 2, column++] = invoice.AssignBatchNo;
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceCurrency;
                     datasheet.Cells[row + 2, column++] = invoice.AssignAmount;
