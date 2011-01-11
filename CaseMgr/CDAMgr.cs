@@ -514,6 +514,441 @@ namespace CMBC.EasyFactor.CaseMgr
 
             var selectedCDA = (CDA)_bs.List[dgvCDAs.CurrentCell.RowIndex];
 
+            Client seller = selectedCDA.Case.SellerClient;
+            if (seller != null)
+            {
+                if (seller.Contract.ContractType == "193号文合同")
+                {
+                    ReportCDA193(selectedCDA);
+                }
+                else
+                {
+                    ReportCDAOld(selectedCDA);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedCDA"></param>
+        private void ReportCDA193(CDA selectedCDA)
+        {
+            var app = new ApplicationClass { Visible = false };
+            var sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
+
+            try
+            {
+                sheet.PageSetup.Zoom = false;
+                sheet.PageSetup.PaperSize = XlPaperSize.xlPaperA4;
+                sheet.PageSetup.FitToPagesWide = 1;
+                sheet.PageSetup.FitToPagesTall = false;
+
+                bool isZero = false;
+                if (selectedCDA.Case.TransactionType == "国内买方保理" || selectedCDA.Case.TransactionType == "进口保理")
+                {
+                    isZero = true;
+                }
+
+                sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 2]].MergeCells = true;
+                sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 1]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+                sheet.Cells[2, 1] = "中国民生银行保理额度通知书";
+
+                sheet.Range[sheet.Cells[4, 1], sheet.Cells[4, 2]].MergeCells = true;
+                sheet.Range[sheet.Cells[4, 1], sheet.Cells[4, 1]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                sheet.Cells[4, 1] = String.Format("案件编号：{0}", selectedCDA.CaseCode);
+
+                sheet.Cells[5, 1] = String.Format("贵公司（{0}公司）前洽本行办理保理业务并签立保理服务合同", selectedCDA.SellerName);
+                if (selectedCDA.Case.SellerClient.Contract != null)
+                {
+                    sheet.Cells[6, 1] = String.Format("(合同编号:第[ {0} ]号 ), 经本行评估后,核定额度如下:",
+                                                      selectedCDA.Case.SellerClient.Contract.ContractCode);
+                }
+                else
+                {
+                    sheet.Cells[6, 1] = String.Format("(合同编号:第[  ]号 ), 经本行评估后,核定额度如下:");
+                }
+
+                int row = 8;
+                sheet.Cells[row, 1] = "买方名称";
+                sheet.Cells[row++, 2] = selectedCDA.BuyerName;
+                sheet.Cells[row, 1] = "买方地址";
+                sheet.Cells[row++, 2] = String.IsNullOrEmpty(selectedCDA.Case.BuyerClient.AddressCN)
+                                            ? selectedCDA.Case.BuyerClient.AddressEN
+                                            : selectedCDA.Case.BuyerClient.AddressCN;
+                sheet.Cells[row, 1] = "付款条件";
+                sheet.Cells[row++, 2] = selectedCDA.PaymentTerms;
+
+                if (selectedCDA.IsRecoarse.GetValueOrDefault() == false)
+                {
+                    sheet.Cells[row, 1] = "信用风险担保额度";
+                    if (selectedCDA.CreditCover.HasValue)
+                    {
+                        if (isZero)
+                        {
+                            sheet.Cells[row++, 2] = "0";
+                        }
+                        else
+                        {
+                            sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）",
+                                                                  TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr),
+                                                                  selectedCDA.CreditCover,
+                                                                  TypeUtil.ToPrintCurrencyChinese(
+                                                                      selectedCDA.CreditCoverCurr),
+                                                                  TypeUtil.ConvertToChineseMoney(selectedCDA.CreditCover));
+                        }
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+
+                    sheet.Cells[row, 1] = "信用风险承担比例";
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "0%";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0:0%}", selectedCDA.PUGProportion.GetValueOrDefault());
+                    }
+
+                    sheet.Cells[row, 1] = "信用风险额度有效期限";
+                    if (selectedCDA.CreditCoverPeriodBegin.HasValue)
+                    {
+                        if (isZero)
+                        {
+                            sheet.Cells[row++, 2] = "无";
+                        }
+                        else
+                        {
+                            sheet.Cells[row++, 2] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日 至 {1:yyyy}年{1:MM}月{1:dd}日",
+                                                                  selectedCDA.CreditCoverPeriodBegin,
+                                                                  selectedCDA.CreditCoverPeriodEnd);
+                        }
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = "无";
+                    }
+                }
+
+                sheet.Cells[row, 1] = "保理融资额度";
+                if (selectedCDA.FinanceLine.HasValue)
+                {
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）",
+                                                              TypeUtil.ToPrintCurrency(selectedCDA.FinanceLineCurr),
+                                                              selectedCDA.FinanceLine,
+                                                              TypeUtil.ToPrintCurrencyChinese(
+                                                                  selectedCDA.FinanceLineCurr),
+                                                              TypeUtil.ConvertToChineseMoney(selectedCDA.FinanceLine));
+                    }
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = "0";
+                }
+
+                sheet.Cells[row, 1] = "保理融资额度有效期限";
+                if (selectedCDA.FinanceLinePeriodBegin.HasValue)
+                {
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "无";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日 至 {1:yyyy}年{1:MM}月{1:dd}日",
+                                                              selectedCDA.FinanceLinePeriodBegin,
+                                                              selectedCDA.FinanceLinePeriodEnd);
+                    }
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = "无";
+                }
+
+                sheet.Cells[row, 1] = "最高保理融资额度";
+
+                double? highestCreditLine = selectedCDA.HighestFinanceLine;
+                if (highestCreditLine.HasValue)
+                {
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} （{2}{3}）",
+                                                              TypeUtil.ToPrintCurrency(selectedCDA.FinanceLineCurr),
+                                                              highestCreditLine,
+                                                              TypeUtil.ToPrintCurrencyChinese(
+                                                                  selectedCDA.FinanceLineCurr),
+                                                              TypeUtil.ConvertToChineseMoney(highestCreditLine));
+                    }
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = "0";
+                }
+
+                sheet.Cells[row, 1] = "保理融资比例";
+                if (isZero)
+                {
+                    sheet.Cells[row++, 2] = "无";
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = String.Format("单笔融资不超过合格应收账款金额的 {0:p0}", selectedCDA.FinanceProportion);
+                }
+
+                sheet.Cells[row, 1] = "保理费率";
+                if (selectedCDA.CommissionType == "其他")
+                {
+                    sheet.Cells[row++, 2] = selectedCDA.CommissionTypeComment;
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:p4} {2}",
+                                                                selectedCDA.CommissionType,
+                                                                selectedCDA.Price.GetValueOrDefault(), isZero ? "，由买方承担" : string.Empty);
+                }
+
+                sheet.Cells[row, 1] = "单据处理费";
+                if (selectedCDA.HandFee.HasValue)
+                {
+                    if (isZero)
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} 元 （每张发票）",
+                                                              TypeUtil.ToPrintCurrencyChinese(selectedCDA.HandFeeCurr),
+                                                              selectedCDA.HandFee);
+                    }
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = "0";
+                }
+
+                int rowEnd = 16;
+                if (selectedCDA.Case.TransactionType == "出口保理")
+                {
+                    sheet.Cells[row, 1] = "进口保理商";
+                    sheet.Cells[row++, 2] = selectedCDA.Case.BuyerFactor.ToString();
+                    rowEnd = 17;
+                }
+
+                if (selectedCDA.IsRecoarse.GetValueOrDefault() == false)
+                {
+                    rowEnd += 5;
+                    sheet.Cells[row, 1] = "自负额";
+                    if (selectedCDA.Deductibles.HasValue)
+                    {
+                        if (isZero)
+                        {
+                            sheet.Cells[row++, 2] = "0";
+                        }
+                        else
+                        {
+                            sheet.Cells[row++, 2] = String.Format("{0} {1:N2}",
+                                                                  TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr),
+                                                                  selectedCDA.Deductibles);
+                        }
+                    }
+                    else
+                    {
+                        sheet.Cells[row++, 2] = "0";
+                    }
+
+                    sheet.Cells[row, 1] = "最低损失门槛";
+                    if (selectedCDA.LossThreshold.HasValue)
+                    {
+                        if (isZero)
+                        {
+                            sheet.Cells[row, 2] = "0";
+                        }
+                        else
+                        {
+                            sheet.Cells[row, 2] = String.Format("{0} {1:N2}",
+                                                                  TypeUtil.ToPrintCurrency(selectedCDA.CreditCoverCurr),
+                                                                  selectedCDA.LossThreshold);
+                        }
+                    }
+                    else
+                    {
+                        sheet.Cells[row, 2] = "0";
+                    }
+
+                }
+
+                sheet.Range[sheet.Cells[8, 1], sheet.Cells[rowEnd, 1]].HorizontalAlignment =
+                    XlHAlign.xlHAlignDistributed;
+                sheet.Range[sheet.Cells[8, 2], sheet.Cells[rowEnd, 2]].HorizontalAlignment = XlHAlign.xlHAlignLeft;
+
+                sheet.Range[sheet.Cells[8, 1], sheet.Cells[rowEnd, 2]].Borders.LineStyle = 1;
+                sheet.Range[sheet.Cells[8, 1], sheet.Cells[rowEnd, 2]].WrapText = true;
+                sheet.Range[sheet.Cells[8, 1], sheet.Cells[rowEnd, 1]].Font.Bold = true;
+
+                sheet.Range["A1", Type.Missing].ColumnWidth = 30;
+                sheet.Range["B1", Type.Missing].ColumnWidth = 60;
+
+                Range contentRange = sheet.Range[sheet.Cells[8, 1], sheet.Cells[rowEnd, 2]];
+                foreach (Range range in contentRange)
+                {
+                    range.EntireRow.RowHeight = 35;
+                }
+
+                row = rowEnd + 2;
+                sheet.Cells[row++, 1] = "备注：";
+
+                bool isSingle = selectedCDA.Case.SellerFactorCode == selectedCDA.Case.BuyerFactorCode;
+                string single = isSingle ? "单保理" : "双保理";
+                string line = string.Empty;
+                switch (selectedCDA.Case.TransactionType)
+                {
+                    case "国内卖方保理":
+                        line = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", "有追索权", "国内", single, selectedCDA.IsNotice);
+                        break;
+                    case "出口保理":
+                        line = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", "有追索权", "出口", single, selectedCDA.IsNotice);
+                        break;
+                    case "国内买方保理":
+                        line = String.Format("（1）本业务为{0}{1}（{2}）业务。", "有追索权", "国内", selectedCDA.IsNotice);
+                        break;
+                    case "进口保理":
+                        line = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", "有追索权", "进口", single, selectedCDA.IsNotice);
+                        break;
+                    default:
+                        break;
+                }
+                sheet.Cells[row, 1] = line;
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                row++;
+                if (!String.IsNullOrEmpty(selectedCDA.Comment))
+                {
+                    sheet.Cells[row, 1] = "（2）" + selectedCDA.Comment;
+                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
+                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 40;
+                    row++;
+                }
+
+                row++;
+                sheet.Cells[row, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 40;
+                row++;
+                row++;
+                sheet.Cells[row, 1] =
+                    "为利益考虑，请务必确认上开买方系贵公司预定交易之对象，本保理额度通知书取代先前同一买方之保理额度通知书及先前所有贵公司与本合同相关保理额度通知书中之最高保理融资额度。";
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 40;
+                row++;
+                row++;
+
+                sheet.Cells[row++, 2] = selectedCDA.Case.OwnerDepartment.Location.LocationName == "北京"
+                                         ? String.Format("中国民生银行股份有限公司总行营业部")
+                                         : String.Format("中国民生银行股份有限公司{0}分行",
+                                                         selectedCDA.Case.OwnerDepartment.Location.LocationName);
+
+                sheet.Cells[row++, 2] = String.Format("日期：{0:yyyy}年 {0:MM}月 {0:dd}日", selectedCDA.CDASignDate);
+                sheet.Range[sheet.Cells[row - 2, 2], sheet.Cells[row - 1, 2]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+                row++;
+
+                sheet.Cells[row++, 1] = "我公司知晓并同意上述保理额度通知书内容。";
+                row++;
+
+                sheet.Cells[row++, 2] = selectedCDA.SellerName;
+                sheet.Cells[row++, 2] = "公司印鉴          ";
+                sheet.Cells[row++, 2] = String.Format("日期:      年    月    日");
+                sheet.Range[sheet.Cells[row - 3, 2], sheet.Cells[row - 1, 2]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+
+                row++;
+                row++;
+                if (selectedCDA.IsNotice == "暗保理")
+                {
+                    const string line0 = "本案为暗保理方式操作的，操作过程中请注意如下事项";
+                    sheet.Cells[row, 1] = line0;
+                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].Font.Bold = true;
+                    row++;
+                    if (selectedCDA.IsRecoarse.GetValueOrDefault())
+                    {
+                        const string line1 = "（1）如应收账款债务人(以下简称买方)于到应收账款到期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
+                        const string line2 = "（2）官方认定买方无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
+                        const string line3 = "（3）关于卖方与买方间全部契约之应收账款，卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
+                        string comment = line1 + "\n\n" + line2 + "\n\n" + line3;
+                        sheet.Cells[row, 1] = comment;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 150;
+                    }
+                    else
+                    {
+                        const string line1 = "（1）如应收账款债务人(以下简称买方)于到应收账款期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
+                        const string line2 =
+                            "（2）针对本案的担保付款期限由「应收账款到期日后一百二十日」，修改为「买方收到应收账款转让通知之日起一百二十日」。";
+                        const string line3 = "（3）核准应收账款的销售合同有禁止转让的约定时，民生银行就该应收账款不须负任何责任。";
+                        const string line4 = "（4）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
+                        const string line5 = "（5）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
+
+                        string comment = line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5;
+                        sheet.Cells[row, 1] = comment;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 220;
+                    }
+
+                }
+
+                sheet.UsedRange.Font.Name = "仿宋_GB2312";
+                sheet.UsedRange.Font.Size = 12;
+
+                sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 1]].Font.Size = 16;
+                sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 1]].Font.Bold = true;
+
+                app.Visible = true;
+            }
+            catch (Exception)
+            {
+                if (sheet != null)
+                {
+                    Marshal.ReleaseComObject(sheet);
+                }
+
+                if (app != null)
+                {
+                    foreach (Workbook wb in app.Workbooks)
+                    {
+                        wb.Close(false, Type.Missing, Type.Missing);
+                    }
+
+                    app.Workbooks.Close();
+                    app.Quit();
+                    Marshal.ReleaseComObject(app);
+                }
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedCDA"></param>
+        private void ReportCDAOld(CDA selectedCDA)
+        {
             var app = new ApplicationClass { Visible = false };
             var sheet = (Worksheet)app.Workbooks.Add(true).Sheets[1];
 
