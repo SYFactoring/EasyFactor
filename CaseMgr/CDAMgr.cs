@@ -445,9 +445,9 @@ namespace CMBC.EasyFactor.CaseMgr
                     seller.ClientNameCN.Contains(clientName) || seller.ClientNameEN.Contains(clientName) ||
                     buyer.ClientNameCN.Contains(clientName) || buyer.ClientNameEN.Contains(clientName)
                 let sellerfactor = cda.Case.SellerFactor
-                where sellerfactor.CompanyNameCN.Contains(factorName) || sellerfactor.CompanyNameEN.Contains(factorName)
                 let buyerfactor = cda.Case.BuyerFactor
-                where buyerfactor.CompanyNameCN.Contains(factorName) || buyerfactor.CompanyNameEN.Contains(factorName)
+                where sellerfactor.CompanyNameCN.Contains(factorName) || sellerfactor.CompanyNameEN.Contains(factorName)
+                  || buyerfactor.CompanyNameCN.Contains(factorName) || buyerfactor.CompanyNameEN.Contains(factorName)
                 where
                     (status != string.Empty ? cda.CDAStatus == status : true)
                     && cda.CreateUserName.Contains(createUserName)
@@ -811,40 +811,96 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row++, 1] = "备注：";
 
                 bool isSingle = selectedCDA.Case.SellerFactorCode == selectedCDA.Case.BuyerFactorCode;
+                string recoarse = selectedCDA.IsRecoarse.GetValueOrDefault() ? "有追索权" : "无追索权";
                 string single = isSingle ? "单保理" : "双保理";
-                string line = string.Empty;
+                string line0 = string.Empty;
                 switch (selectedCDA.Case.TransactionType)
                 {
                     case "国内卖方保理":
-                        line = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", "有追索权", "国内", single, selectedCDA.IsNotice);
+                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "国内", single, selectedCDA.IsNotice);
                         break;
                     case "出口保理":
-                        line = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", "有追索权", "出口", single, selectedCDA.IsNotice);
+                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "出口", single, selectedCDA.IsNotice);
                         break;
                     case "国内买方保理":
-                        line = String.Format("（1）本业务为{0}{1}（{2}）业务。", "有追索权", "国内", selectedCDA.IsNotice);
+                        line0 = String.Format("（1）本业务为{0}{1}（{2}）业务。", recoarse, "国内", selectedCDA.IsNotice);
                         break;
                     case "进口保理":
-                        line = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", "有追索权", "进口", single, selectedCDA.IsNotice);
+                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "进口", single, selectedCDA.IsNotice);
                         break;
                     default:
                         break;
                 }
-                sheet.Cells[row, 1] = line;
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
-                row++;
-                if (!String.IsNullOrEmpty(selectedCDA.Comment))
+
+                if (selectedCDA.IsNotice == "暗保理")
                 {
-                    sheet.Cells[row, 1] = "（2）" + selectedCDA.Comment;
-                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
-                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
-                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 40;
-                    row++;
+                    if (selectedCDA.IsRecoarse.GetValueOrDefault())
+                    {
+                        const string line1 = "（2）如应收账款债务人(以下简称买方)于到应收账款到期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
+                        const string line2 = "（3）官方认定买方无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
+                        const string line3 = "（4）关于卖方与买方间全部契约之应收账款，卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
+                        string comment = line0+"\n\n"+line1 + "\n\n" + line2 + "\n\n" + line3;
+                        if (!String.IsNullOrEmpty(selectedCDA.Comment))
+                        {
+                            comment += "\n\n（5）" + selectedCDA.Comment;
+                        }
+                        sheet.Cells[row, 1] = comment;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 190;
+                        if (!String.IsNullOrEmpty(selectedCDA.Comment))
+                        {
+                            sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 210;
+                        }
+                        row++;
+                    }
+                    else
+                    {
+                        const string line1 = "（2）如应收账款债务人(以下简称买方)于到应收账款期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
+                        const string line2 =
+                            "（3）针对本案的担保付款期限由「应收账款到期日后一百二十日」，修改为「买方收到应收账款转让通知之日起一百二十日」。";
+                        const string line3 = "（4）核准应收账款的销售合同有禁止转让的约定时，民生银行就该应收账款不须负任何责任。";
+                        const string line4 = "（5）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
+                        const string line5 = "（6）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
+
+                        string comment = line0+"\n\n"+line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5;
+                        if (!String.IsNullOrEmpty(selectedCDA.Comment))
+                        {
+                            comment += "\n\n（7）" + selectedCDA.Comment;
+                        }
+                        sheet.Cells[row, 1] = comment;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 250;
+                        if (!String.IsNullOrEmpty(selectedCDA.Comment))
+                        {
+                            sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 270;
+                        }
+                        row++;
+                    }
+                }
+                else
+                {
+                    if (!String.IsNullOrEmpty(selectedCDA.Comment))
+                    {
+                        sheet.Cells[row, 1] = line0 + "\n\n（2）" + selectedCDA.Comment;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 40;
+                        row++;
+                    }
+                    else
+                    {
+                        sheet.Cells[row, 1] = line0;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
+                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 20;
+                        row++;
+                    }
                 }
 
                 row++;
-                sheet.Cells[row, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
+                sheet.Cells[row, 1] = "如贵公司于本行发出本通知书后90日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 40;
@@ -874,44 +930,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row++, 2] = "公司印鉴          ";
                 sheet.Cells[row++, 2] = String.Format("日期:      年    月    日");
                 sheet.Range[sheet.Cells[row - 3, 2], sheet.Cells[row - 1, 2]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-
-                row++;
-                row++;
-                if (selectedCDA.IsNotice == "暗保理")
-                {
-                    const string line0 = "本案为暗保理方式操作的，操作过程中请注意如下事项";
-                    sheet.Cells[row, 1] = line0;
-                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
-                    sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].Font.Bold = true;
-                    row++;
-                    if (selectedCDA.IsRecoarse.GetValueOrDefault())
-                    {
-                        const string line1 = "（1）如应收账款债务人(以下简称买方)于到应收账款到期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
-                        const string line2 = "（2）官方认定买方无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
-                        const string line3 = "（3）关于卖方与买方间全部契约之应收账款，卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
-                        string comment = line1 + "\n\n" + line2 + "\n\n" + line3;
-                        sheet.Cells[row, 1] = comment;
-                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
-                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
-                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 150;
-                    }
-                    else
-                    {
-                        const string line1 = "（1）如应收账款债务人(以下简称买方)于到应收账款期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
-                        const string line2 =
-                            "（2）针对本案的担保付款期限由「应收账款到期日后一百二十日」，修改为「买方收到应收账款转让通知之日起一百二十日」。";
-                        const string line3 = "（3）核准应收账款的销售合同有禁止转让的约定时，民生银行就该应收账款不须负任何责任。";
-                        const string line4 = "（4）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
-                        const string line5 = "（5）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
-
-                        string comment = line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5;
-                        sheet.Cells[row, 1] = comment;
-                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
-                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
-                        sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 220;
-                    }
-
-                }
 
                 sheet.UsedRange.Font.Name = "仿宋_GB2312";
                 sheet.UsedRange.Font.Size = 12;
@@ -1205,7 +1223,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[23, 1] = "备注：";
 
                 bool isSingle = selectedCDA.Case.SellerFactorCode == selectedCDA.Case.BuyerFactorCode;
-
                 string recoarse = selectedCDA.IsRecoarse.GetValueOrDefault() ? "有追索权" : "无追索权";
                 string single = isSingle ? "单保理" : "双保理";
                 string line1 = string.Empty;
@@ -1417,5 +1434,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 menuItemReject.Enabled = false;
             }
         }
+
     }
 }

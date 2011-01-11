@@ -721,6 +721,7 @@ namespace CMBC.EasyFactor.Utils
                             invoice.Commission = invoice.AssignAmount * cda.Price;
                         }
 
+                        invoice.CaculateCommission(false);
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
                         invoice.InvoiceAssignBatch = batch;
 
@@ -1002,6 +1003,7 @@ namespace CMBC.EasyFactor.Utils
                                 invoice.Commission = invoice.AssignAmount * cda.Price;
                             }
 
+                            invoice.CaculateCommission(false);
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
                             invoice.InvoiceAssignBatch = assignBatch;
                         }
