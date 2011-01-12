@@ -53,7 +53,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             }
 
             DateTime beginDate = new DateTime(Int32.Parse(yearStr), Int32.Parse(monthStr), 1, 0, 0, 0);
-            DateTime endDate = new DateTime(Int32.Parse(yearStr), Int32.Parse(monthStr) + 1, 1, 0, 0, 0);
+            DateTime endDate = beginDate.AddMonths(1);
 
             DBDataContext context = new DBDataContext();
 
