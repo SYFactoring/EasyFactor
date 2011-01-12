@@ -839,7 +839,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         const string line1 = "（2）如应收账款债务人(以下简称买方)于到应收账款到期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
                         const string line2 = "（3）官方认定买方无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
                         const string line3 = "（4）关于卖方与买方间全部契约之应收账款，卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
-                        string comment = line0+"\n\n"+line1 + "\n\n" + line2 + "\n\n" + line3;
+                        string comment = line0 + "\n\n" + line1 + "\n\n" + line2 + "\n\n" + line3;
                         if (!String.IsNullOrEmpty(selectedCDA.Comment))
                         {
                             comment += "\n\n（5）" + selectedCDA.Comment;
@@ -863,7 +863,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         const string line4 = "（5）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
                         const string line5 = "（6）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
 
-                        string comment = line0+"\n\n"+line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5;
+                        string comment = line0 + "\n\n" + line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5;
                         if (!String.IsNullOrEmpty(selectedCDA.Comment))
                         {
                             comment += "\n\n（7）" + selectedCDA.Comment;
