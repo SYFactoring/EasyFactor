@@ -236,6 +236,6 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        public const string REPORT_PASSWORD = "CMBC2010";
+        public const string REPORT_PASSWORD = "CMBC2011";
     }
 }

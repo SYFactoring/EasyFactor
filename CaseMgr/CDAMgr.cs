@@ -517,7 +517,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Client seller = selectedCDA.Case.SellerClient;
             if (seller != null)
             {
-                if (seller.Contract.ContractType == "193号文合同")
+                if (seller.Contract!=null && seller.Contract.ContractType == "193号文合同")
                 {
                     ReportCDA193(selectedCDA);
                 }
