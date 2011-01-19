@@ -9,6 +9,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyFactor 2007", "..\EasyF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyRoll", "..\EasyRoll\EasyRoll.csproj", "{B3D8F767-B183-40A5-B523-8DA2D4B5AD96}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EasyRoll Installer", "..\EasyRoll Installer\EasyRoll Installer.vdproj", "{C45BCE7F-045E-4960-84F4-B4ED86B931E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,12 @@ Global
 		{B3D8F767-B183-40A5-B523-8DA2D4B5AD96}.Release|Mixed Platforms.Build.0 = Release|x86
 		{B3D8F767-B183-40A5-B523-8DA2D4B5AD96}.Release|x86.ActiveCfg = Release|x86
 		{B3D8F767-B183-40A5-B523-8DA2D4B5AD96}.Release|x86.Build.0 = Release|x86
+		{C45BCE7F-045E-4960-84F4-B4ED86B931E2}.Debug|Any CPU.ActiveCfg = Debug
+		{C45BCE7F-045E-4960-84F4-B4ED86B931E2}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{C45BCE7F-045E-4960-84F4-B4ED86B931E2}.Debug|x86.ActiveCfg = Debug
+		{C45BCE7F-045E-4960-84F4-B4ED86B931E2}.Release|Any CPU.ActiveCfg = Release
+		{C45BCE7F-045E-4960-84F4-B4ED86B931E2}.Release|Mixed Platforms.ActiveCfg = Release
+		{C45BCE7F-045E-4960-84F4-B4ED86B931E2}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
