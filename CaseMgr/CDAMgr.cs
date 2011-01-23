@@ -558,7 +558,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Range[sheet.Cells[4, 1], sheet.Cells[4, 1]].HorizontalAlignment = XlHAlign.xlHAlignRight;
                 sheet.Cells[4, 1] = String.Format("案件编号：{0}", selectedCDA.CaseCode);
 
-                sheet.Cells[5, 1] = String.Format("贵公司（{0}公司）前洽本行办理保理业务并签立保理服务合同", selectedCDA.SellerName);
+                sheet.Cells[5, 1] = String.Format("贵公司（{0}）前洽本行办理保理业务并签立保理服务合同", selectedCDA.SellerName);
                 if (selectedCDA.Case.SellerClient.Contract != null)
                 {
                     sheet.Cells[6, 1] = String.Format("(合同编号:第[ {0} ]号 ), 经本行评估后,核定额度如下:",
@@ -715,7 +715,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:p4} {2}",
+                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:p2} {2}",
                                                                 selectedCDA.CommissionType,
                                                                 selectedCDA.Price.GetValueOrDefault(), isZero ? "，由买方承担" : string.Empty);
                 }
@@ -723,16 +723,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "单据处理费";
                 if (selectedCDA.HandFee.HasValue)
                 {
-                    if (isZero)
-                    {
-                        sheet.Cells[row++, 2] = "0";
-                    }
-                    else
-                    {
-                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} 元 （每张发票）",
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} 元 （每张发票）",
                                                               TypeUtil.ToPrintCurrencyChinese(selectedCDA.HandFeeCurr),
                                                               selectedCDA.HandFee);
-                    }
                 }
                 else
                 {
@@ -1142,7 +1135,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
                 else
                 {
-                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:p4} {2}",
+                    sheet.Cells[row++, 2] = String.Format("{0}的 {1:p2} {2}",
                                                                 selectedCDA.CommissionType,
                                                                 selectedCDA.Price.GetValueOrDefault(), isZero ? "，由买方承担" : string.Empty);
                 }
@@ -1150,16 +1143,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row, 1] = "单据处理费";
                 if (selectedCDA.HandFee.HasValue)
                 {
-                    if (isZero)
-                    {
-                        sheet.Cells[row++, 2] = "0";
-                    }
-                    else
-                    {
-                        sheet.Cells[row++, 2] = String.Format("{0} {1:N2} 元 （每张发票）",
+                    sheet.Cells[row++, 2] = String.Format("{0} {1:N2} 元 （每张发票）",
                                                               TypeUtil.ToPrintCurrencyChinese(selectedCDA.HandFeeCurr),
                                                               selectedCDA.HandFee);
-                    }
                 }
                 else
                 {

@@ -721,9 +721,9 @@ namespace CMBC.EasyFactor.Utils
                             invoice.Commission = invoice.AssignAmount * cda.Price;
                         }
 
-                        invoice.CaculateCommission(false);
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
                         invoice.InvoiceAssignBatch = batch;
+                        invoice.CaculateCommission(false);
 
                         result++;
                         worker.ReportProgress((int)((float)row * 100 / size));
@@ -1003,9 +1003,9 @@ namespace CMBC.EasyFactor.Utils
                                 invoice.Commission = invoice.AssignAmount * cda.Price;
                             }
 
-                            invoice.CaculateCommission(false);
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
                             invoice.InvoiceAssignBatch = assignBatch;
+                            invoice.CaculateCommission(false);
                         }
                         else if ("´ûÏîÍ¨Öª" == type)
                         {

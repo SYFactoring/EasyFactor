@@ -1259,13 +1259,22 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[row, 2] = String.Format("{0}", keyClient);
             row++;
 
+            DBDataContext context = new DBDataContext();
+            IQueryable<Case> caseResult = from c in context.Cases
+                                          where c.SellerCode == keyClient.ClientEDICode && c.IsPool && c.CaseMark == "启动案"
+                                          select c;
+
             sheet.Cells[row, 1] = "账款池余额：";
             sheet.Range[sheet.Cells[row, "B"], sheet.Cells[row, "C"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "B"], sheet.Cells[row, "C"]].HorizontalAlignment =
                 XlHAlign.xlHAlignLeft;
             sheet.Cells[row, 2] = keyClient.PoolCanBeFinance;
-            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
-                TypeUtil.GetExcelCurrency("CNY");
+            if (caseResult.Count() > 0)
+            {
+                Case curCase = caseResult.First();
+                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
+                    TypeUtil.GetExcelCurrency(curCase.InvoiceCurrency);
+            }
 
             row++;
             row++;
@@ -1276,10 +1285,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[row, 5] = "可融资金额(账款池)";
 
             row++;
-            DBDataContext context = new DBDataContext();
-            IQueryable<Case> caseResult = from c in context.Cases
-                                          where c.SellerCode == keyClient.ClientEDICode && c.IsPool
-                                          select c;
+
             int invoiceStart = row;
             double totalAssignOutstanding = 0;
             double totalValuedAssignOutstanding = 0;
@@ -1307,8 +1313,11 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[row, 2] = totalAssignOutstanding;
             sheet.Cells[row, 3] = totalValuedAssignOutstanding;
             sheet.Cells[row, 5] = totalCanBeFinanceAmount;
-            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 5]].NumberFormatLocal = TypeUtil.GetExcelCurr("CNY");
-
+            if (caseResult.Count() > 0)
+            {
+                Case curCase = caseResult.First();
+                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 5]].NumberFormatLocal = TypeUtil.GetExcelCurr(curCase.InvoiceCurrency);
+            }
             int invoiceEnd = row ;
 
             sheet.Range[sheet.Cells[invoiceStart - 1, 2], sheet.Cells[invoiceEnd, 5]].HorizontalAlignment =
@@ -2237,7 +2246,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (batch.TransactionType == "国内买方保理" || batch.TransactionType == "进口保理")
                 {
                     MessageBoxEx.Show(
-                        String.Format("批次：{0}，案件类型为{1}，不能使用直接生成三表功能", batch.AssignBatchNo, batch.TransactionType),
+                        String.Format("批次：{0}，案件类型为{1}，不能使用直接生成两表功能", batch.AssignBatchNo, batch.TransactionType),
                         MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
