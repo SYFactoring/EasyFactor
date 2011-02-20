@@ -664,6 +664,20 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ImportPaymentInter(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
+            {
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_PAYMENT_INTER);
+                form.Show();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportRefund(object sender, EventArgs e)
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))

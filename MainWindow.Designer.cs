@@ -82,6 +82,7 @@ namespace CMBC.EasyFactor
         private DevComponents.DotNetBar.ButtonItem btnPaymentBatchQuery;
         private DevComponents.DotNetBar.ButtonItem btnPaymentCheck;
         private DevComponents.DotNetBar.ButtonItem btnPaymentImport;
+        private DevComponents.DotNetBar.ButtonItem btnPaymentInterImport;
         private DevComponents.DotNetBar.ButtonItem btnPoolFinance;
         private DevComponents.DotNetBar.ButtonItem btnPoolFinanceBatchQuery;
         private DevComponents.DotNetBar.ButtonItem btnPoolFinanceCheck;
@@ -203,6 +204,7 @@ namespace CMBC.EasyFactor
             this.btnAssignImportNew = new DevComponents.DotNetBar.ButtonItem();
             this.btnFinanceImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnPaymentImport = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPaymentInterImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnCreditNoteImport = new DevComponents.DotNetBar.ButtonItem();
             this.btnRefundImport = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelReport = new DevComponents.DotNetBar.RibbonPanel();
@@ -465,6 +467,7 @@ namespace CMBC.EasyFactor
             this.btnAssignImportNew,
             this.btnFinanceImport,
             this.btnPaymentImport,
+            this.btnPaymentInterImport,
             this.btnCreditNoteImport,
             this.btnRefundImport});
             this.ribbonBarARImport.Location = new System.Drawing.Point(3, 0);
@@ -517,6 +520,17 @@ namespace CMBC.EasyFactor
             this.btnPaymentImport.SubItemsExpandWidth = 14;
             this.btnPaymentImport.Text = "冲销账款明细表";
             this.btnPaymentImport.Click += new System.EventHandler(this.ImportPayment);
+
+            // 
+            // btnPaymentInterImport
+            // 
+            this.btnPaymentInterImport.Image = ((System.Drawing.Image)(resources.GetObject("btnPaymentImport.Image")));
+            this.btnPaymentInterImport.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+            this.btnPaymentInterImport.Name = "btnPaymentInterImport";
+            this.btnPaymentInterImport.SubItemsExpandWidth = 14;
+            this.btnPaymentInterImport.Text = "冲销账款明细表（进口）";
+            this.btnPaymentInterImport.Click += new System.EventHandler(this.ImportPaymentInter);
+
             // 
             // btnCreditNoteImport
             // 
