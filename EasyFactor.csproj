@@ -711,7 +711,9 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="cmbc.config" />
+    <None Include="cmbc.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DB.dbml\DB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DB.designer.cs</LastGenOutput>
@@ -811,19 +813,11 @@
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>1</VersionMajor>
-      <VersionMinor>7</VersionMinor>
+      <VersionMinor>6</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
     </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
