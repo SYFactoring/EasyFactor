@@ -893,7 +893,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 }
 
                 row++;
-                sheet.Cells[row, 1] = "如贵公司于本行发出本通知书后90日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
+                sheet.Cells[row, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].WrapText = true;
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 40;
