@@ -66,6 +66,11 @@ namespace CMBC.EasyFactor.ARMgr
             /// 
             /// </summary>
             FINANCE_DUE_BYDAY,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            DUPLICATE_INVOICE,
         }
 
         #endregion
@@ -196,6 +201,11 @@ namespace CMBC.EasyFactor.ARMgr
                 colFinanceOverDueDays.Visible = true;
 
                 tbFinanceOverDueDays.Text = @"1";
+                QueryInvoices(null, null);
+            }
+            else if (opInvoiceType == OpInvoiceType.DUPLICATE_INVOICE)
+            {
+                cbIsDuplicate.CheckValue = "Y";
                 QueryInvoices(null, null);
             }
         }
@@ -655,6 +665,7 @@ namespace CMBC.EasyFactor.ARMgr
             string invoiceNo = tbInvoiceNo.Text;
             var isFlaw = cbIsFlaw.CheckValue as string;
             var isDispute = cbIsDispute.CheckValue as string;
+            var isDuplicate = cbIsDuplicate.CheckValue as string;
             string caseMark = cbCaseMark.Text;
             var location = (string)cbLocation.SelectedValue;
             string transactionType = cbTransactionType.Text;
@@ -689,7 +700,6 @@ namespace CMBC.EasyFactor.ARMgr
 
 
             Context = new DBDataContext();
-
             IQueryable<Invoice> queryResult = from invoice in Context.Invoices
                                               let assignBatch = invoice.InvoiceAssignBatch
                                               where
@@ -765,6 +775,12 @@ namespace CMBC.EasyFactor.ARMgr
                                                        : true)
                                               orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;
+
+            if (isDuplicate == "Y")
+            {
+                var groupResult = from i in Context.Invoices group i by i.InvoiceNo into g where g.Count() > 1 select g.Key;
+                queryResult = from invoice in queryResult where groupResult.Contains(invoice.InvoiceNo) orderby invoice.InvoiceNo select invoice;
+            }
 
             _bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

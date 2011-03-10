@@ -10,6 +10,7 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbCaseMark;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsDispute;
         private DevComponents.DotNetBar.Controls.CheckBoxX cbIsFlaw;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cbIsDuplicate;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbLocation;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbTransactionType;
         private System.Windows.Forms.ContextMenuStrip cmuInvoiceMgr;
@@ -123,6 +124,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblFinanceOverDueDays = new DevComponents.DotNetBar.LabelX();
             this.tbAssignOverDueDays = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAssignOverDueDays = new DevComponents.DotNetBar.LabelX();
+            this.cbIsDuplicate = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbIsDispute = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.cbIsFlaw = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.tbInvoiceNo = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -212,6 +214,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Controls.Add(this.lblFinanceOverDueDays);
             this.panelQuery.Controls.Add(this.tbAssignOverDueDays);
             this.panelQuery.Controls.Add(this.lblAssignOverDueDays);
+            this.panelQuery.Controls.Add(this.cbIsDuplicate);
             this.panelQuery.Controls.Add(this.cbIsDispute);
             this.panelQuery.Controls.Add(this.cbIsFlaw);
             this.panelQuery.Controls.Add(this.tbInvoiceNo);
@@ -568,6 +571,25 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblAssignOverDueDays.Size = new System.Drawing.Size(81, 16);
             this.lblAssignOverDueDays.TabIndex = 19;
             this.lblAssignOverDueDays.Text = "账款逾期天数";
+            // 
+            // cbIsDuplicate
+            // 
+            this.cbIsDuplicate.AutoSize = true;
+            // 
+            // 
+            // 
+            this.cbIsDuplicate.BackgroundStyle.Class = "";
+            this.cbIsDuplicate.Checked = true;
+            this.cbIsDuplicate.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            this.cbIsDuplicate.CheckValue = "A";
+            this.cbIsDuplicate.CheckValueIndeterminate = "A";
+            this.cbIsDuplicate.Location = new System.Drawing.Point(866, 59);
+            this.cbIsDuplicate.Name = "cbIsDispute";
+            this.cbIsDuplicate.Size = new System.Drawing.Size(76, 16);
+            this.cbIsDuplicate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsDuplicate.TabIndex = 28;
+            this.cbIsDuplicate.Text = "是否重复";
+            this.cbIsDuplicate.ThreeState = false;
             // 
             // cbIsDispute
             // 

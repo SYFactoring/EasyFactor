@@ -26,6 +26,11 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
+        private string warningMsg = string.Empty;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly ImportType _importType;
         /// <summary>
         /// 
@@ -475,6 +480,12 @@ namespace CMBC.EasyFactor.Utils
                                     : String.Format("导入结束, 共导入{0}条记录", e.Result);
             }
 
+            if (warningMsg != string.Empty)
+            {
+                tbStatus.Text += tbStatus.Text + Environment.NewLine + warningMsg;
+                warningMsg = string.Empty;
+            }
+
             btnStart.Enabled = true;
             btnCancel.Text = @"关闭";
             if (e.Error == null &&
@@ -536,6 +547,8 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = GetValueArray(fileName, 1);
             int result = 0;
+            var warningCreditCover = new List<Case>();
+            var warningFinanceLine = new List<Case>();
             var invoiceList = new List<Invoice>();
             var batchList = new List<InvoiceAssignBatch>();
 
@@ -593,6 +606,22 @@ namespace CMBC.EasyFactor.Utils
                         {
                             throw new Exception("没有有效的额度通知书: " + caseCode);
                         }
+                        if (cda.CreditCoverPeriodEnd.HasValue)
+                        {
+                            if (cda.CreditCoverPeriodEnd.Value < DateTime.Today && !warningCreditCover.Contains(curCase))
+                            {
+                                warningMsg += "买方信用风险额度已过期，案件编号：" + caseCode + Environment.NewLine;
+                                warningCreditCover.Add(curCase);
+                            }
+                        }
+                        if (cda.FinanceLinePeriodEnd.HasValue)
+                        {
+                            if (cda.FinanceLinePeriodEnd.Value < DateTime.Today && !warningFinanceLine.Contains(curCase))
+                            {
+                                warningMsg += "保理融资额度已过期，案件编号：" + caseCode + Environment.NewLine;
+                                warningFinanceLine.Add(curCase);
+                            }
+                        }
 
                         if (batch == null || batch.CaseCode != caseCode)
                         {
@@ -634,6 +663,11 @@ namespace CMBC.EasyFactor.Utils
                         else
                         {
                             throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
+                        }
+
+                        if (_context.Invoices.Count(i => i.InvoiceNo == invoiceNo) > 0)
+                        {
+                            warningMsg += "存在相同发票号：" + invoiceNo + Environment.NewLine;
                         }
 
                         string currency = string.Format("{0:G}", valueArray[row, column++]);
@@ -779,6 +813,8 @@ namespace CMBC.EasyFactor.Utils
         {
             object[,] valueArray = GetValueArray(fileName, 1);
             int result = 0;
+            var warningCreditCover = new List<Case>();
+            var warningFinanceLine = new List<Case>();
             var invoiceList = new List<Invoice>();
             var creditNoteList = new List<CreditNote>();
             var paymentLogList = new List<InvoicePaymentLog>();
@@ -872,6 +908,22 @@ namespace CMBC.EasyFactor.Utils
                         {
                             throw new Exception("没有有效的额度通知书: " + caseCode);
                         }
+                        if (cda.CreditCoverPeriodEnd.HasValue)
+                        {
+                            if (cda.CreditCoverPeriodEnd.Value < DateTime.Today && !warningCreditCover.Contains(curCase))
+                            {
+                                warningMsg += "买方信用风险额度已过期，案件编号：" + caseCode + Environment.NewLine;
+                                warningCreditCover.Add(curCase);
+                            }
+                        }
+                        if (cda.FinanceLinePeriodEnd.HasValue)
+                        {
+                            if (cda.FinanceLinePeriodEnd.Value < DateTime.Today && !warningFinanceLine.Contains(curCase))
+                            {
+                                warningMsg += "保理融资额度已过期，案件编号：" + caseCode + Environment.NewLine;
+                                warningFinanceLine.Add(curCase);
+                            }
+                        }
 
                         if (assignBatch == null || assignBatch.CaseCode != caseCode)
                         {
@@ -916,6 +968,11 @@ namespace CMBC.EasyFactor.Utils
                             else
                             {
                                 throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
+                            }
+
+                            if (_context.Invoices.Count(i => i.InvoiceNo == invoiceNo) > 0)
+                            {
+                                warningMsg += "存在相同发票号：" + invoiceNo + Environment.NewLine;
                             }
 
                             string currency = string.Format("{0:G}", valueArray[row, column++]);

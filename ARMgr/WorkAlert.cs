@@ -50,6 +50,7 @@ namespace CMBC.EasyFactor.ARMgr
             superTooltip.SetSuperTooltip(btnDueAssign0, new SuperTooltipInfo(@"今日到期的应收账款", "", "", null, null, color));
             superTooltip.SetSuperTooltip(btnDueAssign, new SuperTooltipInfo(@"已经逾期的应收账款", "", "", null, null, color));
             superTooltip.SetSuperTooltip(btnInvoiceDispute, new SuperTooltipInfo(@"商纠账款", "", "", null, null, color));
+            superTooltip.SetSuperTooltip(btnDuplicateInvoice, new SuperTooltipInfo(@"重复发票", "", "", null, null, color));
 
             superTooltip.SetSuperTooltip(btnDueFinance7, new SuperTooltipInfo(@"7日内到期的应收账款", "", "", null, null, color));
             superTooltip.SetSuperTooltip(btnDueFinance0, new SuperTooltipInfo(@"今日到期的应收账款", "", "", null, null, color));
@@ -89,6 +90,10 @@ namespace CMBC.EasyFactor.ARMgr
             result =
                 context.CDAs.Count(c => c.CDAStatus == CDAStr.REJECT && c.CreateUserName == App.Current.CurUser.Name);
             worker.ReportProgress(result, btnRejectCheckCDA);
+
+            //DuplicateInvoice
+            var invoiceGroup = from i in context.Invoices group i by i.InvoiceNo into g where g.Count() > 1 select g.Key;
+            worker.ReportProgress(invoiceGroup.Count() * 2, btnDuplicateInvoice);
 
             //DueAssign7
             result =
@@ -240,6 +245,17 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryFactorCreditLineDue(object sender, EventArgs e)
         {
             var mgr = new FactorCreditLineMgr(FactorCreditLineMgr.OpFactorCreditMgrType.DUE);
+            App.Current.MainWindow.SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryDuplicateInvoice(object sender, EventArgs e)
+        {
+            var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DUPLICATE_INVOICE);
             App.Current.MainWindow.SetDetailPanel(mgr);
         }
 

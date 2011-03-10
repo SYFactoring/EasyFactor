@@ -8,6 +8,7 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ButtonX btnDueAssign;
         private DevComponents.DotNetBar.ButtonX btnDueAssign0;
         private DevComponents.DotNetBar.ButtonX btnDueAssign7;
+        private DevComponents.DotNetBar.ButtonX btnDuplicateInvoice;
         private DevComponents.DotNetBar.ButtonX btnDueCDA;
         private DevComponents.DotNetBar.ButtonX btnDueClientCreditLine;
         private DevComponents.DotNetBar.ButtonX btnDueContract;
@@ -76,6 +77,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDueFinance7 = new DevComponents.DotNetBar.ButtonX();
             this.panelAssign = new DevComponents.DotNetBar.ExpandablePanel();
             this.btnInvoiceDispute = new DevComponents.DotNetBar.ButtonX();
+            this.btnDuplicateInvoice = new DevComponents.DotNetBar.ButtonX();
             this.btnDueAssign = new DevComponents.DotNetBar.ButtonX();
             this.btnDueAssign0 = new DevComponents.DotNetBar.ButtonX();
             this.btnDueAssign7 = new DevComponents.DotNetBar.ButtonX();
@@ -347,6 +349,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelAssign.Controls.Add(this.btnDueAssign);
             this.panelAssign.Controls.Add(this.btnDueAssign0);
             this.panelAssign.Controls.Add(this.btnDueAssign7);
+            this.panelAssign.Controls.Add(this.btnDuplicateInvoice);
             this.panelAssign.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelAssign.ExpandOnTitleClick = true;
             this.panelAssign.Location = new System.Drawing.Point(0, 0);
@@ -368,6 +371,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelAssign.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelAssign.TitleStyle.GradientAngle = 90;
             this.panelAssign.TitleText = "应收账款预警提示";
+            // 
+            // btnDuplicateInvoice
+            // 
+            this.btnDuplicateInvoice.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDuplicateInvoice.AutoExpandOnClick = true;
+            this.btnDuplicateInvoice.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnDuplicateInvoice.Location = new System.Drawing.Point(15, 143);
+            this.btnDuplicateInvoice.Name = "btnDuplicateInvoice";
+            this.btnDuplicateInvoice.Size = new System.Drawing.Size(140, 25);
+            this.btnDuplicateInvoice.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDuplicateInvoice.TabIndex = 3;
+            this.btnDuplicateInvoice.Text = "e) 重复发票";
+            this.btnDuplicateInvoice.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnDuplicateInvoice.Click += new System.EventHandler(this.QueryDuplicateInvoice);
             // 
             // btnInvoiceDispute
             // 
