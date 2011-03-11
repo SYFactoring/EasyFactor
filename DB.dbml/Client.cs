@@ -300,25 +300,22 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 池融资有效的账款余额，即应收账款池余额
         /// </summary>
-        public double PoolCanBeFinance
+        public double GetPoolCanBeFinance(string currency)
         {
-            get
+            double result = 0;
+            foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
             {
-                double result = 0;
-                foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
+                double canBeFinance = curCase.CanBeFinanceAmount;
+                if (curCase.InvoiceCurrency != currency)
                 {
-                    double canBeFinance = curCase.CanBeFinanceAmount;
-                    if (curCase.InvoiceCurrency != "CNY")
-                    {
-                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
-                        canBeFinance *= exchange;
-                    }
-
-                    result += canBeFinance;
+                    double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                    canBeFinance *= exchange;
                 }
 
-                return result;
+                result += canBeFinance;
             }
+
+            return result;
         }
 
 

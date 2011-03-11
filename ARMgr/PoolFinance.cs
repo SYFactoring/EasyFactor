@@ -184,11 +184,11 @@ namespace CMBC.EasyFactor.ARMgr
                 double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
                 financeAmount *= rate;
             }
-            if (TypeUtil.GreaterZero(financeAmount - _client.PoolCanBeFinance))
+            if (TypeUtil.GreaterZero(financeAmount - _client.GetPoolCanBeFinance("CNY")))
             {
                 MessageBoxEx.Show(
                     String.Format("本次融资币别{0}，额度{1:N2}，大于当前应收账款余额{2:N2}，不能融资。", batch.BatchCurrency, batch.FinanceAmount,
-                                  _client.PoolCanBeFinance), MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  _client.GetPoolCanBeFinance("CNY")), MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 return;
             }

@@ -1268,10 +1268,10 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range[sheet.Cells[row, "B"], sheet.Cells[row, "C"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "B"], sheet.Cells[row, "C"]].HorizontalAlignment =
                 XlHAlign.xlHAlignLeft;
-            sheet.Cells[row, 2] = keyClient.PoolCanBeFinance;
             if (caseResult.Count() > 0)
             {
                 Case curCase = caseResult.First();
+                sheet.Cells[row, 2] = keyClient.GetPoolCanBeFinance(curCase.InvoiceCurrency);
                 sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
                     TypeUtil.GetExcelCurrency(curCase.InvoiceCurrency);
             }
@@ -1422,7 +1422,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             row++;
             sheet.Cells[row, 1] = "账款池余额：";
-            sheet.Cells[row, 2] = keyClient.PoolCanBeFinance;
+            sheet.Cells[row, 2] = keyClient.GetPoolCanBeFinance("CNY");
             sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
                 TypeUtil.GetExcelCurrency("CNY");
 
