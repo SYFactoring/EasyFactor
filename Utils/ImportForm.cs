@@ -745,23 +745,24 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         string commissionStr = String.Format("{0:G}", valueArray[row, column++]);
-                        if (cda.CommissionType == "其他")
-                        {
-                            if (String.IsNullOrEmpty(commissionStr))
-                            {
-                                throw new Exception("手续费不能为空，不能导入：" + invoiceNo);
-                            }
-                            double commissionAmount;
-                            if (Double.TryParse(commissionStr, out commissionAmount))
-                            {
-                                invoice.Commission = commissionAmount;
-                            }
-                            else
-                            {
-                                throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
-                            }
-                        }
-                        else if (cda.CommissionType == "按转让金额")
+                        //if (cda.CommissionType == "其他")
+                        //{
+                        //    if (String.IsNullOrEmpty(commissionStr))
+                        //    {
+                        //        throw new Exception("手续费不能为空，不能导入：" + invoiceNo);
+                        //    }
+                        //    double commissionAmount;
+                        //    if (Double.TryParse(commissionStr, out commissionAmount))
+                        //    {
+                        //        invoice.Commission = commissionAmount;
+                        //    }
+                        //    else
+                        //    {
+                        //        throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
+                        //    }
+                        //}
+                        //else 
+                        if (cda.CommissionType == "按转让金额")
                         {
                             invoice.Commission = invoice.AssignAmount * cda.Price;
                         }
@@ -1050,23 +1051,24 @@ namespace CMBC.EasyFactor.Utils
                             }
 
                             string commissionStr = String.Format("{0:G}", valueArray[row, column++]);
-                            if (cda.CommissionType == "其他")
-                            {
-                                if (String.IsNullOrEmpty(commissionStr))
-                                {
-                                    throw new Exception("手续费不能为空，不能导入：" + invoiceNo);
-                                }
-                                double commissionAmount;
-                                if (Double.TryParse(commissionStr, out commissionAmount))
-                                {
-                                    invoice.Commission = commissionAmount;
-                                }
-                                else
-                                {
-                                    throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
-                                }
-                            }
-                            else if (cda.CommissionType == "按转让金额")
+                            //if (cda.CommissionType == "其他")
+                            //{
+                            //    if (String.IsNullOrEmpty(commissionStr))
+                            //    {
+                            //        throw new Exception("手续费不能为空，不能导入：" + invoiceNo);
+                            //    }
+                            //    double commissionAmount;
+                            //    if (Double.TryParse(commissionStr, out commissionAmount))
+                            //    {
+                            //        invoice.Commission = commissionAmount;
+                            //    }
+                            //    else
+                            //    {
+                            //        throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
+                            //    }
+                            //}
+                            //else 
+                            if (cda.CommissionType == "按转让金额")
                             {
                                 invoice.Commission = invoice.AssignAmount * cda.Price;
                             }
