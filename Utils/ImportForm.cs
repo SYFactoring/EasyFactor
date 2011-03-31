@@ -662,7 +662,9 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
+                            warningMsg += "发票号已经存在：" + invoiceNo + Environment.NewLine;
+                            continue;
+                            //throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
                         }
 
                         if (_context.Invoices.Count(i => i.InvoiceNo == invoiceNo) > 0)
@@ -968,7 +970,9 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
+                                warningMsg += "发票号已经存在：" + invoiceNo + Environment.NewLine;
+                                continue;
+                                //throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
                             }
 
                             if (_context.Invoices.Count(i => i.InvoiceNo == invoiceNo) > 0)
