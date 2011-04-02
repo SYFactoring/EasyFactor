@@ -31,6 +31,11 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
+        private string exceptionMsg = string.Empty;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly ImportType _importType;
         /// <summary>
         /// 
@@ -466,7 +471,7 @@ namespace CMBC.EasyFactor.Utils
                 else
                 {
                     tbStatus.Text = String.Format("发生异常: {0}", e.Error.Message);
-                }
+                 }
             }
             else if (e.Cancelled)
             {
@@ -482,9 +487,11 @@ namespace CMBC.EasyFactor.Utils
 
             if (warningMsg != string.Empty)
             {
-                tbStatus.Text += tbStatus.Text + Environment.NewLine + warningMsg;
-                warningMsg = string.Empty;
+                tbStatus.Text += Environment.NewLine + warningMsg;
             }
+
+            exceptionMsg = string.Empty;
+            warningMsg = string.Empty;
 
             btnStart.Enabled = true;
             btnCancel.Text = @"关闭";
@@ -579,7 +586,8 @@ namespace CMBC.EasyFactor.Utils
                             {
                                 break;
                             }
-                            throw new Exception("案件编号不能为空，不能导入：" + invoiceNo);
+                            //throw new Exception("案件编号不能为空，不能导入：" + invoiceNo);
+                            exceptionMsg += "案件编号不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                         }
                         if (caseCode.Length > 20)
                         {
@@ -588,7 +596,8 @@ namespace CMBC.EasyFactor.Utils
 
                         if (String.IsNullOrEmpty(invoiceNo))
                         {
-                            throw new Exception("发票编号不能为空，不能导入，案件编号： " + caseCode);
+                            //throw new Exception("发票编号不能为空，不能导入，案件编号： " + caseCode);
+                            exceptionMsg += "发票编号不能为空，不能导入，案件编号： " + caseCode + Environment.NewLine;
                         }
 
                         if (curCase == null || curCase.CaseCode != caseCode)
@@ -597,14 +606,16 @@ namespace CMBC.EasyFactor.Utils
 
                             if (curCase == null)
                             {
-                                throw new Exception("案件编号错误: " + caseCode);
+                                //throw new Exception("案件编号错误: " + caseCode);
+                                exceptionMsg += "案件编号错误: " + caseCode + Environment.NewLine;
                             }
                         }
 
                         CDA cda = curCase.ActiveCDA;
                         if (cda == null)
                         {
-                            throw new Exception("没有有效的额度通知书: " + caseCode);
+                            //throw new Exception("没有有效的额度通知书: " + caseCode);
+                            exceptionMsg += "没有有效的额度通知书: " + caseCode + Environment.NewLine;
                         }
                         if (cda.CreditCoverPeriodEnd.HasValue)
                         {
@@ -657,7 +668,8 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("当前导入文件中发票号重复: " + old.InvoiceNo);
+                                //throw new Exception("当前导入文件中发票号重复: " + old.InvoiceNo);
+                                exceptionMsg += "当前导入文件中发票号重复: " + old.InvoiceNo + Environment.NewLine;
                             }
                         }
                         else
@@ -675,17 +687,20 @@ namespace CMBC.EasyFactor.Utils
                         string currency = string.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(currency))
                         {
-                            throw new Exception("发票币别不能为空，不能导入：" + invoiceNo);
+                            //throw new Exception("发票币别不能为空，不能导入：" + invoiceNo);
+                            exceptionMsg += "发票币别不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                         }
                         if (currency != curCase.InvoiceCurrency)
                         {
-                            throw new Exception("发票币别与案件币别不匹配，不能导入：" + invoiceNo);
+                            //throw new Exception("发票币别与案件币别不匹配，不能导入：" + invoiceNo);
+                            exceptionMsg += "发票币别与案件币别不匹配，不能导入：" + invoiceNo;
                         }
 
                         string invoiceAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(invoiceAmountStr))
                         {
-                            throw new Exception("发票金额不能为空，不能导入：" + invoiceNo);
+                            //throw new Exception("发票金额不能为空，不能导入：" + invoiceNo);
+                            exceptionMsg += "发票金额不能为空，不能导入：" + invoiceNo;
                         }
                         double invoiceAmount;
                         if (Double.TryParse(invoiceAmountStr, out invoiceAmount))
@@ -694,13 +709,15 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("发票金额类型异常，不能导入：" + invoiceNo);
+                            //throw new Exception("发票金额类型异常，不能导入：" + invoiceNo);
+                            exceptionMsg += "发票金额类型异常，不能导入：" + invoiceNo + Environment.NewLine;
                         }
 
                         string assignAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(assignAmountStr))
                         {
-                            throw new Exception("转让金额不能为空，不能导入：" + invoiceNo);
+                            //throw new Exception("转让金额不能为空，不能导入：" + invoiceNo);
+                            exceptionMsg += "转让金额不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                         }
                         double assignAmount;
                         if (Double.TryParse(assignAmountStr, out assignAmount))
@@ -709,7 +726,8 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("转让金额类型异常，不能导入：" + invoiceNo);
+                            //throw new Exception("转让金额类型异常，不能导入：" + invoiceNo);
+                            exceptionMsg += "转让金额类型异常，不能导入：" + invoiceNo + Environment.NewLine;
                         }
 
                         string invoiceDateStr = String.Format("{0:G}", valueArray[row, column++]);
@@ -720,21 +738,24 @@ namespace CMBC.EasyFactor.Utils
                             {
                                 if (invoiceDate > DateTime.Today)
                                 {
-                                    throw new Exception("发票日不能晚于今日，不能导入：" + invoiceNo);
+                                    //throw new Exception("发票日不能晚于今日，不能导入：" + invoiceNo);
+                                    exceptionMsg += "发票日不能晚于今日，不能导入：" + invoiceNo + Environment.NewLine;
                                 }
 
                                 invoice.InvoiceDate = invoiceDate;
                             }
                             else
                             {
-                                throw new Exception("发票日类型异常，不能导入：" + invoiceNo);
+                                //throw new Exception("发票日类型异常，不能导入：" + invoiceNo);
+                                exceptionMsg += "发票日类型异常，不能导入：" + invoiceNo + Environment.NewLine;
                             }
                         }
 
                         string dueDateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(dueDateStr))
                         {
-                            throw new Exception("转让日不能为空，不能导入：" + invoiceNo);
+                            //throw new Exception("转让日不能为空，不能导入：" + invoiceNo);
+                            exceptionMsg += "转让日不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                         }
                         DateTime dueDate;
                         if (DateTime.TryParse(dueDateStr, out dueDate))
@@ -743,7 +764,8 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            throw new Exception("转让日类型异常，不能导入：" + invoiceNo);
+                            //throw new Exception("转让日类型异常，不能导入：" + invoiceNo);
+                            exceptionMsg += "转让日类型异常，不能导入：" + invoiceNo + Environment.NewLine;
                         }
 
                         string commissionStr = String.Format("{0:G}", valueArray[row, column++]);
@@ -777,6 +799,10 @@ namespace CMBC.EasyFactor.Utils
                         worker.ReportProgress((int)((float)row * 100 / size));
                     }
 
+                    if (exceptionMsg != string.Empty)
+                    {
+                        throw new Exception(exceptionMsg);
+                    }
                     _context.SubmitChanges();
                 }
                 catch (Exception e1)
@@ -856,7 +882,8 @@ namespace CMBC.EasyFactor.Utils
                                 {
                                     break;
                                 }
-                                throw new Exception("案件编号不能为空，不能导入：" + invoiceNo);
+                                //throw new Exception("案件编号不能为空，不能导入：" + invoiceNo);
+                                exceptionMsg += "案件编号不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                             }
                             if (caseCode.Length > 20)
                             {
@@ -865,7 +892,8 @@ namespace CMBC.EasyFactor.Utils
 
                             if (String.IsNullOrEmpty(invoiceNo))
                             {
-                                throw new Exception("发票编号不能为空，不能导入，案件编号： " + caseCode);
+                                //throw new Exception("发票编号不能为空，不能导入，案件编号： " + caseCode);
+                                exceptionMsg += "发票编号不能为空，不能导入，案件编号： " + caseCode + Environment.NewLine;
                             }
 
                             column++;
@@ -879,7 +907,8 @@ namespace CMBC.EasyFactor.Utils
                                 {
                                     break;
                                 }
-                                throw new Exception("案件编号不能为空，不能导入：" + creditNoteNo);
+                                //throw new Exception("案件编号不能为空，不能导入：" + creditNoteNo);
+                                exceptionMsg += "案件编号不能为空，不能导入：" + creditNoteNo + Environment.NewLine;
                             }
                             if (caseCode.Length > 20)
                             {
@@ -888,7 +917,8 @@ namespace CMBC.EasyFactor.Utils
 
                             if (String.IsNullOrEmpty(creditNoteNo))
                             {
-                                throw new Exception("贷项通知编号不能为空，不能导入，案件编号： " + caseCode);
+                                //throw new Exception("贷项通知编号不能为空，不能导入，案件编号： " + caseCode);
+                                exceptionMsg += "贷项通知编号不能为空，不能导入，案件编号： " + caseCode + Environment.NewLine;
                             }
                         }
                         else
@@ -902,14 +932,16 @@ namespace CMBC.EasyFactor.Utils
 
                             if (curCase == null)
                             {
-                                throw new Exception("案件编号错误: " + caseCode);
+                                //throw new Exception("案件编号错误: " + caseCode);
+                                exceptionMsg += "案件编号错误: " + caseCode + Environment.NewLine;
                             }
                         }
 
                         CDA cda = curCase.ActiveCDA;
                         if (cda == null)
                         {
-                            throw new Exception("没有有效的额度通知书: " + caseCode);
+                            //throw new Exception("没有有效的额度通知书: " + caseCode);
+                            exceptionMsg += "没有有效的额度通知书: " + caseCode + Environment.NewLine;
                         }
                         if (cda.CreditCoverPeriodEnd.HasValue)
                         {
@@ -965,7 +997,8 @@ namespace CMBC.EasyFactor.Utils
                                 }
                                 else
                                 {
-                                    throw new Exception("当前导入文件中发票号重复: " + old.InvoiceNo);
+                                    //throw new Exception("当前导入文件中发票号重复: " + old.InvoiceNo);
+                                    exceptionMsg += "当前导入文件中发票号重复: " + old.InvoiceNo + Environment.NewLine;
                                 }
                             }
                             else
@@ -983,17 +1016,20 @@ namespace CMBC.EasyFactor.Utils
                             string currency = string.Format("{0:G}", valueArray[row, column++]);
                             if (String.IsNullOrEmpty(currency))
                             {
-                                throw new Exception("发票币别不能为空，不能导入：" + invoiceNo);
+                                //throw new Exception("发票币别不能为空，不能导入：" + invoiceNo);
+                                exceptionMsg += "发票币别不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                             }
                             if (currency != curCase.InvoiceCurrency)
                             {
-                                throw new Exception("发票币别与案件币别不匹配，不能导入：" + invoiceNo);
+                                //throw new Exception("发票币别与案件币别不匹配，不能导入：" + invoiceNo);
+                                exceptionMsg += "发票币别与案件币别不匹配，不能导入：" + invoiceNo + Environment.NewLine;
                             }
 
                             string invoiceAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                             if (String.IsNullOrEmpty(invoiceAmountStr))
                             {
-                                throw new Exception("发票金额不能为空，不能导入：" + invoiceNo);
+                                //throw new Exception("发票金额不能为空，不能导入：" + invoiceNo);
+                                exceptionMsg += "发票金额不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                             }
                             double invoiceAmount;
                             if (Double.TryParse(invoiceAmountStr, out invoiceAmount))
@@ -1002,13 +1038,15 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("发票金额类型异常，不能导入：" + invoiceNo);
+                                //throw new Exception("发票金额类型异常，不能导入：" + invoiceNo);
+                                exceptionMsg += "发票金额类型异常，不能导入：" + invoiceNo + Environment.NewLine;
                             }
 
                             string assignAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                             if (String.IsNullOrEmpty(assignAmountStr))
                             {
-                                throw new Exception("转让金额不能为空，不能导入：" + invoiceNo);
+                                //throw new Exception("转让金额不能为空，不能导入：" + invoiceNo);
+                                exceptionMsg += "转让金额不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                             }
                             double assignAmount;
                             if (Double.TryParse(assignAmountStr, out assignAmount))
@@ -1017,7 +1055,8 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("转让金额类型异常，不能导入：" + invoiceNo);
+                                //throw new Exception("转让金额类型异常，不能导入：" + invoiceNo);
+                                exceptionMsg += "转让金额类型异常，不能导入：" + invoiceNo + Environment.NewLine;
                             }
 
                             string invoiceDateStr = String.Format("{0:G}", valueArray[row, column++]);
@@ -1028,21 +1067,24 @@ namespace CMBC.EasyFactor.Utils
                                 {
                                     if (invoiceDate > DateTime.Today)
                                     {
-                                        throw new Exception("发票日不能晚于今日，不能导入：" + invoiceNo);
+                                        //throw new Exception("发票日不能晚于今日，不能导入：" + invoiceNo);
+                                        exceptionMsg += "发票日不能晚于今日，不能导入：" + invoiceNo + Environment.NewLine;
                                     }
 
                                     invoice.InvoiceDate = invoiceDate;
                                 }
                                 else
                                 {
-                                    throw new Exception("发票日类型异常，不能导入：" + invoiceNo);
+                                    //throw new Exception("发票日类型异常，不能导入：" + invoiceNo);
+                                    exceptionMsg += "发票日类型异常，不能导入：" + invoiceNo + Environment.NewLine;
                                 }
                             }
 
                             string dueDateStr = String.Format("{0:G}", valueArray[row, column++]);
                             if (String.IsNullOrEmpty(dueDateStr))
                             {
-                                throw new Exception("转让日不能为空，不能导入：" + invoiceNo);
+                                //throw new Exception("转让日不能为空，不能导入：" + invoiceNo);
+                                exceptionMsg += "转让日不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                             }
                             DateTime dueDate;
                             if (DateTime.TryParse(dueDateStr, out dueDate))
@@ -1051,7 +1093,8 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("转让日类型异常，不能导入：" + invoiceNo);
+                                //throw new Exception("转让日类型异常，不能导入：" + invoiceNo);
+                                exceptionMsg += "转让日类型异常，不能导入：" + invoiceNo + Environment.NewLine;
                             }
 
                             string commissionStr = String.Format("{0:G}", valueArray[row, column++]);
@@ -1096,13 +1139,15 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("贷项通知号已经存在，不能导入： " + creditNoteNo);
+                                //throw new Exception("贷项通知号已经存在，不能导入： " + creditNoteNo);
+                                exceptionMsg += "贷项通知号已经存在，不能导入： " + creditNoteNo + Environment.NewLine;
                             }
 
                             String toInvoiceNo = String.Format("{0:G}", valueArray[row, column++]);
                             if (String.IsNullOrEmpty(toInvoiceNo))
                             {
-                                throw new Exception(String.Format("贷项通知{0}对应发票编号不能为空", creditNoteNo));
+                                //throw new Exception(String.Format("贷项通知{0}对应发票编号不能为空", creditNoteNo));
+                                exceptionMsg += String.Format("贷项通知{0}对应发票编号不能为空", creditNoteNo) + Environment.NewLine;
                             }
 
                             Invoice toInvoice =
@@ -1113,30 +1158,35 @@ namespace CMBC.EasyFactor.Utils
                                 toInvoice = invoiceList.SingleOrDefault(i => i.InvoiceNo == toInvoiceNo);
                                 if (toInvoice == null)
                                 {
-                                    throw new Exception(String.Format("贷项通知{0}对应发票编号{1}错误", creditNoteNo, toInvoiceNo));
+                                    //throw new Exception(String.Format("贷项通知{0}对应发票编号{1}错误", creditNoteNo, toInvoiceNo));
+                                    exceptionMsg += String.Format("贷项通知{0}对应发票编号{1}错误", creditNoteNo, toInvoiceNo) + Environment.NewLine;
                                 }
                             }
 
                             string currency = string.Format("{0:G}", valueArray[row, column++]);
                             if (String.IsNullOrEmpty(currency))
                             {
-                                throw new Exception("贷项通知币别不能为空，不能导入：" + creditNoteNo);
+                                //throw new Exception("贷项通知币别不能为空，不能导入：" + creditNoteNo);
+                                exceptionMsg += "贷项通知币别不能为空，不能导入：" + creditNoteNo + Environment.NewLine;
                             }
                             if (currency != toInvoice.InvoiceCurrency)
                             {
-                                throw new Exception("贷项通知币别与发票币别不匹配，不能导入：" + creditNoteNo);
+                                //throw new Exception("贷项通知币别与发票币别不匹配，不能导入：" + creditNoteNo);
+                                exceptionMsg += "贷项通知币别与发票币别不匹配，不能导入：" + creditNoteNo + Environment.NewLine;
                             }
 
                             string paymentAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                             if (String.IsNullOrEmpty(paymentAmountStr))
                             {
-                                throw new Exception("贷项通知金额不能为空，不能导入：" + creditNoteNo);
+                                //throw new Exception("贷项通知金额不能为空，不能导入：" + creditNoteNo);
+                                exceptionMsg += "贷项通知金额不能为空，不能导入：" + creditNoteNo + Environment.NewLine;
                             }
 
                             double paymentAmount;
                             if (!Double.TryParse(paymentAmountStr, out paymentAmount))
                             {
-                                throw new Exception("贷项通知金额类型异常，不能导入：" + creditNoteNo);
+                                //throw new Exception("贷项通知金额类型异常，不能导入：" + creditNoteNo);
+                                exceptionMsg += "贷项通知金额类型异常，不能导入：" + creditNoteNo + Environment.NewLine;
                             }
 
                             column++;
@@ -1144,7 +1194,8 @@ namespace CMBC.EasyFactor.Utils
                             string creditNoteDateStr = String.Format("{0:G}", valueArray[row, column++]);
                             if (String.IsNullOrEmpty(creditNoteDateStr))
                             {
-                                throw new Exception("贷项通知日不能为空," + creditNoteNo);
+                                //throw new Exception("贷项通知日不能为空," + creditNoteNo);
+                                exceptionMsg += "贷项通知日不能为空," + creditNoteNo + Environment.NewLine;
                             }
                             DateTime creditNoteDate;
                             if (DateTime.TryParse(creditNoteDateStr, out creditNoteDate))
@@ -1153,7 +1204,8 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                throw new Exception("贷项通知日类型异常，不能导入：" + creditNoteNo);
+                                //throw new Exception("贷项通知日类型异常，不能导入：" + creditNoteNo);
+                                exceptionMsg += "贷项通知日类型异常，不能导入：" + creditNoteNo + Environment.NewLine;
                             }
 
                             column++;
@@ -1200,6 +1252,10 @@ namespace CMBC.EasyFactor.Utils
                         worker.ReportProgress((int)((float)row * 100 / size));
                     }
 
+                    if (exceptionMsg != string.Empty)
+                    {
+                        throw new Exception(exceptionMsg);
+                    }
                     _context.SubmitChanges();
                 }
                 catch (Exception e1)
