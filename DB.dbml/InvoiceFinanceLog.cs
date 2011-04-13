@@ -313,7 +313,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
             if (cda.CommissionType == "°´ÈÚ×Ê½ð¶î")
             {
-                Commission = FinanceAmount * cda.Price;
+                Commission = Math.Round(FinanceAmount.GetValueOrDefault() * cda.Price.GetValueOrDefault(),2);
             }
         }
 

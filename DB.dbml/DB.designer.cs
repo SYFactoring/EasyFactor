@@ -12646,7 +12646,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="Float")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="Decimal(18,2)")]
 		public System.Nullable<double> Commission
 		{
 			get
@@ -12886,7 +12886,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactorCommission", DbType="float")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactorCommission", DbType="Decimal(18,2)")]
 		public System.Nullable<double> FactorCommission
 		{
 			get
@@ -13145,7 +13145,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="Float")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="Decimal(18,2)")]
 		public System.Nullable<double> Commission
 		{
 			get

@@ -543,7 +543,7 @@
       <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RefundAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="RefundDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Commission" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Commission" Type="System.Double" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="IsDispute" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="DisputeType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="DisputeAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
@@ -555,7 +555,7 @@
       <Column Name="DisputeResolveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="DisputeResolveUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="FactorCommission" Type="System.Double" DbType="float" CanBeNull="true" />
+      <Column Name="FactorCommission" Type="System.Double" DbType="Decimal(18,2)" CanBeNull="true" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="InvoiceFinanceLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoiceFinanceLog" />
       <Association Name="Invoice_InvoicePaymentLog" Member="InvoicePaymentLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoicePaymentLog" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="InvoiceAssignBatch" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="InvoiceAssignBatch" IsForeignKey="true" />
@@ -567,7 +567,7 @@
       <Column Name="FinanceBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="FinanceAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="Commission" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Commission" Type="System.Double" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="InvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceRefundLogs" ThisKey="FinanceLogID" OtherKey="FinanceLogID" Type="InvoiceRefundLog" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="Invoice" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="Invoice" IsForeignKey="true" />

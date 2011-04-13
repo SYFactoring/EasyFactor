@@ -674,7 +674,7 @@ namespace CMBC.EasyFactor.Utils
                         }
                         else
                         {
-                            warningMsg += "发票号已经存在：" + invoiceNo + Environment.NewLine;
+                            exceptionMsg += "发票号已经存在：" + invoiceNo + Environment.NewLine;
                             continue;
                             //throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
                         }
@@ -788,7 +788,7 @@ namespace CMBC.EasyFactor.Utils
                         //else 
                         if (cda.CommissionType == "按转让金额")
                         {
-                            invoice.Commission = invoice.AssignAmount * cda.Price;
+                            invoice.Commission = Math.Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(),2);
                         }
 
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
@@ -1003,7 +1003,7 @@ namespace CMBC.EasyFactor.Utils
                             }
                             else
                             {
-                                warningMsg += "发票号已经存在：" + invoiceNo + Environment.NewLine;
+                                exceptionMsg += "发票号已经存在：" + invoiceNo + Environment.NewLine;
                                 continue;
                                 //throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
                             }
@@ -1117,7 +1117,7 @@ namespace CMBC.EasyFactor.Utils
                             //else 
                             if (cda.CommissionType == "按转让金额")
                             {
-                                invoice.Commission = invoice.AssignAmount * cda.Price;
+                                invoice.Commission = Math.Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(),2);
                             }
 
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
