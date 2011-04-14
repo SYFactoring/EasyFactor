@@ -443,6 +443,24 @@ namespace CMBC.EasyFactor.Utils
         {
             progressBar.Value = e.ProgressPercentage;
             tbStatus.Text = _importType == ImportType.SEND_LEGERS ? String.Format("正在给{0}发送邮件", e.UserState) : String.Format("导入进度 {0:G}%", e.ProgressPercentage);
+            if (e.UserState != null)
+            {
+                string msg = (string)e.UserState;
+                if (msg.Contains('|'))
+                {
+                    string[] msgs = msg.Split(new char[] { '|' });
+                    string exceptionMsg = msgs[0];
+                    string warningMsg = msgs[1];
+                    if (exceptionMsg != string.Empty)
+                    {
+                        tbStatus.Text += Environment.NewLine + "异常信息:" + Environment.NewLine + exceptionMsg;
+                    }
+                    if (warningMsg != string.Empty)
+                    {
+                        tbStatus.Text += Environment.NewLine + "警告信息:" + Environment.NewLine + warningMsg;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -471,7 +489,7 @@ namespace CMBC.EasyFactor.Utils
                 else
                 {
                     tbStatus.Text = String.Format("发生异常: {0}", e.Error.Message);
-                 }
+                }
             }
             else if (e.Cancelled)
             {
@@ -788,7 +806,7 @@ namespace CMBC.EasyFactor.Utils
                         //else 
                         if (cda.CommissionType == "按转让金额")
                         {
-                            invoice.Commission = TypeUtil.C1Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(),2);
+                            invoice.Commission = TypeUtil.C1Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(), 2);
                         }
 
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
@@ -796,7 +814,7 @@ namespace CMBC.EasyFactor.Utils
                         invoice.CaculateCommission(false);
 
                         result++;
-                        worker.ReportProgress((int)((float)row * 100 / size));
+                        worker.ReportProgress((int)((float)row * 100 / size), exceptionMsg + "|" + warningMsg);
                     }
 
                     if (exceptionMsg != string.Empty)
@@ -1117,7 +1135,7 @@ namespace CMBC.EasyFactor.Utils
                             //else 
                             if (cda.CommissionType == "按转让金额")
                             {
-                                invoice.Commission = TypeUtil.C1Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(),2);
+                                invoice.Commission = TypeUtil.C1Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(), 2);
                             }
 
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
@@ -1249,7 +1267,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         result++;
-                        worker.ReportProgress((int)((float)row * 100 / size));
+                        worker.ReportProgress((int)((float)row * 100 / size), exceptionMsg + "|" + warningMsg);
                     }
 
                     if (exceptionMsg != string.Empty)

@@ -70,9 +70,10 @@ namespace CMBC.EasyFactor.Utils
             // 
             // 
             this.lblFilePath.BackgroundStyle.Class = "";
-            this.lblFilePath.Location = new System.Drawing.Point(12, 10);
+            this.lblFilePath.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblFilePath.Location = new System.Drawing.Point(12, 9);
             this.lblFilePath.Name = "lblFilePath";
-            this.lblFilePath.Size = new System.Drawing.Size(59, 16);
+            this.lblFilePath.Size = new System.Drawing.Size(62, 18);
             this.lblFilePath.TabIndex = 0;
             this.lblFilePath.Text = "文件路径:";
             // 
@@ -84,70 +85,84 @@ namespace CMBC.EasyFactor.Utils
             // 
             // 
             this.lblStatus.BackgroundStyle.Class = "";
-            this.lblStatus.Location = new System.Drawing.Point(37, 33);
+            this.lblStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblStatus.Location = new System.Drawing.Point(37, 30);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(34, 16);
+            this.lblStatus.Size = new System.Drawing.Size(37, 18);
             this.lblStatus.TabIndex = 3;
             this.lblStatus.Text = "状态:";
             // 
             // progressBar
             // 
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
             this.progressBar.BackgroundStyle.Class = "";
-            this.progressBar.Location = new System.Drawing.Point(77, 104);
+            this.progressBar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.progressBar.Location = new System.Drawing.Point(77, 96);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(266, 23);
+            this.progressBar.Size = new System.Drawing.Size(266, 21);
             this.progressBar.TabIndex = 6;
             // 
             // lblProgress
             // 
+            this.lblProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblProgress.AutoSize = true;
             this.lblProgress.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.lblProgress.BackgroundStyle.Class = "";
-            this.lblProgress.Location = new System.Drawing.Point(12, 104);
+            this.lblProgress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblProgress.Location = new System.Drawing.Point(12, 96);
             this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(59, 16);
+            this.lblProgress.Size = new System.Drawing.Size(62, 18);
             this.lblProgress.TabIndex = 5;
             this.lblProgress.Text = "导入进度:";
             // 
             // tbStatus
             // 
+            this.tbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
             this.tbStatus.Border.Class = "TextBoxBorder";
-            this.tbStatus.Location = new System.Drawing.Point(77, 32);
+            this.tbStatus.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbStatus.Location = new System.Drawing.Point(77, 30);
             this.tbStatus.Multiline = true;
             this.tbStatus.Name = "tbStatus";
             this.tbStatus.ReadOnly = true;
             this.tbStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbStatus.Size = new System.Drawing.Size(266, 66);
+            this.tbStatus.Size = new System.Drawing.Size(266, 61);
             this.tbStatus.TabIndex = 4;
             // 
             // tbFilePath
             // 
+            this.tbFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
             this.tbFilePath.Border.Class = "TextBoxBorder";
-            this.tbFilePath.Location = new System.Drawing.Point(77, 8);
+            this.tbFilePath.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbFilePath.Location = new System.Drawing.Point(77, 7);
             this.tbFilePath.Name = "tbFilePath";
             this.tbFilePath.ReadOnly = true;
-            this.tbFilePath.Size = new System.Drawing.Size(266, 20);
+            this.tbFilePath.Size = new System.Drawing.Size(266, 21);
             this.tbFilePath.TabIndex = 1;
             // 
             // btnStart
             // 
             this.btnStart.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStart.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnStart.Location = new System.Drawing.Point(178, 133);
+            this.btnStart.Location = new System.Drawing.Point(178, 123);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.Size = new System.Drawing.Size(75, 21);
             this.btnStart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnStart.TabIndex = 7;
             this.btnStart.Text = "开始";
@@ -156,10 +171,12 @@ namespace CMBC.EasyFactor.Utils
             // btnCancel
             // 
             this.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCancel.Location = new System.Drawing.Point(268, 133);
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(268, 123);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(75, 21);
             this.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "关闭";
@@ -168,10 +185,11 @@ namespace CMBC.EasyFactor.Utils
             // btnFileSelect
             // 
             this.btnFileSelect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFileSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFileSelect.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnFileSelect.Location = new System.Drawing.Point(349, 8);
+            this.btnFileSelect.Location = new System.Drawing.Point(349, 7);
             this.btnFileSelect.Name = "btnFileSelect";
-            this.btnFileSelect.Size = new System.Drawing.Size(24, 23);
+            this.btnFileSelect.Size = new System.Drawing.Size(24, 21);
             this.btnFileSelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFileSelect.TabIndex = 2;
             this.btnFileSelect.Text = "...";
@@ -187,9 +205,11 @@ namespace CMBC.EasyFactor.Utils
             // 
             // ImportForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AcceptButton = this.btnStart;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 162);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(384, 150);
             this.Controls.Add(this.btnFileSelect);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnStart);
@@ -200,7 +220,6 @@ namespace CMBC.EasyFactor.Utils
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblFilePath);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImportForm";
