@@ -346,23 +346,23 @@ namespace CMBC.EasyFactor.DB.dbml
                         }
                     }
 
-                    Commission = Math.Round(InvoiceFinanceLogs.Sum(log => log.Commission).GetValueOrDefault(),2);
+                    Commission = TypeUtil.C1Round(InvoiceFinanceLogs.Sum(log => log.Commission).GetValueOrDefault(),2);
                 }
                 else if (cda.CommissionType == "按转让金额")
                 {
                     if (!TypeUtil.GreaterZero(Commission) || isOverwrite)
                     {
-                        Commission = Math.Round(AssignAmount * cda.Price.GetValueOrDefault(),2);
+                        Commission = TypeUtil.C1Round(AssignAmount * cda.Price.GetValueOrDefault(),2);
                     }
                     if (!TypeUtil.GreaterZero(FactorCommission) || isOverwrite)
                     {
                         if (TransactionType == "出口保理")
                         {
-                            FactorCommission = Math.Round(AssignAmount * cda.IFPrice.GetValueOrDefault(),2);
+                            FactorCommission = TypeUtil.C1Round(AssignAmount * cda.IFPrice.GetValueOrDefault(),2);
                         }
                         else if (TransactionType == "进口保理")
                         {
-                            FactorCommission = Math.Round(AssignAmount * cda.EFPrice.GetValueOrDefault(),2);
+                            FactorCommission = TypeUtil.C1Round(AssignAmount * cda.EFPrice.GetValueOrDefault(),2);
                         }
                     }
                 }

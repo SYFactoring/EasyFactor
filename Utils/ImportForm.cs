@@ -788,7 +788,7 @@ namespace CMBC.EasyFactor.Utils
                         //else 
                         if (cda.CommissionType == "按转让金额")
                         {
-                            invoice.Commission = Math.Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(),2);
+                            invoice.Commission = TypeUtil.C1Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(),2);
                         }
 
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
@@ -1117,7 +1117,7 @@ namespace CMBC.EasyFactor.Utils
                             //else 
                             if (cda.CommissionType == "按转让金额")
                             {
-                                invoice.Commission = Math.Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(),2);
+                                invoice.Commission = TypeUtil.C1Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(),2);
                             }
 
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column]);

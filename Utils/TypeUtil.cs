@@ -243,5 +243,14 @@ namespace CMBC.EasyFactor.Utils
             }
             return currency;
         }
+
+        public static double C1Round(double value, int digit)
+        {
+            double vt = Math.Pow(10, digit);
+            double vx = value * vt;
+
+            vx += 0.5;
+            return (Math.Floor(vx) / vt);
+        } 
     }
 }
