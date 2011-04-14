@@ -164,7 +164,7 @@ namespace CMBC.EasyFactor.CaseMgr
             string sellerFactorCode = tbSellerFactorCode.Text;
             string buyerFactorCode = tbBuyerFactorCode.Text;
             string createUserName = tbCreateUserName.Text;
-            string location = cbLocation.Text;
+            string location = (string)cbLocation.SelectedValue ;
             string requestType = cbRequestType.Text;
 
             var context = new DBDataContext();
@@ -182,7 +182,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                                                  (requestType != "" ? neg.RequestType == requestType : true)
                                                              let c = neg.Case
                                                              where
-                                                                 (location == "È«²¿"
+                                                                 (location == "00"
                                                                       ? true
                                                                       : c.OwnerDepartment.LocationCode == location)
                                                                  &&

@@ -806,20 +806,21 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isSingle = selectedCDA.Case.SellerFactorCode == selectedCDA.Case.BuyerFactorCode;
                 string recoarse = selectedCDA.IsRecoarse.GetValueOrDefault() ? "有追索权" : "无追索权";
                 string single = isSingle ? "单保理" : "双保理";
+                string financeType = selectedCDA.Case.IsPool ? "池融资" : "一般融资";
                 string line0 = string.Empty;
                 switch (selectedCDA.Case.TransactionType)
                 {
                     case "国内卖方保理":
-                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "国内", single, selectedCDA.IsNotice);
+                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "国内", single, selectedCDA.IsNotice, financeType);
                         break;
                     case "出口保理":
-                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "出口", single, selectedCDA.IsNotice);
+                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "出口", single, selectedCDA.IsNotice, financeType);
                         break;
                     case "国内买方保理":
-                        line0 = String.Format("（1）本业务为{0}{1}（{2}）业务。", recoarse, "国内", selectedCDA.IsNotice);
+                        line0 = String.Format("（1）本业务为{0}{1}（{2}）业务，采用{4}模式。", recoarse, "国内", selectedCDA.IsNotice, financeType);
                         break;
                     case "进口保理":
-                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "进口", single, selectedCDA.IsNotice);
+                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "进口", single, selectedCDA.IsNotice, financeType);
                         break;
                     default:
                         break;
@@ -1053,7 +1054,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     sheet.Cells[row++, 2] = "无";
                 }
-                sheet.Cells[row, 1] = "保理预付款额度";
+                sheet.Cells[row, 1] = "保理融资额度";
                 if (selectedCDA.FinanceLine.HasValue)
                 {
                     if (isZero)
@@ -1075,7 +1076,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = "0";
                 }
 
-                sheet.Cells[row, 1] = "预付款额度有效期限";
+                sheet.Cells[row, 1] = "保理融资额度有效期限";
                 if (selectedCDA.FinanceLinePeriodBegin.HasValue)
                 {
                     if (isZero)
@@ -1094,7 +1095,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = "无";
                 }
 
-                sheet.Cells[row, 1] = "最高保理预付款额度";
+                sheet.Cells[row, 1] = "最高保理融资额度";
 
                 double? highestCreditLine = selectedCDA.HighestFinanceLine;
                 if (highestCreditLine.HasValue)
@@ -1118,7 +1119,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     sheet.Cells[row++, 2] = "0";
                 }
 
-                sheet.Cells[row, 1] = "预付比例";
+                sheet.Cells[row, 1] = "保理融资比例";
                 if (isZero)
                 {
                     sheet.Cells[row++, 2] = "无";
@@ -1211,20 +1212,21 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isSingle = selectedCDA.Case.SellerFactorCode == selectedCDA.Case.BuyerFactorCode;
                 string recoarse = selectedCDA.IsRecoarse.GetValueOrDefault() ? "有追索权" : "无追索权";
                 string single = isSingle ? "单保理" : "双保理";
+                string financeType = selectedCDA.Case.IsPool ? "池融资" : "一般融资";
                 string line1 = string.Empty;
                 switch (selectedCDA.Case.TransactionType)
                 {
                     case "国内卖方保理":
-                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "国内", single, selectedCDA.IsNotice);
+                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "国内", single, selectedCDA.IsNotice, financeType);
                         break;
                     case "出口保理":
-                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "出口", single, selectedCDA.IsNotice);
+                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "出口", single, selectedCDA.IsNotice, financeType);
                         break;
                     case "国内买方保理":
-                        line1 = String.Format("（1）本业务为{0}{1}（{2}）业务。", recoarse, "国内", selectedCDA.IsNotice);
+                        line1 = String.Format("（1）本业务为{0}{1}（{2}）业务，采用{4}模式。", recoarse, "国内", selectedCDA.IsNotice, financeType);
                         break;
                     case "进口保理":
-                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务。", recoarse, "进口", single, selectedCDA.IsNotice);
+                        line1 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "进口", single, selectedCDA.IsNotice, financeType);
                         break;
                     default:
                         break;
@@ -1270,7 +1272,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 sheet.Cells[26, 1] = "如贵公司于本行发出本通知书后10日内未签回或于本行收到签回通知书后30日内未动用额度时，本行得停止额度之动用。贵公司嗣后如欲动用该额度，须重新提出申请。";
                 sheet.Cells[28, 1] =
-                    "为利益考虑，请务必确认上开买方系贵公司预定交易之对象，本保理额度通知书取代先前同一买方之保理额度通知书及先前所有贵公司与本合同相关保理额度通知书中之最高保理预付款额度。";
+                    "为利益考虑，请务必确认上开买方系贵公司预定交易之对象，本保理额度通知书取代先前同一买方之保理额度通知书及先前所有贵公司与本合同相关保理额度通知书中之最高保理融资额度。";
 
 
                 sheet.Range[sheet.Cells[26, 1], sheet.Cells[26, 2]].RowHeight = 40;
