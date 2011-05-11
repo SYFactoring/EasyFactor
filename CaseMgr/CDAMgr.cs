@@ -817,7 +817,7 @@ namespace CMBC.EasyFactor.CaseMgr
                         line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "出口", single, selectedCDA.IsNotice, financeType);
                         break;
                     case "国内买方保理":
-                        line0 = String.Format("（1）本业务为{0}{1}（{2}）业务，采用{4}模式。", recoarse, "国内", selectedCDA.IsNotice, financeType);
+                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "国内", single, selectedCDA.IsNotice, financeType);
                         break;
                     case "进口保理":
                         line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "进口", single, selectedCDA.IsNotice, financeType);
