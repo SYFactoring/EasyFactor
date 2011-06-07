@@ -605,7 +605,38 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        /// <summary>
+        /// 用于国内买方保理
+        /// </summary>
+        public double ValuedAssignOutstanding2
+        {
+            get
+            {
+                if (_valuedAssignOutstanding.HasValue == false)
+                {
+                    double financeProp = ActiveCDA.FinanceProportion.GetValueOrDefault();
+                    double total = 0;
+                    foreach (InvoiceAssignBatch batch in InvoiceAssignBatches)
+                    {
+                        if (batch.IsRefinance)
+                        {
+                            total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp < -TypeUtil.PRECISION)).Sum(invoice => invoice.AssignOutstanding);
+                        }
+                        else
+                        {
+                            if (!batch.IsRefinanced)
+                            {
+                                total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw).Sum(invoice => invoice.AssignOutstanding);
+                            }
+                        }
+                    }
 
+                    _valuedAssignOutstanding = total;
+                }
+
+                return _valuedAssignOutstanding.Value;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>

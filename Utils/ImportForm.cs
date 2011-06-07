@@ -2704,7 +2704,7 @@ namespace CMBC.EasyFactor.Utils
                             return -1;
                         }
 
-                        string factorCode = String.Format("{0:G}", valueArray[row, 2]).Trim();
+                        string factorCode = String.Format("{0:G}", valueArray[row, 1]).Trim();
                         if (String.IsNullOrEmpty(factorCode))
                         {
                             continue;
@@ -2723,12 +2723,13 @@ namespace CMBC.EasyFactor.Utils
                             factor.BeginMonitor();
                         }
 
-                        int column = 1;
-                        factor.CountryName = String.Format("{0:G}", valueArray[row, column++]);
-                        column++;
+                        int column = 2;
                         factor.CompanyNameEN = String.Format("{0:G}", valueArray[row, column++]);
                         factor.ShortName = String.Format("{0:G}", valueArray[row, column++]);
+                        //VAT 
+                        column++;
                         factor.Department = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.CountryName = String.Format("{0:G}", valueArray[row, column++]);
                         factor.PostalAddress_1 = String.Format("{0:G}", valueArray[row, column++]);
                         factor.PostalAddress_2 = String.Format("{0:G}", valueArray[row, column++]);
                         factor.PostalCodePost = String.Format("{0:G}", valueArray[row, column++]);
@@ -2743,22 +2744,22 @@ namespace CMBC.EasyFactor.Utils
                         factor.Telephone_2 = String.Format("{0:G}", valueArray[row, column++]);
                         factor.Telefax_1 = String.Format("{0:G}", valueArray[row, column++]);
                         factor.Telefax_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.WorkingHours = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.GeneralCorrespondence_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.GeneralCorrespondence_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Contacts_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Contacts_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Contacts_3 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Contacts_4 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Management_1 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Management_2 = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.Shareholders = String.Format("{0:G}", valueArray[row, column++]);
                         factor.IFISAvailableOnPrivateForum = String.Format("{0:G}", valueArray[row, column++]);
                         factor.MembershipStatus = String.Format("{0:G}", valueArray[row, column++]);
                         factor.MembershipDate = String.Format("{0:G}", valueArray[row, column++]);
-                        factor.DateOfLatestRevision = String.Format("{0:G}", valueArray[row, column]);
+                        factor.DateOfLatestRevision = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.WorkingHours = String.Format("{0:G}", valueArray[row, column++]);
+                        factor.Shareholders = String.Format("{0:G}\r\n{1:G}\r\n{2:G}\r\n{3:G}", valueArray[row, column++], valueArray[row, column++], valueArray[row, column++], valueArray[row, column++]); 
+                        factor.GeneralCorrespondence_1 = String.Format("Name:{0:G}\r\nPos:{1:G}\r\nTel:{2:G}\r\nEmail:{3:G}", valueArray[row, column++], valueArray[row, column++], valueArray[row, column++], valueArray[row, column++]); 
+                        factor.GeneralCorrespondence_2 = String.Format("Name:{0:G}\r\nPos:{1:G}\r\nTel:{2:G}\r\nEmail:{3:G}", valueArray[row, column++], valueArray[row, column++], valueArray[row, column++], valueArray[row, column++]); 
+                        factor.Management_1 = String.Format("Name:{0:G}\r\nPos:{1:G}\r\nTel:{2:G}\r\nEmail:{3:G}", valueArray[row, column++], valueArray[row, column++], valueArray[row, column++], valueArray[row, column++]); 
+                        factor.Management_2 = String.Format("Name:{0:G}\r\nPos:{1:G}\r\nTel:{2:G}\r\nEmail:{3:G}", valueArray[row, column++], valueArray[row, column++], valueArray[row, column++], valueArray[row, column++]); 
+                        factor.Contacts_1 = String.Format("Name:{0:G}\r\nPos:{1:G}\r\nTel:{2:G}\r\nEmail:{3:G}", valueArray[row, column++], valueArray[row, column++], valueArray[row, column++], valueArray[row, column++]); 
+                        factor.Contacts_2 = String.Format("Name:{0:G}\r\nPos:{1:G}\r\nTel:{2:G}\r\nEmail:{3:G}", valueArray[row, column++], valueArray[row, column++], valueArray[row, column++], valueArray[row, column++]); 
+                        factor.Contacts_3 = String.Format("Name:{0:G}\r\nPos:{1:G}\r\nTel:{2:G}\r\nEmail:{3:G}", valueArray[row, column++], valueArray[row, column++], valueArray[row, column++], valueArray[row, column++]); 
+                        factor.Contacts_4 = String.Format("Name:{0:G}\r\nPos:{1:G}\r\nTel:{2:G}\r\nEmail:{3:G}", valueArray[row, column++], valueArray[row, column++], valueArray[row, column++], valueArray[row, column++]); 
+                       
                         factor.CreateUserName = App.Current.CurUser.Name;
-
                         string monitorResult = factor.EndMonitor();
                         if (!String.IsNullOrEmpty(monitorResult))
                         {

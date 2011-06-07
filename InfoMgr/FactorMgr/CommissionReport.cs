@@ -14,6 +14,7 @@ using CMBC.EasyFactor.DB.dbml;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
 using Microsoft.Office.Interop.Excel;
+using System.IO;
 
 namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 {
@@ -109,6 +110,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 }
 
                 string filePath = String.Format("{0}\\{1:yyyyMM}-保理费月报表(出口保理).xls", SystemUtil.DesktopPath, month);
+
+                int n = 1;
+                while (File.Exists(filePath))
+                {
+                    filePath = String.Format("{0}\\{1:yyyyMMdd}-保理费用报表(出口保理)-{2}.xls", SystemUtil.DesktopPath, month, n++);
+                }
+
                 workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
                                 XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
                                 Type.Missing, Type.Missing, Type.Missing);
@@ -155,6 +163,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 }
 
                 string filePath = String.Format("{0}\\{1:yyyyMM}-保理费月报表(进口保理).xls", SystemUtil.DesktopPath, month);
+
+                int n = 1;
+                while (File.Exists(filePath))
+                {
+                    filePath = String.Format("{0}\\{1:yyyyMMdd}-保理费用报表(进口保理)-{2}.xls", SystemUtil.DesktopPath, month, n++);
+                }
+
                 workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
                                 XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
                                 Type.Missing, Type.Missing, Type.Missing);

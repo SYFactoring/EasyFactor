@@ -576,6 +576,14 @@ namespace CMBC.EasyFactor.ARMgr
 
                 string filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-应收账款转让明细表.xls", SystemUtil.DesktopPath, DateTime.Today,
                 batchGroup.Key);
+
+                int n = 1;
+                while (File.Exists(filePath))
+                {
+                    filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-应收账款转让明细表-{3}.xls", SystemUtil.DesktopPath, DateTime.Today,
+                                                batchGroup.Key, n++);
+                }
+
                 workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
                                 XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
                                 Type.Missing, Type.Missing, Type.Missing);
@@ -847,6 +855,14 @@ namespace CMBC.EasyFactor.ARMgr
 
                 string filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-保理费用明细表.xls", SystemUtil.DesktopPath, DateTime.Today,
                 batchGroup.Key);
+
+                int n = 1;
+                while (File.Exists(filePath))
+                {
+                    filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-保理费用明细表-{3}.xls", SystemUtil.DesktopPath, DateTime.Today,
+                                                batchGroup.Key, n++);
+                }
+
                 workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
                                 XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
                                 Type.Missing, Type.Missing, Type.Missing);
@@ -1211,6 +1227,14 @@ namespace CMBC.EasyFactor.ARMgr
 
                 string filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-可融资账款明细表.xls", SystemUtil.DesktopPath, DateTime.Today,
                                 batchGroup.Key);
+
+                int n = 1;
+                while (File.Exists(filePath))
+                {
+                    filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-可融资账款明细表-{3}.xls", SystemUtil.DesktopPath, DateTime.Today,
+                                                batchGroup.Key, n++);
+                }
+
                 workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
                                 XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
                                 Type.Missing, Type.Missing, Type.Missing);
@@ -1600,7 +1624,14 @@ namespace CMBC.EasyFactor.ARMgr
                 row++;
 
                 sheet.Cells[row, 1] = "对此" + clientSide + "的有效账款余额：";
-                sheet.Cells[row, 2] = group.First().Case.ValuedAssignOutstanding;
+                if (transactionType == "国内买方保理")
+                {
+                    sheet.Cells[row, 2] = group.First().Case.ValuedAssignOutstanding2;
+                }
+                else
+                {
+                    sheet.Cells[row, 2] = group.First().Case.ValuedAssignOutstanding;
+                }
                 sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
                     TypeUtil.GetExcelCurrency(group.First().Case.InvoiceCurrency);
 
@@ -2331,6 +2362,12 @@ namespace CMBC.EasyFactor.ARMgr
 
                 string filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}.xls", SystemUtil.DesktopPath, DateTime.Today,
                                                 batchGroup.Key);
+                int n = 1;
+                while (File.Exists(filePath))
+                {
+                    filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-{3}.xls", SystemUtil.DesktopPath, DateTime.Today,
+                                                batchGroup.Key,n++);
+                }
                 workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
                                 XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
                                 Type.Missing, Type.Missing, Type.Missing);

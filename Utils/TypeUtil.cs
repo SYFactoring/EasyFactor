@@ -244,13 +244,19 @@ namespace CMBC.EasyFactor.Utils
             return currency;
         }
 
-        public static double C1Round(double value, int digit)
+        public static double C1Round(double value, int decimals)
         {
-            double vt = Math.Pow(10, digit);
-            double vx = value * vt;
-
-            vx += 0.5;
-            return (Math.Floor(vx) / vt);
+            double result;
+            if (value < 0)
+            {
+                result =  Math.Round(value + 5 / Math.Pow(10, decimals + 1), decimals, MidpointRounding.AwayFromZero);
+            }
+            else
+            {
+                result =  Math.Round(value, decimals, MidpointRounding.AwayFromZero);
+            }
+            Console.WriteLine(value + " -> " + result);
+            return result;
         } 
     }
 }

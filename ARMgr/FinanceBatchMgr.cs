@@ -549,6 +549,14 @@ namespace CMBC.EasyFactor.ARMgr
 
                 string filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-保理费用明细表.xls", SystemUtil.DesktopPath, DateTime.Today,
                 batchGroup.Key);
+
+                int n = 1;
+                while (File.Exists(filePath))
+                {
+                    filePath = String.Format("{0}\\{1:yyyyMMdd}-{2}-保理费用明细表-{3}.xls", SystemUtil.DesktopPath, DateTime.Today,
+                                                batchGroup.Key, n++);
+                }
+
                 workbook.SaveAs(filePath, XlFileFormat.xlExcel8, Type.Missing, Type.Missing, false, false,
                                 XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlUserResolution, false,
                                 Type.Missing, Type.Missing, Type.Missing);
