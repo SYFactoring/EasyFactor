@@ -1829,7 +1829,8 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "融资日";
                 datasheet.Cells[1, column++] = "融资到期日";
                 datasheet.Cells[1, column++] = "账款逾期天数";
-                datasheet.Cells[1, column] = "融资逾期天数";
+                datasheet.Cells[1, column++] = "融资逾期天数";
+                datasheet.Cells[1, column++] = "备注";
 
                 int size = _exportData.Count;
                 int row = 0;
@@ -1887,8 +1888,10 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         column++;
-                        datasheet.Cells[row + 2 + i, column] = financeLog.FinanceOverDueDays;
+                        datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceOverDueDays;
                     }
+
+                    datasheet.Cells[row + 2, column++] = invoice.Comment;
 
                     int step = invoice.InvoiceFinanceLogs.Count > 1 ? invoice.InvoiceFinanceLogs.Count : 1;
                     row += step;

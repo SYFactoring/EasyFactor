@@ -2385,7 +2385,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.productENTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.productENTextBox.Size = new System.Drawing.Size(178, 40);
             this.productENTextBox.TabIndex = 23;
-            this.clientValidator.SetValidator2(this.productENTextBox, this.regularExpressionValidator8);
+           // this.clientValidator.SetValidator2(this.productENTextBox, this.regularExpressionValidator8);
             this.productENTextBox.WatermarkText = "Ó¢ÎÄ";
             // 
             // productCNTextBox
@@ -2403,7 +2403,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.productCNTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.productCNTextBox.Size = new System.Drawing.Size(178, 42);
             this.productCNTextBox.TabIndex = 22;
-            this.clientValidator.SetValidator2(this.productCNTextBox, this.regularExpressionValidator7);
+           // this.clientValidator.SetValidator2(this.productCNTextBox, this.regularExpressionValidator7);
             this.productCNTextBox.WatermarkText = "ÖÐÎÄ";
             // 
             // provinceENTextBox
