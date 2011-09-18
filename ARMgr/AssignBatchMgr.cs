@@ -1663,6 +1663,33 @@ namespace CMBC.EasyFactor.ARMgr
                     double assignAmount = 0;
                     bool isDueOK = transactionType == "国内买方保理";
                     CDA cda = selectedBatch.Case.ActiveCDA;
+                    DateTime earlistDateForBaoxian = DateTime.MaxValue;
+                    if (selectedBatch.Case.Factor.FactorType == "保险公司")
+                    {
+                        foreach (Invoice invoice in selectedBatch.Case.Invoices)
+                        {
+                            if (invoice.IsFlaw == false
+                           && invoice.IsDispute.GetValueOrDefault() == false
+                           && invoice.DueDate <= DateTime.Today
+                           && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
+                           &&
+                           ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) *
+                            cda.FinanceProportion.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() >
+                            TypeUtil.PRECISION)
+                           )
+                            {
+                                if (earlistDateForBaoxian >invoice.DueDate)
+                                {
+                                    earlistDateForBaoxian = invoice.DueDate;
+                                }
+                            }
+                        }
+                        if (earlistDateForBaoxian != DateTime.MaxValue)
+                        {
+                            earlistDateForBaoxian = earlistDateForBaoxian.AddDays(Double.Parse(cda.DelayDays.GetValueOrDefault().ToString()));
+                        }
+                    }
+
                     foreach (Invoice invoice in selectedBatch.Invoices)
                     {
                         if (invoice.IsFlaw == false
@@ -1675,6 +1702,13 @@ namespace CMBC.EasyFactor.ARMgr
                              TypeUtil.PRECISION)
                             )
                         {
+                            if (selectedBatch.Case.Factor.FactorType == "保险公司")
+                            {
+                                if (earlistDateForBaoxian != DateTime.MaxValue && invoice.InvoiceDate > earlistDateForBaoxian)
+                                {
+                                    continue;
+                                }
+                            }
                             sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;
                             sheet.Cells[row, 2] = invoice.AssignOutstanding;
                             sheet.Cells[row, 3] = invoice.InvoiceDate;

@@ -68,6 +68,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX invoiceCurrencyTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX lossThresholdTextBox;
+        private DevComponents.DotNetBar.Controls.TextBoxX delayDaysTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX noticePersonTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX orderNumberTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX paymentTermsTextBox;
@@ -127,46 +128,47 @@ namespace CMBC.EasyFactor.CaseMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevComponents.DotNetBar.LabelX caseCodeLabel;
-            DevComponents.DotNetBar.LabelX sellerClientLabel;
-            DevComponents.DotNetBar.LabelX factorCodeLabel;
-            DevComponents.DotNetBar.LabelX buyerClientEDICodeLabel;
-            DevComponents.DotNetBar.LabelX transactionTypeLabel;
-            DevComponents.DotNetBar.LabelX invoiceCurrencyLabel;
-            DevComponents.DotNetBar.LabelX creditCoverCurrLabel;
-            DevComponents.DotNetBar.LabelX pUGProportionLabel;
-            DevComponents.DotNetBar.LabelX creditCoverPeriodBeginLabel;
-            DevComponents.DotNetBar.LabelX pUGPeriodLabel;
-            DevComponents.DotNetBar.LabelX reassignGracePeriodLabel;
-            DevComponents.DotNetBar.LabelX financeLineCurrLabel;
-            DevComponents.DotNetBar.LabelX financeLinePeriodBeginLabel;
-            DevComponents.DotNetBar.LabelX lblHighestFinance;
-            DevComponents.DotNetBar.LabelX financeProportionLabel;
-            DevComponents.DotNetBar.LabelX orderNumberLabel;
-            DevComponents.DotNetBar.LabelX paymentTermsLabel;
-            DevComponents.DotNetBar.LabelX financeGracePeriodLabel;
-            DevComponents.DotNetBar.LabelX deductiblesLabel;
-            DevComponents.DotNetBar.LabelX lossThresholdLabel;
-            DevComponents.DotNetBar.LabelX priceLabel;
-            DevComponents.DotNetBar.LabelX iFPriceLabel;
-            DevComponents.DotNetBar.LabelX commissonTypeLabel;
-            DevComponents.DotNetBar.LabelX commissionTypeCommentLabel;
-            DevComponents.DotNetBar.LabelX handFeeLabel;
-            DevComponents.DotNetBar.LabelX noticePersonLabel;
-            DevComponents.DotNetBar.LabelX emailLabel;
-            DevComponents.DotNetBar.LabelX faxLabel;
-            DevComponents.DotNetBar.LabelX commentLabel;
-            DevComponents.DotNetBar.LabelX createUserNameLabel;
-            DevComponents.DotNetBar.LabelX cDAStatusLabel;
-            DevComponents.DotNetBar.LabelX noticeMethodLabel;
-            DevComponents.DotNetBar.LabelX contractCodeLabel;
-            DevComponents.DotNetBar.LabelX lblCDACode;
-            DevComponents.DotNetBar.LabelX assignTypeLabel;
-            DevComponents.DotNetBar.LabelX lblIsNotice;
-            DevComponents.DotNetBar.LabelX lblRemark;
-            DevComponents.DotNetBar.LabelX lblCasePaymentTerm;
-            DevComponents.DotNetBar.LabelX lblCDASignDate;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDADetail));
+            this.caseCodeLabel = new DevComponents.DotNetBar.LabelX();
+            this.sellerClientLabel = new DevComponents.DotNetBar.LabelX();
+            this.factorCodeLabel = new DevComponents.DotNetBar.LabelX();
+            this.buyerClientEDICodeLabel = new DevComponents.DotNetBar.LabelX();
+            this.transactionTypeLabel = new DevComponents.DotNetBar.LabelX();
+            this.invoiceCurrencyLabel = new DevComponents.DotNetBar.LabelX();
+            this.creditCoverCurrLabel = new DevComponents.DotNetBar.LabelX();
+            this.pUGProportionLabel = new DevComponents.DotNetBar.LabelX();
+            this.creditCoverPeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
+            this.pUGPeriodLabel = new DevComponents.DotNetBar.LabelX();
+            this.reassignGracePeriodLabel = new DevComponents.DotNetBar.LabelX();
+            this.financeLineCurrLabel = new DevComponents.DotNetBar.LabelX();
+            this.financeLinePeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
+            this.lblHighestFinance = new DevComponents.DotNetBar.LabelX();
+            this.financeProportionLabel = new DevComponents.DotNetBar.LabelX();
+            this.orderNumberLabel = new DevComponents.DotNetBar.LabelX();
+            this.paymentTermsLabel = new DevComponents.DotNetBar.LabelX();
+            this.financeGracePeriodLabel = new DevComponents.DotNetBar.LabelX();
+            this.deductiblesLabel = new DevComponents.DotNetBar.LabelX();
+            this.lossThresholdLabel = new DevComponents.DotNetBar.LabelX();
+            this.delayDaysLabel = new DevComponents.DotNetBar.LabelX();
+            this.priceLabel = new DevComponents.DotNetBar.LabelX();
+            this.iFPriceLabel = new DevComponents.DotNetBar.LabelX();
+            this.commissonTypeLabel = new DevComponents.DotNetBar.LabelX();
+            this.commissionTypeCommentLabel = new DevComponents.DotNetBar.LabelX();
+            this.handFeeLabel = new DevComponents.DotNetBar.LabelX();
+            this.noticePersonLabel = new DevComponents.DotNetBar.LabelX();
+            this.emailLabel = new DevComponents.DotNetBar.LabelX();
+            this.faxLabel = new DevComponents.DotNetBar.LabelX();
+            this.commentLabel = new DevComponents.DotNetBar.LabelX();
+            this.createUserNameLabel = new DevComponents.DotNetBar.LabelX();
+            this.cDAStatusLabel = new DevComponents.DotNetBar.LabelX();
+            this.noticeMethodLabel = new DevComponents.DotNetBar.LabelX();
+            this.contractCodeLabel = new DevComponents.DotNetBar.LabelX();
+            this.lblCDACode = new DevComponents.DotNetBar.LabelX();
+            this.assignTypeLabel = new DevComponents.DotNetBar.LabelX();
+            this.lblIsNotice = new DevComponents.DotNetBar.LabelX();
+            this.lblRemark = new DevComponents.DotNetBar.LabelX();
+            this.lblCasePaymentTerm = new DevComponents.DotNetBar.LabelX();
+            this.lblCDASignDate = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbCasePaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -194,6 +196,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbIsCreditCoverRevolving = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.handFeeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lossThresholdTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.delayDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commissionTypeCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.deductiblesTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commissionTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -232,8 +235,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.customValidator8 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator7 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator();
             this.customValidator10 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator9 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.compareValidator2 = new DevComponents.DotNetBar.Validator.CompareValidator();
@@ -243,49 +246,10 @@ namespace CMBC.EasyFactor.CaseMgr
             this.compareValidator1 = new DevComponents.DotNetBar.Validator.CompareValidator();
             this.customValidator3 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator();
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            caseCodeLabel = new DevComponents.DotNetBar.LabelX();
-            sellerClientLabel = new DevComponents.DotNetBar.LabelX();
-            factorCodeLabel = new DevComponents.DotNetBar.LabelX();
-            buyerClientEDICodeLabel = new DevComponents.DotNetBar.LabelX();
-            transactionTypeLabel = new DevComponents.DotNetBar.LabelX();
-            invoiceCurrencyLabel = new DevComponents.DotNetBar.LabelX();
-            creditCoverCurrLabel = new DevComponents.DotNetBar.LabelX();
-            pUGProportionLabel = new DevComponents.DotNetBar.LabelX();
-            creditCoverPeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
-            pUGPeriodLabel = new DevComponents.DotNetBar.LabelX();
-            reassignGracePeriodLabel = new DevComponents.DotNetBar.LabelX();
-            financeLineCurrLabel = new DevComponents.DotNetBar.LabelX();
-            financeLinePeriodBeginLabel = new DevComponents.DotNetBar.LabelX();
-            lblHighestFinance = new DevComponents.DotNetBar.LabelX();
-            financeProportionLabel = new DevComponents.DotNetBar.LabelX();
-            orderNumberLabel = new DevComponents.DotNetBar.LabelX();
-            paymentTermsLabel = new DevComponents.DotNetBar.LabelX();
-            financeGracePeriodLabel = new DevComponents.DotNetBar.LabelX();
-            deductiblesLabel = new DevComponents.DotNetBar.LabelX();
-            lossThresholdLabel = new DevComponents.DotNetBar.LabelX();
-            priceLabel = new DevComponents.DotNetBar.LabelX();
-            iFPriceLabel = new DevComponents.DotNetBar.LabelX();
-            commissonTypeLabel = new DevComponents.DotNetBar.LabelX();
-            commissionTypeCommentLabel = new DevComponents.DotNetBar.LabelX();
-            handFeeLabel = new DevComponents.DotNetBar.LabelX();
-            noticePersonLabel = new DevComponents.DotNetBar.LabelX();
-            emailLabel = new DevComponents.DotNetBar.LabelX();
-            faxLabel = new DevComponents.DotNetBar.LabelX();
-            commentLabel = new DevComponents.DotNetBar.LabelX();
-            createUserNameLabel = new DevComponents.DotNetBar.LabelX();
-            cDAStatusLabel = new DevComponents.DotNetBar.LabelX();
-            noticeMethodLabel = new DevComponents.DotNetBar.LabelX();
-            contractCodeLabel = new DevComponents.DotNetBar.LabelX();
-            lblCDACode = new DevComponents.DotNetBar.LabelX();
-            assignTypeLabel = new DevComponents.DotNetBar.LabelX();
-            lblIsNotice = new DevComponents.DotNetBar.LabelX();
-            lblRemark = new DevComponents.DotNetBar.LabelX();
-            lblCasePaymentTerm = new DevComponents.DotNetBar.LabelX();
-            lblCDASignDate = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
@@ -300,576 +264,630 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // caseCodeLabel
             // 
-            caseCodeLabel.AutoSize = true;
-            caseCodeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.caseCodeLabel.AutoSize = true;
+            this.caseCodeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            caseCodeLabel.BackgroundStyle.Class = "";
-            caseCodeLabel.Location = new System.Drawing.Point(3, 6);
-            caseCodeLabel.Name = "caseCodeLabel";
-            caseCodeLabel.Size = new System.Drawing.Size(59, 16);
-            caseCodeLabel.TabIndex = 0;
-            caseCodeLabel.Text = "案件编号:";
+            this.caseCodeLabel.BackgroundStyle.Class = "";
+            this.caseCodeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.caseCodeLabel.Location = new System.Drawing.Point(3, 6);
+            this.caseCodeLabel.Name = "caseCodeLabel";
+            this.caseCodeLabel.Size = new System.Drawing.Size(59, 16);
+            this.caseCodeLabel.TabIndex = 0;
+            this.caseCodeLabel.Text = "案件编号:";
             // 
             // sellerClientLabel
             // 
-            sellerClientLabel.AutoSize = true;
-            sellerClientLabel.BackColor = System.Drawing.Color.Transparent;
+            this.sellerClientLabel.AutoSize = true;
+            this.sellerClientLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            sellerClientLabel.BackgroundStyle.Class = "";
-            sellerClientLabel.Location = new System.Drawing.Point(15, 26);
-            sellerClientLabel.Name = "sellerClientLabel";
-            sellerClientLabel.Size = new System.Drawing.Size(34, 16);
-            sellerClientLabel.TabIndex = 8;
-            sellerClientLabel.Text = "卖方:";
+            this.sellerClientLabel.BackgroundStyle.Class = "";
+            this.sellerClientLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.sellerClientLabel.Location = new System.Drawing.Point(15, 26);
+            this.sellerClientLabel.Name = "sellerClientLabel";
+            this.sellerClientLabel.Size = new System.Drawing.Size(34, 16);
+            this.sellerClientLabel.TabIndex = 8;
+            this.sellerClientLabel.Text = "卖方:";
             // 
             // factorCodeLabel
             // 
-            factorCodeLabel.AutoSize = true;
-            factorCodeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.factorCodeLabel.AutoSize = true;
+            this.factorCodeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            factorCodeLabel.BackgroundStyle.Class = "";
-            factorCodeLabel.Location = new System.Drawing.Point(355, 26);
-            factorCodeLabel.Name = "factorCodeLabel";
-            factorCodeLabel.Size = new System.Drawing.Size(47, 16);
-            factorCodeLabel.TabIndex = 12;
-            factorCodeLabel.Text = "保理商:";
+            this.factorCodeLabel.BackgroundStyle.Class = "";
+            this.factorCodeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.factorCodeLabel.Location = new System.Drawing.Point(355, 26);
+            this.factorCodeLabel.Name = "factorCodeLabel";
+            this.factorCodeLabel.Size = new System.Drawing.Size(47, 16);
+            this.factorCodeLabel.TabIndex = 12;
+            this.factorCodeLabel.Text = "保理商:";
             // 
             // buyerClientEDICodeLabel
             // 
-            buyerClientEDICodeLabel.AutoSize = true;
-            buyerClientEDICodeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.buyerClientEDICodeLabel.AutoSize = true;
+            this.buyerClientEDICodeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            buyerClientEDICodeLabel.BackgroundStyle.Class = "";
-            buyerClientEDICodeLabel.Location = new System.Drawing.Point(15, 69);
-            buyerClientEDICodeLabel.Name = "buyerClientEDICodeLabel";
-            buyerClientEDICodeLabel.Size = new System.Drawing.Size(34, 16);
-            buyerClientEDICodeLabel.TabIndex = 16;
-            buyerClientEDICodeLabel.Text = "买方:";
+            this.buyerClientEDICodeLabel.BackgroundStyle.Class = "";
+            this.buyerClientEDICodeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.buyerClientEDICodeLabel.Location = new System.Drawing.Point(15, 69);
+            this.buyerClientEDICodeLabel.Name = "buyerClientEDICodeLabel";
+            this.buyerClientEDICodeLabel.Size = new System.Drawing.Size(34, 16);
+            this.buyerClientEDICodeLabel.TabIndex = 16;
+            this.buyerClientEDICodeLabel.Text = "买方:";
             // 
             // transactionTypeLabel
             // 
-            transactionTypeLabel.AutoSize = true;
-            transactionTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.transactionTypeLabel.AutoSize = true;
+            this.transactionTypeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            transactionTypeLabel.BackgroundStyle.Class = "";
-            transactionTypeLabel.Location = new System.Drawing.Point(177, 6);
-            transactionTypeLabel.Name = "transactionTypeLabel";
-            transactionTypeLabel.Size = new System.Drawing.Size(59, 16);
-            transactionTypeLabel.TabIndex = 2;
-            transactionTypeLabel.Text = "业务类别:";
+            this.transactionTypeLabel.BackgroundStyle.Class = "";
+            this.transactionTypeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.transactionTypeLabel.Location = new System.Drawing.Point(177, 6);
+            this.transactionTypeLabel.Name = "transactionTypeLabel";
+            this.transactionTypeLabel.Size = new System.Drawing.Size(59, 16);
+            this.transactionTypeLabel.TabIndex = 2;
+            this.transactionTypeLabel.Text = "业务类别:";
             // 
             // invoiceCurrencyLabel
             // 
-            invoiceCurrencyLabel.AutoSize = true;
-            invoiceCurrencyLabel.BackColor = System.Drawing.Color.Transparent;
+            this.invoiceCurrencyLabel.AutoSize = true;
+            this.invoiceCurrencyLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            invoiceCurrencyLabel.BackgroundStyle.Class = "";
-            invoiceCurrencyLabel.Location = new System.Drawing.Point(353, 4);
-            invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
-            invoiceCurrencyLabel.Size = new System.Drawing.Size(59, 16);
-            invoiceCurrencyLabel.TabIndex = 4;
-            invoiceCurrencyLabel.Text = "发票币别:";
+            this.invoiceCurrencyLabel.BackgroundStyle.Class = "";
+            this.invoiceCurrencyLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.invoiceCurrencyLabel.Location = new System.Drawing.Point(353, 4);
+            this.invoiceCurrencyLabel.Name = "invoiceCurrencyLabel";
+            this.invoiceCurrencyLabel.Size = new System.Drawing.Size(59, 16);
+            this.invoiceCurrencyLabel.TabIndex = 4;
+            this.invoiceCurrencyLabel.Text = "发票币别:";
             // 
             // creditCoverCurrLabel
             // 
-            creditCoverCurrLabel.AutoSize = true;
-            creditCoverCurrLabel.BackColor = System.Drawing.Color.Transparent;
+            this.creditCoverCurrLabel.AutoSize = true;
+            this.creditCoverCurrLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            creditCoverCurrLabel.BackgroundStyle.Class = "";
-            creditCoverCurrLabel.Location = new System.Drawing.Point(9, 26);
-            creditCoverCurrLabel.Name = "creditCoverCurrLabel";
-            creditCoverCurrLabel.Size = new System.Drawing.Size(84, 16);
-            creditCoverCurrLabel.TabIndex = 7;
-            creditCoverCurrLabel.Text = "买方风险额度:";
+            this.creditCoverCurrLabel.BackgroundStyle.Class = "";
+            this.creditCoverCurrLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.creditCoverCurrLabel.Location = new System.Drawing.Point(9, 26);
+            this.creditCoverCurrLabel.Name = "creditCoverCurrLabel";
+            this.creditCoverCurrLabel.Size = new System.Drawing.Size(84, 16);
+            this.creditCoverCurrLabel.TabIndex = 7;
+            this.creditCoverCurrLabel.Text = "买方风险额度:";
             // 
             // pUGProportionLabel
             // 
-            pUGProportionLabel.AutoSize = true;
-            pUGProportionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.pUGProportionLabel.AutoSize = true;
+            this.pUGProportionLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            pUGProportionLabel.BackgroundStyle.Class = "";
-            pUGProportionLabel.Location = new System.Drawing.Point(32, 48);
-            pUGProportionLabel.Name = "pUGProportionLabel";
-            pUGProportionLabel.Size = new System.Drawing.Size(59, 16);
-            pUGProportionLabel.TabIndex = 14;
-            pUGProportionLabel.Text = "担保比例:";
+            this.pUGProportionLabel.BackgroundStyle.Class = "";
+            this.pUGProportionLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.pUGProportionLabel.Location = new System.Drawing.Point(32, 48);
+            this.pUGProportionLabel.Name = "pUGProportionLabel";
+            this.pUGProportionLabel.Size = new System.Drawing.Size(59, 16);
+            this.pUGProportionLabel.TabIndex = 14;
+            this.pUGProportionLabel.Text = "担保比例:";
             // 
             // creditCoverPeriodBeginLabel
             // 
-            creditCoverPeriodBeginLabel.AutoSize = true;
-            creditCoverPeriodBeginLabel.BackColor = System.Drawing.Color.Transparent;
+            this.creditCoverPeriodBeginLabel.AutoSize = true;
+            this.creditCoverPeriodBeginLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            creditCoverPeriodBeginLabel.BackgroundStyle.Class = "";
-            creditCoverPeriodBeginLabel.Location = new System.Drawing.Point(286, 24);
-            creditCoverPeriodBeginLabel.Name = "creditCoverPeriodBeginLabel";
-            creditCoverPeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
-            creditCoverPeriodBeginLabel.TabIndex = 10;
-            creditCoverPeriodBeginLabel.Text = "有效期限:";
+            this.creditCoverPeriodBeginLabel.BackgroundStyle.Class = "";
+            this.creditCoverPeriodBeginLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.creditCoverPeriodBeginLabel.Location = new System.Drawing.Point(286, 24);
+            this.creditCoverPeriodBeginLabel.Name = "creditCoverPeriodBeginLabel";
+            this.creditCoverPeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
+            this.creditCoverPeriodBeginLabel.TabIndex = 10;
+            this.creditCoverPeriodBeginLabel.Text = "有效期限:";
             // 
             // pUGPeriodLabel
             // 
-            pUGPeriodLabel.AutoSize = true;
-            pUGPeriodLabel.BackColor = System.Drawing.Color.Transparent;
+            this.pUGPeriodLabel.AutoSize = true;
+            this.pUGPeriodLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            pUGPeriodLabel.BackgroundStyle.Class = "";
-            pUGPeriodLabel.Location = new System.Drawing.Point(241, 48);
-            pUGPeriodLabel.Name = "pUGPeriodLabel";
-            pUGPeriodLabel.Size = new System.Drawing.Size(104, 16);
-            pUGPeriodLabel.TabIndex = 16;
-            pUGPeriodLabel.Text = "担保付款期限(天):";
+            this.pUGPeriodLabel.BackgroundStyle.Class = "";
+            this.pUGPeriodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.pUGPeriodLabel.Location = new System.Drawing.Point(241, 48);
+            this.pUGPeriodLabel.Name = "pUGPeriodLabel";
+            this.pUGPeriodLabel.Size = new System.Drawing.Size(104, 16);
+            this.pUGPeriodLabel.TabIndex = 16;
+            this.pUGPeriodLabel.Text = "担保付款期限(天):";
             // 
             // reassignGracePeriodLabel
             // 
-            reassignGracePeriodLabel.AutoSize = true;
-            reassignGracePeriodLabel.BackColor = System.Drawing.Color.Transparent;
+            this.reassignGracePeriodLabel.AutoSize = true;
+            this.reassignGracePeriodLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            reassignGracePeriodLabel.BackgroundStyle.Class = "";
-            reassignGracePeriodLabel.Location = new System.Drawing.Point(501, 48);
-            reassignGracePeriodLabel.Name = "reassignGracePeriodLabel";
-            reassignGracePeriodLabel.Size = new System.Drawing.Size(92, 16);
-            reassignGracePeriodLabel.TabIndex = 18;
-            reassignGracePeriodLabel.Text = "回购宽限期(天):";
+            this.reassignGracePeriodLabel.BackgroundStyle.Class = "";
+            this.reassignGracePeriodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.reassignGracePeriodLabel.Location = new System.Drawing.Point(501, 48);
+            this.reassignGracePeriodLabel.Name = "reassignGracePeriodLabel";
+            this.reassignGracePeriodLabel.Size = new System.Drawing.Size(92, 16);
+            this.reassignGracePeriodLabel.TabIndex = 18;
+            this.reassignGracePeriodLabel.Text = "回购宽限期(天):";
             // 
             // financeLineCurrLabel
             // 
-            financeLineCurrLabel.AutoSize = true;
-            financeLineCurrLabel.BackColor = System.Drawing.Color.Transparent;
+            this.financeLineCurrLabel.AutoSize = true;
+            this.financeLineCurrLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            financeLineCurrLabel.BackgroundStyle.Class = "";
-            financeLineCurrLabel.Location = new System.Drawing.Point(21, 70);
-            financeLineCurrLabel.Name = "financeLineCurrLabel";
-            financeLineCurrLabel.Size = new System.Drawing.Size(72, 16);
-            financeLineCurrLabel.TabIndex = 20;
-            financeLineCurrLabel.Text = "预付款额度:";
+            this.financeLineCurrLabel.BackgroundStyle.Class = "";
+            this.financeLineCurrLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.financeLineCurrLabel.Location = new System.Drawing.Point(21, 70);
+            this.financeLineCurrLabel.Name = "financeLineCurrLabel";
+            this.financeLineCurrLabel.Size = new System.Drawing.Size(72, 16);
+            this.financeLineCurrLabel.TabIndex = 20;
+            this.financeLineCurrLabel.Text = "预付款额度:";
             // 
             // financeLinePeriodBeginLabel
             // 
-            financeLinePeriodBeginLabel.AutoSize = true;
-            financeLinePeriodBeginLabel.BackColor = System.Drawing.Color.Transparent;
+            this.financeLinePeriodBeginLabel.AutoSize = true;
+            this.financeLinePeriodBeginLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            financeLinePeriodBeginLabel.BackgroundStyle.Class = "";
-            financeLinePeriodBeginLabel.Location = new System.Drawing.Point(286, 69);
-            financeLinePeriodBeginLabel.Name = "financeLinePeriodBeginLabel";
-            financeLinePeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
-            financeLinePeriodBeginLabel.TabIndex = 23;
-            financeLinePeriodBeginLabel.Text = "有效期限:";
+            this.financeLinePeriodBeginLabel.BackgroundStyle.Class = "";
+            this.financeLinePeriodBeginLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.financeLinePeriodBeginLabel.Location = new System.Drawing.Point(286, 69);
+            this.financeLinePeriodBeginLabel.Name = "financeLinePeriodBeginLabel";
+            this.financeLinePeriodBeginLabel.Size = new System.Drawing.Size(59, 16);
+            this.financeLinePeriodBeginLabel.TabIndex = 23;
+            this.financeLinePeriodBeginLabel.Text = "有效期限:";
             // 
             // lblHighestFinance
             // 
-            lblHighestFinance.AutoSize = true;
-            lblHighestFinance.BackColor = System.Drawing.Color.Transparent;
+            this.lblHighestFinance.AutoSize = true;
+            this.lblHighestFinance.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            lblHighestFinance.BackgroundStyle.Class = "";
-            lblHighestFinance.Location = new System.Drawing.Point(4, 95);
-            lblHighestFinance.Name = "lblHighestFinance";
-            lblHighestFinance.Size = new System.Drawing.Size(121, 16);
-            lblHighestFinance.TabIndex = 26;
-            lblHighestFinance.Text = "最高保理预付款额度:";
+            this.lblHighestFinance.BackgroundStyle.Class = "";
+            this.lblHighestFinance.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblHighestFinance.Location = new System.Drawing.Point(4, 95);
+            this.lblHighestFinance.Name = "lblHighestFinance";
+            this.lblHighestFinance.Size = new System.Drawing.Size(121, 16);
+            this.lblHighestFinance.TabIndex = 26;
+            this.lblHighestFinance.Text = "最高保理预付款额度:";
             // 
             // financeProportionLabel
             // 
-            financeProportionLabel.AutoSize = true;
-            financeProportionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.financeProportionLabel.AutoSize = true;
+            this.financeProportionLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            financeProportionLabel.BackgroundStyle.Class = "";
-            financeProportionLabel.Location = new System.Drawing.Point(286, 92);
-            financeProportionLabel.Name = "financeProportionLabel";
-            financeProportionLabel.Size = new System.Drawing.Size(59, 16);
-            financeProportionLabel.TabIndex = 28;
-            financeProportionLabel.Text = "预付比例:";
+            this.financeProportionLabel.BackgroundStyle.Class = "";
+            this.financeProportionLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.financeProportionLabel.Location = new System.Drawing.Point(286, 92);
+            this.financeProportionLabel.Name = "financeProportionLabel";
+            this.financeProportionLabel.Size = new System.Drawing.Size(59, 16);
+            this.financeProportionLabel.TabIndex = 28;
+            this.financeProportionLabel.Text = "预付比例:";
             // 
             // orderNumberLabel
             // 
-            orderNumberLabel.AutoSize = true;
-            orderNumberLabel.BackColor = System.Drawing.Color.Transparent;
+            this.orderNumberLabel.AutoSize = true;
+            this.orderNumberLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            orderNumberLabel.BackgroundStyle.Class = "";
-            orderNumberLabel.Location = new System.Drawing.Point(295, 159);
-            orderNumberLabel.Name = "orderNumberLabel";
-            orderNumberLabel.Size = new System.Drawing.Size(47, 16);
-            orderNumberLabel.TabIndex = 34;
-            orderNumberLabel.Text = "订单号:";
+            this.orderNumberLabel.BackgroundStyle.Class = "";
+            this.orderNumberLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.orderNumberLabel.Location = new System.Drawing.Point(295, 159);
+            this.orderNumberLabel.Name = "orderNumberLabel";
+            this.orderNumberLabel.Size = new System.Drawing.Size(47, 16);
+            this.orderNumberLabel.TabIndex = 34;
+            this.orderNumberLabel.Text = "订单号:";
             // 
             // paymentTermsLabel
             // 
-            paymentTermsLabel.AutoSize = true;
-            paymentTermsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.paymentTermsLabel.AutoSize = true;
+            this.paymentTermsLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            paymentTermsLabel.BackgroundStyle.Class = "";
-            paymentTermsLabel.Location = new System.Drawing.Point(28, 117);
-            paymentTermsLabel.Name = "paymentTermsLabel";
-            paymentTermsLabel.Size = new System.Drawing.Size(57, 15);
-            paymentTermsLabel.TabIndex = 32;
-            paymentTermsLabel.Text = "<font color=\'red\'>*</font>付款条件:";
+            this.paymentTermsLabel.BackgroundStyle.Class = "";
+            this.paymentTermsLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.paymentTermsLabel.Location = new System.Drawing.Point(28, 117);
+            this.paymentTermsLabel.Name = "paymentTermsLabel";
+            this.paymentTermsLabel.Size = new System.Drawing.Size(57, 15);
+            this.paymentTermsLabel.TabIndex = 32;
+            this.paymentTermsLabel.Text = "<font color=\'red\'>*</font>付款条件:";
             // 
             // financeGracePeriodLabel
             // 
-            financeGracePeriodLabel.AutoSize = true;
-            financeGracePeriodLabel.BackColor = System.Drawing.Color.Transparent;
+            this.financeGracePeriodLabel.AutoSize = true;
+            this.financeGracePeriodLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            financeGracePeriodLabel.BackgroundStyle.Class = "";
-            financeGracePeriodLabel.Location = new System.Drawing.Point(501, 95);
-            financeGracePeriodLabel.Name = "financeGracePeriodLabel";
-            financeGracePeriodLabel.Size = new System.Drawing.Size(92, 16);
-            financeGracePeriodLabel.TabIndex = 30;
-            financeGracePeriodLabel.Text = "融资宽限期(天):";
+            this.financeGracePeriodLabel.BackgroundStyle.Class = "";
+            this.financeGracePeriodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.financeGracePeriodLabel.Location = new System.Drawing.Point(501, 95);
+            this.financeGracePeriodLabel.Name = "financeGracePeriodLabel";
+            this.financeGracePeriodLabel.Size = new System.Drawing.Size(92, 16);
+            this.financeGracePeriodLabel.TabIndex = 30;
+            this.financeGracePeriodLabel.Text = "融资宽限期(天):";
             // 
             // deductiblesLabel
             // 
-            deductiblesLabel.AutoSize = true;
-            deductiblesLabel.BackColor = System.Drawing.Color.Transparent;
+            this.deductiblesLabel.AutoSize = true;
+            this.deductiblesLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            deductiblesLabel.BackgroundStyle.Class = "";
-            deductiblesLabel.Location = new System.Drawing.Point(42, 182);
-            deductiblesLabel.Name = "deductiblesLabel";
-            deductiblesLabel.Size = new System.Drawing.Size(47, 16);
-            deductiblesLabel.TabIndex = 36;
-            deductiblesLabel.Text = "自负额:";
+            this.deductiblesLabel.BackgroundStyle.Class = "";
+            this.deductiblesLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.deductiblesLabel.Location = new System.Drawing.Point(42, 182);
+            this.deductiblesLabel.Name = "deductiblesLabel";
+            this.deductiblesLabel.Size = new System.Drawing.Size(47, 16);
+            this.deductiblesLabel.TabIndex = 36;
+            this.deductiblesLabel.Text = "自负额:";
             // 
             // lossThresholdLabel
             // 
-            lossThresholdLabel.AutoSize = true;
-            lossThresholdLabel.BackColor = System.Drawing.Color.Transparent;
+            this.lossThresholdLabel.AutoSize = true;
+            this.lossThresholdLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            lossThresholdLabel.BackgroundStyle.Class = "";
-            lossThresholdLabel.Location = new System.Drawing.Point(257, 185);
-            lossThresholdLabel.Name = "lossThresholdLabel";
-            lossThresholdLabel.Size = new System.Drawing.Size(84, 16);
-            lossThresholdLabel.TabIndex = 38;
-            lossThresholdLabel.Text = "最低损失门槛:";
+            this.lossThresholdLabel.BackgroundStyle.Class = "";
+            this.lossThresholdLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lossThresholdLabel.Location = new System.Drawing.Point(257, 185);
+            this.lossThresholdLabel.Name = "lossThresholdLabel";
+            this.lossThresholdLabel.Size = new System.Drawing.Size(84, 16);
+            this.lossThresholdLabel.TabIndex = 38;
+            this.lossThresholdLabel.Text = "最低损失门槛:";
+            // 
+            // delayDaysLabel
+            // 
+            this.delayDaysLabel.AutoSize = true;
+            this.delayDaysLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.delayDaysLabel.BackgroundStyle.Class = "";
+            this.delayDaysLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.delayDaysLabel.Location = new System.Drawing.Point(455, 185);
+            this.delayDaysLabel.Name = "delayDaysLabel";
+            this.delayDaysLabel.Size = new System.Drawing.Size(59, 16);
+            this.delayDaysLabel.TabIndex = 38;
+            this.delayDaysLabel.Text = "逾期天数:";
             // 
             // priceLabel
             // 
-            priceLabel.AutoSize = true;
-            priceLabel.BackColor = System.Drawing.Color.Transparent;
+            this.priceLabel.AutoSize = true;
+            this.priceLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            priceLabel.BackgroundStyle.Class = "";
-            priceLabel.Location = new System.Drawing.Point(15, 205);
-            priceLabel.Name = "priceLabel";
-            priceLabel.Size = new System.Drawing.Size(69, 15);
-            priceLabel.TabIndex = 40;
-            priceLabel.Text = "<font color=\'red\'>*</font>总手续费率:";
+            this.priceLabel.BackgroundStyle.Class = "";
+            this.priceLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.priceLabel.Location = new System.Drawing.Point(15, 205);
+            this.priceLabel.Name = "priceLabel";
+            this.priceLabel.Size = new System.Drawing.Size(69, 15);
+            this.priceLabel.TabIndex = 40;
+            this.priceLabel.Text = "<font color=\'red\'>*</font>总手续费率:";
             // 
             // iFPriceLabel
             // 
-            iFPriceLabel.AutoSize = true;
-            iFPriceLabel.BackColor = System.Drawing.Color.Transparent;
+            this.iFPriceLabel.AutoSize = true;
+            this.iFPriceLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            iFPriceLabel.BackgroundStyle.Class = "";
-            iFPriceLabel.Location = new System.Drawing.Point(272, 207);
-            iFPriceLabel.Name = "iFPriceLabel";
-            iFPriceLabel.Size = new System.Drawing.Size(69, 16);
-            iFPriceLabel.TabIndex = 42;
-            iFPriceLabel.Text = "IF手续费率:";
+            this.iFPriceLabel.BackgroundStyle.Class = "";
+            this.iFPriceLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.iFPriceLabel.Location = new System.Drawing.Point(272, 207);
+            this.iFPriceLabel.Name = "iFPriceLabel";
+            this.iFPriceLabel.Size = new System.Drawing.Size(69, 16);
+            this.iFPriceLabel.TabIndex = 42;
+            this.iFPriceLabel.Text = "IF手续费率:";
             // 
             // commissonTypeLabel
             // 
-            commissonTypeLabel.AutoSize = true;
-            commissonTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.commissonTypeLabel.AutoSize = true;
+            this.commissonTypeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            commissonTypeLabel.BackgroundStyle.Class = "";
-            commissonTypeLabel.Location = new System.Drawing.Point(26, 228);
-            commissonTypeLabel.Name = "commissonTypeLabel";
-            commissonTypeLabel.Size = new System.Drawing.Size(57, 15);
-            commissonTypeLabel.TabIndex = 49;
-            commissonTypeLabel.Text = "<font color=\'red\'>*</font>计费方式:";
+            this.commissonTypeLabel.BackgroundStyle.Class = "";
+            this.commissonTypeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.commissonTypeLabel.Location = new System.Drawing.Point(26, 228);
+            this.commissonTypeLabel.Name = "commissonTypeLabel";
+            this.commissonTypeLabel.Size = new System.Drawing.Size(57, 15);
+            this.commissonTypeLabel.TabIndex = 49;
+            this.commissonTypeLabel.Text = "<font color=\'red\'>*</font>计费方式:";
             // 
             // commissionTypeCommentLabel
             // 
-            commissionTypeCommentLabel.AutoSize = true;
-            commissionTypeCommentLabel.BackColor = System.Drawing.Color.Transparent;
+            this.commissionTypeCommentLabel.AutoSize = true;
+            this.commissionTypeCommentLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            commissionTypeCommentLabel.BackgroundStyle.Class = "";
-            commissionTypeCommentLabel.Location = new System.Drawing.Point(242, 229);
-            commissionTypeCommentLabel.Name = "commissionTypeCommentLabel";
-            commissionTypeCommentLabel.Size = new System.Drawing.Size(34, 16);
-            commissionTypeCommentLabel.TabIndex = 51;
-            commissionTypeCommentLabel.Text = "说明:";
+            this.commissionTypeCommentLabel.BackgroundStyle.Class = "";
+            this.commissionTypeCommentLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.commissionTypeCommentLabel.Location = new System.Drawing.Point(242, 229);
+            this.commissionTypeCommentLabel.Name = "commissionTypeCommentLabel";
+            this.commissionTypeCommentLabel.Size = new System.Drawing.Size(34, 16);
+            this.commissionTypeCommentLabel.TabIndex = 51;
+            this.commissionTypeCommentLabel.Text = "说明:";
             // 
             // handFeeLabel
             // 
-            handFeeLabel.AutoSize = true;
-            handFeeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.handFeeLabel.AutoSize = true;
+            this.handFeeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            handFeeLabel.BackgroundStyle.Class = "";
-            handFeeLabel.Location = new System.Drawing.Point(455, 208);
-            handFeeLabel.Name = "handFeeLabel";
-            handFeeLabel.Size = new System.Drawing.Size(104, 16);
-            handFeeLabel.TabIndex = 46;
-            handFeeLabel.Text = "单据处理费(每笔):";
+            this.handFeeLabel.BackgroundStyle.Class = "";
+            this.handFeeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.handFeeLabel.Location = new System.Drawing.Point(455, 208);
+            this.handFeeLabel.Name = "handFeeLabel";
+            this.handFeeLabel.Size = new System.Drawing.Size(104, 16);
+            this.handFeeLabel.TabIndex = 46;
+            this.handFeeLabel.Text = "单据处理费(每笔):";
             // 
             // noticePersonLabel
             // 
-            noticePersonLabel.AutoSize = true;
-            noticePersonLabel.BackColor = System.Drawing.Color.Transparent;
+            this.noticePersonLabel.AutoSize = true;
+            this.noticePersonLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            noticePersonLabel.BackgroundStyle.Class = "";
-            noticePersonLabel.Location = new System.Drawing.Point(40, 25);
-            noticePersonLabel.Name = "noticePersonLabel";
-            noticePersonLabel.Size = new System.Drawing.Size(47, 16);
-            noticePersonLabel.TabIndex = 7;
-            noticePersonLabel.Text = "通知人:";
+            this.noticePersonLabel.BackgroundStyle.Class = "";
+            this.noticePersonLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.noticePersonLabel.Location = new System.Drawing.Point(40, 25);
+            this.noticePersonLabel.Name = "noticePersonLabel";
+            this.noticePersonLabel.Size = new System.Drawing.Size(47, 16);
+            this.noticePersonLabel.TabIndex = 7;
+            this.noticePersonLabel.Text = "通知人:";
             // 
             // emailLabel
             // 
-            emailLabel.AutoSize = true;
-            emailLabel.BackColor = System.Drawing.Color.Transparent;
+            this.emailLabel.AutoSize = true;
+            this.emailLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            emailLabel.BackgroundStyle.Class = "";
-            emailLabel.Location = new System.Drawing.Point(530, 5);
-            emailLabel.Name = "emailLabel";
-            emailLabel.Size = new System.Drawing.Size(63, 16);
-            emailLabel.TabIndex = 9;
-            emailLabel.Text = "Email地址:";
+            this.emailLabel.BackgroundStyle.Class = "";
+            this.emailLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.emailLabel.Location = new System.Drawing.Point(530, 5);
+            this.emailLabel.Name = "emailLabel";
+            this.emailLabel.Size = new System.Drawing.Size(63, 16);
+            this.emailLabel.TabIndex = 9;
+            this.emailLabel.Text = "Email地址:";
             // 
             // faxLabel
             // 
-            faxLabel.AutoSize = true;
-            faxLabel.BackColor = System.Drawing.Color.Transparent;
+            this.faxLabel.AutoSize = true;
+            this.faxLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            faxLabel.BackgroundStyle.Class = "";
-            faxLabel.Location = new System.Drawing.Point(530, 27);
-            faxLabel.Name = "faxLabel";
-            faxLabel.Size = new System.Drawing.Size(59, 16);
-            faxLabel.TabIndex = 11;
-            faxLabel.Text = "传真号码:";
+            this.faxLabel.BackgroundStyle.Class = "";
+            this.faxLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.faxLabel.Location = new System.Drawing.Point(530, 27);
+            this.faxLabel.Name = "faxLabel";
+            this.faxLabel.Size = new System.Drawing.Size(59, 16);
+            this.faxLabel.TabIndex = 11;
+            this.faxLabel.Text = "传真号码:";
             // 
             // commentLabel
             // 
-            commentLabel.AutoSize = true;
-            commentLabel.BackColor = System.Drawing.Color.Transparent;
+            this.commentLabel.AutoSize = true;
+            this.commentLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            commentLabel.BackgroundStyle.Class = "";
-            commentLabel.Location = new System.Drawing.Point(50, 51);
-            commentLabel.Name = "commentLabel";
-            commentLabel.Size = new System.Drawing.Size(34, 16);
-            commentLabel.TabIndex = 13;
-            commentLabel.Text = "备注:";
+            this.commentLabel.BackgroundStyle.Class = "";
+            this.commentLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.commentLabel.Location = new System.Drawing.Point(50, 51);
+            this.commentLabel.Name = "commentLabel";
+            this.commentLabel.Size = new System.Drawing.Size(34, 16);
+            this.commentLabel.TabIndex = 13;
+            this.commentLabel.Text = "备注:";
             // 
             // createUserNameLabel
             // 
-            createUserNameLabel.AutoSize = true;
-            createUserNameLabel.BackColor = System.Drawing.Color.Transparent;
+            this.createUserNameLabel.AutoSize = true;
+            this.createUserNameLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            createUserNameLabel.BackgroundStyle.Class = "";
-            createUserNameLabel.Location = new System.Drawing.Point(552, 51);
-            createUserNameLabel.Name = "createUserNameLabel";
-            createUserNameLabel.Size = new System.Drawing.Size(47, 16);
-            createUserNameLabel.TabIndex = 15;
-            createUserNameLabel.Text = "经办人:";
+            this.createUserNameLabel.BackgroundStyle.Class = "";
+            this.createUserNameLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.createUserNameLabel.Location = new System.Drawing.Point(552, 51);
+            this.createUserNameLabel.Name = "createUserNameLabel";
+            this.createUserNameLabel.Size = new System.Drawing.Size(47, 16);
+            this.createUserNameLabel.TabIndex = 15;
+            this.createUserNameLabel.Text = "经办人:";
             // 
             // cDAStatusLabel
             // 
-            cDAStatusLabel.AutoSize = true;
-            cDAStatusLabel.BackColor = System.Drawing.Color.Transparent;
+            this.cDAStatusLabel.AutoSize = true;
+            this.cDAStatusLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            cDAStatusLabel.BackgroundStyle.Class = "";
-            cDAStatusLabel.Location = new System.Drawing.Point(27, 3);
-            cDAStatusLabel.Name = "cDAStatusLabel";
-            cDAStatusLabel.Size = new System.Drawing.Size(58, 16);
-            cDAStatusLabel.TabIndex = 2;
-            cDAStatusLabel.Text = "CDA状态:";
+            this.cDAStatusLabel.BackgroundStyle.Class = "";
+            this.cDAStatusLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.cDAStatusLabel.Location = new System.Drawing.Point(27, 3);
+            this.cDAStatusLabel.Name = "cDAStatusLabel";
+            this.cDAStatusLabel.Size = new System.Drawing.Size(58, 16);
+            this.cDAStatusLabel.TabIndex = 2;
+            this.cDAStatusLabel.Text = "CDA状态:";
             // 
             // noticeMethodLabel
             // 
-            noticeMethodLabel.AutoSize = true;
-            noticeMethodLabel.BackColor = System.Drawing.Color.Transparent;
+            this.noticeMethodLabel.AutoSize = true;
+            this.noticeMethodLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            noticeMethodLabel.BackgroundStyle.Class = "";
-            noticeMethodLabel.Location = new System.Drawing.Point(333, 25);
-            noticeMethodLabel.Name = "noticeMethodLabel";
-            noticeMethodLabel.Size = new System.Drawing.Size(59, 16);
-            noticeMethodLabel.TabIndex = 4;
-            noticeMethodLabel.Text = "通知方式:";
+            this.noticeMethodLabel.BackgroundStyle.Class = "";
+            this.noticeMethodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.noticeMethodLabel.Location = new System.Drawing.Point(333, 25);
+            this.noticeMethodLabel.Name = "noticeMethodLabel";
+            this.noticeMethodLabel.Size = new System.Drawing.Size(59, 16);
+            this.noticeMethodLabel.TabIndex = 4;
+            this.noticeMethodLabel.Text = "通知方式:";
             // 
             // contractCodeLabel
             // 
-            contractCodeLabel.AutoSize = true;
-            contractCodeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.contractCodeLabel.AutoSize = true;
+            this.contractCodeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            contractCodeLabel.BackgroundStyle.Class = "";
-            contractCodeLabel.Location = new System.Drawing.Point(367, 67);
-            contractCodeLabel.Name = "contractCodeLabel";
-            contractCodeLabel.Size = new System.Drawing.Size(84, 16);
-            contractCodeLabel.TabIndex = 6;
-            contractCodeLabel.Text = "保理合同编号:";
+            this.contractCodeLabel.BackgroundStyle.Class = "";
+            this.contractCodeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.contractCodeLabel.Location = new System.Drawing.Point(367, 67);
+            this.contractCodeLabel.Name = "contractCodeLabel";
+            this.contractCodeLabel.Size = new System.Drawing.Size(84, 16);
+            this.contractCodeLabel.TabIndex = 6;
+            this.contractCodeLabel.Text = "保理合同编号:";
             // 
             // lblCDACode
             // 
-            lblCDACode.AutoSize = true;
-            lblCDACode.BackColor = System.Drawing.Color.Transparent;
+            this.lblCDACode.AutoSize = true;
+            this.lblCDACode.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            lblCDACode.BackgroundStyle.Class = "";
-            lblCDACode.Location = new System.Drawing.Point(36, 3);
-            lblCDACode.Name = "lblCDACode";
-            lblCDACode.Size = new System.Drawing.Size(58, 16);
-            lblCDACode.TabIndex = 0;
-            lblCDACode.Text = "CDA编号:";
+            this.lblCDACode.BackgroundStyle.Class = "";
+            this.lblCDACode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCDACode.Location = new System.Drawing.Point(36, 3);
+            this.lblCDACode.Name = "lblCDACode";
+            this.lblCDACode.Size = new System.Drawing.Size(58, 16);
+            this.lblCDACode.TabIndex = 0;
+            this.lblCDACode.Text = "CDA编号:";
             // 
             // assignTypeLabel
             // 
-            assignTypeLabel.AutoSize = true;
-            assignTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.assignTypeLabel.AutoSize = true;
+            this.assignTypeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            assignTypeLabel.BackgroundStyle.Class = "";
-            assignTypeLabel.Location = new System.Drawing.Point(565, 4);
-            assignTypeLabel.Name = "assignTypeLabel";
-            assignTypeLabel.Size = new System.Drawing.Size(57, 15);
-            assignTypeLabel.TabIndex = 2;
-            assignTypeLabel.Text = "<font color=\'red\'>*</font>转让方式:";
+            this.assignTypeLabel.BackgroundStyle.Class = "";
+            this.assignTypeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.assignTypeLabel.Location = new System.Drawing.Point(565, 4);
+            this.assignTypeLabel.Name = "assignTypeLabel";
+            this.assignTypeLabel.Size = new System.Drawing.Size(57, 15);
+            this.assignTypeLabel.TabIndex = 2;
+            this.assignTypeLabel.Text = "<font color=\'red\'>*</font>转让方式:";
             // 
             // lblIsNotice
             // 
-            lblIsNotice.AutoSize = true;
-            lblIsNotice.BackColor = System.Drawing.Color.Transparent;
+            this.lblIsNotice.AutoSize = true;
+            this.lblIsNotice.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            lblIsNotice.BackgroundStyle.Class = "";
-            lblIsNotice.Location = new System.Drawing.Point(283, 3);
-            lblIsNotice.Name = "lblIsNotice";
-            lblIsNotice.Size = new System.Drawing.Size(60, 15);
-            lblIsNotice.TabIndex = 4;
-            lblIsNotice.Text = "<font color=\'red\'>*</font>明/暗保理:";
+            this.lblIsNotice.BackgroundStyle.Class = "";
+            this.lblIsNotice.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblIsNotice.Location = new System.Drawing.Point(283, 3);
+            this.lblIsNotice.Name = "lblIsNotice";
+            this.lblIsNotice.Size = new System.Drawing.Size(60, 15);
+            this.lblIsNotice.TabIndex = 4;
+            this.lblIsNotice.Text = "<font color=\'red\'>*</font>明/暗保理:";
             // 
             // lblRemark
             // 
-            lblRemark.AutoSize = true;
-            lblRemark.BackColor = System.Drawing.Color.Transparent;
+            this.lblRemark.AutoSize = true;
+            this.lblRemark.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            lblRemark.BackgroundStyle.Class = "";
-            lblRemark.Location = new System.Drawing.Point(0, 86);
-            lblRemark.Name = "lblRemark";
-            lblRemark.Size = new System.Drawing.Size(84, 16);
-            lblRemark.TabIndex = 17;
-            lblRemark.Text = "内部提示信息:";
+            this.lblRemark.BackgroundStyle.Class = "";
+            this.lblRemark.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblRemark.Location = new System.Drawing.Point(0, 86);
+            this.lblRemark.Name = "lblRemark";
+            this.lblRemark.Size = new System.Drawing.Size(84, 16);
+            this.lblRemark.TabIndex = 17;
+            this.lblRemark.Text = "内部提示信息:";
             // 
             // lblCasePaymentTerm
             // 
-            lblCasePaymentTerm.AutoSize = true;
-            lblCasePaymentTerm.BackColor = System.Drawing.Color.Transparent;
+            this.lblCasePaymentTerm.AutoSize = true;
+            this.lblCasePaymentTerm.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            lblCasePaymentTerm.BackgroundStyle.Class = "";
-            lblCasePaymentTerm.Location = new System.Drawing.Point(346, 87);
-            lblCasePaymentTerm.Name = "lblCasePaymentTerm";
-            lblCasePaymentTerm.Size = new System.Drawing.Size(104, 16);
-            lblCasePaymentTerm.TabIndex = 21;
-            lblCasePaymentTerm.Text = "最长付款期限(天):";
+            this.lblCasePaymentTerm.BackgroundStyle.Class = "";
+            this.lblCasePaymentTerm.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCasePaymentTerm.Location = new System.Drawing.Point(346, 87);
+            this.lblCasePaymentTerm.Name = "lblCasePaymentTerm";
+            this.lblCasePaymentTerm.Size = new System.Drawing.Size(104, 16);
+            this.lblCasePaymentTerm.TabIndex = 21;
+            this.lblCasePaymentTerm.Text = "最长付款期限(天):";
             // 
             // lblCDASignDate
             // 
-            lblCDASignDate.AutoSize = true;
-            lblCDASignDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblCDASignDate.AutoSize = true;
+            this.lblCDASignDate.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            lblCDASignDate.BackgroundStyle.Class = "";
-            lblCDASignDate.Location = new System.Drawing.Point(242, 2);
-            lblCDASignDate.Name = "lblCDASignDate";
-            lblCDASignDate.Size = new System.Drawing.Size(57, 15);
-            lblCDASignDate.TabIndex = 35;
-            lblCDASignDate.Text = "<font color=\'red\'>*</font>签发日期:";
+            this.lblCDASignDate.BackgroundStyle.Class = "";
+            this.lblCDASignDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCDASignDate.Location = new System.Drawing.Point(242, 2);
+            this.lblCDASignDate.Name = "lblCDASignDate";
+            this.lblCDASignDate.Size = new System.Drawing.Size(57, 15);
+            this.lblCDASignDate.TabIndex = 35;
+            this.lblCDASignDate.Text = "<font color=\'red\'>*</font>签发日期:";
             // 
             // groupPanelCase
             // 
             this.groupPanelCase.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelCase.Controls.Add(lblCasePaymentTerm);
+            this.groupPanelCase.Controls.Add(this.lblCasePaymentTerm);
             this.groupPanelCase.Controls.Add(this.tbCasePaymentTerm);
             this.groupPanelCase.Controls.Add(this.invoiceCurrencyTextBox);
             this.groupPanelCase.Controls.Add(this.transactionTypeTextBox);
             this.groupPanelCase.Controls.Add(this.companyNameENTextBox);
-            this.groupPanelCase.Controls.Add(contractCodeLabel);
+            this.groupPanelCase.Controls.Add(this.contractCodeLabel);
             this.groupPanelCase.Controls.Add(this.contractCodeTextBox);
             this.groupPanelCase.Controls.Add(this.btnCaseSelect);
-            this.groupPanelCase.Controls.Add(invoiceCurrencyLabel);
-            this.groupPanelCase.Controls.Add(transactionTypeLabel);
+            this.groupPanelCase.Controls.Add(this.invoiceCurrencyLabel);
+            this.groupPanelCase.Controls.Add(this.transactionTypeLabel);
             this.groupPanelCase.Controls.Add(this.buyerClientNameENTextBox);
             this.groupPanelCase.Controls.Add(this.buyerClientNameCNTextBox);
-            this.groupPanelCase.Controls.Add(buyerClientEDICodeLabel);
+            this.groupPanelCase.Controls.Add(this.buyerClientEDICodeLabel);
             this.groupPanelCase.Controls.Add(this.buyerClientEDICodeTextBox);
             this.groupPanelCase.Controls.Add(this.sellerClientNameENTextBox);
             this.groupPanelCase.Controls.Add(this.companyNameCNTextBox);
-            this.groupPanelCase.Controls.Add(factorCodeLabel);
+            this.groupPanelCase.Controls.Add(this.factorCodeLabel);
             this.groupPanelCase.Controls.Add(this.factorCodeTextBox);
             this.groupPanelCase.Controls.Add(this.sellerClientNameCNTextBox);
-            this.groupPanelCase.Controls.Add(sellerClientLabel);
+            this.groupPanelCase.Controls.Add(this.sellerClientLabel);
             this.groupPanelCase.Controls.Add(this.sellerClientEDICodeTextBox);
-            this.groupPanelCase.Controls.Add(caseCodeLabel);
+            this.groupPanelCase.Controls.Add(this.caseCodeLabel);
             this.groupPanelCase.Controls.Add(this.caseCodeTextBox);
             this.groupPanelCase.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelCase.Location = new System.Drawing.Point(0, 0);
@@ -900,10 +918,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.groupPanelCase.StyleMouseDown.Class = "";
+            this.groupPanelCase.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
             // 
             // 
             this.groupPanelCase.StyleMouseOver.Class = "";
+            this.groupPanelCase.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.groupPanelCase.TabIndex = 0;
             // 
             // tbCasePaymentTerm
@@ -912,6 +932,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbCasePaymentTerm.Border.Class = "TextBoxBorder";
+            this.tbCasePaymentTerm.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbCasePaymentTerm.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.NetPaymentTerm", true));
             this.tbCasePaymentTerm.Location = new System.Drawing.Point(456, 86);
             this.tbCasePaymentTerm.Name = "tbCasePaymentTerm";
@@ -928,6 +949,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.invoiceCurrencyTextBox.Border.Class = "TextBoxBorder";
+            this.invoiceCurrencyTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.invoiceCurrencyTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.InvoiceCurrency", true));
             this.invoiceCurrencyTextBox.Location = new System.Drawing.Point(429, 1);
             this.invoiceCurrencyTextBox.Name = "invoiceCurrencyTextBox";
@@ -940,6 +962,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.transactionTypeTextBox.Border.Class = "TextBoxBorder";
+            this.transactionTypeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.transactionTypeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.TransactionType", true));
             this.transactionTypeTextBox.Location = new System.Drawing.Point(242, 2);
             this.transactionTypeTextBox.Name = "transactionTypeTextBox";
@@ -952,6 +975,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.companyNameENTextBox.Border.Class = "TextBoxBorder";
+            this.companyNameENTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.companyNameENTextBox.Location = new System.Drawing.Point(520, 44);
             this.companyNameENTextBox.Name = "companyNameENTextBox";
             this.companyNameENTextBox.Size = new System.Drawing.Size(170, 20);
@@ -965,6 +989,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.contractCodeTextBox.Border.Class = "TextBoxBorder";
+            this.contractCodeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.contractCodeTextBox.Location = new System.Drawing.Point(456, 66);
             this.contractCodeTextBox.Name = "contractCodeTextBox";
             this.contractCodeTextBox.Size = new System.Drawing.Size(100, 20);
@@ -989,6 +1014,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.buyerClientNameENTextBox.Border.Class = "TextBoxBorder";
+            this.buyerClientNameENTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.buyerClientNameENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.BuyerClient.ClientNameEN", true));
             this.buyerClientNameENTextBox.Location = new System.Drawing.Point(125, 86);
             this.buyerClientNameENTextBox.Name = "buyerClientNameENTextBox";
@@ -1003,6 +1029,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.buyerClientNameCNTextBox.Border.Class = "TextBoxBorder";
+            this.buyerClientNameCNTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.buyerClientNameCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.BuyerClient.ClientNameCN", true));
             this.buyerClientNameCNTextBox.Location = new System.Drawing.Point(125, 65);
             this.buyerClientNameCNTextBox.Name = "buyerClientNameCNTextBox";
@@ -1017,6 +1044,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.buyerClientEDICodeTextBox.Border.Class = "TextBoxBorder";
+            this.buyerClientEDICodeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.buyerClientEDICodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.BuyerClient.ClientEDICode", true));
             this.buyerClientEDICodeTextBox.Location = new System.Drawing.Point(55, 67);
             this.buyerClientEDICodeTextBox.Name = "buyerClientEDICodeTextBox";
@@ -1030,6 +1058,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.sellerClientNameENTextBox.Border.Class = "TextBoxBorder";
+            this.sellerClientNameENTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sellerClientNameENTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.SellerClient.ClientNameEN", true));
             this.sellerClientNameENTextBox.Location = new System.Drawing.Point(125, 44);
             this.sellerClientNameENTextBox.Name = "sellerClientNameENTextBox";
@@ -1044,6 +1073,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.companyNameCNTextBox.Border.Class = "TextBoxBorder";
+            this.companyNameCNTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.companyNameCNTextBox.Location = new System.Drawing.Point(520, 23);
             this.companyNameCNTextBox.Name = "companyNameCNTextBox";
             this.companyNameCNTextBox.Size = new System.Drawing.Size(170, 20);
@@ -1057,6 +1087,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.factorCodeTextBox.Border.Class = "TextBoxBorder";
+            this.factorCodeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.factorCodeTextBox.Location = new System.Drawing.Point(429, 23);
             this.factorCodeTextBox.Name = "factorCodeTextBox";
             this.factorCodeTextBox.Size = new System.Drawing.Size(85, 20);
@@ -1069,6 +1100,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.sellerClientNameCNTextBox.Border.Class = "TextBoxBorder";
+            this.sellerClientNameCNTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sellerClientNameCNTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.SellerClient.ClientNameCN", true));
             this.sellerClientNameCNTextBox.Location = new System.Drawing.Point(125, 23);
             this.sellerClientNameCNTextBox.Name = "sellerClientNameCNTextBox";
@@ -1083,6 +1115,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.sellerClientEDICodeTextBox.Border.Class = "TextBoxBorder";
+            this.sellerClientEDICodeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.sellerClientEDICodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.SellerClient.ClientEDICode", true));
             this.sellerClientEDICodeTextBox.Location = new System.Drawing.Point(55, 23);
             this.sellerClientEDICodeTextBox.Name = "sellerClientEDICodeTextBox";
@@ -1096,6 +1129,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.caseCodeTextBox.Border.Class = "TextBoxBorder";
+            this.caseCodeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.caseCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Case.CaseCode", true));
             this.caseCodeTextBox.Location = new System.Drawing.Point(71, 2);
             this.caseCodeTextBox.Name = "caseCodeTextBox";
@@ -1107,56 +1141,58 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.groupPanelCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelCreditCover.Controls.Add(lblIsNotice);
+            this.groupPanelCreditCover.Controls.Add(this.lblIsNotice);
             this.groupPanelCreditCover.Controls.Add(this.cbIsNotice);
             this.groupPanelCreditCover.Controls.Add(this.cbIsRecoarse);
-            this.groupPanelCreditCover.Controls.Add(assignTypeLabel);
+            this.groupPanelCreditCover.Controls.Add(this.assignTypeLabel);
             this.groupPanelCreditCover.Controls.Add(this.assignTypeComboBox);
-            this.groupPanelCreditCover.Controls.Add(lblCDACode);
+            this.groupPanelCreditCover.Controls.Add(this.lblCDACode);
             this.groupPanelCreditCover.Controls.Add(this.tbCDACode);
             this.groupPanelCreditCover.Controls.Add(this.tbHighestFinance);
             this.groupPanelCreditCover.Controls.Add(this.handFeeCurrComboBox);
             this.groupPanelCreditCover.Controls.Add(this.cbIsCreditCoverRevolving);
-            this.groupPanelCreditCover.Controls.Add(handFeeLabel);
-            this.groupPanelCreditCover.Controls.Add(lossThresholdLabel);
+            this.groupPanelCreditCover.Controls.Add(this.handFeeLabel);
+            this.groupPanelCreditCover.Controls.Add(this.lossThresholdLabel);
+            this.groupPanelCreditCover.Controls.Add(this.delayDaysLabel);
             this.groupPanelCreditCover.Controls.Add(this.handFeeTextBox);
             this.groupPanelCreditCover.Controls.Add(this.lossThresholdTextBox);
-            this.groupPanelCreditCover.Controls.Add(commissionTypeCommentLabel);
-            this.groupPanelCreditCover.Controls.Add(deductiblesLabel);
+            this.groupPanelCreditCover.Controls.Add(this.delayDaysTextBox);
+            this.groupPanelCreditCover.Controls.Add(this.commissionTypeCommentLabel);
+            this.groupPanelCreditCover.Controls.Add(this.deductiblesLabel);
             this.groupPanelCreditCover.Controls.Add(this.commissionTypeCommentTextBox);
             this.groupPanelCreditCover.Controls.Add(this.deductiblesTextBox);
-            this.groupPanelCreditCover.Controls.Add(commissonTypeLabel);
-            this.groupPanelCreditCover.Controls.Add(financeGracePeriodLabel);
+            this.groupPanelCreditCover.Controls.Add(this.commissonTypeLabel);
+            this.groupPanelCreditCover.Controls.Add(this.financeGracePeriodLabel);
             this.groupPanelCreditCover.Controls.Add(this.commissionTypeComboBox);
             this.groupPanelCreditCover.Controls.Add(this.financeGracePeriodTextBox);
-            this.groupPanelCreditCover.Controls.Add(paymentTermsLabel);
+            this.groupPanelCreditCover.Controls.Add(this.paymentTermsLabel);
             this.groupPanelCreditCover.Controls.Add(this.paymentTermsTextBox);
-            this.groupPanelCreditCover.Controls.Add(iFPriceLabel);
-            this.groupPanelCreditCover.Controls.Add(orderNumberLabel);
+            this.groupPanelCreditCover.Controls.Add(this.iFPriceLabel);
+            this.groupPanelCreditCover.Controls.Add(this.orderNumberLabel);
             this.groupPanelCreditCover.Controls.Add(this.iFPriceTextBox);
             this.groupPanelCreditCover.Controls.Add(this.orderNumberTextBox);
-            this.groupPanelCreditCover.Controls.Add(priceLabel);
+            this.groupPanelCreditCover.Controls.Add(this.priceLabel);
             this.groupPanelCreditCover.Controls.Add(this.priceTextBox);
-            this.groupPanelCreditCover.Controls.Add(financeProportionLabel);
+            this.groupPanelCreditCover.Controls.Add(this.financeProportionLabel);
             this.groupPanelCreditCover.Controls.Add(this.financeProportionTextBox);
-            this.groupPanelCreditCover.Controls.Add(lblHighestFinance);
+            this.groupPanelCreditCover.Controls.Add(this.lblHighestFinance);
             this.groupPanelCreditCover.Controls.Add(this.financeLinePeriodEndDateTimePicker);
-            this.groupPanelCreditCover.Controls.Add(financeLinePeriodBeginLabel);
+            this.groupPanelCreditCover.Controls.Add(this.financeLinePeriodBeginLabel);
             this.groupPanelCreditCover.Controls.Add(this.financeLinePeriodBeginDateTimePicker);
             this.groupPanelCreditCover.Controls.Add(this.financeLineTextBox);
-            this.groupPanelCreditCover.Controls.Add(financeLineCurrLabel);
+            this.groupPanelCreditCover.Controls.Add(this.financeLineCurrLabel);
             this.groupPanelCreditCover.Controls.Add(this.financeLineCurrComboBox);
-            this.groupPanelCreditCover.Controls.Add(reassignGracePeriodLabel);
+            this.groupPanelCreditCover.Controls.Add(this.reassignGracePeriodLabel);
             this.groupPanelCreditCover.Controls.Add(this.reassignGracePeriodTextBox);
-            this.groupPanelCreditCover.Controls.Add(pUGPeriodLabel);
+            this.groupPanelCreditCover.Controls.Add(this.pUGPeriodLabel);
             this.groupPanelCreditCover.Controls.Add(this.pUGPeriodTextBox);
             this.groupPanelCreditCover.Controls.Add(this.creditCoverPeriodEndDateTimePicker);
-            this.groupPanelCreditCover.Controls.Add(creditCoverPeriodBeginLabel);
+            this.groupPanelCreditCover.Controls.Add(this.creditCoverPeriodBeginLabel);
             this.groupPanelCreditCover.Controls.Add(this.creditCoverPeriodBeginDateTimePicker);
-            this.groupPanelCreditCover.Controls.Add(pUGProportionLabel);
+            this.groupPanelCreditCover.Controls.Add(this.pUGProportionLabel);
             this.groupPanelCreditCover.Controls.Add(this.pUGProportionTextBox);
             this.groupPanelCreditCover.Controls.Add(this.creditCoverTextBox);
-            this.groupPanelCreditCover.Controls.Add(creditCoverCurrLabel);
+            this.groupPanelCreditCover.Controls.Add(this.creditCoverCurrLabel);
             this.groupPanelCreditCover.Controls.Add(this.creditCoverCurrComboBox);
             this.groupPanelCreditCover.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelCreditCover.Location = new System.Drawing.Point(0, 115);
@@ -1187,10 +1223,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.groupPanelCreditCover.StyleMouseDown.Class = "";
+            this.groupPanelCreditCover.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
             // 
             // 
             this.groupPanelCreditCover.StyleMouseOver.Class = "";
+            this.groupPanelCreditCover.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.groupPanelCreditCover.TabIndex = 1;
             // 
             // cbIsNotice
@@ -1198,6 +1236,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbIsNotice.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IsNotice", true));
             this.cbIsNotice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbIsNotice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbIsNotice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbIsNotice.FormattingEnabled = true;
             this.cbIsNotice.Items.AddRange(new object[] {
             "明保理",
@@ -1215,6 +1254,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cbIsRecoarse.BackgroundStyle.Class = "";
+            this.cbIsRecoarse.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsRecoarse", true));
             this.cbIsRecoarse.Location = new System.Drawing.Point(458, 3);
             this.cbIsRecoarse.Name = "cbIsRecoarse";
@@ -1228,6 +1268,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.assignTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "AssignType", true));
             this.assignTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.assignTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.assignTypeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.assignTypeComboBox.FormattingEnabled = true;
             this.assignTypeComboBox.Location = new System.Drawing.Point(625, 2);
             this.assignTypeComboBox.Name = "assignTypeComboBox";
@@ -1240,6 +1281,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbCDACode.Border.Class = "TextBoxBorder";
+            this.tbCDACode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbCDACode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CDACode", true));
             this.tbCDACode.Location = new System.Drawing.Point(101, 2);
             this.tbCDACode.Name = "tbCDACode";
@@ -1253,6 +1295,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbHighestFinance.Border.Class = "TextBoxBorder";
+            this.tbHighestFinance.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbHighestFinance.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HighestFinanceLine", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.tbHighestFinance.Location = new System.Drawing.Point(131, 91);
             this.tbHighestFinance.Name = "tbHighestFinance";
@@ -1266,6 +1309,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.handFeeCurrComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFeeCurr", true));
             this.handFeeCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.handFeeCurrComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.handFeeCurrComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.handFeeCurrComboBox.FormattingEnabled = true;
             this.handFeeCurrComboBox.Location = new System.Drawing.Point(560, 206);
             this.handFeeCurrComboBox.Name = "handFeeCurrComboBox";
@@ -1281,6 +1325,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cbIsCreditCoverRevolving.BackgroundStyle.Class = "";
+            this.cbIsCreditCoverRevolving.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cbIsCreditCoverRevolving.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsCreditCoverRevolving", true));
             this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(101, 162);
             this.cbIsCreditCoverRevolving.Name = "cbIsCreditCoverRevolving";
@@ -1296,6 +1341,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.handFeeTextBox.Border.Class = "TextBoxBorder";
+            this.handFeeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.handFeeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFee", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.handFeeTextBox.Location = new System.Drawing.Point(618, 206);
             this.handFeeTextBox.Name = "handFeeTextBox";
@@ -1308,6 +1354,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lossThresholdTextBox.Border.Class = "TextBoxBorder";
+            this.lossThresholdTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lossThresholdTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "LossThreshold", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.lossThresholdTextBox.Location = new System.Drawing.Point(350, 180);
             this.lossThresholdTextBox.Name = "lossThresholdTextBox";
@@ -1315,12 +1362,26 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lossThresholdTextBox.TabIndex = 39;
             this.superValidator.SetValidator1(this.lossThresholdTextBox, this.customValidator8);
             // 
+            // delayDaysTextBox
+            // 
+            // 
+            // 
+            // 
+            this.delayDaysTextBox.Border.Class = "TextBoxBorder";
+            this.delayDaysTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.delayDaysTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "DelayDays", true));
+            this.delayDaysTextBox.Location = new System.Drawing.Point(520, 185);
+            this.delayDaysTextBox.Name = "delayDaysTextBox";
+            this.delayDaysTextBox.Size = new System.Drawing.Size(100, 20);
+            this.delayDaysTextBox.TabIndex = 39;
+            // 
             // commissionTypeCommentTextBox
             // 
             // 
             // 
             // 
             this.commissionTypeCommentTextBox.Border.Class = "TextBoxBorder";
+            this.commissionTypeCommentTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.commissionTypeCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionTypeComment", true));
             this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(284, 229);
             this.commissionTypeCommentTextBox.Name = "commissionTypeCommentTextBox";
@@ -1334,6 +1395,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.deductiblesTextBox.Border.Class = "TextBoxBorder";
+            this.deductiblesTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.deductiblesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Deductibles", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.deductiblesTextBox.Location = new System.Drawing.Point(101, 181);
             this.deductiblesTextBox.Name = "deductiblesTextBox";
@@ -1346,6 +1408,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.commissionTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionType", true));
             this.commissionTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.commissionTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.commissionTypeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.commissionTypeComboBox.FormattingEnabled = true;
             this.commissionTypeComboBox.Location = new System.Drawing.Point(101, 227);
             this.commissionTypeComboBox.Name = "commissionTypeComboBox";
@@ -1359,6 +1422,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.financeGracePeriodTextBox.Border.Class = "TextBoxBorder";
+            this.financeGracePeriodTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeGracePeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceGracePeriod", true));
             this.financeGracePeriodTextBox.Location = new System.Drawing.Point(599, 91);
             this.financeGracePeriodTextBox.Name = "financeGracePeriodTextBox";
@@ -1371,6 +1435,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.paymentTermsTextBox.Border.Class = "TextBoxBorder";
+            this.paymentTermsTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.paymentTermsTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PaymentTerms", true));
             this.paymentTermsTextBox.Location = new System.Drawing.Point(101, 113);
             this.paymentTermsTextBox.Multiline = true;
@@ -1386,6 +1451,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
+            this.iFPriceTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IFPrice", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p4"));
             this.iFPriceTextBox.Location = new System.Drawing.Point(350, 205);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
@@ -1399,6 +1465,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.orderNumberTextBox.Border.Class = "TextBoxBorder";
+            this.orderNumberTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.orderNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "OrderNumber", true));
             this.orderNumberTextBox.Enabled = false;
             this.orderNumberTextBox.Location = new System.Drawing.Point(350, 158);
@@ -1412,6 +1479,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.priceTextBox.Border.Class = "TextBoxBorder";
+            this.priceTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Price", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p4"));
             this.priceTextBox.Location = new System.Drawing.Point(101, 203);
             this.priceTextBox.Name = "priceTextBox";
@@ -1425,6 +1493,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.financeProportionTextBox.Border.Class = "TextBoxBorder";
+            this.financeProportionTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceProportion", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p0"));
             this.financeProportionTextBox.Location = new System.Drawing.Point(350, 90);
             this.financeProportionTextBox.Name = "financeProportionTextBox";
@@ -1437,6 +1506,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.financeLinePeriodEndDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.financeLinePeriodEndDateTimePicker.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeLinePeriodEndDateTimePicker.ButtonDropDown.Visible = true;
             this.financeLinePeriodEndDateTimePicker.ButtonFreeText.Checked = true;
             this.financeLinePeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "FinanceLinePeriodEnd", true));
@@ -1451,11 +1521,13 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.financeLinePeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.financeLinePeriodEndDateTimePicker.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -1463,6 +1535,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.financeLinePeriodEndDateTimePicker.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.financeLinePeriodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.financeLinePeriodEndDateTimePicker.Name = "financeLinePeriodEndDateTimePicker";
@@ -1477,6 +1550,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.financeLinePeriodBeginDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.financeLinePeriodBeginDateTimePicker.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeLinePeriodBeginDateTimePicker.ButtonDropDown.Visible = true;
             this.financeLinePeriodBeginDateTimePicker.ButtonFreeText.Checked = true;
             this.financeLinePeriodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "FinanceLinePeriodBegin", true));
@@ -1491,11 +1565,13 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.financeLinePeriodBeginDateTimePicker.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.financeLinePeriodBeginDateTimePicker.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -1503,6 +1579,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.financeLinePeriodBeginDateTimePicker.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.financeLinePeriodBeginDateTimePicker.Name = "financeLinePeriodBeginDateTimePicker";
@@ -1515,6 +1592,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.financeLineTextBox.Border.Class = "TextBoxBorder";
+            this.financeLineTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeLineTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceLine", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.financeLineTextBox.Location = new System.Drawing.Point(175, 69);
             this.financeLineTextBox.Name = "financeLineTextBox";
@@ -1529,6 +1607,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.financeLineCurrComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.financeLineCurrComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceLineCurr", true));
             this.financeLineCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.financeLineCurrComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.financeLineCurrComboBox.FormattingEnabled = true;
             this.financeLineCurrComboBox.Location = new System.Drawing.Point(101, 68);
             this.financeLineCurrComboBox.Name = "financeLineCurrComboBox";
@@ -1542,6 +1621,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.reassignGracePeriodTextBox.Border.Class = "TextBoxBorder";
+            this.reassignGracePeriodTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.reassignGracePeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "ReassignGracePeriod", true));
             this.reassignGracePeriodTextBox.Location = new System.Drawing.Point(599, 47);
             this.reassignGracePeriodTextBox.Name = "reassignGracePeriodTextBox";
@@ -1554,6 +1634,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.pUGPeriodTextBox.Border.Class = "TextBoxBorder";
+            this.pUGPeriodTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.pUGPeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PUGPeriod", true));
             this.pUGPeriodTextBox.Location = new System.Drawing.Point(350, 45);
             this.pUGPeriodTextBox.Name = "pUGPeriodTextBox";
@@ -1566,6 +1647,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.creditCoverPeriodEndDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.creditCoverPeriodEndDateTimePicker.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.creditCoverPeriodEndDateTimePicker.ButtonDropDown.Visible = true;
             this.creditCoverPeriodEndDateTimePicker.ButtonFreeText.Checked = true;
             this.creditCoverPeriodEndDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CreditCoverPeriodEnd", true));
@@ -1580,11 +1662,13 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.creditCoverPeriodEndDateTimePicker.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.creditCoverPeriodEndDateTimePicker.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -1592,6 +1676,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.creditCoverPeriodEndDateTimePicker.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.creditCoverPeriodEndDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.creditCoverPeriodEndDateTimePicker.Name = "creditCoverPeriodEndDateTimePicker";
@@ -1606,6 +1691,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.creditCoverPeriodBeginDateTimePicker.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.creditCoverPeriodBeginDateTimePicker.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.creditCoverPeriodBeginDateTimePicker.ButtonDropDown.Visible = true;
             this.creditCoverPeriodBeginDateTimePicker.ButtonFreeText.Checked = true;
             this.creditCoverPeriodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CreditCoverPeriodBegin", true));
@@ -1620,11 +1706,13 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.BackgroundStyle.Class = "";
+            this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -1632,6 +1720,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.creditCoverPeriodBeginDateTimePicker.Name = "creditCoverPeriodBeginDateTimePicker";
@@ -1644,6 +1733,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.pUGProportionTextBox.Border.Class = "TextBoxBorder";
+            this.pUGProportionTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.pUGProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PUGProportion", true));
             this.pUGProportionTextBox.Location = new System.Drawing.Point(101, 47);
             this.pUGProportionTextBox.Name = "pUGProportionTextBox";
@@ -1656,6 +1746,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.creditCoverTextBox.Border.Class = "TextBoxBorder";
+            this.creditCoverTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.creditCoverTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreditCover", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
             this.creditCoverTextBox.Location = new System.Drawing.Point(175, 24);
             this.creditCoverTextBox.Name = "creditCoverTextBox";
@@ -1669,6 +1760,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.creditCoverCurrComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.creditCoverCurrComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreditCoverCurr", true));
             this.creditCoverCurrComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.creditCoverCurrComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.creditCoverCurrComboBox.FormattingEnabled = true;
             this.creditCoverCurrComboBox.Location = new System.Drawing.Point(101, 24);
             this.creditCoverCurrComboBox.Name = "creditCoverCurrComboBox";
@@ -1680,25 +1772,25 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.groupPanelOther.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelOther.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.groupPanelOther.Controls.Add(lblCDASignDate);
+            this.groupPanelOther.Controls.Add(this.lblCDASignDate);
             this.groupPanelOther.Controls.Add(this.diCDASignDate);
             this.groupPanelOther.Controls.Add(this.cbIsSigned);
-            this.groupPanelOther.Controls.Add(lblRemark);
+            this.groupPanelOther.Controls.Add(this.lblRemark);
             this.groupPanelOther.Controls.Add(this.tbRemark);
             this.groupPanelOther.Controls.Add(this.cbNoticeMethodFax);
             this.groupPanelOther.Controls.Add(this.cbNoticeMethodEmail);
-            this.groupPanelOther.Controls.Add(noticeMethodLabel);
-            this.groupPanelOther.Controls.Add(cDAStatusLabel);
+            this.groupPanelOther.Controls.Add(this.noticeMethodLabel);
+            this.groupPanelOther.Controls.Add(this.cDAStatusLabel);
             this.groupPanelOther.Controls.Add(this.cDAStatusComboBox);
-            this.groupPanelOther.Controls.Add(createUserNameLabel);
+            this.groupPanelOther.Controls.Add(this.createUserNameLabel);
             this.groupPanelOther.Controls.Add(this.createUserNameTextBox);
-            this.groupPanelOther.Controls.Add(commentLabel);
+            this.groupPanelOther.Controls.Add(this.commentLabel);
             this.groupPanelOther.Controls.Add(this.commentTextBox);
-            this.groupPanelOther.Controls.Add(faxLabel);
+            this.groupPanelOther.Controls.Add(this.faxLabel);
             this.groupPanelOther.Controls.Add(this.faxTextBox);
-            this.groupPanelOther.Controls.Add(emailLabel);
+            this.groupPanelOther.Controls.Add(this.emailLabel);
             this.groupPanelOther.Controls.Add(this.emailTextBox);
-            this.groupPanelOther.Controls.Add(noticePersonLabel);
+            this.groupPanelOther.Controls.Add(this.noticePersonLabel);
             this.groupPanelOther.Controls.Add(this.noticePersonTextBox);
             this.groupPanelOther.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelOther.Location = new System.Drawing.Point(0, 372);
@@ -1729,10 +1821,12 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.groupPanelOther.StyleMouseDown.Class = "";
+            this.groupPanelOther.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
             // 
             // 
             this.groupPanelOther.StyleMouseOver.Class = "";
+            this.groupPanelOther.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.groupPanelOther.TabIndex = 2;
             // 
             // diCDASignDate
@@ -1741,6 +1835,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.diCDASignDate.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diCDASignDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diCDASignDate.ButtonDropDown.Visible = true;
             this.diCDASignDate.ButtonFreeText.Checked = true;
             this.diCDASignDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CDASignDate", true));
@@ -1755,11 +1850,13 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.diCDASignDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
             this.diCDASignDate.MonthCalendar.BackgroundStyle.Class = "";
+            this.diCDASignDate.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diCDASignDate.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
             // 
             this.diCDASignDate.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diCDASignDate.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diCDASignDate.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
             this.diCDASignDate.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.diCDASignDate.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -1767,6 +1864,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.diCDASignDate.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diCDASignDate.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diCDASignDate.MonthCalendar.TodayButtonVisible = true;
             this.diCDASignDate.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diCDASignDate.Name = "diCDASignDate";
@@ -1782,6 +1880,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cbIsSigned.BackgroundStyle.Class = "";
+            this.cbIsSigned.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cbIsSigned.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsSigned", true));
             this.cbIsSigned.Location = new System.Drawing.Point(429, 3);
             this.cbIsSigned.Name = "cbIsSigned";
@@ -1796,6 +1895,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.tbRemark.Border.Class = "TextBoxBorder";
+            this.tbRemark.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbRemark.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Remark", true));
             this.tbRemark.Location = new System.Drawing.Point(101, 86);
             this.tbRemark.Multiline = true;
@@ -1812,6 +1912,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cbNoticeMethodFax.BackgroundStyle.Class = "";
+            this.cbNoticeMethodFax.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cbNoticeMethodFax.Location = new System.Drawing.Point(447, 27);
             this.cbNoticeMethodFax.Name = "cbNoticeMethodFax";
             this.cbNoticeMethodFax.Size = new System.Drawing.Size(51, 16);
@@ -1827,6 +1928,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cbNoticeMethodEmail.BackgroundStyle.Class = "";
+            this.cbNoticeMethodEmail.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cbNoticeMethodEmail.Location = new System.Drawing.Point(398, 27);
             this.cbNoticeMethodEmail.Name = "cbNoticeMethodEmail";
             this.cbNoticeMethodEmail.Size = new System.Drawing.Size(51, 16);
@@ -1839,6 +1941,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cDAStatusComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CDAStatus", true));
             this.cDAStatusComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cDAStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cDAStatusComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cDAStatusComboBox.FormattingEnabled = true;
             this.cDAStatusComboBox.Location = new System.Drawing.Point(101, 0);
             this.cDAStatusComboBox.Name = "cDAStatusComboBox";
@@ -1851,6 +1954,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.createUserNameTextBox.Border.Class = "TextBoxBorder";
+            this.createUserNameTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.createUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreateUserName", true));
             this.createUserNameTextBox.Location = new System.Drawing.Point(599, 49);
             this.createUserNameTextBox.Name = "createUserNameTextBox";
@@ -1864,6 +1968,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.commentTextBox.Border.Class = "TextBoxBorder";
+            this.commentTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Comment", true));
             this.commentTextBox.Location = new System.Drawing.Point(101, 48);
             this.commentTextBox.Multiline = true;
@@ -1878,6 +1983,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.faxTextBox.Border.Class = "TextBoxBorder";
+            this.faxTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.faxTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Fax", true));
             this.faxTextBox.Location = new System.Drawing.Point(599, 25);
             this.faxTextBox.Name = "faxTextBox";
@@ -1890,6 +1996,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.emailTextBox.Border.Class = "TextBoxBorder";
+            this.emailTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Email", true));
             this.emailTextBox.Location = new System.Drawing.Point(599, 2);
             this.emailTextBox.Name = "emailTextBox";
@@ -1903,6 +2010,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.noticePersonTextBox.Border.Class = "TextBoxBorder";
+            this.noticePersonTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.noticePersonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "NoticePerson", true));
             this.noticePersonTextBox.Location = new System.Drawing.Point(101, 23);
             this.noticePersonTextBox.Name = "noticePersonTextBox";
@@ -2079,5 +2187,46 @@ namespace CMBC.EasyFactor.CaseMgr
         }
 
         #endregion
+
+        private DevComponents.DotNetBar.LabelX caseCodeLabel;
+        private DevComponents.DotNetBar.LabelX sellerClientLabel;
+        private DevComponents.DotNetBar.LabelX factorCodeLabel;
+        private DevComponents.DotNetBar.LabelX buyerClientEDICodeLabel;
+        private DevComponents.DotNetBar.LabelX transactionTypeLabel;
+        private DevComponents.DotNetBar.LabelX invoiceCurrencyLabel;
+        private DevComponents.DotNetBar.LabelX creditCoverCurrLabel;
+        private DevComponents.DotNetBar.LabelX pUGProportionLabel;
+        private DevComponents.DotNetBar.LabelX creditCoverPeriodBeginLabel;
+        private DevComponents.DotNetBar.LabelX pUGPeriodLabel;
+        private DevComponents.DotNetBar.LabelX reassignGracePeriodLabel;
+        private DevComponents.DotNetBar.LabelX financeLineCurrLabel;
+        private DevComponents.DotNetBar.LabelX financeLinePeriodBeginLabel;
+        private DevComponents.DotNetBar.LabelX lblHighestFinance;
+        private DevComponents.DotNetBar.LabelX financeProportionLabel;
+        private DevComponents.DotNetBar.LabelX orderNumberLabel;
+        private DevComponents.DotNetBar.LabelX paymentTermsLabel;
+        private DevComponents.DotNetBar.LabelX financeGracePeriodLabel;
+        private DevComponents.DotNetBar.LabelX deductiblesLabel;
+        private DevComponents.DotNetBar.LabelX lossThresholdLabel;
+        private DevComponents.DotNetBar.LabelX delayDaysLabel;
+        private DevComponents.DotNetBar.LabelX priceLabel;
+        private DevComponents.DotNetBar.LabelX iFPriceLabel;
+        private DevComponents.DotNetBar.LabelX commissonTypeLabel;
+        private DevComponents.DotNetBar.LabelX commissionTypeCommentLabel;
+        private DevComponents.DotNetBar.LabelX handFeeLabel;
+        private DevComponents.DotNetBar.LabelX noticePersonLabel;
+        private DevComponents.DotNetBar.LabelX emailLabel;
+        private DevComponents.DotNetBar.LabelX faxLabel;
+        private DevComponents.DotNetBar.LabelX commentLabel;
+        private DevComponents.DotNetBar.LabelX createUserNameLabel;
+        private DevComponents.DotNetBar.LabelX cDAStatusLabel;
+        private DevComponents.DotNetBar.LabelX noticeMethodLabel;
+        private DevComponents.DotNetBar.LabelX contractCodeLabel;
+        private DevComponents.DotNetBar.LabelX lblCDACode;
+        private DevComponents.DotNetBar.LabelX assignTypeLabel;
+        private DevComponents.DotNetBar.LabelX lblIsNotice;
+        private DevComponents.DotNetBar.LabelX lblRemark;
+        private DevComponents.DotNetBar.LabelX lblCasePaymentTerm;
+        private DevComponents.DotNetBar.LabelX lblCDASignDate;
     }
 }

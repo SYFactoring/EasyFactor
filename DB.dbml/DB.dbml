@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=195.21.48.37;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="Char(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -92,6 +92,7 @@
       <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="IsSigned" Type="System.Boolean" DbType="bit" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="HighestFinanceLine" Type="System.Double" DbType="float" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="DelayDays" Type="System.Int32" DbType="int" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Case_CDA" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>

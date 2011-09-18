@@ -98,7 +98,7 @@ namespace CMBC.EasyFactor.Utils
             {
                 var smtpClient = new SmtpClient("smtp.cmbc.com.cn", 25)
                                      {
-                                         Credentials = new NetworkCredential("factoring", "passw0rd"),
+                                         Credentials = new NetworkCredential("factoring", "factor2011"),
                                          //EnableSsl = true,
                                          DeliveryMethod = SmtpDeliveryMethod.Network
                                      };

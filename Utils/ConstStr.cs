@@ -4,6 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
 namespace CMBC.EasyFactor.Utils
 {
     /// <summary>
@@ -231,11 +232,11 @@ namespace CMBC.EasyFactor.Utils
     /// <summary>
     /// 
     /// </summary>
-    public static class REPORT
+    public class REPORT
     {
         /// <summary>
         /// 
         /// </summary>
-        public const string REPORT_PASSWORD = "CMBC2011";
+        public static string REPORT_PASSWORD = "CMBC"+DateTime.Today.Year;
     }
 }
