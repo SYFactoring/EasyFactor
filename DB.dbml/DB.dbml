@@ -93,6 +93,7 @@
       <Column Name="IsSigned" Type="System.Boolean" DbType="bit" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="HighestFinanceLine" Type="System.Double" DbType="float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="DelayDays" Type="System.Int32" DbType="int" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="RiskType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Case_CDA" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>

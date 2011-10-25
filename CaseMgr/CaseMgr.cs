@@ -392,9 +392,9 @@ namespace CMBC.EasyFactor.CaseMgr
                                                                     ? c.CaseAppDate <= endDate
                                                                     : true)
                                                                 &&
-                                                               (cbIsCDAChecked.Checked == false
-                                                                    ? true
-                                                                    : c.CDAs.Any(cda => cda.CDAStatus == CDAStr.CHECKED))
+                                                               (cbIsLowRisk.Checked == true
+                                                                    ? c.CDAs.Any(cda=>cda.RiskType=="µÕ∑Áœ’"&&cda.CDAStatus=="“—…Û∫À")
+                                                                    : true)
                                                                &&
                                                                (cbIsContractSigned.Checked == false
                                                                     ? true
@@ -481,7 +481,7 @@ namespace CMBC.EasyFactor.CaseMgr
             diBegin.Value = default(DateTime);
             diEnd.Value = default(DateTime);
             cbIsContractSigned.Checked = true;
-            cbIsCDAChecked.Checked = true;
+            cbIsLowRisk.Checked = true;
             tbOPName.Text = string.Empty;
         }
 

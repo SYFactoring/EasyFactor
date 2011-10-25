@@ -693,6 +693,31 @@ namespace CMBC.EasyFactor.DB.dbml
             get { return !InvoiceAssignBatches.Any(i => i.IsClear == false); }
         }
 
+        public string SellerClientName
+        {
+            get { return SellerClient.ClientNameCN == string.Empty ? SellerClient.ClientNameEN : SellerClient.ClientNameCN; }
+        }
+
+        public string SellerFactorName
+        {
+            get { return SellerFactor.CompanyNameCN == string.Empty ? SellerFactor.CompanyNameEN : SellerFactor.CompanyNameCN; }
+        }
+
+        public string BuyerClientName
+        {
+            get { return BuyerClient.ClientNameCN == string.Empty ? BuyerClient.ClientNameEN : BuyerClient.ClientNameCN; }
+        }
+
+        public string BuyerFactorName
+        {
+            get { return BuyerFactor.CompanyNameCN == string.Empty ? BuyerFactor.CompanyNameEN : BuyerFactor.CompanyNameCN; }
+        }
+
+        public string OwnerDepartmentName
+        {
+            get { return OwnerDepartment.DepartmentName; }
+        }
+
         /// <summary>
         /// 
         /// </summary>

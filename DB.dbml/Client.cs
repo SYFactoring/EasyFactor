@@ -178,18 +178,16 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// ÏÖ½ð³ØÓà¶î
         /// </summary>
-        public double? PoolCashOutstanding
+        public double GetPoolCashOutstanding(string currency)
         {
-            get
-            {
                 double cashTotal = 0;
                 double totalPayment = 0;
                 foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
                 {
                     double paymentAmount = curCase.PaymentAmountByDate;
-                    if (curCase.InvoiceCurrency != "CNY")
+                    if (curCase.InvoiceCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
+                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
                         paymentAmount *= exchange;
                     }
 
@@ -201,9 +199,9 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     double refundAmount = financeBatch.PoolRefundAmount.GetValueOrDefault();
 
-                    if (financeBatch.BatchCurrency != "CNY")
+                    if (financeBatch.BatchCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(financeBatch.BatchCurrency, "CNY");
+                        double exchange = Exchange.GetExchangeRate(financeBatch.BatchCurrency, currency);
                         refundAmount *= exchange;
                     }
 
@@ -215,9 +213,9 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (GuaranteeDeposits.Count > 0)
                 {
                     double gd = GuaranteeDeposits[0].GuaranteeDepositAmount;
-                    if (GuaranteeDeposits[0].GuaranteeDepositCurrency != "CNY")
+                    if (GuaranteeDeposits[0].GuaranteeDepositCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(GuaranteeDeposits[0].GuaranteeDepositCurrency, "CNY");
+                        double exchange = Exchange.GetExchangeRate(GuaranteeDeposits[0].GuaranteeDepositCurrency, currency);
                         gd *= exchange;
                     }
 
@@ -225,7 +223,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return cashTotal;
-            }
         }
 
         /// <summary>
@@ -251,18 +248,16 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// ÈÚ×Ê³ØÓà¶î
         /// </summary>
-        public double? PoolFinanceOutstanding
+        public double GetPoolFinanceOutstanding(string currency)
         {
-            get
-            {
                 double total = 0;
                 foreach (InvoiceFinanceBatch financeBatch in InvoiceFinanceBatches)
                 {
                     double financeOutstanding = financeBatch.PoolFinanceOutstanding;
 
-                    if (financeBatch.BatchCurrency != "CNY")
+                    if (financeBatch.BatchCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(financeBatch.BatchCurrency, "CNY");
+                        double exchange = Exchange.GetExchangeRate(financeBatch.BatchCurrency, currency);
                         financeOutstanding *= exchange;
                     }
 
@@ -270,23 +265,20 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return total;
-            }
         }
 
         /// <summary>
         /// ³ØÈÚ×ÊµÄ×ÜÕË¿îÓà¶î
         /// </summary>
-        public double PoolTotalAssignOutstading
+        public double GetPoolTotalAssignOutstading(string currency)
         {
-            get
-            {
                 double result = 0;
                 foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
                 {
                     double assignOutstanding = curCase.AssignOutstanding;
-                    if (curCase.InvoiceCurrency != "CNY")
+                    if (curCase.InvoiceCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, "CNY");
+                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
                         assignOutstanding *= exchange;
                     }
 
@@ -294,7 +286,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 return result;
-            }
         }
 
         /// <summary>

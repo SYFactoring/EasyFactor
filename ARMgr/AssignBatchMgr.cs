@@ -557,6 +557,7 @@ namespace CMBC.EasyFactor.ARMgr
             MakeReport makeReport = ReportAssignApplication;
             GroupBatchesByTransactionType(selectedBatches, makeReport);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -1202,7 +1203,14 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 if (batchGroup.Any(b => b.Case.IsPool == false))
                 {
-                    ReportFinanceSheet(sheet, batchGroup, transactionType);
+                    if (transactionType == "出口保理" && batchGroup.First().Case.ActiveCDA.RiskType == "低风险")
+                    {
+                        ReportFinanceSheetOld(sheet, batchGroup, transactionType);
+                    }
+                    else
+                    {
+                        ReportFinanceSheet(sheet, batchGroup, transactionType);
+                    }
                 }
                 else
                 {
@@ -1215,7 +1223,14 @@ namespace CMBC.EasyFactor.ARMgr
                         poolsheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
                     }
                     poolsheet.Name = "可融资账款明细表(保理池)";
-                    ReportPoolFinanceSheet(poolsheet, batchGroup.Key);
+                    if (transactionType == "出口保理" && batchGroup.First().Case.ActiveCDA.RiskType == "低风险")
+                    {
+                        ReportPoolFinanceSheetOld(poolsheet, batchGroup.Key);
+                    }
+                    else
+                    {
+                        ReportPoolFinanceSheet(poolsheet, batchGroup.Key);
+                    }
                 }
 
                 Case firstCase = batchGroup.First().Case;
@@ -1412,132 +1427,145 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sheet"></param>
         /// <param name="keyClient"></param>
-    //    private static void ReportPoolFinanceSheetOld(Worksheet sheet, Client keyClient)
-    //    {
-    //        string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-    //        sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+        private static void ReportPoolFinanceSheetOld(Worksheet sheet, Client keyClient)
+        {
+            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
-    //        sheet.Range["A3", "E3"].MergeCells = true;
-    //        sheet.Range["A3", "A3"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-    //        sheet.Cells[3, 1] = "可融资账款明细表(池融资)";
+            sheet.Range["A3", "E3"].MergeCells = true;
+            sheet.Range["A3", "A3"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
+            sheet.Cells[3, 1] = "可融资账款明细表(保理池)";
 
-    //        int row = 5;
-    //        sheet.Cells[row, 1] = "卖方：";
+            int row = 5;
+            sheet.Cells[row, 1] = "卖方：";
 
-    //        sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].Font.Underline = true;
-    //        sheet.Cells[row, 2] = String.Format("{0}", keyClient);
-    //        row++;
+            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].Font.Underline = true;
+            sheet.Cells[row, 2] = String.Format("{0}", keyClient);
+            row++;
 
-    //        row++;
-    //        sheet.Cells[row, 1] = "池融资额度：";
-    //        ClientCreditLine poolCreditLine = keyClient.PoolFinanceCreditLine;
-    //        if (poolCreditLine != null)
-    //        {
-    //            sheet.Cells[row, 2] = poolCreditLine.CreditLine;
-    //            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
-    //                TypeUtil.GetExcelCurrency(poolCreditLine.CreditLineCurrency);
-    //        }
+            row++;
+            sheet.Cells[row, 1] = "池融资额度：";
+            ClientCreditLine poolCreditLine = keyClient.PoolFinanceCreditLine;
+            if (poolCreditLine != null)
+            {
+                sheet.Cells[row, 2] = poolCreditLine.CreditLine;
+                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
+                    TypeUtil.GetExcelCurrency(poolCreditLine.CreditLineCurrency);
+            }
 
-    //        row++;
-    //        sheet.Cells[row, 1] = "总账款余额：";
-    //        sheet.Cells[row, 2] = keyClient.PoolTotalAssignOutstading;
-    //        sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
-    //            TypeUtil.GetExcelCurrency("CNY");
+            row++;
+            sheet.Cells[row, 1] = "总账款余额：";
+            sheet.Cells[row, 2] = keyClient.GetPoolTotalAssignOutstading(poolCreditLine.CreditLineCurrency);
+            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
+                TypeUtil.GetExcelCurrency(poolCreditLine.CreditLineCurrency);
 
-    //        row++;
-    //        sheet.Cells[row, 1] = "账款池余额：";
-    //        sheet.Cells[row, 2] = keyClient.GetPoolCanBeFinance("CNY");
-    //        sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
-    //            TypeUtil.GetExcelCurrency("CNY");
+            row++;
+            sheet.Cells[row, 1] = "账款池余额：";
+            sheet.Cells[row, 2] = keyClient.GetPoolCanBeFinance(poolCreditLine.CreditLineCurrency);
+            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
+                TypeUtil.GetExcelCurrency(poolCreditLine.CreditLineCurrency);
 
-    //        row++;
-    //        sheet.Cells[row, 1] = "融资池余额：";
-    //        sheet.Cells[row, 2] = keyClient.PoolFinanceOutstanding;
-    //        sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
-    //            TypeUtil.GetExcelCurrency("CNY");
+            row++;
+            sheet.Cells[row, 1] = "融资池余额：";
+            sheet.Cells[row, 2] = keyClient.GetPoolFinanceOutstanding(poolCreditLine.CreditLineCurrency);
+            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
+                TypeUtil.GetExcelCurrency(poolCreditLine.CreditLineCurrency);
+            row++;
+            row++;
+            sheet.Cells[row, 1] = "以下内容由分部/行负责核定";
+            sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].Font.Underline = true;
+            row++;
 
-    //        row++;
-    //        sheet.Cells[row, 1] = "现金池余额：";
-    //        sheet.Cells[row, 2] = keyClient.PoolCashOutstanding;
-    //        sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
-    //            TypeUtil.GetExcelCurrency("CNY");
+            sheet.Cells[row, 1] = "现金池余额：";
+           // sheet.Cells[row, 2] = keyClient.GetPoolCashOutstanding(poolCreditLine.CreditLineCurrency);
+            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
+                TypeUtil.GetExcelCurrency(poolCreditLine.CreditLineCurrency);
 
-    //        row++;
-    //        sheet.Cells[row, 1] = "尚可动拨金额：";
+            row++;
+            sheet.Cells[row, 1] = "本次可融资金额：";
 
-    //        row++;
-    //        row++;
-    //        sheet.Cells[row, 1] = "买方";
-    //        sheet.Cells[row, 2] = "账款余额";
-    //        sheet.Cells[row, 3] = "有效账款余额";
-    //        sheet.Cells[row, 4] = "融资比例";
-    //        sheet.Cells[row, 5] = "可融资金额";
+            row++;
+            row++;
+            sheet.Cells[row, 1] = "买方";
+            sheet.Cells[row, 2] = "账款余额";
+            sheet.Cells[row, 3] = "有效账款余额";
+            sheet.Cells[row, 4] = "融资比例";
+            sheet.Cells[row, 5] = "可融资金额";
 
-    //        row++;
-    //        DBDataContext context = new DBDataContext();
-    //        IQueryable<Case> caseResult = from c in context.Cases
-    //                                      where c.SellerCode == keyClient.ClientEDICode && c.IsPool
-    //                                      select c;
-    //        int invoiceStart = row;
-    //        foreach (Case c in caseResult)
-    //        {
-    //            sheet.Cells[row, 1] = c.BuyerClient.ToString();
-    //            sheet.Cells[row, 2] = c.AssignOutstanding;
-    //            sheet.Cells[row, 3] = c.ValuedAssignOutstanding;
-    //            sheet.Cells[row, 4] = c.FinanceProportion;
-    //            sheet.Cells[row, 5] = c.CanBeFinanceAmount;
-    //            sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 3]].NumberFormatLocal =
-    //                TypeUtil.GetExcelCurr(c.InvoiceCurrency);
-    //            sheet.Range[sheet.Cells[row, 4], sheet.Cells[row, 4]].NumberFormatLocal =
-    //"0%";
-    //            sheet.Range[sheet.Cells[row, 5], sheet.Cells[row, 5]].NumberFormatLocal =
-    //TypeUtil.GetExcelCurr(c.InvoiceCurrency);
-    //            row++;
-    //        }
-    //        int invoiceEnd = row - 1;
+            row++;
+            DBDataContext context = new DBDataContext();
+            IQueryable<Case> caseResult = from c in context.Cases
+                                          where c.SellerCode == keyClient.ClientEDICode && c.IsPool
+                                          select c;
+            int invoiceStart = row;
+            foreach (Case c in caseResult)
+            {
+                sheet.Cells[row, 1] = c.BuyerClient.ToString();
+                sheet.Cells[row, 2] = c.AssignOutstanding;
+                sheet.Cells[row, 3] = c.ValuedAssignOutstanding;
+                sheet.Cells[row, 4] = c.FinanceProportion;
+                sheet.Cells[row, 5] = c.CanBeFinanceAmount;
+                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 3]].NumberFormatLocal =
+                    TypeUtil.GetExcelCurr(c.InvoiceCurrency);
+                sheet.Range[sheet.Cells[row, 4], sheet.Cells[row, 4]].NumberFormatLocal =
+    "0%";
+                sheet.Range[sheet.Cells[row, 5], sheet.Cells[row, 5]].NumberFormatLocal =
+    TypeUtil.GetExcelCurr(c.InvoiceCurrency);
+                row++;
+            }
+            int invoiceEnd = row - 1;
 
-    //        sheet.Range[sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]].HorizontalAlignment =
-    //            XlHAlign.xlHAlignCenter;
-    //        sheet.Range[sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]].Borders.LineStyle = 1;
+            sheet.Range[sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]].HorizontalAlignment =
+                XlHAlign.xlHAlignCenter;
+            sheet.Range[sheet.Cells[invoiceStart - 1, 1], sheet.Cells[invoiceEnd, 5]].Borders.LineStyle = 1;
 
-    //        row++;
-    //        sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
-    //        sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
-    //        sheet.Cells[row, 1] = @"备注：本表当日放款有效，过期请重新向保理部申请出具表单。";
+            row++;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
+            sheet.Cells[row, 1] = @"备注：";
+            row++;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
+            sheet.Cells[row, 1] = @"（1）本表当日放款有效，过期请重新向保理部申请出具表单。";
+            row++;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].WrapText = true;
+            sheet.Cells[row, 1] = @"（2）进行保理池放款时，分部贸易融资审查岗须审核确认新增融资款满足以下两项条件：①保理项下账款池余额+现金池余额 >= 保理融资池余额；②保理融资池余额+新增融资<=保理池融资额度+现金池余额。";
+            sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 1]].RowHeight = 45;
 
-    //        row += 3;
-    //        sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
-    //        sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-    //        sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
-    //        row++;
-    //        row++;
-    //        sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
-    //        sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-    //        sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            row += 3;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+            sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
+            row++;
+            row++;
+            sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
+            sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
+            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
 
-    //        sheet.UsedRange.Font.Name = "仿宋_GB2312";
-    //        sheet.UsedRange.Font.Size = 12;
-    //        sheet.Range[sheet.Cells[3, 1], sheet.Cells[3, 1]].Font.Size = 24;
-    //        sheet.Range[sheet.Cells[3, 1], sheet.Cells[3, 5]].RowHeight = 30;
+            sheet.UsedRange.Font.Name = "仿宋_GB2312";
+            sheet.UsedRange.Font.Size = 12;
+            sheet.Range[sheet.Cells[3, 1], sheet.Cells[3, 1]].Font.Size = 24;
+            sheet.Range[sheet.Cells[3, 1], sheet.Cells[3, 5]].RowHeight = 30;
 
-    //        sheet.Range["A1", Type.Missing].ColumnWidth = 20;
-    //        sheet.Range["B1", Type.Missing].ColumnWidth = 20;
-    //        sheet.Range["C1", Type.Missing].ColumnWidth = 20;
-    //        sheet.Range["D1", Type.Missing].ColumnWidth = 10;
-    //        sheet.Range["E1", Type.Missing].ColumnWidth = 20;
+            sheet.Range["A1", Type.Missing].ColumnWidth = 20;
+            sheet.Range["B1", Type.Missing].ColumnWidth = 20;
+            sheet.Range["C1", Type.Missing].ColumnWidth = 20;
+            sheet.Range["D1", Type.Missing].ColumnWidth = 10;
+            sheet.Range["E1", Type.Missing].ColumnWidth = 20;
 
-    //        var sealRange = ((Range)sheet.Cells[row - 4, 3]);
-    //        string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-    //        sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
-    //                                Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+            var sealRange = ((Range)sheet.Cells[row - 4, 3]);
+            string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+                                    Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
-    //        //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
+            //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
-    //        sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
-    //                      Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-    //                      Type.Missing);
-    //        sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
-    //    }
+            sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
+                          Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                          Type.Missing);
+            sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
+        }
 
         /// <summary>
         /// 
@@ -1668,15 +1696,8 @@ namespace CMBC.EasyFactor.ARMgr
                     {
                         foreach (Invoice invoice in selectedBatch.Case.Invoices)
                         {
-                            if (invoice.IsFlaw == false
-                           && invoice.IsDispute.GetValueOrDefault() == false
-                           && invoice.DueDate <= DateTime.Today
-                           && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
-                           &&
-                           ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) *
-                            cda.FinanceProportion.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() >
-                            TypeUtil.PRECISION)
-                           )
+                            if (invoice.DueDate <= DateTime.Today
+                           && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION ))
                             {
                                 if (earlistDateForBaoxian >invoice.DueDate)
                                 {
@@ -1855,7 +1876,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             row++;
-            sheet.Cells[row, 1] = "总融资余额：";
+            sheet.Cells[row, 1] = "保理融资余额：";
             if (creditLine != null)
             {
                 sheet.Cells[row, 2] = keyClient.GetFinanceOutstanding(creditLine.CreditLineCurrency).GetValueOrDefault();
@@ -1864,7 +1885,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             row++;
-            sheet.Cells[row, 1] = "最高可融资金额：";
+            sheet.Cells[row, 1] = "本次可融资金额：";
             GuaranteeDeposit gd = keyClient.GetGuaranteeDeposit(firstCase.InvoiceCurrency);
             double canBeFinanceAmount = 0;
             if (creditLine != null)
@@ -1935,27 +1956,27 @@ namespace CMBC.EasyFactor.ARMgr
                     sheet.Cells[row, 2] = factor.ToString();
                 }
 
-                row++;
+                //row++;
 
-                sheet.Cells[row, 1] = "信用风险额度：";
-                sheet.Cells[row, 2] = cda.CreditCover.GetValueOrDefault();
-                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
-                    TypeUtil.GetExcelCurrency(cda.CreditCoverCurr);
+                //sheet.Cells[row, 1] = "信用风险额度：";
+                //sheet.Cells[row, 2] = cda.CreditCover.GetValueOrDefault();
+                //sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
+                //    TypeUtil.GetExcelCurrency(cda.CreditCoverCurr);
+
+                //row++;
+                //sheet.Cells[row, 1] = "应收账款余额：";
+                //sheet.Cells[row, 2] = selectedBatch.Case.AssignOutstanding;
+                //sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
+                //    TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
 
                 row++;
-                sheet.Cells[row, 1] = "应收账款余额：";
-                sheet.Cells[row, 2] = selectedBatch.Case.AssignOutstanding;
-                sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
-                    TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
-
-                row++;
-                sheet.Cells[row, 1] = "保理融资额度：";
+                sheet.Cells[row, 1] = "对此买方保理融资额度：";
                 sheet.Cells[row, 2] = cda.FinanceLine.GetValueOrDefault();
                 sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
                     TypeUtil.GetExcelCurrency(cda.FinanceLineCurr);
 
                 row++;
-                sheet.Cells[row, 1] = "融资余额：";
+                sheet.Cells[row, 1] = "对此买方保理融资余额：";
                 sheet.Cells[row, 2] = selectedBatch.Case.FinanceOutstanding.GetValueOrDefault();
                 sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
                     TypeUtil.GetExcelCurrency(selectedBatch.Case.InvoiceCurrency);
@@ -1963,11 +1984,11 @@ namespace CMBC.EasyFactor.ARMgr
                 row++;
                 if (transactionType == "国内卖方保理" || transactionType == "出口保理")
                 {
-                    sheet.Cells[row, 1] = "此买方最高可融资金额：";
+                    sheet.Cells[row, 1] = "对此买方本次可融资金额：";
                 }
                 else
                 {
-                    sheet.Cells[row, 1] = "此卖方最高可融资金额：";
+                    sheet.Cells[row, 1] = "对此卖方本次可融资金额：";
                 }
 
                 if (gd != null)

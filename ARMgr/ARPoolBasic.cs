@@ -96,10 +96,10 @@ namespace CMBC.EasyFactor.ARMgr
                 throw new ArgumentNullException("selectedClient", @"selectedClient cannot be a null reference");
             }
 
-            tbPoolTotalAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolTotalAssignOutstading);
+            tbPoolTotalAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.GetPoolTotalAssignOutstading("CNY"));
             tbPoolValuedAssignOutstanding.Text = String.Format("{0:N2}", selectedClient.GetPoolCanBeFinance("CNY"));
-            tbPoolCashOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolCashOutstanding);
-            tbPoolFinanceOutstanding.Text = String.Format("{0:N2}", selectedClient.PoolFinanceOutstanding);
+            tbPoolCashOutstanding.Text = String.Format("{0:N2}", selectedClient.GetPoolCashOutstanding("CNY"));
+            tbPoolFinanceOutstanding.Text = String.Format("{0:N2}", selectedClient.GetPoolFinanceOutstanding("CNY"));
         }
 
         //?Private?Methods?(3)?

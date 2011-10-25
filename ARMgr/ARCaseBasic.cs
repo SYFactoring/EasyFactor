@@ -365,7 +365,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (curCase != null)
             {
-                if (curCase.IsPool)
+                if (curCase.IsPool && (_opARType==OpARType.FINANCE||_opARType==OpARType.BUYER_REFUND||_opARType==OpARType.SELLER_REFUND))
                 {
                     MessageBoxEx.Show("本案为池融资模式，请在池融资模块进行操作", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                       MessageBoxIcon.Information);

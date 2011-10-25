@@ -1815,6 +1815,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "所属地区";
                 datasheet.Cells[1, column++] = "卖方名称";
                 datasheet.Cells[1, column++] = "买方名称";
+                datasheet.Cells[1, column++] = "自营/协销";
                 datasheet.Cells[1, column++] = "业务编号";
                 datasheet.Cells[1, column++] = "发票号";
                 datasheet.Cells[1, column++] = "发票币别";
@@ -1859,6 +1860,7 @@ namespace CMBC.EasyFactor.Utils
                         invoice.InvoiceAssignBatch.Case.OwnerDepartment.Location.LocationName;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.SellerClient.ToString();
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.BuyerClient.ToString();
+                    datasheet.Cells[row + 2, column++] = invoice.InvoiceAssignBatch.Case.OperationType;
                     datasheet.Cells[row + 2, column++] = invoice.AssignBatchNo;
                     datasheet.Cells[row + 2, column++] = "'" + invoice.InvoiceNo;
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceCurrency;
@@ -1870,12 +1872,12 @@ namespace CMBC.EasyFactor.Utils
                     if (invoice.AssignOverDueDays >= 0)
                     {
                         ((Range)datasheet.Cells[row + 2, column - 2]).Interior.ColorIndex = 6;
-                        datasheet.Cells[row + 2, 17] = invoice.AssignOverDueDays;
+                        datasheet.Cells[row + 2, 18] = invoice.AssignOverDueDays;
                     }
 
                     for (int i = 0; i < invoice.InvoiceFinanceLogs.Count; i++)
                     {
-                        column = 12;
+                        column = 13;
                         InvoiceFinanceLog financeLog = invoice.InvoiceFinanceLogs[i];
                         datasheet.Cells[row + 2 + i, column++] = financeLog.InvoiceFinanceBatch.BatchCurrency;
                         datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceAmount;
@@ -1902,12 +1904,12 @@ namespace CMBC.EasyFactor.Utils
                 foreach (Range range in datasheet.UsedRange.Columns)
                 {
                     range.EntireColumn.AutoFit();
-                    if (range.Column == 7 || range.Column == 8 || range.Column == 13 || range.Column == 14)
+                    if (range.Column == 8 || range.Column == 9 || range.Column == 14 || range.Column == 15)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
-                    else if (range.Column == 9 || range.Column == 10 || range.Column == 11 || range.Column == 15 ||
-                             range.Column == 16)
+                    else if (range.Column == 10 || range.Column == 11 || range.Column == 12 || range.Column == 16 ||
+                             range.Column == 17)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }

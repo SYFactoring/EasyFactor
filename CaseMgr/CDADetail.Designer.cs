@@ -4,7 +4,7 @@ namespace CMBC.EasyFactor.CaseMgr
     {
 		#region?Fields?(81)?
 
-        private DevComponents.DotNetBar.Controls.ComboBoxEx assignTypeComboBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx riskTypeComboBox;
         private DevComponents.DotNetBar.ButtonX btnCaseSelect;
         private DevComponents.DotNetBar.ButtonX btnCDASave;
         private DevComponents.DotNetBar.ButtonX btnCDAUpdate;
@@ -164,7 +164,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.noticeMethodLabel = new DevComponents.DotNetBar.LabelX();
             this.contractCodeLabel = new DevComponents.DotNetBar.LabelX();
             this.lblCDACode = new DevComponents.DotNetBar.LabelX();
-            this.assignTypeLabel = new DevComponents.DotNetBar.LabelX();
+            this.riskTypeLabel = new DevComponents.DotNetBar.LabelX();
             this.lblIsNotice = new DevComponents.DotNetBar.LabelX();
             this.lblRemark = new DevComponents.DotNetBar.LabelX();
             this.lblCasePaymentTerm = new DevComponents.DotNetBar.LabelX();
@@ -189,7 +189,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.cbIsNotice = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.assignTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.riskTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tbCDACode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbHighestFinance = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.handFeeCurrComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -787,20 +787,20 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCDACode.TabIndex = 0;
             this.lblCDACode.Text = "CDA编号:";
             // 
-            // assignTypeLabel
+            // riskTypeLabel
             // 
-            this.assignTypeLabel.AutoSize = true;
-            this.assignTypeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.riskTypeLabel.AutoSize = true;
+            this.riskTypeLabel.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.assignTypeLabel.BackgroundStyle.Class = "";
-            this.assignTypeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.assignTypeLabel.Location = new System.Drawing.Point(565, 4);
-            this.assignTypeLabel.Name = "assignTypeLabel";
-            this.assignTypeLabel.Size = new System.Drawing.Size(57, 15);
-            this.assignTypeLabel.TabIndex = 2;
-            this.assignTypeLabel.Text = "<font color=\'red\'>*</font>转让方式:";
+            this.riskTypeLabel.BackgroundStyle.Class = "";
+            this.riskTypeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.riskTypeLabel.Location = new System.Drawing.Point(565, 4);
+            this.riskTypeLabel.Name = "riskTypeLabel";
+            this.riskTypeLabel.Size = new System.Drawing.Size(57, 15);
+            this.riskTypeLabel.TabIndex = 2;
+            this.riskTypeLabel.Text = "<font color=\'red\'>*</font>高/低风险:";
             // 
             // lblIsNotice
             // 
@@ -1144,8 +1144,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelCreditCover.Controls.Add(this.lblIsNotice);
             this.groupPanelCreditCover.Controls.Add(this.cbIsNotice);
             this.groupPanelCreditCover.Controls.Add(this.cbIsRecoarse);
-            this.groupPanelCreditCover.Controls.Add(this.assignTypeLabel);
-            this.groupPanelCreditCover.Controls.Add(this.assignTypeComboBox);
+            this.groupPanelCreditCover.Controls.Add(this.riskTypeLabel);
+            this.groupPanelCreditCover.Controls.Add(this.riskTypeComboBox);
             this.groupPanelCreditCover.Controls.Add(this.lblCDACode);
             this.groupPanelCreditCover.Controls.Add(this.tbCDACode);
             this.groupPanelCreditCover.Controls.Add(this.tbHighestFinance);
@@ -1261,19 +1261,19 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbIsRecoarse.Size = new System.Drawing.Size(101, 16);
             this.cbIsRecoarse.TabIndex = 6;
             this.cbIsRecoarse.Text = "是否有追索权";
-            this.cbIsRecoarse.CheckedChanged += new System.EventHandler(this.CbIsRecoarseCheckedChanged);
+            //this.cbIsRecoarse.CheckedChanged += new System.EventHandler(this.CbIsRecoarseCheckedChanged);
             // 
-            // assignTypeComboBox
+            // riskTypeComboBox
             // 
-            this.assignTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "AssignType", true));
-            this.assignTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.assignTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.assignTypeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.assignTypeComboBox.FormattingEnabled = true;
-            this.assignTypeComboBox.Location = new System.Drawing.Point(625, 2);
-            this.assignTypeComboBox.Name = "assignTypeComboBox";
-            this.assignTypeComboBox.Size = new System.Drawing.Size(74, 21);
-            this.assignTypeComboBox.TabIndex = 3;
+            this.riskTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "RiskType", true));
+            this.riskTypeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.riskTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.riskTypeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.riskTypeComboBox.FormattingEnabled = true;
+            this.riskTypeComboBox.Location = new System.Drawing.Point(625, 2);
+            this.riskTypeComboBox.Name = "riskTypeComboBox";
+            this.riskTypeComboBox.Size = new System.Drawing.Size(74, 21);
+            this.riskTypeComboBox.TabIndex = 3;
             // 
             // tbCDACode
             // 
@@ -1599,7 +1599,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.financeLineTextBox.Size = new System.Drawing.Size(100, 20);
             this.financeLineTextBox.TabIndex = 22;
             this.superValidator.SetValidator1(this.financeLineTextBox, this.customValidator4);
-            this.superValidator.SetValidator2(this.financeLineTextBox, this.customValidator5);
+            //this.superValidator.SetValidator2(this.financeLineTextBox, this.customValidator5);
             // 
             // financeLineCurrComboBox
             // 
@@ -2110,7 +2110,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.customValidator5.ErrorMessage = "预付款额度不能大于买方风险担保额度";
             this.customValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator5.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator5ValidateValue);
+ //           this.customValidator5.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator5ValidateValue);
             // 
             // compareValidator1
             // 
@@ -2223,7 +2223,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.LabelX noticeMethodLabel;
         private DevComponents.DotNetBar.LabelX contractCodeLabel;
         private DevComponents.DotNetBar.LabelX lblCDACode;
-        private DevComponents.DotNetBar.LabelX assignTypeLabel;
+        private DevComponents.DotNetBar.LabelX riskTypeLabel;
         private DevComponents.DotNetBar.LabelX lblIsNotice;
         private DevComponents.DotNetBar.LabelX lblRemark;
         private DevComponents.DotNetBar.LabelX lblCasePaymentTerm;
