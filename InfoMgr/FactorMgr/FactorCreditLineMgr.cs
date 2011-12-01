@@ -148,7 +148,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             IQueryable<FactorCreditLine> queryResult =
                 context.FactorCreditLines.Where(
-                    f =>
+                f => 
+                    ((cbFactorCreditStatus.Text==String.Empty||cbFactorCreditStatus.Text==@"È«²¿")?true: f.CreditLineStatus == cbFactorCreditStatus.Text )&&
                     f.Factor.FactorCode.Contains(factorCode) &&
                     ((f.Factor.CompanyNameCN ?? string.Empty).Contains(factorName) || (f.Factor.CompanyNameEN??string.Empty).Contains(factorName)));
             _bs.DataSource = queryResult;

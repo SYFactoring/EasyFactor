@@ -25,6 +25,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         private DevComponents.DotNetBar.PanelEx panelQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorCode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFactorName;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbFactorCreditStatus;
 
 		#endregion?Fields?
 
@@ -77,6 +78,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
+            this.cbFactorCreditStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tbFactorName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFactorName = new DevComponents.DotNetBar.LabelX();
             this.tbFactorCode = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -121,11 +123,12 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactorCreditLines.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvFactorCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactorCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvFactorCreditLines.Location = new System.Drawing.Point(0, 27);
+            this.dgvFactorCreditLines.Location = new System.Drawing.Point(0, 25);
             this.dgvFactorCreditLines.Name = "dgvFactorCreditLines";
             this.dgvFactorCreditLines.ReadOnly = true;
+            this.dgvFactorCreditLines.RowTemplate.Height = 23;
             this.dgvFactorCreditLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvFactorCreditLines.Size = new System.Drawing.Size(935, 329);
+            this.dgvFactorCreditLines.Size = new System.Drawing.Size(935, 304);
             this.dgvFactorCreditLines.TabIndex = 3;
             this.dgvFactorCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvFactorCreditLinesCellDoubleClick);
             this.dgvFactorCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvFactorCreditLinesDataBindingComplete);
@@ -218,6 +221,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.btnQuery);
+            this.panelQuery.Controls.Add(this.cbFactorCreditStatus);
             this.panelQuery.Controls.Add(this.tbFactorName);
             this.panelQuery.Controls.Add(this.lblFactorName);
             this.panelQuery.Controls.Add(this.tbFactorCode);
@@ -225,7 +229,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(935, 27);
+            this.panelQuery.Size = new System.Drawing.Size(935, 25);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -242,23 +246,41 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(468, 5);
+            this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCount.Location = new System.Drawing.Point(588, 4);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(71, 16);
-            this.lblCount.TabIndex = 10;
+            this.lblCount.Size = new System.Drawing.Size(74, 18);
+            this.lblCount.TabIndex = 11;
             this.lblCount.Text = "获得 条记录";
             // 
             // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(387, 1);
+            this.btnQuery.Location = new System.Drawing.Point(487, 2);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.Size = new System.Drawing.Size(75, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 9;
+            this.btnQuery.TabIndex = 10;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.Query);
+            // 
+            // cbFactorCreditStatus
+            // 
+            this.cbFactorCreditStatus.DisplayMember = "Text";
+            this.cbFactorCreditStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbFactorCreditStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFactorCreditStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbFactorCreditStatus.FormattingEnabled = true;
+            this.cbFactorCreditStatus.Items.AddRange(new object[] {
+            "全部",
+            "已生效",
+            "已过期"});
+            this.cbFactorCreditStatus.Location = new System.Drawing.Point(385, 1);
+            this.cbFactorCreditStatus.Name = "cbFactorCreditStatus";
+            this.cbFactorCreditStatus.Size = new System.Drawing.Size(99, 22);
+            this.cbFactorCreditStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbFactorCreditStatus.TabIndex = 9;
             // 
             // tbFactorName
             // 
@@ -266,9 +288,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.tbFactorName.Border.Class = "TextBoxBorder";
-            this.tbFactorName.Location = new System.Drawing.Point(281, 4);
+            this.tbFactorName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbFactorName.Location = new System.Drawing.Point(281, 2);
             this.tbFactorName.Name = "tbFactorName";
-            this.tbFactorName.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorName.Size = new System.Drawing.Size(100, 21);
             this.tbFactorName.TabIndex = 8;
             // 
             // lblFactorName
@@ -278,9 +301,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblFactorName.BackgroundStyle.Class = "";
-            this.lblFactorName.Location = new System.Drawing.Point(198, 6);
+            this.lblFactorName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblFactorName.Location = new System.Drawing.Point(198, 4);
             this.lblFactorName.Name = "lblFactorName";
-            this.lblFactorName.Size = new System.Drawing.Size(81, 16);
+            this.lblFactorName.Size = new System.Drawing.Size(81, 18);
             this.lblFactorName.TabIndex = 7;
             this.lblFactorName.Text = "合作机构名称";
             // 
@@ -290,9 +314,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.tbFactorCode.Border.Class = "TextBoxBorder";
-            this.tbFactorCode.Location = new System.Drawing.Point(89, 4);
+            this.tbFactorCode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbFactorCode.Location = new System.Drawing.Point(89, 2);
             this.tbFactorCode.Name = "tbFactorCode";
-            this.tbFactorCode.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorCode.Size = new System.Drawing.Size(100, 21);
             this.tbFactorCode.TabIndex = 6;
             // 
             // lblFactorCode
@@ -302,20 +327,21 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblFactorCode.BackgroundStyle.Class = "";
-            this.lblFactorCode.Location = new System.Drawing.Point(8, 6);
+            this.lblFactorCode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblFactorCode.Location = new System.Drawing.Point(8, 4);
             this.lblFactorCode.Name = "lblFactorCode";
-            this.lblFactorCode.Size = new System.Drawing.Size(81, 16);
+            this.lblFactorCode.Size = new System.Drawing.Size(81, 18);
             this.lblFactorCode.TabIndex = 5;
             this.lblFactorCode.Text = "合作机构代码";
             // 
             // FactorCreditLineMgr
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvFactorCreditLines);
             this.Controls.Add(this.panelQuery);
             this.Name = "FactorCreditLineMgr";
-            this.Size = new System.Drawing.Size(935, 356);
+            this.Size = new System.Drawing.Size(935, 329);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactorCreditLines)).EndInit();
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();

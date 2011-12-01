@@ -148,14 +148,18 @@ namespace CMBC.EasyFactor.DB.dbml
             double result = 0;
             foreach (Case curCase in BuyerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
-                double assignOutstanding = curCase.AssignOutstanding;
-                if (curCase.InvoiceCurrency != currency)
+                CDA cda = curCase.ActiveCDA;
+                if (cda != null && cda.CreditCover.HasValue && cda.CreditCover.Value > 0)
                 {
-                    double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
-                    assignOutstanding *= exchange;
-                }
+                    double assignOutstanding = curCase.AssignOutstanding;
+                    if (curCase.InvoiceCurrency != currency)
+                    {
+                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                        assignOutstanding *= exchange;
+                    }
 
-                result += assignOutstanding;
+                    result += assignOutstanding;
+                }
             }
 
             return result;

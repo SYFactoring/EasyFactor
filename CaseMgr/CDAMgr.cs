@@ -438,7 +438,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     (location == "00" ? true : curCase.OwnerDepartment.LocationCode == location)
                 let contracts = cda.Case.SellerClient.Contracts
                 where
-                    contractCode == string.Empty ? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
+                    String.IsNullOrEmpty(contractCode)? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
                 let seller = cda.Case.SellerClient
                 let buyer = cda.Case.BuyerClient
                 where
@@ -811,10 +811,16 @@ namespace CMBC.EasyFactor.CaseMgr
                 switch (selectedCDA.Case.TransactionType)
                 {
                     case "国内卖方保理":
-                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "国内", single, selectedCDA.IsNotice, financeType);
+                        if(selectedCDA.Case.BuyerFactor.FactorType=="保险公司")
+                            line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "国内", "信保", selectedCDA.IsNotice, financeType);
+                        else
+                            line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "国内", single, selectedCDA.IsNotice, financeType);
                         break;
                     case "出口保理":
-                        line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "出口", single, selectedCDA.IsNotice, financeType);
+                        if (selectedCDA.Case.BuyerFactor.FactorType == "保险公司")
+                            line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "出口", "信保", selectedCDA.IsNotice, financeType);
+                        else
+                            line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "出口", single, selectedCDA.IsNotice, financeType);
                         break;
                     case "国内买方保理":
                         line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "国内", single, selectedCDA.IsNotice, financeType);

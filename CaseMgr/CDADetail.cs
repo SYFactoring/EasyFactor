@@ -64,9 +64,9 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="selectedCase"></param>
         /// <param name="opCDAType"></param>
         public CDADetail(Case selectedCase, OpCDAType opCDAType)
-            : this((CDA) null, opCDAType)
+            : this((CDA)null, opCDAType)
         {
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             cda.Case = _context.Cases.SingleOrDefault(c => c.CaseCode == selectedCase.CaseCode);
             FillCase();
         }
@@ -109,9 +109,9 @@ namespace CMBC.EasyFactor.CaseMgr
             handFeeCurrComboBox.ValueMember = "CurrencyCode";
             handFeeCurrComboBox.SelectedIndex = -1;
 
-            riskTypeComboBox.Items.AddRange(new[] {"高风险", "低风险"});
-            commissionTypeComboBox.Items.AddRange(new[] {"按转让金额", "按融资金额", "其他"});
-            cDAStatusComboBox.Items.AddRange(new[] {CDAStr.UNCHECK, CDAStr.CHECKED, CDAStr.REJECT, CDAStr.INVALID});
+            riskTypeComboBox.Items.AddRange(new[] { "高风险", "低风险" });
+            commissionTypeComboBox.Items.AddRange(new[] { "按转让金额", "按融资金额", "其他" });
+            cDAStatusComboBox.Items.AddRange(new[] { CDAStr.UNCHECK, CDAStr.CHECKED, CDAStr.REJECT, CDAStr.INVALID });
 
             if (opCDAType == OpCDAType.NEW_CDA)
             {
@@ -149,7 +149,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="opCDAType"></param>
         public CDADetail(OpCDAType opCDAType)
-            : this((CDA) null, opCDAType)
+            : this((CDA)null, opCDAType)
         {
         }
 
@@ -479,7 +479,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DetailBuyer(object sender, EventArgs e)
         {
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             if (cda == null || cda.Case == null)
             {
                 return;
@@ -496,7 +496,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DetailCase(object sender, EventArgs e)
         {
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             if (cda == null || cda.Case == null)
             {
                 return;
@@ -513,7 +513,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DetailContract(object sender, EventArgs e)
         {
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             if (cda == null || cda.Case == null)
             {
                 return;
@@ -534,7 +534,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DetailFactor(object sender, EventArgs e)
         {
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             if (cda == null || cda.Case == null)
             {
                 return;
@@ -556,7 +556,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void DetailSeller(object sender, EventArgs e)
         {
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             if (cda == null || cda.Case == null)
             {
                 return;
@@ -571,7 +571,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         private void FillCase()
         {
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             if (cda.Case == null)
             {
                 return;
@@ -602,7 +602,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="currency"></param>
         private void FillCreditCover(string currency)
         {
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             if (cda.Case == null)
             {
                 return;
@@ -645,7 +645,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="currency"></param>
         private void FillFinanceLine(string currency)
         {
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             if (cda.Case == null)
             {
                 return;
@@ -714,11 +714,40 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
 
             if (!superValidator.Validate())
             {
                 return;
+            }
+
+            FactorCreditLine factorCreditLine = cda.Case.BuyerFactor.FactorCreditLines.FirstOrDefault();
+            if (factorCreditLine != null && (cda.Case.TransactionType == "出口保理" || cda.Case.TransactionType == "国内卖方保理") && cda.CreditCoverPeriodEnd > factorCreditLine.PeriodEnd)
+            {
+                DialogResult dr = MessageBoxEx.Show("此业务的买方信用风险担保额度到期日大于买方保理商的保理商额度的到期日，是否继续保存", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
+                                        MessageBoxIcon.Question);
+                if (dr == DialogResult.No)
+                {
+                    return;
+                }
+            }
+            if (factorCreditLine != null && (cda.Case.TransactionType == "出口保理" || cda.Case.TransactionType == "国内卖方保理"))
+            {
+                double outstanding = factorCreditLine.CreditLineOutstanding;
+                if(factorCreditLine.CreditLineCurrency!=cda.CreditCoverCurr)
+                {
+                    double rate = Exchange.GetExchangeRate(factorCreditLine.CreditLineCurrency, cda.CreditCoverCurr);
+                    outstanding *= rate;
+                }
+                if (cda.CreditCover > outstanding)
+                {
+                    DialogResult dr = MessageBoxEx.Show("此业务的买方信用风险担保额度大于买方保理商的剩余保理商额度("+factorCreditLine.CreditLineCurrency+" "+factorCreditLine.CreditLineOutstanding+")，是否继续保存", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo,
+                                           MessageBoxIcon.Question);
+                    if (dr == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
             }
 
             if (cbNoticeMethodEmail.Checked)
@@ -873,7 +902,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 return;
             }
 
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             if (cda == null)
             {
                 MessageBoxEx.Show("请首先选择一个额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -955,7 +984,7 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetComponetEditable(createUserNameTextBox, false);
             ControlUtil.SetComponetEditable(cDAStatusComboBox, false);
 
-            var cda = (CDA) CDABindingSource.DataSource;
+            var cda = (CDA)CDABindingSource.DataSource;
             if (_opCDAType != OpCDAType.DETAIL_CDA && cda.Case != null)
             {
                 ClientCreditLine creditLine = cda.Case.BuyerClient.AssignCreditLine;

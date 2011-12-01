@@ -695,22 +695,22 @@ namespace CMBC.EasyFactor.DB.dbml
 
         public string SellerClientName
         {
-            get { return SellerClient.ClientNameCN == string.Empty ? SellerClient.ClientNameEN : SellerClient.ClientNameCN; }
+            get { return String.IsNullOrEmpty(SellerClient.ClientNameCN) ? SellerClient.ClientNameEN : SellerClient.ClientNameCN; }
         }
 
         public string SellerFactorName
         {
-            get { return SellerFactor.CompanyNameCN == string.Empty ? SellerFactor.CompanyNameEN : SellerFactor.CompanyNameCN; }
+            get { return String.IsNullOrEmpty(SellerFactor.CompanyNameCN) ? SellerFactor.CompanyNameEN : SellerFactor.CompanyNameCN; }
         }
 
         public string BuyerClientName
         {
-            get { return BuyerClient.ClientNameCN == string.Empty ? BuyerClient.ClientNameEN : BuyerClient.ClientNameCN; }
+            get { return String.IsNullOrEmpty(BuyerClient.ClientNameCN) ? BuyerClient.ClientNameEN : BuyerClient.ClientNameCN; }
         }
 
         public string BuyerFactorName
         {
-            get { return BuyerFactor.CompanyNameCN == string.Empty ? BuyerFactor.CompanyNameEN : BuyerFactor.CompanyNameCN; }
+            get { return String.IsNullOrEmpty(BuyerFactor.CompanyNameCN) ? BuyerFactor.CompanyNameEN : BuyerFactor.CompanyNameCN; }
         }
 
         public string OwnerDepartmentName

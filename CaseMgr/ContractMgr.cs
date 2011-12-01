@@ -263,7 +263,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                                    client.ClientNameEN.Contains(clientName)
                                                where (contract.ContractCode.Contains(contractCode))
                                                      &&
-                                                     (contractStatus == string.Empty
+                                                     (String.IsNullOrEmpty(contractStatus)
                                                           ? true
                                                           : contract.ContractStatus == contractStatus)
                                                      && (contract.CreateUserName.Contains(createUserName))

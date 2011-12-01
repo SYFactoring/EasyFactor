@@ -267,7 +267,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                  from paymentLog in paymentLogs
                                                  let invoice = paymentLog.Invoice
                                                  where
-                                                     (invoiceNo == string.Empty
+                                                     (String.IsNullOrEmpty(invoiceNo)
                                                           ? true
                                                           : invoice.InvoiceNo.Contains(invoiceNo))
                                                  select creditNote;

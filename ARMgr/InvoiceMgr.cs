@@ -105,14 +105,14 @@ namespace CMBC.EasyFactor.ARMgr
 
             IQueryable<Invoice> queryResult = from invoice in Context.Invoices
                                               where
-                                                  (tbAssignOverDueDays.Text == string.Empty
+                                                  (String.IsNullOrEmpty(tbAssignOverDueDays.Text)
                                                        ? true
                                                        : (invoice.PaymentAmount.GetValueOrDefault() -
                                                           invoice.AssignAmount < -TypeUtil.PRECISION &&
                                                           invoice.DueDate <= DateTime.Now.Date.AddDays(0 - days) &&
                                                           invoice.DueDate >= DateTime.Now.Date))
                                                   &&
-                                                  (tbFinanceOverDueDays.Text == string.Empty
+                                                  (String.IsNullOrEmpty(tbFinanceOverDueDays.Text)
                                                        ? true
                                                        : (invoice.RefundAmount.GetValueOrDefault() -
                                                           invoice.FinanceAmount.GetValueOrDefault() <
@@ -734,11 +734,11 @@ namespace CMBC.EasyFactor.ARMgr
                                                   buyerFactor.CompanyNameCN.Contains(factorName) ||
                                                   buyerFactor.CompanyNameEN.Contains(factorName)
                                               where
-                                                  (invoiceNo == string.Empty
+                                                  (String.IsNullOrEmpty(invoiceNo)
                                                        ? true
                                                        : invoice.InvoiceNo.Contains(invoiceNo))
                                                   &&
-                                                  (assignBatchNo == string.Empty
+                                                  (String.IsNullOrEmpty(assignBatchNo)
                                                        ? true
                                                        : invoice.AssignBatchNo.Contains(assignBatchNo))
                                                   &&
@@ -750,13 +750,13 @@ namespace CMBC.EasyFactor.ARMgr
                                                        ? true
                                                        : invoice.IsDispute == (isDispute == "Y" ? true : false))
                                                   &&
-                                                  (tbAssignOverDueDays.Text == string.Empty
+                                                  (String.IsNullOrEmpty(tbAssignOverDueDays.Text)
                                                        ? true
                                                        : (invoice.PaymentAmount.GetValueOrDefault() -
                                                           invoice.AssignAmount < -TypeUtil.PRECISION &&
                                                           invoice.DueDate <= assignOverDueDate))
                                                   &&
-                                                  (tbFinanceOverDueDays.Text == string.Empty
+                                                  (String.IsNullOrEmpty(tbFinanceOverDueDays.Text)
                                                        ? true
                                                        : (invoice.RefundAmount.GetValueOrDefault() -
                                                           invoice.FinanceAmount.GetValueOrDefault() <

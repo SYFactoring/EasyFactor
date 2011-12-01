@@ -36,7 +36,14 @@ namespace CMBC.EasyFactor.DB.dbml
                     return null;
                 }
 
-                return CreditCover - Case.AssignOutstanding;
+                double assignOutstanding = Case.AssignOutstanding;
+                if (Case.InvoiceCurrency != this.CreditCoverCurr)
+                {
+                    double rate = Exchange.GetExchangeRate(Case.InvoiceCurrency, CreditCoverCurr);
+                    assignOutstanding *= rate;
+                }
+
+                return CreditCover - assignOutstanding;
             }
         }
 

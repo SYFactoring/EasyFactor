@@ -421,7 +421,7 @@ namespace CMBC.EasyFactor.Utils
                         var mail = new SendMail(location.LegerContactEmail1, location.LegerContactEmail2,
                                                 App.Current.CurUser.Email,
                                                 String.Format("{0}保理台帐{1:yyyyMMdd}", dir.Name, DateTime.Today),
-                                                "本邮件由中国民生银行保理运营系统自动生成并发送。如有问题请回复邮件给张晓兰(zhangxiaolan@cmbc.com.cn)");
+                                                "本邮件由中国民生银行保理运营系统自动生成并发送。如有问题请回复邮件给保理部(factoring@cmbc.com.cn)");
 
                         mail.AddAttachment(zipName);
                         mail.Send();

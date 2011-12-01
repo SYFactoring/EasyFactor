@@ -178,7 +178,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(911, 30);
+            this.panelQuery.Size = new System.Drawing.Size(911, 28);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -194,7 +194,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.btnReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnReset.Location = new System.Drawing.Point(693, 5);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(41, 23);
+            this.btnReset.Size = new System.Drawing.Size(41, 21);
             this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReset.TabIndex = 9;
             this.btnReset.Text = "重置";
@@ -205,10 +205,11 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbCountry.DisplayMember = "Text";
             this.cbCountry.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCountry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbCountry.FormattingEnabled = true;
-            this.cbCountry.Location = new System.Drawing.Point(216, 5);
+            this.cbCountry.Location = new System.Drawing.Point(216, 2);
             this.cbCountry.Name = "cbCountry";
-            this.cbCountry.Size = new System.Drawing.Size(99, 21);
+            this.cbCountry.Size = new System.Drawing.Size(99, 22);
             this.cbCountry.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbCountry.TabIndex = 3;
             // 
@@ -219,9 +220,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblCountry.BackgroundStyle.Class = "";
+            this.lblCountry.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblCountry.Location = new System.Drawing.Point(175, 5);
             this.lblCountry.Name = "lblCountry";
-            this.lblCountry.Size = new System.Drawing.Size(44, 16);
+            this.lblCountry.Size = new System.Drawing.Size(44, 18);
             this.lblCountry.TabIndex = 2;
             this.lblCountry.Text = "所在国";
             // 
@@ -230,6 +232,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.cbFactorType.DisplayMember = "Text";
             this.cbFactorType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbFactorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFactorType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbFactorType.FormattingEnabled = true;
             this.cbFactorType.Items.AddRange(new object[] {
             "全部",
@@ -237,9 +240,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             "保险公司",
             "监管机构",
             "代付行"});
-            this.cbFactorType.Location = new System.Drawing.Point(70, 5);
+            this.cbFactorType.Location = new System.Drawing.Point(70, 2);
             this.cbFactorType.Name = "cbFactorType";
-            this.cbFactorType.Size = new System.Drawing.Size(99, 21);
+            this.cbFactorType.Size = new System.Drawing.Size(99, 22);
             this.cbFactorType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbFactorType.TabIndex = 1;
             // 
@@ -250,9 +253,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(740, 8);
+            this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCount.Location = new System.Drawing.Point(740, 7);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 10;
             // 
             // btnQuery
@@ -261,7 +264,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnQuery.Location = new System.Drawing.Point(646, 5);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(41, 23);
+            this.btnQuery.Size = new System.Drawing.Size(41, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 8;
             this.btnQuery.Text = "查询";
@@ -273,9 +276,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.tbFactorName.Border.Class = "TextBoxBorder";
-            this.tbFactorName.Location = new System.Drawing.Point(540, 5);
+            this.tbFactorName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbFactorName.Location = new System.Drawing.Point(540, 2);
             this.tbFactorName.Name = "tbFactorName";
-            this.tbFactorName.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorName.Size = new System.Drawing.Size(100, 21);
             this.tbFactorName.TabIndex = 7;
             // 
             // lblFactorName
@@ -285,9 +289,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblFactorName.BackgroundStyle.Class = "";
+            this.lblFactorName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblFactorName.Location = new System.Drawing.Point(485, 5);
             this.lblFactorName.Name = "lblFactorName";
-            this.lblFactorName.Size = new System.Drawing.Size(56, 16);
+            this.lblFactorName.Size = new System.Drawing.Size(56, 18);
             this.lblFactorName.TabIndex = 6;
             this.lblFactorName.Text = "机构名称";
             // 
@@ -297,9 +302,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.tbFactorCode.Border.Class = "TextBoxBorder";
-            this.tbFactorCode.Location = new System.Drawing.Point(379, 5);
+            this.tbFactorCode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbFactorCode.Location = new System.Drawing.Point(379, 2);
             this.tbFactorCode.Name = "tbFactorCode";
-            this.tbFactorCode.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorCode.Size = new System.Drawing.Size(100, 21);
             this.tbFactorCode.TabIndex = 5;
             // 
             // lblFactorCode
@@ -309,9 +315,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblFactorCode.BackgroundStyle.Class = "";
+            this.lblFactorCode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblFactorCode.Location = new System.Drawing.Point(321, 5);
             this.lblFactorCode.Name = "lblFactorCode";
-            this.lblFactorCode.Size = new System.Drawing.Size(56, 16);
+            this.lblFactorCode.Size = new System.Drawing.Size(56, 18);
             this.lblFactorCode.TabIndex = 4;
             this.lblFactorCode.Text = "机构编号";
             // 
@@ -322,9 +329,10 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // 
             this.lblFactorType.BackgroundStyle.Class = "";
+            this.lblFactorType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblFactorType.Location = new System.Drawing.Point(5, 5);
             this.lblFactorType.Name = "lblFactorType";
-            this.lblFactorType.Size = new System.Drawing.Size(56, 16);
+            this.lblFactorType.Size = new System.Drawing.Size(56, 18);
             this.lblFactorType.TabIndex = 0;
             this.lblFactorType.Text = "机构类型";
             // 
@@ -361,13 +369,13 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvFactors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactors.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvFactors.Location = new System.Drawing.Point(0, 30);
+            this.dgvFactors.Location = new System.Drawing.Point(0, 28);
             this.dgvFactors.MultiSelect = false;
             this.dgvFactors.Name = "dgvFactors";
             this.dgvFactors.ReadOnly = true;
             this.dgvFactors.RowTemplate.Height = 23;
             this.dgvFactors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFactors.Size = new System.Drawing.Size(911, 318);
+            this.dgvFactors.Size = new System.Drawing.Size(911, 293);
             this.dgvFactors.TabIndex = 0;
             this.dgvFactors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvFactors.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvFactorsRowPostPaint);
@@ -411,14 +419,14 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             // 
             // FactorMgr
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.dgvFactors);
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "FactorMgr";
-            this.Size = new System.Drawing.Size(911, 348);
+            this.Size = new System.Drawing.Size(911, 321);
             this.contextMenuFactorMgr.ResumeLayout(false);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
