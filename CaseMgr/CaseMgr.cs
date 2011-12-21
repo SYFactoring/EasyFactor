@@ -196,6 +196,8 @@ namespace CMBC.EasyFactor.CaseMgr
                 MessageBoxEx.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", MESSAGE.TITLE_WARNING,
                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                dgvCases.Rows.RemoveAt(dgvCases.CurrentCell.RowIndex);
+
                 foreach (InvoiceAssignBatch assignBatch in selectedCase.InvoiceAssignBatches)
                 {
                     foreach (Invoice invoice in assignBatch.Invoices)
@@ -212,6 +214,7 @@ namespace CMBC.EasyFactor.CaseMgr
                     Context.Invoices.DeleteAllOnSubmit(assignBatch.Invoices);
                 }
 
+                Context.CreditCoverNegotiations.DeleteAllOnSubmit(selectedCase.CreditCoverNegotiations);
                 Context.InvoiceAssignBatches.DeleteAllOnSubmit(selectedCase.InvoiceAssignBatches);
                 Context.InvoiceFinanceBatches.DeleteAllOnSubmit(selectedCase.InvoiceFinanceBatches);
                 Context.InvoicePaymentBatches.DeleteAllOnSubmit(selectedCase.InvoicePaymentBatches);
@@ -232,7 +235,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                   MessageBoxIcon.Information);
-                dgvCases.Rows.RemoveAt(dgvCases.CurrentCell.RowIndex);
+               
             }
         }
 
