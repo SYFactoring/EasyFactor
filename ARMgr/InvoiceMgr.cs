@@ -107,16 +107,16 @@ namespace CMBC.EasyFactor.ARMgr
                                               where
                                                   (String.IsNullOrEmpty(tbAssignOverDueDays.Text)
                                                        ? true
-                                                       : (invoice.PaymentAmount.GetValueOrDefault() -
-                                                          invoice.AssignAmount < -TypeUtil.PRECISION &&
+                                                       : (invoice.PaymentAmount.GetValueOrDefault() <
+                                                          invoice.AssignAmount  &&
                                                           invoice.DueDate <= DateTime.Now.Date.AddDays(0 - days) &&
                                                           invoice.DueDate >= DateTime.Now.Date))
                                                   &&
                                                   (String.IsNullOrEmpty(tbFinanceOverDueDays.Text)
                                                        ? true
-                                                       : (invoice.RefundAmount.GetValueOrDefault() -
-                                                          invoice.FinanceAmount.GetValueOrDefault() <
-                                                          -TypeUtil.PRECISION &&
+                                                       : (invoice.RefundAmount.GetValueOrDefault() <
+                                                          invoice.FinanceAmount.GetValueOrDefault() 
+                                                          &&
                                                           invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(0 - days) &&
                                                           invoice.FinanceDueDate >= DateTime.Now.Date))
                                               select invoice;
@@ -692,11 +692,11 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            double assignOustanding;
-            bool needAssignOutstanding = Double.TryParse(tbAssignOutstanding.Text, out assignOustanding);
+            decimal assignOustanding;
+            bool needAssignOutstanding = Decimal.TryParse(tbAssignOutstanding.Text, out assignOustanding);
 
-            double financeOutstanding;
-            bool needFinanceOutstanding = Double.TryParse(tbFinanceOutstanding.Text, out financeOutstanding);
+            decimal financeOutstanding;
+            bool needFinanceOutstanding = Decimal.TryParse(tbFinanceOutstanding.Text, out financeOutstanding);
 
 
             Context = new DBDataContext();
@@ -752,26 +752,24 @@ namespace CMBC.EasyFactor.ARMgr
                                                   &&
                                                   (String.IsNullOrEmpty(tbAssignOverDueDays.Text)
                                                        ? true
-                                                       : (invoice.PaymentAmount.GetValueOrDefault() -
-                                                          invoice.AssignAmount < -TypeUtil.PRECISION &&
+                                                       : (invoice.PaymentAmount.GetValueOrDefault() <
+                                                          invoice.AssignAmount  &&
                                                           invoice.DueDate <= assignOverDueDate))
                                                   &&
                                                   (String.IsNullOrEmpty(tbFinanceOverDueDays.Text)
                                                        ? true
-                                                       : (invoice.RefundAmount.GetValueOrDefault() -
-                                                          invoice.FinanceAmount.GetValueOrDefault() <
-                                                          -TypeUtil.PRECISION &&
+                                                       : (invoice.RefundAmount.GetValueOrDefault() <
+                                                          invoice.FinanceAmount.GetValueOrDefault()  &&
                                                           invoice.FinanceDueDate <= financeOverDueDate))
                                                   &&
                                                   (needAssignOutstanding
-                                                       ? invoice.PaymentAmount.GetValueOrDefault() -
-                                                         invoice.AssignAmount + assignOustanding < -TypeUtil.PRECISION
+                                                       ? invoice.PaymentAmount.GetValueOrDefault() <
+                                                         invoice.AssignAmount - assignOustanding 
                                                        : true)
                                                   &&
                                                   (needFinanceOutstanding
-                                                       ? invoice.RefundAmount.GetValueOrDefault() -
-                                                         invoice.FinanceAmount.GetValueOrDefault() + financeOutstanding <
-                                                         -TypeUtil.PRECISION
+                                                       ? invoice.RefundAmount.GetValueOrDefault() <
+                                                         invoice.FinanceAmount.GetValueOrDefault() - financeOutstanding 
                                                        : true)
                                               orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;

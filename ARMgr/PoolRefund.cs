@@ -155,10 +155,10 @@ namespace CMBC.EasyFactor.ARMgr
             string batchCurrency = batchCurrencyComboBoxEx.Text;
 
             string refundAmountStr = refundAmountTextBoxX.Text;
-            double refundAmount = 0;
+            decimal refundAmount = 0;
             if (!String.IsNullOrEmpty(refundAmountStr))
             {
-                if (!Double.TryParse(refundAmountStr, out refundAmount))
+                if (!Decimal.TryParse(refundAmountStr, out refundAmount))
                 {
                     MessageBoxEx.Show("冲销融资金额类型异常");
                 }
@@ -176,7 +176,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (financeBatch.BatchCurrency != batchCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(batchCurrency, financeBatch.BatchCurrency);
+                        decimal rate = Exchange.GetExchangeRate(batchCurrency, financeBatch.BatchCurrency);
                         refundAmount *= rate;
                     }
 

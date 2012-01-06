@@ -489,8 +489,7 @@ namespace CMBC.EasyFactor.ARMgr
             IQueryable<Invoice> queryResult = from invoice in _context.Invoices
                                               where
                                                   invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode &&
-                                                  (invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount <
-                                                   -TypeUtil.PRECISION)
+                                                  (invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount)
                                               orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;
 
@@ -713,7 +712,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void StatBatch()
         {
             IList logList = logsBindingSource.List;
-            double totalPayment = logList.Cast<object>().Where((t, i) => Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString())).Sum(t => ((InvoicePaymentLog)t).PaymentAmount.GetValueOrDefault());
+            decimal totalPayment = logList.Cast<object>().Where((t, i) => Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString())).Sum(t => ((InvoicePaymentLog)t).PaymentAmount.GetValueOrDefault());
 
             tbTotalPayment.Text = String.Format("{0:N2}", totalPayment);
         }

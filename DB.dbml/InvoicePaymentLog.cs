@@ -34,7 +34,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignAmount
+        public decimal AssignAmount
         {
             get { return Invoice != null ? Invoice.AssignAmount : AssignAmount2; }
         }
@@ -42,7 +42,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignAmount2 { get; set; }
+        public decimal AssignAmount2 { get; set; }
 
         /// <summary>
         /// 
@@ -65,7 +65,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignOutstanding
+        public decimal AssignOutstanding
         {
             get { return Invoice != null ? Invoice.AssignOutstanding : AssignOutstanding2; }
         }
@@ -73,7 +73,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignOutstanding2 { get; set; }
+        public decimal AssignOutstanding2 { get; set; }
 
         /// <summary>
         /// 
@@ -127,12 +127,12 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoicePaymentAmount
+        public decimal? InvoicePaymentAmount
         {
             get { return Invoice != null ? Invoice.PaymentAmount : InvoicePaymentAmount2; }
         }
 
-        public double? InvoicePaymentAmount2 { get; set; }
+        public decimal? InvoicePaymentAmount2 { get; set; }
 
         /// <summary>
         /// 

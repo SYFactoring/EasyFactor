@@ -41,7 +41,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double CreditLineOutstanding
+        public decimal CreditLineOutstanding
         {
             get
             {
@@ -143,18 +143,18 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public double GetAssignOutstanding(string currency)
+        public decimal GetAssignOutstanding(string currency)
         {
-            double result = 0;
+            decimal result = 0;
             foreach (Case curCase in BuyerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
                 CDA cda = curCase.ActiveCDA;
                 if (cda != null && cda.CreditCover.HasValue && cda.CreditCover.Value > 0)
                 {
-                    double assignOutstanding = curCase.AssignOutstanding;
+                    decimal assignOutstanding = curCase.AssignOutstanding;
                     if (curCase.InvoiceCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                        decimal exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
                         assignOutstanding *= exchange;
                     }
 
@@ -170,18 +170,18 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public double GetTotalCreditCover(string currency)
+        public decimal GetTotalCreditCover(string currency)
         {
-            double result = 0;
+            decimal result = 0;
             foreach (Case curCase in BuyerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
                 CDA cda = curCase.ActiveCDA;
                 if (cda != null && cda.CreditCover.HasValue && cda.CreditCoverPeriodEnd > DateTime.Today.AddDays(1))
                 {
-                    double creditCover = cda.CreditCover.Value;
+                    decimal creditCover = cda.CreditCover.Value;
                     if (cda.CreditCoverCurr != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(cda.CreditCoverCurr, currency);
+                        decimal exchange = Exchange.GetExchangeRate(cda.CreditCoverCurr, currency);
                         creditCover *= exchange;
                     }
 

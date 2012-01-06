@@ -17,21 +17,21 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class InvoiceAssignBatch
     {
 
-        private double? _assignAmount;
-        private double? _assignOutstanding;
-        private double? _commissionAmount;
-        private double? _factorCommissionAmount;
-        private double? _financeAmount;
-        private double? _financeOutstanding;
-        private double? _paymentAmount;
-        private double? _refundAmount;
+        private decimal? _assignAmount;
+        private decimal? _assignOutstanding;
+        private decimal? _commissionAmount;
+        private decimal? _factorCommissionAmount;
+        private decimal? _financeAmount;
+        private decimal? _financeOutstanding;
+        private decimal? _paymentAmount;
+        private decimal? _refundAmount;
 
 
 
         /// <summary>
         /// Gets assign amount
         /// </summary>
-        public double AssignAmount
+        public decimal AssignAmount
         {
             get
             {
@@ -47,7 +47,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double AssignOutstanding
+        public decimal AssignOutstanding
         {
             get
             {
@@ -87,13 +87,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double? CommissionAmount
+        public decimal? CommissionAmount
         {
             get
             {
                 if (_commissionAmount.HasValue == false)
                 {
-                    double? result = null;
+                    decimal? result = null;
                     foreach (Invoice invoice in Invoices.Where(invoice => invoice.Commission.HasValue))
                     {
                         if (result.HasValue == false)
@@ -125,7 +125,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? CreditNoteAmount
+        public decimal? CreditNoteAmount
         {
             get { return CreditNotes.Sum(c => c.PaymentAmount); }
         }
@@ -141,13 +141,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? FactorCommissionAmount
+        public decimal? FactorCommissionAmount
         {
             get
             {
                 if (_factorCommissionAmount.HasValue == false)
                 {
-                    double? result = null;
+                    decimal? result = null;
                     foreach (Invoice invoice in Invoices.Where(invoice => invoice.FactorCommission.HasValue))
                     {
                         if (result.HasValue == false)
@@ -215,7 +215,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets finance amount
         /// </summary>
-        public double FinanceAmount
+        public decimal FinanceAmount
         {
             get
             {
@@ -231,7 +231,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double FinanceOutstanding
+        public decimal FinanceOutstanding
         {
             get
             {
@@ -247,17 +247,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? HandFee
+        public decimal? HandFee
         {
             get
             {
                 CDA cda = Case.ActiveCDA;
                 if (cda != null)
                 {
-                    double? handfee = cda.HandFee;
+                    decimal? handfee = cda.HandFee;
                     if (cda.HandFeeCurr != Case.InvoiceCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(cda.HandFeeCurr, Case.InvoiceCurrency);
+                        decimal rate = Exchange.GetExchangeRate(cda.HandFeeCurr, Case.InvoiceCurrency);
                         handfee *= rate;
                     }
                     return handfee;
@@ -270,7 +270,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double? HandfeeAmount
+        public decimal? HandfeeAmount
         {
             get { return Invoices.Count * HandFee; }
         }
@@ -288,7 +288,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public bool IsRefinanced
         {
-            get { return Invoices.Any(i => i.FinanceAmount > TypeUtil.PRECISION); }
+            get { return Invoices.Any(i => i.FinanceAmount > 0); }
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? MsgAmount
+        public decimal? MsgAmount
         {
             get
             {
@@ -335,7 +335,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets payment amount
         /// </summary>
-        public double PaymentAmount
+        public decimal PaymentAmount
         {
             get
             {
@@ -351,7 +351,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets refund amount
         /// </summary>
-        public double RefundAmount
+        public decimal RefundAmount
         {
             get
             {
@@ -367,7 +367,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? RemitAmount
+        public decimal? RemitAmount
         {
             get { return CommissionRemittance != null ? CommissionRemittance.RemitAmount : null; }
         }

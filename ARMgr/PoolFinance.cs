@@ -178,10 +178,10 @@ namespace CMBC.EasyFactor.ARMgr
 
             var batch = (InvoiceFinanceBatch) batchBindingSource.DataSource;
 
-            double financeAmount = batch.FinanceAmount;
+            decimal financeAmount = batch.FinanceAmount;
             if (batch.BatchCurrency != "CNY")
             {
-                double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                decimal rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
                 financeAmount *= rate;
             }
             if (TypeUtil.GreaterZero(financeAmount - _client.GetPoolCanBeFinance("CNY")))

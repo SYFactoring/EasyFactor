@@ -217,7 +217,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             IEnumerable<IGrouping<Client, InvoiceAssignBatch>> clientGroups = factorGroup.GroupBy(batch => batch.Case.SellerClient);
 
             int row = 7;
-            double sellerTotal = 0;
+            decimal sellerTotal = 0;
             foreach (var clientGroup in clientGroups)
             {
                 Client client = clientGroup.Key;
@@ -239,9 +239,9 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 11]].Font.Underline = XlUnderlineStyle.xlUnderlineStyleSingle;
 
                 row++;
-                double assignTotal = 0;
-                double commissionTotal = 0;
-                double handfeeTotal = 0;
+                decimal assignTotal = 0;
+                decimal commissionTotal = 0;
+                decimal handfeeTotal = 0;
                 foreach (InvoiceAssignBatch batch in clientGroup.OrderBy(b => b.Case.BuyerCode))
                 {
                     sheet.Cells[row, 1] = batch.Case.BuyerClient.ClientNameEN;

@@ -99,7 +99,7 @@ namespace CMBC.EasyFactor.ARMgr
             result =
                 context.Invoices.Count(
                     invoice =>
-                    invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION &&
+                    invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount &&
                     invoice.DueDate <= DateTime.Now.Date.AddDays(7) && invoice.DueDate >= DateTime.Now.Date);
             worker.ReportProgress(result, btnDueAssign7);
 
@@ -107,7 +107,7 @@ namespace CMBC.EasyFactor.ARMgr
             result =
                 context.Invoices.Count(
                     invoice =>
-                    invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION &&
+                    invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount  &&
                     invoice.DueDate == DateTime.Now.Date);
             worker.ReportProgress(result, btnDueAssign0);
 
@@ -115,7 +115,7 @@ namespace CMBC.EasyFactor.ARMgr
             result =
                 context.Invoices.Count(
                     invoice =>
-                    invoice.PaymentAmount.GetValueOrDefault() - invoice.AssignAmount < -TypeUtil.PRECISION &&
+                    invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount  &&
                     invoice.DueDate < DateTime.Now.Date);
             worker.ReportProgress(result, btnDueAssign);
 
@@ -127,8 +127,8 @@ namespace CMBC.EasyFactor.ARMgr
             result =
                 context.Invoices.Count(
                     invoice =>
-                    invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() <
-                    -TypeUtil.PRECISION && invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(7) &&
+                    invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() 
+                     && invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(7) &&
                     invoice.FinanceDueDate >= DateTime.Now.Date);
             worker.ReportProgress(result, btnDueFinance7);
 
@@ -136,16 +136,16 @@ namespace CMBC.EasyFactor.ARMgr
             result =
                 context.Invoices.Count(
                     invoice =>
-                    invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() <
-                    -TypeUtil.PRECISION && invoice.FinanceDueDate == DateTime.Now.Date);
+                    invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() 
+                     && invoice.FinanceDueDate == DateTime.Now.Date);
             worker.ReportProgress(result, btnDueFinance0);
 
             //DueFinance
             result =
                 context.Invoices.Count(
                     invoice =>
-                    invoice.RefundAmount.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() <
-                    -TypeUtil.PRECISION && invoice.FinanceDueDate < DateTime.Now.Date);
+                    invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() 
+                    && invoice.FinanceDueDate < DateTime.Now.Date);
             worker.ReportProgress(result, btnDueFinance);
 
             //DueClientCreditLine

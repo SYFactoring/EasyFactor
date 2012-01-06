@@ -23,11 +23,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double AssignCreditLineOutstanding
+        public decimal AssignCreditLineOutstanding
         {
             get
             {
-                double result = CreditLine - Client.GetAssignOutstandingAsBuyer(CreditLineCurrency);
+                decimal result = CreditLine - Client.GetAssignOutstandingAsBuyer(CreditLineCurrency);
                 if (ClientCreditLines.Count > 0)
                 {
                     result = ClientCreditLines.Aggregate(result, (current, creditLine) => current - creditLine.Client.GetAssignOutstandingAsBuyer(CreditLineCurrency));
@@ -56,11 +56,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double FinanceCreditLineOutstanding
+        public decimal FinanceCreditLineOutstanding
         {
             get
             {
-                double result = CreditLine - Client.GetFinanceOutstanding(CreditLineCurrency).GetValueOrDefault();
+                decimal result = CreditLine - Client.GetFinanceOutstanding(CreditLineCurrency).GetValueOrDefault();
                 if (ClientCreditLines.Count > 0)
                 {
                     result = ClientCreditLines.Aggregate(result, (current, creditLine) => current - creditLine.Client.GetFinanceOutstanding(CreditLineCurrency).GetValueOrDefault());

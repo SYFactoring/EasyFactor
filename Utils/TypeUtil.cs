@@ -63,14 +63,14 @@ namespace CMBC.EasyFactor.Utils
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        public static string ConvertToChineseMoney(double? number)
+        public static string ConvertToChineseMoney(decimal? number)
         {
             if (number == null)
             {
                 return string.Empty;
             }
 
-            double input = number.Value;
+            decimal input = number.Value;
             string result =
                 input.ToString(
                     "#ð¦'.'#Çª#°Û#Ê°#ïö'.'#Çª#°Û#Ê°#Ûò'.'#Çª#°Û#Ê°#¾©'.'#Çª#°Û#Ê°#Õ×'.'#Çª#°Û#Ê°#ÒÚ'.'#Çª#°Û#Ê°#Íò'.'#Çª#°Û#Ê°#Ôª.0½Ç0·Ö;¸º#ð¦'.'#Çª#°Û#Ê°#ïö'.'#Çª#°Û#Ê°#Ûò'.'#Çª#°Û#Ê°#¾©'.'#Çª#°Û#Ê°#Õ×'.'#Çª#°Û#Ê°#ÒÚ'.'#Çª#°Û#Ê°#Íò'.'#Çª#°Û#Ê°#Ôª.0½Ç0·Ö;ÁãÔª");
@@ -112,6 +112,16 @@ namespace CMBC.EasyFactor.Utils
             }
 
             return Math.Abs(double1.Value) < PRECISION;
+        }
+
+        public static bool EqualsZero(decimal? decimal1)
+        {
+            if (decimal1 == null)
+            {
+                return true;
+            }
+
+            return decimal1==0;
         }
 
         /// <summary>
@@ -176,6 +186,16 @@ namespace CMBC.EasyFactor.Utils
             return double1 > PRECISION;
         }
 
+        public static bool GreaterZero(decimal? decimal1)
+        {
+            if (decimal1 == null)
+            {
+                return false;
+            }
+
+            return decimal1>0;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -189,6 +209,16 @@ namespace CMBC.EasyFactor.Utils
             }
 
             return double1 < -PRECISION;
+        }
+
+        public static bool LessZero(decimal? decimal1)
+        {
+            if (decimal1 == null)
+            {
+                return false;
+            }
+
+            return decimal1 < 0;
         }
 
         /// <summary>

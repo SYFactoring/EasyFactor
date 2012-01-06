@@ -54,7 +54,7 @@
       <Column Name="IsNotice" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="AssignType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CreditCoverCurr" Type="System.String" DbType="Char(3)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="CreditCover" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="CreditCover" Type="decimal" DbType="Decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="IsCreditCoverRevolving" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="PUGProportion" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CreditCoverPeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
@@ -62,22 +62,22 @@
       <Column Name="PUGPeriod" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="ReassignGracePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceLineCurr" Type="System.String" DbType="Char(3)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="FinanceLine" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="FinanceLine" Type="decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceLinePeriodBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceLinePeriodEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceProportion" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="OrderNumber" Type="System.String" DbType="VarChar(35)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="PaymentTerms" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceGracePeriod" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="Deductibles" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="LossThreshold" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="Deductibles" Type="decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="LossThreshold" Type="decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="EFPrice" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="IFPrice" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CommissionType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CommissionTypeComment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="HandFeeCurr" Type="System.String" DbType="Char(10)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="HandFee" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="HandFee" Type="decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CDASignDate" Type="System.DateTime" DbType="DateTime" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CDAStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="NoticeMethod" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
@@ -91,10 +91,10 @@
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="IsSigned" Type="System.Boolean" DbType="bit" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="HighestFinanceLine" Type="System.Double" DbType="float" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="InsuranceInvoiceGraceDays" Storage="_DelayDays" Type="System.Int32" DbType="int" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="HighestFinanceLine" Type="decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="InsuranceInvoiceGraceDays" Storage="_insuranceInvoiceGraceDays" Type="System.Int32" DbType="int" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="RiskType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="PoolInvoiceGraceDays" Storage="_DelayDays" Type="System.Int32" DbType="int" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="PoolInvoiceGraceDays" Storage="_poolInvoiceGraceDays" Type="System.Int32" DbType="int" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Case_CDA" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>
@@ -166,7 +166,7 @@
       <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CreditLineType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CreditLineCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="CreditLine" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="CreditLine" Type="decimal" DbType="decimal NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="PeriodBegin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="PeriodEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="ApproveNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
@@ -212,9 +212,9 @@
       <Column Name="NegoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CaseCode" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="RequestType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="RequestAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="RequestAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="RequestDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="ReplyAmount" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="ReplyAmount" Type="decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="ReplyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="IFPrice" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(1400)" CanBeNull="true" UpdateCheck="WhenChanged" />
@@ -341,7 +341,7 @@
       <Column Name="CreditLineID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FactorCode" Type="System.String" DbType="Char(7) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CreditLineCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="CreditLine" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="CreditLine" Type="decimal" DbType="decimal NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="PeriodBegin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="PeriodEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="ApproveNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
@@ -380,7 +380,7 @@
       <Column Name="CaseCode" Storage="_CDACode" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="BatchCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="FinanceAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="FinanceAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FinancePeriodBegin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FinancePeriodEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FinanceRate" Type="System.Double" DbType="Float" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -388,7 +388,7 @@
       <Column Name="CostRate" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="OtherIncome" Type="System.Double" DbType="float" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="OtherIncome" Type="decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="LoanNo" Type="System.String" DbType="Nvarchar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="ClientEDICode" Type="System.String" DbType="Varchar(35)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="InputDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
@@ -432,7 +432,7 @@
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="InputDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="RefundAmount" Type="System.Double" DbType="float" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="RefundAmount" Type="decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceBatchNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="InvoiceRefundBatch_InvoiceRefundLog" Member="InvoiceRefundLogs" ThisKey="RefundBatchNo" OtherKey="RefundBatchNo" Type="InvoiceRefundLog" />
       <Association Name="Case_InvoiceRefundBatch" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
@@ -443,7 +443,7 @@
     <Type Name="Exchange">
       <Column Name="FromCurr" Type="System.String" DbType="Char(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="ToCurr" Type="System.String" DbType="Char(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="ExchangeRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ExchangeRate" Type="decimal" DbType="Decimal NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="false" UpdateCheck="Never" />
     </Type>
   </Table>
@@ -454,7 +454,7 @@
       <Column Name="ReviewStatus" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ReviewDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="RequestCurrency" Type="System.String" DbType="Char(3)" CanBeNull="true" />
-      <Column Name="RequestAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="RequestAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="RequestFinanceType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="RequestFinanceType2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="RequestCommissionRate" Type="System.Double" DbType="Float" CanBeNull="true" />
@@ -476,7 +476,7 @@
       <Column Name="RefundLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RefundBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="FinanceLogID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="RefundAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="true" />
+      <Column Name="RefundAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="InvoiceRefundBatch_InvoiceRefundLog" Member="InvoiceRefundBatch" ThisKey="RefundBatchNo" OtherKey="RefundBatchNo" Type="InvoiceRefundBatch" IsForeignKey="true" />
       <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceFinanceLog" ThisKey="FinanceLogID" OtherKey="FinanceLogID" Type="InvoiceFinanceLog" IsForeignKey="true" />
@@ -496,7 +496,7 @@
     <Type Name="GuaranteeDeposit">
       <Column Name="GuaranteeDepositID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="GuaranteeDepositCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
-      <Column Name="GuaranteeDepositAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="GuaranteeDepositAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="false" />
       <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
@@ -520,9 +520,9 @@
       <Column Name="InvoiceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="InvoiceNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="InvoiceAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="false" />
       <Column Name="AssignBatchNo" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
-      <Column Name="AssignAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="AssignAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="false" />
       <Column Name="DueDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="ValueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="NetPaymentTerms" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -539,17 +539,17 @@
       <Column Name="FlawResolveReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="FlawResolveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="FlawResolveUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="FinanceAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FinanceAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="FinanceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="FinanceDueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PaymentAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PaymentAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="RefundAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="RefundAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="RefundDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Commission" Type="System.Double" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Commission" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="IsDispute" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="DisputeType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="DisputeAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DisputeAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="DisputeReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="DisputeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="DisputeUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -558,7 +558,7 @@
       <Column Name="DisputeResolveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="DisputeResolveUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="FactorCommission" Type="System.Double" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="FactorCommission" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="InvoiceFinanceLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoiceFinanceLog" />
       <Association Name="Invoice_InvoicePaymentLog" Member="InvoicePaymentLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoicePaymentLog" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="InvoiceAssignBatch" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="InvoiceAssignBatch" IsForeignKey="true" />
@@ -568,9 +568,9 @@
     <Type Name="InvoiceFinanceLog">
       <Column Name="FinanceLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FinanceBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="FinanceAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="true" />
+      <Column Name="FinanceAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="Commission" Type="System.Double" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Commission" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="InvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceRefundLogs" ThisKey="FinanceLogID" OtherKey="FinanceLogID" Type="InvoiceRefundLog" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="Invoice" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="Invoice" IsForeignKey="true" />
@@ -581,7 +581,7 @@
     <Type Name="InvoicePaymentLog">
       <Column Name="PaymentLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PaymentBatchNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="PaymentAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="true" />
+      <Column Name="PaymentAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="true" />
       <Column Name="CreditNoteNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="InvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -606,10 +606,10 @@
       <Column Name="MsgType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="MsgDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="MsgCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
-      <Column Name="MsgAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="MsgAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="false" />
       <Column Name="RemitDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RemitCurrency" Type="System.String" DbType="Char(3)" CanBeNull="true" />
-      <Column Name="RemitAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="RemitAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="FactorCode" Type="System.String" DbType="Char(7)" CanBeNull="false" UpdateCheck="WhenChanged" />

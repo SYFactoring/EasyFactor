@@ -19,17 +19,17 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class Case
     {
         private CDA _activeCDA;
-        private double? _assginOutstanding;
-        private double? _assignAmountByDate;
-        private double? _commissionIncomeByDate;
-        private double? _financeAmountByDate;
-        private double? _financeOutstanding;
-        private double? _marginIncomeByDate;
-        private double? _netInterestIncomeByDate;
-        private double? _paymentAmountByDate;
-        private double? _refundAmountByDate;
-        private double? _totalAssignOutstanding;
-        private double? _valuedAssignOutstanding;
+        private decimal? _assginOutstanding;
+        private decimal? _assignAmountByDate;
+        private decimal? _commissionIncomeByDate;
+        private decimal? _financeAmountByDate;
+        private decimal? _financeOutstanding;
+        private decimal? _marginIncomeByDate;
+        private decimal? _netInterestIncomeByDate;
+        private decimal? _paymentAmountByDate;
+        private decimal? _refundAmountByDate;
+        private decimal? _totalAssignOutstanding;
+        private decimal? _valuedAssignOutstanding;
 
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignAmountByDate
+        public decimal AssignAmountByDate
         {
             get
             {
@@ -74,7 +74,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                     IEnumerable<InvoiceAssignBatch> batches =
                         InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
-                    double result = batches.Sum(batch => batch.AssignAmount);
+                    decimal result = batches.Sum(batch => batch.AssignAmount);
 
                     _assignAmountByDate = result;
                 }
@@ -86,13 +86,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets 转让余额
         /// </summary>
-        public double AssignOutstanding
+        public decimal AssignOutstanding
         {
             get
             {
                 if (_assginOutstanding.HasValue == false)
                 {
-                    double total =
+                    decimal total =
                         InvoiceAssignBatches.SelectMany(assignBatch => assignBatch.Invoices).Sum(
                             invoice => invoice.AssignOutstanding);
 
@@ -106,7 +106,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double CanBeFinanceAmount
+        public decimal CanBeFinanceAmount
         {
             get
             {
@@ -117,7 +117,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
                 //return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(),
                 //                ValuedAssignOutstanding * activeCDA.FinanceProportion.GetValueOrDefault());
-                return ValuedAssignOutstanding * activeCDA.FinanceProportion.GetValueOrDefault();
+                return ValuedAssignOutstanding * (decimal)activeCDA.FinanceProportion.GetValueOrDefault();
             }
         }
 
@@ -145,13 +145,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double CommissionIncomeByDate
+        public decimal CommissionIncomeByDate
         {
             get
             {
                 if (_commissionIncomeByDate.HasValue == false)
                 {
-                    double result = 0;
+                    decimal result = 0;
                     int count = 0;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
@@ -165,7 +165,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     }
 
                     CDA cda = ActiveCDA;
-                    double handFreeIncome = 0;
+                    decimal handFreeIncome = 0;
                     if (cda != null)
                     {
                         handFreeIncome = count * cda.HandFee.GetValueOrDefault();
@@ -181,7 +181,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? CreditCoverOutstanding
+        public decimal? CreditCoverOutstanding
         {
             get
             {
@@ -218,13 +218,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double FinanceAmountByDate
+        public decimal FinanceAmountByDate
         {
             get
             {
                 if (_financeAmountByDate.HasValue == false)
                 {
-                    double result = 0;
+                    decimal result = 0;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                     IEnumerable<InvoiceFinanceBatch> batches =
@@ -232,10 +232,10 @@ namespace CMBC.EasyFactor.DB.dbml
                             i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
                     foreach (InvoiceFinanceBatch batch in batches)
                     {
-                        double finance = batch.FinanceAmount;
+                        decimal finance = batch.FinanceAmount;
                         if (batch.BatchCurrency != InvoiceCurrency)
                         {
-                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, InvoiceCurrency);
+                            decimal rate = Exchange.GetExchangeRate(batch.BatchCurrency, InvoiceCurrency);
                             finance *= rate;
                         }
                         result += finance;
@@ -251,7 +251,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? FinanceLineOutstanding
+        public decimal? FinanceLineOutstanding
         {
             get
             {
@@ -263,13 +263,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets 融资余额
         /// </summary>
-        public double? FinanceOutstanding
+        public decimal? FinanceOutstanding
         {
             get
             {
                 if (_financeOutstanding.HasValue == false)
                 {
-                    double? total = null;
+                    decimal? total = null;
                     foreach (InvoiceAssignBatch assignBatch in InvoiceAssignBatches)
                     {
                         //if (assignBatch.CheckStatus == BATCH.CHECK)
@@ -283,7 +283,7 @@ namespace CMBC.EasyFactor.DB.dbml
                                     total = 0;
                                 }
 
-                                double financeOutstanding = invoice.FinanceOutstanding.Value;
+                                decimal financeOutstanding = invoice.FinanceOutstanding.Value;
                                 total += financeOutstanding;
                             }
                         }
@@ -349,7 +349,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? HighestFinanceLineAmount
+        public decimal? HighestFinanceLineAmount
         {
             get
             {
@@ -384,13 +384,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? MarginIncomeByDate
+        public decimal? MarginIncomeByDate
         {
             get
             {
                 if (_marginIncomeByDate.HasValue == false)
                 {
-                    double? result = null;
+                    decimal? result = null;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                     IEnumerable<InvoiceFinanceBatch> batches =
@@ -416,13 +416,13 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public double? NetInterestIncomeByDate
+        public decimal? NetInterestIncomeByDate
         {
             get
             {
                 if (_netInterestIncomeByDate.HasValue == false)
                 {
-                    double? result = null;
+                    decimal? result = null;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                     IEnumerable<InvoiceFinanceBatch> batches =
@@ -451,7 +451,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double PaymentAmountByDate
+        public decimal PaymentAmountByDate
         {
             get
             {
@@ -461,7 +461,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     DateTime toDate = QueryDateTo < TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                     IEnumerable<InvoicePaymentBatch> batches =
                         InvoicePaymentBatches.Where(i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate);
-                    double result = batches.Sum(batch => batch.PaymentAmount);
+                    decimal result = batches.Sum(batch => batch.PaymentAmount);
 
                     _paymentAmountByDate = result;
                 }
@@ -473,7 +473,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double RefundAmountByDate
+        public decimal RefundAmountByDate
         {
             get
             {
@@ -483,7 +483,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
 
                     IEnumerable<InvoiceRefundBatch> batches = InvoiceRefundBatches.Where(i => i.RefundDate >= fromDate && i.RefundDate <= toDate);
-                    double result = batches.Sum(batch => batch.RefundAmount.GetValueOrDefault());
+                    decimal result = batches.Sum(batch => batch.RefundAmount.GetValueOrDefault());
 
                     _refundAmountByDate = result;
                 }
@@ -526,7 +526,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double TotalAssignOutstanding
+        public decimal TotalAssignOutstanding
         {
             get
             {
@@ -542,7 +542,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double TotalFinanceOutstanding
+        public decimal TotalFinanceOutstanding
         {
             get
             {
@@ -563,7 +563,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? TotalIncomeByDate
+        public decimal? TotalIncomeByDate
         {
             get
             {
@@ -575,19 +575,19 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 用于池融资，有效的转让余额
         /// </summary>
-        public double ValuedAssignOutstanding
+        public decimal ValuedAssignOutstanding
         {
             get
             {
                 if (_valuedAssignOutstanding.HasValue == false)
                 {
                     double financeProp = ActiveCDA.FinanceProportion.GetValueOrDefault();
-                    double total = 0;
+                    decimal total = 0;
                     foreach (InvoiceAssignBatch batch in InvoiceAssignBatches)
                     {
                         if (batch.IsRefinance)
                         {
-                            total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && DateTime.Today < invoice.DueDate && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp < -TypeUtil.PRECISION)).Sum(invoice => invoice.AssignOutstanding);
+                            total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && DateTime.Today < invoice.DueDate && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * (decimal)financeProp < 0)).Sum(invoice => invoice.AssignOutstanding);
                         }
                         else
                         {
@@ -608,19 +608,19 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 用于国内买方保理
         /// </summary>
-        public double ValuedAssignOutstanding2
+        public decimal ValuedAssignOutstanding2
         {
             get
             {
                 if (_valuedAssignOutstanding.HasValue == false)
                 {
                     double financeProp = ActiveCDA.FinanceProportion.GetValueOrDefault();
-                    double total = 0;
+                    decimal total = 0;
                     foreach (InvoiceAssignBatch batch in InvoiceAssignBatches)
                     {
                         if (batch.IsRefinance)
                         {
-                            total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp < -TypeUtil.PRECISION)).Sum(invoice => invoice.AssignOutstanding);
+                            total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * (decimal)financeProp < 0)).Sum(invoice => invoice.AssignOutstanding);
                         }
                         else
                         {

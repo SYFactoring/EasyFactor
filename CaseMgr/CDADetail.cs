@@ -263,10 +263,10 @@ namespace CMBC.EasyFactor.CaseMgr
                 ClientCreditLine creditLine = cda.Case.BuyerClient.AssignCreditLine;
                 if (creditLine != null)
                 {
-                    double buyerCreditLine = creditLine.CreditLine;
+                    decimal buyerCreditLine = creditLine.CreditLine;
                     if (cda.CreditCoverCurr != creditLine.CreditLineCurrency)
                     {
-                        double exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, cda.CreditCoverCurr);
+                        decimal exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, cda.CreditCoverCurr);
                         buyerCreditLine *= exchange;
                     }
                     e.IsValid = cda.CreditCover <= buyerCreditLine;
@@ -324,10 +324,10 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (creditLine != null)
                 {
-                    double theCreditLine = creditLine.CreditLine;
+                    decimal theCreditLine = creditLine.CreditLine;
                     if (cda.FinanceLineCurr != creditLine.CreditLineCurrency)
                     {
-                        double exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, cda.FinanceLineCurr);
+                        decimal exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, cda.FinanceLineCurr);
                         theCreditLine *= exchange;
                     }
 
@@ -411,7 +411,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (cda.Deductibles.HasValue && cda.CreditCover.HasValue)
                 {
-                    e.IsValid = !TypeUtil.GreaterZero(cda.Deductibles.Value - cda.CreditCover.Value);
+                    e.IsValid = cda.Deductibles.Value <= cda.CreditCover.Value;
                 }
                 else
                 {
@@ -437,7 +437,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 if (cda.LossThreshold.HasValue && cda.CreditCover.HasValue)
                 {
-                    e.IsValid = !TypeUtil.GreaterZero(cda.LossThreshold.Value - cda.CreditCover.Value);
+                    e.IsValid = cda.LossThreshold.Value <= cda.CreditCover.Value;
                 }
                 else
                 {
@@ -757,10 +757,10 @@ namespace CMBC.EasyFactor.CaseMgr
             }
             if (factorCreditLine != null && (cda.Case.TransactionType == "出口保理" || cda.Case.TransactionType == "国内卖方保理"))
             {
-                double outstanding = factorCreditLine.CreditLineOutstanding;
+                decimal outstanding = factorCreditLine.CreditLineOutstanding;
                 if(factorCreditLine.CreditLineCurrency!=cda.CreditCoverCurr)
                 {
-                    double rate = Exchange.GetExchangeRate(factorCreditLine.CreditLineCurrency, cda.CreditCoverCurr);
+                    decimal rate = Exchange.GetExchangeRate(factorCreditLine.CreditLineCurrency, cda.CreditCoverCurr);
                     outstanding *= rate;
                 }
                 if (cda.CreditCover > outstanding)

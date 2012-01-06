@@ -1519,7 +1519,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreditCoverCurr;
 		
-		private System.Nullable<double> _CreditCover;
+		private System.Nullable<decimal> _CreditCover;
 		
 		private System.Nullable<bool> _IsCreditCoverRevolving;
 		
@@ -1535,7 +1535,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FinanceLineCurr;
 		
-		private System.Nullable<double> _FinanceLine;
+		private System.Nullable<decimal> _FinanceLine;
 		
 		private System.Nullable<System.DateTime> _FinanceLinePeriodBegin;
 		
@@ -1549,9 +1549,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<int> _FinanceGracePeriod;
 		
-		private System.Nullable<double> _Deductibles;
+		private System.Nullable<decimal> _Deductibles;
 		
-		private System.Nullable<double> _LossThreshold;
+		private System.Nullable<decimal> _LossThreshold;
 		
 		private System.Nullable<double> _Price;
 		
@@ -1565,7 +1565,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _HandFeeCurr;
 		
-		private System.Nullable<double> _HandFee;
+		private System.Nullable<decimal> _HandFee;
 		
 		private System.DateTime _CDASignDate;
 		
@@ -1593,13 +1593,13 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private bool _IsSigned;
 		
-		private System.Nullable<double> _HighestFinanceLine;
+		private System.Nullable<decimal> _HighestFinanceLine;
 		
 		private System.Nullable<int> _insuranceInvoiceGraceDays;
-
-        private System.Nullable<int> _poolInvoiceGraceDays;
 		
 		private string _RiskType;
+		
+		private System.Nullable<int> _poolInvoiceGraceDays;
 		
 		private EntityRef<Case> _Case;
 		
@@ -1619,7 +1619,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnAssignTypeChanged();
     partial void OnCreditCoverCurrChanging(string value);
     partial void OnCreditCoverCurrChanged();
-    partial void OnCreditCoverChanging(System.Nullable<double> value);
+    partial void OnCreditCoverChanging(System.Nullable<decimal> value);
     partial void OnCreditCoverChanged();
     partial void OnIsCreditCoverRevolvingChanging(System.Nullable<bool> value);
     partial void OnIsCreditCoverRevolvingChanged();
@@ -1635,7 +1635,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnReassignGracePeriodChanged();
     partial void OnFinanceLineCurrChanging(string value);
     partial void OnFinanceLineCurrChanged();
-    partial void OnFinanceLineChanging(System.Nullable<double> value);
+    partial void OnFinanceLineChanging(System.Nullable<decimal> value);
     partial void OnFinanceLineChanged();
     partial void OnFinanceLinePeriodBeginChanging(System.Nullable<System.DateTime> value);
     partial void OnFinanceLinePeriodBeginChanged();
@@ -1649,9 +1649,9 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPaymentTermsChanged();
     partial void OnFinanceGracePeriodChanging(System.Nullable<int> value);
     partial void OnFinanceGracePeriodChanged();
-    partial void OnDeductiblesChanging(System.Nullable<double> value);
+    partial void OnDeductiblesChanging(System.Nullable<decimal> value);
     partial void OnDeductiblesChanged();
-    partial void OnLossThresholdChanging(System.Nullable<double> value);
+    partial void OnLossThresholdChanging(System.Nullable<decimal> value);
     partial void OnLossThresholdChanged();
     partial void OnPriceChanging(System.Nullable<double> value);
     partial void OnPriceChanged();
@@ -1665,7 +1665,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommissionTypeCommentChanged();
     partial void OnHandFeeCurrChanging(string value);
     partial void OnHandFeeCurrChanged();
-    partial void OnHandFeeChanging(System.Nullable<double> value);
+    partial void OnHandFeeChanging(System.Nullable<decimal> value);
     partial void OnHandFeeChanged();
     partial void OnCDASignDateChanging(System.DateTime value);
     partial void OnCDASignDateChanged();
@@ -1693,14 +1693,14 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckDateChanged();
     partial void OnIsSignedChanging(bool value);
     partial void OnIsSignedChanged();
-    partial void OnHighestFinanceLineChanging(System.Nullable<double> value);
+    partial void OnHighestFinanceLineChanging(System.Nullable<decimal> value);
     partial void OnHighestFinanceLineChanged();
-    partial void OnInsuranceInvoiceDaysChanging(System.Nullable<int> value);
-    partial void OnInsuranceInvoiceDaysChanged();
-    partial void OnPoolInvoiceDaysChanging(System.Nullable<int> value);
-    partial void OnPoolInvoiceDaysChanged();
+    partial void OnInsuranceInvoiceGraceDaysChanging(System.Nullable<int> value);
+    partial void OnInsuranceInvoiceGraceDaysChanged();
     partial void OnRiskTypeChanging(string value);
     partial void OnRiskTypeChanged();
+    partial void OnPoolInvoiceGraceDaysChanging(System.Nullable<int> value);
+    partial void OnPoolInvoiceGraceDaysChanged();
     #endregion
 		
 		public CDA()
@@ -1833,8 +1833,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditCover", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> CreditCover
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditCover", DbType="Decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> CreditCover
 		{
 			get
 			{
@@ -1993,8 +1993,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceLine", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> FinanceLine
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceLine", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> FinanceLine
 		{
 			get
 			{
@@ -2133,8 +2133,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deductibles", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> Deductibles
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deductibles", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> Deductibles
 		{
 			get
 			{
@@ -2153,8 +2153,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LossThreshold", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> LossThreshold
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LossThreshold", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> LossThreshold
 		{
 			get
 			{
@@ -2293,8 +2293,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HandFee", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> HandFee
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HandFee", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> HandFee
 		{
 			get
 			{
@@ -2573,8 +2573,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HighestFinanceLine", DbType="float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> HighestFinanceLine
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HighestFinanceLine", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> HighestFinanceLine
 		{
 			get
 			{
@@ -2604,35 +2604,15 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._insuranceInvoiceGraceDays != value))
 				{
-					this.OnInsuranceInvoiceDaysChanging(value);
+					this.OnInsuranceInvoiceGraceDaysChanging(value);
 					this.SendPropertyChanging();
 					this._insuranceInvoiceGraceDays = value;
 					this.SendPropertyChanged("InsuranceInvoiceGraceDays");
-					this.OnInsuranceInvoiceDaysChanged();
+					this.OnInsuranceInvoiceGraceDaysChanged();
 				}
 			}
 		}
-
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_poolInvoiceGraceDays", DbType = "int", UpdateCheck = UpdateCheck.WhenChanged)]
-        public System.Nullable<int> PoolInvoiceGraceDays
-        {
-            get
-            {
-                return this._poolInvoiceGraceDays;
-            }
-            set
-            {
-                if ((this._poolInvoiceGraceDays != value))
-                {
-                    this.OnInsuranceInvoiceDaysChanging(value);
-                    this.SendPropertyChanging();
-                    this._poolInvoiceGraceDays = value;
-                    this.SendPropertyChanged("PoolInvoiceGraceDays");
-                    this.OnInsuranceInvoiceDaysChanged();
-                }
-            }
-        }
-
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RiskType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string RiskType
 		{
@@ -2649,6 +2629,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._RiskType = value;
 					this.SendPropertyChanged("RiskType");
 					this.OnRiskTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_poolInvoiceGraceDays", DbType="int", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<int> PoolInvoiceGraceDays
+		{
+			get
+			{
+				return this._poolInvoiceGraceDays;
+			}
+			set
+			{
+				if ((this._poolInvoiceGraceDays != value))
+				{
+					this.OnPoolInvoiceGraceDaysChanging(value);
+					this.SendPropertyChanging();
+					this._poolInvoiceGraceDays = value;
+					this.SendPropertyChanged("PoolInvoiceGraceDays");
+					this.OnPoolInvoiceGraceDaysChanged();
 				}
 			}
 		}
@@ -4181,7 +4181,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreditLineCurrency;
 		
-		private double _CreditLine;
+		private decimal _CreditLine;
 		
 		private System.DateTime _PeriodBegin;
 		
@@ -4229,7 +4229,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreditLineTypeChanged();
     partial void OnCreditLineCurrencyChanging(string value);
     partial void OnCreditLineCurrencyChanged();
-    partial void OnCreditLineChanging(double value);
+    partial void OnCreditLineChanging(decimal value);
     partial void OnCreditLineChanged();
     partial void OnPeriodBeginChanging(System.DateTime value);
     partial void OnPeriodBeginChanged();
@@ -4353,8 +4353,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditLine", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
-		public double CreditLine
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditLine", DbType="decimal NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
+		public decimal CreditLine
 		{
 			get
 			{
@@ -5188,11 +5188,11 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _RequestType;
 		
-		private double _RequestAmount;
+		private decimal _RequestAmount;
 		
 		private System.DateTime _RequestDate;
 		
-		private System.Nullable<double> _ReplyAmount;
+		private System.Nullable<decimal> _ReplyAmount;
 		
 		private System.Nullable<System.DateTime> _ReplyDate;
 		
@@ -5220,11 +5220,11 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCaseCodeChanged();
     partial void OnRequestTypeChanging(string value);
     partial void OnRequestTypeChanged();
-    partial void OnRequestAmountChanging(double value);
+    partial void OnRequestAmountChanging(decimal value);
     partial void OnRequestAmountChanged();
     partial void OnRequestDateChanging(System.DateTime value);
     partial void OnRequestDateChanged();
-    partial void OnReplyAmountChanging(System.Nullable<double> value);
+    partial void OnReplyAmountChanging(System.Nullable<decimal> value);
     partial void OnReplyAmountChanged();
     partial void OnReplyDateChanging(System.Nullable<System.DateTime> value);
     partial void OnReplyDateChanged();
@@ -5312,8 +5312,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestAmount", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
-		public double RequestAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestAmount", DbType="decimal NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
+		public decimal RequestAmount
 		{
 			get
 			{
@@ -5352,8 +5352,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReplyAmount", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> ReplyAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReplyAmount", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> ReplyAmount
 		{
 			get
 			{
@@ -8065,7 +8065,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreditLineCurrency;
 		
-		private double _CreditLine;
+		private decimal _CreditLine;
 		
 		private System.DateTime _PeriodBegin;
 		
@@ -8103,7 +8103,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFactorCodeChanged();
     partial void OnCreditLineCurrencyChanging(string value);
     partial void OnCreditLineCurrencyChanged();
-    partial void OnCreditLineChanging(double value);
+    partial void OnCreditLineChanging(decimal value);
     partial void OnCreditLineChanged();
     partial void OnPeriodBeginChanging(System.DateTime value);
     partial void OnPeriodBeginChanged();
@@ -8201,8 +8201,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditLine", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
-		public double CreditLine
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditLine", DbType="decimal NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
+		public decimal CreditLine
 		{
 			get
 			{
@@ -8922,7 +8922,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _BatchCurrency;
 		
-		private double _FinanceAmount;
+		private decimal _FinanceAmount;
 		
 		private System.DateTime _FinancePeriodBegin;
 		
@@ -8938,7 +8938,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CreateUserName;
 		
-		private System.Nullable<double> _OtherIncome;
+		private System.Nullable<decimal> _OtherIncome;
 		
 		private string _LoanNo;
 		
@@ -8968,7 +8968,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceTypeChanged();
     partial void OnBatchCurrencyChanging(string value);
     partial void OnBatchCurrencyChanged();
-    partial void OnFinanceAmountChanging(double value);
+    partial void OnFinanceAmountChanging(decimal value);
     partial void OnFinanceAmountChanged();
     partial void OnFinancePeriodBeginChanging(System.DateTime value);
     partial void OnFinancePeriodBeginChanged();
@@ -8984,7 +8984,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnCreateUserNameChanging(string value);
     partial void OnCreateUserNameChanged();
-    partial void OnOtherIncomeChanging(System.Nullable<double> value);
+    partial void OnOtherIncomeChanging(System.Nullable<decimal> value);
     partial void OnOtherIncomeChanged();
     partial void OnLoanNoChanging(string value);
     partial void OnLoanNoChanged();
@@ -9088,8 +9088,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceAmount", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
-		public double FinanceAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceAmount", DbType="decimal NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
+		public decimal FinanceAmount
 		{
 			get
 			{
@@ -9252,8 +9252,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OtherIncome", DbType="float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> OtherIncome
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OtherIncome", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> OtherIncome
 		{
 			get
 			{
@@ -10031,7 +10031,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
-		private System.Nullable<double> _RefundAmount;
+		private System.Nullable<decimal> _RefundAmount;
 		
 		private string _FinanceBatchNo;
 		
@@ -10059,7 +10059,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCreateUserNameChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
-    partial void OnRefundAmountChanging(System.Nullable<double> value);
+    partial void OnRefundAmountChanging(System.Nullable<decimal> value);
     partial void OnRefundAmountChanged();
     partial void OnFinanceBatchNoChanging(string value);
     partial void OnFinanceBatchNoChanged();
@@ -10217,8 +10217,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefundAmount", DbType="float", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<double> RefundAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefundAmount", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> RefundAmount
 		{
 			get
 			{
@@ -10385,7 +10385,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _ToCurr;
 		
-		private double _ExchangeRate;
+		private decimal _ExchangeRate;
 		
 		private System.DateTime _LastModifiedDate;
 		
@@ -10397,7 +10397,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFromCurrChanged();
     partial void OnToCurrChanging(string value);
     partial void OnToCurrChanged();
-    partial void OnExchangeRateChanging(double value);
+    partial void OnExchangeRateChanging(decimal value);
     partial void OnExchangeRateChanged();
     partial void OnLastModifiedDateChanging(System.DateTime value);
     partial void OnLastModifiedDateChanged();
@@ -10448,8 +10448,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExchangeRate", DbType="Float NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public double ExchangeRate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExchangeRate", DbType="Decimal NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public decimal ExchangeRate
 		{
 			get
 			{
@@ -10525,7 +10525,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _RequestCurrency;
 		
-		private System.Nullable<double> _RequestAmount;
+		private System.Nullable<decimal> _RequestAmount;
 		
 		private string _RequestFinanceType;
 		
@@ -10569,7 +10569,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnReviewDateChanged();
     partial void OnRequestCurrencyChanging(string value);
     partial void OnRequestCurrencyChanged();
-    partial void OnRequestAmountChanging(System.Nullable<double> value);
+    partial void OnRequestAmountChanging(System.Nullable<decimal> value);
     partial void OnRequestAmountChanged();
     partial void OnRequestFinanceTypeChanging(string value);
     partial void OnRequestFinanceTypeChanged();
@@ -10709,8 +10709,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestAmount", DbType="Float")]
-		public System.Nullable<double> RequestAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestAmount", DbType="decimal")]
+		public System.Nullable<decimal> RequestAmount
 		{
 			get
 			{
@@ -11056,7 +11056,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private int _FinanceLogID;
 		
-		private System.Nullable<double> _RefundAmount;
+		private System.Nullable<decimal> _RefundAmount;
 		
 		private string _Comment;
 		
@@ -11074,7 +11074,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnRefundBatchNoChanged();
     partial void OnFinanceLogIDChanging(int value);
     partial void OnFinanceLogIDChanged();
-    partial void OnRefundAmountChanging(System.Nullable<double> value);
+    partial void OnRefundAmountChanging(System.Nullable<decimal> value);
     partial void OnRefundAmountChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
@@ -11155,8 +11155,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefundAmount", DbType="Float NOT NULL")]
-		public System.Nullable<double> RefundAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefundAmount", DbType="decimal NOT NULL")]
+		public System.Nullable<decimal> RefundAmount
 		{
 			get
 			{
@@ -11493,7 +11493,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _GuaranteeDepositCurrency;
 		
-		private double _GuaranteeDepositAmount;
+		private decimal _GuaranteeDepositAmount;
 		
 		private string _ClientEDICode;
 		
@@ -11513,7 +11513,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnGuaranteeDepositIDChanged();
     partial void OnGuaranteeDepositCurrencyChanging(string value);
     partial void OnGuaranteeDepositCurrencyChanged();
-    partial void OnGuaranteeDepositAmountChanging(double value);
+    partial void OnGuaranteeDepositAmountChanging(decimal value);
     partial void OnGuaranteeDepositAmountChanged();
     partial void OnClientEDICodeChanging(string value);
     partial void OnClientEDICodeChanged();
@@ -11571,8 +11571,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuaranteeDepositAmount", DbType="Float NOT NULL")]
-		public double GuaranteeDepositAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuaranteeDepositAmount", DbType="decimal NOT NULL")]
+		public decimal GuaranteeDepositAmount
 		{
 			get
 			{
@@ -11952,11 +11952,11 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InvoiceDate;
 		
-		private double _InvoiceAmount;
+		private decimal _InvoiceAmount;
 		
 		private string _AssignBatchNo;
 		
-		private double _AssignAmount;
+		private decimal _AssignAmount;
 		
 		private System.DateTime _DueDate;
 		
@@ -11990,27 +11990,27 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FlawResolveUserName;
 		
-		private System.Nullable<double> _FinanceAmount;
+		private System.Nullable<decimal> _FinanceAmount;
 		
 		private System.Nullable<System.DateTime> _FinanceDate;
 		
 		private System.Nullable<System.DateTime> _FinanceDueDate;
 		
-		private System.Nullable<double> _PaymentAmount;
+		private System.Nullable<decimal> _PaymentAmount;
 		
 		private System.Nullable<System.DateTime> _PaymentDate;
 		
-		private System.Nullable<double> _RefundAmount;
+		private System.Nullable<decimal> _RefundAmount;
 		
 		private System.Nullable<System.DateTime> _RefundDate;
 		
-		private System.Nullable<double> _Commission;
+		private System.Nullable<decimal> _Commission;
 		
 		private System.Nullable<bool> _IsDispute;
 		
 		private string _DisputeType;
 		
-		private System.Nullable<double> _DisputeAmount;
+		private System.Nullable<decimal> _DisputeAmount;
 		
 		private string _DisputeReason;
 		
@@ -12028,7 +12028,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
-		private System.Nullable<double> _FactorCommission;
+		private System.Nullable<decimal> _FactorCommission;
 		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
@@ -12046,11 +12046,11 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnInvoiceNoChanged();
     partial void OnInvoiceDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInvoiceDateChanged();
-    partial void OnInvoiceAmountChanging(double value);
+    partial void OnInvoiceAmountChanging(decimal value);
     partial void OnInvoiceAmountChanged();
     partial void OnAssignBatchNoChanging(string value);
     partial void OnAssignBatchNoChanged();
-    partial void OnAssignAmountChanging(double value);
+    partial void OnAssignAmountChanging(decimal value);
     partial void OnAssignAmountChanged();
     partial void OnDueDateChanging(System.DateTime value);
     partial void OnDueDateChanged();
@@ -12084,27 +12084,27 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFlawResolveDateChanged();
     partial void OnFlawResolveUserNameChanging(string value);
     partial void OnFlawResolveUserNameChanged();
-    partial void OnFinanceAmountChanging(System.Nullable<double> value);
+    partial void OnFinanceAmountChanging(System.Nullable<decimal> value);
     partial void OnFinanceAmountChanged();
     partial void OnFinanceDateChanging(System.Nullable<System.DateTime> value);
     partial void OnFinanceDateChanged();
     partial void OnFinanceDueDateChanging(System.Nullable<System.DateTime> value);
     partial void OnFinanceDueDateChanged();
-    partial void OnPaymentAmountChanging(System.Nullable<double> value);
+    partial void OnPaymentAmountChanging(System.Nullable<decimal> value);
     partial void OnPaymentAmountChanged();
     partial void OnPaymentDateChanging(System.Nullable<System.DateTime> value);
     partial void OnPaymentDateChanged();
-    partial void OnRefundAmountChanging(System.Nullable<double> value);
+    partial void OnRefundAmountChanging(System.Nullable<decimal> value);
     partial void OnRefundAmountChanged();
     partial void OnRefundDateChanging(System.Nullable<System.DateTime> value);
     partial void OnRefundDateChanged();
-    partial void OnCommissionChanging(System.Nullable<double> value);
+    partial void OnCommissionChanging(System.Nullable<decimal> value);
     partial void OnCommissionChanged();
     partial void OnIsDisputeChanging(System.Nullable<bool> value);
     partial void OnIsDisputeChanged();
     partial void OnDisputeTypeChanging(string value);
     partial void OnDisputeTypeChanged();
-    partial void OnDisputeAmountChanging(System.Nullable<double> value);
+    partial void OnDisputeAmountChanging(System.Nullable<decimal> value);
     partial void OnDisputeAmountChanged();
     partial void OnDisputeReasonChanging(string value);
     partial void OnDisputeReasonChanged();
@@ -12122,7 +12122,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnDisputeResolveUserNameChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
-    partial void OnFactorCommissionChanging(System.Nullable<double> value);
+    partial void OnFactorCommissionChanging(System.Nullable<decimal> value);
     partial void OnFactorCommissionChanged();
     #endregion
 		
@@ -12194,8 +12194,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceAmount", DbType="Float NOT NULL")]
-		public double InvoiceAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceAmount", DbType="decimal NOT NULL")]
+		public decimal InvoiceAmount
 		{
 			get
 			{
@@ -12238,8 +12238,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AssignAmount", DbType="Float NOT NULL")]
-		public double AssignAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AssignAmount", DbType="decimal NOT NULL")]
+		public decimal AssignAmount
 		{
 			get
 			{
@@ -12578,8 +12578,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceAmount", DbType="Float")]
-		public System.Nullable<double> FinanceAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceAmount", DbType="decimal")]
+		public System.Nullable<decimal> FinanceAmount
 		{
 			get
 			{
@@ -12638,8 +12638,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentAmount", DbType="Float")]
-		public System.Nullable<double> PaymentAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentAmount", DbType="decimal")]
+		public System.Nullable<decimal> PaymentAmount
 		{
 			get
 			{
@@ -12678,8 +12678,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefundAmount", DbType="Float")]
-		public System.Nullable<double> RefundAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefundAmount", DbType="decimal")]
+		public System.Nullable<decimal> RefundAmount
 		{
 			get
 			{
@@ -12718,8 +12718,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="Decimal(18,2)")]
-		public System.Nullable<double> Commission
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="decimal")]
+		public System.Nullable<decimal> Commission
 		{
 			get
 			{
@@ -12778,8 +12778,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisputeAmount", DbType="Float")]
-		public System.Nullable<double> DisputeAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisputeAmount", DbType="decimal")]
+		public System.Nullable<decimal> DisputeAmount
 		{
 			get
 			{
@@ -12958,8 +12958,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactorCommission", DbType="Decimal(18,2)")]
-		public System.Nullable<double> FactorCommission
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FactorCommission", DbType="decimal")]
+		public System.Nullable<decimal> FactorCommission
 		{
 			get
 			{
@@ -13093,11 +13093,11 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FinanceBatchNo;
 		
-		private System.Nullable<double> _FinanceAmount;
+		private System.Nullable<decimal> _FinanceAmount;
 		
 		private string _Comment;
 		
-		private System.Nullable<double> _Commission;
+		private System.Nullable<decimal> _Commission;
 		
 		private int _InvoiceID;
 		
@@ -13115,11 +13115,11 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceLogIDChanged();
     partial void OnFinanceBatchNoChanging(string value);
     partial void OnFinanceBatchNoChanged();
-    partial void OnFinanceAmountChanging(System.Nullable<double> value);
+    partial void OnFinanceAmountChanging(System.Nullable<decimal> value);
     partial void OnFinanceAmountChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
-    partial void OnCommissionChanging(System.Nullable<double> value);
+    partial void OnCommissionChanging(System.Nullable<decimal> value);
     partial void OnCommissionChanged();
     partial void OnInvoiceIDChanging(int value);
     partial void OnInvoiceIDChanged();
@@ -13177,8 +13177,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceAmount", DbType="Float NOT NULL")]
-		public System.Nullable<double> FinanceAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceAmount", DbType="decimal NOT NULL")]
+		public System.Nullable<decimal> FinanceAmount
 		{
 			get
 			{
@@ -13217,8 +13217,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="Decimal(18,2)")]
-		public System.Nullable<double> Commission
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="decimal")]
+		public System.Nullable<decimal> Commission
 		{
 			get
 			{
@@ -13385,7 +13385,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _PaymentBatchNo;
 		
-		private System.Nullable<double> _PaymentAmount;
+		private System.Nullable<decimal> _PaymentAmount;
 		
 		private string _CreditNoteNo;
 		
@@ -13407,7 +13407,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPaymentLogIDChanged();
     partial void OnPaymentBatchNoChanging(string value);
     partial void OnPaymentBatchNoChanged();
-    partial void OnPaymentAmountChanging(System.Nullable<double> value);
+    partial void OnPaymentAmountChanging(System.Nullable<decimal> value);
     partial void OnPaymentAmountChanged();
     partial void OnCreditNoteNoChanging(string value);
     partial void OnCreditNoteNoChanged();
@@ -13469,8 +13469,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentAmount", DbType="Float NOT NULL")]
-		public System.Nullable<double> PaymentAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentAmount", DbType="decimal NOT NULL")]
+		public System.Nullable<decimal> PaymentAmount
 		{
 			get
 			{
@@ -13876,13 +13876,13 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _MsgCurrency;
 		
-		private double _MsgAmount;
+		private decimal _MsgAmount;
 		
 		private System.Nullable<System.DateTime> _RemitDate;
 		
 		private string _RemitCurrency;
 		
-		private System.Nullable<double> _RemitAmount;
+		private System.Nullable<decimal> _RemitAmount;
 		
 		private string _Comment;
 		
@@ -13906,13 +13906,13 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnMsgDateChanged();
     partial void OnMsgCurrencyChanging(string value);
     partial void OnMsgCurrencyChanged();
-    partial void OnMsgAmountChanging(double value);
+    partial void OnMsgAmountChanging(decimal value);
     partial void OnMsgAmountChanged();
     partial void OnRemitDateChanging(System.Nullable<System.DateTime> value);
     partial void OnRemitDateChanged();
     partial void OnRemitCurrencyChanging(string value);
     partial void OnRemitCurrencyChanged();
-    partial void OnRemitAmountChanging(System.Nullable<double> value);
+    partial void OnRemitAmountChanging(System.Nullable<decimal> value);
     partial void OnRemitAmountChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
@@ -14009,8 +14009,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MsgAmount", DbType="Float NOT NULL")]
-		public double MsgAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MsgAmount", DbType="decimal NOT NULL")]
+		public decimal MsgAmount
 		{
 			get
 			{
@@ -14069,8 +14069,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RemitAmount", DbType="Float")]
-		public System.Nullable<double> RemitAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RemitAmount", DbType="decimal")]
+		public System.Nullable<decimal> RemitAmount
 		{
 			get
 			{

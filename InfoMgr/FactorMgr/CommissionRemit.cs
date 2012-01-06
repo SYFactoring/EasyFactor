@@ -283,8 +283,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
         {
             IList batchList = _bs.List;
 
-            double totalCommission = 0;
-            double totalIFCommission = 0;
+            decimal totalCommission = 0;
+            decimal totalIFCommission = 0;
             for (int i = 0; i < batchList.Count; i++)
             {
                 if (Boolean.Parse(dgvBatches.Rows[i].Cells[0].EditedFormattedValue.ToString()))

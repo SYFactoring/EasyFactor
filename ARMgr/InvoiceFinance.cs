@@ -43,7 +43,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private double _currentBatchFinanceAmount;
+        private decimal _currentBatchFinanceAmount;
 
 
         /// <summary>
@@ -131,18 +131,18 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="checkBoxCell"></param>
         private void ClickLog(InvoiceFinanceLog log, DataGridViewCheckBoxCell checkBoxCell)
         {
-            double currentFinanceAmount = _currentBatchFinanceAmount;
+            decimal currentFinanceAmount = _currentBatchFinanceAmount;
 
             var batch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
-            double financeAmount;
-            if (log.AssignOutstanding * _case.ActiveCDA.FinanceProportion.GetValueOrDefault() + currentFinanceAmount >
+            decimal financeAmount;
+            if (log.AssignOutstanding * (decimal)_case.ActiveCDA.FinanceProportion.GetValueOrDefault() + currentFinanceAmount >
                 batch.FinanceAmount)
             {
                 financeAmount = batch.FinanceAmount - currentFinanceAmount;
             }
             else
             {
-                financeAmount = log.AssignOutstanding * _case.ActiveCDA.FinanceProportion.GetValueOrDefault();
+                financeAmount = log.AssignOutstanding * (decimal)_case.ActiveCDA.FinanceProportion.GetValueOrDefault();
             }
 
             if (!TypeUtil.GreaterZero(financeAmount))
@@ -156,7 +156,7 @@ namespace CMBC.EasyFactor.ARMgr
             CDA cda = _case.ActiveCDA;
             if (cda.CommissionType == "按融资金额")
             {
-                log.Commission = log.FinanceAmount * cda.Price;
+                log.Commission = log.FinanceAmount * (decimal)cda.Price;
             }
         }
 
@@ -425,8 +425,8 @@ namespace CMBC.EasyFactor.ARMgr
             else if (col == colFinanceAmount || col == colCommission)
             {
                 var str = (string)e.FormattedValue;
-                double result;
-                bool ok = Double.TryParse(str, out result);
+                decimal result;
+                bool ok = Decimal.TryParse(str, out result);
                 if (!ok)
                 {
                     e.Cancel = true;
@@ -440,7 +440,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (e.Cancel == false && col == colFinanceAmount)
                 {
                     var selectedLog = (InvoiceFinanceLog)logsBindingSource.List[e.RowIndex];
-                    if (result > selectedLog.AssignOutstanding * _case.ActiveCDA.FinanceProportion)
+                    if (result > selectedLog.AssignOutstanding * (decimal)_case.ActiveCDA.FinanceProportion)
                     {
                         if (DialogResult.No ==
                             MessageBoxEx.Show("您输入的融资金额超出融资比例的范围，确认录入吗？", MESSAGE.TITLE_INFORMATION,
@@ -612,10 +612,10 @@ namespace CMBC.EasyFactor.ARMgr
                 //}
 
                 ClientCreditLine highestFinanceLine = _case.HighestFinanceLine;
-                double highestFinanceLineAmount = highestFinanceLine.CreditLine;
+                decimal highestFinanceLineAmount = highestFinanceLine.CreditLine;
                 if (highestFinanceLine.CreditLineCurrency != _case.InvoiceCurrency)
                 {
-                    double rate = Exchange.GetExchangeRate(highestFinanceLine.CreditLineCurrency, _case.InvoiceCurrency);
+                    decimal rate = Exchange.GetExchangeRate(highestFinanceLine.CreditLineCurrency, _case.InvoiceCurrency);
                     highestFinanceLineAmount *= rate;
                 }
 
@@ -652,8 +652,8 @@ namespace CMBC.EasyFactor.ARMgr
                                                   && invoice.IsFlaw == false
                                                   && invoice.IsDispute.GetValueOrDefault() == false
                                                   && invoice.DueDate > DateTime.Today.AddDays(1)
-                                                  && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
-                                                  && ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp - invoice.FinanceAmount.GetValueOrDefault() > TypeUtil.PRECISION)
+                                                  && (invoice.AssignAmount > invoice.PaymentAmount.GetValueOrDefault() )
+                                                  && ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * (decimal)financeProp > invoice.FinanceAmount.GetValueOrDefault())
                                               orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;
 
@@ -766,7 +766,7 @@ namespace CMBC.EasyFactor.ARMgr
             var batch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
             var logList = new List<InvoiceFinanceLog>();
 
-            double totalFinance =
+            decimal totalFinance =
                 logsBindingSource.List.Cast<object>().Where(
                     (t, i) => Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString())).Cast
                     <InvoiceFinanceLog>().Sum(log => log.FinanceAmount.GetValueOrDefault());
@@ -784,7 +784,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             GuaranteeDeposit gd = _case.GuaranteeDepositClient.GetGuaranteeDeposit(batch.BatchCurrency);
-            double guaranteeDeposit = 0;
+            decimal guaranteeDeposit = 0;
             CDA activeCDA = _case.ActiveCDA;
             if (gd != null)
             {
@@ -798,10 +798,10 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             ClientCreditLine highestFinanceLine = _case.HighestFinanceLine;
-            double highestFinanceLineAmount = highestFinanceLine.CreditLine;
+            decimal highestFinanceLineAmount = highestFinanceLine.CreditLine;
             if (highestFinanceLine.CreditLineCurrency != _case.InvoiceCurrency)
             {
-                double rate = Exchange.GetExchangeRate(highestFinanceLine.CreditLineCurrency, _case.InvoiceCurrency);
+                decimal rate = Exchange.GetExchangeRate(highestFinanceLine.CreditLineCurrency, _case.InvoiceCurrency);
                 highestFinanceLineAmount *= rate;
             }
 
@@ -945,8 +945,8 @@ namespace CMBC.EasyFactor.ARMgr
             IList logList = logsBindingSource.List;
             var financeBatch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
 
-            double totalFinance = 0;
-            double totalInterest = 0;
+            decimal totalFinance = 0;
+            decimal totalInterest = 0;
             for (int i = 0; i < logList.Count; i++)
             {
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))

@@ -62,7 +62,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double PaymentAmount
+        public decimal PaymentAmount
         {
             get
             {

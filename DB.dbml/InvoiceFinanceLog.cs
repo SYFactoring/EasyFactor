@@ -35,7 +35,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignAmount
+        public decimal AssignAmount
         {
             get { return Invoice != null ? Invoice.AssignAmount : AssignAmount2; }
         }
@@ -43,7 +43,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignAmount2 { get; set; }
+        public decimal AssignAmount2 { get; set; }
 
         /// <summary>
         /// 
@@ -66,7 +66,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignOutstanding
+        public decimal AssignOutstanding
         {
             get { return Invoice != null ? Invoice.AssignOutstanding : AssignOutstanding2; }
         }
@@ -74,7 +74,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignOutstanding2 { get; set; }
+        public decimal AssignOutstanding2 { get; set; }
 
         /// <summary>
         /// 
@@ -116,7 +116,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double FinanceOutstanding
+        public decimal FinanceOutstanding
         {
             get { return FinanceAmount.GetValueOrDefault() - RefundAmount.GetValueOrDefault(); }
         }
@@ -143,11 +143,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double GrossInterest
+        public decimal GrossInterest
         {
             get
             {
-                double interest = 0;
+                decimal interest = 0;
 
                 if (InvoiceFinanceBatch != null)
                 {
@@ -155,14 +155,14 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         int period =
                             (InvoiceFinanceBatch.FinancePeriodEnd - InvoiceFinanceBatch.FinancePeriodBegin).Days;
-                        interest = FinanceAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * period;
+                        interest = FinanceAmount.GetValueOrDefault() * (decimal)InvoiceFinanceBatch.FinanceRate / 360 * period;
                     }
                     else
                     {
                         interest += (from refundLog in InvoiceRefundLogs
                                      let period = (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodBegin).Days
                                      let overduePeriod = refundLog.InvoiceRefundBatch.RefundDate > InvoiceFinanceBatch.FinancePeriodEnd ? (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0
-                                     select refundLog.RefundAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 * (period + overduePeriod)).Sum();
+                                     select refundLog.RefundAmount.GetValueOrDefault() * (decimal)InvoiceFinanceBatch.FinanceRate / 360 * (period + overduePeriod)).Sum();
 
                         if (TypeUtil.GreaterZero(FinanceOutstanding) &&
                             DateTime.Today > InvoiceFinanceBatch.FinancePeriodBegin)
@@ -171,14 +171,14 @@ namespace CMBC.EasyFactor.DB.dbml
                             int overduePeriod = DateTime.Today.Date > InvoiceFinanceBatch.FinancePeriodEnd
                                                     ? (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodEnd).Days
                                                     : 0;
-                            interest += FinanceAmount.GetValueOrDefault() * InvoiceFinanceBatch.FinanceRate / 360 *
+                            interest += FinanceAmount.GetValueOrDefault() * (decimal)InvoiceFinanceBatch.FinanceRate / 360 *
                                         (period + overduePeriod);
                         }
                     }
 
                     if (InvoiceFinanceBatch.BatchCurrency != "CNY")
                     {
-                        double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, "CNY");
+                        decimal rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, "CNY");
                         interest *= rate;
                     }
                 }
@@ -203,17 +203,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoiceFinanceAmount
+        public decimal? InvoiceFinanceAmount
         {
             get { return Invoice != null ? Invoice.FinanceAmount : InvoiceFinanceAmount2; }
         }
 
-        public double? InvoiceFinanceAmount2 { get; set; }
+        public decimal? InvoiceFinanceAmount2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoiceFinanceOutstanding
+        public decimal? InvoiceFinanceOutstanding
         {
             get { return Invoice != null ? Invoice.FinanceOutstanding : InvoiceFinanceOutstanding2; }
         }
@@ -221,7 +221,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoiceFinanceOutstanding2 { get; set; }
+        public decimal? InvoiceFinanceOutstanding2 { get; set; }
 
         /// <summary>
         /// 
@@ -244,11 +244,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double NetInterest
+        public decimal NetInterest
         {
             get
             {
-                double interest = 0;
+                decimal interest = 0;
                 if (InvoiceFinanceBatch != null)
                 {
                     if (InvoiceFinanceBatch.FinanceType == "卖方代付" || InvoiceFinanceBatch.FinanceType == "买方代付")
@@ -256,7 +256,7 @@ namespace CMBC.EasyFactor.DB.dbml
                         int period =
                             (InvoiceFinanceBatch.FinancePeriodEnd - InvoiceFinanceBatch.FinancePeriodBegin).Days;
                         interest = FinanceAmount.GetValueOrDefault() *
-                                   (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) /
+                                   (decimal)(InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) /
                                    360 * period;
                     }
                     else
@@ -264,7 +264,7 @@ namespace CMBC.EasyFactor.DB.dbml
                         interest += (from refundLog in InvoiceRefundLogs
                                      let period = (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodBegin).Days
                                      let overduePeriod = refundLog.InvoiceRefundBatch.RefundDate > InvoiceFinanceBatch.FinancePeriodEnd ? (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0
-                                     select refundLog.RefundAmount.GetValueOrDefault() * (InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * (period + overduePeriod)).Sum();
+                                     select refundLog.RefundAmount.GetValueOrDefault() * (decimal)(InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * (period + overduePeriod)).Sum();
 
                         if (TypeUtil.GreaterZero(FinanceOutstanding) &&
                             DateTime.Today > InvoiceFinanceBatch.FinancePeriodBegin)
@@ -274,14 +274,14 @@ namespace CMBC.EasyFactor.DB.dbml
                                                     ? (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodEnd).Days
                                                     : 0;
                             interest += FinanceAmount.GetValueOrDefault() *
-                                        (InvoiceFinanceBatch.FinanceRate -
+                                        (decimal)(InvoiceFinanceBatch.FinanceRate -
                                          InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * (period + overduePeriod);
                         }
                     }
 
                     if (InvoiceFinanceBatch.BatchCurrency != "CNY")
                     {
-                        double rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, "CNY");
+                        decimal rate = Exchange.GetExchangeRate(InvoiceFinanceBatch.BatchCurrency, "CNY");
                         interest *= rate;
                     }
                 }
@@ -293,7 +293,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? RefundAmount
+        public decimal? RefundAmount
         {
             get { return InvoiceRefundLogs != null ? InvoiceRefundLogs.Sum(log => log.RefundAmount) : null; }
         }
@@ -313,7 +313,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
             if (cda.CommissionType == "按融资金额")
             {
-                Commission = TypeUtil.C1Round(FinanceAmount.GetValueOrDefault() * cda.Price.GetValueOrDefault(),2);
+                Commission = FinanceAmount.GetValueOrDefault() * (decimal)cda.Price.GetValueOrDefault();
             }
         }
 

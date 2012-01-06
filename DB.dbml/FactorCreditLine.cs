@@ -18,7 +18,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets ’ÀøÓ”‡∂Ó
         /// </summary>
-        public double CreditLineAssignOutstanding
+        public decimal CreditLineAssignOutstanding
         {
             get { return Factor.GetAssignOutstanding(CreditLineCurrency); }
         }
@@ -26,7 +26,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets  £”‡∂Ó∂»
         /// </summary>
-        public double CreditLineOutstanding
+        public decimal CreditLineOutstanding
         {
             get { return CreditLine - Factor.GetTotalCreditCover(CreditLineCurrency); }
         }

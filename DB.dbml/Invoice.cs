@@ -32,7 +32,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double AssignOutstanding
+        public decimal AssignOutstanding
         {
             get { return AssignAmount - PaymentAmount.GetValueOrDefault(); }
         }
@@ -96,7 +96,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double? FinanceOutstanding
+        public decimal? FinanceOutstanding
         {
             get
             {
@@ -131,7 +131,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double GrossInterest
+        public decimal GrossInterest
         {
             get
             {
@@ -253,7 +253,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double NetInterest
+        public decimal NetInterest
         {
             get
             {
@@ -346,23 +346,23 @@ namespace CMBC.EasyFactor.DB.dbml
                         }
                     }
 
-                    Commission = TypeUtil.C1Round(InvoiceFinanceLogs.Sum(log => log.Commission).GetValueOrDefault(),2);
+                    Commission = InvoiceFinanceLogs.Sum(log => log.Commission).GetValueOrDefault();
                 }
                 else if (cda.CommissionType == "按转让金额")
                 {
                     if (!TypeUtil.GreaterZero(Commission) || isOverwrite)
                     {
-                        Commission = TypeUtil.C1Round(AssignAmount * cda.Price.GetValueOrDefault(),2);
+                        Commission = AssignAmount * (decimal)cda.Price.GetValueOrDefault();
                     }
                     if (!TypeUtil.GreaterZero(FactorCommission) || isOverwrite)
                     {
                         if (TransactionType == "出口保理")
                         {
-                            FactorCommission = TypeUtil.C1Round(AssignAmount * cda.IFPrice.GetValueOrDefault(),2);
+                            FactorCommission = AssignAmount * (decimal)cda.IFPrice.GetValueOrDefault();
                         }
                         else if (TransactionType == "进口保理")
                         {
-                            FactorCommission = TypeUtil.C1Round(AssignAmount * cda.EFPrice.GetValueOrDefault(),2);
+                            FactorCommission = AssignAmount * (decimal)cda.EFPrice.GetValueOrDefault();
                         }
                     }
                 }
@@ -380,10 +380,10 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 foreach (InvoiceFinanceLog log in InvoiceFinanceLogs)
                 {
-                    double finance = log.FinanceAmount.GetValueOrDefault();
+                    decimal finance = log.FinanceAmount.GetValueOrDefault();
                     if (log.InvoiceFinanceBatch.BatchCurrency != InvoiceCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(log.InvoiceFinanceBatch.BatchCurrency, InvoiceCurrency);
+                        decimal rate = Exchange.GetExchangeRate(log.InvoiceFinanceBatch.BatchCurrency, InvoiceCurrency);
                         finance *= rate;
                     }
 
@@ -465,14 +465,14 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (InvoiceFinanceLogs.Count > 0)
             {
-                double refundAmount = 0;
+                decimal refundAmount = 0;
                 foreach (InvoiceFinanceLog financeLog in InvoiceFinanceLogs)
                 {
-                    double refund = financeLog.InvoiceRefundLogs.Sum(refundLog => refundLog.RefundAmount.GetValueOrDefault());
+                    decimal refund = financeLog.InvoiceRefundLogs.Sum(refundLog => refundLog.RefundAmount.GetValueOrDefault());
 
                     if (financeLog.InvoiceFinanceBatch.BatchCurrency != InvoiceCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(financeLog.InvoiceFinanceBatch.BatchCurrency,
+                        decimal rate = Exchange.GetExchangeRate(financeLog.InvoiceFinanceBatch.BatchCurrency,
                                                                InvoiceCurrency);
                         refund *= rate;
                     }

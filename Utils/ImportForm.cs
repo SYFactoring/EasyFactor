@@ -720,8 +720,8 @@ namespace CMBC.EasyFactor.Utils
                             //throw new Exception("发票金额不能为空，不能导入：" + invoiceNo);
                             exceptionMsg += "发票金额不能为空，不能导入：" + invoiceNo;
                         }
-                        double invoiceAmount;
-                        if (Double.TryParse(invoiceAmountStr, out invoiceAmount))
+                        decimal invoiceAmount;
+                        if (Decimal.TryParse(invoiceAmountStr, out invoiceAmount))
                         {
                             invoice.InvoiceAmount = invoiceAmount;
                         }
@@ -737,8 +737,8 @@ namespace CMBC.EasyFactor.Utils
                             //throw new Exception("转让金额不能为空，不能导入：" + invoiceNo);
                             exceptionMsg += "转让金额不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                         }
-                        double assignAmount;
-                        if (Double.TryParse(assignAmountStr, out assignAmount))
+                        decimal assignAmount;
+                        if (Decimal.TryParse(assignAmountStr, out assignAmount))
                         {
                             invoice.AssignAmount = assignAmount;
                         }
@@ -806,7 +806,7 @@ namespace CMBC.EasyFactor.Utils
                         //else 
                         if (cda.CommissionType == "按转让金额")
                         {
-                            invoice.Commission = TypeUtil.C1Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(), 2);
+                            invoice.Commission = invoice.AssignAmount * (decimal)cda.Price.GetValueOrDefault();
                         }
 
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
@@ -1049,8 +1049,8 @@ namespace CMBC.EasyFactor.Utils
                                 //throw new Exception("发票金额不能为空，不能导入：" + invoiceNo);
                                 exceptionMsg += "发票金额不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                             }
-                            double invoiceAmount;
-                            if (Double.TryParse(invoiceAmountStr, out invoiceAmount))
+                            decimal invoiceAmount;
+                            if (Decimal.TryParse(invoiceAmountStr, out invoiceAmount))
                             {
                                 invoice.InvoiceAmount = invoiceAmount;
                             }
@@ -1066,8 +1066,8 @@ namespace CMBC.EasyFactor.Utils
                                 //throw new Exception("转让金额不能为空，不能导入：" + invoiceNo);
                                 exceptionMsg += "转让金额不能为空，不能导入：" + invoiceNo + Environment.NewLine;
                             }
-                            double assignAmount;
-                            if (Double.TryParse(assignAmountStr, out assignAmount))
+                            decimal assignAmount;
+                            if (Decimal.TryParse(assignAmountStr, out assignAmount))
                             {
                                 invoice.AssignAmount = assignAmount;
                             }
@@ -1135,7 +1135,7 @@ namespace CMBC.EasyFactor.Utils
                             //else 
                             if (cda.CommissionType == "按转让金额")
                             {
-                                invoice.Commission = TypeUtil.C1Round(invoice.AssignAmount * cda.Price.GetValueOrDefault(), 2);
+                                invoice.Commission = invoice.AssignAmount * (decimal)cda.Price.GetValueOrDefault();
                             }
 
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
@@ -1200,8 +1200,8 @@ namespace CMBC.EasyFactor.Utils
                                 exceptionMsg += "贷项通知金额不能为空，不能导入：" + creditNoteNo + Environment.NewLine;
                             }
 
-                            double paymentAmount;
-                            if (!Double.TryParse(paymentAmountStr, out paymentAmount))
+                            decimal paymentAmount;
+                            if (!Decimal.TryParse(paymentAmountStr, out paymentAmount))
                             {
                                 //throw new Exception("贷项通知金额类型异常，不能导入：" + creditNoteNo);
                                 exceptionMsg += "贷项通知金额类型异常，不能导入：" + creditNoteNo + Environment.NewLine;
@@ -1371,12 +1371,12 @@ namespace CMBC.EasyFactor.Utils
                             }
                         }
 
-                        invoice.InvoiceAmount = (double)valueArray[row, column++];
-                        invoice.AssignAmount = (double)valueArray[row, column++];
+                        invoice.InvoiceAmount = (decimal)valueArray[row, column++];
+                        invoice.AssignAmount = (decimal)valueArray[row, column++];
                         invoice.InvoiceDate = (DateTime)valueArray[row, column++];
                         invoice.DueDate = (DateTime)valueArray[row, column++];
                         invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-                        invoice.Commission = (double?)valueArray[row, column++];
+                        invoice.Commission = (decimal?)valueArray[row, column++];
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
 
                         invoiceList.Add(invoice);
@@ -1623,7 +1623,7 @@ namespace CMBC.EasyFactor.Utils
                         cda.IsNotice = String.Format("{0:G}", valueArray[row, column++]);
                         cda.AssignType = String.Format("{0:G}", valueArray[row, column++]);
                         cda.CreditCoverCurr = String.Format("{0:G}", valueArray[row, column++]);
-                        cda.CreditCover = (double?)valueArray[row, column++];
+                        cda.CreditCover = (decimal?)valueArray[row, column++];
                         cda.CreditCoverPeriodBegin = (DateTime?)valueArray[row, column++];
                         cda.CreditCoverPeriodEnd = (DateTime?)valueArray[row, column++];
                         cda.PUGProportion = (double?)valueArray[row, column++];
@@ -1638,10 +1638,10 @@ namespace CMBC.EasyFactor.Utils
                             cda.ReassignGracePeriod = Convert.ToInt32(reassignPeriod.Value);
                         }
                         cda.FinanceLineCurr = String.Format("{0:G}", valueArray[row, column++]);
-                        cda.FinanceLine = (double?)valueArray[row, column++];
+                        cda.FinanceLine = (decimal?)valueArray[row, column++];
                         cda.FinanceLinePeriodBegin = (DateTime?)valueArray[row, column++];
                         cda.FinanceLinePeriodEnd = (DateTime?)valueArray[row, column++];
-                        cda.HighestFinanceLine = (double?)valueArray[row, column++];
+                        cda.HighestFinanceLine = (decimal?)valueArray[row, column++];
                         cda.FinanceProportion = (double?)valueArray[row, column++];
                         var financePeriod = (double?)valueArray[row, column++];
                         if (financePeriod.HasValue)
@@ -1650,13 +1650,13 @@ namespace CMBC.EasyFactor.Utils
                         }
                         cda.PaymentTerms = String.Format("{0:G}", valueArray[row, column++]);
                         cda.OrderNumber = String.Format("{0:G}", valueArray[row, column++]);
-                        cda.Deductibles = (double?)valueArray[row, column++];
-                        cda.LossThreshold = (double?)valueArray[row, column++];
+                        cda.Deductibles = (decimal?)valueArray[row, column++];
+                        cda.LossThreshold = (decimal?)valueArray[row, column++];
                         cda.Price = (double?)valueArray[row, column++];
                         cda.IFPrice = (double?)valueArray[row, column++];
                         cda.EFPrice = (double?)valueArray[row, column++];
                         cda.HandFeeCurr = String.Format("{0:G}", valueArray[row, column++]);
-                        cda.HandFee = (double?)valueArray[row, column++];
+                        cda.HandFee = (decimal?)valueArray[row, column++];
                         cda.CommissionType = String.Format("{0:G}", valueArray[row, column++]);
                         cda.CommissionTypeComment = String.Format("{0:G}", valueArray[row, column++]);
                         cda.CDASignDate = (DateTime)valueArray[row, column++];
@@ -1892,7 +1892,7 @@ namespace CMBC.EasyFactor.Utils
                                              {
                                                  CreditLineType = String.Format("{0:G}", valueArray[row, column++]),
                                                  CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]),
-                                                 CreditLine = (double)valueArray[row, column++],
+                                                 CreditLine = (decimal)valueArray[row, column++],
                                                  PeriodBegin = (DateTime)valueArray[row, column++],
                                                  PeriodEnd = (DateTime)valueArray[row, column++],
                                                  ApproveNo = String.Format("{0:G}", valueArray[row, column++]),
@@ -2117,7 +2117,7 @@ namespace CMBC.EasyFactor.Utils
                                      {
                                          ReviewNo = reviewNo,
                                          RequestCurrency = String.Format("{0:G}", valueArray[row, column++]),
-                                         RequestAmount = (double?)valueArray[row, column++],
+                                         RequestAmount = (decimal?)valueArray[row, column++],
                                          RequestFinanceType = String.Format("{0:G}", valueArray[row, column++]),
                                          RequestFinanceType2 = String.Format("{0:G}", valueArray[row, column++])
                                      };
@@ -2296,7 +2296,7 @@ namespace CMBC.EasyFactor.Utils
                         var creditCover = new CreditCoverNegotiation
                                               {
                                                   RequestType = String.Format("{0:G}", valueArray[row, column++]),
-                                                  RequestAmount = (double)valueArray[row, column++]
+                                                  RequestAmount = (decimal)valueArray[row, column++]
                                               };
                         var netPaymentTerm = (double?)valueArray[row, column++];
                         if (netPaymentTerm.HasValue)
@@ -2304,7 +2304,7 @@ namespace CMBC.EasyFactor.Utils
                             creditCover.NetPaymentTerm = Convert.ToInt32(netPaymentTerm.Value.ToString());
                         }
                         creditCover.RequestDate = (DateTime)valueArray[row, column++];
-                        creditCover.ReplyAmount = (double?)valueArray[row, column++];
+                        creditCover.ReplyAmount = (decimal?)valueArray[row, column++];
                         creditCover.ReplyDate = (DateTime?)valueArray[row, column++];
                         creditCover.IFPrice = (double?)valueArray[row, column++];
                         creditCover.PriceDate = (DateTime?)valueArray[row, column++];
@@ -2445,12 +2445,12 @@ namespace CMBC.EasyFactor.Utils
                         creditNote.InvoiceAssignBatch = log.Invoice.InvoiceAssignBatch;
 
                         string creditNoteAmountStr = String.Format("{0:G}", valueArray[row, column++]);
-                        double creditNoteAmount;
+                        decimal creditNoteAmount;
                         if (String.IsNullOrEmpty(creditNoteAmountStr))
                         {
                             throw new Exception("贷项通知金额不能为空，不能导入：" + creditNoteNo);
                         }
-                        if (Double.TryParse(creditNoteAmountStr, out creditNoteAmount))
+                        if (Decimal.TryParse(creditNoteAmountStr, out creditNoteAmount))
                         {
                             log.PaymentAmount = creditNoteAmount;
                         }
@@ -2652,7 +2652,7 @@ namespace CMBC.EasyFactor.Utils
                             exchange = new Exchange();
                             _context.Exchanges.InsertOnSubmit(exchange);
                         }
-                        exchange.ExchangeRate = (double)valueArray[row, 3];
+                        exchange.ExchangeRate = (decimal)valueArray[row, 3];
                         exchange.LastModifiedDate = DateTime.Now;
 
                         result++;
@@ -2857,7 +2857,7 @@ namespace CMBC.EasyFactor.Utils
                         var creditLine = new FactorCreditLine
                                              {
                                                  CreditLineCurrency = String.Format("{0:G}", valueArray[row, column++]),
-                                                 CreditLine = (double)valueArray[row, column++],
+                                                 CreditLine = (decimal)valueArray[row, column++],
                                                  PeriodBegin = (DateTime)valueArray[row, column++],
                                                  PeriodEnd = (DateTime)valueArray[row, column++],
                                                  ApproveNo = String.Format("{0:G}", valueArray[row, column++]),
@@ -2980,8 +2980,8 @@ namespace CMBC.EasyFactor.Utils
                         {
                             throw new Exception("融资金额不能为空，不能导入：" + assignBatchCode);
                         }
-                        double financeAmount;
-                        if (Double.TryParse(financeAmountStr, out financeAmount))
+                        decimal financeAmount;
+                        if (Decimal.TryParse(financeAmountStr, out financeAmount))
                         {
                             financeBatch.FinanceAmount = financeAmount;
                         }
@@ -3065,7 +3065,7 @@ namespace CMBC.EasyFactor.Utils
 
                         CDA activeCDA = assignBatch.Case.ActiveCDA;
                         GuaranteeDeposit gd = assignBatch.Case.GuaranteeDepositClient.GetGuaranteeDeposit(batchCurrency);
-                        double guaranteeDeposit = 0;
+                        decimal guaranteeDeposit = 0;
 
                         if (activeCDA == null)
                         {
@@ -3095,7 +3095,7 @@ namespace CMBC.EasyFactor.Utils
 
                         if (batchCurrency != activeCDA.FinanceLineCurr)
                         {
-                            double rate = Exchange.GetExchangeRate(batchCurrency, activeCDA.FinanceLineCurr);
+                            decimal rate = Exchange.GetExchangeRate(batchCurrency, activeCDA.FinanceLineCurr);
                             financeAmount *= rate;
                         }
 
@@ -3114,27 +3114,27 @@ namespace CMBC.EasyFactor.Utils
                         //}
 
                         ClientCreditLine highestFinanceLine = assignBatch.Case.HighestFinanceLine;
-                        double highestFinanceLineAmount = highestFinanceLine.CreditLine;
+                        decimal highestFinanceLineAmount = highestFinanceLine.CreditLine;
                         //if (highestFinanceLine.CreditLineCurrency != assignBatch.Case.InvoiceCurrency)
                         //{
                         //    double rate = Exchange.GetExchangeRate(highestFinanceLine.CreditLineCurrency, assignBatch.Case.InvoiceCurrency);
                         //    highestFinanceLineAmount *= rate;
                         //}
 
-                        double caseTotalFinanceOutstanding = assignBatch.Case.TotalFinanceOutstanding;
+                        decimal caseTotalFinanceOutstanding = assignBatch.Case.TotalFinanceOutstanding;
                         if (assignBatch.Case.InvoiceCurrency != highestFinanceLine.CreditLineCurrency)
                         {
-                            double rate = Exchange.GetExchangeRate(assignBatch.Case.InvoiceCurrency, highestFinanceLine.CreditLineCurrency);
+                            decimal rate = Exchange.GetExchangeRate(assignBatch.Case.InvoiceCurrency, highestFinanceLine.CreditLineCurrency);
                             caseTotalFinanceOutstanding *= rate;
                         }
                         if (batchCurrency != highestFinanceLine.CreditLineCurrency)
                         {
-                            double rate = Exchange.GetExchangeRate(batchCurrency, highestFinanceLine.CreditLineCurrency);
+                            decimal rate = Exchange.GetExchangeRate(batchCurrency, highestFinanceLine.CreditLineCurrency);
                             guaranteeDeposit *= rate;
                         }
                         if (activeCDA.FinanceLineCurr != highestFinanceLine.CreditLineCurrency)
                         {
-                            double rate = Exchange.GetExchangeRate(activeCDA.FinanceLineCurr, highestFinanceLine.CreditLineCurrency);
+                            decimal rate = Exchange.GetExchangeRate(activeCDA.FinanceLineCurr, highestFinanceLine.CreditLineCurrency);
                             financeAmount *= rate;
                         }
 
@@ -3158,7 +3158,7 @@ namespace CMBC.EasyFactor.Utils
                         financeBatchList.Add(financeBatch);
 
 
-                        double currentFinanceAmount = 0;
+                        decimal currentFinanceAmount = 0;
                         IEnumerable<Invoice> invoices;
                         if (assignBatch.Case.TransactionType == "国内买方保理")
                         {
@@ -3178,19 +3178,19 @@ namespace CMBC.EasyFactor.Utils
 
                         foreach (Invoice invoice in invoices)
                         {
-                            double canBeFinanceAmount = TypeUtil.C1Round(invoice.AssignOutstanding *
-                                                        activeCDA.FinanceProportion.GetValueOrDefault(),2) -
+                            decimal canBeFinanceAmount = invoice.AssignOutstanding *
+                                                        (decimal)activeCDA.FinanceProportion.GetValueOrDefault() -
                                                         invoice.FinanceAmount.GetValueOrDefault();
                             if (TypeUtil.GreaterZero(canBeFinanceAmount))
                             {
                                 if (invoice.InvoiceCurrency != financeBatch.BatchCurrency)
                                 {
-                                    double rate = Exchange.GetExchangeRate(invoice.InvoiceCurrency,
+                                    decimal rate = Exchange.GetExchangeRate(invoice.InvoiceCurrency,
                                                                            financeBatch.BatchCurrency);
                                     canBeFinanceAmount *= rate;
                                 }
 
-                                double logFinanceAmount;
+                                decimal logFinanceAmount;
                                 if (canBeFinanceAmount + currentFinanceAmount > financeBatch.FinanceAmount)
                                 {
                                     logFinanceAmount = financeBatch.FinanceAmount - currentFinanceAmount;
@@ -3211,7 +3211,7 @@ namespace CMBC.EasyFactor.Utils
                                     currentFinanceAmount += logFinanceAmount;
                                     if (activeCDA.CommissionType == "按融资金额")
                                     {
-                                        log.Commission = log.FinanceAmount * activeCDA.Price;
+                                        log.Commission = log.FinanceAmount * (decimal)activeCDA.Price;
                                     }
 
                                     log.Invoice.CaculateCommission(true);
@@ -3341,8 +3341,8 @@ namespace CMBC.EasyFactor.Utils
                         column++;
                         var log = new InvoiceFinanceLog(invoice)
                                       {
-                                          FinanceAmount = (double?)valueArray[row, column++],
-                                          Commission = (double?)valueArray[row, column++],
+                                          FinanceAmount = (decimal?)valueArray[row, column++],
+                                          Commission = (decimal?)valueArray[row, column++],
                                           Comment = String.Format("{0:G}", valueArray[row, column])
                                       };
 
@@ -3475,7 +3475,7 @@ namespace CMBC.EasyFactor.Utils
                             }
 
                             column = 8;
-                            invoice.InvoiceAmount = (double)valueArray[row, column++];
+                            invoice.InvoiceAmount = (decimal)valueArray[row, column++];
                             invoice.AssignAmount = invoice.InvoiceAmount;
                             invoice.InvoiceDate = (DateTime?)valueArray[row, column++];
                             invoice.DueDate = (DateTime)valueArray[row, column++];
@@ -3540,7 +3540,7 @@ namespace CMBC.EasyFactor.Utils
 
                             //融资信息
                             column = 15;
-                            var financeAmount = (double?)valueArray[row, column++];
+                            var financeAmount = (decimal?)valueArray[row, column++];
                             if (financeAmount.HasValue)
                             {
                                 if (financeBatch == null)
@@ -3589,7 +3589,7 @@ namespace CMBC.EasyFactor.Utils
 
                             //付款信息
                             column = 18;
-                            var paymentAmount = (double?)valueArray[row, column++];
+                            var paymentAmount = (decimal?)valueArray[row, column++];
                             if (paymentAmount.HasValue)
                             {
                                 paymentLog = new InvoicePaymentLog
@@ -3636,7 +3636,7 @@ namespace CMBC.EasyFactor.Utils
 
                             //还款信息
                             column = 20;
-                            var refundAmount = (double?)valueArray[row, column++];
+                            var refundAmount = (decimal?)valueArray[row, column++];
                             if (refundAmount.HasValue)
                             {
                                 refundLog = new InvoiceRefundLog
@@ -3656,7 +3656,7 @@ namespace CMBC.EasyFactor.Utils
 
                             //手续费
                             column = 22;
-                            var commission = (double?)valueArray[row, column++];
+                            var commission = (decimal?)valueArray[row, column++];
 
                             if (commission.HasValue)
                             {
@@ -3729,7 +3729,7 @@ namespace CMBC.EasyFactor.Utils
                             paymentLog = new InvoicePaymentLog
                                              {
                                                  CreditNote = creditNote,
-                                                 PaymentAmount = (double)valueArray[row, 8]
+                                                 PaymentAmount = (decimal)valueArray[row, 8]
                                              };
                             string invoiceNo = String.Format("{0:G}", valueArray[row, 6]);
                             if (String.IsNullOrEmpty(invoiceNo))
@@ -3917,10 +3917,10 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         string paymentAmountStr = String.Format("{0:G}", valueArray[row, column++]);
-                        double paymentAmount = 0;
+                        decimal paymentAmount = 0;
                         if (!String.IsNullOrEmpty(paymentAmountStr))
                         {
-                            if (!Double.TryParse(paymentAmountStr, out paymentAmount))
+                            if (!Decimal.TryParse(paymentAmountStr, out paymentAmount))
                             {
                                 throw isInInvoice
                                           ? new Exception("冲销账款金额类型异常，不能导入：" + invoiceNo)
@@ -4160,10 +4160,10 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         string paymentAmountStr = String.Format("{0:G}", valueArray[row, column++]);
-                        double paymentAmount = 0;
+                        decimal paymentAmount = 0;
                         if (!String.IsNullOrEmpty(paymentAmountStr))
                         {
-                            if (!Double.TryParse(paymentAmountStr, out paymentAmount))
+                            if (!Decimal.TryParse(paymentAmountStr, out paymentAmount))
                             {
                                 throw new Exception("冲销账款金额类型异常，不能导入：" + invoiceNo);
                             }
@@ -4304,7 +4304,7 @@ namespace CMBC.EasyFactor.Utils
 
                         var log = new InvoicePaymentLog(invoice);
                         column++;
-                        log.PaymentAmount = (double?)valueArray[row, column++];
+                        log.PaymentAmount = (decimal?)valueArray[row, column++];
                         log.Comment = String.Format("{0:G}", valueArray[row, column++]);
 
                         if (valueArray.GetUpperBound(1) > 4)
@@ -4445,8 +4445,8 @@ namespace CMBC.EasyFactor.Utils
                         {
                             throw new Exception("融资金额不能为空，不能导入：" + clientEDICode);
                         }
-                        double financeAmount;
-                        if (Double.TryParse(financeAmountStr, out financeAmount))
+                        decimal financeAmount;
+                        if (Decimal.TryParse(financeAmountStr, out financeAmount))
                         {
                             financeBatch.FinanceAmount = financeAmount;
                         }
@@ -4619,10 +4619,10 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         string refundAmountStr = String.Format("{0:G}", valueArray[row, column++]);
-                        double refundAmount = 0;
+                        decimal refundAmount = 0;
                         if (!String.IsNullOrEmpty(refundAmountStr))
                         {
-                            if (!Double.TryParse(refundAmountStr, out refundAmount))
+                            if (!Decimal.TryParse(refundAmountStr, out refundAmount))
                             {
                                 throw new Exception("冲销融资金额类型异常，不能导入：" + clientEDICode);
                             }
@@ -4653,7 +4653,7 @@ namespace CMBC.EasyFactor.Utils
                                 {
                                     if (financeBatch.BatchCurrency != batchCurrency)
                                     {
-                                        double rate = Exchange.GetExchangeRate(batchCurrency, financeBatch.BatchCurrency);
+                                        decimal rate = Exchange.GetExchangeRate(batchCurrency, financeBatch.BatchCurrency);
                                         refundAmount *= rate;
                                     }
 
@@ -4815,10 +4815,10 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         string refundAmountStr = String.Format("{0:G}", valueArray[row, column++]);
-                        double refundAmount = 0;
+                        decimal refundAmount = 0;
                         if (!String.IsNullOrEmpty(refundAmountStr))
                         {
-                            if (!Double.TryParse(refundAmountStr, out refundAmount))
+                            if (!Decimal.TryParse(refundAmountStr, out refundAmount))
                             {
                                 throw new Exception("冲销融资金额类型异常，不能导入：" + assignBatchCode);
                             }
@@ -4857,7 +4857,7 @@ namespace CMBC.EasyFactor.Utils
 
                             if (refundCurrency != assignBatch.BatchCurrency)
                             {
-                                double rate = Exchange.GetExchangeRate(refundCurrency, assignBatch.BatchCurrency);
+                                decimal rate = Exchange.GetExchangeRate(refundCurrency, assignBatch.BatchCurrency);
                                 if (TypeUtil.GreaterZero(refundAmount * rate - assignBatch.FinanceOutstanding))
                                 {
                                     throw new Exception("冲销融资金额不能大于融资余额，不能导入：" + assignBatchCode);
@@ -4977,10 +4977,10 @@ namespace CMBC.EasyFactor.Utils
                             _context.InvoiceFinanceLogs.SingleOrDefault(i => i.FinanceLogID == financeLogId);
                         column++;
                         string refundAmountStr = String.Format("{0:G}", valueArray[row, column++]);
-                        double refundAmount = 0;
+                        decimal refundAmount = 0;
                         if (!String.IsNullOrEmpty(refundAmountStr))
                         {
-                            if (!Double.TryParse(refundAmountStr, out refundAmount))
+                            if (!Decimal.TryParse(refundAmountStr, out refundAmount))
                             {
                                 throw new Exception("冲销融资金额类型异常，不能导入：" + invoiceNo);
                             }

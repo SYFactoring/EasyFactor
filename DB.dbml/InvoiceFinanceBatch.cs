@@ -18,25 +18,25 @@ namespace CMBC.EasyFactor.DB.dbml
     public partial class InvoiceFinanceBatch
     {
 
-        private double? _assignAmount;
-        private double? _commissionAmount;
-        private double? _grossInterestIncome;
-        private double? _handfeeAmount;
-        private double? _marginIncome;
-        private double? _netInterestIncome;
+        private decimal? _assignAmount;
+        private decimal? _commissionAmount;
+        private decimal? _grossInterestIncome;
+        private decimal? _handfeeAmount;
+        private decimal? _marginIncome;
+        private decimal? _netInterestIncome;
 
 
 
         /// <summary>
         /// Gets
         /// </summary>
-        public double AssignAmount
+        public decimal AssignAmount
         {
             get
             {
                 if (_assignAmount.HasValue == false)
                 {
-                    double result = InvoiceFinanceLogs.Sum(log => log.Invoice.AssignAmount);
+                    decimal result = InvoiceFinanceLogs.Sum(log => log.Invoice.AssignAmount);
 
                     _assignAmount = result;
                 }
@@ -100,13 +100,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double? CommissionAmount
+        public decimal? CommissionAmount
         {
             get
             {
                 if (_commissionAmount.HasValue == false)
                 {
-                    double? result = null;
+                    decimal? result = null;
                     foreach (InvoiceFinanceLog log in InvoiceFinanceLogs)
                     {
                         if (log.Commission.HasValue)
@@ -122,7 +122,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
                     if (BatchCurrency != Case.InvoiceCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(BatchCurrency, Case.InvoiceCurrency);
+                        decimal rate = Exchange.GetExchangeRate(BatchCurrency, Case.InvoiceCurrency);
                         result *= rate;
                     }
 
@@ -136,7 +136,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double FinanceOutstanding
+        public decimal FinanceOutstanding
         {
             get
             {
@@ -147,13 +147,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 毛利息收入
         /// </summary>
-        public double GrossInterestIncome
+        public decimal GrossInterestIncome
         {
             get
             {
                 if (_grossInterestIncome.HasValue == false)
                 {
-                    double result = InvoiceFinanceLogs.Sum(log => log.GrossInterest);
+                    decimal result = InvoiceFinanceLogs.Sum(log => log.GrossInterest);
 
                     _grossInterestIncome = result;
                 }
@@ -165,16 +165,16 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets
         /// </summary>
-        public double? HandfeeAmount
+        public decimal? HandfeeAmount
         {
             get
             {
                 if (_handfeeAmount.HasValue == false)
                 {
-                    double? result = AssignCount * Case.ActiveCDA.HandFee;
+                    decimal? result = AssignCount * Case.ActiveCDA.HandFee;
                     if (Case.ActiveCDA.HandFeeCurr != Case.InvoiceCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(Case.ActiveCDA.HandFeeCurr, Case.InvoiceCurrency);
+                        decimal rate = Exchange.GetExchangeRate(Case.ActiveCDA.HandFeeCurr, Case.InvoiceCurrency);
                         result *= rate;
                     }
 
@@ -188,13 +188,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 代付利差收入
         /// </summary>
-        public double? MarginIncome
+        public decimal? MarginIncome
         {
             get
             {
                 if (_marginIncome.HasValue == false)
                 {
-                    _marginIncome = FinanceAmount * (FinanceRate - CostRate) / 360 *
+                    _marginIncome = FinanceAmount * (decimal)(FinanceRate - CostRate) / 360 *
                                     ((FinancePeriodEnd - FinancePeriodBegin).Days);
                 }
 
@@ -205,13 +205,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 净利息收入
         /// </summary>
-        public double NetInterestIncome
+        public decimal NetInterestIncome
         {
             get
             {
                 if (_netInterestIncome.HasValue == false)
                 {
-                    double result = InvoiceFinanceLogs.Sum(log => log.NetInterest);
+                    decimal result = InvoiceFinanceLogs.Sum(log => log.NetInterest);
 
                     _netInterestIncome = result;
                 }
@@ -223,7 +223,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double PoolFinanceOutstanding
+        public decimal PoolFinanceOutstanding
         {
             get { return FinanceAmount - PoolRefundAmount.GetValueOrDefault(); }
         }
@@ -231,7 +231,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? PoolRefundAmount
+        public decimal? PoolRefundAmount
         {
             get { return InvoiceRefundBatches != null ? InvoiceRefundBatches.Sum(batch => batch.RefundAmount) : null; }
         }

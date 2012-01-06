@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets 关联额度中的买方信用风险担保额度余额
         /// </summary>
-        public double? CreditCoverOutstanding
+        public decimal? CreditCoverOutstanding
         {
             get
             {
@@ -36,10 +36,10 @@ namespace CMBC.EasyFactor.DB.dbml
                     return null;
                 }
 
-                double assignOutstanding = Case.AssignOutstanding;
+                decimal assignOutstanding = Case.AssignOutstanding;
                 if (Case.InvoiceCurrency != this.CreditCoverCurr)
                 {
-                    double rate = Exchange.GetExchangeRate(Case.InvoiceCurrency, CreditCoverCurr);
+                    decimal rate = Exchange.GetExchangeRate(Case.InvoiceCurrency, CreditCoverCurr);
                     assignOutstanding *= rate;
                 }
 
@@ -75,7 +75,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets 关联额度中预付款融资额度余额
         /// </summary>
-        public double? FinanceLineOutstanding
+        public decimal? FinanceLineOutstanding
         {
             get
             {
@@ -84,11 +84,11 @@ namespace CMBC.EasyFactor.DB.dbml
                     return null;
                 }
 
-                double financeLine = FinanceLine.GetValueOrDefault();
-                double financeOutstanding = Case.FinanceOutstanding.GetValueOrDefault();
+                decimal financeLine = FinanceLine.GetValueOrDefault();
+                decimal financeOutstanding = Case.FinanceOutstanding.GetValueOrDefault();
                 if (Case.InvoiceCurrency != FinanceLineCurr)
                 {
-                    double rate = Exchange.GetExchangeRate(Case.InvoiceCurrency, FinanceLineCurr);
+                    decimal rate = Exchange.GetExchangeRate(Case.InvoiceCurrency, FinanceLineCurr);
                     financeOutstanding *= rate;
                 }
 

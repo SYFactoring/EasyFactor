@@ -678,7 +678,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 sheet.Cells[row, 1] = "最高保理融资额度";
 
-                double? highestCreditLine = selectedCDA.HighestFinanceLine;
+                decimal? highestCreditLine = selectedCDA.HighestFinanceLine;
                 if (highestCreditLine.HasValue)
                 {
                     if (isZero)
@@ -1105,7 +1105,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 sheet.Cells[row, 1] = "最高保理融资额度";
 
-                double? highestCreditLine = selectedCDA.HighestFinanceLine;
+                decimal? highestCreditLine = selectedCDA.HighestFinanceLine;
                 if (highestCreditLine.HasValue)
                 {
                     if (isZero)

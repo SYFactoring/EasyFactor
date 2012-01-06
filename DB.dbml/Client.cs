@@ -60,7 +60,7 @@ namespace CMBC.EasyFactor.DB.dbml
         ///<summary>
         /// Gets 买方信用风险担保额度余额
         ///</summary>
-        public double? AssignCreditLineOutstanding
+        public decimal? AssignCreditLineOutstanding
         {
             get
             {
@@ -127,7 +127,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// Gets 最高保理预付款融资额度余额
         /// </summary>
-        public double? FinanceLineOutstanding
+        public decimal? FinanceLineOutstanding
         {
             get
             {
@@ -178,31 +178,31 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 现金池余额
         /// </summary>
-        public double GetPoolCashOutstanding(string currency)
+        public decimal GetPoolCashOutstanding(string currency)
         {
-                double cashTotal = 0;
-                double totalPayment = 0;
+                decimal cashTotal = 0;
+                decimal totalPayment = 0;
                 foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
                 {
-                    double paymentAmount = curCase.PaymentAmountByDate;
+                    decimal paymentAmount = curCase.PaymentAmountByDate;
                     if (curCase.InvoiceCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
-                        paymentAmount *= exchange;
+                        decimal exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                        paymentAmount *= (decimal)exchange;
                     }
 
                     totalPayment += paymentAmount;
                 }
 
-                double totalRefund = 0;
+                decimal totalRefund = 0;
                 foreach (InvoiceFinanceBatch financeBatch in InvoiceFinanceBatches)
                 {
-                    double refundAmount = financeBatch.PoolRefundAmount.GetValueOrDefault();
+                    decimal refundAmount = financeBatch.PoolRefundAmount.GetValueOrDefault();
 
                     if (financeBatch.BatchCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(financeBatch.BatchCurrency, currency);
-                        refundAmount *= exchange;
+                        decimal exchange = Exchange.GetExchangeRate(financeBatch.BatchCurrency, currency);
+                        refundAmount *= (decimal)exchange;
                     }
 
                     totalRefund += refundAmount;
@@ -212,11 +212,11 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 if (GuaranteeDeposits.Count > 0)
                 {
-                    double gd = GuaranteeDeposits[0].GuaranteeDepositAmount;
+                    decimal gd = GuaranteeDeposits[0].GuaranteeDepositAmount;
                     if (GuaranteeDeposits[0].GuaranteeDepositCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(GuaranteeDeposits[0].GuaranteeDepositCurrency, currency);
-                        gd *= exchange;
+                        decimal exchange = Exchange.GetExchangeRate(GuaranteeDeposits[0].GuaranteeDepositCurrency, currency);
+                        gd *= (decimal)exchange;
                     }
 
                     cashTotal += gd;
@@ -248,16 +248,16 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 融资池余额
         /// </summary>
-        public double GetPoolFinanceOutstanding(string currency)
+        public decimal GetPoolFinanceOutstanding(string currency)
         {
-                double total = 0;
+                decimal total = 0;
                 foreach (InvoiceFinanceBatch financeBatch in InvoiceFinanceBatches)
                 {
-                    double financeOutstanding = financeBatch.PoolFinanceOutstanding;
+                    decimal financeOutstanding = financeBatch.PoolFinanceOutstanding;
 
                     if (financeBatch.BatchCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(financeBatch.BatchCurrency, currency);
+                        decimal exchange = Exchange.GetExchangeRate(financeBatch.BatchCurrency, currency);
                         financeOutstanding *= exchange;
                     }
 
@@ -270,15 +270,15 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 池融资的总账款余额
         /// </summary>
-        public double GetPoolTotalAssignOutstading(string currency)
+        public decimal GetPoolTotalAssignOutstading(string currency)
         {
-                double result = 0;
+            decimal result = 0;
                 foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
                 {
-                    double assignOutstanding = curCase.AssignOutstanding;
+                    decimal assignOutstanding = curCase.AssignOutstanding;
                     if (curCase.InvoiceCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                        decimal exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
                         assignOutstanding *= exchange;
                     }
 
@@ -291,15 +291,15 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 池融资有效的账款余额，即应收账款池余额
         /// </summary>
-        public double GetPoolCanBeFinance(string currency)
+        public decimal GetPoolCanBeFinance(string currency)
         {
-            double result = 0;
+            decimal result = 0;
             foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.IsPool))
             {
-                double canBeFinance = curCase.CanBeFinanceAmount;
+                decimal canBeFinance = curCase.CanBeFinanceAmount;
                 if (curCase.InvoiceCurrency != currency)
                 {
-                    double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                    decimal exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
                     canBeFinance *= exchange;
                 }
 
@@ -317,9 +317,9 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <param name="transactionType"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public double CanBeFinanceAmount(string transactionType, string currency)
+        public decimal CanBeFinanceAmount(string transactionType, string currency)
         {
-            double result = 0;
+            decimal result = 0;
             EntitySet<Case> cases = (transactionType == "国内卖方保理" || transactionType == "出口保理")
                                         ? SellerCases
                                         : BuyerCases;
@@ -327,10 +327,10 @@ namespace CMBC.EasyFactor.DB.dbml
                 Case curCase in
                     cases.Where(c => c.CaseMark == CASE.ENABLE && c.TransactionType == transactionType))
             {
-                double canbeFinanceAmount = curCase.CanBeFinanceAmount;
+                decimal canbeFinanceAmount = curCase.CanBeFinanceAmount;
                 if (curCase.InvoiceCurrency != currency)
                 {
-                    double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                    decimal exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
                     canbeFinanceAmount *= exchange;
                 }
 
@@ -338,13 +338,13 @@ namespace CMBC.EasyFactor.DB.dbml
             }
 
             ClientCreditLine creditLine = FinanceCreditLine;
-            double creditLineAmount = 0;
+            decimal creditLineAmount = 0;
             if (creditLine != null)
             {
                 creditLineAmount = creditLine.CreditLine;
                 if (creditLine.CreditLineCurrency != currency)
                 {
-                    double exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, currency);
+                    decimal exchange = Exchange.GetExchangeRate(creditLine.CreditLineCurrency, currency);
                     creditLineAmount *= exchange;
                 }
             }
@@ -357,15 +357,15 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public double GetAssignOutstandingAsBuyer(string currency)
+        public decimal GetAssignOutstandingAsBuyer(string currency)
         {
-            double result = 0;
+            decimal result = 0;
             foreach (Case curCase in BuyerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
-                double assignOutstanding = curCase.AssignOutstanding;
+                decimal assignOutstanding = curCase.AssignOutstanding;
                 if (curCase.InvoiceCurrency != currency)
                 {
-                    double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                    decimal exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
                     assignOutstanding *= exchange;
                 }
 
@@ -381,17 +381,17 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <param name="transactionType"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public double GetAssignOutstandingAsSeller(string transactionType, string currency)
+        public decimal GetAssignOutstandingAsSeller(string transactionType, string currency)
         {
-            double result = 0;
+            decimal result = 0;
             foreach (
                 Case curCase in
                     SellerCases.Where(c => c.CaseMark == CASE.ENABLE && c.TransactionType == transactionType))
             {
-                double assignOutstanding = curCase.AssignOutstanding;
+                decimal assignOutstanding = curCase.AssignOutstanding;
                 if (curCase.InvoiceCurrency != currency)
                 {
-                    double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                    decimal exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
                     assignOutstanding *= exchange;
                 }
 
@@ -406,12 +406,12 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public double? GetFinanceOutstanding(string currency)
+        public decimal? GetFinanceOutstanding(string currency)
         {
-            double? total = null;
+            decimal? total = null;
             foreach (Case curCase in SellerCases.Where(c => c.CaseMark == CASE.ENABLE))
             {
-                double? financeOutstanding = curCase.FinanceOutstanding;
+                decimal? financeOutstanding = curCase.FinanceOutstanding;
                 if (financeOutstanding.HasValue)
                 {
                     if (total == null)
@@ -421,8 +421,8 @@ namespace CMBC.EasyFactor.DB.dbml
 
                     if (curCase.InvoiceCurrency != currency)
                     {
-                        double exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
-                        financeOutstanding *= exchange;
+                        decimal exchange = Exchange.GetExchangeRate(curCase.InvoiceCurrency, currency);
+                        financeOutstanding *= (decimal)exchange;
                     }
 
                     total += financeOutstanding.Value;

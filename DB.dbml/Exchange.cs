@@ -27,7 +27,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <returns></returns>
-        public static double GetExchangeRate(string from, string to)
+        public static decimal GetExchangeRate(string from, string to)
         {
             Exchange exchange = ExchangeList.SingleOrDefault(e => e.FromCurr == from && e.ToCurr == to);
             return exchange != null ? exchange.ExchangeRate : 1;

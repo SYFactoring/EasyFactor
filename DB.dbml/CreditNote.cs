@@ -45,7 +45,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? PaymentAmount
+        public decimal? PaymentAmount
         {
             get { return InvoicePaymentLogs.Sum(log => log.PaymentAmount); }
         }

@@ -601,7 +601,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[5, 1] = "保理费用明细表";
 
             int row = 7;
-            double totalCommission = 0;
+            decimal totalCommission = 0;
 
             foreach (InvoiceFinanceBatch selectedBatch in batchGroup)
             {

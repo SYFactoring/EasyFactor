@@ -328,7 +328,7 @@ namespace CMBC.EasyFactor.ARMgr
                 CDA cda = _case.ActiveCDA;
                 if (cda.CommissionType == "°´×ªÈÃ½ð¶î")
                 {
-                    selectedInvoice.Commission = selectedInvoice.AssignAmount * cda.Price;
+                    selectedInvoice.Commission = selectedInvoice.AssignAmount * (decimal)cda.Price;
                 }
 
                 StatBatch();
@@ -515,7 +515,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            double totalAssign = 0;
+            decimal totalAssign = 0;
             var invoiceNoList = new List<string>();
             foreach (Invoice invoice in invoiceList)
             {
@@ -568,11 +568,11 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (_case.BuyerClient.GroupAssignCreditLine != null)
             {
-                double assignCreditLineOutstanding = _case.BuyerClient.GroupAssignCreditLine.AssignCreditLineOutstanding;
+                decimal assignCreditLineOutstanding = _case.BuyerClient.GroupAssignCreditLine.AssignCreditLineOutstanding;
                 if (_case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency !=
                     _case.BuyerClient.AssignCreditLine.CreditLineCurrency)
                 {
-                    double exchange =
+                    decimal exchange =
                         Exchange.GetExchangeRate(_case.BuyerClient.GroupAssignCreditLine.CreditLineCurrency,
                                                  _case.BuyerClient.AssignCreditLine.CreditLineCurrency);
                     assignCreditLineOutstanding *= exchange;
@@ -673,8 +673,8 @@ namespace CMBC.EasyFactor.ARMgr
         private void StatBatch()
         {
             IList invoiceList = invoiceBindingSource.List;
-            double totalAssign = 0;
-            double totalCommmission = 0;
+            decimal totalAssign = 0;
+            decimal totalCommmission = 0;
             foreach (Invoice invoice in invoiceList)
             {
                 totalAssign += invoice.AssignAmount;

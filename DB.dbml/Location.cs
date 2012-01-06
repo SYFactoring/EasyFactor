@@ -63,11 +63,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignAmountByDate
+        public decimal AssignAmountByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 foreach (Department dept in Departments)
                 {
                     dept.QueryDateFrom = QueryDateFrom;
@@ -81,11 +81,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double CommissionIncomeByDate
+        public decimal CommissionIncomeByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 foreach (Department dept in Departments)
                 {
                     dept.QueryDateFrom = QueryDateFrom;
@@ -99,11 +99,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double FinanceAmountByDate
+        public decimal FinanceAmountByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 foreach (Department dept in Departments)
                 {
                     dept.QueryDateFrom = QueryDateFrom;
@@ -117,11 +117,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double MarginIncomeByDate
+        public decimal MarginIncomeByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 foreach (Department dept in Departments)
                 {
                     dept.QueryDateFrom = QueryDateFrom;
@@ -135,11 +135,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double NetInterestIncomeByDate
+        public decimal NetInterestIncomeByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 foreach (Department dept in Departments)
                 {
                     dept.QueryDateFrom = QueryDateFrom;
@@ -153,11 +153,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double PaymentAmountByDate
+        public decimal PaymentAmountByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 foreach (Department dept in Departments)
                 {
                     dept.QueryDateFrom = QueryDateFrom;
@@ -171,11 +171,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double TotalIncomeByDate
+        public decimal TotalIncomeByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 foreach (Department dept in Departments)
                 {
                     dept.QueryDateFrom = QueryDateFrom;

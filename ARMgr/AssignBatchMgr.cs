@@ -907,7 +907,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Cells[5, 1] = "保理费用明细表";
 
             int row = 7;
-            double totalCommission = 0;
+            decimal totalCommission = 0;
             bool showTotalCommission = true;
 
             foreach (InvoiceAssignBatch selectedBatch in batchGroup)
@@ -1326,9 +1326,9 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
 
             int invoiceStart = row;
-            double totalAssignOutstanding = 0;
-            double totalValuedAssignOutstanding = 0;
-            double totalCanBeFinanceAmount = 0;
+            decimal totalAssignOutstanding = 0;
+            decimal totalValuedAssignOutstanding = 0;
+            decimal totalCanBeFinanceAmount = 0;
             foreach (Case c in caseResult)
             {
                 sheet.Cells[row, 1] = c.BuyerClient.ToString();
@@ -1688,7 +1688,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                     row++;
                     int invoiceStart = row;
-                    double assignAmount = 0;
+                    decimal assignAmount = 0;
                     bool isDueOK = transactionType == "国内买方保理";
                     CDA cda = selectedBatch.Case.ActiveCDA;
                     DateTime earlistDateForBaoxian = DateTime.MaxValue;
@@ -1697,7 +1697,7 @@ namespace CMBC.EasyFactor.ARMgr
                         foreach (Invoice invoice in selectedBatch.Case.Invoices)
                         {
                             if (invoice.DueDate <= DateTime.Today
-                           && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION ))
+                           && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > 0 ))
                             {
                                 if (earlistDateForBaoxian >invoice.DueDate)
                                 {
@@ -1716,11 +1716,11 @@ namespace CMBC.EasyFactor.ARMgr
                         if (invoice.IsFlaw == false
                             && invoice.IsDispute.GetValueOrDefault() == false
                             && (isDueOK ? true : invoice.DueDate > DateTime.Today.AddDays(1))
-                            && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
+                            && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > 0)
                             &&
                             ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) *
-                             cda.FinanceProportion.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() >
-                             TypeUtil.PRECISION)
+                             (decimal)cda.FinanceProportion.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() >
+                             0)
                             )
                         {
                             if (selectedBatch.Case.Factor.FactorType == "保险公司")
@@ -1887,7 +1887,7 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
             sheet.Cells[row, 1] = "本次可融资金额：";
             GuaranteeDeposit gd = keyClient.GetGuaranteeDeposit(firstCase.InvoiceCurrency);
-            double canBeFinanceAmount = 0;
+            decimal canBeFinanceAmount = 0;
             if (creditLine != null)
             {
                 if (gd != null)
@@ -2014,18 +2014,17 @@ namespace CMBC.EasyFactor.ARMgr
 
                 row++;
                 int invoiceStart = row;
-                double assignAmount = 0;
+                decimal assignAmount = 0;
                 bool isDueOK = transactionType == "国内买方保理";
                 foreach (Invoice invoice in selectedBatch.Invoices)
                 {
                     if (invoice.IsFlaw == false
                         && invoice.IsDispute.GetValueOrDefault() == false
                         && (isDueOK ? true : invoice.DueDate > DateTime.Today.AddDays(1))
-                        && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
+                        && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > 0)
                         &&
-                        ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) *
-                         cda.FinanceProportion.GetValueOrDefault() - invoice.FinanceAmount.GetValueOrDefault() >
-                         TypeUtil.PRECISION)
+                        ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) *(decimal)
+                         cda.FinanceProportion.GetValueOrDefault() > invoice.FinanceAmount.GetValueOrDefault())
                         )
                     {
                         sheet.Cells[row, 1] = "'" + invoice.InvoiceNo;

@@ -42,11 +42,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double AssignAmountByDate
+        public decimal AssignAmountByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                 foreach (Case selectedCase in OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
@@ -55,10 +55,10 @@ namespace CMBC.EasyFactor.DB.dbml
                         selectedCase.InvoiceAssignBatches.Where(i => i.AssignDate >= fromDate && i.AssignDate <= toDate);
                     foreach (InvoiceAssignBatch batch in batches)
                     {
-                        double assign = batch.AssignAmount;
+                        decimal assign = batch.AssignAmount;
                         if (selectedCase.InvoiceCurrency != "CNY")
                         {
-                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                            decimal rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
                             assign *= rate;
                         }
                         result += assign;
@@ -80,21 +80,21 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double CommissionIncomeByDate
+        public decimal CommissionIncomeByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                 foreach (Case selectedCase in OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
                 {
                     selectedCase.QueryDateFrom = fromDate;
                     selectedCase.QueryDateTo = toDate;
-                    double commission = selectedCase.CommissionIncomeByDate;
+                    decimal commission = selectedCase.CommissionIncomeByDate;
                     if (selectedCase.InvoiceCurrency != "CNY" && TypeUtil.GreaterZero(commission))
                     {
-                        double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+                        decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
                         commission *= rate;
                     }
 
@@ -108,11 +108,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double FinanceAmountByDate
+        public decimal FinanceAmountByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                 foreach (Case selectedCase in OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
@@ -122,10 +122,10 @@ namespace CMBC.EasyFactor.DB.dbml
                             i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
                     foreach (InvoiceFinanceBatch batch in batches)
                     {
-                        double finance = batch.FinanceAmount;
+                        decimal finance = batch.FinanceAmount;
                         if (batch.BatchCurrency != "CNY")
                         {
-                            double rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                            decimal rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
                             finance *= rate;
                         }
 
@@ -148,21 +148,21 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? MarginIncomeByDate
+        public decimal? MarginIncomeByDate
         {
             get
             {
-                double? result = null;
+                decimal? result = null;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                 foreach (Case selectedCase in OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
                 {
                     selectedCase.QueryDateFrom = fromDate;
                     selectedCase.QueryDateTo = toDate;
-                    double? marginIncome = selectedCase.MarginIncomeByDate;
+                    decimal? marginIncome = selectedCase.MarginIncomeByDate;
                     if (selectedCase.InvoiceCurrency != "CNY" && TypeUtil.GreaterZero(marginIncome))
                     {
-                        double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+                        decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
                         marginIncome *= rate;
                     }
 
@@ -181,21 +181,21 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? NetInterestIncomeByDate
+        public decimal? NetInterestIncomeByDate
         {
             get
             {
-                double? result = null;
+                decimal? result = null;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
                 foreach (Case selectedCase in OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
                 {
                     selectedCase.QueryDateFrom = fromDate;
                     selectedCase.QueryDateTo = toDate;
-                    double? netInterest = selectedCase.NetInterestIncomeByDate;
+                    decimal? netInterest = selectedCase.NetInterestIncomeByDate;
                     if (selectedCase.InvoiceCurrency != "CNY" && TypeUtil.GreaterZero(netInterest))
                     {
-                        double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+                        decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
                         netInterest *= rate;
                     }
 
@@ -214,11 +214,11 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double PaymentAmountByDate
+        public decimal PaymentAmountByDate
         {
             get
             {
-                double result = 0;
+                decimal result = 0;
                 DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
                 DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
 
@@ -229,10 +229,10 @@ namespace CMBC.EasyFactor.DB.dbml
                             i => i.PaymentDate >= fromDate && i.PaymentDate <= toDate);
                     foreach (InvoicePaymentBatch batch in batches)
                     {
-                        double payment = batch.PaymentAmount;
+                        decimal payment = batch.PaymentAmount;
                         if (selectedCase.InvoiceCurrency != "CNY")
                         {
-                            double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+                            decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
                             payment *= rate;
                         }
 
@@ -265,7 +265,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double TotalIncomeByDate
+        public decimal TotalIncomeByDate
         {
             get
             {

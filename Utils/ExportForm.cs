@@ -2922,8 +2922,8 @@ namespace CMBC.EasyFactor.Utils
             string creditCoverCurrency = client.AssignCreditLine==null ? "CNY" : client.AssignCreditLine.CreditLineCurrency;
             string financeLineCurrency = client.FinanceCreditLine == null ? "CNY" : client.FinanceCreditLine.CreditLineCurrency;
 
-            double totalAssignOutstanding = 0;
-            double totalFinanceOutstanding = 0;
+            decimal totalAssignOutstanding = 0;
+            decimal totalFinanceOutstanding = 0;
 
             int row = 10;
             foreach (Case selectedCase in caseGroup)
@@ -2954,18 +2954,18 @@ namespace CMBC.EasyFactor.Utils
                     }
                 }
 
-                double assignOutstanding = selectedCase.AssignOutstanding;
+                decimal assignOutstanding = selectedCase.AssignOutstanding;
                 if (selectedCase.InvoiceCurrency != creditCoverCurrency)
                 {
-                    double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, creditCoverCurrency);
+                    decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, creditCoverCurrency);
                     assignOutstanding *= rate;
                 }
                 totalAssignOutstanding += assignOutstanding;
 
-                double financeOutstanding = selectedCase.FinanceOutstanding.GetValueOrDefault();
+                decimal financeOutstanding = selectedCase.FinanceOutstanding.GetValueOrDefault();
                 if (selectedCase.InvoiceCurrency != financeLineCurrency)
                 {
-                    double rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, financeLineCurrency);
+                    decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, financeLineCurrency);
                     financeOutstanding *= rate;
                 }
                 totalFinanceOutstanding += financeOutstanding;

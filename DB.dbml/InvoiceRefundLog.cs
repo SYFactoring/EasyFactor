@@ -37,7 +37,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? FinanceAmount
+        public decimal? FinanceAmount
         {
             get
             {
@@ -52,7 +52,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? FinanceAmount2 { get; set; }
+        public decimal? FinanceAmount2 { get; set; }
 
         /// <summary>
         /// 
@@ -102,7 +102,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? FinanceOutstanding
+        public decimal? FinanceOutstanding
         {
             get { return InvoiceFinanceLog != null ? InvoiceFinanceLog.FinanceOutstanding : FinanceOutstanding2; }
         }
@@ -110,7 +110,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? FinanceOutstanding2 { get; set; }
+        public decimal? FinanceOutstanding2 { get; set; }
 
         /// <summary>
         /// 
@@ -133,7 +133,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoicePaymentAmount
+        public decimal? InvoicePaymentAmount
         {
             get
             {
@@ -148,12 +148,12 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoicePaymentAmount2 { get; set; }
+        public decimal? InvoicePaymentAmount2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoiceRefundAmount
+        public decimal? InvoiceRefundAmount
         {
             get
             {
@@ -168,7 +168,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public double? InvoiceRefundAmount2 { get; set; }
+        public decimal? InvoiceRefundAmount2 { get; set; }
 
         /// <summary>
         /// 

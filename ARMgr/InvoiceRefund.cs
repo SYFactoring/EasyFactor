@@ -65,7 +65,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <summary>
         /// 
         /// </summary>
-        private double _totalPayment;
+        private decimal _totalPayment;
 
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace CMBC.EasyFactor.ARMgr
             if (TypeUtil.GreaterZero(_totalPayment))
             {
                 IList logList = logsBindingSource.List;
-                double totalRefund = logList.Cast<object>().Where((t, i) => Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString())).Cast<InvoiceRefundLog>().Sum(l => l.RefundAmount.GetValueOrDefault());
+                decimal totalRefund = logList.Cast<object>().Where((t, i) => Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString())).Cast<InvoiceRefundLog>().Sum(l => l.RefundAmount.GetValueOrDefault());
 
                 log.RefundAmount = Math.Min(log.FinanceOutstanding.GetValueOrDefault(), _totalPayment - totalRefund);
             }
@@ -500,9 +500,8 @@ namespace CMBC.EasyFactor.ARMgr
             IQueryable<InvoiceFinanceLog> queryResult = from log in _context.InvoiceFinanceLogs
                                                         where log.Invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode
                                                               &&
-                                                              ((from refundLog in log.InvoiceRefundLogs select refundLog.RefundAmount).Sum().GetValueOrDefault() -
-                                                               log.FinanceAmount.GetValueOrDefault() <
-                                                               -TypeUtil.PRECISION)
+                                                              ((from refundLog in log.InvoiceRefundLogs select refundLog.RefundAmount).Sum().GetValueOrDefault() <
+                                                               log.FinanceAmount.GetValueOrDefault() )
                                                         orderby log.InvoiceFinanceBatch.FinancePeriodEnd
                                                         select log;
 
@@ -692,16 +691,16 @@ namespace CMBC.EasyFactor.ARMgr
         private void StatBatch()
         {
             IList refundLogList = logsBindingSource.List;
-            double totalRefund = 0;
+            decimal totalRefund = 0;
             for (int i = 0; i < refundLogList.Count; i++)
             {
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     var refundLog = (InvoiceRefundLog)refundLogList[i];
-                    double refundAmount = refundLog.RefundAmount.GetValueOrDefault();
+                    decimal refundAmount = refundLog.RefundAmount.GetValueOrDefault();
                     if (refundLog.RefundCurrency != _case.InvoiceCurrency)
                     {
-                        double rate = Exchange.GetExchangeRate(refundLog.RefundCurrency, _case.InvoiceCurrency);
+                        decimal rate = Exchange.GetExchangeRate(refundLog.RefundCurrency, _case.InvoiceCurrency);
                         refundAmount *= rate;
                     }
 
