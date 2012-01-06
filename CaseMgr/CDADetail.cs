@@ -477,6 +477,30 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void CustomValidator11ValidateValue(object sender, ValidateValueEventArgs e)
+        {
+            var cda = CDABindingSource.DataSource as CDA;
+            if (cda != null)
+            {
+                if (cda.Case.IsPool)
+                {
+                    if (cda.PoolInvoiceGraceDays == null)
+                        e.IsValid = false;
+                    else
+                        e.IsValid = true;
+                }
+                else
+                {
+                    e.IsValid = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DetailBuyer(object sender, EventArgs e)
         {
             var cda = (CDA)CDABindingSource.DataSource;
