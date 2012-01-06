@@ -754,7 +754,7 @@ namespace CMBC.EasyFactor.Utils
                             DateTime invoiceDate;
                             if (DateTime.TryParse(invoiceDateStr, out invoiceDate))
                             {
-                                if (invoiceDate > DateTime.Today)
+                                if (invoiceDate > DateTime.Today.AddDays(1))
                                 {
                                     //throw new Exception("发票日不能晚于今日，不能导入：" + invoiceNo);
                                     exceptionMsg += "发票日不能晚于今日，不能导入：" + invoiceNo + Environment.NewLine;
@@ -1083,7 +1083,7 @@ namespace CMBC.EasyFactor.Utils
                                 DateTime invoiceDate;
                                 if (DateTime.TryParse(invoiceDateStr, out invoiceDate))
                                 {
-                                    if (invoiceDate > DateTime.Today)
+                                    if (invoiceDate > DateTime.Today.AddDays(1))
                                     {
                                         //throw new Exception("发票日不能晚于今日，不能导入：" + invoiceNo);
                                         exceptionMsg += "发票日不能晚于今日，不能导入：" + invoiceNo + Environment.NewLine;
@@ -3093,6 +3093,12 @@ namespace CMBC.EasyFactor.Utils
                                                               assignBatch.Case.HighestFinanceLine.PeriodEnd, assignBatchCode));
                         }
 
+                        if (batchCurrency != activeCDA.FinanceLineCurr)
+                        {
+                            double rate = Exchange.GetExchangeRate(batchCurrency, activeCDA.FinanceLineCurr);
+                            financeAmount *= rate;
+                        }
+
                         if (TypeUtil.LessZero(activeCDA.FinanceLineOutstanding - financeAmount + guaranteeDeposit))
                         {
                             throw new Exception(String.Format("该案件的预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}",
@@ -3109,10 +3115,27 @@ namespace CMBC.EasyFactor.Utils
 
                         ClientCreditLine highestFinanceLine = assignBatch.Case.HighestFinanceLine;
                         double highestFinanceLineAmount = highestFinanceLine.CreditLine;
-                        if (highestFinanceLine.CreditLineCurrency != assignBatch.Case.InvoiceCurrency)
+                        //if (highestFinanceLine.CreditLineCurrency != assignBatch.Case.InvoiceCurrency)
+                        //{
+                        //    double rate = Exchange.GetExchangeRate(highestFinanceLine.CreditLineCurrency, assignBatch.Case.InvoiceCurrency);
+                        //    highestFinanceLineAmount *= rate;
+                        //}
+
+                        double caseTotalFinanceOutstanding = assignBatch.Case.TotalFinanceOutstanding;
+                        if (assignBatch.Case.InvoiceCurrency != highestFinanceLine.CreditLineCurrency)
                         {
-                            double rate = Exchange.GetExchangeRate(highestFinanceLine.CreditLineCurrency, assignBatch.Case.InvoiceCurrency);
-                            highestFinanceLineAmount *= rate;
+                            double rate = Exchange.GetExchangeRate(assignBatch.Case.InvoiceCurrency, highestFinanceLine.CreditLineCurrency);
+                            caseTotalFinanceOutstanding *= rate;
+                        }
+                        if (batchCurrency != highestFinanceLine.CreditLineCurrency)
+                        {
+                            double rate = Exchange.GetExchangeRate(batchCurrency, highestFinanceLine.CreditLineCurrency);
+                            guaranteeDeposit *= rate;
+                        }
+                        if (activeCDA.FinanceLineCurr != highestFinanceLine.CreditLineCurrency)
+                        {
+                            double rate = Exchange.GetExchangeRate(activeCDA.FinanceLineCurr, highestFinanceLine.CreditLineCurrency);
+                            financeAmount *= rate;
                         }
 
                         if (

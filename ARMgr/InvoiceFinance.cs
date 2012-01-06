@@ -651,7 +651,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                   invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode
                                                   && invoice.IsFlaw == false
                                                   && invoice.IsDispute.GetValueOrDefault() == false
-                                                  && invoice.DueDate > DateTime.Today
+                                                  && invoice.DueDate > DateTime.Today.AddDays(1)
                                                   && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
                                                   && ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * financeProp - invoice.FinanceAmount.GetValueOrDefault() > TypeUtil.PRECISION)
                                               orderby invoice.InvoiceAssignBatch.AssignDate

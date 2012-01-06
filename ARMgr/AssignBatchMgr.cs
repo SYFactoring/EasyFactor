@@ -1715,7 +1715,7 @@ namespace CMBC.EasyFactor.ARMgr
                     {
                         if (invoice.IsFlaw == false
                             && invoice.IsDispute.GetValueOrDefault() == false
-                            && (isDueOK ? true : invoice.DueDate > DateTime.Today)
+                            && (isDueOK ? true : invoice.DueDate > DateTime.Today.AddDays(1))
                             && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
                             &&
                             ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) *
@@ -2020,7 +2020,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     if (invoice.IsFlaw == false
                         && invoice.IsDispute.GetValueOrDefault() == false
-                        && (isDueOK ? true : invoice.DueDate > DateTime.Today)
+                        && (isDueOK ? true : invoice.DueDate > DateTime.Today.AddDays(1))
                         && (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault() > TypeUtil.PRECISION)
                         &&
                         ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) *
