@@ -1595,7 +1595,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<double> _HighestFinanceLine;
 		
-		private System.Nullable<int> _DelayDays;
+		private System.Nullable<int> _insuranceInvoiceGraceDays;
+
+        private System.Nullable<int> _poolInvoiceGraceDays;
 		
 		private string _RiskType;
 		
@@ -1693,8 +1695,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnIsSignedChanged();
     partial void OnHighestFinanceLineChanging(System.Nullable<double> value);
     partial void OnHighestFinanceLineChanged();
-    partial void OnDelayDaysChanging(System.Nullable<int> value);
-    partial void OnDelayDaysChanged();
+    partial void OnInsuranceInvoiceDaysChanging(System.Nullable<int> value);
+    partial void OnInsuranceInvoiceDaysChanged();
+    partial void OnPoolInvoiceDaysChanging(System.Nullable<int> value);
+    partial void OnPoolInvoiceDaysChanged();
     partial void OnRiskTypeChanging(string value);
     partial void OnRiskTypeChanged();
     #endregion
@@ -2589,26 +2593,46 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DelayDays", DbType="int", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<int> DelayDays
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_insuranceInvoiceGraceDays", DbType="int", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<int> InsuranceInvoiceGraceDays
 		{
 			get
 			{
-				return this._DelayDays;
+				return this._insuranceInvoiceGraceDays;
 			}
 			set
 			{
-				if ((this._DelayDays != value))
+				if ((this._insuranceInvoiceGraceDays != value))
 				{
-					this.OnDelayDaysChanging(value);
+					this.OnInsuranceInvoiceDaysChanging(value);
 					this.SendPropertyChanging();
-					this._DelayDays = value;
-					this.SendPropertyChanged("DelayDays");
-					this.OnDelayDaysChanged();
+					this._insuranceInvoiceGraceDays = value;
+					this.SendPropertyChanged("InsuranceInvoiceGraceDays");
+					this.OnInsuranceInvoiceDaysChanged();
 				}
 			}
 		}
-		
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_poolInvoiceGraceDays", DbType = "int", UpdateCheck = UpdateCheck.WhenChanged)]
+        public System.Nullable<int> PoolInvoiceGraceDays
+        {
+            get
+            {
+                return this._poolInvoiceGraceDays;
+            }
+            set
+            {
+                if ((this._poolInvoiceGraceDays != value))
+                {
+                    this.OnInsuranceInvoiceDaysChanging(value);
+                    this.SendPropertyChanging();
+                    this._poolInvoiceGraceDays = value;
+                    this.SendPropertyChanged("PoolInvoiceGraceDays");
+                    this.OnInsuranceInvoiceDaysChanged();
+                }
+            }
+        }
+
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RiskType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string RiskType
 		{

@@ -593,7 +593,7 @@ namespace CMBC.EasyFactor.DB.dbml
                         {
                             if (!batch.IsRefinanced)
                             {
-                                total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && DateTime.Today.AddDays(0-ActiveCDA.PoolInvoiceGraceDays) < invoice.DueDate).Sum(invoice => invoice.AssignOutstanding);
+                                total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && DateTime.Today.AddDays(0-ActiveCDA.PoolInvoiceGraceDays.GetValueOrDefault()) < invoice.DueDate).Sum(invoice => invoice.AssignOutstanding);
                             }
                         }
                     }

@@ -1707,7 +1707,7 @@ namespace CMBC.EasyFactor.ARMgr
                         }
                         if (earlistDateForBaoxian != DateTime.MaxValue)
                         {
-                            earlistDateForBaoxian = earlistDateForBaoxian.AddDays(Double.Parse(cda.DelayDays.GetValueOrDefault().ToString()));
+                            earlistDateForBaoxian = earlistDateForBaoxian.AddDays(Double.Parse(cda.InsuranceInvoiceGraceDays.GetValueOrDefault().ToString()));
                         }
                     }
 
