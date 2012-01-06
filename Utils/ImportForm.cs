@@ -3178,8 +3178,8 @@ namespace CMBC.EasyFactor.Utils
 
                         foreach (Invoice invoice in invoices)
                         {
-                            double canBeFinanceAmount = invoice.AssignOutstanding *
-                                                        activeCDA.FinanceProportion.GetValueOrDefault() -
+                            double canBeFinanceAmount = TypeUtil.C1Round(invoice.AssignOutstanding *
+                                                        activeCDA.FinanceProportion.GetValueOrDefault(),2) -
                                                         invoice.FinanceAmount.GetValueOrDefault();
                             if (TypeUtil.GreaterZero(canBeFinanceAmount))
                             {

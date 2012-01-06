@@ -417,6 +417,7 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void QueryCDAs(object sender, EventArgs e)
         {
+            string cdaCode = tbCDACode.Text;
             string clientName = tbClientName.Text;
             string factorName = tbFactorName.Text;
             string contractCode = tbContractCode.Text;
@@ -432,6 +433,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             IQueryable<CDA> queryResult =
                 from cda in Context.CDAs
+                where (cdaCode==""?true:cda.CDACode==cdaCode)
                 let curCase = cda.Case
                 where
                     (transactionType == "È«²¿" ? true : curCase.TransactionType == transactionType) &&

@@ -2394,7 +2394,14 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (batchGroup.Any(b => b.Case.IsPool == false))
                 {
-                    ReportFinanceSheet(financeSheet, batchGroup, transactionType);
+                    if (transactionType == "出口保理" && batchGroup.First().Case.ActiveCDA.RiskType == "低风险")
+                    {
+                        ReportFinanceSheetOld(financeSheet, batchGroup, transactionType);
+                    }
+                    else
+                    {
+                        ReportFinanceSheet(financeSheet, batchGroup, transactionType);
+                    }
                 }
                 else
                 {
