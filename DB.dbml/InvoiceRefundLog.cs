@@ -206,7 +206,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (TypeUtil.LessZero(RefundAmount))
+                if (RefundAmount<0)
                 {
                     throw new Exception(String.Format("还款金额{0:N2}不能为负: {1}", RefundAmount,
                                  RefundLogID));

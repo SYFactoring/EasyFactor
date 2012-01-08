@@ -705,7 +705,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return false;
                 }
 
-                if (TypeUtil.EqualsZero(invoice.InvoiceAmount))
+                if (invoice.InvoiceAmount==0)
                 {
                     MessageBoxEx.Show("Æ±Ãæ½ð¶î±ØÌî", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);

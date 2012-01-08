@@ -29,7 +29,9 @@ namespace CMBC.EasyFactor.DB.dbml
         private decimal? _paymentAmountByDate;
         private decimal? _refundAmountByDate;
         private decimal? _totalAssignOutstanding;
-        private decimal? _valuedAssignOutstanding;
+        private decimal? _sellerValuedAssignOutstanding;
+        private decimal? _buyerValuedAssignOutstanding;
+        private decimal? _poolValuedAssignOutstanding;
 
 
         /// <summary>
@@ -115,9 +117,21 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     return 0;
                 }
-                //return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(),
-                //                ValuedAssignOutstanding * activeCDA.FinanceProportion.GetValueOrDefault());
-                return ValuedAssignOutstanding * (decimal)activeCDA.FinanceProportion.GetValueOrDefault();
+
+                if (IsPool)
+                {
+                    return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(),
+                                PoolValuedAssignOutstanding * (decimal)activeCDA.FinanceProportion.GetValueOrDefault());
+                }
+                else
+                {
+                    if (TransactionType == "国内卖方保理" || TransactionType == "出口保理")
+                        return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(), SellerValuedAssignOutstanding * (decimal)activeCDA.FinanceProportion.GetValueOrDefault());
+                    else if (TransactionType == "国内买方保理")
+                        return Math.Min(activeCDA.FinanceLineOutstanding.GetValueOrDefault(), BuyerValuedAssignOutstanding * (decimal)activeCDA.FinanceProportion.GetValueOrDefault());
+                    else
+                        return 0;
+                }
             }
         }
 
@@ -572,14 +586,35 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        /// <summary>
-        /// 用于池融资，有效的转让余额
-        /// </summary>
-        public decimal ValuedAssignOutstanding
+        public decimal PoolValuedAssignOutstanding
         {
             get
             {
-                if (_valuedAssignOutstanding.HasValue == false)
+                if (_poolValuedAssignOutstanding.HasValue == false)
+                {
+                    double financeProp = ActiveCDA.FinanceProportion.GetValueOrDefault();
+                    decimal total = 0;
+                    foreach (InvoiceAssignBatch batch in InvoiceAssignBatches)
+                    {
+                        total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault()
+                                                                     && !invoice.IsFlaw && DateTime.Today.AddDays(0 - ActiveCDA.PoolInvoiceGraceDays.GetValueOrDefault()) < invoice.DueDate
+                                                                         ).Sum(invoice => invoice.AssignOutstanding);
+                    }
+                    _poolValuedAssignOutstanding = total;
+                }
+
+                return _poolValuedAssignOutstanding.Value;
+            }
+        }
+
+        /// <summary>
+        /// 用于卖方保理，出口保理，有效的转让余额
+        /// </summary>
+        public decimal SellerValuedAssignOutstanding
+        {
+            get
+            {
+                if (_sellerValuedAssignOutstanding.HasValue == false)
                 {
                     double financeProp = ActiveCDA.FinanceProportion.GetValueOrDefault();
                     decimal total = 0;
@@ -587,32 +622,36 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         if (batch.IsRefinance)
                         {
-                            total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && DateTime.Today < invoice.DueDate && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * (decimal)financeProp < 0)).Sum(invoice => invoice.AssignOutstanding);
+                            total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault()
+                                                                  && !invoice.IsFlaw && DateTime.Today < invoice.DueDate
+                                                                  && (invoice.FinanceAmount.HasValue == false
+                                                                      || invoice.FinanceAmount.GetValueOrDefault() < invoice.AssignAmount * (decimal)financeProp)
+                                                                      ).Sum(invoice => invoice.AssignOutstanding);
                         }
                         else
                         {
                             if (!batch.IsRefinanced)
                             {
-                                total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && DateTime.Today.AddDays(0-ActiveCDA.PoolInvoiceGraceDays.GetValueOrDefault()) < invoice.DueDate).Sum(invoice => invoice.AssignOutstanding);
+                                total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && DateTime.Today < invoice.DueDate).Sum(invoice => invoice.AssignOutstanding);
                             }
                         }
                     }
 
-                    _valuedAssignOutstanding = total;
+                    _sellerValuedAssignOutstanding = total;
                 }
 
-                return _valuedAssignOutstanding.Value;
+                return _sellerValuedAssignOutstanding.Value;
             }
         }
 
         /// <summary>
         /// 用于国内买方保理
         /// </summary>
-        public decimal ValuedAssignOutstanding2
+        public decimal BuyerValuedAssignOutstanding
         {
             get
             {
-                if (_valuedAssignOutstanding.HasValue == false)
+                if (_buyerValuedAssignOutstanding.HasValue == false)
                 {
                     double financeProp = ActiveCDA.FinanceProportion.GetValueOrDefault();
                     decimal total = 0;
@@ -620,7 +659,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     {
                         if (batch.IsRefinance)
                         {
-                            total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - (invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * (decimal)financeProp < 0)).Sum(invoice => invoice.AssignOutstanding);
+                            total += batch.Invoices.Where(invoice => !invoice.IsDispute.GetValueOrDefault() && !invoice.IsFlaw && (invoice.FinanceAmount.HasValue == false || invoice.FinanceAmount.GetValueOrDefault() - invoice.AssignAmount * (decimal)financeProp < 0)).Sum(invoice => invoice.AssignOutstanding);
                         }
                         else
                         {
@@ -631,10 +670,10 @@ namespace CMBC.EasyFactor.DB.dbml
                         }
                     }
 
-                    _valuedAssignOutstanding = total;
+                    _buyerValuedAssignOutstanding = total;
                 }
 
-                return _valuedAssignOutstanding.Value;
+                return _buyerValuedAssignOutstanding.Value;
             }
         }
         /// <summary>

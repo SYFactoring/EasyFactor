@@ -1333,7 +1333,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 sheet.Cells[row, 1] = c.BuyerClient.ToString();
                 sheet.Cells[row, 2] = c.AssignOutstanding;
-                sheet.Cells[row, 3] = c.ValuedAssignOutstanding;
+                sheet.Cells[row, 3] = c.PoolValuedAssignOutstanding;
                 sheet.Cells[row, 4] = c.FinanceProportion;
                 sheet.Cells[row, 5] = c.CanBeFinanceAmount;
                 sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 3]].NumberFormatLocal =
@@ -1344,7 +1344,7 @@ namespace CMBC.EasyFactor.ARMgr
     TypeUtil.GetExcelCurr(c.InvoiceCurrency);
                 row++;
                 totalAssignOutstanding += c.AssignOutstanding;
-                totalValuedAssignOutstanding += c.ValuedAssignOutstanding;
+                totalValuedAssignOutstanding += c.PoolValuedAssignOutstanding;
                 totalCanBeFinanceAmount += c.CanBeFinanceAmount;
             }
 
@@ -1502,7 +1502,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 sheet.Cells[row, 1] = c.BuyerClient.ToString();
                 sheet.Cells[row, 2] = c.AssignOutstanding;
-                sheet.Cells[row, 3] = c.ValuedAssignOutstanding;
+                sheet.Cells[row, 3] = c.PoolValuedAssignOutstanding;
                 sheet.Cells[row, 4] = c.FinanceProportion;
                 sheet.Cells[row, 5] = c.CanBeFinanceAmount;
                 sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 3]].NumberFormatLocal =
@@ -1654,11 +1654,11 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Cells[row, 1] = "对此" + clientSide + "的有效账款余额：";
                 if (transactionType == "国内买方保理")
                 {
-                    sheet.Cells[row, 2] = group.First().Case.ValuedAssignOutstanding2;
+                    sheet.Cells[row, 2] = group.First().Case.BuyerValuedAssignOutstanding;
                 }
                 else
                 {
-                    sheet.Cells[row, 2] = group.First().Case.ValuedAssignOutstanding;
+                    sheet.Cells[row, 2] = group.First().Case.SellerValuedAssignOutstanding;
                 }
                 sheet.Range[sheet.Cells[row, 2], sheet.Cells[row, 2]].NumberFormatLocal =
                     TypeUtil.GetExcelCurrency(group.First().Case.InvoiceCurrency);
@@ -1903,7 +1903,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                        firstCase.InvoiceCurrency);
                 }
 
-                if (TypeUtil.LessZero(canBeFinanceAmount))
+                if (canBeFinanceAmount<0)
                 {
                     canBeFinanceAmount = 0;
                 }
@@ -2016,6 +2016,7 @@ namespace CMBC.EasyFactor.ARMgr
                 int invoiceStart = row;
                 decimal assignAmount = 0;
                 bool isDueOK = transactionType == "国内买方保理";
+
                 foreach (Invoice invoice in selectedBatch.Invoices)
                 {
                     if (invoice.IsFlaw == false

@@ -225,6 +225,14 @@ namespace CMBC.EasyFactor.ARMgr
                             Context.InvoiceRefundLogs.DeleteOnSubmit(refundLog);
                         }
 
+                        foreach (InvoiceRefundBatch refundBatch in selectedBatch.InvoiceRefundBatches.ToList())
+                        {
+                            if (refundBatch.InvoiceRefundLogs.Count == 0)
+                            {
+                                Context.InvoiceRefundBatches.DeleteOnSubmit(refundBatch);
+                            }
+                        }
+
                         Invoice invoice = log.Invoice;
                         log.Invoice = null;
                         invoice.Commission -= log.Commission.GetValueOrDefault();

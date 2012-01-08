@@ -145,7 +145,7 @@ namespace CMBC.EasyFactor.ARMgr
                 financeAmount = log.AssignOutstanding * (decimal)_case.ActiveCDA.FinanceProportion.GetValueOrDefault();
             }
 
-            if (!TypeUtil.GreaterZero(financeAmount))
+            if (financeAmount<=0)
             {
                 checkBoxCell.Value = 0;
                 return;
@@ -237,7 +237,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void CustomValidator3ValidateValue(object sender, ValidateValueEventArgs e)
         {
             var batch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
-            e.IsValid = !TypeUtil.LessZero(batch.FinanceRate);
+            e.IsValid = batch.FinanceRate>=0;
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace CMBC.EasyFactor.ARMgr
             var batch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
             if (batch.CostRate.HasValue)
             {
-                e.IsValid = !TypeUtil.LessZero(batch.CostRate);
+                e.IsValid = batch.CostRate>=0;
             }
             else
             {
@@ -544,7 +544,7 @@ namespace CMBC.EasyFactor.ARMgr
                         oldLog.Commission = newLog.Commission;
                         oldLog.Comment = newLog.Comment;
 
-                        if (TypeUtil.GreaterZero(oldLog.FinanceAmount))
+                        if (oldLog.FinanceAmount>0)
                         {
                             cell.Value = 1;
                         }
@@ -597,7 +597,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (!hasGD)
             {
-                if (TypeUtil.LessZero(activeCDA.FinanceLineOutstanding))
+                if (activeCDA.FinanceLineOutstanding<0)
                 {
                     MessageBoxEx.Show("该案件的预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
@@ -619,7 +619,7 @@ namespace CMBC.EasyFactor.ARMgr
                     highestFinanceLineAmount *= rate;
                 }
 
-                if (TypeUtil.LessZero(highestFinanceLineAmount - _case.TotalFinanceOutstanding))
+                if (highestFinanceLineAmount < _case.TotalFinanceOutstanding)
                 {
                     MessageBoxEx.Show("该客户的最高预付款融资额度余额不足，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
@@ -771,7 +771,7 @@ namespace CMBC.EasyFactor.ARMgr
                     (t, i) => Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString())).Cast
                     <InvoiceFinanceLog>().Sum(log => log.FinanceAmount.GetValueOrDefault());
 
-            if (!TypeUtil.EqualsZero(batch.FinanceAmount - totalFinance))
+            if (batch.FinanceAmount != totalFinance)
             {
                 MessageBoxEx.Show("融资额未分配结束，不能保存", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                   MessageBoxIcon.Information);
@@ -790,7 +790,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 guaranteeDeposit = gd.GuaranteeDepositAmount;
             }
-            if (TypeUtil.LessZero(activeCDA.FinanceLineOutstanding - batch.FinanceAmount + guaranteeDeposit))
+            if (activeCDA.FinanceLineOutstanding < batch.FinanceAmount - guaranteeDeposit)
             {
                 throw new Exception(String.Format("该案件的预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资",
                                                   (activeCDA.FinanceLineOutstanding + guaranteeDeposit),
@@ -806,8 +806,8 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             if (
-                TypeUtil.LessZero(highestFinanceLineAmount - _case.TotalFinanceOutstanding - batch.FinanceAmount +
-                                  guaranteeDeposit))
+                highestFinanceLineAmount < _case.TotalFinanceOutstanding + batch.FinanceAmount -
+                                  guaranteeDeposit)
             {
                 throw new Exception(String.Format("该客户的最高预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资",
                                                   (highestFinanceLineAmount - _case.TotalFinanceOutstanding +
@@ -978,7 +978,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     var log = (InvoiceFinanceLog)logList[i];
-                    if (!TypeUtil.GreaterZero(log.FinanceAmount))
+                    if (log.FinanceAmount<=0)
                     {
                         MessageBoxEx.Show("融资金额不能为空: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                           MessageBoxIcon.Information);

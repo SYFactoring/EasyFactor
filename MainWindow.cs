@@ -38,7 +38,7 @@ namespace CMBC.EasyFactor
         {
             try
             {
-                Process.Start("http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/index.html");
+                Process.Start("http://58.215.189.162/EasyFactoring/change_log.htm");
             }
             catch (Exception)
             {
@@ -314,7 +314,7 @@ namespace CMBC.EasyFactor
                                   {
                                       ConfigURL =
                                           new Uri(
-                                          "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml")
+                                          "http://58.215.189.162/EasyFactoring/UpdateVersion.xml")
                                   };
             autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
             autoUpdater.TryUpdate();

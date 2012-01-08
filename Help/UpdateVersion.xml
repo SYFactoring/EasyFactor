@@ -1,6 +1,6 @@
 <VersionConfig>
-	<AvailableVersion>2.7.14.1</AvailableVersion>
-	<AppFileURL>http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/App.zip</AppFileURL>
+	<AvailableVersion>3.1.8.1</AvailableVersion>
+	<AppFileURL>http://58.215.189.162/EasyFactoring/App.zip</AppFileURL>
 	<LatestChanges>Fixed Bugs</LatestChanges>
-	<ChangeLogURL>http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/change_log.htm</ChangeLogURL>
+	<ChangeLogURL>http://58.215.189.162/EasyFactoring/change_log.htm</ChangeLogURL>
 </VersionConfig>

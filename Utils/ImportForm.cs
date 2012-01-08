@@ -806,7 +806,7 @@ namespace CMBC.EasyFactor.Utils
                         //else 
                         if (cda.CommissionType == "按转让金额")
                         {
-                            invoice.Commission = invoice.AssignAmount * (decimal)cda.Price.GetValueOrDefault();
+                            invoice.Commission = Decimal.Round(invoice.AssignAmount * (decimal)cda.Price.GetValueOrDefault(),2);
                         }
 
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
@@ -1135,7 +1135,7 @@ namespace CMBC.EasyFactor.Utils
                             //else 
                             if (cda.CommissionType == "按转让金额")
                             {
-                                invoice.Commission = invoice.AssignAmount * (decimal)cda.Price.GetValueOrDefault();
+                                invoice.Commission = Decimal.Round(invoice.AssignAmount * (decimal)cda.Price.GetValueOrDefault(),2);
                             }
 
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
@@ -2496,7 +2496,7 @@ namespace CMBC.EasyFactor.Utils
                             //paymentBatch.CheckStatus = BATCH.UNCHECK;
                         }
 
-                        if (TypeUtil.GreaterZero(creditNoteAmount - invoice.AssignOutstanding))
+                        if (creditNoteAmount == invoice.AssignOutstanding)
                         {
                             throw new Exception("贷项通知金额不能大于转让余额，不能导入：" + creditNoteNo);
                         }
@@ -3099,7 +3099,7 @@ namespace CMBC.EasyFactor.Utils
                             financeAmount *= rate;
                         }
 
-                        if (TypeUtil.LessZero(activeCDA.FinanceLineOutstanding - financeAmount + guaranteeDeposit))
+                        if (activeCDA.FinanceLineOutstanding < financeAmount - guaranteeDeposit)
                         {
                             throw new Exception(String.Format("该案件的预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}",
                                                               (activeCDA.FinanceLineOutstanding + guaranteeDeposit),
@@ -3139,8 +3139,8 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         if (
-                            TypeUtil.LessZero(highestFinanceLineAmount - assignBatch.Case.TotalFinanceOutstanding -
-                                              financeAmount + guaranteeDeposit))
+                           highestFinanceLineAmount < assignBatch.Case.TotalFinanceOutstanding +
+                                              financeAmount - guaranteeDeposit)
                         {
                             throw new Exception(String.Format("该客户的最高预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资：{2}",
                                                               (highestFinanceLineAmount -
@@ -3178,10 +3178,10 @@ namespace CMBC.EasyFactor.Utils
 
                         foreach (Invoice invoice in invoices)
                         {
-                            decimal canBeFinanceAmount = invoice.AssignOutstanding *
+                            decimal canBeFinanceAmount = Decimal.Round(invoice.AssignOutstanding *
                                                         (decimal)activeCDA.FinanceProportion.GetValueOrDefault() -
-                                                        invoice.FinanceAmount.GetValueOrDefault();
-                            if (TypeUtil.GreaterZero(canBeFinanceAmount))
+                                                        invoice.FinanceAmount.GetValueOrDefault(),2);
+                            if (canBeFinanceAmount>0)
                             {
                                 if (invoice.InvoiceCurrency != financeBatch.BatchCurrency)
                                 {
@@ -3193,14 +3193,14 @@ namespace CMBC.EasyFactor.Utils
                                 decimal logFinanceAmount;
                                 if (canBeFinanceAmount + currentFinanceAmount > financeBatch.FinanceAmount)
                                 {
-                                    logFinanceAmount = financeBatch.FinanceAmount - currentFinanceAmount;
+                                    logFinanceAmount = Decimal.Round(financeBatch.FinanceAmount - currentFinanceAmount,2);
                                 }
                                 else
                                 {
-                                    logFinanceAmount = canBeFinanceAmount;
+                                    logFinanceAmount = Decimal.Round(canBeFinanceAmount,2);
                                 }
 
-                                if (TypeUtil.GreaterZero(logFinanceAmount))
+                                if (logFinanceAmount>0)
                                 {
                                     var log = new InvoiceFinanceLog
                                                   {
@@ -3208,19 +3208,19 @@ namespace CMBC.EasyFactor.Utils
                                                       InvoiceFinanceBatch = financeBatch,
                                                       FinanceAmount = logFinanceAmount
                                                   };
-                                    currentFinanceAmount += logFinanceAmount;
+                                    currentFinanceAmount += Decimal.Round(logFinanceAmount,2);
                                     if (activeCDA.CommissionType == "按融资金额")
                                     {
                                         log.Commission = log.FinanceAmount * (decimal)activeCDA.Price;
                                     }
 
-                                    log.Invoice.CaculateCommission(true);
+                                    log.Invoice.CaculateCommission(false);
                                     log.Invoice.CaculateFinance();
                                 }
                             }
                         }
 
-                        if (TypeUtil.GreaterZero(financeBatch.FinanceAmount - currentFinanceAmount))
+                        if (financeBatch.FinanceAmount > currentFinanceAmount)
                         {
                             throw new Exception(String.Format("本次申请融资金额{0:N2}，大于实际可融资金额{1:N2}，业务编号：{2}",
                                                               financeBatch.FinanceAmount, currentFinanceAmount,
@@ -3276,7 +3276,7 @@ namespace CMBC.EasyFactor.Utils
                             Invoice invoice = log.Invoice;
                             log.Invoice = null;
                             invoice.CaculateFinance();
-                            invoice.CaculateCommission(true);
+                            invoice.CaculateCommission(false);
                         }
 
                         batch.Case = null;
@@ -3946,7 +3946,7 @@ namespace CMBC.EasyFactor.Utils
 
                         string comment = String.Format("{0:G}", valueArray[row, column]);
 
-                        if (TypeUtil.GreaterZero(paymentAmount))
+                        if (paymentAmount>0)
                         {
                             InvoicePaymentBatch paymentBatch;
                             if (isInInvoice)
@@ -3974,7 +3974,7 @@ namespace CMBC.EasyFactor.Utils
                                     paymentBatchList.Add(paymentBatch);
                                 }
 
-                                if (TypeUtil.GreaterZero(paymentAmount - invoice.AssignOutstanding))
+                                if (paymentAmount > invoice.AssignOutstanding)
                                 {
                                     throw new Exception("冲销账款金额不能大于转让余额，不能导入：" + invoiceNo);
                                 }
@@ -4005,15 +4005,15 @@ namespace CMBC.EasyFactor.Utils
                                 //paymentBatch.CheckStatus = BATCH.UNCHECK;
                                 paymentBatchList.Add(paymentBatch);
 
-                                if (TypeUtil.GreaterZero(paymentAmount - assignBatch.AssignOutstanding))
+                                if (paymentAmount > assignBatch.AssignOutstanding)
                                 {
                                     throw new Exception("冲销账款金额不能大于转让余额，不能导入：" + assignBatchCode);
                                 }
 
                                 foreach (Invoice inv in assignBatch.Invoices.OrderBy(i => i.DueDate))
                                 {
-                                    if (TypeUtil.GreaterZero(paymentAmount) &&
-                                        TypeUtil.GreaterZero(inv.AssignOutstanding))
+                                    if (paymentAmount>0 &&
+                                        inv.AssignOutstanding>0)
                                     {
                                         var log = new InvoicePaymentLog
                                                       {
@@ -4183,7 +4183,7 @@ namespace CMBC.EasyFactor.Utils
 
                         string comment = String.Format("{0:G}", valueArray[row, column]);
 
-                        if (TypeUtil.GreaterZero(paymentAmount))
+                        if (paymentAmount>0)
                         {
                             InvoicePaymentBatch paymentBatch;
                             paymentBatch =
@@ -4209,7 +4209,7 @@ namespace CMBC.EasyFactor.Utils
                                 paymentBatchList.Add(paymentBatch);
                             }
 
-                            if (TypeUtil.GreaterZero(paymentAmount - invoice.AssignOutstanding))
+                            if (paymentAmount > invoice.AssignOutstanding)
                             {
                                 throw new Exception("冲销账款金额不能大于转让余额，不能导入：" + invoiceNo);
                             }
@@ -4642,14 +4642,14 @@ namespace CMBC.EasyFactor.Utils
 
                         string comment = String.Format("{0:G}", valueArray[row, column]);
 
-                        if (TypeUtil.GreaterZero(refundAmount))
+                        if (refundAmount>0)
                         {
                             foreach (
                                 InvoiceFinanceBatch financeBatch in
                                     client.InvoiceFinanceBatches.OrderBy(i => i.FinancePeriodEnd))
                             {
-                                if (TypeUtil.GreaterZero(refundAmount) &&
-                                    TypeUtil.GreaterZero(financeBatch.PoolFinanceOutstanding))
+                                if (refundAmount>0 &&
+                                    financeBatch.PoolFinanceOutstanding>0)
                                 {
                                     if (financeBatch.BatchCurrency != batchCurrency)
                                     {
@@ -4839,7 +4839,7 @@ namespace CMBC.EasyFactor.Utils
                         string comment = String.Format("{0:G}", valueArray[row, column]);
 
 
-                        if (TypeUtil.GreaterZero(refundAmount))
+                        if (refundAmount>0)
                         {
                             refundBatch = new InvoiceRefundBatch
                                               {
@@ -4858,14 +4858,14 @@ namespace CMBC.EasyFactor.Utils
                             if (refundCurrency != assignBatch.BatchCurrency)
                             {
                                 decimal rate = Exchange.GetExchangeRate(refundCurrency, assignBatch.BatchCurrency);
-                                if (TypeUtil.GreaterZero(refundAmount * rate - assignBatch.FinanceOutstanding))
+                                if (refundAmount * rate > assignBatch.FinanceOutstanding)
                                 {
                                     throw new Exception("冲销融资金额不能大于融资余额，不能导入：" + assignBatchCode);
                                 }
                             }
                             else
                             {
-                                if (TypeUtil.GreaterZero(refundAmount - assignBatch.FinanceOutstanding))
+                                if (refundAmount > assignBatch.FinanceOutstanding)
                                 {
                                     throw new Exception("冲销融资金额不能大于融资余额，不能导入：" + assignBatchCode);
                                 }
@@ -4873,13 +4873,13 @@ namespace CMBC.EasyFactor.Utils
 
                             var financeLogs = (from inv in assignBatch.Invoices
                                                from financeLog in inv.InvoiceFinanceLogs
-                                               where financeLog.InvoiceFinanceBatch.BatchCurrency == refundCurrency && TypeUtil.GreaterZero(financeLog.FinanceOutstanding)
+                                               where financeLog.InvoiceFinanceBatch.BatchCurrency == refundCurrency && financeLog.FinanceOutstanding>0
                                                select financeLog).ToList();
 
                             foreach (InvoiceFinanceLog financeLog in financeLogs.OrderBy(f => f.FinanceDueDate))
                             {
-                                if (TypeUtil.GreaterZero(refundAmount) &&
-                                    TypeUtil.GreaterZero(financeLog.FinanceOutstanding))
+                                if (refundAmount>0 &&
+                                    financeLog.FinanceOutstanding>0)
                                 {
                                     var log = new InvoiceRefundLog
                                                   {

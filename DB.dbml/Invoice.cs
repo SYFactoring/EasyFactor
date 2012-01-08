@@ -44,7 +44,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (TypeUtil.GreaterZero(AssignOutstanding))
+                if (AssignOutstanding>0)
                 {
                     return (DateTime.Now.Date - DueDate).Days;
                 }
@@ -116,7 +116,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (TypeUtil.GreaterZero(FinanceOutstanding))
+                if (FinanceOutstanding>0)
                 {
                     if (FinanceDueDate != null)
                     {
@@ -215,7 +215,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public bool IsClear
         {
-            get { return TypeUtil.EqualsZero(AssignOutstanding) && TypeUtil.EqualsZero(FinanceOutstanding); }
+            get { return AssignOutstanding==0 && FinanceOutstanding==0; }
         }
 
         /// <summary>
@@ -346,23 +346,23 @@ namespace CMBC.EasyFactor.DB.dbml
                         }
                     }
 
-                    Commission = InvoiceFinanceLogs.Sum(log => log.Commission).GetValueOrDefault();
+                    Commission = Decimal.Round(InvoiceFinanceLogs.Sum(log => log.Commission).GetValueOrDefault(),2);
                 }
                 else if (cda.CommissionType == "按转让金额")
                 {
-                    if (!TypeUtil.GreaterZero(Commission) || isOverwrite)
+                    if (Commission<=0 || isOverwrite)
                     {
-                        Commission = AssignAmount * (decimal)cda.Price.GetValueOrDefault();
+                        Commission = Decimal.Round(AssignAmount * (decimal)cda.Price.GetValueOrDefault());
                     }
-                    if (!TypeUtil.GreaterZero(FactorCommission) || isOverwrite)
+                    if (FactorCommission<=0 || isOverwrite)
                     {
                         if (TransactionType == "出口保理")
                         {
-                            FactorCommission = AssignAmount * (decimal)cda.IFPrice.GetValueOrDefault();
+                            FactorCommission = Decimal.Round(AssignAmount * (decimal)cda.IFPrice.GetValueOrDefault());
                         }
                         else if (TransactionType == "进口保理")
                         {
-                            FactorCommission = AssignAmount * (decimal)cda.EFPrice.GetValueOrDefault();
+                            FactorCommission = Decimal.Round(AssignAmount * (decimal)cda.EFPrice.GetValueOrDefault());
                         }
                     }
                 }
@@ -411,7 +411,7 @@ namespace CMBC.EasyFactor.DB.dbml
             if (InvoiceFinanceLogs.Count > 0)
             {
                 var financeDates = from log in InvoiceFinanceLogs
-                                   where TypeUtil.GreaterZero(log.FinanceOutstanding)
+                                   where log.FinanceOutstanding>0
                                    select log.InvoiceFinanceBatch.FinancePeriodBegin;
                 if (financeDates.Count() > 0)
                 {
@@ -419,7 +419,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 var financeDueDates = from log in InvoiceFinanceLogs
-                                  where TypeUtil.GreaterZero(log.FinanceOutstanding)
+                                  where log.FinanceOutstanding>0
                                   select log.InvoiceFinanceBatch.FinancePeriodEnd;
                 if(financeDueDates.Count()>0)
                 {
@@ -480,7 +480,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     refundAmount += refund;
                 }
 
-                if (TypeUtil.GreaterZero(refundAmount))
+                if (refundAmount>0)
                 {
                     RefundAmount = refundAmount;
                 }
@@ -580,49 +580,49 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (TypeUtil.LessZero(InvoiceAmount))
+                if (InvoiceAmount<0)
                 {
                     throw new Exception(String.Format("票面金额{0:N2}不能为负: {1}", InvoiceAmount,
                                                       InvoiceNo));
                 }
 
-                if (TypeUtil.LessZero(AssignAmount))
+                if (AssignAmount<0)
                 {
                     throw new Exception(String.Format("转让金额{0:N2}不能为负: {1}", AssignAmount,
                                                       InvoiceNo));
                 }
 
-                if (TypeUtil.LessZero(FinanceAmount))
+                if (FinanceAmount<0)
                 {
                     throw new Exception(String.Format("融资金额{0:N2}不能为负: {1}", FinanceAmount,
                                                      InvoiceNo));
                 }
 
-                if (TypeUtil.LessZero(PaymentAmount))
+                if (PaymentAmount<0)
                 {
                     throw new Exception(String.Format("付款金额{0:N2}不能为负: {1}", PaymentAmount,
                                                      InvoiceNo));
                 }
 
-                if (TypeUtil.LessZero(RefundAmount))
+                if (RefundAmount<0)
                 {
                     throw new Exception(String.Format("还款金额{0:N2}不能为负: {1}", RefundAmount,
                                                      InvoiceNo));
                 }
 
-                if (TypeUtil.LessZero(Commission))
+                if (Commission<0)
                 {
                     throw new Exception(String.Format("手续费金额{0:N2}不能为负: {1}", Commission,
                                                      InvoiceNo));
                 }
 
-                if (TypeUtil.LessZero(FactorCommission))
+                if (FactorCommission<0)
                 {
                     throw new Exception(String.Format("保理商手续费金额{0:N2}不能为负: {1}", FactorCommission,
                                                      InvoiceNo));
                 }
 
-                if (TypeUtil.GreaterZero(AssignAmount - InvoiceAmount))
+                if (AssignAmount > InvoiceAmount)
                 {
                     throw new Exception(String.Format("转让金额{0:N2}不能大于票面金额{1:N2}: {2}", AssignAmount, InvoiceAmount,
                                                       InvoiceNo));
@@ -630,20 +630,20 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 if (FinanceAmount.HasValue)
                 {
-                    if (TypeUtil.GreaterZero(FinanceAmount - AssignAmount))
+                    if (FinanceAmount > AssignAmount)
                     {
                         throw new Exception(String.Format("融资金额{0:N2}不能大于转让金额{1:N2}: {2}", FinanceAmount, AssignAmount,
                                                           InvoiceNo));
                     }
                 }
 
-                if (TypeUtil.GreaterZero(PaymentAmount.GetValueOrDefault() - AssignAmount))
+                if (PaymentAmount.GetValueOrDefault() > AssignAmount)
                 {
                     throw new Exception(String.Format("付款金额{0:N2}不能大于转让金额{1:N2}: {2}", PaymentAmount, AssignAmount,
                                                       InvoiceNo));
                 }
 
-                if (TypeUtil.GreaterZero(RefundAmount.GetValueOrDefault() - FinanceAmount.GetValueOrDefault()))
+                if (RefundAmount.GetValueOrDefault() > FinanceAmount.GetValueOrDefault())
                 {
                     throw new Exception(String.Format("还款金额{0:N2}不能大于融资金额{1:N2}: {2}", RefundAmount, FinanceAmount,
                                                       InvoiceNo));

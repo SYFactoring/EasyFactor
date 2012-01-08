@@ -17,7 +17,6 @@ namespace CMBC.EasyFactor.Utils
     {
 
         public static readonly DateTime MIN_DATE = new DateTime(1753, 1, 1);
-        public static readonly double PRECISION = 0.01;
 
         //?Public?Methods?(12)?
         /// <summary>
@@ -102,31 +101,6 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="double1"></param>
-        /// <returns></returns>
-        public static bool EqualsZero(double? double1)
-        {
-            if (double1 == null)
-            {
-                return true;
-            }
-
-            return Math.Abs(double1.Value) < PRECISION;
-        }
-
-        public static bool EqualsZero(decimal? decimal1)
-        {
-            if (decimal1 == null)
-            {
-                return true;
-            }
-
-            return decimal1==0;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public static void FormatFloatToPercent(object sender, ConvertEventArgs e)
@@ -169,56 +143,6 @@ namespace CMBC.EasyFactor.Utils
         public static string GetExcelCurrency(string currency)
         {
             return "[$" + currency + "] #,##0.00";
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="double1"></param>
-        /// <returns></returns>
-        public static bool GreaterZero(double? double1)
-        {
-            if (double1 == null)
-            {
-                return false;
-            }
-
-            return double1 > PRECISION;
-        }
-
-        public static bool GreaterZero(decimal? decimal1)
-        {
-            if (decimal1 == null)
-            {
-                return false;
-            }
-
-            return decimal1>0;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="double1"></param>
-        /// <returns></returns>
-        public static bool LessZero(double? double1)
-        {
-            if (double1 == null)
-            {
-                return false;
-            }
-
-            return double1 < -PRECISION;
-        }
-
-        public static bool LessZero(decimal? decimal1)
-        {
-            if (decimal1 == null)
-            {
-                return false;
-            }
-
-            return decimal1 < 0;
         }
 
         /// <summary>
@@ -273,20 +197,5 @@ namespace CMBC.EasyFactor.Utils
             }
             return currency;
         }
-
-        public static double C1Round(double value, int decimals)
-        {
-            double result;
-            if (value < 0)
-            {
-                result =  Math.Round(value + 5 / Math.Pow(10, decimals + 1), decimals, MidpointRounding.AwayFromZero);
-            }
-            else
-            {
-                result =  Math.Round(value, decimals, MidpointRounding.AwayFromZero);
-            }
-            Console.WriteLine(value + " -> " + result);
-            return result;
-        } 
     }
 }

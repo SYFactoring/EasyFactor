@@ -123,7 +123,7 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
             }
 
-            var financeBatches = _client.InvoiceFinanceBatches.Where(financeBatch => TypeUtil.GreaterZero(financeBatch.PoolFinanceOutstanding)).ToList();
+            var financeBatches = _client.InvoiceFinanceBatches.Where(financeBatch => financeBatch.PoolFinanceOutstanding>0).ToList();
 
             dgvLogs.DataSource = financeBatches;
         }
@@ -172,7 +172,7 @@ namespace CMBC.EasyFactor.ARMgr
             var refundBatchList = new List<InvoiceRefundBatch>();
             foreach (InvoiceFinanceBatch financeBatch in financeBatchList)
             {
-                if (TypeUtil.GreaterZero(refundAmount) && TypeUtil.GreaterZero(financeBatch.PoolFinanceOutstanding))
+                if (refundAmount>0 && financeBatch.PoolFinanceOutstanding>0)
                 {
                     if (financeBatch.BatchCurrency != batchCurrency)
                     {
@@ -197,7 +197,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            if (TypeUtil.GreaterZero(refundAmount))
+            if (refundAmount>0)
             {
                 MessageBoxEx.Show("冲销融资金额不能大于融资余额");
                 foreach (InvoiceRefundBatch batch in refundBatchList)

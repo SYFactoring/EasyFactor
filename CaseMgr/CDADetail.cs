@@ -640,7 +640,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.CreditCoverPeriodEnd = buyerCreditLine.PeriodEnd;
                 cda.CreditCoverCurr = buyerCreditLine.CreditLineCurrency;
                 cda.CreditCover = buyerCreditLine.CreditLine;
-                if (TypeUtil.EqualsZero(buyerCreditLine.CreditLine))
+                if (buyerCreditLine.CreditLine==0)
                 {
                     cda.PUGProportion = 0;
                 }

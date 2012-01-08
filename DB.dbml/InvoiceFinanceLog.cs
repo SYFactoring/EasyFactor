@@ -128,7 +128,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (TypeUtil.GreaterZero(FinanceOutstanding))
+                if (FinanceOutstanding>0)
                 {
                     if (FinanceDueDate != null)
                     {
@@ -164,7 +164,7 @@ namespace CMBC.EasyFactor.DB.dbml
                                      let overduePeriod = refundLog.InvoiceRefundBatch.RefundDate > InvoiceFinanceBatch.FinancePeriodEnd ? (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0
                                      select refundLog.RefundAmount.GetValueOrDefault() * (decimal)InvoiceFinanceBatch.FinanceRate / 360 * (period + overduePeriod)).Sum();
 
-                        if (TypeUtil.GreaterZero(FinanceOutstanding) &&
+                        if (FinanceOutstanding>0 &&
                             DateTime.Today > InvoiceFinanceBatch.FinancePeriodBegin)
                         {
                             int period = (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodBegin).Days;
@@ -266,7 +266,7 @@ namespace CMBC.EasyFactor.DB.dbml
                                      let overduePeriod = refundLog.InvoiceRefundBatch.RefundDate > InvoiceFinanceBatch.FinancePeriodEnd ? (refundLog.InvoiceRefundBatch.RefundDate - InvoiceFinanceBatch.FinancePeriodEnd).Days : 0
                                      select refundLog.RefundAmount.GetValueOrDefault() * (decimal)(InvoiceFinanceBatch.FinanceRate - InvoiceFinanceBatch.CostRate.GetValueOrDefault()) / 360 * (period + overduePeriod)).Sum();
 
-                        if (TypeUtil.GreaterZero(FinanceOutstanding) &&
+                        if (FinanceOutstanding>0 &&
                             DateTime.Today > InvoiceFinanceBatch.FinancePeriodBegin)
                         {
                             int period = (DateTime.Today.Date - InvoiceFinanceBatch.FinancePeriodBegin).Days;
@@ -313,7 +313,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
             if (cda.CommissionType == "按融资金额")
             {
-                Commission = FinanceAmount.GetValueOrDefault() * (decimal)cda.Price.GetValueOrDefault();
+                Commission =Decimal.Round(FinanceAmount.GetValueOrDefault() * (decimal)cda.Price.GetValueOrDefault(),2);
             }
         }
 
@@ -325,7 +325,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (TypeUtil.LessZero(FinanceAmount))
+                if (FinanceAmount<0)
                 {
                     throw new Exception(String.Format("融资金额{0:N2}不能为负: {1}", FinanceAmount,
                                  FinanceLogID));

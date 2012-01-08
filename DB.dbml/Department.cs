@@ -92,7 +92,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     selectedCase.QueryDateFrom = fromDate;
                     selectedCase.QueryDateTo = toDate;
                     decimal commission = selectedCase.CommissionIncomeByDate;
-                    if (selectedCase.InvoiceCurrency != "CNY" && TypeUtil.GreaterZero(commission))
+                    if (selectedCase.InvoiceCurrency != "CNY" && commission>0)
                     {
                         decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
                         commission *= rate;
@@ -160,7 +160,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     selectedCase.QueryDateFrom = fromDate;
                     selectedCase.QueryDateTo = toDate;
                     decimal? marginIncome = selectedCase.MarginIncomeByDate;
-                    if (selectedCase.InvoiceCurrency != "CNY" && TypeUtil.GreaterZero(marginIncome))
+                    if (selectedCase.InvoiceCurrency != "CNY" && marginIncome>0)
                     {
                         decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
                         marginIncome *= rate;
@@ -193,7 +193,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     selectedCase.QueryDateFrom = fromDate;
                     selectedCase.QueryDateTo = toDate;
                     decimal? netInterest = selectedCase.NetInterestIncomeByDate;
-                    if (selectedCase.InvoiceCurrency != "CNY" && TypeUtil.GreaterZero(netInterest))
+                    if (selectedCase.InvoiceCurrency != "CNY" && netInterest>0)
                     {
                         decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
                         netInterest *= rate;

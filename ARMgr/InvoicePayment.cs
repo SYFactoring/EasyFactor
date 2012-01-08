@@ -431,7 +431,7 @@ namespace CMBC.EasyFactor.ARMgr
                         oldLog.Comment = newLog.Comment;
 
 
-                        if (TypeUtil.GreaterZero(oldLog.PaymentAmount))
+                        if (oldLog.PaymentAmount>0)
                         {
                             cell.Value = 1;
                         }
@@ -730,7 +730,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     var log = (InvoicePaymentLog)logList[i];
-                    if (TypeUtil.LessZero(log.AssignOutstanding))
+                    if (log.AssignOutstanding<0)
                     {
                         MessageBoxEx.Show("付款金额不能大于转让金额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION,
                                           MessageBoxButtons.OK, MessageBoxIcon.Information);

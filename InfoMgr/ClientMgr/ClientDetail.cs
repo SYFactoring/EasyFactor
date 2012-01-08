@@ -422,7 +422,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                                    ValidateValueEventArgs e)
         {
             var creditLine = (ClientCreditLine)clientCreditLineBindingSource.DataSource;
-            e.IsValid = TypeUtil.GreaterZero(creditLine.CreditLine);
+            e.IsValid = creditLine.CreditLine>0;
         }
 
         /// <summary>

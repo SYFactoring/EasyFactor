@@ -158,7 +158,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (TypeUtil.LessZero(PaymentAmount))
+                if (PaymentAmount<0)
                 {
                     throw new Exception(String.Format("付款金额{0:N2}不能为负: {1}", PaymentAmount,
                                  PaymentLogID));

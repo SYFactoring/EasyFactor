@@ -189,7 +189,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="log"></param>
         private void ClickLog(InvoiceRefundLog log)
         {
-            if (TypeUtil.GreaterZero(_totalPayment))
+            if (_totalPayment>0)
             {
                 IList logList = logsBindingSource.List;
                 decimal totalRefund = logList.Cast<object>().Where((t, i) => Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString())).Cast<InvoiceRefundLog>().Sum(l => l.RefundAmount.GetValueOrDefault());
@@ -451,7 +451,7 @@ namespace CMBC.EasyFactor.ARMgr
                         oldLog.Comment = newLog.Comment;
 
 
-                        if (TypeUtil.GreaterZero(oldLog.RefundAmount))
+                        if (oldLog.RefundAmount>0)
                         {
                             cell.Value = 1;
                         }
@@ -725,7 +725,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     var log = (InvoiceRefundLog)logList[i];
-                    if (TypeUtil.LessZero(log.FinanceAmount - log.RefundAmount))
+                    if (log.FinanceAmount < log.RefundAmount)
                     {
                         MessageBoxEx.Show("还款金额不能大于融资余额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION,
                                           MessageBoxButtons.OK, MessageBoxIcon.Information);

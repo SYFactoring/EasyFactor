@@ -26,7 +26,7 @@ namespace CMBC.EasyFactor.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=YIMING-HOMEPC\\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;U" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=195.21.43.37;Initial Catalog=FOS;Persist Security Info=True;U" +
             "ser ID=Factoring;Password=gnirotcaF")]
         public string FOSConnectionString {
             get {
