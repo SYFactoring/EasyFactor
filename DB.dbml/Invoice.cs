@@ -44,7 +44,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (AssignOutstanding>0)
+                if (AssignOutstanding > 0)
                 {
                     return (DateTime.Now.Date - DueDate).Days;
                 }
@@ -116,7 +116,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                if (FinanceOutstanding>0)
+                if (FinanceOutstanding > 0)
                 {
                     if (FinanceDueDate != null)
                     {
@@ -215,7 +215,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public bool IsClear
         {
-            get { return AssignOutstanding==0 && FinanceOutstanding==0; }
+            get { return AssignOutstanding == 0 && (FinanceOutstanding.HasValue == false || FinanceOutstanding == 0); }
         }
 
         /// <summary>
@@ -346,15 +346,15 @@ namespace CMBC.EasyFactor.DB.dbml
                         }
                     }
 
-                    Commission = Decimal.Round(InvoiceFinanceLogs.Sum(log => log.Commission).GetValueOrDefault(),2);
+                    Commission = Decimal.Round(InvoiceFinanceLogs.Sum(log => log.Commission).GetValueOrDefault(), 2);
                 }
                 else if (cda.CommissionType == "按转让金额")
                 {
-                    if (Commission<=0 || isOverwrite)
+                    if (Commission <= 0 || isOverwrite)
                     {
                         Commission = Decimal.Round(AssignAmount * (decimal)cda.Price.GetValueOrDefault());
                     }
-                    if (FactorCommission<=0 || isOverwrite)
+                    if (FactorCommission <= 0 || isOverwrite)
                     {
                         if (TransactionType == "出口保理")
                         {
@@ -411,7 +411,7 @@ namespace CMBC.EasyFactor.DB.dbml
             if (InvoiceFinanceLogs.Count > 0)
             {
                 var financeDates = from log in InvoiceFinanceLogs
-                                   where log.FinanceOutstanding>0
+                                   where log.FinanceOutstanding > 0
                                    select log.InvoiceFinanceBatch.FinancePeriodBegin;
                 if (financeDates.Count() > 0)
                 {
@@ -419,9 +419,9 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
 
                 var financeDueDates = from log in InvoiceFinanceLogs
-                                  where log.FinanceOutstanding>0
-                                  select log.InvoiceFinanceBatch.FinancePeriodEnd;
-                if(financeDueDates.Count()>0)
+                                      where log.FinanceOutstanding > 0
+                                      select log.InvoiceFinanceBatch.FinancePeriodEnd;
+                if (financeDueDates.Count() > 0)
                 {
                     FinanceDueDate = financeDueDates.Min();
                 }
@@ -480,7 +480,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     refundAmount += refund;
                 }
 
-                if (refundAmount>0)
+                if (refundAmount > 0)
                 {
                     RefundAmount = refundAmount;
                 }
@@ -580,43 +580,43 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             if (action == ChangeAction.Insert || action == ChangeAction.Update)
             {
-                if (InvoiceAmount<0)
+                if (InvoiceAmount < 0)
                 {
                     throw new Exception(String.Format("票面金额{0:N2}不能为负: {1}", InvoiceAmount,
                                                       InvoiceNo));
                 }
 
-                if (AssignAmount<0)
+                if (AssignAmount < 0)
                 {
                     throw new Exception(String.Format("转让金额{0:N2}不能为负: {1}", AssignAmount,
                                                       InvoiceNo));
                 }
 
-                if (FinanceAmount<0)
+                if (FinanceAmount < 0)
                 {
                     throw new Exception(String.Format("融资金额{0:N2}不能为负: {1}", FinanceAmount,
                                                      InvoiceNo));
                 }
 
-                if (PaymentAmount<0)
+                if (PaymentAmount < 0)
                 {
                     throw new Exception(String.Format("付款金额{0:N2}不能为负: {1}", PaymentAmount,
                                                      InvoiceNo));
                 }
 
-                if (RefundAmount<0)
+                if (RefundAmount < 0)
                 {
                     throw new Exception(String.Format("还款金额{0:N2}不能为负: {1}", RefundAmount,
                                                      InvoiceNo));
                 }
 
-                if (Commission<0)
+                if (Commission < 0)
                 {
                     throw new Exception(String.Format("手续费金额{0:N2}不能为负: {1}", Commission,
                                                      InvoiceNo));
                 }
 
-                if (FactorCommission<0)
+                if (FactorCommission < 0)
                 {
                     throw new Exception(String.Format("保理商手续费金额{0:N2}不能为负: {1}", FactorCommission,
                                                      InvoiceNo));
