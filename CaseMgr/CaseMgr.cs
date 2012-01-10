@@ -192,6 +192,19 @@ namespace CMBC.EasyFactor.CaseMgr
             }
 
             var selectedCase = (Case)_bs.List[dgvCases.CurrentCell.RowIndex];
+
+            if (selectedCase.Invoices.Count > 0)
+            {
+                MessageBoxEx.Show("此案件有关联发票，不能删除。", MESSAGE.TITLE_WARNING,
+                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            if (selectedCase.ActiveCDA != null)
+            {
+                MessageBoxEx.Show("此案件有关联额度通知书，不能删除。", MESSAGE.TITLE_WARNING,
+                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
             if (
                 MessageBoxEx.Show("此案件是" + selectedCase.CaseMark + "，是否确定删除", MESSAGE.TITLE_WARNING,
                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -235,7 +248,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                   MessageBoxIcon.Information);
-               
+
             }
         }
 
@@ -396,7 +409,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                                                     : true)
                                                                 &&
                                                                (cbIsLowRisk.Checked == true
-                                                                    ? c.CDAs.Any(cda=>cda.RiskType=="低风险"&&cda.CDAStatus=="已审核")
+                                                                    ? c.CDAs.Any(cda => cda.RiskType == "低风险" && cda.CDAStatus == "已审核")
                                                                     : true)
                                                                &&
                                                                (cbIsContractSigned.Checked == false
