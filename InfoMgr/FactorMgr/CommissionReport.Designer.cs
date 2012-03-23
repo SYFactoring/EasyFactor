@@ -120,6 +120,8 @@
             this.cbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbYear.FormattingEnabled = true;
             this.cbYear.Items.AddRange(new object[] {
+            "2014",
+            "2013",
             "2012",
             "2011",
             "2010",

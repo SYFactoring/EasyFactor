@@ -350,19 +350,19 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
                 else if (cda.CommissionType == "按转让金额")
                 {
-                    if (Commission <= 0 || isOverwrite)
+                    if (Commission.HasValue==false || Commission <= 0 || isOverwrite)
                     {
-                        Commission = Decimal.Round(AssignAmount * (decimal)cda.Price.GetValueOrDefault());
+                        Commission = Decimal.Round(AssignAmount * (decimal)cda.Price.GetValueOrDefault(), 2);
                     }
-                    if (FactorCommission <= 0 || isOverwrite)
+                    if (FactorCommission.HasValue==false ||FactorCommission <=0 || isOverwrite)
                     {
                         if (TransactionType == "出口保理")
                         {
-                            FactorCommission = Decimal.Round(AssignAmount * (decimal)cda.IFPrice.GetValueOrDefault());
+                            FactorCommission = Decimal.Round(AssignAmount * (decimal)cda.IFPrice.GetValueOrDefault(), 2);
                         }
                         else if (TransactionType == "进口保理")
                         {
-                            FactorCommission = Decimal.Round(AssignAmount * (decimal)cda.EFPrice.GetValueOrDefault());
+                            FactorCommission = Decimal.Round(AssignAmount * (decimal)cda.EFPrice.GetValueOrDefault(), 2);
                         }
                     }
                 }
