@@ -681,7 +681,7 @@ namespace CMBC.EasyFactor.Utils
                                     InvoiceAssignBatch lastAssignBatch = _context.InvoiceAssignBatches.SingleOrDefault(b => b.AssignBatchNo == LastAssignBatchNo);
                                     if (lastAssignBatch != null)
                                     {
-                                        if (lastAssignBatch.FinanceAmount > 0)
+                                        if (lastAssignBatch.FinanceAmount == 0)
                                         {
                                             warningMsg += "此案为低风险业务，上一次的转让后尚未登记放款信息，请提示分部尽快上报放款明细，案件编号：" + caseCode + Environment.NewLine;
                                         }
@@ -1025,7 +1025,7 @@ namespace CMBC.EasyFactor.Utils
                                     InvoiceAssignBatch lastAssignBatch = _context.InvoiceAssignBatches.SingleOrDefault(b => b.AssignBatchNo == LastAssignBatchNo);
                                     if (lastAssignBatch != null)
                                     {
-                                        if (lastAssignBatch.FinanceAmount > 0)
+                                        if (lastAssignBatch.FinanceAmount == 0)
                                         {
                                             warningMsg += "此案为低风险业务，上一次的转让后尚未登记放款信息，请提示分部尽快上报放款明细，案件编号：" + caseCode + Environment.NewLine;
                                         }
