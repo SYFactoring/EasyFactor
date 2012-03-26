@@ -1018,10 +1018,10 @@ namespace CMBC.EasyFactor.Utils
 
                             if (cda.RiskType == "µÍ·çÏÕ")
                             {
-                                int batchCount = Convert.ToInt32(batch.AssignBatchNo.Substring(17));
+                                int batchCount = Convert.ToInt32(assignBatch.AssignBatchNo.Substring(17));
                                 if (batchCount > 1)
                                 {
-                                    String LastAssignBatchNo = batch.AssignBatchNo.Substring(0, 17) + String.Format("{0:D3}", batchCount - 1);
+                                    String LastAssignBatchNo = assignBatch.AssignBatchNo.Substring(0, 17) + String.Format("{0:D3}", batchCount - 1);
                                     InvoiceAssignBatch lastAssignBatch = _context.InvoiceAssignBatches.SingleOrDefault(b => b.AssignBatchNo == LastAssignBatchNo);
                                     if (lastAssignBatch != null)
                                     {
