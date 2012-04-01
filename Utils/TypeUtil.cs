@@ -195,6 +195,10 @@ namespace CMBC.EasyFactor.Utils
             {
                 return "人民币";
             }
+            else if ("USD".Equals(currency))
+            {
+                return "美元";
+            }
             return currency;
         }
     }
