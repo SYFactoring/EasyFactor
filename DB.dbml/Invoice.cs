@@ -622,7 +622,7 @@ namespace CMBC.EasyFactor.DB.dbml
                                                      InvoiceNo));
                 }
 
-                if (AssignAmount > InvoiceAmount)
+                if (TypeUtil.GreaterThan(AssignAmount,InvoiceAmount))
                 {
                     throw new Exception(String.Format("转让金额{0:N2}不能大于票面金额{1:N2}: {2}", AssignAmount, InvoiceAmount,
                                                       InvoiceNo));
@@ -630,20 +630,20 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 if (FinanceAmount.HasValue)
                 {
-                    if (FinanceAmount > AssignAmount)
+                    if (TypeUtil.GreaterThan(FinanceAmount , AssignAmount))
                     {
                         throw new Exception(String.Format("融资金额{0:N2}不能大于转让金额{1:N2}: {2}", FinanceAmount, AssignAmount,
                                                           InvoiceNo));
                     }
                 }
 
-                if (PaymentAmount.GetValueOrDefault() > AssignAmount)
+                if (TypeUtil.GreaterThan(PaymentAmount, AssignAmount))
                 {
                     throw new Exception(String.Format("付款金额{0:N2}不能大于转让金额{1:N2}: {2}", PaymentAmount, AssignAmount,
                                                       InvoiceNo));
                 }
 
-                if (RefundAmount.GetValueOrDefault() > FinanceAmount.GetValueOrDefault())
+                if (TypeUtil.GreaterThan(RefundAmount, FinanceAmount))
                 {
                     throw new Exception(String.Format("还款金额{0:N2}不能大于融资金额{1:N2}: {2}", RefundAmount, FinanceAmount,
                                                       InvoiceNo));

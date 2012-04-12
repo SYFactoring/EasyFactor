@@ -201,5 +201,81 @@ namespace CMBC.EasyFactor.Utils
             }
             return currency;
         }
+
+        public static bool GreaterThan(decimal? left, decimal? right)
+        {
+            if (left.HasValue == false && right.HasValue == false)
+            {
+                return false;
+            }
+            if (left.HasValue == true && right.HasValue == false)
+            {
+                return true;
+            }
+            if(left.HasValue==false&&right.HasValue==true)
+            {
+                return false;
+            }
+            decimal diff = new decimal(0.01);
+            if (left - right > diff)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool LessThan(decimal? left, decimal? right)
+        {
+            if (left.HasValue == false && right.HasValue == false)
+            {
+                return false;
+            }
+            if (left.HasValue == true && right.HasValue == false)
+            {
+                return false;
+            }
+            if (left.HasValue == false && right.HasValue == true)
+            {
+                return true;
+            }
+            decimal diff = new decimal(-0.01);
+            if (left - right < diff)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool EqualThan(decimal? left, decimal? right)
+        {
+            if (left.HasValue == false && right.HasValue == false)
+            {
+                return false;
+            }
+            if (left.HasValue == true && right.HasValue == false)
+            {
+                return false;
+            }
+            if (left.HasValue == false && right.HasValue == true)
+            {
+                return false;
+            }
+            decimal diff = new decimal(0.01);
+            decimal minusdiff= new decimal(-0.01);
+            if ((left - right < diff)&&(left-right>minusdiff))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

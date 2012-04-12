@@ -1227,6 +1227,9 @@ namespace CMBC.EasyFactor.Utils
                                 exceptionMsg += "贷项通知币别与发票币别不匹配，不能导入：" + creditNoteNo + Environment.NewLine;
                             }
 
+                            //票面金额
+                            column++;
+
                             string paymentAmountStr = String.Format("{0:G}", valueArray[row, column++]);
                             if (String.IsNullOrEmpty(paymentAmountStr))
                             {
@@ -1241,6 +1244,7 @@ namespace CMBC.EasyFactor.Utils
                                 exceptionMsg += "贷项通知金额类型异常，不能导入：" + creditNoteNo + Environment.NewLine;
                             }
 
+                            //发票日
                             column++;
 
                             string creditNoteDateStr = String.Format("{0:G}", valueArray[row, column++]);
@@ -1260,8 +1264,7 @@ namespace CMBC.EasyFactor.Utils
                                 exceptionMsg += "贷项通知日类型异常，不能导入：" + creditNoteNo + Environment.NewLine;
                             }
 
-                            column++;
-
+                            //手续费
                             column++;
 
                             string comment = String.Format("{0:G}", valueArray[row, column]);
@@ -4839,6 +4842,9 @@ namespace CMBC.EasyFactor.Utils
                         {
                             throw new Exception("没有有效的额度通知书: " + assignBatchCode);
                         }
+
+                        //发票号
+                        column++;
 
                         string refundType = String.Format("{0:G}", valueArray[row, column++]);
 
