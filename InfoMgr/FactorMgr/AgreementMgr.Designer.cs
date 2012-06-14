@@ -62,7 +62,7 @@
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(917, 30);
+            this.panelQuery.Size = new System.Drawing.Size(917, 28);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -79,9 +79,10 @@
             // 
             // 
             this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(389, 9);
+            this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCount.Location = new System.Drawing.Point(389, 8);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(71, 16);
+            this.lblCount.Size = new System.Drawing.Size(74, 18);
             this.lblCount.TabIndex = 10;
             this.lblCount.Text = "获得 条记录";
             // 
@@ -91,7 +92,7 @@
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnQuery.Location = new System.Drawing.Point(342, 4);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(41, 23);
+            this.btnQuery.Size = new System.Drawing.Size(41, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuery.TabIndex = 8;
             this.btnQuery.Text = "查询";
@@ -103,9 +104,10 @@
             // 
             // 
             this.tbFactorName.Border.Class = "TextBoxBorder";
+            this.tbFactorName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbFactorName.Location = new System.Drawing.Point(236, 6);
             this.tbFactorName.Name = "tbFactorName";
-            this.tbFactorName.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorName.Size = new System.Drawing.Size(100, 21);
             this.tbFactorName.TabIndex = 7;
             // 
             // lblFactorName
@@ -115,9 +117,10 @@
             // 
             // 
             this.lblFactorName.BackgroundStyle.Class = "";
-            this.lblFactorName.Location = new System.Drawing.Point(181, 7);
+            this.lblFactorName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblFactorName.Location = new System.Drawing.Point(181, 6);
             this.lblFactorName.Name = "lblFactorName";
-            this.lblFactorName.Size = new System.Drawing.Size(56, 16);
+            this.lblFactorName.Size = new System.Drawing.Size(56, 18);
             this.lblFactorName.TabIndex = 6;
             this.lblFactorName.Text = "机构名称";
             // 
@@ -127,9 +130,10 @@
             // 
             // 
             this.tbFactorCode.Border.Class = "TextBoxBorder";
+            this.tbFactorCode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbFactorCode.Location = new System.Drawing.Point(75, 6);
             this.tbFactorCode.Name = "tbFactorCode";
-            this.tbFactorCode.Size = new System.Drawing.Size(100, 20);
+            this.tbFactorCode.Size = new System.Drawing.Size(100, 21);
             this.tbFactorCode.TabIndex = 5;
             // 
             // lblFactorCode
@@ -139,9 +143,10 @@
             // 
             // 
             this.lblFactorCode.BackgroundStyle.Class = "";
+            this.lblFactorCode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblFactorCode.Location = new System.Drawing.Point(17, 6);
             this.lblFactorCode.Name = "lblFactorCode";
-            this.lblFactorCode.Size = new System.Drawing.Size(56, 16);
+            this.lblFactorCode.Size = new System.Drawing.Size(56, 18);
             this.lblFactorCode.TabIndex = 4;
             this.lblFactorCode.Text = "机构编号";
             // 
@@ -179,13 +184,12 @@
             this.dgvAgreements.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAgreements.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAgreements.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvAgreements.Location = new System.Drawing.Point(0, 30);
-            this.dgvAgreements.MultiSelect = false;
+            this.dgvAgreements.Location = new System.Drawing.Point(0, 28);
             this.dgvAgreements.Name = "dgvAgreements";
             this.dgvAgreements.ReadOnly = true;
             this.dgvAgreements.RowTemplate.Height = 23;
             this.dgvAgreements.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAgreements.Size = new System.Drawing.Size(917, 319);
+            this.dgvAgreements.Size = new System.Drawing.Size(917, 294);
             this.dgvAgreements.TabIndex = 3;
             this.dgvAgreements.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvAgreementsCellDoubleClick);
             this.dgvAgreements.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvAgreementsRowPostPaint);
@@ -241,12 +245,12 @@
             // 
             // AgreementMgr
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvAgreements);
             this.Controls.Add(this.panelQuery);
             this.Name = "AgreementMgr";
-            this.Size = new System.Drawing.Size(917, 349);
+            this.Size = new System.Drawing.Size(917, 322);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgreements)).EndInit();

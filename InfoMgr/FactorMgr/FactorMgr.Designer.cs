@@ -370,7 +370,6 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             this.dgvFactors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFactors.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvFactors.Location = new System.Drawing.Point(0, 28);
-            this.dgvFactors.MultiSelect = false;
             this.dgvFactors.Name = "dgvFactors";
             this.dgvFactors.ReadOnly = true;
             this.dgvFactors.RowTemplate.Height = 23;
