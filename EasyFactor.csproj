@@ -41,6 +41,10 @@
     <ApplicationVersion>1.0.0.2</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,7 +75,7 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevComponents.DotNetBar2, Version=8.2.0.2, Culture=neutral, PublicKeyToken=5fd520d36328f741, processorArchitecture=MSIL">
+    <Reference Include="DevComponents.DotNetBar2, Version=8.8.0.0, Culture=neutral, PublicKeyToken=e116d99a00eca71b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dll\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
@@ -284,7 +288,6 @@
     <Compile Include="DB.dbml\InvoiceRefundBatch.cs" />
     <Compile Include="DB.dbml\InvoiceRefundLog.cs" />
     <Compile Include="DB.dbml\User.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Help\AutoUpdateConfig.cs" />
     <Compile Include="Help\AutoUpdater.cs">
       <SubType>Component</SubType>
@@ -712,9 +715,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="cmbc.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="DB.dbml\DB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DB.designer.cs</LastGenOutput>
@@ -768,7 +768,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 和 x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

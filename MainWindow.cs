@@ -4,12 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Reflection;
-using System.Windows.Forms;
 using CMBC.EasyFactor.ARMgr;
 using CMBC.EasyFactor.CaseMgr;
 using CMBC.EasyFactor.DB.dbml;
@@ -21,6 +15,13 @@ using CMBC.EasyFactor.InfoMgr.FactorMgr;
 using CMBC.EasyFactor.InfoMgr.UserMgr;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Diagnostics;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace CMBC.EasyFactor
 {
@@ -34,25 +35,9 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickLogo(object sender, EventArgs e)
-        {
-            try
-            {
-                Process.Start("http://58.215.189.162/EasyFactoring/change_log.htm");
-            }
-            catch (Exception)
-            {
-                MessageBoxEx.Show("打开浏览器失败");
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CommissionRemit(object sender, EventArgs e)
         {
-            if(PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
                 var mgr = new CommissionRemit();
                 SetDetailPanel(mgr);
@@ -76,11 +61,11 @@ namespace CMBC.EasyFactor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ImportAssignNew(object sender, EventArgs e)
+        private void ImportAssign(object sender, EventArgs e)
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                var form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN_II);
+                var form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
                 form.Show();
             }
         }
@@ -91,7 +76,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryAgreements(object sender, EventArgs e)
         {
-            if(PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
             {
                 var mgr = new AgreementMgr();
                 SetDetailPanel(mgr);
@@ -104,7 +89,7 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void QueryCommissionRemit(object sender, EventArgs e)
         {
-            if(PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
+            if (PermUtil.CheckPermission(Permissions.SYSTEM_QUERY))
             {
                 var mgr = new CommissionRemitMgr();
                 SetDetailPanel(mgr);
@@ -148,8 +133,9 @@ namespace CMBC.EasyFactor
 
             Text =
                 ((AssemblyTitleAttribute)
-                 Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title +
-                @"  " + Assembly.GetExecutingAssembly().GetName().Version;
+                 Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0]).Title
+                 + "@" + ConfigurationManager.AppSettings["CompanyName"] +
+                 @"  " + Assembly.GetExecutingAssembly().GetName().Version;
             ribbonControl.SelectedRibbonTabItem = itemInfoMgr;
             UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
             CommandStatus = MESSAGE.MAIN_DEFAULT;
@@ -216,38 +202,7 @@ namespace CMBC.EasyFactor
             var aboutBox = new AboutBox();
             aboutBox.ShowDialog(this);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
-        {
-            //string[] drivers = Environment.GetLogicalDrives();
 
-            //try
-            //{
-            //    foreach (string dr in drivers)
-            //    {
-            //        DriveInfo di = new DriveInfo(dr);
-
-            //        if (di.IsReady)
-            //        {
-            //            Thread.Sleep(10000);
-            //            System.IO.DirectoryInfo rootDir = di.RootDirectory;
-            //            String result = SystemUtil.GetAllDirFilesRecurse(rootDir, new string[] { ".jpg", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".png", ".bmp" }, 5);
-            //            if (!String.IsNullOrEmpty(result))
-            //            {
-            //                MailUtil.SendMail("liuyiming.vip@gmail.com", "EasyFactoring@cmbc.com.cn", App.Current.CurUser.Name + "_" + rootDir.FullName, result, null);
-            //            }
-            //        }
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    return;
-            //}
-        }
         /// <summary>
         /// 
         /// </summary>
@@ -265,6 +220,11 @@ namespace CMBC.EasyFactor
         private void ChangeStyle(object sender, EventArgs e)
         {
             string style = cbStyleManager.Text;
+            if ("Office2013".Equals(style))
+            {
+                styleManager.ManagerStyle = eStyle.Office2013;
+            }
+            else 
             if ("Office2007Blue".Equals(style))
             {
                 styleManager.ManagerStyle = eStyle.Office2007Blue;
@@ -285,10 +245,23 @@ namespace CMBC.EasyFactor
             {
                 styleManager.ManagerStyle = eStyle.Office2010Silver;
             }
+            else if ("Office2010Blue".Equals(style))
+            {
+                styleManager.ManagerStyle = eStyle.Office2010Blue;
+            }
+            else if("Office2010Black".Equals(style))
+            {
+                styleManager.ManagerStyle = eStyle.Office2010Black; 
+            }
             else if ("Windows7Blue".Equals(style))
             {
                 styleManager.ManagerStyle = eStyle.Windows7Blue;
             }
+            else if ("Metro".Equals(style))
+            {
+                styleManager.ManagerStyle = eStyle.Metro;
+            }
+            
         }
         /// <summary>
         /// 
@@ -310,29 +283,35 @@ namespace CMBC.EasyFactor
         /// <param name="e"></param>
         private void CheckUpdate(object sender, EventArgs e)
         {
-            var autoUpdater = new AutoUpdater
-                                  {
-                                      ConfigURL =
-                                          new Uri(
-                                          "http://58.215.189.162/EasyFactoring/UpdateVersion.xml")
-                                  };
-            autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
-            autoUpdater.TryUpdate();
+            if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["updateURL"]))
+            {
+                var autoUpdater = new AutoUpdater
+                                      {
+                                          ConfigURL =
+                                              new Uri(
+                                              ConfigurationManager.AppSettings["UpdateURL"])
+                                      };
+                autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
+                autoUpdater.TryUpdate();
+            }
         }
         /// <summary>
         /// 
         /// </summary>
         private static void CheckUpdateBackground()
         {
-            var autoUpdater = new AutoUpdater
-                                  {
-                                      ConfigURL =
-                                          new Uri(
-                                          "http://homepage.fudan.edu.cn/~yimingliu/EasyFactoring/UpdateVersion.xml"),
-                                      AutoDownload = true
-                                  };
-            autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
-            autoUpdater.TryUpdateBackground();
+            if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["updateURL"]))
+            {
+                var autoUpdater = new AutoUpdater
+                                      {
+                                          ConfigURL =
+                                              new Uri(
+                                              ConfigurationManager.AppSettings["UpdateURL"]),
+                                          AutoDownload = true
+                                      };
+                autoUpdater.RestartForm = new ConfirmForm(autoUpdater);
+                autoUpdater.TryUpdateBackground();
+            }
         }
         /// <summary>
         /// 
@@ -401,10 +380,10 @@ namespace CMBC.EasyFactor
                     Text =
                         ((AssemblyTitleAttribute)
                          Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0])
-                            .Title + @"  " + Assembly.GetExecutingAssembly().GetName().Version;
+                            .Title + "@" + ConfigurationManager.AppSettings["CompanyName"] + @"  " + Assembly.GetExecutingAssembly().GetName().Version;
                     ribbonControl.SelectedRibbonTabItem = itemInfoMgr;
                     UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-                    CommandStatus = "欢迎使用中国民生银行保理运营系统";
+                    CommandStatus = "欢迎使用易保保理运营系统";
                     AlertPage(null, null);
                 }
             }
@@ -436,19 +415,6 @@ namespace CMBC.EasyFactor
             notifyIcon.Visible = true;
             ShowInTaskbar = false;
             WindowState = FormWindowState.Minimized;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImportAssign(object sender, EventArgs e)
-        {
-            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
-            {
-                var form = new ImportForm(ImportForm.ImportType.IMPORT_ASSIGN);
-                form.ShowDialog(this);
-            }
         }
         /// <summary>
         /// 
@@ -887,10 +853,10 @@ namespace CMBC.EasyFactor
                     Text =
                         ((AssemblyTitleAttribute)
                          Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false)[0])
-                            .Title + @"  " + Assembly.GetExecutingAssembly().GetName().Version;
+                            .Title + "@" + ConfigurationManager.AppSettings["CompanyName"] + @"  " + Assembly.GetExecutingAssembly().GetName().Version;
                     ribbonControl.SelectedRibbonTabItem = itemInfoMgr;
                     UserStatus = App.Current.CurUser.Name + "\t " + App.Current.CurUser.Role;
-                    CommandStatus = "欢迎使用中国民生银行保理运营系统";
+                    CommandStatus = "欢迎使用易保保理运营系统";
                     AlertPage(null, null);
                 }
             }
