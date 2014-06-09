@@ -110,10 +110,6 @@ namespace CMBC.EasyFactor.CaseMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.cbIsPool = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.lblLocation = new DevComponents.DotNetBar.LabelX();
-            this.tbOPName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblOPName = new DevComponents.DotNetBar.LabelX();
             this.cbCaseMark = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblCaseMark = new DevComponents.DotNetBar.LabelX();
             this.cbIsContractSigned = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -132,6 +128,10 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblTransactionType = new DevComponents.DotNetBar.LabelX();
             this.diEnd = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.diBegin = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.cbLocation = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblLocation = new DevComponents.DotNetBar.LabelX();
+            this.tbOPName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblOPName = new DevComponents.DotNetBar.LabelX();
             this.cbOwnerDepts = new DevComponents.DotNetBar.Controls.ComboTree();
             this.lblOnwerDept = new DevComponents.DotNetBar.LabelX();
             this.dgvCases = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -181,8 +181,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colInvoiceCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsPool = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOperationType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOwnerDept = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAppDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCaseMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -212,8 +210,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.panelQuery.Controls.Add(this.cbIsPool);
             this.panelQuery.Controls.Add(this.cbLocation);
             this.panelQuery.Controls.Add(this.lblLocation);
-            this.panelQuery.Controls.Add(this.tbOPName);
-            this.panelQuery.Controls.Add(this.lblOPName);
             this.panelQuery.Controls.Add(this.cbCaseMark);
             this.panelQuery.Controls.Add(this.lblCaseMark);
             this.panelQuery.Controls.Add(this.cbIsContractSigned);
@@ -237,7 +233,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(819, 77);
+            this.panelQuery.Size = new System.Drawing.Size(819, 71);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -253,14 +249,331 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             // 
-            this.cbIsPool.BackgroundStyle.Class = "";
             this.cbIsPool.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.cbIsPool.Location = new System.Drawing.Point(599, 53);
+            this.cbIsPool.Location = new System.Drawing.Point(599, 49);
             this.cbIsPool.Name = "cbIsPool";
-            this.cbIsPool.Size = new System.Drawing.Size(88, 16);
+            this.cbIsPool.Size = new System.Drawing.Size(88, 18);
             this.cbIsPool.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbIsPool.TabIndex = 21;
             this.cbIsPool.Text = "是否池融资";
+            // 
+            // cbCaseMark
+            // 
+            this.cbCaseMark.DisplayMember = "Text";
+            this.cbCaseMark.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCaseMark.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCaseMark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbCaseMark.FormattingEnabled = true;
+            this.cbCaseMark.ItemHeight = 14;
+            this.cbCaseMark.Items.AddRange(new object[] {
+            "全部",
+            "申请案",
+            "启动案",
+            "已结案"});
+            this.cbCaseMark.Location = new System.Drawing.Point(460, 26);
+            this.cbCaseMark.Name = "cbCaseMark";
+            this.cbCaseMark.Size = new System.Drawing.Size(133, 20);
+            this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCaseMark.TabIndex = 11;
+            // 
+            // lblCaseMark
+            // 
+            this.lblCaseMark.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCaseMark.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCaseMark.Location = new System.Drawing.Point(398, 27);
+            this.lblCaseMark.Name = "lblCaseMark";
+            this.lblCaseMark.Size = new System.Drawing.Size(56, 18);
+            this.lblCaseMark.TabIndex = 10;
+            this.lblCaseMark.Text = "案件状态";
+            // 
+            // cbIsContractSigned
+            // 
+            this.cbIsContractSigned.AutoSize = true;
+            // 
+            // 
+            // 
+            this.cbIsContractSigned.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.cbIsContractSigned.Location = new System.Drawing.Point(599, 6);
+            this.cbIsContractSigned.Name = "cbIsContractSigned";
+            this.cbIsContractSigned.Size = new System.Drawing.Size(125, 18);
+            this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsContractSigned.TabIndex = 19;
+            this.cbIsContractSigned.Text = "是否签订保理合同";
+            // 
+            // btnQueryReset
+            // 
+            this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQueryReset.Location = new System.Drawing.Point(731, 29);
+            this.btnQueryReset.Name = "btnQueryReset";
+            this.btnQueryReset.Size = new System.Drawing.Size(48, 19);
+            this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQueryReset.TabIndex = 23;
+            this.btnQueryReset.Text = "重置";
+            this.btnQueryReset.Click += new System.EventHandler(this.Reset);
+            // 
+            // cbIsLowRisk
+            // 
+            this.cbIsLowRisk.AutoSize = true;
+            // 
+            // 
+            // 
+            this.cbIsLowRisk.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.cbIsLowRisk.Location = new System.Drawing.Point(599, 28);
+            this.cbIsLowRisk.Name = "cbIsLowRisk";
+            this.cbIsLowRisk.Size = new System.Drawing.Size(88, 18);
+            this.cbIsLowRisk.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsLowRisk.TabIndex = 20;
+            this.cbIsLowRisk.Text = "是否低风险";
+            // 
+            // tbClientName
+            // 
+            // 
+            // 
+            // 
+            this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbClientName.Location = new System.Drawing.Point(59, 6);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.Size = new System.Drawing.Size(133, 21);
+            this.tbClientName.TabIndex = 1;
+            // 
+            // lblClientName
+            // 
+            this.lblClientName.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblClientName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblClientName.Location = new System.Drawing.Point(3, 6);
+            this.lblClientName.Name = "lblClientName";
+            this.lblClientName.Size = new System.Drawing.Size(56, 18);
+            this.lblClientName.TabIndex = 0;
+            this.lblClientName.Text = "客户名称";
+            // 
+            // tbCaseCode
+            // 
+            // 
+            // 
+            // 
+            this.tbCaseCode.Border.Class = "TextBoxBorder";
+            this.tbCaseCode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbCaseCode.Location = new System.Drawing.Point(254, 5);
+            this.tbCaseCode.Name = "tbCaseCode";
+            this.tbCaseCode.Size = new System.Drawing.Size(133, 21);
+            this.tbCaseCode.TabIndex = 3;
+            // 
+            // lblCaseCode
+            // 
+            this.lblCaseCode.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCaseCode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCaseCode.Location = new System.Drawing.Point(198, 6);
+            this.lblCaseCode.Name = "lblCaseCode";
+            this.lblCaseCode.Size = new System.Drawing.Size(56, 18);
+            this.lblCaseCode.TabIndex = 2;
+            this.lblCaseCode.Text = "案件编号";
+            // 
+            // lblCount
+            // 
+            this.lblCount.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCount.Location = new System.Drawing.Point(731, 52);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(74, 18);
+            this.lblCount.TabIndex = 24;
+            this.lblCount.Text = "获得 条记录";
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblDate.Location = new System.Drawing.Point(198, 49);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(56, 18);
+            this.lblDate.TabIndex = 14;
+            this.lblDate.Text = "查询期限";
+            // 
+            // btnQuery
+            // 
+            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuery.Location = new System.Drawing.Point(731, 7);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(48, 19);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.TabIndex = 22;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.QueryCase);
+            // 
+            // cbCurrency
+            // 
+            this.cbCurrency.DisplayMember = "Text";
+            this.cbCurrency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCurrency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbCurrency.FormattingEnabled = true;
+            this.cbCurrency.ItemHeight = 14;
+            this.cbCurrency.Location = new System.Drawing.Point(514, 47);
+            this.cbCurrency.Name = "cbCurrency";
+            this.cbCurrency.Size = new System.Drawing.Size(79, 20);
+            this.cbCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCurrency.TabIndex = 18;
+            // 
+            // lblCurrency
+            // 
+            this.lblCurrency.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblCurrency.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCurrency.Location = new System.Drawing.Point(477, 49);
+            this.lblCurrency.Name = "lblCurrency";
+            this.lblCurrency.Size = new System.Drawing.Size(31, 18);
+            this.lblCurrency.TabIndex = 17;
+            this.lblCurrency.Text = "币别";
+            // 
+            // cbTransactionType
+            // 
+            this.cbTransactionType.DisplayMember = "Text";
+            this.cbTransactionType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbTransactionType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbTransactionType.FormattingEnabled = true;
+            this.cbTransactionType.ItemHeight = 14;
+            this.cbTransactionType.Items.AddRange(new object[] {
+            "国内卖方保理",
+            "国内买方保理",
+            "出口保理",
+            "进口保理"});
+            this.cbTransactionType.Location = new System.Drawing.Point(59, 46);
+            this.cbTransactionType.Name = "cbTransactionType";
+            this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
+            this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbTransactionType.TabIndex = 13;
+            // 
+            // lblTransactionType
+            // 
+            this.lblTransactionType.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblTransactionType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblTransactionType.Location = new System.Drawing.Point(3, 49);
+            this.lblTransactionType.Name = "lblTransactionType";
+            this.lblTransactionType.Size = new System.Drawing.Size(56, 18);
+            this.lblTransactionType.TabIndex = 12;
+            this.lblTransactionType.Text = "业务类别";
+            // 
+            // diEnd
+            // 
+            // 
+            // 
+            // 
+            this.diEnd.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diEnd.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.diEnd.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.diEnd.ButtonDropDown.Visible = true;
+            this.diEnd.ButtonFreeText.Checked = true;
+            this.diEnd.FreeTextEntryMode = true;
+            this.diEnd.IsPopupCalendarOpen = false;
+            this.diEnd.Location = new System.Drawing.Point(360, 47);
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diEnd.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.diEnd.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.diEnd.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.diEnd.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diEnd.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.diEnd.MonthCalendar.TodayButtonVisible = true;
+            this.diEnd.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diEnd.Name = "diEnd";
+            this.diEnd.Size = new System.Drawing.Size(100, 21);
+            this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.diEnd.TabIndex = 16;
+            // 
+            // diBegin
+            // 
+            // 
+            // 
+            // 
+            this.diBegin.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diBegin.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.diBegin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.diBegin.ButtonDropDown.Visible = true;
+            this.diBegin.ButtonFreeText.Checked = true;
+            this.diBegin.FreeTextEntryMode = true;
+            this.diBegin.IsPopupCalendarOpen = false;
+            this.diBegin.Location = new System.Drawing.Point(254, 47);
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.diBegin.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.diBegin.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.diBegin.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
+            this.diBegin.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.diBegin.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.diBegin.MonthCalendar.TodayButtonVisible = true;
+            this.diBegin.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.diBegin.Name = "diBegin";
+            this.diBegin.Size = new System.Drawing.Size(100, 21);
+            this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.diBegin.TabIndex = 15;
             // 
             // cbLocation
             // 
@@ -282,11 +595,9 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             // 
-            this.lblLocation.BackgroundStyle.Class = "";
             this.lblLocation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblLocation.Location = new System.Drawing.Point(3, 30);
             this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(56, 16);
             this.lblLocation.TabIndex = 6;
             this.lblLocation.Text = "业务地区";
             // 
@@ -308,344 +619,11 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             // 
-            this.lblOPName.BackgroundStyle.Class = "";
             this.lblOPName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblOPName.Location = new System.Drawing.Point(404, 7);
             this.lblOPName.Name = "lblOPName";
-            this.lblOPName.Size = new System.Drawing.Size(47, 16);
             this.lblOPName.TabIndex = 4;
             this.lblOPName.Text = "OP人员";
-            // 
-            // cbCaseMark
-            // 
-            this.cbCaseMark.DisplayMember = "Text";
-            this.cbCaseMark.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCaseMark.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCaseMark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbCaseMark.FormattingEnabled = true;
-            this.cbCaseMark.ItemHeight = 14;
-            this.cbCaseMark.Items.AddRange(new object[] {
-            "全部",
-            "申请案",
-            "启动案",
-            "已结案"});
-            this.cbCaseMark.Location = new System.Drawing.Point(460, 28);
-            this.cbCaseMark.Name = "cbCaseMark";
-            this.cbCaseMark.Size = new System.Drawing.Size(133, 20);
-            this.cbCaseMark.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCaseMark.TabIndex = 11;
-            // 
-            // lblCaseMark
-            // 
-            this.lblCaseMark.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCaseMark.BackgroundStyle.Class = "";
-            this.lblCaseMark.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCaseMark.Location = new System.Drawing.Point(398, 29);
-            this.lblCaseMark.Name = "lblCaseMark";
-            this.lblCaseMark.Size = new System.Drawing.Size(56, 16);
-            this.lblCaseMark.TabIndex = 10;
-            this.lblCaseMark.Text = "案件状态";
-            // 
-            // cbIsContractSigned
-            // 
-            this.cbIsContractSigned.AutoSize = true;
-            // 
-            // 
-            // 
-            this.cbIsContractSigned.BackgroundStyle.Class = "";
-            this.cbIsContractSigned.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.cbIsContractSigned.Location = new System.Drawing.Point(599, 7);
-            this.cbIsContractSigned.Name = "cbIsContractSigned";
-            this.cbIsContractSigned.Size = new System.Drawing.Size(126, 16);
-            this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsContractSigned.TabIndex = 19;
-            this.cbIsContractSigned.Text = "是否签订保理合同";
-            // 
-            // btnQueryReset
-            // 
-            this.btnQueryReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnQueryReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQueryReset.Location = new System.Drawing.Point(731, 31);
-            this.btnQueryReset.Name = "btnQueryReset";
-            this.btnQueryReset.Size = new System.Drawing.Size(48, 21);
-            this.btnQueryReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQueryReset.TabIndex = 23;
-            this.btnQueryReset.Text = "重置";
-            this.btnQueryReset.Click += new System.EventHandler(this.Reset);
-            // 
-            // cbIsLowRisk
-            // 
-            this.cbIsLowRisk.AutoSize = true;
-            // 
-            // 
-            // 
-            this.cbIsLowRisk.BackgroundStyle.Class = "";
-            this.cbIsLowRisk.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.cbIsLowRisk.Location = new System.Drawing.Point(599, 30);
-            this.cbIsLowRisk.Name = "cbIsLowRisk";
-            this.cbIsLowRisk.Size = new System.Drawing.Size(88, 16);
-            this.cbIsLowRisk.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbIsLowRisk.TabIndex = 20;
-            this.cbIsLowRisk.Text = "是否低风险";
-            // 
-            // tbClientName
-            // 
-            // 
-            // 
-            // 
-            this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbClientName.Location = new System.Drawing.Point(59, 6);
-            this.tbClientName.Name = "tbClientName";
-            this.tbClientName.Size = new System.Drawing.Size(133, 20);
-            this.tbClientName.TabIndex = 1;
-            // 
-            // lblClientName
-            // 
-            this.lblClientName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblClientName.Location = new System.Drawing.Point(3, 6);
-            this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(56, 16);
-            this.lblClientName.TabIndex = 0;
-            this.lblClientName.Text = "客户名称";
-            // 
-            // tbCaseCode
-            // 
-            // 
-            // 
-            // 
-            this.tbCaseCode.Border.Class = "TextBoxBorder";
-            this.tbCaseCode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbCaseCode.Location = new System.Drawing.Point(254, 5);
-            this.tbCaseCode.Name = "tbCaseCode";
-            this.tbCaseCode.Size = new System.Drawing.Size(133, 20);
-            this.tbCaseCode.TabIndex = 3;
-            // 
-            // lblCaseCode
-            // 
-            this.lblCaseCode.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCaseCode.BackgroundStyle.Class = "";
-            this.lblCaseCode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCaseCode.Location = new System.Drawing.Point(198, 6);
-            this.lblCaseCode.Name = "lblCaseCode";
-            this.lblCaseCode.Size = new System.Drawing.Size(56, 16);
-            this.lblCaseCode.TabIndex = 2;
-            this.lblCaseCode.Text = "案件编号";
-            // 
-            // lblCount
-            // 
-            this.lblCount.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCount.Location = new System.Drawing.Point(731, 56);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(71, 16);
-            this.lblCount.TabIndex = 24;
-            this.lblCount.Text = "获得 条记录";
-            // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblDate.BackgroundStyle.Class = "";
-            this.lblDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblDate.Location = new System.Drawing.Point(198, 53);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(56, 16);
-            this.lblDate.TabIndex = 14;
-            this.lblDate.Text = "查询期限";
-            // 
-            // btnQuery
-            // 
-            this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(731, 8);
-            this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(48, 21);
-            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuery.TabIndex = 22;
-            this.btnQuery.Text = "查询";
-            this.btnQuery.Click += new System.EventHandler(this.QueryCase);
-            // 
-            // cbCurrency
-            // 
-            this.cbCurrency.DisplayMember = "Text";
-            this.cbCurrency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCurrency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbCurrency.FormattingEnabled = true;
-            this.cbCurrency.ItemHeight = 14;
-            this.cbCurrency.Location = new System.Drawing.Point(514, 51);
-            this.cbCurrency.Name = "cbCurrency";
-            this.cbCurrency.Size = new System.Drawing.Size(79, 20);
-            this.cbCurrency.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbCurrency.TabIndex = 18;
-            // 
-            // lblCurrency
-            // 
-            this.lblCurrency.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblCurrency.BackgroundStyle.Class = "";
-            this.lblCurrency.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCurrency.Location = new System.Drawing.Point(477, 53);
-            this.lblCurrency.Name = "lblCurrency";
-            this.lblCurrency.Size = new System.Drawing.Size(31, 16);
-            this.lblCurrency.TabIndex = 17;
-            this.lblCurrency.Text = "币别";
-            // 
-            // cbTransactionType
-            // 
-            this.cbTransactionType.DisplayMember = "Text";
-            this.cbTransactionType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbTransactionType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbTransactionType.FormattingEnabled = true;
-            this.cbTransactionType.ItemHeight = 14;
-            this.cbTransactionType.Items.AddRange(new object[] {
-            "国内卖方保理",
-            "国内买方保理",
-            "出口保理",
-            "进口保理"});
-            this.cbTransactionType.Location = new System.Drawing.Point(59, 50);
-            this.cbTransactionType.Name = "cbTransactionType";
-            this.cbTransactionType.Size = new System.Drawing.Size(133, 20);
-            this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbTransactionType.TabIndex = 13;
-            // 
-            // lblTransactionType
-            // 
-            this.lblTransactionType.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblTransactionType.BackgroundStyle.Class = "";
-            this.lblTransactionType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTransactionType.Location = new System.Drawing.Point(3, 53);
-            this.lblTransactionType.Name = "lblTransactionType";
-            this.lblTransactionType.Size = new System.Drawing.Size(56, 16);
-            this.lblTransactionType.TabIndex = 12;
-            this.lblTransactionType.Text = "业务类别";
-            // 
-            // diEnd
-            // 
-            // 
-            // 
-            // 
-            this.diEnd.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diEnd.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.diEnd.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.diEnd.ButtonDropDown.Visible = true;
-            this.diEnd.ButtonFreeText.Checked = true;
-            this.diEnd.FreeTextEntryMode = true;
-            this.diEnd.Location = new System.Drawing.Point(360, 51);
-            // 
-            // 
-            // 
-            this.diEnd.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diEnd.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diEnd.MonthCalendar.BackgroundStyle.Class = "";
-            this.diEnd.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.diEnd.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.diEnd.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diEnd.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.diEnd.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.diEnd.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diEnd.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.diEnd.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diEnd.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.diEnd.MonthCalendar.TodayButtonVisible = true;
-            this.diEnd.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diEnd.Name = "diEnd";
-            this.diEnd.Size = new System.Drawing.Size(100, 20);
-            this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diEnd.TabIndex = 16;
-            // 
-            // diBegin
-            // 
-            // 
-            // 
-            // 
-            this.diBegin.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.diBegin.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.diBegin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.diBegin.ButtonDropDown.Visible = true;
-            this.diBegin.ButtonFreeText.Checked = true;
-            this.diBegin.FreeTextEntryMode = true;
-            this.diBegin.Location = new System.Drawing.Point(254, 51);
-            // 
-            // 
-            // 
-            this.diBegin.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diBegin.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diBegin.MonthCalendar.BackgroundStyle.Class = "";
-            this.diBegin.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.diBegin.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.diBegin.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.diBegin.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.diBegin.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
-            this.diBegin.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.diBegin.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.diBegin.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.diBegin.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.diBegin.MonthCalendar.TodayButtonVisible = true;
-            this.diBegin.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.diBegin.Name = "diBegin";
-            this.diBegin.Size = new System.Drawing.Size(100, 20);
-            this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.diBegin.TabIndex = 15;
             // 
             // cbOwnerDepts
             // 
@@ -668,11 +646,9 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             // 
-            this.lblOnwerDept.BackgroundStyle.Class = "";
             this.lblOnwerDept.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblOnwerDept.Location = new System.Drawing.Point(198, 29);
             this.lblOnwerDept.Name = "lblOnwerDept";
-            this.lblOnwerDept.Size = new System.Drawing.Size(56, 16);
             this.lblOnwerDept.TabIndex = 8;
             this.lblOnwerDept.Text = "业务归属";
             // 
@@ -699,8 +675,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colInvoiceCurrency,
             this.colTransactionType,
             this.colIsPool,
-            this.colOperationType,
-            this.colOwnerDept,
             this.colAppDate,
             this.colCaseMark,
             this.colAssignAmount,
@@ -727,11 +701,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.dgvCases.DefaultCellStyle = dataGridViewCellStyle16;
             this.dgvCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvCases.Location = new System.Drawing.Point(0, 77);
+            this.dgvCases.Location = new System.Drawing.Point(0, 71);
             this.dgvCases.Name = "dgvCases";
             this.dgvCases.ReadOnly = true;
             this.dgvCases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvCases.Size = new System.Drawing.Size(819, 308);
+            this.dgvCases.Size = new System.Drawing.Size(819, 284);
             this.dgvCases.TabIndex = 1;
             this.dgvCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvCases.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvCaseCellFormatting);
@@ -751,52 +725,52 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemCaseExport,
             this.menuItemCaculateInvoices});
             this.cmuContractMgr.Name = "cmuContractMgr";
-            this.cmuContractMgr.Size = new System.Drawing.Size(147, 192);
+            this.cmuContractMgr.Size = new System.Drawing.Size(149, 192);
             // 
             // menuItemCaseSelect
             // 
             this.menuItemCaseSelect.Name = "menuItemCaseSelect";
-            this.menuItemCaseSelect.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseSelect.Size = new System.Drawing.Size(148, 22);
             this.menuItemCaseSelect.Text = "选定案件";
             this.menuItemCaseSelect.Click += new System.EventHandler(this.SelectCase);
             // 
             // menuItemCaseDetail
             // 
             this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(148, 22);
             this.menuItemCaseDetail.Text = "详细信息";
             this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(145, 6);
             // 
             // menuItemCaseNew
             // 
             this.menuItemCaseNew.Name = "menuItemCaseNew";
-            this.menuItemCaseNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseNew.Size = new System.Drawing.Size(148, 22);
             this.menuItemCaseNew.Text = "新建案件";
             this.menuItemCaseNew.Click += new System.EventHandler(this.NewCase);
             // 
             // menuItemCreditCoverNegNew
             // 
             this.menuItemCreditCoverNegNew.Name = "menuItemCreditCoverNegNew";
-            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCreditCoverNegNew.Size = new System.Drawing.Size(148, 22);
             this.menuItemCreditCoverNegNew.Text = "新建额度申请";
             this.menuItemCreditCoverNegNew.Click += new System.EventHandler(this.NewCreditCoverNeg);
             // 
             // menuItemCaseDelete
             // 
             this.menuItemCaseDelete.Name = "menuItemCaseDelete";
-            this.menuItemCaseDelete.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseDelete.Size = new System.Drawing.Size(148, 22);
             this.menuItemCaseDelete.Text = "删除案件";
             this.menuItemCaseDelete.Click += new System.EventHandler(this.DeleteCase);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
             // 
             // menuItemLegerReport
             // 
@@ -804,34 +778,34 @@ namespace CMBC.EasyFactor.CaseMgr
             this.menuItemLegerExportAll,
             this.menuItemLegerExportLeft});
             this.menuItemLegerReport.Name = "menuItemLegerReport";
-            this.menuItemLegerReport.Size = new System.Drawing.Size(146, 22);
+            this.menuItemLegerReport.Size = new System.Drawing.Size(148, 22);
             this.menuItemLegerReport.Text = "导出台帐";
             // 
             // menuItemLegerExportAll
             // 
             this.menuItemLegerExportAll.Name = "menuItemLegerExportAll";
-            this.menuItemLegerExportAll.Size = new System.Drawing.Size(110, 22);
+            this.menuItemLegerExportAll.Size = new System.Drawing.Size(112, 22);
             this.menuItemLegerExportAll.Text = "全部";
             this.menuItemLegerExportAll.Click += new System.EventHandler(this.ReportLegerAll);
             // 
             // menuItemLegerExportLeft
             // 
             this.menuItemLegerExportLeft.Name = "menuItemLegerExportLeft";
-            this.menuItemLegerExportLeft.Size = new System.Drawing.Size(110, 22);
+            this.menuItemLegerExportLeft.Size = new System.Drawing.Size(112, 22);
             this.menuItemLegerExportLeft.Text = "未结清";
             this.menuItemLegerExportLeft.Click += new System.EventHandler(this.ReportLegerLeft);
             // 
             // menuItemCaseExport
             // 
             this.menuItemCaseExport.Name = "menuItemCaseExport";
-            this.menuItemCaseExport.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaseExport.Size = new System.Drawing.Size(148, 22);
             this.menuItemCaseExport.Text = "导出案子";
             this.menuItemCaseExport.Click += new System.EventHandler(this.ExportCases);
             // 
             // menuItemCaculateInvoices
             // 
             this.menuItemCaculateInvoices.Name = "menuItemCaculateInvoices";
-            this.menuItemCaculateInvoices.Size = new System.Drawing.Size(146, 22);
+            this.menuItemCaculateInvoices.Size = new System.Drawing.Size(148, 22);
             this.menuItemCaculateInvoices.Text = "重新计算数值";
             this.menuItemCaculateInvoices.Click += new System.EventHandler(this.CaculateInvoices);
             // 
@@ -1140,22 +1114,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.colIsPool.Name = "colIsPool";
             this.colIsPool.ReadOnly = true;
             // 
-            // colOperationType
-            // 
-            this.colOperationType.DataPropertyName = "OperationType";
-            this.colOperationType.HeaderText = "操作类型";
-            this.colOperationType.Name = "colOperationType";
-            this.colOperationType.ReadOnly = true;
-            this.colOperationType.Width = 80;
-            // 
-            // colOwnerDept
-            // 
-            this.colOwnerDept.DataPropertyName = "OwnerDepartmentName";
-            this.colOwnerDept.HeaderText = "业务归属机构";
-            this.colOwnerDept.Name = "colOwnerDept";
-            this.colOwnerDept.ReadOnly = true;
-            this.colOwnerDept.Width = 104;
-            // 
             // colAppDate
             // 
             this.colAppDate.DataPropertyName = "CaseAppDate";
@@ -1317,13 +1275,13 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // CaseMgr
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvCases);
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "CaseMgr";
-            this.Size = new System.Drawing.Size(819, 385);
+            this.Size = new System.Drawing.Size(819, 355);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();
@@ -1372,8 +1330,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsPool;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperationType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOwnerDept;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAppDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCaseMark;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;

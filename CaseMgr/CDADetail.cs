@@ -717,6 +717,7 @@ namespace CMBC.EasyFactor.CaseMgr
                               ReassignGracePeriod = 60,
                               FinanceProportion = 0.8,
                               IsNotice = "明保理",
+                              RiskType = "高风险",
                               IsRecoarse = false,
                               CDAStatus = CDAStr.UNCHECK,
                               IsCreditCoverRevolving = true,

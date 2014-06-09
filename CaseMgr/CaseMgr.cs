@@ -396,7 +396,7 @@ namespace CMBC.EasyFactor.CaseMgr
                                                                && c.CaseCode.Contains(tbCaseCode.Text)
                                                                &&
                                                                (caseMark == "È«²¿" ? true : c.CaseMark.Contains(caseMark))
-                                                               && (c.OPName == null ? true : c.OPName.Contains(opName))
+                                                               //&& (c.OPName == null ? true : c.OPName.Contains(opName))
                                                                &&
                                                                (_opCaseType != OpCaseType.STAT &&
                                                                 beginDate != diBegin.MinDate
@@ -498,7 +498,7 @@ namespace CMBC.EasyFactor.CaseMgr
             diEnd.Value = default(DateTime);
             cbIsContractSigned.Checked = true;
             cbIsLowRisk.Checked = true;
-            tbOPName.Text = string.Empty;
+            //tbOPName.Text = string.Empty;
         }
 
         /// <summary>

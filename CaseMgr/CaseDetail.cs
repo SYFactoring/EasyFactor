@@ -263,26 +263,26 @@ namespace CMBC.EasyFactor.CaseMgr
 
             var curCase = (Case) caseBindingSource.DataSource;
 
-            Factor cmbc = _context.Factors.SingleOrDefault(f => f.FactorCode == Factor.CMBC_CODE);
+            Factor defaultFactor = _context.Factors.SingleOrDefault(f => f.FactorCode == Factor.DEFAULT_FACTOR_CODE);
             switch (transactionType)
             {
                 case "国内卖方保理":
                 case "国内买方保理":
                     btnCaseFactorSelect.Enabled = false;
-                    curCase.SellerFactor = cmbc;
-                    curCase.BuyerFactor = cmbc;
+                    curCase.SellerFactor = defaultFactor;
+                    curCase.BuyerFactor = defaultFactor;
                     curCase.InvoiceCurrency = "CNY";
                     cbCaseInvoiceCurrency.Enabled = false;
                     break;
                 case "出口保理":
                     btnCaseFactorSelect.Enabled = true;
-                    curCase.SellerFactor = cmbc;
+                    curCase.SellerFactor = defaultFactor;
                     curCase.InvoiceCurrency = "USD";
                     cbCaseInvoiceCurrency.Enabled = true;
                     break;
                 case "进口保理":
                     btnCaseFactorSelect.Enabled = true;
-                    curCase.BuyerFactor = cmbc;
+                    curCase.BuyerFactor = defaultFactor;
                     curCase.InvoiceCurrency = "USD";
                     cbCaseInvoiceCurrency.Enabled = true;
                     break;
@@ -639,8 +639,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isAddOK = true;
                 try
                 {
-                    curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType,
-                                                             curCase.OwnerDepartment.LocationCode, curCase.CaseAppDate);
+                    //curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType,
+                                                             //curCase.OwnerDepartment.LocationCode, curCase.CaseAppDate);
+                    curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType, null, curCase.CaseAppDate);
                     _context.Cases.InsertOnSubmit(curCase);
                     _context.SubmitChanges();
                 }
@@ -1090,5 +1091,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
             ControlUtil.SetComponetEditable(tbCreditCoverCreateUserName, false);
         }
+
     }
 }

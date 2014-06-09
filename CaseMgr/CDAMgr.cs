@@ -15,6 +15,7 @@ using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
 using Microsoft.Office.Interop.Excel;
 using Rectangle = System.Drawing.Rectangle;
+using System.Configuration;
 
 namespace CMBC.EasyFactor.CaseMgr
 {
@@ -433,14 +434,15 @@ namespace CMBC.EasyFactor.CaseMgr
 
             IQueryable<CDA> queryResult =
                 from cda in Context.CDAs
-                where (cdaCode==""?true:cda.CDACode==cdaCode)
+                where (cdaCode == "" ? true : cda.CDACode == cdaCode)
                 let curCase = cda.Case
                 where
-                    (transactionType == "全部" ? true : curCase.TransactionType == transactionType) &&
+                    (transactionType == "全部" ? true : curCase.TransactionType == transactionType)
+                    &&
                     (location == "00" ? true : curCase.OwnerDepartment.LocationCode == location)
                 let contracts = cda.Case.SellerClient.Contracts
                 where
-                    String.IsNullOrEmpty(contractCode)? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
+                    String.IsNullOrEmpty(contractCode) ? true : contracts.Any(con => con.ContractCode.Contains(contractCode))
                 let seller = cda.Case.SellerClient
                 let buyer = cda.Case.BuyerClient
                 where
@@ -554,7 +556,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 2]].MergeCells = true;
                 sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 1]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-                sheet.Cells[2, 1] = "中国民生银行保理额度通知书";
+                sheet.Cells[2, 1] = "保理额度通知书";
 
                 sheet.Range[sheet.Cells[4, 1], sheet.Cells[4, 2]].MergeCells = true;
                 sheet.Range[sheet.Cells[4, 1], sheet.Cells[4, 1]].HorizontalAlignment = XlHAlign.xlHAlignRight;
@@ -813,7 +815,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 switch (selectedCDA.Case.TransactionType)
                 {
                     case "国内卖方保理":
-                        if(selectedCDA.Case.BuyerFactor.FactorType=="保险公司")
+                        if (selectedCDA.Case.BuyerFactor.FactorType == "保险公司")
                             line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "国内", "信保", selectedCDA.IsNotice, financeType);
                         else
                             line0 = String.Format("（1）本业务为{0}{1}{2}（{3}）业务，采用{4}模式。", recoarse, "国内", single, selectedCDA.IsNotice, financeType);
@@ -838,9 +840,9 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     if (selectedCDA.IsRecoarse.GetValueOrDefault())
                     {
-                        const string line1 = "（2）如应收账款债务人(以下简称买方)于到应收账款到期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
-                        const string line2 = "（3）官方认定买方无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
-                        const string line3 = "（4）关于卖方与买方间全部契约之应收账款，卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
+                        string line1 = "（2）如应收账款债务人(以下简称买方)于到应收账款到期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知" + ConfigurationManager.AppSettings["CompanyName"] + "此延迟付款。" + ConfigurationManager.AppSettings["CompanyName"] + "依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，" + ConfigurationManager.AppSettings["CompanyName"] + "自动免除其承担的信用风险担保责任。";
+                        string line2 = "（3）官方认定买方无力清偿时，" + ConfigurationManager.AppSettings["CompanyName"] + "得将所有买方尚未清偿之应收账款业已转让予" + ConfigurationManager.AppSettings["CompanyName"] + "事宜通知买方。";
+                        string line3 = "（4）关于卖方与买方间全部契约之应收账款，卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
                         string comment = line0 + "\n\n" + line1 + "\n\n" + line2 + "\n\n" + line3;
                         if (!String.IsNullOrEmpty(selectedCDA.Comment))
                         {
@@ -858,12 +860,12 @@ namespace CMBC.EasyFactor.CaseMgr
                     }
                     else
                     {
-                        const string line1 = "（2）如应收账款债务人(以下简称买方)于到应收账款期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
-                        const string line2 =
-                            "（3）针对本案的担保付款期限由「应收账款到期日后一百二十日」，修改为「买方收到应收账款转让通知之日起一百二十日」。";
-                        const string line3 = "（4）核准应收账款的销售合同有禁止转让的约定时，民生银行就该应收账款不须负任何责任。";
-                        const string line4 = "（5）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
-                        const string line5 = "（6）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
+                        string line1 = "（2）如应收账款债务人(以下简称买方)于到应收账款期日后    日内（最长不超过60天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知" + ConfigurationManager.AppSettings["CompanyName"] + "此延迟付款。" + ConfigurationManager.AppSettings["CompanyName"] + "依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，" + ConfigurationManager.AppSettings["CompanyName"] + "自动免除其承担的信用风险担保责任。";
+                        string line2 =
+                          "（3）针对本案的担保付款期限由「应收账款到期日后一百二十日」，修改为「买方收到应收账款转让通知之日起一百二十日」。";
+                        string line3 = "（4）核准应收账款的销售合同有禁止转让的约定时，" + ConfigurationManager.AppSettings["CompanyName"] + "就该应收账款不须负任何责任。";
+                        string line4 = "（5）买方未清偿核准应收账款且官方认定无力清偿时，" + ConfigurationManager.AppSettings["CompanyName"] + "得将所有买方尚未清偿之应收账款业已转让予" + ConfigurationManager.AppSettings["CompanyName"] + "事宜通知买方。";
+                        string line5 = "（6）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
 
                         string comment = line0 + "\n\n" + line1 + "\n\n" + line2 + "\n\n" + line3 + "\n\n" + line4 + "\n\n" + line5;
                         if (!String.IsNullOrEmpty(selectedCDA.Comment))
@@ -916,10 +918,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 row++;
                 row++;
 
-                sheet.Cells[row++, 2] = selectedCDA.Case.OwnerDepartment.Location.LocationName == "北京"
-                                         ? String.Format("中国民生银行股份有限公司总行营业部")
-                                         : String.Format("中国民生银行股份有限公司{0}分行",
-                                                         selectedCDA.Case.OwnerDepartment.Location.LocationName);
+                sheet.Cells[row++, 2] = ConfigurationManager.AppSettings["CompanyName"];
+                    //selectedCDA.Case.OwnerDepartment.Location.LocationName == "北京"
+                    //                     ? String.Format("中国民生银行股份有限公司总行营业部")
+                    //                     : String.Format("中国民生银行股份有限公司{0}分行",
+                    //                                     selectedCDA.Case.OwnerDepartment.Location.LocationName);
 
                 sheet.Cells[row++, 2] = String.Format("日期：{0:yyyy}年 {0:MM}月 {0:dd}日", selectedCDA.CDASignDate);
                 sheet.Range[sheet.Cells[row - 2, 2], sheet.Cells[row - 1, 2]].HorizontalAlignment = XlHAlign.xlHAlignRight;
@@ -987,7 +990,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 sheet.Range[sheet.Cells[1, 1], sheet.Cells[1, 2]].MergeCells = true;
                 sheet.Range[sheet.Cells[1, 1], sheet.Cells[1, 1]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
-                sheet.Cells[1, 1] = "中国民生银行保理额度通知书 ";
+                sheet.Cells[1, 1] = "保理额度通知书 ";
 
                 sheet.Cells[3, 2] = String.Format("案件编号：{0}", selectedCDA.CaseCode);
                 sheet.Range[sheet.Cells[3, 2], sheet.Cells[3, 2]].HorizontalAlignment = XlHAlign.xlHAlignRight;
@@ -1240,11 +1243,11 @@ namespace CMBC.EasyFactor.CaseMgr
                         break;
                 }
 
-                const string line2 =
-                    "（2）如应收账款债务人(以下简称买方)于到应收账款期日后 60 日内（最长不超过 60 天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知民生银行此延迟付款。民生银行依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，民生银行自动免除其承担的信用风险担保责任。";
-                const string line3 = "（3）核准应收账款的销售合同有禁止转让的约定时，民生银行就该应收账款不须负任何责任。";
-                const string line4 = "（4）买方未清偿核准应收账款且官方认定无力清偿时，民生银行得将所有买方尚未清偿之应收账款业已转让予民生银行事宜通知买方。";
-                const string line5 = "（5）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
+                string line2 =
+                    "（2）如应收账款债务人(以下简称买方)于到应收账款期日后 60 日内（最长不超过 60 天）仍未付款，卖方至迟于上述约定到期日后的第一个营业日通知" + ConfigurationManager.AppSettings["CompanyName"] + "此延迟付款。" + ConfigurationManager.AppSettings["CompanyName"] + "依卖方的前述通知，通知买方应收账款转让事宜及其未付余额，如卖方未尽通知责任，" + ConfigurationManager.AppSettings["CompanyName"] + "自动免除其承担的信用风险担保责任。";
+                string line3 = "（3）核准应收账款的销售合同有禁止转让的约定时，" + ConfigurationManager.AppSettings["CompanyName"] + "就该应收账款不须负任何责任。";
+                string line4 = "（4）买方未清偿核准应收账款且官方认定无力清偿时，" + ConfigurationManager.AppSettings["CompanyName"] + "得将所有买方尚未清偿之应收账款业已转让予" + ConfigurationManager.AppSettings["CompanyName"] + "事宜通知买方。";
+                string line5 = "（5）关于卖方与买方间全部契约之应收账款（不论是否为信用风险担保金额所涵盖），卖方应按到期日之顺序排列。卖方应尽善良管理人的注意义务维持其对该应收账款的权利并保存相关纪录。";
 
                 sheet.Range[sheet.Cells[24, 1], sheet.Cells[24, 1]].WrapText = true;
                 sheet.Range[sheet.Cells[26, 1], sheet.Cells[26, 1]].WrapText = true;
@@ -1286,10 +1289,11 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Range[sheet.Cells[26, 1], sheet.Cells[26, 2]].RowHeight = 40;
                 sheet.Range[sheet.Cells[28, 1], sheet.Cells[28, 2]].RowHeight = 40;
 
-                sheet.Cells[30, 2] = selectedCDA.Case.OwnerDepartment.Location.LocationName == "北京"
-                                         ? String.Format("中国民生银行股份有限公司总行营业部")
-                                         : String.Format("中国民生银行股份有限公司{0}分行",
-                                                         selectedCDA.Case.OwnerDepartment.Location.LocationName);
+                sheet.Cells[30, 2] = ConfigurationManager.AppSettings["CompanyName"];
+                    //selectedCDA.Case.OwnerDepartment.Location.LocationName == "北京"
+                    //                     ? String.Format("中国民生银行股份有限公司总行营业部")
+                    //                     : String.Format("中国民生银行股份有限公司{0}分行",
+                    //                                     selectedCDA.Case.OwnerDepartment.Location.LocationName);
 
                 sheet.Cells[31, 2] = String.Format("日期：{0:yyyy}年 {0:MM}月 {0:dd}日", selectedCDA.CDASignDate);
                 sheet.Range[sheet.Cells[30, 2], sheet.Cells[31, 2]].HorizontalAlignment = XlHAlign.xlHAlignRight;
