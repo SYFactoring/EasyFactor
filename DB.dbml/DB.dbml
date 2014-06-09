@@ -10,7 +10,7 @@
       <Column Name="InvoiceCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="TransactionType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="OperationType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="OwnerDepartmentCode" Type="System.String" DbType="VarChar(14) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="OwnerDepartmentCode" Type="System.String" DbType="VarChar(14) " CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CaseAppDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CaseMark" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />

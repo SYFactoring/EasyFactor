@@ -163,24 +163,24 @@ namespace CMBC.EasyFactor.DB.dbml
             Contract contract = selectedCase.SellerClient.Contract;
             if (contract != null)
             {
-                if (contract.ContractType == "新合同")
-                {
-                    IQueryable<string> queryResult = from cda in context.CDAs
-                                                     where cda.CDACode.StartsWith(contract.ContractCode)
-                                                     select cda.CDACode;
-                    int count;
-                    if (
-                        !Int32.TryParse(queryResult.Max(no => no.Substring(contract.ContractCode.Length + 1)), out count))
-                    {
-                        count = 0;
-                    }
+                //if (contract.ContractType == "新合同")
+                //{
+                //    IQueryable<string> queryResult = from cda in context.CDAs
+                //                                     where cda.CDACode.StartsWith(contract.ContractCode)
+                //                                     select cda.CDACode;
+                //    int count;
+                //    if (
+                //        !Int32.TryParse(queryResult.Max(no => no.Substring(contract.ContractCode.Length + 1)), out count))
+                //    {
+                //        count = 0;
+                //    }
 
-                    return String.Format("{0}-{1:000}", contract.ContractCode, count + 1);
-                }
-                else
-                {
+                //    return String.Format("{0}-{1:000}", contract.ContractCode, count + 1);
+                //}
+                //else
+                //{
                     IQueryable<string> queryResult = from cda in context.CDAs
-                                                     where cda.CDACode.StartsWith(selectedCase.CaseCode + "XXX")
+                                                     where cda.CDACode.StartsWith(selectedCase.CaseCode)
                                                      select cda.CDACode;
 
                     int count;
@@ -190,8 +190,8 @@ namespace CMBC.EasyFactor.DB.dbml
                         count = 0;
                     }
 
-                    return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, count + 1);
-                }
+                    return String.Format("{0}-{1:000}", selectedCase.CaseCode, count + 1);
+                //}
             }
             if (selectedCase.TransactionType == "进口保理")
             {
@@ -199,12 +199,12 @@ namespace CMBC.EasyFactor.DB.dbml
                                                  where cda.CDACode.StartsWith(selectedCase.CaseCode)
                                                  select cda.CDACode;
                 int count;
-                if (!Int32.TryParse(queryResult.Max(no => no.Substring(selectedCase.CaseCode.Length + 4)), out count))
+                if (!Int32.TryParse(queryResult.Max(no => no.Substring(selectedCase.CaseCode.Length + 1)), out count))
                 {
                     count = 0;
                 }
 
-                return String.Format("{0}XXX-{1:000}", selectedCase.CaseCode, count + 1);
+                return String.Format("{0}-{1:000}", selectedCase.CaseCode, count + 1);
             }
             return string.Empty;
         }

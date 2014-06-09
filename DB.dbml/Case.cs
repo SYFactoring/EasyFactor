@@ -686,7 +686,7 @@ namespace CMBC.EasyFactor.DB.dbml
         public static string GenerateCaseCode(string transactionType, string locationCode, DateTime appDate)
         {
             var context = new DBDataContext();
-            string year = String.Format("{0:yy}", appDate);
+            string year = String.Format("{0:yyyy}", appDate);
             string typeCode;
             switch (transactionType)
             {
@@ -707,7 +707,15 @@ namespace CMBC.EasyFactor.DB.dbml
                     break;
             }
 
-            string prefix = String.Format("69{0}{1}{2}", locationCode, typeCode, year);
+            string prefix = null;
+            if (locationCode != null)
+            {
+                prefix = String.Format("69{0}{1}{2}", locationCode, typeCode, year);
+            }
+            else
+            {
+                prefix = String.Format("{0}{1}", typeCode, year);
+            }
             int caseCount = 0;
             IEnumerable<string> queryStr = from c in context.Cases
                                            where c.CaseCode.StartsWith(prefix)

@@ -24,6 +24,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public static readonly string CMBC_CODE = "CN01300";
 
+        public static readonly string DEFAULT_FACTOR_CODE = "0000000";
+
         /// <summary>
         /// 
         /// </summary>
