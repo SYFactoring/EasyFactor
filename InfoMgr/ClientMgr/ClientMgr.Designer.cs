@@ -516,7 +516,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.GroupNoColumn,
             this.IndustryColumn,
             this.DepartmentCodeColumn,
-            this.DepartmentColumn,
             this.PMNameColumn});
             this.dgvClients.ContextMenuStrip = this.cmuClientMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
