@@ -573,7 +573,7 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "业务归属机构";
                 datasheet.Cells[1, column++] = "申请日期";
                 datasheet.Cells[1, column++] = "案件状态";
-                datasheet.Cells[1, column] = "OP人员";
+                //datasheet.Cells[1, column] = "OP人员";
 
                 int size = _exportData.Count;
                 for (int row = 0; row < size; row++)
@@ -615,7 +615,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = selectedCase.OwnerDepartment.DepartmentName;
                     datasheet.Cells[row + 2, column++] = selectedCase.CaseAppDate;
                     datasheet.Cells[row + 2, column++] = selectedCase.CaseMark;
-                    datasheet.Cells[row + 2, column] = selectedCase.OPName;
+                    //datasheet.Cells[row + 2, column] = selectedCase.OPName;
 
                     worker.ReportProgress((int)((float)row * 100 / size));
                 }
@@ -2622,15 +2622,15 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     sheet.Range["B7", "F7"].MergeCells = true;
-                    sheet.Cells[7, "A"] = "协查意见书编号";
-                    List<ClientReview> reviewList = selectedCase.ClientReviews;
-                    if (reviewList != null)
-                    {
-                        String reviews = reviewList.Aggregate(string.Empty,
-                                                              (current, review) => current + (review.ReviewNo + ";"));
+                    //sheet.Cells[7, "A"] = "协查意见书编号";
+                    //List<ClientReview> reviewList = selectedCase.ClientReviews;
+                    //if (reviewList != null)
+                    //{
+                    //    String reviews = reviewList.Aggregate(string.Empty,
+                    //                                          (current, review) => current + (review.ReviewNo + ";"));
 
-                        sheet.Cells[7, "B"] = reviews;
-                    }
+                    //    sheet.Cells[7, "B"] = reviews;
+                    //}
 
                     sheet.Cells[4, "G"] = "案件编号";
                     sheet.Range[sheet.Cells[4, "H"], sheet.Cells[4, "I"]].MergeCells = true;
@@ -3119,10 +3119,10 @@ namespace CMBC.EasyFactor.Utils
             sheet.Cells[6, "B"] = factorList.Count == 1 ? factorList[0] : String.Join(";", factorList.ToArray());
 
             sheet.Range["B7", "I7"].MergeCells = true;
-            sheet.Cells[7, "A"] = "协查意见书编号";
-            sheet.Cells[7, "B"] = clientReviewList.Count == 1
-                                      ? clientReviewList[0]
-                                      : String.Join(";", clientReviewList.ToArray());
+            //sheet.Cells[7, "A"] = "协查意见书编号";
+            //sheet.Cells[7, "B"] = clientReviewList.Count == 1
+            //                          ? clientReviewList[0]
+            //                          : String.Join(";", clientReviewList.ToArray());
 
             sheet.Range[sheet.Cells[4, "L"], sheet.Cells[4, "M"]].MergeCells = true;
             sheet.Cells[4, "L"] = "信用风险担保";

@@ -19,7 +19,7 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        public const string MAIN_DEFAULT = "欢迎使用中国民生银行保理运营系统";
+        public const string MAIN_DEFAULT = "欢迎使用EasyFactoring易保保理运营系统";
         /// <summary>
         /// 提示
         /// </summary>
@@ -237,6 +237,6 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        public static string REPORT_PASSWORD = "CMBC"+DateTime.Today.Year;
+        public static string REPORT_PASSWORD = "EasyFactoring"+DateTime.Today.Year;
     }
 }

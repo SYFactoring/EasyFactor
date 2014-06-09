@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using CMBC.EasyFactor.DB.dbml;
 using DevComponents.DotNetBar;
 using Microsoft.Office.Interop.Excel;
+using System.Configuration;
 
 namespace CMBC.EasyFactor.Utils
 {
@@ -156,11 +157,6 @@ namespace CMBC.EasyFactor.Utils
             /// <summary>
             /// 
             /// </summary>
-            IMPORT_ASSIGN_II,
-
-            /// <summary>
-            /// 
-            /// </summary>
             IMPORT_FINANCE,
 
             /// <summary>
@@ -253,9 +249,6 @@ namespace CMBC.EasyFactor.Utils
                     Text = @"台帐导入";
                     break;
                 case ImportType.IMPORT_ASSIGN:
-                    Text = @"应收账款转让清单导入";
-                    break;
-                case ImportType.IMPORT_ASSIGN_II:
                     Text = @"应收账款转让清单导入";
                     break;
                 case ImportType.IMPORT_FINANCE:
@@ -352,9 +345,6 @@ namespace CMBC.EasyFactor.Utils
                 case ImportType.IMPORT_ASSIGN:
                     e.Result = ImportAssign((string)e.Argument, worker, e);
                     break;
-                case ImportType.IMPORT_ASSIGN_II:
-                    e.Result = ImportAssignII((string)e.Argument, worker, e);
-                    break;
                 case ImportType.IMPORT_FINANCE:
                     e.Result = ImportFinance((string)e.Argument, worker, e);
                     break;
@@ -421,7 +411,7 @@ namespace CMBC.EasyFactor.Utils
                         var mail = new SendMail(location.LegerContactEmail1, location.LegerContactEmail2,
                                                 App.Current.CurUser.Email,
                                                 String.Format("{0}保理台帐{1:yyyyMMdd}", dir.Name, DateTime.Today),
-                                                "本邮件由中国民生银行保理运营系统自动生成并发送。如有问题请回复邮件给保理部(factoring@cmbc.com.cn)");
+                                                "本邮件由" + ConfigurationManager.AppSettings["CompanyName"] + "保理运营系统自动生成并发送。");
 
                         mail.AddAttachment(zipName);
                         mail.Send();
@@ -566,314 +556,8 @@ namespace CMBC.EasyFactor.Utils
         /// <param name="fileName"></param>
         /// <param name="worker"></param>
         /// <param name="e"></param>
-        /// <exception cref="Exception"></exception>
         /// <returns></returns>
         private int ImportAssign(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            object[,] valueArray = GetValueArray(fileName, 1);
-            int result = 0;
-            var warningCreditCover = new List<Case>();
-            var warningFinanceLine = new List<Case>();
-            var invoiceList = new List<Invoice>();
-            var batchList = new List<InvoiceAssignBatch>();
-
-            _context = new DBDataContext();
-
-            if (valueArray != null)
-            {
-                int size = valueArray.GetUpperBound(0);
-                Case curCase = null;
-                InvoiceAssignBatch batch = null;
-
-                try
-                {
-                    for (int row = 3; row <= size; row++)
-                    {
-                        if (worker.CancellationPending)
-                        {
-                            e.Cancel = true;
-                            return -1;
-                        }
-                        //int column = 12;
-                        int column = 1;
-                        string caseCode = String.Format("{0:G}", valueArray[row, column++]).Trim();
-                        string invoiceNo = String.Format("{0:G}", valueArray[row, column++]).Trim();
-                        if (String.IsNullOrEmpty(caseCode))
-                        {
-                            if (String.IsNullOrEmpty(invoiceNo))
-                            {
-                                break;
-                            }
-                            //throw new Exception("案件编号不能为空，不能导入：" + invoiceNo);
-                            exceptionMsg += "案件编号不能为空，不能导入：" + invoiceNo + Environment.NewLine;
-                        }
-                        if (caseCode.Length > 20)
-                        {
-                            break;
-                        }
-
-                        if (String.IsNullOrEmpty(invoiceNo))
-                        {
-                            //throw new Exception("发票编号不能为空，不能导入，案件编号： " + caseCode);
-                            exceptionMsg += "发票编号不能为空，不能导入，案件编号： " + caseCode + Environment.NewLine;
-                        }
-
-                        if (curCase == null || curCase.CaseCode != caseCode)
-                        {
-                            curCase = _context.Cases.SingleOrDefault(c => c.CaseCode == caseCode);
-
-                            if (curCase == null)
-                            {
-                                //throw new Exception("案件编号错误: " + caseCode);
-                                exceptionMsg += "案件编号错误: " + caseCode + Environment.NewLine;
-                            }
-                        }
-
-                        CDA cda = curCase.ActiveCDA;
-                        if (cda == null)
-                        {
-                            //throw new Exception("没有有效的额度通知书: " + caseCode);
-                            exceptionMsg += "没有有效的额度通知书: " + caseCode + Environment.NewLine;
-                        }
-                        if (cda.CreditCoverPeriodEnd.HasValue)
-                        {
-                            if (cda.CreditCoverPeriodEnd.Value < DateTime.Today && !warningCreditCover.Contains(curCase))
-                            {
-                                warningMsg += "买方信用风险额度已过期，案件编号：" + caseCode + Environment.NewLine;
-                                warningCreditCover.Add(curCase);
-                            }
-                        }
-                        if (cda.FinanceLinePeriodEnd.HasValue)
-                        {
-                            if (cda.FinanceLinePeriodEnd.Value < DateTime.Today && !warningFinanceLine.Contains(curCase))
-                            {
-                                warningMsg += "保理融资额度已过期，案件编号：" + caseCode + Environment.NewLine;
-                                warningFinanceLine.Add(curCase);
-                            }
-                        }
-
-                        if (batch == null || batch.CaseCode != caseCode)
-                        {
-                            batch = batchList.SingleOrDefault(b => b.CaseCode == caseCode);
-                            if (batch == null)
-                            {
-                                batch = new InvoiceAssignBatch
-                                            {
-                                                AssignDate = DateTime.Today,
-                                                Case = curCase,
-                                                CreateUserName = App.Current.CurUser.Name,
-                                                InputDate = DateTime.Today
-                                            };
-                                batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase.CaseCode,
-                                                                                               batch.AssignDate,
-                                                                                               batchList);
-                                //batch.CheckStatus = BATCH.UNCHECK;
-                                batch.IsRefinance = false;
-                                batchList.Add(batch);
-                            }
-
-                            if (cda.RiskType == "低风险")
-                            {
-                                int batchCount = Convert.ToInt32(batch.AssignBatchNo.Substring(17));
-                                if (batchCount > 1)
-                                {
-                                    String LastAssignBatchNo = batch.AssignBatchNo.Substring(0,17)+ String.Format("{0:D3}",batchCount-1);
-                                    InvoiceAssignBatch lastAssignBatch = _context.InvoiceAssignBatches.SingleOrDefault(b => b.AssignBatchNo == LastAssignBatchNo);
-                                    if (lastAssignBatch != null)
-                                    {
-                                        if (lastAssignBatch.FinanceAmount == 0)
-                                        {
-                                            warningMsg += "此案为低风险业务，上一次的转让后尚未登记放款信息，请提示分部尽快上报放款明细，案件编号：" + caseCode + Environment.NewLine;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        Invoice invoice =
-                            _context.Invoices.SingleOrDefault(
-                                i => i.InvoiceNo == invoiceNo && i.InvoiceAssignBatch.CaseCode == caseCode);
-                        if (invoice == null)
-                        {
-                            invoice = new Invoice { InvoiceNo = invoiceNo };
-                            Invoice old = invoiceList.SingleOrDefault(i => i.InvoiceNo == invoiceNo);
-                            if (old == null)
-                            {
-                                invoiceList.Add(invoice);
-                            }
-                            else
-                            {
-                                //throw new Exception("当前导入文件中发票号重复: " + old.InvoiceNo);
-                                exceptionMsg += "当前导入文件中发票号重复: " + old.InvoiceNo + Environment.NewLine;
-                            }
-                        }
-                        else
-                        {
-                            exceptionMsg += "发票号已经存在：" + invoiceNo + Environment.NewLine;
-                            continue;
-                            //throw new Exception("发票号已经存在，不能导入： " + invoiceNo);
-                        }
-
-                        if (_context.Invoices.Count(i => i.InvoiceNo == invoiceNo) > 0)
-                        {
-                            warningMsg += "存在相同发票号：" + invoiceNo + Environment.NewLine;
-                        }
-
-                        string currency = string.Format("{0:G}", valueArray[row, column++]);
-                        if (String.IsNullOrEmpty(currency))
-                        {
-                            //throw new Exception("发票币别不能为空，不能导入：" + invoiceNo);
-                            exceptionMsg += "发票币别不能为空，不能导入：" + invoiceNo + Environment.NewLine;
-                        }
-                        if (currency != curCase.InvoiceCurrency)
-                        {
-                            //throw new Exception("发票币别与案件币别不匹配，不能导入：" + invoiceNo);
-                            exceptionMsg += "发票币别与案件币别不匹配，不能导入：" + invoiceNo;
-                        }
-
-                        string invoiceAmountStr = String.Format("{0:G}", valueArray[row, column++]);
-                        if (String.IsNullOrEmpty(invoiceAmountStr))
-                        {
-                            //throw new Exception("发票金额不能为空，不能导入：" + invoiceNo);
-                            exceptionMsg += "发票金额不能为空，不能导入：" + invoiceNo;
-                        }
-                        decimal invoiceAmount;
-                        if (Decimal.TryParse(invoiceAmountStr, out invoiceAmount))
-                        {
-                            invoice.InvoiceAmount = invoiceAmount;
-                        }
-                        else
-                        {
-                            //throw new Exception("发票金额类型异常，不能导入：" + invoiceNo);
-                            exceptionMsg += "发票金额类型异常，不能导入：" + invoiceNo + Environment.NewLine;
-                        }
-
-                        string assignAmountStr = String.Format("{0:G}", valueArray[row, column++]);
-                        if (String.IsNullOrEmpty(assignAmountStr))
-                        {
-                            //throw new Exception("转让金额不能为空，不能导入：" + invoiceNo);
-                            exceptionMsg += "转让金额不能为空，不能导入：" + invoiceNo + Environment.NewLine;
-                        }
-                        decimal assignAmount;
-                        if (Decimal.TryParse(assignAmountStr, out assignAmount))
-                        {
-                            invoice.AssignAmount = assignAmount;
-                        }
-                        else
-                        {
-                            //throw new Exception("转让金额类型异常，不能导入：" + invoiceNo);
-                            exceptionMsg += "转让金额类型异常，不能导入：" + invoiceNo + Environment.NewLine;
-                        }
-
-                        string invoiceDateStr = String.Format("{0:G}", valueArray[row, column++]);
-                        if (!String.IsNullOrEmpty(invoiceDateStr))
-                        {
-                            DateTime invoiceDate;
-                            if (DateTime.TryParse(invoiceDateStr, out invoiceDate))
-                            {
-                                if (invoiceDate > DateTime.Today.AddDays(1))
-                                {
-                                    //throw new Exception("发票日不能晚于今日，不能导入：" + invoiceNo);
-                                    exceptionMsg += "发票日不能晚于今日，不能导入：" + invoiceNo + Environment.NewLine;
-                                }
-
-                                invoice.InvoiceDate = invoiceDate;
-                            }
-                            else
-                            {
-                                //throw new Exception("发票日类型异常，不能导入：" + invoiceNo);
-                                exceptionMsg += "发票日类型异常，不能导入：" + invoiceNo + Environment.NewLine;
-                            }
-                        }
-
-                        string dueDateStr = String.Format("{0:G}", valueArray[row, column++]);
-                        if (String.IsNullOrEmpty(dueDateStr))
-                        {
-                            //throw new Exception("转让日不能为空，不能导入：" + invoiceNo);
-                            exceptionMsg += "转让日不能为空，不能导入：" + invoiceNo + Environment.NewLine;
-                        }
-                        DateTime dueDate;
-                        if (DateTime.TryParse(dueDateStr, out dueDate))
-                        {
-                            invoice.DueDate = dueDate;
-                        }
-                        else
-                        {
-                            //throw new Exception("转让日类型异常，不能导入：" + invoiceNo);
-                            exceptionMsg += "转让日类型异常，不能导入：" + invoiceNo + Environment.NewLine;
-                        }
-
-                        string commissionStr = String.Format("{0:G}", valueArray[row, column++]);
-                        //if (cda.CommissionType == "其他")
-                        //{
-                        //    if (String.IsNullOrEmpty(commissionStr))
-                        //    {
-                        //        throw new Exception("手续费不能为空，不能导入：" + invoiceNo);
-                        //    }
-                        //    double commissionAmount;
-                        //    if (Double.TryParse(commissionStr, out commissionAmount))
-                        //    {
-                        //        invoice.Commission = commissionAmount;
-                        //    }
-                        //    else
-                        //    {
-                        //        throw new Exception("手续费类型异常，不能导入：" + invoiceNo);
-                        //    }
-                        //}
-                        //else 
-                        if (cda.CommissionType == "按转让金额")
-                        {
-                            invoice.Commission = Decimal.Round(invoice.AssignAmount * (decimal)cda.Price.GetValueOrDefault(),2);
-                        }
-
-                        invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
-                        invoice.InvoiceAssignBatch = batch;
-                        invoice.CaculateCommission(false);
-
-                        result++;
-                        worker.ReportProgress((int)((float)row * 100 / size), exceptionMsg + "|" + warningMsg);
-                    }
-
-                    if (exceptionMsg != string.Empty)
-                    {
-                        throw new Exception(exceptionMsg);
-                    }
-                    _context.SubmitChanges();
-                }
-                catch (Exception e1)
-                {
-                    foreach (InvoiceAssignBatch b in batchList)
-                    {
-                        b.Case = null;
-                    }
-
-                    if (result != invoiceList.Count)
-                    {
-                        e1.Data["row"] = result;
-                    }
-
-                    if (curCase != null)
-                    {
-                        e1.Data["ID"] = curCase.CaseCode;
-                    }
-
-                    throw;
-                }
-            }
-
-            worker.ReportProgress(100);
-            _workbook.Close(false, fileName, null);
-            ReleaseResource();
-            return result;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="worker"></param>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        private int ImportAssignII(string fileName, BackgroundWorker worker, DoWorkEventArgs e)
         {
             object[,] valueArray = GetValueArray(fileName, 1);
             int result = 0;
