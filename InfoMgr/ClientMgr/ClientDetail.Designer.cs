@@ -1714,7 +1714,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tabControl.Tabs.Add(this.tabItemClient);
             this.tabControl.Tabs.Add(this.tabItemClientCreditLine);
             this.tabControl.Tabs.Add(this.tabItemContract);
-            this.tabControl.Tabs.Add(this.tabItemReview);
+            //this.tabControl.Tabs.Add(this.tabItemReview);
             this.tabControl.Tabs.Add(this.itemGuaranteeDeposit);
             this.tabControl.Text = "tabControl1";
             // 
@@ -3561,9 +3561,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbContractType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbContractType.FormattingEnabled = true;
             this.cbContractType.Items.AddRange(new object[] {
-            "新合同",
-            "旧合同",
-            "193号文合同"});
+            "有追索权保理合同",
+            "无追索权保理合同"});
             this.cbContractType.Location = new System.Drawing.Point(99, 4);
             this.cbContractType.Name = "cbContractType";
             this.cbContractType.Size = new System.Drawing.Size(143, 22);

@@ -58,8 +58,8 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
 
             DBDataContext context = new DBDataContext();
 
-            if ("进口保理" == transactionType)
-            {
+            //if ("进口保理" == transactionType)
+            //{
                 List<InvoiceAssignBatch> batches = context.InvoiceAssignBatches.Where(batch =>
                     batch.Case.TransactionType == "进口保理"
                     && batch.AssignDate > beginDate
@@ -72,18 +72,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 }
 
                 ReportImportCommissionApplication(batches, beginDate);
-            }
-            else if ("出口保理" == transactionType)
-            {
-                //List<InvoiceAssignBatch> batches = context.InvoiceAssignBatches.Where(
-                //    batch => batch.Case.TransactionType == "出口保理"
-                //    && batch.AssignDate > beginDate
-                //    && batch.AssignDate < endDate
-                //    && batch.Case.OwnerDepartment.LocationName == location).ToList();
-                //ReportExportCommissionApplication(batches, beginDate, location);
-                MessageBoxEx.Show("领导说不需要这个功能了。");
-                return;
-            }
+            //}
+            //else if ("出口保理" == transactionType)
+            //{
+            //    List<InvoiceAssignBatch> batches = context.InvoiceAssignBatches.Where(
+            //        batch => batch.Case.TransactionType == "出口保理"
+            //        && batch.AssignDate > beginDate
+            //        && batch.AssignDate < endDate
+            //        && batch.Case.OwnerDepartment.LocationName == location).ToList();
+            //    ReportExportCommissionApplication(batches, beginDate, location);
+            //    //MessageBoxEx.Show("领导说不需要这个功能了。");
+            //    return;
+            //}
         }
 
         /// <summary>
@@ -158,7 +158,18 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 {
                     Factor factor = factorGroup.Key;
                     var commissionSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, 1, Type.Missing);
-                    commissionSheet.Name = factor.CompanyNameEN.Substring(0, 15);
+                    if (factor.CompanyNameEN.Length > 15 )
+                    {
+                        commissionSheet.Name = factor.CompanyNameEN.Substring(0, 15);
+                    }
+                    else if (factor.CompanyNameEN.Length > 0)
+                    {
+                        commissionSheet.Name = factor.CompanyNameEN;
+                    }
+                    else
+                    {
+                        commissionSheet.Name = "NONAME";
+                    }
                     ReportImportCommissionSheet(commissionSheet, factorGroup, month);
                 }
 
@@ -205,7 +216,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             //sheet.PageSetup.FitToPagesTall = false;
 
             sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 11]].MergeCells = true;
-            sheet.Cells[2, 1] = "Commission Sales Report For " + month.ToString("MMMM yyyy", new CultureInfo("en-US")) + " - CHINA MINSHENG BANKING CORP.";
+            sheet.Cells[2, 1] = "Commission Sales Report For " + month.ToString("MMMM yyyy", new CultureInfo("en-US"));
             sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 1]].HorizontalAlignment = XlHAlign.xlHAlignCenter;
             sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 1]].Font.Size = 14;
             sheet.Cells[3, 11] = String.Format("{0:yyyy/MM/dd}", DateTime.Today);

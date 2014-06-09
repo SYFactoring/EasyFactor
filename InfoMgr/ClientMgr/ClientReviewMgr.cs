@@ -236,7 +236,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                                                                &&
                                                                                (domain == "È«²¿"
                                                                                     ? true
-                                                                                    : c.Client.Department.Domain==domain)
+                                                                                    : c.Client.Department.Domain == domain)
                                                                                &&
                                                                                (beginDate != diBegin.MinDate
                                                                                     ? c.ReviewDate >= beginDate
