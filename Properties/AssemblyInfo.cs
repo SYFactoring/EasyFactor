@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EasyFactoring@CMBC")]
+[assembly: AssemblyTitle("EasyFactoring 易保")]
 [assembly: AssemblyDescription("本系统可以保理提高业务处理效率，提升风险控管的能力，确保业务数据的安全。本系统的主要功能包括应收账款管理、客户、保理商基本信息及额度管理、合同信息管理、案件查询、预警提示等基础模块。")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Easy Product")]
 [assembly: AssemblyProduct("EasyFactoring")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.4.12.1")]
-[assembly: AssemblyFileVersion("3.4.12.1")]
+[assembly: AssemblyVersion("1.0.1")]
+[assembly: AssemblyFileVersion("1.0.1")]
 [assembly: NeutralResourcesLanguageAttribute("zh-CN")]
