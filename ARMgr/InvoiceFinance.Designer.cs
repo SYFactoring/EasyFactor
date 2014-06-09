@@ -514,8 +514,7 @@ namespace CMBC.EasyFactor.ARMgr
             "商业承兑汇票",
             "国内信用证",
             "国际信用证",
-            "其他",
-            "未知"});
+            "其他"});
             this.financeTypeComboBoxEx.Location = new System.Drawing.Point(440, 3);
             this.financeTypeComboBoxEx.Name = "financeTypeComboBoxEx";
             this.financeTypeComboBoxEx.Size = new System.Drawing.Size(100, 20);

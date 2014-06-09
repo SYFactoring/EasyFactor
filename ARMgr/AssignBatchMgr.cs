@@ -620,8 +620,8 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.PageSetup.FitToPagesWide = 1;
             sheet.PageSetup.FitToPagesTall = false;
 
-            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+            //string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+            //sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
             Client seller = batchGroup.Key;
             sheet.Cells[2, 1] = String.Format("致： {0}", seller);
@@ -777,7 +777,7 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
+            sheet.Cells[row, 1] = "公司名 （业务章）        ";
             row++;
             row++;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
@@ -794,14 +794,14 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range["D1", Type.Missing].ColumnWidth = 15;
             sheet.Range["E1", Type.Missing].ColumnWidth = 10;
 
-            var sealRange = ((Range)sheet.Cells[row - 4, 3]);
-            string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
-                                    Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+            //var sealRange = ((Range)sheet.Cells[row - 4, 3]);
+            //string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+            //sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+            //                        Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
             //((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
-            sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
+            sheet.Protect(Type.Missing, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing);
             sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
@@ -897,8 +897,8 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.PageSetup.FitToPagesWide = 1;
             sheet.PageSetup.FitToPagesTall = false;
 
-            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+            //string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+            //sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
             Client seller = batchGroup.Key;
             sheet.Cells[3, 1] = String.Format("卖方：{0}", seller);
@@ -986,7 +986,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）";
+            sheet.Cells[row, 1] = "公司名 （业务章）";
             row += 2;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
@@ -1006,14 +1006,14 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range["A1", "A4"].RowHeight = 20;
             sheet.Range["A5", "A5"].RowHeight = 30;
 
-            var sealRange = ((Range)sheet.Cells[row - 3, 3]);
-            string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
-                                    Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+            //var sealRange = ((Range)sheet.Cells[row - 3, 3]);
+            //string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+            //sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+            //                        Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
             //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
-            sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
+            sheet.Protect(Type.Missing, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing);
             sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
@@ -1058,8 +1058,8 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.PageSetup.FitToPagesWide = 1;
                 sheet.PageSetup.FitToPagesTall = false;
 
-                string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+                //string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+                //sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
                 Client seller = batchGroup.Key;
 
@@ -1284,8 +1284,8 @@ namespace CMBC.EasyFactor.ARMgr
             //sheet.PageSetup.FitToPagesWide = 1;
             //sheet.PageSetup.FitToPagesTall = false;
 
-            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+            //string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+            //sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
             sheet.Range["A3", "E3"].MergeCells = true;
             sheet.Range["A3", "A3"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
@@ -1391,7 +1391,7 @@ namespace CMBC.EasyFactor.ARMgr
             row += 3;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
+            sheet.Cells[row, 1] = "公司名 （业务章）        ";
             row++;
             row++;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
@@ -1409,14 +1409,14 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range["D1", Type.Missing].ColumnWidth = 8;
             sheet.Range["E1", Type.Missing].ColumnWidth = 18;
 
-            var sealRange = ((Range)sheet.Cells[row - 5, 3]);
-            string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
-                                    Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+            //var sealRange = ((Range)sheet.Cells[row - 5, 3]);
+            //string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+            //sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+            //                        Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
             //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
-            sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
+            sheet.Protect(Type.Missing, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing);
             sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
@@ -1429,8 +1429,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="keyClient"></param>
         private static void ReportPoolFinanceSheetOld(Worksheet sheet, Client keyClient)
         {
-            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+            //string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+            //sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
             sheet.Range["A3", "E3"].MergeCells = true;
             sheet.Range["A3", "A3"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
@@ -1536,7 +1536,7 @@ namespace CMBC.EasyFactor.ARMgr
             row += 3;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
+            sheet.Cells[row, 1] = "公司名 （业务章）        ";
             row++;
             row++;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
@@ -1554,14 +1554,14 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range["D1", Type.Missing].ColumnWidth = 10;
             sheet.Range["E1", Type.Missing].ColumnWidth = 20;
 
-            var sealRange = ((Range)sheet.Cells[row - 4, 3]);
-            string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
-                                    Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+            //var sealRange = ((Range)sheet.Cells[row - 4, 3]);
+            //string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+            //sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+            //                        Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
             //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
-            sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
+            sheet.Protect(Type.Missing, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing);
             sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
@@ -1581,8 +1581,8 @@ namespace CMBC.EasyFactor.ARMgr
             //sheet.PageSetup.FitToPagesWide = 1;
             //sheet.PageSetup.FitToPagesTall = false;
 
-            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+            //string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+            //sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
             sheet.Range["A3", "E3"].MergeCells = true;
             sheet.Range["A3", "A3"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
@@ -1791,7 +1791,7 @@ namespace CMBC.EasyFactor.ARMgr
             row += 2;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
+            sheet.Cells[row, 1] = "公司名 （业务章）        ";
             row++;
             row++;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
@@ -1809,14 +1809,14 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range["D1", Type.Missing].ColumnWidth = 15;
             sheet.Range["E1", Type.Missing].ColumnWidth = 8;
 
-            var sealRange = ((Range)sheet.Cells[row - 4, 3]);
-            string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
-                                    Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+            //var sealRange = ((Range)sheet.Cells[row - 4, 3]);
+            //string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+            //sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+            //                        Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
             //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
-            sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
+            sheet.Protect(Type.Missing, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing);
             sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
@@ -1836,8 +1836,8 @@ namespace CMBC.EasyFactor.ARMgr
             //sheet.PageSetup.FitToPagesWide = 1;
             //sheet.PageSetup.FitToPagesTall = false;
 
-            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-            sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
+            //string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+            //sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 160, 3, 170, 30);
 
             sheet.Range["A3", "E3"].MergeCells = true;
             sheet.Range["A3", "A3"].HorizontalAlignment = XlHAlign.xlHAlignCenter;
@@ -2085,7 +2085,7 @@ namespace CMBC.EasyFactor.ARMgr
             row += 3;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "E"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "A"], sheet.Cells[row, "A"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 1] = "中国民生银行贸易金融事业部保理业务部 （业务章）        ";
+            sheet.Cells[row, 1] = "公司名 （业务章）        ";
             row++;
             row++;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
@@ -2103,14 +2103,14 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range["D1", Type.Missing].ColumnWidth = 15;
             sheet.Range["E1", Type.Missing].ColumnWidth = 8;
 
-            var sealRange = ((Range)sheet.Cells[row - 4, 3]);
-            string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
-            sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
-                                    Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
+            //var sealRange = ((Range)sheet.Cells[row - 4, 3]);
+            //string sealPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seal.png");
+            //sheet.Shapes.AddPicture(sealPath, MsoTriState.msoFalse, MsoTriState.msoTrue,
+            //                        Convert.ToSingle(sealRange.Left) + 30, Convert.ToSingle(sealRange.Top), 120, 120);
 
             //                ((Worksheet)app.ActiveSheet).ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.GetTempFileName(), XlFixedFormatQuality.xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
-            sheet.Protect(REPORT.REPORT_PASSWORD, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
+            sheet.Protect(Type.Missing, true, true, true, true, true, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                           Type.Missing);
             sheet.EnableSelection = XlEnableSelection.xlUnlockedCells;
@@ -2156,8 +2156,8 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.PageSetup.FitToPagesWide = 1;
                 sheet.PageSetup.FitToPagesTall = false;
 
-                string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
-                sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 240, 3, 170, 30);
+                //string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CMBCExport.png");
+                //sheet.Shapes.AddPicture(logoPath, MsoTriState.msoFalse, MsoTriState.msoTrue, 240, 3, 170, 30);
 
                 Client seller = batchGroup.Key;
                 sheet.Range["A3", "G3"].MergeCells = true;
