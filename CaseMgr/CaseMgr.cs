@@ -70,7 +70,7 @@ namespace CMBC.EasyFactor.CaseMgr
             cbCaseMark.Text = @"全部";
 
             List<Department> deptsList = Department.AllDepartments;
-            deptsList.Insert(0, new Department { DepartmentCode = "CN01300", DepartmentName = "全部" });
+            deptsList.Insert(0, new Department { DepartmentCode = Factor.DEFAULT_FACTOR_CODE, DepartmentName = "全部" });
             cbOwnerDepts.DataSource = deptsList;
             cbOwnerDepts.DisplayMembers = "DepartmentName";
             cbOwnerDepts.ValueMember = "DepartmentCode";
@@ -376,7 +376,7 @@ namespace CMBC.EasyFactor.CaseMgr
             Context = new DBDataContext();
 
             IQueryable<Case> queryResult = Context.Cases.Where(c =>
-                                                               ((string)cbOwnerDepts.SelectedValue == "CN01300"
+                                                               ((string)cbOwnerDepts.SelectedValue == Factor.DEFAULT_FACTOR_CODE
                                                                     ? true
                                                                     : c.OwnerDepartmentCode.Equals(
                                                                         (string)cbOwnerDepts.SelectedValue))

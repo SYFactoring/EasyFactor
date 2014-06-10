@@ -5786,7 +5786,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Domain", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Domain", DbType="NVarChar(50) NOT NULL", UpdateCheck=UpdateCheck.Never)]
 		public string Domain
 		{
 			get

@@ -374,6 +374,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             }
 
             var location = (string)cbLocation.SelectedValue;
+            if (location == null)
+            {
+                location = "00";
+            }
 
             string caseType = cbCaseType.Text;
 
@@ -383,9 +387,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                                                                    (location == "00"
                                                                         ? true
                                                                         : c.BranchCode.EndsWith(location))
-                                                                   &&
-                                                                   ((c.PMName ?? string.Empty).
-                                                                       Contains(tbPM.Text))
                                                                    &&
                                                                    ((c.RMName ?? string.Empty).
                                                                        Contains(tbRM.Text))

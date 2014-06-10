@@ -4,12 +4,14 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using DevComponents.DotNetBar;
 using System;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
+using System.Windows.Forms;
 
 namespace CMBC.EasyFactor.Utils
 {
@@ -50,7 +52,7 @@ namespace CMBC.EasyFactor.Utils
 
             if (String.IsNullOrEmpty(from))
             {
-                from = "factoring@cmbc.com.cn";
+                from = "EasyFactoring@163.com";
             }
 
             _mailMessage.From = new MailAddress(from);
@@ -96,13 +98,21 @@ namespace CMBC.EasyFactor.Utils
         {
             if (_mailMessage != null)
             {
-                var smtpClient = new SmtpClient("smtp.cmbc.com.cn", 25)
+                var smtpClient = new SmtpClient("smtp.163.com", 25)
                                      {
-                                         Credentials = new NetworkCredential("factoring", "factor2011"),
+                                         Credentials = new NetworkCredential("EasyFactoring@163.com", "gnirotcaF"),
                                          //EnableSsl = true,
                                          DeliveryMethod = SmtpDeliveryMethod.Network
                                      };
-                smtpClient.Send(_mailMessage);
+                try
+                {
+                    smtpClient.Send(_mailMessage);
+                }
+                catch (Exception e)
+                {
+                    MessageBoxEx.Show("∑¢ÀÕ” º˛ ß∞‹: " + e.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
+                }
             }
         }
     }

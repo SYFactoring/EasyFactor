@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=YIMING-PC\SQLEXPRESS;Initial Catalog=FOS;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="Char(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -235,7 +235,7 @@
     <Type Name="Department">
       <Column Name="DepartmentCode" Type="System.String" DbType="VarChar(14) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="Domain" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Domain" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="AddressCN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="AddressEN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="PostCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />

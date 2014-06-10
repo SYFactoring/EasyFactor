@@ -31,6 +31,7 @@ namespace CMBC.EasyFactor.Help
         {
             InitializeComponent();
             tbSubmitPerson.Text = App.Current.CurUser.Name;
+            tbMailCC.Text = App.Current.CurUser.Email;
         }
 
 
@@ -98,6 +99,7 @@ namespace CMBC.EasyFactor.Help
         {
             btnSubmit.Enabled = false;
 
+            string cc = tbMailCC.Text;
             string title = tbTitle.Text;
             string who = tbSubmitPerson.Text;
             string type = cbBugType.Text;
@@ -105,7 +107,7 @@ namespace CMBC.EasyFactor.Help
             string bug = tbBug.Text + "\n----------------------------------------------\n" +
                          Assembly.GetExecutingAssembly().GetName().Version;
 
-            _mail = new SendMail("liuyiming.vip@gmail.com", App.Current.CurUser.Email + ";xiaolan.pub@gmail.com", null, mailTitle,
+            _mail = new SendMail("liuyiming.vip@gmail.com", cc + ";xiaolan.pub@gmail.com", null, mailTitle,
                                 bug);
 
             backgroundWorker.RunWorkerAsync();

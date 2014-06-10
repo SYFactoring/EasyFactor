@@ -96,6 +96,22 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        public string Location
+        {
+            get
+            {
+                if (this.Department != null)
+                {
+                    return this.Department.LocationName;
+                }
+                else
+                {
+                    return String.Empty;
+                }
+            }
+        }
+
+
         /// <summary>
         /// 
         /// </summary>

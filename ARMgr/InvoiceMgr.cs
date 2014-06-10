@@ -583,7 +583,7 @@ namespace CMBC.EasyFactor.ARMgr
                 var invoice = (Invoice)_bs.List[cell.RowIndex];
                 if (!selectedInvoices.Contains(invoice))
                 {
-                    selectedInvoices.Add(invoice);
+                    selectedInvoices.Insert(0,invoice);
                 }
             }
 
@@ -771,7 +771,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                        ? invoice.RefundAmount.GetValueOrDefault() <
                                                          invoice.FinanceAmount.GetValueOrDefault() - financeOutstanding 
                                                        : true)
-                                              orderby invoice.InvoiceAssignBatch.AssignDate
+                                              orderby invoice.InvoiceAssignBatch.AssignDate, invoice.AssignBatchNo, invoice.DueDate
                                               select invoice;
 
             if (isDuplicate == "Y")

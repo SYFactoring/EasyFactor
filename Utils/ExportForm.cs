@@ -677,66 +677,79 @@ namespace CMBC.EasyFactor.Utils
                 sheetInternal.Name = "国际";
 
                 int column = 1;
-                sheetInternal.Cells[1, column++] = "业务类型";
-                sheetInternal.Cells[1, column++] = "是否有追索权";
-                sheetInternal.Cells[1, column++] = "明/暗保理";
+	
                 sheetInternal.Cells[1, column++] = "新旧合同";
                 sheetInternal.Cells[1, column++] = "合同编号";
                 sheetInternal.Cells[1, column++] = "主合同生效日";
                 sheetInternal.Cells[1, column++] = "主合同到期日";
                 sheetInternal.Cells[1, column++] = "CDA编号";
+                sheetInternal.Cells[1, column++] = "案件编号";
+                sheetInternal.Cells[1, column++] = "业务类型";
+                sheetInternal.Cells[1, column++] = "卖方客户号";
                 sheetInternal.Cells[1, column++] = "卖方名称";
+                sheetInternal.Cells[1, column++] = "业务归属机构";
+                sheetInternal.Cells[1, column++] = "买方客户号";
                 sheetInternal.Cells[1, column++] = "买方名称";
                 sheetInternal.Cells[1, column++] = "买方地址";
                 sheetInternal.Cells[1, column++] = "签发日期";
+                sheetInternal.Cells[1, column++] = "是否有追索权";
+                sheetInternal.Cells[1, column++] = "明/暗保理";
                 sheetInternal.Cells[1, column++] = "付款方式";
                 sheetInternal.Cells[1, column++] = "买方信用风险额度币别";
                 sheetInternal.Cells[1, column++] = "信用风险额度";
                 sheetInternal.Cells[1, column++] = "有效期限(始)";
                 sheetInternal.Cells[1, column++] = "有效期限(终)";
-                sheetInternal.Cells[1, column++] = "预付款额度币别";
-                sheetInternal.Cells[1, column++] = "保理预付款额度";
+                sheetInternal.Cells[1, column++] = "信用风险担保比例";
+                sheetInternal.Cells[1, column++] = "融资额度币别";
+                sheetInternal.Cells[1, column++] = "保理融资额度";    
                 sheetInternal.Cells[1, column++] = "有效期限（始）";
                 sheetInternal.Cells[1, column++] = "有效期限（终）";
-                sheetInternal.Cells[1, column++] = "最高保理预付款额度";
-                sheetInternal.Cells[1, column++] = "预付比例";
+                sheetInternal.Cells[1, column++] = "最高保理融资额度";
+                sheetInternal.Cells[1, column++] = "融资比例";
+                sheetInternal.Cells[1, column++] = "融资宽限期";
                 sheetInternal.Cells[1, column++] = "保理费率";
                 sheetInternal.Cells[1, column++] = "计费方式";
+                sheetInternal.Cells[1, column++] = "其他计费方式说明";
                 sheetInternal.Cells[1, column++] = "单据处理费币别";
                 sheetInternal.Cells[1, column++] = "单据处理费";
                 sheetInternal.Cells[1, column++] = "备注";
                 sheetInternal.Cells[1, column] = "进口保理商";
-
                 column = 1;
-                sheetLocal.Cells[1, column++] = "业务类型";
-                sheetLocal.Cells[1, column++] = "是否有追索权";
-                sheetLocal.Cells[1, column++] = "明/暗保理";
                 sheetLocal.Cells[1, column++] = "新旧合同";
                 sheetLocal.Cells[1, column++] = "合同编号";
                 sheetLocal.Cells[1, column++] = "主合同生效日";
                 sheetLocal.Cells[1, column++] = "主合同到期日";
                 sheetLocal.Cells[1, column++] = "CDA编号";
+                sheetLocal.Cells[1, column++] = "案件编号";
+                sheetLocal.Cells[1, column++] = "业务类型";
+                sheetLocal.Cells[1, column++] = "卖方客户号";
                 sheetLocal.Cells[1, column++] = "卖方名称";
+                sheetLocal.Cells[1, column++] = "业务归属机构";
+                sheetLocal.Cells[1, column++] = "买方客户号";
                 sheetLocal.Cells[1, column++] = "买方名称";
                 sheetLocal.Cells[1, column++] = "买方地址";
                 sheetLocal.Cells[1, column++] = "签发日期";
+                sheetLocal.Cells[1, column++] = "是否有追索权";
+                sheetLocal.Cells[1, column++] = "明/暗保理";
                 sheetLocal.Cells[1, column++] = "付款方式";
                 sheetLocal.Cells[1, column++] = "买方信用风险额度币别";
                 sheetLocal.Cells[1, column++] = "信用风险额度";
                 sheetLocal.Cells[1, column++] = "有效期限(始)";
                 sheetLocal.Cells[1, column++] = "有效期限(终)";
-                sheetLocal.Cells[1, column++] = "预付款额度币别";
-                sheetLocal.Cells[1, column++] = "保理预付款额度";
+                sheetLocal.Cells[1, column++] = "信用风险担保比例";
+                sheetLocal.Cells[1, column++] = "融资额度币别";
+                sheetLocal.Cells[1, column++] = "保理融资额度";
                 sheetLocal.Cells[1, column++] = "有效期限（始）";
                 sheetLocal.Cells[1, column++] = "有效期限（终）";
-                sheetLocal.Cells[1, column++] = "最高保理预付款额度";
-                sheetLocal.Cells[1, column++] = "预付比例";
+                sheetLocal.Cells[1, column++] = "最高保理融资额度";
+                sheetLocal.Cells[1, column++] = "融资比例";
+                sheetLocal.Cells[1, column++] = "融资宽限期";
                 sheetLocal.Cells[1, column++] = "保理费率";
                 sheetLocal.Cells[1, column++] = "计费方式";
+                sheetLocal.Cells[1, column++] = "其他计费方式说明";
                 sheetLocal.Cells[1, column++] = "单据处理费币别";
                 sheetLocal.Cells[1, column++] = "单据处理费";
                 sheetLocal.Cells[1, column] = "备注";
-
                 int size = _exportData.Count;
                 int inter = 0;
                 int local = 0;
@@ -776,9 +789,6 @@ namespace CMBC.EasyFactor.Utils
                         sheet = sheetLocal;
                     }
 
-                    sheet.Cells[rowId + 1, column++] = cda.TransactionType;
-                    sheet.Cells[rowId + 1, column++] = TypeUtil.ConvertBoolToStr(cda.IsRecoarse);
-                    sheet.Cells[rowId + 1, column++] = cda.IsNotice;
                     Contract contract = cda.Case.SellerClient.Contract;
                     if (contract != null)
                     {
@@ -796,27 +806,36 @@ namespace CMBC.EasyFactor.Utils
                     }
 
                     sheet.Cells[rowId + 1, column++] = cda.CDACode;
+                    sheet.Cells[rowId + 1, column++] = cda.Case.CaseCode;
+                    sheet.Cells[rowId + 1, column++] = cda.TransactionType;
+                    sheet.Cells[rowId + 1, column++] = cda.Case.SellerCode;
                     sheet.Cells[rowId + 1, column++] = cda.SellerName;
+                    sheet.Cells[rowId + 1, column++] = cda.Case.OwnerDepartment.DepartmentName;
+                    sheet.Cells[rowId + 1, column++] = cda.Case.BuyerCode;
                     sheet.Cells[rowId + 1, column++] = cda.BuyerName;
                     sheet.Cells[rowId + 1, column++] = cda.Case.BuyerClient.Address;
                     sheet.Cells[rowId + 1, column++] = cda.CDASignDate;
+                    sheet.Cells[rowId + 1, column++] = TypeUtil.ConvertBoolToStr(cda.IsRecoarse);
+                    sheet.Cells[rowId + 1, column++] = cda.IsNotice;
                     sheet.Cells[rowId + 1, column++] = cda.PaymentTerms;
                     sheet.Cells[rowId + 1, column++] = cda.CreditCoverCurr;
                     sheet.Cells[rowId + 1, column++] = cda.CreditCover;
                     sheet.Cells[rowId + 1, column++] = cda.CreditCoverPeriodBegin;
                     sheet.Cells[rowId + 1, column++] = cda.CreditCoverPeriodEnd;
+                    sheet.Cells[rowId + 1, column++] = cda.PUGProportion;
                     sheet.Cells[rowId + 1, column++] = cda.FinanceLineCurr;
                     sheet.Cells[rowId + 1, column++] = cda.FinanceLine;
                     sheet.Cells[rowId + 1, column++] = cda.FinanceLinePeriodBegin;
                     sheet.Cells[rowId + 1, column++] = cda.FinanceLinePeriodEnd;
                     sheet.Cells[rowId + 1, column++] = cda.HighestFinanceLine;
                     sheet.Cells[rowId + 1, column++] = cda.FinanceProportion;
+                    sheet.Cells[rowId + 1, column++] = cda.FinanceGracePeriod;
                     sheet.Cells[rowId + 1, column++] = cda.Price;
                     sheet.Cells[rowId + 1, column++] = cda.CommissionType;
+                    sheet.Cells[rowId + 1, column++] = cda.CommissionTypeComment;
                     sheet.Cells[rowId + 1, column++] = cda.HandFeeCurr;
                     sheet.Cells[rowId + 1, column++] = cda.HandFee;
                     sheet.Cells[rowId + 1, column++] = cda.Comment;
-
                     if (sheet == sheetInternal)
                     {
                         sheet.Cells[rowId + 1, column] = cda.Case.BuyerFactor.ToString();
@@ -827,20 +846,20 @@ namespace CMBC.EasyFactor.Utils
 
                 foreach (Range range in sheetInternal.UsedRange.Columns)
                 {
-                    if (range.Column == 6 || range.Column == 7 || range.Column == 12 || range.Column == 16 ||
-                        range.Column == 17 || range.Column == 20 || range.Column == 21)
+                    if (range.Column == 3 || range.Column == 4 || range.Column == 14 || range.Column == 20 ||
+                        range.Column == 21 || range.Column == 25 || range.Column == 26)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
-                    else if (range.Column == 15 || range.Column == 19 || range.Column == 22 || range.Column == 27)
+                    else if (range.Column == 19 || range.Column == 24 || range.Column == 27 || range.Column == 34)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
-                    else if (range.Column == 23)
+                    else if (range.Column == 22||range.Column==28)
                     {
                         range.NumberFormatLocal = "0%";
                     }
-                    else if (range.Column == 24)
+                    else if (range.Column == 30)
                     {
                         range.NumberFormatLocal = "0.0000%";
                     }
@@ -850,22 +869,22 @@ namespace CMBC.EasyFactor.Utils
 
                 foreach (Range range in sheetLocal.UsedRange.Columns)
                 {
-                    if (range.Column == 6 || range.Column == 7 || range.Column == 12 || range.Column == 16 ||
-                        range.Column == 17 || range.Column == 20 || range.Column == 21)
+                    if (range.Column == 3 || range.Column == 4 || range.Column == 14 || range.Column == 20 ||
+                         range.Column == 21 || range.Column == 25 || range.Column == 26)
                     {
                         range.NumberFormatLocal = "yyyy-MM-dd";
                     }
-                    else if (range.Column == 15 || range.Column == 19 || range.Column == 22 || range.Column == 27)
+                    else if (range.Column == 19 || range.Column == 24 || range.Column == 27 || range.Column == 34)
                     {
                         range.NumberFormatLocal = "#,##0.00";
                     }
-                    else if (range.Column == 23)
+                    else if (range.Column == 22 || range.Column == 28)
                     {
                         range.NumberFormatLocal = "0%";
                     }
-                    else if (range.Column == 24)
+                    else if (range.Column == 30)
                     {
-                        range.NumberFormatLocal = "0.000%";
+                        range.NumberFormatLocal = "0.0000%";
                     }
 
                     range.EntireColumn.AutoFit();
@@ -1835,6 +1854,7 @@ namespace CMBC.EasyFactor.Utils
 
                 int size = _exportData.Count;
                 int row = 0;
+                string lastAssignBatchNo = null;
                 foreach (Invoice invoice in _exportData)
                 {
                     if (worker.CancellationPending)
@@ -1895,6 +1915,19 @@ namespace CMBC.EasyFactor.Utils
 
                     datasheet.Cells[row + 2, column++] = invoice.Comment;
 
+                    if (lastAssignBatchNo == null)
+                    {
+                        ((Range)datasheet.Rows[row + 2]).Interior.ColorIndex = 6;
+                        lastAssignBatchNo = invoice.AssignBatchNo;
+                        datasheet.Cells[row + 2, 21] = "Y";
+                    }
+                    else if (lastAssignBatchNo != invoice.AssignBatchNo)
+                    {
+                        ((Range)datasheet.Rows[row + 2]).Interior.ColorIndex = 6;
+                        lastAssignBatchNo = invoice.AssignBatchNo;
+                        datasheet.Cells[row + 2, 21] = "Y";
+                    }
+					
                     int step = invoice.InvoiceFinanceLogs.Count > 1 ? invoice.InvoiceFinanceLogs.Count : 1;
                     row += step;
                     size += (step - 1);
@@ -2033,7 +2066,7 @@ namespace CMBC.EasyFactor.Utils
                     Case curCase = invoice.InvoiceAssignBatch.Case;
                     sb.Append(invoice.AssignBatchNo).Append(',');
                     sb.Append("MSG09").Append(',');
-                    sb.Append("CN01300").Append(',');
+                    sb.Append(Factor.DEFAULT_FACTOR_CODE).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
                     sb.Append(User.GetEDIAccount(invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
@@ -2120,7 +2153,7 @@ namespace CMBC.EasyFactor.Utils
                     Case curCase = log.Invoice.InvoiceAssignBatch.Case;
                     sb.Append(log.CreditNote.AssignBatchNo).Append(',');
                     sb.Append("MSG09").Append(',');
-                    sb.Append("CN01300").Append(',');
+                    sb.Append(Factor.DEFAULT_FACTOR_CODE).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
                     sb.Append(User.GetEDIAccount(log.Invoice.InvoiceAssignBatch.CreateUserName)).Append(',');
                     sb.Append(',');
@@ -2207,7 +2240,7 @@ namespace CMBC.EasyFactor.Utils
                     Case curCase = log.Invoice.InvoiceAssignBatch.Case;
                     sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
                     sb.Append("MSG11").Append(',');
-                    sb.Append("CN01300").Append(',');
+                    sb.Append(Factor.DEFAULT_FACTOR_CODE).Append(',');
                     sb.Append(curCase.SellerFactorCode).Append(',');
                     sb.Append(User.GetEDIAccount(log.InvoicePaymentBatch.CreateUserName)).Append(',');
                     sb.Append(',');
@@ -2301,7 +2334,7 @@ namespace CMBC.EasyFactor.Utils
                     Case curCase = log.Invoice.InvoiceAssignBatch.Case;
                     sb.Append(log.InvoicePaymentBatch.PaymentBatchNo).Append(',');
                     sb.Append("MSG12").Append(',');
-                    sb.Append("CN01300").Append(',');
+                    sb.Append(Factor.DEFAULT_FACTOR_CODE).Append(',');
                     sb.Append(curCase.BuyerFactorCode).Append(',');
                     sb.Append(User.GetEDIAccount(log.InvoicePaymentBatch.CreateUserName)).Append(',');
                     sb.Append(',');

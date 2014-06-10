@@ -34,7 +34,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.PanelEx pnlQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientEDICode;
         private DevComponents.DotNetBar.Controls.TextBoxX tbClientName;
-        private DevComponents.DotNetBar.Controls.TextBoxX tbPM;
         private DevComponents.DotNetBar.Controls.TextBoxX tbRM;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -80,7 +79,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblClientNo = new DevComponents.DotNetBar.LabelX();
             this.lblClientName = new DevComponents.DotNetBar.LabelX();
             this.lblRM = new DevComponents.DotNetBar.LabelX();
-            this.lblPM = new DevComponents.DotNetBar.LabelX();
             this.lblCaseType = new DevComponents.DotNetBar.LabelX();
             this.cmuClientMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemClientSelect = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,7 +102,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbClientEDICode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbRM = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbPM = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.dgvClients = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -130,7 +127,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.GroupNoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IndustryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DepartmentCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PMNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LocationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RMColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmuClientMgr.SuspendLayout();
             this.pnlQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
@@ -160,7 +158,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblClientNo.Location = new System.Drawing.Point(3, 6);
             this.lblClientNo.Name = "lblClientNo";
             this.lblClientNo.Size = new System.Drawing.Size(56, 18);
-            this.lblClientNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.lblClientNo.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.lblClientNo.TabIndex = 0;
             this.lblClientNo.Text = "保理代码";
             this.lblClientNo.TextLineAlignment = System.Drawing.StringAlignment.Far;
@@ -186,26 +184,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.lblRM.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblRM.Location = new System.Drawing.Point(340, 30);
+            this.lblRM.Location = new System.Drawing.Point(170, 31);
             this.lblRM.Name = "lblRM";
             this.lblRM.Size = new System.Drawing.Size(56, 18);
             this.lblRM.TabIndex = 11;
             this.lblRM.Text = "客户经理";
             this.lblRM.TextLineAlignment = System.Drawing.StringAlignment.Far;
-            // 
-            // lblPM
-            // 
-            this.lblPM.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblPM.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblPM.Location = new System.Drawing.Point(170, 30);
-            this.lblPM.Name = "lblPM";
-            this.lblPM.Size = new System.Drawing.Size(56, 18);
-            this.lblPM.TabIndex = 9;
-            this.lblPM.Text = "产品经理";
-            this.lblPM.TextLineAlignment = System.Drawing.StringAlignment.Far;
             // 
             // lblCaseType
             // 
@@ -298,7 +282,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // pnlQuery
             // 
             this.pnlQuery.CanvasColor = System.Drawing.SystemColors.Control;
-            this.pnlQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.pnlQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.pnlQuery.Controls.Add(this.cbLocation);
             this.pnlQuery.Controls.Add(this.lblLocation);
             this.pnlQuery.Controls.Add(this.cbCaseType);
@@ -315,9 +299,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.pnlQuery.Controls.Add(this.lblClientName);
             this.pnlQuery.Controls.Add(this.tbRM);
             this.pnlQuery.Controls.Add(this.lblRM);
-            this.pnlQuery.Controls.Add(this.tbPM);
-            this.pnlQuery.Controls.Add(this.lblPM);
-            //this.pnlQuery.DisabledBackColor = System.Drawing.Color.Empty;
+            this.pnlQuery.DisabledBackColor = System.Drawing.Color.Empty;
             this.pnlQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlQuery.Location = new System.Drawing.Point(0, 0);
             this.pnlQuery.Name = "pnlQuery";
@@ -335,14 +317,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.cbLocation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLocation.Enabled = false;
-            this.cbLocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 14;
             this.cbLocation.Location = new System.Drawing.Point(59, 31);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(101, 20);
-            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.cbLocation.TabIndex = 25;
             // 
             // lblLocation
@@ -361,7 +341,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.cbCaseType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbCaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCaseType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbCaseType.ItemHeight = 14;
             this.cbCaseType.Items.AddRange(new object[] {
             "全部",
@@ -371,7 +350,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbCaseType.Location = new System.Drawing.Point(566, 6);
             this.cbCaseType.Name = "cbCaseType";
             this.cbCaseType.Size = new System.Drawing.Size(100, 20);
-            this.cbCaseType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbCaseType.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.cbCaseType.TabIndex = 17;
             // 
             // btnReset
@@ -381,7 +360,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnReset.Location = new System.Drawing.Point(672, 30);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(60, 21);
-            this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnReset.TabIndex = 14;
             this.btnReset.Text = "清空";
             this.btnReset.Click += new System.EventHandler(this.Reset);
@@ -393,10 +372,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.cbIsContractSigned.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.cbIsContractSigned.Location = new System.Drawing.Point(509, 31);
+            this.cbIsContractSigned.Location = new System.Drawing.Point(340, 32);
             this.cbIsContractSigned.Name = "cbIsContractSigned";
             this.cbIsContractSigned.Size = new System.Drawing.Size(125, 18);
-            this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbIsContractSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.cbIsContractSigned.TabIndex = 6;
             this.cbIsContractSigned.Text = "是否签订保理合同";
             // 
@@ -410,6 +389,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblCount.Location = new System.Drawing.Point(738, 34);
             this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 15;
             // 
             // btnQuery
@@ -419,7 +399,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnQuery.Location = new System.Drawing.Point(672, 6);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(60, 20);
-            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnQuery.TabIndex = 13;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.QueryClients);
@@ -428,7 +408,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.cbClientType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbClientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbClientType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbClientType.ItemHeight = 14;
             this.cbClientType.Items.AddRange(new object[] {
             "全部",
@@ -438,7 +417,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbClientType.Location = new System.Drawing.Point(397, 6);
             this.cbClientType.Name = "cbClientType";
             this.cbClientType.Size = new System.Drawing.Size(100, 20);
-            this.cbClientType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbClientType.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.cbClientType.TabIndex = 5;
             // 
             // tbClientEDICode
@@ -472,22 +451,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             this.tbRM.Border.Class = "TextBoxBorder";
             this.tbRM.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbRM.Location = new System.Drawing.Point(397, 30);
+            this.tbRM.Location = new System.Drawing.Point(227, 30);
             this.tbRM.Name = "tbRM";
             this.tbRM.Size = new System.Drawing.Size(100, 21);
             this.tbRM.TabIndex = 12;
-            // 
-            // tbPM
-            // 
-            // 
-            // 
-            // 
-            this.tbPM.Border.Class = "TextBoxBorder";
-            this.tbPM.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbPM.Location = new System.Drawing.Point(227, 30);
-            this.tbPM.Name = "tbPM";
-            this.tbPM.Size = new System.Drawing.Size(100, 21);
-            this.tbPM.TabIndex = 10;
             // 
             // dgvClients
             // 
@@ -516,7 +483,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.GroupNoColumn,
             this.IndustryColumn,
             this.DepartmentCodeColumn,
-            this.PMNameColumn});
+            this.LocationColumn,
+            this.RMColumn});
             this.dgvClients.ContextMenuStrip = this.cmuClientMgr;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -555,6 +523,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn1.FillWeight = 81.40282F;
             this.dataGridViewTextBoxColumn1.HeaderText = "保理代码";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Width = 62;
             // 
             // dataGridViewTextBoxColumn2
@@ -563,6 +532,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn2.FillWeight = 81.40282F;
             this.dataGridViewTextBoxColumn2.HeaderText = "客户号";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             this.dataGridViewTextBoxColumn2.Width = 62;
             // 
             // dataGridViewTextBoxColumn3
@@ -571,6 +541,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn3.FillWeight = 304.5686F;
             this.dataGridViewTextBoxColumn3.HeaderText = "客户名称(中)";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             this.dataGridViewTextBoxColumn3.Width = 232;
             // 
             // dataGridViewTextBoxColumn4
@@ -579,6 +550,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn4.FillWeight = 81.40282F;
             this.dataGridViewTextBoxColumn4.HeaderText = "客户名称(英)";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Width = 62;
             // 
             // dataGridViewTextBoxColumn5
@@ -587,6 +559,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn5.FillWeight = 81.40282F;
             this.dataGridViewTextBoxColumn5.HeaderText = "地址(中)";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
             this.dataGridViewTextBoxColumn5.Width = 62;
             // 
             // dataGridViewTextBoxColumn6
@@ -595,6 +568,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn6.FillWeight = 81.40282F;
             this.dataGridViewTextBoxColumn6.HeaderText = "地址(英)";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
             this.dataGridViewTextBoxColumn6.Width = 62;
             // 
             // dataGridViewTextBoxColumn7
@@ -603,6 +577,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn7.FillWeight = 81.40282F;
             this.dataGridViewTextBoxColumn7.HeaderText = "国家";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
             this.dataGridViewTextBoxColumn7.Width = 62;
             // 
             // dataGridViewTextBoxColumn8
@@ -611,6 +586,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn8.FillWeight = 81.40282F;
             this.dataGridViewTextBoxColumn8.HeaderText = "客户类型";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
             this.dataGridViewTextBoxColumn8.Width = 62;
             // 
             // dataGridViewTextBoxColumn9
@@ -619,6 +595,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn9.FillWeight = 81.40282F;
             this.dataGridViewTextBoxColumn9.HeaderText = "所属集团客户号";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
             this.dataGridViewTextBoxColumn9.Width = 62;
             // 
             // dataGridViewTextBoxColumn10
@@ -627,6 +604,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn10.FillWeight = 81.40282F;
             this.dataGridViewTextBoxColumn10.HeaderText = "所属行业";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
             this.dataGridViewTextBoxColumn10.Width = 62;
             // 
             // dataGridViewTextBoxColumn11
@@ -634,6 +612,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn11.DataPropertyName = "BranchCode";
             this.dataGridViewTextBoxColumn11.HeaderText = "所属机构代码";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Visible = false;
             // 
             // dataGridViewTextBoxColumn12
@@ -642,6 +621,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dataGridViewTextBoxColumn12.FillWeight = 81.40282F;
             this.dataGridViewTextBoxColumn12.HeaderText = "所属机构";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
             this.dataGridViewTextBoxColumn12.Width = 62;
             // 
             // dataGridViewTextBoxColumn13
@@ -740,13 +720,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.DepartmentCodeColumn.ReadOnly = true;
             this.DepartmentCodeColumn.Visible = false;
             // 
-            // PMNameColumn
+            // LocationColumn
             // 
-            this.PMNameColumn.DataPropertyName = "PMName";
-            this.PMNameColumn.FillWeight = 81.40282F;
-            this.PMNameColumn.HeaderText = "产品经理";
-            this.PMNameColumn.Name = "PMNameColumn";
-            this.PMNameColumn.ReadOnly = true;
+            this.LocationColumn.DataPropertyName = "Location";
+            this.LocationColumn.HeaderText = "业务地区";
+            this.LocationColumn.Name = "LocationColumn";
+            this.LocationColumn.ReadOnly = true;
+            // 
+            // RMColumn
+            // 
+            this.RMColumn.DataPropertyName = "RMName";
+            this.RMColumn.HeaderText = "客户经理";
+            this.RMColumn.Name = "RMColumn";
+            this.RMColumn.ReadOnly = true;
             // 
             // ClientMgr
             // 
@@ -785,7 +771,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private DevComponents.DotNetBar.LabelX lblClientNo;
         private DevComponents.DotNetBar.LabelX lblClientName;
         private DevComponents.DotNetBar.LabelX lblRM;
-        private DevComponents.DotNetBar.LabelX lblPM;
         private DevComponents.DotNetBar.LabelX lblCaseType;
         private System.Windows.Forms.DataGridViewTextBoxColumn clientEDICodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientCoreNoColumn;
@@ -798,6 +783,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn GroupNoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn IndustryColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DepartmentCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PMNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LocationColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RMColumn;
     }
 }
