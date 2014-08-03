@@ -201,7 +201,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             List<Department> allDepartments = Department.GetAllDepartments(_context);
             cbDepartments.DataSource = allDepartments;
             cbDepartments.DisplayMembers = "DepartmentName";
-            cbDepartments.GroupingMembers = "Domain";
+            //cbDepartments.GroupingMembers = "Domain";
             cbDepartments.ValueMember = "DepartmentCode";
             cbDepartments.SelectedIndex = -1;
 
@@ -1226,19 +1226,24 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             {
                 bool isAddOK = true;
 
-                Contract oldContract =
-                    _context.Contracts.SingleOrDefault(c => c.ContractCode == contract.ContractCode);
-                if (oldContract != null)
-                {
-                    MessageBoxEx.Show("该合同编号已存在，请重新编码", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
-                                      MessageBoxIcon.Information);
-                    return;
-                }
+                //Contract oldContract =
+                //    _context.Contracts.SingleOrDefault(c => c.ContractCode == contract.ContractCode);
+                //if (oldContract != null)
+                //{
+                //    MessageBoxEx.Show("该合同编号已存在，请重新编码", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                //                      MessageBoxIcon.Information);
+                //    return;
+                //}
 
                 try
                 {
                     contract.Client = client;
 
+                    contract.ContractCode = contract.newContractCode();
+                    if(contract.ContractCode == String.Empty)
+                    {
+                        throw new Exception("创建合同编号失败，可能没有有效主合同");
+                    }
                     DateTime today = DateTime.Now.Date;
                     contract.ContractStatus = contract.ContractDueDate < today ? CONTRACT.EXPIRY : CONTRACT.AVAILABILITY;
 
@@ -1256,13 +1261,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
-                    if (contract.ContractStatus == CONTRACT.AVAILABILITY)
+                    if (contract.ContractStatus == CONTRACT.AVAILABILITY && !contract.ContractType.StartsWith("附属合同") && !contract.ContractType.StartsWith("补充协议"))
                     {
                         foreach (Contract c in client.Contracts)
                         {
-                            if (c != contract && c.ContractStatus == CONTRACT.AVAILABILITY)
+                            if (c != contract && c.ContractStatus == CONTRACT.AVAILABILITY && !c.ContractType.StartsWith("附属合同") && !c.ContractType.StartsWith("补充协议"))
                             {
                                 c.ContractStatus = CONTRACT.EXPIRY;
+                                IQueryable<Contract> subContracts = _context.Contracts.Where(sub => sub.ContractCode.StartsWith(c.ContractCode));
+                                foreach (Contract sub in subContracts)
+                                {
+                                    sub.ContractStatus = CONTRACT.EXPIRY;
+                                }
                             }
                         }
 

@@ -126,7 +126,7 @@ namespace CMBC.EasyFactor.CaseMgr
             List<Department> allDepartments = Department.GetAllDepartments(_context);
             cbCaseOwnerDepts.DataSource = allDepartments;
             cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
-            cbCaseOwnerDepts.GroupingMembers = "Domain";
+            //cbCaseOwnerDepts.GroupingMembers = "Domain";
             cbCaseOwnerDepts.ValueMember = "DepartmentCode";
             cbCaseOwnerDepts.SelectedIndex = -1;
 

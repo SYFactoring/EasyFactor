@@ -126,7 +126,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // panelQuery
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.panelQuery.Controls.Add(this.cbDomains);
             this.panelQuery.Controls.Add(this.lblOnwerDept);
             this.panelQuery.Controls.Add(this.cbLocation);
@@ -140,10 +140,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.panelQuery.Controls.Add(this.lblClientName);
             this.panelQuery.Controls.Add(this.tbClientReviewNo);
             this.panelQuery.Controls.Add(this.lblClientReviewNo);
+            this.panelQuery.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(935, 55);
+            this.panelQuery.Size = new System.Drawing.Size(935, 51);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -191,10 +192,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             "汕头",
             "南昌",
             "香港"});
-            this.cbDomains.Location = new System.Drawing.Point(272, 29);
+            this.cbDomains.Location = new System.Drawing.Point(272, 27);
             this.cbDomains.Name = "cbDomains";
             this.cbDomains.Size = new System.Drawing.Size(133, 20);
-            this.cbDomains.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbDomains.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.cbDomains.TabIndex = 30;
             // 
             // lblOnwerDept
@@ -203,10 +204,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             // 
-            this.lblOnwerDept.BackgroundStyle.Class = "";
-            this.lblOnwerDept.Location = new System.Drawing.Point(202, 31);
+            this.lblOnwerDept.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblOnwerDept.Location = new System.Drawing.Point(202, 29);
             this.lblOnwerDept.Name = "lblOnwerDept";
-            this.lblOnwerDept.Size = new System.Drawing.Size(68, 16);
+            this.lblOnwerDept.Size = new System.Drawing.Size(68, 18);
             this.lblOnwerDept.TabIndex = 29;
             this.lblOnwerDept.Text = "所属事业部";
             // 
@@ -217,10 +218,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 14;
-            this.cbLocation.Location = new System.Drawing.Point(96, 29);
+            this.cbLocation.Location = new System.Drawing.Point(96, 27);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(100, 20);
-            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.cbLocation.TabIndex = 28;
             // 
             // lblLocation
@@ -228,10 +229,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             // 
-            this.lblLocation.BackgroundStyle.Class = "";
-            this.lblLocation.Location = new System.Drawing.Point(40, 26);
+            this.lblLocation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblLocation.Location = new System.Drawing.Point(40, 24);
             this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(59, 23);
+            this.lblLocation.Size = new System.Drawing.Size(59, 21);
             this.lblLocation.TabIndex = 27;
             this.lblLocation.Text = "业务地区";
             // 
@@ -241,10 +242,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             // 
-            this.lblDate.BackgroundStyle.Class = "";
-            this.lblDate.Location = new System.Drawing.Point(411, 32);
+            this.lblDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblDate.Location = new System.Drawing.Point(411, 30);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(56, 16);
+            this.lblDate.Size = new System.Drawing.Size(56, 18);
             this.lblDate.TabIndex = 24;
             this.lblDate.Text = "查询期限";
             // 
@@ -254,11 +255,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.diEnd.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diEnd.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diEnd.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diEnd.ButtonDropDown.Visible = true;
             this.diEnd.ButtonFreeText.Checked = true;
             this.diEnd.FreeTextEntryMode = true;
-            this.diEnd.Location = new System.Drawing.Point(579, 31);
+            this.diEnd.IsPopupCalendarOpen = false;
+            this.diEnd.Location = new System.Drawing.Point(579, 29);
             // 
             // 
             // 
@@ -267,7 +270,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.diEnd.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diEnd.MonthCalendar.BackgroundStyle.Class = "";
+            this.diEnd.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diEnd.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
@@ -278,7 +281,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
             this.diEnd.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.diEnd.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diEnd.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diEnd.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
             this.diEnd.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.diEnd.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -288,12 +291,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
             this.diEnd.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.diEnd.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diEnd.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diEnd.MonthCalendar.TodayButtonVisible = true;
             this.diEnd.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diEnd.Name = "diEnd";
-            this.diEnd.Size = new System.Drawing.Size(100, 20);
-            this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.diEnd.Size = new System.Drawing.Size(100, 21);
+            this.diEnd.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.diEnd.TabIndex = 26;
             // 
             // diBegin
@@ -302,11 +305,13 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.diBegin.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.diBegin.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diBegin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.diBegin.ButtonDropDown.Visible = true;
             this.diBegin.ButtonFreeText.Checked = true;
             this.diBegin.FreeTextEntryMode = true;
-            this.diBegin.Location = new System.Drawing.Point(473, 31);
+            this.diBegin.IsPopupCalendarOpen = false;
+            this.diBegin.Location = new System.Drawing.Point(473, 29);
             // 
             // 
             // 
@@ -315,7 +320,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.diBegin.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.diBegin.MonthCalendar.BackgroundStyle.Class = "";
+            this.diBegin.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diBegin.MonthCalendar.ClearButtonVisible = true;
             // 
             // 
@@ -326,7 +331,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
             this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
             this.diBegin.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.diBegin.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.diBegin.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diBegin.MonthCalendar.DisplayMonth = new System.DateTime(2009, 12, 1, 0, 0, 0, 0);
             this.diBegin.MonthCalendar.MarkedDates = new System.DateTime[0];
             this.diBegin.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
@@ -336,12 +341,12 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
             this.diBegin.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.diBegin.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.diBegin.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.diBegin.MonthCalendar.TodayButtonVisible = true;
             this.diBegin.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.diBegin.Name = "diBegin";
-            this.diBegin.Size = new System.Drawing.Size(100, 20);
-            this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.diBegin.Size = new System.Drawing.Size(100, 21);
+            this.diBegin.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.diBegin.TabIndex = 25;
             // 
             // lblCount
@@ -350,8 +355,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             // 
-            this.lblCount.BackgroundStyle.Class = "";
-            this.lblCount.Location = new System.Drawing.Point(529, 7);
+            this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCount.Location = new System.Drawing.Point(529, 6);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
             this.lblCount.TabIndex = 8;
@@ -362,8 +367,8 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnQuery.Location = new System.Drawing.Point(448, 3);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.Size = new System.Drawing.Size(75, 21);
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnQuery.TabIndex = 4;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.Query);
@@ -374,9 +379,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbClientName.Location = new System.Drawing.Point(272, 4);
             this.tbClientName.Name = "tbClientName";
-            this.tbClientName.Size = new System.Drawing.Size(170, 20);
+            this.tbClientName.Size = new System.Drawing.Size(170, 21);
             this.tbClientName.TabIndex = 3;
             // 
             // lblClientName
@@ -385,10 +391,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             // 
-            this.lblClientName.BackgroundStyle.Class = "";
-            this.lblClientName.Location = new System.Drawing.Point(202, 5);
+            this.lblClientName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblClientName.Location = new System.Drawing.Point(204, 5);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(56, 16);
+            this.lblClientName.Size = new System.Drawing.Size(56, 18);
             this.lblClientName.TabIndex = 2;
             this.lblClientName.Text = "客户名称";
             // 
@@ -398,9 +404,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbClientReviewNo.Border.Class = "TextBoxBorder";
+            this.tbClientReviewNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbClientReviewNo.Location = new System.Drawing.Point(96, 4);
             this.tbClientReviewNo.Name = "tbClientReviewNo";
-            this.tbClientReviewNo.Size = new System.Drawing.Size(100, 20);
+            this.tbClientReviewNo.Size = new System.Drawing.Size(100, 21);
             this.tbClientReviewNo.TabIndex = 1;
             // 
             // lblClientReviewNo
@@ -409,10 +416,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             // 
-            this.lblClientReviewNo.BackgroundStyle.Class = "";
-            this.lblClientReviewNo.Location = new System.Drawing.Point(6, 7);
+            this.lblClientReviewNo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblClientReviewNo.Location = new System.Drawing.Point(6, 6);
             this.lblClientReviewNo.Name = "lblClientReviewNo";
-            this.lblClientReviewNo.Size = new System.Drawing.Size(93, 16);
+            this.lblClientReviewNo.Size = new System.Drawing.Size(93, 18);
             this.lblClientReviewNo.TabIndex = 0;
             this.lblClientReviewNo.Text = "协查意见书编号";
             // 
@@ -460,11 +467,11 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientReviews.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvClientReviews.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientReviews.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvClientReviews.Location = new System.Drawing.Point(0, 55);
+            this.dgvClientReviews.Location = new System.Drawing.Point(0, 51);
             this.dgvClientReviews.Name = "dgvClientReviews";
             this.dgvClientReviews.ReadOnly = true;
             this.dgvClientReviews.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvClientReviews.Size = new System.Drawing.Size(935, 292);
+            this.dgvClientReviews.Size = new System.Drawing.Size(935, 269);
             this.dgvClientReviews.TabIndex = 1;
             this.dgvClientReviews.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvClientReviews.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvClientCreditLinesRowPostPaint);
@@ -616,54 +623,54 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.toolStripSeparator1,
             this.menuItemClientReviewExport});
             this.cmuClientReviewMgr.Name = "contextMenuClientMgr";
-            this.cmuClientReviewMgr.Size = new System.Drawing.Size(171, 126);
+            this.cmuClientReviewMgr.Size = new System.Drawing.Size(173, 104);
             // 
             // menuItemReviewSelect
             // 
             this.menuItemReviewSelect.Name = "menuItemReviewSelect";
-            this.menuItemReviewSelect.Size = new System.Drawing.Size(170, 22);
+            this.menuItemReviewSelect.Size = new System.Drawing.Size(172, 22);
             this.menuItemReviewSelect.Text = "选定协查意见(&S)";
             this.menuItemReviewSelect.Click += new System.EventHandler(this.SelectClientReview);
             // 
             // menuItemClientReviewDetail
             // 
             this.menuItemClientReviewDetail.Name = "menuItemClientReviewDetail";
-            this.menuItemClientReviewDetail.Size = new System.Drawing.Size(170, 22);
+            this.menuItemClientReviewDetail.Size = new System.Drawing.Size(172, 22);
             this.menuItemClientReviewDetail.Text = "详细信息(&M)";
             this.menuItemClientReviewDetail.Click += new System.EventHandler(this.DetailClientReview);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(167, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(169, 6);
             // 
             // menuItemClientReviewDelete
             // 
             this.menuItemClientReviewDelete.Name = "menuItemClientReviewDelete";
-            this.menuItemClientReviewDelete.Size = new System.Drawing.Size(170, 22);
+            this.menuItemClientReviewDelete.Size = new System.Drawing.Size(172, 22);
             this.menuItemClientReviewDelete.Text = "删除协查意见(&D)";
             this.menuItemClientReviewDelete.Click += new System.EventHandler(this.DeleteClientReview);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(169, 6);
             // 
             // menuItemClientReviewExport
             // 
             this.menuItemClientReviewExport.Name = "menuItemClientReviewExport";
-            this.menuItemClientReviewExport.Size = new System.Drawing.Size(170, 22);
+            this.menuItemClientReviewExport.Size = new System.Drawing.Size(172, 22);
             this.menuItemClientReviewExport.Text = "导出选定协查意见";
             this.menuItemClientReviewExport.Click += new System.EventHandler(this.ExportClientReviews);
             // 
             // ClientReviewMgr
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvClientReviews);
             this.Controls.Add(this.panelQuery);
             this.Name = "ClientReviewMgr";
-            this.Size = new System.Drawing.Size(935, 347);
+            this.Size = new System.Drawing.Size(935, 320);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diEnd)).EndInit();

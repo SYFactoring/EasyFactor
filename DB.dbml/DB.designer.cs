@@ -442,6 +442,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private bool _IsPool;
 		
+		private bool _IsCollectionOnly;
+		
 		private EntitySet<CDA> _CDAs;
 		
 		private EntitySet<CreditCoverNegotiation> _CreditCoverNegotiations;
@@ -500,6 +502,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnIsPoolChanging(bool value);
     partial void OnIsPoolChanged();
+    partial void OnIsCollectionOnlyChanging(bool value);
+    partial void OnIsCollectionOnlyChanged();
     #endregion
 		
 		public Case()
@@ -854,6 +858,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._IsPool = value;
 					this.SendPropertyChanged("IsPool");
 					this.OnIsPoolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsCollectionOnly", DbType="Bit")]
+		public bool IsCollectionOnly
+		{
+			get
+			{
+				return this._IsCollectionOnly;
+			}
+			set
+			{
+				if ((this._IsCollectionOnly != value))
+				{
+					this.OnIsCollectionOnlyChanging(value);
+					this.SendPropertyChanging();
+					this._IsCollectionOnly = value;
+					this.SendPropertyChanged("IsCollectionOnly");
+					this.OnIsCollectionOnlyChanged();
 				}
 			}
 		}
@@ -4237,8 +4261,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPeriodEndChanged();
     partial void OnApproveNoChanging(string value);
     partial void OnApproveNoChanged();
-    partial void OnApproveTypeChanging(string value);
-    partial void OnApproveTypeChanged();
+    partial void OnCreditLineMarkChanging(string value);
+    partial void OnCreditLineMarkChanged();
     partial void OnCreditLineStatusChanging(string value);
     partial void OnCreditLineStatusChanged();
     partial void OnFreezeReasonChanging(string value);
@@ -4434,7 +4458,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApproveType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string ApproveType
+		public string CreditLineMark
 		{
 			get
 			{
@@ -4444,11 +4468,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._ApproveType != value))
 				{
-					this.OnApproveTypeChanging(value);
+					this.OnCreditLineMarkChanging(value);
 					this.SendPropertyChanging();
 					this._ApproveType = value;
-					this.SendPropertyChanged("ApproveType");
-					this.OnApproveTypeChanged();
+					this.SendPropertyChanged("CreditLineMark");
+					this.OnCreditLineMarkChanged();
 				}
 			}
 		}
