@@ -599,6 +599,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     batch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(batch.PaymentDate);
                     batch.InputDate = DateTime.Today;
+                    batch.CheckStatus = BATCH.UNCHECK;
                 }
 
                 for (int i = 0; i < logsBindingSource.List.Count; i++)

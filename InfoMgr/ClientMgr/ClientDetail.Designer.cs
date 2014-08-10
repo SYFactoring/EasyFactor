@@ -2079,9 +2079,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbPMName.FormattingEnabled = true;
             this.cbPMName.ItemHeight = 15;
             this.cbPMName.Items.AddRange(new object[] {
-            "国有",
-            "民营",
-            "三资"});
+            "团队A",
+            "团队B",
+            "团队C"});
             this.cbPMName.Location = new System.Drawing.Point(85, 51);
             this.cbPMName.Name = "cbPMName";
             this.cbPMName.Size = new System.Drawing.Size(100, 21);

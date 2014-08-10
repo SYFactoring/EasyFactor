@@ -862,7 +862,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsCollectionOnly", DbType="Bit")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsCollectionOnly", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
 		public bool IsCollectionOnly
 		{
 			get
@@ -1625,6 +1625,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<int> _poolInvoiceGraceDays;
 		
+		private string _CommissionPrePost;
+		
+		private string _AssignNotifyType;
+		
 		private EntityRef<Case> _Case;
 		
     #region 可扩展性方法定义
@@ -1725,6 +1729,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnRiskTypeChanged();
     partial void OnPoolInvoiceGraceDaysChanging(System.Nullable<int> value);
     partial void OnPoolInvoiceGraceDaysChanged();
+    partial void OnCommissionPrePostChanging(string value);
+    partial void OnCommissionPrePostChanged();
+    partial void OnAssignNotifyTypeChanging(string value);
+    partial void OnAssignNotifyTypeChanged();
     #endregion
 		
 		public CDA()
@@ -2673,6 +2681,46 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._poolInvoiceGraceDays = value;
 					this.SendPropertyChanged("PoolInvoiceGraceDays");
 					this.OnPoolInvoiceGraceDaysChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommissionPrePost", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CommissionPrePost
+		{
+			get
+			{
+				return this._CommissionPrePost;
+			}
+			set
+			{
+				if ((this._CommissionPrePost != value))
+				{
+					this.OnCommissionPrePostChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionPrePost = value;
+					this.SendPropertyChanged("CommissionPrePost");
+					this.OnCommissionPrePostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AssignNotifyType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string AssignNotifyType
+		{
+			get
+			{
+				return this._AssignNotifyType;
+			}
+			set
+			{
+				if ((this._AssignNotifyType != value))
+				{
+					this.OnAssignNotifyTypeChanging(value);
+					this.SendPropertyChanging();
+					this._AssignNotifyType = value;
+					this.SendPropertyChanged("AssignNotifyType");
+					this.OnAssignNotifyTypeChanged();
 				}
 			}
 		}
@@ -8564,6 +8612,12 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<int> _MsgID;
 		
+		private string _CheckStatus;
+		
+		private string _CheckUserName;
+		
+		private System.Nullable<System.DateTime> _CheckDate;
+		
 		private EntitySet<CreditNote> _CreditNotes;
 		
 		private EntitySet<Invoice> _Invoices;
@@ -8594,6 +8648,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnIsRefinanceChanged();
     partial void OnMsgIDChanging(System.Nullable<int> value);
     partial void OnMsgIDChanged();
+    partial void OnCheckStatusChanging(string value);
+    partial void OnCheckStatusChanged();
+    partial void OnCheckUserNameChanging(string value);
+    partial void OnCheckUserNameChanged();
+    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckDateChanged();
     #endregion
 		
 		public InvoiceAssignBatch()
@@ -8793,6 +8853,66 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckStatus", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CheckStatus
+		{
+			get
+			{
+				return this._CheckStatus;
+			}
+			set
+			{
+				if ((this._CheckStatus != value))
+				{
+					this.OnCheckStatusChanging(value);
+					this.SendPropertyChanging();
+					this._CheckStatus = value;
+					this.SendPropertyChanged("CheckStatus");
+					this.OnCheckStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CheckUserName
+		{
+			get
+			{
+				return this._CheckUserName;
+			}
+			set
+			{
+				if ((this._CheckUserName != value))
+				{
+					this.OnCheckUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CheckUserName = value;
+					this.SendPropertyChanged("CheckUserName");
+					this.OnCheckUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> CheckDate
+		{
+			get
+			{
+				return this._CheckDate;
+			}
+			set
+			{
+				if ((this._CheckDate != value))
+				{
+					this.OnCheckDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckDate = value;
+					this.SendPropertyChanged("CheckDate");
+					this.OnCheckDateChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceAssignBatch_CreditNote", Storage="_CreditNotes", ThisKey="AssignBatchNo", OtherKey="AssignBatchNo")]
 		public EntitySet<CreditNote> CreditNotes
 		{
@@ -8970,6 +9090,12 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _InputDate;
 		
+		private string _CheckStatus;
+		
+		private string _CheckUserName;
+		
+		private System.Nullable<System.DateTime> _CheckDate;
+		
 		private EntitySet<InvoiceRefundBatch> _InvoiceRefundBatches;
 		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
@@ -9016,6 +9142,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnClientEDICodeChanged();
     partial void OnInputDateChanging(System.Nullable<System.DateTime> value);
     partial void OnInputDateChanged();
+    partial void OnCheckStatusChanging(string value);
+    partial void OnCheckStatusChanged();
+    partial void OnCheckUserNameChanging(string value);
+    partial void OnCheckUserNameChanged();
+    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckDateChanged();
     #endregion
 		
 		public InvoiceFinanceBatch()
@@ -9360,6 +9492,66 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckStatus", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CheckStatus
+		{
+			get
+			{
+				return this._CheckStatus;
+			}
+			set
+			{
+				if ((this._CheckStatus != value))
+				{
+					this.OnCheckStatusChanging(value);
+					this.SendPropertyChanging();
+					this._CheckStatus = value;
+					this.SendPropertyChanged("CheckStatus");
+					this.OnCheckStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CheckUserName
+		{
+			get
+			{
+				return this._CheckUserName;
+			}
+			set
+			{
+				if ((this._CheckUserName != value))
+				{
+					this.OnCheckUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CheckUserName = value;
+					this.SendPropertyChanged("CheckUserName");
+					this.OnCheckUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> CheckDate
+		{
+			get
+			{
+				return this._CheckDate;
+			}
+			set
+			{
+				if ((this._CheckDate != value))
+				{
+					this.OnCheckDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckDate = value;
+					this.SendPropertyChanged("CheckDate");
+					this.OnCheckDateChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceFinanceBatch_InvoiceRefundBatch", Storage="_InvoiceRefundBatches", ThisKey="FinanceBatchNo", OtherKey="FinanceBatchNo")]
 		public EntitySet<InvoiceRefundBatch> InvoiceRefundBatches
 		{
@@ -9557,6 +9749,12 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<bool> _IsSendMsg;
 		
+		private string _CheckStatus;
+		
+		private string _CheckUserName;
+		
+		private System.Nullable<System.DateTime> _CheckDate;
+		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
 		private EntityRef<Case> _Case;
@@ -9583,6 +9781,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnInputDateChanged();
     partial void OnIsSendMsgChanging(System.Nullable<bool> value);
     partial void OnIsSendMsgChanged();
+    partial void OnCheckStatusChanging(string value);
+    partial void OnCheckStatusChanged();
+    partial void OnCheckUserNameChanging(string value);
+    partial void OnCheckUserNameChanged();
+    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckDateChanged();
     #endregion
 		
 		public InvoicePaymentBatch()
@@ -9772,6 +9976,66 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._IsSendMsg = value;
 					this.SendPropertyChanged("IsSendMsg");
 					this.OnIsSendMsgChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckStatus", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CheckStatus
+		{
+			get
+			{
+				return this._CheckStatus;
+			}
+			set
+			{
+				if ((this._CheckStatus != value))
+				{
+					this.OnCheckStatusChanging(value);
+					this.SendPropertyChanging();
+					this._CheckStatus = value;
+					this.SendPropertyChanged("CheckStatus");
+					this.OnCheckStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CheckUserName
+		{
+			get
+			{
+				return this._CheckUserName;
+			}
+			set
+			{
+				if ((this._CheckUserName != value))
+				{
+					this.OnCheckUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CheckUserName = value;
+					this.SendPropertyChanged("CheckUserName");
+					this.OnCheckUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> CheckDate
+		{
+			get
+			{
+				return this._CheckDate;
+			}
+			set
+			{
+				if ((this._CheckDate != value))
+				{
+					this.OnCheckDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckDate = value;
+					this.SendPropertyChanged("CheckDate");
+					this.OnCheckDateChanged();
 				}
 			}
 		}
@@ -10059,6 +10323,12 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FinanceBatchNo;
 		
+		private string _CheckStatus;
+		
+		private string _CheckUserName;
+		
+		private System.Nullable<System.DateTime> _CheckDate;
+		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
 		
 		private EntityRef<Case> _Case;
@@ -10087,6 +10357,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnRefundAmountChanged();
     partial void OnFinanceBatchNoChanging(string value);
     partial void OnFinanceBatchNoChanged();
+    partial void OnCheckStatusChanging(string value);
+    partial void OnCheckStatusChanged();
+    partial void OnCheckUserNameChanging(string value);
+    partial void OnCheckUserNameChanged();
+    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckDateChanged();
     #endregion
 		
 		public InvoiceRefundBatch()
@@ -10281,6 +10557,66 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._FinanceBatchNo = value;
 					this.SendPropertyChanged("FinanceBatchNo");
 					this.OnFinanceBatchNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckStatus", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CheckStatus
+		{
+			get
+			{
+				return this._CheckStatus;
+			}
+			set
+			{
+				if ((this._CheckStatus != value))
+				{
+					this.OnCheckStatusChanging(value);
+					this.SendPropertyChanging();
+					this._CheckStatus = value;
+					this.SendPropertyChanged("CheckStatus");
+					this.OnCheckStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CheckUserName
+		{
+			get
+			{
+				return this._CheckUserName;
+			}
+			set
+			{
+				if ((this._CheckUserName != value))
+				{
+					this.OnCheckUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CheckUserName = value;
+					this.SendPropertyChanged("CheckUserName");
+					this.OnCheckUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> CheckDate
+		{
+			get
+			{
+				return this._CheckDate;
+			}
+			set
+			{
+				if ((this._CheckDate != value))
+				{
+					this.OnCheckDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckDate = value;
+					this.SendPropertyChanged("CheckDate");
+					this.OnCheckDateChanged();
 				}
 			}
 		}

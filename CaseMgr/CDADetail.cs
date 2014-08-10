@@ -722,6 +722,8 @@ namespace CMBC.EasyFactor.CaseMgr
                               CDAStatus = CDAStr.UNCHECK,
                               IsCreditCoverRevolving = true,
                               AssignType = "全部",
+                              CommissionPrePost = "先收",
+                              AssignNotifyType = "买方书面确认",
                               Case = curCase
                           };
             return cda;

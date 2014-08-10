@@ -1323,15 +1323,26 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 {
                     MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
-                    if (contract.ContractStatus == CONTRACT.AVAILABILITY)
+                    if (contract.ContractStatus == CONTRACT.AVAILABILITY && !contract.ContractType.StartsWith("附属合同") && !contract.ContractType.StartsWith("补充协议"))
                     {
                         foreach (Contract c in client.Contracts)
                         {
-                            if (c != contract && c.ContractStatus == CONTRACT.AVAILABILITY)
+                            if (c != contract && c.ContractStatus == CONTRACT.AVAILABILITY && !c.ContractType.StartsWith("附属合同") && !c.ContractType.StartsWith("补充协议"))
                             {
                                 c.ContractStatus = CONTRACT.EXPIRY;
                             }
                         }
+                    }
+                    else if (contract.ContractStatus == CONTRACT.EXPIRY && !contract.ContractType.StartsWith("附属合同") && !contract.ContractType.StartsWith("补充协议"))
+                    {
+                        foreach (Contract c in client.Contracts.Where(c => c.ContractCode.StartsWith(contract.ContractCode)))
+                        {
+                            if (c != contract)
+                            {
+                                c.ContractStatus = CONTRACT.EXPIRY;
+                            }
+                        }
+                    }
 
                         try
                         {
@@ -1342,7 +1353,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                             MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
                                               MessageBoxIcon.Warning);
                         }
-                    }
 
                     dgvContracts.Refresh();
                 }

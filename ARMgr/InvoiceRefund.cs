@@ -605,6 +605,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     batch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(batch.RefundDate);
                     batch.InputDate = DateTime.Today;
+                    batch.CheckStatus = BATCH.UNCHECK;
                 }
                 for (int i = 0; i < logsBindingSource.List.Count; i++)
                 {

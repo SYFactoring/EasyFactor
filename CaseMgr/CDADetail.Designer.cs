@@ -53,7 +53,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private System.Windows.Forms.ErrorProvider errorProvider;
         private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX faxTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX financeGracePeriodTextBox;
         private DevComponents.DotNetBar.Controls.ComboBoxEx financeLineCurrComboBox;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financeLinePeriodBeginDateTimePicker;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput financeLinePeriodEndDateTimePicker;
@@ -68,7 +67,6 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX invoiceCurrencyTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX lossThresholdTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX insuranceInvoiceGraceDaysTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX poolInvoiceGraceDaysTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX noticePersonTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX orderNumberTextBox;
@@ -147,10 +145,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.financeProportionLabel = new DevComponents.DotNetBar.LabelX();
             this.orderNumberLabel = new DevComponents.DotNetBar.LabelX();
             this.paymentTermsLabel = new DevComponents.DotNetBar.LabelX();
-            this.financeGracePeriodLabel = new DevComponents.DotNetBar.LabelX();
             this.deductiblesLabel = new DevComponents.DotNetBar.LabelX();
             this.lossThresholdLabel = new DevComponents.DotNetBar.LabelX();
-            this.insuranceInvoiceGraceDaysLabel = new DevComponents.DotNetBar.LabelX();
             this.poolInvoiceGraceDaysLabel = new DevComponents.DotNetBar.LabelX();
             this.priceLabel = new DevComponents.DotNetBar.LabelX();
             this.iFPriceLabel = new DevComponents.DotNetBar.LabelX();
@@ -173,7 +169,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCDASignDate = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbCasePaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.companyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -189,6 +184,8 @@ namespace CMBC.EasyFactor.CaseMgr
             this.sellerClientEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.caseCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanelCreditCover = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbCommissionPrePost = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblCommissionPrePost = new DevComponents.DotNetBar.LabelX();
             this.cbIsNotice = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cbIsRecoarse = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.riskTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -198,12 +195,10 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbIsCreditCoverRevolving = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.handFeeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lossThresholdTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.insuranceInvoiceGraceDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.poolInvoiceGraceDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commissionTypeCommentTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.deductiblesTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commissionTypeComboBox = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.financeGracePeriodTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.paymentTermsTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.iFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.orderNumberTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -235,11 +230,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.btnCDAUpdate = new DevComponents.DotNetBar.ButtonX();
             this.btnCDASave = new DevComponents.DotNetBar.ButtonX();
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.customValidator8 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator11 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator7 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.customValidator10 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.customValidator9 = new DevComponents.DotNetBar.Validator.CustomValidator();
@@ -254,8 +249,14 @@ namespace CMBC.EasyFactor.CaseMgr
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.customValidator5 = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.financeGracePeriodTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.financeGracePeriodLabel = new DevComponents.DotNetBar.LabelX();
+            this.insuranceInvoiceGraceDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.insuranceInvoiceGraceDaysLabel = new DevComponents.DotNetBar.LabelX();
+            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lblAssignNotifyType = new DevComponents.DotNetBar.LabelX();
+            this.cbAssignNotifyType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.groupPanelCase.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodBeginDateTimePicker)).BeginInit();
@@ -264,6 +265,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelOther.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diCDASignDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -400,7 +402,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.pUGPeriodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.pUGPeriodLabel.Location = new System.Drawing.Point(241, 44);
+            this.pUGPeriodLabel.Location = new System.Drawing.Point(236, 44);
             this.pUGPeriodLabel.Name = "pUGPeriodLabel";
             this.pUGPeriodLabel.Size = new System.Drawing.Size(112, 18);
             this.pUGPeriodLabel.TabIndex = 16;
@@ -504,20 +506,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.paymentTermsLabel.TabIndex = 32;
             this.paymentTermsLabel.Text = "<font color=\'red\'>*</font>付款条件:";
             // 
-            // financeGracePeriodLabel
-            // 
-            this.financeGracePeriodLabel.AutoSize = true;
-            this.financeGracePeriodLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.financeGracePeriodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.financeGracePeriodLabel.Location = new System.Drawing.Point(501, 88);
-            this.financeGracePeriodLabel.Name = "financeGracePeriodLabel";
-            this.financeGracePeriodLabel.Size = new System.Drawing.Size(99, 18);
-            this.financeGracePeriodLabel.TabIndex = 30;
-            this.financeGracePeriodLabel.Text = "融资宽限期(天):";
-            // 
             // deductiblesLabel
             // 
             this.deductiblesLabel.AutoSize = true;
@@ -545,20 +533,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lossThresholdLabel.Size = new System.Drawing.Size(87, 18);
             this.lossThresholdLabel.TabIndex = 38;
             this.lossThresholdLabel.Text = "最低损失门槛:";
-            // 
-            // insuranceInvoiceGraceDaysLabel
-            // 
-            this.insuranceInvoiceGraceDaysLabel.AutoSize = true;
-            this.insuranceInvoiceGraceDaysLabel.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.insuranceInvoiceGraceDaysLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.insuranceInvoiceGraceDaysLabel.Location = new System.Drawing.Point(474, 169);
-            this.insuranceInvoiceGraceDaysLabel.Name = "insuranceInvoiceGraceDaysLabel";
-            this.insuranceInvoiceGraceDaysLabel.Size = new System.Drawing.Size(124, 18);
-            this.insuranceInvoiceGraceDaysLabel.TabIndex = 38;
-            this.insuranceInvoiceGraceDaysLabel.Text = "发票宽限期（信保）:";
             // 
             // poolInvoiceGraceDaysLabel
             // 
@@ -624,7 +598,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.commissionTypeCommentLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.commissionTypeCommentLabel.Location = new System.Drawing.Point(242, 211);
+            this.commissionTypeCommentLabel.Location = new System.Drawing.Point(50, 232);
             this.commissionTypeCommentLabel.Name = "commissionTypeCommentLabel";
             this.commissionTypeCommentLabel.Size = new System.Drawing.Size(37, 18);
             this.commissionTypeCommentLabel.TabIndex = 51;
@@ -708,7 +682,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.createUserNameLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.createUserNameLabel.Location = new System.Drawing.Point(552, 47);
+            this.createUserNameLabel.Location = new System.Drawing.Point(546, 47);
             this.createUserNameLabel.Name = "createUserNameLabel";
             this.createUserNameLabel.Size = new System.Drawing.Size(50, 18);
             this.createUserNameLabel.TabIndex = 15;
@@ -915,10 +889,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbCasePaymentTerm.Size = new System.Drawing.Size(100, 21);
             this.tbCasePaymentTerm.TabIndex = 22;
             // 
-            // CDABindingSource
-            // 
-            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
-            // 
             // invoiceCurrencyTextBox
             // 
             // 
@@ -1117,6 +1087,10 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.groupPanelCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelCreditCover.Controls.Add(this.cbAssignNotifyType);
+            this.groupPanelCreditCover.Controls.Add(this.lblAssignNotifyType);
+            this.groupPanelCreditCover.Controls.Add(this.cbCommissionPrePost);
+            this.groupPanelCreditCover.Controls.Add(this.lblCommissionPrePost);
             this.groupPanelCreditCover.Controls.Add(this.lblIsNotice);
             this.groupPanelCreditCover.Controls.Add(this.cbIsNotice);
             this.groupPanelCreditCover.Controls.Add(this.cbIsRecoarse);
@@ -1129,20 +1103,16 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelCreditCover.Controls.Add(this.cbIsCreditCoverRevolving);
             this.groupPanelCreditCover.Controls.Add(this.handFeeLabel);
             this.groupPanelCreditCover.Controls.Add(this.lossThresholdLabel);
-            this.groupPanelCreditCover.Controls.Add(this.insuranceInvoiceGraceDaysLabel);
             this.groupPanelCreditCover.Controls.Add(this.poolInvoiceGraceDaysLabel);
             this.groupPanelCreditCover.Controls.Add(this.handFeeTextBox);
             this.groupPanelCreditCover.Controls.Add(this.lossThresholdTextBox);
-            this.groupPanelCreditCover.Controls.Add(this.insuranceInvoiceGraceDaysTextBox);
             this.groupPanelCreditCover.Controls.Add(this.poolInvoiceGraceDaysTextBox);
             this.groupPanelCreditCover.Controls.Add(this.commissionTypeCommentLabel);
             this.groupPanelCreditCover.Controls.Add(this.deductiblesLabel);
             this.groupPanelCreditCover.Controls.Add(this.commissionTypeCommentTextBox);
             this.groupPanelCreditCover.Controls.Add(this.deductiblesTextBox);
             this.groupPanelCreditCover.Controls.Add(this.commissonTypeLabel);
-            this.groupPanelCreditCover.Controls.Add(this.financeGracePeriodLabel);
             this.groupPanelCreditCover.Controls.Add(this.commissionTypeComboBox);
-            this.groupPanelCreditCover.Controls.Add(this.financeGracePeriodTextBox);
             this.groupPanelCreditCover.Controls.Add(this.paymentTermsLabel);
             this.groupPanelCreditCover.Controls.Add(this.paymentTermsTextBox);
             this.groupPanelCreditCover.Controls.Add(this.iFPriceLabel);
@@ -1176,7 +1146,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelCreditCover.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelCreditCover.Location = new System.Drawing.Point(0, 106);
             this.groupPanelCreditCover.Name = "groupPanelCreditCover";
-            this.groupPanelCreditCover.Size = new System.Drawing.Size(745, 237);
+            this.groupPanelCreditCover.Size = new System.Drawing.Size(745, 273);
             // 
             // 
             // 
@@ -1206,6 +1176,36 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.groupPanelCreditCover.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.groupPanelCreditCover.TabIndex = 1;
+            // 
+            // cbCommissionPrePost
+            // 
+            this.cbCommissionPrePost.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionPrePost", true));
+            this.cbCommissionPrePost.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCommissionPrePost.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCommissionPrePost.FormattingEnabled = true;
+            this.cbCommissionPrePost.ItemHeight = 15;
+            this.cbCommissionPrePost.Items.AddRange(new object[] {
+            "先收",
+            "后收"});
+            this.cbCommissionPrePost.Location = new System.Drawing.Point(350, 212);
+            this.cbCommissionPrePost.Name = "cbCommissionPrePost";
+            this.cbCommissionPrePost.Size = new System.Drawing.Size(100, 21);
+            this.cbCommissionPrePost.TabIndex = 54;
+            this.superValidator.SetValidator1(this.cbCommissionPrePost, this.requiredFieldValidator2);
+            // 
+            // lblCommissionPrePost
+            // 
+            this.lblCommissionPrePost.AutoSize = true;
+            this.lblCommissionPrePost.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblCommissionPrePost.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCommissionPrePost.Location = new System.Drawing.Point(281, 212);
+            this.lblCommissionPrePost.Name = "lblCommissionPrePost";
+            this.lblCommissionPrePost.Size = new System.Drawing.Size(60, 16);
+            this.lblCommissionPrePost.TabIndex = 53;
+            this.lblCommissionPrePost.Text = "<font color=\'red\'>*</font>收费方式:";
             // 
             // cbIsNotice
             // 
@@ -1300,7 +1300,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.cbIsCreditCoverRevolving.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cbIsCreditCoverRevolving.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsCreditCoverRevolving", true));
-            this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(101, 149);
+            this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(104, 147);
             this.cbIsCreditCoverRevolving.Name = "cbIsCreditCoverRevolving";
             this.cbIsCreditCoverRevolving.Size = new System.Drawing.Size(101, 18);
             this.cbIsCreditCoverRevolving.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -1335,19 +1335,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lossThresholdTextBox.TabIndex = 39;
             this.superValidator.SetValidator1(this.lossThresholdTextBox, this.customValidator8);
             // 
-            // insuranceInvoiceGraceDaysTextBox
-            // 
-            // 
-            // 
-            // 
-            this.insuranceInvoiceGraceDaysTextBox.Border.Class = "TextBoxBorder";
-            this.insuranceInvoiceGraceDaysTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.insuranceInvoiceGraceDaysTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "insuranceInvoiceGraceDays", true));
-            this.insuranceInvoiceGraceDaysTextBox.Location = new System.Drawing.Point(599, 168);
-            this.insuranceInvoiceGraceDaysTextBox.Name = "insuranceInvoiceGraceDaysTextBox";
-            this.insuranceInvoiceGraceDaysTextBox.Size = new System.Drawing.Size(100, 21);
-            this.insuranceInvoiceGraceDaysTextBox.TabIndex = 39;
-            // 
             // poolInvoiceGraceDaysTextBox
             // 
             // 
@@ -1370,9 +1357,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.commissionTypeCommentTextBox.Border.Class = "TextBoxBorder";
             this.commissionTypeCommentTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.commissionTypeCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionTypeComment", true));
-            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(284, 211);
+            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(101, 234);
             this.commissionTypeCommentTextBox.Name = "commissionTypeCommentTextBox";
-            this.commissionTypeCommentTextBox.Size = new System.Drawing.Size(415, 21);
+            this.commissionTypeCommentTextBox.Size = new System.Drawing.Size(598, 21);
             this.commissionTypeCommentTextBox.TabIndex = 52;
             this.superValidator.SetValidator1(this.commissionTypeCommentTextBox, this.customValidator1);
             // 
@@ -1402,19 +1389,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.commissionTypeComboBox.Size = new System.Drawing.Size(109, 21);
             this.commissionTypeComboBox.TabIndex = 50;
             this.superValidator.SetValidator1(this.commissionTypeComboBox, this.requiredFieldValidator2);
-            // 
-            // financeGracePeriodTextBox
-            // 
-            // 
-            // 
-            // 
-            this.financeGracePeriodTextBox.Border.Class = "TextBoxBorder";
-            this.financeGracePeriodTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.financeGracePeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceGracePeriod", true));
-            this.financeGracePeriodTextBox.Location = new System.Drawing.Point(599, 84);
-            this.financeGracePeriodTextBox.Name = "financeGracePeriodTextBox";
-            this.financeGracePeriodTextBox.Size = new System.Drawing.Size(100, 21);
-            this.financeGracePeriodTextBox.TabIndex = 31;
             // 
             // paymentTermsTextBox
             // 
@@ -1566,7 +1540,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.financeLinePeriodBeginDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.financeLinePeriodBeginDateTimePicker.Name = "financeLinePeriodBeginDateTimePicker";
-            this.financeLinePeriodBeginDateTimePicker.Size = new System.Drawing.Size(104, 21);
+            this.financeLinePeriodBeginDateTimePicker.Size = new System.Drawing.Size(99, 21);
             this.financeLinePeriodBeginDateTimePicker.TabIndex = 24;
             // 
             // financeLineTextBox
@@ -1702,7 +1676,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.TodayButtonVisible = true;
             this.creditCoverPeriodBeginDateTimePicker.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
             this.creditCoverPeriodBeginDateTimePicker.Name = "creditCoverPeriodBeginDateTimePicker";
-            this.creditCoverPeriodBeginDateTimePicker.Size = new System.Drawing.Size(107, 21);
+            this.creditCoverPeriodBeginDateTimePicker.Size = new System.Drawing.Size(98, 21);
             this.creditCoverPeriodBeginDateTimePicker.TabIndex = 11;
             // 
             // pUGProportionTextBox
@@ -1772,9 +1746,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelOther.Controls.Add(this.noticePersonTextBox);
             this.groupPanelOther.DisabledBackColor = System.Drawing.Color.Empty;
             this.groupPanelOther.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelOther.Location = new System.Drawing.Point(0, 343);
+            this.groupPanelOther.Location = new System.Drawing.Point(0, 379);
             this.groupPanelOther.Name = "groupPanelOther";
-            this.groupPanelOther.Size = new System.Drawing.Size(745, 121);
+            this.groupPanelOther.Size = new System.Drawing.Size(745, 134);
             // 
             // 
             // 
@@ -1992,7 +1966,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.btnCDAUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCDAUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDAUpdate.Location = new System.Drawing.Point(264, 470);
+            this.btnCDAUpdate.Location = new System.Drawing.Point(264, 499);
             this.btnCDAUpdate.Name = "btnCDAUpdate";
             this.btnCDAUpdate.Size = new System.Drawing.Size(75, 21);
             this.btnCDAUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -2004,7 +1978,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.btnCDASave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCDASave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDASave.Location = new System.Drawing.Point(345, 470);
+            this.btnCDASave.Location = new System.Drawing.Point(345, 499);
             this.btnCDASave.Name = "btnCDASave";
             this.btnCDASave.Size = new System.Drawing.Size(75, 21);
             this.btnCDASave.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -2017,6 +1991,11 @@ namespace CMBC.EasyFactor.CaseMgr
             this.superValidator.ContainerControl = this;
             this.superValidator.ErrorProvider = this.errorProvider;
             this.superValidator.Highlighter = this.highlighter;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "必填";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // customValidator8
             // 
@@ -2041,11 +2020,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.customValidator7.ErrorMessage = "自负额不能大于买方信用风险额度";
             this.customValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.customValidator7.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.CustomValidator7ValidateValue);
-            // 
-            // requiredFieldValidator2
-            // 
-            this.requiredFieldValidator2.ErrorMessage = "必填";
-            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator1
             // 
@@ -2129,12 +2103,104 @@ namespace CMBC.EasyFactor.CaseMgr
             this.customValidator5.ErrorMessage = "预付款额度不能大于买方风险担保额度";
             this.customValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
+            // financeGracePeriodTextBox
+            // 
+            // 
+            // 
+            // 
+            this.financeGracePeriodTextBox.Border.Class = "TextBoxBorder";
+            this.financeGracePeriodTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.financeGracePeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceGracePeriod", true));
+            this.financeGracePeriodTextBox.Location = new System.Drawing.Point(599, 84);
+            this.financeGracePeriodTextBox.Name = "financeGracePeriodTextBox";
+            this.financeGracePeriodTextBox.Size = new System.Drawing.Size(100, 21);
+            this.financeGracePeriodTextBox.TabIndex = 31;
+            // 
+            // financeGracePeriodLabel
+            // 
+            this.financeGracePeriodLabel.AutoSize = true;
+            this.financeGracePeriodLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.financeGracePeriodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.financeGracePeriodLabel.Location = new System.Drawing.Point(501, 88);
+            this.financeGracePeriodLabel.Name = "financeGracePeriodLabel";
+            this.financeGracePeriodLabel.Size = new System.Drawing.Size(99, 18);
+            this.financeGracePeriodLabel.TabIndex = 30;
+            this.financeGracePeriodLabel.Text = "融资宽限期(天):";
+            // 
+            // insuranceInvoiceGraceDaysTextBox
+            // 
+            // 
+            // 
+            // 
+            this.insuranceInvoiceGraceDaysTextBox.Border.Class = "TextBoxBorder";
+            this.insuranceInvoiceGraceDaysTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.insuranceInvoiceGraceDaysTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "insuranceInvoiceGraceDays", true));
+            this.insuranceInvoiceGraceDaysTextBox.Location = new System.Drawing.Point(599, 168);
+            this.insuranceInvoiceGraceDaysTextBox.Name = "insuranceInvoiceGraceDaysTextBox";
+            this.insuranceInvoiceGraceDaysTextBox.Size = new System.Drawing.Size(100, 21);
+            this.insuranceInvoiceGraceDaysTextBox.TabIndex = 39;
+            // 
+            // insuranceInvoiceGraceDaysLabel
+            // 
+            this.insuranceInvoiceGraceDaysLabel.AutoSize = true;
+            this.insuranceInvoiceGraceDaysLabel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.insuranceInvoiceGraceDaysLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.insuranceInvoiceGraceDaysLabel.Location = new System.Drawing.Point(474, 169);
+            this.insuranceInvoiceGraceDaysLabel.Name = "insuranceInvoiceGraceDaysLabel";
+            this.insuranceInvoiceGraceDaysLabel.Size = new System.Drawing.Size(124, 18);
+            this.insuranceInvoiceGraceDaysLabel.TabIndex = 38;
+            this.insuranceInvoiceGraceDaysLabel.Text = "发票宽限期（信保）:";
+            // 
+            // CDABindingSource
+            // 
+            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
+            // 
+            // lblAssignNotifyType
+            // 
+            this.lblAssignNotifyType.AutoSize = true;
+            this.lblAssignNotifyType.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblAssignNotifyType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblAssignNotifyType.Location = new System.Drawing.Point(508, 215);
+            this.lblAssignNotifyType.Name = "lblAssignNotifyType";
+            this.lblAssignNotifyType.Size = new System.Drawing.Size(84, 16);
+            this.lblAssignNotifyType.TabIndex = 55;
+            this.lblAssignNotifyType.Text = "<font color=\'red\'>*</font>转让通知方式:";
+            // 
+            // cbAssignNotifyType
+            // 
+            this.cbAssignNotifyType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "AssignNotifyType", true));
+            this.cbAssignNotifyType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbAssignNotifyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAssignNotifyType.FormattingEnabled = true;
+            this.cbAssignNotifyType.ItemHeight = 15;
+            this.cbAssignNotifyType.Items.AddRange(new object[] {
+            "买方书面确认",
+            "发票注明转让",
+            "公正送达",
+            "寄送转让明细",
+            "三方协议",
+            "其他"});
+            this.cbAssignNotifyType.Location = new System.Drawing.Point(599, 212);
+            this.cbAssignNotifyType.Name = "cbAssignNotifyType";
+            this.cbAssignNotifyType.Size = new System.Drawing.Size(100, 21);
+            this.cbAssignNotifyType.TabIndex = 56;
+            this.superValidator.SetValidator1(this.cbAssignNotifyType, this.requiredFieldValidator2);
+            // 
             // CDADetail
             // 
             this.AcceptButton = this.btnCDASave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 494);
+            this.ClientSize = new System.Drawing.Size(745, 521);
             this.Controls.Add(this.btnCDASave);
             this.Controls.Add(this.btnCDAUpdate);
             this.Controls.Add(this.groupPanelOther);
@@ -2146,7 +2212,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.Text = "额度通知书";
             this.groupPanelCase.ResumeLayout(false);
             this.groupPanelCase.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.groupPanelCreditCover.ResumeLayout(false);
             this.groupPanelCreditCover.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).EndInit();
@@ -2157,6 +2222,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelOther.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diCDASignDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2180,10 +2246,8 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.LabelX financeProportionLabel;
         private DevComponents.DotNetBar.LabelX orderNumberLabel;
         private DevComponents.DotNetBar.LabelX paymentTermsLabel;
-        private DevComponents.DotNetBar.LabelX financeGracePeriodLabel;
         private DevComponents.DotNetBar.LabelX deductiblesLabel;
         private DevComponents.DotNetBar.LabelX lossThresholdLabel;
-        private DevComponents.DotNetBar.LabelX insuranceInvoiceGraceDaysLabel;
         private DevComponents.DotNetBar.LabelX poolInvoiceGraceDaysLabel;
         private DevComponents.DotNetBar.LabelX priceLabel;
         private DevComponents.DotNetBar.LabelX iFPriceLabel;
@@ -2205,5 +2269,13 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.LabelX lblCasePaymentTerm;
         private DevComponents.DotNetBar.LabelX lblCDASignDate;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator11;
+        private DevComponents.DotNetBar.LabelX insuranceInvoiceGraceDaysLabel;
+        private DevComponents.DotNetBar.Controls.TextBoxX insuranceInvoiceGraceDaysTextBox;
+        private DevComponents.DotNetBar.LabelX financeGracePeriodLabel;
+        private DevComponents.DotNetBar.Controls.TextBoxX financeGracePeriodTextBox;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbCommissionPrePost;
+        private DevComponents.DotNetBar.LabelX lblCommissionPrePost;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbAssignNotifyType;
+        private DevComponents.DotNetBar.LabelX lblAssignNotifyType;
     }
 }

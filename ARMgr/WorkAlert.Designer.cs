@@ -23,10 +23,11 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter;
-        private DevComponents.DotNetBar.ExpandablePanel panelAssign;
-        private DevComponents.DotNetBar.ExpandablePanel panelFinance;
-        private DevComponents.DotNetBar.ExpandablePanel panelOther;
-        private DevComponents.DotNetBar.PanelEx panelRight;
+        private DevComponents.DotNetBar.ExpandablePanel panelAssignDue;
+        private DevComponents.DotNetBar.ExpandablePanel panelFinanceDue;
+        private DevComponents.DotNetBar.ExpandablePanel panelOtherDue;
+        private DevComponents.DotNetBar.PanelEx panelTop;
+        private DevComponents.DotNetBar.PanelEx panelBottom;
         private DevComponents.DotNetBar.SuperTooltip superTooltip;
 
 		#endregion?Fields?
@@ -61,96 +62,121 @@ namespace CMBC.EasyFactor.ARMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panelRight = new DevComponents.DotNetBar.PanelEx();
-            this.panelCDA = new DevComponents.DotNetBar.ExpandablePanel();
+            this.panelTop = new DevComponents.DotNetBar.PanelEx();
+            this.panelCDADue = new DevComponents.DotNetBar.ExpandablePanel();
             this.btnRejectCheckCDA = new DevComponents.DotNetBar.ButtonX();
             this.btnWaitCheckCDA = new DevComponents.DotNetBar.ButtonX();
             this.btnNeedCheckCDA = new DevComponents.DotNetBar.ButtonX();
-            this.panelOther = new DevComponents.DotNetBar.ExpandablePanel();
+            this.panelOtherDue = new DevComponents.DotNetBar.ExpandablePanel();
             this.btnDueFactorCreditLine = new DevComponents.DotNetBar.ButtonX();
             this.btnDueContract = new DevComponents.DotNetBar.ButtonX();
             this.btnDueCDA = new DevComponents.DotNetBar.ButtonX();
             this.btnDueClientCreditLine = new DevComponents.DotNetBar.ButtonX();
-            this.panelFinance = new DevComponents.DotNetBar.ExpandablePanel();
+            this.panelFinanceDue = new DevComponents.DotNetBar.ExpandablePanel();
             this.btnDueFinance = new DevComponents.DotNetBar.ButtonX();
             this.btnDueFinance0 = new DevComponents.DotNetBar.ButtonX();
             this.btnDueFinance7 = new DevComponents.DotNetBar.ButtonX();
-            this.panelAssign = new DevComponents.DotNetBar.ExpandablePanel();
+            this.panelAssignDue = new DevComponents.DotNetBar.ExpandablePanel();
             this.btnInvoiceDispute = new DevComponents.DotNetBar.ButtonX();
-            this.btnDuplicateInvoice = new DevComponents.DotNetBar.ButtonX();
             this.btnDueAssign = new DevComponents.DotNetBar.ButtonX();
             this.btnDueAssign0 = new DevComponents.DotNetBar.ButtonX();
             this.btnDueAssign7 = new DevComponents.DotNetBar.ButtonX();
+            this.btnDuplicateInvoice = new DevComponents.DotNetBar.ButtonX();
+            this.panelBottom = new DevComponents.DotNetBar.PanelEx();
+            this.panelCheckRefundBatch = new DevComponents.DotNetBar.ExpandablePanel();
+            this.btnRejectCheckRefundBatch = new DevComponents.DotNetBar.ButtonX();
+            this.btnWaitCheckRefundBatch = new DevComponents.DotNetBar.ButtonX();
+            this.btnNeedCheckRefundBatch = new DevComponents.DotNetBar.ButtonX();
+            this.panelCheckPaymentBatch = new DevComponents.DotNetBar.ExpandablePanel();
+            this.btnRejectCheckPaymentBatch = new DevComponents.DotNetBar.ButtonX();
+            this.btnWaitCheckPaymentBatch = new DevComponents.DotNetBar.ButtonX();
+            this.btnNeedCheckPaymentBatch = new DevComponents.DotNetBar.ButtonX();
+            this.panelCheckFinanceBatch = new DevComponents.DotNetBar.ExpandablePanel();
+            this.btnRejectCheckFinanceBatch = new DevComponents.DotNetBar.ButtonX();
+            this.btnWaitCheckFinanceBatch = new DevComponents.DotNetBar.ButtonX();
+            this.btnNeedCheckFinanceBatch = new DevComponents.DotNetBar.ButtonX();
+            this.panelCheckAssignBatch = new DevComponents.DotNetBar.ExpandablePanel();
+            this.btnRejectCheckAssignBatch = new DevComponents.DotNetBar.ButtonX();
+            this.btnWaitCheckAssignBatch = new DevComponents.DotNetBar.ButtonX();
+            this.btnNeedCheckAssignBatch = new DevComponents.DotNetBar.ButtonX();
             this.bubbleBarTab1 = new DevComponents.DotNetBar.BubbleBarTab(this.components);
             this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.panelRight.SuspendLayout();
-            this.panelCDA.SuspendLayout();
-            this.panelOther.SuspendLayout();
-            this.panelFinance.SuspendLayout();
-            this.panelAssign.SuspendLayout();
+            this.panelTop.SuspendLayout();
+            this.panelCDADue.SuspendLayout();
+            this.panelOtherDue.SuspendLayout();
+            this.panelFinanceDue.SuspendLayout();
+            this.panelAssignDue.SuspendLayout();
+            this.panelBottom.SuspendLayout();
+            this.panelCheckRefundBatch.SuspendLayout();
+            this.panelCheckPaymentBatch.SuspendLayout();
+            this.panelCheckFinanceBatch.SuspendLayout();
+            this.panelCheckAssignBatch.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelRight
+            // panelTop
             // 
-            this.panelRight.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelRight.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelRight.Controls.Add(this.panelCDA);
-            this.panelRight.Controls.Add(this.panelOther);
-            this.panelRight.Controls.Add(this.panelFinance);
-            this.panelRight.Controls.Add(this.panelAssign);
-            this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelRight.Location = new System.Drawing.Point(0, 0);
-            this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(801, 219);
-            this.panelRight.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelRight.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelRight.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelRight.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelRight.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelRight.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelRight.Style.GradientAngle = 90;
-            this.panelRight.TabIndex = 2;
+            this.panelTop.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelTop.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.panelTop.Controls.Add(this.panelCDADue);
+            this.panelTop.Controls.Add(this.panelOtherDue);
+            this.panelTop.Controls.Add(this.panelFinanceDue);
+            this.panelTop.Controls.Add(this.panelAssignDue);
+            this.panelTop.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(801, 184);
+            this.panelTop.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelTop.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelTop.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelTop.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelTop.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelTop.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelTop.Style.GradientAngle = 90;
+            this.panelTop.TabIndex = 2;
             // 
-            // panelCDA
+            // panelCDADue
             // 
-            this.panelCDA.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelCDA.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelCDA.Controls.Add(this.btnRejectCheckCDA);
-            this.panelCDA.Controls.Add(this.btnWaitCheckCDA);
-            this.panelCDA.Controls.Add(this.btnNeedCheckCDA);
-            this.panelCDA.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelCDA.ExpandOnTitleClick = true;
-            this.panelCDA.Location = new System.Drawing.Point(600, 0);
-            this.panelCDA.Name = "panelCDA";
-            this.panelCDA.Size = new System.Drawing.Size(200, 219);
-            this.panelCDA.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelCDA.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelCDA.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelCDA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelCDA.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.panelCDA.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
-            this.panelCDA.Style.GradientAngle = 90;
-            this.panelCDA.TabIndex = 3;
-            this.panelCDA.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelCDA.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelCDA.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelCDA.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
-            this.panelCDA.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelCDA.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelCDA.TitleStyle.GradientAngle = 90;
-            this.panelCDA.TitleText = "额度通知书";
+            this.panelCDADue.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelCDADue.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelCDADue.Controls.Add(this.btnRejectCheckCDA);
+            this.panelCDADue.Controls.Add(this.btnWaitCheckCDA);
+            this.panelCDADue.Controls.Add(this.btnNeedCheckCDA);
+            this.panelCDADue.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelCDADue.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelCDADue.ExpandOnTitleClick = true;
+            this.panelCDADue.Location = new System.Drawing.Point(600, 0);
+            this.panelCDADue.Name = "panelCDADue";
+            this.panelCDADue.Size = new System.Drawing.Size(200, 184);
+            this.panelCDADue.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCDADue.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCDADue.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCDADue.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelCDADue.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelCDADue.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelCDADue.Style.GradientAngle = 90;
+            this.panelCDADue.TabIndex = 3;
+            this.panelCDADue.TitleHeight = 24;
+            this.panelCDADue.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCDADue.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCDADue.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCDADue.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelCDADue.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelCDADue.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelCDADue.TitleStyle.GradientAngle = 90;
+            this.panelCDADue.TitleText = "额度通知书";
             // 
             // btnRejectCheckCDA
             // 
             this.btnRejectCheckCDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnRejectCheckCDA.AutoExpandOnClick = true;
             this.btnRejectCheckCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnRejectCheckCDA.Location = new System.Drawing.Point(15, 87);
+            this.btnRejectCheckCDA.Location = new System.Drawing.Point(15, 80);
             this.btnRejectCheckCDA.Name = "btnRejectCheckCDA";
-            this.btnRejectCheckCDA.Size = new System.Drawing.Size(140, 25);
-            this.btnRejectCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnRejectCheckCDA.Size = new System.Drawing.Size(140, 23);
+            this.btnRejectCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnRejectCheckCDA.TabIndex = 0;
             this.btnRejectCheckCDA.Text = "c) 拒绝放行";
             this.btnRejectCheckCDA.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -161,10 +187,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnWaitCheckCDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnWaitCheckCDA.AutoExpandOnClick = true;
             this.btnWaitCheckCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnWaitCheckCDA.Location = new System.Drawing.Point(15, 58);
+            this.btnWaitCheckCDA.Location = new System.Drawing.Point(15, 54);
             this.btnWaitCheckCDA.Name = "btnWaitCheckCDA";
-            this.btnWaitCheckCDA.Size = new System.Drawing.Size(140, 25);
-            this.btnWaitCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnWaitCheckCDA.Size = new System.Drawing.Size(140, 23);
+            this.btnWaitCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnWaitCheckCDA.TabIndex = 0;
             this.btnWaitCheckCDA.Text = "b) 等待放行";
             this.btnWaitCheckCDA.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -175,54 +201,56 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnNeedCheckCDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnNeedCheckCDA.AutoExpandOnClick = true;
             this.btnNeedCheckCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnNeedCheckCDA.Location = new System.Drawing.Point(15, 29);
+            this.btnNeedCheckCDA.Location = new System.Drawing.Point(15, 27);
             this.btnNeedCheckCDA.Name = "btnNeedCheckCDA";
-            this.btnNeedCheckCDA.Size = new System.Drawing.Size(140, 25);
-            this.btnNeedCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnNeedCheckCDA.Size = new System.Drawing.Size(140, 23);
+            this.btnNeedCheckCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnNeedCheckCDA.TabIndex = 0;
             this.btnNeedCheckCDA.Text = "a) 需要放行";
             this.btnNeedCheckCDA.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
             this.btnNeedCheckCDA.Click += new System.EventHandler(this.QueryNeedCheckCDAs);
             // 
-            // panelOther
+            // panelOtherDue
             // 
-            this.panelOther.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelOther.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelOther.Controls.Add(this.btnDueFactorCreditLine);
-            this.panelOther.Controls.Add(this.btnDueContract);
-            this.panelOther.Controls.Add(this.btnDueCDA);
-            this.panelOther.Controls.Add(this.btnDueClientCreditLine);
-            this.panelOther.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelOther.ExpandOnTitleClick = true;
-            this.panelOther.Location = new System.Drawing.Point(400, 0);
-            this.panelOther.Name = "panelOther";
-            this.panelOther.Size = new System.Drawing.Size(200, 219);
-            this.panelOther.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelOther.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelOther.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelOther.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelOther.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.panelOther.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
-            this.panelOther.Style.GradientAngle = 90;
-            this.panelOther.TabIndex = 2;
-            this.panelOther.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelOther.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelOther.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelOther.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
-            this.panelOther.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelOther.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelOther.TitleStyle.GradientAngle = 90;
-            this.panelOther.TitleText = "其它信息提示";
+            this.panelOtherDue.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelOtherDue.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelOtherDue.Controls.Add(this.btnDueFactorCreditLine);
+            this.panelOtherDue.Controls.Add(this.btnDueContract);
+            this.panelOtherDue.Controls.Add(this.btnDueCDA);
+            this.panelOtherDue.Controls.Add(this.btnDueClientCreditLine);
+            this.panelOtherDue.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelOtherDue.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelOtherDue.ExpandOnTitleClick = true;
+            this.panelOtherDue.Location = new System.Drawing.Point(400, 0);
+            this.panelOtherDue.Name = "panelOtherDue";
+            this.panelOtherDue.Size = new System.Drawing.Size(200, 184);
+            this.panelOtherDue.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelOtherDue.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelOtherDue.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelOtherDue.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelOtherDue.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelOtherDue.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelOtherDue.Style.GradientAngle = 90;
+            this.panelOtherDue.TabIndex = 2;
+            this.panelOtherDue.TitleHeight = 24;
+            this.panelOtherDue.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelOtherDue.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelOtherDue.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelOtherDue.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelOtherDue.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelOtherDue.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelOtherDue.TitleStyle.GradientAngle = 90;
+            this.panelOtherDue.TitleText = "其它信息提示";
             // 
             // btnDueFactorCreditLine
             // 
             this.btnDueFactorCreditLine.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDueFactorCreditLine.AutoExpandOnClick = true;
             this.btnDueFactorCreditLine.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDueFactorCreditLine.Location = new System.Drawing.Point(15, 58);
+            this.btnDueFactorCreditLine.Location = new System.Drawing.Point(15, 54);
             this.btnDueFactorCreditLine.Name = "btnDueFactorCreditLine";
-            this.btnDueFactorCreditLine.Size = new System.Drawing.Size(160, 25);
-            this.btnDueFactorCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDueFactorCreditLine.Size = new System.Drawing.Size(160, 23);
+            this.btnDueFactorCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnDueFactorCreditLine.TabIndex = 1;
             this.btnDueFactorCreditLine.Text = "b) 保理商额度到期";
             this.btnDueFactorCreditLine.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -233,10 +261,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDueContract.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDueContract.AutoExpandOnClick = true;
             this.btnDueContract.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDueContract.Location = new System.Drawing.Point(15, 115);
+            this.btnDueContract.Location = new System.Drawing.Point(15, 106);
             this.btnDueContract.Name = "btnDueContract";
-            this.btnDueContract.Size = new System.Drawing.Size(160, 25);
-            this.btnDueContract.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDueContract.Size = new System.Drawing.Size(160, 23);
+            this.btnDueContract.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnDueContract.TabIndex = 3;
             this.btnDueContract.Text = "d) 保理合同到期";
             this.btnDueContract.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -247,10 +275,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDueCDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDueCDA.AutoExpandOnClick = true;
             this.btnDueCDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDueCDA.Location = new System.Drawing.Point(15, 86);
+            this.btnDueCDA.Location = new System.Drawing.Point(15, 79);
             this.btnDueCDA.Name = "btnDueCDA";
-            this.btnDueCDA.Size = new System.Drawing.Size(160, 25);
-            this.btnDueCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDueCDA.Size = new System.Drawing.Size(160, 23);
+            this.btnDueCDA.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnDueCDA.TabIndex = 2;
             this.btnDueCDA.Text = "c) 额度通知书到期";
             this.btnDueCDA.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -261,53 +289,55 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDueClientCreditLine.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDueClientCreditLine.AutoExpandOnClick = true;
             this.btnDueClientCreditLine.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDueClientCreditLine.Location = new System.Drawing.Point(15, 29);
+            this.btnDueClientCreditLine.Location = new System.Drawing.Point(15, 27);
             this.btnDueClientCreditLine.Name = "btnDueClientCreditLine";
-            this.btnDueClientCreditLine.Size = new System.Drawing.Size(160, 25);
-            this.btnDueClientCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDueClientCreditLine.Size = new System.Drawing.Size(160, 23);
+            this.btnDueClientCreditLine.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnDueClientCreditLine.TabIndex = 0;
             this.btnDueClientCreditLine.Text = "a) 客户额度到期";
             this.btnDueClientCreditLine.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
             this.btnDueClientCreditLine.Click += new System.EventHandler(this.QueryClientCreditLineDue);
             // 
-            // panelFinance
+            // panelFinanceDue
             // 
-            this.panelFinance.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelFinance.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelFinance.Controls.Add(this.btnDueFinance);
-            this.panelFinance.Controls.Add(this.btnDueFinance0);
-            this.panelFinance.Controls.Add(this.btnDueFinance7);
-            this.panelFinance.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelFinance.ExpandOnTitleClick = true;
-            this.panelFinance.Location = new System.Drawing.Point(200, 0);
-            this.panelFinance.Name = "panelFinance";
-            this.panelFinance.Size = new System.Drawing.Size(200, 219);
-            this.panelFinance.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelFinance.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelFinance.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelFinance.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelFinance.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.panelFinance.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
-            this.panelFinance.Style.GradientAngle = 90;
-            this.panelFinance.TabIndex = 1;
-            this.panelFinance.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelFinance.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelFinance.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelFinance.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
-            this.panelFinance.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelFinance.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelFinance.TitleStyle.GradientAngle = 90;
-            this.panelFinance.TitleText = "融资信息预警提示";
+            this.panelFinanceDue.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelFinanceDue.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelFinanceDue.Controls.Add(this.btnDueFinance);
+            this.panelFinanceDue.Controls.Add(this.btnDueFinance0);
+            this.panelFinanceDue.Controls.Add(this.btnDueFinance7);
+            this.panelFinanceDue.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelFinanceDue.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelFinanceDue.ExpandOnTitleClick = true;
+            this.panelFinanceDue.Location = new System.Drawing.Point(200, 0);
+            this.panelFinanceDue.Name = "panelFinanceDue";
+            this.panelFinanceDue.Size = new System.Drawing.Size(200, 184);
+            this.panelFinanceDue.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelFinanceDue.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelFinanceDue.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelFinanceDue.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelFinanceDue.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelFinanceDue.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelFinanceDue.Style.GradientAngle = 90;
+            this.panelFinanceDue.TabIndex = 1;
+            this.panelFinanceDue.TitleHeight = 24;
+            this.panelFinanceDue.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelFinanceDue.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelFinanceDue.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelFinanceDue.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelFinanceDue.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelFinanceDue.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelFinanceDue.TitleStyle.GradientAngle = 90;
+            this.panelFinanceDue.TitleText = "融资信息预警提示";
             // 
             // btnDueFinance
             // 
             this.btnDueFinance.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDueFinance.AutoExpandOnClick = true;
             this.btnDueFinance.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDueFinance.Location = new System.Drawing.Point(15, 86);
+            this.btnDueFinance.Location = new System.Drawing.Point(15, 79);
             this.btnDueFinance.Name = "btnDueFinance";
-            this.btnDueFinance.Size = new System.Drawing.Size(140, 25);
-            this.btnDueFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDueFinance.Size = new System.Drawing.Size(140, 23);
+            this.btnDueFinance.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnDueFinance.TabIndex = 2;
             this.btnDueFinance.Text = "c) 已经逾期";
             this.btnDueFinance.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -318,10 +348,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDueFinance0.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDueFinance0.AutoExpandOnClick = true;
             this.btnDueFinance0.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDueFinance0.Location = new System.Drawing.Point(15, 58);
+            this.btnDueFinance0.Location = new System.Drawing.Point(15, 54);
             this.btnDueFinance0.Name = "btnDueFinance0";
-            this.btnDueFinance0.Size = new System.Drawing.Size(140, 25);
-            this.btnDueFinance0.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDueFinance0.Size = new System.Drawing.Size(140, 23);
+            this.btnDueFinance0.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnDueFinance0.TabIndex = 1;
             this.btnDueFinance0.Text = "b) 今日到期";
             this.btnDueFinance0.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -332,69 +362,57 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDueFinance7.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDueFinance7.AutoExpandOnClick = true;
             this.btnDueFinance7.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDueFinance7.Location = new System.Drawing.Point(15, 29);
+            this.btnDueFinance7.Location = new System.Drawing.Point(15, 27);
             this.btnDueFinance7.Name = "btnDueFinance7";
-            this.btnDueFinance7.Size = new System.Drawing.Size(140, 25);
-            this.btnDueFinance7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDueFinance7.Size = new System.Drawing.Size(140, 23);
+            this.btnDueFinance7.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnDueFinance7.TabIndex = 0;
             this.btnDueFinance7.Text = "a) 7日内到期";
             this.btnDueFinance7.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
             this.btnDueFinance7.Click += new System.EventHandler(this.QueryInvoiceFinanceDueBy7);
             // 
-            // panelAssign
+            // panelAssignDue
             // 
-            this.panelAssign.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelAssign.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelAssign.Controls.Add(this.btnInvoiceDispute);
-            this.panelAssign.Controls.Add(this.btnDueAssign);
-            this.panelAssign.Controls.Add(this.btnDueAssign0);
-            this.panelAssign.Controls.Add(this.btnDueAssign7);
-            this.panelAssign.Controls.Add(this.btnDuplicateInvoice);
-            this.panelAssign.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelAssign.ExpandOnTitleClick = true;
-            this.panelAssign.Location = new System.Drawing.Point(0, 0);
-            this.panelAssign.Name = "panelAssign";
-            this.panelAssign.Size = new System.Drawing.Size(200, 219);
-            this.panelAssign.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelAssign.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelAssign.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelAssign.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelAssign.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.panelAssign.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
-            this.panelAssign.Style.GradientAngle = 90;
-            this.panelAssign.TabIndex = 0;
-            this.panelAssign.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelAssign.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelAssign.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelAssign.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
-            this.panelAssign.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelAssign.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelAssign.TitleStyle.GradientAngle = 90;
-            this.panelAssign.TitleText = "应收账款预警提示";
-            // 
-            // btnDuplicateInvoice
-            // 
-            this.btnDuplicateInvoice.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnDuplicateInvoice.AutoExpandOnClick = true;
-            this.btnDuplicateInvoice.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDuplicateInvoice.Location = new System.Drawing.Point(15, 143);
-            this.btnDuplicateInvoice.Name = "btnDuplicateInvoice";
-            this.btnDuplicateInvoice.Size = new System.Drawing.Size(140, 25);
-            this.btnDuplicateInvoice.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnDuplicateInvoice.TabIndex = 3;
-            this.btnDuplicateInvoice.Text = "e) 重复发票";
-            this.btnDuplicateInvoice.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
-            this.btnDuplicateInvoice.Click += new System.EventHandler(this.QueryDuplicateInvoice);
+            this.panelAssignDue.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelAssignDue.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelAssignDue.Controls.Add(this.btnInvoiceDispute);
+            this.panelAssignDue.Controls.Add(this.btnDueAssign);
+            this.panelAssignDue.Controls.Add(this.btnDueAssign0);
+            this.panelAssignDue.Controls.Add(this.btnDueAssign7);
+            this.panelAssignDue.Controls.Add(this.btnDuplicateInvoice);
+            this.panelAssignDue.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelAssignDue.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelAssignDue.ExpandOnTitleClick = true;
+            this.panelAssignDue.Location = new System.Drawing.Point(0, 0);
+            this.panelAssignDue.Name = "panelAssignDue";
+            this.panelAssignDue.Size = new System.Drawing.Size(200, 184);
+            this.panelAssignDue.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelAssignDue.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelAssignDue.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelAssignDue.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelAssignDue.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelAssignDue.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelAssignDue.Style.GradientAngle = 90;
+            this.panelAssignDue.TabIndex = 0;
+            this.panelAssignDue.TitleHeight = 24;
+            this.panelAssignDue.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelAssignDue.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelAssignDue.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelAssignDue.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelAssignDue.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelAssignDue.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelAssignDue.TitleStyle.GradientAngle = 90;
+            this.panelAssignDue.TitleText = "应收账款预警提示";
             // 
             // btnInvoiceDispute
             // 
             this.btnInvoiceDispute.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnInvoiceDispute.AutoExpandOnClick = true;
             this.btnInvoiceDispute.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnInvoiceDispute.Location = new System.Drawing.Point(15, 115);
+            this.btnInvoiceDispute.Location = new System.Drawing.Point(15, 106);
             this.btnInvoiceDispute.Name = "btnInvoiceDispute";
-            this.btnInvoiceDispute.Size = new System.Drawing.Size(140, 25);
-            this.btnInvoiceDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnInvoiceDispute.Size = new System.Drawing.Size(140, 23);
+            this.btnInvoiceDispute.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnInvoiceDispute.TabIndex = 3;
             this.btnInvoiceDispute.Text = "d) 商纠账款";
             this.btnInvoiceDispute.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -405,10 +423,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDueAssign.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDueAssign.AutoExpandOnClick = true;
             this.btnDueAssign.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDueAssign.Location = new System.Drawing.Point(15, 86);
+            this.btnDueAssign.Location = new System.Drawing.Point(15, 79);
             this.btnDueAssign.Name = "btnDueAssign";
-            this.btnDueAssign.Size = new System.Drawing.Size(140, 25);
-            this.btnDueAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDueAssign.Size = new System.Drawing.Size(140, 23);
+            this.btnDueAssign.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnDueAssign.TabIndex = 2;
             this.btnDueAssign.Text = "c) 已经逾期";
             this.btnDueAssign.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -419,10 +437,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDueAssign0.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDueAssign0.AutoExpandOnClick = true;
             this.btnDueAssign0.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDueAssign0.Location = new System.Drawing.Point(15, 58);
+            this.btnDueAssign0.Location = new System.Drawing.Point(15, 54);
             this.btnDueAssign0.Name = "btnDueAssign0";
-            this.btnDueAssign0.Size = new System.Drawing.Size(140, 25);
-            this.btnDueAssign0.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDueAssign0.Size = new System.Drawing.Size(140, 23);
+            this.btnDueAssign0.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnDueAssign0.TabIndex = 1;
             this.btnDueAssign0.Text = "b) 今日到期";
             this.btnDueAssign0.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -433,19 +451,351 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnDueAssign7.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDueAssign7.AutoExpandOnClick = true;
             this.btnDueAssign7.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDueAssign7.Location = new System.Drawing.Point(15, 29);
+            this.btnDueAssign7.Location = new System.Drawing.Point(15, 27);
             this.btnDueAssign7.Name = "btnDueAssign7";
-            this.btnDueAssign7.Size = new System.Drawing.Size(140, 25);
-            this.btnDueAssign7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDueAssign7.Size = new System.Drawing.Size(140, 23);
+            this.btnDueAssign7.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnDueAssign7.TabIndex = 0;
             this.btnDueAssign7.Text = "a) 7日内到期";
             this.btnDueAssign7.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
             this.btnDueAssign7.Click += new System.EventHandler(this.QueryInvoiceAssignDueBy7);
             // 
+            // btnDuplicateInvoice
+            // 
+            this.btnDuplicateInvoice.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDuplicateInvoice.AutoExpandOnClick = true;
+            this.btnDuplicateInvoice.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnDuplicateInvoice.Location = new System.Drawing.Point(15, 132);
+            this.btnDuplicateInvoice.Name = "btnDuplicateInvoice";
+            this.btnDuplicateInvoice.Size = new System.Drawing.Size(140, 23);
+            this.btnDuplicateInvoice.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnDuplicateInvoice.TabIndex = 3;
+            this.btnDuplicateInvoice.Text = "e) 重复发票";
+            this.btnDuplicateInvoice.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnDuplicateInvoice.Click += new System.EventHandler(this.QueryDuplicateInvoice);
+            // 
+            // panelBottom
+            // 
+            this.panelBottom.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelBottom.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.panelBottom.Controls.Add(this.panelCheckRefundBatch);
+            this.panelBottom.Controls.Add(this.panelCheckPaymentBatch);
+            this.panelBottom.Controls.Add(this.panelCheckFinanceBatch);
+            this.panelBottom.Controls.Add(this.panelCheckAssignBatch);
+            this.panelBottom.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 184);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(801, 202);
+            this.panelBottom.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelBottom.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelBottom.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelBottom.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelBottom.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelBottom.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelBottom.Style.GradientAngle = 90;
+            this.panelBottom.TabIndex = 3;
+            // 
+            // panelCheckRefundBatch
+            // 
+            this.panelCheckRefundBatch.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelCheckRefundBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelCheckRefundBatch.Controls.Add(this.btnRejectCheckRefundBatch);
+            this.panelCheckRefundBatch.Controls.Add(this.btnWaitCheckRefundBatch);
+            this.panelCheckRefundBatch.Controls.Add(this.btnNeedCheckRefundBatch);
+            this.panelCheckRefundBatch.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelCheckRefundBatch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelCheckRefundBatch.ExpandOnTitleClick = true;
+            this.panelCheckRefundBatch.Location = new System.Drawing.Point(600, 0);
+            this.panelCheckRefundBatch.Name = "panelCheckRefundBatch";
+            this.panelCheckRefundBatch.Size = new System.Drawing.Size(200, 202);
+            this.panelCheckRefundBatch.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCheckRefundBatch.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCheckRefundBatch.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCheckRefundBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelCheckRefundBatch.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelCheckRefundBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelCheckRefundBatch.Style.GradientAngle = 90;
+            this.panelCheckRefundBatch.TabIndex = 4;
+            this.panelCheckRefundBatch.TitleHeight = 24;
+            this.panelCheckRefundBatch.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCheckRefundBatch.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCheckRefundBatch.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCheckRefundBatch.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelCheckRefundBatch.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelCheckRefundBatch.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelCheckRefundBatch.TitleStyle.GradientAngle = 90;
+            this.panelCheckRefundBatch.TitleText = "还款";
+            // 
+            // btnRejectCheckRefundBatch
+            // 
+            this.btnRejectCheckRefundBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRejectCheckRefundBatch.AutoExpandOnClick = true;
+            this.btnRejectCheckRefundBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRejectCheckRefundBatch.Location = new System.Drawing.Point(15, 80);
+            this.btnRejectCheckRefundBatch.Name = "btnRejectCheckRefundBatch";
+            this.btnRejectCheckRefundBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnRejectCheckRefundBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnRejectCheckRefundBatch.TabIndex = 0;
+            this.btnRejectCheckRefundBatch.Text = "c) 拒绝放行";
+            this.btnRejectCheckRefundBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnRejectCheckRefundBatch.Click += new System.EventHandler(this.QueryRejectCheckRefundBatch);
+            // 
+            // btnWaitCheckRefundBatch
+            // 
+            this.btnWaitCheckRefundBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnWaitCheckRefundBatch.AutoExpandOnClick = true;
+            this.btnWaitCheckRefundBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnWaitCheckRefundBatch.Location = new System.Drawing.Point(15, 54);
+            this.btnWaitCheckRefundBatch.Name = "btnWaitCheckRefundBatch";
+            this.btnWaitCheckRefundBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnWaitCheckRefundBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnWaitCheckRefundBatch.TabIndex = 0;
+            this.btnWaitCheckRefundBatch.Text = "b) 等待放行";
+            this.btnWaitCheckRefundBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnWaitCheckRefundBatch.Click += new System.EventHandler(this.QueryWaitCheckRefundBatch);
+            // 
+            // btnNeedCheckRefundBatch
+            // 
+            this.btnNeedCheckRefundBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNeedCheckRefundBatch.AutoExpandOnClick = true;
+            this.btnNeedCheckRefundBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnNeedCheckRefundBatch.Location = new System.Drawing.Point(15, 27);
+            this.btnNeedCheckRefundBatch.Name = "btnNeedCheckRefundBatch";
+            this.btnNeedCheckRefundBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnNeedCheckRefundBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnNeedCheckRefundBatch.TabIndex = 0;
+            this.btnNeedCheckRefundBatch.Text = "a) 需要放行";
+            this.btnNeedCheckRefundBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnNeedCheckRefundBatch.Click += new System.EventHandler(this.QueryNeedCheckRefundBatch);
+            // 
+            // panelCheckPaymentBatch
+            // 
+            this.panelCheckPaymentBatch.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelCheckPaymentBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelCheckPaymentBatch.Controls.Add(this.btnRejectCheckPaymentBatch);
+            this.panelCheckPaymentBatch.Controls.Add(this.btnWaitCheckPaymentBatch);
+            this.panelCheckPaymentBatch.Controls.Add(this.btnNeedCheckPaymentBatch);
+            this.panelCheckPaymentBatch.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelCheckPaymentBatch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelCheckPaymentBatch.ExpandOnTitleClick = true;
+            this.panelCheckPaymentBatch.Location = new System.Drawing.Point(400, 0);
+            this.panelCheckPaymentBatch.Name = "panelCheckPaymentBatch";
+            this.panelCheckPaymentBatch.Size = new System.Drawing.Size(200, 202);
+            this.panelCheckPaymentBatch.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCheckPaymentBatch.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCheckPaymentBatch.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCheckPaymentBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelCheckPaymentBatch.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelCheckPaymentBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelCheckPaymentBatch.Style.GradientAngle = 90;
+            this.panelCheckPaymentBatch.TabIndex = 4;
+            this.panelCheckPaymentBatch.TitleHeight = 24;
+            this.panelCheckPaymentBatch.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCheckPaymentBatch.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCheckPaymentBatch.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCheckPaymentBatch.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelCheckPaymentBatch.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelCheckPaymentBatch.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelCheckPaymentBatch.TitleStyle.GradientAngle = 90;
+            this.panelCheckPaymentBatch.TitleText = "收款";
+            // 
+            // btnRejectCheckPaymentBatch
+            // 
+            this.btnRejectCheckPaymentBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRejectCheckPaymentBatch.AutoExpandOnClick = true;
+            this.btnRejectCheckPaymentBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRejectCheckPaymentBatch.Location = new System.Drawing.Point(15, 80);
+            this.btnRejectCheckPaymentBatch.Name = "btnRejectCheckPaymentBatch";
+            this.btnRejectCheckPaymentBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnRejectCheckPaymentBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnRejectCheckPaymentBatch.TabIndex = 0;
+            this.btnRejectCheckPaymentBatch.Text = "c) 拒绝放行";
+            this.btnRejectCheckPaymentBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnRejectCheckPaymentBatch.Click += new System.EventHandler(this.QueryRejectCheckPaymentBatch);
+            // 
+            // btnWaitCheckPaymentBatch
+            // 
+            this.btnWaitCheckPaymentBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnWaitCheckPaymentBatch.AutoExpandOnClick = true;
+            this.btnWaitCheckPaymentBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnWaitCheckPaymentBatch.Location = new System.Drawing.Point(15, 54);
+            this.btnWaitCheckPaymentBatch.Name = "btnWaitCheckPaymentBatch";
+            this.btnWaitCheckPaymentBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnWaitCheckPaymentBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnWaitCheckPaymentBatch.TabIndex = 0;
+            this.btnWaitCheckPaymentBatch.Text = "b) 等待放行";
+            this.btnWaitCheckPaymentBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnWaitCheckPaymentBatch.Click += new System.EventHandler(this.QueryWaitCheckPaymentBatch);
+            // 
+            // btnNeedCheckPaymentBatch
+            // 
+            this.btnNeedCheckPaymentBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNeedCheckPaymentBatch.AutoExpandOnClick = true;
+            this.btnNeedCheckPaymentBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnNeedCheckPaymentBatch.Location = new System.Drawing.Point(15, 27);
+            this.btnNeedCheckPaymentBatch.Name = "btnNeedCheckPaymentBatch";
+            this.btnNeedCheckPaymentBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnNeedCheckPaymentBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnNeedCheckPaymentBatch.TabIndex = 0;
+            this.btnNeedCheckPaymentBatch.Text = "a) 需要放行";
+            this.btnNeedCheckPaymentBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnNeedCheckPaymentBatch.Click += new System.EventHandler(this.QueryNeedCheckPaymentBatch);
+            // 
+            // panelCheckFinanceBatch
+            // 
+            this.panelCheckFinanceBatch.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelCheckFinanceBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelCheckFinanceBatch.Controls.Add(this.btnRejectCheckFinanceBatch);
+            this.panelCheckFinanceBatch.Controls.Add(this.btnWaitCheckFinanceBatch);
+            this.panelCheckFinanceBatch.Controls.Add(this.btnNeedCheckFinanceBatch);
+            this.panelCheckFinanceBatch.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelCheckFinanceBatch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelCheckFinanceBatch.ExpandOnTitleClick = true;
+            this.panelCheckFinanceBatch.Location = new System.Drawing.Point(200, 0);
+            this.panelCheckFinanceBatch.Name = "panelCheckFinanceBatch";
+            this.panelCheckFinanceBatch.Size = new System.Drawing.Size(200, 202);
+            this.panelCheckFinanceBatch.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCheckFinanceBatch.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCheckFinanceBatch.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCheckFinanceBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelCheckFinanceBatch.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelCheckFinanceBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelCheckFinanceBatch.Style.GradientAngle = 90;
+            this.panelCheckFinanceBatch.TabIndex = 4;
+            this.panelCheckFinanceBatch.TitleHeight = 24;
+            this.panelCheckFinanceBatch.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCheckFinanceBatch.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCheckFinanceBatch.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCheckFinanceBatch.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelCheckFinanceBatch.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelCheckFinanceBatch.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelCheckFinanceBatch.TitleStyle.GradientAngle = 90;
+            this.panelCheckFinanceBatch.TitleText = "融资";
+            // 
+            // btnRejectCheckFinanceBatch
+            // 
+            this.btnRejectCheckFinanceBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRejectCheckFinanceBatch.AutoExpandOnClick = true;
+            this.btnRejectCheckFinanceBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRejectCheckFinanceBatch.Location = new System.Drawing.Point(15, 80);
+            this.btnRejectCheckFinanceBatch.Name = "btnRejectCheckFinanceBatch";
+            this.btnRejectCheckFinanceBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnRejectCheckFinanceBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnRejectCheckFinanceBatch.TabIndex = 0;
+            this.btnRejectCheckFinanceBatch.Text = "c) 拒绝放行";
+            this.btnRejectCheckFinanceBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnRejectCheckFinanceBatch.Click += new System.EventHandler(this.QueryRejectCheckFinanceBatch);
+            // 
+            // btnWaitCheckFinanceBatch
+            // 
+            this.btnWaitCheckFinanceBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnWaitCheckFinanceBatch.AutoExpandOnClick = true;
+            this.btnWaitCheckFinanceBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnWaitCheckFinanceBatch.Location = new System.Drawing.Point(15, 54);
+            this.btnWaitCheckFinanceBatch.Name = "btnWaitCheckFinanceBatch";
+            this.btnWaitCheckFinanceBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnWaitCheckFinanceBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnWaitCheckFinanceBatch.TabIndex = 0;
+            this.btnWaitCheckFinanceBatch.Text = "b) 等待放行";
+            this.btnWaitCheckFinanceBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnWaitCheckFinanceBatch.Click += new System.EventHandler(this.QueryWaitCheckFinanceBatch);
+            // 
+            // btnNeedCheckFinanceBatch
+            // 
+            this.btnNeedCheckFinanceBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNeedCheckFinanceBatch.AutoExpandOnClick = true;
+            this.btnNeedCheckFinanceBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnNeedCheckFinanceBatch.Location = new System.Drawing.Point(15, 27);
+            this.btnNeedCheckFinanceBatch.Name = "btnNeedCheckFinanceBatch";
+            this.btnNeedCheckFinanceBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnNeedCheckFinanceBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnNeedCheckFinanceBatch.TabIndex = 0;
+            this.btnNeedCheckFinanceBatch.Text = "a) 需要放行";
+            this.btnNeedCheckFinanceBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnNeedCheckFinanceBatch.Click += new System.EventHandler(this.QueryNeedCheckFinanceBatch);
+            // 
+            // panelCheckAssignBatch
+            // 
+            this.panelCheckAssignBatch.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelCheckAssignBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelCheckAssignBatch.Controls.Add(this.btnRejectCheckAssignBatch);
+            this.panelCheckAssignBatch.Controls.Add(this.btnWaitCheckAssignBatch);
+            this.panelCheckAssignBatch.Controls.Add(this.btnNeedCheckAssignBatch);
+            this.panelCheckAssignBatch.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelCheckAssignBatch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelCheckAssignBatch.ExpandOnTitleClick = true;
+            this.panelCheckAssignBatch.Location = new System.Drawing.Point(0, 0);
+            this.panelCheckAssignBatch.Name = "panelCheckAssignBatch";
+            this.panelCheckAssignBatch.Size = new System.Drawing.Size(200, 202);
+            this.panelCheckAssignBatch.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCheckAssignBatch.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCheckAssignBatch.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCheckAssignBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelCheckAssignBatch.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelCheckAssignBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelCheckAssignBatch.Style.GradientAngle = 90;
+            this.panelCheckAssignBatch.TabIndex = 4;
+            this.panelCheckAssignBatch.TitleHeight = 24;
+            this.panelCheckAssignBatch.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelCheckAssignBatch.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelCheckAssignBatch.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelCheckAssignBatch.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelCheckAssignBatch.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelCheckAssignBatch.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelCheckAssignBatch.TitleStyle.GradientAngle = 90;
+            this.panelCheckAssignBatch.TitleText = "转让";
+            // 
+            // btnRejectCheckAssignBatch
+            // 
+            this.btnRejectCheckAssignBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRejectCheckAssignBatch.AutoExpandOnClick = true;
+            this.btnRejectCheckAssignBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRejectCheckAssignBatch.Location = new System.Drawing.Point(15, 80);
+            this.btnRejectCheckAssignBatch.Name = "btnRejectCheckAssignBatch";
+            this.btnRejectCheckAssignBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnRejectCheckAssignBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnRejectCheckAssignBatch.TabIndex = 0;
+            this.btnRejectCheckAssignBatch.Text = "c) 拒绝放行";
+            this.btnRejectCheckAssignBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnRejectCheckAssignBatch.Click += new System.EventHandler(this.QueryRejectCheckAssignBatch);
+            // 
+            // btnWaitCheckAssignBatch
+            // 
+            this.btnWaitCheckAssignBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnWaitCheckAssignBatch.AutoExpandOnClick = true;
+            this.btnWaitCheckAssignBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnWaitCheckAssignBatch.Location = new System.Drawing.Point(15, 54);
+            this.btnWaitCheckAssignBatch.Name = "btnWaitCheckAssignBatch";
+            this.btnWaitCheckAssignBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnWaitCheckAssignBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnWaitCheckAssignBatch.TabIndex = 0;
+            this.btnWaitCheckAssignBatch.Text = "b) 等待放行";
+            this.btnWaitCheckAssignBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnWaitCheckAssignBatch.Click += new System.EventHandler(this.QueryWaitCheckAssignBatch);
+            // 
+            // btnNeedCheckAssignBatch
+            // 
+            this.btnNeedCheckAssignBatch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNeedCheckAssignBatch.AutoExpandOnClick = true;
+            this.btnNeedCheckAssignBatch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnNeedCheckAssignBatch.Location = new System.Drawing.Point(15, 27);
+            this.btnNeedCheckAssignBatch.Name = "btnNeedCheckAssignBatch";
+            this.btnNeedCheckAssignBatch.Size = new System.Drawing.Size(140, 23);
+            this.btnNeedCheckAssignBatch.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnNeedCheckAssignBatch.TabIndex = 0;
+            this.btnNeedCheckAssignBatch.Text = "a) 需要放行";
+            this.btnNeedCheckAssignBatch.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnNeedCheckAssignBatch.Click += new System.EventHandler(this.QueryNeedCheckAssignBatch);
+            // 
             // bubbleBarTab1
             // 
             this.bubbleBarTab1.Name = "bubbleBarTab1";
             this.bubbleBarTab1.Text = "";
+            // 
+            // superTooltip
+            // 
+            this.superTooltip.DefaultTooltipSettings = new DevComponents.DotNetBar.SuperTooltipInfo("", "", "", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
             // 
             // backgroundWorker
             // 
@@ -460,26 +810,51 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // WorkAlert
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panelRight);
+            this.Controls.Add(this.panelTop);
+            this.Controls.Add(this.panelBottom);
             this.Name = "WorkAlert";
-            this.Size = new System.Drawing.Size(801, 219);
-            this.panelRight.ResumeLayout(false);
-            this.panelCDA.ResumeLayout(false);
-            this.panelOther.ResumeLayout(false);
-            this.panelFinance.ResumeLayout(false);
-            this.panelAssign.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(801, 386);
+            this.panelTop.ResumeLayout(false);
+            this.panelCDADue.ResumeLayout(false);
+            this.panelOtherDue.ResumeLayout(false);
+            this.panelFinanceDue.ResumeLayout(false);
+            this.panelAssignDue.ResumeLayout(false);
+            this.panelBottom.ResumeLayout(false);
+            this.panelCheckRefundBatch.ResumeLayout(false);
+            this.panelCheckPaymentBatch.ResumeLayout(false);
+            this.panelCheckFinanceBatch.ResumeLayout(false);
+            this.panelCheckAssignBatch.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevComponents.DotNetBar.ExpandablePanel panelCDA;
+        private DevComponents.DotNetBar.ExpandablePanel panelCDADue;
         private DevComponents.DotNetBar.ButtonX btnRejectCheckCDA;
         private DevComponents.DotNetBar.ButtonX btnWaitCheckCDA;
         private DevComponents.DotNetBar.ButtonX btnNeedCheckCDA;
 
+        private DevComponents.DotNetBar.ExpandablePanel panelCheckAssignBatch;
+        private DevComponents.DotNetBar.ButtonX btnRejectCheckAssignBatch;
+        private DevComponents.DotNetBar.ButtonX btnWaitCheckAssignBatch;
+        private DevComponents.DotNetBar.ButtonX btnNeedCheckAssignBatch;
+
+        private DevComponents.DotNetBar.ExpandablePanel panelCheckFinanceBatch;
+        private DevComponents.DotNetBar.ButtonX btnRejectCheckFinanceBatch;
+        private DevComponents.DotNetBar.ButtonX btnWaitCheckFinanceBatch;
+        private DevComponents.DotNetBar.ButtonX btnNeedCheckFinanceBatch;
+
+        private DevComponents.DotNetBar.ExpandablePanel panelCheckPaymentBatch;
+        private DevComponents.DotNetBar.ButtonX btnRejectCheckPaymentBatch;
+        private DevComponents.DotNetBar.ButtonX btnWaitCheckPaymentBatch;
+        private DevComponents.DotNetBar.ButtonX btnNeedCheckPaymentBatch;
+
+        private DevComponents.DotNetBar.ExpandablePanel panelCheckRefundBatch;
+        private DevComponents.DotNetBar.ButtonX btnRejectCheckRefundBatch;
+        private DevComponents.DotNetBar.ButtonX btnWaitCheckRefundBatch;
+        private DevComponents.DotNetBar.ButtonX btnNeedCheckRefundBatch;
     }
 }

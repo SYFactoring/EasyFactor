@@ -821,6 +821,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 batch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(batch.FinancePeriodBegin);
                 batch.InputDate = DateTime.Today;
+                batch.CheckStatus = BATCH.UNCHECK;
             }
 
             for (int i = 0; i < logsBindingSource.List.Count; i++)

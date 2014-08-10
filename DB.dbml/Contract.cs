@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
                 else
                 {
-                    int contractCounts = context.Contracts.Count(c => c.ContractCode.StartsWith(mainContract.ContractCode) && c.ContractType.StartsWith("补充合同"));
+                    int contractCounts = context.Contracts.Count(c => c.ContractCode.StartsWith(mainContract.ContractCode) && c.ContractType.StartsWith("补充协议"));
                     string contractCode = String.Format("{0}-BC-{1:D2}", mainContract.ContractCode, contractCounts + 1);
                     return contractCode;
                 }
@@ -65,8 +65,8 @@ namespace CMBC.EasyFactor.DB.dbml
             else
             {
                 String abbrName = this.Client.ClientEDICode.Substring(3, 4);
-                int count = context.Contracts.Count(c => c.ClientEDICode == this.Client.ClientEDICode && c.ContractValueDate.Year == this.ContractValueDate.Year);
-                string contractCode = String.Format("{0:4}{1:yyyy}{2:D2}", abbrName, this.ContractValueDate, count);
+                int count = context.Contracts.Count(c => c.ClientEDICode == this.Client.ClientEDICode && c.ContractValueDate.Year == this.ContractValueDate.Year && c.ContractType == "保理业务合同");
+                string contractCode = String.Format("{0:4}{1:yyyy}{2:D2}", abbrName, this.ContractValueDate, count + 1);
                 return contractCode;
             }
         }

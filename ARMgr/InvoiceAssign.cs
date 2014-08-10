@@ -599,6 +599,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(_case.CaseCode, batch.AssignDate);
                     batch.InputDate = DateTime.Today;
+                    batch.CheckStatus = BATCH.UNCHECK;
                 }
 
                 foreach (Invoice invoice in invoiceList)
