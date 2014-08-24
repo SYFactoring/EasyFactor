@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FOS" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=121.40.122.181;Initial Catalog=FOS_Test;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=121.40.145.175;Initial Catalog=FOS_Test;Persist Security Info=True;User ID=Factoring" SettingsObjectName="CMBC.EasyFactor.Properties.Settings" SettingsPropertyName="FOSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.[Case]" Member="Cases">
     <Type Name="Case">
       <Column Name="CaseCode" Type="System.String" DbType="Char(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
@@ -98,6 +98,8 @@
       <Column Name="PoolInvoiceGraceDays" Storage="_poolInvoiceGraceDays" Type="System.Int32" DbType="int" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CommissionPrePost" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="AssignNotifyType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="FinanceRatioType" Type="System.String" DbType="Nvarchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="FinanceRatio" Type="System.String" DbType="NVarchar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Case_CDA" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>
@@ -374,6 +376,7 @@
       <Column Name="CheckStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="WhoPayFee" Type="System.String" DbType="NVarchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceAssignBatch_CreditNote" Member="CreditNotes" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="CreditNote" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="Invoice" />
       <Association Name="Case_InvoiceAssignBatch" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
@@ -401,6 +404,9 @@
       <Column Name="CheckStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="FinanceRateType1" Type="System.String" DbType="NVarchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="FinanceRateType2" Type="System.String" DbType="NVarchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="WhoPayInterest" Type="System.String" DbType="NVarchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceFinanceBatch_InvoiceRefundBatch" Member="InvoiceRefundBatches" ThisKey="FinanceBatchNo" OtherKey="FinanceBatchNo" Type="InvoiceRefundBatch" />
       <Association Name="InvoiceFinanceBatch_InvoiceFinanceLog" Member="InvoiceFinanceLogs" ThisKey="FinanceBatchNo" OtherKey="FinanceBatchNo" Type="InvoiceFinanceLog" />
       <Association Name="Factor_InvoiceFinanceBatch" Member="Factor" ThisKey="FactorCode" OtherKey="FactorCode" Type="Factor" IsForeignKey="true" />

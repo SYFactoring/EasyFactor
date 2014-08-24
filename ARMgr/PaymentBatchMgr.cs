@@ -70,6 +70,7 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         public PaymentBatchMgr(String username, String checkStatus)
+            : this(OpBatchType.QUERY)
         {
             if(username == null)
             {
@@ -140,7 +141,7 @@ namespace CMBC.EasyFactor.ARMgr
         //?Private?Methods?(12)?
         private void Check(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_APPROVE))
             {
                 return;
             }
@@ -527,7 +528,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void Reject(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_APPROVE))
             {
                 return;
             }

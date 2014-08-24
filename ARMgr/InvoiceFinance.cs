@@ -74,14 +74,23 @@ namespace CMBC.EasyFactor.ARMgr
             batchCurrencyComboBoxEx.DisplayMember = "CurrencyCode";
             batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
 
+            cbFinanceRateType1.Items.AddRange(new object[] { "先收息", "后收息" });
+            cbFinanceRateType1.Text = "先收息";
+
+            cbFinanceRateType2.Items.AddRange(new object[] { "计头不计尾", "记尾不计头" });
+            cbFinanceRateType2.Text = "计头不计尾";
+
+            cbWhoPayInterest.Items.AddRange(new object[] { "卖方付", "买方付" });
+            cbWhoPayInterest.Text = "卖方付";
+
             dgvLogs.CellFormatting += DgvInvoicesCellFormatting;
             dgvLogs.CellParsing += DgvInvoicesCellParsing;
 
             financeRateTextBox.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
             financeRateTextBox.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
 
-            costRateTextBoxX.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
-            costRateTextBoxX.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
+            //costRateTextBoxX.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
+            //costRateTextBoxX.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
 
             foreach (DataGridViewColumn column in dgvLogs.Columns)
             {
@@ -654,6 +663,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                   && invoice.DueDate > DateTime.Today.AddDays(1)
                                                   && (invoice.AssignAmount > invoice.PaymentAmount.GetValueOrDefault() )
                                                   && ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * (decimal)financeProp > invoice.FinanceAmount.GetValueOrDefault())
+                                                  && invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK
                                               orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;
 

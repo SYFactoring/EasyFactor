@@ -75,6 +75,7 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         public RefundBatchMgr(String username, String checkStatus)
+            : this(OpBatchType.QUERY)
         {
             if(username == null)
             {
@@ -150,7 +151,7 @@ namespace CMBC.EasyFactor.ARMgr
         //?Private?Methods?(9)?
         private void Check(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_APPROVE))
             {
                 return;
             }
@@ -423,7 +424,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void Reject(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(Permissions.INVOICE_CHECK))
+            if (!PermUtil.CheckPermission(Permissions.INVOICE_APPROVE))
             {
                 return;
             }

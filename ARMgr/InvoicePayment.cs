@@ -490,6 +490,7 @@ namespace CMBC.EasyFactor.ARMgr
                                               where
                                                   invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode &&
                                                   (invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount)
+                                                  && invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK
                                               orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;
 

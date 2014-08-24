@@ -157,6 +157,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCommissionAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorCommissionPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorCommissionAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWhoPayFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInputDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -645,6 +646,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCommissionAmount,
             this.colFactorCommissionPrice,
             this.colFactorCommissionAmount,
+            this.colWhoPayFee,
             this.colInputDate,
             this.colCreateUserName,
             this.colCheckStatus,
@@ -996,6 +998,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFactorCommissionAmount.Name = "colFactorCommissionAmount";
             this.colFactorCommissionAmount.ReadOnly = true;
             // 
+            // colWhoPayFee
+            // 
+            this.colWhoPayFee.DataPropertyName = "WhoPayFee";
+            this.colWhoPayFee.HeaderText = "±£¿Ì∏∂∑—";
+            this.colWhoPayFee.Name = "colWhoPayFee";
+            this.colWhoPayFee.ReadOnly = true;
+            // 
             // colInputDate
             // 
             this.colInputDate.DataPropertyName = "InputDate";
@@ -1088,6 +1097,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorCommissionPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFactorCommissionAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWhoPayFee;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInputDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;

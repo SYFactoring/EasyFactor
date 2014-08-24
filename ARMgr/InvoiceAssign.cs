@@ -52,6 +52,8 @@ namespace CMBC.EasyFactor.ARMgr
             dgvInvoices.AutoGenerateColumns = false;
             superValidator.Enabled = false;
             dgvInvoices.ReadOnly = true;
+            cbWhoPayFee.Items.AddRange(new object[] { "Âô·½¸¶", "Âò·½¸¶" });
+            cbWhoPayFee.Text = "Âô·½¸¶";
             ControlUtil.SetDoubleBuffered(dgvInvoices);
 
             _context = new DBDataContext();

@@ -1629,6 +1629,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _AssignNotifyType;
 		
+		private string _FinanceRatioType;
+		
+		private string _FinanceRatio;
+		
 		private EntityRef<Case> _Case;
 		
     #region 可扩展性方法定义
@@ -1733,6 +1737,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommissionPrePostChanged();
     partial void OnAssignNotifyTypeChanging(string value);
     partial void OnAssignNotifyTypeChanged();
+    partial void OnFinanceRatioTypeChanging(string value);
+    partial void OnFinanceRatioTypeChanged();
+    partial void OnFinanceRatioChanging(string value);
+    partial void OnFinanceRatioChanged();
     #endregion
 		
 		public CDA()
@@ -2721,6 +2729,46 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._AssignNotifyType = value;
 					this.SendPropertyChanged("AssignNotifyType");
 					this.OnAssignNotifyTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceRatioType", DbType="Nvarchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string FinanceRatioType
+		{
+			get
+			{
+				return this._FinanceRatioType;
+			}
+			set
+			{
+				if ((this._FinanceRatioType != value))
+				{
+					this.OnFinanceRatioTypeChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceRatioType = value;
+					this.SendPropertyChanged("FinanceRatioType");
+					this.OnFinanceRatioTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceRatio", DbType="NVarchar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string FinanceRatio
+		{
+			get
+			{
+				return this._FinanceRatio;
+			}
+			set
+			{
+				if ((this._FinanceRatio != value))
+				{
+					this.OnFinanceRatioChanging(value);
+					this.SendPropertyChanging();
+					this._FinanceRatio = value;
+					this.SendPropertyChanged("FinanceRatio");
+					this.OnFinanceRatioChanged();
 				}
 			}
 		}
@@ -8618,6 +8666,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _CheckDate;
 		
+		private string _WhoPayFee;
+		
 		private EntitySet<CreditNote> _CreditNotes;
 		
 		private EntitySet<Invoice> _Invoices;
@@ -8654,6 +8704,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckUserNameChanged();
     partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCheckDateChanged();
+    partial void OnWhoPayFeeChanging(string value);
+    partial void OnWhoPayFeeChanged();
     #endregion
 		
 		public InvoiceAssignBatch()
@@ -8913,6 +8965,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WhoPayFee", DbType="NVarchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string WhoPayFee
+		{
+			get
+			{
+				return this._WhoPayFee;
+			}
+			set
+			{
+				if ((this._WhoPayFee != value))
+				{
+					this.OnWhoPayFeeChanging(value);
+					this.SendPropertyChanging();
+					this._WhoPayFee = value;
+					this.SendPropertyChanged("WhoPayFee");
+					this.OnWhoPayFeeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceAssignBatch_CreditNote", Storage="_CreditNotes", ThisKey="AssignBatchNo", OtherKey="AssignBatchNo")]
 		public EntitySet<CreditNote> CreditNotes
 		{
@@ -9096,6 +9168,12 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _CheckDate;
 		
+		private string _FinanceRateType1;
+		
+		private string _FinanceRateType2;
+		
+		private string _WhoPayInterest;
+		
 		private EntitySet<InvoiceRefundBatch> _InvoiceRefundBatches;
 		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
@@ -9148,6 +9226,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckUserNameChanged();
     partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCheckDateChanged();
+    partial void OnFinanceRateType1Changing(string value);
+    partial void OnFinanceRateType1Changed();
+    partial void OnFinanceRateType2Changing(string value);
+    partial void OnFinanceRateType2Changed();
+    partial void OnWhoPayInterestChanging(string value);
+    partial void OnWhoPayInterestChanged();
     #endregion
 		
 		public InvoiceFinanceBatch()
@@ -9548,6 +9632,66 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._CheckDate = value;
 					this.SendPropertyChanged("CheckDate");
 					this.OnCheckDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceRateType1", DbType="NVarchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string FinanceRateType1
+		{
+			get
+			{
+				return this._FinanceRateType1;
+			}
+			set
+			{
+				if ((this._FinanceRateType1 != value))
+				{
+					this.OnFinanceRateType1Changing(value);
+					this.SendPropertyChanging();
+					this._FinanceRateType1 = value;
+					this.SendPropertyChanged("FinanceRateType1");
+					this.OnFinanceRateType1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceRateType2", DbType="NVarchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string FinanceRateType2
+		{
+			get
+			{
+				return this._FinanceRateType2;
+			}
+			set
+			{
+				if ((this._FinanceRateType2 != value))
+				{
+					this.OnFinanceRateType2Changing(value);
+					this.SendPropertyChanging();
+					this._FinanceRateType2 = value;
+					this.SendPropertyChanged("FinanceRateType2");
+					this.OnFinanceRateType2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WhoPayInterest", DbType="NVarchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string WhoPayInterest
+		{
+			get
+			{
+				return this._WhoPayInterest;
+			}
+			set
+			{
+				if ((this._WhoPayInterest != value))
+				{
+					this.OnWhoPayInterestChanging(value);
+					this.SendPropertyChanging();
+					this._WhoPayInterest = value;
+					this.SendPropertyChanged("WhoPayInterest");
+					this.OnWhoPayInterestChanged();
 				}
 			}
 		}

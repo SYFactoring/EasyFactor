@@ -64,7 +64,9 @@ namespace CMBC.EasyFactor.ARMgr
             _bs.DataSource = _case.InvoiceAssignBatches;
             Context = context;
         }
+
         public AssignBatchMgr(String username, String checkStatus)
+            : this(OpBatchType.QUERY)
         {
             if(username == null)
             {
@@ -137,7 +139,7 @@ namespace CMBC.EasyFactor.ARMgr
         //?Private?Methods?(25)?
         private void Check(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_CHECK))
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
             {
                 return;
             }
@@ -522,7 +524,7 @@ namespace CMBC.EasyFactor.ARMgr
         }
         private void Reject(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_CHECK))
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
             {
                 return;
             }

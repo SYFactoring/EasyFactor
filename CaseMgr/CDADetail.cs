@@ -724,6 +724,7 @@ namespace CMBC.EasyFactor.CaseMgr
                               AssignType = "全部",
                               CommissionPrePost = "先收",
                               AssignNotifyType = "买方书面确认",
+                              FinanceRatioType = "单笔单议",
                               Case = curCase
                           };
             return cda;
@@ -808,6 +809,12 @@ namespace CMBC.EasyFactor.CaseMgr
             if (cda.CDACode == null)
             {
                 bool isAddOK = true;
+                if (cda.Case.SellerClient.Contact == null)
+                {
+                    MessageBoxEx.Show("卖方没有有效合同，不能创建CDA", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string cdaCode = CDA.GenerateCDACode(cda.Case);
                 if (String.IsNullOrEmpty(cdaCode))
                 {

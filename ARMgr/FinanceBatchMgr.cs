@@ -83,6 +83,7 @@ namespace CMBC.EasyFactor.ARMgr
         }
 
         public FinanceBatchMgr(String username, String checkStatus)
+            : this(OpBatchType.QUERY)
         {
             if(username == null)
             {
@@ -179,7 +180,7 @@ namespace CMBC.EasyFactor.ARMgr
         //?Private?Methods?(13)?
         private void Check(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_CHECK))
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
             {
                 return;
             }
@@ -504,7 +505,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         private void Reject(object sender, EventArgs e)
         {
-            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_CHECK))
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
             {
                 return;
             }

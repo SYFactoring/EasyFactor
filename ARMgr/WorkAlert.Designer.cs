@@ -598,7 +598,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCheckPaymentBatch.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelCheckPaymentBatch.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelCheckPaymentBatch.TitleStyle.GradientAngle = 90;
-            this.panelCheckPaymentBatch.TitleText = "ÊÕ¿î";
+            this.panelCheckPaymentBatch.TitleText = "¸¶¿î";
             // 
             // btnRejectCheckPaymentBatch
             // 

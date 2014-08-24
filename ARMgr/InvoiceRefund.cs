@@ -502,6 +502,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                               &&
                                                               ((from refundLog in log.InvoiceRefundLogs select refundLog.RefundAmount).Sum().GetValueOrDefault() <
                                                                log.FinanceAmount.GetValueOrDefault() )
+                                                               && log.Invoice.InvoiceFinanceBatches.All(f=>f.CheckStatus == BATCH.CHECK)
                                                         orderby log.InvoiceFinanceBatch.FinancePeriodEnd
                                                         select log;
 

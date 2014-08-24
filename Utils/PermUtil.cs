@@ -44,7 +44,7 @@ namespace CMBC.EasyFactor.Utils
         /// <summary>
         /// 
         /// </summary>
-        INVOICE_CHECK = 0x00002000,
+        //INVOICE_CHECK = 0x00002000,
 
         /// <summary>
         /// 

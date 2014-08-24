@@ -1445,7 +1445,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 sheet.Cells[row++, 2] = String.Format("每笔发票最高不超过 {0:p0} 成", selectedCDA.FinanceProportion);
 
                 sheet.Cells[row, 1] = "保理融资利率";
-                sheet.Cells[row++, 2] = "未定义";
+                if (selectedCDA.FinanceRatioType == "固定利率")
+                {
+                    sheet.Cells[row++, 2] = selectedCDA.FinanceRatio;
+                }
+                else
+                {
+                    sheet.Cells[row++, 2] = "单笔单议";
+                }
 
                 sheet.Cells[row, 1] = "保理费";
                 if (selectedCDA.CommissionType == "其他")
@@ -1501,27 +1508,34 @@ namespace CMBC.EasyFactor.CaseMgr
 
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].WrapText = true;
-                sheet.Cells[row++, 1] = "应收账款转让通知方式（按实际业务情况选择）：";
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].WrapText = true;
-                sheet.Cells[row++,1] = selectedCDA.AssignNotifyType=="买方书面确认"?"√":"□"+" 由贵司单独通知或我司联合贵司共同通知买方，并取得买方书面确认;";
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].WrapText = true;
-                sheet.Cells[row++,1] = selectedCDA.AssignNotifyType=="发票注明转让"?"√":"□"+" 贵司向买方开出的发票原件上注明应收账款转让的事实，贵司应将该等发票复印件交予我司";
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].WrapText = true;
-                sheet.Cells[row++,1] = selectedCDA.AssignNotifyType=="公正送达"?"√":"□"+" 由贵司单独或我司联合贵司采取公证送达方式，通知买方应收账款转让事实";
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].WrapText = true;
-                sheet.Cells[row++, 1] = selectedCDA.AssignNotifyType=="寄送转让明细"?"√":"□"+" 我司与买方签署协议约定以传真、电文、电报、电子邮件等方式寄送我司受让账款明细，由买方确认回执; ";
+                sheet.Cells[row++, 1] = "应收账款转让通知方式：";
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].WrapText = true;
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].RowHeight = 25;
-                sheet.Cells[row++,1] =selectedCDA.AssignNotifyType=="三方协议"?"√":"□"+" 我司通过与贵司、买方之间的相关协议，明确规定有关应收账款确认和通知的方式和流程，并按照该协议的规定履行相关程序。";
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].MergeCells = true;
-                sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 2]].WrapText = true;
-                sheet.Cells[row++, 1]=selectedCDA.AssignNotifyType=="其他"?"√":"□"+" 其他";
-
+                if (selectedCDA.AssignNotifyType == "买方书面确认")
+                {
+                    sheet.Cells[row++, 1] = "由贵司单独通知或我司联合贵司共同通知买方，并取得买方书面确认;";
+                }
+                else if (selectedCDA.AssignNotifyType == "发票注明转让")
+                {
+                    sheet.Cells[row++, 1] = "贵司向买方开出的发票原件上注明应收账款转让的事实，贵司应将该等发票复印件交予我司";
+                }
+                else if (selectedCDA.AssignNotifyType == "公正送达")
+                {
+                    sheet.Cells[row++, 1] = "由贵司单独或我司联合贵司采取公证送达方式，通知买方应收账款转让事实";
+                }
+                else if (selectedCDA.AssignNotifyType == "寄送转让明细")
+                {
+                    sheet.Cells[row++, 1] = "我司与买方签署协议约定以传真、电文、电报、电子邮件等方式寄送我司受让账款明细，由买方确认回执; ";
+                }
+                else if (selectedCDA.AssignNotifyType == "三方协议")
+                {
+                    sheet.Cells[row++, 1] = "我司通过与贵司、买方之间的相关协议，明确规定有关应收账款确认和通知的方式和流程，并按照该协议的规定履行相关程序。";
+                }
+                else if (selectedCDA.AssignNotifyType == "其他")
+                {
+                    sheet.Cells[row++, 1] = "其他";
+                }
                 row++;
 
                 sheet.Cells[row++, 1] = "附注：";
