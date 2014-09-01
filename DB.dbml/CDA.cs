@@ -185,7 +185,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
                     int count;
                     if (
-                        !Int32.TryParse(queryResult.Max(no => no.Substring(selectedCase.CaseCode.Length + 4)), out count))
+                        !Int32.TryParse(queryResult.Max(no => no.Substring(selectedCase.CaseCode.Length + 1)), out count))
                     {
                         count = 0;
                     }

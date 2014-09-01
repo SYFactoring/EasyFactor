@@ -82,9 +82,6 @@ namespace CMBC.EasyFactor.ARMgr
             financeRateTextBox.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
             financeRateTextBox.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
 
-            costRateTextBox.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
-            costRateTextBox.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
-
             UpdateBatchControlStatus();
         }
 
@@ -293,8 +290,6 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ControlUtil.SetComponetEditable(comp, false);
                 }
-
-                btnFactorSelect.Visible = false;
             }
             else if (_opBatchType == OpBatchType.UPDATE_BATCH)
             {
@@ -302,10 +297,6 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     ControlUtil.SetComponetEditable(comp, true);
                 }
-
-                btnFactorSelect.Visible = true;
-                factorCodeTextBox.ReadOnly = true;
-                factorTextBox.ReadOnly = true;
             }
 
             ControlUtil.SetComponetEditable(createUserNameTextBox, false);

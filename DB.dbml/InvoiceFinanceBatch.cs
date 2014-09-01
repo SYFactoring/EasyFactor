@@ -20,10 +20,11 @@ namespace CMBC.EasyFactor.DB.dbml
 
         private decimal? _assignAmount;
         private decimal? _commissionAmount;
-        private decimal? _grossInterestIncome;
+        //private decimal? _grossInterestIncome;
         private decimal? _handfeeAmount;
-        private decimal? _marginIncome;
-        private decimal? _netInterestIncome;
+        private decimal? _interestAmount;
+        //private decimal? _marginIncome;
+        //private decimal? _netInterestIncome;
 
 
 
@@ -147,20 +148,20 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 毛利息收入
         /// </summary>
-        public decimal GrossInterestIncome
-        {
-            get
-            {
-                if (_grossInterestIncome.HasValue == false)
-                {
-                    decimal result = InvoiceFinanceLogs.Sum(log => log.GrossInterest);
+        //public decimal GrossInterestIncome
+        //{
+        //    get
+        //    {
+        //        if (_grossInterestIncome.HasValue == false)
+        //        {
+        //            decimal result = InvoiceFinanceLogs.Sum(log => log.GrossInterest);
 
-                    _grossInterestIncome = result;
-                }
+        //            _grossInterestIncome = result;
+        //        }
 
-                return _grossInterestIncome.Value;
-            }
-        }
+        //        return _grossInterestIncome.Value;
+        //    }
+        //}
 
         /// <summary>
         /// Gets
@@ -188,35 +189,49 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 代付利差收入
         /// </summary>
-        public decimal? MarginIncome
-        {
-            get
-            {
-                if (_marginIncome.HasValue == false)
-                {
-                    _marginIncome = FinanceAmount * (decimal)(FinanceRate - CostRate) / 360 *
-                                    ((FinancePeriodEnd - FinancePeriodBegin).Days);
-                }
+        //public decimal? MarginIncome
+        //{
+        //    get
+        //    {
+        //        if (_marginIncome.HasValue == false)
+        //        {
+        //            _marginIncome = FinanceAmount * (decimal)(FinanceRate - CostRate) / 360 *
+        //                            ((FinancePeriodEnd - FinancePeriodBegin).Days);
+        //        }
 
-                return _marginIncome;
-            }
-        }
+        //        return _marginIncome;
+        //    }
+        //}
 
         /// <summary>
         /// 净利息收入
         /// </summary>
-        public decimal NetInterestIncome
+        //public decimal NetInterestIncome
+        //{
+        //    get
+        //    {
+        //        if (_netInterestIncome.HasValue == false)
+        //        {
+        //            decimal result = InvoiceFinanceLogs.Sum(log => log.NetInterest);
+
+        //            _netInterestIncome = result;
+        //        }
+
+        //        return _netInterestIncome.Value;
+        //    }
+        //}
+
+        public decimal Interest
         {
             get
             {
-                if (_netInterestIncome.HasValue == false)
+                if (_interestAmount.HasValue == false)
                 {
-                    decimal result = InvoiceFinanceLogs.Sum(log => log.NetInterest);
-
-                    _netInterestIncome = result;
+                    decimal result = InvoiceFinanceLogs.Sum(log => log.Interest.GetValueOrDefault());
+                    _interestAmount = result;
                 }
 
-                return _netInterestIncome.Value;
+                return _interestAmount.Value;
             }
         }
 
@@ -361,17 +376,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        partial void OnFinancePeriodEndChanged()
-        {
-            foreach (InvoiceFinanceLog log in InvoiceFinanceLogs)
-            {
-                log.Invoice.CaculateFinanceDate();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="action"></param>
         partial void OnValidate(ChangeAction action)
         {
@@ -389,21 +393,21 @@ namespace CMBC.EasyFactor.DB.dbml
                                                               FinancePeriodBegin, assignDate, FinanceBatchNo));
                         }
 
-                        if (FinancePeriodBegin > FinancePeriodEnd)
-                        {
-                            throw new Exception(String.Format("融资到期日{0:yyyyMMdd}应该大于融资日{1:yyyyMMdd}，融资批号：{2} ",
-                                                              FinancePeriodBegin, FinancePeriodEnd, FinanceBatchNo));
-                        }
+                        //if (FinancePeriodBegin > FinancePeriodEnd)
+                        //{
+                        //    throw new Exception(String.Format("融资到期日{0:yyyyMMdd}应该大于融资日{1:yyyyMMdd}，融资批号：{2} ",
+                        //                                      FinancePeriodBegin, FinancePeriodEnd, FinanceBatchNo));
+                        //}
 
-                        if (Case.TransactionType != "国内买方保理")
-                        {
-                            DateTime dueDate = invoiceList.OrderByDescending(i => i.DueDate).First().DueDate;
-                            if (FinancePeriodEnd < dueDate)
-                            {
-                                throw new Exception(String.Format("融资到期日{0:yyyyMMdd}不能早于发票到期日{1:yyyyMMdd}，融资批号：{2} ",
-                                                                  FinancePeriodEnd, dueDate, FinanceBatchNo));
-                            }
-                        }
+                        //if (Case.TransactionType != "国内买方保理")
+                        //{
+                        //    DateTime dueDate = invoiceList.OrderByDescending(i => i.DueDate).First().DueDate;
+                        //    if (FinancePeriodEnd < dueDate)
+                        //    {
+                        //        throw new Exception(String.Format("融资到期日{0:yyyyMMdd}不能早于发票到期日{1:yyyyMMdd}，融资批号：{2} ",
+                        //                                          FinancePeriodEnd, dueDate, FinanceBatchNo));
+                        //    }
+                        //}
                     }
 
                     if(FinanceAmount<0)

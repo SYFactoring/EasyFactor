@@ -102,13 +102,15 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblAssignNumber;
             DevComponents.DotNetBar.LabelX lblTotalCommission;
             DevComponents.DotNetBar.LabelX lblTotalHandfee;
+            DevComponents.DotNetBar.LabelX lblWhoPayFee;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceAssign));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            DevComponents.DotNetBar.LabelX lblWhoPayFee;
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAssignBatch = new DevComponents.DotNetBar.PanelEx();
+            this.cbWhoPayFee = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbTotalHandfee = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbTotalCommission = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbAssignNumber = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -130,6 +132,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.menuItemFlaw = new System.Windows.Forms.ToolStripMenuItem();
             this.invoiceBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -141,6 +144,11 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -148,14 +156,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.cbWhoPayFee = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             assignDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -165,14 +165,14 @@ namespace CMBC.EasyFactor.ARMgr
             lblTotalHandfee = new DevComponents.DotNetBar.LabelX();
             lblWhoPayFee = new DevComponents.DotNetBar.LabelX();
             this.panelAssignBatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).BeginInit();
             this.cmuInvoiceAssign.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).BeginInit();
             this.invoiceBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // assignBatchNoLabel
@@ -266,6 +266,19 @@ namespace CMBC.EasyFactor.ARMgr
             lblTotalHandfee.TabIndex = 15;
             lblTotalHandfee.Text = "本次单据处理费收入";
             // 
+            // lblWhoPayFee
+            // 
+            lblWhoPayFee.AutoSize = true;
+            // 
+            // 
+            // 
+            lblWhoPayFee.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            lblWhoPayFee.Location = new System.Drawing.Point(356, 9);
+            lblWhoPayFee.Name = "lblWhoPayFee";
+            lblWhoPayFee.Size = new System.Drawing.Size(62, 18);
+            lblWhoPayFee.TabIndex = 21;
+            lblWhoPayFee.Text = "保理费由:";
+            // 
             // panelAssignBatch
             // 
             this.panelAssignBatch.AutoScroll = true;
@@ -306,6 +319,23 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelAssignBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelAssignBatch.Style.GradientAngle = 90;
             this.panelAssignBatch.TabIndex = 0;
+            // 
+            // cbWhoPayFee
+            // 
+            this.cbWhoPayFee.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "WhoPayFee", true));
+            this.cbWhoPayFee.DisplayMember = "Text";
+            this.cbWhoPayFee.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbWhoPayFee.FormattingEnabled = true;
+            this.cbWhoPayFee.ItemHeight = 14;
+            this.cbWhoPayFee.Location = new System.Drawing.Point(427, 6);
+            this.cbWhoPayFee.Name = "cbWhoPayFee";
+            this.cbWhoPayFee.Size = new System.Drawing.Size(77, 20);
+            this.cbWhoPayFee.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.cbWhoPayFee.TabIndex = 20;
+            // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch);
             // 
             // tbTotalHandfee
             // 
@@ -460,7 +490,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.assignDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.batchBindingSource, "AssignDate", true));
             this.assignDateDateTimePicker.FreeTextEntryMode = true;
             this.assignDateDateTimePicker.IsPopupCalendarOpen = false;
-            this.assignDateDateTimePicker.Location = new System.Drawing.Point(217, 6);
+            this.assignDateDateTimePicker.Location = new System.Drawing.Point(229, 6);
             // 
             // 
             // 
@@ -585,6 +615,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
+            // invoiceBindingSource
+            // 
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
@@ -699,6 +733,46 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvInvoicesCellValueChanged);
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvInvoicesRowHeaderMouseDoubleClick);
             // 
+            // colInvoiceNo
+            // 
+            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
+            this.colInvoiceNo.HeaderText = "发票号";
+            this.colInvoiceNo.Name = "colInvoiceNo";
+            // 
+            // colInvoiceAmount
+            // 
+            this.colInvoiceAmount.DataPropertyName = "InvoiceAmount";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colInvoiceAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colInvoiceAmount.HeaderText = "票面金额";
+            this.colInvoiceAmount.Name = "colInvoiceAmount";
+            // 
+            // colAssignAmount
+            // 
+            this.colAssignAmount.DataPropertyName = "AssignAmount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAssignAmount.HeaderText = "转让金额";
+            this.colAssignAmount.Name = "colAssignAmount";
+            // 
+            // colInvoiceDate
+            // 
+            this.colInvoiceDate.DataPropertyName = "InvoiceDate";
+            this.colInvoiceDate.HeaderText = "发票日";
+            this.colInvoiceDate.Name = "colInvoiceDate";
+            this.colInvoiceDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colDueDate
+            // 
+            this.colDueDate.DataPropertyName = "DueDate";
+            this.colDueDate.HeaderText = "到期日";
+            this.colDueDate.Name = "colDueDate";
+            this.colDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // colCommission
             // 
             this.colCommission.DataPropertyName = "Commission";
@@ -740,80 +814,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // cbWhoPayFee
-            // 
-            this.cbWhoPayFee.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "WhoPayFee", true));
-            this.cbWhoPayFee.DisplayMember = "Text";
-            this.cbWhoPayFee.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbWhoPayFee.FormattingEnabled = true;
-            this.cbWhoPayFee.ItemHeight = 14;
-            this.cbWhoPayFee.Location = new System.Drawing.Point(427, 6);
-            this.cbWhoPayFee.Name = "cbWhoPayFee";
-            this.cbWhoPayFee.Size = new System.Drawing.Size(77, 20);
-            this.cbWhoPayFee.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
-            this.cbWhoPayFee.TabIndex = 20;
-            // 
-            // lblWhoPayFee
-            // 
-            lblWhoPayFee.AutoSize = true;
-            // 
-            // 
-            // 
-            lblWhoPayFee.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            lblWhoPayFee.Location = new System.Drawing.Point(356, 9);
-            lblWhoPayFee.Name = "lblWhoPayFee";
-            lblWhoPayFee.Size = new System.Drawing.Size(62, 18);
-            lblWhoPayFee.TabIndex = 21;
-            lblWhoPayFee.Text = "保理费由:";
-            // 
-            // colInvoiceNo
-            // 
-            this.colInvoiceNo.DataPropertyName = "InvoiceNo";
-            this.colInvoiceNo.HeaderText = "发票号";
-            this.colInvoiceNo.Name = "colInvoiceNo";
-            // 
-            // colInvoiceAmount
-            // 
-            this.colInvoiceAmount.DataPropertyName = "InvoiceAmount";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colInvoiceAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colInvoiceAmount.HeaderText = "票面金额";
-            this.colInvoiceAmount.Name = "colInvoiceAmount";
-            // 
-            // colAssignAmount
-            // 
-            this.colAssignAmount.DataPropertyName = "AssignAmount";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssignAmount.HeaderText = "转让金额";
-            this.colAssignAmount.Name = "colAssignAmount";
-            // 
-            // colInvoiceDate
-            // 
-            this.colInvoiceDate.DataPropertyName = "InvoiceDate";
-            this.colInvoiceDate.HeaderText = "发票日";
-            this.colInvoiceDate.Name = "colInvoiceDate";
-            this.colInvoiceDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colDueDate
-            // 
-            this.colDueDate.DataPropertyName = "DueDate";
-            this.colDueDate.HeaderText = "到期日";
-            this.colDueDate.Name = "colDueDate";
-            this.colDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // invoiceBindingSource
-            // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
-            // 
-            // batchBindingSource
-            // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceAssignBatch);
-            // 
             // InvoiceAssign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -826,15 +826,15 @@ namespace CMBC.EasyFactor.ARMgr
             this.Size = new System.Drawing.Size(1235, 549);
             this.panelAssignBatch.ResumeLayout(false);
             this.panelAssignBatch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).EndInit();
             this.cmuInvoiceAssign.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).EndInit();
             this.invoiceBindingNavigator.ResumeLayout(false);
             this.invoiceBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

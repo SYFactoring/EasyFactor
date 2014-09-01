@@ -259,9 +259,6 @@ namespace CMBC.EasyFactor.ARMgr
         private void FillCaseBasic()
         {
             tbCaseCode.Text = Case.CaseCode;
-            ownerDepartmentCodeTextBox.Text = Case.OwnerDepartment == null
-                                                  ? string.Empty
-                                                  : Case.OwnerDepartment.ToString();
             transactionTypeTextBox.Text = Case.TransactionType;
             invoiceCurrencyTextBox.Text = Case.InvoiceCurrency;
             sellerEDICodeTextBox.Text = Case.SellerCode;
@@ -271,6 +268,7 @@ namespace CMBC.EasyFactor.ARMgr
             buyerNameTextBox.Text = Case.BuyerClient == null ? string.Empty : Case.BuyerClient.ToString();
             tbTotalAssignOutstanding.Text = String.Format("{0:N2}", Case.TotalAssignOutstanding);
             tbTotalFinanceOustanding.Text = String.Format("{0:N2}", Case.TotalFinanceOutstanding);
+            tbPool.Text = Case.IsPool ? "池融资" : "单笔融资";
 
             switch (Case.TransactionType)
             {
@@ -294,8 +292,7 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 tbCDACode.Text = cda.CDACode;
                 tbIsNotice.Text = cda.IsNotice;
-                if (cda.IsRecoarse != null) isRecoarseCheckBox.Checked = cda.IsRecoarse.Value;
-                assignTypeTextBox.Text = cda.AssignType;
+                tbRecoarse.Text = cda.IsRecoarse.GetValueOrDefault() ? "有追索权" : "无追索权";
                 tbPaymentTerms.Text = cda.PaymentTerms;
 
                 priceTextBox.Text = String.Format("{0:P4}", cda.Price);
@@ -324,11 +321,6 @@ namespace CMBC.EasyFactor.ARMgr
                                       MessageBoxIcon.Information);
                     return;
                 }
-            }
-            else
-            {
-                isRecoarseCheckBox.Checked = false;
-                assignTypeTextBox.Text = string.Empty;
             }
 
             Control control = panelInvoiceMgr.Controls[0];

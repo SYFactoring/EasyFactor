@@ -81,7 +81,7 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                IList<Contract> contractList = Contracts.Where(c => c.ContractStatus == CONTRACT.AVAILABILITY).ToList();
+                IList<Contract> contractList = Contracts.Where(c => c.ContractStatus == CONTRACT.AVAILABILITY && !c.ContractType.StartsWith("附属合同") && !c.ContractType.StartsWith("补充协议")).ToList();
                 if (contractList.Count > 1)
                 {
                     MessageBoxEx.Show("包含多个有效的主合同，客户编号: " + ClientEDICode, MESSAGE.TITLE_WARNING);

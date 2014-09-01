@@ -1709,7 +1709,7 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2 + recordStep, column++] =
                             financeLog.InvoiceFinanceBatch.FinancePeriodBegin;
                         datasheet.Cells[row + 2 + recordStep, column++] =
-                            financeLog.InvoiceFinanceBatch.FinancePeriodEnd;
+                            financeLog.FinanceDueDate;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.Comment;
                         datasheet.Cells[row + 2 + recordStep, column] = financeLog.InvoiceFinanceBatch.CreateUserName;
 
@@ -1760,7 +1760,7 @@ namespace CMBC.EasyFactor.Utils
                     //手续费
                     datasheet.Cells[row + 2, column++] = invoice.Commission;
                     //利息
-                    datasheet.Cells[row + 2, column++] = invoice.NetInterest;
+                    datasheet.Cells[row + 2, column++] = invoice.Interest;
                     datasheet.Cells[row + 2, column] = invoice.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / size));

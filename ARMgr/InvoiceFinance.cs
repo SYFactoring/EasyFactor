@@ -75,22 +75,16 @@ namespace CMBC.EasyFactor.ARMgr
             batchCurrencyComboBoxEx.ValueMember = "CurrencyCode";
 
             cbFinanceRateType1.Items.AddRange(new object[] { "先收息", "后收息" });
-            cbFinanceRateType1.Text = "先收息";
 
-            cbFinanceRateType2.Items.AddRange(new object[] { "计头不计尾", "记尾不计头" });
-            cbFinanceRateType2.Text = "计头不计尾";
+            cbFinanceRateType2.Items.AddRange(new object[] { "计头不计尾", "计头又计尾" });
 
             cbWhoPayInterest.Items.AddRange(new object[] { "卖方付", "买方付" });
-            cbWhoPayInterest.Text = "卖方付";
 
             dgvLogs.CellFormatting += DgvInvoicesCellFormatting;
             dgvLogs.CellParsing += DgvInvoicesCellParsing;
 
             financeRateTextBox.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
             financeRateTextBox.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
-
-            //costRateTextBoxX.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
-            //costRateTextBoxX.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
 
             foreach (DataGridViewColumn column in dgvLogs.Columns)
             {
@@ -167,6 +161,24 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 log.Commission = log.FinanceAmount * (decimal)cda.Price;
             }
+
+            decimal interest = 0;
+            if(batch.FinanceRateType2 == "计头不计尾")
+            {
+                interest = (decimal)batch.FinanceRate * financeAmount * (log.FinanceDueDate - batch.FinancePeriodBegin).Days /360;
+            }
+            else if(batch.FinanceRateType2 == "计头又计尾")
+            {
+                interest = (decimal)batch.FinanceRate * financeAmount * ((log.FinanceDueDate - batch.FinancePeriodBegin).Days + 1) / 360;
+            }
+
+            if (batch.BatchCurrency != "CNY")
+            {
+                decimal rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                interest *= rate;
+            }
+
+            log.Interest = interest;
         }
 
         /// <summary>
@@ -206,37 +218,37 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CustomValidator2ValidateValue(object sender, ValidateValueEventArgs e)
-        {
-            var batch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
-            if (_case.TransactionType == "国内买方保理")
-            {
-                e.IsValid = true;
-            }
+        //private void CustomValidator2ValidateValue(object sender, ValidateValueEventArgs e)
+        //{
+        //    var batch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
+        //    if (_case.TransactionType == "国内买方保理")
+        //    {
+        //        e.IsValid = true;
+        //    }
 
-            IList logList = logsBindingSource.List;
+        //    IList logList = logsBindingSource.List;
 
-            DateTime dueDate = default(DateTime);
-            for (int i = 0; i < logList.Count; i++)
-            {
-                if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
-                {
-                    var log = (InvoiceFinanceLog)logList[i];
-                    if (log.DueDate.HasValue && dueDate < log.DueDate.Value)
-                    {
-                        dueDate = log.DueDate.Value;
-                    }
-                }
-            }
+        //    DateTime dueDate = default(DateTime);
+        //    for (int i = 0; i < logList.Count; i++)
+        //    {
+        //        if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+        //        {
+        //            var log = (InvoiceFinanceLog)logList[i];
+        //            if (log.DueDate.HasValue && dueDate < log.DueDate.Value)
+        //            {
+        //                dueDate = log.DueDate.Value;
+        //            }
+        //        }
+        //    }
 
-            if (dueDate == default(DateTime))
-            {
-                e.IsValid = true;
-                return;
-            }
+        //    if (dueDate == default(DateTime))
+        //    {
+        //        e.IsValid = true;
+        //        return;
+        //    }
 
-            e.IsValid = batch.FinancePeriodEnd >= dueDate;
-        }
+        //    e.IsValid = batch.FinancePeriodEnd >= dueDate;
+        //}
 
         /// <summary>
         /// 
@@ -648,6 +660,9 @@ namespace CMBC.EasyFactor.ARMgr
             var financeBatch = new InvoiceFinanceBatch
                                    {
                                        BatchCurrency = _case.InvoiceCurrency,
+                                       FinanceRateType1 = "先收息",
+                                       FinanceRateType2 = "计头不计尾",
+                                       WhoPayInterest = "卖方付",
                                        CreateUserName = App.Current.CurUser.Name
                                    };
             //financeBatch.CheckStatus = BATCH.UNCHECK;
@@ -721,6 +736,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             dgvLogs.Rows[rowIndex].Cells["colFinanceAmount"].ReadOnly = !editable;
             dgvLogs.Rows[rowIndex].Cells["colComment"].ReadOnly = !editable;
+            dgvLogs.Rows[rowIndex].Cells["colInterest"].ReadOnly = !editable;
 
             if (_case.ActiveCDA.CommissionType == "按融资金额" || _case.ActiveCDA.CommissionType == "其他")
             {
@@ -737,6 +753,8 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     log.Commission = null;
                 }
+
+                log.Interest = 0;
             }
         }
 
@@ -790,7 +808,8 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (_case.HighestFinanceLine.PeriodEnd < batch.FinancePeriodBegin)
             {
-                throw new Exception(String.Format("客户融资额度已到期，不能融资"));
+                MessageBoxEx.Show("客户融资额度已到期，不能融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,MessageBoxIcon.Information);
+                return;
             }
 
             GuaranteeDeposit gd = _case.GuaranteeDepositClient.GetGuaranteeDeposit(batch.BatchCurrency);
@@ -802,9 +821,10 @@ namespace CMBC.EasyFactor.ARMgr
             }
             if (activeCDA.FinanceLineOutstanding < batch.FinanceAmount - guaranteeDeposit)
             {
-                throw new Exception(String.Format("该案件的预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资",
+                MessageBoxEx.Show(String.Format("该案件的预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资",
                                                   (activeCDA.FinanceLineOutstanding + guaranteeDeposit),
-                                                  batch.FinanceAmount));
+                                                  batch.FinanceAmount), MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
             ClientCreditLine highestFinanceLine = _case.HighestFinanceLine;
@@ -819,9 +839,10 @@ namespace CMBC.EasyFactor.ARMgr
                 highestFinanceLineAmount < _case.TotalFinanceOutstanding + batch.FinanceAmount -
                                   guaranteeDeposit)
             {
-                throw new Exception(String.Format("该客户的最高预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资",
+                MessageBoxEx.Show(String.Format("该客户的最高预付款融资额度余额为{0:N2}，欲融资{1:N2}，额度不足，不能融资",
                                                   (highestFinanceLineAmount - _case.TotalFinanceOutstanding +
-                                                   guaranteeDeposit), batch.FinanceAmount));
+                                                   guaranteeDeposit), batch.FinanceAmount), MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
             bool isSaveOK = true;
@@ -963,7 +984,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     totalFinance += ((InvoiceFinanceLog)logList[i]).FinanceAmount.GetValueOrDefault();
-                    totalInterest += ((InvoiceFinanceLog)logList[i]).NetInterest;
+                    totalInterest += ((InvoiceFinanceLog)logList[i]).Interest.GetValueOrDefault();
                 }
             }
 

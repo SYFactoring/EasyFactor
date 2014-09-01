@@ -718,7 +718,7 @@ namespace CMBC.EasyFactor.CaseMgr
                               FinanceProportion = 0.8,
                               IsNotice = "明保理",
                               RiskType = "高风险",
-                              IsRecoarse = false,
+                              IsRecoarse = true,
                               CDAStatus = CDAStr.UNCHECK,
                               IsCreditCoverRevolving = true,
                               AssignType = "全部",
@@ -1043,6 +1043,27 @@ namespace CMBC.EasyFactor.CaseMgr
                     financeLinePeriodEndDateTimePicker.Value = default(DateTime);
                     financeLineTextBox.Enabled = false;
                 }
+            }
+            cbIsRecoarse_CheckedChanged(null, null);
+        }
+
+        private void cbIsRecoarse_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbIsRecoarse.Checked)
+            {
+                creditCoverCurrComboBox.Enabled = false;
+                creditCoverPeriodBeginDateTimePicker.Enabled = false;
+                creditCoverPeriodEndDateTimePicker.Enabled = false;
+                creditCoverTextBox.ReadOnly = true;
+            }
+            else
+            {
+                creditCoverCurrComboBox.Enabled = true;
+                creditCoverPeriodBeginDateTimePicker.Enabled = true;
+                creditCoverPeriodEndDateTimePicker.Enabled = true;
+                creditCoverPeriodBeginDateTimePicker.Value = default(DateTime);
+                creditCoverPeriodEndDateTimePicker.Value = default(DateTime);
+                creditCoverTextBox.ReadOnly = false;
             }
         }
     }

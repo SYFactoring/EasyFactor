@@ -131,13 +131,13 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public decimal GrossInterest
-        {
-            get
-            {
-                return InvoiceFinanceLogs.Sum(financeLog => financeLog.GrossInterest);
-            }
-        }
+        //public decimal GrossInterest
+        //{
+        //    get
+        //    {
+        //        return InvoiceFinanceLogs.Sum(financeLog => financeLog.GrossInterest);
+        //    }
+        //}
 
         /// <summary>
         /// Gets
@@ -253,11 +253,18 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public decimal NetInterest
+        //public decimal NetInterest
+        //{
+        //    get
+        //    {
+        //        return InvoiceFinanceLogs.Sum(financeLog => financeLog.NetInterest);
+        //    }
+        //}
+        public decimal Interest
         {
             get
             {
-                return InvoiceFinanceLogs.Sum(financeLog => financeLog.NetInterest);
+                return InvoiceFinanceLogs.Sum(financeLog => financeLog.Interest.GetValueOrDefault());
             }
         }
 
@@ -320,6 +327,13 @@ namespace CMBC.EasyFactor.DB.dbml
             get { return InvoiceAssignBatch.Case.TransactionType; }
         }
 
+        public DateTime ReassignDate
+        {
+            get
+            {
+                return DueDate.AddDays(this.InvoiceAssignBatch.Case.ActiveCDA.ReassignGracePeriod.GetValueOrDefault());
+            }
+        }
 
         //?Public?Methods?(6)?
         /// <summary>
@@ -420,7 +434,7 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 var financeDueDates = from log in InvoiceFinanceLogs
                                       where log.FinanceOutstanding > 0
-                                      select log.InvoiceFinanceBatch.FinancePeriodEnd;
+                                      select log.FinanceDueDate;
                 if (financeDueDates.Count() > 0)
                 {
                     FinanceDueDate = financeDueDates.Min();

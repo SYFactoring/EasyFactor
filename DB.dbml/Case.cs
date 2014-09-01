@@ -24,8 +24,8 @@ namespace CMBC.EasyFactor.DB.dbml
         private decimal? _commissionIncomeByDate;
         private decimal? _financeAmountByDate;
         private decimal? _financeOutstanding;
-        private decimal? _marginIncomeByDate;
-        private decimal? _netInterestIncomeByDate;
+        //private decimal? _marginIncomeByDate;
+        private decimal? _interestIncomeByDate;
         private decimal? _paymentAmountByDate;
         private decimal? _refundAmountByDate;
         private decimal? _totalAssignOutstanding;
@@ -398,43 +398,43 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public decimal? MarginIncomeByDate
+        //public decimal? MarginIncomeByDate
+        //{
+        //    get
+        //    {
+        //        if (_marginIncomeByDate.HasValue == false)
+        //        {
+        //            decimal? result = null;
+        //            DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+        //            DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+        //            IEnumerable<InvoiceFinanceBatch> batches =
+        //                InvoiceFinanceBatches.Where(
+        //                    i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
+        //            foreach (InvoiceFinanceBatch batch in batches)
+        //            {
+        //                if (batch.FinanceType == "卖方代付" || batch.FinanceType == "买方代付")
+        //                {
+        //                    if (result == null)
+        //                    {
+        //                        result = 0;
+        //                    }
+
+        //                    result += batch.MarginIncome;
+        //                }
+        //            }
+
+        //            _marginIncomeByDate = result;
+        //        }
+
+        //        return _marginIncomeByDate;
+        //    }
+        //}
+
+        public decimal? InterestIncomeByDate
         {
             get
             {
-                if (_marginIncomeByDate.HasValue == false)
-                {
-                    decimal? result = null;
-                    DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
-                    DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                    IEnumerable<InvoiceFinanceBatch> batches =
-                        InvoiceFinanceBatches.Where(
-                            i => i.FinancePeriodBegin >= fromDate && i.FinancePeriodBegin <= toDate);
-                    foreach (InvoiceFinanceBatch batch in batches)
-                    {
-                        if (batch.FinanceType == "卖方代付" || batch.FinanceType == "买方代付")
-                        {
-                            if (result == null)
-                            {
-                                result = 0;
-                            }
-
-                            result += batch.MarginIncome;
-                        }
-                    }
-
-                    _marginIncomeByDate = result;
-                }
-
-                return _marginIncomeByDate;
-            }
-        }
-
-        public decimal? NetInterestIncomeByDate
-        {
-            get
-            {
-                if (_netInterestIncomeByDate.HasValue == false)
+                if (_interestIncomeByDate.HasValue == false)
                 {
                     decimal? result = null;
                     DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
@@ -451,14 +451,14 @@ namespace CMBC.EasyFactor.DB.dbml
                                 result = 0;
                             }
 
-                            result += batch.NetInterestIncome;
+                            result += batch.Interest;
                         }
                     }
 
-                    _netInterestIncomeByDate = result;
+                    _interestIncomeByDate = result;
                 }
 
-                return _netInterestIncomeByDate;
+                return _interestIncomeByDate;
             }
         }
 
@@ -581,8 +581,10 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return CommissionIncomeByDate + NetInterestIncomeByDate.GetValueOrDefault() +
-                       MarginIncomeByDate.GetValueOrDefault();
+                return CommissionIncomeByDate;
+                //+NetInterestIncomeByDate.GetValueOrDefault();
+                //+
+                //       MarginIncomeByDate.GetValueOrDefault();
             }
         }
 

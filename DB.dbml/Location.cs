@@ -117,39 +117,39 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public decimal MarginIncomeByDate
-        {
-            get
-            {
-                decimal result = 0;
-                foreach (Department dept in Departments)
-                {
-                    dept.QueryDateFrom = QueryDateFrom;
-                    dept.QueryDateTo = QueryDateTo;
-                    result += dept.MarginIncomeByDate.GetValueOrDefault();
-                }
+        //public decimal MarginIncomeByDate
+        //{
+        //    get
+        //    {
+        //        decimal result = 0;
+        //        foreach (Department dept in Departments)
+        //        {
+        //            dept.QueryDateFrom = QueryDateFrom;
+        //            dept.QueryDateTo = QueryDateTo;
+        //            result += dept.MarginIncomeByDate.GetValueOrDefault();
+        //        }
 
-                return result;
-            }
-        }
+        //        return result;
+        //    }
+        //}
         /// <summary>
         /// 
         /// </summary>
-        public decimal NetInterestIncomeByDate
-        {
-            get
-            {
-                decimal result = 0;
-                foreach (Department dept in Departments)
-                {
-                    dept.QueryDateFrom = QueryDateFrom;
-                    dept.QueryDateTo = QueryDateTo;
-                    result += dept.NetInterestIncomeByDate.GetValueOrDefault();
-                }
+        //public decimal NetInterestIncomeByDate
+        //{
+        //    get
+        //    {
+        //        decimal result = 0;
+        //        foreach (Department dept in Departments)
+        //        {
+        //            dept.QueryDateFrom = QueryDateFrom;
+        //            dept.QueryDateTo = QueryDateTo;
+        //            result += dept.NetInterestIncomeByDate.GetValueOrDefault();
+        //        }
 
-                return result;
-            }
-        }
+        //        return result;
+        //    }
+        //}
         /// <summary>
         /// 
         /// </summary>

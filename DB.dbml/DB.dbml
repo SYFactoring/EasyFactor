@@ -391,7 +391,6 @@
       <Column Name="BatchCurrency" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FinanceAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FinancePeriodBegin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="FinancePeriodEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FinanceRate" Type="System.Double" DbType="Float" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="FactorCode" Type="System.String" DbType="Char(7)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CostRate" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
@@ -593,6 +592,7 @@
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="Commission" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="InvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Interest" Type="System.Decimal" DbType="Decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceRefundLogs" ThisKey="FinanceLogID" OtherKey="FinanceLogID" Type="InvoiceRefundLog" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="Invoice" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="Invoice" IsForeignKey="true" />
       <Association Name="InvoiceFinanceBatch_InvoiceFinanceLog" Member="InvoiceFinanceBatch" ThisKey="FinanceBatchNo" OtherKey="FinanceBatchNo" Type="InvoiceFinanceBatch" IsForeignKey="true" />

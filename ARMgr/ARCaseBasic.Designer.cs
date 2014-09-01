@@ -13,10 +13,6 @@ namespace CMBC.EasyFactor.ARMgr
     {
 		#region?Fields?(44)?
 
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private DevComponents.DotNetBar.Controls.TextBoxX assignTypeTextBox;
         private DevComponents.DotNetBar.ButtonX btnCaseQuery;
         private DevComponents.DotNetBar.Controls.TextBoxX buyerEDICodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX buyerNameTextBox;
@@ -32,8 +28,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.Controls.TextBoxX handFeeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX iFPriceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX invoiceCurrencyTextBox;
-        private DevComponents.DotNetBar.Controls.CheckBoxX isRecoarseCheckBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX ownerDepartmentCodeTextBox;
         private DevComponents.DotNetBar.ExpandablePanel panelBuyer;
         private DevComponents.DotNetBar.ExpandablePanel panelCase;
         private DevComponents.DotNetBar.ExpandablePanel panelCaseBasic;
@@ -110,8 +104,6 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblCaseCode;
             DevComponents.DotNetBar.LabelX lblCDACode;
             DevComponents.DotNetBar.LabelX lblIsNotice;
-            DevComponents.DotNetBar.LabelX ownerDepartmentCodeLabel;
-            DevComponents.DotNetBar.LabelX assignTypeLabel;
             DevComponents.DotNetBar.LabelX sellerEDICodeLabel;
             DevComponents.DotNetBar.LabelX buyerEDICodeLabel;
             DevComponents.DotNetBar.LabelX invoiceCurrencyLabel;
@@ -121,6 +113,8 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblPaymentTerms;
             DevComponents.DotNetBar.LabelX lblSellerAssignOutstanding;
             DevComponents.DotNetBar.LabelX lblTotalFinanceOutstanding;
+            DevComponents.DotNetBar.LabelX lblRecoarse;
+            DevComponents.DotNetBar.LabelX lblPool;
             this.panelCaseBasic = new DevComponents.DotNetBar.ExpandablePanel();
             this.panelFinanceCreditLine = new DevComponents.DotNetBar.ExpandablePanel();
             this.tbTotalFinanceOustanding = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -152,18 +146,17 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbCDACode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbIsNotice = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnCaseQuery = new DevComponents.DotNetBar.ButtonX();
-            this.ownerDepartmentCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.assignTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.sellerEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.sellerNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerEDICodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buyerNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.isRecoarseCheckBox = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.factorCodeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
+            this.tbRecoarse = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbPool = new DevComponents.DotNetBar.Controls.TextBoxX();
             priceLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
             handFeeCurrLabel = new DevComponents.DotNetBar.LabelX();
@@ -181,8 +174,6 @@ namespace CMBC.EasyFactor.ARMgr
             lblCaseCode = new DevComponents.DotNetBar.LabelX();
             lblCDACode = new DevComponents.DotNetBar.LabelX();
             lblIsNotice = new DevComponents.DotNetBar.LabelX();
-            ownerDepartmentCodeLabel = new DevComponents.DotNetBar.LabelX();
-            assignTypeLabel = new DevComponents.DotNetBar.LabelX();
             sellerEDICodeLabel = new DevComponents.DotNetBar.LabelX();
             buyerEDICodeLabel = new DevComponents.DotNetBar.LabelX();
             invoiceCurrencyLabel = new DevComponents.DotNetBar.LabelX();
@@ -192,6 +183,8 @@ namespace CMBC.EasyFactor.ARMgr
             lblPaymentTerms = new DevComponents.DotNetBar.LabelX();
             lblSellerAssignOutstanding = new DevComponents.DotNetBar.LabelX();
             lblTotalFinanceOutstanding = new DevComponents.DotNetBar.LabelX();
+            lblRecoarse = new DevComponents.DotNetBar.LabelX();
+            lblPool = new DevComponents.DotNetBar.LabelX();
             this.panelCaseBasic.SuspendLayout();
             this.panelFinanceCreditLine.SuspendLayout();
             this.panelBuyer.SuspendLayout();
@@ -388,7 +381,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblCaseCode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            lblCaseCode.Location = new System.Drawing.Point(310, 46);
+            lblCaseCode.Location = new System.Drawing.Point(313, 23);
             lblCaseCode.Name = "lblCaseCode";
             lblCaseCode.Size = new System.Drawing.Size(56, 18);
             lblCaseCode.TabIndex = 56;
@@ -401,7 +394,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblCDACode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            lblCDACode.Location = new System.Drawing.Point(311, 26);
+            lblCDACode.Location = new System.Drawing.Point(37, 23);
             lblCDACode.Name = "lblCDACode";
             lblCDACode.Size = new System.Drawing.Size(50, 18);
             lblCDACode.TabIndex = 54;
@@ -414,37 +407,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblIsNotice.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            lblIsNotice.Location = new System.Drawing.Point(307, 84);
+            lblIsNotice.Location = new System.Drawing.Point(307, 63);
             lblIsNotice.Name = "lblIsNotice";
             lblIsNotice.Size = new System.Drawing.Size(62, 18);
             lblIsNotice.TabIndex = 51;
             lblIsNotice.Text = "明/暗保理";
-            // 
-            // ownerDepartmentCodeLabel
-            // 
-            ownerDepartmentCodeLabel.AutoSize = true;
-            // 
-            // 
-            // 
-            ownerDepartmentCodeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            ownerDepartmentCodeLabel.Location = new System.Drawing.Point(6, 24);
-            ownerDepartmentCodeLabel.Name = "ownerDepartmentCodeLabel";
-            ownerDepartmentCodeLabel.Size = new System.Drawing.Size(87, 18);
-            ownerDepartmentCodeLabel.TabIndex = 30;
-            ownerDepartmentCodeLabel.Text = " 业务归属机构";
-            // 
-            // assignTypeLabel
-            // 
-            assignTypeLabel.AutoSize = true;
-            // 
-            // 
-            // 
-            assignTypeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            assignTypeLabel.Location = new System.Drawing.Point(309, 64);
-            assignTypeLabel.Name = "assignTypeLabel";
-            assignTypeLabel.Size = new System.Drawing.Size(56, 18);
-            assignTypeLabel.TabIndex = 49;
-            assignTypeLabel.Text = "转让方式";
             // 
             // sellerEDICodeLabel
             // 
@@ -505,7 +472,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             transactionTypeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            transactionTypeLabel.Location = new System.Drawing.Point(31, 105);
+            transactionTypeLabel.Location = new System.Drawing.Point(313, 44);
             transactionTypeLabel.Name = "transactionTypeLabel";
             transactionTypeLabel.Size = new System.Drawing.Size(56, 18);
             transactionTypeLabel.TabIndex = 41;
@@ -588,6 +555,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCaseBasic.Style.GradientAngle = 90;
             this.panelCaseBasic.TabIndex = 0;
             this.panelCaseBasic.TitleHeight = 14;
+            this.panelCaseBasic.TitleText = "Title Bar";
             // 
             // panelFinanceCreditLine
             // 
@@ -978,6 +946,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCase.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelCase.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
             this.panelCase.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelCase.Controls.Add(this.tbPool);
+            this.panelCase.Controls.Add(lblPool);
+            this.panelCase.Controls.Add(this.tbRecoarse);
+            this.panelCase.Controls.Add(lblRecoarse);
             this.panelCase.Controls.Add(this.tbNetPaymentTerm);
             this.panelCase.Controls.Add(this.tbPaymentTerms);
             this.panelCase.Controls.Add(lblPaymentTerms);
@@ -987,18 +959,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCase.Controls.Add(lblCDACode);
             this.panelCase.Controls.Add(lblIsNotice);
             this.panelCase.Controls.Add(this.tbIsNotice);
-            this.panelCase.Controls.Add(ownerDepartmentCodeLabel);
             this.panelCase.Controls.Add(this.btnCaseQuery);
-            this.panelCase.Controls.Add(assignTypeLabel);
-            this.panelCase.Controls.Add(this.ownerDepartmentCodeTextBox);
-            this.panelCase.Controls.Add(this.assignTypeTextBox);
             this.panelCase.Controls.Add(this.sellerEDICodeTextBox);
             this.panelCase.Controls.Add(sellerEDICodeLabel);
             this.panelCase.Controls.Add(this.sellerNameTextBox);
             this.panelCase.Controls.Add(this.buyerEDICodeTextBox);
             this.panelCase.Controls.Add(buyerEDICodeLabel);
             this.panelCase.Controls.Add(this.buyerNameTextBox);
-            this.panelCase.Controls.Add(this.isRecoarseCheckBox);
             this.panelCase.Controls.Add(this.factorCodeTextBox);
             this.panelCase.Controls.Add(invoiceCurrencyLabel);
             this.panelCase.Controls.Add(factorCodeLabel);
@@ -1063,7 +1030,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tbCaseCode.Border.Class = "TextBoxBorder";
             this.tbCaseCode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbCaseCode.Location = new System.Drawing.Point(372, 43);
+            this.tbCaseCode.Location = new System.Drawing.Point(372, 22);
             this.tbCaseCode.Name = "tbCaseCode";
             this.tbCaseCode.ReadOnly = true;
             this.tbCaseCode.Size = new System.Drawing.Size(100, 21);
@@ -1077,7 +1044,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tbCDACode.Border.Class = "TextBoxBorder";
             this.tbCDACode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbCDACode.Location = new System.Drawing.Point(372, 24);
+            this.tbCDACode.Location = new System.Drawing.Point(97, 20);
             this.tbCDACode.Name = "tbCDACode";
             this.tbCDACode.ReadOnly = true;
             this.tbCDACode.Size = new System.Drawing.Size(100, 21);
@@ -1091,7 +1058,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.tbIsNotice.Border.Class = "TextBoxBorder";
             this.tbIsNotice.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbIsNotice.Location = new System.Drawing.Point(373, 84);
+            this.tbIsNotice.Location = new System.Drawing.Point(372, 63);
             this.tbIsNotice.Name = "tbIsNotice";
             this.tbIsNotice.ReadOnly = true;
             this.tbIsNotice.Size = new System.Drawing.Size(100, 21);
@@ -1108,32 +1075,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnCaseQuery.TabIndex = 29;
             this.btnCaseQuery.Text = "...";
             this.btnCaseQuery.Click += new System.EventHandler(this.SelectCase);
-            // 
-            // ownerDepartmentCodeTextBox
-            // 
-            // 
-            // 
-            // 
-            this.ownerDepartmentCodeTextBox.Border.Class = "TextBoxBorder";
-            this.ownerDepartmentCodeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ownerDepartmentCodeTextBox.Location = new System.Drawing.Point(97, 22);
-            this.ownerDepartmentCodeTextBox.Name = "ownerDepartmentCodeTextBox";
-            this.ownerDepartmentCodeTextBox.ReadOnly = true;
-            this.ownerDepartmentCodeTextBox.Size = new System.Drawing.Size(100, 21);
-            this.ownerDepartmentCodeTextBox.TabIndex = 31;
-            // 
-            // assignTypeTextBox
-            // 
-            // 
-            // 
-            // 
-            this.assignTypeTextBox.Border.Class = "TextBoxBorder";
-            this.assignTypeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.assignTypeTextBox.Location = new System.Drawing.Point(373, 64);
-            this.assignTypeTextBox.Name = "assignTypeTextBox";
-            this.assignTypeTextBox.ReadOnly = true;
-            this.assignTypeTextBox.Size = new System.Drawing.Size(100, 21);
-            this.assignTypeTextBox.TabIndex = 50;
             // 
             // sellerEDICodeTextBox
             // 
@@ -1191,20 +1132,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.buyerNameTextBox.TabIndex = 37;
             this.buyerNameTextBox.DoubleClick += new System.EventHandler(this.DetailBuyer);
             // 
-            // isRecoarseCheckBox
-            // 
-            this.isRecoarseCheckBox.AutoSize = true;
-            // 
-            // 
-            // 
-            this.isRecoarseCheckBox.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.isRecoarseCheckBox.Enabled = false;
-            this.isRecoarseCheckBox.Location = new System.Drawing.Point(371, 105);
-            this.isRecoarseCheckBox.Name = "isRecoarseCheckBox";
-            this.isRecoarseCheckBox.Size = new System.Drawing.Size(101, 18);
-            this.isRecoarseCheckBox.TabIndex = 53;
-            this.isRecoarseCheckBox.Text = "是否有追索权";
-            // 
             // factorCodeTextBox
             // 
             // 
@@ -1226,7 +1153,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.invoiceCurrencyTextBox.Border.Class = "TextBoxBorder";
             this.invoiceCurrencyTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.invoiceCurrencyTextBox.Location = new System.Drawing.Point(240, 24);
+            this.invoiceCurrencyTextBox.Location = new System.Drawing.Point(237, 22);
             this.invoiceCurrencyTextBox.Name = "invoiceCurrencyTextBox";
             this.invoiceCurrencyTextBox.ReadOnly = true;
             this.invoiceCurrencyTextBox.Size = new System.Drawing.Size(64, 21);
@@ -1253,7 +1180,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.transactionTypeTextBox.Border.Class = "TextBoxBorder";
             this.transactionTypeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.transactionTypeTextBox.Location = new System.Drawing.Point(97, 103);
+            this.transactionTypeTextBox.Location = new System.Drawing.Point(372, 42);
             this.transactionTypeTextBox.Name = "transactionTypeTextBox";
             this.transactionTypeTextBox.ReadOnly = true;
             this.transactionTypeTextBox.Size = new System.Drawing.Size(100, 21);
@@ -1277,6 +1204,58 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelInvoiceMgr.Style.GradientAngle = 90;
             this.panelInvoiceMgr.TabIndex = 0;
             // 
+            // lblRecoarse
+            // 
+            lblRecoarse.AutoSize = true;
+            // 
+            // 
+            // 
+            lblRecoarse.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            lblRecoarse.Location = new System.Drawing.Point(325, 85);
+            lblRecoarse.Name = "lblRecoarse";
+            lblRecoarse.Size = new System.Drawing.Size(44, 18);
+            lblRecoarse.TabIndex = 63;
+            lblRecoarse.Text = "追索权";
+            // 
+            // tbRecoarse
+            // 
+            // 
+            // 
+            // 
+            this.tbRecoarse.Border.Class = "TextBoxBorder";
+            this.tbRecoarse.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbRecoarse.Location = new System.Drawing.Point(372, 83);
+            this.tbRecoarse.Name = "tbRecoarse";
+            this.tbRecoarse.ReadOnly = true;
+            this.tbRecoarse.Size = new System.Drawing.Size(100, 21);
+            this.tbRecoarse.TabIndex = 64;
+            // 
+            // lblPool
+            // 
+            lblPool.AutoSize = true;
+            // 
+            // 
+            // 
+            lblPool.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            lblPool.Location = new System.Drawing.Point(325, 105);
+            lblPool.Name = "lblPool";
+            lblPool.Size = new System.Drawing.Size(44, 18);
+            lblPool.TabIndex = 65;
+            lblPool.Text = "池融资";
+            // 
+            // tbPool
+            // 
+            // 
+            // 
+            // 
+            this.tbPool.Border.Class = "TextBoxBorder";
+            this.tbPool.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbPool.Location = new System.Drawing.Point(372, 104);
+            this.tbPool.Name = "tbPool";
+            this.tbPool.ReadOnly = true;
+            this.tbPool.Size = new System.Drawing.Size(100, 21);
+            this.tbPool.TabIndex = 66;
+            // 
             // ARCaseBasic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1299,5 +1278,9 @@ namespace CMBC.EasyFactor.ARMgr
 
         }
         #endregion
+
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPool;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbRecoarse;
+
     }
 }

@@ -2726,21 +2726,6 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("融资日类型异常，不能导入：" + assignBatchCode);
                         }
 
-                        string endDateStr = String.Format("{0:G}", valueArray[row, column++]);
-                        if (String.IsNullOrEmpty(endDateStr))
-                        {
-                            throw new Exception("融资到期日不能为空，不能导入：" + assignBatchCode);
-                        }
-                        DateTime endDate;
-                        if (DateTime.TryParse(endDateStr, out endDate))
-                        {
-                            financeBatch.FinancePeriodEnd = endDate;
-                        }
-                        else
-                        {
-                            throw new Exception("融资到期日类型异常，不能导入：" + assignBatchCode);
-                        }
-
                         string financeRateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(financeRateStr))
                         {
@@ -3238,8 +3223,7 @@ namespace CMBC.EasyFactor.Utils
                                     financeBatches.SingleOrDefault(
                                         i =>
                                         i.Case.CaseCode == caseCode && i.FinanceType == financeType &&
-                                        i.FinancePeriodBegin.Date == financeDate &&
-                                        i.FinancePeriodEnd.Date == financeDueDate);
+                                        i.FinancePeriodBegin.Date == financeDate);
                                 if (financeBatch == null)
                                 {
                                     financeBatch = new InvoiceFinanceBatch { FinanceType = financeType };
@@ -3248,7 +3232,6 @@ namespace CMBC.EasyFactor.Utils
                                     column = 25;
                                     financeBatch.FinanceRate = (double)valueArray[row, column++];
                                     financeBatch.FinancePeriodBegin = financeDate.Value;
-                                    financeBatch.FinancePeriodEnd = financeDueDate.Value;
                                     financeBatch.CreateUserName = createUserName;
                                     //financeBatch.CheckStatus = BATCH.CHECK;
                                     financeBatch.FinanceBatchNo =
@@ -4191,21 +4174,6 @@ namespace CMBC.EasyFactor.Utils
                             throw new Exception("融资日类型异常，不能导入：" + clientEDICode);
                         }
 
-                        string endDateStr = String.Format("{0:G}", valueArray[row, column++]);
-                        if (String.IsNullOrEmpty(endDateStr))
-                        {
-                            throw new Exception("融资到期日不能为空，不能导入：" + clientEDICode);
-                        }
-                        DateTime endDate;
-                        if (DateTime.TryParse(endDateStr, out endDate))
-                        {
-                            financeBatch.FinancePeriodEnd = endDate;
-                        }
-                        else
-                        {
-                            throw new Exception("融资到期日类型异常，不能导入：" + clientEDICode);
-                        }
-
                         string financeRateStr = String.Format("{0:G}", valueArray[row, column++]);
                         if (String.IsNullOrEmpty(financeRateStr))
                         {
@@ -4367,7 +4335,7 @@ namespace CMBC.EasyFactor.Utils
                         {
                             foreach (
                                 InvoiceFinanceBatch financeBatch in
-                                    client.InvoiceFinanceBatches.OrderBy(i => i.FinancePeriodEnd))
+                                    client.InvoiceFinanceBatches)
                             {
                                 if (refundAmount>0 &&
                                     financeBatch.PoolFinanceOutstanding>0)

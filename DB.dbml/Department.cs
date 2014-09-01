@@ -148,68 +148,68 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public decimal? MarginIncomeByDate
-        {
-            get
-            {
-                decimal? result = null;
-                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
-                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                foreach (Case selectedCase in OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
-                {
-                    selectedCase.QueryDateFrom = fromDate;
-                    selectedCase.QueryDateTo = toDate;
-                    decimal? marginIncome = selectedCase.MarginIncomeByDate;
-                    if (selectedCase.InvoiceCurrency != "CNY" && marginIncome>0)
-                    {
-                        decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
-                        marginIncome *= rate;
-                    }
+        //public decimal? MarginIncomeByDate
+        //{
+        //    get
+        //    {
+        //        decimal? result = null;
+        //        DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+        //        DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+        //        foreach (Case selectedCase in OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
+        //        {
+        //            selectedCase.QueryDateFrom = fromDate;
+        //            selectedCase.QueryDateTo = toDate;
+        //            decimal? marginIncome = selectedCase.MarginIncomeByDate;
+        //            if (selectedCase.InvoiceCurrency != "CNY" && marginIncome>0)
+        //            {
+        //                decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+        //                marginIncome *= rate;
+        //            }
 
-                    if (marginIncome.HasValue && result == null)
-                    {
-                        result = 0;
-                    }
+        //            if (marginIncome.HasValue && result == null)
+        //            {
+        //                result = 0;
+        //            }
 
-                    result += marginIncome.GetValueOrDefault();
-                }
+        //            result += marginIncome.GetValueOrDefault();
+        //        }
 
-                return result;
-            }
-        }
+        //        return result;
+        //    }
+        //}
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal? NetInterestIncomeByDate
-        {
-            get
-            {
-                decimal? result = null;
-                DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
-                DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
-                foreach (Case selectedCase in OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
-                {
-                    selectedCase.QueryDateFrom = fromDate;
-                    selectedCase.QueryDateTo = toDate;
-                    decimal? netInterest = selectedCase.NetInterestIncomeByDate;
-                    if (selectedCase.InvoiceCurrency != "CNY" && netInterest>0)
-                    {
-                        decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
-                        netInterest *= rate;
-                    }
+        //public decimal? NetInterestIncomeByDate
+        //{
+        //    get
+        //    {
+        //        decimal? result = null;
+        //        DateTime fromDate = QueryDateFrom == TypeUtil.MIN_DATE ? TypeUtil.MIN_DATE : QueryDateFrom;
+        //        DateTime toDate = QueryDateTo == TypeUtil.MIN_DATE ? DateTime.MaxValue : QueryDateTo;
+        //        foreach (Case selectedCase in OwnerCases.Where(c => c.CaseMark == CASE.ENABLE))
+        //        {
+        //            selectedCase.QueryDateFrom = fromDate;
+        //            selectedCase.QueryDateTo = toDate;
+        //            decimal? netInterest = selectedCase.NetInterestIncomeByDate;
+        //            if (selectedCase.InvoiceCurrency != "CNY" && netInterest>0)
+        //            {
+        //                decimal rate = Exchange.GetExchangeRate(selectedCase.InvoiceCurrency, "CNY");
+        //                netInterest *= rate;
+        //            }
 
-                    if (netInterest.HasValue && result == null)
-                    {
-                        result = 0;
-                    }
+        //            if (netInterest.HasValue && result == null)
+        //            {
+        //                result = 0;
+        //            }
 
-                    result += netInterest.GetValueOrDefault();
-                }
+        //            result += netInterest.GetValueOrDefault();
+        //        }
 
-                return result;
-            }
-        }
+        //        return result;
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -269,8 +269,10 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return CommissionIncomeByDate + NetInterestIncomeByDate.GetValueOrDefault() +
-                       MarginIncomeByDate.GetValueOrDefault();
+                return CommissionIncomeByDate;
+                //+NetInterestIncomeByDate.GetValueOrDefault();
+                //+
+                  //     MarginIncomeByDate.GetValueOrDefault();
             }
         }
 

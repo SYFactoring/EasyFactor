@@ -125,9 +125,6 @@ namespace CMBC.EasyFactor.CaseMgr
 
             List<Department> allDepartments = Department.GetAllDepartments(_context);
             cbCaseOwnerDepts.DataSource = allDepartments;
-            cbCaseOwnerDepts.DisplayMembers = "DepartmentName";
-            //cbCaseOwnerDepts.GroupingMembers = "Domain";
-            cbCaseOwnerDepts.ValueMember = "DepartmentCode";
             cbCaseOwnerDepts.SelectedIndex = -1;
 
             _opCaseType = opCaseType;
@@ -233,24 +230,6 @@ namespace CMBC.EasyFactor.CaseMgr
             }
         }
 
-
-        //?Private?Methods?(24)?
-        /// <summary>
-        /// Case owner deparment changed event handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseOwnerDeptsChanged(object sender, AdvTreeNodeEventArgs e)
-        {
-            if (caseBindingSource.DataSource is Case)
-            {
-                var curCase = (Case) caseBindingSource.DataSource;
-                if (cbCaseOwnerDepts.SelectedNode != null)
-                {
-                    curCase.OwnerDepartment = (Department) cbCaseOwnerDepts.SelectedNode.DataKey;
-                }
-            }
-        }
 
         /// <summary>
         /// 
@@ -639,8 +618,6 @@ namespace CMBC.EasyFactor.CaseMgr
                 bool isAddOK = true;
                 try
                 {
-                    //curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType,
-                                                             //curCase.OwnerDepartment.LocationCode, curCase.CaseAppDate);
                     curCase.CaseCode = Case.GenerateCaseCode(curCase.TransactionType, null, curCase.CaseAppDate);
                     _context.Cases.InsertOnSubmit(curCase);
                     _context.SubmitChanges();
@@ -831,16 +808,6 @@ namespace CMBC.EasyFactor.CaseMgr
                     case "国内买方保理":
                     case "进口保理":
                         curCase.OwnerDepartment = curCase.BuyerClient.Department;
-                        if (curCase.OwnerDepartment != null)
-                        {
-                            if (!curCase.OwnerDepartment.DepartmentName.Contains("贸金"))
-                            {
-                                curCase.OperationType = "协销";
-                            }
-                            var deptsList = (List<Department>) cbCaseOwnerDepts.DataSource;
-                            cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
-                        }
-
                         cbReviews.DataSource = curCase.ClientReviews;
                         break;
                     default:
@@ -875,17 +842,6 @@ namespace CMBC.EasyFactor.CaseMgr
                     case "国内卖方保理":
                     case "出口保理":
                         curCase.OwnerDepartment = curCase.SellerClient.Department;
-                        if (curCase.OwnerDepartment != null)
-                        {
-                            if (!curCase.OwnerDepartment.DepartmentName.Contains("贸金"))
-                            {
-                                curCase.OperationType = "协销";
-                            }
-
-                            var deptsList = (List<Department>) cbCaseOwnerDepts.DataSource;
-                            cbCaseOwnerDepts.SelectedIndex = deptsList.IndexOf(curCase.OwnerDepartment);
-                        }
-
                         cbReviews.DataSource = curCase.ClientReviews;
                         break;
                     case "国内买方保理":
@@ -1092,5 +1048,5 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetComponetEditable(tbCreditCoverCreateUserName, false);
         }
 
-    }
+     }
 }

@@ -9142,8 +9142,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.DateTime _FinancePeriodBegin;
 		
-		private System.DateTime _FinancePeriodEnd;
-		
 		private double _FinanceRate;
 		
 		private string _FactorCode;
@@ -9200,8 +9198,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceAmountChanged();
     partial void OnFinancePeriodBeginChanging(System.DateTime value);
     partial void OnFinancePeriodBeginChanged();
-    partial void OnFinancePeriodEndChanging(System.DateTime value);
-    partial void OnFinancePeriodEndChanged();
     partial void OnFinanceRateChanging(double value);
     partial void OnFinanceRateChanged();
     partial void OnFactorCodeChanging(string value);
@@ -9364,26 +9360,6 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._FinancePeriodBegin = value;
 					this.SendPropertyChanged("FinancePeriodBegin");
 					this.OnFinancePeriodBeginChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinancePeriodEnd", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.DateTime FinancePeriodEnd
-		{
-			get
-			{
-				return this._FinancePeriodEnd;
-			}
-			set
-			{
-				if ((this._FinancePeriodEnd != value))
-				{
-					this.OnFinancePeriodEndChanging(value);
-					this.SendPropertyChanging();
-					this._FinancePeriodEnd = value;
-					this.SendPropertyChanged("FinancePeriodEnd");
-					this.OnFinancePeriodEndChanged();
 				}
 			}
 		}
@@ -13605,6 +13581,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private int _InvoiceID;
 		
+		private System.Nullable<decimal> _Interest;
+		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
 		
 		private EntityRef<Invoice> _Invoice;
@@ -13627,6 +13605,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommissionChanged();
     partial void OnInvoiceIDChanging(int value);
     partial void OnInvoiceIDChanged();
+    partial void OnInterestChanging(System.Nullable<decimal> value);
+    partial void OnInterestChanged();
     #endregion
 		
 		public InvoiceFinanceLog()
@@ -13761,6 +13741,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._InvoiceID = value;
 					this.SendPropertyChanged("InvoiceID");
 					this.OnInvoiceIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Interest", DbType="Decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> Interest
+		{
+			get
+			{
+				return this._Interest;
+			}
+			set
+			{
+				if ((this._Interest != value))
+				{
+					this.OnInterestChanging(value);
+					this.SendPropertyChanging();
+					this._Interest = value;
+					this.SendPropertyChanged("Interest");
+					this.OnInterestChanged();
 				}
 			}
 		}
