@@ -698,9 +698,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // GroupNoColumn
             // 
-            this.GroupNoColumn.DataPropertyName = "GroupEDICode";
+            this.GroupNoColumn.DataPropertyName = "Department";
             this.GroupNoColumn.FillWeight = 81.40282F;
-            this.GroupNoColumn.HeaderText = "所属集团客户号";
+            this.GroupNoColumn.HeaderText = "所属公司";
             this.GroupNoColumn.Name = "GroupNoColumn";
             this.GroupNoColumn.ReadOnly = true;
             // 

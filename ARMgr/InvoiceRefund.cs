@@ -77,6 +77,7 @@ namespace CMBC.EasyFactor.ARMgr
             ImeMode = ImeMode.OnHalf;
             dgvLogs.ImeMode = ImeMode.OnHalf;
 
+            paymentDateDateTimePicker.Value = DateTime.Today;
             var checkBoxCell = new DataGridViewCheckboxHeaderCell();
             checkBoxCell.OnCheckBoxClicked += OnCheckBoxClicked;
             var checkBoxCol = dgvLogs.Columns[0] as DataGridViewCheckBoxColumn;
@@ -199,6 +200,27 @@ namespace CMBC.EasyFactor.ARMgr
             else
             {
                 log.RefundAmount = log.FinanceOutstanding.GetValueOrDefault();
+            }
+
+            if (log.FinanceRateType1 == "后收息")
+            {
+                decimal interest = 0;
+                if (log.FinanceRateType2 == "计头不计尾")
+                {
+                    interest = (decimal)log.FinanceRate * log.RefundAmount.GetValueOrDefault() * (DateTime.Today - log.FinancePeriodBegin).Days / 360;
+                }
+                else if (log.FinanceRateType2 == "计头又计尾")
+                {
+                    interest = (decimal)log.FinanceRate * log.RefundAmount.GetValueOrDefault() * ((DateTime.Today - log.FinancePeriodBegin).Days + 1) / 360;
+                }
+
+                if (log.RefundCurrency != "CNY")
+                {
+                    decimal rate = Exchange.GetExchangeRate(log.RefundCurrency, "CNY");
+                    interest *= rate;
+                }
+
+                log.Interest = interest;
             }
         }
 
@@ -502,8 +524,8 @@ namespace CMBC.EasyFactor.ARMgr
                                                               &&
                                                               ((from refundLog in log.InvoiceRefundLogs select refundLog.RefundAmount).Sum().GetValueOrDefault() <
                                                                log.FinanceAmount.GetValueOrDefault() )
-                                                               && log.Invoice.InvoiceFinanceBatches.All(f=>f.CheckStatus == BATCH.CHECK)
-                                                        orderby log.FinanceDueDate
+                                                               && log.InvoiceFinanceBatch.CheckStatus == BATCH.CHECK
+                                                        orderby log.Invoice.DueDate
                                                         select log;
 
             var logs = new List<InvoiceRefundLog>();
@@ -553,12 +575,14 @@ namespace CMBC.EasyFactor.ARMgr
         private void ResetRow(int rowIndex, bool editable)
         {
             dgvLogs.Rows[rowIndex].Cells["colRefundAmount"].ReadOnly = !editable;
+            dgvLogs.Rows[rowIndex].Cells["colInterest"].ReadOnly = !editable;
 
             if (!editable)
             {
                 IList logList = logsBindingSource.List;
                 var log = (InvoiceRefundLog)logList[rowIndex];
                 log.RefundAmount = 0;
+                log.Interest = 0;
             }
         }
 
@@ -694,12 +718,14 @@ namespace CMBC.EasyFactor.ARMgr
         {
             IList refundLogList = logsBindingSource.List;
             decimal totalRefund = 0;
+            decimal totalInterest = 0;
             for (int i = 0; i < refundLogList.Count; i++)
             {
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     var refundLog = (InvoiceRefundLog)refundLogList[i];
                     decimal refundAmount = refundLog.RefundAmount.GetValueOrDefault();
+                    decimal interestAmount = refundLog.Interest.GetValueOrDefault();
                     if (refundLog.RefundCurrency != _case.InvoiceCurrency)
                     {
                         decimal rate = Exchange.GetExchangeRate(refundLog.RefundCurrency, _case.InvoiceCurrency);
@@ -707,10 +733,12 @@ namespace CMBC.EasyFactor.ARMgr
                     }
 
                     totalRefund += refundAmount;
+                    totalInterest += interestAmount;
                 }
             }
 
             tbTotalRefund.Text = String.Format("{0:N2}", totalRefund);
+            tbTotalInterest.Text = String.Format("{0:N2}", totalInterest);
         }
 
         /// <summary>

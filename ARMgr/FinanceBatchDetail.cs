@@ -75,6 +75,12 @@ namespace CMBC.EasyFactor.ARMgr
             _opBatchType = OpBatchType.DETAIL_BATCH;
             ImeMode = ImeMode.OnHalf;
 
+            cbFinanceRateType1.Items.AddRange(new object[] { "先收息", "后收息" });
+
+            cbFinanceRateType2.Items.AddRange(new object[] { "计头不计尾", "计头又计尾" });
+
+            cbWhoPayInterest.Items.AddRange(new object[] { "卖方付", "买方付" });
+
             batchCurrencyComboBox.DataSource = Currency.AllCurrencies;
             batchCurrencyComboBox.DisplayMember = "CurrencyCode";
             batchCurrencyComboBox.ValueMember = "CurrencyCode";
@@ -118,14 +124,7 @@ namespace CMBC.EasyFactor.ARMgr
             try
             {
                 Invoice invoice = log.Invoice;
-                log.Invoice = null;
                 InvoiceFinanceBatch batch = log.InvoiceFinanceBatch;
-                log.InvoiceFinanceBatch = null;
-
-                foreach (InvoiceRefundLog refundLog in log.InvoiceRefundLogs)
-                {
-                    refundLog.InvoiceFinanceLog = null;
-                }
 
                 _context.InvoiceRefundLogs.DeleteAllOnSubmit(log.InvoiceRefundLogs);
                 invoice.CaculateRefund();

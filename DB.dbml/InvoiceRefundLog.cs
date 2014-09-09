@@ -32,6 +32,10 @@ namespace CMBC.EasyFactor.DB.dbml
             InvoiceRefundAmount2 = financeLog.RefundAmount;
             InvoicePaymentAmount2 = financeLog.Invoice.PaymentAmount;
             RefundCurrency2 = financeLog.InvoiceFinanceBatch.BatchCurrency;
+            FinanceRateType1 = financeLog.InvoiceFinanceBatch.FinanceRateType1;
+            FinanceRateType2 = financeLog.InvoiceFinanceBatch.FinanceRateType2;
+            FinanceRate = financeLog.InvoiceFinanceBatch.FinanceRate;
+            FinancePeriodBegin = financeLog.InvoiceFinanceBatch.FinancePeriodBegin;
         }
 
         /// <summary>
@@ -213,5 +217,13 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
+        public string FinanceRateType1 { get; set; }
+
+        public string FinanceRateType2 { get; set; }
+
+        public double FinanceRate { get; set; }
+
+        public DateTime FinancePeriodBegin { get; set; }
     }
 }

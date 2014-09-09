@@ -200,9 +200,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             List<Department> allDepartments = Department.GetAllDepartments(_context);
             cbDepartments.DataSource = allDepartments;
-            cbDepartments.DisplayMembers = "DepartmentName";
-            //cbDepartments.GroupingMembers = "Domain";
-            cbDepartments.ValueMember = "DepartmentCode";
             cbDepartments.SelectedIndex = -1;
 
             creditLineCurrencyComboBox.DataSource = Currency.AllCurrencies;
@@ -394,24 +391,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
 
 
-
-        //?Private?Methods?(45)?
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CbDepartmentsSelectionChanged(object sender, AdvTreeNodeEventArgs e)
-        {
-            if (clientBindingSource.DataSource is Client)
-            {
-                var client = (Client)clientBindingSource.DataSource;
-                if (cbDepartments.SelectedNode != null)
-                {
-                    client.Department = (Department)cbDepartments.SelectedNode.DataKey;
-                }
-            }
-        }
 
         /// <summary>
         /// 

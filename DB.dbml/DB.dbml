@@ -498,6 +498,7 @@
       <Column Name="FinanceLogID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="RefundAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Interest" Type="System.Decimal" DbType="decimal(18,2)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceRefundBatch_InvoiceRefundLog" Member="InvoiceRefundBatch" ThisKey="RefundBatchNo" OtherKey="RefundBatchNo" Type="InvoiceRefundBatch" IsForeignKey="true" />
       <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceFinanceLog" ThisKey="FinanceLogID" OtherKey="FinanceLogID" Type="InvoiceFinanceLog" IsForeignKey="true" />
     </Type>

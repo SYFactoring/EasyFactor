@@ -210,7 +210,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             InvoiceRefundLog log =
-                ((EntitySet<InvoiceRefundLog>) dgvRefundLogs.DataSource)[dgvRefundLogs.SelectedRows[0].Index];
+                ((List<InvoiceRefundLog>) dgvRefundLogs.DataSource)[dgvRefundLogs.SelectedRows[0].Index];
 
             try
             {
@@ -228,7 +228,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            dgvRefundLogs.Rows.RemoveAt(dgvRefundLogs.SelectedRows[0].Index);
+           // dgvRefundLogs.Rows.RemoveAt(dgvRefundLogs.SelectedRows[0].Index);
         }
 
         /// <summary>

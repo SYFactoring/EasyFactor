@@ -22,6 +22,7 @@ namespace CMBC.EasyFactor.DB.dbml
             AssignBatchNo2 = invoice.AssignBatchNo;
             InvoiceID2 = invoice.InvoiceID;
             InvoiceNo2 = invoice.InvoiceNo;
+            InvoiceAmount2 = invoice.InvoiceAmount;
             AssignAmount2 = invoice.AssignAmount;
             AssignOutstanding2 = invoice.AssignOutstanding;
             InvoiceDate2 = invoice.InvoiceDate;
@@ -332,5 +333,31 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
+        public decimal InvoiceAmount2 { get; set; }
+
+        public decimal InvoiceAmount
+        {
+            get
+            {
+                if (Invoice != null)
+                {
+                    return Invoice.InvoiceAmount;
+                }
+                else
+                {
+                    return InvoiceAmount2;
+                }
+            }
+        }
+
+        public DateTime ReassignDate
+        {
+            get
+            {
+                return Invoice.ReassignDate;
+            }
+        }
+
     }
 }

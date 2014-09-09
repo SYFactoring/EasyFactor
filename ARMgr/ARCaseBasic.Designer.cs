@@ -140,6 +140,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.handFeeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.handFeeCurrTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelCase = new DevComponents.DotNetBar.ExpandablePanel();
+            this.tbPool = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.tbRecoarse = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbNetPaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbPaymentTerms = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbCaseCode = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -155,8 +157,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
-            this.tbRecoarse = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.tbPool = new DevComponents.DotNetBar.Controls.TextBoxX();
             priceLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
             handFeeCurrLabel = new DevComponents.DotNetBar.LabelX();
@@ -529,6 +529,32 @@ namespace CMBC.EasyFactor.ARMgr
             lblTotalFinanceOutstanding.Size = new System.Drawing.Size(68, 18);
             lblTotalFinanceOutstanding.TabIndex = 13;
             lblTotalFinanceOutstanding.Text = "总融资余额";
+            // 
+            // lblRecoarse
+            // 
+            lblRecoarse.AutoSize = true;
+            // 
+            // 
+            // 
+            lblRecoarse.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            lblRecoarse.Location = new System.Drawing.Point(325, 85);
+            lblRecoarse.Name = "lblRecoarse";
+            lblRecoarse.Size = new System.Drawing.Size(44, 18);
+            lblRecoarse.TabIndex = 63;
+            lblRecoarse.Text = "追索权";
+            // 
+            // lblPool
+            // 
+            lblPool.AutoSize = true;
+            // 
+            // 
+            // 
+            lblPool.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            lblPool.Location = new System.Drawing.Point(295, 105);
+            lblPool.Name = "lblPool";
+            lblPool.Size = new System.Drawing.Size(74, 18);
+            lblPool.TabIndex = 65;
+            lblPool.Text = "单笔/池融资";
             // 
             // panelCaseBasic
             // 
@@ -997,6 +1023,32 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCase.TitleStyle.GradientAngle = 90;
             this.panelCase.TitleText = "基本信息";
             // 
+            // tbPool
+            // 
+            // 
+            // 
+            // 
+            this.tbPool.Border.Class = "TextBoxBorder";
+            this.tbPool.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbPool.Location = new System.Drawing.Point(372, 104);
+            this.tbPool.Name = "tbPool";
+            this.tbPool.ReadOnly = true;
+            this.tbPool.Size = new System.Drawing.Size(100, 21);
+            this.tbPool.TabIndex = 66;
+            // 
+            // tbRecoarse
+            // 
+            // 
+            // 
+            // 
+            this.tbRecoarse.Border.Class = "TextBoxBorder";
+            this.tbRecoarse.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbRecoarse.Location = new System.Drawing.Point(372, 83);
+            this.tbRecoarse.Name = "tbRecoarse";
+            this.tbRecoarse.ReadOnly = true;
+            this.tbRecoarse.Size = new System.Drawing.Size(100, 21);
+            this.tbRecoarse.TabIndex = 64;
+            // 
             // tbNetPaymentTerm
             // 
             // 
@@ -1203,58 +1255,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelInvoiceMgr.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelInvoiceMgr.Style.GradientAngle = 90;
             this.panelInvoiceMgr.TabIndex = 0;
-            // 
-            // lblRecoarse
-            // 
-            lblRecoarse.AutoSize = true;
-            // 
-            // 
-            // 
-            lblRecoarse.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            lblRecoarse.Location = new System.Drawing.Point(325, 85);
-            lblRecoarse.Name = "lblRecoarse";
-            lblRecoarse.Size = new System.Drawing.Size(44, 18);
-            lblRecoarse.TabIndex = 63;
-            lblRecoarse.Text = "追索权";
-            // 
-            // tbRecoarse
-            // 
-            // 
-            // 
-            // 
-            this.tbRecoarse.Border.Class = "TextBoxBorder";
-            this.tbRecoarse.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbRecoarse.Location = new System.Drawing.Point(372, 83);
-            this.tbRecoarse.Name = "tbRecoarse";
-            this.tbRecoarse.ReadOnly = true;
-            this.tbRecoarse.Size = new System.Drawing.Size(100, 21);
-            this.tbRecoarse.TabIndex = 64;
-            // 
-            // lblPool
-            // 
-            lblPool.AutoSize = true;
-            // 
-            // 
-            // 
-            lblPool.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            lblPool.Location = new System.Drawing.Point(325, 105);
-            lblPool.Name = "lblPool";
-            lblPool.Size = new System.Drawing.Size(44, 18);
-            lblPool.TabIndex = 65;
-            lblPool.Text = "池融资";
-            // 
-            // tbPool
-            // 
-            // 
-            // 
-            // 
-            this.tbPool.Border.Class = "TextBoxBorder";
-            this.tbPool.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbPool.Location = new System.Drawing.Point(372, 104);
-            this.tbPool.Name = "tbPool";
-            this.tbPool.ReadOnly = true;
-            this.tbPool.Size = new System.Drawing.Size(100, 21);
-            this.tbPool.TabIndex = 66;
             // 
             // ARCaseBasic
             // 

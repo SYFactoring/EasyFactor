@@ -11540,6 +11540,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
+		private System.Nullable<decimal> _Interest;
+		
 		private EntityRef<InvoiceRefundBatch> _InvoiceRefundBatch;
 		
 		private EntityRef<InvoiceFinanceLog> _InvoiceFinanceLog;
@@ -11558,6 +11560,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnRefundAmountChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnInterestChanging(System.Nullable<decimal> value);
+    partial void OnInterestChanged();
     #endregion
 		
 		public InvoiceRefundLog()
@@ -11671,6 +11675,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Interest", DbType="decimal(18,2)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> Interest
+		{
+			get
+			{
+				return this._Interest;
+			}
+			set
+			{
+				if ((this._Interest != value))
+				{
+					this.OnInterestChanging(value);
+					this.SendPropertyChanging();
+					this._Interest = value;
+					this.SendPropertyChanged("Interest");
+					this.OnInterestChanged();
 				}
 			}
 		}

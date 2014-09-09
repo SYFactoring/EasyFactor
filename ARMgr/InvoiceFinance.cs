@@ -162,23 +162,26 @@ namespace CMBC.EasyFactor.ARMgr
                 log.Commission = log.FinanceAmount * (decimal)cda.Price;
             }
 
-            decimal interest = 0;
-            if(batch.FinanceRateType2 == "计头不计尾")
+            if (batch.FinanceRateType1 == "先收息")
             {
-                interest = (decimal)batch.FinanceRate * financeAmount * (log.FinanceDueDate - batch.FinancePeriodBegin).Days /360;
-            }
-            else if(batch.FinanceRateType2 == "计头又计尾")
-            {
-                interest = (decimal)batch.FinanceRate * financeAmount * ((log.FinanceDueDate - batch.FinancePeriodBegin).Days + 1) / 360;
-            }
+                decimal interest = 0;
+                if (batch.FinanceRateType2 == "计头不计尾")
+                {
+                    interest = (decimal)batch.FinanceRate * financeAmount * (log.FinanceDueDate - batch.FinancePeriodBegin).Days / 360;
+                }
+                else if (batch.FinanceRateType2 == "计头又计尾")
+                {
+                    interest = (decimal)batch.FinanceRate * financeAmount * ((log.FinanceDueDate - batch.FinancePeriodBegin).Days + 1) / 360;
+                }
 
-            if (batch.BatchCurrency != "CNY")
-            {
-                decimal rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
-                interest *= rate;
-            }
+                if (batch.BatchCurrency != "CNY")
+                {
+                    decimal rate = Exchange.GetExchangeRate(batch.BatchCurrency, "CNY");
+                    interest *= rate;
+                }
 
-            log.Interest = interest;
+                log.Interest = interest;
+            }
         }
 
         /// <summary>

@@ -264,7 +264,9 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return InvoiceFinanceLogs.Sum(financeLog => financeLog.Interest.GetValueOrDefault());
+                decimal financeInterest = InvoiceFinanceLogs.Sum(financeLog => financeLog.Interest.GetValueOrDefault());
+                decimal refundInterest = InvoiceFinanceLogs.Sum(financeLog => financeLog.InvoiceRefundLogs.Sum(refundLog => refundLog.Interest.GetValueOrDefault()));
+                return financeInterest + refundInterest;
             }
         }
 
@@ -331,7 +333,14 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get
             {
-                return DueDate.AddDays(this.InvoiceAssignBatch.Case.ActiveCDA.ReassignGracePeriod.GetValueOrDefault());
+                if (this.InvoiceAssignBatch.Case.ActiveCDA != null)
+                {
+                    return DueDate.AddDays(this.InvoiceAssignBatch.Case.ActiveCDA.ReassignGracePeriod.GetValueOrDefault());
+                }
+                else
+                {
+                    return DueDate;
+                }
             }
         }
 
