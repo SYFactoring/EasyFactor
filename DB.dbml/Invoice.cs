@@ -270,6 +270,28 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        public decimal UnpaidInterest
+        {
+            get
+            {
+                var financeLogs =  InvoiceFinanceLogs.Where(log => log.InvoiceFinanceBatch.FinanceRateType1 == "后收息" && log.FinanceOutstanding>0);
+                decimal unpaidInterest=0;
+                foreach(InvoiceFinanceLog log in financeLogs){
+                    if (log.InvoiceFinanceBatch.FinanceRateType2 == "计头不计尾")
+                    {
+                        unpaidInterest += log.FinanceOutstanding * (decimal)log.InvoiceFinanceBatch.FinanceRate * (DateTime.Today - log.InvoiceFinanceBatch.FinancePeriodBegin).Days / 360;
+                    }
+                    else if (log.InvoiceFinanceBatch.FinanceRateType2 == "计头又计尾")
+                    {
+                        unpaidInterest += log.FinanceOutstanding * (decimal)log.InvoiceFinanceBatch.FinanceRate * ((DateTime.Today - log.InvoiceFinanceBatch.FinancePeriodBegin).Days+1) / 360;
+                    }
+                        
+                }
+
+                return unpaidInterest;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>

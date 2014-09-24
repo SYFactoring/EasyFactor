@@ -714,7 +714,7 @@ namespace CMBC.EasyFactor.CaseMgr
                               CommissionType = "按转让金额",
                               PUGProportion = 1,
                               PUGPeriod = 90,
-                              ReassignGracePeriod = 60,
+                              ReassignGracePeriod = 45,
                               FinanceProportion = 0.8,
                               IsNotice = "明保理",
                               RiskType = "高风险",
@@ -802,6 +802,12 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.Price = cda.IFPrice;
             }
 
+            if (cda.Price < cda.IFPrice)
+            {
+                MessageBoxEx.Show("IF手续费率不能大于总手续费率",MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             cda.EFPrice = cda.Price - cda.IFPrice;
             cda.CreateUserName = App.Current.CurUser.Name;
             cda.CDAStatus = CDAStr.UNCHECK;
@@ -809,7 +815,7 @@ namespace CMBC.EasyFactor.CaseMgr
             if (cda.CDACode == null)
             {
                 bool isAddOK = true;
-                if (cda.Case.SellerClient.Contact == null)
+                if (cda.Case.SellerClient.Contract == null)
                 {
                     MessageBoxEx.Show("卖方没有有效合同，不能创建CDA", MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;

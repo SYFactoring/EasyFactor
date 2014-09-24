@@ -1063,7 +1063,7 @@ namespace CMBC.EasyFactor.ARMgr
             // ColWhoPayInterest
             // 
             this.ColWhoPayInterest.DataPropertyName = "WhoPayInterest";
-            this.ColWhoPayInterest.HeaderText = "利息付费";
+            this.ColWhoPayInterest.HeaderText = "付息方式";
             this.ColWhoPayInterest.Name = "ColWhoPayInterest";
             this.ColWhoPayInterest.ReadOnly = true;
             // 

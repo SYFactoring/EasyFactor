@@ -69,13 +69,6 @@ namespace CMBC.EasyFactor.CaseMgr
             cbTransactionType.Text = @"全部";
             cbCaseMark.Text = @"启动案";
 
-            List<Department> deptsList = Department.AllDepartments;
-            deptsList.Insert(0, new Department { DepartmentCode = Factor.DEFAULT_FACTOR_CODE, DepartmentName = "全部" });
-            cbOwnerDepts.DataSource = deptsList;
-            cbOwnerDepts.DisplayMembers = "DepartmentName";
-            cbOwnerDepts.ValueMember = "DepartmentCode";
-            cbOwnerDepts.GroupingMembers = "Domain";
-
             List<Currency> currencyList = Currency.AllCurrencies;
             currencyList.Insert(0, new Currency { CurrencyCode = "AAA", CurrencyName = "All" });
             cbCurrency.DataSource = currencyList;
@@ -376,11 +369,6 @@ namespace CMBC.EasyFactor.CaseMgr
             Context = new DBDataContext();
 
             IQueryable<Case> queryResult = Context.Cases.Where(c =>
-                                                               ((string)cbOwnerDepts.SelectedValue == Factor.DEFAULT_FACTOR_CODE
-                                                                    ? true
-                                                                    : c.OwnerDepartmentCode.Equals(
-                                                                        (string)cbOwnerDepts.SelectedValue))
-                                                               &&
                                                                (cbTransactionType.Text == @"全部"
                                                                     ? true
                                                                     : c.TransactionType == cbTransactionType.Text)
@@ -489,7 +477,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// <param name="e"></param>
         private void Reset(object sender, EventArgs e)
         {
-            cbOwnerDepts.SelectedIndex = 0;
             cbTransactionType.SelectedIndex = 0;
             cbCurrency.SelectedIndex = 0;
             tbCaseCode.Text = string.Empty;

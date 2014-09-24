@@ -1217,6 +1217,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 try
                 {
                     contract.Client = client;
+                    if(client.ClientCoreNo == String.Empty)
+                    {
+                        throw new Exception("创建合同编号失败，客户编号为空");
+                    }
 
                     contract.ContractCode = contract.newContractCode();
                     if(contract.ContractCode == String.Empty)

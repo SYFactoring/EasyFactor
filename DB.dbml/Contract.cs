@@ -64,9 +64,9 @@ namespace CMBC.EasyFactor.DB.dbml
             }
             else
             {
-                String abbrName = this.Client.ClientEDICode.Substring(3, 4);
+                String abbrName = this.Client.ClientCoreNo;
                 int count = context.Contracts.Count(c => c.ClientEDICode == this.Client.ClientEDICode && c.ContractValueDate.Year == this.ContractValueDate.Year && c.ContractType == "保理业务合同");
-                string contractCode = String.Format("{0:4}{1:yyyy}{2:D2}", abbrName, this.ContractValueDate, count + 1);
+                string contractCode = String.Format("{0}{1:yy}{2:D2}", abbrName, this.ContractValueDate, count + 1);
                 return contractCode;
             }
         }
