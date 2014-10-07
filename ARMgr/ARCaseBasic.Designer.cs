@@ -20,7 +20,6 @@ namespace CMBC.EasyFactor.ARMgr
         private System.ComponentModel.IContainer components = null;
         private DevComponents.DotNetBar.Controls.TextBoxX creditCoverCurrTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX creditCoverTextBox;
-        private DevComponents.DotNetBar.Controls.TextBoxX eFPriceTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX factorCodeTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX factorNameTextBox;
         private DevComponents.DotNetBar.Controls.TextBoxX financeProportionTextBox;
@@ -99,7 +98,6 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblFinanceCreditCoverBalance;
             DevComponents.DotNetBar.LabelX lblDueDate;
             DevComponents.DotNetBar.LabelX lblCreditLine;
-            DevComponents.DotNetBar.LabelX efPriceLbl;
             DevComponents.DotNetBar.LabelX lblCommissionType;
             DevComponents.DotNetBar.LabelX lblCaseCode;
             DevComponents.DotNetBar.LabelX lblCDACode;
@@ -115,6 +113,7 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblTotalFinanceOutstanding;
             DevComponents.DotNetBar.LabelX lblRecoarse;
             DevComponents.DotNetBar.LabelX lblPool;
+            DevComponents.DotNetBar.LabelX lblCommissionPrePost;
             this.panelCaseBasic = new DevComponents.DotNetBar.ExpandablePanel();
             this.panelFinanceCreditLine = new DevComponents.DotNetBar.ExpandablePanel();
             this.tbTotalFinanceOustanding = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -136,7 +135,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.priceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.financeProportionTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.iFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.eFPriceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.handFeeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.handFeeCurrTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelCase = new DevComponents.DotNetBar.ExpandablePanel();
@@ -157,6 +155,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
+            this.tbCommissionPrePost = new DevComponents.DotNetBar.Controls.TextBoxX();
             priceLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
             handFeeCurrLabel = new DevComponents.DotNetBar.LabelX();
@@ -169,7 +168,6 @@ namespace CMBC.EasyFactor.ARMgr
             lblFinanceCreditCoverBalance = new DevComponents.DotNetBar.LabelX();
             lblDueDate = new DevComponents.DotNetBar.LabelX();
             lblCreditLine = new DevComponents.DotNetBar.LabelX();
-            efPriceLbl = new DevComponents.DotNetBar.LabelX();
             lblCommissionType = new DevComponents.DotNetBar.LabelX();
             lblCaseCode = new DevComponents.DotNetBar.LabelX();
             lblCDACode = new DevComponents.DotNetBar.LabelX();
@@ -185,6 +183,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblTotalFinanceOutstanding = new DevComponents.DotNetBar.LabelX();
             lblRecoarse = new DevComponents.DotNetBar.LabelX();
             lblPool = new DevComponents.DotNetBar.LabelX();
+            lblCommissionPrePost = new DevComponents.DotNetBar.LabelX();
             this.panelCaseBasic.SuspendLayout();
             this.panelFinanceCreditLine.SuspendLayout();
             this.panelBuyer.SuspendLayout();
@@ -199,7 +198,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             priceLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            priceLabel.Location = new System.Drawing.Point(6, 26);
+            priceLabel.Location = new System.Drawing.Point(6, 21);
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new System.Drawing.Size(68, 18);
             priceLabel.TabIndex = 0;
@@ -212,7 +211,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             iFPriceLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            iFPriceLabel.Location = new System.Drawing.Point(7, 66);
+            iFPriceLabel.Location = new System.Drawing.Point(6, 40);
             iFPriceLabel.Name = "iFPriceLabel";
             iFPriceLabel.Size = new System.Drawing.Size(68, 18);
             iFPriceLabel.TabIndex = 2;
@@ -225,7 +224,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             handFeeCurrLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            handFeeCurrLabel.Location = new System.Drawing.Point(6, 86);
+            handFeeCurrLabel.Location = new System.Drawing.Point(6, 61);
             handFeeCurrLabel.Name = "handFeeCurrLabel";
             handFeeCurrLabel.Size = new System.Drawing.Size(68, 18);
             handFeeCurrLabel.TabIndex = 4;
@@ -348,19 +347,6 @@ namespace CMBC.EasyFactor.ARMgr
             lblCreditLine.TabIndex = 2;
             lblCreditLine.Text = "预付款额度";
             // 
-            // efPriceLbl
-            // 
-            efPriceLbl.AutoSize = true;
-            // 
-            // 
-            // 
-            efPriceLbl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            efPriceLbl.Location = new System.Drawing.Point(6, 46);
-            efPriceLbl.Name = "efPriceLbl";
-            efPriceLbl.Size = new System.Drawing.Size(68, 18);
-            efPriceLbl.TabIndex = 7;
-            efPriceLbl.Text = "EF手续费率";
-            // 
             // lblCommissionType
             // 
             lblCommissionType.AutoSize = true;
@@ -368,7 +354,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             lblCommissionType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            lblCommissionType.Location = new System.Drawing.Point(16, 104);
+            lblCommissionType.Location = new System.Drawing.Point(18, 82);
             lblCommissionType.Name = "lblCommissionType";
             lblCommissionType.Size = new System.Drawing.Size(56, 18);
             lblCommissionType.TabIndex = 9;
@@ -839,15 +825,15 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelFee.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelFee.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
             this.panelFee.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelFee.Controls.Add(lblCommissionPrePost);
+            this.panelFee.Controls.Add(this.tbCommissionPrePost);
             this.panelFee.Controls.Add(this.commissionTypeTextBox);
             this.panelFee.Controls.Add(priceLabel);
             this.panelFee.Controls.Add(lblCommissionType);
             this.panelFee.Controls.Add(financeProportionLabel);
             this.panelFee.Controls.Add(this.priceTextBox);
             this.panelFee.Controls.Add(this.financeProportionTextBox);
-            this.panelFee.Controls.Add(efPriceLbl);
             this.panelFee.Controls.Add(this.iFPriceTextBox);
-            this.panelFee.Controls.Add(this.eFPriceTextBox);
             this.panelFee.Controls.Add(iFPriceLabel);
             this.panelFee.Controls.Add(this.handFeeTextBox);
             this.panelFee.Controls.Add(this.handFeeCurrTextBox);
@@ -883,7 +869,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.commissionTypeTextBox.Border.Class = "TextBoxBorder";
             this.commissionTypeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.commissionTypeTextBox.Location = new System.Drawing.Point(77, 103);
+            this.commissionTypeTextBox.Location = new System.Drawing.Point(77, 81);
             this.commissionTypeTextBox.Name = "commissionTypeTextBox";
             this.commissionTypeTextBox.ReadOnly = true;
             this.commissionTypeTextBox.Size = new System.Drawing.Size(100, 21);
@@ -896,7 +882,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.priceTextBox.Border.Class = "TextBoxBorder";
             this.priceTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.priceTextBox.Location = new System.Drawing.Point(77, 22);
+            this.priceTextBox.Location = new System.Drawing.Point(77, 19);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.ReadOnly = true;
             this.priceTextBox.Size = new System.Drawing.Size(100, 21);
@@ -922,24 +908,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
             this.iFPriceTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.iFPriceTextBox.Location = new System.Drawing.Point(77, 64);
+            this.iFPriceTextBox.Location = new System.Drawing.Point(77, 39);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.ReadOnly = true;
             this.iFPriceTextBox.Size = new System.Drawing.Size(100, 21);
             this.iFPriceTextBox.TabIndex = 3;
-            // 
-            // eFPriceTextBox
-            // 
-            // 
-            // 
-            // 
-            this.eFPriceTextBox.Border.Class = "TextBoxBorder";
-            this.eFPriceTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.eFPriceTextBox.Location = new System.Drawing.Point(77, 43);
-            this.eFPriceTextBox.Name = "eFPriceTextBox";
-            this.eFPriceTextBox.ReadOnly = true;
-            this.eFPriceTextBox.Size = new System.Drawing.Size(100, 21);
-            this.eFPriceTextBox.TabIndex = 8;
             // 
             // handFeeTextBox
             // 
@@ -948,7 +921,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.handFeeTextBox.Border.Class = "TextBoxBorder";
             this.handFeeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.handFeeTextBox.Location = new System.Drawing.Point(116, 84);
+            this.handFeeTextBox.Location = new System.Drawing.Point(116, 60);
             this.handFeeTextBox.Name = "handFeeTextBox";
             this.handFeeTextBox.ReadOnly = true;
             this.handFeeTextBox.Size = new System.Drawing.Size(61, 21);
@@ -961,7 +934,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.handFeeCurrTextBox.Border.Class = "TextBoxBorder";
             this.handFeeCurrTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.handFeeCurrTextBox.Location = new System.Drawing.Point(77, 84);
+            this.handFeeCurrTextBox.Location = new System.Drawing.Point(77, 60);
             this.handFeeCurrTextBox.Name = "handFeeCurrTextBox";
             this.handFeeCurrTextBox.ReadOnly = true;
             this.handFeeCurrTextBox.Size = new System.Drawing.Size(33, 21);
@@ -1256,6 +1229,32 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelInvoiceMgr.Style.GradientAngle = 90;
             this.panelInvoiceMgr.TabIndex = 0;
             // 
+            // tbCommissionPrePost
+            // 
+            // 
+            // 
+            // 
+            this.tbCommissionPrePost.Border.Class = "TextBoxBorder";
+            this.tbCommissionPrePost.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbCommissionPrePost.Location = new System.Drawing.Point(77, 102);
+            this.tbCommissionPrePost.Name = "tbCommissionPrePost";
+            this.tbCommissionPrePost.ReadOnly = true;
+            this.tbCommissionPrePost.Size = new System.Drawing.Size(100, 21);
+            this.tbCommissionPrePost.TabIndex = 11;
+            // 
+            // lblCommissionPrePost
+            // 
+            lblCommissionPrePost.AutoSize = true;
+            // 
+            // 
+            // 
+            lblCommissionPrePost.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            lblCommissionPrePost.Location = new System.Drawing.Point(18, 104);
+            lblCommissionPrePost.Name = "lblCommissionPrePost";
+            lblCommissionPrePost.Size = new System.Drawing.Size(56, 18);
+            lblCommissionPrePost.TabIndex = 12;
+            lblCommissionPrePost.Text = "收费方式";
+            // 
             // ARCaseBasic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1281,6 +1280,7 @@ namespace CMBC.EasyFactor.ARMgr
 
         private DevComponents.DotNetBar.Controls.TextBoxX tbPool;
         private DevComponents.DotNetBar.Controls.TextBoxX tbRecoarse;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbCommissionPrePost;
 
     }
 }

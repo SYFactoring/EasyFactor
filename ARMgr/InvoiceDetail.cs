@@ -598,7 +598,7 @@ namespace CMBC.EasyFactor.ARMgr
                 dueDateTextBox.Enabled = true;
                 commentTextBox.ReadOnly = false;
                 assignAmountTextBox.ReadOnly = false;
-                commissionTextBox.ReadOnly = false;
+                paidCommissionTextBox.ReadOnly = false;
                 tbFactorCommission.ReadOnly = false;
 
                 foreach (Control comp in groupPanelInvoiceAdv.Controls)

@@ -110,14 +110,14 @@ namespace CMBC.EasyFactor.DB.dbml
                     decimal? result = null;
                     foreach (InvoiceFinanceLog log in InvoiceFinanceLogs)
                     {
-                        if (log.Commission.HasValue)
+                        if (log.PaidCommission.HasValue)
                         {
                             if (result.HasValue == false)
                             {
                                 result = 0;
                             }
 
-                            result += log.Commission;
+                            result += log.PaidCommission;
                         }
                     }
 

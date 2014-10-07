@@ -8692,6 +8692,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _WhoPayFee;
 		
+		private string _CommissionType;
+		
+		private string _CommissionPrePost;
+		
 		private EntitySet<CreditNote> _CreditNotes;
 		
 		private EntitySet<Invoice> _Invoices;
@@ -8728,8 +8732,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCheckUserNameChanged();
     partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCheckDateChanged();
-    partial void OnWhoPayFeeChanging(string value);
-    partial void OnWhoPayFeeChanged();
+    partial void OnWhoPayCommissionChanging(string value);
+    partial void OnWhoPayCommissionChanged();
+    partial void OnCommissionTypeChanging(string value);
+    partial void OnCommissionTypeChanged();
+    partial void OnCommissionPrePostChanging(string value);
+    partial void OnCommissionPrePostChanged();
     #endregion
 		
 		public InvoiceAssignBatch()
@@ -8989,8 +8997,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WhoPayFee", DbType="NVarchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string WhoPayFee
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WhoPayFee", DbType="Varchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string WhoPayCommission
 		{
 			get
 			{
@@ -9000,11 +9008,51 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._WhoPayFee != value))
 				{
-					this.OnWhoPayFeeChanging(value);
+					this.OnWhoPayCommissionChanging(value);
 					this.SendPropertyChanging();
 					this._WhoPayFee = value;
-					this.SendPropertyChanged("WhoPayFee");
-					this.OnWhoPayFeeChanged();
+					this.SendPropertyChanged("WhoPayCommission");
+					this.OnWhoPayCommissionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommissionType", DbType="varchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CommissionType
+		{
+			get
+			{
+				return this._CommissionType;
+			}
+			set
+			{
+				if ((this._CommissionType != value))
+				{
+					this.OnCommissionTypeChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionType = value;
+					this.SendPropertyChanged("CommissionType");
+					this.OnCommissionTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommissionPrePost", DbType="varchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CommissionPrePost
+		{
+			get
+			{
+				return this._CommissionPrePost;
+			}
+			set
+			{
+				if ((this._CommissionPrePost != value))
+				{
+					this.OnCommissionPrePostChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionPrePost = value;
+					this.SendPropertyChanged("CommissionPrePost");
+					this.OnCommissionPrePostChanged();
 				}
 			}
 		}
@@ -12558,6 +12606,12 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<decimal> _FactorCommission;
 		
+		private System.Nullable<decimal> _UnpaidCommission;
+		
+		private System.Nullable<decimal> _PaidHandlingFee;
+		
+		private System.Nullable<decimal> _UnpaidHandlingFee;
+		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
@@ -12626,8 +12680,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnRefundAmountChanged();
     partial void OnRefundDateChanging(System.Nullable<System.DateTime> value);
     partial void OnRefundDateChanged();
-    partial void OnCommissionChanging(System.Nullable<decimal> value);
-    partial void OnCommissionChanged();
+    partial void OnPaidCommissionChanging(System.Nullable<decimal> value);
+    partial void OnPaidCommissionChanged();
     partial void OnIsDisputeChanging(System.Nullable<bool> value);
     partial void OnIsDisputeChanged();
     partial void OnDisputeTypeChanging(string value);
@@ -12652,6 +12706,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnFactorCommissionChanging(System.Nullable<decimal> value);
     partial void OnFactorCommissionChanged();
+    partial void OnUnpaidCommissionChanging(System.Nullable<decimal> value);
+    partial void OnUnpaidCommissionChanged();
+    partial void OnPaidHandlingFeeChanging(System.Nullable<decimal> value);
+    partial void OnPaidHandlingFeeChanged();
+    partial void OnUnpaidHandlingFeeChanging(System.Nullable<decimal> value);
+    partial void OnUnpaidHandlingFeeChanged();
     #endregion
 		
 		public Invoice()
@@ -13247,7 +13307,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="decimal")]
-		public System.Nullable<decimal> Commission
+		public System.Nullable<decimal> PaidCommission
 		{
 			get
 			{
@@ -13257,11 +13317,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._Commission != value))
 				{
-					this.OnCommissionChanging(value);
+					this.OnPaidCommissionChanging(value);
 					this.SendPropertyChanging();
 					this._Commission = value;
-					this.SendPropertyChanged("Commission");
-					this.OnCommissionChanged();
+					this.SendPropertyChanged("PaidCommission");
+					this.OnPaidCommissionChanged();
 				}
 			}
 		}
@@ -13506,6 +13566,66 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnpaidCommission", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> UnpaidCommission
+		{
+			get
+			{
+				return this._UnpaidCommission;
+			}
+			set
+			{
+				if ((this._UnpaidCommission != value))
+				{
+					this.OnUnpaidCommissionChanging(value);
+					this.SendPropertyChanging();
+					this._UnpaidCommission = value;
+					this.SendPropertyChanged("UnpaidCommission");
+					this.OnUnpaidCommissionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaidHandlingFee", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> PaidHandlingFee
+		{
+			get
+			{
+				return this._PaidHandlingFee;
+			}
+			set
+			{
+				if ((this._PaidHandlingFee != value))
+				{
+					this.OnPaidHandlingFeeChanging(value);
+					this.SendPropertyChanging();
+					this._PaidHandlingFee = value;
+					this.SendPropertyChanged("PaidHandlingFee");
+					this.OnPaidHandlingFeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnpaidHandlingFee", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> UnpaidHandlingFee
+		{
+			get
+			{
+				return this._UnpaidHandlingFee;
+			}
+			set
+			{
+				if ((this._UnpaidHandlingFee != value))
+				{
+					this.OnUnpaidHandlingFeeChanging(value);
+					this.SendPropertyChanging();
+					this._UnpaidHandlingFee = value;
+					this.SendPropertyChanged("UnpaidHandlingFee");
+					this.OnUnpaidHandlingFeeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Invoice_InvoiceFinanceLog", Storage="_InvoiceFinanceLogs", ThisKey="InvoiceID", OtherKey="InvoiceID")]
 		public EntitySet<InvoiceFinanceLog> InvoiceFinanceLogs
 		{
@@ -13625,11 +13745,13 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _Comment;
 		
-		private System.Nullable<decimal> _Commission;
-		
 		private int _InvoiceID;
 		
 		private System.Nullable<decimal> _Interest;
+		
+		private System.Nullable<decimal> _PaidCommission;
+		
+		private System.Nullable<decimal> _UnpaidCommission;
 		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
 		
@@ -13649,12 +13771,14 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceAmountChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
-    partial void OnCommissionChanging(System.Nullable<decimal> value);
-    partial void OnCommissionChanged();
     partial void OnInvoiceIDChanging(int value);
     partial void OnInvoiceIDChanged();
     partial void OnInterestChanging(System.Nullable<decimal> value);
     partial void OnInterestChanged();
+    partial void OnPaidCommissionChanging(System.Nullable<decimal> value);
+    partial void OnPaidCommissionChanged();
+    partial void OnUnpaidCommissionChanging(System.Nullable<decimal> value);
+    partial void OnUnpaidCommissionChanged();
     #endregion
 		
 		public InvoiceFinanceLog()
@@ -13749,26 +13873,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="decimal")]
-		public System.Nullable<decimal> Commission
-		{
-			get
-			{
-				return this._Commission;
-			}
-			set
-			{
-				if ((this._Commission != value))
-				{
-					this.OnCommissionChanging(value);
-					this.SendPropertyChanging();
-					this._Commission = value;
-					this.SendPropertyChanged("Commission");
-					this.OnCommissionChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", DbType="Int NOT NULL")]
 		public int InvoiceID
 		{
@@ -13809,6 +13913,46 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Interest = value;
 					this.SendPropertyChanged("Interest");
 					this.OnInterestChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaidCommission", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> PaidCommission
+		{
+			get
+			{
+				return this._PaidCommission;
+			}
+			set
+			{
+				if ((this._PaidCommission != value))
+				{
+					this.OnPaidCommissionChanging(value);
+					this.SendPropertyChanging();
+					this._PaidCommission = value;
+					this.SendPropertyChanged("PaidCommission");
+					this.OnPaidCommissionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnpaidCommission", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> UnpaidCommission
+		{
+			get
+			{
+				return this._UnpaidCommission;
+			}
+			set
+			{
+				if ((this._UnpaidCommission != value))
+				{
+					this.OnUnpaidCommissionChanging(value);
+					this.SendPropertyChanging();
+					this._UnpaidCommission = value;
+					this.SendPropertyChanged("UnpaidCommission");
+					this.OnUnpaidCommissionChanged();
 				}
 			}
 		}

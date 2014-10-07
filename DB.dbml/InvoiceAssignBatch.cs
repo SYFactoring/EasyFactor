@@ -94,13 +94,13 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (_commissionAmount.HasValue == false)
                 {
                     decimal? result = null;
-                    foreach (Invoice invoice in Invoices.Where(invoice => invoice.Commission.HasValue))
+                    foreach (Invoice invoice in Invoices.Where(invoice => invoice.PaidCommission.HasValue))
                     {
                         if (result.HasValue == false)
                         {
                             result = 0;
                         }
-                        result += invoice.Commission;
+                        result += invoice.PaidCommission;
                     }
 
                     _commissionAmount = result;

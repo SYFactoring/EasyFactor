@@ -492,7 +492,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = invoice.InvoiceDate;
                     datasheet.Cells[row + 2, column++] = invoice.DueDate;
                     datasheet.Cells[row + 2, column++] = TypeUtil.ConvertBoolToStr(invoice.IsFlaw);
-                    datasheet.Cells[row + 2, column++] = invoice.Commission;
+                    datasheet.Cells[row + 2, column++] = invoice.PaidCommission;
                     datasheet.Cells[row + 2, column] = invoice.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / size));
@@ -1532,7 +1532,7 @@ namespace CMBC.EasyFactor.Utils
                     datasheet.Cells[row + 2, column++] = "'" + log.InvoiceNo2;
                     datasheet.Cells[row + 2, column++] = log.AssignOutstanding;
                     datasheet.Cells[row + 2, column++] = log.FinanceAmount;
-                    datasheet.Cells[row + 2, column++] = log.Commission;
+                    datasheet.Cells[row + 2, column++] = log.PaidCommission;
                     datasheet.Cells[row + 2, column] = log.Comment;
 
                     worker.ReportProgress((int)((float)row * 100 / size));
@@ -1758,7 +1758,7 @@ namespace CMBC.EasyFactor.Utils
                     column = 40;
 
                     //手续费
-                    datasheet.Cells[row + 2, column++] = invoice.Commission;
+                    datasheet.Cells[row + 2, column++] = invoice.PaidCommission;
                     //利息
                     datasheet.Cells[row + 2, column++] = invoice.Interest;
                     datasheet.Cells[row + 2, column] = invoice.Comment;
@@ -2845,7 +2845,7 @@ namespace CMBC.EasyFactor.Utils
 
                             sheet.Cells[row, "N"] = invoice.AssignOutstanding;
                             sheet.Range[sheet.Cells[row, "N"], sheet.Cells[row, "N"]].NumberFormatLocal = assignCurrencyFormat;
-                            sheet.Cells[row, "S"] = invoice.Commission;
+                            sheet.Cells[row, "S"] = invoice.PaidCommission;
                             sheet.Range[sheet.Cells[row, "S"], sheet.Cells[row, "S"]].NumberFormatLocal = assignCurrencyFormat;
                             sheet.Cells[row, "T"] = invoice.Comment;
 
@@ -3117,7 +3117,7 @@ namespace CMBC.EasyFactor.Utils
                     step = step < (normalPaymentNumber + creditNoteNumber) ? (normalPaymentNumber + creditNoteNumber) : step;
 
                     sheet.Cells[row, "N"] = invoice.AssignOutstanding;
-                    sheet.Cells[row, "S"] = invoice.Commission;
+                    sheet.Cells[row, "S"] = invoice.PaidCommission;
                     sheet.Range[sheet.Cells[row, "N"], sheet.Cells[row, "N"]].NumberFormatLocal = assignCurrencyFormat;
                     sheet.Range[sheet.Cells[row, "S"], sheet.Cells[row, "S"]].NumberFormatLocal = assignCurrencyFormat;
                     sheet.Cells[row, "T"] = invoice.Comment;

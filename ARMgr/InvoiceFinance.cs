@@ -157,9 +157,17 @@ namespace CMBC.EasyFactor.ARMgr
             log.FinanceAmount = financeAmount;
 
             CDA cda = _case.ActiveCDA;
-            if (cda.CommissionType == "按融资金额")
+            InvoiceAssignBatch assignBatch = _context.Invoices.Single(i => i.InvoiceID == log.InvoiceID2).InvoiceAssignBatch;
+            if (assignBatch.CommissionType == "按融资金额")
             {
-                log.Commission = log.FinanceAmount * (decimal)cda.Price;
+                if (assignBatch.CommissionPrePost == "先收")
+                {
+                    log.PaidCommission = log.FinanceAmount * (decimal)cda.Price;
+                }
+                else if (assignBatch.CommissionPrePost == "后收")
+                {
+                    log.UnpaidCommission = log.FinanceAmount * (decimal)cda.Price;
+                }
             }
 
             if (batch.FinanceRateType1 == "先收息")
@@ -215,43 +223,6 @@ namespace CMBC.EasyFactor.ARMgr
 
             e.IsValid = batch.FinancePeriodBegin >= assignDate;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void CustomValidator2ValidateValue(object sender, ValidateValueEventArgs e)
-        //{
-        //    var batch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
-        //    if (_case.TransactionType == "国内买方保理")
-        //    {
-        //        e.IsValid = true;
-        //    }
-
-        //    IList logList = logsBindingSource.List;
-
-        //    DateTime dueDate = default(DateTime);
-        //    for (int i = 0; i < logList.Count; i++)
-        //    {
-        //        if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
-        //        {
-        //            var log = (InvoiceFinanceLog)logList[i];
-        //            if (log.DueDate.HasValue && dueDate < log.DueDate.Value)
-        //            {
-        //                dueDate = log.DueDate.Value;
-        //            }
-        //        }
-        //    }
-
-        //    if (dueDate == default(DateTime))
-        //    {
-        //        e.IsValid = true;
-        //        return;
-        //    }
-
-        //    e.IsValid = batch.FinancePeriodEnd >= dueDate;
-        //}
 
         /// <summary>
         /// 
@@ -446,7 +417,7 @@ namespace CMBC.EasyFactor.ARMgr
                     e.Cancel = true;
                 }
             }
-            else if (col == colFinanceAmount || col == colCommission)
+            else if (col == colFinanceAmount || col == colPaidCommission || col == colUnpaidCommission)
             {
                 var str = (string)e.FormattedValue;
                 decimal result;
@@ -565,7 +536,7 @@ namespace CMBC.EasyFactor.ARMgr
                     if (newLog != null)
                     {
                         oldLog.FinanceAmount = newLog.FinanceAmount;
-                        oldLog.Commission = newLog.Commission;
+                        oldLog.PaidCommission = newLog.PaidCommission;
                         oldLog.Comment = newLog.Comment;
 
                         if (oldLog.FinanceAmount>0)
@@ -653,11 +624,13 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (activeCDA.CommissionType == "按融资金额" || activeCDA.CommissionType == "其他")
             {
-                colCommission.Visible = true;
+                colPaidCommission.Visible = true;
+                colUnpaidCommission.Visible = true;
             }
             else
             {
-                colCommission.Visible = false;
+                colPaidCommission.Visible = false;
+                colUnpaidCommission.Visible = false;
             }
 
             var financeBatch = new InvoiceFinanceBatch
@@ -742,12 +715,14 @@ namespace CMBC.EasyFactor.ARMgr
         private void ResetRow(int rowIndex, bool editable)
         {
             dgvLogs.Rows[rowIndex].Cells["colFinanceAmount"].ReadOnly = !editable;
-            dgvLogs.Rows[rowIndex].Cells["colComment"].ReadOnly = !editable;
+            dgvLogs.Rows[rowIndex].Cells["colPaidCommission"].ReadOnly = !editable;
+            dgvLogs.Rows[rowIndex].Cells["colUnpaidCommission"].ReadOnly = !editable;
             dgvLogs.Rows[rowIndex].Cells["colInterest"].ReadOnly = !editable;
 
             if (_case.ActiveCDA.CommissionType == "按融资金额" || _case.ActiveCDA.CommissionType == "其他")
             {
-                dgvLogs.Rows[rowIndex].Cells["colCommission"].ReadOnly = !editable;
+                dgvLogs.Rows[rowIndex].Cells["colPaidCommission"].ReadOnly = !editable;
+                dgvLogs.Rows[rowIndex].Cells["colUnpaidCommission"].ReadOnly = !editable;
             }
 
             if (!editable)
@@ -758,7 +733,8 @@ namespace CMBC.EasyFactor.ARMgr
 
                 if (_case.ActiveCDA.CommissionType == "按融资金额" || _case.ActiveCDA.CommissionType == "其他")
                 {
-                    log.Commission = null;
+                    log.PaidCommission = null;
+                    log.UnpaidCommission = null;
                 }
 
                 log.Interest = 0;

@@ -176,6 +176,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRefundDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnPaidCommssion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnpaidInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -788,6 +789,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colRefundAmount,
             this.colRefundDate,
             this.colCommission,
+            this.colUnPaidCommssion,
             this.colInterest,
             this.colUnpaidInterest,
             this.colIsFlaw,
@@ -1135,14 +1137,21 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // colCommission
             // 
-            this.colCommission.DataPropertyName = "Commission";
+            this.colCommission.DataPropertyName = "PaidCommission";
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle11.Format = "N2";
             dataGridViewCellStyle11.NullValue = null;
             this.colCommission.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colCommission.HeaderText = "手续费收入";
+            this.colCommission.HeaderText = "已收手续费";
             this.colCommission.Name = "colCommission";
             this.colCommission.ReadOnly = true;
+            // 
+            // colUnPaidCommssion
+            // 
+            this.colUnPaidCommssion.DataPropertyName = "UnPaidCommission";
+            this.colUnPaidCommssion.HeaderText = "未收手续费";
+            this.colUnPaidCommssion.Name = "colUnPaidCommssion";
+            this.colUnPaidCommssion.ReadOnly = true;
             // 
             // colInterest
             // 
@@ -1250,6 +1259,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRefundDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnPaidCommssion;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInterest;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnpaidInterest;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;

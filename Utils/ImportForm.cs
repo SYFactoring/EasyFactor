@@ -853,7 +853,7 @@ namespace CMBC.EasyFactor.Utils
                             //else 
                             if (cda.CommissionType == "按转让金额")
                             {
-                                invoice.Commission = Decimal.Round(invoice.AssignAmount * (decimal)cda.Price.GetValueOrDefault(),2);
+                                invoice.PaidCommission = Decimal.Round(invoice.AssignAmount * (decimal)cda.Price.GetValueOrDefault(), 2);
                             }
 
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
@@ -1097,7 +1097,7 @@ namespace CMBC.EasyFactor.Utils
                         invoice.InvoiceDate = (DateTime)valueArray[row, column++];
                         invoice.DueDate = (DateTime)valueArray[row, column++];
                         invoice.IsFlaw = TypeUtil.ConvertStrToBool(valueArray[row, column++]);
-                        invoice.Commission = (decimal?)valueArray[row, column++];
+                        invoice.PaidCommission = (decimal?)valueArray[row, column++];
                         invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
 
                         invoiceList.Add(invoice);
@@ -2917,7 +2917,7 @@ namespace CMBC.EasyFactor.Utils
                                     currentFinanceAmount += Decimal.Round(logFinanceAmount,2);
                                     if (activeCDA.CommissionType == "按融资金额")
                                     {
-                                        log.Commission = log.FinanceAmount * (decimal)activeCDA.Price;
+                                        log.PaidCommission = log.FinanceAmount * (decimal)activeCDA.Price;
                                     }
 
                                     log.Invoice.CaculateCommission(false);
@@ -3048,7 +3048,7 @@ namespace CMBC.EasyFactor.Utils
                         var log = new InvoiceFinanceLog(invoice)
                                       {
                                           FinanceAmount = (decimal?)valueArray[row, column++],
-                                          Commission = (decimal?)valueArray[row, column++],
+                                          PaidCommission = (decimal?)valueArray[row, column++],
                                           Comment = String.Format("{0:G}", valueArray[row, column])
                                       };
 
@@ -3366,11 +3366,11 @@ namespace CMBC.EasyFactor.Utils
                             {
                                 if (activeCDA.CommissionType == "按融资金额" && financeLog != null)
                                 {
-                                    financeLog.Commission = commission;
+                                    financeLog.PaidCommission = commission;
                                 }
                                 else
                                 {
-                                    invoice.Commission = commission;
+                                    invoice.PaidCommission = commission;
                                 }
                             }
 

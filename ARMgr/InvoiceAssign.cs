@@ -52,8 +52,8 @@ namespace CMBC.EasyFactor.ARMgr
             dgvInvoices.AutoGenerateColumns = false;
             superValidator.Enabled = false;
             dgvInvoices.ReadOnly = true;
-            cbWhoPayFee.Items.AddRange(new object[] { "卖方付", "买方付" });
-            cbWhoPayFee.Text = "卖方付";
+            cbWhoPayCommission.Items.AddRange(new object[] { "卖方付", "买方付" });
+            cbWhoPayCommission.Text = "卖方付";
             ControlUtil.SetDoubleBuffered(dgvInvoices);
 
             _context = new DBDataContext();
@@ -220,7 +220,7 @@ namespace CMBC.EasyFactor.ARMgr
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
                 e.ParsingApplied = true;
             }
-            else if (col == colInvoiceAmount || col == colAssignAmount || col == colCommission)
+            else if (col == colInvoiceAmount || col == colAssignAmount || col == colPaidCommission || col==colUnpaidCommission || col==colPaidHandlingFee|| col== colUnpaidHandingFee)
             {
                 if (e.Value.Equals(string.Empty))
                 {
@@ -270,7 +270,7 @@ namespace CMBC.EasyFactor.ARMgr
                     e.Cancel = true;
                 }
             }
-            else if (col == colInvoiceAmount || col == colAssignAmount || col == colCommission)
+            else if (col == colInvoiceAmount || col == colAssignAmount || col == colPaidCommission || col==colUnpaidCommission || col==colPaidHandlingFee||col==colUnpaidHandingFee)
             {
                 var str = (string)e.FormattedValue;
                 double result;
@@ -323,14 +323,43 @@ namespace CMBC.EasyFactor.ARMgr
             if (dgvInvoices.Columns[e.ColumnIndex] == colInvoiceAmount)
             {
                 selectedInvoice.AssignAmount = selectedInvoice.InvoiceAmount;
+                CDA cda = _case.ActiveCDA;
+                if (cda.CommissionPrePost == "先收")
+                {
+                    if (cda.CommissionType == "按转让金额")
+                    {
+                        selectedInvoice.PaidCommission = selectedInvoice.AssignAmount * (decimal)cda.Price;
+                    }
+                    selectedInvoice.PaidHandlingFee = cda.HandFee.GetValueOrDefault();
+                }
+                else if (cda.CommissionPrePost == "后收")
+                {
+                    if (cda.CommissionType == "按转让金额")
+                    {
+                        selectedInvoice.UnpaidCommission = selectedInvoice.AssignAmount * (decimal)cda.Price;
+                    }
+                    selectedInvoice.UnpaidHandlingFee = cda.HandFee.GetValueOrDefault();
+                }
                 StatBatch();
             }
             else if (dgvInvoices.Columns[e.ColumnIndex] == colAssignAmount)
             {
                 CDA cda = _case.ActiveCDA;
-                if (cda.CommissionType == "按转让金额")
+                if (cda.CommissionPrePost == "先收")
                 {
-                    selectedInvoice.Commission = selectedInvoice.AssignAmount * (decimal)cda.Price;
+                    if (cda.CommissionType == "按转让金额")
+                    {
+                        selectedInvoice.PaidCommission = selectedInvoice.AssignAmount * (decimal)cda.Price;
+                    }
+                    selectedInvoice.PaidHandlingFee = cda.HandFee.GetValueOrDefault();
+                }
+                else if (cda.CommissionPrePost == "后收")
+                {
+                    if (cda.CommissionType == "按转让金额")
+                    {
+                        selectedInvoice.UnpaidCommission = selectedInvoice.AssignAmount * (decimal)cda.Price;
+                    }
+                    selectedInvoice.UnpaidHandlingFee = cda.HandFee.GetValueOrDefault();
                 }
 
                 StatBatch();
@@ -424,7 +453,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     foreach (Invoice invoice in invoiceList)
                     {
-                        if (invoice.Commission.HasValue == false)
+                        if (invoice.PaidCommission.HasValue == false)
                         {
                             invoice.CaculateCommission(false);
                         }
@@ -456,11 +485,13 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (_case.ActiveCDA.CommissionType == "按转让金额" || _case.ActiveCDA.CommissionType == "其他")
             {
-                colCommission.Visible = true;
+                colPaidCommission.Visible = true;
+                colUnpaidCommission.Visible = true;
             }
             else
             {
-                colCommission.Visible = false;
+                colPaidCommission.Visible = false;
+                colUnpaidCommission.Visible = false;
             }
 
             var batch = new InvoiceAssignBatch
@@ -468,7 +499,9 @@ namespace CMBC.EasyFactor.ARMgr
                                 AssignDate = DateTime.Now.Date,
                                 CreateUserName = App.Current.CurUser.Name,
                                 IsRefinance = false,
-                                WhoPayFee = "卖方付"
+                                WhoPayCommission = "卖方付",
+                                CommissionType = _case.ActiveCDA.CommissionType,
+                                CommissionPrePost = _case.ActiveCDA.CommissionPrePost
                             };
             //batch.CheckStatus = BATCH.UNCHECK;
             batchBindingSource.DataSource = batch;
@@ -686,16 +719,18 @@ namespace CMBC.EasyFactor.ARMgr
             IList invoiceList = invoiceBindingSource.List;
             decimal totalAssign = 0;
             decimal totalCommmission = 0;
+            decimal totalHandlingFee = 0;
             foreach (Invoice invoice in invoiceList)
             {
                 totalAssign += invoice.AssignAmount;
-                totalCommmission += invoice.Commission.GetValueOrDefault();
+                totalCommmission += invoice.PaidCommission.GetValueOrDefault();
+                totalHandlingFee += invoice.PaidHandlingFee.GetValueOrDefault();
             }
 
             tbTotalAssign.Text = String.Format("{0:N2}", totalAssign);
             tbAssignNumber.Text = String.Format("{0}", invoiceList.Count);
             tbTotalCommission.Text = String.Format("{0:N2}", totalCommmission);
-            tbTotalHandfee.Text = String.Format("{0:N2}", invoiceList.Count * _case.ActiveCDA.HandFee.GetValueOrDefault());
+            tbTotalHandfee.Text = String.Format("{0:N2}", totalHandlingFee);
         }
 
         /// <summary>
@@ -776,7 +811,7 @@ namespace CMBC.EasyFactor.ARMgr
                     invoice.FlawReason = "09";
                 }
 
-                if (invoice.Commission.HasValue == false && cda.CommissionType == "其他")
+                if (invoice.PaidCommission.HasValue == false && cda.CommissionType == "其他")
                 {
                     if (isCommissionAlert)
                     {

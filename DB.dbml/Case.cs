@@ -175,7 +175,7 @@ namespace CMBC.EasyFactor.DB.dbml
                     foreach (InvoiceAssignBatch batch in batches)
                     {
                         count += batch.BatchCount;
-                        result = batch.Invoices.Sum(invoice => invoice.Commission.GetValueOrDefault());
+                        result = batch.Invoices.Sum(invoice => invoice.PaidCommission.GetValueOrDefault());
                     }
 
                     CDA cda = ActiveCDA;

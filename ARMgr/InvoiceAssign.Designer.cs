@@ -104,12 +104,15 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblTotalHandfee;
             DevComponents.DotNetBar.LabelX lblWhoPayFee;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceAssign));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelAssignBatch = new DevComponents.DotNetBar.PanelEx();
-            this.cbWhoPayFee = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbWhoPayCommission = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbTotalHandfee = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tbTotalCommission = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -144,18 +147,21 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaidCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnpaidCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaidHandlingFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnpaidHandingFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             assignDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -285,7 +291,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelAssignBatch.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelAssignBatch.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.panelAssignBatch.Controls.Add(lblWhoPayFee);
-            this.panelAssignBatch.Controls.Add(this.cbWhoPayFee);
+            this.panelAssignBatch.Controls.Add(this.cbWhoPayCommission);
             this.panelAssignBatch.Controls.Add(this.tbTotalHandfee);
             this.panelAssignBatch.Controls.Add(this.tbTotalCommission);
             this.panelAssignBatch.Controls.Add(this.tbAssignNumber);
@@ -320,18 +326,18 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelAssignBatch.Style.GradientAngle = 90;
             this.panelAssignBatch.TabIndex = 0;
             // 
-            // cbWhoPayFee
+            // cbWhoPayCommission
             // 
-            this.cbWhoPayFee.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "WhoPayFee", true));
-            this.cbWhoPayFee.DisplayMember = "Text";
-            this.cbWhoPayFee.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbWhoPayFee.FormattingEnabled = true;
-            this.cbWhoPayFee.ItemHeight = 14;
-            this.cbWhoPayFee.Location = new System.Drawing.Point(427, 6);
-            this.cbWhoPayFee.Name = "cbWhoPayFee";
-            this.cbWhoPayFee.Size = new System.Drawing.Size(77, 20);
-            this.cbWhoPayFee.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
-            this.cbWhoPayFee.TabIndex = 20;
+            this.cbWhoPayCommission.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "WhoPayCommission", true));
+            this.cbWhoPayCommission.DisplayMember = "Text";
+            this.cbWhoPayCommission.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbWhoPayCommission.FormattingEnabled = true;
+            this.cbWhoPayCommission.ItemHeight = 14;
+            this.cbWhoPayCommission.Location = new System.Drawing.Point(427, 6);
+            this.cbWhoPayCommission.Name = "cbWhoPayCommission";
+            this.cbWhoPayCommission.Size = new System.Drawing.Size(77, 20);
+            this.cbWhoPayCommission.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.cbWhoPayCommission.TabIndex = 20;
             // 
             // batchBindingSource
             // 
@@ -705,19 +711,22 @@ namespace CMBC.EasyFactor.ARMgr
             this.colAssignAmount,
             this.colInvoiceDate,
             this.colDueDate,
-            this.colCommission,
+            this.colPaidCommission,
+            this.colUnpaidCommission,
+            this.colPaidHandlingFee,
+            this.colUnpaidHandingFee,
             this.colIsFlaw,
             this.colComment});
             this.dgvInvoices.ContextMenuStrip = this.cmuInvoiceAssign;
             this.dgvInvoices.DataSource = this.invoiceBindingSource;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
@@ -732,6 +741,26 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvInvoicesCellValidating);
             this.dgvInvoices.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvInvoicesCellValueChanged);
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvInvoicesRowHeaderMouseDoubleClick);
+            // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "必填";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
             // 
             // colInvoiceNo
             // 
@@ -773,14 +802,41 @@ namespace CMBC.EasyFactor.ARMgr
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // colCommission
+            // colPaidCommission
             // 
-            this.colCommission.DataPropertyName = "Commission";
+            this.colPaidCommission.DataPropertyName = "PaidCommission";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle3.Format = "N2";
-            this.colCommission.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colCommission.HeaderText = "手续费";
-            this.colCommission.Name = "colCommission";
+            this.colPaidCommission.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colPaidCommission.HeaderText = "已收手续费";
+            this.colPaidCommission.Name = "colPaidCommission";
+            // 
+            // colUnpaidCommission
+            // 
+            this.colUnpaidCommission.DataPropertyName = "UnpaidCommission";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.colUnpaidCommission.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colUnpaidCommission.HeaderText = "未收手续费";
+            this.colUnpaidCommission.Name = "colUnpaidCommission";
+            // 
+            // colPaidHandlingFee
+            // 
+            this.colPaidHandlingFee.DataPropertyName = "PaidHandlingFee";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.colPaidHandlingFee.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colPaidHandlingFee.HeaderText = "已收单据费";
+            this.colPaidHandlingFee.Name = "colPaidHandlingFee";
+            // 
+            // colUnpaidHandingFee
+            // 
+            this.colUnpaidHandingFee.DataPropertyName = "UnpaidHandingFee";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.colUnpaidHandingFee.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colUnpaidHandingFee.HeaderText = "未收单据费";
+            this.colUnpaidHandingFee.Name = "colUnpaidHandingFee";
             // 
             // colIsFlaw
             // 
@@ -793,26 +849,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colComment.DataPropertyName = "Comment";
             this.colComment.HeaderText = "备注";
             this.colComment.Name = "colComment";
-            // 
-            // superValidator
-            // 
-            this.superValidator.ContainerControl = this;
-            this.superValidator.ErrorProvider = this.errorProvider;
-            this.superValidator.Highlighter = this.highlighter;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "必填";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // highlighter
-            // 
-            this.highlighter.ContainerControl = this;
             // 
             // InvoiceAssign
             // 
@@ -841,14 +877,17 @@ namespace CMBC.EasyFactor.ARMgr
         }
         #endregion
 
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbWhoPayCommission;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaidCommission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnpaidCommission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaidHandlingFee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnpaidHandingFee;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsFlaw;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbWhoPayFee;
     }
 }

@@ -377,7 +377,9 @@
       <Column Name="CheckStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="WhoPayFee" Type="System.String" DbType="NVarchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="WhoPayCommission" Storage="_WhoPayFee" Type="System.String" DbType="Varchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="CommissionType" Type="System.String" DbType="varchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="CommissionPrePost" Type="System.String" DbType="varchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceAssignBatch_CreditNote" Member="CreditNotes" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="CreditNote" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="Invoice" />
       <Association Name="Case_InvoiceAssignBatch" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
@@ -568,7 +570,7 @@
       <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RefundAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="RefundDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Commission" Type="decimal" DbType="decimal" CanBeNull="true" />
+      <Column Name="PaidCommission" Storage="_Commission" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="IsDispute" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="DisputeType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="DisputeAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
@@ -581,6 +583,9 @@
       <Column Name="DisputeResolveUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="FactorCommission" Type="decimal" DbType="decimal" CanBeNull="true" />
+      <Column Name="UnpaidCommission" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="PaidHandlingFee" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="UnpaidHandlingFee" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="InvoiceFinanceLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoiceFinanceLog" />
       <Association Name="Invoice_InvoicePaymentLog" Member="InvoicePaymentLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoicePaymentLog" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="InvoiceAssignBatch" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="InvoiceAssignBatch" IsForeignKey="true" />
@@ -595,6 +600,8 @@
       <Column Name="Commission" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="InvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Interest" Type="System.Decimal" DbType="Decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="PaidCommission" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="UnpaidCommission" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceRefundLogs" ThisKey="FinanceLogID" OtherKey="FinanceLogID" Type="InvoiceRefundLog" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="Invoice" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="Invoice" IsForeignKey="true" />
       <Association Name="InvoiceFinanceBatch_InvoiceFinanceLog" Member="InvoiceFinanceBatch" ThisKey="FinanceBatchNo" OtherKey="FinanceBatchNo" Type="InvoiceFinanceBatch" IsForeignKey="true" />

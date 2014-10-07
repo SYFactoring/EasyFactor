@@ -296,11 +296,11 @@ namespace CMBC.EasyFactor.ARMgr
                 tbPaymentTerms.Text = cda.PaymentTerms;
 
                 priceTextBox.Text = String.Format("{0:P4}", cda.Price);
-                eFPriceTextBox.Text = String.Format("{0:P4}", cda.EFPrice);
                 iFPriceTextBox.Text = String.Format("{0:P4}", cda.IFPrice);
                 handFeeCurrTextBox.Text = cda.HandFeeCurr;
                 handFeeTextBox.Text = String.Format("{0:N}", cda.HandFee);
                 commissionTypeTextBox.Text = cda.CommissionType;
+                tbCommissionPrePost.Text = cda.CommissionPrePost;
 
                 creditCoverCurrTextBox.Text = cda.CreditCoverCurr;
                 creditCoverTextBox.Text = String.Format("{0:N2}", cda.CreditCover);

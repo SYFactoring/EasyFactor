@@ -1000,7 +1000,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // colWhoPayFee
             // 
-            this.colWhoPayFee.DataPropertyName = "WhoPayFee";
+            this.colWhoPayFee.DataPropertyName = "WhoPayCommission";
             this.colWhoPayFee.HeaderText = "±£¿Ì∏∂∑—";
             this.colWhoPayFee.Name = "colWhoPayFee";
             this.colWhoPayFee.ReadOnly = true;
