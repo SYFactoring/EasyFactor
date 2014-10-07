@@ -171,6 +171,8 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(caseCodeTextBox, false);
             ControlUtil.SetComponetEditable(assignBatchNoTextBox, false);
             ControlUtil.SetComponetEditable(diInputDate, false);
+            ControlUtil.SetComponetEditable(tbWhoPayFee, false);
+            ControlUtil.SetComponetEditable(tbCheckStatus, false);
         }
     }
 }

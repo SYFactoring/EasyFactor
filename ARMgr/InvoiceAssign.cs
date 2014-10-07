@@ -467,7 +467,8 @@ namespace CMBC.EasyFactor.ARMgr
                             {
                                 AssignDate = DateTime.Now.Date,
                                 CreateUserName = App.Current.CurUser.Name,
-                                IsRefinance = false
+                                IsRefinance = false,
+                                WhoPayFee = "卖方付"
                             };
             //batch.CheckStatus = BATCH.UNCHECK;
             batchBindingSource.DataSource = batch;
@@ -601,7 +602,6 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(_case.CaseCode, batch.AssignDate);
                     batch.InputDate = DateTime.Today;
-                    batch.CheckStatus = BATCH.UNCHECK;
                 }
 
                 foreach (Invoice invoice in invoiceList)
@@ -614,6 +614,7 @@ namespace CMBC.EasyFactor.ARMgr
                     }
                 }
 
+                batch.CheckStatus = BATCH.UNCHECK;
                 _context.SubmitChanges();
             }
             catch (Exception e1)
@@ -664,6 +665,13 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceAssignBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
+                if (selectedBatch.Invoices.Any(i => i.FinanceAmount > 0 || i.PaymentAmount > 0))
+                {
+                    MessageBoxEx.Show("此转让批次已进行过融资或付款等后续操作，不能再修改", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                    return;
+                }
+
                 batchBindingSource.DataSource = selectedBatch;
                 invoiceBindingSource.DataSource = selectedBatch.Invoices.ToList();
                 StatBatch();

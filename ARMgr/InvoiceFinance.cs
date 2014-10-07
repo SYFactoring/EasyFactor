@@ -668,7 +668,11 @@ namespace CMBC.EasyFactor.ARMgr
                                        WhoPayInterest = "卖方付",
                                        CreateUserName = App.Current.CurUser.Name
                                    };
-            //financeBatch.CheckStatus = BATCH.UNCHECK;
+            if (activeCDA.FinanceRatioType == "固定利率")
+            {
+                financeBatch.FinanceRate = activeCDA.FinanceRatio.GetValueOrDefault();
+            }
+
             batchBindingSource.DataSource = financeBatch;
 
             double financeProp = _case.ActiveCDA.FinanceProportion.GetValueOrDefault();
@@ -855,7 +859,6 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 batch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(batch.FinancePeriodBegin);
                 batch.InputDate = DateTime.Today;
-                batch.CheckStatus = BATCH.UNCHECK;
             }
 
             for (int i = 0; i < logsBindingSource.List.Count; i++)
@@ -876,6 +879,8 @@ namespace CMBC.EasyFactor.ARMgr
                 batch.FinanceBatchNo = null;
                 return;
             }
+
+            batch.CheckStatus = BATCH.UNCHECK;
 
             try
             {
@@ -924,6 +929,13 @@ namespace CMBC.EasyFactor.ARMgr
             InvoiceFinanceBatch selectedBatch = batchMgr.Selected;
             if (selectedBatch != null)
             {
+                if (selectedBatch.InvoiceFinanceLogs.Any(i => i.RefundAmount > 0 ))
+                {
+                    MessageBoxEx.Show("此融资批次已进行过还款操作，不能再修改", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                    return;
+                }
+
                 batchBindingSource.DataSource = selectedBatch;
                 logsBindingSource.DataSource = selectedBatch.InvoiceFinanceLogs;
 

@@ -1631,7 +1631,9 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _FinanceRatioType;
 		
-		private string _FinanceRatio;
+		private System.Nullable<double> _FinanceRatio;
+		
+		private System.Nullable<double> _PenaltyInterestRate;
 		
 		private EntityRef<Case> _Case;
 		
@@ -1739,8 +1741,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnAssignNotifyTypeChanged();
     partial void OnFinanceRatioTypeChanging(string value);
     partial void OnFinanceRatioTypeChanged();
-    partial void OnFinanceRatioChanging(string value);
+    partial void OnFinanceRatioChanging(System.Nullable<double> value);
     partial void OnFinanceRatioChanged();
+    partial void OnPenaltyInterestRateChanging(System.Nullable<double> value);
+    partial void OnPenaltyInterestRateChanged();
     #endregion
 		
 		public CDA()
@@ -2753,8 +2757,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceRatio", DbType="NVarchar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string FinanceRatio
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceRatio", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<double> FinanceRatio
 		{
 			get
 			{
@@ -2769,6 +2773,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._FinanceRatio = value;
 					this.SendPropertyChanged("FinanceRatio");
 					this.OnFinanceRatioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PenaltyInterestRate", DbType="Float", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<double> PenaltyInterestRate
+		{
+			get
+			{
+				return this._PenaltyInterestRate;
+			}
+			set
+			{
+				if ((this._PenaltyInterestRate != value))
+				{
+					this.OnPenaltyInterestRateChanging(value);
+					this.SendPropertyChanging();
+					this._PenaltyInterestRate = value;
+					this.SendPropertyChanged("PenaltyInterestRate");
+					this.OnPenaltyInterestRateChanged();
 				}
 			}
 		}
@@ -3998,7 +4022,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _AccountID;
+		private int _AccountID;
 		
 		private string _ClientEDICode;
 		
@@ -4010,11 +4034,11 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _CorrespondentBank;
 		
-		private string _Branch;
-		
-		private System.Nullable<bool> _IsDefault;
-		
 		private string _Comment;
+		
+		private string _AccountName;
+		
+		private string _CreateUserName;
 		
 		private EntityRef<Client> _Client;
 		
@@ -4022,7 +4046,7 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnAccountIDChanging(string value);
+    partial void OnAccountIDChanging(int value);
     partial void OnAccountIDChanged();
     partial void OnClientEDICodeChanging(string value);
     partial void OnClientEDICodeChanged();
@@ -4032,14 +4056,14 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnAccountCurrencyChanged();
     partial void OnAccountTypeChanging(string value);
     partial void OnAccountTypeChanged();
-    partial void OnCorrespondentBankChanging(string value);
-    partial void OnCorrespondentBankChanged();
-    partial void OnBranchChanging(string value);
-    partial void OnBranchChanged();
-    partial void OnIsDefaultChanging(System.Nullable<bool> value);
-    partial void OnIsDefaultChanged();
+    partial void OnAccountBankChanging(string value);
+    partial void OnAccountBankChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnAccountNameChanging(string value);
+    partial void OnAccountNameChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
     #endregion
 		
 		public ClientAccount()
@@ -4048,8 +4072,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountID", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.WhenChanged)]
-		public string AccountID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.WhenChanged)]
+		public int AccountID
 		{
 			get
 			{
@@ -4068,7 +4092,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientEDICode", DbType="VarChar(35)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientEDICode", DbType="VarChar(35)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string ClientEDICode
 		{
 			get
@@ -4092,7 +4116,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNumber", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNumber", DbType="VarChar(200)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountNumber
 		{
 			get
@@ -4112,7 +4136,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountCurrency", DbType="NChar(3)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountCurrency", DbType="Char(3)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountCurrency
 		{
 			get
@@ -4132,7 +4156,7 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountType", DbType="VarChar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
 		public string AccountType
 		{
 			get
@@ -4152,8 +4176,8 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CorrespondentBank", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string CorrespondentBank
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CorrespondentBank", DbType="VarChar(200)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string AccountBank
 		{
 			get
 			{
@@ -4163,51 +4187,11 @@ namespace CMBC.EasyFactor.DB.dbml
 			{
 				if ((this._CorrespondentBank != value))
 				{
-					this.OnCorrespondentBankChanging(value);
+					this.OnAccountBankChanging(value);
 					this.SendPropertyChanging();
 					this._CorrespondentBank = value;
-					this.SendPropertyChanged("CorrespondentBank");
-					this.OnCorrespondentBankChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Branch", DbType="VarChar(200)", UpdateCheck=UpdateCheck.WhenChanged)]
-		public string Branch
-		{
-			get
-			{
-				return this._Branch;
-			}
-			set
-			{
-				if ((this._Branch != value))
-				{
-					this.OnBranchChanging(value);
-					this.SendPropertyChanging();
-					this._Branch = value;
-					this.SendPropertyChanged("Branch");
-					this.OnBranchChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDefault", DbType="Bit", UpdateCheck=UpdateCheck.WhenChanged)]
-		public System.Nullable<bool> IsDefault
-		{
-			get
-			{
-				return this._IsDefault;
-			}
-			set
-			{
-				if ((this._IsDefault != value))
-				{
-					this.OnIsDefaultChanging(value);
-					this.SendPropertyChanging();
-					this._IsDefault = value;
-					this.SendPropertyChanged("IsDefault");
-					this.OnIsDefaultChanged();
+					this.SendPropertyChanged("AccountBank");
+					this.OnAccountBankChanged();
 				}
 			}
 		}
@@ -4228,6 +4212,46 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountName", DbType="VarChar(200)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string AccountName
+		{
+			get
+			{
+				return this._AccountName;
+			}
+			set
+			{
+				if ((this._AccountName != value))
+				{
+					this.OnAccountNameChanging(value);
+					this.SendPropertyChanging();
+					this._AccountName = value;
+					this.SendPropertyChanged("AccountName");
+					this.OnAccountNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateUserName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
 				}
 			}
 		}

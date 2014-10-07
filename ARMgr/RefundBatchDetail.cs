@@ -269,6 +269,7 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(createUserNameTextBox, false);
             ControlUtil.SetComponetEditable(refundBatchNoTextBox, false);
             ControlUtil.SetComponetEditable(diInputDate, false);
+            ControlUtil.SetComponetEditable(tbCheckStatus, false);
         }
     }
 }

@@ -169,7 +169,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lblCDASignDate = new DevComponents.DotNetBar.LabelX();
             this.groupPanelCase = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.tbCasePaymentTerm = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.invoiceCurrencyTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.companyNameENTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -260,8 +259,10 @@ namespace CMBC.EasyFactor.CaseMgr
             this.financeGracePeriodLabel = new DevComponents.DotNetBar.LabelX();
             this.insuranceInvoiceGraceDaysTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.insuranceInvoiceGraceDaysLabel = new DevComponents.DotNetBar.LabelX();
+            this.tbPenaltyInterestRate = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblPenaltyInterestRate = new DevComponents.DotNetBar.LabelX();
+            this.CDABindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupPanelCase.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.groupPanelCreditCover.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodBeginDateTimePicker)).BeginInit();
@@ -270,6 +271,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelOther.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diCDASignDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // caseCodeLabel
@@ -406,7 +408,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.pUGPeriodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.pUGPeriodLabel.Location = new System.Drawing.Point(236, 44);
+            this.pUGPeriodLabel.Location = new System.Drawing.Point(237, 44);
             this.pUGPeriodLabel.Name = "pUGPeriodLabel";
             this.pUGPeriodLabel.Size = new System.Drawing.Size(112, 18);
             this.pUGPeriodLabel.TabIndex = 16;
@@ -420,7 +422,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.reassignGracePeriodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.reassignGracePeriodLabel.Location = new System.Drawing.Point(529, 44);
+            this.reassignGracePeriodLabel.Location = new System.Drawing.Point(520, 44);
             this.reassignGracePeriodLabel.Name = "reassignGracePeriodLabel";
             this.reassignGracePeriodLabel.Size = new System.Drawing.Size(99, 18);
             this.reassignGracePeriodLabel.TabIndex = 18;
@@ -462,7 +464,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblHighestFinance.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblHighestFinance.Location = new System.Drawing.Point(4, 88);
+            this.lblHighestFinance.Location = new System.Drawing.Point(3, 89);
             this.lblHighestFinance.Name = "lblHighestFinance";
             this.lblHighestFinance.Size = new System.Drawing.Size(124, 18);
             this.lblHighestFinance.TabIndex = 26;
@@ -476,7 +478,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.financeProportionLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.financeProportionLabel.Location = new System.Drawing.Point(286, 85);
+            this.financeProportionLabel.Location = new System.Drawing.Point(286, 89);
             this.financeProportionLabel.Name = "financeProportionLabel";
             this.financeProportionLabel.Size = new System.Drawing.Size(62, 18);
             this.financeProportionLabel.TabIndex = 28;
@@ -490,7 +492,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.orderNumberLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.orderNumberLabel.Location = new System.Drawing.Point(295, 147);
+            this.orderNumberLabel.Location = new System.Drawing.Point(295, 173);
             this.orderNumberLabel.Name = "orderNumberLabel";
             this.orderNumberLabel.Size = new System.Drawing.Size(50, 18);
             this.orderNumberLabel.TabIndex = 34;
@@ -504,7 +506,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.paymentTermsLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.paymentTermsLabel.Location = new System.Drawing.Point(28, 108);
+            this.paymentTermsLabel.Location = new System.Drawing.Point(28, 132);
             this.paymentTermsLabel.Name = "paymentTermsLabel";
             this.paymentTermsLabel.Size = new System.Drawing.Size(60, 16);
             this.paymentTermsLabel.TabIndex = 32;
@@ -518,7 +520,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.deductiblesLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.deductiblesLabel.Location = new System.Drawing.Point(42, 168);
+            this.deductiblesLabel.Location = new System.Drawing.Point(42, 192);
             this.deductiblesLabel.Name = "deductiblesLabel";
             this.deductiblesLabel.Size = new System.Drawing.Size(50, 18);
             this.deductiblesLabel.TabIndex = 36;
@@ -532,7 +534,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lossThresholdLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lossThresholdLabel.Location = new System.Drawing.Point(257, 170);
+            this.lossThresholdLabel.Location = new System.Drawing.Point(257, 196);
             this.lossThresholdLabel.Name = "lossThresholdLabel";
             this.lossThresholdLabel.Size = new System.Drawing.Size(87, 18);
             this.lossThresholdLabel.TabIndex = 38;
@@ -546,7 +548,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.poolInvoiceGraceDaysLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.poolInvoiceGraceDaysLabel.Location = new System.Drawing.Point(534, 147);
+            this.poolInvoiceGraceDaysLabel.Location = new System.Drawing.Point(534, 174);
             this.poolInvoiceGraceDaysLabel.Name = "poolInvoiceGraceDaysLabel";
             this.poolInvoiceGraceDaysLabel.Size = new System.Drawing.Size(87, 18);
             this.poolInvoiceGraceDaysLabel.TabIndex = 39;
@@ -560,7 +562,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.priceLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.priceLabel.Location = new System.Drawing.Point(15, 189);
+            this.priceLabel.Location = new System.Drawing.Point(15, 213);
             this.priceLabel.Name = "priceLabel";
             this.priceLabel.Size = new System.Drawing.Size(72, 16);
             this.priceLabel.TabIndex = 40;
@@ -574,7 +576,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.iFPriceLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.iFPriceLabel.Location = new System.Drawing.Point(272, 191);
+            this.iFPriceLabel.Location = new System.Drawing.Point(272, 217);
             this.iFPriceLabel.Name = "iFPriceLabel";
             this.iFPriceLabel.Size = new System.Drawing.Size(74, 18);
             this.iFPriceLabel.TabIndex = 42;
@@ -588,7 +590,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.commissonTypeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.commissonTypeLabel.Location = new System.Drawing.Point(26, 210);
+            this.commissonTypeLabel.Location = new System.Drawing.Point(26, 239);
             this.commissonTypeLabel.Name = "commissonTypeLabel";
             this.commissonTypeLabel.Size = new System.Drawing.Size(60, 16);
             this.commissonTypeLabel.TabIndex = 49;
@@ -602,7 +604,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.commissionTypeCommentLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.commissionTypeCommentLabel.Location = new System.Drawing.Point(50, 232);
+            this.commissionTypeCommentLabel.Location = new System.Drawing.Point(51, 264);
             this.commissionTypeCommentLabel.Name = "commissionTypeCommentLabel";
             this.commissionTypeCommentLabel.Size = new System.Drawing.Size(37, 18);
             this.commissionTypeCommentLabel.TabIndex = 51;
@@ -616,7 +618,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.handFeeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.handFeeLabel.Location = new System.Drawing.Point(455, 192);
+            this.handFeeLabel.Location = new System.Drawing.Point(455, 216);
             this.handFeeLabel.Name = "handFeeLabel";
             this.handFeeLabel.Size = new System.Drawing.Size(112, 18);
             this.handFeeLabel.TabIndex = 46;
@@ -630,7 +632,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.noticePersonLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.noticePersonLabel.Location = new System.Drawing.Point(40, 23);
+            this.noticePersonLabel.Location = new System.Drawing.Point(41, 23);
             this.noticePersonLabel.Name = "noticePersonLabel";
             this.noticePersonLabel.Size = new System.Drawing.Size(50, 18);
             this.noticePersonLabel.TabIndex = 7;
@@ -644,7 +646,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.emailLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.emailLabel.Location = new System.Drawing.Point(530, 5);
+            this.emailLabel.Location = new System.Drawing.Point(531, 5);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(68, 18);
             this.emailLabel.TabIndex = 9;
@@ -658,7 +660,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.faxLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.faxLabel.Location = new System.Drawing.Point(530, 25);
+            this.faxLabel.Location = new System.Drawing.Point(531, 25);
             this.faxLabel.Name = "faxLabel";
             this.faxLabel.Size = new System.Drawing.Size(62, 18);
             this.faxLabel.TabIndex = 11;
@@ -672,7 +674,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.commentLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.commentLabel.Location = new System.Drawing.Point(50, 47);
+            this.commentLabel.Location = new System.Drawing.Point(51, 47);
             this.commentLabel.Name = "commentLabel";
             this.commentLabel.Size = new System.Drawing.Size(37, 18);
             this.commentLabel.TabIndex = 13;
@@ -686,7 +688,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.createUserNameLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.createUserNameLabel.Location = new System.Drawing.Point(546, 47);
+            this.createUserNameLabel.Location = new System.Drawing.Point(547, 47);
             this.createUserNameLabel.Name = "createUserNameLabel";
             this.createUserNameLabel.Size = new System.Drawing.Size(50, 18);
             this.createUserNameLabel.TabIndex = 15;
@@ -700,7 +702,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cDAStatusLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.cDAStatusLabel.Location = new System.Drawing.Point(27, 3);
+            this.cDAStatusLabel.Location = new System.Drawing.Point(28, 3);
             this.cDAStatusLabel.Name = "cDAStatusLabel";
             this.cDAStatusLabel.Size = new System.Drawing.Size(56, 18);
             this.cDAStatusLabel.TabIndex = 2;
@@ -714,7 +716,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.noticeMethodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.noticeMethodLabel.Location = new System.Drawing.Point(333, 23);
+            this.noticeMethodLabel.Location = new System.Drawing.Point(334, 23);
             this.noticeMethodLabel.Name = "noticeMethodLabel";
             this.noticeMethodLabel.Size = new System.Drawing.Size(62, 18);
             this.noticeMethodLabel.TabIndex = 4;
@@ -756,7 +758,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.riskTypeLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.riskTypeLabel.Location = new System.Drawing.Point(565, 4);
+            this.riskTypeLabel.Location = new System.Drawing.Point(581, 4);
             this.riskTypeLabel.Name = "riskTypeLabel";
             this.riskTypeLabel.Size = new System.Drawing.Size(66, 16);
             this.riskTypeLabel.TabIndex = 2;
@@ -784,7 +786,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblRemark.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblRemark.Location = new System.Drawing.Point(0, 79);
+            this.lblRemark.Location = new System.Drawing.Point(1, 79);
             this.lblRemark.Name = "lblRemark";
             this.lblRemark.Size = new System.Drawing.Size(87, 18);
             this.lblRemark.TabIndex = 17;
@@ -812,7 +814,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblCDASignDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCDASignDate.Location = new System.Drawing.Point(242, 2);
+            this.lblCDASignDate.Location = new System.Drawing.Point(243, 2);
             this.lblCDASignDate.Name = "lblCDASignDate";
             this.lblCDASignDate.Size = new System.Drawing.Size(60, 16);
             this.lblCDASignDate.TabIndex = 35;
@@ -892,10 +894,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbCasePaymentTerm.Name = "tbCasePaymentTerm";
             this.tbCasePaymentTerm.Size = new System.Drawing.Size(100, 21);
             this.tbCasePaymentTerm.TabIndex = 22;
-            // 
-            // CDABindingSource
-            // 
-            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
             // 
             // invoiceCurrencyTextBox
             // 
@@ -1095,6 +1093,8 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.groupPanelCreditCover.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelCreditCover.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelCreditCover.Controls.Add(this.tbPenaltyInterestRate);
+            this.groupPanelCreditCover.Controls.Add(this.lblPenaltyInterestRate);
             this.groupPanelCreditCover.Controls.Add(this.tbFinanceRatio);
             this.groupPanelCreditCover.Controls.Add(this.lblFinanceRatio);
             this.groupPanelCreditCover.Controls.Add(this.cbFinanceRatioType);
@@ -1157,7 +1157,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelCreditCover.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupPanelCreditCover.Location = new System.Drawing.Point(0, 106);
             this.groupPanelCreditCover.Name = "groupPanelCreditCover";
-            this.groupPanelCreditCover.Size = new System.Drawing.Size(745, 273);
+            this.groupPanelCreditCover.Size = new System.Drawing.Size(745, 294);
             // 
             // 
             // 
@@ -1196,9 +1196,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbFinanceRatio.Border.Class = "TextBoxBorder";
             this.tbFinanceRatio.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbFinanceRatio.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceRatio", true));
-            this.tbFinanceRatio.Location = new System.Drawing.Point(636, 82);
+            this.tbFinanceRatio.Location = new System.Drawing.Point(175, 108);
             this.tbFinanceRatio.Name = "tbFinanceRatio";
-            this.tbFinanceRatio.Size = new System.Drawing.Size(91, 21);
+            this.tbFinanceRatio.Size = new System.Drawing.Size(100, 21);
             this.tbFinanceRatio.TabIndex = 59;
             // 
             // lblFinanceRatio
@@ -1209,7 +1209,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblFinanceRatio.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblFinanceRatio.Location = new System.Drawing.Point(469, 87);
+            this.lblFinanceRatio.Location = new System.Drawing.Point(28, 110);
             this.lblFinanceRatio.Name = "lblFinanceRatio";
             this.lblFinanceRatio.Size = new System.Drawing.Size(60, 16);
             this.lblFinanceRatio.TabIndex = 57;
@@ -1225,9 +1225,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbFinanceRatioType.Items.AddRange(new object[] {
             "单笔单议",
             "固定利率"});
-            this.cbFinanceRatioType.Location = new System.Drawing.Point(535, 83);
+            this.cbFinanceRatioType.Location = new System.Drawing.Point(101, 108);
             this.cbFinanceRatioType.Name = "cbFinanceRatioType";
-            this.cbFinanceRatioType.Size = new System.Drawing.Size(96, 21);
+            this.cbFinanceRatioType.Size = new System.Drawing.Size(70, 21);
             this.cbFinanceRatioType.TabIndex = 58;
             this.superValidator.SetValidator1(this.cbFinanceRatioType, this.requiredFieldValidator4);
             // 
@@ -1245,7 +1245,7 @@ namespace CMBC.EasyFactor.CaseMgr
             "寄送转让明细",
             "三方协议",
             "其他"});
-            this.cbAssignNotifyType.Location = new System.Drawing.Point(627, 215);
+            this.cbAssignNotifyType.Location = new System.Drawing.Point(627, 236);
             this.cbAssignNotifyType.Name = "cbAssignNotifyType";
             this.cbAssignNotifyType.Size = new System.Drawing.Size(100, 21);
             this.cbAssignNotifyType.TabIndex = 56;
@@ -1259,7 +1259,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblAssignNotifyType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblAssignNotifyType.Location = new System.Drawing.Point(530, 217);
+            this.lblAssignNotifyType.Location = new System.Drawing.Point(530, 241);
             this.lblAssignNotifyType.Name = "lblAssignNotifyType";
             this.lblAssignNotifyType.Size = new System.Drawing.Size(84, 16);
             this.lblAssignNotifyType.TabIndex = 55;
@@ -1275,7 +1275,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cbCommissionPrePost.Items.AddRange(new object[] {
             "先收",
             "后收"});
-            this.cbCommissionPrePost.Location = new System.Drawing.Point(350, 212);
+            this.cbCommissionPrePost.Location = new System.Drawing.Point(350, 236);
             this.cbCommissionPrePost.Name = "cbCommissionPrePost";
             this.cbCommissionPrePost.Size = new System.Drawing.Size(100, 21);
             this.cbCommissionPrePost.TabIndex = 54;
@@ -1289,7 +1289,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.lblCommissionPrePost.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCommissionPrePost.Location = new System.Drawing.Point(281, 212);
+            this.lblCommissionPrePost.Location = new System.Drawing.Point(281, 238);
             this.lblCommissionPrePost.Name = "lblCommissionPrePost";
             this.lblCommissionPrePost.Size = new System.Drawing.Size(60, 16);
             this.lblCommissionPrePost.TabIndex = 53;
@@ -1319,7 +1319,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.cbIsRecoarse.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cbIsRecoarse.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsRecoarse", true));
-            this.cbIsRecoarse.Location = new System.Drawing.Point(458, 3);
+            this.cbIsRecoarse.Location = new System.Drawing.Point(469, 3);
             this.cbIsRecoarse.Name = "cbIsRecoarse";
             this.cbIsRecoarse.Size = new System.Drawing.Size(101, 18);
             this.cbIsRecoarse.TabIndex = 6;
@@ -1333,9 +1333,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.riskTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.riskTypeComboBox.FormattingEnabled = true;
             this.riskTypeComboBox.ItemHeight = 15;
-            this.riskTypeComboBox.Location = new System.Drawing.Point(637, 2);
+            this.riskTypeComboBox.Location = new System.Drawing.Point(653, 2);
             this.riskTypeComboBox.Name = "riskTypeComboBox";
-            this.riskTypeComboBox.Size = new System.Drawing.Size(93, 21);
+            this.riskTypeComboBox.Size = new System.Drawing.Size(77, 21);
             this.riskTypeComboBox.TabIndex = 3;
             // 
             // tbCDACode
@@ -1346,7 +1346,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbCDACode.Border.Class = "TextBoxBorder";
             this.tbCDACode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbCDACode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CDACode", true));
-            this.tbCDACode.Location = new System.Drawing.Point(101, 2);
+            this.tbCDACode.Location = new System.Drawing.Point(101, 0);
             this.tbCDACode.Name = "tbCDACode";
             this.tbCDACode.ReadOnly = true;
             this.tbCDACode.Size = new System.Drawing.Size(154, 21);
@@ -1360,9 +1360,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbHighestFinance.Border.Class = "TextBoxBorder";
             this.tbHighestFinance.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbHighestFinance.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HighestFinanceLine", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.tbHighestFinance.Location = new System.Drawing.Point(131, 85);
+            this.tbHighestFinance.Location = new System.Drawing.Point(133, 86);
             this.tbHighestFinance.Name = "tbHighestFinance";
-            this.tbHighestFinance.Size = new System.Drawing.Size(100, 21);
+            this.tbHighestFinance.Size = new System.Drawing.Size(142, 21);
             this.tbHighestFinance.TabIndex = 27;
             // 
             // handFeeCurrComboBox
@@ -1374,7 +1374,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.handFeeCurrComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.handFeeCurrComboBox.FormattingEnabled = true;
             this.handFeeCurrComboBox.ItemHeight = 15;
-            this.handFeeCurrComboBox.Location = new System.Drawing.Point(560, 190);
+            this.handFeeCurrComboBox.Location = new System.Drawing.Point(560, 214);
             this.handFeeCurrComboBox.Name = "handFeeCurrComboBox";
             this.handFeeCurrComboBox.Size = new System.Drawing.Size(53, 21);
             this.handFeeCurrComboBox.TabIndex = 47;
@@ -1389,7 +1389,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.cbIsCreditCoverRevolving.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cbIsCreditCoverRevolving.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsCreditCoverRevolving", true));
-            this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(104, 147);
+            this.cbIsCreditCoverRevolving.Location = new System.Drawing.Point(104, 171);
             this.cbIsCreditCoverRevolving.Name = "cbIsCreditCoverRevolving";
             this.cbIsCreditCoverRevolving.Size = new System.Drawing.Size(101, 18);
             this.cbIsCreditCoverRevolving.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -1405,7 +1405,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.handFeeTextBox.Border.Class = "TextBoxBorder";
             this.handFeeTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.handFeeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "HandFee", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.handFeeTextBox.Location = new System.Drawing.Point(627, 191);
+            this.handFeeTextBox.Location = new System.Drawing.Point(627, 212);
             this.handFeeTextBox.Name = "handFeeTextBox";
             this.handFeeTextBox.Size = new System.Drawing.Size(100, 21);
             this.handFeeTextBox.TabIndex = 48;
@@ -1418,7 +1418,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.lossThresholdTextBox.Border.Class = "TextBoxBorder";
             this.lossThresholdTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lossThresholdTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "LossThreshold", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.lossThresholdTextBox.Location = new System.Drawing.Point(350, 167);
+            this.lossThresholdTextBox.Location = new System.Drawing.Point(350, 191);
             this.lossThresholdTextBox.Name = "lossThresholdTextBox";
             this.lossThresholdTextBox.Size = new System.Drawing.Size(100, 21);
             this.lossThresholdTextBox.TabIndex = 39;
@@ -1432,7 +1432,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.poolInvoiceGraceDaysTextBox.Border.Class = "TextBoxBorder";
             this.poolInvoiceGraceDaysTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.poolInvoiceGraceDaysTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "poolInvoiceGraceDays", true));
-            this.poolInvoiceGraceDaysTextBox.Location = new System.Drawing.Point(627, 147);
+            this.poolInvoiceGraceDaysTextBox.Location = new System.Drawing.Point(627, 172);
             this.poolInvoiceGraceDaysTextBox.Name = "poolInvoiceGraceDaysTextBox";
             this.poolInvoiceGraceDaysTextBox.Size = new System.Drawing.Size(100, 21);
             this.poolInvoiceGraceDaysTextBox.TabIndex = 39;
@@ -1446,7 +1446,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.commissionTypeCommentTextBox.Border.Class = "TextBoxBorder";
             this.commissionTypeCommentTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.commissionTypeCommentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CommissionTypeComment", true));
-            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(101, 241);
+            this.commissionTypeCommentTextBox.Location = new System.Drawing.Point(101, 264);
             this.commissionTypeCommentTextBox.Name = "commissionTypeCommentTextBox";
             this.commissionTypeCommentTextBox.Size = new System.Drawing.Size(626, 21);
             this.commissionTypeCommentTextBox.TabIndex = 52;
@@ -1460,7 +1460,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.deductiblesTextBox.Border.Class = "TextBoxBorder";
             this.deductiblesTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.deductiblesTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Deductibles", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "N2"));
-            this.deductiblesTextBox.Location = new System.Drawing.Point(101, 167);
+            this.deductiblesTextBox.Location = new System.Drawing.Point(101, 191);
             this.deductiblesTextBox.Name = "deductiblesTextBox";
             this.deductiblesTextBox.Size = new System.Drawing.Size(109, 21);
             this.deductiblesTextBox.TabIndex = 37;
@@ -1473,7 +1473,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.commissionTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.commissionTypeComboBox.FormattingEnabled = true;
             this.commissionTypeComboBox.ItemHeight = 15;
-            this.commissionTypeComboBox.Location = new System.Drawing.Point(101, 210);
+            this.commissionTypeComboBox.Location = new System.Drawing.Point(101, 236);
             this.commissionTypeComboBox.Name = "commissionTypeComboBox";
             this.commissionTypeComboBox.Size = new System.Drawing.Size(109, 21);
             this.commissionTypeComboBox.TabIndex = 50;
@@ -1487,7 +1487,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.paymentTermsTextBox.Border.Class = "TextBoxBorder";
             this.paymentTermsTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.paymentTermsTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PaymentTerms", true));
-            this.paymentTermsTextBox.Location = new System.Drawing.Point(101, 106);
+            this.paymentTermsTextBox.Location = new System.Drawing.Point(101, 130);
             this.paymentTermsTextBox.Multiline = true;
             this.paymentTermsTextBox.Name = "paymentTermsTextBox";
             this.paymentTermsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -1503,7 +1503,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.iFPriceTextBox.Border.Class = "TextBoxBorder";
             this.iFPriceTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.iFPriceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "IFPrice", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p4"));
-            this.iFPriceTextBox.Location = new System.Drawing.Point(350, 189);
+            this.iFPriceTextBox.Location = new System.Drawing.Point(350, 213);
             this.iFPriceTextBox.Name = "iFPriceTextBox";
             this.iFPriceTextBox.Size = new System.Drawing.Size(100, 21);
             this.iFPriceTextBox.TabIndex = 43;
@@ -1518,7 +1518,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.orderNumberTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.orderNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "OrderNumber", true));
             this.orderNumberTextBox.Enabled = false;
-            this.orderNumberTextBox.Location = new System.Drawing.Point(350, 146);
+            this.orderNumberTextBox.Location = new System.Drawing.Point(350, 170);
             this.orderNumberTextBox.Name = "orderNumberTextBox";
             this.orderNumberTextBox.Size = new System.Drawing.Size(100, 21);
             this.orderNumberTextBox.TabIndex = 35;
@@ -1531,7 +1531,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.priceTextBox.Border.Class = "TextBoxBorder";
             this.priceTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Price", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p4"));
-            this.priceTextBox.Location = new System.Drawing.Point(101, 188);
+            this.priceTextBox.Location = new System.Drawing.Point(101, 212);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(109, 21);
             this.priceTextBox.TabIndex = 41;
@@ -1545,7 +1545,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.financeProportionTextBox.Border.Class = "TextBoxBorder";
             this.financeProportionTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeProportionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "FinanceProportion", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, null, "p0"));
-            this.financeProportionTextBox.Location = new System.Drawing.Point(350, 83);
+            this.financeProportionTextBox.Location = new System.Drawing.Point(350, 86);
             this.financeProportionTextBox.Name = "financeProportionTextBox";
             this.financeProportionTextBox.Size = new System.Drawing.Size(100, 21);
             this.financeProportionTextBox.TabIndex = 29;
@@ -1604,7 +1604,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.financeLinePeriodBeginDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "FinanceLinePeriodBegin", true));
             this.financeLinePeriodBeginDateTimePicker.FreeTextEntryMode = true;
             this.financeLinePeriodBeginDateTimePicker.IsPopupCalendarOpen = false;
-            this.financeLinePeriodBeginDateTimePicker.Location = new System.Drawing.Point(350, 63);
+            this.financeLinePeriodBeginDateTimePicker.Location = new System.Drawing.Point(350, 65);
             // 
             // 
             // 
@@ -1681,7 +1681,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.pUGPeriodTextBox.Border.Class = "TextBoxBorder";
             this.pUGPeriodTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.pUGPeriodTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PUGPeriod", true));
-            this.pUGPeriodTextBox.Location = new System.Drawing.Point(350, 42);
+            this.pUGPeriodTextBox.Location = new System.Drawing.Point(350, 44);
             this.pUGPeriodTextBox.Name = "pUGPeriodTextBox";
             this.pUGPeriodTextBox.Size = new System.Drawing.Size(100, 21);
             this.pUGPeriodTextBox.TabIndex = 17;
@@ -1813,7 +1813,9 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.groupPanelOther.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanelOther.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanelOther.Controls.Add(this.btnCDASave);
             this.groupPanelOther.Controls.Add(this.lblCDASignDate);
+            this.groupPanelOther.Controls.Add(this.btnCDAUpdate);
             this.groupPanelOther.Controls.Add(this.diCDASignDate);
             this.groupPanelOther.Controls.Add(this.cbIsSigned);
             this.groupPanelOther.Controls.Add(this.lblRemark);
@@ -1835,9 +1837,9 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelOther.Controls.Add(this.noticePersonTextBox);
             this.groupPanelOther.DisabledBackColor = System.Drawing.Color.Empty;
             this.groupPanelOther.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupPanelOther.Location = new System.Drawing.Point(0, 379);
+            this.groupPanelOther.Location = new System.Drawing.Point(0, 400);
             this.groupPanelOther.Name = "groupPanelOther";
-            this.groupPanelOther.Size = new System.Drawing.Size(745, 134);
+            this.groupPanelOther.Size = new System.Drawing.Size(745, 168);
             // 
             // 
             // 
@@ -1880,7 +1882,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.diCDASignDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.CDABindingSource, "CDASignDate", true));
             this.diCDASignDate.FreeTextEntryMode = true;
             this.diCDASignDate.IsPopupCalendarOpen = false;
-            this.diCDASignDate.Location = new System.Drawing.Point(310, 1);
+            this.diCDASignDate.Location = new System.Drawing.Point(311, 1);
             // 
             // 
             // 
@@ -1918,7 +1920,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.cbIsSigned.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cbIsSigned.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.CDABindingSource, "IsSigned", true));
-            this.cbIsSigned.Location = new System.Drawing.Point(429, 3);
+            this.cbIsSigned.Location = new System.Drawing.Point(430, 3);
             this.cbIsSigned.Name = "cbIsSigned";
             this.cbIsSigned.Size = new System.Drawing.Size(76, 18);
             this.cbIsSigned.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -1933,7 +1935,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.tbRemark.Border.Class = "TextBoxBorder";
             this.tbRemark.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbRemark.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Remark", true));
-            this.tbRemark.Location = new System.Drawing.Point(101, 79);
+            this.tbRemark.Location = new System.Drawing.Point(102, 79);
             this.tbRemark.Multiline = true;
             this.tbRemark.Name = "tbRemark";
             this.tbRemark.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -1948,7 +1950,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cbNoticeMethodFax.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.cbNoticeMethodFax.Location = new System.Drawing.Point(447, 25);
+            this.cbNoticeMethodFax.Location = new System.Drawing.Point(448, 25);
             this.cbNoticeMethodFax.Name = "cbNoticeMethodFax";
             this.cbNoticeMethodFax.Size = new System.Drawing.Size(51, 18);
             this.cbNoticeMethodFax.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -1963,7 +1965,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             // 
             this.cbNoticeMethodEmail.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.cbNoticeMethodEmail.Location = new System.Drawing.Point(398, 25);
+            this.cbNoticeMethodEmail.Location = new System.Drawing.Point(399, 25);
             this.cbNoticeMethodEmail.Name = "cbNoticeMethodEmail";
             this.cbNoticeMethodEmail.Size = new System.Drawing.Size(51, 18);
             this.cbNoticeMethodEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -1977,7 +1979,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.cDAStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cDAStatusComboBox.FormattingEnabled = true;
             this.cDAStatusComboBox.ItemHeight = 15;
-            this.cDAStatusComboBox.Location = new System.Drawing.Point(101, 0);
+            this.cDAStatusComboBox.Location = new System.Drawing.Point(102, 0);
             this.cDAStatusComboBox.Name = "cDAStatusComboBox";
             this.cDAStatusComboBox.Size = new System.Drawing.Size(109, 21);
             this.cDAStatusComboBox.TabIndex = 3;
@@ -1990,7 +1992,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.createUserNameTextBox.Border.Class = "TextBoxBorder";
             this.createUserNameTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.createUserNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "CreateUserName", true));
-            this.createUserNameTextBox.Location = new System.Drawing.Point(599, 45);
+            this.createUserNameTextBox.Location = new System.Drawing.Point(600, 45);
             this.createUserNameTextBox.Name = "createUserNameTextBox";
             this.createUserNameTextBox.ReadOnly = true;
             this.createUserNameTextBox.Size = new System.Drawing.Size(128, 21);
@@ -2004,7 +2006,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.commentTextBox.Border.Class = "TextBoxBorder";
             this.commentTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Comment", true));
-            this.commentTextBox.Location = new System.Drawing.Point(101, 44);
+            this.commentTextBox.Location = new System.Drawing.Point(102, 44);
             this.commentTextBox.Multiline = true;
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -2019,7 +2021,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.faxTextBox.Border.Class = "TextBoxBorder";
             this.faxTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.faxTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Fax", true));
-            this.faxTextBox.Location = new System.Drawing.Point(599, 23);
+            this.faxTextBox.Location = new System.Drawing.Point(600, 23);
             this.faxTextBox.Name = "faxTextBox";
             this.faxTextBox.Size = new System.Drawing.Size(128, 21);
             this.faxTextBox.TabIndex = 12;
@@ -2032,7 +2034,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.emailTextBox.Border.Class = "TextBoxBorder";
             this.emailTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "Email", true));
-            this.emailTextBox.Location = new System.Drawing.Point(599, 2);
+            this.emailTextBox.Location = new System.Drawing.Point(600, 2);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(128, 21);
             this.emailTextBox.TabIndex = 10;
@@ -2046,7 +2048,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.noticePersonTextBox.Border.Class = "TextBoxBorder";
             this.noticePersonTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.noticePersonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "NoticePerson", true));
-            this.noticePersonTextBox.Location = new System.Drawing.Point(101, 21);
+            this.noticePersonTextBox.Location = new System.Drawing.Point(102, 21);
             this.noticePersonTextBox.Name = "noticePersonTextBox";
             this.noticePersonTextBox.Size = new System.Drawing.Size(109, 21);
             this.noticePersonTextBox.TabIndex = 8;
@@ -2055,7 +2057,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.btnCDAUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCDAUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDAUpdate.Location = new System.Drawing.Point(264, 499);
+            this.btnCDAUpdate.Location = new System.Drawing.Point(274, 119);
             this.btnCDAUpdate.Name = "btnCDAUpdate";
             this.btnCDAUpdate.Size = new System.Drawing.Size(75, 21);
             this.btnCDAUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -2067,7 +2069,7 @@ namespace CMBC.EasyFactor.CaseMgr
             // 
             this.btnCDASave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCDASave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCDASave.Location = new System.Drawing.Point(345, 499);
+            this.btnCDASave.Location = new System.Drawing.Point(355, 119);
             this.btnCDASave.Name = "btnCDASave";
             this.btnCDASave.Size = new System.Drawing.Size(75, 21);
             this.btnCDASave.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -2220,7 +2222,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.financeGracePeriodLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.financeGracePeriodLabel.Location = new System.Drawing.Point(501, 88);
             this.financeGracePeriodLabel.Name = "financeGracePeriodLabel";
-            this.financeGracePeriodLabel.Size = new System.Drawing.Size(0, 0);
+            this.financeGracePeriodLabel.Size = new System.Drawing.Size(99, 18);
             this.financeGracePeriodLabel.TabIndex = 30;
             this.financeGracePeriodLabel.Text = "融资宽限期(天):";
             // 
@@ -2247,18 +2249,47 @@ namespace CMBC.EasyFactor.CaseMgr
             this.insuranceInvoiceGraceDaysLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.insuranceInvoiceGraceDaysLabel.Location = new System.Drawing.Point(474, 169);
             this.insuranceInvoiceGraceDaysLabel.Name = "insuranceInvoiceGraceDaysLabel";
-            this.insuranceInvoiceGraceDaysLabel.Size = new System.Drawing.Size(0, 0);
+            this.insuranceInvoiceGraceDaysLabel.Size = new System.Drawing.Size(124, 18);
             this.insuranceInvoiceGraceDaysLabel.TabIndex = 38;
             this.insuranceInvoiceGraceDaysLabel.Text = "发票宽限期（信保）:";
+            // 
+            // tbPenaltyInterestRate
+            // 
+            // 
+            // 
+            // 
+            this.tbPenaltyInterestRate.Border.Class = "TextBoxBorder";
+            this.tbPenaltyInterestRate.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbPenaltyInterestRate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.CDABindingSource, "PenaltyInterestRate", true));
+            this.tbPenaltyInterestRate.Location = new System.Drawing.Point(350, 108);
+            this.tbPenaltyInterestRate.Name = "tbPenaltyInterestRate";
+            this.tbPenaltyInterestRate.Size = new System.Drawing.Size(100, 21);
+            this.tbPenaltyInterestRate.TabIndex = 61;
+            // 
+            // lblPenaltyInterestRate
+            // 
+            this.lblPenaltyInterestRate.AutoSize = true;
+            this.lblPenaltyInterestRate.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblPenaltyInterestRate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblPenaltyInterestRate.Location = new System.Drawing.Point(286, 110);
+            this.lblPenaltyInterestRate.Name = "lblPenaltyInterestRate";
+            this.lblPenaltyInterestRate.Size = new System.Drawing.Size(62, 18);
+            this.lblPenaltyInterestRate.TabIndex = 60;
+            this.lblPenaltyInterestRate.Text = "罚息利率:";
+            // 
+            // CDABindingSource
+            // 
+            this.CDABindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.CDA);
             // 
             // CDADetail
             // 
             this.AcceptButton = this.btnCDASave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 521);
-            this.Controls.Add(this.btnCDASave);
-            this.Controls.Add(this.btnCDAUpdate);
+            this.ClientSize = new System.Drawing.Size(745, 545);
             this.Controls.Add(this.groupPanelOther);
             this.Controls.Add(this.groupPanelCreditCover);
             this.Controls.Add(this.groupPanelCase);
@@ -2268,7 +2299,6 @@ namespace CMBC.EasyFactor.CaseMgr
             this.Text = "额度通知书";
             this.groupPanelCase.ResumeLayout(false);
             this.groupPanelCase.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.groupPanelCreditCover.ResumeLayout(false);
             this.groupPanelCreditCover.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.financeLinePeriodEndDateTimePicker)).EndInit();
@@ -2279,6 +2309,7 @@ namespace CMBC.EasyFactor.CaseMgr
             this.groupPanelOther.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diCDASignDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CDABindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2337,5 +2368,7 @@ namespace CMBC.EasyFactor.CaseMgr
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbFinanceRatioType;
         private DevComponents.DotNetBar.Controls.TextBoxX tbFinanceRatio;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
+        private DevComponents.DotNetBar.Controls.TextBoxX tbPenaltyInterestRate;
+        private DevComponents.DotNetBar.LabelX lblPenaltyInterestRate;
     }
 }

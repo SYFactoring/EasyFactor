@@ -42,6 +42,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// 
         /// </summary>
+        private readonly BindingSource _bsAccounts;
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly DBDataContext _context;
         /// <summary>
         /// 
@@ -63,8 +67,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// 
         /// </summary>
         private OpReviewType _opReviewType;
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpAccountType _opAccountType;
 
         /// <summary>
         /// 
@@ -164,8 +170,26 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             /// </summary>
             DETAIL_REVIEW
         }
+        /// <summary>
+        /// Account Type
+        /// </summary>
+        public enum OpAccountType
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            NEW_ACCOUNT,
 
+            /// <summary>
+            /// 
+            /// </summary>
+            UPDATE_ACCOUNT,
 
+            /// <summary>
+            /// 
+            /// </summary>
+            DETAIL_ACCOUNT
+        }
 
         /// <summary>
         /// Initializes a new instance of the ClientDetail class
@@ -184,14 +208,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             _bsContracts = new BindingSource();
             _bsReviews = new BindingSource();
             _bsGDs = new BindingSource();
+            _bsAccounts = new BindingSource();
             dgvClientCreditLines.AutoGenerateColumns = false;
             dgvContracts.AutoGenerateColumns = false;
             dgvReviews.AutoGenerateColumns = false;
             dgvGDs.AutoGenerateColumns = false;
+            dgvAccounts.AutoGenerateColumns = false;
             dgvClientCreditLines.DataSource = _bsCreditLines;
             dgvContracts.DataSource = _bsContracts;
             dgvReviews.DataSource = _bsReviews;
             dgvGDs.DataSource = _bsGDs;
+            dgvAccounts.DataSource = _bsAccounts;
             _context = new DBDataContext();
 
             cbCountryCode.DataSource = Country.AllCountries();
@@ -217,11 +244,17 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             cbGDCurr.ValueMember = "CurrencyCode";
             cbGDCurr.SelectedIndex = -1;
 
+            cbAccountCurrency.DataSource = Currency.AllCurrencies;
+            cbAccountCurrency.DisplayMember = "CurrencyCode";
+            cbAccountCurrency.ValueMember = "CurrencyCode";
+            cbAccountCurrency.SelectedIndex = -1;
+
             _opClientType = opClientType;
             _opClientCreditLineType = opClientCreditLineType;
             _opContractType = opContractType;
             _opReviewType = opReviewType;
             _opGdType = OpGDType.DETAIL_GD;
+            _opAccountType = OpAccountType.DETAIL_ACCOUNT;
 
             if (opClientType == OpClientType.NEW_CLIENT)
             {
@@ -242,6 +275,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             _bsContracts.DataSource = client.Contracts;
             _bsReviews.DataSource = client.ClientReviews;
             _bsGDs.DataSource = client.GuaranteeDeposits;
+            _bsAccounts.DataSource = client.ClientAccounts;
 
             var deptsList = (List<Department>)cbDepartments.DataSource;
             cbDepartments.SelectedIndex = deptsList.IndexOf(client.Department);
@@ -275,6 +309,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             UpdateContractControlStatus();
             UpdateReviewControlStatus();
             UpdateGDControlStatus();
+            UpdateAccountControlStatus();
 
             requestCommissionRateTextBox.DataBindings[0].Format +=
                 TypeUtil.FormatFloatToPercent;
@@ -685,6 +720,60 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void DeleteAccount(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            var client = (Client)clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(accountBindingSource.DataSource is ClientAccount))
+            {
+                return;
+            }
+
+            var account = (ClientAccount)accountBindingSource.DataSource;
+            if (
+                MessageBoxEx.Show("是否打算删除此帐号信息", MESSAGE.TITLE_WARNING, MessageBoxButtons.OKCancel,
+                                  MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            bool isDeleteOK = true;
+            try
+            {
+                _context.ClientAccounts.DeleteOnSubmit(account);
+                _context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                isDeleteOK = false;
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (isDeleteOK)
+            {
+                MessageBoxEx.Show("数据删除成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                accountBindingSource.DataSource = typeof(ClientAccount);
+                SetAccountEditable(false);
+                _bsAccounts.DataSource = typeof(ClientAccount);
+                _bsAccounts.DataSource = client.ClientAccounts;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DiContractValueDateValueChanged(object sender, EventArgs e)
         {
             if (_opContractType == OpContractType.NEW_CONTRACT)
@@ -847,6 +936,32 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void NewAccount(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            var client = (Client)clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                return;
+            }
+
+            accountBindingSource.DataSource = typeof(ClientAccount);
+            accountBindingSource.DataSource = new ClientAccount();
+            _opAccountType = OpAccountType.NEW_ACCOUNT;
+            UpdateAccountControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PeriodBeginDateTimePickerValueChanged(object sender, EventArgs e)
         {
             if (_opClientCreditLineType == OpClientCreditLineType.NEW_CLIENT_CREDIT_LINE)
@@ -934,6 +1049,25 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             _bsReviews.DataSource = typeof(ClientReview);
             _bsReviews.DataSource = client.ClientReviews;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefreshAccounts(object sender, EventArgs e)
+        {
+            var client = (Client)clientBindingSource.DataSource;
+            if (client == null || client.ClientEDICode == null)
+            {
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                return;
+            }
+
+            _bsAccounts.DataSource = typeof(ClientAccount);
+            _bsAccounts.DataSource = client.ClientAccounts;
         }
 
         /// <summary>
@@ -1542,6 +1676,98 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void SaveAccount(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            if (!accountValidator.Validate())
+            {
+                return;
+            }
+
+            var client = (Client)clientBindingSource.DataSource;
+            if (client == null)
+            {
+                MessageBoxEx.Show("请首先选定一个客户", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!(accountBindingSource.DataSource is ClientAccount))
+            {
+                return;
+            }
+
+            var account = (ClientAccount)accountBindingSource.DataSource;
+            account.CreateUserName = App.Current.CurUser.Name;
+            if (_opAccountType == OpAccountType.NEW_ACCOUNT)
+            {
+                bool isAddOK = true;
+                try
+                {
+                    client.ClientAccounts.Add(account);
+
+                    _context.ClientAccounts.InsertOnSubmit(account);
+                    _context.SubmitChanges();
+                }
+                catch (Exception e1)
+                {
+                    account.Client = null;
+                    isAddOK = false;
+                    MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isAddOK)
+                {
+                    MessageBoxEx.Show("数据新建成功", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+
+                    _bsAccounts.DataSource = client.ClientAccounts.ToList();
+                    NewAccount(null, null);
+                }
+            }
+            else
+            {
+                bool isUpdateOK = true;
+                try
+                {
+                    _context.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                catch (ChangeConflictException)
+                {
+                    foreach (ObjectChangeConflict cc in _context.ChangeConflicts)
+                    {
+                        foreach (MemberChangeConflict mc in cc.MemberConflicts)
+                        {
+                            mc.Resolve(RefreshMode.KeepChanges);
+                        }
+                    }
+
+                    _context.SubmitChanges();
+                }
+                catch (Exception e2)
+                {
+                    isUpdateOK = false;
+                    MessageBoxEx.Show(e2.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (isUpdateOK)
+                {
+                    MessageBoxEx.Show(MESSAGE.DATA_UPDATE_SUCCESS, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+                    dgvAccounts.Refresh();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectClientCreditLine(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvClientCreditLines.SelectedRows.Count == 0)
@@ -1692,6 +1918,23 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectAccount(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvAccounts.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            var selectedAccount = (ClientAccount)_bsAccounts.List[dgvAccounts.SelectedRows[0].Index];
+            SetAccountEditable(false);
+            accountBindingSource.DataSource = selectedAccount;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="editable"></param>
         private void SetClientCreditLineEditable(bool editable)
         {
@@ -1732,6 +1975,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         private void SetReviewEditable(bool editable)
         {
             foreach (Control comp in groupPanelReview.Controls)
+            {
+                ControlUtil.SetComponetEditable(comp, editable);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="editable"></param>
+        private void SetAccountEditable(bool editable)
+        {
+            foreach (Control comp in groupPanelAccount.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, editable);
             }
@@ -2105,5 +2360,55 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
             ControlUtil.SetComponetEditable(tbReviewCreateUserName, false);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateAccount(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(Permissions.BASICINFO_UPDATE))
+            {
+                return;
+            }
+
+            _opAccountType = OpAccountType.UPDATE_ACCOUNT;
+            UpdateAccountControlStatus();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateAccountControlStatus()
+        {
+            if (_opAccountType == OpAccountType.DETAIL_ACCOUNT)
+            {
+                foreach (Control comp in groupPanelAccount.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, false);
+                }
+            }
+            else if (_opAccountType == OpAccountType.NEW_ACCOUNT)
+            {
+                foreach (Control comp in groupPanelAccount.Controls)
+                {
+                    ControlUtil.SetComponetDefault(comp);
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+            }
+            else if (_opAccountType == OpAccountType.UPDATE_ACCOUNT)
+            {
+                foreach (Control comp in groupPanelAccount.Controls)
+                {
+                    ControlUtil.SetComponetEditable(comp, true);
+                }
+
+                reviewNoTextBox.ReadOnly = true;
+            }
+
+            ControlUtil.SetComponetEditable(tbReviewCreateUserName, false);
+        }
+
     }
 }

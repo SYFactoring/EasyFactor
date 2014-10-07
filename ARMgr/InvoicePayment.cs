@@ -600,7 +600,6 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     batch.PaymentBatchNo = InvoicePaymentBatch.GeneratePaymentBatchNo(batch.PaymentDate);
                     batch.InputDate = DateTime.Today;
-                    batch.CheckStatus = BATCH.UNCHECK;
                 }
 
                 for (int i = 0; i < logsBindingSource.List.Count; i++)
@@ -638,6 +637,7 @@ namespace CMBC.EasyFactor.ARMgr
                     return;
                 }
 
+                batch.CheckStatus = BATCH.UNCHECK;
                 _context.SubmitChanges();
             }
             catch (Exception e1)

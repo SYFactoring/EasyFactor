@@ -99,7 +99,8 @@
       <Column Name="CommissionPrePost" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="AssignNotifyType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="FinanceRatioType" Type="System.String" DbType="Nvarchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="FinanceRatio" Type="System.String" DbType="NVarchar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="FinanceRatio" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="PenaltyInterestRate" Type="System.Double" DbType="Float" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Case_CDA" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
     </Type>
   </Table>
@@ -153,15 +154,15 @@
   </Table>
   <Table Name="dbo.ClientAccount" Member="ClientAccounts">
     <Type Name="ClientAccount">
-      <Column Name="AccountID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="WhenChanged" />
-      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="AccountNumber" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="AccountCurrency" Type="System.String" DbType="NChar(3)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="AccountType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="CorrespondentBank" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="Branch" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="WhenChanged" />
-      <Column Name="IsDefault" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="AccountID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="ClientEDICode" Type="System.String" DbType="VarChar(35)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="AccountNumber" Type="System.String" DbType="VarChar(200)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="AccountCurrency" Type="System.String" DbType="Char(3)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="AccountType" Type="System.String" DbType="VarChar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="AccountBank" Storage="_CorrespondentBank" Type="System.String" DbType="VarChar(200)" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="AccountName" Type="System.String" DbType="VarChar(200)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="CreateUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Client_ClientAccount" Member="Client" ThisKey="ClientEDICode" OtherKey="ClientEDICode" Type="Client" IsForeignKey="true" />
     </Type>
   </Table>

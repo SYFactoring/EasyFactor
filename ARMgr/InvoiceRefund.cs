@@ -525,6 +525,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                               ((from refundLog in log.InvoiceRefundLogs select refundLog.RefundAmount).Sum().GetValueOrDefault() <
                                                                log.FinanceAmount.GetValueOrDefault() )
                                                                && log.InvoiceFinanceBatch.CheckStatus == BATCH.CHECK
+                                                               && log.InvoiceFinanceBatch.FinancePeriodBegin <= batch.RefundDate
                                                         orderby log.Invoice.DueDate
                                                         select log;
 
@@ -630,7 +631,6 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     batch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(batch.RefundDate);
                     batch.InputDate = DateTime.Today;
-                    batch.CheckStatus = BATCH.UNCHECK;
                 }
                 for (int i = 0; i < logsBindingSource.List.Count; i++)
                 {
@@ -653,6 +653,7 @@ namespace CMBC.EasyFactor.ARMgr
 
                 batch.CaculateRefundAmount();
 
+                batch.CheckStatus = BATCH.UNCHECK;
                 _context.SubmitChanges();
             }
             catch (Exception e1)

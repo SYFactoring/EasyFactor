@@ -88,6 +88,10 @@ namespace CMBC.EasyFactor.CaseMgr
 
             financeProportionTextBox.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
             financeProportionTextBox.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
+            tbFinanceRatio.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
+            tbFinanceRatio.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
+            tbPenaltyInterestRate.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
+            tbPenaltyInterestRate.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
 
             priceTextBox.DataBindings[0].Format += TypeUtil.FormatFloatToPercent;
             priceTextBox.DataBindings[0].Parse += TypeUtil.ParsePercentToFloat;
@@ -725,6 +729,7 @@ namespace CMBC.EasyFactor.CaseMgr
                               CommissionPrePost = "先收",
                               AssignNotifyType = "买方书面确认",
                               FinanceRatioType = "单笔单议",
+                              PenaltyInterestRate = 0.001,
                               Case = curCase
                           };
             return cda;
@@ -1023,6 +1028,7 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetComponetEditable(tbHighestFinance, false);
             ControlUtil.SetComponetEditable(createUserNameTextBox, false);
             ControlUtil.SetComponetEditable(cDAStatusComboBox, false);
+            ControlUtil.SetComponetEditable(commissionTypeComboBox, false);
 
             var cda = (CDA)CDABindingSource.DataSource;
             if (_opCDAType != OpCDAType.DETAIL_CDA && cda.Case != null)
