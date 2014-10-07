@@ -835,6 +835,38 @@ namespace CMBC.EasyFactor.ARMgr
             {
                 batch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(batch.FinancePeriodBegin);
                 batch.InputDate = DateTime.Today;
+
+                if (batch.CommissionType == "按融资金额")
+                {
+                    RevenueBatch commissionBatch = new RevenueBatch
+                    {
+                        RevenueDate = DateTime.Now,
+                        CreateUserName = App.Current.CurUser.Name,
+                        CheckStatus = BATCH.UNCHECK
+                    };
+
+                    for (int i = 0; i < logsBindingSource.List.Count; i++)
+                    {
+                        var log = (InvoiceFinanceLog)logsBindingSource.List[i];
+                        if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
+                        {
+                            Invoice invoice = _context.Invoices.SingleOrDefault(inv => inv.InvoiceID == log.InvoiceID2);
+                            if (log.PaidCommission.HasValue)
+                            {
+                                RevenueLog commissionLog = new RevenueLog
+                                           {
+                                               RevenueType = "融资手续费",
+                                               RevenueCurrency = batch.BatchCurrency,
+                                               RevenueDate = DateTime.Now,
+                                               RevenueValue = log.PaidCommission.GetValueOrDefault(),
+                                               Invoice = invoice,
+                                               RevenueBatch = commissionBatch
+                                           };
+                            }
+
+                        }
+                    }
+                }
             }
 
             for (int i = 0; i < logsBindingSource.List.Count; i++)
@@ -867,6 +899,7 @@ namespace CMBC.EasyFactor.ARMgr
                 foreach (InvoiceFinanceLog log in logList)
                 {
                     Invoice invoice = log.Invoice;
+                    invoice.RevenueLog = null;
                     log.Invoice = null;
                     log.InvoiceFinanceBatch = null;
                     invoice.CaculateFinance();

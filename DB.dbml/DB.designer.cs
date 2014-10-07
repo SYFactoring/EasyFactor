@@ -123,6 +123,12 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void InsertCommissionRemittance(CommissionRemittance instance);
     partial void UpdateCommissionRemittance(CommissionRemittance instance);
     partial void DeleteCommissionRemittance(CommissionRemittance instance);
+    partial void InsertRevenueLog(RevenueLog instance);
+    partial void UpdateRevenueLog(RevenueLog instance);
+    partial void DeleteRevenueLog(RevenueLog instance);
+    partial void InsertRevenueBatch(RevenueBatch instance);
+    partial void UpdateRevenueBatch(RevenueBatch instance);
+    partial void DeleteRevenueBatch(RevenueBatch instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -400,6 +406,22 @@ namespace CMBC.EasyFactor.DB.dbml
 			get
 			{
 				return this.GetTable<CommissionRemittance>();
+			}
+		}
+		
+		public System.Data.Linq.Table<RevenueLog> RevenueLog
+		{
+			get
+			{
+				return this.GetTable<RevenueLog>();
+			}
+		}
+		
+		public System.Data.Linq.Table<RevenueBatch> RevenueBatch
+		{
+			get
+			{
+				return this.GetTable<RevenueBatch>();
 			}
 		}
 	}
@@ -8700,6 +8722,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<Invoice> _Invoices;
 		
+		private EntitySet<RevenueBatch> _RevenueBatch;
+		
 		private EntityRef<Case> _Case;
 		
 		private EntityRef<CommissionRemittance> _CommissionRemittance;
@@ -8744,6 +8768,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this._CreditNotes = new EntitySet<CreditNote>(new Action<CreditNote>(this.attach_CreditNotes), new Action<CreditNote>(this.detach_CreditNotes));
 			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
+			this._RevenueBatch = new EntitySet<RevenueBatch>(new Action<RevenueBatch>(this.attach_RevenueBatch), new Action<RevenueBatch>(this.detach_RevenueBatch));
 			this._Case = default(EntityRef<Case>);
 			this._CommissionRemittance = default(EntityRef<CommissionRemittance>);
 			OnCreated();
@@ -9083,6 +9108,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceAssignBatch_RevenueBatch", Storage="_RevenueBatch", ThisKey="AssignBatchNo", OtherKey="AssignBatchNo")]
+		public EntitySet<RevenueBatch> RevenueBatch
+		{
+			get
+			{
+				return this._RevenueBatch;
+			}
+			set
+			{
+				this._RevenueBatch.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Case_InvoiceAssignBatch", Storage="_Case", ThisKey="CaseCode", OtherKey="CaseCode", IsForeignKey=true)]
 		public Case Case
 		{
@@ -9190,6 +9228,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		}
 		
 		private void detach_Invoices(Invoice entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceAssignBatch = null;
+		}
+		
+		private void attach_RevenueBatch(RevenueBatch entity)
+		{
+			this.SendPropertyChanging();
+			entity.InvoiceAssignBatch = this;
+		}
+		
+		private void detach_RevenueBatch(RevenueBatch entity)
 		{
 			this.SendPropertyChanging();
 			entity.InvoiceAssignBatch = null;
@@ -12616,6 +12666,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
 		
+		private EntitySet<RevenueLog> _CommissionLog;
+		
 		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
 		
     #region 可扩展性方法定义
@@ -12718,6 +12770,7 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this._InvoiceFinanceLogs = new EntitySet<InvoiceFinanceLog>(new Action<InvoiceFinanceLog>(this.attach_InvoiceFinanceLogs), new Action<InvoiceFinanceLog>(this.detach_InvoiceFinanceLogs));
 			this._InvoicePaymentLogs = new EntitySet<InvoicePaymentLog>(new Action<InvoicePaymentLog>(this.attach_InvoicePaymentLogs), new Action<InvoicePaymentLog>(this.detach_InvoicePaymentLogs));
+			this._CommissionLog = new EntitySet<RevenueLog>(new Action<RevenueLog>(this.attach_CommissionLog), new Action<RevenueLog>(this.detach_CommissionLog));
 			this._InvoiceAssignBatch = default(EntityRef<InvoiceAssignBatch>);
 			OnCreated();
 		}
@@ -13652,6 +13705,19 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Invoice_RevenueLog", Storage="_CommissionLog", ThisKey="InvoiceID", OtherKey="InvoiceID")]
+		public EntitySet<RevenueLog> RevenueLog
+		{
+			get
+			{
+				return this._CommissionLog;
+			}
+			set
+			{
+				this._CommissionLog.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceAssignBatch_Invoice", Storage="_InvoiceAssignBatch", ThisKey="AssignBatchNo", OtherKey="AssignBatchNo", IsForeignKey=true)]
 		public InvoiceAssignBatch InvoiceAssignBatch
 		{
@@ -13729,6 +13795,18 @@ namespace CMBC.EasyFactor.DB.dbml
 			this.SendPropertyChanging();
 			entity.Invoice = null;
 		}
+		
+		private void attach_CommissionLog(RevenueLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Invoice = this;
+		}
+		
+		private void detach_CommissionLog(RevenueLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Invoice = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InvoiceFinanceLog")]
@@ -13744,6 +13822,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		private System.Nullable<decimal> _FinanceAmount;
 		
 		private string _Comment;
+		
+		private System.Nullable<decimal> _Commission;
 		
 		private int _InvoiceID;
 		
@@ -13771,6 +13851,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceAmountChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
+    partial void OnCommissionChanging(System.Nullable<decimal> value);
+    partial void OnCommissionChanged();
     partial void OnInvoiceIDChanging(int value);
     partial void OnInvoiceIDChanged();
     partial void OnInterestChanging(System.Nullable<decimal> value);
@@ -13869,6 +13951,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Comment = value;
 					this.SendPropertyChanged("Comment");
 					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Commission", DbType="decimal")]
+		public System.Nullable<decimal> Commission
+		{
+			get
+			{
+				return this._Commission;
+			}
+			set
+			{
+				if ((this._Commission != value))
+				{
+					this.OnCommissionChanging(value);
+					this.SendPropertyChanging();
+					this._Commission = value;
+					this.SendPropertyChanged("Commission");
+					this.OnCommissionChanged();
 				}
 			}
 		}
@@ -14926,6 +15028,569 @@ namespace CMBC.EasyFactor.DB.dbml
 		{
 			this.SendPropertyChanging();
 			entity.CommissionRemittance = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class RevenueLog : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CommissionID;
+		
+		private decimal _CommissionValue;
+		
+		private int _InvoiceID;
+		
+		private int _CommissionBatchID;
+		
+		private string _RevenueType;
+		
+		private string _RevenueCurrency;
+		
+		private System.DateTime _RevenueDate;
+		
+		private EntityRef<Invoice> _Invoice;
+		
+		private EntityRef<RevenueBatch> _CommissionBatch;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRevenueIDChanging(int value);
+    partial void OnRevenueIDChanged();
+    partial void OnRevenueValueChanging(decimal value);
+    partial void OnRevenueValueChanged();
+    partial void OnInvoiceIDChanging(int value);
+    partial void OnInvoiceIDChanged();
+    partial void OnRevenueBatchIDChanging(int value);
+    partial void OnRevenueBatchIDChanged();
+    partial void OnRevenueTypeChanging(string value);
+    partial void OnRevenueTypeChanged();
+    partial void OnRevenueCurrencyChanging(string value);
+    partial void OnRevenueCurrencyChanged();
+    partial void OnRevenueDateChanging(System.DateTime value);
+    partial void OnRevenueDateChanged();
+    #endregion
+		
+		public RevenueLog()
+		{
+			this._Invoice = default(EntityRef<Invoice>);
+			this._CommissionBatch = default(EntityRef<RevenueBatch>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommissionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RevenueID
+		{
+			get
+			{
+				return this._CommissionID;
+			}
+			set
+			{
+				if ((this._CommissionID != value))
+				{
+					this.OnRevenueIDChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionID = value;
+					this.SendPropertyChanged("RevenueID");
+					this.OnRevenueIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommissionValue", DbType="decimal", UpdateCheck=UpdateCheck.WhenChanged)]
+		public decimal RevenueValue
+		{
+			get
+			{
+				return this._CommissionValue;
+			}
+			set
+			{
+				if ((this._CommissionValue != value))
+				{
+					this.OnRevenueValueChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionValue = value;
+					this.SendPropertyChanged("RevenueValue");
+					this.OnRevenueValueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", DbType="int", UpdateCheck=UpdateCheck.WhenChanged)]
+		public int InvoiceID
+		{
+			get
+			{
+				return this._InvoiceID;
+			}
+			set
+			{
+				if ((this._InvoiceID != value))
+				{
+					if (this._Invoice.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnInvoiceIDChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceID = value;
+					this.SendPropertyChanged("InvoiceID");
+					this.OnInvoiceIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommissionBatchID", DbType="int")]
+		public int RevenueBatchID
+		{
+			get
+			{
+				return this._CommissionBatchID;
+			}
+			set
+			{
+				if ((this._CommissionBatchID != value))
+				{
+					if (this._CommissionBatch.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRevenueBatchIDChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionBatchID = value;
+					this.SendPropertyChanged("RevenueBatchID");
+					this.OnRevenueBatchIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RevenueType", DbType="varchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string RevenueType
+		{
+			get
+			{
+				return this._RevenueType;
+			}
+			set
+			{
+				if ((this._RevenueType != value))
+				{
+					this.OnRevenueTypeChanging(value);
+					this.SendPropertyChanging();
+					this._RevenueType = value;
+					this.SendPropertyChanged("RevenueType");
+					this.OnRevenueTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RevenueCurrency", DbType="char(3)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string RevenueCurrency
+		{
+			get
+			{
+				return this._RevenueCurrency;
+			}
+			set
+			{
+				if ((this._RevenueCurrency != value))
+				{
+					this.OnRevenueCurrencyChanging(value);
+					this.SendPropertyChanging();
+					this._RevenueCurrency = value;
+					this.SendPropertyChanged("RevenueCurrency");
+					this.OnRevenueCurrencyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RevenueDate", DbType="datetime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.DateTime RevenueDate
+		{
+			get
+			{
+				return this._RevenueDate;
+			}
+			set
+			{
+				if ((this._RevenueDate != value))
+				{
+					this.OnRevenueDateChanging(value);
+					this.SendPropertyChanging();
+					this._RevenueDate = value;
+					this.SendPropertyChanged("RevenueDate");
+					this.OnRevenueDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Invoice_RevenueLog", Storage="_Invoice", ThisKey="InvoiceID", OtherKey="InvoiceID", IsForeignKey=true)]
+		public Invoice Invoice
+		{
+			get
+			{
+				return this._Invoice.Entity;
+			}
+			set
+			{
+				Invoice previousValue = this._Invoice.Entity;
+				if (((previousValue != value) 
+							|| (this._Invoice.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Invoice.Entity = null;
+						previousValue.RevenueLog.Remove(this);
+					}
+					this._Invoice.Entity = value;
+					if ((value != null))
+					{
+						value.RevenueLog.Add(this);
+						this._InvoiceID = value.InvoiceID;
+					}
+					else
+					{
+						this._InvoiceID = default(int);
+					}
+					this.SendPropertyChanged("Invoice");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RevenueBatch_RevenueLog", Storage="_CommissionBatch", ThisKey="RevenueBatchID", OtherKey="RevenueBatchID", IsForeignKey=true)]
+		public RevenueBatch RevenueBatch
+		{
+			get
+			{
+				return this._CommissionBatch.Entity;
+			}
+			set
+			{
+				RevenueBatch previousValue = this._CommissionBatch.Entity;
+				if (((previousValue != value) 
+							|| (this._CommissionBatch.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CommissionBatch.Entity = null;
+						previousValue.RevenueLog.Remove(this);
+					}
+					this._CommissionBatch.Entity = value;
+					if ((value != null))
+					{
+						value.RevenueLog.Add(this);
+						this._CommissionBatchID = value.RevenueBatchID;
+					}
+					else
+					{
+						this._CommissionBatchID = default(int);
+					}
+					this.SendPropertyChanged("RevenueBatch");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class RevenueBatch : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CommissionBatchID;
+		
+		private string _CreateUserName;
+		
+		private System.DateTime _CommissionDate;
+		
+		private string _CheckStatus;
+		
+		private System.Nullable<System.DateTime> _CheckDate;
+		
+		private string _CheckUserName;
+		
+		private string _AssignBatchNo;
+		
+		private EntitySet<RevenueLog> _CommissionLog;
+		
+		private EntityRef<InvoiceAssignBatch> _InvoiceAssignBatch;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRevenueBatchIDChanging(int value);
+    partial void OnRevenueBatchIDChanged();
+    partial void OnCreateUserNameChanging(string value);
+    partial void OnCreateUserNameChanged();
+    partial void OnRevenueDateChanging(System.DateTime value);
+    partial void OnRevenueDateChanged();
+    partial void OnCheckStatusChanging(string value);
+    partial void OnCheckStatusChanged();
+    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckDateChanged();
+    partial void OnCheckUserNameChanging(string value);
+    partial void OnCheckUserNameChanged();
+    partial void OnAssignBatchNoChanging(string value);
+    partial void OnAssignBatchNoChanged();
+    #endregion
+		
+		public RevenueBatch()
+		{
+			this._CommissionLog = new EntitySet<RevenueLog>(new Action<RevenueLog>(this.attach_CommissionLog), new Action<RevenueLog>(this.detach_CommissionLog));
+			this._InvoiceAssignBatch = default(EntityRef<InvoiceAssignBatch>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommissionBatchID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RevenueBatchID
+		{
+			get
+			{
+				return this._CommissionBatchID;
+			}
+			set
+			{
+				if ((this._CommissionBatchID != value))
+				{
+					this.OnRevenueBatchIDChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionBatchID = value;
+					this.SendPropertyChanged("RevenueBatchID");
+					this.OnRevenueBatchIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateUserName", DbType="nvarchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CreateUserName
+		{
+			get
+			{
+				return this._CreateUserName;
+			}
+			set
+			{
+				if ((this._CreateUserName != value))
+				{
+					this.OnCreateUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CreateUserName = value;
+					this.SendPropertyChanged("CreateUserName");
+					this.OnCreateUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommissionDate", DbType="datetime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.DateTime RevenueDate
+		{
+			get
+			{
+				return this._CommissionDate;
+			}
+			set
+			{
+				if ((this._CommissionDate != value))
+				{
+					this.OnRevenueDateChanging(value);
+					this.SendPropertyChanging();
+					this._CommissionDate = value;
+					this.SendPropertyChanged("RevenueDate");
+					this.OnRevenueDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckStatus", DbType="nvarchar(50)", CanBeNull=false, UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CheckStatus
+		{
+			get
+			{
+				return this._CheckStatus;
+			}
+			set
+			{
+				if ((this._CheckStatus != value))
+				{
+					this.OnCheckStatusChanging(value);
+					this.SendPropertyChanging();
+					this._CheckStatus = value;
+					this.SendPropertyChanged("CheckStatus");
+					this.OnCheckStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="datetime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> CheckDate
+		{
+			get
+			{
+				return this._CheckDate;
+			}
+			set
+			{
+				if ((this._CheckDate != value))
+				{
+					this.OnCheckDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckDate = value;
+					this.SendPropertyChanged("CheckDate");
+					this.OnCheckDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckUserName", DbType="nvarchar(50)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string CheckUserName
+		{
+			get
+			{
+				return this._CheckUserName;
+			}
+			set
+			{
+				if ((this._CheckUserName != value))
+				{
+					this.OnCheckUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._CheckUserName = value;
+					this.SendPropertyChanged("CheckUserName");
+					this.OnCheckUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AssignBatchNo", DbType="char(20)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public string AssignBatchNo
+		{
+			get
+			{
+				return this._AssignBatchNo;
+			}
+			set
+			{
+				if ((this._AssignBatchNo != value))
+				{
+					if (this._InvoiceAssignBatch.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAssignBatchNoChanging(value);
+					this.SendPropertyChanging();
+					this._AssignBatchNo = value;
+					this.SendPropertyChanged("AssignBatchNo");
+					this.OnAssignBatchNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RevenueBatch_RevenueLog", Storage="_CommissionLog", ThisKey="RevenueBatchID", OtherKey="RevenueBatchID")]
+		public EntitySet<RevenueLog> RevenueLog
+		{
+			get
+			{
+				return this._CommissionLog;
+			}
+			set
+			{
+				this._CommissionLog.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InvoiceAssignBatch_RevenueBatch", Storage="_InvoiceAssignBatch", ThisKey="AssignBatchNo", OtherKey="AssignBatchNo", IsForeignKey=true)]
+		public InvoiceAssignBatch InvoiceAssignBatch
+		{
+			get
+			{
+				return this._InvoiceAssignBatch.Entity;
+			}
+			set
+			{
+				InvoiceAssignBatch previousValue = this._InvoiceAssignBatch.Entity;
+				if (((previousValue != value) 
+							|| (this._InvoiceAssignBatch.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._InvoiceAssignBatch.Entity = null;
+						previousValue.RevenueBatch.Remove(this);
+					}
+					this._InvoiceAssignBatch.Entity = value;
+					if ((value != null))
+					{
+						value.RevenueBatch.Add(this);
+						this._AssignBatchNo = value.AssignBatchNo;
+					}
+					else
+					{
+						this._AssignBatchNo = default(string);
+					}
+					this.SendPropertyChanged("InvoiceAssignBatch");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CommissionLog(RevenueLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.RevenueBatch = this;
+		}
+		
+		private void detach_CommissionLog(RevenueLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.RevenueBatch = null;
 		}
 	}
 }

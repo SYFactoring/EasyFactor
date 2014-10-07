@@ -635,6 +635,52 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(_case.CaseCode, batch.AssignDate);
                     batch.InputDate = DateTime.Today;
+
+                    if (batch.CommissionPrePost == "先收")
+                    {
+                        RevenueBatch commissionBatch = new RevenueBatch
+                        {
+                            RevenueDate = DateTime.Now,
+                            CreateUserName = App.Current.CurUser.Name,
+                            CheckStatus = BATCH.UNCHECK,
+                            InvoiceAssignBatch = batch
+                        };
+
+                        foreach (Invoice invoice in invoiceList)
+                        {
+                            if(TypeUtil.GreaterThan(invoice.PaidHandlingFee,0)){
+                                RevenueLog handFeeLog = new RevenueLog
+                                {
+                                    RevenueValue = invoice.PaidHandlingFee.GetValueOrDefault(),
+                                    RevenueType = "单据费",
+                                    RevenueCurrency = batch.BatchCurrency,
+                                    RevenueDate = DateTime.Now,
+                                    Invoice = invoice,
+                                    RevenueBatch = commissionBatch
+                                };
+                            }
+                        }
+
+                        if (batch.CommissionType == "按转让金额")
+                        {
+                            foreach (Invoice invoice in invoiceList)
+                            {
+                                if (TypeUtil.GreaterThan(invoice.PaidCommission, 0))
+                                {
+                                    RevenueLog commissionLog = new RevenueLog
+                                    {
+                                        RevenueValue = invoice.PaidCommission.GetValueOrDefault(),
+                                        RevenueType = "转让手续费",
+                                        RevenueCurrency = batch.BatchCurrency,
+                                        RevenueDate = DateTime.Now,
+                                        Invoice = invoice,
+                                        RevenueBatch = commissionBatch
+                                    };
+                                }
+                            }
+                        }
+                    }
+
                 }
 
                 foreach (Invoice invoice in invoiceList)
@@ -655,10 +701,12 @@ namespace CMBC.EasyFactor.ARMgr
                 foreach (Invoice invoice in invoiceList)
                 {
                     invoice.InvoiceAssignBatch = null;
+                    invoice.RevenueLog = null;
                 }
 
                 batch.Case = null;
                 batch.AssignBatchNo = null;
+                batch.RevenueBatch = null;
                 isSaveOK = false;
                 MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

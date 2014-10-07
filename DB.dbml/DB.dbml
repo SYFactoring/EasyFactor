@@ -382,6 +382,7 @@
       <Column Name="CommissionPrePost" Type="System.String" DbType="varchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceAssignBatch_CreditNote" Member="CreditNotes" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="CreditNote" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="Invoices" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="Invoice" />
+      <Association Name="InvoiceAssignBatch_RevenueBatch" Member="RevenueBatch" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="RevenueBatch" />
       <Association Name="Case_InvoiceAssignBatch" Member="Case" ThisKey="CaseCode" OtherKey="CaseCode" Type="Case" IsForeignKey="true" />
       <Association Name="CommissionRemittance_InvoiceAssignBatch" Member="CommissionRemittance" ThisKey="MsgID" OtherKey="MsgID" Type="CommissionRemittance" IsForeignKey="true" />
     </Type>
@@ -588,6 +589,7 @@
       <Column Name="UnpaidHandlingFee" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="InvoiceFinanceLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoiceFinanceLog" />
       <Association Name="Invoice_InvoicePaymentLog" Member="InvoicePaymentLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoicePaymentLog" />
+      <Association Name="Invoice_RevenueLog" Member="RevenueLog" Storage="_CommissionLog" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="RevenueLog" />
       <Association Name="InvoiceAssignBatch_Invoice" Member="InvoiceAssignBatch" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="InvoiceAssignBatch" IsForeignKey="true" />
     </Type>
   </Table>
@@ -645,6 +647,32 @@
       <Column Name="FactorCode" Type="System.String" DbType="Char(7)" CanBeNull="false" UpdateCheck="WhenChanged" />
       <Association Name="CommissionRemittance_InvoiceAssignBatch" Member="InvoiceAssignBatches" ThisKey="MsgID" OtherKey="MsgID" Type="InvoiceAssignBatch" />
       <Association Name="Factor_CommissionRemittance" Member="Factor" ThisKey="FactorCode" OtherKey="FactorCode" Type="Factor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="" Member="RevenueLog">
+    <Type Name="RevenueLog">
+      <Column Name="RevenueID" Storage="_CommissionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RevenueValue" Storage="_CommissionValue" Type="System.Decimal" DbType="decimal" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="InvoiceID" Type="System.Int32" DbType="int" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="RevenueBatchID" Storage="_CommissionBatchID" Type="System.Int32" DbType="int" CanBeNull="false" />
+      <Column Name="RevenueType" Type="System.String" DbType="varchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="RevenueCurrency" Type="System.String" DbType="char(3)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="RevenueDate" Type="System.DateTime" DbType="datetime" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Association Name="Invoice_RevenueLog" Member="Invoice" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="Invoice" IsForeignKey="true" />
+      <Association Name="RevenueBatch_RevenueLog" Member="RevenueBatch" Storage="_CommissionBatch" ThisKey="RevenueBatchID" OtherKey="RevenueBatchID" Type="RevenueBatch" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="" Member="RevenueBatch">
+    <Type Name="RevenueBatch">
+      <Column Name="RevenueBatchID" Storage="_CommissionBatchID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CreateUserName" Type="System.String" DbType="nvarchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="RevenueDate" Storage="_CommissionDate" Type="System.DateTime" DbType="datetime" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="CheckStatus" Type="System.String" DbType="nvarchar(50)" CanBeNull="false" UpdateCheck="WhenChanged" />
+      <Column Name="CheckDate" Type="System.DateTime" DbType="datetime" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="CheckUserName" Type="System.String" DbType="nvarchar(50)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="AssignBatchNo" Type="System.String" DbType="char(20)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Association Name="RevenueBatch_RevenueLog" Member="RevenueLog" Storage="_CommissionLog" ThisKey="RevenueBatchID" OtherKey="RevenueBatchID" Type="RevenueLog" />
+      <Association Name="InvoiceAssignBatch_RevenueBatch" Member="InvoiceAssignBatch" ThisKey="AssignBatchNo" OtherKey="AssignBatchNo" Type="InvoiceAssignBatch" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

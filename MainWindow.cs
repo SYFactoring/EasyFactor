@@ -1328,5 +1328,11 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
+
+        private void QueryRevenueLog(object sender, EventArgs e)
+        {
+            var mgr = new RevenueMgr(RevenueMgr.OpRevenueType.QUERY);
+            SetDetailPanel(mgr);
+        }
     }
 }
