@@ -15,6 +15,7 @@ using CMBC.EasyFactor.CaseMgr;
 using CMBC.EasyFactor.DB.dbml;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
+using CMBC.EasyFactor.Controls;
 
 namespace CMBC.EasyFactor.ARMgr
 {
@@ -53,6 +54,15 @@ namespace CMBC.EasyFactor.ARMgr
             dgvInvoices.ReadOnly = true;
             ControlUtil.SetDoubleBuffered(dgvInvoices);
 
+            var checkBoxCell = new DataGridViewCheckboxHeaderCell();
+            checkBoxCell.OnCheckBoxClicked += OnCheckBoxClicked;
+            var checkBoxCol = dgvInvoices.Columns[0] as DataGridViewCheckBoxColumn;
+            if (checkBoxCol != null)
+            {
+                checkBoxCol.HeaderCell = checkBoxCell;
+                checkBoxCol.HeaderCell.Value = string.Empty;
+            }
+
             _context = new DBDataContext();
 
             foreach (DataGridViewColumn column in dgvInvoices.Columns)
@@ -61,6 +71,32 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             colCurCommissionValue.ReadOnly = false;
+        }
+
+        private void OnCheckBoxClicked(object sender, DataGridViewCheckboxHeaderEventArgs e)
+        {
+            IList logList = invoiceBindingSource.List;
+            foreach (DataGridViewRow dgvRow in dgvInvoices.Rows)
+            {
+                if (dgvRow.Index < logList.Count)
+                {
+                    var invoice = (Invoice)logList[dgvRow.Index];
+                    if (e.CheckedState)
+                    {
+                        dgvRow.Cells[0].Value = true;
+                        ClickInvoice(invoice);
+                        ResetRow(dgvRow.Index, true);
+                    }
+                    else
+                    {
+                        dgvRow.Cells[0].Value = false;
+                        ResetRow(dgvRow.Index, false);
+                    }
+                }
+            }
+
+            dgvInvoices.Refresh();
+            StatBatch();
         }
 
 
@@ -158,7 +194,7 @@ namespace CMBC.EasyFactor.ARMgr
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
                 e.ParsingApplied = true;
             }
-            else if (col == colInvoiceAmount || col == colAssignAmount || col == colPaidCommission || col==colUnpaidCommission )
+            else if (col == colInvoiceAmount || col == colAssignAmount || col == colPaidCommission || col==colUnpaidCommission || col == colCurCommissionValue)
             {
                 if (e.Value.Equals(string.Empty))
                 {
@@ -193,7 +229,7 @@ namespace CMBC.EasyFactor.ARMgr
                     e.Cancel = true;
                 }
             }
-            else if (col == colInvoiceAmount || col == colAssignAmount || col == colPaidCommission || col==colUnpaidCommission )
+            else if (col == colInvoiceAmount || col == colAssignAmount || col == colPaidCommission || col==colUnpaidCommission || col==colCurCommissionValue )
             {
                 var str = (string)e.FormattedValue;
                 double result;
@@ -351,5 +387,50 @@ namespace CMBC.EasyFactor.ARMgr
             tbTotalCommission.Text = String.Format("{0:N2}", totalCommmission);
         }
 
+        private void dgvCellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
+
+            IList invoiceList = invoiceBindingSource.List;
+            var invoice = (Invoice)invoiceList[e.RowIndex];
+            dgvInvoices.EndEdit();
+
+            if (dgvInvoices.Columns[e.ColumnIndex] == colCheckBox)
+            {
+                var checkBoxCell = (DataGridViewCheckBoxCell)dgvInvoices.Rows[e.RowIndex].Cells[0];
+
+                if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
+                {
+                    
+                    ClickInvoice(invoice);
+                    ResetRow(e.RowIndex, true);
+                }
+                else
+                {
+                    ResetRow(e.RowIndex, false);
+                }
+
+                dgvInvoices.Refresh();
+            }
+            StatBatch();
+        }
+
+        private static void ClickInvoice(Invoice invoice)
+        {
+            invoice.CurCommissionValue = invoice.UnpaidCommission;
+        }
+
+        private void ResetRow(int rowIndex, bool editable)
+        {
+            dgvInvoices.Rows[rowIndex].Cells["colCurCommissionValue"].ReadOnly = !editable;
+            if (!editable)
+            {
+                var invoice = (Invoice)invoiceBindingSource.List[rowIndex];
+                invoice.CurCommissionValue = null;
+            }
+        }
     }
 }

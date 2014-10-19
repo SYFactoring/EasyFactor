@@ -199,7 +199,15 @@ namespace CMBC.EasyFactor.ARMgr
             }
             else
             {
-                log.RefundAmount = log.FinanceOutstanding.GetValueOrDefault();
+                var batch = (InvoiceRefundBatch)batchBindingSource.DataSource;
+                if (batch.RefundType == "买方直接付款")
+                {
+                    log.RefundAmount = Math.Min(log.FinanceOutstanding.GetValueOrDefault(), log.DirectPaymentOutstanding.GetValueOrDefault());
+                }
+                else
+                {
+                    log.RefundAmount = log.FinanceOutstanding.GetValueOrDefault();
+                }
             }
 
             if (log.FinanceRateType1 == "后收息")
@@ -324,7 +332,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             DataGridViewColumn col = dgvLogs.Columns[e.ColumnIndex];
-            if (col == colFinanceDate || col == colFinanceDueDate)
+            if (col == colFinanceDate || col == colReassginDate)
             {
                 var date = (DateTime)e.Value;
                 e.Value = date.ToString("yyyyMMdd");
@@ -761,6 +769,17 @@ namespace CMBC.EasyFactor.ARMgr
                         MessageBoxEx.Show("还款金额不能大于融资余额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION,
                                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return false;
+                    }
+
+                    var batch = (InvoiceRefundBatch)batchBindingSource.DataSource;
+                    if (batch.RefundType == "买方直接付款")
+                    {
+                        if (log.RefundAmount > log.DirectPaymentOutstanding)
+                        {
+                            MessageBoxEx.Show("还款金额不能大于直接付款余额: " + log.InvoiceNo2, MESSAGE.TITLE_INFORMATION,
+                                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return false;
+                        }
                     }
 
                     //if (log.InvoiceFinanceLog == null)

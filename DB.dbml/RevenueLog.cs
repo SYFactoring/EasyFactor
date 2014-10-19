@@ -11,5 +11,21 @@ namespace CMBC.EasyFactor.DB.dbml
         {
             get { return Invoice.InvoiceNo; }
         }
+
+        public double? CommissionPrice
+        {
+            get { return Invoice.InvoiceAssignBatch.CommissionPrice; }
+        }
+
+        public decimal AssignAmount
+        {
+            get
+            {
+                return Invoice.AssignAmount;
+            }
+        }
+
+        public DateTime AssignDate { get { return Invoice.AssignDate; } }
+    
     }
 }

@@ -203,6 +203,14 @@ namespace CMBC.EasyFactor.DB.dbml
             get { return InvoiceRefundLogs != null ? InvoiceRefundLogs.Sum(log => log.RefundAmount) : null; }
         }
 
+        public decimal? DirectRefundAmount
+        {
+            get
+            {
+                return InvoiceRefundLogs.Where(log => log.InvoiceRefundBatch.RefundType == "买方直接付款").Sum(log => log.RefundAmount).GetValueOrDefault();
+            }
+        }
+
         //?Public?Methods?(1)?
         /// <summary>
         /// 

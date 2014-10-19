@@ -147,10 +147,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -162,6 +158,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.colUnpaidHandingFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsFlaw = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("必填");
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
             assignBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             assignDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
@@ -172,6 +172,7 @@ namespace CMBC.EasyFactor.ARMgr
             lblWhoPayFee = new DevComponents.DotNetBar.LabelX();
             this.panelAssignBatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).BeginInit();
             this.cmuInvoiceAssign.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).BeginInit();
             this.invoiceBindingNavigator.SuspendLayout();
@@ -187,7 +188,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             assignBatchNoLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            assignBatchNoLabel.Location = new System.Drawing.Point(13, 9);
+            assignBatchNoLabel.Location = new System.Drawing.Point(8, 8);
             assignBatchNoLabel.Name = "assignBatchNoLabel";
             assignBatchNoLabel.Size = new System.Drawing.Size(62, 18);
             assignBatchNoLabel.TabIndex = 0;
@@ -213,7 +214,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             commentLabel.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            commentLabel.Location = new System.Drawing.Point(38, 33);
+            commentLabel.Location = new System.Drawing.Point(31, 33);
             commentLabel.Name = "commentLabel";
             commentLabel.Size = new System.Drawing.Size(37, 18);
             commentLabel.TabIndex = 5;
@@ -318,7 +319,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelAssignBatch.Size = new System.Drawing.Size(1235, 75);
             this.panelAssignBatch.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelAssignBatch.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelAssignBatch.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.panelAssignBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
             this.panelAssignBatch.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelAssignBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
@@ -344,11 +344,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbTotalHandfee
             // 
+            this.tbTotalHandfee.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbTotalHandfee.Border.Class = "TextBoxBorder";
             this.tbTotalHandfee.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbTotalHandfee.DisabledBackColor = System.Drawing.Color.White;
+            this.tbTotalHandfee.ForeColor = System.Drawing.Color.Black;
             this.tbTotalHandfee.Location = new System.Drawing.Point(910, 54);
             this.tbTotalHandfee.Name = "tbTotalHandfee";
             this.tbTotalHandfee.ReadOnly = true;
@@ -357,11 +360,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbTotalCommission
             // 
+            this.tbTotalCommission.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbTotalCommission.Border.Class = "TextBoxBorder";
             this.tbTotalCommission.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbTotalCommission.DisabledBackColor = System.Drawing.Color.White;
+            this.tbTotalCommission.ForeColor = System.Drawing.Color.Black;
             this.tbTotalCommission.Location = new System.Drawing.Point(910, 37);
             this.tbTotalCommission.Name = "tbTotalCommission";
             this.tbTotalCommission.ReadOnly = true;
@@ -370,11 +376,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbAssignNumber
             // 
+            this.tbAssignNumber.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbAssignNumber.Border.Class = "TextBoxBorder";
             this.tbAssignNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbAssignNumber.DisabledBackColor = System.Drawing.Color.White;
+            this.tbAssignNumber.ForeColor = System.Drawing.Color.Black;
             this.tbAssignNumber.Location = new System.Drawing.Point(910, 19);
             this.tbAssignNumber.Name = "tbAssignNumber";
             this.tbAssignNumber.ReadOnly = true;
@@ -383,11 +392,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbTotalAssign
             // 
+            this.tbTotalAssign.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbTotalAssign.Border.Class = "TextBoxBorder";
             this.tbTotalAssign.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbTotalAssign.DisabledBackColor = System.Drawing.Color.White;
+            this.tbTotalAssign.ForeColor = System.Drawing.Color.Black;
             this.tbTotalAssign.Location = new System.Drawing.Point(910, 2);
             this.tbTotalAssign.Name = "tbTotalAssign";
             this.tbTotalAssign.ReadOnly = true;
@@ -456,12 +468,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // commentTextBox
             // 
+            this.commentTextBox.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.commentTextBox.Border.Class = "TextBoxBorder";
             this.commentTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "Comment", true));
+            this.commentTextBox.DisabledBackColor = System.Drawing.Color.White;
+            this.commentTextBox.ForeColor = System.Drawing.Color.Black;
             this.commentTextBox.Location = new System.Drawing.Point(74, 30);
             this.commentTextBox.Multiline = true;
             this.commentTextBox.Name = "commentTextBox";
@@ -526,12 +541,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // assignBatchNoTextBox
             // 
+            this.assignBatchNoTextBox.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.assignBatchNoTextBox.Border.Class = "TextBoxBorder";
             this.assignBatchNoTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.assignBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "AssignBatchNo", true));
+            this.assignBatchNoTextBox.DisabledBackColor = System.Drawing.Color.White;
+            this.assignBatchNoTextBox.ForeColor = System.Drawing.Color.Black;
             this.assignBatchNoTextBox.Location = new System.Drawing.Point(74, 6);
             this.assignBatchNoTextBox.Name = "assignBatchNoTextBox";
             this.assignBatchNoTextBox.ReadOnly = true;
@@ -728,7 +746,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInvoices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.dgvInvoices.Location = new System.Drawing.Point(0, 100);
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -740,26 +758,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvInvoicesCellValidating);
             this.dgvInvoices.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvInvoicesCellValueChanged);
             this.dgvInvoices.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvInvoicesRowHeaderMouseDoubleClick);
-            // 
-            // superValidator
-            // 
-            this.superValidator.ContainerControl = this;
-            this.superValidator.ErrorProvider = this.errorProvider;
-            this.superValidator.Highlighter = this.highlighter;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "必填";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // highlighter
-            // 
-            this.highlighter.ContainerControl = this;
             // 
             // colInvoiceNo
             // 
@@ -848,6 +846,26 @@ namespace CMBC.EasyFactor.ARMgr
             this.colComment.DataPropertyName = "Comment";
             this.colComment.HeaderText = "备注";
             this.colComment.Name = "colComment";
+            // 
+            // superValidator
+            // 
+            this.superValidator.ContainerControl = this;
+            this.superValidator.ErrorProvider = this.errorProvider;
+            this.superValidator.Highlighter = this.highlighter;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "必填";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
+            // highlighter
+            // 
+            this.highlighter.ContainerControl = this;
             // 
             // InvoiceAssign
             // 

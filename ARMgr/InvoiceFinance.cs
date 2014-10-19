@@ -622,6 +622,13 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
+            if (_context.InvoiceFinanceBatches.Count(batch => batch.Case.SellerClient == _case.SellerClient && batch.FinancePeriodBegin.Date == DateTime.Today) > 0)
+            {
+                MessageBoxEx.Show("同一客户同一天不能进行再次融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                  MessageBoxIcon.Information);
+                return;
+            }
+
             if (activeCDA.CommissionType == "按融资金额" || activeCDA.CommissionType == "其他")
             {
                 colPaidCommission.Visible = true;
@@ -635,6 +642,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             var financeBatch = new InvoiceFinanceBatch
                                    {
+                                       FinancePeriodBegin = DateTime.Now,
                                        BatchCurrency = _case.InvoiceCurrency,
                                        FinanceRateType1 = "先收息",
                                        FinanceRateType2 = "计头不计尾",
@@ -1003,18 +1011,21 @@ namespace CMBC.EasyFactor.ARMgr
 
             decimal totalFinance = 0;
             decimal totalInterest = 0;
+            decimal totalCommission = 0;
             for (int i = 0; i < logList.Count; i++)
             {
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     totalFinance += ((InvoiceFinanceLog)logList[i]).FinanceAmount.GetValueOrDefault();
                     totalInterest += ((InvoiceFinanceLog)logList[i]).Interest.GetValueOrDefault();
+                    totalCommission += ((InvoiceFinanceLog)logList[i]).PaidCommission.GetValueOrDefault();
                 }
             }
 
             _currentBatchFinanceAmount = totalFinance;
             tbFinanceLineBalance.Text = String.Format("{0:N2}", financeBatch.FinanceAmount - totalFinance);
             tbTotalInterest.Text = String.Format("{0:N2}", totalInterest);
+            tbTotalCommission.Text = String.Format("{0:N2}", totalCommission);
             if (totalFinance > financeBatch.FinanceAmount)
             {
                 MessageBoxEx.Show("当前融资额超过限定", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,

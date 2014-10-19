@@ -169,40 +169,6 @@ namespace CMBC.EasyFactor.CaseMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        //private void CbIsRecoarseCheckedChanged(object sender, EventArgs e)
-        //{
-        //    var cda = (CDA) CDABindingSource.DataSource;
-        //    if (cda.Case != null)
-        //    {
-        //        cda.IsRecoarse = cbIsRecoarse.Checked;
-        //        if (cda.IsRecoarse.GetValueOrDefault())
-        //        {
-        //            cda.CreditCoverPeriodBegin = null;
-        //            cda.CreditCoverPeriodEnd = null;
-        //            cda.CreditCover = null;
-        //            cda.CreditCoverCurr = null;
-        //            creditCoverCurrComboBox.Enabled = false;
-        //            creditCoverPeriodBeginDateTimePicker.Enabled = false;
-        //            creditCoverPeriodEndDateTimePicker.Enabled = false;
-        //            creditCoverTextBox.ReadOnly = true;
-        //            creditCoverPeriodBeginDateTimePicker.Value = default(DateTime);
-        //            creditCoverPeriodEndDateTimePicker.Value = default(DateTime);
-        //        }
-        //        else
-        //        {
-        //            creditCoverCurrComboBox.Enabled = true;
-        //            creditCoverPeriodBeginDateTimePicker.Enabled = true;
-        //            creditCoverPeriodEndDateTimePicker.Enabled = true;
-        //            creditCoverTextBox.ReadOnly = false;
-        //        }
-        //    }
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CustomValidator1ValidateValue(object sender, ValidateValueEventArgs e)
         {
             var cda = CDABindingSource.DataSource as CDA;
@@ -258,11 +224,11 @@ namespace CMBC.EasyFactor.CaseMgr
                     return;
                 }
 
-                if (cda.IsCreditCoverRevolving.GetValueOrDefault())
-                {
-                    e.IsValid = true;
-                    return;
-                }
+                //if (cda.IsCreditCoverRevolving.GetValueOrDefault())
+                //{
+                //    e.IsValid = true;
+                //    return;
+                //}
 
                 ClientCreditLine creditLine = cda.Case.BuyerClient.AssignCreditLine;
                 if (creditLine != null)
@@ -648,14 +614,14 @@ namespace CMBC.EasyFactor.CaseMgr
                 {
                     cda.PUGProportion = 0;
                 }
+                cda.IsRecoarse = false;
             }
             else
             {
                 creditCoverCurrComboBox.Enabled = false;
                 creditCoverPeriodBeginDateTimePicker.Enabled = false;
                 creditCoverPeriodEndDateTimePicker.Enabled = false;
-                creditCoverTextBox.ReadOnly = true;
-                //cbIsRecoarse.Enabled = false;
+                creditCoverTextBox.Enabled = false;
                 creditCoverPeriodBeginDateTimePicker.Value = default(DateTime);
                 creditCoverPeriodEndDateTimePicker.Value = default(DateTime);
                 cda.CreditCoverPeriodBegin = null;
@@ -663,7 +629,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.CreditCover = null;
                 cda.CreditCoverCurr = null;
                 cda.PUGProportion = 0;
-                //cda.IsRecoarse = true;
+                cda.IsRecoarse = true;
             }
         }
 
@@ -722,7 +688,6 @@ namespace CMBC.EasyFactor.CaseMgr
                               FinanceProportion = 0.8,
                               IsNotice = "明保理",
                               RiskType = "高风险",
-                              IsRecoarse = true,
                               CDAStatus = CDAStr.UNCHECK,
                               IsCreditCoverRevolving = true,
                               AssignType = "全部",
@@ -1028,35 +993,33 @@ namespace CMBC.EasyFactor.CaseMgr
             ControlUtil.SetComponetEditable(tbHighestFinance, false);
             ControlUtil.SetComponetEditable(createUserNameTextBox, false);
             ControlUtil.SetComponetEditable(cDAStatusComboBox, false);
-            ControlUtil.SetComponetEditable(commissionTypeComboBox, false);
 
-            var cda = (CDA)CDABindingSource.DataSource;
-            if (_opCDAType != OpCDAType.DETAIL_CDA && cda.Case != null)
-            {
-                ClientCreditLine creditLine = cda.Case.BuyerClient.AssignCreditLine;
-                if (creditLine == null)
-                {
-                    creditCoverCurrComboBox.Enabled = false;
-                    creditCoverPeriodBeginDateTimePicker.Enabled = false;
-                    creditCoverPeriodEndDateTimePicker.Enabled = false;
-                    creditCoverPeriodBeginDateTimePicker.Value = default(DateTime);
-                    creditCoverPeriodEndDateTimePicker.Value = default(DateTime);
-                    creditCoverTextBox.Enabled = false;
-                }
+            //var cda = (CDA)CDABindingSource.DataSource;
+            //if (_opCDAType != OpCDAType.DETAIL_CDA && cda.Case != null)
+            //{
+            //    ClientCreditLine creditLine = cda.Case.BuyerClient.AssignCreditLine;
+            //    if (creditLine == null)
+            //    {
+            //        creditCoverCurrComboBox.Enabled = false;
+            //        creditCoverPeriodBeginDateTimePicker.Enabled = false;
+            //        creditCoverPeriodEndDateTimePicker.Enabled = false;
+            //        creditCoverPeriodBeginDateTimePicker.Value = default(DateTime);
+            //        creditCoverPeriodEndDateTimePicker.Value = default(DateTime);
+            //        creditCoverTextBox.Enabled = false;
+            //    }
 
-                ClientCreditLine financeLine = cda.Case.HighestFinanceLine;
+            //    ClientCreditLine financeLine = cda.Case.HighestFinanceLine;
 
-                if (financeLine == null)
-                {
-                    financeLineCurrComboBox.Enabled = false;
-                    financeLinePeriodBeginDateTimePicker.Enabled = false;
-                    financeLinePeriodEndDateTimePicker.Enabled = false;
-                    financeLinePeriodBeginDateTimePicker.Value = default(DateTime);
-                    financeLinePeriodEndDateTimePicker.Value = default(DateTime);
-                    financeLineTextBox.Enabled = false;
-                }
-            }
-            cbIsRecoarse_CheckedChanged(null, null);
+            //    if (financeLine == null)
+            //    {
+            //        financeLineCurrComboBox.Enabled = false;
+            //        financeLinePeriodBeginDateTimePicker.Enabled = false;
+            //        financeLinePeriodEndDateTimePicker.Enabled = false;
+            //        financeLinePeriodBeginDateTimePicker.Value = default(DateTime);
+            //        financeLinePeriodEndDateTimePicker.Value = default(DateTime);
+            //        financeLineTextBox.Enabled = false;
+            //    }
+            //}
         }
 
         private void cbIsRecoarse_CheckedChanged(object sender, EventArgs e)

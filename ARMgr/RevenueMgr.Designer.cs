@@ -51,7 +51,12 @@ namespace CMBC.EasyFactor.ARMgr
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.dateTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblDatePicker = new DevComponents.DotNetBar.LabelX();
@@ -63,12 +68,22 @@ namespace CMBC.EasyFactor.ARMgr
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.dgvRevenues = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCommissionPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRevenueType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRevenueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRevenueCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRevenueValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBatchID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -307,21 +322,23 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvRevenues.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRevenues.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colInvoiceID,
+            this.colAssignAmount,
+            this.colAssignDate,
+            this.colCommissionPrice,
             this.colRevenueType,
             this.colRevenueDate,
             this.colRevenueCurrency,
-            this.colRevenueValue,
-            this.colBatchID});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRevenues.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colRevenueValue});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRevenues.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvRevenues.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRevenues.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvRevenues.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.dgvRevenues.Location = new System.Drawing.Point(0, 30);
             this.dgvRevenues.Name = "dgvRevenues";
             this.dgvRevenues.ReadOnly = true;
@@ -331,20 +348,106 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvRevenues.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRevenues_CellDoubleClick);
             this.dgvRevenues.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvRevenuesRowPostPaint);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "InvoiceNo";
+            this.dataGridViewTextBoxColumn1.HeaderText = "发票号";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "AssignAmount";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewTextBoxColumn2.HeaderText = "转让金额";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "AssignDate";
+            this.dataGridViewTextBoxColumn3.HeaderText = "转让日";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "CommissionPrice";
+            this.dataGridViewTextBoxColumn4.HeaderText = "手续费率";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "RevenueType";
+            this.dataGridViewTextBoxColumn5.HeaderText = "收入类型";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 92;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "RevenueDate";
+            this.dataGridViewTextBoxColumn6.HeaderText = "交易日";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "RevenueCurrency";
+            this.dataGridViewTextBoxColumn7.HeaderText = "币别";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "RevenueValue";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.Format = "N2";
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridViewTextBoxColumn8.HeaderText = "收入金额";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 93;
+            // 
             // colInvoiceID
             // 
-            this.colInvoiceID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colInvoiceID.DataPropertyName = "InvoiceNo";
-            this.colInvoiceID.Frozen = true;
             this.colInvoiceID.HeaderText = "发票号";
             this.colInvoiceID.Name = "colInvoiceID";
             this.colInvoiceID.ReadOnly = true;
-            this.colInvoiceID.Width = 200;
+            // 
+            // colAssignAmount
+            // 
+            this.colAssignAmount.DataPropertyName = "AssignAmount";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colAssignAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAssignAmount.HeaderText = "转让金额";
+            this.colAssignAmount.Name = "colAssignAmount";
+            this.colAssignAmount.ReadOnly = true;
+            // 
+            // colAssignDate
+            // 
+            this.colAssignDate.DataPropertyName = "AssignDate";
+            this.colAssignDate.HeaderText = "转让日";
+            this.colAssignDate.Name = "colAssignDate";
+            this.colAssignDate.ReadOnly = true;
+            // 
+            // colCommissionPrice
+            // 
+            this.colCommissionPrice.DataPropertyName = "CommissionPrice";
+            dataGridViewCellStyle3.Format = "p2";
+            this.colCommissionPrice.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colCommissionPrice.HeaderText = "手续费率";
+            this.colCommissionPrice.Name = "colCommissionPrice";
+            this.colCommissionPrice.ReadOnly = true;
             // 
             // colRevenueType
             // 
             this.colRevenueType.DataPropertyName = "RevenueType";
-            this.colRevenueType.HeaderText = "类别";
+            this.colRevenueType.HeaderText = "收入类型";
             this.colRevenueType.Name = "colRevenueType";
             this.colRevenueType.ReadOnly = true;
             // 
@@ -365,16 +468,12 @@ namespace CMBC.EasyFactor.ARMgr
             // colRevenueValue
             // 
             this.colRevenueValue.DataPropertyName = "RevenueValue";
-            this.colRevenueValue.HeaderText = "收入";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Format = "N2";
+            this.colRevenueValue.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colRevenueValue.HeaderText = "收入金额";
             this.colRevenueValue.Name = "colRevenueValue";
             this.colRevenueValue.ReadOnly = true;
-            // 
-            // colBatchID
-            // 
-            this.colBatchID.DataPropertyName = "RevenueBatchID";
-            this.colBatchID.HeaderText = "批次号";
-            this.colBatchID.Name = "colBatchID";
-            this.colBatchID.ReadOnly = true;
             // 
             // RevenueMgr
             // 
@@ -400,10 +499,20 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.LabelX lblDatePicker;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBatchID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
     }
 }

@@ -36,6 +36,8 @@ namespace CMBC.EasyFactor.DB.dbml
             FinanceRateType2 = financeLog.InvoiceFinanceBatch.FinanceRateType2;
             FinanceRate = financeLog.InvoiceFinanceBatch.FinanceRate;
             FinancePeriodBegin = financeLog.InvoiceFinanceBatch.FinancePeriodBegin;
+            ReassignDate = financeLog.Invoice.ReassignDate;
+            DirectPaymentOutstanding = financeLog.Invoice.DirectPaymentOutstanding;
         }
 
         /// <summary>
@@ -115,6 +117,8 @@ namespace CMBC.EasyFactor.DB.dbml
         /// 
         /// </summary>
         public decimal? FinanceOutstanding2 { get; set; }
+
+        public DateTime ReassignDate { get; set; }
 
         /// <summary>
         /// 
@@ -225,5 +229,11 @@ namespace CMBC.EasyFactor.DB.dbml
         public double FinanceRate { get; set; }
 
         public DateTime FinancePeriodBegin { get; set; }
+
+        public decimal? DirectPaymentOutstanding
+        {
+            get;
+            set;
+        }
     }
 }

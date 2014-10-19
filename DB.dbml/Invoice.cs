@@ -736,5 +736,13 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
+        public decimal? DirectPaymentOutstanding
+        {
+            get
+            {
+                return InvoicePaymentLogs.Where(log => log.InvoicePaymentBatch.PaymentType == "买方直接付款").Sum(log => log.PaymentAmount).GetValueOrDefault() - InvoiceFinanceLogs.Sum(log => log.DirectRefundAmount).GetValueOrDefault();
+            }
+        }
     }
 }

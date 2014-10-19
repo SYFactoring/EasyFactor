@@ -4391,7 +4391,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             "保理预付款融资额度",
             "池融资额度",
             "订单融资额度",
-            "买方信用担保额度"});
+            "买方信用风险担保额度"});
             this.creditLineTypeComboBox.Location = new System.Drawing.Point(90, 4);
             this.creditLineTypeComboBox.Name = "creditLineTypeComboBox";
             this.creditLineTypeComboBox.Size = new System.Drawing.Size(152, 21);

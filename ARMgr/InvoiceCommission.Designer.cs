@@ -123,6 +123,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colInvoiceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -349,7 +350,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // invoiceBindingSource
             // 
-            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.Invoice);
+            this.invoiceBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceFinanceLog);
             // 
             // bindingNavigatorCountItem
             // 
@@ -432,6 +433,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.AutoGenerateColumns = false;
             this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInvoices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCheckBox,
             this.colInvoiceNo,
             this.colInvoiceAmount,
             this.colAssignAmount,
@@ -457,6 +459,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvInvoices.Size = new System.Drawing.Size(1235, 487);
             this.dgvInvoices.TabIndex = 0;
+            this.dgvInvoices.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCellContentClick);
             this.dgvInvoices.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvInvoicesCellFormatting);
             this.dgvInvoices.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.DgvInvoicesCellParsing);
             this.dgvInvoices.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvInvoicesCellValidating);
@@ -539,6 +542,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn8.HeaderText = "本次收费";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            // 
+            // colCheckBox
+            // 
+            this.colCheckBox.Frozen = true;
+            this.colCheckBox.HeaderText = "";
+            this.colCheckBox.Name = "colCheckBox";
+            this.colCheckBox.Width = 20;
             // 
             // colInvoiceNo
             // 
@@ -646,6 +656,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;

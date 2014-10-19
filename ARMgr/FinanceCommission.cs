@@ -15,6 +15,7 @@ using CMBC.EasyFactor.CaseMgr;
 using CMBC.EasyFactor.DB.dbml;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
+using CMBC.EasyFactor.Controls;
 
 namespace CMBC.EasyFactor.ARMgr
 {
@@ -47,13 +48,48 @@ namespace CMBC.EasyFactor.ARMgr
         {
             InitializeComponent();
             ImeMode = ImeMode.OnHalf;
-            dgvInvoices.ImeMode = ImeMode.OnHalf;
+            dgvFinanceLogs.ImeMode = ImeMode.OnHalf;
             _caseBasic = caseBasic;
-            dgvInvoices.AutoGenerateColumns = false;
-            dgvInvoices.ReadOnly = true;
-            ControlUtil.SetDoubleBuffered(dgvInvoices);
+            dgvFinanceLogs.AutoGenerateColumns = false;
+            dgvFinanceLogs.ReadOnly = true;
+            ControlUtil.SetDoubleBuffered(dgvFinanceLogs);
+
+            var checkBoxCell = new DataGridViewCheckboxHeaderCell();
+            checkBoxCell.OnCheckBoxClicked += OnCheckBoxClicked;
+            var checkBoxCol = dgvFinanceLogs.Columns[0] as DataGridViewCheckBoxColumn;
+            if (checkBoxCol != null)
+            {
+                checkBoxCol.HeaderCell = checkBoxCell;
+                checkBoxCol.HeaderCell.Value = string.Empty;
+            }
 
             _context = new DBDataContext();
+        }
+
+        private void OnCheckBoxClicked(object sender, DataGridViewCheckboxHeaderEventArgs e)
+        {
+            IList logList = invoiceBindingSource.List;
+            foreach (DataGridViewRow dgvRow in dgvFinanceLogs.Rows)
+            {
+                if (dgvRow.Index < logList.Count)
+                {
+                    var log = (InvoiceFinanceLog)logList[dgvRow.Index];
+                    if (e.CheckedState)
+                    {
+                        dgvRow.Cells[0].Value = true;
+                        ClickLog(log);
+                        ResetRow(dgvRow.Index, true);
+                    }
+                    else
+                    {
+                        dgvRow.Cells[0].Value = false;
+                        ResetRow(dgvRow.Index, false);
+                    }
+                }
+            }
+
+            dgvFinanceLogs.Refresh();
+            StatBatch();
         }
 
 
@@ -93,12 +129,12 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e">Event Args</param>
         private void DetailInvoice(object sender, EventArgs e)
         {
-            if (dgvInvoices.CurrentCell == null)
+            if (dgvFinanceLogs.CurrentCell == null)
             {
                 return;
             }
 
-            var selectedInvoiceFinanceLog = (InvoiceFinanceLog)invoiceBindingSource.List[dgvInvoices.CurrentCell.RowIndex];
+            var selectedInvoiceFinanceLog = (InvoiceFinanceLog)invoiceBindingSource.List[dgvFinanceLogs.CurrentCell.RowIndex];
             var invoiceDetail = new InvoiceDetail(selectedInvoiceFinanceLog.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
             invoiceDetail.ShowDialog(this);
         }
@@ -115,7 +151,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            DataGridViewColumn col = dgvInvoices.Columns[e.ColumnIndex];
+            DataGridViewColumn col = dgvFinanceLogs.Columns[e.ColumnIndex];
             if (col == colDueDate || col == colInvoiceDate || col == colFinanceDate)
             {
                 var date = (DateTime)e.Value;
@@ -137,7 +173,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            DataGridViewColumn col = dgvInvoices.Columns[e.ColumnIndex];
+            DataGridViewColumn col = dgvFinanceLogs.Columns[e.ColumnIndex];
             if (col == colDueDate || col == colInvoiceDate || col== colFinanceDate)
             {
                 if (e.Value.Equals(string.Empty))
@@ -151,7 +187,7 @@ namespace CMBC.EasyFactor.ARMgr
                 e.Value = DateTime.ParseExact(str, "yyyyMMdd", DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None);
                 e.ParsingApplied = true;
             }
-            else if (col == colInvoiceAmount || col == colAssignAmount || col == colFinanceAmount || col == colPaidCommission || col==colUnpaidCommission )
+            else if (col == colInvoiceAmount || col == colAssignAmount || col == colFinanceAmount || col == colPaidCommission || col==colUnpaidCommission || col== colCurCommissionValue)
             {
                 if (e.Value.Equals(string.Empty))
                 {
@@ -174,7 +210,7 @@ namespace CMBC.EasyFactor.ARMgr
                 return;
             }
 
-            DataGridViewColumn col = dgvInvoices.Columns[e.ColumnIndex];
+            DataGridViewColumn col = dgvFinanceLogs.Columns[e.ColumnIndex];
             if (col == colDueDate || col == colInvoiceDate || col == colFinanceDate)
             {
                 var str = (string)e.FormattedValue;
@@ -186,7 +222,7 @@ namespace CMBC.EasyFactor.ARMgr
                     e.Cancel = true;
                 }
             }
-            else if (col == colInvoiceAmount || col == colAssignAmount || col == colFinanceAmount || col == colPaidCommission || col==colUnpaidCommission )
+            else if (col == colInvoiceAmount || col == colAssignAmount || col == colFinanceAmount || col == colPaidCommission || col==colUnpaidCommission || col==colCurCommissionValue)
             {
                 var str = (string)e.FormattedValue;
                 double result;
@@ -247,7 +283,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             var result = from log in _context.InvoiceFinanceLogs where log.Invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode && log.UnpaidCommission > 0 && log.Invoice.InvoiceAssignBatch.CommissionType =="°´ÈÚ×Ê½ð¶î" select log;
             invoiceBindingSource.DataSource = result;
-            dgvInvoices.ReadOnly = false;
+            dgvFinanceLogs.ReadOnly = false;
         }
 
         /// <summary>
@@ -348,5 +384,49 @@ namespace CMBC.EasyFactor.ARMgr
             tbTotalCommission.Text = String.Format("{0:N2}", totalCommmission);
         }
 
+        private void dgvCellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
+
+            IList logList = invoiceBindingSource.List;
+            var log = (InvoiceFinanceLog)logList[e.RowIndex];
+            dgvFinanceLogs.EndEdit();
+
+            if (dgvFinanceLogs.Columns[e.ColumnIndex] == colCheckBox)
+            {
+                var checkBoxCell = (DataGridViewCheckBoxCell)dgvFinanceLogs.Rows[e.RowIndex].Cells[0];
+
+                if (Boolean.Parse(checkBoxCell.EditedFormattedValue.ToString()))
+                {
+                    ClickLog(log);
+                    ResetRow(e.RowIndex, true);
+                }
+                else
+                {
+                    ResetRow(e.RowIndex, false);
+                }
+                dgvFinanceLogs.Refresh();
+            }
+            StatBatch();
+        }
+
+
+        private static void ClickLog(InvoiceFinanceLog log)
+        {
+            log.CurCommissionValue = log.UnpaidCommission;
+        }
+
+        private void ResetRow(int rowIndex, bool editable)
+        {
+            dgvFinanceLogs.Rows[rowIndex].Cells["colCurCommissionValue"].ReadOnly = !editable;
+            if (!editable)
+            {
+                var log = (InvoiceFinanceLog)invoiceBindingSource.List[rowIndex];
+                log.CurCommissionValue = null;
+            }
+        }
     }
 }

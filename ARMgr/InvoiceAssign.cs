@@ -498,7 +498,7 @@ namespace CMBC.EasyFactor.ARMgr
                             {
                                 AssignDate = DateTime.Now.Date,
                                 CreateUserName = App.Current.CurUser.Name,
-                                IsRefinance = false,
+                                IsRefinance = true,
                                 WhoPayCommission = "Âô·½¸¶",
                                 CommissionType = _case.ActiveCDA.CommissionType,
                                 CommissionPrePost = _case.ActiveCDA.CommissionPrePost

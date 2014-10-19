@@ -169,7 +169,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReassignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsSendPaymentMsg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -234,7 +234,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Size = new System.Drawing.Size(1056, 72);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.panelQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
             this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
@@ -243,11 +242,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbAssignBatchNo
             // 
+            this.tbAssignBatchNo.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbAssignBatchNo.Border.Class = "TextBoxBorder";
             this.tbAssignBatchNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbAssignBatchNo.DisabledBackColor = System.Drawing.Color.White;
+            this.tbAssignBatchNo.ForeColor = System.Drawing.Color.Black;
             this.tbAssignBatchNo.Location = new System.Drawing.Point(234, 26);
             this.tbAssignBatchNo.Name = "tbAssignBatchNo";
             this.tbAssignBatchNo.Size = new System.Drawing.Size(101, 21);
@@ -268,11 +270,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbCaseCode
             // 
+            this.tbCaseCode.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbCaseCode.Border.Class = "TextBoxBorder";
             this.tbCaseCode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbCaseCode.DisabledBackColor = System.Drawing.Color.White;
+            this.tbCaseCode.ForeColor = System.Drawing.Color.Black;
             this.tbCaseCode.Location = new System.Drawing.Point(67, 26);
             this.tbCaseCode.Name = "tbCaseCode";
             this.tbCaseCode.Size = new System.Drawing.Size(101, 21);
@@ -322,11 +327,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbFinanceOutstanding
             // 
+            this.tbFinanceOutstanding.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbFinanceOutstanding.Border.Class = "TextBoxBorder";
             this.tbFinanceOutstanding.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbFinanceOutstanding.DisabledBackColor = System.Drawing.Color.White;
+            this.tbFinanceOutstanding.ForeColor = System.Drawing.Color.Black;
             this.tbFinanceOutstanding.Location = new System.Drawing.Point(762, 29);
             this.tbFinanceOutstanding.Name = "tbFinanceOutstanding";
             this.tbFinanceOutstanding.Size = new System.Drawing.Size(98, 21);
@@ -347,11 +355,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbAssignOutstanding
             // 
+            this.tbAssignOutstanding.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbAssignOutstanding.Border.Class = "TextBoxBorder";
             this.tbAssignOutstanding.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbAssignOutstanding.DisabledBackColor = System.Drawing.Color.White;
+            this.tbAssignOutstanding.ForeColor = System.Drawing.Color.Black;
             this.tbAssignOutstanding.Location = new System.Drawing.Point(761, 8);
             this.tbAssignOutstanding.Name = "tbAssignOutstanding";
             this.tbAssignOutstanding.Size = new System.Drawing.Size(98, 21);
@@ -536,11 +547,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbFinanceOverDueDays
             // 
+            this.tbFinanceOverDueDays.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbFinanceOverDueDays.Border.Class = "TextBoxBorder";
             this.tbFinanceOverDueDays.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbFinanceOverDueDays.DisabledBackColor = System.Drawing.Color.White;
+            this.tbFinanceOverDueDays.ForeColor = System.Drawing.Color.Black;
             this.tbFinanceOverDueDays.Location = new System.Drawing.Point(595, 29);
             this.tbFinanceOverDueDays.Name = "tbFinanceOverDueDays";
             this.tbFinanceOverDueDays.Size = new System.Drawing.Size(98, 21);
@@ -561,11 +575,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbAssignOverDueDays
             // 
+            this.tbAssignOverDueDays.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbAssignOverDueDays.Border.Class = "TextBoxBorder";
             this.tbAssignOverDueDays.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbAssignOverDueDays.DisabledBackColor = System.Drawing.Color.White;
+            this.tbAssignOverDueDays.ForeColor = System.Drawing.Color.Black;
             this.tbAssignOverDueDays.Location = new System.Drawing.Point(595, 8);
             this.tbAssignOverDueDays.Name = "tbAssignOverDueDays";
             this.tbAssignOverDueDays.Size = new System.Drawing.Size(98, 21);
@@ -642,11 +659,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbInvoiceNo
             // 
+            this.tbInvoiceNo.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbInvoiceNo.Border.Class = "TextBoxBorder";
             this.tbInvoiceNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbInvoiceNo.DisabledBackColor = System.Drawing.Color.White;
+            this.tbInvoiceNo.ForeColor = System.Drawing.Color.Black;
             this.tbInvoiceNo.Location = new System.Drawing.Point(401, 27);
             this.tbInvoiceNo.Name = "tbInvoiceNo";
             this.tbInvoiceNo.Size = new System.Drawing.Size(100, 21);
@@ -704,11 +724,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbFactor
             // 
+            this.tbFactor.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbFactor.Border.Class = "TextBoxBorder";
             this.tbFactor.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbFactor.DisabledBackColor = System.Drawing.Color.White;
+            this.tbFactor.ForeColor = System.Drawing.Color.Black;
             this.tbFactor.Location = new System.Drawing.Point(234, 6);
             this.tbFactor.Name = "tbFactor";
             this.tbFactor.Size = new System.Drawing.Size(100, 21);
@@ -729,11 +752,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbClientName
             // 
+            this.tbClientName.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
             this.tbClientName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbClientName.DisabledBackColor = System.Drawing.Color.White;
+            this.tbClientName.ForeColor = System.Drawing.Color.Black;
             this.tbClientName.Location = new System.Drawing.Point(67, 6);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(100, 21);
@@ -782,7 +808,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceAmount,
             this.colFinanceOutstanding,
             this.colFinanceDate,
-            this.colFinanceDueDate,
+            this.colReassignDate,
             this.colIsSendPaymentMsg,
             this.colPaymentAmount,
             this.colPaymentDate,
@@ -806,7 +832,7 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.dgvInvoices.Location = new System.Drawing.Point(0, 72);
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.ReadOnly = true;
@@ -1082,13 +1108,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceDate.ReadOnly = true;
             this.colFinanceDate.Width = 68;
             // 
-            // colFinanceDueDate
+            // colReassignDate
             // 
-            this.colFinanceDueDate.DataPropertyName = "ReassignDate";
-            this.colFinanceDueDate.HeaderText = "预计回购日";
-            this.colFinanceDueDate.Name = "colFinanceDueDate";
-            this.colFinanceDueDate.ReadOnly = true;
-            this.colFinanceDueDate.Width = 92;
+            this.colReassignDate.DataPropertyName = "ReassignDate";
+            this.colReassignDate.HeaderText = "预计回购日";
+            this.colReassignDate.Name = "colReassignDate";
+            this.colReassignDate.ReadOnly = true;
+            this.colReassignDate.Width = 92;
             // 
             // colIsSendPaymentMsg
             // 
@@ -1252,7 +1278,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReassignDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsSendPaymentMsg;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;

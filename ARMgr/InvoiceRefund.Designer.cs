@@ -87,18 +87,22 @@ namespace CMBC.EasyFactor.ARMgr
             DevComponents.DotNetBar.LabelX lblRefundType;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceRefund));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelRefundBatch = new DevComponents.DotNetBar.PanelEx();
+            this.tbTotalInterest = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblTotalInterest = new DevComponents.DotNetBar.LabelX();
             this.btnPaymentBatchImport = new DevComponents.DotNetBar.ButtonX();
             this.btnPaymentBatchExport = new DevComponents.DotNetBar.ButtonX();
             this.btnPaymentBatchSelect = new DevComponents.DotNetBar.ButtonX();
@@ -106,6 +110,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbTotalRefund = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnPaymentBatchNew = new DevComponents.DotNetBar.ButtonX();
             this.cbRefundType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnPaymentBatchSave = new DevComponents.DotNetBar.ButtonX();
             this.lblTotalPayment = new DevComponents.DotNetBar.LabelX();
             this.tbTotalPayment = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -131,7 +136,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.superValidator = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.batchBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -149,18 +153,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinanceDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReassginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinanceRateType1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDirectPaymentOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRefundAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInterest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblTotalInterest = new DevComponents.DotNetBar.LabelX();
-            this.tbTotalInterest = new DevComponents.DotNetBar.Controls.TextBoxX();
             refundBatchNoLabel = new DevComponents.DotNetBar.LabelX();
             refundDateLabel = new DevComponents.DotNetBar.LabelX();
             commentLabel = new DevComponents.DotNetBar.LabelX();
             lblRefundType = new DevComponents.DotNetBar.LabelX();
             this.panelRefundBatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentDateDateTimePicker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).BeginInit();
             this.invoiceBindingNavigator.SuspendLayout();
@@ -168,7 +174,6 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).BeginInit();
             this.cmuInvoiceRefund.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // refundBatchNoLabel
@@ -253,12 +258,40 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelRefundBatch.Size = new System.Drawing.Size(1069, 75);
             this.panelRefundBatch.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelRefundBatch.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelRefundBatch.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.panelRefundBatch.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
             this.panelRefundBatch.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelRefundBatch.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelRefundBatch.Style.GradientAngle = 90;
             this.panelRefundBatch.TabIndex = 0;
+            // 
+            // tbTotalInterest
+            // 
+            this.tbTotalInterest.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.tbTotalInterest.Border.Class = "TextBoxBorder";
+            this.tbTotalInterest.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbTotalInterest.DisabledBackColor = System.Drawing.Color.White;
+            this.tbTotalInterest.ForeColor = System.Drawing.Color.Black;
+            this.tbTotalInterest.Location = new System.Drawing.Point(879, 48);
+            this.tbTotalInterest.Name = "tbTotalInterest";
+            this.tbTotalInterest.ReadOnly = true;
+            this.tbTotalInterest.Size = new System.Drawing.Size(100, 21);
+            this.tbTotalInterest.TabIndex = 19;
+            // 
+            // lblTotalInterest
+            // 
+            this.lblTotalInterest.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblTotalInterest.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblTotalInterest.Location = new System.Drawing.Point(791, 48);
+            this.lblTotalInterest.Name = "lblTotalInterest";
+            this.lblTotalInterest.Size = new System.Drawing.Size(81, 18);
+            this.lblTotalInterest.TabIndex = 18;
+            this.lblTotalInterest.Text = "本次利息总额";
             // 
             // btnPaymentBatchImport
             // 
@@ -311,11 +344,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbTotalRefund
             // 
+            this.tbTotalRefund.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbTotalRefund.Border.Class = "TextBoxBorder";
             this.tbTotalRefund.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbTotalRefund.DisabledBackColor = System.Drawing.Color.White;
+            this.tbTotalRefund.ForeColor = System.Drawing.Color.Black;
             this.tbTotalRefund.Location = new System.Drawing.Point(879, 26);
             this.tbTotalRefund.Name = "tbTotalRefund";
             this.tbTotalRefund.ReadOnly = true;
@@ -349,6 +385,10 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbRefundType.Size = new System.Drawing.Size(100, 21);
             this.cbRefundType.TabIndex = 5;
             // 
+            // batchBindingSource
+            // 
+            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceRefundBatch);
+            // 
             // btnPaymentBatchSave
             // 
             this.btnPaymentBatchSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -376,11 +416,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbTotalPayment
             // 
+            this.tbTotalPayment.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbTotalPayment.Border.Class = "TextBoxBorder";
             this.tbTotalPayment.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbTotalPayment.DisabledBackColor = System.Drawing.Color.White;
+            this.tbTotalPayment.ForeColor = System.Drawing.Color.Black;
             this.tbTotalPayment.Location = new System.Drawing.Point(879, 4);
             this.tbTotalPayment.Name = "tbTotalPayment";
             this.tbTotalPayment.ReadOnly = true;
@@ -389,12 +432,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // commentTextBox
             // 
+            this.commentTextBox.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.commentTextBox.Border.Class = "TextBoxBorder";
             this.commentTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.commentTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "Comment", true));
+            this.commentTextBox.DisabledBackColor = System.Drawing.Color.White;
+            this.commentTextBox.ForeColor = System.Drawing.Color.Black;
             this.commentTextBox.Location = new System.Drawing.Point(206, 26);
             this.commentTextBox.Multiline = true;
             this.commentTextBox.Name = "commentTextBox";
@@ -445,12 +491,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // refundBatchNoTextBox
             // 
+            this.refundBatchNoTextBox.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.refundBatchNoTextBox.Border.Class = "TextBoxBorder";
             this.refundBatchNoTextBox.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.refundBatchNoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.batchBindingSource, "RefundBatchNo", true));
+            this.refundBatchNoTextBox.DisabledBackColor = System.Drawing.Color.White;
+            this.refundBatchNoTextBox.ForeColor = System.Drawing.Color.Black;
             this.refundBatchNoTextBox.Location = new System.Drawing.Point(90, 3);
             this.refundBatchNoTextBox.Name = "refundBatchNoTextBox";
             this.refundBatchNoTextBox.ReadOnly = true;
@@ -556,12 +605,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvLogs.AllowUserToAddRows = false;
             this.dgvLogs.AllowUserToDeleteRows = false;
             this.dgvLogs.AutoGenerateColumns = false;
+            this.dgvLogs.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -572,26 +622,38 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceAmount,
             this.colFinanceOutstanding,
             this.colFinanceDate,
-            this.colFinanceDueDate,
+            this.colReassginDate,
+            this.colFinanceRate,
+            this.colFinanceRateType1,
+            this.colDirectPaymentOutstanding,
             this.colInvoiceRefundAmount,
             this.colRefundAmount,
             this.colInterest,
             this.colComment});
             this.dgvLogs.ContextMenuStrip = this.cmuInvoiceRefund;
             this.dgvLogs.DataSource = this.logsBindingSource;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLogs.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLogs.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLogs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvLogs.EnableHeadersVisualStyles = false;
+            this.dgvLogs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.dgvLogs.Location = new System.Drawing.Point(0, 100);
             this.dgvLogs.Name = "dgvLogs";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLogs.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvLogs.Size = new System.Drawing.Size(1069, 386);
             this.dgvLogs.TabIndex = 2;
@@ -647,10 +709,6 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
-            // batchBindingSource
-            // 
-            this.batchBindingSource.DataSource = typeof(CMBC.EasyFactor.DB.dbml.InvoiceRefundBatch);
-            // 
             // dataGridViewCheckBoxColumn1
             // 
             this.dataGridViewCheckBoxColumn1.Frozen = true;
@@ -673,18 +731,18 @@ namespace CMBC.EasyFactor.ARMgr
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "FinanceAmount";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N2";
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn3.HeaderText = "融资金额";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.DataPropertyName = "FinanceOutstanding";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn4.HeaderText = "融资余额";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
@@ -703,30 +761,30 @@ namespace CMBC.EasyFactor.ARMgr
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "InvoiceRefundAmount";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTextBoxColumn7.HeaderText = "已还款金额";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.DataPropertyName = "RefundAmount";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N2";
-            dataGridViewCellStyle11.NullValue = null;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewTextBoxColumn8.HeaderText = "本次还款金额";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
             // dataGridViewTextBoxColumn9
             // 
             this.dataGridViewTextBoxColumn9.DataPropertyName = "Interest";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "N2";
+            dataGridViewCellStyle14.NullValue = null;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewTextBoxColumn9.HeaderText = "本次利息";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             // 
@@ -779,39 +837,60 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceDate.HeaderText = "融资日";
             this.colFinanceDate.Name = "colFinanceDate";
             // 
-            // colFinanceDueDate
+            // colReassginDate
             // 
-            this.colFinanceDueDate.DataPropertyName = "FinanceDueDate";
-            this.colFinanceDueDate.HeaderText = "融资到期日";
-            this.colFinanceDueDate.Name = "colFinanceDueDate";
+            this.colReassginDate.DataPropertyName = "ReassignDate";
+            this.colReassginDate.HeaderText = "预计回购日";
+            this.colReassginDate.Name = "colReassginDate";
+            // 
+            // colFinanceRate
+            // 
+            this.colFinanceRate.DataPropertyName = "FinanceRate";
+            this.colFinanceRate.HeaderText = "融资利息";
+            this.colFinanceRate.Name = "colFinanceRate";
+            // 
+            // colFinanceRateType1
+            // 
+            this.colFinanceRateType1.DataPropertyName = "FinanceRateType1";
+            this.colFinanceRateType1.HeaderText = "收息方式";
+            this.colFinanceRateType1.Name = "colFinanceRateType1";
+            // 
+            // colDirectPaymentOutstanding
+            // 
+            this.colDirectPaymentOutstanding.DataPropertyName = "DirectPaymentOutstanding";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.colDirectPaymentOutstanding.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colDirectPaymentOutstanding.HeaderText = "直接付款余额";
+            this.colDirectPaymentOutstanding.Name = "colDirectPaymentOutstanding";
             // 
             // colInvoiceRefundAmount
             // 
             this.colInvoiceRefundAmount.DataPropertyName = "InvoiceRefundAmount";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colInvoiceRefundAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colInvoiceRefundAmount.DefaultCellStyle = dataGridViewCellStyle5;
             this.colInvoiceRefundAmount.HeaderText = "已还款金额";
             this.colInvoiceRefundAmount.Name = "colInvoiceRefundAmount";
             // 
             // colRefundAmount
             // 
             this.colRefundAmount.DataPropertyName = "RefundAmount";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colRefundAmount.DefaultCellStyle = dataGridViewCellStyle6;
             this.colRefundAmount.HeaderText = "本次还款金额";
             this.colRefundAmount.Name = "colRefundAmount";
             // 
             // colInterest
             // 
             this.colInterest.DataPropertyName = "Interest";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.colInterest.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.colInterest.DefaultCellStyle = dataGridViewCellStyle7;
             this.colInterest.HeaderText = "本次利息";
             this.colInterest.Name = "colInterest";
             // 
@@ -820,32 +899,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.colComment.DataPropertyName = "Comment";
             this.colComment.HeaderText = "备注";
             this.colComment.Name = "colComment";
-            // 
-            // lblTotalInterest
-            // 
-            this.lblTotalInterest.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblTotalInterest.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTotalInterest.Location = new System.Drawing.Point(791, 48);
-            this.lblTotalInterest.Name = "lblTotalInterest";
-            this.lblTotalInterest.Size = new System.Drawing.Size(81, 18);
-            this.lblTotalInterest.TabIndex = 18;
-            this.lblTotalInterest.Text = "本次利息总额";
-            // 
-            // tbTotalInterest
-            // 
-            // 
-            // 
-            // 
-            this.tbTotalInterest.Border.Class = "TextBoxBorder";
-            this.tbTotalInterest.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbTotalInterest.Location = new System.Drawing.Point(879, 48);
-            this.tbTotalInterest.Name = "tbTotalInterest";
-            this.tbTotalInterest.ReadOnly = true;
-            this.tbTotalInterest.Size = new System.Drawing.Size(100, 21);
-            this.tbTotalInterest.TabIndex = 19;
             // 
             // InvoiceRefund
             // 
@@ -860,6 +913,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.Size = new System.Drawing.Size(1069, 486);
             this.panelRefundBatch.ResumeLayout(false);
             this.panelRefundBatch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentDateDateTimePicker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).EndInit();
             this.invoiceBindingNavigator.ResumeLayout(false);
@@ -868,7 +922,6 @@ namespace CMBC.EasyFactor.ARMgr
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogs)).EndInit();
             this.cmuInvoiceRefund.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -876,17 +929,6 @@ namespace CMBC.EasyFactor.ARMgr
 
         #endregion
 
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceRefundAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInterest;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
         private DevComponents.DotNetBar.Controls.TextBoxX tbTotalInterest;
         private DevComponents.DotNetBar.LabelX lblTotalInterest;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
@@ -900,6 +942,20 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheckBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReassginDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceRateType1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDirectPaymentOutstanding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceRefundAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRefundAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInterest;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colComment;
 
     }
 }
