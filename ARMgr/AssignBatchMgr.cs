@@ -114,6 +114,8 @@ namespace CMBC.EasyFactor.ARMgr
             cbLocation.ValueMember = "LocationCode";
             cbLocation.SelectedIndex = 0;
 
+            cbStatus.Items.AddRange(new String[] {BATCH.CHECK,BATCH.UNCHECK,BATCH.REJECT });
+
             UpdateContextMenu();
 
             if (_opBatchType == OpBatchType.REPORT)
@@ -462,6 +464,7 @@ namespace CMBC.EasyFactor.ARMgr
             string clientName = tbClientName.Text;
             string factorName = tbFactorName.Text;
             string transactionType = cbTransactionType.Text;
+            string status = cbStatus.Text;
             var location = (string)cbLocation.SelectedValue;
 
             if (String.IsNullOrEmpty(transactionType))
@@ -515,7 +518,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                 (endInputDate != dateInputTo.MinDate
                                                                      ? batch.InputDate <= endInputDate
                                                                      : true)
-                                                              //&& (status != string.Empty ? batch.CheckStatus == status : true)
+                                                                && (status != string.Empty ? batch.CheckStatus == status : true)
                                                                 && (batch.CreateUserName.Contains(createUserName))
                                                           select batch;
 

@@ -172,7 +172,6 @@ namespace CMBC.EasyFactor.ARMgr
             lblWhoPayFee = new DevComponents.DotNetBar.LabelX();
             this.panelAssignBatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.batchBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.assignDateDateTimePicker)).BeginInit();
             this.cmuInvoiceAssign.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceBindingNavigator)).BeginInit();
             this.invoiceBindingNavigator.SuspendLayout();

@@ -674,8 +674,8 @@ namespace CMBC.EasyFactor
         {
             if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {
-                var invoiceAssign = new ARCaseBasic(OpARType.ASSIGN);
-                SetDetailPanel(invoiceAssign);
+                var InvoiceAssign = new ARCaseBasic(OpARType.ASSIGN);
+                SetDetailPanel(InvoiceAssign);
             }
         }
         /// <summary>
@@ -1328,11 +1328,44 @@ namespace CMBC.EasyFactor
                 SetDetailPanel(mgr);
             }
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void QueryRevenueLog(object sender, EventArgs e)
         {
             var mgr = new RevenueMgr(RevenueMgr.OpRevenueType.QUERY);
             SetDetailPanel(mgr);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InvoiceCommission(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
+            {
+                var mgr = new ARCaseBasic(OpARType.INVOICE_COMMISSION);
+                SetDetailPanel(mgr);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FinanceCommission(object sender, EventArgs e)
+        {
+            if (PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
+            {
+                var mgr = new ARCaseBasic(OpARType.FINANCE_COMMISSION);
+                SetDetailPanel(mgr);
+            }
         }
     }
 }

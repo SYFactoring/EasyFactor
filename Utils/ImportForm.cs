@@ -858,7 +858,7 @@ namespace CMBC.EasyFactor.Utils
 
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column]);
                             invoice.InvoiceAssignBatch = assignBatch;
-                            invoice.CaculateCommission(false);
+                            invoice.CaculateCommission();
                         }
                         else if ("´ûÏîÍ¨Öª" == type)
                         {
@@ -2920,7 +2920,7 @@ namespace CMBC.EasyFactor.Utils
                                         log.PaidCommission = log.FinanceAmount * (decimal)activeCDA.Price;
                                     }
 
-                                    log.Invoice.CaculateCommission(false);
+                                    log.Invoice.CaculateCommission();
                                     log.Invoice.CaculateFinance();
                                 }
                             }
@@ -2982,7 +2982,7 @@ namespace CMBC.EasyFactor.Utils
                             Invoice invoice = log.Invoice;
                             log.Invoice = null;
                             invoice.CaculateFinance();
-                            invoice.CaculateCommission(false);
+                            invoice.CaculateCommission();
                         }
 
                         batch.Case = null;
@@ -3374,7 +3374,7 @@ namespace CMBC.EasyFactor.Utils
                                 }
                             }
 
-                            invoice.CaculateCommission(false);
+                            invoice.CaculateCommission();
 
                             column = 25;
                             invoice.Comment = String.Format("{0:G}", valueArray[row, column++]);

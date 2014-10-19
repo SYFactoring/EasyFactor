@@ -321,13 +321,14 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvRevenues.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvRevenues.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRevenues.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.dgvRevenues.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvRevenues.Location = new System.Drawing.Point(0, 30);
             this.dgvRevenues.Name = "dgvRevenues";
             this.dgvRevenues.ReadOnly = true;
             this.dgvRevenues.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRevenues.Size = new System.Drawing.Size(768, 330);
             this.dgvRevenues.TabIndex = 0;
+            this.dgvRevenues.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRevenues_CellDoubleClick);
             this.dgvRevenues.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvRevenuesRowPostPaint);
             // 
             // colInvoiceID

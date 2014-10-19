@@ -455,7 +455,7 @@ namespace CMBC.EasyFactor.ARMgr
                     {
                         if (invoice.PaidCommission.HasValue == false)
                         {
-                            invoice.CaculateCommission(false);
+                            invoice.CaculateCommission();
                         }
                     }
                 }
@@ -686,7 +686,7 @@ namespace CMBC.EasyFactor.ARMgr
                 foreach (Invoice invoice in invoiceList)
                 {
                     invoice.InvoiceAssignBatch = batch;
-                    invoice.CaculateCommission(false);
+                    invoice.CaculateCommissionForFirstTime();
                     if (invoice.IsFlaw)
                     {
                         flawList.Add(invoice);

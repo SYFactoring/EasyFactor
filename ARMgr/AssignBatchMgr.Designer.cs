@@ -96,7 +96,9 @@ namespace CMBC.EasyFactor.ARMgr
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
+            this.cbStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.dateInputTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.lblStatus = new DevComponents.DotNetBar.LabelX();
             this.lblInputDate = new DevComponents.DotNetBar.LabelX();
             this.dateInputFrom = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblCreateUserName = new DevComponents.DotNetBar.LabelX();
@@ -117,25 +119,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbAssignBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAssignBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCommissionRemitDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemAssignReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemThreeReports = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
             this.colFactorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -163,6 +146,25 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCommissionRemitDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemAssignReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFinanceReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCommissionReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemThreeReports = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFlawReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemBatchExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemFileCheckList = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateInputTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateInputFrom)).BeginInit();
@@ -176,7 +178,9 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelQuery.Controls.Add(this.cbStatus);
             this.panelQuery.Controls.Add(this.dateInputTo);
+            this.panelQuery.Controls.Add(this.lblStatus);
             this.panelQuery.Controls.Add(this.lblInputDate);
             this.panelQuery.Controls.Add(this.dateInputFrom);
             this.panelQuery.Controls.Add(this.lblCreateUserName);
@@ -203,12 +207,23 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Size = new System.Drawing.Size(894, 51);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.panelQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
             this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelQuery.Style.GradientAngle = 90;
             this.panelQuery.TabIndex = 0;
+            // 
+            // cbStatus
+            // 
+            this.cbStatus.DisplayMember = "Text";
+            this.cbStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbStatus.FormattingEnabled = true;
+            this.cbStatus.ItemHeight = 14;
+            this.cbStatus.Location = new System.Drawing.Point(208, 26);
+            this.cbStatus.Name = "cbStatus";
+            this.cbStatus.Size = new System.Drawing.Size(101, 20);
+            this.cbStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.cbStatus.TabIndex = 7;
             // 
             // dateInputTo
             // 
@@ -220,7 +235,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateInputTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateInputTo.ButtonDropDown.Visible = true;
             this.dateInputTo.IsPopupCalendarOpen = false;
-            this.dateInputTo.Location = new System.Drawing.Point(671, 25);
+            this.dateInputTo.Location = new System.Drawing.Point(723, 25);
             // 
             // 
             // 
@@ -258,6 +273,19 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateInputTo.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.dateInputTo.TabIndex = 17;
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblStatus.Location = new System.Drawing.Point(176, 28);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(31, 18);
+            this.lblStatus.TabIndex = 6;
+            this.lblStatus.Text = "状态";
+            // 
             // lblInputDate
             // 
             this.lblInputDate.AutoSize = true;
@@ -265,7 +293,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblInputDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblInputDate.Location = new System.Drawing.Point(516, 26);
+            this.lblInputDate.Location = new System.Drawing.Point(572, 27);
             this.lblInputDate.Name = "lblInputDate";
             this.lblInputDate.Size = new System.Drawing.Size(44, 18);
             this.lblInputDate.TabIndex = 15;
@@ -281,7 +309,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateInputFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateInputFrom.ButtonDropDown.Visible = true;
             this.dateInputFrom.IsPopupCalendarOpen = false;
-            this.dateInputFrom.Location = new System.Drawing.Point(565, 25);
+            this.dateInputFrom.Location = new System.Drawing.Point(619, 25);
             // 
             // 
             // 
@@ -334,12 +362,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbFactorName
             // 
+            this.tbFactorName.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbFactorName.Border.Class = "TextBoxBorder";
             this.tbFactorName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbFactorName.Location = new System.Drawing.Point(231, 4);
+            this.tbFactorName.DisabledBackColor = System.Drawing.Color.White;
+            this.tbFactorName.ForeColor = System.Drawing.Color.Black;
+            this.tbFactorName.Location = new System.Drawing.Point(209, 2);
             this.tbFactorName.Name = "tbFactorName";
             this.tbFactorName.Size = new System.Drawing.Size(100, 21);
             this.tbFactorName.TabIndex = 3;
@@ -351,7 +382,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblFactorName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblFactorName.Location = new System.Drawing.Point(181, 6);
+            this.lblFactorName.Location = new System.Drawing.Point(163, 6);
             this.lblFactorName.Name = "lblFactorName";
             this.lblFactorName.Size = new System.Drawing.Size(44, 18);
             this.lblFactorName.TabIndex = 2;
@@ -395,7 +426,7 @@ namespace CMBC.EasyFactor.ARMgr
             "国内买方保理",
             "出口保理",
             "进口保理"});
-            this.cbTransactionType.Location = new System.Drawing.Point(397, 4);
+            this.cbTransactionType.Location = new System.Drawing.Point(370, 3);
             this.cbTransactionType.Name = "cbTransactionType";
             this.cbTransactionType.Size = new System.Drawing.Size(101, 20);
             this.cbTransactionType.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -408,7 +439,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblTransactionType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTransactionType.Location = new System.Drawing.Point(343, 6);
+            this.lblTransactionType.Location = new System.Drawing.Point(314, 5);
             this.lblTransactionType.Name = "lblTransactionType";
             this.lblTransactionType.Size = new System.Drawing.Size(56, 18);
             this.lblTransactionType.TabIndex = 4;
@@ -416,12 +447,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbClientName
             // 
+            this.tbClientName.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
             this.tbClientName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbClientName.Location = new System.Drawing.Point(65, 4);
+            this.tbClientName.DisabledBackColor = System.Drawing.Color.White;
+            this.tbClientName.ForeColor = System.Drawing.Color.Black;
+            this.tbClientName.Location = new System.Drawing.Point(57, 3);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(100, 21);
             this.tbClientName.TabIndex = 1;
@@ -441,11 +475,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbCreateUserName
             // 
+            this.tbCreateUserName.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbCreateUserName.Border.Class = "TextBoxBorder";
             this.tbCreateUserName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbCreateUserName.DisabledBackColor = System.Drawing.Color.White;
+            this.tbCreateUserName.ForeColor = System.Drawing.Color.Black;
             this.tbCreateUserName.Location = new System.Drawing.Point(721, 3);
             this.tbCreateUserName.Name = "tbCreateUserName";
             this.tbCreateUserName.Size = new System.Drawing.Size(100, 21);
@@ -474,7 +511,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateBatchTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateBatchTo.ButtonDropDown.Visible = true;
             this.dateBatchTo.IsPopupCalendarOpen = false;
-            this.dateBatchTo.Location = new System.Drawing.Point(335, 25);
+            this.dateBatchTo.Location = new System.Drawing.Point(466, 25);
             // 
             // 
             // 
@@ -519,7 +556,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblDatePicker.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblDatePicker.Location = new System.Drawing.Point(180, 26);
+            this.lblDatePicker.Location = new System.Drawing.Point(315, 27);
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(44, 18);
             this.lblDatePicker.TabIndex = 12;
@@ -535,7 +572,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateBatchFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateBatchFrom.ButtonDropDown.Visible = true;
             this.dateBatchFrom.IsPopupCalendarOpen = false;
-            this.dateBatchFrom.Location = new System.Drawing.Point(229, 25);
+            this.dateBatchFrom.Location = new System.Drawing.Point(363, 26);
             // 
             // 
             // 
@@ -587,12 +624,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbAssignBatchNo
             // 
+            this.tbAssignBatchNo.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbAssignBatchNo.Border.Class = "TextBoxBorder";
             this.tbAssignBatchNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbAssignBatchNo.Location = new System.Drawing.Point(65, 25);
+            this.tbAssignBatchNo.DisabledBackColor = System.Drawing.Color.White;
+            this.tbAssignBatchNo.ForeColor = System.Drawing.Color.Black;
+            this.tbAssignBatchNo.Location = new System.Drawing.Point(57, 25);
             this.tbAssignBatchNo.Name = "tbAssignBatchNo";
             this.tbAssignBatchNo.Size = new System.Drawing.Size(100, 21);
             this.tbAssignBatchNo.TabIndex = 11;
@@ -662,7 +702,7 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.dgvBatches.Location = new System.Drawing.Point(0, 51);
             this.dgvBatches.Name = "dgvBatches";
             this.dgvBatches.ReadOnly = true;
@@ -672,147 +712,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvBatchesCellDoubleClick);
             this.dgvBatches.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvBatchesCellFormatting);
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvBatchesRowPostPaint);
-            // 
-            // cmuBatchMgr
-            // 
-            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemBatchSelect,
-            this.menuItemBatchDetail,
-            this.toolStripSeparator1,
-            this.menuItemBatchDelete,
-            this.menuItemCommissionRemitDelete,
-            this.toolStripSeparator3,
-            this.menuItemCheck,
-            this.menuItemReject,
-            this.toolStripSeparator2,
-            this.menuItemAssignReport,
-            this.menuItemFinanceReport,
-            this.menuItemCommissionReport,
-            this.menuItemThreeReports,
-            this.menuItemFlawReport,
-            this.toolStripSeparator4,
-            this.menuItemMSG09,
-            this.menuItemBatchExport});
-            this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(201, 314);
-            // 
-            // menuItemBatchSelect
-            // 
-            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
-            this.menuItemBatchSelect.Size = new System.Drawing.Size(200, 22);
-            this.menuItemBatchSelect.Text = "选择批次(&S)";
-            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
-            // 
-            // menuItemBatchDetail
-            // 
-            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
-            this.menuItemBatchDetail.Size = new System.Drawing.Size(200, 22);
-            this.menuItemBatchDetail.Text = "批次详情(&M)";
-            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
-            // 
-            // menuItemBatchDelete
-            // 
-            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
-            this.menuItemBatchDelete.Size = new System.Drawing.Size(200, 22);
-            this.menuItemBatchDelete.Text = "删除批次(&D)";
-            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
-            // 
-            // menuItemCommissionRemitDelete
-            // 
-            this.menuItemCommissionRemitDelete.Name = "menuItemCommissionRemitDelete";
-            this.menuItemCommissionRemitDelete.Size = new System.Drawing.Size(200, 22);
-            this.menuItemCommissionRemitDelete.Text = "删除手续费收付记录";
-            this.menuItemCommissionRemitDelete.Click += new System.EventHandler(this.DeleteCommissionRemit);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(197, 6);
-            // 
-            // menuItemCheck
-            // 
-            this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(200, 22);
-            this.menuItemCheck.Text = "审核通过";
-            this.menuItemCheck.Click += new System.EventHandler(this.Check);
-            // 
-            // menuItemReject
-            // 
-            this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(200, 22);
-            this.menuItemReject.Text = "审核拒绝";
-            this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
-            // 
-            // menuItemAssignReport
-            // 
-            this.menuItemAssignReport.Name = "menuItemAssignReport";
-            this.menuItemAssignReport.Size = new System.Drawing.Size(200, 22);
-            this.menuItemAssignReport.Text = "应收账款转让明细表(&A)";
-            this.menuItemAssignReport.Click += new System.EventHandler(this.ReportAssign);
-            // 
-            // menuItemFinanceReport
-            // 
-            this.menuItemFinanceReport.Name = "menuItemFinanceReport";
-            this.menuItemFinanceReport.Size = new System.Drawing.Size(200, 22);
-            this.menuItemFinanceReport.Text = "可融资账款明细表(&F)";
-            this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
-            // 
-            // menuItemCommissionReport
-            // 
-            this.menuItemCommissionReport.Name = "menuItemCommissionReport";
-            this.menuItemCommissionReport.Size = new System.Drawing.Size(200, 22);
-            this.menuItemCommissionReport.Text = "保理费用明细表(&C)";
-            this.menuItemCommissionReport.Click += new System.EventHandler(this.ReportCommission);
-            // 
-            // menuItemThreeReports
-            // 
-            this.menuItemThreeReports.Name = "menuItemThreeReports";
-            this.menuItemThreeReports.Size = new System.Drawing.Size(200, 22);
-            this.menuItemThreeReports.Text = "直接生成二表(&T)";
-            this.menuItemThreeReports.Click += new System.EventHandler(this.ReportThree);
-            // 
-            // menuItemFlawReport
-            // 
-            this.menuItemFlawReport.Name = "menuItemFlawReport";
-            this.menuItemFlawReport.Size = new System.Drawing.Size(200, 22);
-            this.menuItemFlawReport.Text = "瑕疵通知书";
-            this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(197, 6);
-            // 
-            // menuItemMSG09
-            // 
-            this.menuItemMSG09.Name = "menuItemMSG09";
-            this.menuItemMSG09.Size = new System.Drawing.Size(200, 22);
-            this.menuItemMSG09.Text = "生成MSG09";
-            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
-            // 
-            // menuItemBatchExport
-            // 
-            this.menuItemBatchExport.Name = "menuItemBatchExport";
-            this.menuItemBatchExport.Size = new System.Drawing.Size(200, 22);
-            this.menuItemBatchExport.Text = "导出选定批次";
-            this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
-            // 
-            // menuItemFileCheckList
-            // 
-            this.menuItemFileCheckList.Name = "menuItemFileCheckList";
-            this.menuItemFileCheckList.Size = new System.Drawing.Size(200, 22);
-            this.menuItemFileCheckList.Text = "文件检查单";
-            this.menuItemFileCheckList.Click += new System.EventHandler(this.ReportFileCheckList);
             // 
             // colFactorCode
             // 
@@ -1041,6 +940,147 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCheckUserName.Name = "colCheckUserName";
             this.colCheckUserName.ReadOnly = true;
             // 
+            // cmuBatchMgr
+            // 
+            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemBatchSelect,
+            this.menuItemBatchDetail,
+            this.toolStripSeparator1,
+            this.menuItemBatchDelete,
+            this.menuItemCommissionRemitDelete,
+            this.toolStripSeparator3,
+            this.menuItemCheck,
+            this.menuItemReject,
+            this.toolStripSeparator2,
+            this.menuItemAssignReport,
+            this.menuItemFinanceReport,
+            this.menuItemCommissionReport,
+            this.menuItemThreeReports,
+            this.menuItemFlawReport,
+            this.toolStripSeparator4,
+            this.menuItemMSG09,
+            this.menuItemBatchExport});
+            this.cmuBatchMgr.Name = "cmuBatchMgr";
+            this.cmuBatchMgr.Size = new System.Drawing.Size(201, 314);
+            // 
+            // menuItemBatchSelect
+            // 
+            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(200, 22);
+            this.menuItemBatchSelect.Text = "选择批次(&S)";
+            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            // 
+            // menuItemBatchDetail
+            // 
+            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
+            this.menuItemBatchDetail.Size = new System.Drawing.Size(200, 22);
+            this.menuItemBatchDetail.Text = "批次详情(&M)";
+            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
+            // 
+            // menuItemBatchDelete
+            // 
+            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
+            this.menuItemBatchDelete.Size = new System.Drawing.Size(200, 22);
+            this.menuItemBatchDelete.Text = "删除批次(&D)";
+            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
+            // 
+            // menuItemCommissionRemitDelete
+            // 
+            this.menuItemCommissionRemitDelete.Name = "menuItemCommissionRemitDelete";
+            this.menuItemCommissionRemitDelete.Size = new System.Drawing.Size(200, 22);
+            this.menuItemCommissionRemitDelete.Text = "删除手续费收付记录";
+            this.menuItemCommissionRemitDelete.Click += new System.EventHandler(this.DeleteCommissionRemit);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(197, 6);
+            // 
+            // menuItemCheck
+            // 
+            this.menuItemCheck.Name = "menuItemCheck";
+            this.menuItemCheck.Size = new System.Drawing.Size(200, 22);
+            this.menuItemCheck.Text = "审核通过";
+            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            // 
+            // menuItemReject
+            // 
+            this.menuItemReject.Name = "menuItemReject";
+            this.menuItemReject.Size = new System.Drawing.Size(200, 22);
+            this.menuItemReject.Text = "审核拒绝";
+            this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
+            // 
+            // menuItemAssignReport
+            // 
+            this.menuItemAssignReport.Name = "menuItemAssignReport";
+            this.menuItemAssignReport.Size = new System.Drawing.Size(200, 22);
+            this.menuItemAssignReport.Text = "应收账款转让明细表(&A)";
+            this.menuItemAssignReport.Click += new System.EventHandler(this.ReportAssign);
+            // 
+            // menuItemFinanceReport
+            // 
+            this.menuItemFinanceReport.Name = "menuItemFinanceReport";
+            this.menuItemFinanceReport.Size = new System.Drawing.Size(200, 22);
+            this.menuItemFinanceReport.Text = "可融资账款明细表(&F)";
+            this.menuItemFinanceReport.Click += new System.EventHandler(this.ReportFinance);
+            // 
+            // menuItemCommissionReport
+            // 
+            this.menuItemCommissionReport.Name = "menuItemCommissionReport";
+            this.menuItemCommissionReport.Size = new System.Drawing.Size(200, 22);
+            this.menuItemCommissionReport.Text = "保理费用明细表(&C)";
+            this.menuItemCommissionReport.Click += new System.EventHandler(this.ReportCommission);
+            // 
+            // menuItemThreeReports
+            // 
+            this.menuItemThreeReports.Name = "menuItemThreeReports";
+            this.menuItemThreeReports.Size = new System.Drawing.Size(200, 22);
+            this.menuItemThreeReports.Text = "直接生成二表(&T)";
+            this.menuItemThreeReports.Click += new System.EventHandler(this.ReportThree);
+            // 
+            // menuItemFlawReport
+            // 
+            this.menuItemFlawReport.Name = "menuItemFlawReport";
+            this.menuItemFlawReport.Size = new System.Drawing.Size(200, 22);
+            this.menuItemFlawReport.Text = "瑕疵通知书";
+            this.menuItemFlawReport.Click += new System.EventHandler(this.ReportFlaw);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(197, 6);
+            // 
+            // menuItemMSG09
+            // 
+            this.menuItemMSG09.Name = "menuItemMSG09";
+            this.menuItemMSG09.Size = new System.Drawing.Size(200, 22);
+            this.menuItemMSG09.Text = "生成MSG09";
+            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
+            // 
+            // menuItemBatchExport
+            // 
+            this.menuItemBatchExport.Name = "menuItemBatchExport";
+            this.menuItemBatchExport.Size = new System.Drawing.Size(200, 22);
+            this.menuItemBatchExport.Text = "导出选定批次";
+            this.menuItemBatchExport.Click += new System.EventHandler(this.ExportAssignBatch);
+            // 
+            // menuItemFileCheckList
+            // 
+            this.menuItemFileCheckList.Name = "menuItemFileCheckList";
+            this.menuItemFileCheckList.Size = new System.Drawing.Size(200, 22);
+            this.menuItemFileCheckList.Text = "文件检查单";
+            this.menuItemFileCheckList.Click += new System.EventHandler(this.ReportFileCheckList);
+            // 
             // AssignBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1103,5 +1143,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbStatus;
+        private DevComponents.DotNetBar.LabelX lblStatus;
     }
 }

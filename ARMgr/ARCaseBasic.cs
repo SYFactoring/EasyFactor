@@ -64,6 +64,16 @@ namespace CMBC.EasyFactor.ARMgr
         /// 贷项通知
         /// </summary>
         CREDIT_NOTE,
+
+        /// <summary>
+        /// 按转让收费
+        /// </summary>
+        INVOICE_COMMISSION,
+
+        /// <summary>
+        /// 按融资收费
+        /// </summary>
+        FINANCE_COMMISSION,
     }
 
     /// <summary>
@@ -119,6 +129,12 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
                 case OpARType.BUYER_REFUND:
                     InvoiceControl = new InvoiceRefund(this, InvoiceRefund.OpRefundType.BUYER_PAYMENT);
+                    break;
+                case OpARType.INVOICE_COMMISSION:
+                    InvoiceControl = new InvoiceCommission(this);
+                    break;
+                case OpARType.FINANCE_COMMISSION:
+                    InvoiceControl = new FinanceCommission(this);
                     break;
                 default:
                     InvoiceControl = new UserControl();
@@ -339,6 +355,14 @@ namespace CMBC.EasyFactor.ARMgr
             else if (control is InvoiceRefund)
             {
                 (control as InvoiceRefund).Case = Case;
+            }
+            else if(control is InvoiceCommission)
+            {
+                (control as InvoiceCommission).Case = Case;
+            }
+            else if(control is FinanceCommission)
+            {
+                (control as FinanceCommission).Case = Case;
             }
         }
 

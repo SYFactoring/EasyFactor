@@ -70,9 +70,10 @@ namespace CMBC.EasyFactor.ARMgr
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.dateInputTo = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblInputDate = new DevComponents.DotNetBar.LabelX();
@@ -95,18 +96,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbPaymentBatchNo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblPaymentBatchNo = new DevComponents.DotNetBar.LabelX();
             this.dgvBatches = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemMSG11 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemMSG12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -123,6 +112,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCheckStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuBatchMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemBatchSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemBatchDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemReject = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemBatchDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemMSG09 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemMSG11 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemMSG12 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblStatus = new DevComponents.DotNetBar.LabelX();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateInputTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateInputFrom)).BeginInit();
@@ -136,6 +139,8 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelQuery.Controls.Add(this.cbStatus);
+            this.panelQuery.Controls.Add(this.lblStatus);
             this.panelQuery.Controls.Add(this.dateInputTo);
             this.panelQuery.Controls.Add(this.lblInputDate);
             this.panelQuery.Controls.Add(this.dateInputFrom);
@@ -160,10 +165,9 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
-            this.panelQuery.Size = new System.Drawing.Size(888, 45);
+            this.panelQuery.Size = new System.Drawing.Size(1054, 45);
             this.panelQuery.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelQuery.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelQuery.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.panelQuery.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
             this.panelQuery.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelQuery.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
@@ -180,7 +184,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateInputTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateInputTo.ButtonDropDown.Visible = true;
             this.dateInputTo.IsPopupCalendarOpen = false;
-            this.dateInputTo.Location = new System.Drawing.Point(670, 23);
+            this.dateInputTo.Location = new System.Drawing.Point(777, 22);
             // 
             // 
             // 
@@ -225,7 +229,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblInputDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblInputDate.Location = new System.Drawing.Point(513, 26);
+            this.lblInputDate.Location = new System.Drawing.Point(620, 24);
             this.lblInputDate.Name = "lblInputDate";
             this.lblInputDate.Size = new System.Drawing.Size(44, 18);
             this.lblInputDate.TabIndex = 15;
@@ -241,7 +245,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateInputFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateInputFrom.ButtonDropDown.Visible = true;
             this.dateInputFrom.IsPopupCalendarOpen = false;
-            this.dateInputFrom.Location = new System.Drawing.Point(563, 23);
+            this.dateInputFrom.Location = new System.Drawing.Point(670, 22);
             // 
             // 
             // 
@@ -286,7 +290,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.cbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 14;
-            this.cbLocation.Location = new System.Drawing.Point(393, 3);
+            this.cbLocation.Location = new System.Drawing.Point(393, 1);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(100, 20);
             this.cbLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -338,11 +342,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbClientName
             // 
+            this.tbClientName.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
             this.tbClientName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbClientName.DisabledBackColor = System.Drawing.Color.White;
+            this.tbClientName.ForeColor = System.Drawing.Color.Black;
             this.tbClientName.Location = new System.Drawing.Point(56, 4);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(100, 21);
@@ -363,12 +370,15 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbCreateUserName
             // 
+            this.tbCreateUserName.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbCreateUserName.Border.Class = "TextBoxBorder";
             this.tbCreateUserName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbCreateUserName.Location = new System.Drawing.Point(720, 3);
+            this.tbCreateUserName.DisabledBackColor = System.Drawing.Color.White;
+            this.tbCreateUserName.ForeColor = System.Drawing.Color.Black;
+            this.tbCreateUserName.Location = new System.Drawing.Point(720, 1);
             this.tbCreateUserName.Name = "tbCreateUserName";
             this.tbCreateUserName.Size = new System.Drawing.Size(100, 21);
             this.tbCreateUserName.TabIndex = 9;
@@ -380,7 +390,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCreateUserName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCreateUserName.Location = new System.Drawing.Point(670, 4);
+            this.lblCreateUserName.Location = new System.Drawing.Point(670, 3);
             this.lblCreateUserName.Name = "lblCreateUserName";
             this.lblCreateUserName.Size = new System.Drawing.Size(44, 18);
             this.lblCreateUserName.TabIndex = 8;
@@ -399,7 +409,7 @@ namespace CMBC.EasyFactor.ARMgr
             "担保付款",
             "反转让",
             "贷项通知"});
-            this.cbPaymentType.Location = new System.Drawing.Point(563, 3);
+            this.cbPaymentType.Location = new System.Drawing.Point(563, 2);
             this.cbPaymentType.Name = "cbPaymentType";
             this.cbPaymentType.Size = new System.Drawing.Size(101, 20);
             this.cbPaymentType.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -412,7 +422,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblPaymentType.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblPaymentType.Location = new System.Drawing.Point(501, 5);
+            this.lblPaymentType.Location = new System.Drawing.Point(501, 3);
             this.lblPaymentType.Name = "lblPaymentType";
             this.lblPaymentType.Size = new System.Drawing.Size(56, 18);
             this.lblPaymentType.TabIndex = 6;
@@ -425,7 +435,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCount.Location = new System.Drawing.Point(826, 28);
+            this.lblCount.Location = new System.Drawing.Point(895, 27);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(74, 18);
             this.lblCount.TabIndex = 19;
@@ -441,7 +451,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateBatchTo.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateBatchTo.ButtonDropDown.Visible = true;
             this.dateBatchTo.IsPopupCalendarOpen = false;
-            this.dateBatchTo.Location = new System.Drawing.Point(331, 23);
+            this.dateBatchTo.Location = new System.Drawing.Point(500, 22);
             // 
             // 
             // 
@@ -486,7 +496,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.lblDatePicker.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblDatePicker.Location = new System.Drawing.Point(174, 24);
+            this.lblDatePicker.Location = new System.Drawing.Point(343, 25);
             this.lblDatePicker.Name = "lblDatePicker";
             this.lblDatePicker.Size = new System.Drawing.Size(44, 18);
             this.lblDatePicker.TabIndex = 12;
@@ -502,7 +512,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.dateBatchFrom.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateBatchFrom.ButtonDropDown.Visible = true;
             this.dateBatchFrom.IsPopupCalendarOpen = false;
-            this.dateBatchFrom.Location = new System.Drawing.Point(224, 23);
+            this.dateBatchFrom.Location = new System.Drawing.Point(393, 22);
             // 
             // 
             // 
@@ -544,7 +554,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuery.Location = new System.Drawing.Point(826, 4);
+            this.btnQuery.Location = new System.Drawing.Point(895, 3);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 21);
             this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
@@ -554,11 +564,14 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // tbPaymentBatchNo
             // 
+            this.tbPaymentBatchNo.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.tbPaymentBatchNo.Border.Class = "TextBoxBorder";
             this.tbPaymentBatchNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbPaymentBatchNo.DisabledBackColor = System.Drawing.Color.White;
+            this.tbPaymentBatchNo.ForeColor = System.Drawing.Color.Black;
             this.tbPaymentBatchNo.Location = new System.Drawing.Point(56, 23);
             this.tbPaymentBatchNo.Name = "tbPaymentBatchNo";
             this.tbPaymentBatchNo.Size = new System.Drawing.Size(100, 21);
@@ -582,14 +595,15 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvBatches.AllowUserToAddRows = false;
             this.dgvBatches.AllowUserToDeleteRows = false;
             this.dgvBatches.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvBatches.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvBatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBatches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSellerName,
@@ -609,114 +623,35 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCheckDate,
             this.colCheckUserName});
             this.dgvBatches.ContextMenuStrip = this.cmuBatchMgr;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBatches.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvBatches.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvBatches.EnableHeadersVisualStyles = false;
+            this.dgvBatches.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.dgvBatches.Location = new System.Drawing.Point(0, 45);
             this.dgvBatches.Name = "dgvBatches";
             this.dgvBatches.ReadOnly = true;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBatches.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvBatches.RowTemplate.Height = 23;
             this.dgvBatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvBatches.Size = new System.Drawing.Size(888, 313);
+            this.dgvBatches.Size = new System.Drawing.Size(1054, 313);
             this.dgvBatches.TabIndex = 1;
             this.dgvBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvBatchesCellDoubleClick);
             this.dgvBatches.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvBatchesCellFormatting);
             this.dgvBatches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvBatchesRowPostPaint);
-            // 
-            // cmuBatchMgr
-            // 
-            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemBatchSelect,
-            this.menuItemBatchDetail,
-            this.toolStripSeparator1,
-            this.menuItemCheck,
-            this.menuItemReject,
-            this.toolStripSeparator2,
-            this.menuItemBatchDelete,
-            this.toolStripSeparator3,
-            this.menuItemMSG09,
-            this.menuItemMSG11,
-            this.menuItemMSG12});
-            this.cmuBatchMgr.Name = "cmuBatchMgr";
-            this.cmuBatchMgr.Size = new System.Drawing.Size(145, 198);
-            // 
-            // menuItemBatchSelect
-            // 
-            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
-            this.menuItemBatchSelect.Size = new System.Drawing.Size(144, 22);
-            this.menuItemBatchSelect.Text = "选择批次(&S)";
-            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
-            // 
-            // menuItemBatchDetail
-            // 
-            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
-            this.menuItemBatchDetail.Size = new System.Drawing.Size(144, 22);
-            this.menuItemBatchDetail.Text = "批次详情(&M)";
-            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(141, 6);
-            // 
-            // menuItemBatchDelete
-            // 
-            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
-            this.menuItemBatchDelete.Size = new System.Drawing.Size(144, 22);
-            this.menuItemBatchDelete.Text = "删除批次(&D)";
-            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
-            // 
-            // menuItemMSG09
-            // 
-            this.menuItemMSG09.Name = "menuItemMSG09";
-            this.menuItemMSG09.Size = new System.Drawing.Size(144, 22);
-            this.menuItemMSG09.Text = "生成MSG09";
-            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
-            // 
-            // menuItemMSG11
-            // 
-            this.menuItemMSG11.Name = "menuItemMSG11";
-            this.menuItemMSG11.Size = new System.Drawing.Size(144, 22);
-            this.menuItemMSG11.Text = "生成MSG11";
-            this.menuItemMSG11.Click += new System.EventHandler(this.ExportMSG11);
-            // 
-            // menuItemMSG12
-            // 
-            this.menuItemMSG12.Name = "menuItemMSG12";
-            this.menuItemMSG12.Size = new System.Drawing.Size(144, 22);
-            this.menuItemMSG12.Text = "生成MSG12";
-            this.menuItemMSG12.Click += new System.EventHandler(this.ExportMSG12);
-            // 
-            // menuItemCheck
-            // 
-            this.menuItemCheck.Name = "menuItemCheck";
-            this.menuItemCheck.Size = new System.Drawing.Size(144, 22);
-            this.menuItemCheck.Text = "审核通过";
-            this.menuItemCheck.Click += new System.EventHandler(this.Check);
-            // 
-            // menuItemReject
-            // 
-            this.menuItemReject.Name = "menuItemReject";
-            this.menuItemReject.Size = new System.Drawing.Size(144, 22);
-            this.menuItemReject.Text = "审核拒绝";
-            this.menuItemReject.Click += new System.EventHandler(this.Reject);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(141, 6);
             // 
             // colSellerName
             // 
@@ -789,9 +724,9 @@ namespace CMBC.EasyFactor.ARMgr
             // colPaymentAmount
             // 
             this.colPaymentAmount.DataPropertyName = "PaymentAmount";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.colPaymentAmount.DefaultCellStyle = dataGridViewCellStyle6;
             this.colPaymentAmount.HeaderText = "付款金额";
             this.colPaymentAmount.Name = "colPaymentAmount";
             this.colPaymentAmount.ReadOnly = true;
@@ -839,6 +774,119 @@ namespace CMBC.EasyFactor.ARMgr
             this.colCheckUserName.Name = "colCheckUserName";
             this.colCheckUserName.ReadOnly = true;
             // 
+            // cmuBatchMgr
+            // 
+            this.cmuBatchMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemBatchSelect,
+            this.menuItemBatchDetail,
+            this.toolStripSeparator1,
+            this.menuItemCheck,
+            this.menuItemReject,
+            this.toolStripSeparator2,
+            this.menuItemBatchDelete,
+            this.toolStripSeparator3,
+            this.menuItemMSG09,
+            this.menuItemMSG11,
+            this.menuItemMSG12});
+            this.cmuBatchMgr.Name = "cmuBatchMgr";
+            this.cmuBatchMgr.Size = new System.Drawing.Size(145, 198);
+            // 
+            // menuItemBatchSelect
+            // 
+            this.menuItemBatchSelect.Name = "menuItemBatchSelect";
+            this.menuItemBatchSelect.Size = new System.Drawing.Size(144, 22);
+            this.menuItemBatchSelect.Text = "选择批次(&S)";
+            this.menuItemBatchSelect.Click += new System.EventHandler(this.SelectBatch);
+            // 
+            // menuItemBatchDetail
+            // 
+            this.menuItemBatchDetail.Name = "menuItemBatchDetail";
+            this.menuItemBatchDetail.Size = new System.Drawing.Size(144, 22);
+            this.menuItemBatchDetail.Text = "批次详情(&M)";
+            this.menuItemBatchDetail.Click += new System.EventHandler(this.DetailBatch);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(141, 6);
+            // 
+            // menuItemCheck
+            // 
+            this.menuItemCheck.Name = "menuItemCheck";
+            this.menuItemCheck.Size = new System.Drawing.Size(144, 22);
+            this.menuItemCheck.Text = "审核通过";
+            this.menuItemCheck.Click += new System.EventHandler(this.Check);
+            // 
+            // menuItemReject
+            // 
+            this.menuItemReject.Name = "menuItemReject";
+            this.menuItemReject.Size = new System.Drawing.Size(144, 22);
+            this.menuItemReject.Text = "审核拒绝";
+            this.menuItemReject.Click += new System.EventHandler(this.Reject);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(141, 6);
+            // 
+            // menuItemBatchDelete
+            // 
+            this.menuItemBatchDelete.Name = "menuItemBatchDelete";
+            this.menuItemBatchDelete.Size = new System.Drawing.Size(144, 22);
+            this.menuItemBatchDelete.Text = "删除批次(&D)";
+            this.menuItemBatchDelete.Click += new System.EventHandler(this.DeleteBatch);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
+            // 
+            // menuItemMSG09
+            // 
+            this.menuItemMSG09.Name = "menuItemMSG09";
+            this.menuItemMSG09.Size = new System.Drawing.Size(144, 22);
+            this.menuItemMSG09.Text = "生成MSG09";
+            this.menuItemMSG09.Click += new System.EventHandler(this.ExportMSG09);
+            // 
+            // menuItemMSG11
+            // 
+            this.menuItemMSG11.Name = "menuItemMSG11";
+            this.menuItemMSG11.Size = new System.Drawing.Size(144, 22);
+            this.menuItemMSG11.Text = "生成MSG11";
+            this.menuItemMSG11.Click += new System.EventHandler(this.ExportMSG11);
+            // 
+            // menuItemMSG12
+            // 
+            this.menuItemMSG12.Name = "menuItemMSG12";
+            this.menuItemMSG12.Size = new System.Drawing.Size(144, 22);
+            this.menuItemMSG12.Text = "生成MSG12";
+            this.menuItemMSG12.Click += new System.EventHandler(this.ExportMSG12);
+            // 
+            // cbStatus
+            // 
+            this.cbStatus.DisplayMember = "Text";
+            this.cbStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbStatus.FormattingEnabled = true;
+            this.cbStatus.ItemHeight = 14;
+            this.cbStatus.Location = new System.Drawing.Point(224, 24);
+            this.cbStatus.Name = "cbStatus";
+            this.cbStatus.Size = new System.Drawing.Size(101, 20);
+            this.cbStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.cbStatus.TabIndex = 23;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            // 
+            // 
+            // 
+            this.lblStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblStatus.Location = new System.Drawing.Point(187, 25);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(31, 18);
+            this.lblStatus.TabIndex = 22;
+            this.lblStatus.Text = "状态";
+            // 
             // PaymentBatchMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -847,7 +895,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.Controls.Add(this.panelQuery);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "PaymentBatchMgr";
-            this.Size = new System.Drawing.Size(888, 358);
+            this.Size = new System.Drawing.Size(1054, 358);
             this.panelQuery.ResumeLayout(false);
             this.panelQuery.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateInputTo)).EndInit();
@@ -885,5 +933,7 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckUserName;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbStatus;
+        private DevComponents.DotNetBar.LabelX lblStatus;
     }
 }

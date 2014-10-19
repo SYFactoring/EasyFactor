@@ -250,16 +250,12 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        //public decimal NetInterest
-        //{
-        //    get
-        //    {
-        //        return InvoiceFinanceLogs.Sum(financeLog => financeLog.NetInterest);
-        //    }
-        //}
+        public decimal? CurCommissionValue
+        {
+            get;
+            set;
+        }
+
         public decimal Interest
         {
             get
@@ -370,7 +366,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public void CaculateCommission(bool isOverwrite)
+        public void CaculateCommissionForFirstTime()
         {
             if (InvoiceAssignBatch != null)
             {
@@ -383,12 +379,9 @@ namespace CMBC.EasyFactor.DB.dbml
 
                 if (cda.CommissionType == "按融资金额")
                 {
-                    if (isOverwrite)
+                    foreach (InvoiceFinanceLog log in InvoiceFinanceLogs)
                     {
-                        foreach (InvoiceFinanceLog log in InvoiceFinanceLogs)
-                        {
-                            log.CaculateCommission();
-                        }
+                        log.CaculateCommissionForFirstTime();
                     }
 
                     PaidCommission = Decimal.Round(InvoiceFinanceLogs.Sum(log => log.PaidCommission).GetValueOrDefault(), 2);
@@ -398,30 +391,43 @@ namespace CMBC.EasyFactor.DB.dbml
                 {
                     if (InvoiceAssignBatch.CommissionPrePost == "先收")
                     {
-                        if (PaidCommission.HasValue == false || PaidCommission <= 0 || isOverwrite)
-                        {
-                            PaidCommission = Decimal.Round(AssignAmount * (decimal)cda.Price.GetValueOrDefault(), 2);
-                        }
+                        PaidCommission = Decimal.Round(AssignAmount * (decimal)cda.Price.GetValueOrDefault(), 2);
                     }
                     else if (InvoiceAssignBatch.CommissionPrePost == "后收")
                     {
-                        if (UnpaidCommission.HasValue == false || UnpaidCommission <= 0 || isOverwrite)
-                        {
-                            UnpaidCommission = Decimal.Round(AssignAmount * (decimal)cda.Price.GetValueOrDefault(), 2);
-                        }
+                        UnpaidCommission = Decimal.Round(AssignAmount * (decimal)cda.Price.GetValueOrDefault(), 2);
                     }
-                        if (FactorCommission.HasValue == false || FactorCommission <= 0 || isOverwrite)
-                        {
-                            if (TransactionType == "出口保理")
-                            {
-                                FactorCommission = Decimal.Round(AssignAmount * (decimal)cda.IFPrice.GetValueOrDefault(), 2);
-                            }
-                            else if (TransactionType == "进口保理")
-                            {
-                                FactorCommission = Decimal.Round(AssignAmount * (decimal)cda.EFPrice.GetValueOrDefault(), 2);
-                            }
-                        }
-                    
+                    if (TransactionType == "出口保理")
+                    {
+                        FactorCommission = Decimal.Round(AssignAmount * (decimal)cda.IFPrice.GetValueOrDefault(), 2);
+                    }
+                    else if (TransactionType == "进口保理")
+                    {
+                        FactorCommission = Decimal.Round(AssignAmount * (decimal)cda.EFPrice.GetValueOrDefault(), 2);
+                    }
+                }
+            }
+        }
+
+        //?Public?Methods?(6)?
+        /// <summary>
+        /// 
+        /// </summary>
+        public void CaculateCommission()
+        {
+            if (InvoiceAssignBatch != null)
+            {
+                CDA cda = InvoiceAssignBatch.Case.ActiveCDA;
+
+                if (cda == null)
+                {
+                    throw new Exception("发票:" + this.InvoiceNo + "没有有效的额度通知书");
+                }
+
+                if (cda.CommissionType == "按融资金额")
+                {
+                    PaidCommission = Decimal.Round(InvoiceFinanceLogs.Sum(log => log.PaidCommission).GetValueOrDefault(), 2);
+                    UnpaidCommission = Decimal.Round(InvoiceFinanceLogs.Sum(log => log.UnpaidCommission).GetValueOrDefault(), 2);
                 }
             }
         }
@@ -455,7 +461,7 @@ namespace CMBC.EasyFactor.DB.dbml
                 PaidCommission = null;
             }
 
-            CaculateCommission(false);
+            CaculateCommission();
 
             CaculateFinanceDate();
         }

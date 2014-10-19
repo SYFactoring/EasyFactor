@@ -636,5 +636,6 @@ namespace CMBC.EasyFactor.ARMgr
             ControlUtil.SetComponetEditable(disputeResolveUserNameTextBox, false);
             ControlUtil.SetComponetEditable(disputeUserNameTextBox, false);
         }
+
     }
 }

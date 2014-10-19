@@ -139,5 +139,28 @@ namespace CMBC.EasyFactor.ARMgr
             _bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailInvoice(object sender, EventArgs e)
+        {
+            if (dgvRevenues.CurrentCell == null)
+            {
+                return;
+            }
+
+            var selectedRevenueLog = (RevenueLog)_bs.List[dgvRevenues.CurrentCell.RowIndex];
+            var invoiceDetail = new InvoiceDetail(selectedRevenueLog.Invoice, InvoiceDetail.OpInvoiceType.DETAIL_INVOICE);
+            invoiceDetail.ShowDialog(this);
+        }
+
+        private void dgvRevenues_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DetailInvoice(sender, e);
+        }
+
     }
 }

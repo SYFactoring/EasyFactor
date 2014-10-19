@@ -207,7 +207,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public void CaculateCommission()
+        public void CaculateCommissionForFirstTime()
         {
             InvoiceAssignBatch assingBatch = Invoice.InvoiceAssignBatch;
             CDA cda = assingBatch.Case.ActiveCDA;
@@ -270,5 +270,10 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
+        public decimal? CurCommissionValue
+        {
+            set;
+            get;
+        }
     }
 }

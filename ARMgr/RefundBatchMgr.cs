@@ -123,6 +123,8 @@ namespace CMBC.EasyFactor.ARMgr
             cbLocation.ValueMember = "LocationCode";
             cbLocation.SelectedIndex = 0;
 
+            cbStatus.Items.AddRange(new String[] {BATCH.CHECK,BATCH.UNCHECK,BATCH.REJECT });
+
             UpdateContextMenu();
 
             if (batchType == OpBatchType.POOL_QUERY)
@@ -312,6 +314,8 @@ namespace CMBC.EasyFactor.ARMgr
             string clientName = tbClientName.Text;
             var location = (string) cbLocation.SelectedValue;
             string transactionType = cbTransactionType.Text;
+            string status = cbStatus.Text;
+
             if (String.IsNullOrEmpty(transactionType))
             {
                 transactionType = "全部";
@@ -347,7 +351,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                  (endInputDate != dateInputTo.MinDate
                                                                       ? batch.InputDate <= endInputDate
                                                                       : true)
-                                                                 //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                 && (status != string.Empty ? batch.CheckStatus == status : true)
                                                                  &&
                                                                  (refundType == "全部"
                                                                       ? true
@@ -394,7 +398,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                                  (endInputDate != dateInputTo.MinDate
                                                                       ? batch.InputDate <= endInputDate
                                                                       : true)
-                                                                 //&& (status != string.Empty ? i.CheckStatus == status : true)
+                                                                 && (status != string.Empty ? batch.CheckStatus == status : true)
                                                                  &&
                                                                  (refundType == "全部"
                                                                       ? true
