@@ -496,7 +496,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             var batch = new InvoiceAssignBatch
                             {
-                                AssignDate = DateTime.Now.Date,
+                                AssignDate = DateTime.Today,
                                 CreateUserName = App.Current.CurUser.Name,
                                 IsRefinance = true,
                                 WhoPayCommission = "卖方付",
@@ -634,13 +634,13 @@ namespace CMBC.EasyFactor.ARMgr
                 if (batch.AssignBatchNo == null)
                 {
                     batch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(_case.CaseCode, batch.AssignDate);
-                    batch.InputDate = DateTime.Today;
+                    batch.InputDate = DateTime.Now;
 
                     if (batch.CommissionPrePost == "先收")
                     {
                         RevenueBatch commissionBatch = new RevenueBatch
                         {
-                            RevenueDate = DateTime.Now,
+                            RevenueDate = DateTime.Today,
                             CreateUserName = App.Current.CurUser.Name,
                             CheckStatus = BATCH.UNCHECK,
                             InvoiceAssignBatch = batch
@@ -654,7 +654,7 @@ namespace CMBC.EasyFactor.ARMgr
                                     RevenueValue = invoice.PaidHandlingFee.GetValueOrDefault(),
                                     RevenueType = "单据费",
                                     RevenueCurrency = batch.BatchCurrency,
-                                    RevenueDate = DateTime.Now,
+                                    RevenueDate = DateTime.Today,
                                     Invoice = invoice,
                                     RevenueBatch = commissionBatch
                                 };
@@ -672,7 +672,7 @@ namespace CMBC.EasyFactor.ARMgr
                                         RevenueValue = invoice.PaidCommission.GetValueOrDefault(),
                                         RevenueType = "转让手续费",
                                         RevenueCurrency = batch.BatchCurrency,
-                                        RevenueDate = DateTime.Now,
+                                        RevenueDate = DateTime.Today,
                                         Invoice = invoice,
                                         RevenueBatch = commissionBatch
                                     };

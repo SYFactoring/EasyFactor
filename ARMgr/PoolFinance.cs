@@ -136,7 +136,7 @@ namespace CMBC.EasyFactor.ARMgr
             var financeBatch = new InvoiceFinanceBatch
                                    {
                                        CreateUserName = App.Current.CurUser.Name,
-                                       InputDate = DateTime.Today
+                                       InputDate = DateTime.Now
                                    };
             //financeBatch.CheckStatus = BATCH.UNCHECK;
             batchBindingSource.DataSource = financeBatch;

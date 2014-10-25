@@ -149,5 +149,13 @@ namespace CMBC.EasyFactor.DB.dbml
                 }
             }
         }
+
+        public decimal? Interest
+        {
+            get
+            {
+                return this.InvoiceRefundLogs.Sum(log => log.Interest);
+            }
+        }
     }
 }

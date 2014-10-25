@@ -30,8 +30,8 @@ namespace CMBC.EasyFactor.DB.dbml
             AssignDate2 = invoice.AssignDate;
             InvoiceFinanceAmount2 = invoice.FinanceAmount;
             InvoiceFinanceOutstanding2 = invoice.FinanceOutstanding;
+            ReassignDate = invoice.DueDate.AddDays(invoice.InvoiceAssignBatch.Case.ActiveCDA.ReassignGracePeriod.GetValueOrDefault());
         }
-
 
         /// <summary>
         /// 
@@ -80,14 +80,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? DueDate
-        {
-            get { return Invoice != null ? Invoice.DueDate : DueDate2; }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public DateTime? DueDate2 { get; set; }
 
         /// <summary>
@@ -109,14 +101,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public DateTime FinanceDueDate
-        {
-            get { return DueDate.GetValueOrDefault(); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public decimal FinanceOutstanding
         {
             get { return FinanceAmount.GetValueOrDefault() - RefundAmount.GetValueOrDefault(); }
@@ -131,9 +115,9 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (FinanceOutstanding>0)
                 {
-                    if (FinanceDueDate != null)
+                    if (ReassignDate != null)
                     {
-                        TimeSpan? duedays = DateTime.Now.Date - FinanceDueDate;
+                        TimeSpan? duedays = DateTime.Today - ReassignDate;
                         return duedays.Value.Days;
                     }
                 }
@@ -270,18 +254,58 @@ namespace CMBC.EasyFactor.DB.dbml
             }
         }
 
-        public DateTime ReassignDate
-        {
-            get
-            {
-                return Invoice.ReassignDate;
-            }
-        }
-
         public decimal? CurCommissionValue
         {
             set;
             get;
+        }
+
+        public decimal? CaculatePenaltyInterest()
+        {
+            decimal penaltyInterest = 0;
+            DateTime? penaltyDate = null;
+            if (DateTime.Today > ReassignDate.GetValueOrDefault())
+            {
+                penaltyDate = DateTime.Today;
+            }
+            if (penaltyDate.HasValue)
+            {
+                double PenaltyRate = Invoice.InvoiceAssignBatch.Case.ActiveCDA.PenaltyInterestRate.GetValueOrDefault();
+                if (InvoiceFinanceBatch.FinanceRateType2 == "计头不计尾")
+                {
+                    penaltyInterest = (decimal)(InvoiceFinanceBatch.FinanceRate + PenaltyRate) * FinanceOutstanding * (penaltyDate.GetValueOrDefault() - ReassignDate.GetValueOrDefault()).Days / 360;
+                }
+                else if (InvoiceFinanceBatch.FinanceRateType2 == "计头又计尾")
+                {
+                    penaltyInterest = (decimal)(InvoiceFinanceBatch.FinanceRate + PenaltyRate) * FinanceOutstanding * ((penaltyDate.GetValueOrDefault() - ReassignDate.GetValueOrDefault()).Days + 1) / 360;
+                }
+            }
+
+            return penaltyInterest;
+        }
+
+        public decimal? CaculateInterest()
+        {
+            decimal normalInterest = 0;
+
+            DateTime normalDate;
+            if (DateTime.Today <= ReassignDate.GetValueOrDefault())
+            {
+                normalDate = DateTime.Today;
+            }
+            else
+            {
+                normalDate = ReassignDate.GetValueOrDefault();
+            }
+            if (InvoiceFinanceBatch.FinanceRateType2 == "计头不计尾")
+            {
+                normalInterest = (decimal)InvoiceFinanceBatch.FinanceRate * FinanceOutstanding * (normalDate - InvoiceFinanceBatch.FinancePeriodBegin.Date).Days / 360;
+            }
+            else if (InvoiceFinanceBatch.FinanceRateType2 == "计头又计尾")
+            {
+                normalInterest = (decimal)InvoiceFinanceBatch.FinanceRate * FinanceOutstanding * ((normalDate - InvoiceFinanceBatch.FinancePeriodBegin.Date).Days + 1) / 360;
+            }
+            return normalInterest;
         }
     }
 }

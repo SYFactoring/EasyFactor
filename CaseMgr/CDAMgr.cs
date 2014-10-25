@@ -122,8 +122,8 @@ namespace CMBC.EasyFactor.CaseMgr
                                               where
                                                   cda.CDAStatus == CDAStr.CHECKED
                                                   &&
-                                                  (cda.CreditCoverPeriodEnd < DateTime.Now.Date ||
-                                                   cda.FinanceLinePeriodEnd < DateTime.Now.Date)
+                                                  (cda.CreditCoverPeriodEnd < DateTime.Today ||
+                                                   cda.FinanceLinePeriodEnd < DateTime.Today)
                                               select cda;
 
                 _bs.DataSource = queryResult;
@@ -194,7 +194,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             cda.CDAStatus = CDAStr.CHECKED;
             cda.CheckUserName = App.Current.CurUser.Name;
-            cda.CheckDate = DateTime.Now.Date;
+            cda.CheckDate = DateTime.Now;
 
             if (cda.Case.CaseMark == CASE.APPLICATION)
             {
@@ -322,11 +322,11 @@ namespace CMBC.EasyFactor.CaseMgr
             for (int i = 0; i < _bs.List.Count; i++)
             {
                 var cda = (CDA)_bs.List[i];
-                if (cda.CreditCoverPeriodEnd < DateTime.Now.Date)
+                if (cda.CreditCoverPeriodEnd < DateTime.Today)
                 {
                     dgvCDAs["colCreditCoverPeriodEnd", i].Style.BackColor = Color.Red;
                 }
-                if (cda.FinanceLinePeriodEnd < DateTime.Now.Date)
+                if (cda.FinanceLinePeriodEnd < DateTime.Today)
                 {
                     dgvCDAs["colFinanceLinePeriodEnd", i].Style.BackColor = Color.Red;
                 }
@@ -483,7 +483,7 @@ namespace CMBC.EasyFactor.CaseMgr
 
             cda.CDAStatus = CDAStr.REJECT;
             cda.CheckUserName = App.Current.CurUser.Name;
-            cda.CheckDate = DateTime.Now.Date;
+            cda.CheckDate = DateTime.Now;
 
             try
             {

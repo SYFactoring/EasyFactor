@@ -75,7 +75,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void ResolveFlaw(object sender, EventArgs e)
         {
-            flawResolveDateDateTimePicker.Value = DateTime.Now.Date;
+            flawResolveDateDateTimePicker.Value = DateTime.Today;
             flawResolveUserNameTextBox.Text = App.Current.CurUser.Name;
             tbFlawResolveReason.Enabled = true;
             flawResolveDateDateTimePicker.Enabled = true;

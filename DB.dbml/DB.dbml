@@ -503,6 +503,7 @@
       <Column Name="RefundAmount" Type="decimal" DbType="decimal NOT NULL" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="Interest" Type="System.Decimal" DbType="decimal(18,2)" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Member="PenaltyInterest" Type="System.Decimal" DbType="decimal(18,2)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceRefundBatch_InvoiceRefundLog" Member="InvoiceRefundBatch" ThisKey="RefundBatchNo" OtherKey="RefundBatchNo" Type="InvoiceRefundBatch" IsForeignKey="true" />
       <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceFinanceLog" ThisKey="FinanceLogID" OtherKey="FinanceLogID" Type="InvoiceFinanceLog" IsForeignKey="true" />
     </Type>
@@ -566,7 +567,6 @@
       <Column Name="FlawResolveUserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="FinanceAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="FinanceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="FinanceDueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="PaymentAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
       <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RefundAmount" Type="decimal" DbType="decimal" CanBeNull="true" />
@@ -587,6 +587,7 @@
       <Column Name="UnpaidCommission" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="PaidHandlingFee" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="UnpaidHandlingFee" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="ReassignDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="InvoiceFinanceLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoiceFinanceLog" />
       <Association Name="Invoice_InvoicePaymentLog" Member="InvoicePaymentLogs" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="InvoicePaymentLog" />
       <Association Name="Invoice_RevenueLog" Member="RevenueLog" Storage="_CommissionLog" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="RevenueLog" />
@@ -604,6 +605,8 @@
       <Column Name="Interest" Type="System.Decimal" DbType="Decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="PaidCommission" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Column Name="UnpaidCommission" Type="System.Decimal" DbType="decimal" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Name="ReassignDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="WhenChanged" />
+      <Column Member="PenaltyInterest" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" UpdateCheck="WhenChanged" />
       <Association Name="InvoiceFinanceLog_InvoiceRefundLog" Member="InvoiceRefundLogs" ThisKey="FinanceLogID" OtherKey="FinanceLogID" Type="InvoiceRefundLog" />
       <Association Name="Invoice_InvoiceFinanceLog" Member="Invoice" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="Invoice" IsForeignKey="true" />
       <Association Name="InvoiceFinanceBatch_InvoiceFinanceLog" Member="InvoiceFinanceBatch" ThisKey="FinanceBatchNo" OtherKey="FinanceBatchNo" Type="InvoiceFinanceBatch" IsForeignKey="true" />

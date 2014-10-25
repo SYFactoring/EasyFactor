@@ -211,7 +211,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             batch.CheckStatus = BATCH.CHECK;
             batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
+            batch.CheckDate = DateTime.Now;
             
             try
             {
@@ -539,7 +539,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             batch.CheckStatus = BATCH.REJECT;
             batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
+            batch.CheckDate = DateTime.Now;
             
             try
             {
@@ -721,7 +721,7 @@ namespace CMBC.EasyFactor.ARMgr
             sheet.Range[sheet.Cells[row, "D"], sheet.Cells[row, "E"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "D"], sheet.Cells[row, "D"]].HorizontalAlignment =
                 XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[row, 4] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Today);
 
             sheet.Range["A1", Type.Missing].ColumnWidth = 15;
             sheet.Range["B1", Type.Missing].ColumnWidth = 15;

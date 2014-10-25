@@ -1709,7 +1709,7 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2 + recordStep, column++] =
                             financeLog.InvoiceFinanceBatch.FinancePeriodBegin;
                         datasheet.Cells[row + 2 + recordStep, column++] =
-                            financeLog.FinanceDueDate;
+                            financeLog.ReassignDate;
                         datasheet.Cells[row + 2 + recordStep, column++] = financeLog.InvoiceFinanceBatch.Comment;
                         datasheet.Cells[row + 2 + recordStep, column] = financeLog.InvoiceFinanceBatch.CreateUserName;
 
@@ -1903,7 +1903,7 @@ namespace CMBC.EasyFactor.Utils
                         datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceAmount;
                         datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceOutstanding;
                         datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceDate;
-                        datasheet.Cells[row + 2 + i, column++] = financeLog.FinanceDueDate;
+                        datasheet.Cells[row + 2 + i, column++] = financeLog.ReassignDate;
                         if (financeLog.FinanceOverDueDays >= 0)
                         {
                             ((Range)datasheet.Cells[row + 2 + i, column - 1]).Interior.ColorIndex = 3;
@@ -2777,7 +2777,7 @@ namespace CMBC.EasyFactor.Utils
                                 string financeCurrencyFormat = TypeUtil.GetExcelCurr(financeLog.FinanceCurrency);
                                 sheet.Cells[row + financeStep, "J"] = financeLog.FinanceAmount;
                                 sheet.Cells[row + financeStep, "K"] = financeLog.FinanceDate;
-                                sheet.Cells[row + financeStep, "L"] = financeLog.FinanceDueDate;
+                                sheet.Cells[row + financeStep, "L"] = financeLog.ReassignDate;
                                 sheet.Cells[row + financeStep, "Q"] = financeLog.FinanceOutstanding;
                                 sheet.Range[sheet.Cells[row + financeStep, "J"], sheet.Cells[row + financeStep, "J"]].NumberFormatLocal = financeCurrencyFormat;
                                 sheet.Range[sheet.Cells[row + financeStep, "K"], sheet.Cells[row + financeStep, "K"]].NumberFormatLocal = "yyyy-MM-dd";
@@ -3050,7 +3050,7 @@ namespace CMBC.EasyFactor.Utils
                         string financeCurrencyFormat = TypeUtil.GetExcelCurr(financeLog.FinanceCurrency);
                         sheet.Cells[row + financeStep, "J"] = financeLog.FinanceAmount;
                         sheet.Cells[row + financeStep, "K"] = financeLog.FinanceDate;
-                        sheet.Cells[row + financeStep, "L"] = financeLog.FinanceDueDate;
+                        sheet.Cells[row + financeStep, "L"] = financeLog.ReassignDate;
                         sheet.Cells[row + financeStep, "Q"] = financeLog.FinanceOutstanding;
                         sheet.Range[sheet.Cells[row + financeStep, "J"], sheet.Cells[row + financeStep, "J"]].NumberFormatLocal = financeCurrencyFormat;
                         sheet.Range[sheet.Cells[row + financeStep, "K"], sheet.Cells[row + financeStep, "K"]].NumberFormatLocal = "yyyy-MM-dd";

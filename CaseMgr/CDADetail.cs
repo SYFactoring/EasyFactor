@@ -680,7 +680,7 @@ namespace CMBC.EasyFactor.CaseMgr
         {
             var cda = new CDA
                           {
-                              CDASignDate = DateTime.Now.Date,
+                              CDASignDate = DateTime.Today,
                               CommissionType = "°´×ªÈÃ½ð¶î",
                               PUGProportion = 1,
                               PUGPeriod = 90,

@@ -141,7 +141,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 curCase = new Case
                               {
                                   CreateUserName = App.Current.CurUser.Name,
-                                  CaseAppDate = DateTime.Now.Date,
+                                  CaseAppDate = DateTime.Today,
                                   OperationType = "×ÔÓª",
                                   CaseMark = "ÉêÇë°¸"
                               };

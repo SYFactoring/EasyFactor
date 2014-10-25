@@ -57,7 +57,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             {
                 var context = new DBDataContext();
 
-                DateTime overDueDate = DateTime.Now.Date;
+                DateTime overDueDate = DateTime.Today;
 
                 IQueryable<FactorCreditLine> queryResult =
                     context.FactorCreditLines.Where(
@@ -112,7 +112,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             for (int i = 0; i < _bs.List.Count; i++)
             {
                 var creditLine = (FactorCreditLine) _bs.List[i];
-                if (creditLine.PeriodEnd < DateTime.Now.Date)
+                if (creditLine.PeriodEnd < DateTime.Today)
                 {
                     dgvFactorCreditLines["colPeriodEnd", i].Style.BackColor = Color.Red;
                 }

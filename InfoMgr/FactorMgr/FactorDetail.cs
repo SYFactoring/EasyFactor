@@ -403,7 +403,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 freezeReasonTextBox.ReadOnly = false;
                 freezeDateDateTimePicker.Enabled = true;
                 creditLine.Freezer = App.Current.CurUser.Name;
-                creditLine.FreezeDate = DateTime.Now.Date;
+                creditLine.FreezeDate = DateTime.Today;
             }
         }
         /// <summary>
@@ -607,7 +607,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 bool isAddOK = true;
                 try
                 {
-                    factor.LastModifiedDate = DateTime.Now.Date;
+                    factor.LastModifiedDate = DateTime.Now;
                     _context.Factors.InsertOnSubmit(factor);
                     _context.SubmitChanges();
                 }
@@ -694,8 +694,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
             var creditLine = (FactorCreditLine)factorCreditLineBindingSource.DataSource;
             creditLine.CreateUserName = App.Current.CurUser.Name;
 
-            DateTime today = DateTime.Now.Date;
-            creditLine.CreditLineStatus = creditLine.PeriodEnd < today
+            creditLine.CreditLineStatus = creditLine.PeriodEnd < DateTime.Today
                                               ? FACTOR_CREDIT_LINE.EXPIRY
                                               : FACTOR_CREDIT_LINE.AVAILABILITY;
 
@@ -917,7 +916,7 @@ namespace CMBC.EasyFactor.InfoMgr.FactorMgr
                 unfreezeReasonTextBox.ReadOnly = false;
                 unfreezeDateDateTimePicker.Enabled = true;
                 creditLine.Unfreezer = App.Current.CurUser.Name;
-                creditLine.UnfreezeDate = DateTime.Now.Date;
+                creditLine.UnfreezeDate = DateTime.Today;
             }
         }
         /// <summary>

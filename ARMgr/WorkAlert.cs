@@ -185,7 +185,7 @@ namespace CMBC.EasyFactor.ARMgr
                 context.Invoices.Count(
                     invoice =>
                     invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount &&
-                    invoice.DueDate <= DateTime.Now.Date.AddDays(7) && invoice.DueDate >= DateTime.Now.Date);
+                    invoice.DueDate <= DateTime.Today.AddDays(7) && invoice.DueDate >= DateTime.Today);
             worker.ReportProgress(result, btnDueAssign7);
 
             //DueAssign0
@@ -193,7 +193,7 @@ namespace CMBC.EasyFactor.ARMgr
                 context.Invoices.Count(
                     invoice =>
                     invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount  &&
-                    invoice.DueDate == DateTime.Now.Date);
+                    invoice.DueDate == DateTime.Today);
             worker.ReportProgress(result, btnDueAssign0);
 
             //DueAssign
@@ -201,7 +201,7 @@ namespace CMBC.EasyFactor.ARMgr
                 context.Invoices.Count(
                     invoice =>
                     invoice.PaymentAmount.GetValueOrDefault() < invoice.AssignAmount  &&
-                    invoice.DueDate < DateTime.Now.Date);
+                    invoice.DueDate < DateTime.Today);
             worker.ReportProgress(result, btnDueAssign);
 
             //InvoiceDispute
@@ -213,49 +213,49 @@ namespace CMBC.EasyFactor.ARMgr
                 context.Invoices.Count(
                     invoice =>
                     invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() 
-                     && invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(7) &&
-                    invoice.FinanceDueDate >= DateTime.Now.Date);
+                     && invoice.ReassignDate <= DateTime.Today.AddDays(7) &&
+                    invoice.ReassignDate >= DateTime.Today);
             worker.ReportProgress(result, btnDueFinance7);
 
             //DueFinance0
             result =
                 context.Invoices.Count(
                     invoice =>
-                    invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() 
-                     && invoice.FinanceDueDate == DateTime.Now.Date);
+                    invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault()
+                     && invoice.ReassignDate == DateTime.Today);
             worker.ReportProgress(result, btnDueFinance0);
 
             //DueFinance
             result =
                 context.Invoices.Count(
                     invoice =>
-                    invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault() 
-                    && invoice.FinanceDueDate < DateTime.Now.Date);
+                    invoice.RefundAmount.GetValueOrDefault() < invoice.FinanceAmount.GetValueOrDefault()
+                    && invoice.ReassignDate < DateTime.Today);
             worker.ReportProgress(result, btnDueFinance);
 
             //DueClientCreditLine
             result =
                 context.ClientCreditLines.Count(
-                    c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.PeriodEnd < DateTime.Now.Date);
+                    c => c.CreditLineStatus == CLIENT_CREDIT_LINE.AVAILABILITY && c.PeriodEnd < DateTime.Today);
             worker.ReportProgress(result, btnDueClientCreditLine);
 
             //DueFactorCreditLine
             result =
                 context.FactorCreditLines.Count(
-                    f => f.CreditLineStatus == FACTOR_CREDIT_LINE.AVAILABILITY && f.PeriodEnd < DateTime.Now.Date);
+                    f => f.CreditLineStatus == FACTOR_CREDIT_LINE.AVAILABILITY && f.PeriodEnd < DateTime.Today);
             worker.ReportProgress(result, btnDueFactorCreditLine);
 
             //DueCDA
             result = context.CDAs.Count(cda => cda.CDAStatus == CDAStr.CHECKED
                                                &&
-                                               (cda.CreditCoverPeriodEnd < DateTime.Now.Date ||
-                                                cda.FinanceLinePeriodEnd < DateTime.Now.Date));
+                                               (cda.CreditCoverPeriodEnd < DateTime.Today ||
+                                                cda.FinanceLinePeriodEnd < DateTime.Today));
             worker.ReportProgress(result, btnDueCDA);
 
             //DueContract
             result =
                 context.Contracts.Count(
-                    c => c.ContractStatus == CONTRACT.AVAILABILITY && c.ContractDueDate < DateTime.Now.Date);
+                    c => c.ContractStatus == CONTRACT.AVAILABILITY && c.ContractDueDate < DateTime.Today);
             worker.ReportProgress(result, btnDueContract);
         }
 

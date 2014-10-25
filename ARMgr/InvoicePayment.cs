@@ -161,7 +161,7 @@ namespace CMBC.EasyFactor.ARMgr
         private static void ClickLog(InvoicePaymentLog log)
         {
             log.PaymentAmount = log.AssignOutstanding;
-            log.CreditNoteDate2 = DateTime.Now;
+            log.CreditNoteDate2 = DateTime.Today;
         }
 
         /// <summary>
@@ -481,7 +481,7 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
             }
 
-            batch.PaymentDate = DateTime.Now.Date;
+            batch.PaymentDate = DateTime.Today;
             batch.CreateUserName = App.Current.CurUser.Name;
             //batch.CheckStatus = BATCH.UNCHECK;
             batchBindingSource.DataSource = batch;

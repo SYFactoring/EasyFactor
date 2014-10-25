@@ -46,7 +46,7 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (AssignOutstanding > 0)
                 {
-                    return (DateTime.Now.Date - DueDate).Days;
+                    return (DateTime.Today - DueDate).Days;
                 }
 
                 return null;
@@ -118,9 +118,9 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 if (FinanceOutstanding > 0)
                 {
-                    if (FinanceDueDate != null)
+                    if (ReassignDate.HasValue)
                     {
-                        TimeSpan duedays = DateTime.Now.Date - FinanceDueDate.Value;
+                        TimeSpan duedays = DateTime.Today - ReassignDate.Value;
                         return duedays.Days;
                     }
                 }
@@ -272,18 +272,24 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 var financeLogs =  InvoiceFinanceLogs.Where(log => log.InvoiceFinanceBatch.FinanceRateType1 == "后收息" && log.FinanceOutstanding>0);
                 decimal unpaidInterest=0;
-                foreach(InvoiceFinanceLog log in financeLogs){
-                    if (log.InvoiceFinanceBatch.FinanceRateType2 == "计头不计尾")
-                    {
-                        unpaidInterest += log.FinanceOutstanding * (decimal)log.InvoiceFinanceBatch.FinanceRate * (DateTime.Today - log.InvoiceFinanceBatch.FinancePeriodBegin).Days / 360;
-                    }
-                    else if (log.InvoiceFinanceBatch.FinanceRateType2 == "计头又计尾")
-                    {
-                        unpaidInterest += log.FinanceOutstanding * (decimal)log.InvoiceFinanceBatch.FinanceRate * ((DateTime.Today - log.InvoiceFinanceBatch.FinancePeriodBegin).Days+1) / 360;
-                    }
-                        
+                foreach (InvoiceFinanceLog log in financeLogs)
+                {
+                    unpaidInterest += log.CaculateInterest().GetValueOrDefault();
                 }
+                return unpaidInterest;
+            }
+        }
 
+        public decimal PenaltyInterest
+        {
+            get
+            {
+                var financeLogs = InvoiceFinanceLogs.Where(log => log.InvoiceFinanceBatch.FinanceRateType1 == "后收息" && log.FinanceOutstanding > 0);
+                decimal unpaidInterest = 0;
+                foreach (InvoiceFinanceLog log in financeLogs)
+                {
+                    unpaidInterest += log.CaculatePenaltyInterest().GetValueOrDefault();
+                }
                 return unpaidInterest;
             }
         }
@@ -345,21 +351,6 @@ namespace CMBC.EasyFactor.DB.dbml
         public string TransactionType
         {
             get { return InvoiceAssignBatch.Case.TransactionType; }
-        }
-
-        public DateTime ReassignDate
-        {
-            get
-            {
-                if (this.InvoiceAssignBatch.Case.ActiveCDA != null)
-                {
-                    return DueDate.AddDays(this.InvoiceAssignBatch.Case.ActiveCDA.ReassignGracePeriod.GetValueOrDefault());
-                }
-                else
-                {
-                    return DueDate;
-                }
-            }
         }
 
         //?Public?Methods?(6)?
@@ -457,7 +448,6 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 FinanceAmount = null;
                 FinanceDate = null;
-                FinanceDueDate = null;
                 PaidCommission = null;
             }
 
@@ -478,21 +468,20 @@ namespace CMBC.EasyFactor.DB.dbml
                                    select log.InvoiceFinanceBatch.FinancePeriodBegin;
                 if (financeDates.Count() > 0)
                 {
-                    FinanceDate = financeDates.Min();
+                    FinanceDate = financeDates.Min().Date;
                 }
 
-                var financeDueDates = from log in InvoiceFinanceLogs
+                var reassignDates = from log in InvoiceFinanceLogs
                                       where log.FinanceOutstanding > 0
-                                      select log.FinanceDueDate;
-                if (financeDueDates.Count() > 0)
+                                      select log.ReassignDate;
+                if (reassignDates.Count() > 0)
                 {
-                    FinanceDueDate = financeDueDates.Min();
+                    ReassignDate = reassignDates.Min().GetValueOrDefault();
                 }
             }
             else
             {
                 FinanceDate = null;
-                FinanceDueDate = null;
             }
         }
 
@@ -691,14 +680,14 @@ namespace CMBC.EasyFactor.DB.dbml
                                                       InvoiceNo));
                 }
 
-                if (FinanceAmount.HasValue)
-                {
-                    if (TypeUtil.GreaterThan(FinanceAmount , AssignAmount))
-                    {
-                        throw new Exception(String.Format("融资金额{0:N2}不能大于转让金额{1:N2}: {2}", FinanceAmount, AssignAmount,
-                                                          InvoiceNo));
-                    }
-                }
+                //if (FinanceAmount.HasValue)
+                //{
+                //    if (TypeUtil.GreaterThan(FinanceAmount, AssignAmount))
+                //    {
+                //        throw new Exception(String.Format("融资金额{0:N2}不能大于转让金额{1:N2}: {2}", FinanceAmount, AssignAmount,
+                //                                          InvoiceNo));
+                //    }
+                //}
 
                 if (TypeUtil.GreaterThan(PaymentAmount, AssignAmount))
                 {
@@ -715,12 +704,6 @@ namespace CMBC.EasyFactor.DB.dbml
                 if (InvoiceDate != null && DueDate < InvoiceDate)
                 {
                     throw new Exception(String.Format("发票到期日{0:d}不能早于发票日{1:d}: {2}", DueDate, InvoiceDate, InvoiceNo));
-                }
-
-                if (FinanceDueDate.GetValueOrDefault() < FinanceDate.GetValueOrDefault())
-                {
-                    throw new Exception(String.Format("融资到期日{0:d}不能早于融资日{1:d}: {2}", FinanceDueDate, FinanceDate,
-                                                      InvoiceNo));
                 }
 
                 if (InvoiceAssignBatch.Case.NetPaymentTerm.HasValue)

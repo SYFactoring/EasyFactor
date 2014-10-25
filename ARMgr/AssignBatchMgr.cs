@@ -120,8 +120,8 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (_opBatchType == OpBatchType.REPORT)
             {
-                dateBatchFrom.Value = DateTime.Now.Date;
-                dateBatchTo.Value = DateTime.Now.Date;
+                dateBatchFrom.Value = DateTime.Today;
+                dateBatchTo.Value = DateTime.Today;
                 QueryBatch(null, null);
             }
         }
@@ -167,7 +167,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
             batch.CheckStatus = BATCH.CHECK;
             batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
+            batch.CheckDate = DateTime.Now;
             try
             {
                 Context.SubmitChanges();
@@ -558,7 +558,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             batch.CheckStatus = BATCH.REJECT;
             batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
+            batch.CheckDate = DateTime.Now;
 
             try
             {
@@ -815,7 +815,7 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Today);
 
             sheet.UsedRange.Font.Name = "仿宋_GB2312";
             sheet.UsedRange.Font.Size = 12;
@@ -1023,7 +1023,7 @@ namespace CMBC.EasyFactor.ARMgr
             row += 2;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Today);
 
             sheet.Range["A1", Type.Missing].ColumnWidth = 17;
             sheet.Range["B1", Type.Missing].ColumnWidth = 15;
@@ -1164,7 +1164,7 @@ namespace CMBC.EasyFactor.ARMgr
                 sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 4]].MergeCells = true;
                 sheet.Cells[row, 1] = String.Format("运营组： 经办 {0}               复核 {1}              主管{2}",
                                                     batchGroup.First().CreateUserName, "", "");
-                sheet.Cells[row + 1, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+                sheet.Cells[row + 1, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Today);
 
                 sheet.Range["A1", "A2"].RowHeight = 20;
                 sheet.Range["A3", "A3"].RowHeight = 30;
@@ -1429,7 +1429,7 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Today);
 
             sheet.UsedRange.Font.Name = "仿宋_GB2312";
             sheet.UsedRange.Font.Size = 12;
@@ -1574,7 +1574,7 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Today);
 
             sheet.UsedRange.Font.Name = "仿宋_GB2312";
             sheet.UsedRange.Font.Size = 12;
@@ -1829,7 +1829,7 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Today);
 
             sheet.UsedRange.Font.Name = "仿宋_GB2312";
             sheet.UsedRange.Font.Size = 12;
@@ -2123,7 +2123,7 @@ namespace CMBC.EasyFactor.ARMgr
             row++;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "D"]].MergeCells = true;
             sheet.Range[sheet.Cells[row, "C"], sheet.Cells[row, "C"]].HorizontalAlignment = XlHAlign.xlHAlignRight;
-            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Now);
+            sheet.Cells[row, 3] = String.Format("{0:yyyy}年{0:MM}月{0:dd}日", DateTime.Today);
 
             sheet.UsedRange.Font.Name = "仿宋_GB2312";
             sheet.UsedRange.Font.Size = 12;

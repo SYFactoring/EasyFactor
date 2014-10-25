@@ -283,7 +283,7 @@ namespace CMBC.EasyFactor.ARMgr
             var batch = new RevenueBatch
                             {
                                 CreateUserName = App.Current.CurUser.Name,
-                                RevenueDate = DateTime.Now
+                                RevenueDate = DateTime.Today
                             };
             //batch.CheckStatus = BATCH.UNCHECK;
             batchBindingSource.DataSource = batch;
@@ -337,7 +337,7 @@ namespace CMBC.EasyFactor.ARMgr
                         {
                             RevenueValue = invoice.CurCommissionValue.GetValueOrDefault(),
                             RevenueType = "转让手续费",
-                            RevenueDate = DateTime.Now,
+                            RevenueDate = DateTime.Today,
                             RevenueCurrency = invoice.InvoiceCurrency,
                             Invoice = invoice,
                             RevenueBatch = batch

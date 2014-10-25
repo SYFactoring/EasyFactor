@@ -109,16 +109,16 @@ namespace CMBC.EasyFactor.ARMgr
                                                        ? true
                                                        : (invoice.PaymentAmount.GetValueOrDefault() <
                                                           invoice.AssignAmount  &&
-                                                          invoice.DueDate <= DateTime.Now.Date.AddDays(0 - days) &&
-                                                          invoice.DueDate >= DateTime.Now.Date))
+                                                          invoice.DueDate <= DateTime.Today.AddDays(0 - days) &&
+                                                          invoice.DueDate >= DateTime.Today))
                                                   &&
                                                   (String.IsNullOrEmpty(tbFinanceOverDueDays.Text)
                                                        ? true
                                                        : (invoice.RefundAmount.GetValueOrDefault() <
                                                           invoice.FinanceAmount.GetValueOrDefault() 
                                                           &&
-                                                          invoice.FinanceDueDate <= DateTime.Now.Date.AddDays(0 - days) &&
-                                                          invoice.FinanceDueDate >= DateTime.Now.Date))
+                                                          invoice.ReassignDate <= DateTime.Today.AddDays(0 - days) &&
+                                                          invoice.ReassignDate >= DateTime.Today))
                                               select invoice;
 
             _bs.DataSource = queryResult;
@@ -488,7 +488,7 @@ namespace CMBC.EasyFactor.ARMgr
                 }
                 if (invoice.FinanceOverDueDays >= 0)
                 {
-                    dgvInvoices["colFinanceDueDate", i].Style.BackColor = Color.Red;
+                    dgvInvoices["colReassignDate", i].Style.BackColor = Color.Red;
                 }
             }
         }
@@ -673,22 +673,22 @@ namespace CMBC.EasyFactor.ARMgr
             string assignBatchNo = tbAssignBatchNo.Text;
 
             int assignOverDueDays;
-            DateTime assignOverDueDate = DateTime.Now.Date;
+            DateTime assignOverDueDate = DateTime.Today;
             if (Int32.TryParse(tbAssignOverDueDays.Text, out assignOverDueDays))
             {
                 if (assignOverDueDays != 0)
                 {
-                    assignOverDueDate = DateTime.Now.Date.AddDays(0 - assignOverDueDays);
+                    assignOverDueDate = DateTime.Today.AddDays(0 - assignOverDueDays);
                 }
             }
 
             int financeOverDueDays;
-            DateTime financeOverDueDate = DateTime.Now.Date;
+            DateTime financeOverDueDate = DateTime.Today;
             if (Int32.TryParse(tbFinanceOverDueDays.Text, out financeOverDueDays))
             {
                 if (financeOverDueDays != 0)
                 {
-                    financeOverDueDate = DateTime.Now.Date.AddDays(0 - financeOverDueDays);
+                    financeOverDueDate = DateTime.Today.AddDays(0 - financeOverDueDays);
                 }
             }
 
@@ -760,7 +760,7 @@ namespace CMBC.EasyFactor.ARMgr
                                                        ? true
                                                        : (invoice.RefundAmount.GetValueOrDefault() <
                                                           invoice.FinanceAmount.GetValueOrDefault()  &&
-                                                          invoice.FinanceDueDate <= financeOverDueDate))
+                                                          invoice.ReassignDate <= financeOverDueDate))
                                                   &&
                                                   (needAssignOutstanding
                                                        ? invoice.PaymentAmount.GetValueOrDefault() <

@@ -182,7 +182,7 @@ namespace CMBC.EasyFactor.ARMgr
             
             batch.CheckStatus = BATCH.CHECK;
             batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
+            batch.CheckDate = DateTime.Now;
 
             try
             {
@@ -457,7 +457,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             batch.CheckStatus = BATCH.REJECT;
             batch.CheckUserName = App.Current.CurUser.Name;
-            batch.CheckDate = DateTime.Now.Date;
+            batch.CheckDate = DateTime.Now;
 
             try
             {

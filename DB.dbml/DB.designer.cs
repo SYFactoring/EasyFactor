@@ -11664,6 +11664,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<decimal> _Interest;
 		
+		private System.Nullable<decimal> _PenaltyInterest;
+		
 		private EntityRef<InvoiceRefundBatch> _InvoiceRefundBatch;
 		
 		private EntityRef<InvoiceFinanceLog> _InvoiceFinanceLog;
@@ -11684,6 +11686,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnCommentChanged();
     partial void OnInterestChanging(System.Nullable<decimal> value);
     partial void OnInterestChanged();
+    partial void OnPenaltyInterestChanging(System.Nullable<decimal> value);
+    partial void OnPenaltyInterestChanged();
     #endregion
 		
 		public InvoiceRefundLog()
@@ -11817,6 +11821,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._Interest = value;
 					this.SendPropertyChanged("Interest");
 					this.OnInterestChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PenaltyInterest", DbType="decimal(18,2)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> PenaltyInterest
+		{
+			get
+			{
+				return this._PenaltyInterest;
+			}
+			set
+			{
+				if ((this._PenaltyInterest != value))
+				{
+					this.OnPenaltyInterestChanging(value);
+					this.SendPropertyChanging();
+					this._PenaltyInterest = value;
+					this.SendPropertyChanged("PenaltyInterest");
+					this.OnPenaltyInterestChanged();
 				}
 			}
 		}
@@ -12620,8 +12644,6 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _FinanceDate;
 		
-		private System.Nullable<System.DateTime> _FinanceDueDate;
-		
 		private System.Nullable<decimal> _PaymentAmount;
 		
 		private System.Nullable<System.DateTime> _PaymentDate;
@@ -12661,6 +12683,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		private System.Nullable<decimal> _PaidHandlingFee;
 		
 		private System.Nullable<decimal> _UnpaidHandlingFee;
+		
+		private System.Nullable<System.DateTime> _ReassignDate;
 		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
@@ -12722,8 +12746,6 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceAmountChanged();
     partial void OnFinanceDateChanging(System.Nullable<System.DateTime> value);
     partial void OnFinanceDateChanged();
-    partial void OnFinanceDueDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnFinanceDueDateChanged();
     partial void OnPaymentAmountChanging(System.Nullable<decimal> value);
     partial void OnPaymentAmountChanged();
     partial void OnPaymentDateChanging(System.Nullable<System.DateTime> value);
@@ -12764,6 +12786,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPaidHandlingFeeChanged();
     partial void OnUnpaidHandlingFeeChanging(System.Nullable<decimal> value);
     partial void OnUnpaidHandlingFeeChanged();
+    partial void OnReassignDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnReassignDateChanged();
     #endregion
 		
 		public Invoice()
@@ -13259,26 +13283,6 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinanceDueDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FinanceDueDate
-		{
-			get
-			{
-				return this._FinanceDueDate;
-			}
-			set
-			{
-				if ((this._FinanceDueDate != value))
-				{
-					this.OnFinanceDueDateChanging(value);
-					this.SendPropertyChanging();
-					this._FinanceDueDate = value;
-					this.SendPropertyChanged("FinanceDueDate");
-					this.OnFinanceDueDateChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentAmount", DbType="decimal")]
 		public System.Nullable<decimal> PaymentAmount
 		{
@@ -13679,6 +13683,26 @@ namespace CMBC.EasyFactor.DB.dbml
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReassignDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> ReassignDate
+		{
+			get
+			{
+				return this._ReassignDate;
+			}
+			set
+			{
+				if ((this._ReassignDate != value))
+				{
+					this.OnReassignDateChanging(value);
+					this.SendPropertyChanging();
+					this._ReassignDate = value;
+					this.SendPropertyChanged("ReassignDate");
+					this.OnReassignDateChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Invoice_InvoiceFinanceLog", Storage="_InvoiceFinanceLogs", ThisKey="InvoiceID", OtherKey="InvoiceID")]
 		public EntitySet<InvoiceFinanceLog> InvoiceFinanceLogs
 		{
@@ -13833,6 +13857,10 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<decimal> _UnpaidCommission;
 		
+		private System.Nullable<System.DateTime> _ReassignDate;
+		
+		private System.Nullable<decimal> _PenaltyInterest;
+		
 		private EntitySet<InvoiceRefundLog> _InvoiceRefundLogs;
 		
 		private EntityRef<Invoice> _Invoice;
@@ -13861,6 +13889,10 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnPaidCommissionChanged();
     partial void OnUnpaidCommissionChanging(System.Nullable<decimal> value);
     partial void OnUnpaidCommissionChanged();
+    partial void OnReassignDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnReassignDateChanged();
+    partial void OnPenaltyInterestChanging(System.Nullable<decimal> value);
+    partial void OnPenaltyInterestChanged();
     #endregion
 		
 		public InvoiceFinanceLog()
@@ -14055,6 +14087,46 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._UnpaidCommission = value;
 					this.SendPropertyChanged("UnpaidCommission");
 					this.OnUnpaidCommissionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReassignDate", DbType="DateTime", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<System.DateTime> ReassignDate
+		{
+			get
+			{
+				return this._ReassignDate;
+			}
+			set
+			{
+				if ((this._ReassignDate != value))
+				{
+					this.OnReassignDateChanging(value);
+					this.SendPropertyChanging();
+					this._ReassignDate = value;
+					this.SendPropertyChanged("ReassignDate");
+					this.OnReassignDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PenaltyInterest", DbType="Decimal(18,2)", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<decimal> PenaltyInterest
+		{
+			get
+			{
+				return this._PenaltyInterest;
+			}
+			set
+			{
+				if ((this._PenaltyInterest != value))
+				{
+					this.OnPenaltyInterestChanging(value);
+					this.SendPropertyChanging();
+					this._PenaltyInterest = value;
+					this.SendPropertyChanged("PenaltyInterest");
+					this.OnPenaltyInterestChanged();
 				}
 			}
 		}

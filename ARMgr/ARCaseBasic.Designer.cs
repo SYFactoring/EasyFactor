@@ -131,6 +131,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.creditCoverTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.periodEndTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelFee = new DevComponents.DotNetBar.ExpandablePanel();
+            this.tbCommissionPrePost = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.commissionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.priceTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.financeProportionTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -155,7 +156,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.factorNameTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.transactionTypeTextBox = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelInvoiceMgr = new DevComponents.DotNetBar.PanelEx();
-            this.tbCommissionPrePost = new DevComponents.DotNetBar.Controls.TextBoxX();
             priceLabel = new DevComponents.DotNetBar.LabelX();
             iFPriceLabel = new DevComponents.DotNetBar.LabelX();
             handFeeCurrLabel = new DevComponents.DotNetBar.LabelX();
@@ -542,6 +542,19 @@ namespace CMBC.EasyFactor.ARMgr
             lblPool.TabIndex = 65;
             lblPool.Text = "单笔/池融资";
             // 
+            // lblCommissionPrePost
+            // 
+            lblCommissionPrePost.AutoSize = true;
+            // 
+            // 
+            // 
+            lblCommissionPrePost.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            lblCommissionPrePost.Location = new System.Drawing.Point(18, 104);
+            lblCommissionPrePost.Name = "lblCommissionPrePost";
+            lblCommissionPrePost.Size = new System.Drawing.Size(56, 18);
+            lblCommissionPrePost.TabIndex = 12;
+            lblCommissionPrePost.Text = "收费方式";
+            // 
             // panelCaseBasic
             // 
             this.panelCaseBasic.AutoScroll = true;
@@ -623,6 +636,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbTotalFinanceOustanding.ReadOnly = true;
             this.tbTotalFinanceOustanding.Size = new System.Drawing.Size(100, 21);
             this.tbTotalFinanceOustanding.TabIndex = 14;
+            this.tbTotalFinanceOustanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbHighestFinance
             // 
@@ -636,6 +650,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbHighestFinance.ReadOnly = true;
             this.tbHighestFinance.Size = new System.Drawing.Size(100, 21);
             this.tbHighestFinance.TabIndex = 12;
+            this.tbHighestFinance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbFinanceOutstanding
             // 
@@ -649,6 +664,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbFinanceOutstanding.ReadOnly = true;
             this.tbFinanceOutstanding.Size = new System.Drawing.Size(100, 21);
             this.tbFinanceOutstanding.TabIndex = 10;
+            this.tbFinanceOutstanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbFinanceCreditLineOutstanding
             // 
@@ -662,6 +678,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbFinanceCreditLineOutstanding.ReadOnly = true;
             this.tbFinanceCreditLineOutstanding.Size = new System.Drawing.Size(100, 21);
             this.tbFinanceCreditLineOutstanding.TabIndex = 8;
+            this.tbFinanceCreditLineOutstanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbFinanceLineCurr
             // 
@@ -688,6 +705,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbFinanceLine.ReadOnly = true;
             this.tbFinanceLine.Size = new System.Drawing.Size(66, 21);
             this.tbFinanceLine.TabIndex = 4;
+            this.tbFinanceLine.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbDueDate
             // 
@@ -754,6 +772,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbTotalAssignOutstanding.ReadOnly = true;
             this.tbTotalAssignOutstanding.Size = new System.Drawing.Size(100, 21);
             this.tbTotalAssignOutstanding.TabIndex = 10;
+            this.tbTotalAssignOutstanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbAROutstanding
             // 
@@ -767,6 +786,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbAROutstanding.ReadOnly = true;
             this.tbAROutstanding.Size = new System.Drawing.Size(100, 21);
             this.tbAROutstanding.TabIndex = 8;
+            this.tbAROutstanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // creditCoverCurrTextBox
             // 
@@ -793,6 +813,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbCreditCoverOutstanding.ReadOnly = true;
             this.tbCreditCoverOutstanding.Size = new System.Drawing.Size(100, 21);
             this.tbCreditCoverOutstanding.TabIndex = 6;
+            this.tbCreditCoverOutstanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // creditCoverTextBox
             // 
@@ -806,6 +827,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.creditCoverTextBox.ReadOnly = true;
             this.creditCoverTextBox.Size = new System.Drawing.Size(65, 21);
             this.creditCoverTextBox.TabIndex = 2;
+            this.creditCoverTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // periodEndTextBox
             // 
@@ -861,6 +883,19 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelFee.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelFee.TitleStyle.GradientAngle = 90;
             this.panelFee.TitleText = "费率/其他信息";
+            // 
+            // tbCommissionPrePost
+            // 
+            // 
+            // 
+            // 
+            this.tbCommissionPrePost.Border.Class = "TextBoxBorder";
+            this.tbCommissionPrePost.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbCommissionPrePost.Location = new System.Drawing.Point(77, 102);
+            this.tbCommissionPrePost.Name = "tbCommissionPrePost";
+            this.tbCommissionPrePost.ReadOnly = true;
+            this.tbCommissionPrePost.Size = new System.Drawing.Size(100, 21);
+            this.tbCommissionPrePost.TabIndex = 11;
             // 
             // commissionTypeTextBox
             // 
@@ -1228,32 +1263,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelInvoiceMgr.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelInvoiceMgr.Style.GradientAngle = 90;
             this.panelInvoiceMgr.TabIndex = 0;
-            // 
-            // tbCommissionPrePost
-            // 
-            // 
-            // 
-            // 
-            this.tbCommissionPrePost.Border.Class = "TextBoxBorder";
-            this.tbCommissionPrePost.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.tbCommissionPrePost.Location = new System.Drawing.Point(77, 102);
-            this.tbCommissionPrePost.Name = "tbCommissionPrePost";
-            this.tbCommissionPrePost.ReadOnly = true;
-            this.tbCommissionPrePost.Size = new System.Drawing.Size(100, 21);
-            this.tbCommissionPrePost.TabIndex = 11;
-            // 
-            // lblCommissionPrePost
-            // 
-            lblCommissionPrePost.AutoSize = true;
-            // 
-            // 
-            // 
-            lblCommissionPrePost.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            lblCommissionPrePost.Location = new System.Drawing.Point(18, 104);
-            lblCommissionPrePost.Name = "lblCommissionPrePost";
-            lblCommissionPrePost.Size = new System.Drawing.Size(56, 18);
-            lblCommissionPrePost.TabIndex = 12;
-            lblCommissionPrePost.Text = "收费方式";
             // 
             // ARCaseBasic
             // 

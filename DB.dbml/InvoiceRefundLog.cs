@@ -28,7 +28,6 @@ namespace CMBC.EasyFactor.DB.dbml
             FinanceAmount2 = financeLog.FinanceAmount;
             FinanceOutstanding2 = financeLog.FinanceOutstanding;
             FinanceDate2 = financeLog.FinanceDate;
-            FinanceDueDate2 = financeLog.FinanceDueDate;
             InvoiceRefundAmount2 = financeLog.RefundAmount;
             InvoicePaymentAmount2 = financeLog.Invoice.PaymentAmount;
             RefundCurrency2 = financeLog.InvoiceFinanceBatch.BatchCurrency;
@@ -36,8 +35,10 @@ namespace CMBC.EasyFactor.DB.dbml
             FinanceRateType2 = financeLog.InvoiceFinanceBatch.FinanceRateType2;
             FinanceRate = financeLog.InvoiceFinanceBatch.FinanceRate;
             FinancePeriodBegin = financeLog.InvoiceFinanceBatch.FinancePeriodBegin;
-            ReassignDate = financeLog.Invoice.ReassignDate;
+            ReassignDate = financeLog.ReassignDate;
             DirectPaymentOutstanding = financeLog.Invoice.DirectPaymentOutstanding;
+            FinanceBatchNo = financeLog.FinanceBatchNo;
+            PenaltyRate = financeLog.Invoice.InvoiceAssignBatch.Case.ActiveCDA.PenaltyInterestRate.GetValueOrDefault();
         }
 
         /// <summary>
@@ -83,26 +84,6 @@ namespace CMBC.EasyFactor.DB.dbml
         /// <summary>
         /// 
         /// </summary>
-        public DateTime? FinanceDueDate
-        {
-            get
-            {
-                if (InvoiceFinanceLog != null)
-                {
-                    return InvoiceFinanceLog.FinanceDueDate;
-                }
-                return FinanceDueDate2;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? FinanceDueDate2 { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public int FinanceLogID2 { get; set; }
 
         /// <summary>
@@ -118,7 +99,7 @@ namespace CMBC.EasyFactor.DB.dbml
         /// </summary>
         public decimal? FinanceOutstanding2 { get; set; }
 
-        public DateTime ReassignDate { get; set; }
+        public DateTime? ReassignDate { get; set; }
 
         /// <summary>
         /// 
@@ -228,12 +209,73 @@ namespace CMBC.EasyFactor.DB.dbml
 
         public double FinanceRate { get; set; }
 
+        public double PenaltyRate { get; set; }
+
         public DateTime FinancePeriodBegin { get; set; }
+
+        public string FinanceBatchNo { get; set; }
 
         public decimal? DirectPaymentOutstanding
         {
             get;
             set;
+        }
+
+        public decimal CaculatePenaltyInterest()
+        {
+            decimal penaltyInterest = 0;
+            DateTime? penaltyDate = null;
+            if (DateTime.Today > ReassignDate.GetValueOrDefault())
+            {
+                penaltyDate = DateTime.Today;
+            }
+            if (penaltyDate.HasValue)
+            {
+                if (FinanceRateType2 == "计头不计尾")
+                {
+                    penaltyInterest = (decimal)(FinanceRate + PenaltyRate) * RefundAmount.GetValueOrDefault() * (penaltyDate.GetValueOrDefault() - ReassignDate.GetValueOrDefault()).Days / 360;
+                }
+                else if (FinanceRateType2 == "计头又计尾")
+                {
+                    penaltyInterest = (decimal)(FinanceRate + PenaltyRate) * RefundAmount.GetValueOrDefault() * ((penaltyDate.GetValueOrDefault() - ReassignDate.GetValueOrDefault()).Days + 1) / 360;
+                }
+            }
+
+            if (RefundCurrency != "CNY")
+            {
+                decimal rate = Exchange.GetExchangeRate(RefundCurrency, "CNY");
+                penaltyInterest *= rate;
+            }
+            return penaltyInterest;
+        }
+
+        public decimal? CaculateInterest()
+        {
+            decimal normalInterest = 0;
+
+            DateTime normalDate;
+            if (DateTime.Today <= ReassignDate.GetValueOrDefault())
+            {
+                normalDate = DateTime.Today;
+            }
+            else
+            {
+                normalDate = ReassignDate.GetValueOrDefault();
+            }
+            if (FinanceRateType2 == "计头不计尾")
+            {
+                normalInterest = (decimal)FinanceRate * RefundAmount.GetValueOrDefault() * (normalDate - FinancePeriodBegin.Date).Days / 360;
+            }
+            else if (FinanceRateType2 == "计头又计尾")
+            {
+                normalInterest = (decimal)FinanceRate * RefundAmount.GetValueOrDefault() * ((normalDate - FinancePeriodBegin.Date).Days + 1) / 360;
+            }
+            if (RefundCurrency != "CNY")
+            {
+                decimal rate = Exchange.GetExchangeRate(RefundCurrency, "CNY");
+                normalInterest *= rate;
+            }
+            return normalInterest;
         }
     }
 }

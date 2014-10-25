@@ -275,7 +275,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             var batch = new RevenueBatch
                             {
-                                RevenueDate = DateTime.Now,
+                                RevenueDate = DateTime.Today,
                                 CreateUserName = App.Current.CurUser.Name,
                             };
             //batch.CheckStatus = BATCH.UNCHECK;
@@ -332,7 +332,7 @@ namespace CMBC.EasyFactor.ARMgr
                                 {
                                     RevenueValue = financeLog.CurCommissionValue.GetValueOrDefault(),
                                     RevenueType = "融资手续费",
-                                    RevenueDate = DateTime.Now,
+                                    RevenueDate = DateTime.Today,
                                     RevenueCurrency = financeLog.Invoice.InvoiceCurrency,
                                     Invoice = financeLog.Invoice,
                                     RevenueBatch = batch

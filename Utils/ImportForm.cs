@@ -689,7 +689,7 @@ namespace CMBC.EasyFactor.Utils
                                                       AssignDate = DateTime.Today,
                                                       Case = curCase,
                                                       CreateUserName = App.Current.CurUser.Name,
-                                                      InputDate = DateTime.Today
+                                                      InputDate = DateTime.Now
                                                   };
                                 assignBatch.AssignBatchNo = InvoiceAssignBatch.GenerateAssignBatchNo(curCase.CaseCode,
                                                                                                      assignBatch.
@@ -961,7 +961,7 @@ namespace CMBC.EasyFactor.Utils
                                 paymentBatch = new InvoicePaymentBatch
                                                    {
                                                        Case = curCase,
-                                                       InputDate = DateTime.Today,
+                                                       InputDate = DateTime.Now,
                                                        IsCreateMsg = false,
                                                        PaymentDate = DateTime.Today,
                                                        PaymentType = PAYMENT.CREDIT_NOTE_PAYMENT,
@@ -2207,11 +2207,11 @@ namespace CMBC.EasyFactor.Utils
                                                    Comment = comment,
                                                    InputDate = DateTime.Now,
                                                    IsCreateMsg = false,
-                                                   PaymentDate = DateTime.Now,
+                                                   PaymentDate = DateTime.Today,
                                                    PaymentType = "´ûÏîÍ¨Öª",
                                                    CreateUserName = App.Current.CurUser.Name,
                                                    PaymentBatchNo =
-                                                       InvoicePaymentBatch.GeneratePaymentBatchNo(DateTime.Now,
+                                                       InvoicePaymentBatch.GeneratePaymentBatchNo(DateTime.Today,
                                                                                                   paymentBatchList)
                                                };
                             //paymentBatch.CheckStatus = BATCH.UNCHECK;
@@ -2855,7 +2855,7 @@ namespace CMBC.EasyFactor.Utils
                         }
 
                         //financeBatch.CheckStatus = BATCH.UNCHECK;
-                        financeBatch.InputDate = DateTime.Today;
+                        financeBatch.InputDate = DateTime.Now;
                         financeBatch.CreateUserName = App.Current.CurUser.Name;
                         financeBatch.FinanceBatchNo =
                             InvoiceFinanceBatch.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, financeBatchList);
@@ -2952,7 +2952,7 @@ namespace CMBC.EasyFactor.Utils
                             paymentBatch.PaymentBatchNo =
                                 InvoicePaymentBatch.GeneratePaymentBatchNo(paymentBatch.PaymentDate, paymentBatchList);
                             paymentBatch.Case = financeBatch.Case;
-                            paymentBatch.InputDate = DateTime.Today;
+                            paymentBatch.InputDate = DateTime.Now;
                             paymentBatchList.Add(paymentBatch);
 
                             foreach (InvoiceFinanceLog financeLog in financeBatch.InvoiceFinanceLogs)
@@ -4217,7 +4217,7 @@ namespace CMBC.EasyFactor.Utils
 
                         financeBatch.Comment = String.Format("{0:G}", valueArray[row, column]);
                         //financeBatch.CheckStatus = BATCH.UNCHECK;
-                        financeBatch.InputDate = DateTime.Today;
+                        financeBatch.InputDate = DateTime.Now;
                         financeBatch.CreateUserName = App.Current.CurUser.Name;
                         financeBatch.FinanceBatchNo =
                             InvoiceFinanceBatch.GenerateFinanceBatchNo(financeBatch.FinancePeriodBegin, batchList);
@@ -4568,7 +4568,7 @@ namespace CMBC.EasyFactor.Utils
                                                where financeLog.InvoiceFinanceBatch.BatchCurrency == refundCurrency && financeLog.FinanceOutstanding>0
                                                select financeLog).ToList();
 
-                            foreach (InvoiceFinanceLog financeLog in financeLogs.OrderBy(f => f.FinanceDueDate))
+                            foreach (InvoiceFinanceLog financeLog in financeLogs.OrderBy(f => f.ReassignDate))
                             {
                                 if (refundAmount>0 &&
                                     financeLog.FinanceOutstanding>0)

@@ -83,23 +83,24 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            lblClient.BackgroundStyle.Class = "";
-            lblClient.Location = new System.Drawing.Point(41, 28);
+            lblClient.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            lblClient.Location = new System.Drawing.Point(41, 26);
             lblClient.Name = "lblClient";
-            lblClient.Size = new System.Drawing.Size(31, 16);
+            lblClient.Size = new System.Drawing.Size(31, 18);
             lblClient.TabIndex = 36;
             lblClient.Text = "øÕªß";
             // 
             // panelPoolBasic
             // 
             this.panelPoolBasic.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelPoolBasic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelPoolBasic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.panelPoolBasic.Controls.Add(this.panelPoolOutstanding);
             this.panelPoolBasic.Controls.Add(this.panelClient);
+            this.panelPoolBasic.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelPoolBasic.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelPoolBasic.Location = new System.Drawing.Point(0, 0);
             this.panelPoolBasic.Name = "panelPoolBasic";
-            this.panelPoolBasic.Size = new System.Drawing.Size(730, 86);
+            this.panelPoolBasic.Size = new System.Drawing.Size(730, 79);
             this.panelPoolBasic.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelPoolBasic.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelPoolBasic.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -116,12 +117,13 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelPoolBasic.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.panelPoolBasic.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelPoolBasic.TitleStyle.GradientAngle = 90;
+            this.panelPoolBasic.TitleText = "Title Bar";
             // 
             // panelPoolOutstanding
             // 
             this.panelPoolOutstanding.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelPoolOutstanding.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
-            this.panelPoolOutstanding.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelPoolOutstanding.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.panelPoolOutstanding.Controls.Add(this.tbPoolTotalAssignOutstanding);
             this.panelPoolOutstanding.Controls.Add(this.lblTotalAssignOutstanding);
             this.panelPoolOutstanding.Controls.Add(this.lblValuedAssignOutstanding);
@@ -130,11 +132,12 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelPoolOutstanding.Controls.Add(this.lblCashOutstanding);
             this.panelPoolOutstanding.Controls.Add(this.lblFinanceOustanding);
             this.panelPoolOutstanding.Controls.Add(this.tbPoolCashOutstanding);
+            this.panelPoolOutstanding.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelPoolOutstanding.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelPoolOutstanding.ExpandOnTitleClick = true;
             this.panelPoolOutstanding.Location = new System.Drawing.Point(225, 5);
             this.panelPoolOutstanding.Name = "panelPoolOutstanding";
-            this.panelPoolOutstanding.Size = new System.Drawing.Size(382, 81);
+            this.panelPoolOutstanding.Size = new System.Drawing.Size(382, 74);
             this.panelPoolOutstanding.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelPoolOutstanding.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelPoolOutstanding.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -143,7 +146,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelPoolOutstanding.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
             this.panelPoolOutstanding.Style.GradientAngle = 90;
             this.panelPoolOutstanding.TabIndex = 7;
-            this.panelPoolOutstanding.TitleHeight = 20;
+            this.panelPoolOutstanding.TitleHeight = 18;
             this.panelPoolOutstanding.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
             this.panelPoolOutstanding.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelPoolOutstanding.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -159,11 +162,13 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbPoolTotalAssignOutstanding.Border.Class = "TextBoxBorder";
-            this.tbPoolTotalAssignOutstanding.Location = new System.Drawing.Point(87, 24);
+            this.tbPoolTotalAssignOutstanding.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbPoolTotalAssignOutstanding.Location = new System.Drawing.Point(87, 22);
             this.tbPoolTotalAssignOutstanding.Name = "tbPoolTotalAssignOutstanding";
             this.tbPoolTotalAssignOutstanding.ReadOnly = true;
-            this.tbPoolTotalAssignOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbPoolTotalAssignOutstanding.Size = new System.Drawing.Size(100, 21);
             this.tbPoolTotalAssignOutstanding.TabIndex = 7;
+            this.tbPoolTotalAssignOutstanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblTotalAssignOutstanding
             // 
@@ -171,10 +176,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            this.lblTotalAssignOutstanding.BackgroundStyle.Class = "";
-            this.lblTotalAssignOutstanding.Location = new System.Drawing.Point(13, 25);
+            this.lblTotalAssignOutstanding.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblTotalAssignOutstanding.Location = new System.Drawing.Point(13, 23);
             this.lblTotalAssignOutstanding.Name = "lblTotalAssignOutstanding";
-            this.lblTotalAssignOutstanding.Size = new System.Drawing.Size(68, 16);
+            this.lblTotalAssignOutstanding.Size = new System.Drawing.Size(68, 18);
             this.lblTotalAssignOutstanding.TabIndex = 6;
             this.lblTotalAssignOutstanding.Text = "◊‹’ÀøÓ”‡∂Ó";
             // 
@@ -184,10 +189,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            this.lblValuedAssignOutstanding.BackgroundStyle.Class = "";
-            this.lblValuedAssignOutstanding.Location = new System.Drawing.Point(193, 25);
+            this.lblValuedAssignOutstanding.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblValuedAssignOutstanding.Location = new System.Drawing.Point(193, 23);
             this.lblValuedAssignOutstanding.Name = "lblValuedAssignOutstanding";
-            this.lblValuedAssignOutstanding.Size = new System.Drawing.Size(68, 16);
+            this.lblValuedAssignOutstanding.Size = new System.Drawing.Size(68, 18);
             this.lblValuedAssignOutstanding.TabIndex = 0;
             this.lblValuedAssignOutstanding.Text = "’ÀøÓ≥ÿ”‡∂Ó";
             // 
@@ -197,11 +202,13 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbPoolValuedAssignOutstanding.Border.Class = "TextBoxBorder";
-            this.tbPoolValuedAssignOutstanding.Location = new System.Drawing.Point(267, 24);
+            this.tbPoolValuedAssignOutstanding.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbPoolValuedAssignOutstanding.Location = new System.Drawing.Point(267, 22);
             this.tbPoolValuedAssignOutstanding.Name = "tbPoolValuedAssignOutstanding";
             this.tbPoolValuedAssignOutstanding.ReadOnly = true;
-            this.tbPoolValuedAssignOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbPoolValuedAssignOutstanding.Size = new System.Drawing.Size(100, 21);
             this.tbPoolValuedAssignOutstanding.TabIndex = 1;
+            this.tbPoolValuedAssignOutstanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbPoolFinanceOutstanding
             // 
@@ -209,11 +216,13 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbPoolFinanceOutstanding.Border.Class = "TextBoxBorder";
-            this.tbPoolFinanceOutstanding.Location = new System.Drawing.Point(267, 46);
+            this.tbPoolFinanceOutstanding.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbPoolFinanceOutstanding.Location = new System.Drawing.Point(267, 42);
             this.tbPoolFinanceOutstanding.Name = "tbPoolFinanceOutstanding";
             this.tbPoolFinanceOutstanding.ReadOnly = true;
-            this.tbPoolFinanceOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbPoolFinanceOutstanding.Size = new System.Drawing.Size(100, 21);
             this.tbPoolFinanceOutstanding.TabIndex = 5;
+            this.tbPoolFinanceOutstanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblCashOutstanding
             // 
@@ -221,10 +230,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            this.lblCashOutstanding.BackgroundStyle.Class = "";
-            this.lblCashOutstanding.Location = new System.Drawing.Point(13, 48);
+            this.lblCashOutstanding.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCashOutstanding.Location = new System.Drawing.Point(13, 44);
             this.lblCashOutstanding.Name = "lblCashOutstanding";
-            this.lblCashOutstanding.Size = new System.Drawing.Size(68, 16);
+            this.lblCashOutstanding.Size = new System.Drawing.Size(68, 18);
             this.lblCashOutstanding.TabIndex = 2;
             this.lblCashOutstanding.Text = "œ÷Ω≥ÿ”‡∂Ó";
             // 
@@ -234,10 +243,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             // 
-            this.lblFinanceOustanding.BackgroundStyle.Class = "";
-            this.lblFinanceOustanding.Location = new System.Drawing.Point(193, 48);
+            this.lblFinanceOustanding.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblFinanceOustanding.Location = new System.Drawing.Point(193, 44);
             this.lblFinanceOustanding.Name = "lblFinanceOustanding";
-            this.lblFinanceOustanding.Size = new System.Drawing.Size(68, 16);
+            this.lblFinanceOustanding.Size = new System.Drawing.Size(68, 18);
             this.lblFinanceOustanding.TabIndex = 4;
             this.lblFinanceOustanding.Text = "»⁄◊ ≥ÿ”‡∂Ó";
             // 
@@ -247,26 +256,29 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbPoolCashOutstanding.Border.Class = "TextBoxBorder";
-            this.tbPoolCashOutstanding.Location = new System.Drawing.Point(87, 46);
+            this.tbPoolCashOutstanding.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbPoolCashOutstanding.Location = new System.Drawing.Point(87, 42);
             this.tbPoolCashOutstanding.Name = "tbPoolCashOutstanding";
             this.tbPoolCashOutstanding.ReadOnly = true;
-            this.tbPoolCashOutstanding.Size = new System.Drawing.Size(100, 20);
+            this.tbPoolCashOutstanding.Size = new System.Drawing.Size(100, 21);
             this.tbPoolCashOutstanding.TabIndex = 3;
+            this.tbPoolCashOutstanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // panelClient
             // 
             this.panelClient.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelClient.CollapseDirection = DevComponents.DotNetBar.eCollapseDirection.RightToLeft;
-            this.panelClient.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelClient.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.panelClient.Controls.Add(this.btnClientQuery);
             this.panelClient.Controls.Add(this.tbClientEDICode);
             this.panelClient.Controls.Add(lblClient);
             this.panelClient.Controls.Add(this.tbClientName);
+            this.panelClient.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelClient.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelClient.ExpandOnTitleClick = true;
             this.panelClient.Location = new System.Drawing.Point(0, 5);
             this.panelClient.Name = "panelClient";
-            this.panelClient.Size = new System.Drawing.Size(225, 81);
+            this.panelClient.Size = new System.Drawing.Size(225, 74);
             this.panelClient.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelClient.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelClient.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -275,7 +287,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelClient.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
             this.panelClient.Style.GradientAngle = 90;
             this.panelClient.TabIndex = 6;
-            this.panelClient.TitleHeight = 20;
+            this.panelClient.TitleHeight = 18;
             this.panelClient.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
             this.panelClient.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelClient.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -289,10 +301,10 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.btnClientQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnClientQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClientQuery.Location = new System.Drawing.Point(3, 27);
+            this.btnClientQuery.Location = new System.Drawing.Point(3, 25);
             this.btnClientQuery.Name = "btnClientQuery";
-            this.btnClientQuery.Size = new System.Drawing.Size(32, 29);
-            this.btnClientQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClientQuery.Size = new System.Drawing.Size(32, 27);
+            this.btnClientQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnClientQuery.TabIndex = 35;
             this.btnClientQuery.Text = "...";
             this.btnClientQuery.Click += new System.EventHandler(this.SelectClient);
@@ -303,10 +315,11 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbClientEDICode.Border.Class = "TextBoxBorder";
-            this.tbClientEDICode.Location = new System.Drawing.Point(78, 24);
+            this.tbClientEDICode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbClientEDICode.Location = new System.Drawing.Point(78, 22);
             this.tbClientEDICode.Name = "tbClientEDICode";
             this.tbClientEDICode.ReadOnly = true;
-            this.tbClientEDICode.Size = new System.Drawing.Size(136, 20);
+            this.tbClientEDICode.Size = new System.Drawing.Size(136, 21);
             this.tbClientEDICode.TabIndex = 37;
             this.tbClientEDICode.DoubleClick += new System.EventHandler(this.DetailClient);
             // 
@@ -316,21 +329,23 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
-            this.tbClientName.Location = new System.Drawing.Point(78, 46);
+            this.tbClientName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.tbClientName.Location = new System.Drawing.Point(78, 42);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.ReadOnly = true;
-            this.tbClientName.Size = new System.Drawing.Size(136, 20);
+            this.tbClientName.Size = new System.Drawing.Size(136, 21);
             this.tbClientName.TabIndex = 38;
             this.tbClientName.DoubleClick += new System.EventHandler(this.DetailClient);
             // 
             // panelPool
             // 
             this.panelPool.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelPool.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelPool.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelPool.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelPool.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPool.Location = new System.Drawing.Point(0, 86);
+            this.panelPool.Location = new System.Drawing.Point(0, 79);
             this.panelPool.Name = "panelPool";
-            this.panelPool.Size = new System.Drawing.Size(730, 112);
+            this.panelPool.Size = new System.Drawing.Size(730, 104);
             this.panelPool.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelPool.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelPool.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -342,12 +357,12 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             // ARPoolBasic
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelPool);
             this.Controls.Add(this.panelPoolBasic);
             this.Name = "ARPoolBasic";
-            this.Size = new System.Drawing.Size(730, 198);
+            this.Size = new System.Drawing.Size(730, 183);
             this.panelPoolBasic.ResumeLayout(false);
             this.panelPoolOutstanding.ResumeLayout(false);
             this.panelPoolOutstanding.PerformLayout();

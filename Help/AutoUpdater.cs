@@ -44,7 +44,6 @@ using System.Threading;
 using System.Windows.Forms;
 using CMBC.EasyFactor.Utils;
 using DevComponents.DotNetBar;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace CMBC.EasyFactor.Help
 {
@@ -294,16 +293,12 @@ namespace CMBC.EasyFactor.Help
         /// </summary>
         private static void Restart()
         {
-            string stUpdateName = String.Format("update{0:yyyyMMdd}", DateTime.Now);
+            string stUpdateName = String.Format("update{0:yyyyMMdd}", DateTime.Today);
             // DirectoryInfo diDest = new DirectoryInfo(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
-            string stDest = Path.GetTempPath() + stUpdateName + Path.DirectorySeparatorChar;
-            string[] exeFileList = Directory.GetFiles(stDest, "*.*");
-            if (exeFileList.Length > 0)
-            {
-                Environment.ExitCode = 2; //the surrounding AppStarter must look for this to restart the app.
-                Application.Exit();
-                Process.Start(exeFileList[0]);
-            }
+            string stDest = Path.GetTempPath() + stUpdateName + ".exe";
+            Environment.ExitCode = 2; //the surrounding AppStarter must look for this to restart the app.
+            Application.Exit();
+            Process.Start(stDest);
         }
 
         private void SendAutoUpdateError(string stMessage, Exception e)
@@ -312,60 +307,13 @@ namespace CMBC.EasyFactor.Help
                 OnAutoUpdateError(stMessage, e);
         }
 
-        //downloadFile(string url, string path)
-        /// <summary>
-        /// unzip: Open the zip file specified by stZipPath, into the stDestPath Directory
-        /// </summary>
-        private static void Unzip(string stZipPath, string stDestPath)
-        {
-            var s = new ZipInputStream(File.OpenRead(stZipPath));
-
-            ZipEntry theEntry;
-            while ((theEntry = s.GetNextEntry()) != null)
-            {
-                string fileName = stDestPath + Path.GetDirectoryName(theEntry.Name) + Path.DirectorySeparatorChar +
-                                  Path.GetFileName(theEntry.Name);
-
-                //create directory for file (if necessary)
-                Directory.CreateDirectory(Path.GetDirectoryName(fileName));
-
-                if (!theEntry.IsDirectory)
-                {
-                    FileStream streamWriter = File.Create(fileName);
-
-                    var data = new byte[2048];
-                    try
-                    {
-                        while (true)
-                        {
-                            int size = s.Read(data, 0, data.Length);
-                            if (size > 0)
-                            {
-                                streamWriter.Write(data, 0, size);
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                    }
-
-                    streamWriter.Close();
-                }
-            }
-            s.Close();
-        }
-
         //TryUpdate()		
         /// <summary>
         /// updateThread: This is the Thread that runs for checking updates against the config file
         /// </summary>
         private void UpdateThread()
         {
-            string stUpdateName = String.Format("update{0:yyyyMMdd}", DateTime.Now);
+            string stUpdateName = String.Format("update{0:yyyyMMdd}", DateTime.Today);
             if (_autoUpdateConfig == null) //if we haven't already downloaded the config file, do so now
                 LoadConfigThread();
             if (_autoUpdateConfig != null) //make sure we were able to download it
@@ -381,21 +329,15 @@ namespace CMBC.EasyFactor.Help
                     {
                         //DirectoryInfo diDest = new DirectoryInfo(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
 
-                        string stPath = Path.GetTempPath() + stUpdateName + ".zip";
+                        string stPath = Path.GetTempPath() + stUpdateName + ".exe";
                         int count = 1;
                         while (File.Exists(stPath))
                         {
-                            stPath = Path.GetTempPath() + stUpdateName + "_" + (count++) + ".zip";
+                            stPath = Path.GetTempPath() + stUpdateName + "_" + (count++) + ".exe";
                         }
                         //There is a new version available
                         if (DownloadFile(_autoUpdateConfig.AppFileURL, stPath))
                         {
-                            //MessageBox.Show("Downloaded New File");
-                            string stDest = stPath.Substring(0, stPath.Length - 4) + Path.DirectorySeparatorChar;
-                            //Extract Zip File
-                            Unzip(stPath, stDest);
-                            //Delete Zip File
-                            File.Delete(stPath);
                             if (OnAutoUpdateComplete != null)
                             {
                                 OnAutoUpdateComplete();
@@ -428,7 +370,7 @@ namespace CMBC.EasyFactor.Help
         /// </summary>
         private void UpdateThreadBackground()
         {
-            string stUpdateName = String.Format("update{0:yyyyMMdd}", DateTime.Now);
+            string stUpdateName = String.Format("update{0:yyyyMMdd}", DateTime.Today);
             if (_autoUpdateConfig == null) //if we haven't already downloaded the config file, do so now
                 LoadConfigThread();
             if (_autoUpdateConfig != null) //make sure we were able to download it
@@ -436,21 +378,15 @@ namespace CMBC.EasyFactor.Help
                 //Check the file for an update
                 if (LatestConfigVersion > CurrentAppVersion)
                 {
-                    string stPath = Path.GetTempPath() + stUpdateName + ".zip";
+                    string stPath = Path.GetTempPath() + stUpdateName + ".exe";
                     int count = 1;
                     while (File.Exists(stPath))
                     {
-                        stPath = Path.GetTempPath() + stUpdateName + "_" + (count++) + ".zip";
+                        stPath = Path.GetTempPath() + stUpdateName + "_" + (count++) + ".exe";
                     }
                     //There is a new version available
                     if (DownloadFile(_autoUpdateConfig.AppFileURL, stPath))
                     {
-                        //MessageBox.Show("Downloaded New File");
-                        string stDest = stPath.Substring(0, stPath.Length - 4) + Path.DirectorySeparatorChar;
-                        //Extract Zip File
-                        Unzip(stPath, stDest);
-                        //Delete Zip File
-                        File.Delete(stPath);
                         if (OnAutoUpdateComplete != null)
                         {
                             OnAutoUpdateComplete();

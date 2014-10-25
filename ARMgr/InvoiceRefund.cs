@@ -141,7 +141,6 @@ namespace CMBC.EasyFactor.ARMgr
                                   select new InvoiceRefundLog(financeLog)).ToList();
 
             _totalPayment = paymentBatch.InvoicePaymentLogs.Sum(log => log.PaymentAmount).GetValueOrDefault();
-            tbTotalPayment.Text = String.Format("{0:N2}", _totalPayment);
             tbTotalRefund.Text = string.Empty;
             var batch = new InvoiceRefundBatch();
             if (paymentBatch.PaymentType == PAYMENT.BUYER_PAYMENT)
@@ -210,25 +209,17 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
+            updateInterest(log);
+        }
+
+        private void updateInterest(InvoiceRefundLog log)
+        {
             if (log.FinanceRateType1 == "后收息")
             {
-                decimal interest = 0;
-                if (log.FinanceRateType2 == "计头不计尾")
-                {
-                    interest = (decimal)log.FinanceRate * log.RefundAmount.GetValueOrDefault() * (DateTime.Today - log.FinancePeriodBegin).Days / 360;
-                }
-                else if (log.FinanceRateType2 == "计头又计尾")
-                {
-                    interest = (decimal)log.FinanceRate * log.RefundAmount.GetValueOrDefault() * ((DateTime.Today - log.FinancePeriodBegin).Days + 1) / 360;
-                }
+                decimal penaltyInterest = log.CaculatePenaltyInterest();
 
-                if (log.RefundCurrency != "CNY")
-                {
-                    decimal rate = Exchange.GetExchangeRate(log.RefundCurrency, "CNY");
-                    interest *= rate;
-                }
-
-                log.Interest = interest;
+                log.Interest = log.CaculateInterest();
+                log.PenaltyInterest = log.CaculatePenaltyInterest();
             }
         }
 
@@ -404,6 +395,9 @@ namespace CMBC.EasyFactor.ARMgr
 
             if (dgvLogs.Columns[e.ColumnIndex] == colRefundAmount)
             {
+                IList invoiceRefundList = logsBindingSource.List;
+                var log = (InvoiceRefundLog)invoiceRefundList[e.RowIndex];
+                updateInterest(log);
                 StatBatch();
             }
         }
@@ -522,7 +516,7 @@ namespace CMBC.EasyFactor.ARMgr
                     break;
             }
 
-            batch.RefundDate = DateTime.Now.Date;
+            batch.RefundDate = DateTime.Today;
             batch.CreateUserName = App.Current.CurUser.Name;
             //batch.CheckStatus = BATCH.UNCHECK;
             batchBindingSource.DataSource = batch;
@@ -638,7 +632,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (batch.RefundBatchNo == null)
                 {
                     batch.RefundBatchNo = InvoiceRefundBatch.GenerateRefundBatchNo(batch.RefundDate);
-                    batch.InputDate = DateTime.Today;
+                    batch.InputDate = DateTime.Now;
                 }
                 for (int i = 0; i < logsBindingSource.List.Count; i++)
                 {
@@ -728,13 +722,13 @@ namespace CMBC.EasyFactor.ARMgr
             IList refundLogList = logsBindingSource.List;
             decimal totalRefund = 0;
             decimal totalInterest = 0;
+            decimal totalPenaltyInterest = 0;
             for (int i = 0; i < refundLogList.Count; i++)
             {
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     var refundLog = (InvoiceRefundLog)refundLogList[i];
                     decimal refundAmount = refundLog.RefundAmount.GetValueOrDefault();
-                    decimal interestAmount = refundLog.Interest.GetValueOrDefault();
                     if (refundLog.RefundCurrency != _case.InvoiceCurrency)
                     {
                         decimal rate = Exchange.GetExchangeRate(refundLog.RefundCurrency, _case.InvoiceCurrency);
@@ -742,12 +736,13 @@ namespace CMBC.EasyFactor.ARMgr
                     }
 
                     totalRefund += refundAmount;
-                    totalInterest += interestAmount;
+                    totalInterest += refundLog.Interest.GetValueOrDefault();
+                    totalPenaltyInterest += refundLog.PenaltyInterest.GetValueOrDefault();
                 }
             }
 
             tbTotalRefund.Text = String.Format("{0:N2}", totalRefund);
-            tbTotalInterest.Text = String.Format("{0:N2}", totalInterest);
+            tbTotalInterest.Text = String.Format("{0:N2}", totalInterest+totalPenaltyInterest);
         }
 
         /// <summary>

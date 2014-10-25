@@ -823,7 +823,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 freezeReasonTextBox.ReadOnly = false;
                 freezeDateDateTimePicker.Enabled = true;
                 creditLine.Freezer = App.Current.CurUser.Name;
-                creditLine.FreezeDate = DateTime.Now.Date;
+                creditLine.FreezeDate = DateTime.Today;
             }
         }
 
@@ -1188,7 +1188,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             var creditLine = (ClientCreditLine)clientCreditLineBindingSource.DataSource;
             creditLine.CreateUserName = App.Current.CurUser.Name;
 
-            DateTime today = DateTime.Now.Date;
+            DateTime today = DateTime.Today;
             creditLine.CreditLineStatus = creditLine.PeriodEnd < today
                                               ? CLIENT_CREDIT_LINE.EXPIRY
                                               : CLIENT_CREDIT_LINE.AVAILABILITY;
@@ -1361,8 +1361,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     {
                         throw new Exception("创建合同编号失败，可能没有有效主合同");
                     }
-                    DateTime today = DateTime.Now.Date;
-                    contract.ContractStatus = contract.ContractDueDate < today ? CONTRACT.EXPIRY : CONTRACT.AVAILABILITY;
+                    contract.ContractStatus = contract.ContractDueDate < DateTime.Today ? CONTRACT.EXPIRY : CONTRACT.AVAILABILITY;
 
                     _context.Contracts.InsertOnSubmit(contract);
                     _context.SubmitChanges();
@@ -1411,8 +1410,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             else
             {
                 bool isUpdateOK = true;
-                DateTime today = DateTime.Now.Date;
-                contract.ContractStatus = contract.ContractDueDate < today ? CONTRACT.EXPIRY : CONTRACT.AVAILABILITY;
+                contract.ContractStatus = contract.ContractDueDate < DateTime.Today ? CONTRACT.EXPIRY : CONTRACT.AVAILABILITY;
 
                 try
                 {
@@ -2028,7 +2026,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                 unfreezeReasonTextBox.ReadOnly = false;
                 unfreezeDateDateTimePicker.Enabled = true;
                 creditLine.Unfreezer = App.Current.CurUser.Name;
-                creditLine.UnfreezeDate = DateTime.Now.Date;
+                creditLine.UnfreezeDate = DateTime.Today;
             }
         }
 

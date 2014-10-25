@@ -64,7 +64,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 Context = new DBDataContext();
                 IQueryable<Contract> queryResult =
                     Context.Contracts.Where(
-                        c => c.ContractStatus == CONTRACT.AVAILABILITY && c.ContractDueDate < DateTime.Now.Date);
+                        c => c.ContractStatus == CONTRACT.AVAILABILITY && c.ContractDueDate < DateTime.Today);
 
                 _bs.DataSource = queryResult;
                 lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());

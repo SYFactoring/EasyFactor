@@ -175,11 +175,11 @@ namespace CMBC.EasyFactor.ARMgr
                 decimal interest = 0;
                 if (batch.FinanceRateType2 == "计头不计尾")
                 {
-                    interest = (decimal)batch.FinanceRate * financeAmount * (log.FinanceDueDate - batch.FinancePeriodBegin).Days / 360;
+                    interest = (decimal)batch.FinanceRate * financeAmount * (log.ReassignDate.GetValueOrDefault() - batch.FinancePeriodBegin.Date).Days / 360;
                 }
                 else if (batch.FinanceRateType2 == "计头又计尾")
                 {
-                    interest = (decimal)batch.FinanceRate * financeAmount * ((log.FinanceDueDate - batch.FinancePeriodBegin).Days + 1) / 360;
+                    interest = (decimal)batch.FinanceRate * financeAmount * ((log.ReassignDate.GetValueOrDefault() - batch.FinancePeriodBegin.Date).Days + 1) / 360;
                 }
 
                 if (batch.BatchCurrency != "CNY")
@@ -642,7 +642,7 @@ namespace CMBC.EasyFactor.ARMgr
 
             var financeBatch = new InvoiceFinanceBatch
                                    {
-                                       FinancePeriodBegin = DateTime.Now,
+                                       FinancePeriodBegin = DateTime.Today,
                                        BatchCurrency = _case.InvoiceCurrency,
                                        FinanceRateType1 = "先收息",
                                        FinanceRateType2 = "计头不计尾",
@@ -661,12 +661,12 @@ namespace CMBC.EasyFactor.ARMgr
             IQueryable<Invoice> queryResult = from invoice in _context.Invoices
                                               where
                                                   invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode
-                                                  && invoice.IsFlaw == false
-                                                  && invoice.IsDispute.GetValueOrDefault() == false
-                                                  && invoice.DueDate > DateTime.Today.AddDays(1)
-                                                  && (invoice.AssignAmount > invoice.PaymentAmount.GetValueOrDefault() )
-                                                  && ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * (decimal)financeProp > invoice.FinanceAmount.GetValueOrDefault())
-                                                  && invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK
+                                                    && invoice.IsFlaw == false
+                                                    && invoice.IsDispute.GetValueOrDefault() == false
+                                                    && invoice.DueDate > DateTime.Today.AddDays(1)
+                                                    && (invoice.AssignAmount > invoice.PaymentAmount.GetValueOrDefault() )
+                                                    && ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * (decimal)financeProp) > (invoice.FinanceAmount.GetValueOrDefault()-invoice.RefundAmount.GetValueOrDefault())
+                                                    && invoice.InvoiceAssignBatch.CheckStatus == BATCH.CHECK
                                               orderby invoice.InvoiceAssignBatch.AssignDate
                                               select invoice;
 
@@ -725,8 +725,15 @@ namespace CMBC.EasyFactor.ARMgr
             dgvLogs.Rows[rowIndex].Cells["colFinanceAmount"].ReadOnly = !editable;
             dgvLogs.Rows[rowIndex].Cells["colPaidCommission"].ReadOnly = !editable;
             dgvLogs.Rows[rowIndex].Cells["colUnpaidCommission"].ReadOnly = !editable;
-            dgvLogs.Rows[rowIndex].Cells["colInterest"].ReadOnly = !editable;
-
+            var batch = (InvoiceFinanceBatch)batchBindingSource.DataSource;
+            if (batch.FinanceRateType1 == "先收息")
+            {
+                dgvLogs.Rows[rowIndex].Cells["colInterest"].ReadOnly = !editable;
+            }
+            else
+            {
+                dgvLogs.Rows[rowIndex].Cells["colInterest"].ReadOnly = true;
+            }
             if (_case.ActiveCDA.CommissionType == "按融资金额" || _case.ActiveCDA.CommissionType == "其他")
             {
                 dgvLogs.Rows[rowIndex].Cells["colPaidCommission"].ReadOnly = !editable;
@@ -842,13 +849,13 @@ namespace CMBC.EasyFactor.ARMgr
             if (batch.FinanceBatchNo == null)
             {
                 batch.FinanceBatchNo = InvoiceFinanceBatch.GenerateFinanceBatchNo(batch.FinancePeriodBegin);
-                batch.InputDate = DateTime.Today;
+                batch.InputDate = DateTime.Now;
 
                 if (batch.CommissionType == "按融资金额")
                 {
                     RevenueBatch commissionBatch = new RevenueBatch
                     {
-                        RevenueDate = DateTime.Now,
+                        RevenueDate = DateTime.Today,
                         CreateUserName = App.Current.CurUser.Name,
                         CheckStatus = BATCH.UNCHECK
                     };
@@ -865,7 +872,7 @@ namespace CMBC.EasyFactor.ARMgr
                                            {
                                                RevenueType = "融资手续费",
                                                RevenueCurrency = batch.BatchCurrency,
-                                               RevenueDate = DateTime.Now,
+                                               RevenueDate = DateTime.Today,
                                                RevenueValue = log.PaidCommission.GetValueOrDefault(),
                                                Invoice = invoice,
                                                RevenueBatch = commissionBatch
@@ -884,6 +891,7 @@ namespace CMBC.EasyFactor.ARMgr
                 {
                     log.Invoice = _context.Invoices.SingleOrDefault(invoice => invoice.InvoiceID == log.InvoiceID2);
                     logList.Add(log);
+                    log.Invoice.InvoiceFinanceLogs.Add(log);
                     log.InvoiceFinanceBatch = batch;
                     log.Invoice.CaculateFinance();
                 }

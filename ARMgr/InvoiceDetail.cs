@@ -323,7 +323,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             var invoice = (Invoice) invoiceBindingSource.DataSource;
-            invoice.DisputeDate = DateTime.Now.Date;
+            invoice.DisputeDate = DateTime.Today;
             invoice.DisputeUserName = App.Current.CurUser.Name;
             invoice.IsDispute = true;
             foreach (Control comp in groupPanelDispute.Controls)
@@ -345,7 +345,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             var invoice = (Invoice) invoiceBindingSource.DataSource;
-            invoice.DisputeResolveDate = DateTime.Now.Date;
+            invoice.DisputeResolveDate = DateTime.Today;
             invoice.DisputeResolveUserName = App.Current.CurUser.Name;
             invoice.IsDispute = false;
             foreach (Control comp in groupPanelDisputeResolve.Controls)
@@ -391,7 +391,7 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             var invoice = (Invoice) invoiceBindingSource.DataSource;
-            invoice.FlawResolveDate = DateTime.Now.Date;
+            invoice.FlawResolveDate = DateTime.Today;
             invoice.FlawResolveUserName = App.Current.CurUser.Name;
             invoice.IsFlaw = false;
 
