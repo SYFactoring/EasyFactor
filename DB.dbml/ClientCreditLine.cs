@@ -19,6 +19,28 @@ namespace CMBC.EasyFactor.DB.dbml
     {
         private static readonly Regex ApproveNoRegex = new Regex(@"^[a-zA-Z0-9]+$");
 
+        public decimal CreditLineOutstanding
+        {
+            get
+            {
+                if(CreditLineType=="保理预付款融资额度")
+                {
+                    return FinanceCreditLineOutstanding;
+                }else if(CreditLineType=="买方信用风险担保额度")
+                {
+                    return AssignCreditLineOutstanding;
+                }else if(CreditLineType=="池融资额度")
+                {
+                    return CreditLine;
+                }else if(CreditLineType=="订单融资额度")
+                {
+                    return CreditLine;
+                }else
+                {
+                    return 0;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets

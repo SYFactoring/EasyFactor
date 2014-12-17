@@ -61,8 +61,9 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelQuery = new DevComponents.DotNetBar.PanelEx();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.cbClientGroupType = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -72,18 +73,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.tbClientEDICode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClientEDICode = new DevComponents.DotNetBar.LabelX();
             this.dgvClientCreditLines = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cmuCreditLineMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemCreditLineSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCreditLineDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.colClientEDICode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClientNameCN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClientNameEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineCurrency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLineOutstanding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPeriodEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLineStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmuCreditLineMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemCreditLineSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCreditLineDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientCreditLines)).BeginInit();
             this.cmuCreditLineMgr.SuspendLayout();
@@ -92,7 +94,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // panelQuery
             // 
             this.panelQuery.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelQuery.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.panelQuery.Controls.Add(this.lblCount);
             this.panelQuery.Controls.Add(this.cbClientGroupType);
             this.panelQuery.Controls.Add(this.btnQuery);
@@ -100,6 +102,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.panelQuery.Controls.Add(this.lblClientName);
             this.panelQuery.Controls.Add(this.tbClientEDICode);
             this.panelQuery.Controls.Add(this.lblClientEDICode);
+            this.panelQuery.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelQuery.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuery.Location = new System.Drawing.Point(0, 0);
             this.panelQuery.Name = "panelQuery";
@@ -119,7 +122,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             // 
-            this.lblCount.BackgroundStyle.Class = "";
+            this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblCount.Location = new System.Drawing.Point(529, 6);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(0, 0);
@@ -138,7 +141,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.cbClientGroupType.Location = new System.Drawing.Point(342, 3);
             this.cbClientGroupType.Name = "cbClientGroupType";
             this.cbClientGroupType.Size = new System.Drawing.Size(100, 20);
-            this.cbClientGroupType.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbClientGroupType.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.cbClientGroupType.TabIndex = 7;
             // 
             // btnQuery
@@ -148,7 +151,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.btnQuery.Location = new System.Drawing.Point(448, 3);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 21);
-            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuery.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnQuery.TabIndex = 4;
             this.btnQuery.Text = "²éÑ¯";
             this.btnQuery.Click += new System.EventHandler(this.Query);
@@ -159,6 +162,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbClientName.Border.Class = "TextBoxBorder";
+            this.tbClientName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbClientName.Location = new System.Drawing.Point(236, 3);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(100, 21);
@@ -170,7 +174,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             // 
-            this.lblClientName.BackgroundStyle.Class = "";
+            this.lblClientName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblClientName.Location = new System.Drawing.Point(174, 5);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(56, 18);
@@ -183,6 +187,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             this.tbClientEDICode.Border.Class = "TextBoxBorder";
+            this.tbClientEDICode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.tbClientEDICode.Location = new System.Drawing.Point(68, 3);
             this.tbClientEDICode.Name = "tbClientEDICode";
             this.tbClientEDICode.Size = new System.Drawing.Size(100, 21);
@@ -194,7 +199,7 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             // 
             // 
             // 
-            this.lblClientEDICode.BackgroundStyle.Class = "";
+            this.lblClientEDICode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblClientEDICode.Location = new System.Drawing.Point(6, 5);
             this.lblClientEDICode.Name = "lblClientEDICode";
             this.lblClientEDICode.Size = new System.Drawing.Size(56, 18);
@@ -223,18 +228,19 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colCreditLineType,
             this.colCreditLineCurrency,
             this.colCreditLine,
+            this.colCreditLineOutstanding,
             this.colPeriodBegin,
             this.colPeriodEnd,
             this.colCreditLineStatus});
             this.dgvClientCreditLines.ContextMenuStrip = this.cmuCreditLineMgr;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientCreditLines.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvClientCreditLines.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClientCreditLines.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvClientCreditLines.Location = new System.Drawing.Point(0, 30);
@@ -247,6 +253,28 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.dgvClientCreditLines.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellDoubleClick);
             this.dgvClientCreditLines.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvClientCreditLinesDataBindingComplete);
             this.dgvClientCreditLines.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvClientCreditLinesRowPostPaint);
+            // 
+            // cmuCreditLineMgr
+            // 
+            this.cmuCreditLineMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemCreditLineSelect,
+            this.menuItemCreditLineDetail});
+            this.cmuCreditLineMgr.Name = "cmuContractMgr";
+            this.cmuCreditLineMgr.Size = new System.Drawing.Size(149, 48);
+            // 
+            // menuItemCreditLineSelect
+            // 
+            this.menuItemCreditLineSelect.Name = "menuItemCreditLineSelect";
+            this.menuItemCreditLineSelect.Size = new System.Drawing.Size(148, 22);
+            this.menuItemCreditLineSelect.Text = "Ñ¡¶¨¶î¶ÈÉêÇë";
+            this.menuItemCreditLineSelect.Click += new System.EventHandler(this.SelectClientCreditLine);
+            // 
+            // menuItemCreditLineDetail
+            // 
+            this.menuItemCreditLineDetail.Name = "menuItemCreditLineDetail";
+            this.menuItemCreditLineDetail.Size = new System.Drawing.Size(148, 22);
+            this.menuItemCreditLineDetail.Text = "ÏêÏ¸ÐÅÏ¢";
+            this.menuItemCreditLineDetail.Click += new System.EventHandler(this.DetailClientCreditLine);
             // 
             // colClientEDICode
             // 
@@ -296,6 +324,16 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
             // 
+            // colCreditLineOutstanding
+            // 
+            this.colCreditLineOutstanding.DataPropertyName = "CreditLineOutstanding";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.colCreditLineOutstanding.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colCreditLineOutstanding.HeaderText = "¶î¶ÈÓà¶î";
+            this.colCreditLineOutstanding.Name = "colCreditLineOutstanding";
+            this.colCreditLineOutstanding.ReadOnly = true;
+            // 
             // colPeriodBegin
             // 
             this.colPeriodBegin.DataPropertyName = "PeriodBegin";
@@ -317,28 +355,6 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
             this.colCreditLineStatus.Name = "colCreditLineStatus";
             this.colCreditLineStatus.ReadOnly = true;
             // 
-            // cmuCreditLineMgr
-            // 
-            this.cmuCreditLineMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemCreditLineSelect,
-            this.menuItemCreditLineDetail});
-            this.cmuCreditLineMgr.Name = "cmuContractMgr";
-            this.cmuCreditLineMgr.Size = new System.Drawing.Size(147, 48);
-            // 
-            // menuItemCreditLineSelect
-            // 
-            this.menuItemCreditLineSelect.Name = "menuItemCreditLineSelect";
-            this.menuItemCreditLineSelect.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditLineSelect.Text = "Ñ¡¶¨¶î¶ÈÉêÇë";
-            this.menuItemCreditLineSelect.Click += new System.EventHandler(this.SelectClientCreditLine);
-            // 
-            // menuItemCreditLineDetail
-            // 
-            this.menuItemCreditLineDetail.Name = "menuItemCreditLineDetail";
-            this.menuItemCreditLineDetail.Size = new System.Drawing.Size(146, 22);
-            this.menuItemCreditLineDetail.Text = "ÏêÏ¸ÐÅÏ¢";
-            this.menuItemCreditLineDetail.Click += new System.EventHandler(this.DetailClientCreditLine);
-            // 
             // ClientCreditLineMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -357,17 +373,18 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
 
         #endregion
 
+        private System.Windows.Forms.ContextMenuStrip cmuCreditLineMgr;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditLineSelect;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCreditLineDetail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientEDICode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameCN;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientNameEN;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineOutstanding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodBegin;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriodEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLineStatus;
-        private System.Windows.Forms.ContextMenuStrip cmuCreditLineMgr;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCreditLineSelect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemCreditLineDetail;
     }
 }

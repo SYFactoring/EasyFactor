@@ -1617,8 +1617,8 @@ namespace CMBC.EasyFactor.Utils
                 datasheet.Cells[1, column++] = "融资币别";
                 datasheet.Cells[1, column++] = "融资利率";
                 datasheet.Cells[1, column++] = "成本利率";
-                datasheet.Cells[1, column++] = "本次融资起始日";
-                datasheet.Cells[1, column++] = "本次融资到期日";
+                datasheet.Cells[1, column++] = "融资日";
+                datasheet.Cells[1, column++] = "预计回购日";
                 datasheet.Cells[1, column++] = "本次融资备注";
                 datasheet.Cells[1, column++] = "本次融资经办人";
                 //融资

@@ -1355,7 +1355,10 @@ namespace CMBC.EasyFactor.InfoMgr.ClientMgr
                     {
                         throw new Exception("创建合同编号失败，客户编号为空");
                     }
-
+                    if (client.ClientCoreNo == null)
+                    {
+                        throw new Exception("客户号为空，不能保存合同");
+                    }
                     contract.ContractCode = contract.newContractCode();
                     if(contract.ContractCode == String.Empty)
                     {

@@ -76,6 +76,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRevenueBatchID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -321,6 +323,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvRevenues.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRevenues.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRevenues.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colClientName,
+            this.colRevenueBatchID,
             this.colInvoiceID,
             this.colAssignAmount,
             this.colAssignDate,
@@ -338,7 +342,7 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvRevenues.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvRevenues.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRevenues.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.dgvRevenues.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvRevenues.Location = new System.Drawing.Point(0, 30);
             this.dgvRevenues.Name = "dgvRevenues";
             this.dgvRevenues.ReadOnly = true;
@@ -410,6 +414,20 @@ namespace CMBC.EasyFactor.ARMgr
             this.dataGridViewTextBoxColumn8.HeaderText = "收入金额";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.Width = 93;
+            // 
+            // colClientName
+            // 
+            this.colClientName.DataPropertyName = "ClientName";
+            this.colClientName.HeaderText = "客户名称";
+            this.colClientName.Name = "colClientName";
+            this.colClientName.ReadOnly = true;
+            // 
+            // colRevenueBatchID
+            // 
+            this.colRevenueBatchID.DataPropertyName = "BatchID";
+            this.colRevenueBatchID.HeaderText = "交易编号";
+            this.colRevenueBatchID.Name = "colRevenueBatchID";
+            this.colRevenueBatchID.ReadOnly = true;
             // 
             // colInvoiceID
             // 
@@ -498,14 +516,6 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTo;
         private DevComponents.DotNetBar.LabelX lblDatePicker;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateFrom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueCurrency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -514,5 +524,15 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClientName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueBatchID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInvoiceID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssignDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommissionPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRevenueValue;
     }
 }
