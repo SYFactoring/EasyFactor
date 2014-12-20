@@ -622,9 +622,9 @@ namespace CMBC.EasyFactor.ARMgr
                 }
             }
 
-            if (_context.InvoiceFinanceBatches.Count(batch => batch.Case.SellerClient == _case.SellerClient && batch.FinancePeriodBegin.Date == DateTime.Today) > 0)
+            if (_context.InvoiceFinanceBatches.Count(batch => batch.Case == _case && batch.FinancePeriodBegin.Date == DateTime.Today) > 0)
             {
-                MessageBoxEx.Show("同一客户同一天不能进行再次融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
+                MessageBoxEx.Show("同一案件同一天不能进行再次融资", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
                   MessageBoxIcon.Information);
                 return;
             }
@@ -680,6 +680,12 @@ namespace CMBC.EasyFactor.ARMgr
 
                 var log = new InvoiceFinanceLog(invoice);
                 logs.Add(log);
+            }
+
+            if (logs.Count == 0)
+            {
+                MessageBoxEx.Show("没有符合条件的发票", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
             logsBindingSource.DataSource = logs;

@@ -538,6 +538,12 @@ namespace CMBC.EasyFactor.ARMgr
                 logs.Add(log);
             }
 
+            if (logs.Count == 0)
+            {
+                MessageBoxEx.Show("没有符合条件的发票", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             logsBindingSource.DataSource = logs;
             StatBatch();
         }

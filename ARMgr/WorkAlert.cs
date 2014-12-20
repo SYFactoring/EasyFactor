@@ -297,7 +297,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryCDADue(object sender, EventArgs e)
         {
             var mgr = new CDAMgr(CDAMgr.OpCDAType.DUE);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -308,7 +308,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryClientCreditLineDue(object sender, EventArgs e)
         {
             var mgr = new ClientCreditLineMgr(ClientCreditLineMgr.OpClientCreditMgrType.DUE);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryContractDue(object sender, EventArgs e)
         {
             var mgr = new ContractMgr(ContractMgr.OpContractType.DUE);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -330,7 +330,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryFactorCreditLineDue(object sender, EventArgs e)
         {
             var mgr = new FactorCreditLineMgr(FactorCreditLineMgr.OpFactorCreditMgrType.DUE);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryDuplicateInvoice(object sender, EventArgs e)
         {
             var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DUPLICATE_INVOICE);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryInvoiceAssignDue(object sender, EventArgs e)
         {
             var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.ASSIGN_DUE);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -363,7 +363,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryInvoiceAssignDueBy0(object sender, EventArgs e)
         {
             var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.ASSIGN_DUE_BYDAY, 0);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -374,7 +374,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryInvoiceAssignDueBy7(object sender, EventArgs e)
         {
             var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.ASSIGN_DUE_BYDAY, -7);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -385,7 +385,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryInvoiceDispute(object sender, EventArgs e)
         {
             var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DISPUTE_RESOLVE);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -396,7 +396,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryInvoiceFinanceDue(object sender, EventArgs e)
         {
             var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FINANCE_DUE);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -407,7 +407,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryInvoiceFinanceDueBy0(object sender, EventArgs e)
         {
             var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FINANCE_DUE_BYDAY, 0);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -418,7 +418,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryInvoiceFinanceDueBy7(object sender, EventArgs e)
         {
             var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FINANCE_DUE_BYDAY, -7);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -429,7 +429,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryNeedCheckCDAs(object sender, EventArgs e)
         {
             var mgr = new CDAMgr(CDAMgr.OpCDAType.CHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -440,7 +440,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryRejectCheckCDAs(object sender, EventArgs e)
         {
             var mgr = new CDAMgr(App.Current.CurUser.Name, CDAStr.REJECT);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -451,7 +451,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryWaitCheckCDAs(object sender, EventArgs e)
         {
             var mgr = new CDAMgr(App.Current.CurUser.Name, CDAStr.UNCHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -462,7 +462,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryNeedCheckAssignBatch(object sender, EventArgs e)
         {
             var mgr = new AssignBatchMgr(null, BATCH.UNCHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -473,7 +473,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryRejectCheckAssignBatch(object sender, EventArgs e)
         {
             var mgr = new AssignBatchMgr(App.Current.CurUser.Name, BATCH.REJECT);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -484,7 +484,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryWaitCheckAssignBatch(object sender, EventArgs e)
         {
             var mgr = new AssignBatchMgr(App.Current.CurUser.Name, BATCH.UNCHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -495,7 +495,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryNeedCheckFinanceBatch(object sender, EventArgs e)
         {
             var mgr = new FinanceBatchMgr(null, BATCH.UNCHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -506,7 +506,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryRejectCheckFinanceBatch(object sender, EventArgs e)
         {
             var mgr = new FinanceBatchMgr(App.Current.CurUser.Name, BATCH.REJECT);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -517,7 +517,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryWaitCheckFinanceBatch(object sender, EventArgs e)
         {
             var mgr = new FinanceBatchMgr(App.Current.CurUser.Name, BATCH.UNCHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -528,7 +528,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryNeedCheckPaymentBatch(object sender, EventArgs e)
         {
             var mgr = new PaymentBatchMgr(null, BATCH.UNCHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -539,7 +539,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryRejectCheckPaymentBatch(object sender, EventArgs e)
         {
             var mgr = new PaymentBatchMgr(App.Current.CurUser.Name, BATCH.REJECT);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -550,7 +550,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryWaitCheckPaymentBatch(object sender, EventArgs e)
         {
             var mgr = new PaymentBatchMgr(App.Current.CurUser.Name, BATCH.UNCHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -561,7 +561,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryNeedCheckRefundBatch(object sender, EventArgs e)
         {
             var mgr = new RefundBatchMgr(null, BATCH.UNCHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -572,7 +572,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryRejectCheckRefundBatch(object sender, EventArgs e)
         {
             var mgr = new RefundBatchMgr(App.Current.CurUser.Name, BATCH.REJECT);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
 
         /// <summary>
@@ -583,7 +583,7 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryWaitCheckRefundBatch(object sender, EventArgs e)
         {
             var mgr = new RefundBatchMgr(App.Current.CurUser.Name, BATCH.UNCHECK);
-            App.Current.MainWindow.SetDetailPanel(mgr);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
     }
 }

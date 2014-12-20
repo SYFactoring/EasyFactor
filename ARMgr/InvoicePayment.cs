@@ -501,6 +501,12 @@ namespace CMBC.EasyFactor.ARMgr
                 logs.Add(log);
             }
 
+            if (logs.Count == 0)
+            {
+                MessageBoxEx.Show("没有符合条件的发票", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             logsBindingSource.DataSource = logs;
             StatBatch();
         }
@@ -726,6 +732,7 @@ namespace CMBC.EasyFactor.ARMgr
         private bool ValidateBatch()
         {
             IList logList = logsBindingSource.List;
+            var batch = (InvoicePaymentBatch)batchBindingSource.DataSource;
 
             for (int i = 0; i < logList.Count; i++)
             {
@@ -752,6 +759,16 @@ namespace CMBC.EasyFactor.ARMgr
                     //        return false;
                     //    }
                     //}
+
+
+                    if (batch.PaymentType == "贷项通知")
+                    {
+                        if (String.IsNullOrEmpty(log.CreditNoteNo2)&&String.IsNullOrEmpty(log.CreditNoteNo))
+                        {
+                            MessageBoxEx.Show("贷项通知编号不能为空", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return false;
+                        }
+                    }
                 }
             }
             return true;

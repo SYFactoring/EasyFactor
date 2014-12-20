@@ -668,6 +668,7 @@ namespace CMBC.EasyFactor.CaseMgr
                 cda.FinanceLine = null;
                 cda.FinanceLineCurr = string.Empty;
                 cda.HighestFinanceLine = null;
+
             }
         }
 

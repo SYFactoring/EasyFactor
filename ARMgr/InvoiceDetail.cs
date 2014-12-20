@@ -254,6 +254,11 @@ namespace CMBC.EasyFactor.ARMgr
         private void DetailFinanceBatch(object sender, EventArgs e)
         {
             var invoice = (Invoice) invoiceBindingSource.DataSource;
+            if (String.IsNullOrEmpty(invoice.FinanceBatchNos))
+            {
+                return;
+            }
+
             string[] batchNoes = invoice.FinanceBatchNos.Split(new[] {';'});
             foreach (var detail in from batchNo in batchNoes
                                    select _context.InvoiceFinanceBatches.Single(i => i.FinanceBatchNo == batchNo)
@@ -271,6 +276,11 @@ namespace CMBC.EasyFactor.ARMgr
         private void DetailPaymentBatch(object sender, EventArgs e)
         {
             var invoice = (Invoice) invoiceBindingSource.DataSource;
+            if (String.IsNullOrEmpty(invoice.PaymentBatchNos))
+            {
+                return;
+            }
+
             string[] batchNoes = invoice.PaymentBatchNos.Split(new[] {';'});
             foreach (string batchNo in batchNoes)
             {
@@ -295,6 +305,10 @@ namespace CMBC.EasyFactor.ARMgr
         private void DetailRefundBatch(object sender, EventArgs e)
         {
             var invoice = (Invoice) invoiceBindingSource.DataSource;
+            if (String.IsNullOrEmpty(invoice.RefundBatchNos))
+            {
+                return;
+            }
             string[] batchNoes = invoice.RefundBatchNos.Split(new[] {';'});
             foreach (string batchNo in batchNoes)
             {
@@ -345,6 +359,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             var invoice = (Invoice) invoiceBindingSource.DataSource;
+            if (invoice.DisputeReason == null)
+            {
+                return;
+            }
+
             invoice.DisputeResolveDate = DateTime.Today;
             invoice.DisputeResolveUserName = App.Current.CurUser.Name;
             invoice.IsDispute = false;
@@ -391,6 +410,11 @@ namespace CMBC.EasyFactor.ARMgr
             }
 
             var invoice = (Invoice) invoiceBindingSource.DataSource;
+            if (invoice.FlawReason == null)
+            {
+                return;
+            }
+
             invoice.FlawResolveDate = DateTime.Today;
             invoice.FlawResolveUserName = App.Current.CurUser.Name;
             invoice.IsFlaw = false;

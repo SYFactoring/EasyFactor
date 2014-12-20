@@ -61,7 +61,7 @@ namespace CMBC.EasyFactor.ARMgr
         {
             _case = selectedCase;
             panelQuery.Visible = false;
-            _bs.DataSource = _case.InvoiceAssignBatches;
+            _bs.DataSource = _case.InvoiceAssignBatches.Where(batch=>batch.CheckStatus!=BATCH.CHECK);
             Context = context;
         }
 

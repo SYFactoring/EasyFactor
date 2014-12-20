@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "EasyFactoringÒ×±£"
-#define MyAppVersion "4.12.17.11"
+#define MyAppVersion "4.12.20.12"
 #define MyAppPublisher "Easy Company, Inc."
 #define MyAppExeName "EasyFactoring.exe"
 

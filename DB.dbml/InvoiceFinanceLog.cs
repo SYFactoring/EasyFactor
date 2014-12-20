@@ -305,7 +305,23 @@ namespace CMBC.EasyFactor.DB.dbml
             {
                 normalInterest = (decimal)InvoiceFinanceBatch.FinanceRate * FinanceOutstanding * ((normalDate - InvoiceFinanceBatch.FinancePeriodBegin.Date).Days + 1) / 360;
             }
+            
             return normalInterest;
+        }
+
+        public double FinanceRate
+        {
+            get { return this.InvoiceFinanceBatch.FinanceRate; }
+        }
+
+        public string FinanceRateType1
+        {
+            get { return this.InvoiceFinanceBatch.FinanceRateType1; }
+        }
+
+        public string FinanceRateType2
+        {
+            get { return this.InvoiceFinanceBatch.FinanceRateType2; }
         }
     }
 }
