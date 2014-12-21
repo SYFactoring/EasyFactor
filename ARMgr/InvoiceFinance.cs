@@ -560,6 +560,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
+            ResetControlsStatus();
             if (_case == null)
             {
                 MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -647,7 +648,8 @@ namespace CMBC.EasyFactor.ARMgr
                                        FinanceRateType1 = "先收息",
                                        FinanceRateType2 = "计头不计尾",
                                        WhoPayInterest = "卖方付",
-                                       CreateUserName = App.Current.CurUser.Name
+                                       CreateUserName = App.Current.CurUser.Name,
+                                       ReassignGracePeriod = _case.ActiveCDA.ReassignGracePeriod.GetValueOrDefault()
                                    };
             if (activeCDA.FinanceRatioType == "固定利率")
             {
@@ -678,7 +680,7 @@ namespace CMBC.EasyFactor.ARMgr
                     continue;
                 }
 
-                var log = new InvoiceFinanceLog(invoice);
+                var log = new InvoiceFinanceLog(invoice, financeBatch.ReassignGracePeriod);
                 logs.Add(log);
             }
 
@@ -896,6 +898,7 @@ namespace CMBC.EasyFactor.ARMgr
                 if (Boolean.Parse(dgvLogs.Rows[i].Cells[0].EditedFormattedValue.ToString()))
                 {
                     log.Invoice = _context.Invoices.SingleOrDefault(invoice => invoice.InvoiceID == log.InvoiceID2);
+                    log.ReassignDate = log.Invoice.DueDate.AddDays(batch.ReassignGracePeriod.GetValueOrDefault());
                     logList.Add(log);
                     log.Invoice.InvoiceFinanceLogs.Add(log);
                     log.InvoiceFinanceBatch = batch;

@@ -16,6 +16,12 @@ namespace CMBC.EasyFactor.DB.dbml
     /// </summary>
     public partial class InvoiceFinanceLog
     {
+        public InvoiceFinanceLog(Invoice invoice,int? reassignGradePeriod)
+            : this(invoice)
+        {
+            ReassignDate = invoice.DueDate.AddDays(reassignGradePeriod.GetValueOrDefault());
+        }
+
         public InvoiceFinanceLog(Invoice invoice)
             : this()
         {
@@ -30,9 +36,7 @@ namespace CMBC.EasyFactor.DB.dbml
             AssignDate2 = invoice.AssignDate;
             InvoiceFinanceAmount2 = invoice.FinanceAmount;
             InvoiceFinanceOutstanding2 = invoice.FinanceOutstanding;
-            ReassignDate = invoice.DueDate.AddDays(invoice.InvoiceAssignBatch.Case.ActiveCDA.ReassignGracePeriod.GetValueOrDefault());
         }
-
         /// <summary>
         /// 
         /// </summary>

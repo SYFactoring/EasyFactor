@@ -476,6 +476,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
+            ResetControlsStatus();
             if (_case == null)
             {
                 MessageBoxEx.Show("没有有效的额度通知书", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK,
@@ -514,7 +515,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SaveAssignBatch(object sender, EventArgs e)
+        private void SaveBatch(object sender, EventArgs e)
         {
             if (!PermUtil.CheckPermission(Permissions.INVOICE_UPDATE))
             {

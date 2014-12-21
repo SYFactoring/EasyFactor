@@ -468,7 +468,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.btnAssignBatchSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.btnAssignBatchSave.TabIndex = 8;
             this.btnAssignBatchSave.Text = "±£´æÅú´Î";
-            this.btnAssignBatchSave.Click += new System.EventHandler(this.SaveAssignBatch);
+            this.btnAssignBatchSave.Click += new System.EventHandler(this.SaveBatch);
             // 
             // commentTextBox
             // 

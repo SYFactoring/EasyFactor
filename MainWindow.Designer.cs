@@ -2638,6 +2638,7 @@ namespace CMBC.EasyFactor
             // lblFunctionStatus
             // 
             this.lblFunctionStatus.Name = "lblFunctionStatus";
+            this.lblFunctionStatus.Stretch = true;
             // 
             // lblCurrentUser
             // 

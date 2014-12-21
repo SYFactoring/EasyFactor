@@ -452,6 +452,7 @@ namespace CMBC.EasyFactor.ARMgr
         /// <param name="e"></param>
         private void NewBatch(object sender, EventArgs e)
         {
+            ResetControlsStatus();
             if (_case == null)
             {
                 MessageBoxEx.Show("没有选定案件", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);

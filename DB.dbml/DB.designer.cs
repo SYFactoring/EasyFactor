@@ -9294,6 +9294,8 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private string _WhoPayInterest;
 		
+		private System.Nullable<int> _ReassignGracePeriod;
+		
 		private EntitySet<InvoiceRefundBatch> _InvoiceRefundBatches;
 		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
@@ -9350,6 +9352,8 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnFinanceRateType2Changed();
     partial void OnWhoPayInterestChanging(string value);
     partial void OnWhoPayInterestChanged();
+    partial void OnReassignGracePeriodChanging(System.Nullable<int> value);
+    partial void OnReassignGracePeriodChanged();
     #endregion
 		
 		public InvoiceFinanceBatch()
@@ -9790,6 +9794,26 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._WhoPayInterest = value;
 					this.SendPropertyChanged("WhoPayInterest");
 					this.OnWhoPayInterestChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReassignGracePeriod", DbType="Int", UpdateCheck=UpdateCheck.WhenChanged)]
+		public System.Nullable<int> ReassignGracePeriod
+		{
+			get
+			{
+				return this._ReassignGracePeriod;
+			}
+			set
+			{
+				if ((this._ReassignGracePeriod != value))
+				{
+					this.OnReassignGracePeriodChanging(value);
+					this.SendPropertyChanging();
+					this._ReassignGracePeriod = value;
+					this.SendPropertyChanged("ReassignGracePeriod");
+					this.OnReassignGracePeriodChanged();
 				}
 			}
 		}
