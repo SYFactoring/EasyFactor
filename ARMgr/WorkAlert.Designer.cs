@@ -103,6 +103,14 @@ namespace CMBC.EasyFactor.ARMgr
             this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.highlighter = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.panelFlaw = new DevComponents.DotNetBar.ExpandablePanel();
+            this.btnRejectFlawCheck = new DevComponents.DotNetBar.ButtonX();
+            this.btnWaitFlawCheck = new DevComponents.DotNetBar.ButtonX();
+            this.btnNeedFlawCheck = new DevComponents.DotNetBar.ButtonX();
+            this.panelDispute = new DevComponents.DotNetBar.ExpandablePanel();
+            this.btnRejectDisputeCheck = new DevComponents.DotNetBar.ButtonX();
+            this.btnWaitDisputeCheck = new DevComponents.DotNetBar.ButtonX();
+            this.btnNeedDisputeCheck = new DevComponents.DotNetBar.ButtonX();
             this.panelTop.SuspendLayout();
             this.panelCDADue.SuspendLayout();
             this.panelOtherDue.SuspendLayout();
@@ -113,12 +121,15 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCheckPaymentBatch.SuspendLayout();
             this.panelCheckFinanceBatch.SuspendLayout();
             this.panelCheckAssignBatch.SuspendLayout();
+            this.panelFlaw.SuspendLayout();
+            this.panelDispute.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTop
             // 
             this.panelTop.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelTop.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.panelTop.Controls.Add(this.panelFlaw);
             this.panelTop.Controls.Add(this.panelCDADue);
             this.panelTop.Controls.Add(this.panelOtherDue);
             this.panelTop.Controls.Add(this.panelFinanceDue);
@@ -127,7 +138,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(801, 184);
+            this.panelTop.Size = new System.Drawing.Size(1001, 184);
             this.panelTop.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelTop.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelTop.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -478,6 +489,7 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.panelBottom.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelBottom.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.panelBottom.Controls.Add(this.panelDispute);
             this.panelBottom.Controls.Add(this.panelCheckRefundBatch);
             this.panelBottom.Controls.Add(this.panelCheckPaymentBatch);
             this.panelBottom.Controls.Add(this.panelCheckFinanceBatch);
@@ -486,7 +498,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(0, 184);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(801, 202);
+            this.panelBottom.Size = new System.Drawing.Size(1001, 202);
             this.panelBottom.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelBottom.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelBottom.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -808,6 +820,152 @@ namespace CMBC.EasyFactor.ARMgr
             // 
             this.highlighter.ContainerControl = this;
             // 
+            // panelFlaw
+            // 
+            this.panelFlaw.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelFlaw.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelFlaw.Controls.Add(this.btnRejectFlawCheck);
+            this.panelFlaw.Controls.Add(this.btnWaitFlawCheck);
+            this.panelFlaw.Controls.Add(this.btnNeedFlawCheck);
+            this.panelFlaw.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelFlaw.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelFlaw.ExpandOnTitleClick = true;
+            this.panelFlaw.Location = new System.Drawing.Point(800, 0);
+            this.panelFlaw.Name = "panelFlaw";
+            this.panelFlaw.Size = new System.Drawing.Size(200, 184);
+            this.panelFlaw.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelFlaw.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelFlaw.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelFlaw.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelFlaw.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelFlaw.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelFlaw.Style.GradientAngle = 90;
+            this.panelFlaw.TabIndex = 4;
+            this.panelFlaw.TitleHeight = 24;
+            this.panelFlaw.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelFlaw.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelFlaw.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelFlaw.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelFlaw.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelFlaw.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelFlaw.TitleStyle.GradientAngle = 90;
+            this.panelFlaw.TitleText = "瑕疵";
+            // 
+            // btnRejectFlawCheck
+            // 
+            this.btnRejectFlawCheck.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRejectFlawCheck.AutoExpandOnClick = true;
+            this.btnRejectFlawCheck.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRejectFlawCheck.Location = new System.Drawing.Point(15, 80);
+            this.btnRejectFlawCheck.Name = "btnRejectFlawCheck";
+            this.btnRejectFlawCheck.Size = new System.Drawing.Size(140, 23);
+            this.btnRejectFlawCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnRejectFlawCheck.TabIndex = 0;
+            this.btnRejectFlawCheck.Text = "c) 拒绝放行";
+            this.btnRejectFlawCheck.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnRejectFlawCheck.Click += new System.EventHandler(this.QueryRejectFlawCheck);
+            // 
+            // btnWaitFlawCheck
+            // 
+            this.btnWaitFlawCheck.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnWaitFlawCheck.AutoExpandOnClick = true;
+            this.btnWaitFlawCheck.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnWaitFlawCheck.Location = new System.Drawing.Point(15, 54);
+            this.btnWaitFlawCheck.Name = "btnWaitFlawCheck";
+            this.btnWaitFlawCheck.Size = new System.Drawing.Size(140, 23);
+            this.btnWaitFlawCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnWaitFlawCheck.TabIndex = 0;
+            this.btnWaitFlawCheck.Text = "b) 等待放行";
+            this.btnWaitFlawCheck.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnWaitFlawCheck.Click += new System.EventHandler(this.QueryWaitFlawCheck);
+            // 
+            // btnNeedFlawCheck
+            // 
+            this.btnNeedFlawCheck.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNeedFlawCheck.AutoExpandOnClick = true;
+            this.btnNeedFlawCheck.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnNeedFlawCheck.Location = new System.Drawing.Point(15, 27);
+            this.btnNeedFlawCheck.Name = "btnNeedFlawCheck";
+            this.btnNeedFlawCheck.Size = new System.Drawing.Size(140, 23);
+            this.btnNeedFlawCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnNeedFlawCheck.TabIndex = 0;
+            this.btnNeedFlawCheck.Text = "a) 需要放行";
+            this.btnNeedFlawCheck.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnNeedFlawCheck.Click += new System.EventHandler(this.QueryNeedFlawCheck);
+            // 
+            // panelDispute
+            // 
+            this.panelDispute.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelDispute.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.panelDispute.Controls.Add(this.btnRejectDisputeCheck);
+            this.panelDispute.Controls.Add(this.btnWaitDisputeCheck);
+            this.panelDispute.Controls.Add(this.btnNeedDisputeCheck);
+            this.panelDispute.DisabledBackColor = System.Drawing.Color.Empty;
+            this.panelDispute.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelDispute.ExpandOnTitleClick = true;
+            this.panelDispute.Location = new System.Drawing.Point(800, 0);
+            this.panelDispute.Name = "panelDispute";
+            this.panelDispute.Size = new System.Drawing.Size(200, 202);
+            this.panelDispute.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelDispute.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelDispute.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelDispute.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelDispute.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelDispute.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelDispute.Style.GradientAngle = 90;
+            this.panelDispute.TabIndex = 5;
+            this.panelDispute.TitleHeight = 24;
+            this.panelDispute.TitleStyle.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelDispute.TitleStyle.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelDispute.TitleStyle.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelDispute.TitleStyle.Border = DevComponents.DotNetBar.eBorderType.RaisedInner;
+            this.panelDispute.TitleStyle.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelDispute.TitleStyle.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelDispute.TitleStyle.GradientAngle = 90;
+            this.panelDispute.TitleText = "商纠";
+            // 
+            // btnRejectDisputeCheck
+            // 
+            this.btnRejectDisputeCheck.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRejectDisputeCheck.AutoExpandOnClick = true;
+            this.btnRejectDisputeCheck.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRejectDisputeCheck.Location = new System.Drawing.Point(15, 80);
+            this.btnRejectDisputeCheck.Name = "btnRejectDisputeCheck";
+            this.btnRejectDisputeCheck.Size = new System.Drawing.Size(140, 23);
+            this.btnRejectDisputeCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnRejectDisputeCheck.TabIndex = 0;
+            this.btnRejectDisputeCheck.Text = "c) 拒绝放行";
+            this.btnRejectDisputeCheck.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnRejectDisputeCheck.Click += new System.EventHandler(this.QueryRejectDisputeCheck);
+            // 
+            // btnWaitDisputeCheck
+            // 
+            this.btnWaitDisputeCheck.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnWaitDisputeCheck.AutoExpandOnClick = true;
+            this.btnWaitDisputeCheck.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnWaitDisputeCheck.Location = new System.Drawing.Point(15, 54);
+            this.btnWaitDisputeCheck.Name = "btnWaitDisputeCheck";
+            this.btnWaitDisputeCheck.Size = new System.Drawing.Size(140, 23);
+            this.btnWaitDisputeCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnWaitDisputeCheck.TabIndex = 0;
+            this.btnWaitDisputeCheck.Text = "b) 等待放行";
+            this.btnWaitDisputeCheck.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnWaitDisputeCheck.Click += new System.EventHandler(this.QueryWaitDisputeCheck);
+            // 
+            // btnNeedDisputeCheck
+            // 
+            this.btnNeedDisputeCheck.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNeedDisputeCheck.AutoExpandOnClick = true;
+            this.btnNeedDisputeCheck.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnNeedDisputeCheck.Location = new System.Drawing.Point(15, 27);
+            this.btnNeedDisputeCheck.Name = "btnNeedDisputeCheck";
+            this.btnNeedDisputeCheck.Size = new System.Drawing.Size(140, 23);
+            this.btnNeedDisputeCheck.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.btnNeedDisputeCheck.TabIndex = 0;
+            this.btnNeedDisputeCheck.Text = "a) 需要放行";
+            this.btnNeedDisputeCheck.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+            this.btnNeedDisputeCheck.Click += new System.EventHandler(this.QueryNeedDisputeCheck);
+            // 
             // WorkAlert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -815,7 +973,7 @@ namespace CMBC.EasyFactor.ARMgr
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.panelBottom);
             this.Name = "WorkAlert";
-            this.Size = new System.Drawing.Size(801, 386);
+            this.Size = new System.Drawing.Size(1001, 386);
             this.panelTop.ResumeLayout(false);
             this.panelCDADue.ResumeLayout(false);
             this.panelOtherDue.ResumeLayout(false);
@@ -826,6 +984,8 @@ namespace CMBC.EasyFactor.ARMgr
             this.panelCheckPaymentBatch.ResumeLayout(false);
             this.panelCheckFinanceBatch.ResumeLayout(false);
             this.panelCheckAssignBatch.ResumeLayout(false);
+            this.panelFlaw.ResumeLayout(false);
+            this.panelDispute.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -856,5 +1016,13 @@ namespace CMBC.EasyFactor.ARMgr
         private DevComponents.DotNetBar.ButtonX btnRejectCheckRefundBatch;
         private DevComponents.DotNetBar.ButtonX btnWaitCheckRefundBatch;
         private DevComponents.DotNetBar.ButtonX btnNeedCheckRefundBatch;
+        private DevComponents.DotNetBar.ExpandablePanel panelFlaw;
+        private DevComponents.DotNetBar.ButtonX btnRejectFlawCheck;
+        private DevComponents.DotNetBar.ButtonX btnWaitFlawCheck;
+        private DevComponents.DotNetBar.ButtonX btnNeedFlawCheck;
+        private DevComponents.DotNetBar.ExpandablePanel panelDispute;
+        private DevComponents.DotNetBar.ButtonX btnRejectDisputeCheck;
+        private DevComponents.DotNetBar.ButtonX btnWaitDisputeCheck;
+        private DevComponents.DotNetBar.ButtonX btnNeedDisputeCheck;
     }
 }

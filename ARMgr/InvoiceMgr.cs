@@ -84,6 +84,8 @@ namespace CMBC.EasyFactor.ARMgr
         /// 
         /// </summary>
         private readonly OpInvoiceType _opInvoiceType;
+        private OpInvoiceType opInvoiceType;
+        private string p;
 
 
         public InvoiceMgr(OpInvoiceType opInvoiceType, int days)
@@ -123,6 +125,61 @@ namespace CMBC.EasyFactor.ARMgr
 
             _bs.DataSource = queryResult;
             lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+        }
+
+        public InvoiceMgr(OpInvoiceType opInvoiceType, String username, String checkStatus)
+            :this(OpInvoiceType.INVOICE_QUERY)
+        {
+            if (opInvoiceType == OpInvoiceType.FLAW_RESOLVE)
+            {
+                if (username == null)
+                {
+                    Context = new DBDataContext();
+                    IQueryable<Invoice> queryResult = from invoice in Context.Invoices
+                                                      where
+                                                          invoice.FlawCheckStatus == checkStatus
+                                                      select invoice;
+
+                    _bs.DataSource = queryResult;
+                    lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                }
+                else
+                {
+                    Context = new DBDataContext();
+                    IQueryable<Invoice> queryResult = from invoice in Context.Invoices
+                                                                 where
+                                                                     invoice.FlawCheckStatus == BATCH.UNCHECK && invoice.FlawResolveUserName == username
+                                                                 select invoice;
+
+                    _bs.DataSource = queryResult;
+                    lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                }
+            }
+            else if (opInvoiceType == OpInvoiceType.DISPUTE_RESOLVE)
+            {
+                if (username == null)
+                {
+                    Context = new DBDataContext();
+                    IQueryable<Invoice> queryResult = from invoice in Context.Invoices
+                                                      where
+                                                          invoice.DisputeCheckStatus == checkStatus
+                                                      select invoice;
+
+                    _bs.DataSource = queryResult;
+                    lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                }
+                else
+                {
+                    Context = new DBDataContext();
+                    IQueryable<Invoice> queryResult = from invoice in Context.Invoices
+                                                      where
+                                                          invoice.DisputeCheckStatus == BATCH.UNCHECK && invoice.DisputeResolveUserName == username
+                                                      select invoice;
+
+                    _bs.DataSource = queryResult;
+                    lblCount.Text = String.Format("获得{0}条记录", queryResult.Count());
+                }
+            }
         }
 
         /// <summary>
@@ -209,7 +266,6 @@ namespace CMBC.EasyFactor.ARMgr
                 QueryInvoices(null, null);
             }
         }
-
 
         /// <summary>
         /// 
@@ -320,6 +376,175 @@ namespace CMBC.EasyFactor.ARMgr
             }
         }
 
+        private void CheckFlaw(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
+            {
+                return;
+            }
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice invoice = (Invoice)this._bs.List[this.dgvInvoices.CurrentCell.RowIndex];
+            if (invoice.FlawCheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
+            {
+                MessageBoxEx.Show("此瑕疵已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (MessageBoxEx.Show("是否确认复核通过此瑕疵", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+            if (App.Current.CurUser.Name == invoice.FlawResolveUserName)
+            {
+                MessageBoxEx.Show("经办人和复核人相同，不可进行复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            invoice.FlawCheckStatus = BATCH.CHECK;
+            invoice.FlawCheckUserName = App.Current.CurUser.Name;
+            invoice.FlawCheckDate = DateTime.Now;
+            try
+            {
+                Context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        }
+
+        private void CheckDispute(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
+            {
+                return;
+            }
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice invoice = (Invoice)this._bs.List[this.dgvInvoices.CurrentCell.RowIndex];
+            if (invoice.DisputeCheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
+            {
+                MessageBoxEx.Show("此商纠已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (MessageBoxEx.Show("是否确认复核通过此商纠", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+            if (App.Current.CurUser.Name == invoice.DisputeResolveUserName)
+            {
+                MessageBoxEx.Show("经办人和复核人相同，不可进行复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            invoice.DisputeCheckStatus = BATCH.CHECK;
+            invoice.DisputeCheckUserName = App.Current.CurUser.Name;
+            invoice.DisputeCheckDate = DateTime.Now;
+            try
+            {
+                Context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        }
+
+        private void RejectFlaw(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
+            {
+                return;
+            }
+
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice invoice = (Invoice)this._bs.List[this.dgvInvoices.CurrentCell.RowIndex];
+
+            if (invoice.FlawCheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
+            {
+                MessageBoxEx.Show("此瑕疵已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (MessageBoxEx.Show("是否确认复核退回该瑕疵", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
+            if (App.Current.CurUser.Name == invoice.FlawResolveUserName)
+            {
+                MessageBoxEx.Show("经办人和复核人相同，不可进行复核退回", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            invoice.FlawCheckStatus = BATCH.REJECT;
+            invoice.FlawResolveUserName = App.Current.CurUser.Name;
+            invoice.FlawResolveDate = DateTime.Now;
+
+            try
+            {
+                Context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void RejectDispute(object sender, EventArgs e)
+        {
+            if (!PermUtil.CheckPermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
+            {
+                return;
+            }
+
+            if (this.dgvInvoices.CurrentCell == null)
+            {
+                return;
+            }
+
+            Invoice invoice = (Invoice)this._bs.List[this.dgvInvoices.CurrentCell.RowIndex];
+
+            if (invoice.DisputeCheckStatus != BATCH.UNCHECK && !PermUtil.ValidatePermission(CMBC.EasyFactor.Utils.Permissions.INVOICE_APPROVE))
+            {
+                MessageBoxEx.Show("此商纠已经过复核", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (MessageBoxEx.Show("是否确认复核退回该商纠", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
+            if (App.Current.CurUser.Name == invoice.DisputeResolveUserName)
+            {
+                MessageBoxEx.Show("经办人和复核人相同，不可进行复核退回", MESSAGE.TITLE_INFORMATION, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            invoice.DisputeCheckStatus = BATCH.REJECT;
+            invoice.DisputeResolveUserName = App.Current.CurUser.Name;
+            invoice.DisputeResolveDate = DateTime.Now;
+
+            try
+            {
+                Context.SubmitChanges();
+            }
+            catch (Exception e1)
+            {
+                MessageBoxEx.Show(e1.Message, MESSAGE.TITLE_WARNING, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
         /// <summary>
         /// 
         /// </summary>

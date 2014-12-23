@@ -664,7 +664,9 @@ namespace CMBC.EasyFactor.ARMgr
                                               where
                                                   invoice.InvoiceAssignBatch.CaseCode == _case.CaseCode
                                                     && invoice.IsFlaw == false
+                                                    && invoice.FlawCheckDate == null? true : invoice.FlawCheckStatus == BATCH.CHECK
                                                     && invoice.IsDispute.GetValueOrDefault() == false
+                                                    && invoice.DisputeCheckDate == null? true : invoice.DisputeCheckStatus == BATCH.CHECK
                                                     && invoice.DueDate > DateTime.Today.AddDays(1)
                                                     && (invoice.AssignAmount > invoice.PaymentAmount.GetValueOrDefault() )
                                                     && ((invoice.AssignAmount - invoice.PaymentAmount.GetValueOrDefault()) * (decimal)financeProp) > (invoice.FinanceAmount.GetValueOrDefault()-invoice.RefundAmount.GetValueOrDefault())

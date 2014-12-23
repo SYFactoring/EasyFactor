@@ -138,22 +138,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.tbClientName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblClient = new DevComponents.DotNetBar.LabelX();
             this.dgvInvoices = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.cmuInvoiceMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemInvoiceFlaw = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemInvoiceDispute = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCaculate = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCommission = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemExportAllInvoices = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemAllInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemAllInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSelectedInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSelectedInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
             this.colSellerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFactorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -185,6 +169,27 @@ namespace CMBC.EasyFactor.ARMgr
             this.colIsDispute = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssignOverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinanceOverDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmuInvoiceMgr = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemInvoiceDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaseDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemInvoiceFlaw = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemInvoiceDispute = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemInvoiceDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCaculate = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCommission = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemExportAllInvoices = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAllInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAllInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemExportSelectedInvoices = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelectedInvoiceFull = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSelectedInvoiceOverDue = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCheckFlaw = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemRejectFlaw = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCheckDispute = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemRejectDispute = new System.Windows.Forms.ToolStripMenuItem();
             this.panelQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom)).BeginInit();
@@ -835,7 +840,7 @@ namespace CMBC.EasyFactor.ARMgr
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle15;
             this.dgvInvoices.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvInvoices.Location = new System.Drawing.Point(0, 72);
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.ReadOnly = true;
@@ -846,128 +851,6 @@ namespace CMBC.EasyFactor.ARMgr
             this.dgvInvoices.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvInvoicesCellFormatting);
             this.dgvInvoices.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvInvoicesDataBindingComplete);
             this.dgvInvoices.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvInvoicesRowPostPaint);
-            // 
-            // cmuInvoiceMgr
-            // 
-            this.cmuInvoiceMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemInvoiceDetail,
-            this.menuItemCaseDetail,
-            this.toolStripSeparator,
-            this.menuItemInvoiceFlaw,
-            this.menuItemInvoiceDispute,
-            this.menuItemInvoiceDelete,
-            this.menuItemCaculate,
-            this.menuItemCommission,
-            this.toolStripSeparator1,
-            this.menuItemExportAllInvoices,
-            this.menuItemExportSelectedInvoices});
-            this.cmuInvoiceMgr.Name = "cmuContractMgr";
-            this.cmuInvoiceMgr.Size = new System.Drawing.Size(161, 214);
-            // 
-            // menuItemInvoiceDetail
-            // 
-            this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
-            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(160, 22);
-            this.menuItemInvoiceDetail.Text = "详细信息";
-            this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
-            // 
-            // menuItemCaseDetail
-            // 
-            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
-            this.menuItemCaseDetail.Size = new System.Drawing.Size(160, 22);
-            this.menuItemCaseDetail.Text = "案子详细信息";
-            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(157, 6);
-            // 
-            // menuItemInvoiceFlaw
-            // 
-            this.menuItemInvoiceFlaw.Name = "menuItemInvoiceFlaw";
-            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(160, 22);
-            this.menuItemInvoiceFlaw.Text = "瑕疵处理";
-            this.menuItemInvoiceFlaw.Click += new System.EventHandler(this.InvoiceFlaw);
-            // 
-            // menuItemInvoiceDispute
-            // 
-            this.menuItemInvoiceDispute.Name = "menuItemInvoiceDispute";
-            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(160, 22);
-            this.menuItemInvoiceDispute.Text = "商纠处理";
-            this.menuItemInvoiceDispute.Click += new System.EventHandler(this.InvoiceDispute);
-            // 
-            // menuItemInvoiceDelete
-            // 
-            this.menuItemInvoiceDelete.Name = "menuItemInvoiceDelete";
-            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(160, 22);
-            this.menuItemInvoiceDelete.Text = "删除发票";
-            this.menuItemInvoiceDelete.Click += new System.EventHandler(this.DeleteInvoice);
-            // 
-            // menuItemCaculate
-            // 
-            this.menuItemCaculate.Name = "menuItemCaculate";
-            this.menuItemCaculate.Size = new System.Drawing.Size(160, 22);
-            this.menuItemCaculate.Text = "重新计算数值";
-            this.menuItemCaculate.Click += new System.EventHandler(this.CaculateAmount);
-            // 
-            // menuItemCommission
-            // 
-            this.menuItemCommission.Name = "menuItemCommission";
-            this.menuItemCommission.Size = new System.Drawing.Size(160, 22);
-            this.menuItemCommission.Text = "重新计算手续费";
-            this.menuItemCommission.Click += new System.EventHandler(this.ComputeCommission);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
-            // 
-            // menuItemExportAllInvoices
-            // 
-            this.menuItemExportAllInvoices.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemAllInvoiceFull,
-            this.menuItemAllInvoiceOverDue});
-            this.menuItemExportAllInvoices.Name = "menuItemExportAllInvoices";
-            this.menuItemExportAllInvoices.Size = new System.Drawing.Size(160, 22);
-            this.menuItemExportAllInvoices.Text = "导出全部发票";
-            // 
-            // menuItemAllInvoiceFull
-            // 
-            this.menuItemAllInvoiceFull.Name = "menuItemAllInvoiceFull";
-            this.menuItemAllInvoiceFull.Size = new System.Drawing.Size(148, 22);
-            this.menuItemAllInvoiceFull.Text = "完整格式";
-            this.menuItemAllInvoiceFull.Click += new System.EventHandler(this.ExportAllInvoicesFull);
-            // 
-            // menuItemAllInvoiceOverDue
-            // 
-            this.menuItemAllInvoiceOverDue.Name = "menuItemAllInvoiceOverDue";
-            this.menuItemAllInvoiceOverDue.Size = new System.Drawing.Size(148, 22);
-            this.menuItemAllInvoiceOverDue.Text = "逾期台帐格式";
-            this.menuItemAllInvoiceOverDue.Click += new System.EventHandler(this.ExportAllInvoiceOverDue);
-            // 
-            // menuItemExportSelectedInvoices
-            // 
-            this.menuItemExportSelectedInvoices.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemSelectedInvoiceFull,
-            this.menuItemSelectedInvoiceOverDue});
-            this.menuItemExportSelectedInvoices.Name = "menuItemExportSelectedInvoices";
-            this.menuItemExportSelectedInvoices.Size = new System.Drawing.Size(160, 22);
-            this.menuItemExportSelectedInvoices.Text = "导出所选发票";
-            // 
-            // menuItemSelectedInvoiceFull
-            // 
-            this.menuItemSelectedInvoiceFull.Name = "menuItemSelectedInvoiceFull";
-            this.menuItemSelectedInvoiceFull.Size = new System.Drawing.Size(148, 22);
-            this.menuItemSelectedInvoiceFull.Text = "完整格式";
-            this.menuItemSelectedInvoiceFull.Click += new System.EventHandler(this.ExportSelectedInvoicesFull);
-            // 
-            // menuItemSelectedInvoiceOverDue
-            // 
-            this.menuItemSelectedInvoiceOverDue.Name = "menuItemSelectedInvoiceOverDue";
-            this.menuItemSelectedInvoiceOverDue.Size = new System.Drawing.Size(148, 22);
-            this.menuItemSelectedInvoiceOverDue.Text = "逾期台帐格式";
-            this.menuItemSelectedInvoiceOverDue.Click += new System.EventHandler(this.ExportSelectedInvoicesOverDue);
             // 
             // colSellerName
             // 
@@ -1249,6 +1132,165 @@ namespace CMBC.EasyFactor.ARMgr
             this.colFinanceOverDueDays.Visible = false;
             this.colFinanceOverDueDays.Width = 104;
             // 
+            // cmuInvoiceMgr
+            // 
+            this.cmuInvoiceMgr.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemInvoiceDetail,
+            this.menuItemCaseDetail,
+            this.toolStripSeparator,
+            this.menuItemInvoiceFlaw,
+            this.menuItemInvoiceDispute,
+            this.menuItemInvoiceDelete,
+            this.menuItemCaculate,
+            this.menuItemCommission,
+            this.toolStripSeparator1,
+            this.menuItemExportAllInvoices,
+            this.menuItemExportSelectedInvoices,
+            this.toolStripSeparator2,
+            this.menuItemCheckFlaw,
+            this.menuItemRejectFlaw,
+            this.menuItemCheckDispute,
+            this.menuItemRejectDispute});
+            this.cmuInvoiceMgr.Name = "cmuContractMgr";
+            this.cmuInvoiceMgr.Size = new System.Drawing.Size(161, 330);
+            // 
+            // menuItemInvoiceDetail
+            // 
+            this.menuItemInvoiceDetail.Name = "menuItemInvoiceDetail";
+            this.menuItemInvoiceDetail.Size = new System.Drawing.Size(160, 22);
+            this.menuItemInvoiceDetail.Text = "详细信息";
+            this.menuItemInvoiceDetail.Click += new System.EventHandler(this.DetailInvoice);
+            // 
+            // menuItemCaseDetail
+            // 
+            this.menuItemCaseDetail.Name = "menuItemCaseDetail";
+            this.menuItemCaseDetail.Size = new System.Drawing.Size(160, 22);
+            this.menuItemCaseDetail.Text = "案子详细信息";
+            this.menuItemCaseDetail.Click += new System.EventHandler(this.DetailCase);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(157, 6);
+            // 
+            // menuItemInvoiceFlaw
+            // 
+            this.menuItemInvoiceFlaw.Name = "menuItemInvoiceFlaw";
+            this.menuItemInvoiceFlaw.Size = new System.Drawing.Size(160, 22);
+            this.menuItemInvoiceFlaw.Text = "瑕疵处理";
+            this.menuItemInvoiceFlaw.Click += new System.EventHandler(this.InvoiceFlaw);
+            // 
+            // menuItemInvoiceDispute
+            // 
+            this.menuItemInvoiceDispute.Name = "menuItemInvoiceDispute";
+            this.menuItemInvoiceDispute.Size = new System.Drawing.Size(160, 22);
+            this.menuItemInvoiceDispute.Text = "商纠处理";
+            this.menuItemInvoiceDispute.Click += new System.EventHandler(this.InvoiceDispute);
+            // 
+            // menuItemInvoiceDelete
+            // 
+            this.menuItemInvoiceDelete.Name = "menuItemInvoiceDelete";
+            this.menuItemInvoiceDelete.Size = new System.Drawing.Size(160, 22);
+            this.menuItemInvoiceDelete.Text = "删除发票";
+            this.menuItemInvoiceDelete.Click += new System.EventHandler(this.DeleteInvoice);
+            // 
+            // menuItemCaculate
+            // 
+            this.menuItemCaculate.Name = "menuItemCaculate";
+            this.menuItemCaculate.Size = new System.Drawing.Size(160, 22);
+            this.menuItemCaculate.Text = "重新计算数值";
+            this.menuItemCaculate.Click += new System.EventHandler(this.CaculateAmount);
+            // 
+            // menuItemCommission
+            // 
+            this.menuItemCommission.Name = "menuItemCommission";
+            this.menuItemCommission.Size = new System.Drawing.Size(160, 22);
+            this.menuItemCommission.Text = "重新计算手续费";
+            this.menuItemCommission.Click += new System.EventHandler(this.ComputeCommission);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
+            // 
+            // menuItemExportAllInvoices
+            // 
+            this.menuItemExportAllInvoices.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemAllInvoiceFull,
+            this.menuItemAllInvoiceOverDue});
+            this.menuItemExportAllInvoices.Name = "menuItemExportAllInvoices";
+            this.menuItemExportAllInvoices.Size = new System.Drawing.Size(160, 22);
+            this.menuItemExportAllInvoices.Text = "导出全部发票";
+            // 
+            // menuItemAllInvoiceFull
+            // 
+            this.menuItemAllInvoiceFull.Name = "menuItemAllInvoiceFull";
+            this.menuItemAllInvoiceFull.Size = new System.Drawing.Size(148, 22);
+            this.menuItemAllInvoiceFull.Text = "完整格式";
+            this.menuItemAllInvoiceFull.Click += new System.EventHandler(this.ExportAllInvoicesFull);
+            // 
+            // menuItemAllInvoiceOverDue
+            // 
+            this.menuItemAllInvoiceOverDue.Name = "menuItemAllInvoiceOverDue";
+            this.menuItemAllInvoiceOverDue.Size = new System.Drawing.Size(148, 22);
+            this.menuItemAllInvoiceOverDue.Text = "逾期台帐格式";
+            this.menuItemAllInvoiceOverDue.Click += new System.EventHandler(this.ExportAllInvoiceOverDue);
+            // 
+            // menuItemExportSelectedInvoices
+            // 
+            this.menuItemExportSelectedInvoices.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemSelectedInvoiceFull,
+            this.menuItemSelectedInvoiceOverDue});
+            this.menuItemExportSelectedInvoices.Name = "menuItemExportSelectedInvoices";
+            this.menuItemExportSelectedInvoices.Size = new System.Drawing.Size(160, 22);
+            this.menuItemExportSelectedInvoices.Text = "导出所选发票";
+            // 
+            // menuItemSelectedInvoiceFull
+            // 
+            this.menuItemSelectedInvoiceFull.Name = "menuItemSelectedInvoiceFull";
+            this.menuItemSelectedInvoiceFull.Size = new System.Drawing.Size(148, 22);
+            this.menuItemSelectedInvoiceFull.Text = "完整格式";
+            this.menuItemSelectedInvoiceFull.Click += new System.EventHandler(this.ExportSelectedInvoicesFull);
+            // 
+            // menuItemSelectedInvoiceOverDue
+            // 
+            this.menuItemSelectedInvoiceOverDue.Name = "menuItemSelectedInvoiceOverDue";
+            this.menuItemSelectedInvoiceOverDue.Size = new System.Drawing.Size(148, 22);
+            this.menuItemSelectedInvoiceOverDue.Text = "逾期台帐格式";
+            this.menuItemSelectedInvoiceOverDue.Click += new System.EventHandler(this.ExportSelectedInvoicesOverDue);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(157, 6);
+            // 
+            // menuItemCheckFlaw
+            // 
+            this.menuItemCheckFlaw.Name = "menuItemCheckFlaw";
+            this.menuItemCheckFlaw.Size = new System.Drawing.Size(160, 22);
+            this.menuItemCheckFlaw.Text = "审核通过瑕疵";
+            this.menuItemCheckFlaw.Click += new System.EventHandler(this.CheckFlaw);
+            // 
+            // menuItemRejectFlaw
+            // 
+            this.menuItemRejectFlaw.Name = "menuItemRejectFlaw";
+            this.menuItemRejectFlaw.Size = new System.Drawing.Size(160, 22);
+            this.menuItemRejectFlaw.Text = "审核拒绝瑕疵";
+            this.menuItemRejectFlaw.Click += new System.EventHandler(this.RejectFlaw);
+            // 
+            // menuItemCheckDispute
+            // 
+            this.menuItemCheckDispute.Name = "menuItemCheckDispute";
+            this.menuItemCheckDispute.Size = new System.Drawing.Size(160, 22);
+            this.menuItemCheckDispute.Text = "审核通过商纠";
+            this.menuItemCheckDispute.Click += new System.EventHandler(this.CheckDispute);
+            // 
+            // menuItemRejectDispute
+            // 
+            this.menuItemRejectDispute.Name = "menuItemRejectDispute";
+            this.menuItemRejectDispute.Size = new System.Drawing.Size(160, 22);
+            this.menuItemRejectDispute.Text = "审核拒绝商纠";
+            // 
             // InvoiceMgr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1306,5 +1348,10 @@ namespace CMBC.EasyFactor.ARMgr
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsDispute;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssignOverDueDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinanceOverDueDays;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCheckFlaw;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRejectFlaw;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCheckDispute;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRejectDispute;
     }
 }

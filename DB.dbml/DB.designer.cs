@@ -12710,6 +12710,18 @@ namespace CMBC.EasyFactor.DB.dbml
 		
 		private System.Nullable<System.DateTime> _ReassignDate;
 		
+		private string _FlawCheckStatus;
+		
+		private System.Nullable<System.DateTime> _FlawCheckDate;
+		
+		private string _FlawCheckUserName;
+		
+		private string _DisputeCheckStatus;
+		
+		private System.Nullable<System.DateTime> _DisputeCheckDate;
+		
+		private string _DisputeCheckUserName;
+		
 		private EntitySet<InvoiceFinanceLog> _InvoiceFinanceLogs;
 		
 		private EntitySet<InvoicePaymentLog> _InvoicePaymentLogs;
@@ -12812,6 +12824,18 @@ namespace CMBC.EasyFactor.DB.dbml
     partial void OnUnpaidHandlingFeeChanged();
     partial void OnReassignDateChanging(System.Nullable<System.DateTime> value);
     partial void OnReassignDateChanged();
+    partial void OnFlawCheckStatusChanging(string value);
+    partial void OnFlawCheckStatusChanged();
+    partial void OnFlawCheckDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnFlawCheckDateChanged();
+    partial void OnFlawCheckUserNameChanging(string value);
+    partial void OnFlawCheckUserNameChanged();
+    partial void OnDisputeCheckStatusChanging(string value);
+    partial void OnDisputeCheckStatusChanged();
+    partial void OnDisputeCheckDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDisputeCheckDateChanged();
+    partial void OnDisputeCheckUserNameChanging(string value);
+    partial void OnDisputeCheckUserNameChanged();
     #endregion
 		
 		public Invoice()
@@ -13723,6 +13747,126 @@ namespace CMBC.EasyFactor.DB.dbml
 					this._ReassignDate = value;
 					this.SendPropertyChanged("ReassignDate");
 					this.OnReassignDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlawCheckStatus", DbType="Varchar(50)")]
+		public string FlawCheckStatus
+		{
+			get
+			{
+				return this._FlawCheckStatus;
+			}
+			set
+			{
+				if ((this._FlawCheckStatus != value))
+				{
+					this.OnFlawCheckStatusChanging(value);
+					this.SendPropertyChanging();
+					this._FlawCheckStatus = value;
+					this.SendPropertyChanged("FlawCheckStatus");
+					this.OnFlawCheckStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlawCheckDate", DbType="datetime")]
+		public System.Nullable<System.DateTime> FlawCheckDate
+		{
+			get
+			{
+				return this._FlawCheckDate;
+			}
+			set
+			{
+				if ((this._FlawCheckDate != value))
+				{
+					this.OnFlawCheckDateChanging(value);
+					this.SendPropertyChanging();
+					this._FlawCheckDate = value;
+					this.SendPropertyChanged("FlawCheckDate");
+					this.OnFlawCheckDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlawCheckUserName", DbType="Nvarchar(50)")]
+		public string FlawCheckUserName
+		{
+			get
+			{
+				return this._FlawCheckUserName;
+			}
+			set
+			{
+				if ((this._FlawCheckUserName != value))
+				{
+					this.OnFlawCheckUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._FlawCheckUserName = value;
+					this.SendPropertyChanged("FlawCheckUserName");
+					this.OnFlawCheckUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisputeCheckStatus", DbType="Varchar(50)")]
+		public string DisputeCheckStatus
+		{
+			get
+			{
+				return this._DisputeCheckStatus;
+			}
+			set
+			{
+				if ((this._DisputeCheckStatus != value))
+				{
+					this.OnDisputeCheckStatusChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeCheckStatus = value;
+					this.SendPropertyChanged("DisputeCheckStatus");
+					this.OnDisputeCheckStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisputeCheckDate", DbType="datetime")]
+		public System.Nullable<System.DateTime> DisputeCheckDate
+		{
+			get
+			{
+				return this._DisputeCheckDate;
+			}
+			set
+			{
+				if ((this._DisputeCheckDate != value))
+				{
+					this.OnDisputeCheckDateChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeCheckDate = value;
+					this.SendPropertyChanged("DisputeCheckDate");
+					this.OnDisputeCheckDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisputeCheckUserName", DbType="Nvarchar(50)")]
+		public string DisputeCheckUserName
+		{
+			get
+			{
+				return this._DisputeCheckUserName;
+			}
+			set
+			{
+				if ((this._DisputeCheckUserName != value))
+				{
+					this.OnDisputeCheckUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._DisputeCheckUserName = value;
+					this.SendPropertyChanged("DisputeCheckUserName");
+					this.OnDisputeCheckUserNameChanged();
 				}
 			}
 		}

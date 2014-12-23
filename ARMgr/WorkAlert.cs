@@ -90,6 +90,20 @@ namespace CMBC.EasyFactor.ARMgr
 
             superTooltip.SetSuperTooltip(btnRejectCheckRefundBatch,
                                          new SuperTooltipInfo(@"拒绝放行的还款批次", "", "", null, null, color));
+
+            superTooltip.SetSuperTooltip(btnNeedFlawCheck, new SuperTooltipInfo(@"需要放行的瑕疵发票", "", "", null, null, color));
+
+            superTooltip.SetSuperTooltip(btnWaitFlawCheck, new SuperTooltipInfo(@"等待放行的瑕疵发票", "", "", null, null, color));
+
+            superTooltip.SetSuperTooltip(btnRejectFlawCheck,
+                                         new SuperTooltipInfo(@"拒绝放行的瑕疵发票", "", "", null, null, color));
+
+            superTooltip.SetSuperTooltip(btnNeedDisputeCheck, new SuperTooltipInfo(@"需要放行的商纠发票", "", "", null, null, color));
+
+            superTooltip.SetSuperTooltip(btnWaitDisputeCheck, new SuperTooltipInfo(@"等待放行的商纠发票", "", "", null, null, color));
+
+            superTooltip.SetSuperTooltip(btnRejectDisputeCheck,
+                                         new SuperTooltipInfo(@"拒绝放行的商纠发票", "", "", null, null, color));
         }
 
         /// <summary>
@@ -105,6 +119,34 @@ namespace CMBC.EasyFactor.ARMgr
 
             var context = new DBDataContext();
             int result;
+
+            //QueryNeedFlawCheck
+            result = context.Invoices.Count(c => c.FlawCheckStatus == BATCH.UNCHECK);
+            worker.ReportProgress(result, btnNeedFlawCheck);
+
+            //QueryWaitFlawCheck
+            result =
+                context.Invoices.Count(c => c.FlawCheckStatus == BATCH.UNCHECK && c.FlawResolveUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, btnWaitFlawCheck);
+
+            //QueryRejectFlawCheck
+            result =
+                context.Invoices.Count(c => c.FlawCheckStatus == BATCH.REJECT && c.FlawResolveUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, btnRejectFlawCheck);
+
+            //QueryNeedDisputeCheck
+            result = context.Invoices.Count(c => c.DisputeCheckStatus == BATCH.UNCHECK);
+            worker.ReportProgress(result, btnNeedDisputeCheck);
+
+            //QueryWaitDisputeCheck
+            result =
+                context.Invoices.Count(c => c.DisputeCheckStatus == BATCH.UNCHECK && c.DisputeResolveUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, btnWaitDisputeCheck);
+
+            //QueryRejectDisputeCheck
+            result =
+                context.Invoices.Count(c => c.DisputeCheckStatus == BATCH.REJECT && c.DisputeResolveUserName == App.Current.CurUser.Name);
+            worker.ReportProgress(result, btnRejectDisputeCheck);
 
             //QueryNeedCheckAssignBatch
             result = context.InvoiceAssignBatches.Count(c => c.CheckStatus == BATCH.UNCHECK);
@@ -583,6 +625,72 @@ namespace CMBC.EasyFactor.ARMgr
         private void QueryWaitCheckRefundBatch(object sender, EventArgs e)
         {
             var mgr = new RefundBatchMgr(App.Current.CurUser.Name, BATCH.UNCHECK);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryNeedFlawCheck(object sender, EventArgs e)
+        {
+            var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE, null, BATCH.UNCHECK);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryRejectFlawCheck(object sender, EventArgs e)
+        {
+            var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE, App.Current.CurUser.Name, BATCH.REJECT);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryWaitFlawCheck(object sender, EventArgs e)
+        {
+            var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.FLAW_RESOLVE, App.Current.CurUser.Name, BATCH.UNCHECK);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryNeedDisputeCheck(object sender, EventArgs e)
+        {
+            var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DISPUTE_RESOLVE, null, BATCH.UNCHECK);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryRejectDisputeCheck(object sender, EventArgs e)
+        {
+            var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DISPUTE_RESOLVE, App.Current.CurUser.Name, BATCH.REJECT);
+            App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QueryWaitDisputeCheck(object sender, EventArgs e)
+        {
+            var mgr = new InvoiceMgr(InvoiceMgr.OpInvoiceType.DISPUTE_RESOLVE, App.Current.CurUser.Name, BATCH.UNCHECK);
             App.Current.MainWindow.SetDetailPanel(mgr, sender.ToString());
         }
     }

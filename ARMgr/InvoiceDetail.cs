@@ -367,6 +367,9 @@ namespace CMBC.EasyFactor.ARMgr
             invoice.DisputeResolveDate = DateTime.Today;
             invoice.DisputeResolveUserName = App.Current.CurUser.Name;
             invoice.IsDispute = false;
+
+            invoice.DisputeCheckStatus = BATCH.UNCHECK;
+
             foreach (Control comp in groupPanelDisputeResolve.Controls)
             {
                 ControlUtil.SetComponetEditable(comp, true);
@@ -418,6 +421,8 @@ namespace CMBC.EasyFactor.ARMgr
             invoice.FlawResolveDate = DateTime.Today;
             invoice.FlawResolveUserName = App.Current.CurUser.Name;
             invoice.IsFlaw = false;
+
+            invoice.FlawCheckStatus = BATCH.UNCHECK;
 
             flawResolveDateDateTimePicker.Enabled = true;
             tbFlawResolveReason.ReadOnly = false;
