@@ -1,6 +1,9 @@
 //-----------------------------------------------------------------------
 // <copyright file="LogOnWindow.cs" company="Yiming Liu@Fudan">
+//
 //     Copyright (c) CMBC. All rights reserved.
+//
+// 随便测试一下GIT功能
 // </copyright>
 //-----------------------------------------------------------------------
 
